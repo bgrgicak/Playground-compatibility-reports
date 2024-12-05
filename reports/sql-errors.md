@@ -14,3 +14,5 @@
 | Unknown operation: ADD. | jspi-boot | [View logs](../logs/plugins//n/namaste-lms/jspi-boot/error.log) |
 | Unknown operation: CHANGE. | asyncify-boot | [View logs](../logs/plugins//n/namaste-lms/asyncify-boot/error.log) |
 | Unknown operation: CHANGE. | jspi-boot | [View logs](../logs/plugins//n/namaste-lms/jspi-boot/error.log) |
+| MySQL field type cannot be translated to SQLite: enum. | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.JWLpgBleXD) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_amelia_notifications. | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.JWLpgBleXD) |
