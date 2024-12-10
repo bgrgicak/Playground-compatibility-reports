@@ -4,8 +4,8 @@ This report compares the test results for Playground from December 2023 and Dece
 | Year | Error Rate |
 |------|------------|
 | 2023 | 7.00% |
-| 2024 | 11.00% |
-| Improvement | -4.00% |
+| 2024 | 5.00% |
+| Improvement | 28.00% |
 ## Report
 
 | Test Item | 2023 Result | 2024 Result |
@@ -50,13 +50,13 @@ This report compares the test results for Playground from December 2023 and Dece
 | advanced-nocaptcha-recaptcha | ✅ | ✅ |
 | advanced-popups | ✅ | ✅ |
 | advanced-product-fields-for-woocommerce | ✅ | ✅ |
-| advanced-woo-search | ✅ | ❌ |
+| advanced-woo-search | ✅ | ✅ |
 | advanced-wp-reset | ✅ | ✅ |
 | ag-custom-admin | ✅ | ✅ |
 | age-gate | ❌ | ✅ |
 | ai-engine | ✅ | ✅ |
 | ajax-load-more | ✅ | ✅ |
-| ajax-search-for-woocommerce | ✅ | ❌ |
+| ajax-search-for-woocommerce | ✅ | ✅ |
 | ajax-search-lite | ✅ | ✅ |
 | ajax-thumbnail-rebuild | ✅ | ✅ |
 | akismet | ✅ | ✅ |
@@ -134,7 +134,7 @@ This report compares the test results for Playground from December 2023 and Dece
 | button-contact-vr | ✅ | ✅ |
 | buttonizer-multifunctional-button | ✅ | ✅ |
 | cache-enabler | ✅ | ✅ |
-| calculated-fields-form | ✅ | ❌ |
+| calculated-fields-form | ✅ | ✅ |
 | call-now-button | ✅ | ✅ |
 | capability-manager-enhanced | ✅ | ✅ |
 | carousel-slider | ❌ | ❌ |
@@ -142,7 +142,7 @@ This report compares the test results for Playground from December 2023 and Dece
 | catch-ids | ✅ | ✅ |
 | categories-images | ✅ | ✅ |
 | category-posts | ✅ | ✅ |
-| cf7-conditional-fields | ✅ | ❌ |
+| cf7-conditional-fields | ✅ | ✅ |
 | cf7-google-sheets-connector | ❌ | ❌ |
 | change-admin-email-setting-without-outbound-email | ✅ | ✅ |
 | change-wp-admin-login | ✅ | ✅ |
@@ -178,8 +178,8 @@ This report compares the test results for Playground from December 2023 and Dece
 | connect-polylang-elementor | ✅ | ✅ |
 | constant-contact-forms | ✅ | ✅ |
 | contact-form-7-add-confirm | ❌ | ❌ |
-| contact-form-7-dynamic-text-extension | ✅ | ❌ |
-| contact-form-7-honeypot | ✅ | ❌ |
+| contact-form-7-dynamic-text-extension | ✅ | ✅ |
+| contact-form-7-honeypot | ✅ | ✅ |
 | contact-form-7-image-captcha | ✅ | ❌ |
 | contact-form-7-multi-step-module | ✅ | ✅ |
 | contact-form-7-simple-recaptcha | ✅ | ✅ |
@@ -240,7 +240,7 @@ This report compares the test results for Playground from December 2023 and Dece
 | display-posts-shortcode | ✅ | ✅ |
 | disqus-comment-system | ✅ | ✅ |
 | ditty-news-ticker | ✅ | ✅ |
-| download-manager | ✅ | ❌ |
+| download-manager | ✅ | ✅ |
 | download-monitor | ✅ | ✅ |
 | download-plugins-dashboard | ✅ | ✅ |
 | drag-and-drop-multiple-file-upload-contact-form-7 | ✅ | ✅ |
@@ -267,7 +267,7 @@ This report compares the test results for Playground from December 2023 and Dece
 | ele-custom-skin | ✅ | ✅ |
 | elegro-payment | ✅ | ✅ |
 | elementor | ✅ | ✅ |
-| elementor-beta | ✅ | ❌ |
+| elementor-beta | ✅ | ✅ |
 | elementskit-lite | ✅ | ✅ |
 | email-address-encoder | ✅ | ✅ |
 | email-encoder-bundle | ✅ | ✅ |
@@ -296,7 +296,7 @@ This report compares the test results for Playground from December 2023 and Dece
 | export-media-with-selected-content | ✅ | ✅ |
 | extendify | ✅ | ✅ |
 | facebook-conversion-pixel | ✅ | ✅ |
-| facebook-for-woocommerce | ✅ | ❌ |
+| facebook-for-woocommerce | ✅ | ✅ |
 | facebook-messenger-customer-chat | ✅ | ✅ |
 | facebook-pagelike-widget | ✅ | ✅ |
 | famethemes-demo-importer | ✅ | ✅ |
@@ -341,7 +341,7 @@ This report compares the test results for Playground from December 2023 and Dece
 | google-calendar-events | ❌ | ✅ |
 | google-captcha | ✅ | ✅ |
 | google-language-translator | ✅ | ✅ |
-| google-listings-and-ads | ✅ | ❌ |
+| google-listings-and-ads | ✅ | ✅ |
 | google-maps-easy | ✅ | ✅ |
 | google-maps-widget | ✅ | ✅ |
 | google-site-kit | ✅ | ✅ |
@@ -354,7 +354,7 @@ This report compares the test results for Playground from December 2023 and Dece
 | gtranslate | ✅ | ✅ |
 | gutentor | ❌ | ✅ |
 | h5p | ✅ | ❌ |
-| happy-elementor-addons | ❌ | ❌ |
+| happy-elementor-addons | ❌ | ✅ |
 | hcaptcha-for-forms-and-more | ✅ | ✅ |
 | head-footer-code | ✅ | ✅ |
 | header-and-footer-scripts | ✅ | ✅ |
@@ -407,7 +407,7 @@ This report compares the test results for Playground from December 2023 and Dece
 | ithemes-sync | ✅ | ✅ |
 | iubenda-cookie-law-solution | ❌ | ✅ |
 | iwp-client | ✅ | ✅ |
-| jeg-elementor-kit | ✅ | ❌ |
+| jeg-elementor-kit | ✅ | ✅ |
 | jetformbuilder | ✅ | ✅ |
 | jetpack-boost | ❌ | ✅ |
 | jquery-updater | ✅ | ✅ |
@@ -418,15 +418,15 @@ This report compares the test results for Playground from December 2023 and Dece
 | kadence-woocommerce-email-designer | ✅ | ✅ |
 | kirki | ✅ | ✅ |
 | kk-star-ratings | ✅ | ✅ |
-| klarna-payments-for-woocommerce | ✅ | ❌ |
+| klarna-payments-for-woocommerce | ✅ | ✅ |
 | klaviyo | ✅ | ✅ |
-| kliken-marketing-for-google | ✅ | ❌ |
+| kliken-marketing-for-google | ✅ | ✅ |
 | koko-analytics | ✅ | ✅ |
-| kubio | ✅ | ❌ |
+| kubio | ✅ | ✅ |
 | layout-grid | ✅ | ✅ |
 | leadin | ✅ | ✅ |
 | learnpress | ✅ | ✅ |
-| learnpress-course-review | ❌ | ❌ |
+| learnpress-course-review | ❌ | ✅ |
 | lightweight-social-icons | ✅ | ✅ |
 | limit-login-attempts | ✅ | ✅ |
 | limit-login-attempts-reloaded | ✅ | ✅ |
@@ -449,7 +449,7 @@ This report compares the test results for Playground from December 2023 and Dece
 | mailin | ✅ | ✅ |
 | mailpoet | ❌ | ✅ |
 | maintenance | ✅ | ✅ |
-| mainwp-child | ✅ | ❌ |
+| mainwp-child | ✅ | ✅ |
 | mainwp-child-reports | ✅ | ✅ |
 | make-column-clickable-elementor | ✅ | ✅ |
 | malcare-security | ✅ | ✅ |
@@ -480,7 +480,7 @@ This report compares the test results for Playground from December 2023 and Dece
 | ml-slider | ✅ | ✅ |
 | mobile-menu | ✅ | ✅ |
 | modula-best-grid-gallery | ✅ | ✅ |
-| mollie-payments-for-woocommerce | ✅ | ❌ |
+| mollie-payments-for-woocommerce | ✅ | ✅ |
 | mousewheel-smooth-scroll | ✅ | ✅ |
 | mw-wp-form | ✅ | ✅ |
 | mystickyelements | ✅ | ✅ |
@@ -513,7 +513,7 @@ This report compares the test results for Playground from December 2023 and Dece
 | open-external-links-in-a-new-window | ✅ | ✅ |
 | optimole-wp | ✅ | ✅ |
 | optimus | ✅ | ✅ |
-| optinmonster | ✅ | ❌ |
+| optinmonster | ✅ | ✅ |
 | option-tree | ✅ | ✅ |
 | order-import-export-for-woocommerce | ✅ | ✅ |
 | otter-blocks | ✅ | ✅ |
@@ -538,7 +538,7 @@ This report compares the test results for Playground from December 2023 and Dece
 | photo-gallery | ❌ | ❌ |
 | php-code-widget | ✅ | ✅ |
 | php-compatibility-checker | ✅ | ✅ |
-| pinterest-for-woocommerce | ✅ | ❌ |
+| pinterest-for-woocommerce | ✅ | ✅ |
 | piotnet-addons-for-elementor | ✅ | ❌ |
 | pirate-forms | ✅ | ✅ |
 | pixelyoursite | ✅ | ✅ |
@@ -553,25 +553,25 @@ This report compares the test results for Playground from December 2023 and Dece
 | portfolio-post-type | ✅ | ✅ |
 | post-and-page-builder | ✅ | ✅ |
 | post-duplicator | ✅ | ✅ |
-| post-grid | ✅ | ❌ |
+| post-grid | ✅ | ✅ |
 | post-smtp | ✅ | ✅ |
 | post-type-switcher | ✅ | ✅ |
 | post-types-order | ✅ | ✅ |
 | post-views-counter | ✅ | ✅ |
 | postmark-approved-wordpress-plugin | ✅ | ✅ |
-| powerpack-lite-for-elementor | ✅ | ❌ |
+| powerpack-lite-for-elementor | ✅ | ✅ |
 | premium-addons-for-elementor | ✅ | ✅ |
 | presto-player | ✅ | ✅ |
-| pretty-link | ✅ | ❌ |
-| print-invoices-packing-slip-labels-for-woocommerce | ✅ | ❌ |
+| pretty-link | ✅ | ✅ |
+| print-invoices-packing-slip-labels-for-woocommerce | ✅ | ✅ |
 | printfriendly | ✅ | ✅ |
 | printful-shipping-for-woocommerce | ✅ | ✅ |
 | product-import-export-for-woo | ✅ | ✅ |
-| profile-builder | ✅ | ❌ |
+| profile-builder | ✅ | ✅ |
 | protect-uploads | ✅ | ✅ |
 | public-post-preview | ✅ | ✅ |
 | pubsubhubbub | ✅ | ✅ |
-| pymntpl-paypal-woocommerce | ✅ | ❌ |
+| pymntpl-paypal-woocommerce | ✅ | ✅ |
 | q2w3-fixed-widget | ✅ | ✅ |
 | qi-addons-for-elementor | ❌ | ❌ |
 | qi-blocks | ❌ | ✅ |
@@ -635,7 +635,7 @@ This report compares the test results for Playground from December 2023 and Dece
 | seo-image | ✅ | ✅ |
 | seo-simple-pack | ✅ | ✅ |
 | seo-ultimate | ❌ | ❌ |
-| seraphinite-accelerator | ❌ | ❌ |
+| seraphinite-accelerator | ❌ | ✅ |
 | sg-cachepress | ✅ | ✅ |
 | sg-security | ❌ | ❌ |
 | shariff | ✅ | ✅ |
@@ -667,7 +667,7 @@ This report compares the test results for Playground from December 2023 and Dece
 | simple-tags | ✅ | ✅ |
 | simply-schedule-appointments | ✅ | ✅ |
 | simply-static | ✅ | ✅ |
-| sina-extension-for-elementor | ✅ | ❌ |
+| sina-extension-for-elementor | ✅ | ✅ |
 | site-offline | ✅ | ✅ |
 | site-reviews | ❌ | ✅ |
 | siteground-migrator | ✅ | ✅ |
@@ -721,7 +721,7 @@ This report compares the test results for Playground from December 2023 and Dece
 | templates-patterns-collection | ✅ | ✅ |
 | temporary-login-without-password | ✅ | ❌ |
 | tenweb-speed-optimizer | ✅ | ✅ |
-| testimonial-free | ✅ | ❌ |
+| testimonial-free | ✅ | ✅ |
 | the-events-calendar | ✅ | ✅ |
 | the-plus-addons-for-elementor-page-builder | ✅ | ✅ |
 | the-post-grid | ✅ | ✅ |
@@ -732,8 +732,8 @@ This report compares the test results for Playground from December 2023 and Dece
 | themeisle-companion | ✅ | ✅ |
 | themesflat-addons-for-elementor | ✅ | ✅ |
 | themify-portfolio-post | ✅ | ✅ |
-| thirstyaffiliates | ✅ | ❌ |
-| ti-woocommerce-wishlist | ❌ | ❌ |
+| thirstyaffiliates | ✅ | ✅ |
+| ti-woocommerce-wishlist | ❌ | ✅ |
 | tidio-live-chat | ✅ | ✅ |
 | tiktok-for-business | ✅ | ✅ |
 | timber-library | ✅ | ✅ |
@@ -743,8 +743,8 @@ This report compares the test results for Playground from December 2023 and Dece
 | title-remover | ✅ | ✅ |
 | to-top | ✅ | ✅ |
 | tracking-code-manager | ❌ | ❌ |
-| translatepress-multilingual | ✅ | ❌ |
-| tutor | ❌ | ❌ |
+| translatepress-multilingual | ✅ | ✅ |
+| tutor | ❌ | ✅ |
 | tuxedo-big-file-uploads | ✅ | ✅ |
 | two-factor | ❌ | ✅ |
 | uk-cookie-consent | ✅ | ✅ |
@@ -791,7 +791,7 @@ This report compares the test results for Playground from December 2023 and Dece
 | wc-smart-cod | ✅ | ✅ |
 | wcboost-variation-swatches | ✅ | ✅ |
 | web-stories | ❌ | ✅ |
-| webappick-product-feed-for-woocommerce | ✅ | ❌ |
+| webappick-product-feed-for-woocommerce | ✅ | ✅ |
 | webp-converter-for-media | ❌ | ❌ |
 | webp-express | ✅ | ✅ |
 | weglot | ✅ | ✅ |
@@ -806,44 +806,44 @@ This report compares the test results for Playground from December 2023 and Dece
 | widget-logic | ✅ | ✅ |
 | widget-options | ✅ | ✅ |
 | wonderm00ns-simple-facebook-open-graph-tags | ✅ | ✅ |
-| woo-advanced-shipment-tracking | ✅ | ❌ |
+| woo-advanced-shipment-tracking | ✅ | ✅ |
 | woo-cart-abandonment-recovery | ✅ | ✅ |
 | woo-checkout-field-editor-pro | ✅ | ✅ |
 | woo-discount-rules | ❌ | ❌ |
 | woo-order-export-lite | ✅ | ✅ |
 | woo-permalink-manager | ✅ | ✅ |
 | woo-product-feed-pro | ✅ | ✅ |
-| woo-product-filter | ✅ | ❌ |
+| woo-product-filter | ✅ | ✅ |
 | woo-razorpay | ✅ | ✅ |
-| woo-smart-compare | ✅ | ❌ |
-| woo-smart-quick-view | ✅ | ❌ |
-| woo-smart-wishlist | ✅ | ❌ |
-| woo-stripe-payment | ✅ | ❌ |
-| woo-variation-gallery | ✅ | ❌ |
-| woo-variation-swatches | ✅ | ❌ |
+| woo-smart-compare | ✅ | ✅ |
+| woo-smart-quick-view | ✅ | ✅ |
+| woo-smart-wishlist | ✅ | ✅ |
+| woo-stripe-payment | ✅ | ✅ |
+| woo-variation-gallery | ✅ | ✅ |
+| woo-variation-swatches | ✅ | ✅ |
 | woocommerce-advanced-free-shipping | ✅ | ✅ |
-| woocommerce-ajax-filters | ✅ | ❌ |
+| woocommerce-ajax-filters | ✅ | ✅ |
 | woocommerce-checkout-manager | ✅ | ✅ |
 | woocommerce-conversion-tracking | ✅ | ✅ |
 | woocommerce-correios | ✅ | ✅ |
 | woocommerce-currency-switcher | ✅ | ✅ |
 | woocommerce-customizer | ✅ | ✅ |
-| woocommerce-delivery-notes | ❌ | ❌ |
+| woocommerce-delivery-notes | ❌ | ✅ |
 | woocommerce-direct-checkout | ✅ | ✅ |
 | woocommerce-extra-checkout-fields-for-brazil | ✅ | ✅ |
 | woocommerce-germanized | ✅ | ✅ |
 | woocommerce-google-adwords-conversion-tracking-tag | ✅ | ✅ |
-| woocommerce-google-analytics-integration | ✅ | ❌ |
-| woocommerce-jetpack | ✅ | ❌ |
+| woocommerce-google-analytics-integration | ✅ | ✅ |
+| woocommerce-jetpack | ✅ | ✅ |
 | woocommerce-legacy-rest-api | ✅ | ✅ |
 | woocommerce-mercadopago | ✅ | ✅ |
 | woocommerce-multilingual | ❌ | ✅ |
-| woocommerce-payments | ✅ | ❌ |
-| woocommerce-paypal-payments | ✅ | ❌ |
-| woocommerce-pdf-invoices-packing-slips | ❌ | ❌ |
+| woocommerce-payments | ✅ | ✅ |
+| woocommerce-paypal-payments | ✅ | ✅ |
+| woocommerce-pdf-invoices-packing-slips | ❌ | ✅ |
 | woocommerce-products-filter | ✅ | ✅ |
-| woocommerce-services | ❌ | ❌ |
-| woocommerce-shipstation-integration | ❌ | ❌ |
+| woocommerce-services | ❌ | ✅ |
+| woocommerce-shipstation-integration | ❌ | ✅ |
 | woocustomizer | ✅ | ✅ |
 | woolentor-addons | ✅ | ✅ |
 | woosidebars | ✅ | ✅ |
@@ -886,7 +886,7 @@ This report compares the test results for Playground from December 2023 and Dece
 | wp-force-login | ✅ | ✅ |
 | wp-force-ssl | ❌ | ❌ |
 | wp-google-map-plugin | ✅ | ✅ |
-| wp-google-maps | ✅ | ❌ |
+| wp-google-maps | ✅ | ✅ |
 | wp-headers-and-footers | ✅ | ✅ |
 | wp-hide-security-enhancer | ✅ | ✅ |
 | wp-htaccess-editor | ✅ | ✅ |
@@ -941,7 +941,7 @@ This report compares the test results for Playground from December 2023 and Dece
 | wp-store-locator | ✅ | ✅ |
 | wp-sweep | ✅ | ✅ |
 | wp-table-builder | ✅ | ✅ |
-| wp-ulike | ✅ | ❌ |
+| wp-ulike | ✅ | ✅ |
 | wp-user-avatar | ✅ | ✅ |
 | wp-video-lightbox | ✅ | ✅ |
 | wp-whatsapp | ✅ | ✅ |
@@ -978,6 +978,6 @@ This report compares the test results for Playground from December 2023 and Dece
 | youtube-embed-plus | ✅ | ✅ |
 | zapier | ✅ | ✅ |
 | zarinpal-woocommerce-payment-gateway | ✅ | ✅ |
-| zero-bs-crm | ✅ | ❌ |
+| zero-bs-crm | ✅ | ✅ |
 | zero-spam | ✅ | ✅ |
 | zipaddr-jp | ✅ | ✅ |
