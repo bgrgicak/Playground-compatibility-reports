@@ -1,5 +1,6 @@
-# Test Comparison Report
-This report compares the test results for Playground from December 2023 and December 2024.
+# Playground MySQL and PHP compatibility improvements between 2023 and 2024
+This report compares Playground from December 2023 and December 2024 by analyzing how many of the top 1000 plugins from WordPress.org can be activated in Playground.
+To determine if a plugin is compatible, we use End to End tests where we activate the plugin together it's dependencies and check if it was successfully activated in Playground.
 ## Stats
 | Year | Error Rate |
 |------|------------|
