@@ -426,7 +426,7 @@ This report compares the test results for Playground from December 2023 and Dece
 | layout-grid | ✅ | ✅ |
 | leadin | ✅ | ✅ |
 | learnpress | ✅ | ✅ |
-| learnpress-course-review | ❌ | ✅ |
+| learnpress-course-review | ✅ | ✅ |
 | lightweight-social-icons | ✅ | ✅ |
 | limit-login-attempts | ✅ | ✅ |
 | limit-login-attempts-reloaded | ✅ | ✅ |
@@ -513,7 +513,7 @@ This report compares the test results for Playground from December 2023 and Dece
 | open-external-links-in-a-new-window | ✅ | ✅ |
 | optimole-wp | ✅ | ✅ |
 | optimus | ✅ | ✅ |
-| optinmonster | ✅ | ✅ |
+| optinmonster | ✅ | ❌ |
 | option-tree | ✅ | ✅ |
 | order-import-export-for-woocommerce | ✅ | ✅ |
 | otter-blocks | ✅ | ✅ |
@@ -635,7 +635,7 @@ This report compares the test results for Playground from December 2023 and Dece
 | seo-image | ✅ | ✅ |
 | seo-simple-pack | ✅ | ✅ |
 | seo-ultimate | ❌ | ❌ |
-| seraphinite-accelerator | ❌ | ✅ |
+| seraphinite-accelerator | ✅ | ✅ |
 | sg-cachepress | ✅ | ✅ |
 | sg-security | ❌ | ❌ |
 | shariff | ✅ | ✅ |
@@ -839,7 +839,7 @@ This report compares the test results for Playground from December 2023 and Dece
 | woocommerce-mercadopago | ✅ | ✅ |
 | woocommerce-multilingual | ❌ | ✅ |
 | woocommerce-payments | ✅ | ✅ |
-| woocommerce-paypal-payments | ✅ | ✅ |
+| woocommerce-paypal-payments | ❌ | ✅ |
 | woocommerce-pdf-invoices-packing-slips | ❌ | ✅ |
 | woocommerce-products-filter | ✅ | ✅ |
 | woocommerce-services | ❌ | ✅ |
@@ -969,7 +969,7 @@ This report compares the test results for Playground from December 2023 and Dece
 | yet-another-related-posts-plugin | ✅ | ✅ |
 | yikes-inc-easy-custom-woocommerce-product-tabs | ❌ | ❌ |
 | yith-woocommerce-ajax-navigation | ✅ | ✅ |
-| yith-woocommerce-catalog-mode | ✅ | ❌ |
+| yith-woocommerce-catalog-mode | ❌ | ❌ |
 | yith-woocommerce-compare | ✅ | ✅ |
 | yith-woocommerce-wishlist | ✅ | ✅ |
 | yith-woocommerce-zoom-magnifier | ✅ | ❌ |
