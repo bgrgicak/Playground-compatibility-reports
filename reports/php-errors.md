@@ -2,10 +2,10 @@
 ## Stats
 | Message | Test | Logs |
 |---------|------|------|
-| Uncaught Error: Non-static method SiteInfoGenerator::Enable() cannot be called statically in /wordpress/wp-content/plugins/a9-siteinfo-generator/siteinfo.php:1330 | asyncify-boot | [View logs](..//tmp/tmp.8Z0kcfKPey) |
-| Uncaught Error: Non-static method SiteInfoGenerator::Enable() cannot be called statically in /wordpress/wp-content/plugins/a9-siteinfo-generator/siteinfo.php:1330 | jspi-boot | [View logs](..//tmp/tmp.Qs1pDiTT2j) |
-| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/a5-recent-posts/class-lib/RPW_WidgetClass.php:470 | asyncify-boot | [View logs](..//tmp/tmp.lE5oJF0lQ1) |
-| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/a5-recent-posts/class-lib/RPW_WidgetClass.php:470 | jspi-boot | [View logs](..//tmp/tmp.kRfUc3fX29) |
+| Uncaught Error: Non-static method SiteInfoGenerator::Enable() cannot be called statically in /wordpress/wp-content/plugins/a9-siteinfo-generator/siteinfo.php:1330 | asyncify-boot | [View logs](..//tmp/tmp.CnARF8MtWf) |
+| Uncaught Error: Non-static method SiteInfoGenerator::Enable() cannot be called statically in /wordpress/wp-content/plugins/a9-siteinfo-generator/siteinfo.php:1330 | jspi-boot | [View logs](..//tmp/tmp.38zLYpnr1I) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/a5-recent-posts/class-lib/RPW_WidgetClass.php:470 | asyncify-boot | [View logs](..//tmp/tmp.Eiq7NmtRCu) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/a5-recent-posts/class-lib/RPW_WidgetClass.php:470 | jspi-boot | [View logs](..//tmp/tmp.QHodah5xlv) |
 | Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724 | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.C4lMNW8G6x) |
 | Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724 | jspi-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.0mPNB5Mz7g) |
 | Uncaught Exception: <p><strong>Error:</strong> Current PHP version (7.3.33) does not meet minimum requirements for Flexible Checkout Fields. The plugin requires PHP 7.4.</p><p><a href="https://wordpress.org/support/update-php/">Learn more about updating PHP</a>.</p> in /internal/eval.php:29 | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.Pxb0JXzrDm) |
