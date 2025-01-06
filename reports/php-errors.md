@@ -846,6 +846,8 @@
 | Declaration of image_to_postlist_class::pluginInfoRight($info) must be compatible with basic_plugin_class::pluginInfoRight($info, $added = false) in /wordpress/wp-content/plugins/image-to-postlist/image-to-postlist-plugin.php on line 22 | asyncify-boot | [View logs](..//tmp/tmp.VUCkBKS3v2) |
 | Declaration of image_to_postlist_class::pluginInfoRight($info) must be compatible with basic_plugin_class::pluginInfoRight($info, $added = false) in /wordpress/wp-content/plugins/image-to-postlist/image-to-postlist-plugin.php on line 22 | jspi-boot | [View logs](..//tmp/tmp.7ijPQDqyOh) |
 | Declaration of ithoughts\tooltip_glossary\Backbone::__construct($plugin_base) must be compatible with ithoughts\v1_0\Singleton::__construct() in /wordpress/wp-content/plugins/ithoughts-tooltip-glossary/class/class-backbone.php on line 37 | asyncify-boot | [View logs](../logs/plugins//i/ithoughts-tooltip-glossary/asyncify-boot/error.log) |
+| <p> Please activate Learndash LMS plugin. </p> in /wordpress/wp-content/plugins/innovade-learndash-activities/innovade-ld-activities.php on line 27 | asyncify-boot | [View logs](..//tmp/tmp.HO1sXRbQdJ) |
+| <p> Please activate Learndash LMS plugin. </p> in /wordpress/wp-content/plugins/innovade-learndash-activities/innovade-ld-activities.php on line 27 | jspi-boot | [View logs](..//tmp/tmp.LEPieAmtVA) |
 | Uncaught Error: Undefined constant "PLUGIN_URL" in /wordpress/wp-content/plugins/iphone-control-panel/iphone_control_panel.php:86 | asyncify-boot | [View logs](..//tmp/tmp.s8ushu7l7j) |
 | Uncaught Error: Undefined constant "PLUGIN_URL" in /wordpress/wp-content/plugins/iphone-control-panel/iphone_control_panel.php:86 | jspi-boot | [View logs](..//tmp/tmp.zRuc6JKCgQ) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.FtOrBjXwT3) |
@@ -856,6 +858,8 @@
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/instagram-widget-for-wordpress/instagram.php:233 | jspi-boot | [View logs](..//tmp/tmp.JwxJ4huBfG) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ip-address/ip-address.php:66 | asyncify-boot | [View logs](..//tmp/tmp.1D1c7yRxiM) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ip-address/ip-address.php:66 | jspi-boot | [View logs](..//tmp/tmp.k80aX7dVN9) |
+| Uncaught Error: Undefined constant "yes_please" in /wordpress/wp-content/plugins/image-effects-generator/app/filters/black_and_white.php:4 | asyncify-boot | [View logs](..//tmp/tmp.kKxsbUjs74) |
+| Uncaught Error: Undefined constant "yes_please" in /wordpress/wp-content/plugins/image-effects-generator/app/filters/black_and_white.php:4 | jspi-boot | [View logs](..//tmp/tmp.JEh8Aa47MY) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.dfJE5ae1p8) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.acAR7QEF7D) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.FYHvaz9ZIP) |
@@ -878,6 +882,8 @@
 | Uncaught Error: Attempt to assign property "globalDebugLevel" on null in /wordpress/wp-content/plugins/ipmanager-connector/ipm-nusoap.php:75 | jspi-boot | [View logs](..//tmp/tmp.uGdMQzBPmF) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/idavi/idavi_mailads.php on line 1 | asyncify-boot | [View logs](..//tmp/tmp.APoUdf2dxs) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/idavi/idavi_mailads.php on line 1 | jspi-boot | [View logs](..//tmp/tmp.n8GL6W5432) |
+| Uncaught Error: Non-static method INAP::start_up() cannot be called statically in /wordpress/wp-content/plugins/inline-ajax-page/inap.php:17 | asyncify-boot | [View logs](..//tmp/tmp.UpvzNDxtxE) |
+| Uncaught Error: Non-static method INAP::start_up() cannot be called statically in /wordpress/wp-content/plugins/inline-ajax-page/inap.php:17 | jspi-boot | [View logs](..//tmp/tmp.wQmcF3ekCV) |
 | Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/iota-ppc-wp-plugin/lib/trytes/Trytes.php' (include_path='.:') in /wordpress/wp-content/plugins/iota-pay-per-content/index.php:22 | asyncify-boot | [View logs](../logs/plugins//i/iota-pay-per-content/asyncify-boot/error.log) |
 | Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/iota-ppc-wp-plugin/lib/trytes/Trytes.php' (include_path='.:') in /wordpress/wp-content/plugins/iota-pay-per-content/index.php:22 | jspi-boot | [View logs](../logs/plugins//i/iota-pay-per-content/jspi-boot/error.log) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/igit-new-twitter-tweet-share-button-with-counter/igit-tweet-share-button.php:38 | asyncify-boot | [View logs](..//tmp/tmp.GiBzKTddwa) |
@@ -946,14 +952,16 @@
 | Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 7.4.0". You are running 7.2.34-dev. in /wordpress/wp-content/plugins/elementor/vendor/composer/platform_check.php on line 24 | jspi-boot | [View logs](..//tmp/tmp.q4jfzOK23s) |
 | Uncaught Error: Call to a member function getId() on null in /wordpress/wp-content/plugins/ip2content/Database/Seeders/FieldsValuesSeeder.php:64 | asyncify-boot | [View logs](..//tmp/tmp.PQzwBiyFis) |
 | Uncaught Error: Call to a member function getId() on null in /wordpress/wp-content/plugins/ip2content/Database/Seeders/FieldsValuesSeeder.php:64 | jspi-boot | [View logs](..//tmp/tmp.UbinH3xWwd) |
-| Uncaught Error: Non-static method Invit0r_YahooSession::hasSession() cannot be called statically in /wordpress/wp-content/plugins/invit0r/invit0r.php:488 | asyncify-boot | [View logs](../logs/plugins//i/invit0r/asyncify-boot/error.log) |
-| Uncaught Error: Non-static method Invit0r_YahooSession::hasSession() cannot be called statically in /wordpress/wp-content/plugins/invit0r/invit0r.php:488 | jspi-boot | [View logs](../logs/plugins//i/invit0r/jspi-boot/error.log) |
+| Uncaught Error: Non-static method Invit0r_YahooSession::hasSession() cannot be called statically in /wordpress/wp-content/plugins/invit0r/invit0r.php:488 | asyncify-boot | [View logs](..//tmp/tmp.b0bRSFJtQQ) |
+| Uncaught Error: Non-static method Invit0r_YahooSession::hasSession() cannot be called statically in /wordpress/wp-content/plugins/invit0r/invit0r.php:488 | jspi-boot | [View logs](..//tmp/tmp.9NfYfMqt3U) |
 | Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/instagram-followers-tracker/ift.php:18 | asyncify-boot | [View logs](..//tmp/tmp.GBBhRe0yv1) |
 | Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/instagram-followers-tracker/ift.php:18 | jspi-boot | [View logs](..//tmp/tmp.XqTt3Yikfo) |
 | Uncaught TypeError: curl_setopt(): Argument #1 ($handle) must be of type CurlHandle, null given in /wordpress/wp-content/plugins/instashow/dfy_instagram.php:20 | asyncify-boot | [View logs](../logs/plugins//i/instashow/asyncify-boot/error.log) |
 | Uncaught TypeError: curl_setopt(): Argument #1 ($handle) must be of type CurlHandle, null given in /wordpress/wp-content/plugins/instashow/dfy_instagram.php:20 | jspi-boot | [View logs](../logs/plugins//i/instashow/jspi-boot/error.log) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.WvdOqIZtcY) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.W7e4o8xgYC) |
+| Uncaught Error: Undefined constant "LD_WS_BASE" in /wordpress/wp-content/plugins/info-nutricional/info_nutricional_setup.php:26 | asyncify-boot | [View logs](..//tmp/tmp.8ZqKTwYCvO) |
+| Uncaught Error: Undefined constant "LD_WS_BASE" in /wordpress/wp-content/plugins/info-nutricional/info_nutricional_setup.php:26 | jspi-boot | [View logs](..//tmp/tmp.kcNZ0hFQcq) |
 | Uncaught TypeError: shuffle(): Argument #1 ($array) must be of type array, null given in /wordpress/wp-content/plugins/imageshack-offloader/imageshack-offloader.php:116 | asyncify-boot | [View logs](../logs/plugins//i/imageshack-offloader/asyncify-boot/error.log) |
 | Uncaught TypeError: shuffle(): Argument #1 ($array) must be of type array, null given in /wordpress/wp-content/plugins/imageshack-offloader/imageshack-offloader.php:116 | jspi-boot | [View logs](../logs/plugins//i/imageshack-offloader/jspi-boot/error.log) |
 | Uncaught Error: Undefined constant "INFERFORMPATH" in /wordpress/wp-content/plugins/infer-automated-form-monitor-for-marketing-operations/infer-form-monitor.php:12 | asyncify-boot | [View logs](..//tmp/tmp.NIlMrb2FyC) |
@@ -988,6 +996,8 @@
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/i-am-reading/i-am-reading.php:77 | jspi-boot | [View logs](..//tmp/tmp.t3K3ibdfBs) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/ias-countries/ias-countries.php on line 1847 | asyncify-boot | [View logs](..//tmp/tmp.xVQRNBYKAR) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/ias-countries/ias-countries.php on line 1847 | jspi-boot | [View logs](..//tmp/tmp.8iyE60W633) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.HshakgllTa) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.JxbcOARDOV) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.b2KKdR01oY) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.IFSueYMQVw) |
 | Uncaught Error: Non-static method Improved_Simpler_CSS::init() cannot be called statically in /wordpress/wp-content/plugins/imporved-simpler-css/improved-simpler-css.php:384 | asyncify-boot | [View logs](..//tmp/tmp.bOxupAivGJ) |
@@ -1008,6 +1018,8 @@
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/imposter/imposter.php:87 | jspi-boot | [View logs](..//tmp/tmp.CQwVZ8VS6G) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.YPgQrHvYO1) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.vnEZKMY7PI) |
+| Uncaught TypeError: array_key_exists(): Argument #2 ($array) must be of type array, bool given in /wordpress/wp-content/plugins/ic-hide-add-to-cart-and-prices-in-woocommerce/IC-Hide-add-to-cart-and-prices-in-WooCommerce.php:63 | asyncify-boot | [View logs](..//tmp/tmp.6AMVhBUbJl) |
+| Uncaught TypeError: array_key_exists(): Argument #2 ($array) must be of type array, bool given in /wordpress/wp-content/plugins/ic-hide-add-to-cart-and-prices-in-woocommerce/IC-Hide-add-to-cart-and-prices-in-WooCommerce.php:63 | jspi-boot | [View logs](..//tmp/tmp.mWG115yDrd) |
 | Uncaught Error: Undefined constant "slice_initialize_default_tags" in /wordpress/wp-content/plugins/include-content-slice/include-content-slice.php:208 | asyncify-boot | [View logs](..//tmp/tmp.2fnMzfFWFS) |
 | Uncaught Error: Undefined constant "slice_initialize_default_tags" in /wordpress/wp-content/plugins/include-content-slice/include-content-slice.php:208 | jspi-boot | [View logs](..//tmp/tmp.HxrkWNO4zD) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/inwebo-login/inwebometa.php:62 | asyncify-boot | [View logs](../logs/plugins//i/inwebo-login/asyncify-boot/error.log) |
@@ -1020,6 +1032,8 @@
 | Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/invisible-captcha/invisible_captcha.php:29 | jspi-boot | [View logs](..//tmp/tmp.dYUcoWgwQi) |
 | Uncaught Error: Undefined constant "i2p_version" in /wordpress/wp-content/plugins/image2post/image2post.php:194 | asyncify-boot | [View logs](..//tmp/tmp.Kn08Um4ME6) |
 | Uncaught Error: Undefined constant "i2p_version" in /wordpress/wp-content/plugins/image2post/image2post.php:194 | jspi-boot | [View logs](..//tmp/tmp.QjfZ7JRncw) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.UIe7LwDwc9) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.KnCCCQ2G3D) |
 | Uncaught Error: Call to undefined function mysql_get_server_info() in /wordpress/wp-content/plugins/immediate-attachments/immediate-attachments.php:69 | asyncify-boot | [View logs](..//tmp/tmp.xJ963h8SpD) |
 | Uncaught Error: Call to undefined function mysql_get_server_info() in /wordpress/wp-content/plugins/immediate-attachments/immediate-attachments.php:69 | jspi-boot | [View logs](..//tmp/tmp.e5drNH2DO0) |
 | Uncaught Error: Call to undefined function get_current_screen() in /wordpress/wp-content/plugins/infographic-and-list-builder-ilist/qc-project-ilist-main.php:265 | asyncify-boot | [View logs](..//tmp/tmp.Z1mCyn1Kxk) |
@@ -1078,6 +1092,8 @@
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/indianic-testimonial/testimonial.php:576 | jspi-boot | [View logs](../logs/plugins//i/indianic-testimonial/jspi-boot/error.log) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.5jwlJnDvam) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.OtgX6eIsyr) |
+| Uncaught Exception: <p><strong>Error:</strong> Current WordPress version (6.7.1) does not meet minimum requirements for Inverite IBV Integration. The plugin requires WordPress 7.0.0.</p> in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.gd1HQVoWU4) |
+| Uncaught Exception: <p><strong>Error:</strong> Current WordPress version (6.7.1) does not meet minimum requirements for Inverite IBV Integration. The plugin requires WordPress 7.0.0.</p> in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.p1HRGOLVAX) |
 | Uncaught Exception: <p><strong>Error:</strong> ingenidev Code Widget for Elementor requires 1 plugin to be installed and activated: elementor. <a href="http://127.0.0.1:9400/wp-admin/plugins.php">Manage plugins</a>.</p> in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.gPCkI1gAsk) |
 | Uncaught Exception: <p><strong>Error:</strong> ingenidev Code Widget for Elementor requires 1 plugin to be installed and activated: elementor. <a href="http://127.0.0.1:9400/wp-admin/plugins.php">Manage plugins</a>.</p> in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.6B5RRqjVJW) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/image-pro-wordpress-image-media-management-and-resizing-done-right/src/thumb/phpthumb.class.php on line 585 | asyncify-boot | [View logs](..//tmp/tmp.5BXvIC08jr) |
@@ -1120,6 +1136,8 @@
 | Cannot re-assign auto-global variable _FILES in /wordpress/wp-content/plugins/imasters-wp-adserver/imasters-wp-adserver.php on line 420 | jspi-boot | [View logs](..//tmp/tmp.kqZhtEssmQ) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.SZrYKDSdfT) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.y5oybfbgJx) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.RYwsQudJEd) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.6cu5P9zzMB) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/instagram-recent-media/insta-recent-media.php:146 | asyncify-boot | [View logs](..//tmp/tmp.WBLxEwfXUU) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/instagram-recent-media/insta-recent-media.php:146 | jspi-boot | [View logs](..//tmp/tmp.1lqEGWghDb) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/icheckmovies-widget/magneto-icheckmovies.php:315 | asyncify-boot | [View logs](..//tmp/tmp.4cFwXYLHah) |
@@ -1137,6 +1155,8 @@
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](../logs/plugins//i/instant-slideshare/jspi-boot/error.log) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.3DacVJwUy6) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.WjooYQDnU6) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/impermium-automod/wp-impermium.php:176 | asyncify-boot | [View logs](..//tmp/tmp.bUTVfAg8px) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/impermium-automod/wp-impermium.php:176 | jspi-boot | [View logs](..//tmp/tmp.5l49EJAtHL) |
 | Uncaught Error: Undefined constant "ICLT_CURRENT_VERSION" in /wordpress/wp-content/plugins/icanlocalize-comment-translator/upgrade_schema.php:3 | asyncify-boot | [View logs](..//tmp/tmp.qgaea1Nfkq) |
 | Uncaught Error: Undefined constant "ICLT_CURRENT_VERSION" in /wordpress/wp-content/plugins/icanlocalize-comment-translator/upgrade_schema.php:3 | jspi-boot | [View logs](..//tmp/tmp.ge3QY8sAFN) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ininbox-email-marketing-sign-up-forms/modules/widgets.php:124 | asyncify-boot | [View logs](..//tmp/tmp.cOXbAxibOd) |
@@ -1157,6 +1177,8 @@
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/imagen-del-dia/imagen-del-dia.php:102 | jspi-boot | [View logs](..//tmp/tmp.V9O9mw9Zpa) |
 | Cannot redeclare imagerotate() in /wordpress/wp-content/plugins/imagerotate/imagerotate.php on line 42 | asyncify-boot | [View logs](..//tmp/tmp.cTbgPes4Bm) |
 | Cannot redeclare imagerotate() in /wordpress/wp-content/plugins/imagerotate/imagerotate.php on line 42 | jspi-boot | [View logs](..//tmp/tmp.BYrqRnbm55) |
+| Uncaught Error: Call to undefined function get_editable_roles() in /wordpress/wp-content/plugins/idpay-gateway-gravity-forms/lib/IDPayOperation.php:237 | asyncify-boot | [View logs](..//tmp/tmp.UlH1gBwTA5) |
+| Uncaught Error: Call to undefined function get_editable_roles() in /wordpress/wp-content/plugins/idpay-gateway-gravity-forms/lib/IDPayOperation.php:237 | jspi-boot | [View logs](..//tmp/tmp.llXoP4UbXh) |
 | Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/wp-ultimate-csv-importer/lib/autoload.php' (include_path='.:') in /wordpress/wp-content/plugins/import-woocommerce/importExtensions/ImportHelpers.php:15 | asyncify-boot | [View logs](..//tmp/tmp.Cvcctw6Hsu) |
 | Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/wp-ultimate-csv-importer/lib/autoload.php' (include_path='.:') in /wordpress/wp-content/plugins/import-woocommerce/importExtensions/ImportHelpers.php:15 | jspi-boot | [View logs](..//tmp/tmp.mJ5Zuk0YPd) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/imagedrop/ImageDrop.php:480 | asyncify-boot | [View logs](..//tmp/tmp.KEt88vJ7jO) |
@@ -1167,8 +1189,8 @@
 | Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/iglobal-woocommerce-extension/../woocommerce/includes/class-wc-payment-gateways.php' (include_path='.:') in /wordpress/wp-content/plugins/iglobal-woocommerce-extension/iglobal-woocommerce.php:21 | jspi-boot | [View logs](..//tmp/tmp.sbvfXjpyGS) |
 | Uncaught TypeError: rand(): Argument #2 ($max) must be of type int, float given in /wordpress/wp-content/plugins/igniteup/includes/class-admin-options.php:101 | asyncify-boot | [View logs](..//tmp/tmp.HI9jgGwu8H) |
 | Uncaught TypeError: rand(): Argument #2 ($max) must be of type int, float given in /wordpress/wp-content/plugins/igniteup/includes/class-admin-options.php:101 | jspi-boot | [View logs](..//tmp/tmp.zjwNxblSqQ) |
-| Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/imagus/vendor/composer/../symfony/deprecation-contracts/function.php' (include_path='.:') in /wordpress/wp-content/plugins/imagus/vendor/composer/autoload_real.php:71 | asyncify-boot | [View logs](../logs/plugins//i/imagus/asyncify-boot/error.log) |
-| Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/imagus/vendor/composer/../symfony/deprecation-contracts/function.php' (include_path='.:') in /wordpress/wp-content/plugins/imagus/vendor/composer/autoload_real.php:71 | jspi-boot | [View logs](../logs/plugins//i/imagus/jspi-boot/error.log) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/image-upload-widget/widget_guide.php:132 | asyncify-boot | [View logs](..//tmp/tmp.t5k40mU9l3) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/image-upload-widget/widget_guide.php:132 | jspi-boot | [View logs](..//tmp/tmp.PLgLSKXL9o) |
 | Uncaught Error: Undefined constant "GLOB_BRACE" in /wordpress/wp-content/plugins/ids-ks-international-development-research-plugin/idsimport.php:30 | asyncify-boot | [View logs](..//tmp/tmp.5niRzCAL8y) |
 | Uncaught Error: Undefined constant "GLOB_BRACE" in /wordpress/wp-content/plugins/ids-ks-international-development-research-plugin/idsimport.php:30 | jspi-boot | [View logs](..//tmp/tmp.o92b4i9jq7) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/image-headlines/image-headlines.php on line 382 | asyncify-boot | [View logs](..//tmp/tmp.q9QYOaCO6J) |
@@ -1179,6 +1201,8 @@
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method nimbit_subscribe::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | [View logs](../logs/plugins//i/instant-band-site-by-nimbit/jspi-boot/error.log) |
 | Uncaught Error: Undefined constant "iDonateD_getFundList" in /wordpress/wp-content/plugins/idonate-donation/getFundraisersList.php:635 | asyncify-boot | [View logs](..//tmp/tmp.6BSDiqsior) |
 | Uncaught Error: Undefined constant "iDonateD_getFundList" in /wordpress/wp-content/plugins/idonate-donation/getFundraisersList.php:635 | jspi-boot | [View logs](..//tmp/tmp.m2xCRMLCXh) |
+| Uncaught Error: Non-static method Incorrect_Datetime_Bug_Fix::init() cannot be called statically in /wordpress/wp-content/plugins/incorrect-datetime-bug-plugin-fix/incorrect-datetime-bug-fix.php:40 | asyncify-boot | [View logs](..//tmp/tmp.QoYHJxgyye) |
+| Uncaught Error: Non-static method Incorrect_Datetime_Bug_Fix::init() cannot be called statically in /wordpress/wp-content/plugins/incorrect-datetime-bug-plugin-fix/incorrect-datetime-bug-fix.php:40 | jspi-boot | [View logs](..//tmp/tmp.WWKI1VJBaP) |
 | Uncaught Error: Undefined constant "IQA\Plugin\IQA_ABSPATH" in /wordpress/wp-content/plugins/iq-inhead-analytics/includes/load.php:17 | asyncify-boot | [View logs](..//tmp/tmp.neHelqgBjG) |
 | Uncaught Error: Undefined constant "IQA\Plugin\IQA_ABSPATH" in /wordpress/wp-content/plugins/iq-inhead-analytics/includes/load.php:17 | jspi-boot | [View logs](..//tmp/tmp.EL6BypVotH) |
 | Uncaught Exception: <p><strong>Error:</strong> Current PHP version (7.4.31-dev) does not meet minimum requirements for JSM Inherit Parent Featured Image. The plugin requires PHP 7.4.33.</p><p><a href="https://wordpress.org/support/update-php/">Learn more about updating PHP</a>.</p> in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.OIYhOlruJO) |
