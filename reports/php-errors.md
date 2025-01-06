@@ -847,7 +847,8 @@
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/identica-tools/identica-tools.php on line 1308 | jspi-boot | [View logs](..//tmp/tmp.cpbQmn2IqE) |
 | Declaration of image_to_postlist_class::pluginInfoRight($info) must be compatible with basic_plugin_class::pluginInfoRight($info, $added = false) in /wordpress/wp-content/plugins/image-to-postlist/image-to-postlist-plugin.php on line 22 | asyncify-boot | [View logs](..//tmp/tmp.VUCkBKS3v2) |
 | Declaration of image_to_postlist_class::pluginInfoRight($info) must be compatible with basic_plugin_class::pluginInfoRight($info, $added = false) in /wordpress/wp-content/plugins/image-to-postlist/image-to-postlist-plugin.php on line 22 | jspi-boot | [View logs](..//tmp/tmp.7ijPQDqyOh) |
-| Declaration of ithoughts\tooltip_glossary\Backbone::__construct($plugin_base) must be compatible with ithoughts\v1_0\Singleton::__construct() in /wordpress/wp-content/plugins/ithoughts-tooltip-glossary/class/class-backbone.php on line 37 | asyncify-boot | [View logs](../logs/plugins//i/ithoughts-tooltip-glossary/asyncify-boot/error.log) |
+| Declaration of ithoughts\tooltip_glossary\Backbone::__construct($plugin_base) must be compatible with ithoughts\v1_0\Singleton::__construct() in /wordpress/wp-content/plugins/ithoughts-tooltip-glossary/class/class-backbone.php on line 37 | asyncify-boot | [View logs](..//tmp/tmp.sEcegP3wLP) |
+| Declaration of ithoughts\tooltip_glossary\Backbone::__construct($plugin_base) must be compatible with ithoughts\v1_0\Singleton::__construct() in /wordpress/wp-content/plugins/ithoughts-tooltip-glossary/class/class-backbone.php on line 37 | jspi-boot | [View logs](..//tmp/tmp.3tQpbbiYFw) |
 | <p> Please activate Learndash LMS plugin. </p> in /wordpress/wp-content/plugins/innovade-learndash-activities/innovade-ld-activities.php on line 27 | asyncify-boot | [View logs](..//tmp/tmp.HO1sXRbQdJ) |
 | <p> Please activate Learndash LMS plugin. </p> in /wordpress/wp-content/plugins/innovade-learndash-activities/innovade-ld-activities.php on line 27 | jspi-boot | [View logs](..//tmp/tmp.LEPieAmtVA) |
 | Uncaught Error: Undefined constant "PLUGIN_URL" in /wordpress/wp-content/plugins/iphone-control-panel/iphone_control_panel.php:86 | asyncify-boot | [View logs](..//tmp/tmp.s8ushu7l7j) |
@@ -876,6 +877,8 @@
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.zBQa93Xpab) |
 | Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-content/plugins/iperss/index.php on line 19 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163 | asyncify-boot | [View logs](..//tmp/tmp.GV6gSlbsA1) |
 | Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-content/plugins/iperss/index.php on line 19 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163 | jspi-boot | [View logs](..//tmp/tmp.A1YvGCScPD) |
+| Uncaught Error: Undefined constant "PLUGIN_URL" in /wordpress/wp-content/plugins/info-box-on-new-postpage-editor/Info-Box-Post-Editor.php:85 | asyncify-boot | [View logs](..//tmp/tmp.CRDvn37Nvi) |
+| Uncaught Error: Undefined constant "PLUGIN_URL" in /wordpress/wp-content/plugins/info-box-on-new-postpage-editor/Info-Box-Post-Editor.php:85 | jspi-boot | [View logs](..//tmp/tmp.F4DF8E6AGw) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/iimage-gallery/iimage-gallery.php on line 647 | asyncify-boot | [View logs](..//tmp/tmp.06OQfIPewn) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/iimage-gallery/iimage-gallery.php on line 647 | jspi-boot | [View logs](..//tmp/tmp.obFFo7V3pI) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/idx-broker-wordpress-plugin/idx_broker.php:2086 | asyncify-boot | [View logs](..//tmp/tmp.umho7KDutq) |
@@ -886,6 +889,8 @@
 | Uncaught Exception: <p><strong>Error:</strong> Current PHP version (7.2.34-dev) does not meet minimum requirements for WooCommerce. The plugin requires PHP 7.4.</p><p><a href="https://wordpress.org/support/update-php/">Learn more about updating PHP</a>.</p> in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.VxcE7gnzfZ) |
 | Uncaught Error: Non-static method INCTCHATWIDGET_Settings::_getDefaultOptions() cannot be called statically in /wordpress/wp-content/plugins/incognito-chat/admin/settings.php:58 | asyncify-boot | [View logs](..//tmp/tmp.2086UkrzLx) |
 | Uncaught Error: Non-static method INCTCHATWIDGET_Settings::_getDefaultOptions() cannot be called statically in /wordpress/wp-content/plugins/incognito-chat/admin/settings.php:58 | jspi-boot | [View logs](..//tmp/tmp.gV5YqWGl4j) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/image-scroller/image-scroller-fx.php:183 | asyncify-boot | [View logs](..//tmp/tmp.t9iKaM5ctc) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/image-scroller/image-scroller-fx.php:183 | jspi-boot | [View logs](..//tmp/tmp.oRyzbbEMZH) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/iframe-widget/iframe-widget.php:14 | asyncify-boot | [View logs](..//tmp/tmp.BAF6e6soeG) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/iframe-widget/iframe-widget.php:14 | jspi-boot | [View logs](..//tmp/tmp.uN94ZQekFp) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/import-anything/classes/config.php:44 | asyncify-boot | [View logs](..//tmp/tmp.pQlY2mMts1) |
@@ -904,6 +909,8 @@
 | Uncaught Error: Non-static method INAP::start_up() cannot be called statically in /wordpress/wp-content/plugins/inline-ajax-page/inap.php:17 | jspi-boot | [View logs](..//tmp/tmp.wQmcF3ekCV) |
 | Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/iota-ppc-wp-plugin/lib/trytes/Trytes.php' (include_path='.:') in /wordpress/wp-content/plugins/iota-pay-per-content/index.php:22 | asyncify-boot | [View logs](../logs/plugins//i/iota-pay-per-content/asyncify-boot/error.log) |
 | Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/iota-ppc-wp-plugin/lib/trytes/Trytes.php' (include_path='.:') in /wordpress/wp-content/plugins/iota-pay-per-content/index.php:22 | jspi-boot | [View logs](../logs/plugins//i/iota-pay-per-content/jspi-boot/error.log) |
+| Uncaught Error: Non-static method ipadio::init() cannot be called statically in /wordpress/wp-content/plugins/ipadio-player/ipadio.php:37 | asyncify-boot | [View logs](..//tmp/tmp.eTyDJ82faH) |
+| Uncaught Error: Non-static method ipadio::init() cannot be called statically in /wordpress/wp-content/plugins/ipadio-player/ipadio.php:37 | jspi-boot | [View logs](..//tmp/tmp.vdFaYJQIgk) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/igit-new-twitter-tweet-share-button-with-counter/igit-tweet-share-button.php:38 | asyncify-boot | [View logs](..//tmp/tmp.GiBzKTddwa) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/igit-new-twitter-tweet-share-button-with-counter/igit-tweet-share-button.php:38 | jspi-boot | [View logs](..//tmp/tmp.7B2tLGhd52) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/iire-social-icons/includes/iire_social_widget.php:58 | asyncify-boot | [View logs](..//tmp/tmp.PP6K0bHPeI) |
@@ -938,6 +945,8 @@
 | Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/imaxel-pw2p/imaxel.php on line 1747 | jspi-boot | [View logs](..//tmp/tmp.lh7r73j4y0) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.4zmO8N6Pgb) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.n6OYShNYHK) |
+| Uncaught Error: Call to undefined function ereg_replace() in /wordpress/wp-content/plugins/imaguard/helpers.php:5 | asyncify-boot | [View logs](..//tmp/tmp.78J8kp2Y5s) |
+| Uncaught Error: Call to undefined function ereg_replace() in /wordpress/wp-content/plugins/imaguard/helpers.php:5 | jspi-boot | [View logs](..//tmp/tmp.Amf7inN6Ps) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "icralabelgen_activation" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](..//tmp/tmp.1I91BUoaSX) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "icralabelgen_activation" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | [View logs](..//tmp/tmp.5lxsjOCVpN) |
 | Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/images-finder-for-amazon/AmazonImagesFinder_Plugin.php:32 | asyncify-boot | [View logs](..//tmp/tmp.JkVEuBVmok) |
@@ -1028,8 +1037,6 @@
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/itunes-lookup-widget/itunes-lookup-widget.php:668 | jspi-boot | [View logs](..//tmp/tmp.pei7qLp2X6) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/infoxicate/infoxicate.php:112 | asyncify-boot | [View logs](..//tmp/tmp.TFAuFYXfBb) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/infoxicate/infoxicate.php:112 | jspi-boot | [View logs](..//tmp/tmp.uRjmmsD67U) |
-| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](../logs/plugins//i/instant-appointment/asyncify-boot/error.log) |
-| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](../logs/plugins//i/instant-appointment/jspi-boot/error.log) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/iire-social-lite/includes/iire_social_lite_widget.php:56 | asyncify-boot | [View logs](..//tmp/tmp.TKFQwe5xD0) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/iire-social-lite/includes/iire_social_lite_widget.php:56 | jspi-boot | [View logs](..//tmp/tmp.LWEBA9MVDV) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/i-am-reading/i-am-reading.php:77 | asyncify-boot | [View logs](..//tmp/tmp.WQaqSPJWzo) |
@@ -1058,6 +1065,8 @@
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/imdb-post-rating/top-rated-widget.php:118 | jspi-boot | [View logs](..//tmp/tmp.GjcZUk5J6i) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/imposter/imposter.php:87 | asyncify-boot | [View logs](..//tmp/tmp.GOob1aU0kI) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/imposter/imposter.php:87 | jspi-boot | [View logs](..//tmp/tmp.CQwVZ8VS6G) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/insert-this-intelligent-content-inserts/insertthis.php:121 | asyncify-boot | [View logs](..//tmp/tmp.Jiq6QpXLai) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/insert-this-intelligent-content-inserts/insertthis.php:121 | jspi-boot | [View logs](..//tmp/tmp.8r6Iykc4cD) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.YPgQrHvYO1) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.vnEZKMY7PI) |
 | Uncaught TypeError: array_key_exists(): Argument #2 ($array) must be of type array, bool given in /wordpress/wp-content/plugins/ic-hide-add-to-cart-and-prices-in-woocommerce/IC-Hide-add-to-cart-and-prices-in-WooCommerce.php:63 | asyncify-boot | [View logs](..//tmp/tmp.6AMVhBUbJl) |
@@ -1072,6 +1081,8 @@
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/in-this-section/in-this-section.php:114 | jspi-boot | [View logs](..//tmp/tmp.2EVXezpLZx) |
 | Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/invisible-captcha/invisible_captcha.php:29 | asyncify-boot | [View logs](..//tmp/tmp.YkPsHbMvW4) |
 | Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/invisible-captcha/invisible_captcha.php:29 | jspi-boot | [View logs](..//tmp/tmp.dYUcoWgwQi) |
+| Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "imforza_activation" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](..//tmp/tmp.iKZAxUsLwJ) |
+| Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "imforza_activation" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | [View logs](..//tmp/tmp.ruGhoeqBoK) |
 | Uncaught Error: Undefined constant "i2p_version" in /wordpress/wp-content/plugins/image2post/image2post.php:194 | asyncify-boot | [View logs](..//tmp/tmp.Kn08Um4ME6) |
 | Uncaught Error: Undefined constant "i2p_version" in /wordpress/wp-content/plugins/image2post/image2post.php:194 | jspi-boot | [View logs](..//tmp/tmp.QjfZ7JRncw) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.UIe7LwDwc9) |
@@ -1181,6 +1192,8 @@
 | Uncaught Error: Undefined constant "WC_VERSION" in /wordpress/wp-content/plugins/innozilla-table-rate-shipping-for-woocommerce/installer.php:41 | jspi-boot | [View logs](../logs/plugins//i/innozilla-table-rate-shipping-for-woocommerce/jspi-boot/error.log) |
 | Uncaught Error: Undefined constant "price_excel" in /wordpress/wp-content/plugins/import-excel/functions.php:564 | asyncify-boot | [View logs](..//tmp/tmp.5Ob5OZaity) |
 | Uncaught Error: Undefined constant "price_excel" in /wordpress/wp-content/plugins/import-excel/functions.php:564 | jspi-boot | [View logs](..//tmp/tmp.GN0Kk0duCe) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/inboundio-marketing/includes/class-imp-widget.php:259 | asyncify-boot | [View logs](..//tmp/tmp.4pONs2YdZl) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/inboundio-marketing/includes/class-imp-widget.php:259 | jspi-boot | [View logs](..//tmp/tmp.lhYtrU1i63) |
 | Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in /wordpress/wp-content/plugins/imk-services/inc/Activate.php:13 | asyncify-boot | [View logs](..//tmp/tmp.ORnAu7Lrtn) |
 | Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in /wordpress/wp-content/plugins/imk-services/inc/Activate.php:13 | jspi-boot | [View logs](..//tmp/tmp.Jy0hTuAHof) |
 | Uncaught Error: Undefined constant "PLUGIN_PATH" in /wordpress/wp-content/plugins/ibl-woocommerce-wishlist/wc-custom-wishlist.php:32 | asyncify-boot | [View logs](..//tmp/tmp.92YMKwPe8S) |
@@ -1276,6 +1289,8 @@
 | Uncaught TypeError: array_merge(): Argument #1 must be of type array, null given in /wordpress/wp-content/plugins/iammobiled-mobile/iammobiled-mobile.php:153 | jspi-boot | [View logs](..//tmp/tmp.7aT8bMJrSn) |
 | Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/woocommerce/includes/abstracts/abstract-wc-settings-api.php' (include_path='.:') in /wordpress/wp-content/plugins/integrai/admin/wc-config/class-wc-integration-integrai-settings-integration.php:8 | asyncify-boot | [View logs](..//tmp/tmp.P50j60Mt7O) |
 | Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/woocommerce/includes/abstracts/abstract-wc-settings-api.php' (include_path='.:') in /wordpress/wp-content/plugins/integrai/admin/wc-config/class-wc-integration-integrai-settings-integration.php:8 | jspi-boot | [View logs](..//tmp/tmp.rjOCwUcoKA) |
+| Uncaught Exception: <p><strong>Error:</strong> Current PHP version (7.2.34-dev) does not meet minimum requirements for Dynamics 365 Integration. The plugin requires PHP 8.2.</p><p><a href="https://wordpress.org/support/update-php/">Learn more about updating PHP</a>.</p> in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.cksCWG2crm) |
+| Uncaught Exception: <p><strong>Error:</strong> Current PHP version (7.2.34-dev) does not meet minimum requirements for Dynamics 365 Integration. The plugin requires PHP 8.2.</p><p><a href="https://wordpress.org/support/update-php/">Learn more about updating PHP</a>.</p> in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.PK26SHkI5j) |
 | Uncaught Error: Undefined constant "GLOB_BRACE" in /wordpress/wp-content/plugins/kama-wp-smile/Kama_WP_Smiles_Plugin.php:401 | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.DoNStpmvXo) |
 | Uncaught Error: Undefined constant "GLOB_BRACE" in /wordpress/wp-content/plugins/kama-wp-smile/Kama_WP_Smiles_Plugin.php:401 | jspi-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.g0sYzn34qf) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/1-click-retweetsharelike/la-click-and-share-networkpub.php on line 1116 | asyncify-boot | [View logs](..//tmp/tmp.qtox9Cr6Du) |
