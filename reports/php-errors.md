@@ -848,8 +848,8 @@
 | Uncaught Error: Undefined constant "PLUGIN_URL" in /wordpress/wp-content/plugins/iphone-control-panel/iphone_control_panel.php:86 | jspi-boot | [View logs](..//tmp/tmp.zRuc6JKCgQ) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.FtOrBjXwT3) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.JAC5InfRBm) |
-| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/ipvenger/securimage/securimage_cache.php on line 1258 | asyncify-boot | [View logs](../logs/plugins//i/ipvenger/asyncify-boot/error.log) |
-| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/ipvenger/securimage/securimage_cache.php on line 1258 | jspi-boot | [View logs](../logs/plugins//i/ipvenger/jspi-boot/error.log) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/ipvenger/securimage/securimage_cache.php on line 1258 | asyncify-boot | [View logs](..//tmp/tmp.jAjIDuwgqs) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/ipvenger/securimage/securimage_cache.php on line 1258 | jspi-boot | [View logs](..//tmp/tmp.Wqmqc9dSH7) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/instagram-widget-for-wordpress/instagram.php:233 | asyncify-boot | [View logs](..//tmp/tmp.2xNfkAZ8ZZ) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/instagram-widget-for-wordpress/instagram.php:233 | jspi-boot | [View logs](..//tmp/tmp.JwxJ4huBfG) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ip-address/ip-address.php:66 | asyncify-boot | [View logs](..//tmp/tmp.1D1c7yRxiM) |
@@ -906,6 +906,8 @@
 | Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/images-finder-for-amazon/AmazonImagesFinder_Plugin.php:32 | jspi-boot | [View logs](..//tmp/tmp.ws0gCV3pPq) |
 | Uncaught Error: Non-static method jtMainFrame::newInstance() cannot be called statically in /wordpress/wp-content/plugins/iveribuynow/iVeriBuyNow.php:27 | asyncify-boot | [View logs](..//tmp/tmp.c4XoTnHKdc) |
 | Uncaught Error: Non-static method jtMainFrame::newInstance() cannot be called statically in /wordpress/wp-content/plugins/iveribuynow/iVeriBuyNow.php:27 | jspi-boot | [View logs](..//tmp/tmp.omfjT96M8j) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.qy9etgXsHV) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.hDZB4rqC1W) |
 | Declaration of Neo_Inm_Edit_Walker::start_lvl(&$output) must be compatible with Walker_Nav_Menu::start_lvl(&$output, $depth = 0, $args = null) in /wordpress/wp-content/plugins/improved-nav-menu/NeoInmEditWalker.class.php on line 15 | asyncify-boot | [View logs](..//tmp/tmp.aHOJBzGpkM) |
 | Declaration of Neo_Inm_Edit_Walker::start_lvl(&$output) must be compatible with Walker_Nav_Menu::start_lvl(&$output, $depth = 0, $args = null) in /wordpress/wp-content/plugins/improved-nav-menu/NeoInmEditWalker.class.php on line 15 | jspi-boot | [View logs](..//tmp/tmp.t1uu9bqGIn) |
 | Uncaught PDOException: SQLSTATE[HY000] [2002] Address family not supported by protocol in /wordpress/wp-content/plugins/independent-analytics/vendor/illuminate/database/Connectors/Connector.php:53 | asyncify-boot | [View logs](..//tmp/tmp.R9cY66RHLa) |
@@ -914,10 +916,14 @@
 | Uncaught Error: Undefined constant "P_URL" in /wordpress/wp-content/plugins/infobarwp/infobar.php:34 | jspi-boot | [View logs](..//tmp/tmp.FQVGldNJD6) |
 | Uncaught Error: Call to undefined function get_editable_roles() in /wordpress/wp-content/plugins/ippanel-sms-pro-for-gravity-forms/includes/main.php:111 | asyncify-boot | [View logs](../logs/plugins//i/ippanel-sms-pro-for-gravity-forms/asyncify-boot/error.log) |
 | Uncaught Error: Call to undefined function get_editable_roles() in /wordpress/wp-content/plugins/ippanel-sms-pro-for-gravity-forms/includes/main.php:111 | jspi-boot | [View logs](../logs/plugins//i/ippanel-sms-pro-for-gravity-forms/jspi-boot/error.log) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/inline-upload/inline_upload.php on line 350 | asyncify-boot | [View logs](..//tmp/tmp.tLvtGzQnl2) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/inline-upload/inline_upload.php on line 350 | jspi-boot | [View logs](..//tmp/tmp.I1FoPLXmH7) |
 | Uncaught Exception: <p><strong>Error:</strong> Integrations of Zoho CRM and Forminator form requires 1 plugin to be installed and activated: forminator. <a href="http://127.0.0.1:9400/wp-admin/plugins.php">Manage plugins</a>.</p> in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.ldtDGYwLnR) |
 | Uncaught Exception: <p><strong>Error:</strong> Integrations of Zoho CRM and Forminator form requires 1 plugin to be installed and activated: forminator. <a href="http://127.0.0.1:9400/wp-admin/plugins.php">Manage plugins</a>.</p> in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.4MXzghNab2) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method IMUCInit::on_activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](..//tmp/tmp.Qb9B6usukG) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method IMUCInit::on_activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | [View logs](..//tmp/tmp.XLt8Nq8WV4) |
+| Uncaught Error: Non-static method iPaper::getFolder() cannot be called statically in /wordpress/wp-content/plugins/ipaper/ipaper.php:934 | asyncify-boot | [View logs](..//tmp/tmp.9ZAV8jOM7j) |
+| Uncaught Error: Non-static method iPaper::getFolder() cannot be called statically in /wordpress/wp-content/plugins/ipaper/ipaper.php:934 | jspi-boot | [View logs](..//tmp/tmp.YwH1Xs37Sd) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.m8FDoL7ncV) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.FbGKq44XsG) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.vaeKAgMfbY) |
@@ -940,12 +946,16 @@
 | Uncaught TypeError: shuffle(): Argument #1 ($array) must be of type array, null given in /wordpress/wp-content/plugins/imageshack-offloader/imageshack-offloader.php:116 | jspi-boot | [View logs](../logs/plugins//i/imageshack-offloader/jspi-boot/error.log) |
 | Uncaught Error: Undefined constant "FANCIFIED_URL" in /wordpress/wp-content/plugins/images-fancified/images-fancified.php:29 | asyncify-boot | [View logs](..//tmp/tmp.I4pT9c3Hgd) |
 | Uncaught Error: Undefined constant "FANCIFIED_URL" in /wordpress/wp-content/plugins/images-fancified/images-fancified.php:29 | jspi-boot | [View logs](..//tmp/tmp.MJKKqhisRl) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.Q0gcZFkZbx) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.0V4oxVCQrY) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/itunes-charts/itunes.php:349 | asyncify-boot | [View logs](..//tmp/tmp.hx1eOGnMeh) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/itunes-charts/itunes.php:349 | jspi-boot | [View logs](..//tmp/tmp.oHP7pOajHg) |
 | Uncaught Error: Call to undefined function indigestion_log() in /wordpress/wp-content/plugins/indigestion/indigestion.php:190 | asyncify-boot | [View logs](..//tmp/tmp.noS24hj9xq) |
 | Uncaught Error: Call to undefined function indigestion_log() in /wordpress/wp-content/plugins/indigestion/indigestion.php:190 | jspi-boot | [View logs](..//tmp/tmp.Hur95sjos6) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/iremotewp/lib/s3/S3.php on line 2344 | asyncify-boot | [View logs](..//tmp/tmp.JX1GiH3ThB) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/iremotewp/lib/s3/S3.php on line 2344 | jspi-boot | [View logs](..//tmp/tmp.GNi0k0aGs1) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ix-wemonit/plugin/Ix_Wemonit.php:54 | asyncify-boot | [View logs](..//tmp/tmp.jyBYWkGBoZ) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ix-wemonit/plugin/Ix_Wemonit.php:54 | jspi-boot | [View logs](..//tmp/tmp.Bo8BI2Miwa) |
 | Uncaught Error: Undefined constant "yes" in /wordpress/wp-content/plugins/ilovemachineproblem-responsive-google-map/ilmp-index.php:25 | asyncify-boot | [View logs](..//tmp/tmp.qCkOs2fgnD) |
 | Uncaught Error: Undefined constant "yes" in /wordpress/wp-content/plugins/ilovemachineproblem-responsive-google-map/ilmp-index.php:25 | jspi-boot | [View logs](..//tmp/tmp.xO6iW8LApR) |
 | Uncaught Error: Non-static method MyPlugin::load_file() cannot be called statically in /wordpress/wp-content/plugins/infogeniuz-form-analytics-for-cform-ii/infoGeniuz_Form_Analytics_for_cforms-ii.php:22 | asyncify-boot | [View logs](..//tmp/tmp.eKP4AvzFP3) |
@@ -994,6 +1004,8 @@
 | Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/wp-e-commerce/wpsc-core/wpsc-functions.php' (include_path='.:') in /wordpress/wp-content/plugins/icepay-online-payment-plugin-for-wp-ecommerce/icepay.php:34 | jspi-boot | [View logs](..//tmp/tmp.uTGQ0ge4er) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](../logs/plugins//i/iphoneize-my-feed/asyncify-boot/error.log) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](../logs/plugins//i/iphoneize-my-feed/jspi-boot/error.log) |
+| Uncaught Error: Undefined constant "ZipArchive" in /wordpress/wp-content/plugins/install-profiles/wpip.php:49 | asyncify-boot | [View logs](..//tmp/tmp.70tLmdWFiS) |
+| Uncaught Error: Undefined constant "ZipArchive" in /wordpress/wp-content/plugins/install-profiles/wpip.php:49 | jspi-boot | [View logs](..//tmp/tmp.E3AXbJaIul) |
 | Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in /wordpress/wp-content/plugins/instant-web-highlighter/roohit.php:94 | asyncify-boot | [View logs](../logs/plugins//i/instant-web-highlighter/asyncify-boot/error.log) |
 | Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in /wordpress/wp-content/plugins/instant-web-highlighter/roohit.php:94 | jspi-boot | [View logs](../logs/plugins//i/instant-web-highlighter/jspi-boot/error.log) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method IntelliChristian_Links::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](../logs/plugins//i/intelliads/asyncify-boot/error.log) |
@@ -1062,6 +1074,8 @@
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method ImageBrowser::init() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | [View logs](..//tmp/tmp.GEr1gvqEMD) |
 | Uncaught Error: Undefined constant "body" in /wordpress/wp-content/plugins/ipgp-geolocation/install.php:25 | asyncify-boot | [View logs](..//tmp/tmp.aTs2v2MHyd) |
 | Uncaught Error: Undefined constant "body" in /wordpress/wp-content/plugins/ipgp-geolocation/install.php:25 | jspi-boot | [View logs](..//tmp/tmp.XUEfmNVwYA) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/instaindo-instagram-profile-widget/ig_profile_widget.php:111 | asyncify-boot | [View logs](..//tmp/tmp.Qi2llEiNfA) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/instaindo-instagram-profile-widget/ig_profile_widget.php:111 | jspi-boot | [View logs](..//tmp/tmp.9FR5pAiMFF) |
 | Uncaught Error: Undefined constant "WC_VERSION" in /wordpress/wp-content/plugins/innozilla-table-rate-shipping-for-woocommerce/installer.php:41 | jspi-boot | [View logs](../logs/plugins//i/innozilla-table-rate-shipping-for-woocommerce/jspi-boot/error.log) |
 | Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in /wordpress/wp-content/plugins/imk-services/inc/Activate.php:13 | asyncify-boot | [View logs](../logs/plugins//i/imk-services/asyncify-boot/error.log) |
 | Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in /wordpress/wp-content/plugins/imk-services/inc/Activate.php:13 | jspi-boot | [View logs](../logs/plugins//i/imk-services/jspi-boot/error.log) |
