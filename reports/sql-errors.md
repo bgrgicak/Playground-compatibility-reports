@@ -92,8 +92,10 @@
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | [View logs](..//tmp/tmp.UbinH3xWwd) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wmip2c_fields. | asyncify-boot | [View logs](..//tmp/tmp.PQzwBiyFis) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wmip2c_fields. | jspi-boot | [View logs](..//tmp/tmp.UbinH3xWwd) |
-| Unknown operation: MODIFY. | asyncify-boot | [View logs](../logs/plugins//i/inkmember-build-your-membership-site-easily/asyncify-boot/error.log) |
-| Unknown operation: MODIFY. | jspi-boot | [View logs](../logs/plugins//i/inkmember-build-your-membership-site-easily/jspi-boot/error.log) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | [View logs](..//tmp/tmp.DLAKfNSROX) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | [View logs](..//tmp/tmp.OohGzlFlAo) |
+| Unknown operation: MODIFY. | asyncify-boot | [View logs](..//tmp/tmp.DLAKfNSROX) |
+| Unknown operation: MODIFY. | jspi-boot | [View logs](..//tmp/tmp.OohGzlFlAo) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imk_apps. | asyncify-boot | [View logs](..//tmp/tmp.ORnAu7Lrtn) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imk_apps. | jspi-boot | [View logs](..//tmp/tmp.Jy0hTuAHof) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_dms_mappings. | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.b0h502yGsd) |
