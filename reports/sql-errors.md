@@ -94,8 +94,8 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wmip2c_fields. | jspi-boot | [View logs](..//tmp/tmp.UbinH3xWwd) |
 | Unknown operation: MODIFY. | asyncify-boot | [View logs](../logs/plugins//i/inkmember-build-your-membership-site-easily/asyncify-boot/error.log) |
 | Unknown operation: MODIFY. | jspi-boot | [View logs](../logs/plugins//i/inkmember-build-your-membership-site-easily/jspi-boot/error.log) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_imk_apps. | asyncify-boot | [View logs](../logs/plugins//i/imk-services/asyncify-boot/error.log) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_imk_apps. | jspi-boot | [View logs](../logs/plugins//i/imk-services/jspi-boot/error.log) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_imk_apps. | asyncify-boot | [View logs](..//tmp/tmp.ORnAu7Lrtn) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_imk_apps. | jspi-boot | [View logs](..//tmp/tmp.Jy0hTuAHof) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_dms_mappings. | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.b0h502yGsd) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_dms_mappings. | jspi-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.KaB6AdMmDH) |
 | MySQL field type cannot be translated to SQLite: json. | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.AD0qOquLa5) |
