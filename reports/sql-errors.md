@@ -88,6 +88,8 @@
 | Unknown operation: AUTO_INCREMENT. | jspi-boot | [View logs](..//tmp/tmp.sifXclENOj) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_embed_rsvpify_plugin. | asyncify-boot | [View logs](..//tmp/tmp.45L4CYLFic) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_embed_rsvpify_plugin. | jspi-boot | [View logs](..//tmp/tmp.oDCVC31Ty5) |
+| Unknown show type: FIELDS FROM. | asyncify-boot | [View logs](..//tmp/tmp.X2RRtWB46y) |
+| Unknown show type: FIELDS FROM. | jspi-boot | [View logs](..//tmp/tmp.awKwwCy3rM) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | [View logs](..//tmp/tmp.PQzwBiyFis) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | [View logs](..//tmp/tmp.UbinH3xWwd) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wmip2c_fields. | asyncify-boot | [View logs](..//tmp/tmp.PQzwBiyFis) |
