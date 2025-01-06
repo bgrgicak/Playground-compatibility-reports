@@ -88,10 +88,10 @@
 | Unknown operation: AUTO_INCREMENT. | jspi-boot | [View logs](..//tmp/tmp.sifXclENOj) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_embed_rsvpify_plugin. | asyncify-boot | [View logs](..//tmp/tmp.45L4CYLFic) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_embed_rsvpify_plugin. | jspi-boot | [View logs](..//tmp/tmp.oDCVC31Ty5) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | [View logs](../logs/plugins//i/ip2content/asyncify-boot/error.log) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | [View logs](../logs/plugins//i/ip2content/jspi-boot/error.log) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wmip2c_fields. | asyncify-boot | [View logs](../logs/plugins//i/ip2content/asyncify-boot/error.log) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wmip2c_fields. | jspi-boot | [View logs](../logs/plugins//i/ip2content/jspi-boot/error.log) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | [View logs](..//tmp/tmp.PQzwBiyFis) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | [View logs](..//tmp/tmp.UbinH3xWwd) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wmip2c_fields. | asyncify-boot | [View logs](..//tmp/tmp.PQzwBiyFis) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wmip2c_fields. | jspi-boot | [View logs](..//tmp/tmp.UbinH3xWwd) |
 | Unknown operation: MODIFY. | asyncify-boot | [View logs](../logs/plugins//i/inkmember-build-your-membership-site-easily/asyncify-boot/error.log) |
 | Unknown operation: MODIFY. | jspi-boot | [View logs](../logs/plugins//i/inkmember-build-your-membership-site-easily/jspi-boot/error.log) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imk_apps. | asyncify-boot | [View logs](../logs/plugins//i/imk-services/asyncify-boot/error.log) |
