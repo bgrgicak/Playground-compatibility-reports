@@ -16,6 +16,8 @@
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/google-rank-badge/grank.php on line 123 | jspi-boot | [View logs](..//tmp/tmp.RLE7CgxFtD) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-maps-effortless/google-maps-effortless.php:181 | asyncify-boot | [View logs](..//tmp/tmp.ToQH4JHzqG) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-maps-effortless/google-maps-effortless.php:181 | jspi-boot | [View logs](..//tmp/tmp.C2d0L5ERi0) |
+| Uncaught Error: Access to undeclared static property GlobalTerms::$instance in /wordpress/wp-content/plugins/global-terms/global-terms.php:64 | asyncify-boot | [View logs](..//tmp/tmp.aU3P3cYsEr) |
+| Uncaught Error: Access to undeclared static property GlobalTerms::$instance in /wordpress/wp-content/plugins/global-terms/global-terms.php:64 | jspi-boot | [View logs](..//tmp/tmp.uYSAUi51W2) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/gamatam-tasks/gamatam-tasks.php:52 | asyncify-boot | [View logs](..//tmp/tmp.Eu75T2HCZS) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/gamatam-tasks/gamatam-tasks.php:52 | jspi-boot | [View logs](..//tmp/tmp.PuYnYNU6GI) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/googleanalyticscounter/googleanalyticscounter.php:380 | asyncify-boot | [View logs](..//tmp/tmp.bS0QO1AoVi) |
@@ -26,16 +28,24 @@
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/gmo-widget-custom/gmo-widget-custom.php:22 | jspi-boot | [View logs](..//tmp/tmp.fcb1UUwqTw) |
 | Uncaught Error: Call to undefined function post_exists() in /wordpress/wp-content/plugins/gis-maps/gismaps.php:54 | asyncify-boot | [View logs](..//tmp/tmp.oiTKSo4nzT) |
 | Uncaught Error: Call to undefined function post_exists() in /wordpress/wp-content/plugins/gis-maps/gismaps.php:54 | jspi-boot | [View logs](..//tmp/tmp.PNx20tRQWE) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.WcoXY7J1lz) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.Ww5gIad5HM) |
 | Uncaught Error: Undefined constant "apgmxs_autobuild" in /wordpress/wp-content/plugins/google-monthly-xml-sitemap/monthly-xml-sitemap.php:43 | asyncify-boot | [View logs](..//tmp/tmp.xqBYGPmKut) |
 | Uncaught Error: Undefined constant "apgmxs_autobuild" in /wordpress/wp-content/plugins/google-monthly-xml-sitemap/monthly-xml-sitemap.php:43 | jspi-boot | [View logs](..//tmp/tmp.zObgW8m0VX) |
+| Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in /wordpress/wp-content/plugins/gts-translation/GtsPlugin.php:74 | asyncify-boot | [View logs](..//tmp/tmp.HB44NgtJR6) |
+| Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in /wordpress/wp-content/plugins/gts-translation/GtsPlugin.php:74 | jspi-boot | [View logs](..//tmp/tmp.QTAeta7CLb) |
 | Uncaught Error: Call to undefined function set_magic_quotes_runtime() in /wordpress/wp-content/plugins/general-headers/general-header.php:31 | asyncify-boot | [View logs](..//tmp/tmp.T1q92bT2Zn) |
 | Uncaught Error: Call to undefined function set_magic_quotes_runtime() in /wordpress/wp-content/plugins/general-headers/general-header.php:31 | jspi-boot | [View logs](..//tmp/tmp.zLGjHCGlV4) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-voice-plugin/widget.php:128 | asyncify-boot | [View logs](..//tmp/tmp.7pGkgKuSMn) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-voice-plugin/widget.php:128 | jspi-boot | [View logs](..//tmp/tmp.M8UJVcs4PA) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/get-satisfaction-for-wordpress/classes/HTTP_Request_Oauth.php on line 9 | asyncify-boot | [View logs](..//tmp/tmp.PVQ92eEBO1) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/get-satisfaction-for-wordpress/classes/HTTP_Request_Oauth.php on line 9 | jspi-boot | [View logs](..//tmp/tmp.RVPVoylYTK) |
+| Uncaught TypeError: fwrite(): Argument #1 ($stream) must be of type resource, null given in /wordpress/wp-content/plugins/google-analytics-analyze/google-analytics.php:51 | asyncify-boot | [View logs](..//tmp/tmp.EI7o6JjTbm) |
+| Uncaught TypeError: fwrite(): Argument #1 ($stream) must be of type resource, null given in /wordpress/wp-content/plugins/google-analytics-analyze/google-analytics.php:51 | jspi-boot | [View logs](..//tmp/tmp.Co1vZsz4bq) |
 | Uncaught Error: Non-static method GitHub_Code_Viewer::init() cannot be called statically in /wordpress/wp-content/plugins/github-code-viewer-2/GitHub_Code_Viewer.php:122 | asyncify-boot | [View logs](..//tmp/tmp.N7ORdMtxEd) |
 | Uncaught Error: Non-static method GitHub_Code_Viewer::init() cannot be called statically in /wordpress/wp-content/plugins/github-code-viewer-2/GitHub_Code_Viewer.php:122 | jspi-boot | [View logs](..//tmp/tmp.mTsB6szWjR) |
+| Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method GNA_Slack::activate_handler() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](..//tmp/tmp.uyIsm8xbNu) |
+| Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method GNA_Slack::activate_handler() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | [View logs](..//tmp/tmp.3c81KMuLYH) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.pQfrcySHVe) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.uDiSpCU4m1) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.RosbQnXECb) |
