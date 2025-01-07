@@ -915,8 +915,8 @@
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/idavi/idavi_mailads.php on line 1 | jspi-boot | [View logs](..//tmp/tmp.n8GL6W5432) |
 | Uncaught Error: Non-static method INAP::start_up() cannot be called statically in /wordpress/wp-content/plugins/inline-ajax-page/inap.php:17 | asyncify-boot | [View logs](..//tmp/tmp.UpvzNDxtxE) |
 | Uncaught Error: Non-static method INAP::start_up() cannot be called statically in /wordpress/wp-content/plugins/inline-ajax-page/inap.php:17 | jspi-boot | [View logs](..//tmp/tmp.wQmcF3ekCV) |
-| Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/iota-ppc-wp-plugin/lib/trytes/Trytes.php' (include_path='.:') in /wordpress/wp-content/plugins/iota-pay-per-content/index.php:22 | asyncify-boot | [View logs](../logs/plugins//i/iota-pay-per-content/asyncify-boot/error.log) |
-| Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/iota-ppc-wp-plugin/lib/trytes/Trytes.php' (include_path='.:') in /wordpress/wp-content/plugins/iota-pay-per-content/index.php:22 | jspi-boot | [View logs](../logs/plugins//i/iota-pay-per-content/jspi-boot/error.log) |
+| Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/iota-ppc-wp-plugin/lib/trytes/Trytes.php' (include_path='.:') in /wordpress/wp-content/plugins/iota-pay-per-content/index.php:22 | asyncify-boot | [View logs](..//tmp/tmp.2Eu5RKIjyR) |
+| Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/iota-ppc-wp-plugin/lib/trytes/Trytes.php' (include_path='.:') in /wordpress/wp-content/plugins/iota-pay-per-content/index.php:22 | jspi-boot | [View logs](..//tmp/tmp.PxbBT2Q9YV) |
 | Uncaught Error: Non-static method ipadio::init() cannot be called statically in /wordpress/wp-content/plugins/ipadio-player/ipadio.php:37 | asyncify-boot | [View logs](..//tmp/tmp.eTyDJ82faH) |
 | Uncaught Error: Non-static method ipadio::init() cannot be called statically in /wordpress/wp-content/plugins/ipadio-player/ipadio.php:37 | jspi-boot | [View logs](..//tmp/tmp.vdFaYJQIgk) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/igit-new-twitter-tweet-share-button-with-counter/igit-tweet-share-button.php:38 | asyncify-boot | [View logs](..//tmp/tmp.GiBzKTddwa) |
@@ -927,6 +927,8 @@
 | Access level to GElement::__toString() must be public (as in class Stringable) in /wordpress/wp-content/plugins/inline-google-docs/inc/gelement.php on line 129 | jspi-boot | [View logs](..//tmp/tmp.BmrVEtzZu7) |
 | Uncaught ReflectionException: Class "ItalyStrap\Event\Manager" does not exist in /wordpress/wp-content/plugins/italystrap/vendor/rdlowrey/auryn/lib/StandardReflector.php:14 | asyncify-boot | [View logs](..//tmp/tmp.yeCjmx5zKR) |
 | Uncaught ReflectionException: Class "ItalyStrap\Event\Manager" does not exist in /wordpress/wp-content/plugins/italystrap/vendor/rdlowrey/auryn/lib/StandardReflector.php:14 | jspi-boot | [View logs](..//tmp/tmp.MNvG5gEyU9) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/i-am-reading-continued/i-am-reading.php:77 | asyncify-boot | [View logs](..//tmp/tmp.d4cU9X9lJD) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/i-am-reading-continued/i-am-reading.php:77 | jspi-boot | [View logs](..//tmp/tmp.OnWB2u33Uj) |
 | Uncaught ArgumentCountError: Too few arguments to function izanai_SNS_connect_control::__construct(), 0 passed in /wordpress/wp-content/plugins/izanai/src/class/izanai_SNS_connect_view.class.php on line 20 and exactly 1 expected in /wordpress/wp-content/plugins/izanai/src/class/izanai_SNS_connect_control.class.php:15 | asyncify-boot | [View logs](..//tmp/tmp.d38wVRA1T3) |
 | Uncaught ArgumentCountError: Too few arguments to function izanai_SNS_connect_control::__construct(), 0 passed in /wordpress/wp-content/plugins/izanai/src/class/izanai_SNS_connect_view.class.php on line 20 and exactly 1 expected in /wordpress/wp-content/plugins/izanai/src/class/izanai_SNS_connect_control.class.php:15 | jspi-boot | [View logs](..//tmp/tmp.2b4AHIn0s2) |
 | Uncaught Error: Non-static method MyPlugin::update_contact7() cannot be called statically in /wordpress/wp-content/plugins/infogeniuz-form-analytics-for-contact-form-7/infoGeniuz_Form_Analytics_for_Contact_Form_7.php:21 | asyncify-boot | [View logs](..//tmp/tmp.NUd5RCWlRQ) |
@@ -1045,6 +1047,8 @@
 | Uncaught Error: Call to undefined function indigestion_log() in /wordpress/wp-content/plugins/indigestion/indigestion.php:190 | jspi-boot | [View logs](..//tmp/tmp.Hur95sjos6) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/iremotewp/lib/s3/S3.php on line 2344 | asyncify-boot | [View logs](..//tmp/tmp.JX1GiH3ThB) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/iremotewp/lib/s3/S3.php on line 2344 | jspi-boot | [View logs](..//tmp/tmp.GNi0k0aGs1) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/im-woocommerce-my-account-widget/im-woocommerce-my-account-widget.php:372 | asyncify-boot | [View logs](..//tmp/tmp.8onAZk1nfM) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/im-woocommerce-my-account-widget/im-woocommerce-my-account-widget.php:372 | jspi-boot | [View logs](..//tmp/tmp.61NposoLqj) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ix-wemonit/plugin/Ix_Wemonit.php:54 | asyncify-boot | [View logs](..//tmp/tmp.jyBYWkGBoZ) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ix-wemonit/plugin/Ix_Wemonit.php:54 | jspi-boot | [View logs](..//tmp/tmp.Bo8BI2Miwa) |
 | Uncaught Error: Call to undefined function get_current_screen() in /wordpress/wp-content/plugins/iworks-pwa/includes/iworks/pwa/class-iworks-pwa-administrator.php:330 | asyncify-boot | [View logs](..//tmp/tmp.AW2jYQmyLJ) |
@@ -1139,6 +1143,8 @@
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/instagramwidget/instagramWidget.php:168 | jspi-boot | [View logs](..//tmp/tmp.2nfT7MD028) |
 | Uncaught Error: Undefined constant "widget_IntroduceYou_register" in /wordpress/wp-content/plugins/introduce-you/IntroduceYou.php:246 | asyncify-boot | [View logs](..//tmp/tmp.6iEJMJDeCd) |
 | Uncaught Error: Undefined constant "widget_IntroduceYou_register" in /wordpress/wp-content/plugins/introduce-you/IntroduceYou.php:246 | jspi-boot | [View logs](..//tmp/tmp.WvevDOb5xL) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.AQXET8msU0) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.h5WflXEk6O) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/isimpledesign-amazon-s3-music-player-plugin/s3/S3.php on line 1358 | asyncify-boot | [View logs](..//tmp/tmp.rF6XWvEXIV) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/isimpledesign-amazon-s3-music-player-plugin/s3/S3.php on line 1358 | jspi-boot | [View logs](..//tmp/tmp.3uDDaiZppy) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.RP5aybLNze) |
@@ -1181,6 +1187,8 @@
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/image-pro-wordpress-image-media-management-and-resizing-done-right/src/thumb/phpthumb.class.php on line 585 | jspi-boot | [View logs](..//tmp/tmp.O3RflMi1dB) |
 | Uncaught Error: mysqli object is already closed in /wordpress/wp-content/plugins/ipresso/include/sqlquery.php:143 | asyncify-boot | [View logs](..//tmp/tmp.l77hZZxFXG) |
 | Uncaught Error: mysqli object is already closed in /wordpress/wp-content/plugins/ipresso/include/sqlquery.php:143 | jspi-boot | [View logs](..//tmp/tmp.7LdfXSXedW) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/iframe-less-reloaded/iframe-less-reloaded.php:64 | asyncify-boot | [View logs](..//tmp/tmp.FdxH2ZrmNG) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/iframe-less-reloaded/iframe-less-reloaded.php:64 | jspi-boot | [View logs](..//tmp/tmp.2vH2IpXz2u) |
 | Uncaught Error: Failed opening required 'vendor/autoload.php' (include_path='.:') in /wordpress/wp-content/plugins/ignite-online-social-share/ignite-social.php:14 | asyncify-boot | [View logs](..//tmp/tmp.vEFhQ5xpAl) |
 | Uncaught Error: Failed opening required 'vendor/autoload.php' (include_path='.:') in /wordpress/wp-content/plugins/ignite-online-social-share/ignite-social.php:14 | jspi-boot | [View logs](..//tmp/tmp.eYYi2FqIUv) |
 | Uncaught Error: Call to undefined function request_filesystem_credentials() in /wordpress/wp-content/plugins/ibs-mappro/ibs-mappro.php:132 | asyncify-boot | [View logs](..//tmp/tmp.jaSVyPaNlS) |
