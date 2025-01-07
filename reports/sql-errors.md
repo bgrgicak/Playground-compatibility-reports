@@ -27,22 +27,26 @@
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | [View logs](..//tmp/tmp.oJFmEBQ8Ig) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_tbl_instagramslider. | asyncify-boot | [View logs](..//tmp/tmp.kyBcZVFJd7) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_tbl_instagramslider. | jspi-boot | [View logs](..//tmp/tmp.Q369dfcCvN) |
-| Data type expected in MySQL query, unknown token received: end_time. | asyncify-boot | [View logs](..//tmp/tmp.KOv2EqhPwC) |
-| Data type expected in MySQL query, unknown token received: end_time. | jspi-boot | [View logs](..//tmp/tmp.xSseSgn5HV) |
-| Data type expected in MySQL query, unknown token received: formid. | asyncify-boot | [View logs](..//tmp/tmp.KOv2EqhPwC) |
-| Data type expected in MySQL query, unknown token received: formid. | jspi-boot | [View logs](..//tmp/tmp.xSseSgn5HV) |
-| Data type expected in MySQL query, unknown token received: join_after_campaign_started. | asyncify-boot | [View logs](..//tmp/tmp.KOv2EqhPwC) |
-| Data type expected in MySQL query, unknown token received: join_after_campaign_started. | jspi-boot | [View logs](..//tmp/tmp.xSseSgn5HV) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_additional_field_info. | asyncify-boot | [View logs](..//tmp/tmp.KOv2EqhPwC) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_additional_field_info. | jspi-boot | [View logs](..//tmp/tmp.xSseSgn5HV) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_address_list_mapping. | asyncify-boot | [View logs](..//tmp/tmp.KOv2EqhPwC) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_address_list_mapping. | jspi-boot | [View logs](..//tmp/tmp.xSseSgn5HV) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_email_template. | asyncify-boot | [View logs](..//tmp/tmp.KOv2EqhPwC) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_email_template. | jspi-boot | [View logs](..//tmp/tmp.xSseSgn5HV) |
-| Unknown query type: RENAME. | asyncify-boot | [View logs](..//tmp/tmp.KOv2EqhPwC) |
-| Unknown query type: RENAME. | jspi-boot | [View logs](..//tmp/tmp.xSseSgn5HV) |
+| Data type expected in MySQL query, unknown token received: end_time. | asyncify-boot | [View logs](..//tmp/tmp.47xyHeYzEW) |
+| Data type expected in MySQL query, unknown token received: end_time. | jspi-boot | [View logs](..//tmp/tmp.1qXJWNpAE0) |
+| Data type expected in MySQL query, unknown token received: formid. | asyncify-boot | [View logs](..//tmp/tmp.47xyHeYzEW) |
+| Data type expected in MySQL query, unknown token received: formid. | jspi-boot | [View logs](..//tmp/tmp.1qXJWNpAE0) |
+| Data type expected in MySQL query, unknown token received: join_after_campaign_started. | asyncify-boot | [View logs](..//tmp/tmp.47xyHeYzEW) |
+| Data type expected in MySQL query, unknown token received: join_after_campaign_started. | jspi-boot | [View logs](..//tmp/tmp.1qXJWNpAE0) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_additional_field_info. | asyncify-boot | [View logs](..//tmp/tmp.47xyHeYzEW) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_additional_field_info. | jspi-boot | [View logs](..//tmp/tmp.1qXJWNpAE0) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_address_list_mapping. | asyncify-boot | [View logs](..//tmp/tmp.47xyHeYzEW) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_address_list_mapping. | jspi-boot | [View logs](..//tmp/tmp.1qXJWNpAE0) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_email_template. | asyncify-boot | [View logs](..//tmp/tmp.47xyHeYzEW) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_email_template. | jspi-boot | [View logs](..//tmp/tmp.1qXJWNpAE0) |
+| Unknown query type: RENAME. | asyncify-boot | [View logs](..//tmp/tmp.47xyHeYzEW) |
+| Unknown query type: RENAME. | jspi-boot | [View logs](..//tmp/tmp.1qXJWNpAE0) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | [View logs](..//tmp/tmp.oGL4vsiqxN) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | [View logs](..//tmp/tmp.cK8nHE5Hij) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | [View logs](..//tmp/tmp.LhalBsDZed) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | [View logs](..//tmp/tmp.gRZHMQ9fAN) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | [View logs](..//tmp/tmp.LhalBsDZed) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | [View logs](..//tmp/tmp.gRZHMQ9fAN) |
 | Unknown operation: ADD. | asyncify-boot | [View logs](../logs/plugins//n/namaste-lms/asyncify-boot/error.log) |
 | Unknown operation: ADD. | jspi-boot | [View logs](../logs/plugins//n/namaste-lms/jspi-boot/error.log) |
 | Unknown operation: CHANGE. | asyncify-boot | [View logs](../logs/plugins//n/namaste-lms/asyncify-boot/error.log) |
