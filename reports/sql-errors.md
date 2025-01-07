@@ -4,6 +4,16 @@
 |---------|------|------|
 | MySQL field type cannot be translated to SQLite: enum. | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.ZMjoetKezr) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_amelia_notifications. | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.ZMjoetKezr) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_ajax. | asyncify-boot | [View logs](..//tmp/tmp.mXHaXHbrk3) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_ajax. | jspi-boot | [View logs](..//tmp/tmp.vmkgkpMv2M) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_ip. | asyncify-boot | [View logs](..//tmp/tmp.mXHaXHbrk3) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_ip. | jspi-boot | [View logs](..//tmp/tmp.vmkgkpMv2M) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_pattern. | asyncify-boot | [View logs](..//tmp/tmp.mXHaXHbrk3) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_pattern. | jspi-boot | [View logs](..//tmp/tmp.vmkgkpMv2M) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_posted. | asyncify-boot | [View logs](..//tmp/tmp.mXHaXHbrk3) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_posted. | jspi-boot | [View logs](..//tmp/tmp.vmkgkpMv2M) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_site. | asyncify-boot | [View logs](..//tmp/tmp.mXHaXHbrk3) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_site. | jspi-boot | [View logs](..//tmp/tmp.vmkgkpMv2M) |
 | MySQL field type cannot be translated to SQLite: enum. | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.uGAwfBpneo) |
 | MySQL field type cannot be translated to SQLite: enum. | jspi-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.Z97IIJqmJy) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.uGAwfBpneo) |
