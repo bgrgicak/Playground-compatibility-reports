@@ -10,12 +10,36 @@
 | Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724 | jspi-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.0mPNB5Mz7g) |
 | Uncaught Exception: <p><strong>Error:</strong> Current PHP version (7.3.33) does not meet minimum requirements for Flexible Checkout Fields. The plugin requires PHP 7.4.</p><p><a href="https://wordpress.org/support/update-php/">Learn more about updating PHP</a>.</p> in /internal/eval.php:29 | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.Pxb0JXzrDm) |
 | Uncaught Exception: <p><strong>Error:</strong> Current PHP version (7.3.33) does not meet minimum requirements for Flexible Checkout Fields. The plugin requires PHP 7.4.</p><p><a href="https://wordpress.org/support/update-php/">Learn more about updating PHP</a>.</p> in /internal/eval.php:29 | jspi-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.Tr9sCMP1JY) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/google-rank-badge/grank.php on line 123 | asyncify-boot | [View logs](..//tmp/tmp.a6aoWnnTZ6) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/google-rank-badge/grank.php on line 123 | jspi-boot | [View logs](..//tmp/tmp.RLE7CgxFtD) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-maps-effortless/google-maps-effortless.php:181 | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.aiqTTquB1K) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-maps-effortless/google-maps-effortless.php:181 | jspi-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.4SkYBUf5KY) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/gamatam-tasks/gamatam-tasks.php:52 | asyncify-boot | [View logs](..//tmp/tmp.Eu75T2HCZS) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/gamatam-tasks/gamatam-tasks.php:52 | jspi-boot | [View logs](..//tmp/tmp.PuYnYNU6GI) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-add-to-circles/add-to-circles.php:134 | asyncify-boot | [View logs](..//tmp/tmp.YG5VnVKN7D) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-add-to-circles/add-to-circles.php:134 | jspi-boot | [View logs](..//tmp/tmp.ov0vLMKlUh) |
+| Uncaught Error: Call to undefined function post_exists() in /wordpress/wp-content/plugins/gis-maps/gismaps.php:54 | asyncify-boot | [View logs](..//tmp/tmp.oiTKSo4nzT) |
+| Uncaught Error: Call to undefined function post_exists() in /wordpress/wp-content/plugins/gis-maps/gismaps.php:54 | jspi-boot | [View logs](..//tmp/tmp.PNx20tRQWE) |
+| Uncaught Error: Undefined constant "apgmxs_autobuild" in /wordpress/wp-content/plugins/google-monthly-xml-sitemap/monthly-xml-sitemap.php:43 | asyncify-boot | [View logs](..//tmp/tmp.xqBYGPmKut) |
+| Uncaught Error: Undefined constant "apgmxs_autobuild" in /wordpress/wp-content/plugins/google-monthly-xml-sitemap/monthly-xml-sitemap.php:43 | jspi-boot | [View logs](..//tmp/tmp.zObgW8m0VX) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-voice-plugin/widget.php:128 | asyncify-boot | [View logs](..//tmp/tmp.7pGkgKuSMn) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-voice-plugin/widget.php:128 | jspi-boot | [View logs](..//tmp/tmp.M8UJVcs4PA) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.pQfrcySHVe) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.uDiSpCU4m1) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](../logs/plugins//g/google-trends-und-charts/asyncify-boot/error.log) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](../logs/plugins//g/google-trends-und-charts/jspi-boot/error.log) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/g-social-icons/g-social-icons.php:55 | asyncify-boot | [View logs](..//tmp/tmp.QP1gaEWScx) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/g-social-icons/g-social-icons.php:55 | jspi-boot | [View logs](..//tmp/tmp.PCtPXesBGW) |
+| Uncaught Error: Non-static method go_dark::go() cannot be called statically in /wordpress/wp-content/plugins/go-dark/go-dark.php:224 | asyncify-boot | [View logs](..//tmp/tmp.Qa2mbdTtfW) |
+| Uncaught Error: Non-static method go_dark::go() cannot be called statically in /wordpress/wp-content/plugins/go-dark/go-dark.php:224 | jspi-boot | [View logs](..//tmp/tmp.9uP6imbM2r) |
 | Uncaught Error: Call to undefined function WP_Filesystem() in /wordpress/wp-content/plugins/grand-job/includes/install.class.php:16 | asyncify-boot | [View logs](../logs/plugins//g/grand-job/asyncify-boot/error.log) |
 | Uncaught Error: Call to undefined function WP_Filesystem() in /wordpress/wp-content/plugins/grand-job/includes/install.class.php:16 | jspi-boot | [View logs](../logs/plugins//g/grand-job/jspi-boot/error.log) |
+| Uncaught Error: Call to undefined function mysql_get_server_info() in /wordpress/wp-content/plugins/google-maps-gpx-viewer/php/gpx_database.php:191 | asyncify-boot | [View logs](..//tmp/tmp.uDgdm17Ew3) |
+| Uncaught Error: Call to undefined function mysql_get_server_info() in /wordpress/wp-content/plugins/google-maps-gpx-viewer/php/gpx_database.php:191 | jspi-boot | [View logs](..//tmp/tmp.wmH3e7Kxus) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.pxGDh2ERpR) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.sglZZpman3) |
+| Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/google-subscribed-links/google-subscribed-links.php on line 27 | asyncify-boot | [View logs](..//tmp/tmp.KexNHug5jO) |
+| Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/google-subscribed-links/google-subscribed-links.php on line 27 | jspi-boot | [View logs](..//tmp/tmp.LLQDzy6Jd4) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.gth5WxkWcO) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.w4dgFeWSXM) |
 | Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.0". You are running 7.2.34-dev. in /wordpress/wp-content/plugins/official-facebook-pixel/vendor/composer/platform_check.php on line 24 | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.538JgvPdTB) |
@@ -36,6 +60,8 @@
 | Uncaught Error: Undefined constant "gzinflate" in /wordpress/wp-content/plugins/nfl-news-scroller/extlib/Snoopy.class.inc:426 | jspi-boot | [View logs](..//tmp/tmp.Hz2vLN4DAF) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.iwMLilWfYt) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.yHktcW9sku) |
+| Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, WP_Error given in /wordpress/wp-content/plugins/next-wc-product-labels-badges/includes/wcplb-functions.php:993 | asyncify-boot | [View logs](..//tmp/tmp.Sh8nlHLXcN) |
+| Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, WP_Error given in /wordpress/wp-content/plugins/next-wc-product-labels-badges/includes/wcplb-functions.php:993 | jspi-boot | [View logs](..//tmp/tmp.QCo3JP4yo3) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/nomis/lib/api.class.php on line 2061 | asyncify-boot | [View logs](..//tmp/tmp.aHK7zYCPgh) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/nomis/lib/api.class.php on line 2061 | jspi-boot | [View logs](..//tmp/tmp.SBADdsVuRB) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/nino-social-connect/includes/ninosocial_widget.php:64 | asyncify-boot | [View logs](..//tmp/tmp.gzPY0t1xdy) |
@@ -76,6 +102,8 @@
 | Uncaught Error: Undefined constant "NudalyticsURL" in /wordpress/wp-content/plugins/nudalytics/Nudalytics.php:19 | jspi-boot | [View logs](..//tmp/tmp.tuvntSNQDH) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/nextend-smart-slider-lite/installation.php on line 18 | asyncify-boot | [View logs](..//tmp/tmp.MiZeXkx4YV) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/nextend-smart-slider-lite/installation.php on line 18 | jspi-boot | [View logs](..//tmp/tmp.edOlobD68x) |
+| Uncaught TypeError: array_key_exists(): Argument #2 ($array) must be of type array, bool given in /wordpress/wp-content/plugins/nitwpress/nitwpress.php:351 | asyncify-boot | [View logs](..//tmp/tmp.zta2JZrhXx) |
+| Uncaught TypeError: array_key_exists(): Argument #2 ($array) must be of type array, bool given in /wordpress/wp-content/plugins/nitwpress/nitwpress.php:351 | jspi-boot | [View logs](..//tmp/tmp.ZtcmTDJnMs) |
 | Uncaught Error: Call to undefined function mysql_error() in /wordpress/wp-content/plugins/news-blog-classifier/news-blog-classifier.php:62 | jspi-boot | [View logs](..//tmp/tmp.oJFmEBQ8Ig) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.69Sat2YDER) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.uX3McfHjl2) |
@@ -121,6 +149,8 @@
 | Uncaught Error: Undefined constant "just_register_widgets" in /wordpress/wp-content/plugins/ninja-embed-plugin/ninja_embed_plugin.php:226 | jspi-boot | [View logs](..//tmp/tmp.qTZqtibLfB) |
 | Uncaught Error: Undefined constant "__FIEL__" in /wordpress/wp-content/plugins/nom-event-management/index.php:35 | asyncify-boot | [View logs](..//tmp/tmp.JwKBeEgNwc) |
 | Uncaught Error: Undefined constant "__FIEL__" in /wordpress/wp-content/plugins/nom-event-management/index.php:35 | jspi-boot | [View logs](..//tmp/tmp.QqZvzNBueZ) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/ns-utilities/phpThumb_1.7.9/phpthumb.class.php on line 527 | asyncify-boot | [View logs](..//tmp/tmp.QCmPxFfA0k) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/ns-utilities/phpThumb_1.7.9/phpthumb.class.php on line 527 | jspi-boot | [View logs](..//tmp/tmp.LoVx1tK8rZ) |
 | Uncaught Error: Undefined constant "gzinflate" in /wordpress/wp-content/plugins/nba-team-stats/extlib/Snoopy.class.inc:426 | asyncify-boot | [View logs](..//tmp/tmp.d50dVAN7DB) |
 | Uncaught Error: Undefined constant "gzinflate" in /wordpress/wp-content/plugins/nba-team-stats/extlib/Snoopy.class.inc:426 | jspi-boot | [View logs](..//tmp/tmp.tnyPnFljo4) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ninja-motd/ninja-motd.php:221 | asyncify-boot | [View logs](..//tmp/tmp.M4xpUxiRDj) |
@@ -277,6 +307,8 @@
 | NS8 activation failed with the error: cURL error 35: OpenSSL SSL_connect: SSL_ERROR_SYSCALL in connection to api.ns8.com:443  in /wordpress/wp-content/plugins/ns8-complete-storefront-protection/lib/setup.php on line 44 | jspi-boot | [View logs](..//tmp/tmp.vyej8hXDIZ) |
 | Uncaught Error: Call to undefined function save_mod_rewrite_rules() in /wordpress/wp-content/plugins/nutsforpress-restricted-contents/includes/nfprct-plugin-activate.php:59 | asyncify-boot | [View logs](..//tmp/tmp.elbtV4Ny4L) |
 | Uncaught Error: Call to undefined function save_mod_rewrite_rules() in /wordpress/wp-content/plugins/nutsforpress-restricted-contents/includes/nfprct-plugin-activate.php:59 | jspi-boot | [View logs](..//tmp/tmp.osnBpgTgoW) |
+| Uncaught Error: Undefined constant "gzinflate" in /wordpress/wp-content/plugins/nfl-team-standings-and-stats-updated-weekly/extlib/Snoopy.class.inc:426 | asyncify-boot | [View logs](..//tmp/tmp.Gy2s0ZkVDI) |
+| Uncaught Error: Undefined constant "gzinflate" in /wordpress/wp-content/plugins/nfl-team-standings-and-stats-updated-weekly/extlib/Snoopy.class.inc:426 | jspi-boot | [View logs](..//tmp/tmp.a66hlYGq2H) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/nbill/administrator/components/com_nbill/admin.init.php on line 25 | asyncify-boot | [View logs](..//tmp/tmp.FNv1y1d0hu) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/nbill/administrator/components/com_nbill/admin.init.php on line 25 | jspi-boot | [View logs](..//tmp/tmp.WiMHxNEJbn) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.w506yZ5fOA) |
