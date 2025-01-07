@@ -36,6 +36,10 @@
 | Uncaught Error: Undefined constant "gzinflate" in /wordpress/wp-content/plugins/nfl-news-scroller/extlib/Snoopy.class.inc:426 | jspi-boot | [View logs](..//tmp/tmp.Hz2vLN4DAF) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/nino-social-connect/includes/ninosocial_widget.php:64 | asyncify-boot | [View logs](..//tmp/tmp.gzPY0t1xdy) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/nino-social-connect/includes/ninosocial_widget.php:64 | jspi-boot | [View logs](..//tmp/tmp.xavaWhM9B3) |
+| Uncaught Error: Non-static method Nora_CTA::init() cannot be called statically in /wordpress/wp-content/plugins/nora-cta/nora-cta.php:523 | asyncify-boot | [View logs](..//tmp/tmp.N1PT5jMtJj) |
+| Uncaught Error: Non-static method Nora_CTA::init() cannot be called statically in /wordpress/wp-content/plugins/nora-cta/nora-cta.php:523 | jspi-boot | [View logs](..//tmp/tmp.ayfdr6RcVu) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.kNcPvd1aGR) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.yPPG7ws5Xk) |
 | Uncaught Error: Call to undefined function do_settings_sections() in /wordpress/wp-content/plugins/netrox-sc-live-chat/netroxsc.php:365 | asyncify-boot | [View logs](../logs/plugins//n/netrox-sc-live-chat/asyncify-boot/error.log) |
 | Uncaught Error: Call to undefined function do_settings_sections() in /wordpress/wp-content/plugins/netrox-sc-live-chat/netroxsc.php:365 | jspi-boot | [View logs](../logs/plugins//n/netrox-sc-live-chat/jspi-boot/error.log) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/ns-google-sheets-connector/lib/php-google-oauth/service/Google_Utils.php on line 58 | asyncify-boot | [View logs](..//tmp/tmp.2e3MSjyExh) |
@@ -80,6 +84,8 @@
 | Uncaught Exception: <p><strong>Error:</strong> New Custom Order Columns requires 1 plugin to be installed and activated: woocommerce. <a href="http://127.0.0.1:9400/wp-admin/plugins.php">Manage plugins</a>.</p> in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.JfJTfuvVS7) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/nexuslink-instagram-slider/instagramslider.php:506 | asyncify-boot | [View logs](..//tmp/tmp.kyBcZVFJd7) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/nexuslink-instagram-slider/instagramslider.php:506 | jspi-boot | [View logs](..//tmp/tmp.Q369dfcCvN) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/newest-posts/newest-posts.php:280 | asyncify-boot | [View logs](..//tmp/tmp.Ow56v0zyIs) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/newest-posts/newest-posts.php:280 | jspi-boot | [View logs](..//tmp/tmp.aCeJp6iIjf) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/nktagcloud/inc/multiwidget.php:115 | asyncify-boot | [View logs](..//tmp/tmp.BqWxkZhKmd) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/nktagcloud/inc/multiwidget.php:115 | jspi-boot | [View logs](..//tmp/tmp.OdwZpwO5RP) |
 | Uncaught Error: Non-static method Notify_Plugin::get_options() cannot be called statically in /wordpress/wp-content/plugins/notify-wp/inc/api.class.php:10 | asyncify-boot | [View logs](..//tmp/tmp.iHJgWVG1tq) |
@@ -102,12 +108,16 @@
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/nih-cancer-dictionary/index.php:58 | jspi-boot | [View logs](..//tmp/tmp.c1KKwqppN4) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/nomad-world-map/includes/nwm-widget-class.php:327 | asyncify-boot | [View logs](..//tmp/tmp.zOd3KRd8V2) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/nomad-world-map/includes/nwm-widget-class.php:327 | jspi-boot | [View logs](..//tmp/tmp.4vW2IIAc7L) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/nextgen-gallery-sidebar-widget/ngg-sidebar-widget.php:27 | asyncify-boot | [View logs](..//tmp/tmp.zQFPnuf7EK) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/nextgen-gallery-sidebar-widget/ngg-sidebar-widget.php:27 | jspi-boot | [View logs](..//tmp/tmp.xdxu22Tgkg) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/no-function-language-widget/no-function-language-widget.php:15 | asyncify-boot | [View logs](..//tmp/tmp.Spz9ww28QG) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/no-function-language-widget/no-function-language-widget.php:15 | jspi-boot | [View logs](..//tmp/tmp.oQNyKbNMRg) |
 | Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/navigable/class-nav.php on line 244 | asyncify-boot | [View logs](..//tmp/tmp.3DoArphOvM) |
 | Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/navigable/class-nav.php on line 244 | jspi-boot | [View logs](..//tmp/tmp.hT9n52dDUC) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/newsinapp-widget/newsinapp.php:242 | asyncify-boot | [View logs](..//tmp/tmp.Ret9uH9qib) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/newsinapp-widget/newsinapp.php:242 | jspi-boot | [View logs](..//tmp/tmp.QWA0NzJ5K0) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/news-in-stack-widget/news-in-stack-widget.php:450 | asyncify-boot | [View logs](..//tmp/tmp.VvrYLw3Scb) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/news-in-stack-widget/news-in-stack-widget.php:450 | jspi-boot | [View logs](..//tmp/tmp.1crOPQ7Z1F) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](../logs/plugins//n/new-twitter-widget/jspi-boot/error.log) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/nnd-facebook-profile-for-gravatar/NNDFBProfGrav.php on line 124 | asyncify-boot | [View logs](..//tmp/tmp.11JOtBFzFP) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/nnd-facebook-profile-for-gravatar/NNDFBProfGrav.php on line 124 | jspi-boot | [View logs](..//tmp/tmp.iyLfcWg496) |
@@ -127,6 +137,8 @@
 | Uncaught Error: Class "horshipsrectors_Common_NMF" not found in /wordpress/wp-content/plugins/no-more-frames/no-more-frames.php:59 | jspi-boot | [View logs](..//tmp/tmp.7aPKjfUP5N) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/neeed/neeed.php:385 | asyncify-boot | [View logs](..//tmp/tmp.GJEFb4h9RE) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/neeed/neeed.php:385 | jspi-boot | [View logs](..//tmp/tmp.yr4q2q7m1L) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.82RDx1ZvTt) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.yi806iqC8n) |
 | Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/nameday/nameday.php:71 | asyncify-boot | [View logs](..//tmp/tmp.oqEnPhhOgL) |
 | Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/nameday/nameday.php:71 | jspi-boot | [View logs](..//tmp/tmp.c1Tv6Y1k9g) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/naver-webmaster-tool-syndication-v2/class/nws_lib_class.php on line 120 | asyncify-boot | [View logs](..//tmp/tmp.uAB4DivKue) |
@@ -155,6 +167,8 @@
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/n3rdskwat-mp3player/n3rdskwat-mp3player.php:165 | jspi-boot | [View logs](../logs/plugins//n/n3rdskwat-mp3player/jspi-boot/error.log) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method NvgWp::instalar() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](../logs/plugins//n/navegg/asyncify-boot/error.log) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method NvgWp::instalar() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | [View logs](../logs/plugins//n/navegg/jspi-boot/error.log) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/nomiddleman-crypto-payments-for-woocommerce/src/NMM_Util.php on line 54 | asyncify-boot | [View logs](..//tmp/tmp.3qujm6LMT5) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/nomiddleman-crypto-payments-for-woocommerce/src/NMM_Util.php on line 54 | jspi-boot | [View logs](..//tmp/tmp.A7u83OzIo3) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/nav-query/_plugin.php:13 | asyncify-boot | [View logs](..//tmp/tmp.pfjRTmaxxd) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/nav-query/_plugin.php:13 | jspi-boot | [View logs](..//tmp/tmp.1dm1fcpEJz) |
 | Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/ninja-forms-lite/includes/wp-editor-return.php' (include_path='.:') in /wordpress/wp-content/plugins/ninjaforms/ninja_forms.php:171 | asyncify-boot | [View logs](..//tmp/tmp.vo2VTzMeHh) |
@@ -165,8 +179,8 @@
 | Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/netbible-tagger-reloaded/includes/widgets.php' (include_path='.:') in /wordpress/wp-content/plugins/netbible-tagger-reloaded/wp_netbible_tagger.php:81 | jspi-boot | [View logs](..//tmp/tmp.hwwVuYxrnO) |
 | Uncaught Error: Undefined constant "yes" in /wordpress/wp-content/plugins/nextgen-gallery-image-optimizer/nextgen-gallery-image-optimizer.php:73 | asyncify-boot | [View logs](..//tmp/tmp.snpZeUxws3) |
 | Uncaught Error: Undefined constant "yes" in /wordpress/wp-content/plugins/nextgen-gallery-image-optimizer/nextgen-gallery-image-optimizer.php:73 | jspi-boot | [View logs](..//tmp/tmp.uguAfWoDlT) |
-| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/netblog/core/syntaxHighlighter.php on line 81 | asyncify-boot | [View logs](../logs/plugins//n/netblog/asyncify-boot/error.log) |
-| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/netblog/core/syntaxHighlighter.php on line 81 | jspi-boot | [View logs](../logs/plugins//n/netblog/jspi-boot/error.log) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/netblog/core/syntaxHighlighter.php on line 81 | asyncify-boot | [View logs](..//tmp/tmp.yBuPRGMefu) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/netblog/core/syntaxHighlighter.php on line 81 | jspi-boot | [View logs](..//tmp/tmp.O4bjP10cx2) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ninjatools/ninjatools.php:45 | asyncify-boot | [View logs](..//tmp/tmp.ShbIrBRj8Y) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ninjatools/ninjatools.php:45 | jspi-boot | [View logs](..//tmp/tmp.TrhyXol9TG) |
 | Uncaught Error: Non-static method NativeAlertsPush::getInstance() cannot be called statically in /wordpress/wp-content/plugins/native-alerts-push-notifications/nativealerts-push.php:659 | asyncify-boot | [View logs](..//tmp/tmp.xQygSdG3Ah) |
@@ -175,8 +189,12 @@
 | Cannot re-assign auto-global variable _POST in /wordpress/wp-content/plugins/nwp-slideshow/funcs-backend.php on line 32 | jspi-boot | [View logs](..//tmp/tmp.GmJlSk3DIm) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/nextcellent-gallery-nextgen-legacy/widgets/class-ngg-slideshow-widget.php:175 | asyncify-boot | [View logs](..//tmp/tmp.5cQhjtLIj0) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/nextcellent-gallery-nextgen-legacy/widgets/class-ngg-slideshow-widget.php:175 | jspi-boot | [View logs](..//tmp/tmp.Ad3P6dCfJx) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.aqScZnUwDT) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.bjQtD2QF7N) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](../logs/plugins//n/namaste-lms/asyncify-boot/error.log) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](../logs/plugins//n/namaste-lms/jspi-boot/error.log) |
+| Uncaught Error: Undefined constant "DEFAULT_LAT" in /wordpress/wp-content/plugins/nearby-places-search/config/nearby_places_search_config.php:99 | asyncify-boot | [View logs](..//tmp/tmp.ZqOpaWqpTe) |
+| Uncaught Error: Undefined constant "DEFAULT_LAT" in /wordpress/wp-content/plugins/nearby-places-search/config/nearby_places_search_config.php:99 | jspi-boot | [View logs](..//tmp/tmp.K1z6L9gRaU) |
 | Uncaught TypeError: Unsupported operand types: null & nevistas_news_plugin in /wordpress/wp-content/plugins/nevistas-news/nevistas_news.php:696 | asyncify-boot | [View logs](..//tmp/tmp.waq98aenHq) |
 | Uncaught TypeError: Unsupported operand types: null & nevistas_news_plugin in /wordpress/wp-content/plugins/nevistas-news/nevistas_news.php:696 | jspi-boot | [View logs](..//tmp/tmp.r4nfPLzZBN) |
 | Uncaught Exception: <p><strong>Error:</strong> NetPay Checkout requires 1 plugin to be installed and activated: woocommerce. <a href="http://127.0.0.1:9400/wp-admin/plugins.php">Manage plugins</a>.</p> in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.BZ431pgXVr) |

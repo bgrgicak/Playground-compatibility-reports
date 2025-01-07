@@ -16,6 +16,14 @@
 | SQLSTATE[HY000]: General error: 1 no such column: "keywords". | jspi-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.ZgysfnCQL2) |
 | Unknown operation: DEFAULT CHARACTER SET. | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.B3MKZxWGiy) |
 | Unknown operation: DEFAULT CHARACTER SET. | jspi-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.ZgysfnCQL2) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wpmlcountries. | asyncify-boot | [View logs](..//tmp/tmp.2EOJQAQbyB) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wpmlcountries. | jspi-boot | [View logs](..//tmp/tmp.YbmDFeh2Cd) |
+| SQLSTATE[HY000]: General error: 1 table "wp_wpmlbounces" already exists. | asyncify-boot | [View logs](..//tmp/tmp.2EOJQAQbyB) |
+| SQLSTATE[HY000]: General error: 1 table "wp_wpmlbounces" already exists. | jspi-boot | [View logs](..//tmp/tmp.YbmDFeh2Cd) |
+| SQLSTATE[HY000]: General error: 1 table "wp_wpmlsubscribers" already exists. | asyncify-boot | [View logs](..//tmp/tmp.2EOJQAQbyB) |
+| SQLSTATE[HY000]: General error: 1 table "wp_wpmlsubscribers" already exists. | jspi-boot | [View logs](..//tmp/tmp.YbmDFeh2Cd) |
+| SQLSTATE[HY000]: General error: 1 table "wp_wpmlunsubscribes" already exists. | asyncify-boot | [View logs](..//tmp/tmp.2EOJQAQbyB) |
+| SQLSTATE[HY000]: General error: 1 table "wp_wpmlunsubscribes" already exists. | jspi-boot | [View logs](..//tmp/tmp.YbmDFeh2Cd) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | [View logs](..//tmp/tmp.oJFmEBQ8Ig) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_tbl_instagramslider. | asyncify-boot | [View logs](..//tmp/tmp.kyBcZVFJd7) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_tbl_instagramslider. | jspi-boot | [View logs](..//tmp/tmp.Q369dfcCvN) |
