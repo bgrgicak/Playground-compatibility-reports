@@ -19,10 +19,14 @@
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | [View logs](..//tmp/tmp.oJFmEBQ8Ig) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_tbl_instagramslider. | asyncify-boot | [View logs](..//tmp/tmp.kyBcZVFJd7) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_tbl_instagramslider. | jspi-boot | [View logs](..//tmp/tmp.Q369dfcCvN) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | [View logs](..//tmp/tmp.oGL4vsiqxN) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | [View logs](..//tmp/tmp.cK8nHE5Hij) |
 | Unknown operation: ADD. | asyncify-boot | [View logs](../logs/plugins//n/namaste-lms/asyncify-boot/error.log) |
 | Unknown operation: ADD. | jspi-boot | [View logs](../logs/plugins//n/namaste-lms/jspi-boot/error.log) |
 | Unknown operation: CHANGE. | asyncify-boot | [View logs](../logs/plugins//n/namaste-lms/asyncify-boot/error.log) |
 | Unknown operation: CHANGE. | jspi-boot | [View logs](../logs/plugins//n/namaste-lms/jspi-boot/error.log) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_nu_jm_crea. | asyncify-boot | [View logs](..//tmp/tmp.Sc3XlDvWO5) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_nu_jm_crea. | jspi-boot | [View logs](..//tmp/tmp.fCIAePRegW) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | [View logs](..//tmp/tmp.5y9GnLEaey) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | [View logs](..//tmp/tmp.2dXyRsIoPD) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | [View logs](..//tmp/tmp.N5WRx7TUTp) |
