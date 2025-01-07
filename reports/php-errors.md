@@ -18,6 +18,8 @@
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-maps-effortless/google-maps-effortless.php:181 | jspi-boot | [View logs](..//tmp/tmp.C2d0L5ERi0) |
 | Uncaught Error: Access to undeclared static property GlobalTerms::$instance in /wordpress/wp-content/plugins/global-terms/global-terms.php:64 | asyncify-boot | [View logs](..//tmp/tmp.aU3P3cYsEr) |
 | Uncaught Error: Access to undeclared static property GlobalTerms::$instance in /wordpress/wp-content/plugins/global-terms/global-terms.php:64 | jspi-boot | [View logs](..//tmp/tmp.uYSAUi51W2) |
+| Uncaught Error: Undefined constant "gmlm_version" in /wordpress/wp-content/plugins/geo-multi-location-map/geomap.php:32 | asyncify-boot | [View logs](..//tmp/tmp.baJbZru05B) |
+| Uncaught Error: Undefined constant "gmlm_version" in /wordpress/wp-content/plugins/geo-multi-location-map/geomap.php:32 | jspi-boot | [View logs](..//tmp/tmp.aftXvs89D0) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/gamatam-tasks/gamatam-tasks.php:52 | asyncify-boot | [View logs](..//tmp/tmp.Eu75T2HCZS) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/gamatam-tasks/gamatam-tasks.php:52 | jspi-boot | [View logs](..//tmp/tmp.PuYnYNU6GI) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/googleanalyticscounter/googleanalyticscounter.php:380 | asyncify-boot | [View logs](..//tmp/tmp.bS0QO1AoVi) |
@@ -42,6 +44,8 @@
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/github-readme/Michelf/Markdown.php on line 800 | jspi-boot | [View logs](..//tmp/tmp.Axtqma2NtS) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-voice-plugin/widget.php:128 | asyncify-boot | [View logs](..//tmp/tmp.7pGkgKuSMn) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-voice-plugin/widget.php:128 | jspi-boot | [View logs](..//tmp/tmp.M8UJVcs4PA) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/gwa-tel-contact-manager/gDNS.php on line 230 | asyncify-boot | [View logs](..//tmp/tmp.MIJ0xy47bE) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/gwa-tel-contact-manager/gDNS.php on line 230 | jspi-boot | [View logs](..//tmp/tmp.IITERcaplT) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/get-satisfaction-for-wordpress/classes/HTTP_Request_Oauth.php on line 9 | asyncify-boot | [View logs](..//tmp/tmp.PVQ92eEBO1) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/get-satisfaction-for-wordpress/classes/HTTP_Request_Oauth.php on line 9 | jspi-boot | [View logs](..//tmp/tmp.RVPVoylYTK) |
 | Uncaught TypeError: fwrite(): Argument #1 ($stream) must be of type resource, null given in /wordpress/wp-content/plugins/google-analytics-analyze/google-analytics.php:51 | asyncify-boot | [View logs](..//tmp/tmp.EI7o6JjTbm) |
@@ -86,6 +90,8 @@
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/game-timer/game-timer.php:486 | jspi-boot | [View logs](..//tmp/tmp.L9wxKaqFdV) |
 | Uncaught Error: Undefined constant "KCVT_URL" in /wordpress/wp-content/plugins/gc-testimonials/testimonials.php:946 | asyncify-boot | [View logs](..//tmp/tmp.U4e00oKLG8) |
 | Uncaught Error: Undefined constant "KCVT_URL" in /wordpress/wp-content/plugins/gc-testimonials/testimonials.php:946 | jspi-boot | [View logs](..//tmp/tmp.T0WtFCwqYE) |
+| Declaration of gr_widget::widget($args) must be compatible with WP_Widget::widget($args, $instance) in /wordpress/wp-content/plugins/gameranger-widget/game-ranger-widget.php on line 19 | asyncify-boot | [View logs](..//tmp/tmp.eJnXWU96ks) |
+| Declaration of gr_widget::widget($args) must be compatible with WP_Widget::widget($args, $instance) in /wordpress/wp-content/plugins/gameranger-widget/game-ranger-widget.php on line 19 | jspi-boot | [View logs](..//tmp/tmp.sNua0PF7Y9) |
 | Uncaught Error: Call to undefined function mysql_get_server_info() in /wordpress/wp-content/plugins/google-maps-gpx-viewer/php/gpx_database.php:191 | asyncify-boot | [View logs](..//tmp/tmp.uDgdm17Ew3) |
 | Uncaught Error: Call to undefined function mysql_get_server_info() in /wordpress/wp-content/plugins/google-maps-gpx-viewer/php/gpx_database.php:191 | jspi-boot | [View logs](..//tmp/tmp.wmH3e7Kxus) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/google-analytics-client/include/api/google-api-php-client/service/Google_Utils.php on line 58 | asyncify-boot | [View logs](..//tmp/tmp.LXTa2fuTXn) |
