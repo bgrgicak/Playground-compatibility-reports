@@ -47,10 +47,6 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | [View logs](..//tmp/tmp.gRZHMQ9fAN) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | [View logs](..//tmp/tmp.LhalBsDZed) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | [View logs](..//tmp/tmp.gRZHMQ9fAN) |
-| Unknown operation: ADD. | asyncify-boot | [View logs](../logs/plugins//n/namaste-lms/asyncify-boot/error.log) |
-| Unknown operation: ADD. | jspi-boot | [View logs](../logs/plugins//n/namaste-lms/jspi-boot/error.log) |
-| Unknown operation: CHANGE. | asyncify-boot | [View logs](../logs/plugins//n/namaste-lms/asyncify-boot/error.log) |
-| Unknown operation: CHANGE. | jspi-boot | [View logs](../logs/plugins//n/namaste-lms/jspi-boot/error.log) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_nu_jm_crea. | asyncify-boot | [View logs](..//tmp/tmp.Sc3XlDvWO5) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_nu_jm_crea. | jspi-boot | [View logs](..//tmp/tmp.fCIAePRegW) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | [View logs](..//tmp/tmp.5y9GnLEaey) |
