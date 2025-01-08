@@ -20,6 +20,8 @@
 | SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_posted. | jspi-boot | [View logs](..//tmp/tmp.vmkgkpMv2M) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_site. | asyncify-boot | [View logs](..//tmp/tmp.mXHaXHbrk3) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_site. | jspi-boot | [View logs](..//tmp/tmp.vmkgkpMv2M) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_leads. | asyncify-boot | [View logs](..//tmp/tmp.WWyrY4VUqn) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_leads. | jspi-boot | [View logs](..//tmp/tmp.ASzSzyNQnM) |
 | SQLSTATE[HY000]: General error: 1 near "gmlr": syntax error. | asyncify-boot | [View logs](..//tmp/tmp.CIC7qJNwoE) |
 | SQLSTATE[HY000]: General error: 1 near "gmlr": syntax error. | jspi-boot | [View logs](..//tmp/tmp.H2qm4PodSH) |
 | MySQL field type cannot be translated to SQLite: enum. | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.uGAwfBpneo) |

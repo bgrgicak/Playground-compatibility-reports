@@ -12,8 +12,12 @@
 | Uncaught Exception: <p><strong>Error:</strong> Current PHP version (7.3.33) does not meet minimum requirements for Flexible Checkout Fields. The plugin requires PHP 7.4.</p><p><a href="https://wordpress.org/support/update-php/">Learn more about updating PHP</a>.</p> in /internal/eval.php:29 | jspi-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.Tr9sCMP1JY) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.qxOx5htjEW) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.3buIUFGMt9) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.y7LWcJSbPs) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.pJDEQvVndh) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/google-rank-badge/grank.php on line 123 | asyncify-boot | [View logs](..//tmp/tmp.a6aoWnnTZ6) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/google-rank-badge/grank.php on line 123 | jspi-boot | [View logs](..//tmp/tmp.RLE7CgxFtD) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/gab-captcha-2/gabcaptcha2.php on line 226 | asyncify-boot | [View logs](..//tmp/tmp.bJCx0smmng) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/gab-captcha-2/gabcaptcha2.php on line 226 | jspi-boot | [View logs](..//tmp/tmp.kvJr8e0SzQ) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/gameconfs-widget/gameconfs-widget.php:80 | asyncify-boot | [View logs](..//tmp/tmp.dcf1KwYHF3) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/gameconfs-widget/gameconfs-widget.php:80 | jspi-boot | [View logs](..//tmp/tmp.t53whqRnal) |
 | Uncaught Error: Non-static method SlideshowPluginMain::autoInclude() cannot be called statically in /wordpress/wp-content/plugins/gefallt-mir-button/slideshow.php:35 | asyncify-boot | [View logs](..//tmp/tmp.ZxfpCsfNzX) |
@@ -22,6 +26,8 @@
 | Uncaught Error: Undefined constant "STDERR" in /wordpress/wp-content/plugins/google-picasa-albums-viewer/vendor/composer/platform_check.php:17 | jspi-boot | [View logs](..//tmp/tmp.lE8MnmQu0a) |
 | Uncaught TypeError: fclose() expects parameter 1 to be resource, bool given in /wordpress/wp-content/plugins/getresponse-official/core/class-getresponse-for-wp.php:142 | asyncify-boot | [View logs](..//tmp/tmp.LBcAM3QWKD) |
 | Uncaught TypeError: fclose() expects parameter 1 to be resource, bool given in /wordpress/wp-content/plugins/getresponse-official/core/class-getresponse-for-wp.php:142 | jspi-boot | [View logs](..//tmp/tmp.uwbSxenU4g) |
+| Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/gallerypress/gallerypress.php on line 96 | asyncify-boot | [View logs](..//tmp/tmp.yYqRNQS8MY) |
+| Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/gallerypress/gallerypress.php on line 96 | jspi-boot | [View logs](..//tmp/tmp.qmGqvn6RJv) |
 | Uncaught Error: Undefined constant "is_admin" in /wordpress/wp-content/plugins/gallery-without-the-fluff/gallery-plugin.php:63 | asyncify-boot | [View logs](..//tmp/tmp.ahBztBNJl5) |
 | Uncaught Error: Undefined constant "is_admin" in /wordpress/wp-content/plugins/gallery-without-the-fluff/gallery-plugin.php:63 | jspi-boot | [View logs](..//tmp/tmp.97e5iybez8) |
 | Uncaught ValueError: Path cannot be empty in /wordpress/wp-content/plugins/goarch-online-chapel-daily-xml-feed-parser/online-chapel-xml-parser.php:33 | asyncify-boot | [View logs](..//tmp/tmp.XRemArrx1X) |
@@ -42,6 +48,8 @@
 | Uncaught TypeError: array_walk(): Argument #1 ($array) must be of type array, null given in /wordpress/wp-content/plugins/global-custom-fields/GCF.php:21 | jspi-boot | [View logs](..//tmp/tmp.FluWVPZwHO) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.Gp77GilXpw) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.hvqN8Jv6OX) |
+| Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, class Gameball does not have a method "activate" in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](..//tmp/tmp.nM4XIFVqto) |
+| Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, class Gameball does not have a method "activate" in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | [View logs](..//tmp/tmp.d7cPZRh3kb) |
 | Uncaught Error: Undefined constant "gmlm_version" in /wordpress/wp-content/plugins/geo-multi-location-map/geomap.php:32 | asyncify-boot | [View logs](..//tmp/tmp.baJbZru05B) |
 | Uncaught Error: Undefined constant "gmlm_version" in /wordpress/wp-content/plugins/geo-multi-location-map/geomap.php:32 | jspi-boot | [View logs](..//tmp/tmp.aftXvs89D0) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/gamatam-tasks/gamatam-tasks.php:52 | asyncify-boot | [View logs](..//tmp/tmp.Eu75T2HCZS) |
@@ -54,6 +62,8 @@
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-plus-feed-widget/gplusfeed.php:16 | jspi-boot | [View logs](..//tmp/tmp.w0aHeJ0I7z) |
 | Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/geo-location-comments/inc/activation_hooks.php:17 | asyncify-boot | [View logs](..//tmp/tmp.ZVDmzlswFh) |
 | Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/geo-location-comments/inc/activation_hooks.php:17 | jspi-boot | [View logs](..//tmp/tmp.QsMHKrgnoW) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.RkFpfBPeq7) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.2hwWpLUlH2) |
 | Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/google-analytics-tracking-for-forms/ga-tracking-forms.php:50 | asyncify-boot | [View logs](..//tmp/tmp.3oie27mqHS) |
 | Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/google-analytics-tracking-for-forms/ga-tracking-forms.php:50 | jspi-boot | [View logs](..//tmp/tmp.4h5OivlKa2) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/googleanalyticscounter/googleanalyticscounter.php:380 | asyncify-boot | [View logs](..//tmp/tmp.bS0QO1AoVi) |
@@ -122,6 +132,8 @@
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.lC1TBtNfxP) |
 | Declaration of GgTwitterWidget::save_settings() must be compatible with WP_Widget::save_settings($settings) in /wordpress/wp-content/plugins/gg-twitter/gg-twitter.php on line 93 | asyncify-boot | [View logs](..//tmp/tmp.7JzDA3NnU0) |
 | Declaration of GgTwitterWidget::save_settings() must be compatible with WP_Widget::save_settings($settings) in /wordpress/wp-content/plugins/gg-twitter/gg-twitter.php on line 93 | jspi-boot | [View logs](..//tmp/tmp.v51uJuFUc9) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-map-lightbox-popup/admin/fwgm-widget.php:63 | asyncify-boot | [View logs](..//tmp/tmp.xeD2uavJCl) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-map-lightbox-popup/admin/fwgm-widget.php:63 | jspi-boot | [View logs](..//tmp/tmp.xVK2VikWnb) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/google-latitude-history/google-api-php-client/src/service/apiUtils.php on line 58 | asyncify-boot | [View logs](..//tmp/tmp.JBzOCblsYJ) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/google-latitude-history/google-api-php-client/src/service/apiUtils.php on line 58 | jspi-boot | [View logs](..//tmp/tmp.XpxtVIvvXg) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-page-badge/google-plus-page-badge.php:135 | asyncify-boot | [View logs](..//tmp/tmp.ZcRLC3zHFg) |
@@ -144,10 +156,14 @@
 | Declaration of Cokidoo_DateTime::diff($secondDate) must be compatible with DateTime::diff(DateTimeInterface $targetObject, bool $absolute = false) in /wordpress/wp-content/plugins/google-plus-stream-widget-plugin-for-wordpress/index.php on line 728 | jspi-boot | [View logs](..//tmp/tmp.KzSXD1GBm6) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/generate-thumbnail/admin/includes/getmbl-admin-filters-hooks.php:67 | asyncify-boot | [View logs](..//tmp/tmp.bScYbvycZP) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/generate-thumbnail/admin/includes/getmbl-admin-filters-hooks.php:67 | jspi-boot | [View logs](..//tmp/tmp.FPs46JSVj4) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.dgfEGuj6XR) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.D6qzdTcfdD) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.dHBYsYkGi5) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.eRCkjZkdPW) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-pac-man/pacman-plugin.php:31 | asyncify-boot | [View logs](..//tmp/tmp.CRqw8BCcOd) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-pac-man/pacman-plugin.php:31 | jspi-boot | [View logs](..//tmp/tmp.qyF7JggAZC) |
+| Uncaught Error: Class "GB_LICENSE_ACTIVATION" not found in /wordpress/wp-content/plugins/grocery-shop-grocerybuddy/lib/update.php:21 | asyncify-boot | [View logs](..//tmp/tmp.zcrNO6ZgvQ) |
+| Uncaught Error: Class "GB_LICENSE_ACTIVATION" not found in /wordpress/wp-content/plugins/grocery-shop-grocerybuddy/lib/update.php:21 | jspi-boot | [View logs](..//tmp/tmp.l6IJF06OCf) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method GNA_KoreanSNS::activate_handler() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](..//tmp/tmp.qEqdionGae) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method GNA_KoreanSNS::activate_handler() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | [View logs](..//tmp/tmp.SBH3OZ5Xcm) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method GNA_PostOrder::activate_handler() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](..//tmp/tmp.UOwci4wF0j) |
@@ -168,6 +184,8 @@
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.wwSOpL08or) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-voice-plugin/widget.php:128 | asyncify-boot | [View logs](..//tmp/tmp.7pGkgKuSMn) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-voice-plugin/widget.php:128 | jspi-boot | [View logs](..//tmp/tmp.M8UJVcs4PA) |
+| Uncaught Error: Call to undefined function Gtg_Advanced_Blocks\WP_Filesystem() in /wordpress/wp-content/plugins/gtg-advanced-blocks/inc/Install.php:69 | asyncify-boot | [View logs](..//tmp/tmp.V5Smah17bQ) |
+| Uncaught Error: Call to undefined function Gtg_Advanced_Blocks\WP_Filesystem() in /wordpress/wp-content/plugins/gtg-advanced-blocks/inc/Install.php:69 | jspi-boot | [View logs](..//tmp/tmp.08Fj9I0q5F) |
 | Uncaught Error: Undefined constant "GROUPON_API_PATH" in /wordpress/wp-content/plugins/groupon-widget/groupon-widget.php:22 | asyncify-boot | [View logs](..//tmp/tmp.zPJ3IJsuJL) |
 | Uncaught Error: Undefined constant "GROUPON_API_PATH" in /wordpress/wp-content/plugins/groupon-widget/groupon-widget.php:22 | jspi-boot | [View logs](..//tmp/tmp.qTe5tVgvsX) |
 | Cannot redeclare get_avatar_url() (previously declared in /wordpress/wp-includes/link-template.php:4325) in /wordpress/wp-content/plugins/get-avatar-url/index.php on line 28 | asyncify-boot | [View logs](..//tmp/tmp.m1Pheg0l5w) |
@@ -188,8 +206,12 @@
 | Uncaught Error: Undefined constant "Plugin_activation" in /wordpress/wp-content/plugins/google-calendar-for-wordpress/WPGCalendar.php:27 | jspi-boot | [View logs](..//tmp/tmp.YQN8VHDvxp) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/gallery-face-groups/gallery-face-groups.php on line 81 | asyncify-boot | [View logs](..//tmp/tmp.8XIKZaXQta) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/gallery-face-groups/gallery-face-groups.php on line 81 | jspi-boot | [View logs](..//tmp/tmp.4MEm81kv9y) |
+| Uncaught Error: Undefined constant "GOABROADHQ__MINIMUM_WP_VERSION" in /wordpress/wp-content/plugins/goabroad-hq/class.goabroadhq.php:61 | asyncify-boot | [View logs](..//tmp/tmp.Glv1iHYxQn) |
+| Uncaught Error: Undefined constant "GOABROADHQ__MINIMUM_WP_VERSION" in /wordpress/wp-content/plugins/goabroad-hq/class.goabroadhq.php:61 | jspi-boot | [View logs](..//tmp/tmp.Uya8eNfAXS) |
 | Uncaught Exception: <p><strong>Error:</strong> GetPaid Stripe Payments requires 1 plugin to be installed and activated: invoicing. <a href="http://127.0.0.1:9400/wp-admin/plugins.php">Manage plugins</a>.</p> in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.cdpc7ZU7pO) |
 | Uncaught Exception: <p><strong>Error:</strong> GetPaid Stripe Payments requires 1 plugin to be installed and activated: invoicing. <a href="http://127.0.0.1:9400/wp-admin/plugins.php">Manage plugins</a>.</p> in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.9GZTmuX9vU) |
+| Declaration of gtw::widget($args) must be compatible with WP_Widget::widget($args, $instance) in /wordpress/wp-content/plugins/gtw/gtw.php on line 56 | asyncify-boot | [View logs](..//tmp/tmp.BTKLHDFKfE) |
+| Declaration of gtw::widget($args) must be compatible with WP_Widget::widget($args, $instance) in /wordpress/wp-content/plugins/gtw/gtw.php on line 56 | jspi-boot | [View logs](..//tmp/tmp.piyOeAkBb9) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/get-satisfaction-for-wordpress/classes/HTTP_Request_Oauth.php on line 9 | asyncify-boot | [View logs](..//tmp/tmp.PVQ92eEBO1) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/get-satisfaction-for-wordpress/classes/HTTP_Request_Oauth.php on line 9 | jspi-boot | [View logs](..//tmp/tmp.RVPVoylYTK) |
 | Uncaught TypeError: fwrite(): Argument #1 ($stream) must be of type resource, null given in /wordpress/wp-content/plugins/google-analytics-analyze/google-analytics.php:51 | asyncify-boot | [View logs](..//tmp/tmp.EI7o6JjTbm) |
@@ -202,6 +224,8 @@
 | Declaration of gtrans::widget($args) must be compatible with WP_Widget::widget($args, $instance) in /wordpress/wp-content/plugins/gtrans/gtrans.php on line 59 | jspi-boot | [View logs](..//tmp/tmp.CH6ZYqtcDb) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.kTNXLitZlx) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.PX1x2DhC3t) |
+| Uncaught Error: Undefined constant "gw2pcl_database_version" in /wordpress/wp-content/plugins/guild-wars-2-players-character-list/gw2pcl.php:17 | asyncify-boot | [View logs](..//tmp/tmp.AYwl9lHIob) |
+| Uncaught Error: Undefined constant "gw2pcl_database_version" in /wordpress/wp-content/plugins/guild-wars-2-players-character-list/gw2pcl.php:17 | jspi-boot | [View logs](..//tmp/tmp.Khj0WIT1PE) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/guestonlin/widget.php:3 | asyncify-boot | [View logs](..//tmp/tmp.vpMS8XNQeO) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/guestonlin/widget.php:3 | jspi-boot | [View logs](..//tmp/tmp.ijcaMvf8LP) |
 | Uncaught TypeError: fclose(): Argument #1 ($stream) must be of type resource, bool given in /wordpress/wp-content/plugins/gears-this-blog/inc/admin.php:66 | asyncify-boot | [View logs](..//tmp/tmp.ASPEAK7qdZ) |
@@ -268,8 +292,12 @@
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.5Ojf7jIS1F) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/geeklist-widget-account/geeklist_account.php:87 | asyncify-boot | [View logs](..//tmp/tmp.3nw7JKeBJA) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/geeklist-widget-account/geeklist_account.php:87 | jspi-boot | [View logs](..//tmp/tmp.9Rx4EVyyOt) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/ghostbirdwp/library/class-gbwp-funcs.php on line 2170 | asyncify-boot | [View logs](..//tmp/tmp.2q3N1gzZzX) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/ghostbirdwp/library/class-gbwp-funcs.php on line 2170 | jspi-boot | [View logs](..//tmp/tmp.BjZ8OoQsMv) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/genesis-featured-page-extended/genesis-featured-page-extended.php:311 | asyncify-boot | [View logs](..//tmp/tmp.mILsjpnZA5) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/genesis-featured-page-extended/genesis-featured-page-extended.php:311 | jspi-boot | [View logs](..//tmp/tmp.WN9tlgs0Tz) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/gps-map-widget/GPS_MAP_Widget-plugin.php:129 | asyncify-boot | [View logs](..//tmp/tmp.fhqdIKDFFu) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/gps-map-widget/GPS_MAP_Widget-plugin.php:129 | jspi-boot | [View logs](..//tmp/tmp.evQy0SkQPO) |
 | Uncaught TypeError: fclose(): Argument #1 ($stream) must be of type resource, bool given in /wordpress/wp-content/plugins/gm-adaptive-css-grid-columns/vendor/scssphp/scssphp/src/Logger/StreamLogger.php:41 | asyncify-boot | [View logs](..//tmp/tmp.qxMGMIhtZ0) |
 | Uncaught TypeError: fclose(): Argument #1 ($stream) must be of type resource, bool given in /wordpress/wp-content/plugins/gm-adaptive-css-grid-columns/vendor/scssphp/scssphp/src/Logger/StreamLogger.php:41 | jspi-boot | [View logs](..//tmp/tmp.xCWYdGzupe) |
 | Uncaught Error: Call to undefined function mysql_get_server_info() in /wordpress/wp-content/plugins/google-routeplaner/google-routeplaner.php:70 | asyncify-boot | [View logs](..//tmp/tmp.fEchI0rSpi) |
@@ -286,6 +314,8 @@
 | Uncaught Error: Call to undefined function wp_create_category() in /wordpress/wp-content/plugins/guild-network/GuildNetwork_LifeCycle.php:64 | jspi-boot | [View logs](..//tmp/tmp.LN2j9bbKd4) |
 | Uncaught Error: Undefined constant "GW_VERSION_KEY" in /wordpress/wp-content/plugins/groundwork/GroundWork.php:49 | asyncify-boot | [View logs](..//tmp/tmp.yDid7NOhql) |
 | Uncaught Error: Undefined constant "GW_VERSION_KEY" in /wordpress/wp-content/plugins/groundwork/GroundWork.php:49 | jspi-boot | [View logs](..//tmp/tmp.aF1lyshgeN) |
+| Uncaught Error: Call to undefined function mysql_real_escape_string() in /wordpress/wp-content/plugins/gwa-autoresponder/ar_gwa.php:1556 | asyncify-boot | [View logs](..//tmp/tmp.WWyrY4VUqn) |
+| Uncaught Error: Call to undefined function mysql_real_escape_string() in /wordpress/wp-content/plugins/gwa-autoresponder/ar_gwa.php:1556 | jspi-boot | [View logs](..//tmp/tmp.ASzSzyNQnM) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/gplus/lib/service/apiUtils.php on line 58 | asyncify-boot | [View logs](..//tmp/tmp.sGJMptzvBg) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/gplus/lib/service/apiUtils.php on line 58 | jspi-boot | [View logs](..//tmp/tmp.IhM9A0TAbZ) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method GNA_Slack::activate_handler() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](..//tmp/tmp.uyIsm8xbNu) |
@@ -304,6 +334,8 @@
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-search-cse/wordpress-glcse.php:140 | jspi-boot | [View logs](..//tmp/tmp.wblRUfL39V) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/gzip-pages/filosofo-gzip-compression.php:30 | asyncify-boot | [View logs](..//tmp/tmp.1gmibuVWXa) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/gzip-pages/filosofo-gzip-compression.php:30 | jspi-boot | [View logs](..//tmp/tmp.BiDh6KGwFI) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.M5h9xGgH9o) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.Kc5s3PwVox) |
 | Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/gt-geo-targeting/index.php:42 | asyncify-boot | [View logs](..//tmp/tmp.YUeyCSU1ts) |
 | Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/gt-geo-targeting/index.php:42 | jspi-boot | [View logs](..//tmp/tmp.MsQpvMQzXh) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/getfirefox/getfirefox.php:329 | asyncify-boot | [View logs](..//tmp/tmp.4gbhwfhPrv) |
@@ -336,6 +368,8 @@
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method GNA_CateList::activate_handler() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | [View logs](..//tmp/tmp.glpcWUEVnw) |
 | Uncaught Error: Call to undefined function mysql_escape_string() in /wordpress/wp-content/plugins/gaphub-wp-directory/directory_master.php:93 | asyncify-boot | [View logs](..//tmp/tmp.f5YGPk7ZJ5) |
 | Uncaught Error: Call to undefined function mysql_escape_string() in /wordpress/wp-content/plugins/gaphub-wp-directory/directory_master.php:93 | jspi-boot | [View logs](..//tmp/tmp.2HnPmhMotg) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/get-snarky/get-snarky.php:531 | asyncify-boot | [View logs](..//tmp/tmp.7oSyW30cXq) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/get-snarky/get-snarky.php:531 | jspi-boot | [View logs](..//tmp/tmp.aUsow0tXzD) |
 | require_once(): Failed opening required '/wordpress/wp-content/plugins/gdpr-extensions-com-youtube-2clicksolution/post-types/class.manager-tab-cpt.php' (include_path='.:') in /wordpress/wp-content/plugins/gdpr-extensions-com-youtube-2clicksolution/gdpr-youtube.php on line 77 | asyncify-boot | [View logs](..//tmp/tmp.gxnbKXvvdJ) |
 | require_once(): Failed opening required '/wordpress/wp-content/plugins/gdpr-extensions-com-youtube-2clicksolution/post-types/class.manager-tab-cpt.php' (include_path='.:') in /wordpress/wp-content/plugins/gdpr-extensions-com-youtube-2clicksolution/gdpr-youtube.php on line 77 | jspi-boot | [View logs](..//tmp/tmp.QfMkvXtMrP) |
 | Uncaught Error: Undefined constant "adminVisible" in /wordpress/wp-content/plugins/goup/goUp.php:82 | asyncify-boot | [View logs](..//tmp/tmp.kT9Fdu9zau) |
@@ -352,6 +386,8 @@
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/googlecards/googleCards.php:217 | jspi-boot | [View logs](..//tmp/tmp.RzCvU4LvGw) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method GNA_Miscellaneous::activate_handler() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](..//tmp/tmp.qPE1mLmTDE) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method GNA_Miscellaneous::activate_handler() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | [View logs](..//tmp/tmp.Jzt0Bj7tRF) |
+| Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/google-maps-widget-ready/config.php:3 | asyncify-boot | [View logs](..//tmp/tmp.Zo4Q5ku4Xz) |
+| Uncaught Error: Undefined constant "WPLANG" in /wordpress/wp-content/plugins/google-maps-widget-ready/config.php:3 | jspi-boot | [View logs](..//tmp/tmp.1f5mPjHAGw) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method GFPopupWidgetClass::this_plugin_last() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:326 | asyncify-boot | [View logs](..//tmp/tmp.svJGNIQtCd) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method GFPopupWidgetClass::this_plugin_last() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:326 | jspi-boot | [View logs](..//tmp/tmp.B3vPulwEVt) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.8hnRzdhX7r) |
@@ -414,6 +450,8 @@
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.ZD56v6nfRh) |
 | Declaration of GalleriaPress_Picasa::library_items($gallery_items) must be compatible with GalleriaPress_Library::library_items(array $gallery_items = [], array $options = []) in /wordpress/wp-content/plugins/galleriapress/libraries/picasa/picasa.php on line 42 | asyncify-boot | [View logs](..//tmp/tmp.No8cg9omF8) |
 | Declaration of GalleriaPress_Picasa::library_items($gallery_items) must be compatible with GalleriaPress_Library::library_items(array $gallery_items = [], array $options = []) in /wordpress/wp-content/plugins/galleriapress/libraries/picasa/picasa.php on line 42 | jspi-boot | [View logs](..//tmp/tmp.iEqtoJI07q) |
+| Uncaught Error: Class "GF_Field" not found in /wordpress/wp-content/plugins/gf-basic-captcha/gf-basic-captcha.php:12 | asyncify-boot | [View logs](..//tmp/tmp.RxHplM469W) |
+| Uncaught Error: Class "GF_Field" not found in /wordpress/wp-content/plugins/gf-basic-captcha/gf-basic-captcha.php:12 | jspi-boot | [View logs](..//tmp/tmp.Q5wljp0Yns) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/game-timer/game-timer.php:486 | asyncify-boot | [View logs](..//tmp/tmp.NLo0D7ebrS) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/game-timer/game-timer.php:486 | jspi-boot | [View logs](..//tmp/tmp.L9wxKaqFdV) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method GNA_WooCoupons::activate_handler() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](..//tmp/tmp.M3XeFNS9yW) |
