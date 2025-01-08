@@ -4,6 +4,18 @@
 |---------|------|------|
 | MySQL field type cannot be translated to SQLite: enum. | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.ZMjoetKezr) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_amelia_notifications. | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.ZMjoetKezr) |
+| SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error. | asyncify-boot | [View logs](..//tmp/tmp.8owPvvwXsc) |
+| SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error. | jspi-boot | [View logs](..//tmp/tmp.Q5y17jMeLm) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_golfsoc_competitions. | asyncify-boot | [View logs](..//tmp/tmp.8owPvvwXsc) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_golfsoc_competitions. | jspi-boot | [View logs](..//tmp/tmp.Q5y17jMeLm) |
+| Unexpected token in MySQL query: attending. | asyncify-boot | [View logs](..//tmp/tmp.8owPvvwXsc) |
+| Unexpected token in MySQL query: attending. | jspi-boot | [View logs](..//tmp/tmp.Q5y17jMeLm) |
+| Unexpected token in MySQL query: closed. | asyncify-boot | [View logs](..//tmp/tmp.8owPvvwXsc) |
+| Unexpected token in MySQL query: closed. | jspi-boot | [View logs](..//tmp/tmp.Q5y17jMeLm) |
+| Unexpected token in MySQL query: sent. | asyncify-boot | [View logs](..//tmp/tmp.8owPvvwXsc) |
+| Unexpected token in MySQL query: sent. | jspi-boot | [View logs](..//tmp/tmp.Q5y17jMeLm) |
+| Unknown operation: MODIFY. | asyncify-boot | [View logs](..//tmp/tmp.8owPvvwXsc) |
+| Unknown operation: MODIFY. | jspi-boot | [View logs](..//tmp/tmp.Q5y17jMeLm) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | [View logs](..//tmp/tmp.fzGSjeLRMW) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | [View logs](..//tmp/tmp.39TPo8TA8q) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ez_adsense_options. | asyncify-boot | [View logs](..//tmp/tmp.fzGSjeLRMW) |
