@@ -46,12 +46,16 @@
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.m7UjXyh1oe) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-plus-feed-widget/gplusfeed.php:16 | asyncify-boot | [View logs](..//tmp/tmp.rFMgzN3Zjr) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-plus-feed-widget/gplusfeed.php:16 | jspi-boot | [View logs](..//tmp/tmp.w0aHeJ0I7z) |
+| Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/geo-location-comments/inc/activation_hooks.php:17 | asyncify-boot | [View logs](..//tmp/tmp.ZVDmzlswFh) |
+| Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/geo-location-comments/inc/activation_hooks.php:17 | jspi-boot | [View logs](..//tmp/tmp.QsMHKrgnoW) |
 | Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/google-analytics-tracking-for-forms/ga-tracking-forms.php:50 | asyncify-boot | [View logs](..//tmp/tmp.3oie27mqHS) |
 | Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/google-analytics-tracking-for-forms/ga-tracking-forms.php:50 | jspi-boot | [View logs](..//tmp/tmp.4h5OivlKa2) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/googleanalyticscounter/googleanalyticscounter.php:380 | asyncify-boot | [View logs](..//tmp/tmp.bS0QO1AoVi) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/googleanalyticscounter/googleanalyticscounter.php:380 | jspi-boot | [View logs](..//tmp/tmp.gKqbUrKhO7) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method client_gp::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](..//tmp/tmp.usmvfpDfvy) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method client_gp::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | [View logs](..//tmp/tmp.dSSH7X5n1m) |
+| Uncaught Error: Undefined constant "GLOB_BRACE" in /wordpress/wp-content/plugins/gex-ratings-facepunch-style/gex-ratings-facepunch-style.php:588 | asyncify-boot | [View logs](..//tmp/tmp.VrHLBPgiFe) |
+| Uncaught Error: Undefined constant "GLOB_BRACE" in /wordpress/wp-content/plugins/gex-ratings-facepunch-style/gex-ratings-facepunch-style.php:588 | jspi-boot | [View logs](..//tmp/tmp.uwjlxyCovZ) |
 | Declaration of WP_Frameworks::add($handle, $src, $deps = [], $ver = false) must be compatible with WP_Dependencies::add($handle, $src, $deps = [], $ver = false, $args = null) in /wordpress/wp-content/plugins/google-reader-dashboard/includes/class.wp-frameworks.php on line 73 | asyncify-boot | [View logs](..//tmp/tmp.Wx5wiSOLWd) |
 | Declaration of WP_Frameworks::add($handle, $src, $deps = [], $ver = false) must be compatible with WP_Dependencies::add($handle, $src, $deps = [], $ver = false, $args = null) in /wordpress/wp-content/plugins/google-reader-dashboard/includes/class.wp-frameworks.php on line 73 | jspi-boot | [View logs](..//tmp/tmp.NULiiGzWJE) |
 | Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in /wordpress/wp-content/plugins/grid-gallery-ready/vendor/Rsc/Menu/Page.php:228 | asyncify-boot | [View logs](..//tmp/tmp.ipPQzl1VIY) |
@@ -92,18 +96,26 @@
 | Uncaught Error: Undefined constant "GCSTATS_VERSION" in /wordpress/wp-content/plugins/gcstats/gcStats.php:34 | jspi-boot | [View logs](..//tmp/tmp.nw7bYXP6Dn) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method GNA_GoogleAnalytics::activate_handler() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](..//tmp/tmp.61qKtzIGAB) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method GNA_GoogleAnalytics::activate_handler() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | [View logs](..//tmp/tmp.seOb6YjYMq) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-plus-widget/googleCards.php:664 | asyncify-boot | [View logs](..//tmp/tmp.FnlFqmA6Kg) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-plus-widget/googleCards.php:664 | jspi-boot | [View logs](..//tmp/tmp.mB820RJsPJ) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/gurken-subscribe-to-comments/gurken-subscribe-to-comments.php:154 | asyncify-boot | [View logs](..//tmp/tmp.7UDumlA9dj) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/gurken-subscribe-to-comments/gurken-subscribe-to-comments.php:154 | jspi-boot | [View logs](..//tmp/tmp.UdvAfOIlSH) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.g4SyLFYRF2) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.lC1TBtNfxP) |
 | Declaration of GgTwitterWidget::save_settings() must be compatible with WP_Widget::save_settings($settings) in /wordpress/wp-content/plugins/gg-twitter/gg-twitter.php on line 93 | asyncify-boot | [View logs](..//tmp/tmp.7JzDA3NnU0) |
 | Declaration of GgTwitterWidget::save_settings() must be compatible with WP_Widget::save_settings($settings) in /wordpress/wp-content/plugins/gg-twitter/gg-twitter.php on line 93 | jspi-boot | [View logs](..//tmp/tmp.v51uJuFUc9) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/google-latitude-history/google-api-php-client/src/service/apiUtils.php on line 58 | asyncify-boot | [View logs](..//tmp/tmp.JBzOCblsYJ) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/google-latitude-history/google-api-php-client/src/service/apiUtils.php on line 58 | jspi-boot | [View logs](..//tmp/tmp.XpxtVIvvXg) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-page-badge/google-plus-page-badge.php:135 | asyncify-boot | [View logs](..//tmp/tmp.ZcRLC3zHFg) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-page-badge/google-plus-page-badge.php:135 | jspi-boot | [View logs](..//tmp/tmp.i2pfDY1bJk) |
 | Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in /wordpress/wp-content/plugins/gts-translation/GtsPlugin.php:74 | asyncify-boot | [View logs](..//tmp/tmp.HB44NgtJR6) |
 | Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in /wordpress/wp-content/plugins/gts-translation/GtsPlugin.php:74 | jspi-boot | [View logs](..//tmp/tmp.QTAeta7CLb) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Anderson_Makiyama_Guest_Post_Express::activation() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](..//tmp/tmp.0KQafXwVoB) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method Anderson_Makiyama_Guest_Post_Express::activation() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | [View logs](..//tmp/tmp.pFVHBR8uya) |
 | Uncaught Error: Call to undefined function set_magic_quotes_runtime() in /wordpress/wp-content/plugins/general-headers/general-header.php:31 | asyncify-boot | [View logs](..//tmp/tmp.T1q92bT2Zn) |
 | Uncaught Error: Call to undefined function set_magic_quotes_runtime() in /wordpress/wp-content/plugins/general-headers/general-header.php:31 | jspi-boot | [View logs](..//tmp/tmp.zLGjHCGlV4) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.yhdOw89vYI) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.Hbvc6HFjRE) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.1hgSEJcgYQ) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.50uoTVvVVg) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/get-user-info/getUserInfo.php:210 | asyncify-boot | [View logs](..//tmp/tmp.64fWraLUhX) |
@@ -202,6 +214,8 @@
 | Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/geo-blogroll/geo_blogroll.php:37 | jspi-boot | [View logs](..//tmp/tmp.DbIlqSD9cw) |
 | Uncaught Error: Non-static method Wdgpo_Installer::check() cannot be called statically in /wordpress/wp-content/plugins/google/plusone.php:55 | asyncify-boot | [View logs](..//tmp/tmp.gjIk9sU6fC) |
 | Uncaught Error: Non-static method Wdgpo_Installer::check() cannot be called statically in /wordpress/wp-content/plugins/google/plusone.php:55 | jspi-boot | [View logs](..//tmp/tmp.f1yTlsH6Bi) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/goodreads-grid-widget/goodreads.php:200 | asyncify-boot | [View logs](..//tmp/tmp.uhf4LZ2trQ) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/goodreads-grid-widget/goodreads.php:200 | jspi-boot | [View logs](..//tmp/tmp.kZMZUfFG5a) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method GNA_GoogleRecaptcha::activate_handler() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](..//tmp/tmp.XrGANVM0u7) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method GNA_GoogleRecaptcha::activate_handler() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | [View logs](..//tmp/tmp.Adyvmum3of) |
 | Uncaught Error: Call to undefined function wp_create_category() in /wordpress/wp-content/plugins/guild-network/GuildNetwork_LifeCycle.php:64 | asyncify-boot | [View logs](..//tmp/tmp.4069nBA2Gl) |
@@ -220,6 +234,8 @@
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.uDiSpCU4m1) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.RosbQnXECb) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.k7HL2b4iYI) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/gzip-pages/filosofo-gzip-compression.php:30 | asyncify-boot | [View logs](..//tmp/tmp.1gmibuVWXa) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/gzip-pages/filosofo-gzip-compression.php:30 | jspi-boot | [View logs](..//tmp/tmp.BiDh6KGwFI) |
 | Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/gt-geo-targeting/index.php:42 | asyncify-boot | [View logs](..//tmp/tmp.YUeyCSU1ts) |
 | Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/gt-geo-targeting/index.php:42 | jspi-boot | [View logs](..//tmp/tmp.MsQpvMQzXh) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/getfirefox/getfirefox.php:329 | asyncify-boot | [View logs](..//tmp/tmp.4gbhwfhPrv) |
@@ -266,6 +282,8 @@
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/googlecards/googleCards.php:217 | jspi-boot | [View logs](..//tmp/tmp.RzCvU4LvGw) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method GNA_Miscellaneous::activate_handler() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](..//tmp/tmp.qPE1mLmTDE) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method GNA_Miscellaneous::activate_handler() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | [View logs](..//tmp/tmp.Jzt0Bj7tRF) |
+| Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method GFPopupWidgetClass::this_plugin_last() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:326 | asyncify-boot | [View logs](..//tmp/tmp.svJGNIQtCd) |
+| Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method GFPopupWidgetClass::this_plugin_last() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:326 | jspi-boot | [View logs](..//tmp/tmp.B3vPulwEVt) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/github-profile-display/githubwordpress.php:211 | asyncify-boot | [View logs](..//tmp/tmp.dutoEeqE3W) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/github-profile-display/githubwordpress.php:211 | jspi-boot | [View logs](..//tmp/tmp.TonFwX25gB) |
 | Uncaught Error: Class "RGFormsModel" not found in /wordpress/wp-content/plugins/gravity-forms-data-persistence-add-on-reloaded/gravity-forms-data-persistence-add-on-reloaded.php:18 | asyncify-boot | [View logs](..//tmp/tmp.px549vhsLO) |
