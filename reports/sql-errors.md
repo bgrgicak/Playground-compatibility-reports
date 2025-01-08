@@ -4,6 +4,12 @@
 |---------|------|------|
 | MySQL field type cannot be translated to SQLite: enum. | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.ZMjoetKezr) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_amelia_notifications. | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.ZMjoetKezr) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | [View logs](..//tmp/tmp.fzGSjeLRMW) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | [View logs](..//tmp/tmp.39TPo8TA8q) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ez_adsense_options. | asyncify-boot | [View logs](..//tmp/tmp.fzGSjeLRMW) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ez_adsense_options. | jspi-boot | [View logs](..//tmp/tmp.39TPo8TA8q) |
+| Unknown operation: ALTER. | asyncify-boot | [View logs](..//tmp/tmp.fzGSjeLRMW) |
+| Unknown operation: ALTER. | jspi-boot | [View logs](..//tmp/tmp.39TPo8TA8q) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_ajax. | asyncify-boot | [View logs](..//tmp/tmp.mXHaXHbrk3) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_ajax. | jspi-boot | [View logs](..//tmp/tmp.vmkgkpMv2M) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: rgm_ip. | asyncify-boot | [View logs](..//tmp/tmp.mXHaXHbrk3) |
