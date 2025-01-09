@@ -2322,16 +2322,24 @@
 | Uncaught Exception: <p><strong>Error:</strong> Current PHP version (7.2.34-dev) does not meet minimum requirements for Dynamics 365 Integration. The plugin requires PHP 8.2.</p><p><a href="https://wordpress.org/support/update-php/">Learn more about updating PHP</a>.</p> in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.PK26SHkI5j) |
 | Uncaught Error: Undefined constant "GLOB_BRACE" in /wordpress/wp-content/plugins/kama-wp-smile/Kama_WP_Smiles_Plugin.php:401 | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.DoNStpmvXo) |
 | Uncaught Error: Undefined constant "GLOB_BRACE" in /wordpress/wp-content/plugins/kama-wp-smile/Kama_WP_Smiles_Plugin.php:401 | jspi-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.g0sYzn34qf) |
-| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/1-click-retweetsharelike/la-click-and-share-networkpub.php on line 1116 | asyncify-boot | [View logs](..//tmp/tmp.qtox9Cr6Du) |
-| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/1-click-retweetsharelike/la-click-and-share-networkpub.php on line 1116 | jspi-boot | [View logs](..//tmp/tmp.GdCH9T82gc) |
-| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.CzVVFmJ2FW) |
-| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.K8cCuPb4Gt) |
-| Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method OneHundredCities::install() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](..//tmp/tmp.Ub2dGhoy0s) |
-| Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method OneHundredCities::install() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | [View logs](..//tmp/tmp.LFObaCOuag) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/1-click-retweetsharelike/la-click-and-share-networkpub.php on line 1116 | asyncify-boot | [View logs](..//tmp/tmp.E7Fcafn0wU) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/1-click-retweetsharelike/la-click-and-share-networkpub.php on line 1116 | jspi-boot | [View logs](..//tmp/tmp.OwyxmhfBqZ) |
+| Uncaught Error: Undefined constant "music_bar_1g1g_widget_register" in /wordpress/wp-content/plugins/1g1g-music-bar/1g1g-musicbar-widget.php:184 | asyncify-boot | [View logs](..//tmp/tmp.opeFjbivrc) |
+| Uncaught Error: Undefined constant "music_bar_1g1g_widget_register" in /wordpress/wp-content/plugins/1g1g-music-bar/1g1g-musicbar-widget.php:184 | jspi-boot | [View logs](..//tmp/tmp.aNqNmbVOh3) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.nmAyVbR43N) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.dpZuegpyRz) |
+| Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method OneHundredCities::install() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](..//tmp/tmp.C5ijyC94vm) |
+| Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method OneHundredCities::install() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | [View logs](..//tmp/tmp.9L3juFkBOX) |
 | Uncaught Error: Undefined constant "UNU_DEC_1918_TEXTDOMAIN" in /wordpress/wp-content/plugins/1-decembrie-1918/1-decembrie-1918.php:13 | asyncify-boot | [View logs](..//tmp/tmp.H45Wgpl7XP) |
 | Uncaught Error: Undefined constant "UNU_DEC_1918_TEXTDOMAIN" in /wordpress/wp-content/plugins/1-decembrie-1918/1-decembrie-1918.php:13 | jspi-boot | [View logs](..//tmp/tmp.MkA6naL25L) |
-| 'continue' not in the 'loop' or 'switch' context in /wordpress/wp-content/plugins/1-flash-gallery/includes/ajax/upload.php on line 164 | asyncify-boot | [View logs](..//tmp/tmp.qKsDs6Lrz9) |
-| 'continue' not in the 'loop' or 'switch' context in /wordpress/wp-content/plugins/1-flash-gallery/includes/ajax/upload.php on line 164 | jspi-boot | [View logs](..//tmp/tmp.R1h01J2yve) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/123privacy/123privacy.php:87 | asyncify-boot | [View logs](..//tmp/tmp.PCJv11ghhi) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/123privacy/123privacy.php:87 | jspi-boot | [View logs](..//tmp/tmp.conVVdeYOA) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/1g-music-fav/1g-music-fav.php:45 | asyncify-boot | [View logs](..//tmp/tmp.jGbySv5rPj) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/1g-music-fav/1g-music-fav.php:45 | jspi-boot | [View logs](..//tmp/tmp.inttXfuAVW) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.6DDm3vdqG2) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.WJSNvSZFWX) |
+| 'continue' not in the 'loop' or 'switch' context in /wordpress/wp-content/plugins/1-flash-gallery/includes/ajax/upload.php on line 164 | asyncify-boot | [View logs](..//tmp/tmp.AEhJ0Wjsl3) |
+| 'continue' not in the 'loop' or 'switch' context in /wordpress/wp-content/plugins/1-flash-gallery/includes/ajax/upload.php on line 164 | jspi-boot | [View logs](..//tmp/tmp.4JSl9hOC9U) |
 | Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/1-jquery-photo-gallery-slideshow-flash/wp-1pluginjquery.php on line 24 | asyncify-boot | [View logs](..//tmp/tmp.MYngek3cMT) |
 | Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/1-jquery-photo-gallery-slideshow-flash/wp-1pluginjquery.php on line 24 | jspi-boot | [View logs](..//tmp/tmp.jExc1pWsrn) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.Y42q5T1drj) |
@@ -2340,24 +2348,34 @@
 | Uncaught Error: Call to undefined function DMS\Includes\WP_Filesystem() in /wordpress/wp-content/plugins/domain-mapping-system/includes/class-dms-activator.php:147 | jspi-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.KaB6AdMmDH) |
 | Uncaught TypeError: rand(): Argument #2 ($max) must be of type int, float given in /wordpress/wp-content/plugins/03talk-community-conference/03TALK.php:116 | asyncify-boot | [View logs](..//tmp/tmp.bXsfI8dW4N) |
 | Uncaught TypeError: rand(): Argument #2 ($max) must be of type int, float given in /wordpress/wp-content/plugins/03talk-community-conference/03TALK.php:116 | jspi-boot | [View logs](..//tmp/tmp.4Nph3p8mHi) |
+| Uncaught Error: Class "TimberHelper" not found in /wordpress/wp-content/plugins/zoneboard/zoneboard.php:50 | asyncify-boot | [View logs](..//tmp/tmp.qDRSVVV6Km) |
+| Uncaught Error: Class "TimberHelper" not found in /wordpress/wp-content/plugins/zoneboard/zoneboard.php:50 | jspi-boot | [View logs](..//tmp/tmp.gX3vl3SEPe) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.FxoBeF2CNw) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.Y0RvCBGEiL) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/zingiri-web-shop/fws/includes/subs.inc.php on line 542 | asyncify-boot | [View logs](..//tmp/tmp.OZbTKsJX6T) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/zingiri-web-shop/fws/includes/subs.inc.php on line 542 | jspi-boot | [View logs](..//tmp/tmp.LsHgJiZexI) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zerochat/zerochat.php:428 | asyncify-boot | [View logs](..//tmp/tmp.fwMrlp5hBQ) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zerochat/zerochat.php:428 | jspi-boot | [View logs](..//tmp/tmp.D55ImsuWGv) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.IEuszilsA7) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.BLVjh2nKPB) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zhina-twitter-widget/ZhinaTwitterWidget.php:55 | asyncify-boot | [View logs](..//tmp/tmp.UhWdbMdPrC) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zhina-twitter-widget/ZhinaTwitterWidget.php:55 | jspi-boot | [View logs](..//tmp/tmp.ZN7V8txIkP) |
 | Uncaught Error: Undefined constant "DEFAULT_CURRENCY" in /wordpress/wp-content/plugins/zen4wp/zen4wp.php:81 | asyncify-boot | [View logs](..//tmp/tmp.XlPP8982Gz) |
 | Uncaught Error: Undefined constant "DEFAULT_CURRENCY" in /wordpress/wp-content/plugins/zen4wp/zen4wp.php:81 | jspi-boot | [View logs](..//tmp/tmp.56H1rgZ3w5) |
+| Uncaught Exception: <p><strong>Error:</strong> Current PHP version (7.2.34-dev) does not meet minimum requirements for WooCommerce. The plugin requires PHP 7.4.</p><p><a href="https://wordpress.org/support/update-php/">Learn more about updating PHP</a>.</p> in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.oxX6c8nJkW) |
+| Uncaught Exception: <p><strong>Error:</strong> Current PHP version (7.2.34-dev) does not meet minimum requirements for WooCommerce. The plugin requires PHP 7.4.</p><p><a href="https://wordpress.org/support/update-php/">Learn more about updating PHP</a>.</p> in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.KlrC1oQEmg) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zaplecze-web-toolspl/web-tools-pl-zaplecze-widget.php:182 | asyncify-boot | [View logs](..//tmp/tmp.JRhIWMT1fM) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zaplecze-web-toolspl/web-tools-pl-zaplecze-widget.php:182 | jspi-boot | [View logs](..//tmp/tmp.lYW3UJQVL8) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.zH7RUEDLIX) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.uqrhQ5ovUp) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.SpZ6yGHQ3r) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.rtlIWmZfIi) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zigout/zigout.php:131 | asyncify-boot | [View logs](..//tmp/tmp.pELYb6YoXL) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zigout/zigout.php:131 | jspi-boot | [View logs](..//tmp/tmp.xqXl8z12XP) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method zaazuEmoticons::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](..//tmp/tmp.7lSsDyWLR8) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method zaazuEmoticons::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | [View logs](..//tmp/tmp.BrYoNcs0Zt) |
+| Cannot use "parent" when current class scope has no parent in /wordpress/wp-content/plugins/zencart-products/zencart_options.php on line 148 | asyncify-boot | [View logs](..//tmp/tmp.0II59fukNo) |
+| Cannot use "parent" when current class scope has no parent in /wordpress/wp-content/plugins/zencart-products/zencart_options.php on line 148 | jspi-boot | [View logs](..//tmp/tmp.YIEz3Pgbgr) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zwiveldirect-website-widget/zwivel-widget.php:84 | asyncify-boot | [View logs](..//tmp/tmp.ZDbPcB0XuT) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zwiveldirect-website-widget/zwivel-widget.php:84 | jspi-boot | [View logs](..//tmp/tmp.BGhzAlHu79) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method zia3_os::flush() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](..//tmp/tmp.iPk5V63tsI) |
@@ -2368,14 +2386,20 @@
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zazzle-widget/zazzle_widget.php:390 | jspi-boot | [View logs](..//tmp/tmp.BuFHP31TRl) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zazzle-store-gallery/widget.php:3 | asyncify-boot | [View logs](..//tmp/tmp.urdd6vkUvV) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zazzle-store-gallery/widget.php:3 | jspi-boot | [View logs](..//tmp/tmp.ATBR58QcVF) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zeitplaner/image.php:175 | asyncify-boot | [View logs](..//tmp/tmp.QgtRokQ8OF) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zeitplaner/image.php:175 | jspi-boot | [View logs](..//tmp/tmp.MPdhXoLMRH) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.TFARoFzrGA) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.C5RYsjloJN) |
+| Uncaught Error: Undefined constant "zp_relative_feed_set_host" in /wordpress/wp-content/plugins/zprelativefeed/zprelativefeed.php:73 | asyncify-boot | [View logs](..//tmp/tmp.UwrMolqqeE) |
+| Uncaught Error: Undefined constant "zp_relative_feed_set_host" in /wordpress/wp-content/plugins/zprelativefeed/zprelativefeed.php:73 | jspi-boot | [View logs](..//tmp/tmp.fukEUhpceu) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zeaks-code-snippets/zeaks-snippets.php:353 | asyncify-boot | [View logs](..//tmp/tmp.IICxx5Jbh9) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zeaks-code-snippets/zeaks-snippets.php:353 | jspi-boot | [View logs](..//tmp/tmp.FOR6pu8Cem) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zk-advanced-feature-post/zk-advanced-feature-post.php:318 | asyncify-boot | [View logs](..//tmp/tmp.Udu3cMhXUS) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zk-advanced-feature-post/zk-advanced-feature-post.php:318 | jspi-boot | [View logs](..//tmp/tmp.eC7ZWFC5Y3) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method zia3::flush() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](..//tmp/tmp.kuWdq8rOuD) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method zia3::flush() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | [View logs](..//tmp/tmp.Kpi1AiSD7b) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zigweather/zigweather.php:62 | asyncify-boot | [View logs](..//tmp/tmp.diwkFJdc0Q) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zigweather/zigweather.php:62 | jspi-boot | [View logs](..//tmp/tmp.mjARuZJkpQ) |
 | Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/zocdoc/admin/zocdoc-settings.php' (include_path='.:') in /wordpress/wp-content/plugins/zocdoc/zocdoc.php:19 | asyncify-boot | [View logs](..//tmp/tmp.AYyBBSUVgd) |
 | Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/zocdoc/admin/zocdoc-settings.php' (include_path='.:') in /wordpress/wp-content/plugins/zocdoc/zocdoc.php:19 | jspi-boot | [View logs](..//tmp/tmp.2ev66G8Q63) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zimbra-preauth-widget/init.php:28 | asyncify-boot | [View logs](..//tmp/tmp.sLjd6R7mBK) |
@@ -2410,14 +2434,20 @@
 | Uncaught Exception: <p><strong>Error:</strong> Current PHP version (7.2.34-dev) does not meet minimum requirements for WooCommerce. The plugin requires PHP 7.4.</p><p><a href="https://wordpress.org/support/update-php/">Learn more about updating PHP</a>.</p> in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.XBh9kZIOJ2) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zchat-enterprise/plugin_files/ZChat.class.php:22 | asyncify-boot | [View logs](..//tmp/tmp.HGXjx5yxQR) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zchat-enterprise/plugin_files/ZChat.class.php:22 | jspi-boot | [View logs](..//tmp/tmp.5jbPa1fwv1) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.t9hMoNw6y3) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.wIpeiqBbqM) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.epg0N9E8B0) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.xOqNjP846g) |
 | Uncaught Error: Undefined constant "WP_ZAUN_PATH" in /wordpress/wp-content/plugins/zes-admin-update-notification/wp-ze-admin-update-notifications.php:28 | asyncify-boot | [View logs](..//tmp/tmp.RgM637xrs0) |
 | Uncaught Error: Undefined constant "WP_ZAUN_PATH" in /wordpress/wp-content/plugins/zes-admin-update-notification/wp-ze-admin-update-notifications.php:28 | jspi-boot | [View logs](..//tmp/tmp.lHyBeECCun) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zomato-user-widget/zomato.php:156 | asyncify-boot | [View logs](..//tmp/tmp.gc3FGug4JK) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zomato-user-widget/zomato.php:156 | jspi-boot | [View logs](..//tmp/tmp.RLsVcYPxY7) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.9St4NI7iAT) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.42qH0dDdMS) |
 | Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/zacwp-phpmyadmin/zacwp_pma_controller.php on line 324 | asyncify-boot | [View logs](..//tmp/tmp.6qGi71RUJl) |
 | Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/zacwp-phpmyadmin/zacwp_pma_controller.php on line 324 | jspi-boot | [View logs](..//tmp/tmp.Ud67AFHRSi) |
+| Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method ZMGallery::zm_gallery_plugin_create() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](..//tmp/tmp.eFcVzVhVUf) |
+| Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method ZMGallery::zm_gallery_plugin_create() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | [View logs](..//tmp/tmp.ytVa21FBGt) |
 | Uncaught Error: Undefined constant "Cleantalk\Common\DNS_A" in /wordpress/wp-content/plugins/cleantalk-spam-protect/lib/Cleantalk/Common/Helper.php:550 | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.n9YDYtxgdJ) |
 | Uncaught Error: Undefined constant "Cleantalk\Common\DNS_A" in /wordpress/wp-content/plugins/cleantalk-spam-protect/lib/Cleantalk/Common/Helper.php:550 | jspi-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.YEgJi8zDq6) |
 | Uncaught Exception: <p><strong>Error:</strong> Bonus for Woo requires 1 plugin to be installed and activated: woocommerce. <a href="http://127.0.0.1:9400/wp-admin/plugins.php">Manage plugins</a>.</p> in /internal/eval.php:29 | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.77Jl5hws91) |

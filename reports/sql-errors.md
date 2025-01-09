@@ -175,6 +175,8 @@
 | SQLSTATE[HY000]: General error: 1 no such table: configuration. | jspi-boot | [View logs](..//tmp/tmp.56H1rgZ3w5) |
 | SQLSTATE[HY000]: General error: 1 no such table: template_select. | asyncify-boot | [View logs](..//tmp/tmp.XlPP8982Gz) |
 | SQLSTATE[HY000]: General error: 1 no such table: template_select. | jspi-boot | [View logs](..//tmp/tmp.56H1rgZ3w5) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | asyncify-boot | [View logs](..//tmp/tmp.QgtRokQ8OF) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | jspi-boot | [View logs](..//tmp/tmp.MPdhXoLMRH) |
 | MySQL field type cannot be translated to SQLite: enum. | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.n9YDYtxgdJ) |
 | MySQL field type cannot be translated to SQLite: enum. | jspi-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.YEgJi8zDq6) |
 | Syntax error: Unexpected token name in query SHOW TABLE STATUS FROM  WHERE name='wp_cp_calculated_fields_form_settings';. | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.I6BSwGZ989) |
