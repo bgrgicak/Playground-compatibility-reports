@@ -658,6 +658,8 @@
 | Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-content/plugins/twitter-feed-ticker/ag_twitterfeed_widget.php on line 111 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163 | jspi-boot | [View logs](..//tmp/tmp.vhPe6JKXmi) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/the-stiz-audio-for-woocommerce/classes/WCJDServeAudio.php on line 149 | asyncify-boot | [View logs](..//tmp/tmp.w0wRgR1sCb) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/the-stiz-audio-for-woocommerce/classes/WCJDServeAudio.php on line 149 | jspi-boot | [View logs](..//tmp/tmp.UrVtq9tdwP) |
+| Uncaught Exception: Broadcast requires a Wordpress network install. It does not support single installs. in /wordpress/wp-content/plugins/threewp-broadcast/src/ThreeWP_Broadcast.php:229 | asyncify-boot | [View logs](..//tmp/tmp.IDwKc0xBKp) |
+| Uncaught Exception: Broadcast requires a Wordpress network install. It does not support single installs. in /wordpress/wp-content/plugins/threewp-broadcast/src/ThreeWP_Broadcast.php:229 | jspi-boot | [View logs](..//tmp/tmp.QgGCGZ4jQ8) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.mt161VNsOZ) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.V9J4acZV0b) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.SPyYUM5MBz) |
@@ -714,6 +716,8 @@
 | Cannot use "parent" when current class scope has no parent in /wordpress/wp-content/plugins/typo3-importer/typo3-importer.php on line 65 | jspi-boot | [View logs](..//tmp/tmp.CObc74YzU0) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/terror-alert-level-widget/terror-alert-widget.php:115 | asyncify-boot | [View logs](..//tmp/tmp.LXOCxTy12Q) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/terror-alert-level-widget/terror-alert-widget.php:115 | jspi-boot | [View logs](..//tmp/tmp.ccHlbIytHY) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.beeuzroKPx) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.fRERYRpN64) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/thankyousteve/thank-you-steve-widget.php:56 | asyncify-boot | [View logs](..//tmp/tmp.0pmZlYFsXk) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/thankyousteve/thank-you-steve-widget.php:56 | jspi-boot | [View logs](..//tmp/tmp.BxqIHH2Rrt) |
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method TFSongList::activation() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](..//tmp/tmp.KZ0TmFetrS) |
@@ -732,8 +736,12 @@
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tint/tint-widget.php:31 | jspi-boot | [View logs](..//tmp/tmp.33M18IXdt0) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ticketheere/ticketheere.php:135 | asyncify-boot | [View logs](..//tmp/tmp.nSIZjEO3gQ) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ticketheere/ticketheere.php:135 | jspi-boot | [View logs](..//tmp/tmp.7dBT45pO2a) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/thinktwit/thinktwit.php:57 | asyncify-boot | [View logs](..//tmp/tmp.n7ZoxnPj7j) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/thinktwit/thinktwit.php:57 | jspi-boot | [View logs](..//tmp/tmp.lFoNNG64v8) |
 | Uncaught Error: Call to undefined function add_settings_section() in /wordpress/wp-content/plugins/toolbar-extras-oxygen/includes/admin/tbexob-settings.php:124 | asyncify-boot | [View logs](..//tmp/tmp.LrXCN8rkx2) |
 | Uncaught Error: Call to undefined function add_settings_section() in /wordpress/wp-content/plugins/toolbar-extras-oxygen/includes/admin/tbexob-settings.php:124 | jspi-boot | [View logs](..//tmp/tmp.2R20xqa8MY) |
+| Uncaught Error: Using $this when not in object context in /wordpress/wp-content/plugins/tierra-audio-playlist-manager/audio-playlist-manager.php:1345 | asyncify-boot | [View logs](..//tmp/tmp.cYUCzDTCF2) |
+| Uncaught Error: Using $this when not in object context in /wordpress/wp-content/plugins/tierra-audio-playlist-manager/audio-playlist-manager.php:1345 | jspi-boot | [View logs](..//tmp/tmp.H7Hig1wFsO) |
 | Declaration of Walker_Page_Custom::start_el(&$output, $page, $depth, $args, $current_page) must be compatible with Walker_Page::start_el(&$output, $data_object, $depth = 0, $args = [], $current_object_id = 0) in /wordpress/wp-content/plugins/tagged-sitemap/functions.php on line 63 | asyncify-boot | [View logs](..//tmp/tmp.ZmsKpkNawJ) |
 | Declaration of Walker_Page_Custom::start_el(&$output, $page, $depth, $args, $current_page) must be compatible with Walker_Page::start_el(&$output, $data_object, $depth = 0, $args = [], $current_object_id = 0) in /wordpress/wp-content/plugins/tagged-sitemap/functions.php on line 63 | jspi-boot | [View logs](..//tmp/tmp.tEikgRyPC5) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tt-subscribe/framework/widget/settings.php:4 | asyncify-boot | [View logs](..//tmp/tmp.zv5rs3DER5) |
@@ -756,6 +764,8 @@
 | Uncaught Error: Call to undefined function mysql_real_escape_string() in /wordpress/wp-content/plugins/ttc-wordpress-security-plugin/ttc_security.php:68 | jspi-boot | [View logs](..//tmp/tmp.Bpg2kodqck) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.KpeGh4hXy4) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.aK0YvozHfL) |
+| Uncaught Error: Undefined constant "gr80_tracks2map" in /wordpress/wp-content/plugins/tracks2map/tracks2map.php:342 | asyncify-boot | [View logs](..//tmp/tmp.9OfeNOKTga) |
+| Uncaught Error: Undefined constant "gr80_tracks2map" in /wordpress/wp-content/plugins/tracks2map/tracks2map.php:342 | jspi-boot | [View logs](..//tmp/tmp.lk0P0yQncz) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twitterthispost/twitterthispost.php:270 | asyncify-boot | [View logs](..//tmp/tmp.rgW8CnBzPj) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twitterthispost/twitterthispost.php:270 | jspi-boot | [View logs](..//tmp/tmp.IWQY8AxMTg) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.ojHxKykHx1) |
@@ -766,12 +776,16 @@
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tcvn-coin-slider-widget/coinslider.php:191 | jspi-boot | [View logs](..//tmp/tmp.IO9Yvi3eTc) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/todayish-in-history/todayish_in_history.php:258 | asyncify-boot | [View logs](..//tmp/tmp.eyo8XNcyyN) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/todayish-in-history/todayish_in_history.php:258 | jspi-boot | [View logs](..//tmp/tmp.YkloXMq8Ks) |
+| Uncaught Error: Call to undefined function YO() in /wordpress/wp-content/plugins/this-plugin-should-not-be-used/this-plugin-should-not-be-used.php:11 | asyncify-boot | [View logs](..//tmp/tmp.UWDUNUAEXC) |
+| Uncaught Error: Call to undefined function YO() in /wordpress/wp-content/plugins/this-plugin-should-not-be-used/this-plugin-should-not-be-used.php:11 | jspi-boot | [View logs](..//tmp/tmp.EJvVJQv83J) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.TBKWyFxD9U) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.osSaUPmYFG) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.1P0BvBuvg7) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.IciPhyL12X) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/trombiz/trombiz.php:47 | asyncify-boot | [View logs](..//tmp/tmp.0rkE1q3yl1) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/trombiz/trombiz.php:47 | jspi-boot | [View logs](..//tmp/tmp.5a9LhCPX5N) |
+| __autoload() is no longer supported, use spl_autoload_register() instead in /wordpress/wp-content/plugins/typeahead/typeahead.php on line 42 | asyncify-boot | [View logs](..//tmp/tmp.S4466RNY8R) |
+| __autoload() is no longer supported, use spl_autoload_register() instead in /wordpress/wp-content/plugins/typeahead/typeahead.php on line 42 | jspi-boot | [View logs](..//tmp/tmp.FsAffTm6h0) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/theme-switcher-reloaded/theme-switcher-reloaded.php on line 200 | asyncify-boot | [View logs](..//tmp/tmp.oTjaCAxttL) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/theme-switcher-reloaded/theme-switcher-reloaded.php on line 200 | jspi-boot | [View logs](..//tmp/tmp.PXGba8f9kR) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/toolbar-extras/includes/admin/tbex-addons.php on line 97 | asyncify-boot | [View logs](..//tmp/tmp.HP5lb3082b) |
