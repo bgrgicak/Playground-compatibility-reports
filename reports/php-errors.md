@@ -676,6 +676,8 @@
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/timebank-system/timebank.php:177 | jspi-boot | [View logs](..//tmp/tmp.s68ZBPgDlC) |
 | Uncaught Error: Failed opening required 't72/t72.php' (include_path='.:') in /wordpress/wp-content/plugins/t72-output-html/plugin.php:15 | asyncify-boot | [View logs](..//tmp/tmp.BJQyJhSNS6) |
 | Uncaught Error: Failed opening required 't72/t72.php' (include_path='.:') in /wordpress/wp-content/plugins/t72-output-html/plugin.php:15 | jspi-boot | [View logs](..//tmp/tmp.gZbIJF1GeX) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tvprofil-box/tvprofil-widget.php:145 | asyncify-boot | [View logs](..//tmp/tmp.tu0lH7Mwqj) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tvprofil-box/tvprofil-widget.php:145 | jspi-boot | [View logs](..//tmp/tmp.aYDIPXIMwU) |
 | Uncaught Exception: <p><strong>Error:</strong> Current PHP version (7.2.34-dev) does not meet minimum requirements for WooCommerce. The plugin requires PHP 7.4.</p><p><a href="https://wordpress.org/support/update-php/">Learn more about updating PHP</a>.</p> in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.GRuLHoBfb6) |
 | Uncaught Exception: <p><strong>Error:</strong> Current PHP version (7.2.34-dev) does not meet minimum requirements for WooCommerce. The plugin requires PHP 7.4.</p><p><a href="https://wordpress.org/support/update-php/">Learn more about updating PHP</a>.</p> in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.IJsRm8h0Eq) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twitter-widget-with-sentiment-analysis/twitter.php:87 | asyncify-boot | [View logs](..//tmp/tmp.SfuyRPwOjk) |
@@ -704,6 +706,8 @@
 | Uncaught Error: Non-static method Run::checkLast() cannot be called statically in /wordpress/wp-content/plugins/triedpassword/New.php:71 | jspi-boot | [View logs](..//tmp/tmp.PIpJj4Hlpo) |
 | Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/thecartpress/daos/RelEntities.class.php' (include_path='.:') in /wordpress/wp-content/plugins/thecartpress-productoptions/daos/RelEntitiesOptions.class.php:19 | asyncify-boot | [View logs](..//tmp/tmp.eFu9tor52v) |
 | Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/thecartpress/daos/RelEntities.class.php' (include_path='.:') in /wordpress/wp-content/plugins/thecartpress-productoptions/daos/RelEntitiesOptions.class.php:19 | jspi-boot | [View logs](..//tmp/tmp.xS81NQn0HN) |
+| Uncaught TypeError: Unsupported operand types: null & talkwikitome in /wordpress/wp-content/plugins/talk-wiki-to-me/plugin.php:108 | asyncify-boot | [View logs](..//tmp/tmp.TKo5SkIAGI) |
+| Uncaught TypeError: Unsupported operand types: null & talkwikitome in /wordpress/wp-content/plugins/talk-wiki-to-me/plugin.php:108 | jspi-boot | [View logs](..//tmp/tmp.YnyCLwyDno) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/testimonial-master/testimonial_master.php:90 | asyncify-boot | [View logs](..//tmp/tmp.CcTW3zel7H) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/testimonial-master/testimonial_master.php:90 | jspi-boot | [View logs](..//tmp/tmp.Q0blwttRTy) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.oFOnuQ0mzr) |
@@ -740,16 +744,22 @@
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method TFSongList::activation() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | [View logs](..//tmp/tmp.wH0nTjA6U3) |
 | Declaration of ThemeSwitcherWidget::update($new_instance) must be compatible with WP_Widget::update($new_instance, $old_instance) in /wordpress/wp-content/plugins/theme-switcher/theme-switcher.php on line 48 | asyncify-boot | [View logs](..//tmp/tmp.eT5PT6JBra) |
 | Declaration of ThemeSwitcherWidget::update($new_instance) must be compatible with WP_Widget::update($new_instance, $old_instance) in /wordpress/wp-content/plugins/theme-switcher/theme-switcher.php on line 48 | jspi-boot | [View logs](..//tmp/tmp.uQiOn3xWHt) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.UFRrqLA7Tk) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.MH3YsNFOfj) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tickle-me-wordpress/tickle-me-wordpress.php:15 | asyncify-boot | [View logs](..//tmp/tmp.MmdxtA3PIk) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tickle-me-wordpress/tickle-me-wordpress.php:15 | jspi-boot | [View logs](..//tmp/tmp.v83S1A3ig8) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tcvn-accordion-widget/accordion.php:272 | asyncify-boot | [View logs](..//tmp/tmp.Z0gfpvjCcb) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tcvn-accordion-widget/accordion.php:272 | jspi-boot | [View logs](..//tmp/tmp.Zm1Mcy9UGg) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tinysou-search/class-tinysou-widget.php:72 | asyncify-boot | [View logs](..//tmp/tmp.veoHejhNcZ) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tinysou-search/class-tinysou-widget.php:72 | jspi-boot | [View logs](..//tmp/tmp.bXGsUJ1WDt) |
 | Uncaught Error: Non-static method BaconPay::baconpay_payment_is_woocommerce_active() cannot be called statically in /wordpress/wp-content/plugins/tokenbacon/baconpay.php:26 | asyncify-boot | [View logs](..//tmp/tmp.vskVLpjKUW) |
 | Uncaught Error: Non-static method BaconPay::baconpay_payment_is_woocommerce_active() cannot be called statically in /wordpress/wp-content/plugins/tokenbacon/baconpay.php:26 | jspi-boot | [View logs](..//tmp/tmp.suDavrepAn) |
 | Uncaught Error: Call to a member function get_options() on null in /wordpress/wp-content/plugins/th23-contact/th23-contact-admin.php:517 | asyncify-boot | [View logs](..//tmp/tmp.cCSilO59lD) |
 | Uncaught Error: Call to a member function get_options() on null in /wordpress/wp-content/plugins/th23-contact/th23-contact-admin.php:517 | jspi-boot | [View logs](..//tmp/tmp.SQjqDMfZDD) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tint/tint-widget.php:31 | asyncify-boot | [View logs](..//tmp/tmp.eL9p3sP9fd) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tint/tint-widget.php:31 | jspi-boot | [View logs](..//tmp/tmp.33M18IXdt0) |
+| Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "tffActivation" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](..//tmp/tmp.JIpc2Sjv37) |
+| Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "tffActivation" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | [View logs](..//tmp/tmp.x9LL47NzjH) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ticketheere/ticketheere.php:135 | asyncify-boot | [View logs](..//tmp/tmp.nSIZjEO3gQ) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ticketheere/ticketheere.php:135 | jspi-boot | [View logs](..//tmp/tmp.7dBT45pO2a) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/thinktwit/thinktwit.php:57 | asyncify-boot | [View logs](..//tmp/tmp.n7ZoxnPj7j) |
