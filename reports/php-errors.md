@@ -626,8 +626,14 @@
 | Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.0". You are running 7.2.34-dev. in /wordpress/wp-content/plugins/official-facebook-pixel/vendor/composer/platform_check.php on line 24 | jspi-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.vKFjVw5hol) |
 | Uncaught Error: Call to undefined function wp_generate_attachment_metadata() in /wordpress/wp-content/plugins/emogics-tarot-reader-for-wp/inc/EmogicTarotReader_Activator.php:206 | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.R2ubUWlWPD) |
 | Uncaught Error: Call to undefined function wp_generate_attachment_metadata() in /wordpress/wp-content/plugins/emogics-tarot-reader-for-wp/inc/EmogicTarotReader_Activator.php:206 | jspi-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.VTJ4FMASVb) |
+| Uncaught Error: Call to undefined function Create_Function() in /wordpress/wp-content/plugins/the-fancy-gallery/wp-widget-fancy-random-images.php:135 | asyncify-boot | [View logs](..//tmp/tmp.OGwwQn60pl) |
+| Uncaught Error: Call to undefined function Create_Function() in /wordpress/wp-content/plugins/the-fancy-gallery/wp-widget-fancy-random-images.php:135 | jspi-boot | [View logs](..//tmp/tmp.BoUcLq5GF8) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/timebank-system/timebank.php:177 | asyncify-boot | [View logs](..//tmp/tmp.SXVkBWdPPf) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/timebank-system/timebank.php:177 | jspi-boot | [View logs](..//tmp/tmp.s68ZBPgDlC) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/tcpdf/lib/tcpdf/tcpdf.php on line 16893 | asyncify-boot | [View logs](..//tmp/tmp.wpIesxvSuY) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/tcpdf/lib/tcpdf/tcpdf.php on line 16893 | jspi-boot | [View logs](..//tmp/tmp.6Zd3WX0hUO) |
+| Uncaught Error: Non-static method Run::checkLast() cannot be called statically in /wordpress/wp-content/plugins/triedpassword/New.php:71 | asyncify-boot | [View logs](..//tmp/tmp.ldUQz0TjW6) |
+| Uncaught Error: Non-static method Run::checkLast() cannot be called statically in /wordpress/wp-content/plugins/triedpassword/New.php:71 | jspi-boot | [View logs](..//tmp/tmp.PIpJj4Hlpo) |
 | Uncaught Error: Attempt to assign property "twitterarchives" on null in /wordpress/wp-content/plugins/tweet-tweet/tweet-tweet.php:26 | asyncify-boot | [View logs](..//tmp/tmp.qcq2KNxrU8) |
 | Uncaught Error: Attempt to assign property "twitterarchives" on null in /wordpress/wp-content/plugins/tweet-tweet/tweet-tweet.php:26 | jspi-boot | [View logs](..//tmp/tmp.Hnd0V50te5) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/testimonials-by-avinash-infotech/includes/testimonials-widget.php:62 | asyncify-boot | [View logs](..//tmp/tmp.riMwQ7BWEe) |
@@ -636,6 +642,10 @@
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/thankyousteve/thank-you-steve-widget.php:56 | jspi-boot | [View logs](..//tmp/tmp.BxqIHH2Rrt) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/theme-slider/wp-slider-conf-content.php:98 | asyncify-boot | [View logs](..//tmp/tmp.hcIJ0D1btp) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/theme-slider/wp-slider-conf-content.php:98 | jspi-boot | [View logs](..//tmp/tmp.b1eUNIJc1I) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.KpeGh4hXy4) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.aK0YvozHfL) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/thecircle-daily-horoscope/thecircle-dailyhoroscope.php:213 | asyncify-boot | [View logs](..//tmp/tmp.l1pUNiDVlO) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/thecircle-daily-horoscope/thecircle-dailyhoroscope.php:213 | jspi-boot | [View logs](..//tmp/tmp.zoCa0LVvxQ) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.B3MKZxWGiy) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.ZgysfnCQL2) |
 | Uncaught Error: Call to undefined function WP_Filesystem() in /wordpress/wp-content/plugins/headers-security-advanced-hsts-wp/headers-security-advanced-hsts-wp.php:663 | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.X2zrpXVhTH) |
