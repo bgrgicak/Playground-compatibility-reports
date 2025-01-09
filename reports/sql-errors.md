@@ -36,6 +36,8 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_leads. | jspi-boot | [View logs](..//tmp/tmp.ASzSzyNQnM) |
 | SQLSTATE[HY000]: General error: 1 near "gmlr": syntax error. | asyncify-boot | [View logs](..//tmp/tmp.CIC7qJNwoE) |
 | SQLSTATE[HY000]: General error: 1 near "gmlr": syntax error. | jspi-boot | [View logs](..//tmp/tmp.H2qm4PodSH) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | [View logs](..//tmp/tmp.tSIvUYzSrS) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | [View logs](..//tmp/tmp.2BwVny80Ov) |
 | MySQL field type cannot be translated to SQLite: enum. | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.uGAwfBpneo) |
 | MySQL field type cannot be translated to SQLite: enum. | jspi-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.Z97IIJqmJy) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.uGAwfBpneo) |
