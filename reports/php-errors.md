@@ -626,44 +626,98 @@
 | Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.0". You are running 7.2.34-dev. in /wordpress/wp-content/plugins/official-facebook-pixel/vendor/composer/platform_check.php on line 24 | jspi-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.vKFjVw5hol) |
 | Uncaught Error: Call to undefined function wp_generate_attachment_metadata() in /wordpress/wp-content/plugins/emogics-tarot-reader-for-wp/inc/EmogicTarotReader_Activator.php:206 | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.R2ubUWlWPD) |
 | Uncaught Error: Call to undefined function wp_generate_attachment_metadata() in /wordpress/wp-content/plugins/emogics-tarot-reader-for-wp/inc/EmogicTarotReader_Activator.php:206 | jspi-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.VTJ4FMASVb) |
+| Uncaught Error: Undefined constant "register_tafwidget" in /wordpress/wp-content/plugins/taf-widget/taf-widget.php:62 | asyncify-boot | [View logs](..//tmp/tmp.xPxzPTQCMj) |
+| Uncaught Error: Undefined constant "register_tafwidget" in /wordpress/wp-content/plugins/taf-widget/taf-widget.php:62 | jspi-boot | [View logs](..//tmp/tmp.jm2tsaTQ5r) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twitterply-for-webmasters/twitterply.php:572 | asyncify-boot | [View logs](..//tmp/tmp.cBCS9dTsyo) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twitterply-for-webmasters/twitterply.php:572 | jspi-boot | [View logs](..//tmp/tmp.m0RmsEJ2Zn) |
 | Uncaught Error: Call to undefined function post_exists() in /wordpress/wp-content/plugins/travelers-map/cttm-activation.php:27 | asyncify-boot | [View logs](..//tmp/tmp.LUI6CnKqxY) |
 | Uncaught Error: Call to undefined function post_exists() in /wordpress/wp-content/plugins/travelers-map/cttm-activation.php:27 | jspi-boot | [View logs](..//tmp/tmp.abzvnxuPRI) |
+| Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/tm-store-pure-native-mobile-app-for-free-ios-android/class-wp-tm-store.php on line 2777 | asyncify-boot | [View logs](..//tmp/tmp.v80I57QxcV) |
+| Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/tm-store-pure-native-mobile-app-for-free-ios-android/class-wp-tm-store.php on line 2777 | jspi-boot | [View logs](..//tmp/tmp.VpnpO5Tvej) |
+| Uncaught Error: Call to undefined function get_home_path() in /wordpress/wp-content/plugins/thrivehive/thrivehive.php:569 | asyncify-boot | [View logs](..//tmp/tmp.cohdhioos6) |
+| Uncaught Error: Call to undefined function get_home_path() in /wordpress/wp-content/plugins/thrivehive/thrivehive.php:569 | jspi-boot | [View logs](..//tmp/tmp.5f1TxXGTWW) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tabber/tabber.php:116 | asyncify-boot | [View logs](..//tmp/tmp.cUV4Eh3AOv) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tabber/tabber.php:116 | jspi-boot | [View logs](..//tmp/tmp.R10b5Hbxub) |
 | Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/tweet-old-custom-post/tocp-core.php on line 45 | asyncify-boot | [View logs](..//tmp/tmp.KfpJAoqOWZ) |
 | Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/tweet-old-custom-post/tocp-core.php on line 45 | jspi-boot | [View logs](..//tmp/tmp.hnZlxaY0ca) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twitter-blockquotes/twitter-blockquotes.php:249 | asyncify-boot | [View logs](..//tmp/tmp.zLMsqZmee1) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twitter-blockquotes/twitter-blockquotes.php:249 | jspi-boot | [View logs](..//tmp/tmp.CwEKHCpwOt) |
 | Uncaught Error: Call to undefined function Create_Function() in /wordpress/wp-content/plugins/the-fancy-gallery/wp-widget-fancy-random-images.php:135 | asyncify-boot | [View logs](..//tmp/tmp.OGwwQn60pl) |
 | Uncaught Error: Call to undefined function Create_Function() in /wordpress/wp-content/plugins/the-fancy-gallery/wp-widget-fancy-random-images.php:135 | jspi-boot | [View logs](..//tmp/tmp.BoUcLq5GF8) |
+| Uncaught Error: Undefined constant "TABBER_TABS_DIR" in /wordpress/wp-content/plugins/tabber-tabs-widget/tabber-tabs.php:31 | asyncify-boot | [View logs](..//tmp/tmp.31kdUBfdkl) |
+| Uncaught Error: Undefined constant "TABBER_TABS_DIR" in /wordpress/wp-content/plugins/tabber-tabs-widget/tabber-tabs.php:31 | jspi-boot | [View logs](..//tmp/tmp.N2VFADp42Z) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/timed-widget/tw-widget.php:189 | asyncify-boot | [View logs](..//tmp/tmp.RZzwQQK31X) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/timed-widget/tw-widget.php:189 | jspi-boot | [View logs](..//tmp/tmp.JfcncS1g8M) |
+| Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-content/plugins/twitter-feed-ticker/ag_twitterfeed_widget.php on line 111 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163 | asyncify-boot | [View logs](..//tmp/tmp.xYM7lCtm5V) |
+| Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-content/plugins/twitter-feed-ticker/ag_twitterfeed_widget.php on line 111 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163 | jspi-boot | [View logs](..//tmp/tmp.vhPe6JKXmi) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/the-stiz-audio-for-woocommerce/classes/WCJDServeAudio.php on line 149 | asyncify-boot | [View logs](..//tmp/tmp.w0wRgR1sCb) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/the-stiz-audio-for-woocommerce/classes/WCJDServeAudio.php on line 149 | jspi-boot | [View logs](..//tmp/tmp.UrVtq9tdwP) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.SPyYUM5MBz) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.DEqYn9F2yi) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/timebank-system/timebank.php:177 | asyncify-boot | [View logs](..//tmp/tmp.SXVkBWdPPf) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/timebank-system/timebank.php:177 | jspi-boot | [View logs](..//tmp/tmp.s68ZBPgDlC) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/tcpdf/lib/tcpdf/tcpdf.php on line 16893 | asyncify-boot | [View logs](..//tmp/tmp.wpIesxvSuY) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/tcpdf/lib/tcpdf/tcpdf.php on line 16893 | jspi-boot | [View logs](..//tmp/tmp.6Zd3WX0hUO) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tiptype/tip-type.php:227 | asyncify-boot | [View logs](..//tmp/tmp.nyJoalOswD) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tiptype/tip-type.php:227 | jspi-boot | [View logs](..//tmp/tmp.6iaBk7me0p) |
 | Declaration of Geldquelle::postlist_column($column_name, $post_id) must be compatible with Postlist::postlist_column($post_type, $column_name, $post_id, $meta) in /wordpress/wp-content/plugins/transfinanz/Geldquelle.php on line 364 | asyncify-boot | [View logs](..//tmp/tmp.SmvBw25wtr) |
 | Declaration of Geldquelle::postlist_column($column_name, $post_id) must be compatible with Postlist::postlist_column($post_type, $column_name, $post_id, $meta) in /wordpress/wp-content/plugins/transfinanz/Geldquelle.php on line 364 | jspi-boot | [View logs](..//tmp/tmp.CT5m3dtv3z) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/the-world/theworld.php:34 | asyncify-boot | [View logs](..//tmp/tmp.7hzNR034yQ) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/the-world/theworld.php:34 | jspi-boot | [View logs](..//tmp/tmp.n07AlGG9ZJ) |
+| Uncaught Error: Class "TribeEvents" not found in /wordpress/wp-content/plugins/tribe-events-oembed/tribe-events-oembed.php:413 | asyncify-boot | [View logs](..//tmp/tmp.JZMAqKuyDN) |
+| Uncaught Error: Class "TribeEvents" not found in /wordpress/wp-content/plugins/tribe-events-oembed/tribe-events-oembed.php:413 | jspi-boot | [View logs](..//tmp/tmp.m8vdmYbeoY) |
 | Uncaught Error: Non-static method Run::checkLast() cannot be called statically in /wordpress/wp-content/plugins/triedpassword/New.php:71 | asyncify-boot | [View logs](..//tmp/tmp.ldUQz0TjW6) |
 | Uncaught Error: Non-static method Run::checkLast() cannot be called statically in /wordpress/wp-content/plugins/triedpassword/New.php:71 | jspi-boot | [View logs](..//tmp/tmp.PIpJj4Hlpo) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.oFOnuQ0mzr) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.VTgzisMCuv) |
 | Uncaught Error: Attempt to assign property "twitterarchives" on null in /wordpress/wp-content/plugins/tweet-tweet/tweet-tweet.php:26 | asyncify-boot | [View logs](..//tmp/tmp.qcq2KNxrU8) |
 | Uncaught Error: Attempt to assign property "twitterarchives" on null in /wordpress/wp-content/plugins/tweet-tweet/tweet-tweet.php:26 | jspi-boot | [View logs](..//tmp/tmp.Hnd0V50te5) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twitpic/twitpic.php:472 | asyncify-boot | [View logs](..//tmp/tmp.YrALv8hXoI) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twitpic/twitpic.php:472 | jspi-boot | [View logs](..//tmp/tmp.DMgqMd3dvv) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tag-cloud-canvas/tag-cloud-canvas.php:231 | asyncify-boot | [View logs](..//tmp/tmp.FO0uVAuCHo) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tag-cloud-canvas/tag-cloud-canvas.php:231 | jspi-boot | [View logs](..//tmp/tmp.EqhHT2Y9fm) |
+| Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "Twitter_Auto_Linker_activate" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](..//tmp/tmp.fA6NquANT2) |
+| Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "Twitter_Auto_Linker_activate" not found or invalid function name in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | [View logs](..//tmp/tmp.1HMnA2k6aG) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twittergrid/twittergrid.php:328 | asyncify-boot | [View logs](..//tmp/tmp.yhatlYgbXk) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twittergrid/twittergrid.php:328 | jspi-boot | [View logs](..//tmp/tmp.eQIibfa7Oo) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tf-button/tf-button.php:178 | asyncify-boot | [View logs](..//tmp/tmp.25lPq1ZnEs) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tf-button/tf-button.php:178 | jspi-boot | [View logs](..//tmp/tmp.YPXsE8oier) |
+| Cannot redeclare is_login() (previously declared in /wordpress/wp-includes/load.php:1308) in /wordpress/wp-content/plugins/themed-login/template_tags.php on line 7 | asyncify-boot | [View logs](..//tmp/tmp.VcQ3IfvuW0) |
+| Cannot redeclare is_login() (previously declared in /wordpress/wp-includes/load.php:1308) in /wordpress/wp-content/plugins/themed-login/template_tags.php on line 7 | jspi-boot | [View logs](..//tmp/tmp.DuAhC0rHTC) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/testimonials-by-avinash-infotech/includes/testimonials-widget.php:62 | asyncify-boot | [View logs](..//tmp/tmp.riMwQ7BWEe) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/testimonials-by-avinash-infotech/includes/testimonials-widget.php:62 | jspi-boot | [View logs](..//tmp/tmp.bRh3O1iLAA) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/teledirwidgets/teledirwidgets.php:316 | asyncify-boot | [View logs](..//tmp/tmp.Pqgs3AozfX) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/teledirwidgets/teledirwidgets.php:316 | jspi-boot | [View logs](..//tmp/tmp.qXduDFIfK9) |
+| Cannot use "parent" when current class scope has no parent in /wordpress/wp-content/plugins/typo3-importer/typo3-importer.php on line 65 | asyncify-boot | [View logs](..//tmp/tmp.D7VwkQLCsf) |
+| Cannot use "parent" when current class scope has no parent in /wordpress/wp-content/plugins/typo3-importer/typo3-importer.php on line 65 | jspi-boot | [View logs](..//tmp/tmp.CObc74YzU0) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/terror-alert-level-widget/terror-alert-widget.php:115 | asyncify-boot | [View logs](..//tmp/tmp.LXOCxTy12Q) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/terror-alert-level-widget/terror-alert-widget.php:115 | jspi-boot | [View logs](..//tmp/tmp.ccHlbIytHY) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/thankyousteve/thank-you-steve-widget.php:56 | asyncify-boot | [View logs](..//tmp/tmp.0pmZlYFsXk) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/thankyousteve/thank-you-steve-widget.php:56 | jspi-boot | [View logs](..//tmp/tmp.BxqIHH2Rrt) |
+| Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method TFSongList::activation() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | [View logs](..//tmp/tmp.KZ0TmFetrS) |
+| Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method TFSongList::activation() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | [View logs](..//tmp/tmp.wH0nTjA6U3) |
 | Declaration of ThemeSwitcherWidget::update($new_instance) must be compatible with WP_Widget::update($new_instance, $old_instance) in /wordpress/wp-content/plugins/theme-switcher/theme-switcher.php on line 48 | asyncify-boot | [View logs](..//tmp/tmp.eT5PT6JBra) |
 | Declaration of ThemeSwitcherWidget::update($new_instance) must be compatible with WP_Widget::update($new_instance, $old_instance) in /wordpress/wp-content/plugins/theme-switcher/theme-switcher.php on line 48 | jspi-boot | [View logs](..//tmp/tmp.uQiOn3xWHt) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tickle-me-wordpress/tickle-me-wordpress.php:15 | asyncify-boot | [View logs](..//tmp/tmp.MmdxtA3PIk) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tickle-me-wordpress/tickle-me-wordpress.php:15 | jspi-boot | [View logs](..//tmp/tmp.v83S1A3ig8) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tcvn-accordion-widget/accordion.php:272 | asyncify-boot | [View logs](..//tmp/tmp.Z0gfpvjCcb) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tcvn-accordion-widget/accordion.php:272 | jspi-boot | [View logs](..//tmp/tmp.Zm1Mcy9UGg) |
+| Uncaught Error: Call to a member function get_options() on null in /wordpress/wp-content/plugins/th23-contact/th23-contact-admin.php:517 | asyncify-boot | [View logs](..//tmp/tmp.cCSilO59lD) |
+| Uncaught Error: Call to a member function get_options() on null in /wordpress/wp-content/plugins/th23-contact/th23-contact-admin.php:517 | jspi-boot | [View logs](..//tmp/tmp.SQjqDMfZDD) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tint/tint-widget.php:31 | asyncify-boot | [View logs](..//tmp/tmp.eL9p3sP9fd) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tint/tint-widget.php:31 | jspi-boot | [View logs](..//tmp/tmp.33M18IXdt0) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ticketheere/ticketheere.php:135 | asyncify-boot | [View logs](..//tmp/tmp.nSIZjEO3gQ) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ticketheere/ticketheere.php:135 | jspi-boot | [View logs](..//tmp/tmp.7dBT45pO2a) |
+| Uncaught Error: Call to undefined function add_settings_section() in /wordpress/wp-content/plugins/toolbar-extras-oxygen/includes/admin/tbexob-settings.php:124 | asyncify-boot | [View logs](..//tmp/tmp.LrXCN8rkx2) |
+| Uncaught Error: Call to undefined function add_settings_section() in /wordpress/wp-content/plugins/toolbar-extras-oxygen/includes/admin/tbexob-settings.php:124 | jspi-boot | [View logs](..//tmp/tmp.2R20xqa8MY) |
+| Declaration of Walker_Page_Custom::start_el(&$output, $page, $depth, $args, $current_page) must be compatible with Walker_Page::start_el(&$output, $data_object, $depth = 0, $args = [], $current_object_id = 0) in /wordpress/wp-content/plugins/tagged-sitemap/functions.php on line 63 | asyncify-boot | [View logs](..//tmp/tmp.ZmsKpkNawJ) |
+| Declaration of Walker_Page_Custom::start_el(&$output, $page, $depth, $args, $current_page) must be compatible with Walker_Page::start_el(&$output, $data_object, $depth = 0, $args = [], $current_object_id = 0) in /wordpress/wp-content/plugins/tagged-sitemap/functions.php on line 63 | jspi-boot | [View logs](..//tmp/tmp.tEikgRyPC5) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tt-subscribe/framework/widget/settings.php:4 | asyncify-boot | [View logs](..//tmp/tmp.zv5rs3DER5) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tt-subscribe/framework/widget/settings.php:4 | jspi-boot | [View logs](..//tmp/tmp.p8vnKjSt57) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tentblogger-simple-top-posts/tentblogger-simple-top-posts.php:217 | asyncify-boot | [View logs](..//tmp/tmp.HydFdUXDbq) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tentblogger-simple-top-posts/tentblogger-simple-top-posts.php:217 | jspi-boot | [View logs](..//tmp/tmp.PEULsk58f0) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.b3DLTcBCXE) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.S2E3rUX3e9) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.OaLOJfWwQJ) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.lvp5YPPLn1) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.pxi8hGQCop) |
@@ -674,12 +728,22 @@
 | Uncaught Error: Call to undefined function mysql_real_escape_string() in /wordpress/wp-content/plugins/ttc-wordpress-security-plugin/ttc_security.php:68 | jspi-boot | [View logs](..//tmp/tmp.Bpg2kodqck) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.KpeGh4hXy4) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.aK0YvozHfL) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twitterthispost/twitterthispost.php:270 | asyncify-boot | [View logs](..//tmp/tmp.rgW8CnBzPj) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twitterthispost/twitterthispost.php:270 | jspi-boot | [View logs](..//tmp/tmp.IWQY8AxMTg) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.ojHxKykHx1) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.QlNEEprHF0) |
 | Uncaught Error: Undefined constant "TAS_VERSION" in /wordpress/wp-content/plugins/twitter-api-shortcodes/twitter-api-shortcodes.php:10 | asyncify-boot | [View logs](..//tmp/tmp.iVH5J4lIl4) |
 | Uncaught Error: Undefined constant "TAS_VERSION" in /wordpress/wp-content/plugins/twitter-api-shortcodes/twitter-api-shortcodes.php:10 | jspi-boot | [View logs](..//tmp/tmp.7TlhW47cYU) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tcvn-coin-slider-widget/coinslider.php:191 | asyncify-boot | [View logs](..//tmp/tmp.SL4noO1fzT) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tcvn-coin-slider-widget/coinslider.php:191 | jspi-boot | [View logs](..//tmp/tmp.IO9Yvi3eTc) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.TBKWyFxD9U) |
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.osSaUPmYFG) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | asyncify-boot | [View logs](..//tmp/tmp.1P0BvBuvg7) |
+| Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.IciPhyL12X) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/trombiz/trombiz.php:47 | asyncify-boot | [View logs](..//tmp/tmp.0rkE1q3yl1) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/trombiz/trombiz.php:47 | jspi-boot | [View logs](..//tmp/tmp.5a9LhCPX5N) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/toolbar-extras/includes/admin/tbex-addons.php on line 97 | asyncify-boot | [View logs](..//tmp/tmp.HP5lb3082b) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/toolbar-extras/includes/admin/tbex-addons.php on line 97 | jspi-boot | [View logs](..//tmp/tmp.KtzV0q4RA1) |
 | require_once(): Failed opening required '/wordpress/wp-content/plugins/themeid-caldera-form-to-slack/includes/appsero/src/Client.php' (include_path='.:') in /wordpress/wp-content/plugins/themeid-caldera-form-to-slack/caladea-slack.php on line 31 | asyncify-boot | [View logs](..//tmp/tmp.efeJsU0WAR) |
 | require_once(): Failed opening required '/wordpress/wp-content/plugins/themeid-caldera-form-to-slack/includes/appsero/src/Client.php' (include_path='.:') in /wordpress/wp-content/plugins/themeid-caldera-form-to-slack/caladea-slack.php on line 31 | jspi-boot | [View logs](..//tmp/tmp.g8G7ezDWIz) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/thecircle-daily-horoscope/thecircle-dailyhoroscope.php:213 | asyncify-boot | [View logs](..//tmp/tmp.l1pUNiDVlO) |
