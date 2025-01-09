@@ -1,0 +1,156 @@
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:20
+`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){t.mountBeforeInstall&&p(h,t.mountBeforeInstall)}}});const v=await s.getPrimaryPhp();try{if(n&&!t.mountBeforeInstall&&g.writeFileSync(f,await q(v,"/wordpress")),t.mount&&p(v,t.mount),d=!0,u){const{php:h,reap:m}=await s.processManager.acquirePHPInstance();try{c.log("Running the Blueprint..."),await x(u,h),c.log("Finished running the blueprint")}finally{m()}}a==="build-snapshot"?(await r(t.outfile),c.log(`WordPress exported to ${t.outfile}`),process.exit(0)):a==="run-blueprint"?(c.log("Blueprint executed"),process.exit(0)):c.log(`WordPress is running on ${l}`)}catch(h){if(!t.debug)throw h;const m=v.readFileAsText(D);throw new Error(m,{cause:h})}},async handleRequest(o){return d?await s.request(o):I.forHttpCode(502,"WordPress is not ready yet")}})}Q();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ^
+
+Error: [09-Jan-2025 15:54:13 UTC] PHP Warning:  Undefined variable $twitterUsername in /wordpress/wp-content/plugins/twitter-sharts-plug-in-for-wordpress/twittersharts.php on line 40
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:20:788)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async j (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1166) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"twitter-sharts-plug-in-for-wordpress"},"options":{"activate":true}}) : 
+  "unreachable" WASM instruction executed.
+  
+  The typical reason is a PHP function missing from the ASYNCIFY_ONLY
+  list when building PHP.wasm.
+  
+  You will need to file a new issue in the WordPress Playground repository
+  and paste this error message there:
+  
+  https://github.com/WordPress/wordpress-playground/issues/new
+  
+  If you're a core developer, the typical fix is to:
+  
+  * Isolate a minimal reproduction of the error
+  * Add a reproduction of the error to php-asyncify.spec.ts in the WordPress Playground repository
+  * Run 'npm run fix-asyncify'
+  * Commit the changes, push to the repo, release updated NPM packages
+  
+  Below is a list of all the PHP functions found in the stack trace to
+  help with the minimal reproduction. If they're all already listed in
+  the Dockerfile, you'll need to trigger this error again with long stack
+  traces enabled. In node.js, you can do it using the --stack-trace-limit=100
+  CLI option: 
+  
+      * php.wasm.php_pollfd_for
+      * php.wasm.php_network_connect_socket
+      * php.wasm.php_tcp_sockop_set_option
+      * php.wasm.php_openssl_sockop_set_option
+      * php.wasm._php_stream_set_option
+      * php.wasm.dynCall_iiiii
+  
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12099:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+      at async Qt (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12200:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:20:453)
+      at async j (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1166) {
+    [cause]: Error: 
+    "unreachable" WASM instruction executed.
+    
+    The typical reason is a PHP function missing from the ASYNCIFY_ONLY
+    list when building PHP.wasm.
+    
+    You will need to file a new issue in the WordPress Playground repository
+    and paste this error message there:
+    
+    https://github.com/WordPress/wordpress-playground/issues/new
+    
+    If you're a core developer, the typical fix is to:
+    
+    * Isolate a minimal reproduction of the error
+    * Add a reproduction of the error to php-asyncify.spec.ts in the WordPress Playground repository
+    * Run 'npm run fix-asyncify'
+    * Commit the changes, push to the repo, release updated NPM packages
+    
+    Below is a list of all the PHP functions found in the stack trace to
+    help with the minimal reproduction. If they're all already listed in
+    the Dockerfile, you'll need to trigger this error again with long stack
+    traces enabled. In node.js, you can do it using the --stack-trace-limit=100
+    CLI option: 
+    
+        * php.wasm.php_pollfd_for
+        * php.wasm.php_network_connect_socket
+        * php.wasm.php_tcp_sockop_set_option
+        * php.wasm.php_openssl_sockop_set_option
+        * php.wasm._php_stream_set_option
+        * php.wasm.dynCall_iiiii
+    
+        at PHP.oe (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:1429:78)
+        at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+        at async PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:976:17)
+        at async gr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:31:39)
+        at async Object.at [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:877:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12165:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12096:23)
+        at async Qt (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12200:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:20:453)
+        at async j (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1166) {
+      cause: Error: Rethrown
+          at UnhandledRejectionsTarget.e (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:1406:19)
+          at [nodejs.internal.kHybridDispatch] (node:internal/event_target:757:20)
+          at UnhandledRejectionsTarget.dispatchEvent (node:internal/event_target:692:26)
+          at t.wasmExports.<computed> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:565:15)
+          at invoke_iiiii (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:92895:14)
+          at php.wasm.php_execute_script (wasm://wasm/php.wasm-0372e072:wasm-function[11032]:0x5fcfba)
+          at php.wasm.dynCall_ii (wasm://wasm/php.wasm-0372e072:wasm-function[12823]:0x6c1791)
+          at ret.<computed> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:92342:22)
+          at t.wasmExports.<computed> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:556:18)
+          at invoke_ii (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:92906:14) {
+        cause: RuntimeError: unreachable
+            at php.wasm.__fwritex (wasm://wasm/php.wasm-0372e072:wasm-function[4221]:0x2cde2c)
+            at php.wasm.out (wasm://wasm/php.wasm-0372e072:wasm-function[827]:0x7f513)
+            at php.wasm.printf_core (wasm://wasm/php.wasm-0372e072:wasm-function[5307]:0x37fa97)
+            at php.wasm.__vfprintf_internal (wasm://wasm/php.wasm-0372e072:wasm-function[1457]:0xd7fe3)
+            at php.wasm.vsnprintf (wasm://wasm/php.wasm-0372e072:wasm-function[851]:0x818d6)
+            at php.wasm.__xmlRaiseError (wasm://wasm/php.wasm-0372e072:wasm-function[122]:0x9cb7)
+            at php.wasm.__xmlLoaderErr (wasm://wasm/php.wasm-0372e072:wasm-function[6342]:0x43e45b)
+            at php.wasm.xmlNewInputFromFile (wasm://wasm/php.wasm-0372e072:wasm-function[4800]:0x31eb2d)
+            at php.wasm.xmlDefaultExternalEntityLoader (wasm://wasm/php.wasm-0372e072:wasm-function[4833]:0x3232c6)
+            at php.wasm._php_libxml_pre_ext_ent_loader (wasm://wasm/php.wasm-0372e072:wasm-function[13481]:0x6f42fa) {
+          cause: Error
+              at Asyncify.handleSleep (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:93143:45)
+              at returnCallback (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:86075:51)
+              at wasm_poll_socket (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:86082:12)
+              at php.wasm.php_pollfd_for (wasm://wasm/php.wasm-0372e072:wasm-function[996]:0x989fd)
+              at php.wasm.php_network_connect_socket (wasm://wasm/php.wasm-0372e072:wasm-function[5459]:0x3a403f)
+              at php.wasm.php_tcp_sockop_set_option (wasm://wasm/php.wasm-0372e072:wasm-function[10722]:0x5e2735)
+              at php.wasm.php_openssl_sockop_set_option (wasm://wasm/php.wasm-0372e072:wasm-function[10849]:0x5ecbda)
+              at php.wasm._php_stream_set_option (wasm://wasm/php.wasm-0372e072:wasm-function[532]:0x3cdea)
+              at php.wasm.dynCall_iiiii (wasm://wasm/php.wasm-0372e072:wasm-function[12820]:0x6c152d)
+              at ret.<computed> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:92342:22)
+        },
+        betterMessage: '\n' +
+          '"unreachable" WASM instruction executed.\n' +
+          '\n' +
+          'The typical reason is a PHP function missing from the ASYNCIFY_ONLY\n' +
+          'list when building PHP.wasm.\n' +
+          '\n' +
+          'You will need to file a new issue in the WordPress Playground repository\n' +
+          'and paste this error message there:\n' +
+          '\n' +
+          'https://github.com/WordPress/wordpress-playground/issues/new\n' +
+          '\n' +
+          "If you're a core developer, the typical fix is to:\n" +
+          '\n' +
+          '* Isolate a minimal reproduction of the error\n' +
+          '* Add a reproduction of the error to php-asyncify.spec.ts in the WordPress Playground repository\n' +
+          "* Run 'npm run fix-asyncify'\n" +
+          '* Commit the changes, push to the repo, release updated NPM packages\n' +
+          '\n' +
+          'Below is a list of all the PHP functions found in the stack trace to\n' +
+          "help with the minimal reproduction. If they're all already listed in\n" +
+          "the Dockerfile, you'll need to trigger this error again with long stack\n" +
+          'traces enabled. In node.js, you can do it using the --stack-trace-limit=100\n' +
+          'CLI option: \n' +
+          '\n' +
+          '    * php.wasm.php_pollfd_for\n' +
+          '    * php.wasm.php_network_connect_socket\n' +
+          '    * php.wasm.php_tcp_sockop_set_option\n' +
+          '    * php.wasm.php_openssl_sockop_set_option\n' +
+          '    * php.wasm._php_stream_set_option\n' +
+          '    * php.wasm.dynCall_iiiii\n'
+      }
+    }
+  }
+}
+
+Node.js v18.18.2
