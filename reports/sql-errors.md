@@ -36,6 +36,8 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_leads. | jspi-boot | [View logs](..//tmp/tmp.ASzSzyNQnM) |
 | SQLSTATE[HY000]: General error: 1 near "gmlr": syntax error. | asyncify-boot | [View logs](..//tmp/tmp.CIC7qJNwoE) |
 | SQLSTATE[HY000]: General error: 1 near "gmlr": syntax error. | jspi-boot | [View logs](..//tmp/tmp.H2qm4PodSH) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | [View logs](..//tmp/tmp.VLlGpqtcIC) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | [View logs](..//tmp/tmp.XqzxM7qgo2) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | [View logs](..//tmp/tmp.tSIvUYzSrS) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | [View logs](..//tmp/tmp.2BwVny80Ov) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | [View logs](..//tmp/tmp.yVBDVEg2iW) |
