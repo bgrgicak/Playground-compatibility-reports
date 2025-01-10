@@ -38,6 +38,8 @@
 | SQLSTATE[HY000]: General error: 1 near "gmlr": syntax error. | jspi-boot | [View logs](..//tmp/tmp.H2qm4PodSH) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | [View logs](..//tmp/tmp.tSIvUYzSrS) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | [View logs](..//tmp/tmp.2BwVny80Ov) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | [View logs](..//tmp/tmp.yVBDVEg2iW) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | [View logs](..//tmp/tmp.0xIdKzelp3) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | [View logs](..//tmp/tmp.R9msAEeig8) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | [View logs](..//tmp/tmp.2GRUfjdu0M) |
 | SQLSTATE[HY000]: General error: 1 no such column: "author". | asyncify-boot | [View logs](..//var/folders/pd/hkxf9rgj2qs0crc3m1wkb0_00000gn/T/tmp.B3MKZxWGiy) |
