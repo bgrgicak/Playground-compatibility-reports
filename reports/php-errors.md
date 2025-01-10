@@ -694,6 +694,8 @@
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/trackerly/trackerly.php on line 283 | jspi-boot | [View logs](..//tmp/tmp.8khmylrlm4) |
 | Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/tweet-old-custom-post/tocp-core.php on line 45 | asyncify-boot | [View logs](..//tmp/tmp.KfpJAoqOWZ) |
 | Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/tweet-old-custom-post/tocp-core.php on line 45 | jspi-boot | [View logs](..//tmp/tmp.hnZlxaY0ca) |
+| Uncaught Httpful\Exception\ConnectionErrorException: Unable to connect to "https://app.thevoicedesigner.com/api/apps": 35 OpenSSL SSL_connect: SSL_ERROR_SYSCALL in connection to app.thevoicedesigner.com:443  in /wordpress/wp-content/plugins/the-voice-designer-by-data-driven-design/vendor/nategood/httpful/src/Httpful/Request.php:1028 | asyncify-boot | [View logs](..//tmp/tmp.n2UCTbhuyu) |
+| Uncaught Httpful\Exception\ConnectionErrorException: Unable to connect to "https://app.thevoicedesigner.com/api/apps": 35 OpenSSL SSL_connect: SSL_ERROR_SYSCALL in connection to app.thevoicedesigner.com:443  in /wordpress/wp-content/plugins/the-voice-designer-by-data-driven-design/vendor/nategood/httpful/src/Httpful/Request.php:1028 | jspi-boot | [View logs](..//tmp/tmp.1k5vGf0n9r) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twitter-blockquotes/twitter-blockquotes.php:249 | asyncify-boot | [View logs](..//tmp/tmp.zLMsqZmee1) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twitter-blockquotes/twitter-blockquotes.php:249 | jspi-boot | [View logs](..//tmp/tmp.CwEKHCpwOt) |
 | Uncaught Error: Call to undefined function restore_include_path() in /wordpress/wp-content/plugins/trustauth/trustauth.php:37 | asyncify-boot | [View logs](..//tmp/tmp.zqSYmOPsTb) |
@@ -916,6 +918,8 @@
 | Uncaught TypeError: Unsupported operand types: null & talkwikitome in /wordpress/wp-content/plugins/talk-wiki-to-me/plugin.php:108 | jspi-boot | [View logs](..//tmp/tmp.YnyCLwyDno) |
 | Uncaught Error: Call to undefined function ereg() in /wordpress/wp-content/plugins/taobaopress/taobaopress.php:12 | asyncify-boot | [View logs](..//tmp/tmp.4lTXoniVzg) |
 | Uncaught Error: Call to undefined function ereg() in /wordpress/wp-content/plugins/taobaopress/taobaopress.php:12 | jspi-boot | [View logs](..//tmp/tmp.eMSzVQFdu8) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twitter-search-widget/twitter-search-widget.php:71 | asyncify-boot | [View logs](..//tmp/tmp.4QtTMNpD2W) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twitter-search-widget/twitter-search-widget.php:71 | jspi-boot | [View logs](..//tmp/tmp.nh41A8hbGC) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tm-lunch-menu/index.php:334 | asyncify-boot | [View logs](..//tmp/tmp.zP8pROSDBx) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tm-lunch-menu/index.php:334 | jspi-boot | [View logs](..//tmp/tmp.VnclnMXvin) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twine-social/twinesocial-widget.php:34 | asyncify-boot | [View logs](..//tmp/tmp.Dx929alF0T) |
@@ -924,6 +928,8 @@
 | Uncaught Exception: <p><strong>Error:</strong> Current PHP version (8.0.30-dev) does not meet minimum requirements for Tornevalls Resurs Bank Payment Gateway for WooCommerce. The plugin requires PHP 8.1.</p><p><a href="https://wordpress.org/support/update-php/">Learn more about updating PHP</a>.</p> in /internal/eval.php:29 | jspi-boot | [View logs](..//tmp/tmp.76IDGCUeR1) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tentblogger-social-widget/tentblogger-social-widget.php:426 | asyncify-boot | [View logs](..//tmp/tmp.74A1OAUyYw) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tentblogger-social-widget/tentblogger-social-widget.php:426 | jspi-boot | [View logs](..//tmp/tmp.LCzuYPkaCJ) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.1z3F83uU4W) |
+| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.Uwnf3IasYG) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/thumbnail-updater/thumbnail-updater.php:37 | asyncify-boot | [View logs](..//tmp/tmp.JSXfpWLEVl) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/thumbnail-updater/thumbnail-updater.php:37 | jspi-boot | [View logs](..//tmp/tmp.sS6AOKiQlx) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/testimonial-master/testimonial_master.php:90 | asyncify-boot | [View logs](..//tmp/tmp.CcTW3zel7H) |
@@ -996,6 +1002,8 @@
 | Uncaught Error: Call to undefined function add_settings_section() in /wordpress/wp-content/plugins/toolbar-extras-mainwp/includes/admin/tbexmwp-settings.php:162 | jspi-boot | [View logs](..//tmp/tmp.uXsmwwrBJP) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twittersearch/TwitterSearch.php:162 | asyncify-boot | [View logs](..//tmp/tmp.t54KJW1BAx) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twittersearch/TwitterSearch.php:162 | jspi-boot | [View logs](..//tmp/tmp.P32MSt7Uhn) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/topsy/JSON.php on line 164 | asyncify-boot | [View logs](..//tmp/tmp.rntnCkhYyg) |
+| Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/topsy/JSON.php on line 164 | jspi-boot | [View logs](..//tmp/tmp.Rrg5XIFaei) |
 | Uncaught Error: Non-static method tag_list::init() cannot be called statically in /wordpress/wp-content/plugins/tag-list/tag-list.php:188 | asyncify-boot | [View logs](..//tmp/tmp.kqhNtbHv0J) |
 | Uncaught Error: Non-static method tag_list::init() cannot be called statically in /wordpress/wp-content/plugins/tag-list/tag-list.php:188 | jspi-boot | [View logs](..//tmp/tmp.5Y8SXiUtxc) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twitter-search-smooth-scrolling/twitter-search-smooth-scrolling.php:129 | asyncify-boot | [View logs](..//tmp/tmp.0Cbc7SWxOO) |
@@ -1028,6 +1036,8 @@
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/teledirwidgets/teledirwidgets.php:316 | jspi-boot | [View logs](..//tmp/tmp.qXduDFIfK9) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tipsy-social-icons/tipsy-social-icons.php:311 | asyncify-boot | [View logs](..//tmp/tmp.D2kVGPhYsi) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/tipsy-social-icons/tipsy-social-icons.php:311 | jspi-boot | [View logs](..//tmp/tmp.gUy8exZrS5) |
+| Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/redfruits/gui/ADCoreGui.php' (include_path='.:') in /wordpress/wp-content/plugins/twpctree/TWPCTree.class.php:30 | asyncify-boot | [View logs](..//tmp/tmp.WSVrmRnCyx) |
+| Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/redfruits/gui/ADCoreGui.php' (include_path='.:') in /wordpress/wp-content/plugins/twpctree/TWPCTree.class.php:30 | jspi-boot | [View logs](..//tmp/tmp.16dkfoT4xc) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/trust-form/trust-form.php on line 426 | asyncify-boot | [View logs](..//tmp/tmp.DGreuwPTau) |
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/trust-form/trust-form.php on line 426 | jspi-boot | [View logs](..//tmp/tmp.WxrZcYAG0j) |
 | Uncaught Error: Call to undefined function get_home_path() in /wordpress/wp-content/plugins/tinyfier-wp/TinyfierWP.php:237 | asyncify-boot | [View logs](..//tmp/tmp.b63RhVpl1D) |
@@ -1244,6 +1254,8 @@
 | Uncaught Error: Undefined constant "tf_create_shortcode" in /wordpress/wp-content/plugins/twitter-tweet-feed/twitter-feed.php:65 | jspi-boot | [View logs](..//tmp/tmp.i0opNQAsqR) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | [View logs](..//tmp/tmp.ojHxKykHx1) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | [View logs](..//tmp/tmp.QlNEEprHF0) |
+| Uncaught Error: Non-static method TouAppHelper::get_include_contents() cannot be called statically in /wordpress/wp-content/plugins/terms-of-use-2/classes/models/TouSettings.php:42 | asyncify-boot | [View logs](..//tmp/tmp.VIIJQbnkT5) |
+| Uncaught Error: Non-static method TouAppHelper::get_include_contents() cannot be called statically in /wordpress/wp-content/plugins/terms-of-use-2/classes/models/TouSettings.php:42 | jspi-boot | [View logs](..//tmp/tmp.hNobvHgqnA) |
 | Uncaught Error: Undefined constant "TAS_VERSION" in /wordpress/wp-content/plugins/twitter-api-shortcodes/twitter-api-shortcodes.php:10 | asyncify-boot | [View logs](..//tmp/tmp.iVH5J4lIl4) |
 | Uncaught Error: Undefined constant "TAS_VERSION" in /wordpress/wp-content/plugins/twitter-api-shortcodes/twitter-api-shortcodes.php:10 | jspi-boot | [View logs](..//tmp/tmp.7TlhW47cYU) |
 | Uncaught Error: Undefined constant "STDERR" in /wordpress/wp-content/plugins/twism/vendor/composer/platform_check.php:17 | asyncify-boot | [View logs](..//tmp/tmp.qCMNAXclwv) |
@@ -1344,6 +1356,8 @@
 | Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/turulmeme-shares/turulmeme_shares.php on line 434 | jspi-boot | [View logs](..//tmp/tmp.N7v35sA4Pb) |
 | Method TailoredForm::__unserialize() cannot be static in /wordpress/wp-content/plugins/tailored-tools/lib/class.forms.php on line 1092 | asyncify-boot | [View logs](..//tmp/tmp.mfxYUkre1U) |
 | Method TailoredForm::__unserialize() cannot be static in /wordpress/wp-content/plugins/tailored-tools/lib/class.forms.php on line 1092 | jspi-boot | [View logs](..//tmp/tmp.2cX4quXRNN) |
+| Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/template-base-on-category/template-base-on-category.php on line 83 | asyncify-boot | [View logs](..//tmp/tmp.n24hMuMiaZ) |
+| Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/template-base-on-category/template-base-on-category.php on line 83 | jspi-boot | [View logs](..//tmp/tmp.IHZnWuyFUc) |
 | Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 7.4.0". You are running 7.2.34-dev. in /wordpress/wp-content/plugins/treweler-map-builder/libs/composer/platform_check.php on line 24 | asyncify-boot | [View logs](..//tmp/tmp.dlStCoCzJS) |
 | Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 7.4.0". You are running 7.2.34-dev. in /wordpress/wp-content/plugins/treweler-map-builder/libs/composer/platform_check.php on line 24 | jspi-boot | [View logs](..//tmp/tmp.BHxlvPNbij) |
 | Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/tweetlighter/TweetLighter.php:15 | asyncify-boot | [View logs](..//tmp/tmp.pXE62FRGdY) |
