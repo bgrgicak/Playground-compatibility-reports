@@ -211,6 +211,8 @@
 | MySQL field type cannot be translated to SQLite: set. | jspi-boot | simple-ads-manager | [View logs](/logs/plugins/s/simple-ads-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sam_ads. | asyncify-boot | simple-ads-manager | [View logs](/logs/plugins/s/simple-ads-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sam_ads. | jspi-boot | simple-ads-manager | [View logs](/logs/plugins/s/simple-ads-manager/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | sobex-tech | [View logs](/logs/plugins/s/sobex-tech/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | sobex-tech | [View logs](/logs/plugins/s/sobex-tech/error.json) |
 | SQLSTATE[HY000]: General error: 1 ON CONFLICT clause does not match any PRIMARY KEY or UNIQUE constraint. | asyncify-boot | squad-modules-for-divi | [View logs](/logs/plugins/s/squad-modules-for-divi/error.json) |
 | SQLSTATE[HY000]: General error: 1 ON CONFLICT clause does not match any PRIMARY KEY or UNIQUE constraint. | jspi-boot | squad-modules-for-divi | [View logs](/logs/plugins/s/squad-modules-for-divi/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sl_setting. | asyncify-boot | store-locator | [View logs](/logs/plugins/s/store-locator/error.json) |
