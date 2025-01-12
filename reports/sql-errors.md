@@ -233,6 +233,8 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | sobex-tech | [View logs](/logs/plugins/s/sobex-tech/error.json) |
 | SQLSTATE[HY000]: General error: 1 ON CONFLICT clause does not match any PRIMARY KEY or UNIQUE constraint. | asyncify-boot | squad-modules-for-divi | [View logs](/logs/plugins/s/squad-modules-for-divi/error.json) |
 | SQLSTATE[HY000]: General error: 1 ON CONFLICT clause does not match any PRIMARY KEY or UNIQUE constraint. | jspi-boot | squad-modules-for-divi | [View logs](/logs/plugins/s/squad-modules-for-divi/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ss_downloads. | asyncify-boot | ss-downloads | [View logs](/logs/plugins/s/ss-downloads/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ss_downloads. | jspi-boot | ss-downloads | [View logs](/logs/plugins/s/ss-downloads/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sl_setting. | asyncify-boot | store-locator | [View logs](/logs/plugins/s/store-locator/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sl_setting. | jspi-boot | store-locator | [View logs](/logs/plugins/s/store-locator/error.json) |
     [code] => 0
