@@ -207,6 +207,8 @@
 | SQLSTATE[HY000]: General error: 1 near "USING": syntax error. | jspi-boot | wp-optimizer | [View logs](/logs/plugins/w/wp-optimizer/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | wp-slimstat | [View logs](/logs/plugins/w/wp-slimstat/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | wp-slimstat | [View logs](/logs/plugins/w/wp-slimstat/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_iqamahTimes. | asyncify-boot | salah-world-prayer-iqamah-timings-for-your-masjids | [View logs](/logs/plugins/s/salah-world-prayer-iqamah-timings-for-your-masjids/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_iqamahTimes. | jspi-boot | salah-world-prayer-iqamah-timings-for-your-masjids | [View logs](/logs/plugins/s/salah-world-prayer-iqamah-timings-for-your-masjids/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | asyncify-boot | simple-ads-manager | [View logs](/logs/plugins/s/simple-ads-manager/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | jspi-boot | simple-ads-manager | [View logs](/logs/plugins/s/simple-ads-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sam_ads. | asyncify-boot | simple-ads-manager | [View logs](/logs/plugins/s/simple-ads-manager/error.json) |
