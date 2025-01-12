@@ -215,6 +215,10 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sam_ads. | jspi-boot | simple-ads-manager | [View logs](/logs/plugins/s/simple-ads-manager/error.json) |
 | Table not found. | asyncify-boot | simplelender-by-umatidocs-com | [View logs](/logs/plugins/s/simplelender-by-umatidocs-com/error.json) |
 | Table not found. | jspi-boot | simplelender-by-umatidocs-com | [View logs](/logs/plugins/s/simplelender-by-umatidocs-com/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | singlepage | [View logs](/logs/plugins/s/singlepage/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | singlepage | [View logs](/logs/plugins/s/singlepage/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | singlepage | [View logs](/logs/plugins/s/singlepage/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | singlepage | [View logs](/logs/plugins/s/singlepage/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: checks. | asyncify-boot | sirv | [View logs](/logs/plugins/s/sirv/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: checks. | jspi-boot | sirv | [View logs](/logs/plugins/s/sirv/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: error_type. | asyncify-boot | sirv | [View logs](/logs/plugins/s/sirv/error.json) |
@@ -239,6 +243,8 @@
 | SQLSTATE[HY000]: General error: 1 ON CONFLICT clause does not match any PRIMARY KEY or UNIQUE constraint. | jspi-boot | squad-modules-for-divi | [View logs](/logs/plugins/s/squad-modules-for-divi/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ss_downloads. | asyncify-boot | ss-downloads | [View logs](/logs/plugins/s/ss-downloads/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ss_downloads. | jspi-boot | ss-downloads | [View logs](/logs/plugins/s/ss-downloads/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | sso-freshdesk-support-integration | [View logs](/logs/plugins/s/sso-freshdesk-support-integration/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | sso-freshdesk-support-integration | [View logs](/logs/plugins/s/sso-freshdesk-support-integration/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sl_setting. | asyncify-boot | store-locator | [View logs](/logs/plugins/s/store-locator/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sl_setting. | jspi-boot | store-locator | [View logs](/logs/plugins/s/store-locator/error.json) |
     [code] => 0
