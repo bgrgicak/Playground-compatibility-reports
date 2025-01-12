@@ -211,6 +211,8 @@
 | MySQL field type cannot be translated to SQLite: set. | jspi-boot | simple-ads-manager | [View logs](/logs/plugins/s/simple-ads-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sam_ads. | asyncify-boot | simple-ads-manager | [View logs](/logs/plugins/s/simple-ads-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sam_ads. | jspi-boot | simple-ads-manager | [View logs](/logs/plugins/s/simple-ads-manager/error.json) |
+| Table not found. | asyncify-boot | simplelender-by-umatidocs-com | [View logs](/logs/plugins/s/simplelender-by-umatidocs-com/error.json) |
+| Table not found. | jspi-boot | simplelender-by-umatidocs-com | [View logs](/logs/plugins/s/simplelender-by-umatidocs-com/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: checks. | asyncify-boot | sirv | [View logs](/logs/plugins/s/sirv/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: checks. | jspi-boot | sirv | [View logs](/logs/plugins/s/sirv/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: error_type. | asyncify-boot | sirv | [View logs](/logs/plugins/s/sirv/error.json) |
