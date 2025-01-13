@@ -253,6 +253,14 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ss_downloads. | jspi-boot | ss-downloads | [View logs](/logs/plugins/s/ss-downloads/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | sso-freshdesk-support-integration | [View logs](/logs/plugins/s/sso-freshdesk-support-integration/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | sso-freshdesk-support-integration | [View logs](/logs/plugins/s/sso-freshdesk-support-integration/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error. | asyncify-boot | stageshow | [View logs](/logs/plugins/s/stageshow/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error. | jspi-boot | stageshow | [View logs](/logs/plugins/s/stageshow/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "GatewaySelected": syntax error. | asyncify-boot | stageshow | [View logs](/logs/plugins/s/stageshow/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "GatewaySelected": syntax error. | jspi-boot | stageshow | [View logs](/logs/plugins/s/stageshow/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PayPalCurrency": syntax error. | asyncify-boot | stageshow | [View logs](/logs/plugins/s/stageshow/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PayPalCurrency": syntax error. | jspi-boot | stageshow | [View logs](/logs/plugins/s/stageshow/error.json) |
+| Unexpected token in MySQL query: showNotInListing. | asyncify-boot | stageshow | [View logs](/logs/plugins/s/stageshow/error.json) |
+| Unexpected token in MySQL query: showNotInListing. | jspi-boot | stageshow | [View logs](/logs/plugins/s/stageshow/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | stop-confusion | [View logs](/logs/plugins/s/stop-confusion/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | stop-confusion | [View logs](/logs/plugins/s/stop-confusion/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sl_setting. | asyncify-boot | store-locator | [View logs](/logs/plugins/s/store-locator/error.json) |
