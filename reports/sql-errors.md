@@ -146,6 +146,14 @@ user_id int(11) NOT NULL,
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | safetag | [View logs](/logs/plugins/s/safetag/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_iqamahTimes. | asyncify-boot | salah-world-prayer-iqamah-timings-for-your-masjids | [View logs](/logs/plugins/s/salah-world-prayer-iqamah-timings-for-your-masjids/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_iqamahTimes. | jspi-boot | salah-world-prayer-iqamah-timings-for-your-masjids | [View logs](/logs/plugins/s/salah-world-prayer-iqamah-timings-for-your-masjids/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | sell-downloads | [View logs](/logs/plugins/s/sell-downloads/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | sell-downloads | [View logs](/logs/plugins/s/sell-downloads/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: as_single. | asyncify-boot | sell-downloads | [View logs](/logs/plugins/s/sell-downloads/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: as_single. | jspi-boot | sell-downloads | [View logs](/logs/plugins/s/sell-downloads/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: individually. | asyncify-boot | sell-downloads | [View logs](/logs/plugins/s/sell-downloads/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: individually. | jspi-boot | sell-downloads | [View logs](/logs/plugins/s/sell-downloads/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such index: wp_msdb_purchase__product_purchase. | asyncify-boot | sell-downloads | [View logs](/logs/plugins/s/sell-downloads/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such index: wp_msdb_purchase__product_purchase. | jspi-boot | sell-downloads | [View logs](/logs/plugins/s/sell-downloads/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | sermonaudio-widgets | [View logs](/logs/plugins/s/sermonaudio-widgets/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | sermonaudio-widgets | [View logs](/logs/plugins/s/sermonaudio-widgets/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sa_plugin. | asyncify-boot | sermonaudio-widgets | [View logs](/logs/plugins/s/sermonaudio-widgets/error.json) |
@@ -156,6 +164,8 @@ user_id int(11) NOT NULL,
 | Table not found. | jspi-boot | serpzilla | [View logs](/logs/plugins/s/serpzilla/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | shashin | [View logs](/logs/plugins/s/shashin/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | shashin | [View logs](/logs/plugins/s/shashin/error.json) |
+| Unknown drop type: table. | asyncify-boot | simile-for-woocommerce | [View logs](/logs/plugins/s/simile-for-woocommerce/error.json) |
+| Unknown drop type: table. | jspi-boot | simile-for-woocommerce | [View logs](/logs/plugins/s/simile-for-woocommerce/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | asyncify-boot | simple-ads-manager | [View logs](/logs/plugins/s/simple-ads-manager/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | jspi-boot | simple-ads-manager | [View logs](/logs/plugins/s/simple-ads-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sam_ads. | asyncify-boot | simple-ads-manager | [View logs](/logs/plugins/s/simple-ads-manager/error.json) |
@@ -186,6 +196,8 @@ user_id int(11) NOT NULL,
 | Unknown show type: INDEXES FROM. | jspi-boot | sirv | [View logs](/logs/plugins/s/sirv/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | sobex-tech | [View logs](/logs/plugins/s/sobex-tech/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | sobex-tech | [View logs](/logs/plugins/s/sobex-tech/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_auth0_user. | asyncify-boot | social-login-with-auth0 | [View logs](/logs/plugins/s/social-login-with-auth0/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_auth0_user. | jspi-boot | social-login-with-auth0 | [View logs](/logs/plugins/s/social-login-with-auth0/error.json) |
 | SQLSTATE[HY000]: General error: 1 ON CONFLICT clause does not match any PRIMARY KEY or UNIQUE constraint. | asyncify-boot | squad-modules-for-divi | [View logs](/logs/plugins/s/squad-modules-for-divi/error.json) |
 | SQLSTATE[HY000]: General error: 1 ON CONFLICT clause does not match any PRIMARY KEY or UNIQUE constraint. | jspi-boot | squad-modules-for-divi | [View logs](/logs/plugins/s/squad-modules-for-divi/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ss_downloads. | asyncify-boot | ss-downloads | [View logs](/logs/plugins/s/ss-downloads/error.json) |
@@ -200,6 +212,8 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 near "PayPalCurrency": syntax error. | jspi-boot | stageshow | [View logs](/logs/plugins/s/stageshow/error.json) |
 | Unexpected token in MySQL query: showNotInListing. | asyncify-boot | stageshow | [View logs](/logs/plugins/s/stageshow/error.json) |
 | Unexpected token in MySQL query: showNotInListing. | jspi-boot | stageshow | [View logs](/logs/plugins/s/stageshow/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | stellarpay | [View logs](/logs/plugins/s/stellarpay/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | stellarpay | [View logs](/logs/plugins/s/stellarpay/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | stop-confusion | [View logs](/logs/plugins/s/stop-confusion/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | stop-confusion | [View logs](/logs/plugins/s/stop-confusion/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sl_setting. | asyncify-boot | store-locator | [View logs](/logs/plugins/s/store-locator/error.json) |
