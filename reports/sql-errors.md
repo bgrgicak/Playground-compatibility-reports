@@ -116,6 +116,10 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such column: "keywords". | jspi-boot | h5p | [View logs](/logs/plugins/h/h5p/error.json) |
 | Unknown operation: DEFAULT CHARACTER SET. | asyncify-boot | h5p | [View logs](/logs/plugins/h/h5p/error.json) |
 | Unknown operation: DEFAULT CHARACTER SET. | jspi-boot | h5p | [View logs](/logs/plugins/h/h5p/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_leads. | asyncify-boot | autoresponder-gwa | [View logs](/logs/plugins/a/autoresponder-gwa/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_leads. | jspi-boot | autoresponder-gwa | [View logs](/logs/plugins/a/autoresponder-gwa/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_msg. | asyncify-boot | autoresponder-gwa | [View logs](/logs/plugins/a/autoresponder-gwa/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_msg. | jspi-boot | autoresponder-gwa | [View logs](/logs/plugins/a/autoresponder-gwa/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_arlo_events_presenters__fk_e_id_idx already exists. | asyncify-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
