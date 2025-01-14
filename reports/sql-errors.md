@@ -172,6 +172,8 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sam_ads. | jspi-boot | simple-ads-manager | [View logs](/logs/plugins/s/simple-ads-manager/error.json) |
 | Table not found. | asyncify-boot | simplelender-by-umatidocs-com | [View logs](/logs/plugins/s/simplelender-by-umatidocs-com/error.json) |
 | Table not found. | jspi-boot | simplelender-by-umatidocs-com | [View logs](/logs/plugins/s/simplelender-by-umatidocs-com/error.json) |
+| Table not found. | asyncify-boot | simplemortgage | [View logs](/logs/plugins/s/simplemortgage/error.json) |
+| Table not found. | jspi-boot | simplemortgage | [View logs](/logs/plugins/s/simplemortgage/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | singlepage | [View logs](/logs/plugins/s/singlepage/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | singlepage | [View logs](/logs/plugins/s/singlepage/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | singlepage | [View logs](/logs/plugins/s/singlepage/error.json) |
