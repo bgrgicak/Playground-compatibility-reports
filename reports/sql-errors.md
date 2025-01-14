@@ -116,6 +116,10 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such column: "keywords". | jspi-boot | h5p | [View logs](/logs/plugins/h/h5p/error.json) |
 | Unknown operation: DEFAULT CHARACTER SET. | asyncify-boot | h5p | [View logs](/logs/plugins/h/h5p/error.json) |
 | Unknown operation: DEFAULT CHARACTER SET. | jspi-boot | h5p | [View logs](/logs/plugins/h/h5p/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_admin_bar_table. | asyncify-boot | adminpress | [View logs](/logs/plugins/a/adminpress/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_admin_bar_table. | jspi-boot | adminpress | [View logs](/logs/plugins/a/adminpress/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_widgets_table. | asyncify-boot | adminpress | [View logs](/logs/plugins/a/adminpress/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_widgets_table. | jspi-boot | adminpress | [View logs](/logs/plugins/a/adminpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_leads. | asyncify-boot | autoresponder-gwa | [View logs](/logs/plugins/a/autoresponder-gwa/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_leads. | jspi-boot | autoresponder-gwa | [View logs](/logs/plugins/a/autoresponder-gwa/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_msg. | asyncify-boot | autoresponder-gwa | [View logs](/logs/plugins/a/autoresponder-gwa/error.json) |
