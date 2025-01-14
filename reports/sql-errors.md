@@ -116,6 +116,24 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such column: "keywords". | jspi-boot | h5p | [View logs](/logs/plugins/h/h5p/error.json) |
 | Unknown operation: DEFAULT CHARACTER SET. | asyncify-boot | h5p | [View logs](/logs/plugins/h/h5p/error.json) |
 | Unknown operation: DEFAULT CHARACTER SET. | jspi-boot | h5p | [View logs](/logs/plugins/h/h5p/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_arlo_events_presenters__fk_e_id_idx already exists. | asyncify-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_arlo_events_presenters__fk_e_id_idx already exists. | jspi-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_arlo_eventtemplates_categories__fk_et_id_idx already exists. | asyncify-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_arlo_eventtemplates_categories__fk_et_id_idx already exists. | jspi-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_arlo_eventtemplates_presenters__fk_et_id_idx already exists. | asyncify-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_arlo_eventtemplates_presenters__fk_et_id_idx already exists. | jspi-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "'1'": syntax error. | asyncify-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "'1'": syntax error. | jspi-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: . | asyncify-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: . | jspi-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | ajax-adsense | [View logs](/logs/plugins/a/ajax-adsense/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | ajax-adsense | [View logs](/logs/plugins/a/ajax-adsense/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ez_adsense_options. | asyncify-boot | ajax-adsense | [View logs](/logs/plugins/a/ajax-adsense/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ez_adsense_options. | jspi-boot | ajax-adsense | [View logs](/logs/plugins/a/ajax-adsense/error.json) |
+| Unknown operation: ALTER. | asyncify-boot | ajax-adsense | [View logs](/logs/plugins/a/ajax-adsense/error.json) |
+| Unknown operation: ALTER. | jspi-boot | ajax-adsense | [View logs](/logs/plugins/a/ajax-adsense/error.json) |
 | MySQL field type cannot be translated to SQLite: enum. | asyncify-boot | ameliabooking | [View logs](/logs/plugins/a/ameliabooking/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_amelia_notifications. | asyncify-boot | ameliabooking | [View logs](/logs/plugins/a/ameliabooking/error.json) |
 | MySQL field type cannot be translated to SQLite: enum. | asyncify-boot | woo-abandoned-cart-recovery | [View logs](/logs/plugins/w/woo-abandoned-cart-recovery/error.json) |
