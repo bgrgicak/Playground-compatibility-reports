@@ -134,6 +134,10 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ez_adsense_options. | jspi-boot | ajax-adsense | [View logs](/logs/plugins/a/ajax-adsense/error.json) |
 | Unknown operation: ALTER. | asyncify-boot | ajax-adsense | [View logs](/logs/plugins/a/ajax-adsense/error.json) |
 | Unknown operation: ALTER. | jspi-boot | ajax-adsense | [View logs](/logs/plugins/a/ajax-adsense/error.json) |
+| Unknown query type: DESC. | asyncify-boot | aliprice | [View logs](/logs/plugins/a/aliprice/error.json) |
+| Unknown query type: DESC. | jspi-boot | aliprice | [View logs](/logs/plugins/a/aliprice/error.json) |
+| Unknown show type: INDEXES FROM. | asyncify-boot | aliprice | [View logs](/logs/plugins/a/aliprice/error.json) |
+| Unknown show type: INDEXES FROM. | jspi-boot | aliprice | [View logs](/logs/plugins/a/aliprice/error.json) |
 | MySQL field type cannot be translated to SQLite: enum. | asyncify-boot | ameliabooking | [View logs](/logs/plugins/a/ameliabooking/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_amelia_notifications. | asyncify-boot | ameliabooking | [View logs](/logs/plugins/a/ameliabooking/error.json) |
 | MySQL field type cannot be translated to SQLite: enum. | asyncify-boot | woo-abandoned-cart-recovery | [View logs](/logs/plugins/w/woo-abandoned-cart-recovery/error.json) |
