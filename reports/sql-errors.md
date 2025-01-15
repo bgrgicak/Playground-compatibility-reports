@@ -116,6 +116,15 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such column: "keywords". | jspi-boot | h5p | [View logs](/logs/plugins/h/h5p/error.json) |
 | Unknown operation: DEFAULT CHARACTER SET. | asyncify-boot | h5p | [View logs](/logs/plugins/h/h5p/error.json) |
 | Unknown operation: DEFAULT CHARACTER SET. | jspi-boot | h5p | [View logs](/logs/plugins/h/h5p/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: api_key. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: changed_info. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: id. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: last_try. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: login. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: params. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: registered_by. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: subdomain. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: try_counts. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_admin_bar_table. | asyncify-boot | adminpress | [View logs](/logs/plugins/a/adminpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_admin_bar_table. | jspi-boot | adminpress | [View logs](/logs/plugins/a/adminpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_widgets_table. | asyncify-boot | adminpress | [View logs](/logs/plugins/a/adminpress/error.json) |
@@ -156,8 +165,9 @@ user_id int(11) NOT NULL,
 | Unknown show type: INDEXES FROM. | jspi-boot | aliprice | [View logs](/logs/plugins/a/aliprice/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | alipay | [View logs](/logs/plugins/a/alipay/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | alipay | [View logs](/logs/plugins/a/alipay/error.json) |
-| MySQL field type cannot be translated to SQLite: enum. | asyncify-boot | ameliabooking | [View logs](/logs/plugins/a/ameliabooking/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_amelia_notifications. | asyncify-boot | ameliabooking | [View logs](/logs/plugins/a/ameliabooking/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | ameliabooking | [View logs](/logs/plugins/a/ameliabooking/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_alfieliate_settings. | asyncify-boot | alfieliate-datafeed-installer | [View logs](/logs/plugins/a/alfieliate-datafeed-installer/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_alfieliate_settings. | jspi-boot | alfieliate-datafeed-installer | [View logs](/logs/plugins/a/alfieliate-datafeed-installer/error.json) |
 | MySQL field type cannot be translated to SQLite: enum. | asyncify-boot | woo-abandoned-cart-recovery | [View logs](/logs/plugins/w/woo-abandoned-cart-recovery/error.json) |
 | MySQL field type cannot be translated to SQLite: enum. | jspi-boot | woo-abandoned-cart-recovery | [View logs](/logs/plugins/w/woo-abandoned-cart-recovery/error.json) |
 | MySQL field type cannot be translated to SQLite: enum. | asyncify-boot | wordfence | [View logs](/logs/plugins/w/wordfence/error.json) |
