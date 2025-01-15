@@ -159,6 +159,8 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such table: wp_anti_haxtool. | jspi-boot | anti-hacking-tools | [View logs](/logs/plugins/a/anti-hacking-tools/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | accordion-faq-for-elementor | [View logs](/logs/plugins/a/accordion-faq-for-elementor/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | accordion-faq-for-elementor | [View logs](/logs/plugins/a/accordion-faq-for-elementor/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_admin_menu_creator. | asyncify-boot | admin-menu-creator | [View logs](/logs/plugins/a/admin-menu-creator/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_admin_menu_creator. | jspi-boot | admin-menu-creator | [View logs](/logs/plugins/a/admin-menu-creator/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | ajax-adsense | [View logs](/logs/plugins/a/ajax-adsense/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | ajax-adsense | [View logs](/logs/plugins/a/ajax-adsense/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ez_adsense_options. | asyncify-boot | ajax-adsense | [View logs](/logs/plugins/a/ajax-adsense/error.json) |
