@@ -129,6 +129,12 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such table: wp_admin_bar_table. | jspi-boot | adminpress | [View logs](/logs/plugins/a/adminpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_widgets_table. | asyncify-boot | adminpress | [View logs](/logs/plugins/a/adminpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_widgets_table. | jspi-boot | adminpress | [View logs](/logs/plugins/a/adminpress/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_acpt_lite_custom_post_type. | asyncify-boot | acpt-lite | [View logs](/logs/plugins/a/acpt-lite/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_acpt_lite_custom_post_type. | jspi-boot | acpt-lite | [View logs](/logs/plugins/a/acpt-lite/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_acpt_lite_settings. | asyncify-boot | acpt-lite | [View logs](/logs/plugins/a/acpt-lite/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_acpt_lite_settings. | jspi-boot | acpt-lite | [View logs](/logs/plugins/a/acpt-lite/error.json) |
+| Unknown query type: RENAME. | asyncify-boot | acpt-lite | [View logs](/logs/plugins/a/acpt-lite/error.json) |
+| Unknown query type: RENAME. | jspi-boot | acpt-lite | [View logs](/logs/plugins/a/acpt-lite/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_leads. | asyncify-boot | autoresponder-gwa | [View logs](/logs/plugins/a/autoresponder-gwa/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_leads. | jspi-boot | autoresponder-gwa | [View logs](/logs/plugins/a/autoresponder-gwa/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_msg. | asyncify-boot | autoresponder-gwa | [View logs](/logs/plugins/a/autoresponder-gwa/error.json) |
