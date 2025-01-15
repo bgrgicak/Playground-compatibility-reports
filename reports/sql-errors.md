@@ -136,6 +136,10 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 near "'1'": syntax error. | jspi-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: . | asyncify-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: . | jspi-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: is_pending. | asyncify-boot | amy-lite | [View logs](/logs/plugins/a/amy-lite/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: is_pending. | jspi-boot | amy-lite | [View logs](/logs/plugins/a/amy-lite/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | asyncify-boot | amy-lite | [View logs](/logs/plugins/a/amy-lite/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | jspi-boot | amy-lite | [View logs](/logs/plugins/a/amy-lite/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_anti_haxtool. | asyncify-boot | anti-hacking-tools | [View logs](/logs/plugins/a/anti-hacking-tools/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_anti_haxtool. | jspi-boot | anti-hacking-tools | [View logs](/logs/plugins/a/anti-hacking-tools/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | accordion-faq-for-elementor | [View logs](/logs/plugins/a/accordion-faq-for-elementor/error.json) |
