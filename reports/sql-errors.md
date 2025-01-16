@@ -373,6 +373,8 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such table: wp_product_categories. | jspi-boot | floatbar-for-instinct-shopping-cart | [View logs](/logs/plugins/f/floatbar-for-instinct-shopping-cart/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_product_list. | asyncify-boot | floatbar-for-instinct-shopping-cart | [View logs](/logs/plugins/f/floatbar-for-instinct-shopping-cart/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_product_list. | jspi-boot | floatbar-for-instinct-shopping-cart | [View logs](/logs/plugins/f/floatbar-for-instinct-shopping-cart/error.json) |
+| Unknown operation: AUTO_INCREMENT. | asyncify-boot | fma-product-custom-options | [View logs](/logs/plugins/f/fma-product-custom-options/error.json) |
+| Unknown operation: AUTO_INCREMENT. | jspi-boot | fma-product-custom-options | [View logs](/logs/plugins/f/fma-product-custom-options/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | translate2011 | [View logs](/logs/plugins/t/translate2011/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | translate2011 | [View logs](/logs/plugins/t/translate2011/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | thrive-automator | [View logs](/logs/plugins/t/thrive-automator/error.json) |
