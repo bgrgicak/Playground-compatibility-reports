@@ -361,8 +361,18 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ez_adsense_options. | jspi-boot | google-adsense-lite | [View logs](/logs/plugins/g/google-adsense-lite/error.json) |
 | Unknown operation: ALTER. | asyncify-boot | google-adsense-lite | [View logs](/logs/plugins/g/google-adsense-lite/error.json) |
 | Unknown operation: ALTER. | jspi-boot | google-adsense-lite | [View logs](/logs/plugins/g/google-adsense-lite/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW. | asyncify-boot | factureaza | [View logs](/logs/plugins/f/factureaza/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW. | jspi-boot | factureaza | [View logs](/logs/plugins/f/factureaza/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wc_f4_api_key. | asyncify-boot | factureaza | [View logs](/logs/plugins/f/factureaza/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wc_f4_api_key. | jspi-boot | factureaza | [View logs](/logs/plugins/f/factureaza/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wc_f4_settings. | asyncify-boot | factureaza | [View logs](/logs/plugins/f/factureaza/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wc_f4_settings. | jspi-boot | factureaza | [View logs](/logs/plugins/f/factureaza/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_blogs. | asyncify-boot | frontend-signup-site-clone | [View logs](/logs/plugins/f/frontend-signup-site-clone/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_blogs. | jspi-boot | frontend-signup-site-clone | [View logs](/logs/plugins/f/frontend-signup-site-clone/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_product_categories. | asyncify-boot | floatbar-for-instinct-shopping-cart | [View logs](/logs/plugins/f/floatbar-for-instinct-shopping-cart/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_product_categories. | jspi-boot | floatbar-for-instinct-shopping-cart | [View logs](/logs/plugins/f/floatbar-for-instinct-shopping-cart/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_product_list. | asyncify-boot | floatbar-for-instinct-shopping-cart | [View logs](/logs/plugins/f/floatbar-for-instinct-shopping-cart/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_product_list. | jspi-boot | floatbar-for-instinct-shopping-cart | [View logs](/logs/plugins/f/floatbar-for-instinct-shopping-cart/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | translate2011 | [View logs](/logs/plugins/t/translate2011/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | translate2011 | [View logs](/logs/plugins/t/translate2011/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | thrive-automator | [View logs](/logs/plugins/t/thrive-automator/error.json) |
