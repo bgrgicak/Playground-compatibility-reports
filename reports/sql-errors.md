@@ -373,6 +373,10 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such table: wp_product_categories. | jspi-boot | floatbar-for-instinct-shopping-cart | [View logs](/logs/plugins/f/floatbar-for-instinct-shopping-cart/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_product_list. | asyncify-boot | floatbar-for-instinct-shopping-cart | [View logs](/logs/plugins/f/floatbar-for-instinct-shopping-cart/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_product_list. | jspi-boot | floatbar-for-instinct-shopping-cart | [View logs](/logs/plugins/f/floatbar-for-instinct-shopping-cart/error.json) |
+| MySQL field type cannot be translated to SQLite: json. | asyncify-boot | farazsms | [View logs](/logs/plugins/f/farazsms/error.json) |
+| MySQL field type cannot be translated to SQLite: json. | jspi-boot | farazsms | [View logs](/logs/plugins/f/farazsms/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: name_field_id. | asyncify-boot | farazsms | [View logs](/logs/plugins/f/farazsms/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: name_field_id. | jspi-boot | farazsms | [View logs](/logs/plugins/f/farazsms/error.json) |
 | Unknown operation: AUTO_INCREMENT. | asyncify-boot | fma-product-custom-options | [View logs](/logs/plugins/f/fma-product-custom-options/error.json) |
 | Unknown operation: AUTO_INCREMENT. | jspi-boot | fma-product-custom-options | [View logs](/logs/plugins/f/fma-product-custom-options/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | translate2011 | [View logs](/logs/plugins/t/translate2011/error.json) |
