@@ -323,6 +323,12 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | news-blog-classifier | [View logs](/logs/plugins/n/news-blog-classifier/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_tbl_instagramslider. | asyncify-boot | nexuslink-instagram-slider | [View logs](/logs/plugins/n/nexuslink-instagram-slider/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_tbl_instagramslider. | jspi-boot | nexuslink-instagram-slider | [View logs](/logs/plugins/n/nexuslink-instagram-slider/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW. | asyncify-boot | online-billing-service | [View logs](/logs/plugins/o/online-billing-service/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW. | jspi-boot | online-billing-service | [View logs](/logs/plugins/o/online-billing-service/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wc_obs_api_key. | asyncify-boot | online-billing-service | [View logs](/logs/plugins/o/online-billing-service/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wc_obs_api_key. | jspi-boot | online-billing-service | [View logs](/logs/plugins/o/online-billing-service/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wc_obs_settings. | asyncify-boot | online-billing-service | [View logs](/logs/plugins/o/online-billing-service/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wc_obs_settings. | jspi-boot | online-billing-service | [View logs](/logs/plugins/o/online-billing-service/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: configuration. | asyncify-boot | zen4wp | [View logs](/logs/plugins/z/zen4wp/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: configuration. | jspi-boot | zen4wp | [View logs](/logs/plugins/z/zen4wp/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: template_select. | asyncify-boot | zen4wp | [View logs](/logs/plugins/z/zen4wp/error.json) |
