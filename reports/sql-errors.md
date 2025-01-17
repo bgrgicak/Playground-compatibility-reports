@@ -363,6 +363,10 @@ user_id int(11) NOT NULL,
 | Unknown operation: ALTER. | jspi-boot | google-adsense-lite | [View logs](/logs/plugins/g/google-adsense-lite/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | asyncify-boot | flip-photo-gallery | [View logs](/logs/plugins/f/flip-photo-gallery/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | jspi-boot | flip-photo-gallery | [View logs](/logs/plugins/f/flip-photo-gallery/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | asyncify-boot | favatars | [View logs](/logs/plugins/f/favatars/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | jspi-boot | favatars | [View logs](/logs/plugins/f/favatars/error.json) |
+| Unknown query type: DESC. | asyncify-boot | favatars | [View logs](/logs/plugins/f/favatars/error.json) |
+| Unknown query type: DESC. | jspi-boot | favatars | [View logs](/logs/plugins/f/favatars/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | fbpromotions | [View logs](/logs/plugins/f/fbpromotions/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | fbpromotions | [View logs](/logs/plugins/f/fbpromotions/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW. | asyncify-boot | factureaza | [View logs](/logs/plugins/f/factureaza/error.json) |
