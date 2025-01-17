@@ -363,6 +363,8 @@ user_id int(11) NOT NULL,
 | Unknown operation: ALTER. | jspi-boot | google-adsense-lite | [View logs](/logs/plugins/g/google-adsense-lite/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | asyncify-boot | flip-photo-gallery | [View logs](/logs/plugins/f/flip-photo-gallery/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | jspi-boot | flip-photo-gallery | [View logs](/logs/plugins/f/flip-photo-gallery/error.json) |
+| Unexpected token in MySQL query: is_result. | asyncify-boot | football-predictor | [View logs](/logs/plugins/f/football-predictor/error.json) |
+| Unexpected token in MySQL query: is_result. | jspi-boot | football-predictor | [View logs](/logs/plugins/f/football-predictor/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | asyncify-boot | favatars | [View logs](/logs/plugins/f/favatars/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | jspi-boot | favatars | [View logs](/logs/plugins/f/favatars/error.json) |
 | Unknown query type: DESC. | asyncify-boot | favatars | [View logs](/logs/plugins/f/favatars/error.json) |
