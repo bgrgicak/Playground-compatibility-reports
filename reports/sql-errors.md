@@ -110,6 +110,8 @@ user_id int(11) NOT NULL,
 | Unknown operation: MODIFY. | jspi-boot | blog2social | [View logs](/logs/plugins/b/blog2social/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | asyncify-boot | hit-counter | [View logs](/logs/plugins/h/hit-counter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | jspi-boot | hit-counter | [View logs](/logs/plugins/h/hit-counter/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | asyncify-boot | hit-counter-max | [View logs](/logs/plugins/h/hit-counter-max/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | jspi-boot | hit-counter-max | [View logs](/logs/plugins/h/hit-counter-max/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ntp_header_images. | asyncify-boot | header-images-rotator | [View logs](/logs/plugins/h/header-images-rotator/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ntp_header_images. | jspi-boot | header-images-rotator | [View logs](/logs/plugins/h/header-images-rotator/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | happyfret | [View logs](/logs/plugins/h/happyfret/error.json) |
@@ -130,6 +132,8 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such column: "keywords". | jspi-boot | h5p | [View logs](/logs/plugins/h/h5p/error.json) |
 | Unknown operation: DEFAULT CHARACTER SET. | asyncify-boot | h5p | [View logs](/logs/plugins/h/h5p/error.json) |
 | Unknown operation: DEFAULT CHARACTER SET. | jspi-boot | h5p | [View logs](/logs/plugins/h/h5p/error.json) |
+| Unknown drop type: FUNCTION. | asyncify-boot | hrappka-pl | [View logs](/logs/plugins/h/hrappka-pl/error.json) |
+| Unknown drop type: FUNCTION. | jspi-boot | hrappka-pl | [View logs](/logs/plugins/h/hrappka-pl/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | horoscop | [View logs](/logs/plugins/h/horoscop/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | horoscop | [View logs](/logs/plugins/h/horoscop/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_horoscope. | asyncify-boot | horoscop | [View logs](/logs/plugins/h/horoscop/error.json) |
