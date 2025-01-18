@@ -108,6 +108,8 @@ user_id int(11) NOT NULL,
 | Unknown operation: CHANGE. | jspi-boot | blog2social | [View logs](/logs/plugins/b/blog2social/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | blog2social | [View logs](/logs/plugins/b/blog2social/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | blog2social | [View logs](/logs/plugins/b/blog2social/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ntp_header_images. | asyncify-boot | header-images-rotator | [View logs](/logs/plugins/h/header-images-rotator/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ntp_header_images. | jspi-boot | header-images-rotator | [View logs](/logs/plugins/h/header-images-rotator/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | happyfret | [View logs](/logs/plugins/h/happyfret/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | happyfret | [View logs](/logs/plugins/h/happyfret/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_happyfret_parcel_type. | asyncify-boot | happyfret | [View logs](/logs/plugins/h/happyfret/error.json) |
