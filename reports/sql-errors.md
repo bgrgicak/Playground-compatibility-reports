@@ -116,6 +116,10 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such column: "keywords". | jspi-boot | h5p | [View logs](/logs/plugins/h/h5p/error.json) |
 | Unknown operation: DEFAULT CHARACTER SET. | asyncify-boot | h5p | [View logs](/logs/plugins/h/h5p/error.json) |
 | Unknown operation: DEFAULT CHARACTER SET. | jspi-boot | h5p | [View logs](/logs/plugins/h/h5p/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | horoscop | [View logs](/logs/plugins/h/horoscop/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | horoscop | [View logs](/logs/plugins/h/horoscop/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_horoscope. | asyncify-boot | horoscop | [View logs](/logs/plugins/h/horoscop/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_horoscope. | jspi-boot | horoscop | [View logs](/logs/plugins/h/horoscop/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: api_key. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: changed_info. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: id. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
