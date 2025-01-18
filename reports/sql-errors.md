@@ -108,6 +108,16 @@ user_id int(11) NOT NULL,
 | Unknown operation: CHANGE. | jspi-boot | blog2social | [View logs](/logs/plugins/b/blog2social/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | blog2social | [View logs](/logs/plugins/b/blog2social/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | blog2social | [View logs](/logs/plugins/b/blog2social/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | happyfret | [View logs](/logs/plugins/h/happyfret/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | happyfret | [View logs](/logs/plugins/h/happyfret/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_happyfret_parcel_type. | asyncify-boot | happyfret | [View logs](/logs/plugins/h/happyfret/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_happyfret_parcel_type. | jspi-boot | happyfret | [View logs](/logs/plugins/h/happyfret/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: price_type. | asyncify-boot | hostel | [View logs](/logs/plugins/h/hostel/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: price_type. | jspi-boot | hostel | [View logs](/logs/plugins/h/hostel/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: timestamp. | asyncify-boot | hostel | [View logs](/logs/plugins/h/hostel/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: timestamp. | jspi-boot | hostel | [View logs](/logs/plugins/h/hostel/error.json) |
+| Unknown create type: INDEX. | asyncify-boot | hostel | [View logs](/logs/plugins/h/hostel/error.json) |
+| Unknown create type: INDEX. | jspi-boot | hostel | [View logs](/logs/plugins/h/hostel/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: "author". | asyncify-boot | h5p | [View logs](/logs/plugins/h/h5p/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: "author". | jspi-boot | h5p | [View logs](/logs/plugins/h/h5p/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: "description". | asyncify-boot | h5p | [View logs](/logs/plugins/h/h5p/error.json) |
@@ -120,6 +130,8 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | horoscop | [View logs](/logs/plugins/h/horoscop/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_horoscope. | asyncify-boot | horoscop | [View logs](/logs/plugins/h/horoscop/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_horoscope. | jspi-boot | horoscop | [View logs](/logs/plugins/h/horoscop/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | asyncify-boot | hit-counter-ultimate | [View logs](/logs/plugins/h/hit-counter-ultimate/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | jspi-boot | hit-counter-ultimate | [View logs](/logs/plugins/h/hit-counter-ultimate/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: api_key. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: changed_info. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: id. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
