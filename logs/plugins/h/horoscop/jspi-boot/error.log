@@ -1,0 +1,330 @@
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:20
+`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){t.mountBeforeInstall&&p(h,t.mountBeforeInstall)}}});const v=await s.getPrimaryPhp();try{if(n&&!t.mountBeforeInstall&&g.writeFileSync(f,await q(v,"/wordpress")),t.mount&&p(v,t.mount),d=!0,u){const{php:h,reap:m}=await s.processManager.acquirePHPInstance();try{c.log("Running the Blueprint..."),await x(u,h),c.log("Finished running the blueprint")}finally{m()}}a==="build-snapshot"?(await r(t.outfile),c.log(`WordPress exported to ${t.outfile}`),process.exit(0)):a==="run-blueprint"?(c.log("Blueprint executed"),process.exit(0)):c.log(`WordPress is running on ${l}`)}catch(h){if(!t.debug)throw h;const m=v.readFileAsText(D);throw new Error(m,{cause:h})}},async handleRequest(o){return d?await s.request(o):I.forHttpCode(502,"WordPress is not ready yet")}})}Q();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ^
+
+Error: [18-Jan-2025 11:26:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_horoscope (
+				`sign` char(10) NOT NULL,
+				`content` text NOT NULL,
+				PRIMARY KEY `sign` (sign)
+			) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_horoscope, sign, char(10)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_horoscope, content, text</li>
+<li>Executing: CREATE TABLE &quot;wp_horoscope&quot; (
+&quot;sign&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;content&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+PRIMARY KEY (&quot;(&quot;, &quot;)&quot;)) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/horoscop/horoscope.php(125): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): Horoscope->activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_horosc...', false)
+#7 /internal/eval.php(20): activate_plugin('horoscop/horosc...')
+#8 {main}</pre>
+ for query CREATE TABLE wp_horoscope (
+				`sign` char(10) NOT NULL,
+				`content` text NOT NULL,
+				PRIMARY KEY `sign` (sign)
+			) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_horoscop/horoscope.php'), WP_Hook->do_action, WP_Hook->apply_filters, Horoscope->activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Jan-2025 11:26:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT COUNT(*) FROM wp_horoscope WHERE sign = 'berbec'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT COUNT(*) FROM wp_horoscope WHERE sign = :param0  | parameters: berbec</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_horoscope.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#2 /wordpress/wp-content/plugins/horoscop/horoscope.php(337): wpdb->get_var('SELECT COUNT(*)...')
+#3 /wordpress/wp-content/plugins/horoscop/horoscope.php(126): Horoscope->syncronize()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Horoscope->activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_horosc...', false)
+#8 /internal/eval.php(20): activate_plugin('horoscop/horosc...')
+#9 {main}</pre>
+ for query SELECT COUNT(*) FROM wp_horoscope WHERE sign = 'berbec' made by activate_plugin, do_action('activate_horoscop/horoscope.php'), WP_Hook->do_action, WP_Hook->apply_filters, Horoscope->activate, Horoscope->syncronize, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Jan-2025 11:26:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_horoscope` (`sign`, `content`) VALUES ('berbec', '')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_horoscope` (`sign`, `content`) VALUES (:param0 , :param1 ) | parameters: berbec, </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_horoscope.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_horoscope', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/horoscop/horoscope.php(347): wpdb->insert('wp_horoscope', Array, Array)
+#4 /wordpress/wp-content/plugins/horoscop/horoscope.php(126): Horoscope->syncronize()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Horoscope->activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_horosc...', false)
+#9 /internal/eval.php(20): activate_plugin('horoscop/horosc...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_horoscope` (`sign`, `content`) VALUES ('berbec', '') made by activate_plugin, do_action('activate_horoscop/horoscope.php'), WP_Hook->do_action, WP_Hook->apply_filters, Horoscope->activate, Horoscope->syncronize, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Jan-2025 11:26:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT COUNT(*) FROM wp_horoscope WHERE sign = 'taur'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT COUNT(*) FROM wp_horoscope WHERE sign = :param0  | parameters: taur</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_horoscope.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#2 /wordpress/wp-content/plugins/horoscop/horoscope.php(337): wpdb->get_var('SELECT COUNT(*)...')
+#3 /wordpress/wp-content/plugins/horoscop/horoscope.php(126): Horoscope->syncronize()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Horoscope->activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_horosc...', false)
+#8 /internal/eval.php(20): activate_plugin('horoscop/horosc...')
+#9 {main}</pre>
+ for query SELECT COUNT(*) FROM wp_horoscope WHERE sign = 'taur' made by activate_plugin, do_action('activate_horoscop/horoscope.php'), WP_Hook->do_action, WP_Hook->apply_filters, Horoscope->activate, Horoscope->syncronize, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Jan-2025 11:26:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_horoscope` (`sign`, `content`) VALUES ('taur', '')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_horoscope` (`sign`, `content`) VALUES (:param0 , :param1 ) | parameters: taur, </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_horoscope.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_horoscope', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/horoscop/horoscope.php(347): wpdb->insert('wp_horoscope', Array, Array)
+#4 /wordpress/wp-content/plugins/horoscop/horoscope.php(126): Horoscope->syncronize()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Horoscope->activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_horosc...', false)
+#9 /internal/eval.php(20): activate_plugin('horoscop/horosc...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_horoscope` (`sign`, `content`) VALUES ('taur', '') made by activate_plugin, do_action('activate_horoscop/horoscope.php'), WP_Hook->do_action, WP_Hook->apply_filters, Horoscope->activate, Horoscope->syncronize, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Jan-2025 11:26:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT COUNT(*) FROM wp_horoscope WHERE sign = 'gemeni'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT COUNT(*) FROM wp_horoscope WHERE sign = :param0  | parameters: gemeni</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_horoscope.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#2 /wordpress/wp-content/plugins/horoscop/horoscope.php(337): wpdb->get_var('SELECT COUNT(*)...')
+#3 /wordpress/wp-content/plugins/horoscop/horoscope.php(126): Horoscope->syncronize()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Horoscope->activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_horosc...', false)
+#8 /internal/eval.php(20): activate_plugin('horoscop/horosc...')
+#9 {main}</pre>
+ for query SELECT COUNT(*) FROM wp_horoscope WHERE sign = 'gemeni' made by activate_plugin, do_action('activate_horoscop/horoscope.php'), WP_Hook->do_action, WP_Hook->apply_filters, Horoscope->activate, Horoscope->syncronize, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Jan-2025 11:26:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_horoscope` (`sign`, `content`) VALUES ('gemeni', '')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_horoscope` (`sign`, `content`) VALUES (:param0 , :param1 ) | parameters: gemeni, </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_horoscope.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_horoscope', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/horoscop/horoscope.php(347): wpdb->insert('wp_horoscope', Array, Array)
+#4 /wordpress/wp-content/plugins/horoscop/horoscope.php(126): Horoscope->syncronize()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Horoscope->activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_horosc...', false)
+#9 /internal/eval.php(20): activate_plugin('horoscop/horosc...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_horoscope` (`sign`, `content`) VALUES ('gemeni', '') made by activate_plugin, do_action('activate_horoscop/horoscope.php'), WP_Hook->do_action, WP_Hook->apply_filters, Horoscope->activate, Horoscope->syncronize, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Jan-2025 11:26:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT COUNT(*) FROM wp_horoscope WHERE sign = 'rac'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT COUNT(*) FROM wp_horoscope WHERE sign = :param0  | parameters: rac</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_horoscope.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#2 /wordpress/wp-content/plugins/horoscop/horoscope.php(337): wpdb->get_var('SELECT COUNT(*)...')
+#3 /wordpress/wp-content/plugins/horoscop/horoscope.php(126): Horoscope->syncronize()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Horoscope->activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_horosc...', false)
+#8 /internal/eval.php(20): activate_plugin('horoscop/horosc...')
+#9 {main}</pre>
+ for query SELECT COUNT(*) FROM wp_horoscope WHERE sign = 'rac' made by activate_plugin, do_action('activate_horoscop/horoscope.php'), WP_Hook->do_action, WP_Hook->apply_filters, Horoscope->activate, Horoscope->syncronize, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Jan-2025 11:27:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_horoscope` (`sign`, `content`) VALUES ('rac', '')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_horoscope` (`sign`, `content`) VALUES (:param0 , :param1 ) | parameters: rac, </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_horoscope.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_horoscope', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/horoscop/horoscope.php(347): wpdb->insert('wp_horoscope', Array, Array)
+#4 /wordpress/wp-content/plugins/horoscop/horoscope.php(126): Horoscope->syncronize()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Horoscope->activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_horosc...', false)
+#9 /internal/eval.php(20): activate_plugin('horoscop/horosc...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_horoscope` (`sign`, `content`) VALUES ('rac', '') made by activate_plugin, do_action('activate_horoscop/horoscope.php'), WP_Hook->do_action, WP_Hook->apply_filters, Horoscope->activate, Horoscope->syncronize, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Jan-2025 11:27:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT COUNT(*) FROM wp_horoscope WHERE sign = 'leu'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT COUNT(*) FROM wp_horoscope WHERE sign = :param0  | parameters: leu</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_horoscope.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(*)...')
+#2 /wordpress/wp-content/plugins/horoscop/horoscope.php(337): wpdb->get_var('SELECT COUNT(*)...')
+#3 /wordpress/wp-content/plugins/horoscop/horoscope.php(126): Horoscope->syncronize()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Horoscope->activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_horosc...', false)
+#8 /internal/eval.php(20): activate_plugin('horoscop/horosc...')
+#9 {main}</pre>
+ for query SELECT COUNT(*) FROM wp_horoscope WHERE sign = 'leu' made by activate_plugin, do_action('activate_horoscop/horoscope.php'), WP_Hook->do_action, WP_Hook->apply_filters, Horoscope->activate, Horoscope->syncronize, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[18-Jan-2025 11:27:05 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array in /wordpress/wp-content/plugins/horoscop/horoscope.php:308
+Stack trace:
+#0 /wordpress/wp-content/plugins/horoscop/horoscope.php(343): Horoscope->get_content('leu')
+#1 /wordpress/wp-content/plugins/horoscop/horoscope.php(126): Horoscope->syncronize()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): Horoscope->activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_horosc...', false)
+#6 /internal/eval.php(20): activate_plugin('horoscop/horosc...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/horoscop/horoscope.php on line 308
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:20:788)
+    at async j (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1166) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"horoscop"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12099:32)
+      at async Qt (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12200:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:20:453)
+      at async j (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1166) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:979:19)
+        at async gr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:31:39)
+        at async Object.at [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:877:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12165:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12096:23)
+        at async Qt (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12200:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:20:453)
+        at async j (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1166) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.6.0
