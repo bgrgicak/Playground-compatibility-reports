@@ -232,6 +232,8 @@ user_id int(11) NOT NULL,
 | Unknown operation: ADD. | jspi-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: paycode. | asyncify-boot | moolamojo | [View logs](/logs/plugins/m/moolamojo/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: paycode. | jspi-boot | moolamojo | [View logs](/logs/plugins/m/moolamojo/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_api_keys. | asyncify-boot | messenger-marketing-for-woocommerce | [View logs](/logs/plugins/m/messenger-marketing-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_api_keys. | jspi-boot | messenger-marketing-for-woocommerce | [View logs](/logs/plugins/m/messenger-marketing-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_mowplayer_settings. | asyncify-boot | mowplayer | [View logs](/logs/plugins/m/mowplayer/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_mowplayer_settings. | jspi-boot | mowplayer | [View logs](/logs/plugins/m/mowplayer/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | miniorange-wp-as-saml-idp | [View logs](/logs/plugins/m/miniorange-wp-as-saml-idp/error.json) |
