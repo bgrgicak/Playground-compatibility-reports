@@ -230,6 +230,8 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such table: main.wp_ahm_cron_jobs. | jspi-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
 | Unknown operation: ADD. | asyncify-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
 | Unknown operation: ADD. | jspi-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: paycode. | asyncify-boot | moolamojo | [View logs](/logs/plugins/m/moolamojo/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: paycode. | jspi-boot | moolamojo | [View logs](/logs/plugins/m/moolamojo/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_mowplayer_settings. | asyncify-boot | mowplayer | [View logs](/logs/plugins/m/mowplayer/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_mowplayer_settings. | jspi-boot | mowplayer | [View logs](/logs/plugins/m/mowplayer/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_mca_common. | asyncify-boot | minecraft-admin | [View logs](/logs/plugins/m/minecraft-admin/error.json) |
