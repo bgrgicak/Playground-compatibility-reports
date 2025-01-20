@@ -247,10 +247,18 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 near "a": syntax error. | jspi-boot | masterit-authors-list | [View logs](/logs/plugins/m/masterit-authors-list/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_melipayamak_members. | asyncify-boot | melipayamak-woocommerce-sms | [View logs](/logs/plugins/m/melipayamak-woocommerce-sms/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_melipayamak_members. | jspi-boot | melipayamak-woocommerce-sms | [View logs](/logs/plugins/m/melipayamak-woocommerce-sms/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ruigehond011_landingpages. | asyncify-boot | multisite-landingpages | [View logs](/logs/plugins/m/multisite-landingpages/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ruigehond011_landingpages. | jspi-boot | multisite-landingpages | [View logs](/logs/plugins/m/multisite-landingpages/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | matrixppc | [View logs](/logs/plugins/m/matrixppc/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | matrixppc | [View logs](/logs/plugins/m/matrixppc/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | masqclases | [View logs](/logs/plugins/m/masqclases/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | masqclases | [View logs](/logs/plugins/m/masqclases/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | motor-racing-league | [View logs](/logs/plugins/m/motor-racing-league/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | motor-racing-league | [View logs](/logs/plugins/m/motor-racing-league/error.json) |
+| Unexpected token in MySQL query: optin. | asyncify-boot | motor-racing-league | [View logs](/logs/plugins/m/motor-racing-league/error.json) |
+| Unexpected token in MySQL query: optin. | jspi-boot | motor-racing-league | [View logs](/logs/plugins/m/motor-racing-league/error.json) |
+| Unexpected token in MySQL query: rain. | asyncify-boot | motor-racing-league | [View logs](/logs/plugins/m/motor-racing-league/error.json) |
+| Unexpected token in MySQL query: rain. | jspi-boot | motor-racing-league | [View logs](/logs/plugins/m/motor-racing-league/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | mybookings-search-and-book | [View logs](/logs/plugins/m/mybookings-search-and-book/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | mybookings-search-and-book | [View logs](/logs/plugins/m/mybookings-search-and-book/error.json) |
 | SQLSTATE[HY000]: General error: 1 row value misused. | asyncify-boot | mudslideshow | [View logs](/logs/plugins/m/mudslideshow/error.json) |
