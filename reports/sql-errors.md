@@ -82,6 +82,12 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_user2role2object_rs. | jspi-boot | role-scoper | [View logs](/logs/plugins/r/role-scoper/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | reflex-gallery | [View logs](/logs/plugins/r/reflex-gallery/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | reflex-gallery | [View logs](/logs/plugins/r/reflex-gallery/error.json) |
+| Unknown operation: CHARACTER SET. | asyncify-boot | jsp-store-locator | [View logs](/logs/plugins/j/jsp-store-locator/error.json) |
+| Unknown operation: CHARACTER SET. | jspi-boot | jsp-store-locator | [View logs](/logs/plugins/j/jsp-store-locator/error.json) |
+| Unknown operation: CONVERT. | asyncify-boot | jsp-store-locator | [View logs](/logs/plugins/j/jsp-store-locator/error.json) |
+| Unknown operation: CONVERT. | jspi-boot | jsp-store-locator | [View logs](/logs/plugins/j/jsp-store-locator/error.json) |
+| Unknown operation: ENGINE. | asyncify-boot | jigoshop-ecommerce | [View logs](/logs/plugins/j/jigoshop-ecommerce/error.json) |
+| Unknown operation: ENGINE. | jspi-boot | jigoshop-ecommerce | [View logs](/logs/plugins/j/jigoshop-ecommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_restricted. | asyncify-boot | user-restrictor | [View logs](/logs/plugins/u/user-restrictor/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_restricted. | jspi-boot | user-restrictor | [View logs](/logs/plugins/u/user-restrictor/error.json) |
     [code] => 0
