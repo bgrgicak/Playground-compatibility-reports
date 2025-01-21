@@ -365,6 +365,8 @@ user_id int(11) NOT NULL,
 | Unexpected token in MySQL query: only_one. | jspi-boot | contact-vcard | [View logs](/logs/plugins/c/contact-vcard/error.json) |
 | Unknown create type: table. | asyncify-boot | comment-notifier | [View logs](/logs/plugins/c/comment-notifier/error.json) |
 | Unknown create type: table. | jspi-boot | comment-notifier | [View logs](/logs/plugins/c/comment-notifier/error.json) |
+| Unknown show type: CHARACTER SET ;. | asyncify-boot | custom-database-tables | [View logs](/logs/plugins/c/custom-database-tables/error.json) |
+| Unknown show type: CHARACTER SET ;. | jspi-boot | custom-database-tables | [View logs](/logs/plugins/c/custom-database-tables/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such function: STR_TO_DATE. | asyncify-boot | custom-wp-rest-api | [View logs](/logs/plugins/c/custom-wp-rest-api/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such function: STR_TO_DATE. | jspi-boot | custom-wp-rest-api | [View logs](/logs/plugins/c/custom-wp-rest-api/error.json) |
 | Syntax error: Unexpected token name in query SHOW TABLE STATUS FROM  WHERE name='wp_cp_calculated_fields_form_settings';. | asyncify-boot | calculated-fields-form | [View logs](/logs/plugins/c/calculated-fields-form/error.json) |
