@@ -363,10 +363,10 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such table: wp_contactvcard_field_types. | jspi-boot | contact-vcard | [View logs](/logs/plugins/c/contact-vcard/error.json) |
 | Unexpected token in MySQL query: only_one. | asyncify-boot | contact-vcard | [View logs](/logs/plugins/c/contact-vcard/error.json) |
 | Unexpected token in MySQL query: only_one. | jspi-boot | contact-vcard | [View logs](/logs/plugins/c/contact-vcard/error.json) |
+| Unknown create type: table. | asyncify-boot | comment-notifier | [View logs](/logs/plugins/c/comment-notifier/error.json) |
+| Unknown create type: table. | jspi-boot | comment-notifier | [View logs](/logs/plugins/c/comment-notifier/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such function: STR_TO_DATE. | asyncify-boot | custom-wp-rest-api | [View logs](/logs/plugins/c/custom-wp-rest-api/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such function: STR_TO_DATE. | jspi-boot | custom-wp-rest-api | [View logs](/logs/plugins/c/custom-wp-rest-api/error.json) |
-| MySQL field type cannot be translated to SQLite: enum. | asyncify-boot | cleantalk-spam-protect | [View logs](/logs/plugins/c/cleantalk-spam-protect/error.json) |
-| MySQL field type cannot be translated to SQLite: enum. | jspi-boot | cleantalk-spam-protect | [View logs](/logs/plugins/c/cleantalk-spam-protect/error.json) |
 | Syntax error: Unexpected token name in query SHOW TABLE STATUS FROM  WHERE name='wp_cp_calculated_fields_form_settings';. | asyncify-boot | calculated-fields-form | [View logs](/logs/plugins/c/calculated-fields-form/error.json) |
 | Syntax error: Unexpected token name in query SHOW TABLE STATUS FROM  WHERE name='wp_cp_calculated_fields_form_settings';. | jspi-boot | calculated-fields-form | [View logs](/logs/plugins/c/calculated-fields-form/error.json) |
 | Unknown operation: ADD. | asyncify-boot | calculated-fields-form | [View logs](/logs/plugins/c/calculated-fields-form/error.json) |
