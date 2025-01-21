@@ -357,6 +357,8 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sl_setting. | jspi-boot | store-locator | [View logs](/logs/plugins/s/store-locator/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ceceppa_ml. | asyncify-boot | ceceppa-multilingua | [View logs](/logs/plugins/c/ceceppa-multilingua/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ceceppa_ml. | jspi-boot | ceceppa-multilingua | [View logs](/logs/plugins/c/ceceppa-multilingua/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | clearsale-total | [View logs](/logs/plugins/c/clearsale-total/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | clearsale-total | [View logs](/logs/plugins/c/clearsale-total/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_contactvcard_field_types. | asyncify-boot | contact-vcard | [View logs](/logs/plugins/c/contact-vcard/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_contactvcard_field_types. | jspi-boot | contact-vcard | [View logs](/logs/plugins/c/contact-vcard/error.json) |
 | Unexpected token in MySQL query: only_one. | asyncify-boot | contact-vcard | [View logs](/logs/plugins/c/contact-vcard/error.json) |
