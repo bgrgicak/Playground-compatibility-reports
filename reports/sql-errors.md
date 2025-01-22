@@ -363,6 +363,8 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such table: wp_contactvcard_field_types. | jspi-boot | contact-vcard | [View logs](/logs/plugins/c/contact-vcard/error.json) |
 | Unexpected token in MySQL query: only_one. | asyncify-boot | contact-vcard | [View logs](/logs/plugins/c/contact-vcard/error.json) |
 | Unexpected token in MySQL query: only_one. | jspi-boot | contact-vcard | [View logs](/logs/plugins/c/contact-vcard/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | asyncify-boot | cookies-by-jm | [View logs](/logs/plugins/c/cookies-by-jm/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | jspi-boot | cookies-by-jm | [View logs](/logs/plugins/c/cookies-by-jm/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "DROP": syntax error. | asyncify-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
