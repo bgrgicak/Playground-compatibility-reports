@@ -427,6 +427,12 @@ user_id int(11) NOT NULL,
 | Syntax error: Unexpected token name in query SHOW TABLE STATUS FROM  WHERE name='wp_cp_calculated_fields_form_settings';. | jspi-boot | calculated-fields-form | [View logs](/logs/plugins/c/calculated-fields-form/error.json) |
 | Unknown operation: ADD. | asyncify-boot | calculated-fields-form | [View logs](/logs/plugins/c/calculated-fields-form/error.json) |
 | Unknown operation: ADD. | jspi-boot | calculated-fields-form | [View logs](/logs/plugins/c/calculated-fields-form/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_camera. | asyncify-boot | camera-slideshow | [View logs](/logs/plugins/c/camera-slideshow/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_camera. | jspi-boot | camera-slideshow | [View logs](/logs/plugins/c/camera-slideshow/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | catalogo | [View logs](/logs/plugins/c/catalogo/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | catalogo | [View logs](/logs/plugins/c/catalogo/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_catalogoplugin_column. | asyncify-boot | catalogo | [View logs](/logs/plugins/c/catalogo/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_catalogoplugin_column. | jspi-boot | catalogo | [View logs](/logs/plugins/c/catalogo/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | noshop | [View logs](/logs/plugins/n/noshop/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | noshop | [View logs](/logs/plugins/n/noshop/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_nu_jm_crea. | asyncify-boot | notify-update-par-jm-crea | [View logs](/logs/plugins/n/notify-update-par-jm-crea/error.json) |
