@@ -261,6 +261,24 @@ user_id int(11) NOT NULL,
 | Unknown create type: table. | jspi-boot | database-audit | [View logs](/logs/plugins/d/database-audit/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_dms_mappings. | asyncify-boot | domain-mapping-system | [View logs](/logs/plugins/d/domain-mapping-system/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_dms_mappings. | jspi-boot | domain-mapping-system | [View logs](/logs/plugins/d/domain-mapping-system/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "DROP": syntax error. | asyncify-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "DROP": syntax error. | jspi-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: is404. | asyncify-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: is404. | jspi-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wfBlocks7. | asyncify-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wfBlocks7. | jspi-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wfBlocksAdv. | asyncify-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wfBlocksAdv. | jspi-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wfConfig. | asyncify-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wfConfig. | jspi-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wfLockedOut. | asyncify-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wfLockedOut. | jspi-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wfThrottleLog. | asyncify-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wfThrottleLog. | jspi-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
+| Unknown show type: FIELDS FROM. | asyncify-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
+| Unknown show type: FIELDS FROM. | jspi-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
+| Unknown create type: table. | asyncify-boot | dtables | [View logs](/logs/plugins/d/dtables/error.json) |
+| Unknown create type: table. | jspi-boot | dtables | [View logs](/logs/plugins/d/dtables/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_drf_plugins. | asyncify-boot | digital-raindrops-cms-lite | [View logs](/logs/plugins/d/digital-raindrops-cms-lite/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_drf_plugins. | jspi-boot | digital-raindrops-cms-lite | [View logs](/logs/plugins/d/digital-raindrops-cms-lite/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter_emails. | asyncify-boot | digital-media-combined | [View logs](/logs/plugins/d/digital-media-combined/error.json) |
@@ -277,6 +295,8 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 near ")": syntax error. | jspi-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: main.wp_ahm_cron_jobs. | asyncify-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: main.wp_ahm_cron_jobs. | jspi-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | asyncify-boot | darkpage-simpel-eventer | [View logs](/logs/plugins/d/darkpage-simpel-eventer/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | jspi-boot | darkpage-simpel-eventer | [View logs](/logs/plugins/d/darkpage-simpel-eventer/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: additional. | asyncify-boot | dmsguestbook | [View logs](/logs/plugins/d/dmsguestbook/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: additional. | jspi-boot | dmsguestbook | [View logs](/logs/plugins/d/dmsguestbook/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: flag. | asyncify-boot | dmsguestbook | [View logs](/logs/plugins/d/dmsguestbook/error.json) |
