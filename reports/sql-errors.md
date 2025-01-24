@@ -255,6 +255,10 @@ user_id int(11) NOT NULL,
 | Data type expected in MySQL query, unknown token received: wp_resa_static_group_idService. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
 | Unknown operation: AUTO_INCREMENT. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
 | Unknown operation: AUTO_INCREMENT. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "order": syntax error. | asyncify-boot | dragon-ecommerce | [View logs](/logs/plugins/d/dragon-ecommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "order": syntax error. | jspi-boot | dragon-ecommerce | [View logs](/logs/plugins/d/dragon-ecommerce/error.json) |
+| Unknown create type: table. | asyncify-boot | database-audit | [View logs](/logs/plugins/d/database-audit/error.json) |
+| Unknown create type: table. | jspi-boot | database-audit | [View logs](/logs/plugins/d/database-audit/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_dms_mappings. | asyncify-boot | domain-mapping-system | [View logs](/logs/plugins/d/domain-mapping-system/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_dms_mappings. | jspi-boot | domain-mapping-system | [View logs](/logs/plugins/d/domain-mapping-system/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter_emails. | asyncify-boot | digital-media-combined | [View logs](/logs/plugins/d/digital-media-combined/error.json) |
