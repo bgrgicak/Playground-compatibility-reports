@@ -267,12 +267,16 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter_emails. | jspi-boot | digital-media-combined | [View logs](/logs/plugins/d/digital-media-combined/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | asyncify-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | jspi-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: agent. | asyncify-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: agent. | jspi-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: filename. | asyncify-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: filename. | jspi-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: request_status. | asyncify-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: request_status. | jspi-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ")": syntax error. | asyncify-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ")": syntax error. | jspi-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: main.wp_ahm_cron_jobs. | asyncify-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: main.wp_ahm_cron_jobs. | jspi-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
-| Unknown operation: ADD. | asyncify-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
-| Unknown operation: ADD. | jspi-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_drf_plugins. | asyncify-boot | digital-raindrops-page-styles | [View logs](/logs/plugins/d/digital-raindrops-page-styles/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_drf_plugins. | jspi-boot | digital-raindrops-page-styles | [View logs](/logs/plugins/d/digital-raindrops-page-styles/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | google-adsense-lite | [View logs](/logs/plugins/g/google-adsense-lite/error.json) |
