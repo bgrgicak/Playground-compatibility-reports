@@ -277,6 +277,8 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wfThrottleLog. | jspi-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | dancepress-trwa | [View logs](/logs/plugins/d/dancepress-trwa/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | dancepress-trwa | [View logs](/logs/plugins/d/dancepress-trwa/error.json) |
 | Unknown create type: table. | asyncify-boot | dtables | [View logs](/logs/plugins/d/dtables/error.json) |
 | Unknown create type: table. | jspi-boot | dtables | [View logs](/logs/plugins/d/dtables/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_drf_plugins. | asyncify-boot | digital-raindrops-cms-lite | [View logs](/logs/plugins/d/digital-raindrops-cms-lite/error.json) |
