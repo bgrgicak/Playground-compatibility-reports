@@ -630,6 +630,8 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 duplicate column name: timestamp. | jspi-boot | hostel | [View logs](/logs/plugins/h/hostel/error.json) |
 | Unknown create type: INDEX. | asyncify-boot | hostel | [View logs](/logs/plugins/h/hostel/error.json) |
 | Unknown create type: INDEX. | jspi-boot | hostel | [View logs](/logs/plugins/h/hostel/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | asyncify-boot | visitor-counter | [View logs](/logs/plugins/v/visitor-counter/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | jspi-boot | visitor-counter | [View logs](/logs/plugins/v/visitor-counter/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: country_id. | asyncify-boot | visitors-online | [View logs](/logs/plugins/v/visitors-online/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: country_id. | jspi-boot | visitors-online | [View logs](/logs/plugins/v/visitors-online/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | asyncify-boot | visitors-online | [View logs](/logs/plugins/v/visitors-online/error.json) |
