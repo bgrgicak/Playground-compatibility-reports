@@ -187,6 +187,8 @@ user_id int(11) NOT NULL,
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | translate2011 | [View logs](/logs/plugins/t/translate2011/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | thrive-automator | [View logs](/logs/plugins/t/thrive-automator/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | thrive-automator | [View logs](/logs/plugins/t/thrive-automator/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: add_to_group. | asyncify-boot | quizzes-for-buddypress | [View logs](/logs/plugins/q/quizzes-for-buddypress/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: add_to_group. | jspi-boot | quizzes-for-buddypress | [View logs](/logs/plugins/q/quizzes-for-buddypress/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: points. | asyncify-boot | quizzes-for-learnpress | [View logs](/logs/plugins/q/quizzes-for-learnpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: points. | jspi-boot | quizzes-for-learnpress | [View logs](/logs/plugins/q/quizzes-for-learnpress/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | reflex-gallery | [View logs](/logs/plugins/r/reflex-gallery/error.json) |
@@ -600,6 +602,10 @@ user_id int(11) NOT NULL,
 | Unknown create type: table. | jspi-boot | comment-notifier | [View logs](/logs/plugins/c/comment-notifier/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | clearsale-total | [View logs](/logs/plugins/c/clearsale-total/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | clearsale-total | [View logs](/logs/plugins/c/clearsale-total/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_abj404_lookup. | asyncify-boot | 404-solution | [View logs](/logs/plugins/4/404-solution/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_abj404_lookup. | jspi-boot | 404-solution | [View logs](/logs/plugins/4/404-solution/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_abj404_spelling_cache. | asyncify-boot | 404-solution | [View logs](/logs/plugins/4/404-solution/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_abj404_spelling_cache. | jspi-boot | 404-solution | [View logs](/logs/plugins/4/404-solution/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: "author". | asyncify-boot | h5p | [View logs](/logs/plugins/h/h5p/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: "author". | jspi-boot | h5p | [View logs](/logs/plugins/h/h5p/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: "description". | asyncify-boot | h5p | [View logs](/logs/plugins/h/h5p/error.json) |
