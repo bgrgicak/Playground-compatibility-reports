@@ -475,6 +475,8 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such column: PwdDate. | jspi-boot | expire-password | [View logs](/logs/plugins/e/expire-password/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_options has no column named blog_id. | asyncify-boot | expire-password | [View logs](/logs/plugins/e/expire-password/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_options has no column named blog_id. | jspi-boot | expire-password | [View logs](/logs/plugins/e/expire-password/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "COLUMN": syntax error. | asyncify-boot | exclude-or-include-pages-tags-posts-categories-integrate-with-wiziapp | [View logs](/logs/plugins/e/exclude-or-include-pages-tags-posts-categories-integrate-with-wiziapp/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "COLUMN": syntax error. | jspi-boot | exclude-or-include-pages-tags-posts-categories-integrate-with-wiziapp | [View logs](/logs/plugins/e/exclude-or-include-pages-tags-posts-categories-integrate-with-wiziapp/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | asyncify-boot | julia-beta | [View logs](/logs/plugins/j/julia-beta/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | jspi-boot | julia-beta | [View logs](/logs/plugins/j/julia-beta/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | jigoshop | [View logs](/logs/plugins/j/jigoshop/error.json) |
