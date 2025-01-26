@@ -469,6 +469,12 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 duplicate column name: recurrence_choice. | jspi-boot | events-calendar-registration-booking-by-events-plus | [View logs](/logs/plugins/e/events-calendar-registration-booking-by-events-plus/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | events-calendar-registration-booking-by-events-plus | [View logs](/logs/plugins/e/events-calendar-registration-booking-by-events-plus/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | events-calendar-registration-booking-by-events-plus | [View logs](/logs/plugins/e/events-calendar-registration-booking-by-events-plus/error.json) |
+| SQLSTATE[HY000]: General error: 1 Cannot add a column with non-constant default. | asyncify-boot | expire-password | [View logs](/logs/plugins/e/expire-password/error.json) |
+| SQLSTATE[HY000]: General error: 1 Cannot add a column with non-constant default. | jspi-boot | expire-password | [View logs](/logs/plugins/e/expire-password/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: PwdDate. | asyncify-boot | expire-password | [View logs](/logs/plugins/e/expire-password/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: PwdDate. | jspi-boot | expire-password | [View logs](/logs/plugins/e/expire-password/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_options has no column named blog_id. | asyncify-boot | expire-password | [View logs](/logs/plugins/e/expire-password/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_options has no column named blog_id. | jspi-boot | expire-password | [View logs](/logs/plugins/e/expire-password/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | asyncify-boot | julia-beta | [View logs](/logs/plugins/j/julia-beta/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | jspi-boot | julia-beta | [View logs](/logs/plugins/j/julia-beta/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | jigoshop | [View logs](/logs/plugins/j/jigoshop/error.json) |
