@@ -455,6 +455,12 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such table: template_select. | jspi-boot | zen4wp | [View logs](/logs/plugins/z/zen4wp/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | asyncify-boot | zeitplaner | [View logs](/logs/plugins/z/zeitplaner/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | jspi-boot | zeitplaner | [View logs](/logs/plugins/z/zeitplaner/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ezinearticles. | asyncify-boot | ezinearticles-plugin | [View logs](/logs/plugins/e/ezinearticles-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ezinearticles. | jspi-boot | ezinearticles-plugin | [View logs](/logs/plugins/e/ezinearticles-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_eva__categorie_danger. | asyncify-boot | evarisk | [View logs](/logs/plugins/e/evarisk/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_eva__categorie_danger. | jspi-boot | evarisk | [View logs](/logs/plugins/e/evarisk/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_eva__ged_documents. | asyncify-boot | evarisk | [View logs](/logs/plugins/e/evarisk/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_eva__ged_documents. | jspi-boot | evarisk | [View logs](/logs/plugins/e/evarisk/error.json) |
 | Unexpected token in MySQL query: is_result. | asyncify-boot | euro-2012-predictor | [View logs](/logs/plugins/e/euro-2012-predictor/error.json) |
 | Unexpected token in MySQL query: is_result. | jspi-boot | euro-2012-predictor | [View logs](/logs/plugins/e/euro-2012-predictor/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_eh_add_booking. | asyncify-boot | events-handler | [View logs](/logs/plugins/e/events-handler/error.json) |
@@ -463,6 +469,8 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 near ""+event.text+"": syntax error. | jspi-boot | event-calendar-scheduler | [View logs](/logs/plugins/e/event-calendar-scheduler/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_events_rec. | asyncify-boot | event-calendar-scheduler | [View logs](/logs/plugins/e/event-calendar-scheduler/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_events_rec. | jspi-boot | event-calendar-scheduler | [View logs](/logs/plugins/e/event-calendar-scheduler/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | eventin-divi-addon | [View logs](/logs/plugins/e/eventin-divi-addon/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | eventin-divi-addon | [View logs](/logs/plugins/e/eventin-divi-addon/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | events-calendar-registration-booking-by-events-plus | [View logs](/logs/plugins/e/events-calendar-registration-booking-by-events-plus/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | events-calendar-registration-booking-by-events-plus | [View logs](/logs/plugins/e/events-calendar-registration-booking-by-events-plus/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: recurrence_choice. | asyncify-boot | events-calendar-registration-booking-by-events-plus | [View logs](/logs/plugins/e/events-calendar-registration-booking-by-events-plus/error.json) |
@@ -487,6 +495,10 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | jspi-boot | easy-wp-tickets | [View logs](/logs/plugins/e/easy-wp-tickets/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ezinearticles. | asyncify-boot | ezinearticles-wordpress-plugin | [View logs](/logs/plugins/e/ezinearticles-wordpress-plugin/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ezinearticles. | jspi-boot | ezinearticles-wordpress-plugin | [View logs](/logs/plugins/e/ezinearticles-wordpress-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_emkp_categories. | asyncify-boot | emag-marketplace-connector | [View logs](/logs/plugins/e/emag-marketplace-connector/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_emkp_categories. | jspi-boot | emag-marketplace-connector | [View logs](/logs/plugins/e/emag-marketplace-connector/error.json) |
+| Unknown create type: TRIGGER. | asyncify-boot | emag-marketplace-connector | [View logs](/logs/plugins/e/emag-marketplace-connector/error.json) |
+| Unknown create type: TRIGGER. | jspi-boot | emag-marketplace-connector | [View logs](/logs/plugins/e/emag-marketplace-connector/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_liveshoutbox. | asyncify-boot | easync-booking | [View logs](/logs/plugins/e/easync-booking/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_liveshoutbox. | jspi-boot | easync-booking | [View logs](/logs/plugins/e/easync-booking/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | asyncify-boot | julia-beta | [View logs](/logs/plugins/j/julia-beta/error.json) |
