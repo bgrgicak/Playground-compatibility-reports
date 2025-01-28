@@ -381,6 +381,7 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such table: wp_identixweb_bestupsell. | jspi-boot | best-upsell-for-woocommerce | [View logs](/logs/plugins/b/best-upsell-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: brands20_settings. | asyncify-boot | brands-20 | [View logs](/logs/plugins/b/brands-20/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: brands20_settings. | jspi-boot | brands-20 | [View logs](/logs/plugins/b/brands-20/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_api_keys. | asyncify-boot | buckydrop-dropshipping-for-woocommerce | [View logs](/logs/plugins/b/buckydrop-dropshipping-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | asyncify-boot | bd-hit-counter | [View logs](/logs/plugins/b/bd-hit-counter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | jspi-boot | bd-hit-counter | [View logs](/logs/plugins/b/bd-hit-counter/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | betpress | [View logs](/logs/plugins/b/betpress/error.json) |
