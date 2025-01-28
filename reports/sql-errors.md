@@ -384,8 +384,14 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_api_keys. | asyncify-boot | buckydrop-dropshipping-for-woocommerce | [View logs](/logs/plugins/b/buckydrop-dropshipping-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | asyncify-boot | bd-hit-counter | [View logs](/logs/plugins/b/bd-hit-counter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | jspi-boot | bd-hit-counter | [View logs](/logs/plugins/b/bd-hit-counter/error.json) |
+| Unknown query type: ALTER TABLE wp_badgeos_achievements MODIFY achievement_title TEXT DEFAULT NULL;. | asyncify-boot | badgeos | [View logs](/logs/plugins/b/badgeos/error.json) |
+| Unknown query type: ALTER TABLE wp_badgeos_achievements MODIFY achievement_title TEXT DEFAULT NULL;. | jspi-boot | badgeos | [View logs](/logs/plugins/b/badgeos/error.json) |
+| Unknown query type: ALTER TABLE wp_badgeos_ranks MODIFY rank_title TEXT DEFAULT NULL;. | asyncify-boot | badgeos | [View logs](/logs/plugins/b/badgeos/error.json) |
+| Unknown query type: ALTER TABLE wp_badgeos_ranks MODIFY rank_title TEXT DEFAULT NULL;. | jspi-boot | badgeos | [View logs](/logs/plugins/b/badgeos/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | betpress | [View logs](/logs/plugins/b/betpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_bp_sports. | asyncify-boot | betpress | [View logs](/logs/plugins/b/betpress/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error. | asyncify-boot | bingmaps | [View logs](/logs/plugins/b/bingmaps/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error. | jspi-boot | bingmaps | [View logs](/logs/plugins/b/bingmaps/error.json) |
 | Unknown query type: DESC. | asyncify-boot | binarymlm | [View logs](/logs/plugins/b/binarymlm/error.json) |
 | Unknown query type: DESC. | jspi-boot | binarymlm | [View logs](/logs/plugins/b/binarymlm/error.json) |
 | MySQL field type cannot be translated to SQLite: enum. | asyncify-boot | blog2social | [View logs](/logs/plugins/b/blog2social/error.json) |
