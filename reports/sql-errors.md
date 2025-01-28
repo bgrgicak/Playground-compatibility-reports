@@ -377,10 +377,16 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such table: wp_xmt_acc. | jspi-boot | xhanch-my-twitter | [View logs](/logs/plugins/x/xhanch-my-twitter/error.json) |
 | Unknown create type: table. | asyncify-boot | xhanch-my-twitter | [View logs](/logs/plugins/x/xhanch-my-twitter/error.json) |
 | Unknown create type: table. | jspi-boot | xhanch-my-twitter | [View logs](/logs/plugins/x/xhanch-my-twitter/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_identixweb_bestupsell. | asyncify-boot | best-upsell-for-woocommerce | [View logs](/logs/plugins/b/best-upsell-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_identixweb_bestupsell. | jspi-boot | best-upsell-for-woocommerce | [View logs](/logs/plugins/b/best-upsell-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: brands20_settings. | asyncify-boot | brands-20 | [View logs](/logs/plugins/b/brands-20/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: brands20_settings. | jspi-boot | brands-20 | [View logs](/logs/plugins/b/brands-20/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | asyncify-boot | bd-hit-counter | [View logs](/logs/plugins/b/bd-hit-counter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | jspi-boot | bd-hit-counter | [View logs](/logs/plugins/b/bd-hit-counter/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | betpress | [View logs](/logs/plugins/b/betpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_bp_sports. | asyncify-boot | betpress | [View logs](/logs/plugins/b/betpress/error.json) |
+| Unknown query type: DESC. | asyncify-boot | binarymlm | [View logs](/logs/plugins/b/binarymlm/error.json) |
+| Unknown query type: DESC. | jspi-boot | binarymlm | [View logs](/logs/plugins/b/binarymlm/error.json) |
 | MySQL field type cannot be translated to SQLite: enum. | asyncify-boot | blog2social | [View logs](/logs/plugins/b/blog2social/error.json) |
 | MySQL field type cannot be translated to SQLite: enum. | jspi-boot | blog2social | [View logs](/logs/plugins/b/blog2social/error.json) |
 | Unknown operation: CHANGE. | asyncify-boot | blog2social | [View logs](/logs/plugins/b/blog2social/error.json) |
