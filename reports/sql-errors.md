@@ -396,6 +396,10 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error. | jspi-boot | bingmaps | [View logs](/logs/plugins/b/bingmaps/error.json) |
 | Unknown query type: DESC. | asyncify-boot | binarymlm | [View logs](/logs/plugins/b/binarymlm/error.json) |
 | Unknown query type: DESC. | jspi-boot | binarymlm | [View logs](/logs/plugins/b/binarymlm/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: subscribe_on_signup. | asyncify-boot | konnichiwa | [View logs](/logs/plugins/k/konnichiwa/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: subscribe_on_signup. | jspi-boot | konnichiwa | [View logs](/logs/plugins/k/konnichiwa/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ktpro_users. | asyncify-boot | kish-twit | [View logs](/logs/plugins/k/kish-twit/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ktpro_users. | jspi-boot | kish-twit | [View logs](/logs/plugins/k/kish-twit/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order. | asyncify-boot | kotae | [View logs](/logs/plugins/k/kotae/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order. | jspi-boot | kotae | [View logs](/logs/plugins/k/kotae/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ktpro_users. | asyncify-boot | kish-twitter | [View logs](/logs/plugins/k/kish-twitter/error.json) |
