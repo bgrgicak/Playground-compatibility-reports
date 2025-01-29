@@ -396,6 +396,8 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error. | jspi-boot | bingmaps | [View logs](/logs/plugins/b/bingmaps/error.json) |
 | Unknown query type: DESC. | asyncify-boot | binarymlm | [View logs](/logs/plugins/b/binarymlm/error.json) |
 | Unknown query type: DESC. | jspi-boot | binarymlm | [View logs](/logs/plugins/b/binarymlm/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order. | asyncify-boot | kotae | [View logs](/logs/plugins/k/kotae/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order. | jspi-boot | kotae | [View logs](/logs/plugins/k/kotae/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_arlo_events_presenters__fk_e_id_idx already exists. | asyncify-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
