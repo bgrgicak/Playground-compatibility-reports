@@ -396,12 +396,6 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error. | jspi-boot | bingmaps | [View logs](/logs/plugins/b/bingmaps/error.json) |
 | Unknown query type: DESC. | asyncify-boot | binarymlm | [View logs](/logs/plugins/b/binarymlm/error.json) |
 | Unknown query type: DESC. | jspi-boot | binarymlm | [View logs](/logs/plugins/b/binarymlm/error.json) |
-| MySQL field type cannot be translated to SQLite: enum. | asyncify-boot | blog2social | [View logs](/logs/plugins/b/blog2social/error.json) |
-| MySQL field type cannot be translated to SQLite: enum. | jspi-boot | blog2social | [View logs](/logs/plugins/b/blog2social/error.json) |
-| Unknown operation: CHANGE. | asyncify-boot | blog2social | [View logs](/logs/plugins/b/blog2social/error.json) |
-| Unknown operation: CHANGE. | jspi-boot | blog2social | [View logs](/logs/plugins/b/blog2social/error.json) |
-| Unknown operation: MODIFY. | asyncify-boot | blog2social | [View logs](/logs/plugins/b/blog2social/error.json) |
-| Unknown operation: MODIFY. | jspi-boot | blog2social | [View logs](/logs/plugins/b/blog2social/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_arlo_events_presenters__fk_e_id_idx already exists. | asyncify-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
