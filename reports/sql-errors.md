@@ -390,6 +390,8 @@ user_id int(11) NOT NULL,
 | Unknown query type: ALTER TABLE wp_badgeos_ranks MODIFY rank_title TEXT DEFAULT NULL;. | jspi-boot | badgeos | [View logs](/logs/plugins/b/badgeos/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | betpress | [View logs](/logs/plugins/b/betpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_bp_sports. | asyncify-boot | betpress | [View logs](/logs/plugins/b/betpress/error.json) |
+| Data type expected in MySQL query, unknown token received: pbe_task_id. | asyncify-boot | bulk-edit-for-woocommerce | [View logs](/logs/plugins/b/bulk-edit-for-woocommerce/error.json) |
+| Data type expected in MySQL query, unknown token received: pbe_task_id. | jspi-boot | bulk-edit-for-woocommerce | [View logs](/logs/plugins/b/bulk-edit-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error. | asyncify-boot | bingmaps | [View logs](/logs/plugins/b/bingmaps/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error. | jspi-boot | bingmaps | [View logs](/logs/plugins/b/bingmaps/error.json) |
 | Unknown query type: DESC. | asyncify-boot | binarymlm | [View logs](/logs/plugins/b/binarymlm/error.json) |
