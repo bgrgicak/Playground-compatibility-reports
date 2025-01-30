@@ -2,14 +2,36 @@
 ## Stats
 | Item | Logs |
 |------|------|
+| link-changer-htaccess-for-better-seo | [View logs](/logs/plugins/l/link-changer-htaccess-for-better-seo/error.json) |
+| local-sync | [View logs](/logs/plugins/l/local-sync/error.json) |
 | live-widget-luftdaten | [View logs](/logs/plugins/l/live-widget-luftdaten/error.json) |
+| logger-for-wp-mail-smtp | [View logs](/logs/plugins/l/logger-for-wp-mail-smtp/error.json) |
 | link-juice-keeper | [View logs](/logs/plugins/l/link-juice-keeper/error.json) |
+| login-devices | [View logs](/logs/plugins/l/login-devices/error.json) |
+| login-with-token | [View logs](/logs/plugins/l/login-with-token/error.json) |
+| list-plugin-details | [View logs](/logs/plugins/l/list-plugin-details/error.json) |
 | last-email-address-validator | [View logs](/logs/plugins/l/last-email-address-validator/error.json) |
+| linkmaster | [View logs](/logs/plugins/l/linkmaster/error.json) |
 | lightbox-ga | [View logs](/logs/plugins/l/lightbox-ga/error.json) |
+| last-9-photos-webcomponent | [View logs](/logs/plugins/l/last-9-photos-webcomponent/error.json) |
+| lbyt-lb-youtube | [View logs](/logs/plugins/l/lbyt-lb-youtube/error.json) |
+| lorem-ipsum-replace-content | [View logs](/logs/plugins/l/lorem-ipsum-replace-content/error.json) |
+| spotless-cleaning | [View logs](/logs/themes/s/spotless-cleaning/error.json) |
+| supermarket-ecommerce | [View logs](/logs/themes/s/supermarket-ecommerce/error.json) |
+| studies | [View logs](/logs/themes/s/studies/error.json) |
+| sauna-lite | [View logs](/logs/themes/s/sauna-lite/error.json) |
+| scary-halloween | [View logs](/logs/themes/s/scary-halloween/error.json) |
 | shushi-cafeteria | [View logs](/logs/themes/s/shushi-cafeteria/error.json) |
 | spoken-english-classes | [View logs](/logs/themes/s/spoken-english-classes/error.json) |
 | safha-one-page | [View logs](/logs/themes/s/safha-one-page/error.json) |
+| sociatic | [View logs](/logs/themes/s/sociatic/error.json) |
 | skyspa-lite | [View logs](/logs/themes/s/skyspa-lite/error.json) |
+| snapfolio | [View logs](/logs/themes/s/snapfolio/error.json) |
+| stylish-fashion-shop | [View logs](/logs/themes/s/stylish-fashion-shop/error.json) |
+| school-education | [View logs](/logs/themes/s/school-education/error.json) |
+| startup-blocks | [View logs](/logs/themes/s/startup-blocks/error.json) |
+| swimming-pool-cleaning | [View logs](/logs/themes/s/swimming-pool-cleaning/error.json) |
+| supermart-ecommerce | [View logs](/logs/themes/s/supermart-ecommerce/error.json) |
 | travel-booking-solutions | [View logs](/logs/themes/t/travel-booking-solutions/error.json) |
 | training-institute-academy | [View logs](/logs/themes/t/training-institute-academy/error.json) |
 | travel-booking-agency | [View logs](/logs/themes/t/travel-booking-agency/error.json) |
