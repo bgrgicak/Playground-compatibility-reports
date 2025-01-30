@@ -2,8 +2,11 @@
 ## Stats
 | Item | Logs |
 |------|------|
+| your-ai-chatbot | [View logs](/logs/plugins/y/your-ai-chatbot/error.json) |
+| yaymail | [View logs](/logs/plugins/y/yaymail/error.json) |
 | link-to-telegram | [View logs](/logs/plugins/l/link-to-telegram/error.json) |
 | lzb-select-dynamic | [View logs](/logs/plugins/l/lzb-select-dynamic/error.json) |
+| luzuk-slider | [View logs](/logs/plugins/l/luzuk-slider/error.json) |
 | logdash-activity-log | [View logs](/logs/plugins/l/logdash-activity-log/error.json) |
 | lumeer-embed | [View logs](/logs/plugins/l/lumeer-embed/error.json) |
 | live-shopping-blue | [View logs](/logs/plugins/l/live-shopping-blue/error.json) |
@@ -66,8 +69,11 @@
 | surreal-reality | [View logs](/logs/themes/s/surreal-reality/error.json) |
 | statement | [View logs](/logs/themes/s/statement/error.json) |
 | seva-lite | [View logs](/logs/themes/s/seva-lite/error.json) |
+| steps-dance-academy | [View logs](/logs/themes/s/steps-dance-academy/error.json) |
 | smart-cleaning | [View logs](/logs/themes/s/smart-cleaning/error.json) |
+| simple-life | [View logs](/logs/themes/s/simple-life/error.json) |
 | school | [View logs](/logs/themes/s/school/error.json) |
+| starlight | [View logs](/logs/themes/s/starlight/error.json) |
 | software-agency | [View logs](/logs/themes/s/software-agency/error.json) |
 | social-blog | [View logs](/logs/themes/s/social-blog/error.json) |
 | storeflex | [View logs](/logs/themes/s/storeflex/error.json) |
@@ -129,6 +135,7 @@
 | stygian-light | [View logs](/logs/themes/s/stygian-light/error.json) |
 | suzaku | [View logs](/logs/themes/s/suzaku/error.json) |
 | startupx | [View logs](/logs/themes/s/startupx/error.json) |
+| soccer-club | [View logs](/logs/themes/s/soccer-club/error.json) |
 | startright | [View logs](/logs/themes/s/startright/error.json) |
 | smart-tech-blog | [View logs](/logs/themes/s/smart-tech-blog/error.json) |
 | sayara-automotive | [View logs](/logs/themes/s/sayara-automotive/error.json) |
@@ -136,18 +143,22 @@
 | sparkeducation | [View logs](/logs/themes/s/sparkeducation/error.json) |
 | simple-grey | [View logs](/logs/themes/s/simple-grey/error.json) |
 | stylish-fashion-shop | [View logs](/logs/themes/s/stylish-fashion-shop/error.json) |
+| supermarket-shopping | [View logs](/logs/themes/s/supermarket-shopping/error.json) |
 | solar-power | [View logs](/logs/themes/s/solar-power/error.json) |
 | startup-techup | [View logs](/logs/themes/s/startup-techup/error.json) |
 | summer-camp | [View logs](/logs/themes/s/summer-camp/error.json) |
+| solar-energy-engine | [View logs](/logs/themes/s/solar-energy-engine/error.json) |
 | seo-specialist | [View logs](/logs/themes/s/seo-specialist/error.json) |
 | social-ngo | [View logs](/logs/themes/s/social-ngo/error.json) |
 | style-59 | [View logs](/logs/themes/s/style-59/error.json) |
 | seo-marketing-expert | [View logs](/logs/themes/s/seo-marketing-expert/error.json) |
+| supermarket-store | [View logs](/logs/themes/s/supermarket-store/error.json) |
 | smartlog | [View logs](/logs/themes/s/smartlog/error.json) |
 | school-education | [View logs](/logs/themes/s/school-education/error.json) |
 | startup-blocks | [View logs](/logs/themes/s/startup-blocks/error.json) |
 | swimming-pool-cleaning | [View logs](/logs/themes/s/swimming-pool-cleaning/error.json) |
 | strapped | [View logs](/logs/themes/s/strapped/error.json) |
+| spa-salon | [View logs](/logs/themes/s/spa-salon/error.json) |
 | speedup-store | [View logs](/logs/themes/s/speedup-store/error.json) |
 | supermart-ecommerce | [View logs](/logs/themes/s/supermart-ecommerce/error.json) |
 | skynews | [View logs](/logs/themes/s/skynews/error.json) |
@@ -177,3 +188,21 @@
 | the-home-decor | [View logs](/logs/themes/t/the-home-decor/error.json) |
 | the-computer-repair | [View logs](/logs/themes/t/the-computer-repair/error.json) |
 | tasteful-recipe | [View logs](/logs/themes/t/tasteful-recipe/error.json) |
+| avanza-lite | [View logs](/logs/themes/a/avanza-lite/error.json) |
+| audio-podcast | [View logs](/logs/themes/a/audio-podcast/error.json) |
+| auliettalite | [View logs](/logs/themes/a/auliettalite/error.json) |
+| architect-contractor | [View logs](/logs/themes/a/architect-contractor/error.json) |
+| auto-car-dealership | [View logs](/logs/themes/a/auto-car-dealership/error.json) |
+| advance-automobile | [View logs](/logs/themes/a/advance-automobile/error.json) |
+| architect-architecture | [View logs](/logs/themes/a/architect-architecture/error.json) |
+| automobile-car-dealer | [View logs](/logs/themes/a/automobile-car-dealer/error.json) |
+| affiliate-marketing-business | [View logs](/logs/themes/a/affiliate-marketing-business/error.json) |
+| aemi | [View logs](/logs/themes/a/aemi/error.json) |
+| antique-jewelry | [View logs](/logs/themes/a/antique-jewelry/error.json) |
+| aagaz-startup | [View logs](/logs/themes/a/aagaz-startup/error.json) |
+| advance-pet-care | [View logs](/logs/themes/a/advance-pet-care/error.json) |
+| acoustics | [View logs](/logs/themes/a/acoustics/error.json) |
+| architect-construction | [View logs](/logs/themes/a/architect-construction/error.json) |
+| affiliate-review | [View logs](/logs/themes/a/affiliate-review/error.json) |
+| azure-blog | [View logs](/logs/themes/a/azure-blog/error.json) |
+| akhada-fitness-gym | [View logs](/logs/themes/a/akhada-fitness-gym/error.json) |
