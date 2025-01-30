@@ -397,6 +397,7 @@ user_id int(11) NOT NULL,
 | Unknown query type: DESC. | asyncify-boot | binarymlm | [View logs](/logs/plugins/b/binarymlm/error.json) |
 | Unknown query type: DESC. | jspi-boot | binarymlm | [View logs](/logs/plugins/b/binarymlm/error.json) |
 | Failed to parse the MySQL query.. | ast-sqlite-boot | logdash-activity-log | [View logs](/logs/plugins/l/logdash-activity-log/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | ast-sqlite-boot | lpagery | [View logs](/logs/plugins/l/lpagery/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | asyncify-boot | lici-wp | [View logs](/logs/plugins/l/lici-wp/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | jspi-boot | lici-wp | [View logs](/logs/plugins/l/lici-wp/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: subscribe_on_signup. | asyncify-boot | konnichiwa | [View logs](/logs/plugins/k/konnichiwa/error.json) |
