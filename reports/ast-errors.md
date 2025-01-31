@@ -4,6 +4,7 @@
 |------|------|
 | yourllp-affiliate | [View logs](/logs/plugins/y/yourllp-affiliate/error.json) |
 | yelp-widget-pro | [View logs](/logs/plugins/y/yelp-widget-pro/error.json) |
+| ytsubcount | [View logs](/logs/plugins/y/ytsubcount/error.json) |
 | ymc-states-map | [View logs](/logs/plugins/y/ymc-states-map/error.json) |
 | ymc-crossword | [View logs](/logs/plugins/y/ymc-crossword/error.json) |
 | youcam-makeup | [View logs](/logs/plugins/y/youcam-makeup/error.json) |
@@ -77,6 +78,7 @@
 | lorem-ipsum-replace-content | [View logs](/logs/plugins/l/lorem-ipsum-replace-content/error.json) |
 | 2-factor | [View logs](/logs/plugins/2/2-factor/error.json) |
 | 2coders-integration-mux-video | [View logs](/logs/plugins/2/2coders-integration-mux-video/error.json) |
+| pmpro-import-members-from-csv | [View logs](/logs/plugins/p/pmpro-import-members-from-csv/error.json) |
 | surreal-reality | [View logs](/logs/themes/s/surreal-reality/error.json) |
 | statement | [View logs](/logs/themes/s/statement/error.json) |
 | seva-lite | [View logs](/logs/themes/s/seva-lite/error.json) |
@@ -200,6 +202,7 @@
 | the-computer-repair | [View logs](/logs/themes/t/the-computer-repair/error.json) |
 | tasteful-recipe | [View logs](/logs/themes/t/tasteful-recipe/error.json) |
 | adventure-resort | [View logs](/logs/themes/a/adventure-resort/error.json) |
+| artist-portfolio | [View logs](/logs/themes/a/artist-portfolio/error.json) |
 | automobile-shop | [View logs](/logs/themes/a/automobile-shop/error.json) |
 | animal-caretaker | [View logs](/logs/themes/a/animal-caretaker/error.json) |
 | avanza-lite | [View logs](/logs/themes/a/avanza-lite/error.json) |
@@ -218,6 +221,7 @@
 | auliettalite | [View logs](/logs/themes/a/auliettalite/error.json) |
 | automobile-mechanic | [View logs](/logs/themes/a/automobile-mechanic/error.json) |
 | agency-plus | [View logs](/logs/themes/a/agency-plus/error.json) |
+| azure-news | [View logs](/logs/themes/a/azure-news/error.json) |
 | architect-contractor | [View logs](/logs/themes/a/architect-contractor/error.json) |
 | automotive-centre | [View logs](/logs/themes/a/automotive-centre/error.json) |
 | animal-wildlife | [View logs](/logs/themes/a/animal-wildlife/error.json) |
@@ -226,6 +230,7 @@
 | ac-care | [View logs](/logs/themes/a/ac-care/error.json) |
 | azure-mag | [View logs](/logs/themes/a/azure-mag/error.json) |
 | advance-startup | [View logs](/logs/themes/a/advance-startup/error.json) |
+| advance-coaching | [View logs](/logs/themes/a/advance-coaching/error.json) |
 | app-development-company | [View logs](/logs/themes/a/app-development-company/error.json) |
 | agriculture-farm | [View logs](/logs/themes/a/agriculture-farm/error.json) |
 | animal-pet-shop | [View logs](/logs/themes/a/animal-pet-shop/error.json) |
@@ -251,6 +256,7 @@
 | aster-it-solutions | [View logs](/logs/themes/a/aster-it-solutions/error.json) |
 | advance-portfolio | [View logs](/logs/themes/a/advance-portfolio/error.json) |
 | ac-repairing-services | [View logs](/logs/themes/a/ac-repairing-services/error.json) |
+| agency-bell | [View logs](/logs/themes/a/agency-bell/error.json) |
 | acumen | [View logs](/logs/themes/a/acumen/error.json) |
 | advance-pet-care | [View logs](/logs/themes/a/advance-pet-care/error.json) |
 | acoustics | [View logs](/logs/themes/a/acoustics/error.json) |
@@ -261,4 +267,6 @@
 | auto-mechanic | [View logs](/logs/themes/a/auto-mechanic/error.json) |
 | azure-blog | [View logs](/logs/themes/a/azure-blog/error.json) |
 | awesomeone | [View logs](/logs/themes/a/awesomeone/error.json) |
+| auto-parts-garage | [View logs](/logs/themes/a/auto-parts-garage/error.json) |
+| advance-marketing-agency | [View logs](/logs/themes/a/advance-marketing-agency/error.json) |
 | akhada-fitness-gym | [View logs](/logs/themes/a/akhada-fitness-gym/error.json) |
