@@ -305,6 +305,7 @@
 | omega-blogger | [View logs](/logs/themes/o/omega-blogger/error.json) |
 | ogma-blog | [View logs](/logs/themes/o/ogma-blog/error.json) |
 | online-marketing-agency | [View logs](/logs/themes/o/online-marketing-agency/error.json) |
+| ogma-news | [View logs](/logs/themes/o/ogma-news/error.json) |
 | octo | [View logs](/logs/themes/o/octo/error.json) |
 | adventure-resort | [View logs](/logs/themes/a/adventure-resort/error.json) |
 | artist-portfolio | [View logs](/logs/themes/a/artist-portfolio/error.json) |
