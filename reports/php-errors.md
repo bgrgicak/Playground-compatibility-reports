@@ -14508,8 +14508,6 @@
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | ast-sqlite-boot | picasaimport | [View logs](/logs/plugins/p/picasaimport/error.json) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | picasaimport | [View logs](/logs/plugins/p/picasaimport/error.json) |
 | Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | picasaimport | [View logs](/logs/plugins/p/picasaimport/error.json) |
-| Uncaught Error: Cannot unset string offsets in /wordpress/wp-content/plugins/generateblocks/includes/class-enqueue-css.php:438 | asyncify-boot | pattern-wrangler | [View logs](/logs/plugins/p/pattern-wrangler/error.json) |
-| Uncaught Error: Cannot unset string offsets in /wordpress/wp-content/plugins/generateblocks/includes/class-enqueue-css.php:438 | jspi-boot | pattern-wrangler | [View logs](/logs/plugins/p/pattern-wrangler/error.json) |
 | Uncaught Error: Call to undefined function WP_Filesystem() in /wordpress/wp-content/plugins/page-geo-redirect/update.inc:2 | ast-sqlite-boot | page-geo-redirect | [View logs](/logs/plugins/p/page-geo-redirect/error.json) |
 | Uncaught Error: Call to undefined function WP_Filesystem() in /wordpress/wp-content/plugins/page-geo-redirect/update.inc:2 | asyncify-boot | page-geo-redirect | [View logs](/logs/plugins/p/page-geo-redirect/error.json) |
 | Uncaught Error: Call to undefined function WP_Filesystem() in /wordpress/wp-content/plugins/page-geo-redirect/update.inc:2 | jspi-boot | page-geo-redirect | [View logs](/logs/plugins/p/page-geo-redirect/error.json) |
