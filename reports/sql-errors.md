@@ -165,8 +165,6 @@ user_id int(11) NOT NULL,
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | matrixppc | [View logs](/logs/plugins/m/matrixppc/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | matrixseo | [View logs](/logs/plugins/m/matrixseo/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | matrixseo | [View logs](/logs/plugins/m/matrixseo/error.json) |
-| MySQL field type cannot be translated to SQLite: enum. | asyncify-boot | woo-abandoned-cart-recovery | [View logs](/logs/plugins/w/woo-abandoned-cart-recovery/error.json) |
-| MySQL field type cannot be translated to SQLite: enum. | jspi-boot | woo-abandoned-cart-recovery | [View logs](/logs/plugins/w/woo-abandoned-cart-recovery/error.json) |
 | MySQL field type cannot be translated to SQLite: enum. | asyncify-boot | wordfence | [View logs](/logs/plugins/w/wordfence/error.json) |
 | MySQL field type cannot be translated to SQLite: enum. | jspi-boot | wordfence | [View logs](/logs/plugins/w/wordfence/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wfConfig. | asyncify-boot | wordfence | [View logs](/logs/plugins/w/wordfence/error.json) |
