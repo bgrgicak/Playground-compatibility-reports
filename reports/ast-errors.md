@@ -97,14 +97,3 @@
 | peepso-tools-ultimate-member-migrator |  | [View logs](/logs/plugins/p/peepso-tools-ultimate-member-migrator/error.json) |
 | pixi-contact-form-for-elementor |  | [View logs](/logs/plugins/p/pixi-contact-form-for-elementor/error.json) |
 | product-share |  | [View logs](/logs/plugins/p/product-share/error.json) |
-| omega-hair-salon |  | [View logs](/logs/themes/o/omega-hair-salon/error.json) |
-| ott-vlogger |  | [View logs](/logs/themes/o/ott-vlogger/error.json) |
-| orphans-lite |  | [View logs](/logs/themes/o/orphans-lite/error.json) |
-| omega-design-agency |  | [View logs](/logs/themes/o/omega-design-agency/error.json) |
-| organic-market |  | [View logs](/logs/themes/o/organic-market/error.json) |
-| omega-online-store |  | [View logs](/logs/themes/o/omega-online-store/error.json) |
-| online-tutor |  | [View logs](/logs/themes/o/online-tutor/error.json) |
-| ogma-news |  | [View logs](/logs/themes/o/ogma-news/error.json) |
-| hello-travel |  | [View logs](/logs/themes/h/hello-travel/error.json) |
-| hello-animation |  | [View logs](/logs/themes/h/hello-animation/error.json) |
-| herbal-ayurveda |  | [View logs](/logs/themes/h/herbal-ayurveda/error.json) |
