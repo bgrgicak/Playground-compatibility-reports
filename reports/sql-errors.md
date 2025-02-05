@@ -175,8 +175,6 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wfls_settings. | jspi-boot | wordfence | [View logs](/logs/plugins/w/wordfence/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "USING": syntax error. | asyncify-boot | wp-optimizer | [View logs](/logs/plugins/w/wp-optimizer/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "USING": syntax error. | jspi-boot | wp-optimizer | [View logs](/logs/plugins/w/wp-optimizer/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | wp-slimstat | [View logs](/logs/plugins/w/wp-slimstat/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | wp-slimstat | [View logs](/logs/plugins/w/wp-slimstat/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | tutor | [View logs](/logs/plugins/t/tutor/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | tutor | [View logs](/logs/plugins/t/tutor/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | tabulate | [View logs](/logs/plugins/t/tabulate/error.json) |
