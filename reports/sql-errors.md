@@ -185,8 +185,6 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 duplicate column name: add_to_group. | jspi-boot | quizzes-for-buddypress | [View logs](/logs/plugins/q/quizzes-for-buddypress/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: points. | asyncify-boot | quizzes-for-learnpress | [View logs](/logs/plugins/q/quizzes-for-learnpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: points. | jspi-boot | quizzes-for-learnpress | [View logs](/logs/plugins/q/quizzes-for-learnpress/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_embed_rsvpify_plugin. | asyncify-boot | rsvpify-rsvp-form | [View logs](/logs/plugins/r/rsvpify-rsvp-form/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_embed_rsvpify_plugin. | jspi-boot | rsvpify-rsvp-form | [View logs](/logs/plugins/r/rsvpify-rsvp-form/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | role-scoper | [View logs](/logs/plugins/r/role-scoper/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | role-scoper | [View logs](/logs/plugins/r/role-scoper/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ISNULL": syntax error. | asyncify-boot | role-scoper | [View logs](/logs/plugins/r/role-scoper/error.json) |
