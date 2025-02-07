@@ -195,8 +195,6 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such table: wp_user2group_rs. | jspi-boot | role-scoper | [View logs](/logs/plugins/r/role-scoper/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_user2role2object_rs. | asyncify-boot | role-scoper | [View logs](/logs/plugins/r/role-scoper/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_user2role2object_rs. | jspi-boot | role-scoper | [View logs](/logs/plugins/r/role-scoper/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | recover-abandoned-cart-for-woocommerce | [View logs](/logs/plugins/r/recover-abandoned-cart-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | recover-abandoned-cart-for-woocommerce | [View logs](/logs/plugins/r/recover-abandoned-cart-for-woocommerce/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_resa_appointment_IdBooking. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_resa_appointment_IdBooking. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_resa_appointment_member_idAppointment. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
