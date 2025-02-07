@@ -173,8 +173,6 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wfls_2fa_secrets. | jspi-boot | wordfence | [View logs](/logs/plugins/w/wordfence/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wfls_settings. | asyncify-boot | wordfence | [View logs](/logs/plugins/w/wordfence/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wfls_settings. | jspi-boot | wordfence | [View logs](/logs/plugins/w/wordfence/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "USING": syntax error. | asyncify-boot | wp-optimizer | [View logs](/logs/plugins/w/wp-optimizer/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "USING": syntax error. | jspi-boot | wp-optimizer | [View logs](/logs/plugins/w/wp-optimizer/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | tutor | [View logs](/logs/plugins/t/tutor/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | tutor | [View logs](/logs/plugins/t/tutor/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | tabulate | [View logs](/logs/plugins/t/tabulate/error.json) |
@@ -187,8 +185,6 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 duplicate column name: add_to_group. | jspi-boot | quizzes-for-buddypress | [View logs](/logs/plugins/q/quizzes-for-buddypress/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: points. | asyncify-boot | quizzes-for-learnpress | [View logs](/logs/plugins/q/quizzes-for-learnpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: points. | jspi-boot | quizzes-for-learnpress | [View logs](/logs/plugins/q/quizzes-for-learnpress/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | reflex-gallery | [View logs](/logs/plugins/r/reflex-gallery/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | reflex-gallery | [View logs](/logs/plugins/r/reflex-gallery/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_embed_rsvpify_plugin. | asyncify-boot | rsvpify-rsvp-form | [View logs](/logs/plugins/r/rsvpify-rsvp-form/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_embed_rsvpify_plugin. | jspi-boot | rsvpify-rsvp-form | [View logs](/logs/plugins/r/rsvpify-rsvp-form/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | role-scoper | [View logs](/logs/plugins/r/role-scoper/error.json) |
