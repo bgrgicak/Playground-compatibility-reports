@@ -108,8 +108,6 @@
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | stop-confusion | [View logs](/logs/plugins/s/stop-confusion/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sl_setting. | asyncify-boot | store-locator | [View logs](/logs/plugins/s/store-locator/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sl_setting. | jspi-boot | store-locator | [View logs](/logs/plugins/s/store-locator/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_restricted. | asyncify-boot | user-restrictor | [View logs](/logs/plugins/u/user-restrictor/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_restricted. | jspi-boot | user-restrictor | [View logs](/logs/plugins/u/user-restrictor/error.json) |
     [code] => 0
     [message] => Unexpected character.
     [position] => 34
@@ -124,10 +122,6 @@ _key text NOT NULL,
 _value text NOT NULL,
 user_id int(11) NOT NULL,
 | Array
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | userswp | [View logs](/logs/plugins/u/userswp/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | userswp | [View logs](/logs/plugins/u/userswp/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_uwp_form_fields. | asyncify-boot | userswp | [View logs](/logs/plugins/u/userswp/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_uwp_form_fields. | jspi-boot | userswp | [View logs](/logs/plugins/u/userswp/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "`wp_authors`": syntax error. | asyncify-boot | masterit-authors-list | [View logs](/logs/plugins/m/masterit-authors-list/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "`wp_authors`": syntax error. | jspi-boot | masterit-authors-list | [View logs](/logs/plugins/m/masterit-authors-list/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "a": syntax error. | asyncify-boot | masterit-authors-list | [View logs](/logs/plugins/m/masterit-authors-list/error.json) |
