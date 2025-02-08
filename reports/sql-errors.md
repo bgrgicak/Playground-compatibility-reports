@@ -108,20 +108,6 @@
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | stop-confusion | [View logs](/logs/plugins/s/stop-confusion/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sl_setting. | asyncify-boot | store-locator | [View logs](/logs/plugins/s/store-locator/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sl_setting. | jspi-boot | store-locator | [View logs](/logs/plugins/s/store-locator/error.json) |
-    [code] => 0
-    [message] => Unexpected character.
-    [position] => 34
-    [query] => CREATE TABLE 'wp_udk_user_data' ( \n'id int(11) NOT NULL AUTO_INCREMENT,
-    [str] => \
-(
-)
-. | asyncify-boot | up-user-datakeeper | [View logs](/logs/plugins/u/up-user-datakeeper/error.json) |
-. | jspi-boot | up-user-datakeeper | [View logs](/logs/plugins/u/up-user-datakeeper/error.json) |
-PRIMARY KEY (id)'\n ) $charsetCollate
-_key text NOT NULL,
-_value text NOT NULL,
-user_id int(11) NOT NULL,
-| Array
 | SQLSTATE[HY000]: General error: 1 near "`wp_authors`": syntax error. | asyncify-boot | masterit-authors-list | [View logs](/logs/plugins/m/masterit-authors-list/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "`wp_authors`": syntax error. | jspi-boot | masterit-authors-list | [View logs](/logs/plugins/m/masterit-authors-list/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "a": syntax error. | asyncify-boot | masterit-authors-list | [View logs](/logs/plugins/m/masterit-authors-list/error.json) |
