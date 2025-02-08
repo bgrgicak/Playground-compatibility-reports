@@ -185,68 +185,6 @@ user_id int(11) NOT NULL,
 | SQLSTATE[HY000]: General error: 1 duplicate column name: add_to_group. | jspi-boot | quizzes-for-buddypress | [View logs](/logs/plugins/q/quizzes-for-buddypress/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: points. | asyncify-boot | quizzes-for-learnpress | [View logs](/logs/plugins/q/quizzes-for-learnpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: points. | jspi-boot | quizzes-for-learnpress | [View logs](/logs/plugins/q/quizzes-for-learnpress/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | role-scoper | [View logs](/logs/plugins/r/role-scoper/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | role-scoper | [View logs](/logs/plugins/r/role-scoper/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "ISNULL": syntax error. | asyncify-boot | role-scoper | [View logs](/logs/plugins/r/role-scoper/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "ISNULL": syntax error. | jspi-boot | role-scoper | [View logs](/logs/plugins/r/role-scoper/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_groups_rs. | asyncify-boot | role-scoper | [View logs](/logs/plugins/r/role-scoper/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_groups_rs. | jspi-boot | role-scoper | [View logs](/logs/plugins/r/role-scoper/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_user2group_rs. | asyncify-boot | role-scoper | [View logs](/logs/plugins/r/role-scoper/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_user2group_rs. | jspi-boot | role-scoper | [View logs](/logs/plugins/r/role-scoper/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_user2role2object_rs. | asyncify-boot | role-scoper | [View logs](/logs/plugins/r/role-scoper/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_user2role2object_rs. | jspi-boot | role-scoper | [View logs](/logs/plugins/r/role-scoper/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_appointment_IdBooking. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_appointment_IdBooking. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_appointment_member_idAppointment. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_appointment_member_idAppointment. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_appointment_number_price_idAppointment. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_appointment_number_price_idAppointment. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_appointment_reduction_idAppointment. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_appointment_reduction_idAppointment. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_ask_payment_IdBooking. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_ask_payment_IdBooking. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_booking_custom_reduction_IdBooking. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_booking_custom_reduction_IdBooking. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_booking_reduction_IdBooking. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_booking_reduction_IdBooking. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_member_availability_IdMember. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_member_availability_IdMember. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_member_availability_service_idMemberAvailability. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_member_availability_service_idMemberAvailability. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_member_constraint_idMember. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_member_constraint_idMember. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_member_link_IdMember. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_member_link_IdMember. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_member_link_service_idMemberLink. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_member_link_service_idMemberLink. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_payment_IdBooking. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_payment_IdBooking. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_reduction_application_idReduction. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_reduction_application_idReduction. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_reduction_condition_application_idReductionConditions. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_reduction_condition_application_idReductionConditions. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_reduction_condition_idReductionConditions. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_reduction_condition_idReductionConditions. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_reduction_condition_service_idReductionCondition. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_reduction_condition_service_idReductionCondition. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_reduction_conditions_application_idReduction. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_reduction_conditions_application_idReduction. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_reduction_conditions_idReduction. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_reduction_conditions_idReduction. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_service_availability_idService. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_service_availability_idService. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_service_constraint_idService. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_service_constraint_idService. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_service_member_priority_idService. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_service_member_priority_idService. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_service_price_idService. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_service_price_idService. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_service_timeslot_idServiceAvailability. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_service_timeslot_idServiceAvailability. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_static_group_idService. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_resa_static_group_idService. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Unknown operation: AUTO_INCREMENT. | asyncify-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
-| Unknown operation: AUTO_INCREMENT. | jspi-boot | resa-online | [View logs](/logs/plugins/r/resa-online/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "order": syntax error. | asyncify-boot | dragon-ecommerce | [View logs](/logs/plugins/d/dragon-ecommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "order": syntax error. | jspi-boot | dragon-ecommerce | [View logs](/logs/plugins/d/dragon-ecommerce/error.json) |
 | Unknown create type: table. | asyncify-boot | database-audit | [View logs](/logs/plugins/d/database-audit/error.json) |
