@@ -257,8 +257,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_leads. | jspi-boot | gwa-autoresponder | [View logs](/logs/plugins/g/gwa-autoresponder/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | isimpledesign-approve-postspages-plugin | [View logs](/logs/plugins/i/isimpledesign-approve-postspages-plugin/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | isimpledesign-approve-postspages-plugin | [View logs](/logs/plugins/i/isimpledesign-approve-postspages-plugin/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_imk_apps. | asyncify-boot | imk-services | [View logs](/logs/plugins/i/imk-services/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_imk_apps. | jspi-boot | imk-services | [View logs](/logs/plugins/i/imk-services/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | inkmember-build-your-membership-site-easily | [View logs](/logs/plugins/i/inkmember-build-your-membership-site-easily/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | inkmember-build-your-membership-site-easily | [View logs](/logs/plugins/i/inkmember-build-your-membership-site-easily/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | inkmember-build-your-membership-site-easily | [View logs](/logs/plugins/i/inkmember-build-your-membership-site-easily/error.json) |
