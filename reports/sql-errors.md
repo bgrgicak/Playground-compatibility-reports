@@ -255,12 +255,6 @@
 | SQLSTATE[HY000]: General error: 1 near "gmlr": syntax error. | jspi-boot | geo-mashup | [View logs](/logs/plugins/g/geo-mashup/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_leads. | asyncify-boot | gwa-autoresponder | [View logs](/logs/plugins/g/gwa-autoresponder/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_leads. | jspi-boot | gwa-autoresponder | [View logs](/logs/plugins/g/gwa-autoresponder/error.json) |
-| Unknown show type: FIELDS FROM. | asyncify-boot | isimpledesign-approve-postspages-plugin | [View logs](/logs/plugins/i/isimpledesign-approve-postspages-plugin/error.json) |
-| Unknown show type: FIELDS FROM. | jspi-boot | isimpledesign-approve-postspages-plugin | [View logs](/logs/plugins/i/isimpledesign-approve-postspages-plugin/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | inkmember-build-your-membership-site-easily | [View logs](/logs/plugins/i/inkmember-build-your-membership-site-easily/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | inkmember-build-your-membership-site-easily | [View logs](/logs/plugins/i/inkmember-build-your-membership-site-easily/error.json) |
-| Unknown operation: MODIFY. | asyncify-boot | inkmember-build-your-membership-site-easily | [View logs](/logs/plugins/i/inkmember-build-your-membership-site-easily/error.json) |
-| Unknown operation: MODIFY. | jspi-boot | inkmember-build-your-membership-site-easily | [View logs](/logs/plugins/i/inkmember-build-your-membership-site-easily/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ob_settings. | asyncify-boot | onionbuzz-viral-quiz | [View logs](/logs/plugins/o/onionbuzz-viral-quiz/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ob_settings. | jspi-boot | onionbuzz-viral-quiz | [View logs](/logs/plugins/o/onionbuzz-viral-quiz/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW. | asyncify-boot | online-billing-service | [View logs](/logs/plugins/o/online-billing-service/error.json) |
