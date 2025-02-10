@@ -449,14 +449,6 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | newsplug | [View logs](/logs/plugins/n/newsplug/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | newsplug | [View logs](/logs/plugins/n/newsplug/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | newsplug | [View logs](/logs/plugins/n/newsplug/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wpmlcountries. | asyncify-boot | newsletters-lite | [View logs](/logs/plugins/n/newsletters-lite/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wpmlcountries. | jspi-boot | newsletters-lite | [View logs](/logs/plugins/n/newsletters-lite/error.json) |
-| SQLSTATE[HY000]: General error: 1 table "wp_wpmlbounces" already exists. | asyncify-boot | newsletters-lite | [View logs](/logs/plugins/n/newsletters-lite/error.json) |
-| SQLSTATE[HY000]: General error: 1 table "wp_wpmlbounces" already exists. | jspi-boot | newsletters-lite | [View logs](/logs/plugins/n/newsletters-lite/error.json) |
-| SQLSTATE[HY000]: General error: 1 table "wp_wpmlsubscribers" already exists. | asyncify-boot | newsletters-lite | [View logs](/logs/plugins/n/newsletters-lite/error.json) |
-| SQLSTATE[HY000]: General error: 1 table "wp_wpmlsubscribers" already exists. | jspi-boot | newsletters-lite | [View logs](/logs/plugins/n/newsletters-lite/error.json) |
-| SQLSTATE[HY000]: General error: 1 table "wp_wpmlunsubscribes" already exists. | asyncify-boot | newsletters-lite | [View logs](/logs/plugins/n/newsletters-lite/error.json) |
-| SQLSTATE[HY000]: General error: 1 table "wp_wpmlunsubscribes" already exists. | jspi-boot | newsletters-lite | [View logs](/logs/plugins/n/newsletters-lite/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "DROP": syntax error. | asyncify-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
