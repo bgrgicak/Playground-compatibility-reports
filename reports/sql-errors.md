@@ -445,10 +445,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_email_template. | jspi-boot | newsletter-manager | [View logs](/logs/plugins/n/newsletter-manager/error.json) |
 | Unknown query type: RENAME. | asyncify-boot | newsletter-manager | [View logs](/logs/plugins/n/newsletter-manager/error.json) |
 | Unknown query type: RENAME. | jspi-boot | newsletter-manager | [View logs](/logs/plugins/n/newsletter-manager/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | noshop | [View logs](/logs/plugins/n/noshop/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | noshop | [View logs](/logs/plugins/n/noshop/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_nu_jm_crea. | asyncify-boot | notify-update-par-jm-crea | [View logs](/logs/plugins/n/notify-update-par-jm-crea/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_nu_jm_crea. | jspi-boot | notify-update-par-jm-crea | [View logs](/logs/plugins/n/notify-update-par-jm-crea/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | newsplug | [View logs](/logs/plugins/n/newsplug/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | newsplug | [View logs](/logs/plugins/n/newsplug/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | newsplug | [View logs](/logs/plugins/n/newsplug/error.json) |
