@@ -431,24 +431,6 @@
 | Unknown operation: CONVERT. | jspi-boot | jsp-store-locator | [View logs](/logs/plugins/j/jsp-store-locator/error.json) |
 | Unknown operation: ENGINE. | asyncify-boot | jigoshop-ecommerce | [View logs](/logs/plugins/j/jigoshop-ecommerce/error.json) |
 | Unknown operation: ENGINE. | jspi-boot | jigoshop-ecommerce | [View logs](/logs/plugins/j/jigoshop-ecommerce/error.json) |
-| Data type expected in MySQL query, unknown token received: end_time. | asyncify-boot | newsletter-manager | [View logs](/logs/plugins/n/newsletter-manager/error.json) |
-| Data type expected in MySQL query, unknown token received: end_time. | jspi-boot | newsletter-manager | [View logs](/logs/plugins/n/newsletter-manager/error.json) |
-| Data type expected in MySQL query, unknown token received: formid. | asyncify-boot | newsletter-manager | [View logs](/logs/plugins/n/newsletter-manager/error.json) |
-| Data type expected in MySQL query, unknown token received: formid. | jspi-boot | newsletter-manager | [View logs](/logs/plugins/n/newsletter-manager/error.json) |
-| Data type expected in MySQL query, unknown token received: join_after_campaign_started. | asyncify-boot | newsletter-manager | [View logs](/logs/plugins/n/newsletter-manager/error.json) |
-| Data type expected in MySQL query, unknown token received: join_after_campaign_started. | jspi-boot | newsletter-manager | [View logs](/logs/plugins/n/newsletter-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_additional_field_info. | asyncify-boot | newsletter-manager | [View logs](/logs/plugins/n/newsletter-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_additional_field_info. | jspi-boot | newsletter-manager | [View logs](/logs/plugins/n/newsletter-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_address_list_mapping. | asyncify-boot | newsletter-manager | [View logs](/logs/plugins/n/newsletter-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_address_list_mapping. | jspi-boot | newsletter-manager | [View logs](/logs/plugins/n/newsletter-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_email_template. | asyncify-boot | newsletter-manager | [View logs](/logs/plugins/n/newsletter-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_em_email_template. | jspi-boot | newsletter-manager | [View logs](/logs/plugins/n/newsletter-manager/error.json) |
-| Unknown query type: RENAME. | asyncify-boot | newsletter-manager | [View logs](/logs/plugins/n/newsletter-manager/error.json) |
-| Unknown query type: RENAME. | jspi-boot | newsletter-manager | [View logs](/logs/plugins/n/newsletter-manager/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | newsplug | [View logs](/logs/plugins/n/newsplug/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | newsplug | [View logs](/logs/plugins/n/newsplug/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | newsplug | [View logs](/logs/plugins/n/newsplug/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | newsplug | [View logs](/logs/plugins/n/newsplug/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "DROP": syntax error. | asyncify-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
