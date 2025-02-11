@@ -235,8 +235,6 @@
 | Unexpected token in MySQL query: sent. | jspi-boot | golf-society | [View logs](/logs/plugins/g/golf-society/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | golf-society | [View logs](/logs/plugins/g/golf-society/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | golf-society | [View logs](/logs/plugins/g/golf-society/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "gmlr": syntax error. | asyncify-boot | geo-mashup | [View logs](/logs/plugins/g/geo-mashup/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "gmlr": syntax error. | jspi-boot | geo-mashup | [View logs](/logs/plugins/g/geo-mashup/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_leads. | asyncify-boot | gwa-autoresponder | [View logs](/logs/plugins/g/gwa-autoresponder/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_leads. | jspi-boot | gwa-autoresponder | [View logs](/logs/plugins/g/gwa-autoresponder/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ob_settings. | asyncify-boot | onionbuzz-viral-quiz | [View logs](/logs/plugins/o/onionbuzz-viral-quiz/error.json) |
