@@ -343,26 +343,6 @@
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | singlepage | [View logs](/logs/plugins/s/singlepage/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | singlepage | [View logs](/logs/plugins/s/singlepage/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | singlepage | [View logs](/logs/plugins/s/singlepage/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: checks. | asyncify-boot | sirv | [View logs](/logs/plugins/s/sirv/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: checks. | jspi-boot | sirv | [View logs](/logs/plugins/s/sirv/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: error_type. | asyncify-boot | sirv | [View logs](/logs/plugins/s/sirv/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: error_type. | jspi-boot | sirv | [View logs](/logs/plugins/s/sirv/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: status. | asyncify-boot | sirv | [View logs](/logs/plugins/s/sirv/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: status. | jspi-boot | sirv | [View logs](/logs/plugins/s/sirv/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: timestamp_checks. | asyncify-boot | sirv | [View logs](/logs/plugins/s/sirv/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: timestamp_checks. | jspi-boot | sirv | [View logs](/logs/plugins/s/sirv/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | asyncify-boot | sirv | [View logs](/logs/plugins/s/sirv/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | jspi-boot | sirv | [View logs](/logs/plugins/s/sirv/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | asyncify-boot | sirv | [View logs](/logs/plugins/s/sirv/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | jspi-boot | sirv | [View logs](/logs/plugins/s/sirv/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | sirv | [View logs](/logs/plugins/s/sirv/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | sirv | [View logs](/logs/plugins/s/sirv/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_sirv_images. | asyncify-boot | sirv | [View logs](/logs/plugins/s/sirv/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_sirv_images. | jspi-boot | sirv | [View logs](/logs/plugins/s/sirv/error.json) |
-| Unknown show type: INDEXES FROM. | asyncify-boot | sirv | [View logs](/logs/plugins/s/sirv/error.json) |
-| Unknown show type: INDEXES FROM. | jspi-boot | sirv | [View logs](/logs/plugins/s/sirv/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | sobex-tech | [View logs](/logs/plugins/s/sobex-tech/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | sobex-tech | [View logs](/logs/plugins/s/sobex-tech/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_auth0_user. | asyncify-boot | social-login-with-auth0 | [View logs](/logs/plugins/s/social-login-with-auth0/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_auth0_user. | jspi-boot | social-login-with-auth0 | [View logs](/logs/plugins/s/social-login-with-auth0/error.json) |
 | SQLSTATE[HY000]: General error: 1 ON CONFLICT clause does not match any PRIMARY KEY or UNIQUE constraint. | asyncify-boot | squad-modules-for-divi | [View logs](/logs/plugins/s/squad-modules-for-divi/error.json) |
