@@ -345,8 +345,6 @@
 | Unknown operation: MODIFY. | jspi-boot | singlepage | [View logs](/logs/plugins/s/singlepage/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_auth0_user. | asyncify-boot | social-login-with-auth0 | [View logs](/logs/plugins/s/social-login-with-auth0/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_auth0_user. | jspi-boot | social-login-with-auth0 | [View logs](/logs/plugins/s/social-login-with-auth0/error.json) |
-| SQLSTATE[HY000]: General error: 1 ON CONFLICT clause does not match any PRIMARY KEY or UNIQUE constraint. | asyncify-boot | squad-modules-for-divi | [View logs](/logs/plugins/s/squad-modules-for-divi/error.json) |
-| SQLSTATE[HY000]: General error: 1 ON CONFLICT clause does not match any PRIMARY KEY or UNIQUE constraint. | jspi-boot | squad-modules-for-divi | [View logs](/logs/plugins/s/squad-modules-for-divi/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ss_downloads. | asyncify-boot | ss-downloads | [View logs](/logs/plugins/s/ss-downloads/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ss_downloads. | jspi-boot | ss-downloads | [View logs](/logs/plugins/s/ss-downloads/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | sso-freshdesk-support-integration | [View logs](/logs/plugins/s/sso-freshdesk-support-integration/error.json) |
