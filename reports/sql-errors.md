@@ -335,8 +335,6 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | shashin | [View logs](/logs/plugins/s/shashin/error.json) |
 | Unknown drop type: table. | asyncify-boot | simile-for-woocommerce | [View logs](/logs/plugins/s/simile-for-woocommerce/error.json) |
 | Unknown drop type: table. | jspi-boot | simile-for-woocommerce | [View logs](/logs/plugins/s/simile-for-woocommerce/error.json) |
-| Table not found. | asyncify-boot | simplelender-by-umatidocs-com | [View logs](/logs/plugins/s/simplelender-by-umatidocs-com/error.json) |
-| Table not found. | jspi-boot | simplelender-by-umatidocs-com | [View logs](/logs/plugins/s/simplelender-by-umatidocs-com/error.json) |
 | Table not found. | asyncify-boot | simplemortgage | [View logs](/logs/plugins/s/simplemortgage/error.json) |
 | Table not found. | jspi-boot | simplemortgage | [View logs](/logs/plugins/s/simplemortgage/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | singlepage | [View logs](/logs/plugins/s/singlepage/error.json) |
@@ -345,8 +343,6 @@
 | Unknown operation: MODIFY. | jspi-boot | singlepage | [View logs](/logs/plugins/s/singlepage/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_auth0_user. | asyncify-boot | social-login-with-auth0 | [View logs](/logs/plugins/s/social-login-with-auth0/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_auth0_user. | jspi-boot | social-login-with-auth0 | [View logs](/logs/plugins/s/social-login-with-auth0/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ss_downloads. | asyncify-boot | ss-downloads | [View logs](/logs/plugins/s/ss-downloads/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ss_downloads. | jspi-boot | ss-downloads | [View logs](/logs/plugins/s/ss-downloads/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | sso-freshdesk-support-integration | [View logs](/logs/plugins/s/sso-freshdesk-support-integration/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | sso-freshdesk-support-integration | [View logs](/logs/plugins/s/sso-freshdesk-support-integration/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error. | asyncify-boot | stageshow | [View logs](/logs/plugins/s/stageshow/error.json) |
