@@ -313,8 +313,6 @@
 | SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | jspi-boot | julia-beta | [View logs](/logs/plugins/j/julia-beta/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | safetag | [View logs](/logs/plugins/s/safetag/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | safetag | [View logs](/logs/plugins/s/safetag/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_iqamahTimes. | asyncify-boot | salah-world-prayer-iqamah-timings-for-your-masjids | [View logs](/logs/plugins/s/salah-world-prayer-iqamah-timings-for-your-masjids/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_iqamahTimes. | jspi-boot | salah-world-prayer-iqamah-timings-for-your-masjids | [View logs](/logs/plugins/s/salah-world-prayer-iqamah-timings-for-your-masjids/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | sell-downloads | [View logs](/logs/plugins/s/sell-downloads/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | sell-downloads | [View logs](/logs/plugins/s/sell-downloads/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: as_single. | asyncify-boot | sell-downloads | [View logs](/logs/plugins/s/sell-downloads/error.json) |
@@ -337,14 +335,8 @@
 | Unknown drop type: table. | jspi-boot | simile-for-woocommerce | [View logs](/logs/plugins/s/simile-for-woocommerce/error.json) |
 | Table not found. | asyncify-boot | simplemortgage | [View logs](/logs/plugins/s/simplemortgage/error.json) |
 | Table not found. | jspi-boot | simplemortgage | [View logs](/logs/plugins/s/simplemortgage/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | singlepage | [View logs](/logs/plugins/s/singlepage/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | singlepage | [View logs](/logs/plugins/s/singlepage/error.json) |
-| Unknown operation: MODIFY. | asyncify-boot | singlepage | [View logs](/logs/plugins/s/singlepage/error.json) |
-| Unknown operation: MODIFY. | jspi-boot | singlepage | [View logs](/logs/plugins/s/singlepage/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_auth0_user. | asyncify-boot | social-login-with-auth0 | [View logs](/logs/plugins/s/social-login-with-auth0/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_auth0_user. | jspi-boot | social-login-with-auth0 | [View logs](/logs/plugins/s/social-login-with-auth0/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | sso-freshdesk-support-integration | [View logs](/logs/plugins/s/sso-freshdesk-support-integration/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | sso-freshdesk-support-integration | [View logs](/logs/plugins/s/sso-freshdesk-support-integration/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error. | asyncify-boot | stageshow | [View logs](/logs/plugins/s/stageshow/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error. | jspi-boot | stageshow | [View logs](/logs/plugins/s/stageshow/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "GatewaySelected": syntax error. | asyncify-boot | stageshow | [View logs](/logs/plugins/s/stageshow/error.json) |
