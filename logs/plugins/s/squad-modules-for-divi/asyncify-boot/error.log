@@ -1,156 +1,17 @@
-file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:20
-`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){t.mountBeforeInstall&&p(h,t.mountBeforeInstall)}}});const v=await s.getPrimaryPhp();try{if(n&&!t.mountBeforeInstall&&g.writeFileSync(f,await q(v,"/wordpress")),t.mount&&p(v,t.mount),d=!0,u){const{php:h,reap:m}=await s.processManager.acquirePHPInstance();try{c.log("Running the Blueprint..."),await x(u,h),c.log("Finished running the blueprint")}finally{m()}}a==="build-snapshot"?(await r(t.outfile),c.log(`WordPress exported to ${t.outfile}`),process.exit(0)):a==="run-blueprint"?(c.log("Blueprint executed"),process.exit(0)):c.log(`WordPress is running on ${l}`)}catch(h){if(!t.debug)throw h;const m=v.readFileAsText(D);throw new Error(m,{cause:h})}},async handleRequest(o){return d?await s.request(o):I.forHttpCode(502,"WordPress is not ready yet")}})}Q();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ^
+node:internal/event_target:1094
+  process.nextTick(() => { throw err; });
+                           ^
 
-Error: [11-Jan-2025 21:40:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO wp_divi_squad_custom_fields (meta_key, post_type)
-                SELECT DISTINCT pm.meta_key, p.post_type
-                FROM wp_postmeta pm
-                INNER JOIN wp_posts p ON p.ID = pm.post_id
-                WHERE p.post_type IN ('post')
-                AND pm.meta_key NOT LIKE '_%'
-                AND NOT EXISTS (
-                    SELECT 1
-                    FROM wp_postmeta pm2
-                    INNER JOIN wp_posts p2 ON p2.ID = pm2.post_id
-                    WHERE pm2.meta_key = CONCAT('_', pm.meta_key)
-                    AND p2.post_type = p.post_type
-                )
-                ON DUPLICATE KEY UPDATE last_updated = CURRENT_TIMESTAMP</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_table_info(:table_name) as l WHERE l.pk &gt; 0; | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_index_list(&quot;wp_divi_squad_custom_fields&quot;) as l; | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_index_info(&quot;wp_divi_squad_custom_fields__meta_key_post_type&quot;) as l; | (no parameters)</li>
-<li>Executing: INSERT INTO wp_divi_squad_custom_fields (meta_key, post_type)
-                SELECT DISTINCT pm.meta_key, p.post_type
-                FROM wp_postmeta pm
-                INNER JOIN wp_posts p ON p.ID = pm.post_id
-                WHERE p.post_type IN (:param0 )
-                AND pm.meta_key NOT LIKE :param1 
-                AND NOT EXISTS (
-                    SELECT 1
-                    FROM wp_postmeta pm2
-                    INNER JOIN wp_posts p2 ON p2.ID = pm2.post_id
-                    WHERE pm2.meta_key = (:param2 || pm.meta_key)
-                    AND p2.post_type = p.post_type
-                )
-                ON   CONFLICT (&quot;meta_key&quot;) DO UPDATE SET  last_updated = CURRENT_TIMESTAMP | parameters: post, _%, _</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 ON CONFLICT clause does not match any PRIMARY KEY or UNIQUE constraint.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/squad-modules-for-divi/includes/Base/DiviBuilder/Utils/Elements/CustomFields/Managers/Fields.php(227): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Managers\Fields->populate_summary_table('')
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-includes/load.php(1279): do_action('shutdown')
-#6 [internal function]: shutdown_action_hook()
-#7 {main}</pre>
- for query INSERT INTO wp_divi_squad_custom_fields (meta_key, post_type)
-                SELECT DISTINCT pm.meta_key, p.post_type
-                FROM wp_postmeta pm
-                INNER JOIN wp_posts p ON p.ID = pm.post_id
-                WHERE p.post_type IN ('post')
-                AND pm.meta_key NOT LIKE '_%'
-                AND NOT EXISTS (
-                    SELECT 1
-                    FROM wp_postmeta pm2
-                    INNER JOIN wp_posts p2 ON p2.ID = pm2.post_id
-                    WHERE pm2.meta_key = CONCAT('_', pm.meta_key)
-                    AND p2.post_type = p.post_type
-                )
-                ON DUPLICATE KEY UPDATE last_updated = CURRENT_TIMESTAMP made by shutdown_action_hook, do_action('shutdown'), WP_Hook->do_action, WP_Hook->apply_filters, DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Managers\Fields->populate_summary_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[11-Jan-2025 21:40:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO wp_divi_squad_custom_fields (meta_key, post_type)
-                SELECT DISTINCT pm.meta_key, p.post_type
-                FROM wp_postmeta pm
-                INNER JOIN wp_posts p ON p.ID = pm.post_id
-                WHERE p.post_type IN ('post')
-                AND pm.meta_key NOT LIKE '_%'
-                AND NOT EXISTS (
-                    SELECT 1
-                    FROM wp_postmeta pm2
-                    INNER JOIN wp_posts p2 ON p2.ID = pm2.post_id
-                    WHERE pm2.meta_key = CONCAT('_', pm.meta_key)
-                    AND p2.post_type = p.post_type
-                )
-                ON DUPLICATE KEY UPDATE last_updated = CURRENT_TIMESTAMP</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_table_info(:table_name) as l WHERE l.pk &gt; 0; | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_index_list(&quot;wp_divi_squad_custom_fields&quot;) as l; | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_index_info(&quot;wp_divi_squad_custom_fields__meta_key_post_type&quot;) as l; | (no parameters)</li>
-<li>Executing: INSERT INTO wp_divi_squad_custom_fields (meta_key, post_type)
-                SELECT DISTINCT pm.meta_key, p.post_type
-                FROM wp_postmeta pm
-                INNER JOIN wp_posts p ON p.ID = pm.post_id
-                WHERE p.post_type IN (:param0 )
-                AND pm.meta_key NOT LIKE :param1 
-                AND NOT EXISTS (
-                    SELECT 1
-                    FROM wp_postmeta pm2
-                    INNER JOIN wp_posts p2 ON p2.ID = pm2.post_id
-                    WHERE pm2.meta_key = (:param2 || pm.meta_key)
-                    AND p2.post_type = p.post_type
-                )
-                ON   CONFLICT (&quot;meta_key&quot;) DO UPDATE SET  last_updated = CURRENT_TIMESTAMP | parameters: post, _%, _</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 ON CONFLICT clause does not match any PRIMARY KEY or UNIQUE constraint.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/squad-modules-for-divi/includes/Base/DiviBuilder/Utils/Elements/CustomFields/Managers/Fields.php(227): WP_SQLite_DB->query('INSERT INTO wp_...')
-#2 /wordpress/wp-includes/class-wp-hook.php(324): DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Managers\Fields->populate_summary_table('')
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-includes/load.php(1279): do_action('shutdown')
-#6 [internal function]: shutdown_action_hook()
-#7 {main}</pre>
- for query INSERT INTO wp_divi_squad_custom_fields (meta_key, post_type)
-                SELECT DISTINCT pm.meta_key, p.post_type
-                FROM wp_postmeta pm
-                INNER JOIN wp_posts p ON p.ID = pm.post_id
-                WHERE p.post_type IN ('post')
-                AND pm.meta_key NOT LIKE '_%'
-                AND NOT EXISTS (
-                    SELECT 1
-                    FROM wp_postmeta pm2
-                    INNER JOIN wp_posts p2 ON p2.ID = pm2.post_id
-                    WHERE pm2.meta_key = CONCAT('_', pm.meta_key)
-                    AND p2.post_type = p.post_type
-                )
-                ON DUPLICATE KEY UPDATE last_updated = CURRENT_TIMESTAMP made by shutdown_action_hook, do_action('shutdown'), WP_Hook->do_action, WP_Hook->apply_filters, DiviSquad\Base\DiviBuilder\Utils\Elements\CustomFields\Managers\Fields->populate_summary_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+TypeError: process.stdout.clearLine is not a function
+    at C.<anonymous> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:18:538)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:820:20)
+    at C.dispatchEvent (node:internal/event_target:755:26)
+    at C.notifyProgress (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:295:10)
+    at C.<anonymous> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:200:81)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:820:20)
+    at C.dispatchEvent (node:internal/event_target:755:26)
+    at C.notifyProgress (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:295:10)
+    at C.<anonymous> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:200:81)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:820:20)
 
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:20:788)
-    at async j (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1166) {
-  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginZipFile":{"resource":"wordpress.org/plugins","slug":"squad-modules-for-divi"},"options":{"activate":true},"pluginData":{"resource":"wordpress.org/plugins","slug":"squad-modules-for-divi"}}) : Plugin /wordpress/wp-content/plugins/squad-modules-for-divi could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12099:32)
-      at async Qt (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12200:3)
-      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:20:453)
-      at async j (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1166) {
-    [cause]: Error: Plugin /wordpress/wp-content/plugins/squad-modules-for-divi could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details
-        at gr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:67:24)
-        at async Object.at [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:877:42)
-        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12165:30)
-        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12096:23)
-        at async Qt (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12200:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:20:453)
-        at async j (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1166)
-  }
-}
-
-Node.js v18.18.2
+Node.js v20.15.0
