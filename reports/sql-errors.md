@@ -323,10 +323,6 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | sermonaudio-widgets | [View logs](/logs/plugins/s/sermonaudio-widgets/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sa_plugin. | asyncify-boot | sermonaudio-widgets | [View logs](/logs/plugins/s/sermonaudio-widgets/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sa_plugin. | jspi-boot | sermonaudio-widgets | [View logs](/logs/plugins/s/sermonaudio-widgets/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | serpzilla | [View logs](/logs/plugins/s/serpzilla/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | serpzilla | [View logs](/logs/plugins/s/serpzilla/error.json) |
-| Table not found. | asyncify-boot | serpzilla | [View logs](/logs/plugins/s/serpzilla/error.json) |
-| Table not found. | jspi-boot | serpzilla | [View logs](/logs/plugins/s/serpzilla/error.json) |
 | Unknown drop type: table. | asyncify-boot | simile-for-woocommerce | [View logs](/logs/plugins/s/simile-for-woocommerce/error.json) |
 | Unknown drop type: table. | jspi-boot | simile-for-woocommerce | [View logs](/logs/plugins/s/simile-for-woocommerce/error.json) |
 | Table not found. | asyncify-boot | simplemortgage | [View logs](/logs/plugins/s/simplemortgage/error.json) |
