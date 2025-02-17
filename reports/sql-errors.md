@@ -311,18 +311,6 @@
 | Unknown operation: ENGINE. | jspi-boot | jigoshop-ecommerce | [View logs](/logs/plugins/j/jigoshop-ecommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | asyncify-boot | julia-beta | [View logs](/logs/plugins/j/julia-beta/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | jspi-boot | julia-beta | [View logs](/logs/plugins/j/julia-beta/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | sell-downloads | [View logs](/logs/plugins/s/sell-downloads/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | sell-downloads | [View logs](/logs/plugins/s/sell-downloads/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: as_single. | asyncify-boot | sell-downloads | [View logs](/logs/plugins/s/sell-downloads/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: as_single. | jspi-boot | sell-downloads | [View logs](/logs/plugins/s/sell-downloads/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: individually. | asyncify-boot | sell-downloads | [View logs](/logs/plugins/s/sell-downloads/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: individually. | jspi-boot | sell-downloads | [View logs](/logs/plugins/s/sell-downloads/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such index: wp_msdb_purchase__product_purchase. | asyncify-boot | sell-downloads | [View logs](/logs/plugins/s/sell-downloads/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such index: wp_msdb_purchase__product_purchase. | jspi-boot | sell-downloads | [View logs](/logs/plugins/s/sell-downloads/error.json) |
-| Table not found. | asyncify-boot | simplemortgage | [View logs](/logs/plugins/s/simplemortgage/error.json) |
-| Table not found. | jspi-boot | simplemortgage | [View logs](/logs/plugins/s/simplemortgage/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_auth0_user. | asyncify-boot | social-login-with-auth0 | [View logs](/logs/plugins/s/social-login-with-auth0/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_auth0_user. | jspi-boot | social-login-with-auth0 | [View logs](/logs/plugins/s/social-login-with-auth0/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: price_type. | asyncify-boot | hostel | [View logs](/logs/plugins/h/hostel/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: price_type. | jspi-boot | hostel | [View logs](/logs/plugins/h/hostel/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: timestamp. | asyncify-boot | hostel | [View logs](/logs/plugins/h/hostel/error.json) |
