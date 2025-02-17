@@ -22,18 +22,6 @@
 | Unknown query type: DESC. | jspi-boot | aliprice | [View logs](/logs/plugins/a/aliprice/error.json) |
 | Unknown show type: INDEXES FROM. | asyncify-boot | aliprice | [View logs](/logs/plugins/a/aliprice/error.json) |
 | Unknown show type: INDEXES FROM. | jspi-boot | aliprice | [View logs](/logs/plugins/a/aliprice/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
-| SQLSTATE[HY000]: General error: 1 index wp_arlo_events_presenters__fk_e_id_idx already exists. | asyncify-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
-| SQLSTATE[HY000]: General error: 1 index wp_arlo_events_presenters__fk_e_id_idx already exists. | jspi-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
-| SQLSTATE[HY000]: General error: 1 index wp_arlo_eventtemplates_categories__fk_et_id_idx already exists. | asyncify-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
-| SQLSTATE[HY000]: General error: 1 index wp_arlo_eventtemplates_categories__fk_et_id_idx already exists. | jspi-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
-| SQLSTATE[HY000]: General error: 1 index wp_arlo_eventtemplates_presenters__fk_et_id_idx already exists. | asyncify-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
-| SQLSTATE[HY000]: General error: 1 index wp_arlo_eventtemplates_presenters__fk_et_id_idx already exists. | jspi-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "'1'": syntax error. | asyncify-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "'1'": syntax error. | jspi-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: . | asyncify-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: . | jspi-boot | arlo-training-and-event-management-system | [View logs](/logs/plugins/a/arlo-training-and-event-management-system/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_leads. | asyncify-boot | autoresponder-gwa | [View logs](/logs/plugins/a/autoresponder-gwa/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_leads. | jspi-boot | autoresponder-gwa | [View logs](/logs/plugins/a/autoresponder-gwa/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_msg. | asyncify-boot | autoresponder-gwa | [View logs](/logs/plugins/a/autoresponder-gwa/error.json) |
@@ -58,12 +46,6 @@
 | Unknown operation: MODIFY. | asyncify-boot | ameliabooking | [View logs](/logs/plugins/a/ameliabooking/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_admin_menu_creator. | asyncify-boot | admin-menu-creator | [View logs](/logs/plugins/a/admin-menu-creator/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_admin_menu_creator. | jspi-boot | admin-menu-creator | [View logs](/logs/plugins/a/admin-menu-creator/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | ajax-adsense | [View logs](/logs/plugins/a/ajax-adsense/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | ajax-adsense | [View logs](/logs/plugins/a/ajax-adsense/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ez_adsense_options. | asyncify-boot | ajax-adsense | [View logs](/logs/plugins/a/ajax-adsense/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ez_adsense_options. | jspi-boot | ajax-adsense | [View logs](/logs/plugins/a/ajax-adsense/error.json) |
-| Unknown operation: ALTER. | asyncify-boot | ajax-adsense | [View logs](/logs/plugins/a/ajax-adsense/error.json) |
-| Unknown operation: ALTER. | jspi-boot | ajax-adsense | [View logs](/logs/plugins/a/ajax-adsense/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | author-data | [View logs](/logs/plugins/a/author-data/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | author-data | [View logs](/logs/plugins/a/author-data/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | accordion-faq-for-elementor | [View logs](/logs/plugins/a/accordion-faq-for-elementor/error.json) |
