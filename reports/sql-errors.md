@@ -319,14 +319,10 @@
 | SQLSTATE[HY000]: General error: 1 duplicate column name: individually. | jspi-boot | sell-downloads | [View logs](/logs/plugins/s/sell-downloads/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such index: wp_msdb_purchase__product_purchase. | asyncify-boot | sell-downloads | [View logs](/logs/plugins/s/sell-downloads/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such index: wp_msdb_purchase__product_purchase. | jspi-boot | sell-downloads | [View logs](/logs/plugins/s/sell-downloads/error.json) |
-| Unknown drop type: table. | asyncify-boot | simile-for-woocommerce | [View logs](/logs/plugins/s/simile-for-woocommerce/error.json) |
-| Unknown drop type: table. | jspi-boot | simile-for-woocommerce | [View logs](/logs/plugins/s/simile-for-woocommerce/error.json) |
 | Table not found. | asyncify-boot | simplemortgage | [View logs](/logs/plugins/s/simplemortgage/error.json) |
 | Table not found. | jspi-boot | simplemortgage | [View logs](/logs/plugins/s/simplemortgage/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_auth0_user. | asyncify-boot | social-login-with-auth0 | [View logs](/logs/plugins/s/social-login-with-auth0/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_auth0_user. | jspi-boot | social-login-with-auth0 | [View logs](/logs/plugins/s/social-login-with-auth0/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | stellarpay | [View logs](/logs/plugins/s/stellarpay/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | stellarpay | [View logs](/logs/plugins/s/stellarpay/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: price_type. | asyncify-boot | hostel | [View logs](/logs/plugins/h/hostel/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: price_type. | jspi-boot | hostel | [View logs](/logs/plugins/h/hostel/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: timestamp. | asyncify-boot | hostel | [View logs](/logs/plugins/h/hostel/error.json) |
