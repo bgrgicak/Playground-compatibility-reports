@@ -1,18 +1,1 @@
-{
-  "preferredVersions": {
-    "php": "8.0",
-    "wp": "latest"
-  },
-  "steps": [
-    {
-      "step": "installPlugin",
-      "pluginData": {
-        "resource": "wordpress.org/plugins",
-        "slug": "survey-maker"
-      },
-      "options": {
-        "activate": true
-      }
-    }
-  ]
-}
+{"landingPage":"\/wp-admin\/admin.php?page=survey-maker","preferredVersions":{"php":"8.2","wp":"latest"},"features":{"networking":true},"steps":[{"step":"login","username":"admin","password":"admin123"},{"step":"installPlugin","pluginData":{"resource":"wordpress.org\/plugins","slug":"survey-maker"}},{"step":"runPHP","code":"<?php\nrequire_once '\/wordpress\/wp-load.php';\n\n$posts = get_posts(array(\n 'numberposts' => -1,\n 'post_type' => array('post', 'page'),\n 'post_status' => 'any'\n));\n\nforeach ($posts as $post) {\n wp_delete_post($post->ID, true);\n}"},{"step":"runPHP","code":"<?php require_once 'wordpress\/wp-load.php'; require_once '\/wordpress\/wp-load.php';\n$survey_id = \"1\";\n\/\/ Generate the Gutenberg block content dynamically.\n$post_content = '<!-- wp:survey-maker\/survey {\"metaFieldValue\":' . $survey_id . ',\"shortcode\":\"[ays_survey id=' . $survey_id . ']\"} -->\n<div class=\"wp-block-survey-maker-survey\">[ays_survey id=\"' . $survey_id . '\"]<\/div>\n<!-- \/wp:survey-maker\/survey -->';\n\/\/ Create the new post.\n$post_data = array(\n'post_title'    => 'Survey Maker Example Post',\n'post_content'  => $post_content,\n'post_status'   => 'publish',\n'post_type'     => 'post'\n);\nwp_insert_post($post_data);;"},{"step":"setSiteOptions","options":{"blogname":"Survey Maker Test Site","blogdescription":"Automated Survey Maker Preview"}},{"step":"installPlugin","pluginZipFile":{"resource":"wordpress.org\/plugins","slug":"survey-maker"},"options":{"activate":true}}]}
