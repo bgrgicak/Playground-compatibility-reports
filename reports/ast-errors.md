@@ -2,98 +2,125 @@
 ## Stats
 | Item | Message | Logs |
 |------|---------|------|
-| yourllp-affiliate |  | [View logs](/logs/plugins/y/yourllp-affiliate/error.json) |
-| youbou-code-block |  | [View logs](/logs/plugins/y/youbou-code-block/error.json) |
-| youram-youtube-embed |  | [View logs](/logs/plugins/y/youram-youtube-embed/error.json) |
-| your-ai-chatbot |  | [View logs](/logs/plugins/y/your-ai-chatbot/error.json) |
-| yaymail |  | [View logs](/logs/plugins/y/yaymail/error.json) |
-| yoast-test-helper |  | [View logs](/logs/plugins/y/yoast-test-helper/error.json) |
-| youcam-makeup |  | [View logs](/logs/plugins/y/youcam-makeup/error.json) |
-| yandexid |  | [View logs](/logs/plugins/y/yandexid/error.json) |
-| ymc-smart-filter |  | [View logs](/logs/plugins/y/ymc-smart-filter/error.json) |
-| ytsubcount |  | [View logs](/logs/plugins/y/ytsubcount/error.json) |
-| yas-counter-for-elementor |  | [View logs](/logs/plugins/y/yas-counter-for-elementor/error.json) |
-| ymc-crossword |  | [View logs](/logs/plugins/y/ymc-crossword/error.json) |
-| yelp-widget-pro |  | [View logs](/logs/plugins/y/yelp-widget-pro/error.json) |
-| ymc-states-map |  | [View logs](/logs/plugins/y/ymc-states-map/error.json) |
-| product-widgets-for-elementor |  | [View logs](/logs/plugins/p/product-widgets-for-elementor/error.json) |
-| pubjet |  | [View logs](/logs/plugins/p/pubjet/error.json) |
-| pinkbridge-wp-tool |  | [View logs](/logs/plugins/p/pinkbridge-wp-tool/error.json) |
-| payment-gateway-for-ba-paypal |  | [View logs](/logs/plugins/p/payment-gateway-for-ba-paypal/error.json) |
-| post-updated-date-for-divi |  | [View logs](/logs/plugins/p/post-updated-date-for-divi/error.json) |
-| pepper-connector |  | [View logs](/logs/plugins/p/pepper-connector/error.json) |
-| product-share |  | [View logs](/logs/plugins/p/product-share/error.json) |
-| picdefense-io-image-copyright-risk-checker |  | [View logs](/logs/plugins/p/picdefense-io-image-copyright-risk-checker/error.json) |
-| products-lists-from-prestashop |  | [View logs](/logs/plugins/p/products-lists-from-prestashop/error.json) |
-| parcelpanel |  | [View logs](/logs/plugins/p/parcelpanel/error.json) |
-| podlove-web-player |  | [View logs](/logs/plugins/p/podlove-web-player/error.json) |
-| properties-feed-for-idealista |  | [View logs](/logs/plugins/p/properties-feed-for-idealista/error.json) |
-| publishpress |  | [View logs](/logs/plugins/p/publishpress/error.json) |
-| peepso-tools-ultimate-member-migrator |  | [View logs](/logs/plugins/p/peepso-tools-ultimate-member-migrator/error.json) |
-| pmpro-import-members-from-csv |  | [View logs](/logs/plugins/p/pmpro-import-members-from-csv/error.json) |
-| pixi-contact-form-for-elementor |  | [View logs](/logs/plugins/p/pixi-contact-form-for-elementor/error.json) |
-| publishpress-checklists |  | [View logs](/logs/plugins/p/publishpress-checklists/error.json) |
-| pixxpay |  | [View logs](/logs/plugins/p/pixxpay/error.json) |
-| payment-gateway-through-unifiedpost |  | [View logs](/logs/plugins/p/payment-gateway-through-unifiedpost/error.json) |
-| 2-factor |  | [View logs](/logs/plugins/2/2-factor/error.json) |
-| 2coders-integration-mux-video |  | [View logs](/logs/plugins/2/2coders-integration-mux-video/error.json) |
-| lnkbio |  | [View logs](/logs/plugins/l/lnkbio/error.json) |
-| lws-tools |  | [View logs](/logs/plugins/l/lws-tools/error.json) |
-| link-to-telegram |  | [View logs](/logs/plugins/l/link-to-telegram/error.json) |
-| linkcreator-ai |  | [View logs](/logs/plugins/l/linkcreator-ai/error.json) |
-| liner-in-site |  | [View logs](/logs/plugins/l/liner-in-site/error.json) |
-| little-free-archive-freshener |  | [View logs](/logs/plugins/l/little-free-archive-freshener/error.json) |
-| local-sync |  | [View logs](/logs/plugins/l/local-sync/error.json) |
-| limit-bio |  | [View logs](/logs/plugins/l/limit-bio/error.json) |
-| lazyload-background-images |  | [View logs](/logs/plugins/l/lazyload-background-images/error.json) |
-| leadslide-ai-ebook-creator-and-marketing-funnels |  | [View logs](/logs/plugins/l/leadslide-ai-ebook-creator-and-marketing-funnels/error.json) |
-| linkmaster |  | [View logs](/logs/plugins/l/linkmaster/error.json) |
-| link-cloaking-plugin |  | [View logs](/logs/plugins/l/link-cloaking-plugin/error.json) |
-| login-devices |  | [View logs](/logs/plugins/l/login-devices/error.json) |
-| link-changer-htaccess-for-better-seo |  | [View logs](/logs/plugins/l/link-changer-htaccess-for-better-seo/error.json) |
-| lazycaptcha |  | [View logs](/logs/plugins/l/lazycaptcha/error.json) |
-| logistiq-shipping |  | [View logs](/logs/plugins/l/logistiq-shipping/error.json) |
-| live-badge-twitch |  | [View logs](/logs/plugins/l/live-badge-twitch/error.json) |
-| lorem-toolbox |  | [View logs](/logs/plugins/l/lorem-toolbox/error.json) |
-| lightbox-ga |  | [View logs](/logs/plugins/l/lightbox-ga/error.json) |
-| live-user-ip-and-location |  | [View logs](/logs/plugins/l/live-user-ip-and-location/error.json) |
-| leads-5050-visitor-insights |  | [View logs](/logs/plugins/l/leads-5050-visitor-insights/error.json) |
-| leadrebel |  | [View logs](/logs/plugins/l/leadrebel/error.json) |
-| lazy-blocks |  | [View logs](/logs/plugins/l/lazy-blocks/error.json) |
-| live-username-availability-checking |  | [View logs](/logs/plugins/l/live-username-availability-checking/error.json) |
-| lbyt-lb-youtube |  | [View logs](/logs/plugins/l/lbyt-lb-youtube/error.json) |
-| live-widget-luftdaten |  | [View logs](/logs/plugins/l/live-widget-luftdaten/error.json) |
-| lazy-load-for-videos |  | [View logs](/logs/plugins/l/lazy-load-for-videos/error.json) |
-| last-9-photos-webcomponent |  | [View logs](/logs/plugins/l/last-9-photos-webcomponent/error.json) |
-| link-finder |  | [View logs](/logs/plugins/l/link-finder/error.json) |
-| lh-image-renamer |  | [View logs](/logs/plugins/l/lh-image-renamer/error.json) |
-| last-email-address-validator |  | [View logs](/logs/plugins/l/last-email-address-validator/error.json) |
-| lean-media |  | [View logs](/logs/plugins/l/lean-media/error.json) |
-| live-chat-by-supsystic |  | [View logs](/logs/plugins/l/live-chat-by-supsystic/error.json) |
-| lws-cleaner |  | [View logs](/logs/plugins/l/lws-cleaner/error.json) |
-| luzuk-slider |  | [View logs](/logs/plugins/l/luzuk-slider/error.json) |
-| localhost-to-ip |  | [View logs](/logs/plugins/l/localhost-to-ip/error.json) |
-| link-juice-keeper |  | [View logs](/logs/plugins/l/link-juice-keeper/error.json) |
-| logger-for-wp-mail-smtp |  | [View logs](/logs/plugins/l/logger-for-wp-mail-smtp/error.json) |
-| latest-posts-with-restful-api |  | [View logs](/logs/plugins/l/latest-posts-with-restful-api/error.json) |
-| lorem-ipsum-replace-content |  | [View logs](/logs/plugins/l/lorem-ipsum-replace-content/error.json) |
-| listplus |  | [View logs](/logs/plugins/l/listplus/error.json) |
-| leadin |  | [View logs](/logs/plugins/l/leadin/error.json) |
-| login-page-ui-customizer |  | [View logs](/logs/plugins/l/login-page-ui-customizer/error.json) |
-| live-sports-streamthunder |  | [View logs](/logs/plugins/l/live-sports-streamthunder/error.json) |
-| list-plugin-details |  | [View logs](/logs/plugins/l/list-plugin-details/error.json) |
-| limit-post-creation |  | [View logs](/logs/plugins/l/limit-post-creation/error.json) |
-| link-to-popup |  | [View logs](/logs/plugins/l/link-to-popup/error.json) |
-| link-improver |  | [View logs](/logs/plugins/l/link-improver/error.json) |
-| live-shopping-blue |  | [View logs](/logs/plugins/l/live-shopping-blue/error.json) |
-| logdash-activity-log |  | [View logs](/logs/plugins/l/logdash-activity-log/error.json) |
-| live-theme-preview |  | [View logs](/logs/plugins/l/live-theme-preview/error.json) |
-| login-with-token |  | [View logs](/logs/plugins/l/login-with-token/error.json) |
-| ledenbeheer-external-connection |  | [View logs](/logs/plugins/l/ledenbeheer-external-connection/error.json) |
-| lzb-select-dynamic |  | [View logs](/logs/plugins/l/lzb-select-dynamic/error.json) |
-| leandata-bookit |  | [View logs](/logs/plugins/l/leandata-bookit/error.json) |
-| lumeer-embed |  | [View logs](/logs/plugins/l/lumeer-embed/error.json) |
-| list-categories-widget |  | [View logs](/logs/plugins/l/list-categories-widget/error.json) |
-| load-your-site-url-in-any-page |  | [View logs](/logs/plugins/l/load-your-site-url-in-any-page/error.json) |
-| lpagery |  | [View logs](/logs/plugins/l/lpagery/error.json) |
-| leyka |  | [View logs](/logs/plugins/l/leyka/error.json) |
+| yourllp-affiliate | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/y/yourllp-affiliate/error.json) |
+| youbou-code-block | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/y/youbou-code-block/error.json) |
+| youram-youtube-embed | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/y/youram-youtube-embed/error.json) |
+| your-ai-chatbot | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/y/your-ai-chatbot/error.json) |
+| yaymail | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/y/yaymail/error.json) |
+| yoast-test-helper | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/y/yoast-test-helper/error.json) |
+| youcam-makeup | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/y/youcam-makeup/error.json) |
+| yandexid | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/y/yandexid/error.json) |
+| ymc-smart-filter | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/y/ymc-smart-filter/error.json) |
+| ytsubcount | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/y/ytsubcount/error.json) |
+| yas-counter-for-elementor | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/y/yas-counter-for-elementor/error.json) |
+| ymc-crossword | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/y/ymc-crossword/error.json) |
+| yelp-widget-pro | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/y/yelp-widget-pro/error.json) |
+| ymc-states-map | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/y/ymc-states-map/error.json) |
+| product-widgets-for-elementor | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/p/product-widgets-for-elementor/error.json) |
+| pubjet | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/p/pubjet/error.json) |
+| pinkbridge-wp-tool | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/p/pinkbridge-wp-tool/error.json) |
+| payment-gateway-for-ba-paypal | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/p/payment-gateway-for-ba-paypal/error.json) |
+| post-updated-date-for-divi | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/p/post-updated-date-for-divi/error.json) |
+| pepper-connector | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/p/pepper-connector/error.json) |
+| product-share | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/p/product-share/error.json) |
+| picdefense-io-image-copyright-risk-checker | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/p/picdefense-io-image-copyright-risk-checker/error.json) |
+| products-lists-from-prestashop | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/p/products-lists-from-prestashop/error.json) |
+| parcelpanel | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/p/parcelpanel/error.json) |
+| podlove-web-player | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/p/podlove-web-player/error.json) |
+| properties-feed-for-idealista | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/p/properties-feed-for-idealista/error.json) |
+| publishpress | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/p/publishpress/error.json) |
+| peepso-tools-ultimate-member-migrator | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/p/peepso-tools-ultimate-member-migrator/error.json) |
+| pmpro-import-members-from-csv | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/p/pmpro-import-members-from-csv/error.json) |
+| pixi-contact-form-for-elementor | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/p/pixi-contact-form-for-elementor/error.json) |
+| publishpress-checklists | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/p/publishpress-checklists/error.json) |
+| pixxpay | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/p/pixxpay/error.json) |
+| payment-gateway-through-unifiedpost | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/p/payment-gateway-through-unifiedpost/error.json) |
+| 2-factor | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/2/2-factor/error.json) |
+| 2coders-integration-mux-video | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/2/2coders-integration-mux-video/error.json) |
+| lnkbio | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/lnkbio/error.json) |
+| lws-tools | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/lws-tools/error.json) |
+| link-to-telegram | require_once(/internal/shared/sqlite-database-integration/wp-includes/sqlite/../../wp-includes/parser/class-wp-parser-grammar.php): Failed to open stream: No such file or directory in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php on line 233 | [View logs](/logs/plugins/l/link-to-telegram/error.json) |
+| link-to-telegram | Uncaught Error: Failed opening required '/internal/shared/sqlite-database-integration/wp-includes/sqlite/../../wp-includes/parser/class-wp-parser-grammar.php' (include_path='.:') in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php:233 | [View logs](/logs/plugins/l/link-to-telegram/error.json) |
+| linkcreator-ai | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/linkcreator-ai/error.json) |
+| liner-in-site | require_once(/internal/shared/sqlite-database-integration/wp-includes/sqlite/../../wp-includes/parser/class-wp-parser-grammar.php): Failed to open stream: No such file or directory in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php on line 233 | [View logs](/logs/plugins/l/liner-in-site/error.json) |
+| liner-in-site | Uncaught Error: Failed opening required '/internal/shared/sqlite-database-integration/wp-includes/sqlite/../../wp-includes/parser/class-wp-parser-grammar.php' (include_path='.:') in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php:233 | [View logs](/logs/plugins/l/liner-in-site/error.json) |
+| little-free-archive-freshener | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/little-free-archive-freshener/error.json) |
+| local-sync | Uncaught TypeError: WP_SQLite_Information_Schema_Builder::get_index_column_sub_part(): Argument #2 ($max_length) must be of type ?int, string given, called in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 736 and defined in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php:1457 | [View logs](/logs/plugins/l/local-sync/error.json) |
+| lazyload-background-images | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/lazyload-background-images/error.json) |
+| leadslide-ai-ebook-creator-and-marketing-funnels | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/leadslide-ai-ebook-creator-and-marketing-funnels/error.json) |
+| linkmaster | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/linkmaster/error.json) |
+| link-cloaking-plugin | require_once(/internal/shared/sqlite-database-integration/wp-includes/sqlite/../../wp-includes/parser/class-wp-parser-grammar.php): Failed to open stream: No such file or directory in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php on line 233 | [View logs](/logs/plugins/l/link-cloaking-plugin/error.json) |
+| link-cloaking-plugin | Uncaught Error: Failed opening required '/internal/shared/sqlite-database-integration/wp-includes/sqlite/../../wp-includes/parser/class-wp-parser-grammar.php' (include_path='.:') in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php:233 | [View logs](/logs/plugins/l/link-cloaking-plugin/error.json) |
+| login-devices | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/login-devices/error.json) |
+| link-changer-htaccess-for-better-seo | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/link-changer-htaccess-for-better-seo/error.json) |
+| lazycaptcha | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/lazycaptcha/error.json) |
+| logistiq-shipping | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/logistiq-shipping/error.json) |
+| lorem-toolbox | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/lorem-toolbox/error.json) |
+| lightbox-ga | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/lightbox-ga/error.json) |
+| leads-5050-visitor-insights | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/leads-5050-visitor-insights/error.json) |
+| leadrebel | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/leadrebel/error.json) |
+| lazy-blocks | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/lazy-blocks/error.json) |
+| lbyt-lb-youtube | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/lbyt-lb-youtube/error.json) |
+| live-widget-luftdaten | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/live-widget-luftdaten/error.json) |
+| lazy-load-for-videos | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/lazy-load-for-videos/error.json) |
+| last-9-photos-webcomponent | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/last-9-photos-webcomponent/error.json) |
+| link-finder | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/link-finder/error.json) |
+| last-email-address-validator | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/last-email-address-validator/error.json) |
+| lws-cleaner | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/lws-cleaner/error.json) |
+| luzuk-slider | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/luzuk-slider/error.json) |
+| localhost-to-ip | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/localhost-to-ip/error.json) |
+| link-juice-keeper | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/link-juice-keeper/error.json) |
+| logger-for-wp-mail-smtp | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/logger-for-wp-mail-smtp/error.json) |
+| latest-posts-with-restful-api | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/latest-posts-with-restful-api/error.json) |
+| lorem-ipsum-replace-content | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/lorem-ipsum-replace-content/error.json) |
+| leadin | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/leadin/error.json) |
+| login-page-ui-customizer | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/login-page-ui-customizer/error.json) |
+| list-plugin-details | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/list-plugin-details/error.json) |
+| link-to-popup | require_once(/internal/shared/sqlite-database-integration/wp-includes/sqlite/../../wp-includes/parser/class-wp-parser-grammar.php): Failed to open stream: No such file or directory in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php on line 233 | [View logs](/logs/plugins/l/link-to-popup/error.json) |
+| link-to-popup | Uncaught Error: Failed opening required '/internal/shared/sqlite-database-integration/wp-includes/sqlite/../../wp-includes/parser/class-wp-parser-grammar.php' (include_path='.:') in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php:233 | [View logs](/logs/plugins/l/link-to-popup/error.json) |
+| link-improver | require_once(/internal/shared/sqlite-database-integration/wp-includes/sqlite/../../wp-includes/parser/class-wp-parser-grammar.php): Failed to open stream: No such file or directory in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php on line 233 | [View logs](/logs/plugins/l/link-improver/error.json) |
+| link-improver | Uncaught Error: Failed opening required '/internal/shared/sqlite-database-integration/wp-includes/sqlite/../../wp-includes/parser/class-wp-parser-grammar.php' (include_path='.:') in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php:233 | [View logs](/logs/plugins/l/link-improver/error.json) |
+| logdash-activity-log | Failed to parse the MySQL query.. | [View logs](/logs/plugins/l/logdash-activity-log/error.json) |
+| login-with-token | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/login-with-token/error.json) |
+| lzb-select-dynamic | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/lzb-select-dynamic/error.json) |
+| lumeer-embed | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/lumeer-embed/error.json) |
+| list-categories-widget | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/list-categories-widget/error.json) |
+| load-your-site-url-in-any-page | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/load-your-site-url-in-any-page/error.json) |
+| lpagery | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | Undefined offset: 0 in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | Trying to get property 'lpagery_table_exists' of non-object in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | Undefined offset: 0 in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | Trying to get property 'lpagery_table_exists' of non-object in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | Undefined offset: 0 in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | Trying to get property 'lpagery_table_exists' of non-object in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | Undefined offset: 0 in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | Trying to get property 'lpagery_table_exists' of non-object in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | Undefined offset: 0 in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | Trying to get property 'lpagery_table_exists' of non-object in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | Undefined offset: 0 in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | Trying to get property 'lpagery_table_exists' of non-object in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | Undefined offset: 0 in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | Trying to get property 'lpagery_table_exists' of non-object in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | Undefined offset: 0 in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | Trying to get property 'lpagery_table_exists' of non-object in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | Undefined offset: 0 in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | Trying to get property 'lpagery_table_exists' of non-object in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | Undefined offset: 0 in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | Trying to get property 'lpagery_table_exists' of non-object in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | Undefined offset: 0 in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | Trying to get property 'lpagery_table_exists' of non-object in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | Undefined offset: 0 in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | Trying to get property 'lpagery_table_exists' of non-object in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
+| lpagery | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | [View logs](/logs/plugins/l/lpagery/error.json) |
+| leyka | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/leyka/error.json) |
