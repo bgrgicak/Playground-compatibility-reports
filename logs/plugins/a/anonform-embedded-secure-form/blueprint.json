@@ -1,18 +1,1 @@
-{
-  "preferredVersions": {
-    "php": "8.0",
-    "wp": "latest"
-  },
-  "steps": [
-    {
-      "step": "installPlugin",
-      "pluginData": {
-        "resource": "wordpress.org/plugins",
-        "slug": "anonform-embedded-secure-form"
-      },
-      "options": {
-        "activate": true
-      }
-    }
-  ]
-}
+{"$schema":"https:\/\/playground.wordpress.net\/blueprint-schema.json","landingPage":"\/wp-admin\/plugins.php","preferredVersions":{"php":"8.2","wp":"6.7"},"login":true,"steps":[{"step":"installTheme","themeZipFile":{"resource":"wordpress.org\/themes","slug":"twentyten"},"options":{"activate":true}},{"step":"mkdir","path":"\/wordpress\/wp-content\/plugins\/remove-widgets"},{"step":"writeFile","path":"\/wordpress\/wp-content\/plugins\/remove-widgets\/plugin.php","data":"<?php\n\/*\nPlugin Name: Remove widgets\nDescription: Remove default widgets\nVersion: 1.0\nAuthor: Anonform Ab\n*\/\n\nremove_action('init', 'wp_widgets_init', 1);\nadd_action('init', function() { do_action('widgets_init'); }, 1);\nadd_action('wp_head', 'anon_custom_styles', 100);\nfunction anon_custom_styles(){\necho '<style>#archives,#meta,#branding img { display: none; }<\/style>';\n}"},{"step":"activatePlugin","pluginPath":"remove-widgets\/plugin.php"},{"step":"installPlugin","pluginData":{"resource":"wordpress.org\/plugins","slug":"anonform-embedded-secure-form"}},{"step":"runPHP","code":"<?php\nrequire '\/wordpress\/wp-load.php';\n\n$posts = get_posts(array(\n'numberposts'=>-1,\n'post_type'=>array('post', 'page'),\n'post_status'=>'any'\n));\n\nforeach($posts as $post){\nwp_delete_post($post->ID, true);\n}"},{"step":"importWxr","file":{"resource":"url","url":"https:\/\/ps.w.org\/anonform-embedded-secure-form\/assets\/anonformsandbox.xml"}},{"step":"setSiteOptions","options":{"blogname":"ANON::form live demo","blogdescription":"When you use ANON::form, you own your data \u2013 not tech companies, authorities or hackers","show_on_front":"page","page_on_front":"52"}},{"step":"installPlugin","pluginZipFile":{"resource":"wordpress.org\/plugins","slug":"anonform-embedded-secure-form"},"options":{"activate":true}}]}
