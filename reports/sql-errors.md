@@ -12,16 +12,10 @@
 | SQLSTATE[HY000]: General error: 1 duplicate column name: is_pending. | jspi-boot | amy-lite | [View logs](/logs/plugins/a/amy-lite/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | asyncify-boot | amy-lite | [View logs](/logs/plugins/a/amy-lite/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | jspi-boot | amy-lite | [View logs](/logs/plugins/a/amy-lite/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_anti_haxtool. | asyncify-boot | anti-hacking-tools | [View logs](/logs/plugins/a/anti-hacking-tools/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_anti_haxtool. | jspi-boot | anti-hacking-tools | [View logs](/logs/plugins/a/anti-hacking-tools/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_alfieliate_settings. | asyncify-boot | alfieliate-datafeed-installer | [View logs](/logs/plugins/a/alfieliate-datafeed-installer/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_alfieliate_settings. | jspi-boot | alfieliate-datafeed-installer | [View logs](/logs/plugins/a/alfieliate-datafeed-installer/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | all-category-seo-updater | [View logs](/logs/plugins/a/all-category-seo-updater/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | all-category-seo-updater | [View logs](/logs/plugins/a/all-category-seo-updater/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_leads. | asyncify-boot | autoresponder-gwa | [View logs](/logs/plugins/a/autoresponder-gwa/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_leads. | jspi-boot | autoresponder-gwa | [View logs](/logs/plugins/a/autoresponder-gwa/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_msg. | asyncify-boot | autoresponder-gwa | [View logs](/logs/plugins/a/autoresponder-gwa/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_msg. | jspi-boot | autoresponder-gwa | [View logs](/logs/plugins/a/autoresponder-gwa/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | alipay | [View logs](/logs/plugins/a/alipay/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | alipay | [View logs](/logs/plugins/a/alipay/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_acpt_lite_custom_post_type. | asyncify-boot | acpt-lite | [View logs](/logs/plugins/a/acpt-lite/error.json) |
