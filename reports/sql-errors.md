@@ -12,15 +12,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_acpt_lite_settings. | jspi-boot | acpt-lite | [View logs](/logs/plugins/a/acpt-lite/error.json) |
 | Unknown query type: RENAME. | asyncify-boot | acpt-lite | [View logs](/logs/plugins/a/acpt-lite/error.json) |
 | Unknown query type: RENAME. | jspi-boot | acpt-lite | [View logs](/logs/plugins/a/acpt-lite/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: api_key. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: changed_info. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: id. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: last_try. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: login. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: params. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: registered_by. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: subdomain. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: try_counts. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_admin_menu_creator. | asyncify-boot | admin-menu-creator | [View logs](/logs/plugins/a/admin-menu-creator/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_admin_menu_creator. | jspi-boot | admin-menu-creator | [View logs](/logs/plugins/a/admin-menu-creator/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | author-data | [View logs](/logs/plugins/a/author-data/error.json) |
