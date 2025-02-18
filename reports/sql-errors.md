@@ -4,8 +4,6 @@
 |---------|------|------|------|
 | SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | asyncify-boot | accessqontrol | [View logs](/logs/plugins/a/accessqontrol/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | jspi-boot | accessqontrol | [View logs](/logs/plugins/a/accessqontrol/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_alfieliate_settings. | asyncify-boot | alfieliate-datafeed-installer | [View logs](/logs/plugins/a/alfieliate-datafeed-installer/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_alfieliate_settings. | jspi-boot | alfieliate-datafeed-installer | [View logs](/logs/plugins/a/alfieliate-datafeed-installer/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | all-category-seo-updater | [View logs](/logs/plugins/a/all-category-seo-updater/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | all-category-seo-updater | [View logs](/logs/plugins/a/all-category-seo-updater/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_acpt_lite_custom_post_type. | asyncify-boot | acpt-lite | [View logs](/logs/plugins/a/acpt-lite/error.json) |
@@ -23,7 +21,6 @@
 | SQLSTATE[HY000]: General error: 1 duplicate column name: registered_by. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: subdomain. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: try_counts. | asyncify-boot | amoforms | [View logs](/logs/plugins/a/amoforms/error.json) |
-| Unknown operation: MODIFY. | asyncify-boot | ameliabooking | [View logs](/logs/plugins/a/ameliabooking/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_admin_menu_creator. | asyncify-boot | admin-menu-creator | [View logs](/logs/plugins/a/admin-menu-creator/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_admin_menu_creator. | jspi-boot | admin-menu-creator | [View logs](/logs/plugins/a/admin-menu-creator/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | author-data | [View logs](/logs/plugins/a/author-data/error.json) |
