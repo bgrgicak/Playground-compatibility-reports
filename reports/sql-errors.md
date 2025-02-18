@@ -38,8 +38,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_admin_menu_creator. | jspi-boot | admin-menu-creator | [View logs](/logs/plugins/a/admin-menu-creator/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | author-data | [View logs](/logs/plugins/a/author-data/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | author-data | [View logs](/logs/plugins/a/author-data/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | accordion-faq-for-elementor | [View logs](/logs/plugins/a/accordion-faq-for-elementor/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | accordion-faq-for-elementor | [View logs](/logs/plugins/a/accordion-faq-for-elementor/error.json) |
 | Data type expected in MySQL query, unknown token received: pbe_task_id. | asyncify-boot | bulk-edit-for-woocommerce | [View logs](/logs/plugins/b/bulk-edit-for-woocommerce/error.json) |
 | Data type expected in MySQL query, unknown token received: pbe_task_id. | jspi-boot | bulk-edit-for-woocommerce | [View logs](/logs/plugins/b/bulk-edit-for-woocommerce/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | betpress | [View logs](/logs/plugins/b/betpress/error.json) |
