@@ -6,12 +6,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | jspi-boot | accessqontrol | [View logs](/logs/plugins/a/accessqontrol/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | all-category-seo-updater | [View logs](/logs/plugins/a/all-category-seo-updater/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | all-category-seo-updater | [View logs](/logs/plugins/a/all-category-seo-updater/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_acpt_lite_custom_post_type. | asyncify-boot | acpt-lite | [View logs](/logs/plugins/a/acpt-lite/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_acpt_lite_custom_post_type. | jspi-boot | acpt-lite | [View logs](/logs/plugins/a/acpt-lite/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_acpt_lite_settings. | asyncify-boot | acpt-lite | [View logs](/logs/plugins/a/acpt-lite/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_acpt_lite_settings. | jspi-boot | acpt-lite | [View logs](/logs/plugins/a/acpt-lite/error.json) |
-| Unknown query type: RENAME. | asyncify-boot | acpt-lite | [View logs](/logs/plugins/a/acpt-lite/error.json) |
-| Unknown query type: RENAME. | jspi-boot | acpt-lite | [View logs](/logs/plugins/a/acpt-lite/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_admin_menu_creator. | asyncify-boot | admin-menu-creator | [View logs](/logs/plugins/a/admin-menu-creator/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_admin_menu_creator. | jspi-boot | admin-menu-creator | [View logs](/logs/plugins/a/admin-menu-creator/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | author-data | [View logs](/logs/plugins/a/author-data/error.json) |
