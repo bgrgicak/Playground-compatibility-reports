@@ -2,12 +2,6 @@
 ## Stats
 | Message | Test | Item | Logs |
 |---------|------|------|------|
-| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | asyncify-boot | accessqontrol | [View logs](/logs/plugins/a/accessqontrol/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | jspi-boot | accessqontrol | [View logs](/logs/plugins/a/accessqontrol/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | all-category-seo-updater | [View logs](/logs/plugins/a/all-category-seo-updater/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | all-category-seo-updater | [View logs](/logs/plugins/a/all-category-seo-updater/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | author-data | [View logs](/logs/plugins/a/author-data/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | author-data | [View logs](/logs/plugins/a/author-data/error.json) |
 | Data type expected in MySQL query, unknown token received: pbe_task_id. | asyncify-boot | bulk-edit-for-woocommerce | [View logs](/logs/plugins/b/bulk-edit-for-woocommerce/error.json) |
 | Data type expected in MySQL query, unknown token received: pbe_task_id. | jspi-boot | bulk-edit-for-woocommerce | [View logs](/logs/plugins/b/bulk-edit-for-woocommerce/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | betpress | [View logs](/logs/plugins/b/betpress/error.json) |
