@@ -211,12 +211,6 @@
 | Unexpected token in MySQL query: is_result. | jspi-boot | football-predictor | [View logs](/logs/plugins/f/football-predictor/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | asyncify-boot | flip-photo-gallery | [View logs](/logs/plugins/f/flip-photo-gallery/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | jspi-boot | flip-photo-gallery | [View logs](/logs/plugins/f/flip-photo-gallery/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW. | asyncify-boot | factureaza | [View logs](/logs/plugins/f/factureaza/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW. | jspi-boot | factureaza | [View logs](/logs/plugins/f/factureaza/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wc_f4_api_key. | asyncify-boot | factureaza | [View logs](/logs/plugins/f/factureaza/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wc_f4_api_key. | jspi-boot | factureaza | [View logs](/logs/plugins/f/factureaza/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wc_f4_settings. | asyncify-boot | factureaza | [View logs](/logs/plugins/f/factureaza/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wc_f4_settings. | jspi-boot | factureaza | [View logs](/logs/plugins/f/factureaza/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | asyncify-boot | favatars | [View logs](/logs/plugins/f/favatars/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | jspi-boot | favatars | [View logs](/logs/plugins/f/favatars/error.json) |
 | Unknown query type: DESC. | asyncify-boot | favatars | [View logs](/logs/plugins/f/favatars/error.json) |
@@ -229,10 +223,6 @@
 | MySQL field type cannot be translated to SQLite: json. | jspi-boot | farazsms | [View logs](/logs/plugins/f/farazsms/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: name_field_id. | asyncify-boot | farazsms | [View logs](/logs/plugins/f/farazsms/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: name_field_id. | jspi-boot | farazsms | [View logs](/logs/plugins/f/farazsms/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_product_categories. | asyncify-boot | floatbar-for-instinct-shopping-cart | [View logs](/logs/plugins/f/floatbar-for-instinct-shopping-cart/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_product_categories. | jspi-boot | floatbar-for-instinct-shopping-cart | [View logs](/logs/plugins/f/floatbar-for-instinct-shopping-cart/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_product_list. | asyncify-boot | floatbar-for-instinct-shopping-cart | [View logs](/logs/plugins/f/floatbar-for-instinct-shopping-cart/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_product_list. | jspi-boot | floatbar-for-instinct-shopping-cart | [View logs](/logs/plugins/f/floatbar-for-instinct-shopping-cart/error.json) |
 | Unknown operation: CHARACTER SET. | asyncify-boot | jsp-store-locator | [View logs](/logs/plugins/j/jsp-store-locator/error.json) |
 | Unknown operation: CHARACTER SET. | jspi-boot | jsp-store-locator | [View logs](/logs/plugins/j/jsp-store-locator/error.json) |
 | Unknown operation: CONVERT. | asyncify-boot | jsp-store-locator | [View logs](/logs/plugins/j/jsp-store-locator/error.json) |
