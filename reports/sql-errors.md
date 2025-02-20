@@ -207,8 +207,6 @@
 | SQLSTATE[HY000]: General error: 1 duplicate column name: recurrence_choice. | jspi-boot | events-calendar-registration-booking-by-events-plus | [View logs](/logs/plugins/e/events-calendar-registration-booking-by-events-plus/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | events-calendar-registration-booking-by-events-plus | [View logs](/logs/plugins/e/events-calendar-registration-booking-by-events-plus/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | events-calendar-registration-booking-by-events-plus | [View logs](/logs/plugins/e/events-calendar-registration-booking-by-events-plus/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_blogs. | asyncify-boot | frontend-signup-site-clone | [View logs](/logs/plugins/f/frontend-signup-site-clone/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_blogs. | jspi-boot | frontend-signup-site-clone | [View logs](/logs/plugins/f/frontend-signup-site-clone/error.json) |
 | Unexpected token in MySQL query: is_result. | asyncify-boot | football-predictor | [View logs](/logs/plugins/f/football-predictor/error.json) |
 | Unexpected token in MySQL query: is_result. | jspi-boot | football-predictor | [View logs](/logs/plugins/f/football-predictor/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | asyncify-boot | flip-photo-gallery | [View logs](/logs/plugins/f/flip-photo-gallery/error.json) |
