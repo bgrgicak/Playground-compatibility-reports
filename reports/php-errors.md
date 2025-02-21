@@ -4389,8 +4389,6 @@
 | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | jspi-boot | flickrss | [View logs](/logs/plugins/f/flickrss/error.json) |
 | Uncaught Error: Class "WP_Site" not found in /wordpress/wp-includes/ms-blogs.php:224 | asyncify-boot | feed2tabs | [View logs](/logs/plugins/f/feed2tabs/error.json) |
 | Uncaught Error: Class "WP_Site" not found in /wordpress/wp-includes/ms-blogs.php:224 | jspi-boot | feed2tabs | [View logs](/logs/plugins/f/feed2tabs/error.json) |
-| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/favorites-posts/favposts.php:273 | asyncify-boot | favorites-posts | [View logs](/logs/plugins/f/favorites-posts/error.json) |
-| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/favorites-posts/favposts.php:273 | jspi-boot | favorites-posts | [View logs](/logs/plugins/f/favorites-posts/error.json) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/featured-images-for-categories/featured-images-for-categories.php:153 | asyncify-boot | featured-images-for-categories | [View logs](/logs/plugins/f/featured-images-for-categories/error.json) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/featured-images-for-categories/featured-images-for-categories.php:153 | jspi-boot | featured-images-for-categories | [View logs](/logs/plugins/f/featured-images-for-categories/error.json) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/fnffm-bangla-radio/fnf.fmbangla.php:65 | asyncify-boot | fnffm-bangla-radio | [View logs](/logs/plugins/f/fnffm-bangla-radio/error.json) |
@@ -4449,8 +4447,6 @@
 | Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method specificFeedsSocialIcons::specificFeedsInstall() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | free-social-media-icons | [View logs](/logs/plugins/f/free-social-media-icons/error.json) |
 | Uncaught Error: Undefined constant "_FILE_" in /wordpress/wp-content/plugins/faded-borders-for-images/border.php:35 | asyncify-boot | faded-borders-for-images | [View logs](/logs/plugins/f/faded-borders-for-images/error.json) |
 | Uncaught Error: Undefined constant "_FILE_" in /wordpress/wp-content/plugins/faded-borders-for-images/border.php:35 | jspi-boot | faded-borders-for-images | [View logs](/logs/plugins/f/faded-borders-for-images/error.json) |
-| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | asyncify-boot | fenix-lightbox | [View logs](/logs/plugins/f/fenix-lightbox/error.json) |
-| Uncaught Exception: Unable to activate plugin in /internal/eval.php:32 | jspi-boot | fenix-lightbox | [View logs](/logs/plugins/f/fenix-lightbox/error.json) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/feeddelay/feeddelay.php:210 | asyncify-boot | feeddelay | [View logs](/logs/plugins/f/feeddelay/error.json) |
 | Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/feeddelay/feeddelay.php:210 | jspi-boot | feeddelay | [View logs](/logs/plugins/f/feeddelay/error.json) |
 | Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/feed-back/feed_back.php:14 | asyncify-boot | feed-back | [View logs](/logs/plugins/f/feed-back/error.json) |
