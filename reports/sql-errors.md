@@ -215,14 +215,8 @@
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | jspi-boot | favatars | [View logs](/logs/plugins/f/favatars/error.json) |
 | Unknown query type: DESC. | asyncify-boot | favatars | [View logs](/logs/plugins/f/favatars/error.json) |
 | Unknown query type: DESC. | jspi-boot | favatars | [View logs](/logs/plugins/f/favatars/error.json) |
-| Unknown operation: AUTO_INCREMENT. | asyncify-boot | fma-product-custom-options | [View logs](/logs/plugins/f/fma-product-custom-options/error.json) |
-| Unknown operation: AUTO_INCREMENT. | jspi-boot | fma-product-custom-options | [View logs](/logs/plugins/f/fma-product-custom-options/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | fbpromotions | [View logs](/logs/plugins/f/fbpromotions/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | fbpromotions | [View logs](/logs/plugins/f/fbpromotions/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | asyncify-boot | farazsms | [View logs](/logs/plugins/f/farazsms/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | jspi-boot | farazsms | [View logs](/logs/plugins/f/farazsms/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: name_field_id. | asyncify-boot | farazsms | [View logs](/logs/plugins/f/farazsms/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: name_field_id. | jspi-boot | farazsms | [View logs](/logs/plugins/f/farazsms/error.json) |
 | Unknown operation: CHARACTER SET. | asyncify-boot | jsp-store-locator | [View logs](/logs/plugins/j/jsp-store-locator/error.json) |
 | Unknown operation: CHARACTER SET. | jspi-boot | jsp-store-locator | [View logs](/logs/plugins/j/jsp-store-locator/error.json) |
 | Unknown operation: CONVERT. | asyncify-boot | jsp-store-locator | [View logs](/logs/plugins/j/jsp-store-locator/error.json) |
