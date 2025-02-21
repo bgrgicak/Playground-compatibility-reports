@@ -215,8 +215,6 @@
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | jspi-boot | favatars | [View logs](/logs/plugins/f/favatars/error.json) |
 | Unknown query type: DESC. | asyncify-boot | favatars | [View logs](/logs/plugins/f/favatars/error.json) |
 | Unknown query type: DESC. | jspi-boot | favatars | [View logs](/logs/plugins/f/favatars/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | fbpromotions | [View logs](/logs/plugins/f/fbpromotions/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | fbpromotions | [View logs](/logs/plugins/f/fbpromotions/error.json) |
 | Unknown operation: CHARACTER SET. | asyncify-boot | jsp-store-locator | [View logs](/logs/plugins/j/jsp-store-locator/error.json) |
 | Unknown operation: CHARACTER SET. | jspi-boot | jsp-store-locator | [View logs](/logs/plugins/j/jsp-store-locator/error.json) |
 | Unknown operation: CONVERT. | asyncify-boot | jsp-store-locator | [View logs](/logs/plugins/j/jsp-store-locator/error.json) |
