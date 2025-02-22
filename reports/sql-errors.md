@@ -21,8 +21,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_identixweb_bestupsell. | jspi-boot | best-upsell-for-woocommerce | [View logs](/logs/plugins/b/best-upsell-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: brands20_settings. | asyncify-boot | brands-20 | [View logs](/logs/plugins/b/brands-20/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: brands20_settings. | jspi-boot | brands-20 | [View logs](/logs/plugins/b/brands-20/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ob_settings. | asyncify-boot | onionbuzz-viral-quiz | [View logs](/logs/plugins/o/onionbuzz-viral-quiz/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ob_settings. | jspi-boot | onionbuzz-viral-quiz | [View logs](/logs/plugins/o/onionbuzz-viral-quiz/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: points. | asyncify-boot | quizzes-for-learnpress | [View logs](/logs/plugins/q/quizzes-for-learnpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: points. | jspi-boot | quizzes-for-learnpress | [View logs](/logs/plugins/q/quizzes-for-learnpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: add_to_group. | asyncify-boot | quizzes-for-buddypress | [View logs](/logs/plugins/q/quizzes-for-buddypress/error.json) |
