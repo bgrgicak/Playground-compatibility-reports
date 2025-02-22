@@ -207,8 +207,6 @@
 | SQLSTATE[HY000]: General error: 1 duplicate column name: recurrence_choice. | jspi-boot | events-calendar-registration-booking-by-events-plus | [View logs](/logs/plugins/e/events-calendar-registration-booking-by-events-plus/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | events-calendar-registration-booking-by-events-plus | [View logs](/logs/plugins/e/events-calendar-registration-booking-by-events-plus/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | events-calendar-registration-booking-by-events-plus | [View logs](/logs/plugins/e/events-calendar-registration-booking-by-events-plus/error.json) |
-| Unexpected token in MySQL query: is_result. | asyncify-boot | football-predictor | [View logs](/logs/plugins/f/football-predictor/error.json) |
-| Unexpected token in MySQL query: is_result. | jspi-boot | football-predictor | [View logs](/logs/plugins/f/football-predictor/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | asyncify-boot | flip-photo-gallery | [View logs](/logs/plugins/f/flip-photo-gallery/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | jspi-boot | flip-photo-gallery | [View logs](/logs/plugins/f/flip-photo-gallery/error.json) |
 | Unknown operation: CHARACTER SET. | asyncify-boot | jsp-store-locator | [View logs](/logs/plugins/j/jsp-store-locator/error.json) |
