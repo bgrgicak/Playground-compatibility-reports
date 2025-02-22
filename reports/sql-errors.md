@@ -21,10 +21,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_identixweb_bestupsell. | jspi-boot | best-upsell-for-woocommerce | [View logs](/logs/plugins/b/best-upsell-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: brands20_settings. | asyncify-boot | brands-20 | [View logs](/logs/plugins/b/brands-20/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: brands20_settings. | jspi-boot | brands-20 | [View logs](/logs/plugins/b/brands-20/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | organisation-maps | [View logs](/logs/plugins/o/organisation-maps/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | organisation-maps | [View logs](/logs/plugins/o/organisation-maps/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | asyncify-boot | officegest | [View logs](/logs/plugins/o/officegest/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | jspi-boot | officegest | [View logs](/logs/plugins/o/officegest/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ob_settings. | asyncify-boot | onionbuzz-viral-quiz | [View logs](/logs/plugins/o/onionbuzz-viral-quiz/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ob_settings. | jspi-boot | onionbuzz-viral-quiz | [View logs](/logs/plugins/o/onionbuzz-viral-quiz/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: points. | asyncify-boot | quizzes-for-learnpress | [View logs](/logs/plugins/q/quizzes-for-learnpress/error.json) |
