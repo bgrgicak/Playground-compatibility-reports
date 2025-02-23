@@ -207,8 +207,6 @@
 | Unknown operation: ENGINE. | jspi-boot | jigoshop-ecommerce | [View logs](/logs/plugins/j/jigoshop-ecommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | asyncify-boot | julia-beta | [View logs](/logs/plugins/j/julia-beta/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | jspi-boot | julia-beta | [View logs](/logs/plugins/j/julia-beta/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | asyncify-boot | hit-counter | [View logs](/logs/plugins/h/hit-counter/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | jspi-boot | hit-counter | [View logs](/logs/plugins/h/hit-counter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | asyncify-boot | hit-counter-max | [View logs](/logs/plugins/h/hit-counter-max/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | jspi-boot | hit-counter-max | [View logs](/logs/plugins/h/hit-counter-max/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: "author". | asyncify-boot | h5p | [View logs](/logs/plugins/h/h5p/error.json) |
