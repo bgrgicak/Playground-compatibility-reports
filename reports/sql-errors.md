@@ -207,12 +207,6 @@
 | Unknown operation: ENGINE. | jspi-boot | jigoshop-ecommerce | [View logs](/logs/plugins/j/jigoshop-ecommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | asyncify-boot | julia-beta | [View logs](/logs/plugins/j/julia-beta/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | jspi-boot | julia-beta | [View logs](/logs/plugins/j/julia-beta/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | happyfret | [View logs](/logs/plugins/h/happyfret/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | happyfret | [View logs](/logs/plugins/h/happyfret/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_happyfret_parcel_type. | asyncify-boot | happyfret | [View logs](/logs/plugins/h/happyfret/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_happyfret_parcel_type. | jspi-boot | happyfret | [View logs](/logs/plugins/h/happyfret/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ntp_header_images. | asyncify-boot | header-images-rotator | [View logs](/logs/plugins/h/header-images-rotator/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ntp_header_images. | jspi-boot | header-images-rotator | [View logs](/logs/plugins/h/header-images-rotator/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | asyncify-boot | hit-counter | [View logs](/logs/plugins/h/hit-counter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | jspi-boot | hit-counter | [View logs](/logs/plugins/h/hit-counter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | asyncify-boot | hit-counter-max | [View logs](/logs/plugins/h/hit-counter-max/error.json) |
