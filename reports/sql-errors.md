@@ -207,16 +207,6 @@
 | Unknown operation: ENGINE. | jspi-boot | jigoshop-ecommerce | [View logs](/logs/plugins/j/jigoshop-ecommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | asyncify-boot | julia-beta | [View logs](/logs/plugins/j/julia-beta/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | jspi-boot | julia-beta | [View logs](/logs/plugins/j/julia-beta/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: price_type. | asyncify-boot | hostel | [View logs](/logs/plugins/h/hostel/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: price_type. | jspi-boot | hostel | [View logs](/logs/plugins/h/hostel/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: timestamp. | asyncify-boot | hostel | [View logs](/logs/plugins/h/hostel/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: timestamp. | jspi-boot | hostel | [View logs](/logs/plugins/h/hostel/error.json) |
-| Unknown create type: INDEX. | asyncify-boot | hostel | [View logs](/logs/plugins/h/hostel/error.json) |
-| Unknown create type: INDEX. | jspi-boot | hostel | [View logs](/logs/plugins/h/hostel/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | horoscop | [View logs](/logs/plugins/h/horoscop/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | horoscop | [View logs](/logs/plugins/h/horoscop/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_horoscope. | asyncify-boot | horoscop | [View logs](/logs/plugins/h/horoscop/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_horoscope. | jspi-boot | horoscop | [View logs](/logs/plugins/h/horoscop/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | happyfret | [View logs](/logs/plugins/h/happyfret/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | happyfret | [View logs](/logs/plugins/h/happyfret/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_happyfret_parcel_type. | asyncify-boot | happyfret | [View logs](/logs/plugins/h/happyfret/error.json) |
