@@ -291,8 +291,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_melipayamak_members. | jspi-boot | melipayamak-woocommerce-sms | [View logs](/logs/plugins/m/melipayamak-woocommerce-sms/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | matrixppc | [View logs](/logs/plugins/m/matrixppc/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | matrixppc | [View logs](/logs/plugins/m/matrixppc/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_mca_common. | asyncify-boot | minecraft-admin | [View logs](/logs/plugins/m/minecraft-admin/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_mca_common. | jspi-boot | minecraft-admin | [View logs](/logs/plugins/m/minecraft-admin/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | miniorange-wp-as-saml-idp | [View logs](/logs/plugins/m/miniorange-wp-as-saml-idp/error.json) |
 | SQLSTATE[HY000]: General error: 1 row value misused. | asyncify-boot | mudslideshow | [View logs](/logs/plugins/m/mudslideshow/error.json) |
 | SQLSTATE[HY000]: General error: 1 row value misused. | jspi-boot | mudslideshow | [View logs](/logs/plugins/m/mudslideshow/error.json) |
