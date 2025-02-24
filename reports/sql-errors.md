@@ -307,8 +307,6 @@
 | SQLSTATE[HY000]: General error: 1 duplicate column name: buyer_id. | jspi-boot | music-store | [View logs](/logs/plugins/m/music-store/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such index: wp_msdb_purchase__product_purchase. | asyncify-boot | music-store | [View logs](/logs/plugins/m/music-store/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such index: wp_msdb_purchase__product_purchase. | jspi-boot | music-store | [View logs](/logs/plugins/m/music-store/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | mybookings-search-and-book | [View logs](/logs/plugins/m/mybookings-search-and-book/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | mybookings-search-and-book | [View logs](/logs/plugins/m/mybookings-search-and-book/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_api_keys. | asyncify-boot | messenger-marketing-for-woocommerce | [View logs](/logs/plugins/m/messenger-marketing-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_api_keys. | jspi-boot | messenger-marketing-for-woocommerce | [View logs](/logs/plugins/m/messenger-marketing-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ruigehond011_landingpages. | asyncify-boot | multisite-landingpages | [View logs](/logs/plugins/m/multisite-landingpages/error.json) |
