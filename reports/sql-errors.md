@@ -39,12 +39,6 @@
 | Unexpected token in MySQL query: optin. | jspi-boot | motor-racing-league | [View logs](/logs/plugins/m/motor-racing-league/error.json) |
 | Unexpected token in MySQL query: rain. | asyncify-boot | motor-racing-league | [View logs](/logs/plugins/m/motor-racing-league/error.json) |
 | Unexpected token in MySQL query: rain. | jspi-boot | motor-racing-league | [View logs](/logs/plugins/m/motor-racing-league/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "`wp_authors`": syntax error. | asyncify-boot | masterit-authors-list | [View logs](/logs/plugins/m/masterit-authors-list/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "`wp_authors`": syntax error. | jspi-boot | masterit-authors-list | [View logs](/logs/plugins/m/masterit-authors-list/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "a": syntax error. | asyncify-boot | masterit-authors-list | [View logs](/logs/plugins/m/masterit-authors-list/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "a": syntax error. | jspi-boot | masterit-authors-list | [View logs](/logs/plugins/m/masterit-authors-list/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_melipayamak_members. | asyncify-boot | melipayamak-woocommerce-sms | [View logs](/logs/plugins/m/melipayamak-woocommerce-sms/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_melipayamak_members. | jspi-boot | melipayamak-woocommerce-sms | [View logs](/logs/plugins/m/melipayamak-woocommerce-sms/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: buyer_id. | asyncify-boot | music-store | [View logs](/logs/plugins/m/music-store/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: buyer_id. | jspi-boot | music-store | [View logs](/logs/plugins/m/music-store/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such index: wp_msdb_purchase__product_purchase. | asyncify-boot | music-store | [View logs](/logs/plugins/m/music-store/error.json) |
