@@ -289,18 +289,12 @@
 | Unknown create type: table. | jspi-boot | xhanch-my-twitter | [View logs](/logs/plugins/x/xhanch-my-twitter/error.json) |
 | SQLSTATE[HY000]: General error: 1 row value misused. | asyncify-boot | mudslideshow | [View logs](/logs/plugins/m/mudslideshow/error.json) |
 | SQLSTATE[HY000]: General error: 1 row value misused. | jspi-boot | mudslideshow | [View logs](/logs/plugins/m/mudslideshow/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | matrixseo | [View logs](/logs/plugins/m/matrixseo/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | matrixseo | [View logs](/logs/plugins/m/matrixseo/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | motor-racing-league | [View logs](/logs/plugins/m/motor-racing-league/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | motor-racing-league | [View logs](/logs/plugins/m/motor-racing-league/error.json) |
 | Unexpected token in MySQL query: optin. | asyncify-boot | motor-racing-league | [View logs](/logs/plugins/m/motor-racing-league/error.json) |
 | Unexpected token in MySQL query: optin. | jspi-boot | motor-racing-league | [View logs](/logs/plugins/m/motor-racing-league/error.json) |
 | Unexpected token in MySQL query: rain. | asyncify-boot | motor-racing-league | [View logs](/logs/plugins/m/motor-racing-league/error.json) |
 | Unexpected token in MySQL query: rain. | jspi-boot | motor-racing-league | [View logs](/logs/plugins/m/motor-racing-league/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: buyer_id. | asyncify-boot | music-store | [View logs](/logs/plugins/m/music-store/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: buyer_id. | jspi-boot | music-store | [View logs](/logs/plugins/m/music-store/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such index: wp_msdb_purchase__product_purchase. | asyncify-boot | music-store | [View logs](/logs/plugins/m/music-store/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such index: wp_msdb_purchase__product_purchase. | jspi-boot | music-store | [View logs](/logs/plugins/m/music-store/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ruigehond011_landingpages. | asyncify-boot | multisite-landingpages | [View logs](/logs/plugins/m/multisite-landingpages/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ruigehond011_landingpages. | jspi-boot | multisite-landingpages | [View logs](/logs/plugins/m/multisite-landingpages/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: wp_mega_messages.page_filter. | ast-sqlite-boot | light-messages | [View logs](/logs/plugins/l/light-messages/error.json) |
