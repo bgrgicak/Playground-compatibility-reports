@@ -39,14 +39,8 @@
 | SQLSTATE[HY000]: General error: 1 no such column: country. | jspi-boot | visitors-online | [View logs](/logs/plugins/v/visitors-online/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | asyncify-boot | flip-photo-gallery | [View logs](/logs/plugins/f/flip-photo-gallery/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | jspi-boot | flip-photo-gallery | [View logs](/logs/plugins/f/flip-photo-gallery/error.json) |
-| Unknown operation: CHARACTER SET. | asyncify-boot | jsp-store-locator | [View logs](/logs/plugins/j/jsp-store-locator/error.json) |
-| Unknown operation: CHARACTER SET. | jspi-boot | jsp-store-locator | [View logs](/logs/plugins/j/jsp-store-locator/error.json) |
-| Unknown operation: CONVERT. | asyncify-boot | jsp-store-locator | [View logs](/logs/plugins/j/jsp-store-locator/error.json) |
-| Unknown operation: CONVERT. | jspi-boot | jsp-store-locator | [View logs](/logs/plugins/j/jsp-store-locator/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | jigoshop | [View logs](/logs/plugins/j/jigoshop/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | jigoshop | [View logs](/logs/plugins/j/jigoshop/error.json) |
-| Unknown operation: ENGINE. | asyncify-boot | jigoshop-ecommerce | [View logs](/logs/plugins/j/jigoshop-ecommerce/error.json) |
-| Unknown operation: ENGINE. | jspi-boot | jigoshop-ecommerce | [View logs](/logs/plugins/j/jigoshop-ecommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | asyncify-boot | julia-beta | [View logs](/logs/plugins/j/julia-beta/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | jspi-boot | julia-beta | [View logs](/logs/plugins/j/julia-beta/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_xmt_acc. | asyncify-boot | xhanch-my-twitter | [View logs](/logs/plugins/x/xhanch-my-twitter/error.json) |
