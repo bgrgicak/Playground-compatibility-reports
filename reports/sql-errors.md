@@ -274,8 +274,6 @@
 | Unknown query type: RENAME. | jspi-boot | contact-form-manager | [View logs](/logs/plugins/c/contact-form-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_camera. | asyncify-boot | camera-slideshow | [View logs](/logs/plugins/c/camera-slideshow/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_camera. | jspi-boot | camera-slideshow | [View logs](/logs/plugins/c/camera-slideshow/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such function: STR_TO_DATE. | asyncify-boot | custom-wp-rest-api | [View logs](/logs/plugins/c/custom-wp-rest-api/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such function: STR_TO_DATE. | jspi-boot | custom-wp-rest-api | [View logs](/logs/plugins/c/custom-wp-rest-api/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "DROP": syntax error. | asyncify-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
