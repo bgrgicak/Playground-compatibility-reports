@@ -200,12 +200,6 @@
 | SQLSTATE[HY000]: General error: 1 duplicate column name: fp_inc_attachments. | jspi-boot | calculated-fields-form | [View logs](/logs/plugins/c/calculated-fields-form/error.json) |
 | Syntax error: Unexpected token name in query SHOW TABLE STATUS FROM  WHERE name='wp_cp_calculated_fields_form_settings';. | asyncify-boot | calculated-fields-form | [View logs](/logs/plugins/c/calculated-fields-form/error.json) |
 | Syntax error: Unexpected token name in query SHOW TABLE STATUS FROM  WHERE name='wp_cp_calculated_fields_form_settings';. | jspi-boot | calculated-fields-form | [View logs](/logs/plugins/c/calculated-fields-form/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_contactvcard_field_types. | asyncify-boot | contact-vcard | [View logs](/logs/plugins/c/contact-vcard/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_contactvcard_field_types. | jspi-boot | contact-vcard | [View logs](/logs/plugins/c/contact-vcard/error.json) |
-| Unexpected token in MySQL query: only_one. | asyncify-boot | contact-vcard | [View logs](/logs/plugins/c/contact-vcard/error.json) |
-| Unexpected token in MySQL query: only_one. | jspi-boot | contact-vcard | [View logs](/logs/plugins/c/contact-vcard/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ceceppa_ml. | asyncify-boot | ceceppa-multilingua | [View logs](/logs/plugins/c/ceceppa-multilingua/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ceceppa_ml. | jspi-boot | ceceppa-multilingua | [View logs](/logs/plugins/c/ceceppa-multilingua/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | contact-form-made-easy | [View logs](/logs/plugins/c/contact-form-made-easy/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | contact-form-made-easy | [View logs](/logs/plugins/c/contact-form-made-easy/error.json) |
 | Unknown show type: CHARACTER SET ;. | asyncify-boot | custom-database-tables | [View logs](/logs/plugins/c/custom-database-tables/error.json) |
