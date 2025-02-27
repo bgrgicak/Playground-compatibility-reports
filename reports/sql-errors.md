@@ -232,8 +232,6 @@
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | campation-postoffice | [View logs](/logs/plugins/c/campation-postoffice/error.json) |
 | Unknown operation: AUTO_INCREMENT. | asyncify-boot | campation-postoffice | [View logs](/logs/plugins/c/campation-postoffice/error.json) |
 | Unknown operation: AUTO_INCREMENT. | jspi-boot | campation-postoffice | [View logs](/logs/plugins/c/campation-postoffice/error.json) |
-| Unknown create type: table. | asyncify-boot | comment-notifier | [View logs](/logs/plugins/c/comment-notifier/error.json) |
-| Unknown create type: table. | jspi-boot | comment-notifier | [View logs](/logs/plugins/c/comment-notifier/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | asyncify-boot | calendarista-basic-edition | [View logs](/logs/plugins/c/calendarista-basic-edition/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | jspi-boot | calendarista-basic-edition | [View logs](/logs/plugins/c/calendarista-basic-edition/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | contest-gallery | [View logs](/logs/plugins/c/contest-gallery/error.json) |
