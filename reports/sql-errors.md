@@ -248,15 +248,3 @@
 | Unexpected token in MySQL query: gameReset. | jspi-boot | cardznet | [View logs](/logs/plugins/c/cardznet/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_camera. | asyncify-boot | camera-slideshow | [View logs](/logs/plugins/c/camera-slideshow/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_camera. | jspi-boot | camera-slideshow | [View logs](/logs/plugins/c/camera-slideshow/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "DROP": syntax error. | asyncify-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "DROP": syntax error. | jspi-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_convo_service_params. | asyncify-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_convo_service_params. | jspi-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_convo_service_releases. | asyncify-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_convo_service_releases. | jspi-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
-| Unknown create type: INDEX. | asyncify-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
-| Unknown create type: INDEX. | jspi-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
-| Unknown show type: INDEXES FROM. | asyncify-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
-| Unknown show type: INDEXES FROM. | jspi-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
