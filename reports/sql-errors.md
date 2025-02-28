@@ -202,8 +202,6 @@
 | Syntax error: Unexpected token name in query SHOW TABLE STATUS FROM  WHERE name='wp_cp_calculated_fields_form_settings';. | jspi-boot | calculated-fields-form | [View logs](/logs/plugins/c/calculated-fields-form/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | contact-form-made-easy | [View logs](/logs/plugins/c/contact-form-made-easy/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | contact-form-made-easy | [View logs](/logs/plugins/c/contact-form-made-easy/error.json) |
-| Unknown show type: CHARACTER SET ;. | asyncify-boot | custom-database-tables | [View logs](/logs/plugins/c/custom-database-tables/error.json) |
-| Unknown show type: CHARACTER SET ;. | jspi-boot | custom-database-tables | [View logs](/logs/plugins/c/custom-database-tables/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | catalogo | [View logs](/logs/plugins/c/catalogo/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | catalogo | [View logs](/logs/plugins/c/catalogo/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_catalogoplugin_column. | asyncify-boot | catalogo | [View logs](/logs/plugins/c/catalogo/error.json) |
