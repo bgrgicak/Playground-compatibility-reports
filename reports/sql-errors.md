@@ -248,26 +248,6 @@
 | Unexpected token in MySQL query: complete. | jspi-boot | cardznet | [View logs](/logs/plugins/c/cardznet/error.json) |
 | Unexpected token in MySQL query: gameReset. | asyncify-boot | cardznet | [View logs](/logs/plugins/c/cardznet/error.json) |
 | Unexpected token in MySQL query: gameReset. | jspi-boot | cardznet | [View logs](/logs/plugins/c/cardznet/error.json) |
-| Data type expected in MySQL query, unknown token received: bcc_email. | asyncify-boot | contact-form-manager | [View logs](/logs/plugins/c/contact-form-manager/error.json) |
-| Data type expected in MySQL query, unknown token received: bcc_email. | jspi-boot | contact-form-manager | [View logs](/logs/plugins/c/contact-form-manager/error.json) |
-| Data type expected in MySQL query, unknown token received: client_view_check_radio_line_break_count. | asyncify-boot | contact-form-manager | [View logs](/logs/plugins/c/contact-form-manager/error.json) |
-| Data type expected in MySQL query, unknown token received: client_view_check_radio_line_break_count. | jspi-boot | contact-form-manager | [View logs](/logs/plugins/c/contact-form-manager/error.json) |
-| Data type expected in MySQL query, unknown token received: from_email_id. | asyncify-boot | contact-form-manager | [View logs](/logs/plugins/c/contact-form-manager/error.json) |
-| Data type expected in MySQL query, unknown token received: from_email_id. | jspi-boot | contact-form-manager | [View logs](/logs/plugins/c/contact-form-manager/error.json) |
-| Data type expected in MySQL query, unknown token received: newsletter_email_shortcode. | asyncify-boot | contact-form-manager | [View logs](/logs/plugins/c/contact-form-manager/error.json) |
-| Data type expected in MySQL query, unknown token received: newsletter_email_shortcode. | jspi-boot | contact-form-manager | [View logs](/logs/plugins/c/contact-form-manager/error.json) |
-| Data type expected in MySQL query, unknown token received: redisplay_option. | asyncify-boot | contact-form-manager | [View logs](/logs/plugins/c/contact-form-manager/error.json) |
-| Data type expected in MySQL query, unknown token received: redisplay_option. | jspi-boot | contact-form-manager | [View logs](/logs/plugins/c/contact-form-manager/error.json) |
-| Data type expected in MySQL query, unknown token received: theme_id. | asyncify-boot | contact-form-manager | [View logs](/logs/plugins/c/contact-form-manager/error.json) |
-| Data type expected in MySQL query, unknown token received: theme_id. | jspi-boot | contact-form-manager | [View logs](/logs/plugins/c/contact-form-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_cfm_form. | asyncify-boot | contact-form-manager | [View logs](/logs/plugins/c/contact-form-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_cfm_form. | jspi-boot | contact-form-manager | [View logs](/logs/plugins/c/contact-form-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_cfm_form_elements. | asyncify-boot | contact-form-manager | [View logs](/logs/plugins/c/contact-form-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_cfm_form_elements. | jspi-boot | contact-form-manager | [View logs](/logs/plugins/c/contact-form-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_cfm_theme_details. | asyncify-boot | contact-form-manager | [View logs](/logs/plugins/c/contact-form-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_cfm_theme_details. | jspi-boot | contact-form-manager | [View logs](/logs/plugins/c/contact-form-manager/error.json) |
-| Unknown query type: RENAME. | asyncify-boot | contact-form-manager | [View logs](/logs/plugins/c/contact-form-manager/error.json) |
-| Unknown query type: RENAME. | jspi-boot | contact-form-manager | [View logs](/logs/plugins/c/contact-form-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_camera. | asyncify-boot | camera-slideshow | [View logs](/logs/plugins/c/camera-slideshow/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_camera. | jspi-boot | camera-slideshow | [View logs](/logs/plugins/c/camera-slideshow/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
