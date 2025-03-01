@@ -190,16 +190,6 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | corner-ad | [View logs](/logs/plugins/c/corner-ad/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_corner_ad. | asyncify-boot | corner-ad | [View logs](/logs/plugins/c/corner-ad/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_corner_ad. | jspi-boot | corner-ad | [View logs](/logs/plugins/c/corner-ad/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: category. | asyncify-boot | calculated-fields-form | [View logs](/logs/plugins/c/calculated-fields-form/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: category. | jspi-boot | calculated-fields-form | [View logs](/logs/plugins/c/calculated-fields-form/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: cu_user_email_bcc_field. | asyncify-boot | calculated-fields-form | [View logs](/logs/plugins/c/calculated-fields-form/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: cu_user_email_bcc_field. | jspi-boot | calculated-fields-form | [View logs](/logs/plugins/c/calculated-fields-form/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: extra. | asyncify-boot | calculated-fields-form | [View logs](/logs/plugins/c/calculated-fields-form/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: extra. | jspi-boot | calculated-fields-form | [View logs](/logs/plugins/c/calculated-fields-form/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: fp_inc_attachments. | asyncify-boot | calculated-fields-form | [View logs](/logs/plugins/c/calculated-fields-form/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: fp_inc_attachments. | jspi-boot | calculated-fields-form | [View logs](/logs/plugins/c/calculated-fields-form/error.json) |
-| Syntax error: Unexpected token name in query SHOW TABLE STATUS FROM  WHERE name='wp_cp_calculated_fields_form_settings';. | asyncify-boot | calculated-fields-form | [View logs](/logs/plugins/c/calculated-fields-form/error.json) |
-| Syntax error: Unexpected token name in query SHOW TABLE STATUS FROM  WHERE name='wp_cp_calculated_fields_form_settings';. | jspi-boot | calculated-fields-form | [View logs](/logs/plugins/c/calculated-fields-form/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | contact-form-made-easy | [View logs](/logs/plugins/c/contact-form-made-easy/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | contact-form-made-easy | [View logs](/logs/plugins/c/contact-form-made-easy/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | clearsale-total | [View logs](/logs/plugins/c/clearsale-total/error.json) |
@@ -216,9 +206,3 @@
 | Syntax error: Unexpected token where in query SHOW TABLE STATUS where name like 'wp_contest_gal1ery_entries'. | jspi-boot | contest-gallery | [View logs](/logs/plugins/c/contest-gallery/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | contest-gallery | [View logs](/logs/plugins/c/contest-gallery/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | contest-gallery | [View logs](/logs/plugins/c/contest-gallery/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error. | asyncify-boot | cardznet | [View logs](/logs/plugins/c/cardznet/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error. | jspi-boot | cardznet | [View logs](/logs/plugins/c/cardznet/error.json) |
-| Unexpected token in MySQL query: complete. | asyncify-boot | cardznet | [View logs](/logs/plugins/c/cardznet/error.json) |
-| Unexpected token in MySQL query: complete. | jspi-boot | cardznet | [View logs](/logs/plugins/c/cardznet/error.json) |
-| Unexpected token in MySQL query: gameReset. | asyncify-boot | cardznet | [View logs](/logs/plugins/c/cardznet/error.json) |
-| Unexpected token in MySQL query: gameReset. | jspi-boot | cardznet | [View logs](/logs/plugins/c/cardznet/error.json) |
