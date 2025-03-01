@@ -202,10 +202,6 @@
 | Syntax error: Unexpected token name in query SHOW TABLE STATUS FROM  WHERE name='wp_cp_calculated_fields_form_settings';. | jspi-boot | calculated-fields-form | [View logs](/logs/plugins/c/calculated-fields-form/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | contact-form-made-easy | [View logs](/logs/plugins/c/contact-form-made-easy/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | contact-form-made-easy | [View logs](/logs/plugins/c/contact-form-made-easy/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | catalogo | [View logs](/logs/plugins/c/catalogo/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | catalogo | [View logs](/logs/plugins/c/catalogo/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_catalogoplugin_column. | asyncify-boot | catalogo | [View logs](/logs/plugins/c/catalogo/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_catalogoplugin_column. | jspi-boot | catalogo | [View logs](/logs/plugins/c/catalogo/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | clearsale-total | [View logs](/logs/plugins/c/clearsale-total/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | clearsale-total | [View logs](/logs/plugins/c/clearsale-total/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | asyncify-boot | calendarista-basic-edition | [View logs](/logs/plugins/c/calendarista-basic-edition/error.json) |
@@ -226,5 +222,3 @@
 | Unexpected token in MySQL query: complete. | jspi-boot | cardznet | [View logs](/logs/plugins/c/cardznet/error.json) |
 | Unexpected token in MySQL query: gameReset. | asyncify-boot | cardznet | [View logs](/logs/plugins/c/cardznet/error.json) |
 | Unexpected token in MySQL query: gameReset. | jspi-boot | cardznet | [View logs](/logs/plugins/c/cardznet/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_camera. | asyncify-boot | camera-slideshow | [View logs](/logs/plugins/c/camera-slideshow/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_camera. | jspi-boot | camera-slideshow | [View logs](/logs/plugins/c/camera-slideshow/error.json) |
