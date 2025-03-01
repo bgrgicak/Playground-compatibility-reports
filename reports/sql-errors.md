@@ -208,20 +208,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_catalogoplugin_column. | jspi-boot | catalogo | [View logs](/logs/plugins/c/catalogo/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | clearsale-total | [View logs](/logs/plugins/c/clearsale-total/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | clearsale-total | [View logs](/logs/plugins/c/clearsale-total/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | asyncify-boot | cookies-by-jm | [View logs](/logs/plugins/c/cookies-by-jm/error.json) |
-| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | jspi-boot | cookies-by-jm | [View logs](/logs/plugins/c/cookies-by-jm/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: autocontinue. | asyncify-boot | chained-quiz | [View logs](/logs/plugins/c/chained-quiz/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: autocontinue. | jspi-boot | chained-quiz | [View logs](/logs/plugins/c/chained-quiz/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: comments. | asyncify-boot | chained-quiz | [View logs](/logs/plugins/c/chained-quiz/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: comments. | jspi-boot | chained-quiz | [View logs](/logs/plugins/c/chained-quiz/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: email_admin. | asyncify-boot | chained-quiz | [View logs](/logs/plugins/c/chained-quiz/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: email_admin. | jspi-boot | chained-quiz | [View logs](/logs/plugins/c/chained-quiz/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: not_empty. | asyncify-boot | chained-quiz | [View logs](/logs/plugins/c/chained-quiz/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: not_empty. | jspi-boot | chained-quiz | [View logs](/logs/plugins/c/chained-quiz/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: redirect_url. | asyncify-boot | chained-quiz | [View logs](/logs/plugins/c/chained-quiz/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: redirect_url. | jspi-boot | chained-quiz | [View logs](/logs/plugins/c/chained-quiz/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: tags. | asyncify-boot | chained-quiz | [View logs](/logs/plugins/c/chained-quiz/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: tags. | jspi-boot | chained-quiz | [View logs](/logs/plugins/c/chained-quiz/error.json) |
 | MySQL field type cannot be translated to SQLite: serial. | asyncify-boot | campation-postoffice | [View logs](/logs/plugins/c/campation-postoffice/error.json) |
 | MySQL field type cannot be translated to SQLite: serial. | jspi-boot | campation-postoffice | [View logs](/logs/plugins/c/campation-postoffice/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | campation-postoffice | [View logs](/logs/plugins/c/campation-postoffice/error.json) |
