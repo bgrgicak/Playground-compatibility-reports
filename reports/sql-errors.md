@@ -194,8 +194,6 @@
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | contact-form-made-easy | [View logs](/logs/plugins/c/contact-form-made-easy/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | clearsale-total | [View logs](/logs/plugins/c/clearsale-total/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | clearsale-total | [View logs](/logs/plugins/c/clearsale-total/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | asyncify-boot | calendarista-basic-edition | [View logs](/logs/plugins/c/calendarista-basic-edition/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | jspi-boot | calendarista-basic-edition | [View logs](/logs/plugins/c/calendarista-basic-edition/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | contest-gallery | [View logs](/logs/plugins/c/contest-gallery/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | contest-gallery | [View logs](/logs/plugins/c/contest-gallery/error.json) |
 | Syntax error: Unexpected token where in query SHOW TABLE STATUS where name like 'wp_contest_gal1ery'. | asyncify-boot | contest-gallery | [View logs](/logs/plugins/c/contest-gallery/error.json) |
