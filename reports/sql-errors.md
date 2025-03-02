@@ -186,10 +186,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_abj404_lookup. | jspi-boot | 404-solution | [View logs](/logs/plugins/4/404-solution/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_abj404_spelling_cache. | asyncify-boot | 404-solution | [View logs](/logs/plugins/4/404-solution/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_abj404_spelling_cache. | jspi-boot | 404-solution | [View logs](/logs/plugins/4/404-solution/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | corner-ad | [View logs](/logs/plugins/c/corner-ad/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | corner-ad | [View logs](/logs/plugins/c/corner-ad/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_corner_ad. | asyncify-boot | corner-ad | [View logs](/logs/plugins/c/corner-ad/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_corner_ad. | jspi-boot | corner-ad | [View logs](/logs/plugins/c/corner-ad/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | contact-form-made-easy | [View logs](/logs/plugins/c/contact-form-made-easy/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | contact-form-made-easy | [View logs](/logs/plugins/c/contact-form-made-easy/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | clearsale-total | [View logs](/logs/plugins/c/clearsale-total/error.json) |
