@@ -190,13 +190,3 @@
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | contact-form-made-easy | [View logs](/logs/plugins/c/contact-form-made-easy/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | clearsale-total | [View logs](/logs/plugins/c/clearsale-total/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | clearsale-total | [View logs](/logs/plugins/c/clearsale-total/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | contest-gallery | [View logs](/logs/plugins/c/contest-gallery/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | contest-gallery | [View logs](/logs/plugins/c/contest-gallery/error.json) |
-| Syntax error: Unexpected token where in query SHOW TABLE STATUS where name like 'wp_contest_gal1ery'. | asyncify-boot | contest-gallery | [View logs](/logs/plugins/c/contest-gallery/error.json) |
-| Syntax error: Unexpected token where in query SHOW TABLE STATUS where name like 'wp_contest_gal1ery'. | jspi-boot | contest-gallery | [View logs](/logs/plugins/c/contest-gallery/error.json) |
-| Syntax error: Unexpected token where in query SHOW TABLE STATUS where name like 'wp_contest_gal1ery_comments'. | asyncify-boot | contest-gallery | [View logs](/logs/plugins/c/contest-gallery/error.json) |
-| Syntax error: Unexpected token where in query SHOW TABLE STATUS where name like 'wp_contest_gal1ery_comments'. | jspi-boot | contest-gallery | [View logs](/logs/plugins/c/contest-gallery/error.json) |
-| Syntax error: Unexpected token where in query SHOW TABLE STATUS where name like 'wp_contest_gal1ery_entries'. | asyncify-boot | contest-gallery | [View logs](/logs/plugins/c/contest-gallery/error.json) |
-| Syntax error: Unexpected token where in query SHOW TABLE STATUS where name like 'wp_contest_gal1ery_entries'. | jspi-boot | contest-gallery | [View logs](/logs/plugins/c/contest-gallery/error.json) |
-| Unknown operation: MODIFY. | asyncify-boot | contest-gallery | [View logs](/logs/plugins/c/contest-gallery/error.json) |
-| Unknown operation: MODIFY. | jspi-boot | contest-gallery | [View logs](/logs/plugins/c/contest-gallery/error.json) |
