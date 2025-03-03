@@ -144,8 +144,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_drf_plugins. | jspi-boot | digital-raindrops-cms-lite | [View logs](/logs/plugins/d/digital-raindrops-cms-lite/error.json) |
 | Unknown create type: table. | asyncify-boot | database-audit | [View logs](/logs/plugins/d/database-audit/error.json) |
 | Unknown create type: table. | jspi-boot | database-audit | [View logs](/logs/plugins/d/database-audit/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter_emails. | asyncify-boot | digital-media-combined | [View logs](/logs/plugins/d/digital-media-combined/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter_emails. | jspi-boot | digital-media-combined | [View logs](/logs/plugins/d/digital-media-combined/error.json) |
 | Unknown create type: table. | asyncify-boot | dtables | [View logs](/logs/plugins/d/dtables/error.json) |
 | Unknown create type: table. | jspi-boot | dtables | [View logs](/logs/plugins/d/dtables/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "DROP": syntax error. | asyncify-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
