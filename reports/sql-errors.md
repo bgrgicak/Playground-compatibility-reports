@@ -124,18 +124,6 @@
 | Unsupported statement type: "showStatement" > "COLUMNS". | ast-sqlite-boot | premium-seo-pack-light-version | [View logs](/logs/plugins/p/premium-seo-pack-light-version/error.json) |
 | Unknown drop type: table. | asyncify-boot | plugin-manager | [View logs](/logs/plugins/p/plugin-manager/error.json) |
 | Unknown drop type: table. | jspi-boot | plugin-manager | [View logs](/logs/plugins/p/plugin-manager/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | asyncify-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | jspi-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: agent. | asyncify-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: agent. | jspi-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: filename. | asyncify-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: filename. | jspi-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: request_status. | asyncify-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: request_status. | jspi-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | asyncify-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | jspi-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: main.wp_ahm_cron_jobs. | asyncify-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: main.wp_ahm_cron_jobs. | jspi-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | dancepress-trwa | [View logs](/logs/plugins/d/dancepress-trwa/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | dancepress-trwa | [View logs](/logs/plugins/d/dancepress-trwa/error.json) |
 | Unknown create type: table. | asyncify-boot | dtables | [View logs](/logs/plugins/d/dtables/error.json) |
