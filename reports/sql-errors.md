@@ -146,18 +146,6 @@
 | Unknown show type: FIELDS FROM. | jspi-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | asyncify-boot | darkpage-simpel-eventer | [View logs](/logs/plugins/d/darkpage-simpel-eventer/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | jspi-boot | darkpage-simpel-eventer | [View logs](/logs/plugins/d/darkpage-simpel-eventer/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: additional. | asyncify-boot | dmsguestbook | [View logs](/logs/plugins/d/dmsguestbook/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: additional. | jspi-boot | dmsguestbook | [View logs](/logs/plugins/d/dmsguestbook/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: flag. | asyncify-boot | dmsguestbook | [View logs](/logs/plugins/d/dmsguestbook/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: flag. | jspi-boot | dmsguestbook | [View logs](/logs/plugins/d/dmsguestbook/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: gravatar. | asyncify-boot | dmsguestbook | [View logs](/logs/plugins/d/dmsguestbook/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: gravatar. | jspi-boot | dmsguestbook | [View logs](/logs/plugins/d/dmsguestbook/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: guestbook. | asyncify-boot | dmsguestbook | [View logs](/logs/plugins/d/dmsguestbook/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: guestbook. | jspi-boot | dmsguestbook | [View logs](/logs/plugins/d/dmsguestbook/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: spam. | asyncify-boot | dmsguestbook | [View logs](/logs/plugins/d/dmsguestbook/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: spam. | jspi-boot | dmsguestbook | [View logs](/logs/plugins/d/dmsguestbook/error.json) |
-| Unknown show type: FIELDS FROM. | asyncify-boot | dmsguestbook | [View logs](/logs/plugins/d/dmsguestbook/error.json) |
-| Unknown show type: FIELDS FROM. | jspi-boot | dmsguestbook | [View logs](/logs/plugins/d/dmsguestbook/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_abj404_lookup. | asyncify-boot | 404-solution | [View logs](/logs/plugins/4/404-solution/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_abj404_lookup. | jspi-boot | 404-solution | [View logs](/logs/plugins/4/404-solution/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_abj404_spelling_cache. | asyncify-boot | 404-solution | [View logs](/logs/plugins/4/404-solution/error.json) |
