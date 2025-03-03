@@ -166,8 +166,6 @@
 | SQLSTATE[HY000]: General error: 1 near "order": syntax error. | jspi-boot | dragon-ecommerce | [View logs](/logs/plugins/d/dragon-ecommerce/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | asyncify-boot | darkpage-simpel-eventer | [View logs](/logs/plugins/d/darkpage-simpel-eventer/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | jspi-boot | darkpage-simpel-eventer | [View logs](/logs/plugins/d/darkpage-simpel-eventer/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_drf_plugins. | asyncify-boot | digital-raindrops-page-styles | [View logs](/logs/plugins/d/digital-raindrops-page-styles/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_drf_plugins. | jspi-boot | digital-raindrops-page-styles | [View logs](/logs/plugins/d/digital-raindrops-page-styles/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: additional. | asyncify-boot | dmsguestbook | [View logs](/logs/plugins/d/dmsguestbook/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: additional. | jspi-boot | dmsguestbook | [View logs](/logs/plugins/d/dmsguestbook/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: flag. | asyncify-boot | dmsguestbook | [View logs](/logs/plugins/d/dmsguestbook/error.json) |
