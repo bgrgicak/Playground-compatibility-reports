@@ -136,14 +136,8 @@
 | SQLSTATE[HY000]: General error: 1 near ")": syntax error. | jspi-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: main.wp_ahm_cron_jobs. | asyncify-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: main.wp_ahm_cron_jobs. | jspi-boot | download-manager | [View logs](/logs/plugins/d/download-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_dms_mappings. | asyncify-boot | domain-mapping-system | [View logs](/logs/plugins/d/domain-mapping-system/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_dms_mappings. | jspi-boot | domain-mapping-system | [View logs](/logs/plugins/d/domain-mapping-system/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | dancepress-trwa | [View logs](/logs/plugins/d/dancepress-trwa/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | dancepress-trwa | [View logs](/logs/plugins/d/dancepress-trwa/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_drf_plugins. | asyncify-boot | digital-raindrops-cms-lite | [View logs](/logs/plugins/d/digital-raindrops-cms-lite/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_drf_plugins. | jspi-boot | digital-raindrops-cms-lite | [View logs](/logs/plugins/d/digital-raindrops-cms-lite/error.json) |
-| Unknown create type: table. | asyncify-boot | database-audit | [View logs](/logs/plugins/d/database-audit/error.json) |
-| Unknown create type: table. | jspi-boot | database-audit | [View logs](/logs/plugins/d/database-audit/error.json) |
 | Unknown create type: table. | asyncify-boot | dtables | [View logs](/logs/plugins/d/dtables/error.json) |
 | Unknown create type: table. | jspi-boot | dtables | [View logs](/logs/plugins/d/dtables/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "DROP": syntax error. | asyncify-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
