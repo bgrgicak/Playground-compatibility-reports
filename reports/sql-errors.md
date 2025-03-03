@@ -128,22 +128,6 @@
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | dancepress-trwa | [View logs](/logs/plugins/d/dancepress-trwa/error.json) |
 | Unknown create type: table. | asyncify-boot | dtables | [View logs](/logs/plugins/d/dtables/error.json) |
 | Unknown create type: table. | jspi-boot | dtables | [View logs](/logs/plugins/d/dtables/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "DROP": syntax error. | asyncify-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "DROP": syntax error. | jspi-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: is404. | asyncify-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: is404. | jspi-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wfBlocks7. | asyncify-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wfBlocks7. | jspi-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wfBlocksAdv. | asyncify-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wfBlocksAdv. | jspi-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wfConfig. | asyncify-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wfConfig. | jspi-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wfLockedOut. | asyncify-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wfLockedOut. | jspi-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wfThrottleLog. | asyncify-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_wfThrottleLog. | jspi-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
-| Unknown show type: FIELDS FROM. | asyncify-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
-| Unknown show type: FIELDS FROM. | jspi-boot | dmn-security-centre | [View logs](/logs/plugins/d/dmn-security-centre/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | asyncify-boot | darkpage-simpel-eventer | [View logs](/logs/plugins/d/darkpage-simpel-eventer/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | jspi-boot | darkpage-simpel-eventer | [View logs](/logs/plugins/d/darkpage-simpel-eventer/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_abj404_lookup. | asyncify-boot | 404-solution | [View logs](/logs/plugins/4/404-solution/error.json) |
