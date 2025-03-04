@@ -126,10 +126,6 @@
 | Unknown drop type: table. | jspi-boot | plugin-manager | [View logs](/logs/plugins/p/plugin-manager/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | dancepress-trwa | [View logs](/logs/plugins/d/dancepress-trwa/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | dancepress-trwa | [View logs](/logs/plugins/d/dancepress-trwa/error.json) |
-| Unknown create type: table. | asyncify-boot | dtables | [View logs](/logs/plugins/d/dtables/error.json) |
-| Unknown create type: table. | jspi-boot | dtables | [View logs](/logs/plugins/d/dtables/error.json) |
-| MySQL field type cannot be translated to SQLite: set. | asyncify-boot | darkpage-simpel-eventer | [View logs](/logs/plugins/d/darkpage-simpel-eventer/error.json) |
-| MySQL field type cannot be translated to SQLite: set. | jspi-boot | darkpage-simpel-eventer | [View logs](/logs/plugins/d/darkpage-simpel-eventer/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_abj404_lookup. | asyncify-boot | 404-solution | [View logs](/logs/plugins/4/404-solution/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_abj404_lookup. | jspi-boot | 404-solution | [View logs](/logs/plugins/4/404-solution/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_abj404_spelling_cache. | asyncify-boot | 404-solution | [View logs](/logs/plugins/4/404-solution/error.json) |
