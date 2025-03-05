@@ -43,18 +43,10 @@
 | SQLSTATE[HY000]: General error: 1 no such column: PwdDate. | jspi-boot | expire-password | [View logs](/logs/plugins/e/expire-password/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_options has no column named blog_id. | asyncify-boot | expire-password | [View logs](/logs/plugins/e/expire-password/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_options has no column named blog_id. | jspi-boot | expire-password | [View logs](/logs/plugins/e/expire-password/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_eh_add_booking. | asyncify-boot | events-handler | [View logs](/logs/plugins/e/events-handler/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_eh_add_booking. | jspi-boot | events-handler | [View logs](/logs/plugins/e/events-handler/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_liveshoutbox. | asyncify-boot | easync-booking | [View logs](/logs/plugins/e/easync-booking/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_liveshoutbox. | jspi-boot | easync-booking | [View logs](/logs/plugins/e/easync-booking/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ezinearticles. | asyncify-boot | ezinearticles-wordpress-plugin | [View logs](/logs/plugins/e/ezinearticles-wordpress-plugin/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ezinearticles. | jspi-boot | ezinearticles-wordpress-plugin | [View logs](/logs/plugins/e/ezinearticles-wordpress-plugin/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | events-calendar-registration-booking-by-events-plus | [View logs](/logs/plugins/e/events-calendar-registration-booking-by-events-plus/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | events-calendar-registration-booking-by-events-plus | [View logs](/logs/plugins/e/events-calendar-registration-booking-by-events-plus/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: recurrence_choice. | asyncify-boot | events-calendar-registration-booking-by-events-plus | [View logs](/logs/plugins/e/events-calendar-registration-booking-by-events-plus/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: recurrence_choice. | jspi-boot | events-calendar-registration-booking-by-events-plus | [View logs](/logs/plugins/e/events-calendar-registration-booking-by-events-plus/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | events-calendar-registration-booking-by-events-plus | [View logs](/logs/plugins/e/events-calendar-registration-booking-by-events-plus/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | events-calendar-registration-booking-by-events-plus | [View logs](/logs/plugins/e/events-calendar-registration-booking-by-events-plus/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "COLUMN": syntax error. | asyncify-boot | exclude-or-include-pages-tags-posts-categories-integrate-with-wiziapp | [View logs](/logs/plugins/e/exclude-or-include-pages-tags-posts-categories-integrate-with-wiziapp/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "COLUMN": syntax error. | jspi-boot | exclude-or-include-pages-tags-posts-categories-integrate-with-wiziapp | [View logs](/logs/plugins/e/exclude-or-include-pages-tags-posts-categories-integrate-with-wiziapp/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | asyncify-boot | easy-wp-tickets | [View logs](/logs/plugins/e/easy-wp-tickets/error.json) |
