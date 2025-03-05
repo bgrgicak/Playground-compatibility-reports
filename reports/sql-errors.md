@@ -15,10 +15,6 @@
 | SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order. | jspi-boot | kotae | [View logs](/logs/plugins/k/kotae/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ktpro_users. | asyncify-boot | kish-twitter | [View logs](/logs/plugins/k/kish-twitter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ktpro_users. | jspi-boot | kish-twitter | [View logs](/logs/plugins/k/kish-twitter/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: add_to_group. | asyncify-boot | quizzes-for-buddypress | [View logs](/logs/plugins/q/quizzes-for-buddypress/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: add_to_group. | jspi-boot | quizzes-for-buddypress | [View logs](/logs/plugins/q/quizzes-for-buddypress/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: points. | asyncify-boot | quizzes-for-learnpress | [View logs](/logs/plugins/q/quizzes-for-learnpress/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: points. | jspi-boot | quizzes-for-learnpress | [View logs](/logs/plugins/q/quizzes-for-learnpress/error.json) |
 | MySQL field type cannot be translated to SQLite: enum. | asyncify-boot | wordfence | [View logs](/logs/plugins/w/wordfence/error.json) |
 | MySQL field type cannot be translated to SQLite: enum. | jspi-boot | wordfence | [View logs](/logs/plugins/w/wordfence/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wfConfig. | asyncify-boot | wordfence | [View logs](/logs/plugins/w/wordfence/error.json) |
@@ -114,9 +110,5 @@
 | Unsupported statement type: "showStatement" > "COLUMNS". | ast-sqlite-boot | premium-seo-pack-light-version | [View logs](/logs/plugins/p/premium-seo-pack-light-version/error.json) |
 | Unknown drop type: table. | asyncify-boot | plugin-manager | [View logs](/logs/plugins/p/plugin-manager/error.json) |
 | Unknown drop type: table. | jspi-boot | plugin-manager | [View logs](/logs/plugins/p/plugin-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_abj404_lookup. | asyncify-boot | 404-solution | [View logs](/logs/plugins/4/404-solution/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_abj404_lookup. | jspi-boot | 404-solution | [View logs](/logs/plugins/4/404-solution/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_abj404_spelling_cache. | asyncify-boot | 404-solution | [View logs](/logs/plugins/4/404-solution/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_abj404_spelling_cache. | jspi-boot | 404-solution | [View logs](/logs/plugins/4/404-solution/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | clearsale-total | [View logs](/logs/plugins/c/clearsale-total/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | clearsale-total | [View logs](/logs/plugins/c/clearsale-total/error.json) |
