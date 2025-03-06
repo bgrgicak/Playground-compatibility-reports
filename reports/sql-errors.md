@@ -37,8 +37,6 @@
 | Unknown create type: TRIGGER. | jspi-boot | emag-marketplace-connector | [View logs](/logs/plugins/e/emag-marketplace-connector/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | eventin-divi-addon | [View logs](/logs/plugins/e/eventin-divi-addon/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | eventin-divi-addon | [View logs](/logs/plugins/e/eventin-divi-addon/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_liveshoutbox. | asyncify-boot | easync-booking | [View logs](/logs/plugins/e/easync-booking/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_liveshoutbox. | jspi-boot | easync-booking | [View logs](/logs/plugins/e/easync-booking/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ezinearticles. | asyncify-boot | ezinearticles-wordpress-plugin | [View logs](/logs/plugins/e/ezinearticles-wordpress-plugin/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ezinearticles. | jspi-boot | ezinearticles-wordpress-plugin | [View logs](/logs/plugins/e/ezinearticles-wordpress-plugin/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_eva__categorie_danger. | asyncify-boot | evarisk | [View logs](/logs/plugins/e/evarisk/error.json) |
