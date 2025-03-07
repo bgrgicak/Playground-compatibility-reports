@@ -31,14 +31,6 @@
 | Unexpected token in MySQL query: field_key. | jspi-boot | eway-crm-extension-for-contact-form-7 | [View logs](/logs/plugins/e/eway-crm-extension-for-contact-form-7/error.json) |
 | Unexpected token in MySQL query: url. | asyncify-boot | eway-crm-extension-for-contact-form-7 | [View logs](/logs/plugins/e/eway-crm-extension-for-contact-form-7/error.json) |
 | Unexpected token in MySQL query: url. | jspi-boot | eway-crm-extension-for-contact-form-7 | [View logs](/logs/plugins/e/eway-crm-extension-for-contact-form-7/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_emkp_categories. | asyncify-boot | emag-marketplace-connector | [View logs](/logs/plugins/e/emag-marketplace-connector/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_emkp_categories. | jspi-boot | emag-marketplace-connector | [View logs](/logs/plugins/e/emag-marketplace-connector/error.json) |
-| Unknown create type: TRIGGER. | asyncify-boot | emag-marketplace-connector | [View logs](/logs/plugins/e/emag-marketplace-connector/error.json) |
-| Unknown create type: TRIGGER. | jspi-boot | emag-marketplace-connector | [View logs](/logs/plugins/e/emag-marketplace-connector/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_eva__categorie_danger. | asyncify-boot | evarisk | [View logs](/logs/plugins/e/evarisk/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_eva__categorie_danger. | jspi-boot | evarisk | [View logs](/logs/plugins/e/evarisk/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_eva__ged_documents. | asyncify-boot | evarisk | [View logs](/logs/plugins/e/evarisk/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_eva__ged_documents. | jspi-boot | evarisk | [View logs](/logs/plugins/e/evarisk/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error. | asyncify-boot | bingmaps | [View logs](/logs/plugins/b/bingmaps/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error. | jspi-boot | bingmaps | [View logs](/logs/plugins/b/bingmaps/error.json) |
 | Unknown query type: ALTER TABLE wp_badgeos_achievements MODIFY achievement_title TEXT DEFAULT NULL;. | asyncify-boot | badgeos | [View logs](/logs/plugins/b/badgeos/error.json) |
