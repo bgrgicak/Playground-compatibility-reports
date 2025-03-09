@@ -31,8 +31,6 @@
 | Unexpected token in MySQL query: field_key. | jspi-boot | eway-crm-extension-for-contact-form-7 | [View logs](/logs/plugins/e/eway-crm-extension-for-contact-form-7/error.json) |
 | Unexpected token in MySQL query: url. | asyncify-boot | eway-crm-extension-for-contact-form-7 | [View logs](/logs/plugins/e/eway-crm-extension-for-contact-form-7/error.json) |
 | Unexpected token in MySQL query: url. | jspi-boot | eway-crm-extension-for-contact-form-7 | [View logs](/logs/plugins/e/eway-crm-extension-for-contact-form-7/error.json) |
-| Data type expected in MySQL query, unknown token received: pbe_task_id. | asyncify-boot | bulk-edit-for-woocommerce | [View logs](/logs/plugins/b/bulk-edit-for-woocommerce/error.json) |
-| Data type expected in MySQL query, unknown token received: pbe_task_id. | jspi-boot | bulk-edit-for-woocommerce | [View logs](/logs/plugins/b/bulk-edit-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: attr_title. | ast-sqlite-boot | premium-seo-pack-light-version | [View logs](/logs/plugins/p/premium-seo-pack-light-version/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: group_id. | ast-sqlite-boot | premium-seo-pack-light-version | [View logs](/logs/plugins/p/premium-seo-pack-light-version/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: post_id. | ast-sqlite-boot | premium-seo-pack-light-version | [View logs](/logs/plugins/p/premium-seo-pack-light-version/error.json) |
