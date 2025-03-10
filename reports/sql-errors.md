@@ -4,13 +4,7 @@
 |---------|------|------|------|
 | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | ast-sqlite-boot | lpagery | [View logs](/logs/plugins/l/lpagery/error.json) |
 | Failed to parse the MySQL query.. | ast-sqlite-boot | logdash-activity-log | [View logs](/logs/plugins/l/logdash-activity-log/error.json) |
-| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | asyncify-boot | lici-wp | [View logs](/logs/plugins/l/lici-wp/error.json) |
-| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | jspi-boot | lici-wp | [View logs](/logs/plugins/l/lici-wp/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: wp_mega_messages.page_filter. | ast-sqlite-boot | light-messages | [View logs](/logs/plugins/l/light-messages/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ktpro_users. | asyncify-boot | kish-twit | [View logs](/logs/plugins/k/kish-twit/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ktpro_users. | jspi-boot | kish-twit | [View logs](/logs/plugins/k/kish-twit/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: subscribe_on_signup. | asyncify-boot | konnichiwa | [View logs](/logs/plugins/k/konnichiwa/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: subscribe_on_signup. | jspi-boot | konnichiwa | [View logs](/logs/plugins/k/konnichiwa/error.json) |
 | MySQL field type cannot be translated to SQLite: enum. | asyncify-boot | wordfence | [View logs](/logs/plugins/w/wordfence/error.json) |
 | MySQL field type cannot be translated to SQLite: enum. | jspi-boot | wordfence | [View logs](/logs/plugins/w/wordfence/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wfConfig. | asyncify-boot | wordfence | [View logs](/logs/plugins/w/wordfence/error.json) |
