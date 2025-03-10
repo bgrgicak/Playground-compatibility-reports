@@ -11,8 +11,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ktpro_users. | jspi-boot | kish-twit | [View logs](/logs/plugins/k/kish-twit/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: subscribe_on_signup. | asyncify-boot | konnichiwa | [View logs](/logs/plugins/k/konnichiwa/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: subscribe_on_signup. | jspi-boot | konnichiwa | [View logs](/logs/plugins/k/konnichiwa/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order. | asyncify-boot | kotae | [View logs](/logs/plugins/k/kotae/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order. | jspi-boot | kotae | [View logs](/logs/plugins/k/kotae/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ktpro_users. | asyncify-boot | kish-twitter | [View logs](/logs/plugins/k/kish-twitter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ktpro_users. | jspi-boot | kish-twitter | [View logs](/logs/plugins/k/kish-twitter/error.json) |
 | MySQL field type cannot be translated to SQLite: enum. | asyncify-boot | wordfence | [View logs](/logs/plugins/w/wordfence/error.json) |
