@@ -2,56 +2,14 @@
 ## Stats
 | Item | Message | Logs |
 |------|---------|------|
-| link-finder | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/link-finder/error.json) |
 | lazyload-background-images | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/lazyload-background-images/error.json) |
 | linkcreator-ai | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/linkcreator-ai/error.json) |
 | load-your-site-url-in-any-page | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/load-your-site-url-in-any-page/error.json) |
-| lpagery | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | Undefined offset: 0 in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | Trying to get property 'lpagery_table_exists' of non-object in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | Undefined offset: 0 in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | Trying to get property 'lpagery_table_exists' of non-object in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | Undefined offset: 0 in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | Trying to get property 'lpagery_table_exists' of non-object in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | Undefined offset: 0 in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | Trying to get property 'lpagery_table_exists' of non-object in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | Undefined offset: 0 in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | Trying to get property 'lpagery_table_exists' of non-object in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | Undefined offset: 0 in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | Trying to get property 'lpagery_table_exists' of non-object in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | Undefined offset: 0 in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | Trying to get property 'lpagery_table_exists' of non-object in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | Undefined offset: 0 in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | Trying to get property 'lpagery_table_exists' of non-object in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | Undefined offset: 0 in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | Trying to get property 'lpagery_table_exists' of non-object in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | Undefined offset: 0 in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | Trying to get property 'lpagery_table_exists' of non-object in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | Undefined offset: 0 in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | Trying to get property 'lpagery_table_exists' of non-object in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | Undefined offset: 0 in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | Trying to get property 'lpagery_table_exists' of non-object in /wordpress/wp-content/plugins/lpagery/src/data/LPageryDatabaseMigrator.php on line 25 | [View logs](/logs/plugins/l/lpagery/error.json) |
-| lpagery | Uncaught Exception: The plugin generated unexpected output. in /internal/eval.php:29 | [View logs](/logs/plugins/l/lpagery/error.json) |
 | leyka | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/leyka/error.json) |
 | login-page-ui-customizer | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/login-page-ui-customizer/error.json) |
 | lorem-toolbox | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/lorem-toolbox/error.json) |
 | lws-cleaner | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/lws-cleaner/error.json) |
-| lzb-select-dynamic | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/lzb-select-dynamic/error.json) |
 | leadin | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/leadin/error.json) |
-| lumeer-embed | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/lumeer-embed/error.json) |
-| lws-tools | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/lws-tools/error.json) |
-| leadrebel | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/leadrebel/error.json) |
 | leadslide-ai-ebook-creator-and-marketing-funnels | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/leadslide-ai-ebook-creator-and-marketing-funnels/error.json) |
 | luzuk-slider | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/luzuk-slider/error.json) |
 | localhost-to-ip | Uncaught PDOException: SQLSTATE[HY000]: General error: 1 near "STRICT": syntax error in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:669 | [View logs](/logs/plugins/l/localhost-to-ip/error.json) |
