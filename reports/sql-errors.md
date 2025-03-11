@@ -3,7 +3,6 @@
 | Message | Test | Item | Logs |
 |---------|------|------|------|
 | SQLSTATE[HY000]: General error: 1 no such table: information_schema.TABLES. | ast-sqlite-boot | lpagery | [View logs](/logs/plugins/l/lpagery/error.json) |
-| Failed to parse the MySQL query.. | ast-sqlite-boot | logdash-activity-log | [View logs](/logs/plugins/l/logdash-activity-log/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: wp_mega_messages.page_filter. | ast-sqlite-boot | light-messages | [View logs](/logs/plugins/l/light-messages/error.json) |
 | MySQL field type cannot be translated to SQLite: enum. | asyncify-boot | wordfence | [View logs](/logs/plugins/w/wordfence/error.json) |
 | MySQL field type cannot be translated to SQLite: enum. | jspi-boot | wordfence | [View logs](/logs/plugins/w/wordfence/error.json) |
