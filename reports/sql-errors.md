@@ -18,21 +18,5 @@
 | Unexpected token in MySQL query: field_key. | jspi-boot | eway-crm-extension-for-contact-form-7 | [View logs](/logs/plugins/e/eway-crm-extension-for-contact-form-7/error.json) |
 | Unexpected token in MySQL query: url. | asyncify-boot | eway-crm-extension-for-contact-form-7 | [View logs](/logs/plugins/e/eway-crm-extension-for-contact-form-7/error.json) |
 | Unexpected token in MySQL query: url. | jspi-boot | eway-crm-extension-for-contact-form-7 | [View logs](/logs/plugins/e/eway-crm-extension-for-contact-form-7/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: attr_title. | ast-sqlite-boot | premium-seo-pack-light-version | [View logs](/logs/plugins/p/premium-seo-pack-light-version/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: group_id. | ast-sqlite-boot | premium-seo-pack-light-version | [View logs](/logs/plugins/p/premium-seo-pack-light-version/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: post_id. | ast-sqlite-boot | premium-seo-pack-light-version | [View logs](/logs/plugins/p/premium-seo-pack-light-version/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: publish. | ast-sqlite-boot | premium-seo-pack-light-version | [View logs](/logs/plugins/p/premium-seo-pack-light-version/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: redirect_rule. | ast-sqlite-boot | premium-seo-pack-light-version | [View logs](/logs/plugins/p/premium-seo-pack-light-version/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: redirect_type. | ast-sqlite-boot | premium-seo-pack-light-version | [View logs](/logs/plugins/p/premium-seo-pack-light-version/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: target_status_code. | ast-sqlite-boot | premium-seo-pack-light-version | [View logs](/logs/plugins/p/premium-seo-pack-light-version/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: target_status_details. | ast-sqlite-boot | premium-seo-pack-light-version | [View logs](/logs/plugins/p/premium-seo-pack-light-version/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_psp_web_directories. | ast-sqlite-boot | premium-seo-pack-light-version | [View logs](/logs/plugins/p/premium-seo-pack-light-version/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_psp_web_directories. | asyncify-boot | premium-seo-pack-light-version | [View logs](/logs/plugins/p/premium-seo-pack-light-version/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_psp_web_directories. | jspi-boot | premium-seo-pack-light-version | [View logs](/logs/plugins/p/premium-seo-pack-light-version/error.json) |
-| Unknown operation: MODIFY. | asyncify-boot | premium-seo-pack-light-version | [View logs](/logs/plugins/p/premium-seo-pack-light-version/error.json) |
-| Unknown operation: MODIFY. | jspi-boot | premium-seo-pack-light-version | [View logs](/logs/plugins/p/premium-seo-pack-light-version/error.json) |
-| Unsupported statement type: "showStatement" > "COLUMNS". | ast-sqlite-boot | premium-seo-pack-light-version | [View logs](/logs/plugins/p/premium-seo-pack-light-version/error.json) |
-| Unknown drop type: table. | asyncify-boot | plugin-manager | [View logs](/logs/plugins/p/plugin-manager/error.json) |
-| Unknown drop type: table. | jspi-boot | plugin-manager | [View logs](/logs/plugins/p/plugin-manager/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | clearsale-total | [View logs](/logs/plugins/c/clearsale-total/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | clearsale-total | [View logs](/logs/plugins/c/clearsale-total/error.json) |
