@@ -4,6 +4,7 @@ This report shows the number of errors for each of the top WordPress.org plugins
 ## Stats
 | Date | Error rate (%) | Plugins Tested | Themes Tested | Plugins with Errors | Themes with Errors |
 |------|----------------|----------------|---------------|---------------------|--------------------|
+| 2025-03-27 | 5.931% | 102176 | 13292 | 5489 | 1360 |
 | 2025-03-26 | 5.931% | 102176 | 13292 | 5489 | 1360 |
 | 2025-03-25 | 5.931% | 102176 | 13292 | 5489 | 1360 |
 | 2025-03-24 | 5.932% | 102176 | 13292 | 5490 | 1360 |
@@ -93,4 +94,3 @@ This report shows the number of errors for each of the top WordPress.org plugins
 | 2024-12-30 | 2.24% | 102176 | 13292 | 1847 | 740 |
 | 2024-12-29 | 2.24% | 102176 | 13292 | 1847 | 740 |
 | 2024-12-28 | 2.24% | 102176 | 13292 | 1847 | 740 |
-| 2024-12-27 | 2.24% | 102176 | 13292 | 1847 | 740 |
