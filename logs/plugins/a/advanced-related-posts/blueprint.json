@@ -1,18 +1,1 @@
-{
-  "preferredVersions": {
-    "php": "8.0",
-    "wp": "latest"
-  },
-  "steps": [
-    {
-      "step": "installPlugin",
-      "pluginData": {
-        "resource": "wordpress.org/plugins",
-        "slug": "advanced-related-posts"
-      },
-      "options": {
-        "activate": true
-      }
-    }
-  ]
-}
+{"landingPage":"\/wp-admin\/admin.php?page=advanced-related-posts","preferredVersions":{"php":"8.2","wp":"latest"},"features":{"networking":true},"steps":[{"step":"login","username":"admin","password":"admin123"},{"step":"installPlugin","pluginData":{"resource":"wordpress.org\/plugins","slug":"advanced-related-posts"}},{"step":"setSiteOptions","options":{"blogname":"Advanced Related Posts Test Site","blogdescription":"Automated Advanced Related Posts Preview"}},{"step":"runPHP","code":"<?php\nrequire_once 'wordpress\/wp-load.php';\n\n$posts = [\n    [\n        'post_title' => 'First Test Post',\n        'post_content' => '<p>This is the content of the first test post.<\/p>'\n    ],\n    [\n        'post_title' => 'Second Test Post',\n        'post_content' => '<p>This is the content of the second test post.<\/p>'\n    ],\n    [\n        'post_title' => 'Third Test Post',\n        'post_content' => '<p>This is the content of the third test post.<\/p>'\n    ]\n];\n\nforeach ($posts as $post) {\n    $post_args = array(\n        'post_type'    => 'post',\n        'post_date'    => date('Y-m-d H:i:s'),\n        'post_status'  => 'publish',\n        'post_title'   => $post['post_title'],\n        'post_content' => $post['post_content'],\n    );\n\n    $post_id = wp_insert_post($post_args);\n    if (is_wp_error($post_id)) {\n        echo 'Error creating post: ' . $post_id->get_error_message() . \"\\n\";\n    } else {\n        echo 'Post created successfully with ID: ' . $post_id . \"\\n\";\n    }\n}\n?>"},{"step":"installPlugin","pluginZipFile":{"resource":"wordpress.org\/plugins","slug":"advanced-related-posts"},"options":{"activate":true}}]}
