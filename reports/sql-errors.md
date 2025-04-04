@@ -66,6 +66,15 @@
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | ast-sqlite-boot | export-to-text | [View logs](/logs/plugins/e/export-to-text/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | asyncify-boot | export-to-text | [View logs](/logs/plugins/e/export-to-text/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | jspi-boot | export-to-text | [View logs](/logs/plugins/e/export-to-text/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | eshop-payza-checkout | [View logs](/logs/plugins/e/eshop-payza-checkout/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | eshop-payza-checkout | [View logs](/logs/plugins/e/eshop-payza-checkout/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | eshop-payza-checkout | [View logs](/logs/plugins/e/eshop-payza-checkout/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | edd-checkout-message | [View logs](/logs/plugins/e/edd-checkout-message/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | edd-checkout-message | [View logs](/logs/plugins/e/edd-checkout-message/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | edd-checkout-message | [View logs](/logs/plugins/e/edd-checkout-message/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | elsa-grabber | [View logs](/logs/plugins/e/elsa-grabber/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | elsa-grabber | [View logs](/logs/plugins/e/elsa-grabber/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | elsa-grabber | [View logs](/logs/plugins/e/elsa-grabber/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | ast-sqlite-boot | eewee-pinterest | [View logs](/logs/plugins/e/eewee-pinterest/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | asyncify-boot | eewee-pinterest | [View logs](/logs/plugins/e/eewee-pinterest/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | jspi-boot | eewee-pinterest | [View logs](/logs/plugins/e/eewee-pinterest/error.json) |
@@ -75,18 +84,42 @@
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | ast-sqlite-boot | eshop-quantumwebform | [View logs](/logs/plugins/e/eshop-quantumwebform/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | asyncify-boot | eshop-quantumwebform | [View logs](/logs/plugins/e/eshop-quantumwebform/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | jspi-boot | eshop-quantumwebform | [View logs](/logs/plugins/e/eshop-quantumwebform/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | ez-quote | [View logs](/logs/plugins/e/ez-quote/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | ez-quote | [View logs](/logs/plugins/e/ez-quote/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | ez-quote | [View logs](/logs/plugins/e/ez-quote/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | edd-blockonomics | [View logs](/logs/plugins/e/edd-blockonomics/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | edd-blockonomics | [View logs](/logs/plugins/e/edd-blockonomics/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | edd-blockonomics | [View logs](/logs/plugins/e/edd-blockonomics/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | ast-sqlite-boot | ebookmakr-for-wordpress | [View logs](/logs/plugins/e/ebookmakr-for-wordpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | asyncify-boot | ebookmakr-for-wordpress | [View logs](/logs/plugins/e/ebookmakr-for-wordpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | jspi-boot | ebookmakr-for-wordpress | [View logs](/logs/plugins/e/ebookmakr-for-wordpress/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | extra-product-addons-for-woocommerce | [View logs](/logs/plugins/e/extra-product-addons-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | extra-product-addons-for-woocommerce | [View logs](/logs/plugins/e/extra-product-addons-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | extra-product-addons-for-woocommerce | [View logs](/logs/plugins/e/extra-product-addons-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | ast-sqlite-boot | entertainment-news | [View logs](/logs/plugins/e/entertainment-news/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | asyncify-boot | entertainment-news | [View logs](/logs/plugins/e/entertainment-news/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | jspi-boot | entertainment-news | [View logs](/logs/plugins/e/entertainment-news/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | eshop-shipping-extension | [View logs](/logs/plugins/e/eshop-shipping-extension/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | eshop-shipping-extension | [View logs](/logs/plugins/e/eshop-shipping-extension/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | eshop-shipping-extension | [View logs](/logs/plugins/e/eshop-shipping-extension/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | ast-sqlite-boot | expenses | [View logs](/logs/plugins/e/expenses/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | asyncify-boot | expenses | [View logs](/logs/plugins/e/expenses/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | jspi-boot | expenses | [View logs](/logs/plugins/e/expenses/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | edd-drip | [View logs](/logs/plugins/e/edd-drip/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | edd-drip | [View logs](/logs/plugins/e/edd-drip/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | edd-drip | [View logs](/logs/plugins/e/edd-drip/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | explara-lite | [View logs](/logs/plugins/e/explara-lite/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | explara-lite | [View logs](/logs/plugins/e/explara-lite/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | explara-lite | [View logs](/logs/plugins/e/explara-lite/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | ast-sqlite-boot | eshop-invoice | [View logs](/logs/plugins/e/eshop-invoice/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | asyncify-boot | eshop-invoice | [View logs](/logs/plugins/e/eshop-invoice/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | jspi-boot | eshop-invoice | [View logs](/logs/plugins/e/eshop-invoice/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | easyling-for-wp | [View logs](/logs/plugins/e/easyling-for-wp/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | easyling-for-wp | [View logs](/logs/plugins/e/easyling-for-wp/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | easyling-for-wp | [View logs](/logs/plugins/e/easyling-for-wp/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | edd-paylane-gateway | [View logs](/logs/plugins/e/edd-paylane-gateway/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | edd-paylane-gateway | [View logs](/logs/plugins/e/edd-paylane-gateway/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | edd-paylane-gateway | [View logs](/logs/plugins/e/edd-paylane-gateway/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | ast-sqlite-boot | exec-php | [View logs](/logs/plugins/e/exec-php/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | asyncify-boot | exec-php | [View logs](/logs/plugins/e/exec-php/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | jspi-boot | exec-php | [View logs](/logs/plugins/e/exec-php/error.json) |
@@ -95,6 +128,9 @@
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | jspi-boot | eidogo-for-wordpress | [View logs](/logs/plugins/e/eidogo-for-wordpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | asyncify-boot | easy-wp-tickets | [View logs](/logs/plugins/e/easy-wp-tickets/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | jspi-boot | easy-wp-tickets | [View logs](/logs/plugins/e/easy-wp-tickets/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | external-events-calendar | [View logs](/logs/plugins/e/external-events-calendar/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | external-events-calendar | [View logs](/logs/plugins/e/external-events-calendar/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | external-events-calendar | [View logs](/logs/plugins/e/external-events-calendar/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | ast-sqlite-boot | ecommerce-user-profiles-by-profilegrid | [View logs](/logs/plugins/e/ecommerce-user-profiles-by-profilegrid/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | asyncify-boot | ecommerce-user-profiles-by-profilegrid | [View logs](/logs/plugins/e/ecommerce-user-profiles-by-profilegrid/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | jspi-boot | ecommerce-user-profiles-by-profilegrid | [View logs](/logs/plugins/e/ecommerce-user-profiles-by-profilegrid/error.json) |
@@ -267,6 +303,38 @@
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | readme-detonator | [View logs](/logs/plugins/r/readme-detonator/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | readme-detonator | [View logs](/logs/plugins/r/readme-detonator/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | readme-detonator | [View logs](/logs/plugins/r/readme-detonator/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | ttc-wordpress-security-plugin | [View logs](/logs/plugins/t/ttc-wordpress-security-plugin/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | ttc-wordpress-security-plugin | [View logs](/logs/plugins/t/ttc-wordpress-security-plugin/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | ttc-wordpress-security-plugin | [View logs](/logs/plugins/t/ttc-wordpress-security-plugin/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | tambar | [View logs](/logs/plugins/t/tambar/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | tambar | [View logs](/logs/plugins/t/tambar/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | terror-alert-level-widget | [View logs](/logs/plugins/t/terror-alert-level-widget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | terror-alert-level-widget | [View logs](/logs/plugins/t/terror-alert-level-widget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | terror-alert-level-widget | [View logs](/logs/plugins/t/terror-alert-level-widget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | tt-subscribe | [View logs](/logs/plugins/t/tt-subscribe/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | tt-subscribe | [View logs](/logs/plugins/t/tt-subscribe/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | tt-subscribe | [View logs](/logs/plugins/t/tt-subscribe/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | tcvn-accordion-widget | [View logs](/logs/plugins/t/tcvn-accordion-widget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | tcvn-accordion-widget | [View logs](/logs/plugins/t/tcvn-accordion-widget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | tcvn-accordion-widget | [View logs](/logs/plugins/t/tcvn-accordion-widget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | trumpcha | [View logs](/logs/plugins/t/trumpcha/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | trumpcha | [View logs](/logs/plugins/t/trumpcha/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | trumpcha | [View logs](/logs/plugins/t/trumpcha/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | trombiz | [View logs](/logs/plugins/t/trombiz/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | trombiz | [View logs](/logs/plugins/t/trombiz/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | trombiz | [View logs](/logs/plugins/t/trombiz/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | tentblogger-simple-top-posts | [View logs](/logs/plugins/t/tentblogger-simple-top-posts/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | tentblogger-simple-top-posts | [View logs](/logs/plugins/t/tentblogger-simple-top-posts/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | tentblogger-simple-top-posts | [View logs](/logs/plugins/t/tentblogger-simple-top-posts/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | teledirwidgets | [View logs](/logs/plugins/t/teledirwidgets/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | teledirwidgets | [View logs](/logs/plugins/t/teledirwidgets/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | teledirwidgets | [View logs](/logs/plugins/t/teledirwidgets/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | the-world | [View logs](/logs/plugins/t/the-world/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | the-world | [View logs](/logs/plugins/t/the-world/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | the-world | [View logs](/logs/plugins/t/the-world/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | twitpic | [View logs](/logs/plugins/t/twitpic/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | twitpic | [View logs](/logs/plugins/t/twitpic/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | twitpic | [View logs](/logs/plugins/t/twitpic/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | wc-gateway-gigzter | [View logs](/logs/plugins/w/wc-gateway-gigzter/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | wc-gateway-gigzter | [View logs](/logs/plugins/w/wc-gateway-gigzter/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | wc-gateway-gigzter | [View logs](/logs/plugins/w/wc-gateway-gigzter/error.json) |
