@@ -23,6 +23,8 @@
 | Unknown query type: SHOW_COLUMNS. | ast-sqlite-boot | bp-default-data | [View logs](/logs/plugins/b/bp-default-data/error.json) |
 | Unknown query type: SHOW_COLUMNS. | asyncify-boot | bp-default-data | [View logs](/logs/plugins/b/bp-default-data/error.json) |
 | Unknown query type: SHOW_COLUMNS. | jspi-boot | bp-default-data | [View logs](/logs/plugins/b/bp-default-data/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | ast-sqlite-boot | bitwords-io | [View logs](/logs/plugins/b/bitwords-io/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | bitwords-io | [View logs](/logs/plugins/b/bitwords-io/error.json) |
 | Unknown query type: SHOW_COLUMNS. | ast-sqlite-boot | better-wp-varnish | [View logs](/logs/plugins/b/better-wp-varnish/error.json) |
 | Unknown query type: SHOW_COLUMNS. | asyncify-boot | better-wp-varnish | [View logs](/logs/plugins/b/better-wp-varnish/error.json) |
 | Unknown query type: SHOW_COLUMNS. | jspi-boot | better-wp-varnish | [View logs](/logs/plugins/b/better-wp-varnish/error.json) |
@@ -137,6 +139,46 @@
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | ast-sqlite-boot | eventz-lite | [View logs](/logs/plugins/e/eventz-lite/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | asyncify-boot | eventz-lite | [View logs](/logs/plugins/e/eventz-lite/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | jspi-boot | eventz-lite | [View logs](/logs/plugins/e/eventz-lite/error.json) |
+| Unknown operation: CHARACTER SET. | ast-sqlite-boot | jm-avail-booking | [View logs](/logs/plugins/j/jm-avail-booking/error.json) |
+| Unknown operation: CHARACTER SET. | ast-sqlite-boot | juiz-user-custom | [View logs](/logs/plugins/j/juiz-user-custom/error.json) |
+| Unknown operation: CHARACTER SET. | asyncify-boot | juiz-user-custom | [View logs](/logs/plugins/j/juiz-user-custom/error.json) |
+| Unknown operation: CHARACTER SET. | jspi-boot | juiz-user-custom | [View logs](/logs/plugins/j/juiz-user-custom/error.json) |
+| Unknown operation: CHARACTER SET. | ast-sqlite-boot | jqueryfacebookwallwplight | [View logs](/logs/plugins/j/jqueryfacebookwallwplight/error.json) |
+| Unknown operation: CHARACTER SET. | asyncify-boot | jqueryfacebookwallwplight | [View logs](/logs/plugins/j/jqueryfacebookwallwplight/error.json) |
+| Unknown operation: CHARACTER SET. | jspi-boot | jqueryfacebookwallwplight | [View logs](/logs/plugins/j/jqueryfacebookwallwplight/error.json) |
+| Unknown operation: CHARACTER SET. | ast-sqlite-boot | jet-event-system-for-buddypress | [View logs](/logs/plugins/j/jet-event-system-for-buddypress/error.json) |
+| Unknown operation: CHARACTER SET. | asyncify-boot | jet-event-system-for-buddypress | [View logs](/logs/plugins/j/jet-event-system-for-buddypress/error.json) |
+| Unknown operation: CHARACTER SET. | jspi-boot | jet-event-system-for-buddypress | [View logs](/logs/plugins/j/jet-event-system-for-buddypress/error.json) |
+| Unknown operation: CHARACTER SET. | ast-sqlite-boot | jm-html5-and-responsive-gallery | [View logs](/logs/plugins/j/jm-html5-and-responsive-gallery/error.json) |
+| Unknown operation: CHARACTER SET. | asyncify-boot | jm-html5-and-responsive-gallery | [View logs](/logs/plugins/j/jm-html5-and-responsive-gallery/error.json) |
+| Unknown operation: CHARACTER SET. | jspi-boot | jm-html5-and-responsive-gallery | [View logs](/logs/plugins/j/jm-html5-and-responsive-gallery/error.json) |
+| Unknown operation: CHARACTER SET. | ast-sqlite-boot | jr-relatedposts | [View logs](/logs/plugins/j/jr-relatedposts/error.json) |
+| Unknown operation: CHARACTER SET. | asyncify-boot | jr-relatedposts | [View logs](/logs/plugins/j/jr-relatedposts/error.json) |
+| Unknown operation: CHARACTER SET. | jspi-boot | jr-relatedposts | [View logs](/logs/plugins/j/jr-relatedposts/error.json) |
+| Unknown operation: CHARACTER SET. | ast-sqlite-boot | jr-twitter | [View logs](/logs/plugins/j/jr-twitter/error.json) |
+| Unknown operation: CHARACTER SET. | asyncify-boot | jr-twitter | [View logs](/logs/plugins/j/jr-twitter/error.json) |
+| Unknown operation: CHARACTER SET. | jspi-boot | jr-twitter | [View logs](/logs/plugins/j/jr-twitter/error.json) |
+| Unknown operation: CHARACTER SET. | ast-sqlite-boot | jump-around | [View logs](/logs/plugins/j/jump-around/error.json) |
+| Unknown operation: CHARACTER SET. | asyncify-boot | jump-around | [View logs](/logs/plugins/j/jump-around/error.json) |
+| Unknown operation: CHARACTER SET. | jspi-boot | jump-around | [View logs](/logs/plugins/j/jump-around/error.json) |
+| Unknown operation: CHARACTER SET. | ast-sqlite-boot | jenus-lightweight-social-share | [View logs](/logs/plugins/j/jenus-lightweight-social-share/error.json) |
+| Unknown operation: CHARACTER SET. | asyncify-boot | jenus-lightweight-social-share | [View logs](/logs/plugins/j/jenus-lightweight-social-share/error.json) |
+| Unknown operation: CHARACTER SET. | jspi-boot | jenus-lightweight-social-share | [View logs](/logs/plugins/j/jenus-lightweight-social-share/error.json) |
+| Unknown operation: CHARACTER SET. | ast-sqlite-boot | jigoshop-ecommerce | [View logs](/logs/plugins/j/jigoshop-ecommerce/error.json) |
+| Unknown operation: CHARACTER SET. | asyncify-boot | jigoshop-ecommerce | [View logs](/logs/plugins/j/jigoshop-ecommerce/error.json) |
+| Unknown operation: CHARACTER SET. | jspi-boot | jigoshop-ecommerce | [View logs](/logs/plugins/j/jigoshop-ecommerce/error.json) |
+| Unknown operation: CHARACTER SET. | ast-sqlite-boot | jr-filter | [View logs](/logs/plugins/j/jr-filter/error.json) |
+| Unknown operation: CHARACTER SET. | asyncify-boot | jr-filter | [View logs](/logs/plugins/j/jr-filter/error.json) |
+| Unknown operation: CHARACTER SET. | jspi-boot | jr-filter | [View logs](/logs/plugins/j/jr-filter/error.json) |
+| Unknown operation: CHARACTER SET. | ast-sqlite-boot | jet-member-could | [View logs](/logs/plugins/j/jet-member-could/error.json) |
+| Unknown operation: CHARACTER SET. | asyncify-boot | jet-member-could | [View logs](/logs/plugins/j/jet-member-could/error.json) |
+| Unknown operation: CHARACTER SET. | jspi-boot | jet-member-could | [View logs](/logs/plugins/j/jet-member-could/error.json) |
+| Unknown operation: CHARACTER SET. | ast-sqlite-boot | joomconnect-quick-ticket-lite-for-connectwise | [View logs](/logs/plugins/j/joomconnect-quick-ticket-lite-for-connectwise/error.json) |
+| Unknown operation: CHARACTER SET. | asyncify-boot | joomconnect-quick-ticket-lite-for-connectwise | [View logs](/logs/plugins/j/joomconnect-quick-ticket-lite-for-connectwise/error.json) |
+| Unknown operation: CHARACTER SET. | jspi-boot | joomconnect-quick-ticket-lite-for-connectwise | [View logs](/logs/plugins/j/joomconnect-quick-ticket-lite-for-connectwise/error.json) |
+| Unknown operation: CHARACTER SET. | ast-sqlite-boot | jamies-wp-arrow-newsletter-subscriber | [View logs](/logs/plugins/j/jamies-wp-arrow-newsletter-subscriber/error.json) |
+| Unknown operation: CHARACTER SET. | asyncify-boot | jamies-wp-arrow-newsletter-subscriber | [View logs](/logs/plugins/j/jamies-wp-arrow-newsletter-subscriber/error.json) |
+| Unknown operation: CHARACTER SET. | jspi-boot | jamies-wp-arrow-newsletter-subscriber | [View logs](/logs/plugins/j/jamies-wp-arrow-newsletter-subscriber/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: apiEndpoints. | ast-sqlite-boot | my-posts-order | [View logs](/logs/plugins/m/my-posts-order/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: apiEndpoints. | asyncify-boot | my-posts-order | [View logs](/logs/plugins/m/my-posts-order/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: apiEndpoints. | jspi-boot | my-posts-order | [View logs](/logs/plugins/m/my-posts-order/error.json) |
