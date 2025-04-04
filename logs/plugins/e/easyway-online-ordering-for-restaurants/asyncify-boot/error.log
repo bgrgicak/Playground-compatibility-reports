@@ -1,17 +1,575 @@
-node:internal/event_target:1094
-  process.nextTick(() => { throw err; });
-                           ^
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21
+`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
 
-TypeError: process.stdout.clearLine is not a function
-    at C.<anonymous> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:18:538)
-    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:820:20)
-    at C.dispatchEvent (node:internal/event_target:755:26)
-    at C.notifyProgress (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:295:10)
-    at C.<anonymous> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:200:81)
-    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:820:20)
-    at C.dispatchEvent (node:internal/event_target:755:26)
-    at C.notifyProgress (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:295:10)
-    at C.<anonymous> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:200:81)
-    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:820:20)
+Error: [04-Apr-2025 15:27:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('easy-post-types-fields/easy-post-types-fields.php_plugin_activation', '1743780434', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'easy-post-types-fields/easy-post-types-fields.php_plugin_activation' , '1743780434' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('easy-post-types...', 1743780434, '', 'auto')
+#5 /wordpress/wp-content/plugins/easy-post-types-fields/dependencies/barn2/barn2-lib/src/Plugin/Simple_Plugin.php(100): update_option('easy-post-types...', 1743780434)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Plugin\Simple_Plugin->before_activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_easy-p...', false)
+#10 /internal/eval.php(20): activate_plugin('easy-post-types...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('easy-post-types-fields/easy-post-types-fields.php_plugin_activation', '1743780434', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_easy-post-types-fields/easy-post-types-fields.php'), WP_Hook->do_action, WP_Hook->apply_filters, Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Plugin\Simple_Plugin->before_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[04-Apr-2025 15:27:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout__easy-post-types-fields-setup-wizard_activation_redirect', '1743780464', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout__easy-post-types-fields-setup-wizard_activation_redirect' , '1743780464' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1743780464, '', 'off')
+#5 /wordpress/wp-content/plugins/easy-post-types-fields/dependencies/barn2/setup-wizard/src/Starter.php(63): set_transient('_easy-post-type...', true, 30)
+#6 /wordpress/wp-content/plugins/easy-post-types-fields/src/Admin/Plugin_Setup.php(82): Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Setup_Wizard\Starter->create_transient()
+#7 /wordpress/wp-content/plugins/easy-post-types-fields/dependencies/barn2/barn2-lib/src/Plugin/Simple_Plugin.php(107): Barn2\Plugin\Easy_Post_Types_Fields\Admin\Plugin_Setup->on_activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(324): Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Plugin\Simple_Plugin->before_activate(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_easy-p...', false)
+#12 /internal/eval.php(20): activate_plugin('easy-post-types...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout__easy-post-types-fields-setup-wizard_activation_redirect', '1743780464', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_easy-post-types-fields/easy-post-types-fields.php'), WP_Hook->do_action, WP_Hook->apply_filters, Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Plugin\Simple_Plugin->before_activate, Barn2\Plugin\Easy_Post_Types_Fields\Admin\Plugin_Setup->on_activate, Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Setup_Wizard\Starter->create_transient, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[04-Apr-2025 15:27:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient__easy-post-types-fields-setup-wizard_activation_redirect', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient__easy-post-types-fields-setup-wizard_activation_redirect' , '1' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(1545): add_option('_transient__eas...', true, '', 'off')
+#5 /wordpress/wp-content/plugins/easy-post-types-fields/dependencies/barn2/setup-wizard/src/Starter.php(63): set_transient('_easy-post-type...', true, 30)
+#6 /wordpress/wp-content/plugins/easy-post-types-fields/src/Admin/Plugin_Setup.php(82): Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Setup_Wizard\Starter->create_transient()
+#7 /wordpress/wp-content/plugins/easy-post-types-fields/dependencies/barn2/barn2-lib/src/Plugin/Simple_Plugin.php(107): Barn2\Plugin\Easy_Post_Types_Fields\Admin\Plugin_Setup->on_activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(324): Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Plugin\Simple_Plugin->before_activate(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_easy-p...', false)
+#12 /internal/eval.php(20): activate_plugin('easy-post-types...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient__easy-post-types-fields-setup-wizard_activation_redirect', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_easy-post-types-fields/easy-post-types-fields.php'), WP_Hook->do_action, WP_Hook->apply_filters, Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Plugin\Simple_Plugin->before_activate, Barn2\Plugin\Easy_Post_Types_Fields\Admin\Plugin_Setup->on_activate, Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Setup_Wizard\Starter->create_transient, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[04-Apr-2025 15:27:14 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[04-Apr-2025 15:27:14 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[04-Apr-2025 15:27:14 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[04-Apr-2025 15:27:14 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[04-Apr-2025 15:27:14 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[04-Apr-2025 15:27:14 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[04-Apr-2025 15:27:14 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[04-Apr-2025 15:27:14 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[04-Apr-2025 15:27:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'MNt@>YkeoN@Di2*JeWi)U|JtH!SK^5vu?y!!j:hIp*F*}7:0X;D(l_rBg9}ri,.J', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'MNt@&gt;YkeoN@Di2*JeWi)U|JtH!SK^5vu?y!!j:hIp*F*}7:0X;D(l_rBg9}ri,.J' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'MNt@>YkeoN@Di2*...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'MNt@>YkeoN@Di2*...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'MNt@>YkeoN@Di2*...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'MNt@>YkeoN@Di2*...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40366|barn2_set...', 'nonce')
+#10 /wordpress/wp-content/plugins/easy-post-types-fields/dependencies/barn2/setup-wizard/src/Setup_Wizard.php(201): wp_create_nonce('barn2_setup_wiz...')
+#11 /wordpress/wp-content/plugins/easy-post-types-fields/src/Admin/Wizard/Setup_Wizard.php(55): Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Setup_Wizard\Setup_Wizard->configure(Array)
+#12 /wordpress/wp-content/plugins/easy-post-types-fields/src/Admin/Admin_Controller.php(45): Barn2\Plugin\Easy_Post_Types_Fields\Admin\Wizard\Setup_Wizard->__construct(Object(Barn2\Plugin\Easy_Post_Types_Fields\Plugin))
+#13 /wordpress/wp-content/plugins/easy-post-types-fields/dependencies/barn2/barn2-lib/src/Service/Service_Container.php(40): Barn2\Plugin\Easy_Post_Types_Fields\Admin\Admin_Controller->add_services()
+#14 /wordpress/wp-content/plugins/easy-post-types-fields/src/Admin/Admin_Controller.php(56): Barn2\Plugin\Easy_Post_Types_Fields\Admin\Admin_Controller->register_services()
+#15 /wordpress/wp-content/plugins/easy-post-types-fields/dependencies/barn2/barn2-lib/src/Util.php(233): Barn2\Plugin\Easy_Post_Types_Fields\Admin\Admin_Controller->register()
+#16 [internal function]: Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Util::Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\{closure}(Object(Barn2\Plugin\Easy_Post_Types_Fields\Admin\Admin_Controller))
+#17 /wordpress/wp-content/plugins/easy-post-types-fields/dependencies/barn2/barn2-lib/src/Util.php(238): array_map(Object(Closure), Array)
+#18 /wordpress/wp-content/plugins/easy-post-types-fields/dependencies/barn2/barn2-lib/src/Service/Service_Container.php(144): Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Util::register_services(Array)
+#19 /wordpress/wp-content/plugins/easy-post-types-fields/dependencies/barn2/barn2-lib/src/Service/Service_Container.php(43): Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Plugin\Simple_Plugin->register_services_by_class('Barn2\\Plugin\\Ea...')
+#20 /wordpress/wp-includes/class-wp-hook.php(324): Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Plugin\Simple_Plugin->Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Service\{closure}('Barn2\\Plugin\\Ea...')
+#21 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#22 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#23 /wordpress/wp-content/plugins/easy-post-types-fields/dependencies/barn2/barn2-lib/src/Service/Service_Container.php(154): do_action('2ebaefe6b849a05...', 'Barn2\\Plugin\\Ea...')
+#24 /wordpress/wp-content/plugins/easy-post-types-fields/dependencies/barn2/barn2-lib/src/Service/Service_Container.php(112): Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Plugin\Simple_Plugin->start_services('Barn2\\Plugin\\Ea...')
+#25 /wordpress/wp-includes/class-wp-hook.php(324): Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Plugin\Simple_Plugin->start_standard_services('')
+#26 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#27 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#28 /wordpress/wp-settings.php(682): do_action('after_setup_the...')
+#29 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#30 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#31 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#32 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'MNt@>YkeoN@Di2*JeWi)U|JtH!SK^5vu?y!!j:hIp*F*}7:0X;D(l_rBg9}ri,.J', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('after_setup_theme'), WP_Hook->do_action, WP_Hook->apply_filters, Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Plugin\Simple_Plugin->start_standard_services, Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Plugin\Simple_Plugin->start_services, do_action('2ebaefe6b849a059d2471bd2fa65e9b6_register_Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Service\Standard_Service'), WP_Hook->do_action, WP_Hook->apply_filters, Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Plugin\Simple_Plugin->Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Service\{closure}, Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Plugin\Simple_Plugin->register_services_by_class, Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Util::register_services, array_map, Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Util::Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\{closure}, Barn2\Plugin\Easy_Post_Types_Fields\Admin\Admin_Controller->register, Barn2\Plugin\Easy_Post_Types_Fields\Admin\Admin_Controller->register_services, Barn2\Plugin\Easy_Post_Types_Fields\Admin\Admin_Controller->add_services, Barn2\Plugin\Easy_Post_Types_Fields\Admin\Wizard\Setup_Wizard->__construct, Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Setup_Wizard\Setup_Wizard->configure, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[04-Apr-2025 15:27:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'Rc5jlv*#;hTOM$}rhVfo,Od;/$|-+R)yMU1r0w`J?pARLU<f9jf,~d5.QYhv:zap', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'Rc5jlv*#;hTOM$}rhVfo,Od;/$|-+R)yMU1r0w`J?pARLU&lt;f9jf,~d5.QYhv:zap' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'Rc5jlv*#;hTOM$}...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'Rc5jlv*#;hTOM$}...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'Rc5jlv*#;hTOM$}...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'Rc5jlv*#;hTOM$}...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40366|barn2_set...', 'nonce')
+#10 /wordpress/wp-content/plugins/easy-post-types-fields/dependencies/barn2/setup-wizard/src/Setup_Wizard.php(201): wp_create_nonce('barn2_setup_wiz...')
+#11 /wordpress/wp-content/plugins/easy-post-types-fields/src/Admin/Wizard/Setup_Wizard.php(55): Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Setup_Wizard\Setup_Wizard->configure(Array)
+#12 /wordpress/wp-content/plugins/easy-post-types-fields/src/Admin/Admin_Controller.php(45): Barn2\Plugin\Easy_Post_Types_Fields\Admin\Wizard\Setup_Wizard->__construct(Object(Barn2\Plugin\Easy_Post_Types_Fields\Plugin))
+#13 /wordpress/wp-content/plugins/easy-post-types-fields/dependencies/barn2/barn2-lib/src/Service/Service_Container.php(40): Barn2\Plugin\Easy_Post_Types_Fields\Admin\Admin_Controller->add_services()
+#14 /wordpress/wp-content/plugins/easy-post-types-fields/src/Admin/Admin_Controller.php(56): Barn2\Plugin\Easy_Post_Types_Fields\Admin\Admin_Controller->register_services()
+#15 /wordpress/wp-content/plugins/easy-post-types-fields/dependencies/barn2/barn2-lib/src/Util.php(233): Barn2\Plugin\Easy_Post_Types_Fields\Admin\Admin_Controller->register()
+#16 [internal function]: Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Util::Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\{closure}(Object(Barn2\Plugin\Easy_Post_Types_Fields\Admin\Admin_Controller))
+#17 /wordpress/wp-content/plugins/easy-post-types-fields/dependencies/barn2/barn2-lib/src/Util.php(238): array_map(Object(Closure), Array)
+#18 /wordpress/wp-content/plugins/easy-post-types-fields/dependencies/barn2/barn2-lib/src/Service/Service_Container.php(144): Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Util::register_services(Array)
+#19 /wordpress/wp-content/plugins/easy-post-types-fields/dependencies/barn2/barn2-lib/src/Service/Service_Container.php(43): Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Plugin\Simple_Plugin->register_services_by_class('Barn2\\Plugin\\Ea...')
+#20 /wordpress/wp-includes/class-wp-hook.php(324): Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Plugin\Simple_Plugin->Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Service\{closure}('Barn2\\Plugin\\Ea...')
+#21 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#22 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#23 /wordpress/wp-content/plugins/easy-post-types-fields/dependencies/barn2/barn2-lib/src/Service/Service_Container.php(154): do_action('2ebaefe6b849a05...', 'Barn2\\Plugin\\Ea...')
+#24 /wordpress/wp-content/plugins/easy-post-types-fields/dependencies/barn2/barn2-lib/src/Service/Service_Container.php(112): Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Plugin\Simple_Plugin->start_services('Barn2\\Plugin\\Ea...')
+#25 /wordpress/wp-includes/class-wp-hook.php(324): Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Plugin\Simple_Plugin->start_standard_services('')
+#26 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#27 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#28 /wordpress/wp-settings.php(682): do_action('after_setup_the...')
+#29 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#30 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#31 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#32 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'Rc5jlv*#;hTOM$}rhVfo,Od;/$|-+R)yMU1r0w`J?pARLU<f9jf,~d5.QYhv:zap', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('after_setup_theme'), WP_Hook->do_action, WP_Hook->apply_filters, Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Plugin\Simple_Plugin->start_standard_services, Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Plugin\Simple_Plugin->start_services, do_action('2ebaefe6b849a059d2471bd2fa65e9b6_register_Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Service\Standard_Service'), WP_Hook->do_action, WP_Hook->apply_filters, Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Plugin\Simple_Plugin->Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Service\{closure}, Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Plugin\Simple_Plugin->register_services_by_class, Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Util::register_services, array_map, Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\Util::Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Lib\{closure}, Barn2\Plugin\Easy_Post_Types_Fields\Admin\Admin_Controller->register, Barn2\Plugin\Easy_Post_Types_Fields\Admin\Admin_Controller->register_services, Barn2\Plugin\Easy_Post_Types_Fields\Admin\Admin_Controller->add_services, Barn2\Plugin\Easy_Post_Types_Fields\Admin\Wizard\Setup_Wizard->__construct, Barn2\Plugin\Easy_Post_Types_Fields\Dependencies\Setup_Wizard\Setup_Wizard->configure, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[04-Apr-2025 15:27:32 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[04-Apr-2025 15:27:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[04-Apr-2025 15:27:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[04-Apr-2025 15:27:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[04-Apr-2025 15:27:33 UTC] PHP Warning:  Undefined array key "EasyPostViewCounter_0" in /wordpress/wp-content/plugins/easy-post-view-counter/EasyPostViewCounter.php on line 24
+[04-Apr-2025 15:27:36 UTC] PHP Warning:  Undefined array key "EasyPostViewCounter_0" in /wordpress/wp-content/plugins/easy-post-view-counter/EasyPostViewCounter.php on line 24
+[04-Apr-2025 15:27:38 UTC] PHP Warning:  Undefined array key "EasyPostViewCounter_0" in /wordpress/wp-content/plugins/easy-post-view-counter/EasyPostViewCounter.php on line 24
+[04-Apr-2025 15:27:52 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[04-Apr-2025 15:27:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[04-Apr-2025 15:27:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[04-Apr-2025 15:27:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[04-Apr-2025 15:27:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '4,l&0jN&LMTLyzBsXu):=bjRAa#hPB#)e?S=lZwBQPT{kG|Thg;D_nTU;_`g+5:o', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , '4,l&amp;0jN&amp;LMTLyzBsXu):=bjRAa#hPB#)e?S=lZwBQPT{kG|Thg;D_nTU;_`g+5:o' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', '4,l&0jN&LMTLyzB...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', '4,l&0jN&LMTLyzB...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', '4,l&0jN&LMTLyzB...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', '4,l&0jN&LMTLyzB...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40366|wp_rest|0...', 'nonce')
+#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
+#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
+#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
+#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
+#18 /wordpress/wp-content/plugins/easy-scroll/easy-scroll.php(63): wp_register_script('easy-scroll-mai...', 'http://127.0.0....', Array, '0.1', Array)
+#19 /wordpress/wp-includes/class-wp-hook.php(324): EasyScroll->register_frontend_scripts('')
+#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#22 /wordpress/wp-settings.php(704): do_action('init')
+#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#26 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '4,l&0jN&LMTLyzBsXu):=bjRAa#hPB#)e?S=lZwBQPT{kG|Thg;D_nTU;_`g+5:o', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, EasyScroll->register_frontend_scripts, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[04-Apr-2025 15:27:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 't)ithB5:?[7sbeIZu]9u>),x30a^$I9MK5M8H(pSfaBZKT2N>k3~D~*Z&]R5R>Ps', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 't)ithB5:?[7sbeIZu]9u&gt;),x30a^$I9MK5M8H(pSfaBZKT2N&gt;k3~D~*Z&amp;]R5R&gt;Ps' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 't)ithB5:?[7sbeI...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 't)ithB5:?[7sbeI...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 't)ithB5:?[7sbeI...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 't)ithB5:?[7sbeI...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40366|wp_rest|0...', 'nonce')
+#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
+#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
+#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
+#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
+#18 /wordpress/wp-content/plugins/easy-scroll/easy-scroll.php(63): wp_register_script('easy-scroll-mai...', 'http://127.0.0....', Array, '0.1', Array)
+#19 /wordpress/wp-includes/class-wp-hook.php(324): EasyScroll->register_frontend_scripts('')
+#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#22 /wordpress/wp-settings.php(704): do_action('init')
+#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#26 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 't)ithB5:?[7sbeIZu]9u>),x30a^$I9MK5M8H(pSfaBZKT2N>k3~D~*Z&]R5R>Ps', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, EasyScroll->register_frontend_scripts, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[04-Apr-2025 15:28:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[04-Apr-2025 15:28:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[04-Apr-2025 15:28:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[04-Apr-2025 15:28:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[04-Apr-2025 15:28:31 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[04-Apr-2025 15:28:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[04-Apr-2025 15:28:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[04-Apr-2025 15:28:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[04-Apr-2025 15:28:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('easyjobs-notice_notices', 'a:2:{s:6:\"review\";a:3:{s:5:\"start\";i:1744644511;s:10:\"recurrence\";i:15;s:7:\"refresh\";s:6:\"2.5.10\";}s:7:\"version\";s:5:\"1.1.0\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'easyjobs-notice_notices' , 'a:2:{s:6:&quot;review&quot;;a:3:{s:5:&quot;start&quot;;i:1744644511;s:10:&quot;recurrence&quot;;i:15;s:7:&quot;refresh&quot;;s:6:&quot;2.5.10&quot;;}s:7:&quot;version&quot;;s:5:&quot;1.1.0&quot;;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('easyjobs-notice...', Array, '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'easyjobs-notice...', Array)
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'easyjobs-notice...', Array)
+#7 /wordpress/wp-content/plugins/easyjobs/admin/includes/Notice/Utils/Storage.php(31): update_site_option('easyjobs-notice...', Array)
+#8 /wordpress/wp-content/plugins/easyjobs/admin/includes/Notice/Notice.php(69): PriyoMukul\WPNotice\Utils\Storage->save(Array)
+#9 /wordpress/wp-content/plugins/easyjobs/admin/includes/Notice/Notices.php(209): PriyoMukul\WPNotice\Notice->__construct('review', Array, Array, Array, Object(PriyoMukul\WPNotice\Notices))
+#10 /wordpress/wp-content/plugins/easyjobs/admin/class-easyjobs-admin.php(235): PriyoMukul\WPNotice\Notices->add('review', Array, Array)
+#11 /wordpress/wp-content/plugins/easyjobs/admin/class-easyjobs-admin.php(152): Easyjobs_Admin->notices()
+#12 /wordpress/wp-content/plugins/easyjobs/admin/class-easyjobs-admin.php(119): Easyjobs_Admin->admin_notice()
+#13 /wordpress/wp-content/plugins/easyjobs/includes/class-easyjobs.php(209): Easyjobs_Admin->__construct('easyjobs', '2.5.10')
+#14 /wordpress/wp-content/plugins/easyjobs/includes/class-easyjobs.php(80): Easyjobs->define_admin_hooks()
+#15 /wordpress/wp-content/plugins/easyjobs/easyjobs.php(67): Easyjobs->__construct()
+#16 /wordpress/wp-content/plugins/easyjobs/easyjobs.php(70): run_easyjobs()
+#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('easyjobs/easyjo...')
+#19 /internal/eval.php(20): activate_plugin('easyjobs/easyjo...')
+#20 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('easyjobs-notice_notices', 'a:2:{s:6:\"review\";a:3:{s:5:\"start\";i:1744644511;s:10:\"recurrence\";i:15;s:7:\"refresh\";s:6:\"2.5.10\";}s:7:\"version\";s:5:\"1.1.0\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/easyjobs/easyjobs.php'), run_easyjobs, Easyjobs->__construct, Easyjobs->define_admin_hooks, Easyjobs_Admin->__construct, Easyjobs_Admin->admin_notice, Easyjobs_Admin->notices, PriyoMukul\WPNotice\Notices->add, PriyoMukul\WPNotice\Notice->__construct, PriyoMukul\WPNotice\Utils\Storage->save, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[04-Apr-2025 15:28:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('easyjobs-notice_notices', 'a:2:{s:6:\"opt_in\";a:2:{s:5:\"start\";i:1743953311;s:7:\"refresh\";s:6:\"2.5.10\";}s:7:\"version\";s:5:\"1.1.0\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'easyjobs-notice_notices' , 'a:2:{s:6:&quot;opt_in&quot;;a:2:{s:5:&quot;start&quot;;i:1743953311;s:7:&quot;refresh&quot;;s:6:&quot;2.5.10&quot;;}s:7:&quot;version&quot;;s:5:&quot;1.1.0&quot;;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('easyjobs-notice...', Array, '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'easyjobs-notice...', Array)
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'easyjobs-notice...', Array)
+#7 /wordpress/wp-content/plugins/easyjobs/admin/includes/Notice/Utils/Storage.php(31): update_site_option('easyjobs-notice...', Array)
+#8 /wordpress/wp-content/plugins/easyjobs/admin/includes/Notice/Notice.php(69): PriyoMukul\WPNotice\Utils\Storage->save(Array)
+#9 /wordpress/wp-content/plugins/easyjobs/admin/includes/Notice/Notices.php(209): PriyoMukul\WPNotice\Notice->__construct('opt_in', Array, Array, Array, Object(PriyoMukul\WPNotice\Notices))
+#10 /wordpress/wp-content/plugins/easyjobs/admin/class-easyjobs-admin.php(266): PriyoMukul\WPNotice\Notices->add('opt_in', Array, Array)
+#11 /wordpress/wp-content/plugins/easyjobs/admin/class-easyjobs-admin.php(152): Easyjobs_Admin->notices()
+#12 /wordpress/wp-content/plugins/easyjobs/admin/class-easyjobs-admin.php(119): Easyjobs_Admin->admin_notice()
+#13 /wordpress/wp-content/plugins/easyjobs/includes/class-easyjobs.php(209): Easyjobs_Admin->__construct('easyjobs', '2.5.10')
+#14 /wordpress/wp-content/plugins/easyjobs/includes/class-easyjobs.php(80): Easyjobs->define_admin_hooks()
+#15 /wordpress/wp-content/plugins/easyjobs/easyjobs.php(67): Easyjobs->__construct()
+#16 /wordpress/wp-content/plugins/easyjobs/easyjobs.php(70): run_easyjobs()
+#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('easyjobs/easyjo...')
+#19 /internal/eval.php(20): activate_plugin('easyjobs/easyjo...')
+#20 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('easyjobs-notice_notices', 'a:2:{s:6:\"opt_in\";a:2:{s:5:\"start\";i:1743953311;s:7:\"refresh\";s:6:\"2.5.10\";}s:7:\"version\";s:5:\"1.1.0\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/easyjobs/easyjobs.php'), run_easyjobs, Easyjobs->__construct, Easyjobs->define_admin_hooks, Easyjobs_Admin->__construct, Easyjobs_Admin->admin_notice, Easyjobs_Admin->notices, PriyoMukul\WPNotice\Notices->add, PriyoMukul\WPNotice\Notice->__construct, PriyoMukul\WPNotice\Utils\Storage->save, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[04-Apr-2025 15:28:31 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[04-Apr-2025 15:28:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[04-Apr-2025 15:28:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[04-Apr-2025 15:28:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[04-Apr-2025 15:28:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_easyjobs_activation_redirect', '1743780571', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_easyjobs_activation_redirect' , '1743780571' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1743780571, '', 'off')
+#5 /wordpress/wp-content/plugins/easyjobs/includes/class-easyjobs-activator.php(38): set_transient('easyjobs_activa...', true, 60)
+#6 /wordpress/wp-content/plugins/easyjobs/includes/class-easyjobs-maintenance.php(61): Easyjobs_Activator::activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(324): Easyjobs_Maintenance::activation(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_easyjo...', false)
+#11 /internal/eval.php(20): activate_plugin('easyjobs/easyjo...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_easyjobs_activation_redirect', '1743780571', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_easyjobs/easyjobs.php'), WP_Hook->do_action, WP_Hook->apply_filters, Easyjobs_Maintenance::activation, Easyjobs_Activator::activate, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[04-Apr-2025 15:28:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_easyjobs_activation_redirect', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_easyjobs_activation_redirect' , '1' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_easy...', true, '', 'off')
+#5 /wordpress/wp-content/plugins/easyjobs/includes/class-easyjobs-activator.php(38): set_transient('easyjobs_activa...', true, 60)
+#6 /wordpress/wp-content/plugins/easyjobs/includes/class-easyjobs-maintenance.php(61): Easyjobs_Activator::activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(324): Easyjobs_Maintenance::activation(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_easyjo...', false)
+#11 /internal/eval.php(20): activate_plugin('easyjobs/easyjo...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_easyjobs_activation_redirect', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_easyjobs/easyjobs.php'), WP_Hook->do_action, WP_Hook->apply_filters, Easyjobs_Maintenance::activation, Easyjobs_Activator::activate, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[04-Apr-2025 15:28:31 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[04-Apr-2025 15:28:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[04-Apr-2025 15:28:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[04-Apr-2025 15:28:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[04-Apr-2025 15:28:45 UTC] PHP Warning:  Undefined array key "easymaintenance" in /wordpress/wp-content/plugins/easymaintenance/easy-maintainance.php on line 11
+[04-Apr-2025 15:28:45 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[04-Apr-2025 15:28:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[04-Apr-2025 15:28:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[04-Apr-2025 15:28:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[04-Apr-2025 15:28:45 UTC] PHP Warning:  Undefined array key "easymaintenance" in /wordpress/wp-content/plugins/easymaintenance/easy-maintainance.php on line 11
+[04-Apr-2025 15:28:48 UTC] PHP Warning:  Undefined array key "easymaintenance" in /wordpress/wp-content/plugins/easymaintenance/easy-maintainance.php on line 11
+[04-Apr-2025 15:28:48 UTC] PHP Warning:  Undefined array key "easymaintenance" in /wordpress/wp-content/plugins/easymaintenance/easy-maintainance.php on line 11
+[04-Apr-2025 15:28:51 UTC] PHP Warning:  Undefined array key "easymaintenance" in /wordpress/wp-content/plugins/easymaintenance/easy-maintainance.php on line 11
+[04-Apr-2025 15:28:51 UTC] PHP Warning:  Undefined array key "easymaintenance" in /wordpress/wp-content/plugins/easymaintenance/easy-maintainance.php on line 11
+[04-Apr-2025 15:28:58 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[04-Apr-2025 15:28:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[04-Apr-2025 15:28:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[04-Apr-2025 15:28:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[04-Apr-2025 15:29:11 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[04-Apr-2025 15:29:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[04-Apr-2025 15:29:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[04-Apr-2025 15:29:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[04-Apr-2025 15:29:23 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/easyway-online-ordering-for-restaurants/easyway-online-ordering.php on line 47
+[04-Apr-2025 15:29:26 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /wordpress/wp-content/plugins/easyway-online-ordering-for-restaurants/easyway-online-ordering.php on line 47
 
-Node.js v20.15.0
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"easyway-online-ordering-for-restaurants"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-de
