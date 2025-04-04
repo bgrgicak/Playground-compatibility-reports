@@ -50,3 +50,91 @@
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | readme-detonator | [View logs](/logs/plugins/r/readme-detonator/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | readme-detonator | [View logs](/logs/plugins/r/readme-detonator/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | readme-detonator | [View logs](/logs/plugins/r/readme-detonator/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | wc-gateway-gigzter | [View logs](/logs/plugins/w/wc-gateway-gigzter/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | wc-gateway-gigzter | [View logs](/logs/plugins/w/wc-gateway-gigzter/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | wc-gateway-gigzter | [View logs](/logs/plugins/w/wc-gateway-gigzter/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | wc-gateway-gigzter | [View logs](/logs/plugins/w/wc-gateway-gigzter/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | wc-gateway-gigzter | [View logs](/logs/plugins/w/wc-gateway-gigzter/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | wc-gateway-gigzter | [View logs](/logs/plugins/w/wc-gateway-gigzter/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | weather-journal | [View logs](/logs/plugins/w/weather-journal/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | weather-journal | [View logs](/logs/plugins/w/weather-journal/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | weather-journal | [View logs](/logs/plugins/w/weather-journal/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | weather-journal | [View logs](/logs/plugins/w/weather-journal/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | weather-journal | [View logs](/logs/plugins/w/weather-journal/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | weather-journal | [View logs](/logs/plugins/w/weather-journal/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | whipclip | [View logs](/logs/plugins/w/whipclip/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | whipclip | [View logs](/logs/plugins/w/whipclip/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | whipclip | [View logs](/logs/plugins/w/whipclip/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | whipclip | [View logs](/logs/plugins/w/whipclip/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | whipclip | [View logs](/logs/plugins/w/whipclip/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | whipclip | [View logs](/logs/plugins/w/whipclip/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | woo-wallet | [View logs](/logs/plugins/w/woo-wallet/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | woo-wallet | [View logs](/logs/plugins/w/woo-wallet/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | woocommerce-maintenance-mode | [View logs](/logs/plugins/w/woocommerce-maintenance-mode/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | woocommerce-maintenance-mode | [View logs](/logs/plugins/w/woocommerce-maintenance-mode/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | woocommerce-maintenance-mode | [View logs](/logs/plugins/w/woocommerce-maintenance-mode/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | woocommerce-maintenance-mode | [View logs](/logs/plugins/w/woocommerce-maintenance-mode/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | woocommerce-maintenance-mode | [View logs](/logs/plugins/w/woocommerce-maintenance-mode/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | woocommerce-maintenance-mode | [View logs](/logs/plugins/w/woocommerce-maintenance-mode/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | woocommerce-multi-bank | [View logs](/logs/plugins/w/woocommerce-multi-bank/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | woocommerce-multi-bank | [View logs](/logs/plugins/w/woocommerce-multi-bank/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | woocommerce-multi-bank | [View logs](/logs/plugins/w/woocommerce-multi-bank/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | woocommerce-multi-bank | [View logs](/logs/plugins/w/woocommerce-multi-bank/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | woocommerce-multi-bank | [View logs](/logs/plugins/w/woocommerce-multi-bank/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | woocommerce-multi-bank | [View logs](/logs/plugins/w/woocommerce-multi-bank/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | woothemes-footer-filter | [View logs](/logs/plugins/w/woothemes-footer-filter/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | woothemes-footer-filter | [View logs](/logs/plugins/w/woothemes-footer-filter/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | woothemes-footer-filter | [View logs](/logs/plugins/w/woothemes-footer-filter/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | woothemes-footer-filter | [View logs](/logs/plugins/w/woothemes-footer-filter/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | woothemes-footer-filter | [View logs](/logs/plugins/w/woothemes-footer-filter/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | woothemes-footer-filter | [View logs](/logs/plugins/w/woothemes-footer-filter/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | wp-cache-blocks | [View logs](/logs/plugins/w/wp-cache-blocks/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | wp-cache-blocks | [View logs](/logs/plugins/w/wp-cache-blocks/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | wp-cache-blocks | [View logs](/logs/plugins/w/wp-cache-blocks/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | wp-cache-blocks | [View logs](/logs/plugins/w/wp-cache-blocks/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | wp-cache-blocks | [View logs](/logs/plugins/w/wp-cache-blocks/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | wp-cache-blocks | [View logs](/logs/plugins/w/wp-cache-blocks/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | wp-call-to-action-widget | [View logs](/logs/plugins/w/wp-call-to-action-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | wp-call-to-action-widget | [View logs](/logs/plugins/w/wp-call-to-action-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | wp-call-to-action-widget | [View logs](/logs/plugins/w/wp-call-to-action-widget/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | wp-call-to-action-widget | [View logs](/logs/plugins/w/wp-call-to-action-widget/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | wp-call-to-action-widget | [View logs](/logs/plugins/w/wp-call-to-action-widget/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | wp-call-to-action-widget | [View logs](/logs/plugins/w/wp-call-to-action-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | wp-grow-button | [View logs](/logs/plugins/w/wp-grow-button/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | wp-grow-button | [View logs](/logs/plugins/w/wp-grow-button/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | wp-grow-button | [View logs](/logs/plugins/w/wp-grow-button/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | wp-grow-button | [View logs](/logs/plugins/w/wp-grow-button/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | wp-grow-button | [View logs](/logs/plugins/w/wp-grow-button/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | wp-grow-button | [View logs](/logs/plugins/w/wp-grow-button/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | wp-pedigree-builder | [View logs](/logs/plugins/w/wp-pedigree-builder/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | wp-pedigree-builder | [View logs](/logs/plugins/w/wp-pedigree-builder/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | wp-pedigree-builder | [View logs](/logs/plugins/w/wp-pedigree-builder/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | wp-pedigree-builder | [View logs](/logs/plugins/w/wp-pedigree-builder/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | wp-pedigree-builder | [View logs](/logs/plugins/w/wp-pedigree-builder/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | wp-pedigree-builder | [View logs](/logs/plugins/w/wp-pedigree-builder/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | wp-simple-event-management-system | [View logs](/logs/plugins/w/wp-simple-event-management-system/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | wp-simple-event-management-system | [View logs](/logs/plugins/w/wp-simple-event-management-system/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | wp-simple-event-management-system | [View logs](/logs/plugins/w/wp-simple-event-management-system/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | wp-simple-event-management-system | [View logs](/logs/plugins/w/wp-simple-event-management-system/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | wp-simple-event-management-system | [View logs](/logs/plugins/w/wp-simple-event-management-system/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | wp-simple-event-management-system | [View logs](/logs/plugins/w/wp-simple-event-management-system/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | wp-simple-web-services | [View logs](/logs/plugins/w/wp-simple-web-services/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | wp-simple-web-services | [View logs](/logs/plugins/w/wp-simple-web-services/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | wp-simple-web-services | [View logs](/logs/plugins/w/wp-simple-web-services/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | wp-simple-web-services | [View logs](/logs/plugins/w/wp-simple-web-services/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | wp-simple-web-services | [View logs](/logs/plugins/w/wp-simple-web-services/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | wp-simple-web-services | [View logs](/logs/plugins/w/wp-simple-web-services/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | wp-social-stream | [View logs](/logs/plugins/w/wp-social-stream/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | wp-social-stream | [View logs](/logs/plugins/w/wp-social-stream/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | wp-userlogin | [View logs](/logs/plugins/w/wp-userlogin/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | wp-userlogin | [View logs](/logs/plugins/w/wp-userlogin/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | wp-userlogin | [View logs](/logs/plugins/w/wp-userlogin/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | wp-userlogin | [View logs](/logs/plugins/w/wp-userlogin/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | wp-userlogin | [View logs](/logs/plugins/w/wp-userlogin/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | wp-userlogin | [View logs](/logs/plugins/w/wp-userlogin/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | wpsso-wc-shipping-delivery-time | [View logs](/logs/plugins/w/wpsso-wc-shipping-delivery-time/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | wpsso-wc-shipping-delivery-time | [View logs](/logs/plugins/w/wpsso-wc-shipping-delivery-time/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | wpsso-wc-shipping-delivery-time | [View logs](/logs/plugins/w/wpsso-wc-shipping-delivery-time/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | wpsso-wc-shipping-delivery-time | [View logs](/logs/plugins/w/wpsso-wc-shipping-delivery-time/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | wpsso-wc-shipping-delivery-time | [View logs](/logs/plugins/w/wpsso-wc-shipping-delivery-time/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | wpsso-wc-shipping-delivery-time | [View logs](/logs/plugins/w/wpsso-wc-shipping-delivery-time/error.json) |
