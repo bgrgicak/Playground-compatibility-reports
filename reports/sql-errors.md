@@ -469,6 +469,9 @@
 | Unknown operation: MODIFY. | jspi-boot | pepro-inline-navigation | [View logs](/logs/plugins/p/pepro-inline-navigation/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | prime-timeline | [View logs](/logs/plugins/p/prime-timeline/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | prime-timeline | [View logs](/logs/plugins/p/prime-timeline/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | ast-sqlite-boot | pluggable-logs | [View logs](/logs/plugins/p/pluggable-logs/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | asyncify-boot | pluggable-logs | [View logs](/logs/plugins/p/pluggable-logs/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | jspi-boot | pluggable-logs | [View logs](/logs/plugins/p/pluggable-logs/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | performance-profiler | [View logs](/logs/plugins/p/performance-profiler/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | performance-profiler | [View logs](/logs/plugins/p/performance-profiler/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | performance-profiler | [View logs](/logs/plugins/p/performance-profiler/error.json) |
@@ -490,6 +493,13 @@
 | Unknown operation: MODIFY. | ast-sqlite-boot | page-links-single-page-option | [View logs](/logs/plugins/p/page-links-single-page-option/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | page-links-single-page-option | [View logs](/logs/plugins/p/page-links-single-page-option/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | page-links-single-page-option | [View logs](/logs/plugins/p/page-links-single-page-option/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | ast-sqlite-boot | photoblog | [View logs](/logs/plugins/p/photoblog/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | asyncify-boot | photoblog | [View logs](/logs/plugins/p/photoblog/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | jspi-boot | photoblog | [View logs](/logs/plugins/p/photoblog/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | ast-sqlite-boot | pdf-print | [View logs](/logs/plugins/p/pdf-print/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | ast-sqlite-boot | payment-banking-slip-pix-for-lifterlms | [View logs](/logs/plugins/p/payment-banking-slip-pix-for-lifterlms/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | asyncify-boot | payment-banking-slip-pix-for-lifterlms | [View logs](/logs/plugins/p/payment-banking-slip-pix-for-lifterlms/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | jspi-boot | payment-banking-slip-pix-for-lifterlms | [View logs](/logs/plugins/p/payment-banking-slip-pix-for-lifterlms/error.json) |
     [code] => 0
     [message] => Ending quote ' was expected.
     [position] => 38
@@ -510,6 +520,9 @@
 | Unknown operation: MODIFY. | ast-sqlite-boot | paypal-shop | [View logs](/logs/plugins/p/paypal-shop/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | paypal-shop | [View logs](/logs/plugins/p/paypal-shop/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | paypal-shop | [View logs](/logs/plugins/p/paypal-shop/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | ast-sqlite-boot | product-country-restrictions | [View logs](/logs/plugins/p/product-country-restrictions/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | asyncify-boot | product-country-restrictions | [View logs](/logs/plugins/p/product-country-restrictions/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | jspi-boot | product-country-restrictions | [View logs](/logs/plugins/p/product-country-restrictions/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | parkvisitor-park-finder | [View logs](/logs/plugins/p/parkvisitor-park-finder/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | parkvisitor-park-finder | [View logs](/logs/plugins/p/parkvisitor-park-finder/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | parkvisitor-park-finder | [View logs](/logs/plugins/p/parkvisitor-park-finder/error.json) |
@@ -567,6 +580,9 @@
 | Unknown operation: MODIFY. | ast-sqlite-boot | price-by-user-role-for-woocommerce | [View logs](/logs/plugins/p/price-by-user-role-for-woocommerce/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | price-by-user-role-for-woocommerce | [View logs](/logs/plugins/p/price-by-user-role-for-woocommerce/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | price-by-user-role-for-woocommerce | [View logs](/logs/plugins/p/price-by-user-role-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | ast-sqlite-boot | post-it-notes | [View logs](/logs/plugins/p/post-it-notes/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | asyncify-boot | post-it-notes | [View logs](/logs/plugins/p/post-it-notes/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | jspi-boot | post-it-notes | [View logs](/logs/plugins/p/post-it-notes/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | poker-rakeback-calculator-widget | [View logs](/logs/plugins/p/poker-rakeback-calculator-widget/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | poker-rakeback-calculator-widget | [View logs](/logs/plugins/p/poker-rakeback-calculator-widget/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | poker-rakeback-calculator-widget | [View logs](/logs/plugins/p/poker-rakeback-calculator-widget/error.json) |
@@ -579,6 +595,13 @@
 | Unknown operation: ALTER. | ast-sqlite-boot | post-format-permalink | [View logs](/logs/plugins/p/post-format-permalink/error.json) |
 | Unknown operation: ALTER. | asyncify-boot | post-format-permalink | [View logs](/logs/plugins/p/post-format-permalink/error.json) |
 | Unknown operation: ALTER. | jspi-boot | post-format-permalink | [View logs](/logs/plugins/p/post-format-permalink/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | ast-sqlite-boot | pica-photo-gallery | [View logs](/logs/plugins/p/pica-photo-gallery/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | asyncify-boot | pica-photo-gallery | [View logs](/logs/plugins/p/pica-photo-gallery/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | jspi-boot | pica-photo-gallery | [View logs](/logs/plugins/p/pica-photo-gallery/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | ast-sqlite-boot | parku-search | [View logs](/logs/plugins/p/parku-search/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | asyncify-boot | parku-search | [View logs](/logs/plugins/p/parku-search/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | jspi-boot | parku-search | [View logs](/logs/plugins/p/parku-search/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | ast-sqlite-boot | product-feeder | [View logs](/logs/plugins/p/product-feeder/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | pose-widget | [View logs](/logs/plugins/p/pose-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | pose-widget | [View logs](/logs/plugins/p/pose-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | pose-widget | [View logs](/logs/plugins/p/pose-widget/error.json) |
@@ -597,6 +620,12 @@
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | post-pdf-export | [View logs](/logs/plugins/p/post-pdf-export/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | post-pdf-export | [View logs](/logs/plugins/p/post-pdf-export/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | post-pdf-export | [View logs](/logs/plugins/p/post-pdf-export/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | ast-sqlite-boot | pepfeed-instant-monetization | [View logs](/logs/plugins/p/pepfeed-instant-monetization/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | asyncify-boot | pepfeed-instant-monetization | [View logs](/logs/plugins/p/pepfeed-instant-monetization/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | jspi-boot | pepfeed-instant-monetization | [View logs](/logs/plugins/p/pepfeed-instant-monetization/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | ast-sqlite-boot | pinit | [View logs](/logs/plugins/p/pinit/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | asyncify-boot | pinit | [View logs](/logs/plugins/p/pinit/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | jspi-boot | pinit | [View logs](/logs/plugins/p/pinit/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | payment-gateway-for-quickpay | [View logs](/logs/plugins/p/payment-gateway-for-quickpay/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | payment-gateway-for-quickpay | [View logs](/logs/plugins/p/payment-gateway-for-quickpay/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | payment-gateway-for-quickpay | [View logs](/logs/plugins/p/payment-gateway-for-quickpay/error.json) |
@@ -669,6 +698,9 @@
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | post-images-html-resizer | [View logs](/logs/plugins/p/post-images-html-resizer/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | post-images-html-resizer | [View logs](/logs/plugins/p/post-images-html-resizer/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | post-images-html-resizer | [View logs](/logs/plugins/p/post-images-html-resizer/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | ast-sqlite-boot | pluscaptcha | [View logs](/logs/plugins/p/pluscaptcha/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | asyncify-boot | pluscaptcha | [View logs](/logs/plugins/p/pluscaptcha/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | jspi-boot | pluscaptcha | [View logs](/logs/plugins/p/pluscaptcha/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | predictive-preloader | [View logs](/logs/plugins/p/predictive-preloader/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | predictive-preloader | [View logs](/logs/plugins/p/predictive-preloader/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | predictive-preloader | [View logs](/logs/plugins/p/predictive-preloader/error.json) |
@@ -681,18 +713,39 @@
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | padma-advanced | [View logs](/logs/plugins/p/padma-advanced/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | padma-advanced | [View logs](/logs/plugins/p/padma-advanced/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | padma-advanced | [View logs](/logs/plugins/p/padma-advanced/error.json) |
+| Unknown query type: post_rating. | ast-sqlite-boot | rating-review-matrix | [View logs](/logs/plugins/r/rating-review-matrix/error.json) |
+| Unknown query type: post_rating. | asyncify-boot | rating-review-matrix | [View logs](/logs/plugins/r/rating-review-matrix/error.json) |
+| Unknown query type: post_rating. | jspi-boot | rating-review-matrix | [View logs](/logs/plugins/r/rating-review-matrix/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | rate-this-site | [View logs](/logs/plugins/r/rate-this-site/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | rate-this-site | [View logs](/logs/plugins/r/rate-this-site/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | rate-this-site | [View logs](/logs/plugins/r/rate-this-site/error.json) |
+| Unknown query type: post_rating. | ast-sqlite-boot | rl-carriers-woocommerce-shipping-method | [View logs](/logs/plugins/r/rl-carriers-woocommerce-shipping-method/error.json) |
+| Unknown query type: post_rating. | asyncify-boot | rl-carriers-woocommerce-shipping-method | [View logs](/logs/plugins/r/rl-carriers-woocommerce-shipping-method/error.json) |
+| Unknown query type: post_rating. | jspi-boot | rl-carriers-woocommerce-shipping-method | [View logs](/logs/plugins/r/rl-carriers-woocommerce-shipping-method/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | row-column-testmonial-with-widget | [View logs](/logs/plugins/r/row-column-testmonial-with-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | row-column-testmonial-with-widget | [View logs](/logs/plugins/r/row-column-testmonial-with-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | row-column-testmonial-with-widget | [View logs](/logs/plugins/r/row-column-testmonial-with-widget/error.json) |
+| Unknown query type: post_rating. | ast-sqlite-boot | rua-blog-subscriber-lite | [View logs](/logs/plugins/r/rua-blog-subscriber-lite/error.json) |
+| Unknown query type: post_rating. | asyncify-boot | rua-blog-subscriber-lite | [View logs](/logs/plugins/r/rua-blog-subscriber-lite/error.json) |
+| Unknown query type: post_rating. | jspi-boot | rua-blog-subscriber-lite | [View logs](/logs/plugins/r/rua-blog-subscriber-lite/error.json) |
+| Unknown query type: post_rating. | ast-sqlite-boot | real-time-twitter | [View logs](/logs/plugins/r/real-time-twitter/error.json) |
+| Unknown query type: post_rating. | asyncify-boot | real-time-twitter | [View logs](/logs/plugins/r/real-time-twitter/error.json) |
+| Unknown query type: post_rating. | jspi-boot | real-time-twitter | [View logs](/logs/plugins/r/real-time-twitter/error.json) |
+| Unknown query type: post_rating. | ast-sqlite-boot | review-pro | [View logs](/logs/plugins/r/review-pro/error.json) |
+| Unknown query type: post_rating. | asyncify-boot | review-pro | [View logs](/logs/plugins/r/review-pro/error.json) |
+| Unknown query type: post_rating. | jspi-boot | review-pro | [View logs](/logs/plugins/r/review-pro/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | reward-points-for-wc-marketplace | [View logs](/logs/plugins/r/reward-points-for-wc-marketplace/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | reward-points-for-wc-marketplace | [View logs](/logs/plugins/r/reward-points-for-wc-marketplace/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | reward-points-for-wc-marketplace | [View logs](/logs/plugins/r/reward-points-for-wc-marketplace/error.json) |
+| Unknown query type: post_rating. | ast-sqlite-boot | recipe-of-the-day | [View logs](/logs/plugins/r/recipe-of-the-day/error.json) |
+| Unknown query type: post_rating. | asyncify-boot | recipe-of-the-day | [View logs](/logs/plugins/r/recipe-of-the-day/error.json) |
+| Unknown query type: post_rating. | jspi-boot | recipe-of-the-day | [View logs](/logs/plugins/r/recipe-of-the-day/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | random-quote-of-the-day | [View logs](/logs/plugins/r/random-quote-of-the-day/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | random-quote-of-the-day | [View logs](/logs/plugins/r/random-quote-of-the-day/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | random-quote-of-the-day | [View logs](/logs/plugins/r/random-quote-of-the-day/error.json) |
+| Unknown query type: post_rating. | ast-sqlite-boot | rideshare-importer | [View logs](/logs/plugins/r/rideshare-importer/error.json) |
+| Unknown query type: post_rating. | asyncify-boot | rideshare-importer | [View logs](/logs/plugins/r/rideshare-importer/error.json) |
+| Unknown query type: post_rating. | jspi-boot | rideshare-importer | [View logs](/logs/plugins/r/rideshare-importer/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | rss-feed-scroller-widget | [View logs](/logs/plugins/r/rss-feed-scroller-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | rss-feed-scroller-widget | [View logs](/logs/plugins/r/rss-feed-scroller-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | rss-feed-scroller-widget | [View logs](/logs/plugins/r/rss-feed-scroller-widget/error.json) |
@@ -702,6 +755,12 @@
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | real-estate-mls-search | [View logs](/logs/plugins/r/real-estate-mls-search/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | real-estate-mls-search | [View logs](/logs/plugins/r/real-estate-mls-search/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | real-estate-mls-search | [View logs](/logs/plugins/r/real-estate-mls-search/error.json) |
+| Unknown query type: post_rating. | ast-sqlite-boot | responsive-social-share | [View logs](/logs/plugins/r/responsive-social-share/error.json) |
+| Unknown query type: post_rating. | asyncify-boot | responsive-social-share | [View logs](/logs/plugins/r/responsive-social-share/error.json) |
+| Unknown query type: post_rating. | jspi-boot | responsive-social-share | [View logs](/logs/plugins/r/responsive-social-share/error.json) |
+| Unknown query type: post_rating. | ast-sqlite-boot | runkeeper-widget | [View logs](/logs/plugins/r/runkeeper-widget/error.json) |
+| Unknown query type: post_rating. | asyncify-boot | runkeeper-widget | [View logs](/logs/plugins/r/runkeeper-widget/error.json) |
+| Unknown query type: post_rating. | jspi-boot | runkeeper-widget | [View logs](/logs/plugins/r/runkeeper-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | rock-maps-for-divi | [View logs](/logs/plugins/r/rock-maps-for-divi/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | rock-maps-for-divi | [View logs](/logs/plugins/r/rock-maps-for-divi/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | rock-maps-for-divi | [View logs](/logs/plugins/r/rock-maps-for-divi/error.json) |
@@ -711,6 +770,15 @@
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | rssfeedchecker | [View logs](/logs/plugins/r/rssfeedchecker/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | rssfeedchecker | [View logs](/logs/plugins/r/rssfeedchecker/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | rssfeedchecker | [View logs](/logs/plugins/r/rssfeedchecker/error.json) |
+| Unknown query type: post_rating. | ast-sqlite-boot | rax-google-language-translator | [View logs](/logs/plugins/r/rax-google-language-translator/error.json) |
+| Unknown query type: post_rating. | asyncify-boot | rax-google-language-translator | [View logs](/logs/plugins/r/rax-google-language-translator/error.json) |
+| Unknown query type: post_rating. | jspi-boot | rax-google-language-translator | [View logs](/logs/plugins/r/rax-google-language-translator/error.json) |
+| Unknown query type: post_rating. | ast-sqlite-boot | rockhoist-badges | [View logs](/logs/plugins/r/rockhoist-badges/error.json) |
+| Unknown query type: post_rating. | asyncify-boot | rockhoist-badges | [View logs](/logs/plugins/r/rockhoist-badges/error.json) |
+| Unknown query type: post_rating. | jspi-boot | rockhoist-badges | [View logs](/logs/plugins/r/rockhoist-badges/error.json) |
+| Unknown query type: post_rating. | ast-sqlite-boot | royal-popup-notice | [View logs](/logs/plugins/r/royal-popup-notice/error.json) |
+| Unknown query type: post_rating. | asyncify-boot | royal-popup-notice | [View logs](/logs/plugins/r/royal-popup-notice/error.json) |
+| Unknown query type: post_rating. | jspi-boot | royal-popup-notice | [View logs](/logs/plugins/r/royal-popup-notice/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | readme-detonator | [View logs](/logs/plugins/r/readme-detonator/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | readme-detonator | [View logs](/logs/plugins/r/readme-detonator/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | readme-detonator | [View logs](/logs/plugins/r/readme-detonator/error.json) |
