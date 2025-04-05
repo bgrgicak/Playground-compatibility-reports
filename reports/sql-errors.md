@@ -93,6 +93,51 @@
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | ast-sqlite-boot | copy-protect | [View logs](/logs/plugins/c/copy-protect/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | asyncify-boot | copy-protect | [View logs](/logs/plugins/c/copy-protect/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | jspi-boot | copy-protect | [View logs](/logs/plugins/c/copy-protect/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | cc-flickr-widget | [View logs](/logs/plugins/c/cc-flickr-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | cc-flickr-widget | [View logs](/logs/plugins/c/cc-flickr-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | cc-flickr-widget | [View logs](/logs/plugins/c/cc-flickr-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | chicago-food-widget-powered-by-everyblock | [View logs](/logs/plugins/c/chicago-food-widget-powered-by-everyblock/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | chicago-food-widget-powered-by-everyblock | [View logs](/logs/plugins/c/chicago-food-widget-powered-by-everyblock/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | chicago-food-widget-powered-by-everyblock | [View logs](/logs/plugins/c/chicago-food-widget-powered-by-everyblock/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | codesnippet-20 | [View logs](/logs/plugins/c/codesnippet-20/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | codesnippet-20 | [View logs](/logs/plugins/c/codesnippet-20/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | codesnippet-20 | [View logs](/logs/plugins/c/codesnippet-20/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | cj-revision-feedback | [View logs](/logs/plugins/c/cj-revision-feedback/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | cj-revision-feedback | [View logs](/logs/plugins/c/cj-revision-feedback/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | cj-revision-feedback | [View logs](/logs/plugins/c/cj-revision-feedback/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | crocodoc | [View logs](/logs/plugins/c/crocodoc/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | crocodoc | [View logs](/logs/plugins/c/crocodoc/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | crocodoc | [View logs](/logs/plugins/c/crocodoc/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | clean-options | [View logs](/logs/plugins/c/clean-options/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | clean-options | [View logs](/logs/plugins/c/clean-options/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | clean-options | [View logs](/logs/plugins/c/clean-options/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | doi-indentifier | [View logs](/logs/plugins/d/doi-indentifier/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | doi-indentifier | [View logs](/logs/plugins/d/doi-indentifier/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | doi-indentifier | [View logs](/logs/plugins/d/doi-indentifier/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | direction-map | [View logs](/logs/plugins/d/direction-map/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | direction-map | [View logs](/logs/plugins/d/direction-map/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | direction-map | [View logs](/logs/plugins/d/direction-map/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | digital-and-analog-clock-widget | [View logs](/logs/plugins/d/digital-and-analog-clock-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | digital-and-analog-clock-widget | [View logs](/logs/plugins/d/digital-and-analog-clock-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | digital-and-analog-clock-widget | [View logs](/logs/plugins/d/digital-and-analog-clock-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | d-login | [View logs](/logs/plugins/d/d-login/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | d-login | [View logs](/logs/plugins/d/d-login/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | d-login | [View logs](/logs/plugins/d/d-login/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | daily-different-corner-band | [View logs](/logs/plugins/d/daily-different-corner-band/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | daily-different-corner-band | [View logs](/logs/plugins/d/daily-different-corner-band/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | daily-different-corner-band | [View logs](/logs/plugins/d/daily-different-corner-band/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | devel | [View logs](/logs/plugins/d/devel/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | devel | [View logs](/logs/plugins/d/devel/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | devel | [View logs](/logs/plugins/d/devel/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | deimos-project | [View logs](/logs/plugins/d/deimos-project/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | deimos-project | [View logs](/logs/plugins/d/deimos-project/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | deimos-project | [View logs](/logs/plugins/d/deimos-project/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | dynamic-headers | [View logs](/logs/plugins/d/dynamic-headers/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | dynamic-headers | [View logs](/logs/plugins/d/dynamic-headers/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | dynamic-headers | [View logs](/logs/plugins/d/dynamic-headers/error.json) |
+| Unknown query type: . | ast-sqlite-boot | exclusive-hover-effects | [View logs](/logs/plugins/e/exclusive-hover-effects/error.json) |
+| Unknown query type: . | asyncify-boot | exclusive-hover-effects | [View logs](/logs/plugins/e/exclusive-hover-effects/error.json) |
+| Unknown query type: . | jspi-boot | exclusive-hover-effects | [View logs](/logs/plugins/e/exclusive-hover-effects/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_eway_cf7_fields. | asyncify-boot | eway-crm-extension-for-contact-form-7 | [View logs](/logs/plugins/e/eway-crm-extension-for-contact-form-7/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_eway_cf7_fields. | jspi-boot | eway-crm-extension-for-contact-form-7 | [View logs](/logs/plugins/e/eway-crm-extension-for-contact-form-7/error.json) |
 | Unexpected token in MySQL query: field_key. | asyncify-boot | eway-crm-extension-for-contact-form-7 | [View logs](/logs/plugins/e/eway-crm-extension-for-contact-form-7/error.json) |
@@ -102,15 +147,28 @@
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | ast-sqlite-boot | export-to-text | [View logs](/logs/plugins/e/export-to-text/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | asyncify-boot | export-to-text | [View logs](/logs/plugins/e/export-to-text/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | jspi-boot | export-to-text | [View logs](/logs/plugins/e/export-to-text/error.json) |
+| Unknown query type: . | ast-sqlite-boot | extensive-recent-posts-widget | [View logs](/logs/plugins/e/extensive-recent-posts-widget/error.json) |
+| Unknown query type: . | asyncify-boot | extensive-recent-posts-widget | [View logs](/logs/plugins/e/extensive-recent-posts-widget/error.json) |
+| Unknown query type: . | jspi-boot | extensive-recent-posts-widget | [View logs](/logs/plugins/e/extensive-recent-posts-widget/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | eshop-payza-checkout | [View logs](/logs/plugins/e/eshop-payza-checkout/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | eshop-payza-checkout | [View logs](/logs/plugins/e/eshop-payza-checkout/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | eshop-payza-checkout | [View logs](/logs/plugins/e/eshop-payza-checkout/error.json) |
+| Unknown query type: . | ast-sqlite-boot | easy-error-reporting | [View logs](/logs/plugins/e/easy-error-reporting/error.json) |
+| Unknown query type: . | ast-sqlite-boot | extreme-super-related-posts | [View logs](/logs/plugins/e/extreme-super-related-posts/error.json) |
+| Unknown query type: . | asyncify-boot | extreme-super-related-posts | [View logs](/logs/plugins/e/extreme-super-related-posts/error.json) |
+| Unknown query type: . | jspi-boot | extreme-super-related-posts | [View logs](/logs/plugins/e/extreme-super-related-posts/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | edd-checkout-message | [View logs](/logs/plugins/e/edd-checkout-message/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | edd-checkout-message | [View logs](/logs/plugins/e/edd-checkout-message/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | edd-checkout-message | [View logs](/logs/plugins/e/edd-checkout-message/error.json) |
+| Unknown query type: . | ast-sqlite-boot | easy-edd-for-elementor | [View logs](/logs/plugins/e/easy-edd-for-elementor/error.json) |
+| Unknown query type: . | asyncify-boot | easy-edd-for-elementor | [View logs](/logs/plugins/e/easy-edd-for-elementor/error.json) |
+| Unknown query type: . | jspi-boot | easy-edd-for-elementor | [View logs](/logs/plugins/e/easy-edd-for-elementor/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | elsa-grabber | [View logs](/logs/plugins/e/elsa-grabber/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | elsa-grabber | [View logs](/logs/plugins/e/elsa-grabber/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | elsa-grabber | [View logs](/logs/plugins/e/elsa-grabber/error.json) |
+| Unknown query type: . | ast-sqlite-boot | easy-video-widget | [View logs](/logs/plugins/e/easy-video-widget/error.json) |
+| Unknown query type: . | asyncify-boot | easy-video-widget | [View logs](/logs/plugins/e/easy-video-widget/error.json) |
+| Unknown query type: . | jspi-boot | easy-video-widget | [View logs](/logs/plugins/e/easy-video-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | ast-sqlite-boot | eewee-pinterest | [View logs](/logs/plugins/e/eewee-pinterest/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | asyncify-boot | eewee-pinterest | [View logs](/logs/plugins/e/eewee-pinterest/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | jspi-boot | eewee-pinterest | [View logs](/logs/plugins/e/eewee-pinterest/error.json) |
@@ -132,12 +190,27 @@
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | extra-product-addons-for-woocommerce | [View logs](/logs/plugins/e/extra-product-addons-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | extra-product-addons-for-woocommerce | [View logs](/logs/plugins/e/extra-product-addons-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | extra-product-addons-for-woocommerce | [View logs](/logs/plugins/e/extra-product-addons-for-woocommerce/error.json) |
+| Unknown query type: . | ast-sqlite-boot | exportimport-custom-post-and-taxonomy-type | [View logs](/logs/plugins/e/exportimport-custom-post-and-taxonomy-type/error.json) |
+| Unknown query type: . | asyncify-boot | exportimport-custom-post-and-taxonomy-type | [View logs](/logs/plugins/e/exportimport-custom-post-and-taxonomy-type/error.json) |
+| Unknown query type: . | jspi-boot | exportimport-custom-post-and-taxonomy-type | [View logs](/logs/plugins/e/exportimport-custom-post-and-taxonomy-type/error.json) |
+| Unknown query type: . | ast-sqlite-boot | extreme-search-suggestion-for-woocommerce | [View logs](/logs/plugins/e/extreme-search-suggestion-for-woocommerce/error.json) |
+| Unknown query type: . | asyncify-boot | extreme-search-suggestion-for-woocommerce | [View logs](/logs/plugins/e/extreme-search-suggestion-for-woocommerce/error.json) |
+| Unknown query type: . | jspi-boot | extreme-search-suggestion-for-woocommerce | [View logs](/logs/plugins/e/extreme-search-suggestion-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | ast-sqlite-boot | entertainment-news | [View logs](/logs/plugins/e/entertainment-news/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | asyncify-boot | entertainment-news | [View logs](/logs/plugins/e/entertainment-news/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | jspi-boot | entertainment-news | [View logs](/logs/plugins/e/entertainment-news/error.json) |
+| Unknown query type: . | ast-sqlite-boot | extra-admin-for-comments | [View logs](/logs/plugins/e/extra-admin-for-comments/error.json) |
+| Unknown query type: . | asyncify-boot | extra-admin-for-comments | [View logs](/logs/plugins/e/extra-admin-for-comments/error.json) |
+| Unknown query type: . | jspi-boot | extra-admin-for-comments | [View logs](/logs/plugins/e/extra-admin-for-comments/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | eshop-shipping-extension | [View logs](/logs/plugins/e/eshop-shipping-extension/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | eshop-shipping-extension | [View logs](/logs/plugins/e/eshop-shipping-extension/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | eshop-shipping-extension | [View logs](/logs/plugins/e/eshop-shipping-extension/error.json) |
+| Unknown query type: . | ast-sqlite-boot | easyphoto | [View logs](/logs/plugins/e/easyphoto/error.json) |
+| Unknown query type: . | asyncify-boot | easyphoto | [View logs](/logs/plugins/e/easyphoto/error.json) |
+| Unknown query type: . | jspi-boot | easyphoto | [View logs](/logs/plugins/e/easyphoto/error.json) |
+| Unknown query type: . | ast-sqlite-boot | external-link-gate | [View logs](/logs/plugins/e/external-link-gate/error.json) |
+| Unknown query type: . | asyncify-boot | external-link-gate | [View logs](/logs/plugins/e/external-link-gate/error.json) |
+| Unknown query type: . | jspi-boot | external-link-gate | [View logs](/logs/plugins/e/external-link-gate/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | ast-sqlite-boot | expenses | [View logs](/logs/plugins/e/expenses/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | asyncify-boot | expenses | [View logs](/logs/plugins/e/expenses/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | jspi-boot | expenses | [View logs](/logs/plugins/e/expenses/error.json) |
@@ -164,6 +237,9 @@
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | jspi-boot | eidogo-for-wordpress | [View logs](/logs/plugins/e/eidogo-for-wordpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | asyncify-boot | easy-wp-tickets | [View logs](/logs/plugins/e/easy-wp-tickets/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | jspi-boot | easy-wp-tickets | [View logs](/logs/plugins/e/easy-wp-tickets/error.json) |
+| Unknown query type: . | ast-sqlite-boot | editar-comentarios | [View logs](/logs/plugins/e/editar-comentarios/error.json) |
+| Unknown query type: . | asyncify-boot | editar-comentarios | [View logs](/logs/plugins/e/editar-comentarios/error.json) |
+| Unknown query type: . | jspi-boot | editar-comentarios | [View logs](/logs/plugins/e/editar-comentarios/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | external-events-calendar | [View logs](/logs/plugins/e/external-events-calendar/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | external-events-calendar | [View logs](/logs/plugins/e/external-events-calendar/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | external-events-calendar | [View logs](/logs/plugins/e/external-events-calendar/error.json) |
@@ -173,6 +249,9 @@
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | ast-sqlite-boot | eventz-lite | [View logs](/logs/plugins/e/eventz-lite/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | asyncify-boot | eventz-lite | [View logs](/logs/plugins/e/eventz-lite/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | jspi-boot | eventz-lite | [View logs](/logs/plugins/e/eventz-lite/error.json) |
+| Unknown query type: . | ast-sqlite-boot | easy-contact-popup | [View logs](/logs/plugins/e/easy-contact-popup/error.json) |
+| Unknown query type: . | asyncify-boot | easy-contact-popup | [View logs](/logs/plugins/e/easy-contact-popup/error.json) |
+| Unknown query type: . | jspi-boot | easy-contact-popup | [View logs](/logs/plugins/e/easy-contact-popup/error.json) |
 | Unknown query type: DESC. | ast-sqlite-boot | javascript-miner | [View logs](/logs/plugins/j/javascript-miner/error.json) |
 | Unknown query type: DESC. | asyncify-boot | javascript-miner | [View logs](/logs/plugins/j/javascript-miner/error.json) |
 | Unknown query type: DESC. | jspi-boot | javascript-miner | [View logs](/logs/plugins/j/javascript-miner/error.json) |
@@ -1140,6 +1219,18 @@
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | topspin-store-plugin | [View logs](/logs/plugins/t/topspin-store-plugin/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | topspin-store-plugin | [View logs](/logs/plugins/t/topspin-store-plugin/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | topspin-store-plugin | [View logs](/logs/plugins/t/topspin-store-plugin/error.json) |
+| Unexpected token in MySQL query: isValid. | asyncify-boot | wallet-system-for-woocommerce | [View logs](/logs/plugins/w/wallet-system-for-woocommerce/error.json) |
+| Unexpected token in MySQL query: isValid. | jspi-boot | wallet-system-for-woocommerce | [View logs](/logs/plugins/w/wallet-system-for-woocommerce/error.json) |
+| Unexpected token in MySQL query: willAttend. | asyncify-boot | wallet-system-for-woocommerce | [View logs](/logs/plugins/w/wallet-system-for-woocommerce/error.json) |
+| Unexpected token in MySQL query: willAttend. | jspi-boot | wallet-system-for-woocommerce | [View logs](/logs/plugins/w/wallet-system-for-woocommerce/error.json) |
+| Unexpected token in MySQL query: withAttendance. | asyncify-boot | wallet-system-for-woocommerce | [View logs](/logs/plugins/w/wallet-system-for-woocommerce/error.json) |
+| Unexpected token in MySQL query: withAttendance. | jspi-boot | wallet-system-for-woocommerce | [View logs](/logs/plugins/w/wallet-system-for-woocommerce/error.json) |
+| Unexpected token in MySQL query: isValid. | asyncify-boot | watchman-site7 | [View logs](/logs/plugins/w/watchman-site7/error.json) |
+| Unexpected token in MySQL query: isValid. | jspi-boot | watchman-site7 | [View logs](/logs/plugins/w/watchman-site7/error.json) |
+| Unexpected token in MySQL query: willAttend. | asyncify-boot | watchman-site7 | [View logs](/logs/plugins/w/watchman-site7/error.json) |
+| Unexpected token in MySQL query: willAttend. | jspi-boot | watchman-site7 | [View logs](/logs/plugins/w/watchman-site7/error.json) |
+| Unexpected token in MySQL query: withAttendance. | asyncify-boot | watchman-site7 | [View logs](/logs/plugins/w/watchman-site7/error.json) |
+| Unexpected token in MySQL query: withAttendance. | jspi-boot | watchman-site7 | [View logs](/logs/plugins/w/watchman-site7/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wc-customer-source | [View logs](/logs/plugins/w/wc-customer-source/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wc-customer-source | [View logs](/logs/plugins/w/wc-customer-source/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wc-customer-source | [View logs](/logs/plugins/w/wc-customer-source/error.json) |
@@ -1149,6 +1240,33 @@
 | Unknown operation: MODIFY. | ast-sqlite-boot | wc-gateway-gigzter | [View logs](/logs/plugins/w/wc-gateway-gigzter/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | wc-gateway-gigzter | [View logs](/logs/plugins/w/wc-gateway-gigzter/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | wc-gateway-gigzter | [View logs](/logs/plugins/w/wc-gateway-gigzter/error.json) |
+| Unexpected token in MySQL query: isValid. | ast-sqlite-boot | wc-payment-gateway-easycard | [View logs](/logs/plugins/w/wc-payment-gateway-easycard/error.json) |
+| Unexpected token in MySQL query: isValid. | asyncify-boot | wc-payment-gateway-easycard | [View logs](/logs/plugins/w/wc-payment-gateway-easycard/error.json) |
+| Unexpected token in MySQL query: isValid. | jspi-boot | wc-payment-gateway-easycard | [View logs](/logs/plugins/w/wc-payment-gateway-easycard/error.json) |
+| Unexpected token in MySQL query: willAttend. | ast-sqlite-boot | wc-payment-gateway-easycard | [View logs](/logs/plugins/w/wc-payment-gateway-easycard/error.json) |
+| Unexpected token in MySQL query: willAttend. | asyncify-boot | wc-payment-gateway-easycard | [View logs](/logs/plugins/w/wc-payment-gateway-easycard/error.json) |
+| Unexpected token in MySQL query: willAttend. | jspi-boot | wc-payment-gateway-easycard | [View logs](/logs/plugins/w/wc-payment-gateway-easycard/error.json) |
+| Unexpected token in MySQL query: withAttendance. | ast-sqlite-boot | wc-payment-gateway-easycard | [View logs](/logs/plugins/w/wc-payment-gateway-easycard/error.json) |
+| Unexpected token in MySQL query: withAttendance. | asyncify-boot | wc-payment-gateway-easycard | [View logs](/logs/plugins/w/wc-payment-gateway-easycard/error.json) |
+| Unexpected token in MySQL query: withAttendance. | jspi-boot | wc-payment-gateway-easycard | [View logs](/logs/plugins/w/wc-payment-gateway-easycard/error.json) |
+| Unexpected token in MySQL query: isValid. | ast-sqlite-boot | wc-payphone-gateway | [View logs](/logs/plugins/w/wc-payphone-gateway/error.json) |
+| Unexpected token in MySQL query: isValid. | asyncify-boot | wc-payphone-gateway | [View logs](/logs/plugins/w/wc-payphone-gateway/error.json) |
+| Unexpected token in MySQL query: isValid. | jspi-boot | wc-payphone-gateway | [View logs](/logs/plugins/w/wc-payphone-gateway/error.json) |
+| Unexpected token in MySQL query: willAttend. | ast-sqlite-boot | wc-payphone-gateway | [View logs](/logs/plugins/w/wc-payphone-gateway/error.json) |
+| Unexpected token in MySQL query: willAttend. | asyncify-boot | wc-payphone-gateway | [View logs](/logs/plugins/w/wc-payphone-gateway/error.json) |
+| Unexpected token in MySQL query: willAttend. | jspi-boot | wc-payphone-gateway | [View logs](/logs/plugins/w/wc-payphone-gateway/error.json) |
+| Unexpected token in MySQL query: withAttendance. | ast-sqlite-boot | wc-payphone-gateway | [View logs](/logs/plugins/w/wc-payphone-gateway/error.json) |
+| Unexpected token in MySQL query: withAttendance. | asyncify-boot | wc-payphone-gateway | [View logs](/logs/plugins/w/wc-payphone-gateway/error.json) |
+| Unexpected token in MySQL query: withAttendance. | jspi-boot | wc-payphone-gateway | [View logs](/logs/plugins/w/wc-payphone-gateway/error.json) |
+| Unexpected token in MySQL query: isValid. | ast-sqlite-boot | wc-sofinco-3xcb | [View logs](/logs/plugins/w/wc-sofinco-3xcb/error.json) |
+| Unexpected token in MySQL query: isValid. | asyncify-boot | wc-sofinco-3xcb | [View logs](/logs/plugins/w/wc-sofinco-3xcb/error.json) |
+| Unexpected token in MySQL query: isValid. | jspi-boot | wc-sofinco-3xcb | [View logs](/logs/plugins/w/wc-sofinco-3xcb/error.json) |
+| Unexpected token in MySQL query: willAttend. | ast-sqlite-boot | wc-sofinco-3xcb | [View logs](/logs/plugins/w/wc-sofinco-3xcb/error.json) |
+| Unexpected token in MySQL query: willAttend. | asyncify-boot | wc-sofinco-3xcb | [View logs](/logs/plugins/w/wc-sofinco-3xcb/error.json) |
+| Unexpected token in MySQL query: willAttend. | jspi-boot | wc-sofinco-3xcb | [View logs](/logs/plugins/w/wc-sofinco-3xcb/error.json) |
+| Unexpected token in MySQL query: withAttendance. | ast-sqlite-boot | wc-sofinco-3xcb | [View logs](/logs/plugins/w/wc-sofinco-3xcb/error.json) |
+| Unexpected token in MySQL query: withAttendance. | asyncify-boot | wc-sofinco-3xcb | [View logs](/logs/plugins/w/wc-sofinco-3xcb/error.json) |
+| Unexpected token in MySQL query: withAttendance. | jspi-boot | wc-sofinco-3xcb | [View logs](/logs/plugins/w/wc-sofinco-3xcb/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | weather-journal | [View logs](/logs/plugins/w/weather-journal/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | weather-journal | [View logs](/logs/plugins/w/weather-journal/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | weather-journal | [View logs](/logs/plugins/w/weather-journal/error.json) |
@@ -1176,14 +1294,59 @@
 | Unknown operation: MODIFY. | ast-sqlite-boot | whipclip | [View logs](/logs/plugins/w/whipclip/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | whipclip | [View logs](/logs/plugins/w/whipclip/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | whipclip | [View logs](/logs/plugins/w/whipclip/error.json) |
+| Unexpected token in MySQL query: isValid. | ast-sqlite-boot | wolfiz-stripe-transaction-title-settings | [View logs](/logs/plugins/w/wolfiz-stripe-transaction-title-settings/error.json) |
+| Unexpected token in MySQL query: isValid. | asyncify-boot | wolfiz-stripe-transaction-title-settings | [View logs](/logs/plugins/w/wolfiz-stripe-transaction-title-settings/error.json) |
+| Unexpected token in MySQL query: isValid. | jspi-boot | wolfiz-stripe-transaction-title-settings | [View logs](/logs/plugins/w/wolfiz-stripe-transaction-title-settings/error.json) |
+| Unexpected token in MySQL query: willAttend. | ast-sqlite-boot | wolfiz-stripe-transaction-title-settings | [View logs](/logs/plugins/w/wolfiz-stripe-transaction-title-settings/error.json) |
+| Unexpected token in MySQL query: willAttend. | asyncify-boot | wolfiz-stripe-transaction-title-settings | [View logs](/logs/plugins/w/wolfiz-stripe-transaction-title-settings/error.json) |
+| Unexpected token in MySQL query: willAttend. | jspi-boot | wolfiz-stripe-transaction-title-settings | [View logs](/logs/plugins/w/wolfiz-stripe-transaction-title-settings/error.json) |
+| Unexpected token in MySQL query: withAttendance. | ast-sqlite-boot | wolfiz-stripe-transaction-title-settings | [View logs](/logs/plugins/w/wolfiz-stripe-transaction-title-settings/error.json) |
+| Unexpected token in MySQL query: withAttendance. | asyncify-boot | wolfiz-stripe-transaction-title-settings | [View logs](/logs/plugins/w/wolfiz-stripe-transaction-title-settings/error.json) |
+| Unexpected token in MySQL query: withAttendance. | jspi-boot | wolfiz-stripe-transaction-title-settings | [View logs](/logs/plugins/w/wolfiz-stripe-transaction-title-settings/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "AND": syntax error. | ast-sqlite-boot | woo-address-book | [View logs](/logs/plugins/w/woo-address-book/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "AND": syntax error. | asyncify-boot | woo-address-book | [View logs](/logs/plugins/w/woo-address-book/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "AND": syntax error. | jspi-boot | woo-address-book | [View logs](/logs/plugins/w/woo-address-book/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | ast-sqlite-boot | woo-address-book | [View logs](/logs/plugins/w/woo-address-book/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | asyncify-boot | woo-address-book | [View logs](/logs/plugins/w/woo-address-book/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | jspi-boot | woo-address-book | [View logs](/logs/plugins/w/woo-address-book/error.json) |
+| Unexpected token in MySQL query: isValid. | ast-sqlite-boot | woo-bigbuy-import | [View logs](/logs/plugins/w/woo-bigbuy-import/error.json) |
+| Unexpected token in MySQL query: isValid. | asyncify-boot | woo-bigbuy-import | [View logs](/logs/plugins/w/woo-bigbuy-import/error.json) |
+| Unexpected token in MySQL query: isValid. | jspi-boot | woo-bigbuy-import | [View logs](/logs/plugins/w/woo-bigbuy-import/error.json) |
+| Unexpected token in MySQL query: willAttend. | ast-sqlite-boot | woo-bigbuy-import | [View logs](/logs/plugins/w/woo-bigbuy-import/error.json) |
+| Unexpected token in MySQL query: willAttend. | asyncify-boot | woo-bigbuy-import | [View logs](/logs/plugins/w/woo-bigbuy-import/error.json) |
+| Unexpected token in MySQL query: willAttend. | jspi-boot | woo-bigbuy-import | [View logs](/logs/plugins/w/woo-bigbuy-import/error.json) |
+| Unexpected token in MySQL query: withAttendance. | ast-sqlite-boot | woo-bigbuy-import | [View logs](/logs/plugins/w/woo-bigbuy-import/error.json) |
+| Unexpected token in MySQL query: withAttendance. | asyncify-boot | woo-bigbuy-import | [View logs](/logs/plugins/w/woo-bigbuy-import/error.json) |
+| Unexpected token in MySQL query: withAttendance. | jspi-boot | woo-bigbuy-import | [View logs](/logs/plugins/w/woo-bigbuy-import/error.json) |
+| Unexpected token in MySQL query: isValid. | ast-sqlite-boot | woo-mailchimp-newsletter-discount | [View logs](/logs/plugins/w/woo-mailchimp-newsletter-discount/error.json) |
+| Unexpected token in MySQL query: isValid. | asyncify-boot | woo-mailchimp-newsletter-discount | [View logs](/logs/plugins/w/woo-mailchimp-newsletter-discount/error.json) |
+| Unexpected token in MySQL query: isValid. | jspi-boot | woo-mailchimp-newsletter-discount | [View logs](/logs/plugins/w/woo-mailchimp-newsletter-discount/error.json) |
+| Unexpected token in MySQL query: willAttend. | ast-sqlite-boot | woo-mailchimp-newsletter-discount | [View logs](/logs/plugins/w/woo-mailchimp-newsletter-discount/error.json) |
+| Unexpected token in MySQL query: willAttend. | asyncify-boot | woo-mailchimp-newsletter-discount | [View logs](/logs/plugins/w/woo-mailchimp-newsletter-discount/error.json) |
+| Unexpected token in MySQL query: willAttend. | jspi-boot | woo-mailchimp-newsletter-discount | [View logs](/logs/plugins/w/woo-mailchimp-newsletter-discount/error.json) |
+| Unexpected token in MySQL query: withAttendance. | ast-sqlite-boot | woo-mailchimp-newsletter-discount | [View logs](/logs/plugins/w/woo-mailchimp-newsletter-discount/error.json) |
+| Unexpected token in MySQL query: withAttendance. | asyncify-boot | woo-mailchimp-newsletter-discount | [View logs](/logs/plugins/w/woo-mailchimp-newsletter-discount/error.json) |
+| Unexpected token in MySQL query: withAttendance. | jspi-boot | woo-mailchimp-newsletter-discount | [View logs](/logs/plugins/w/woo-mailchimp-newsletter-discount/error.json) |
+| Unexpected token in MySQL query: isValid. | ast-sqlite-boot | woo-price-updater | [View logs](/logs/plugins/w/woo-price-updater/error.json) |
+| Unexpected token in MySQL query: isValid. | asyncify-boot | woo-price-updater | [View logs](/logs/plugins/w/woo-price-updater/error.json) |
+| Unexpected token in MySQL query: isValid. | jspi-boot | woo-price-updater | [View logs](/logs/plugins/w/woo-price-updater/error.json) |
+| Unexpected token in MySQL query: willAttend. | ast-sqlite-boot | woo-price-updater | [View logs](/logs/plugins/w/woo-price-updater/error.json) |
+| Unexpected token in MySQL query: willAttend. | asyncify-boot | woo-price-updater | [View logs](/logs/plugins/w/woo-price-updater/error.json) |
+| Unexpected token in MySQL query: willAttend. | jspi-boot | woo-price-updater | [View logs](/logs/plugins/w/woo-price-updater/error.json) |
+| Unexpected token in MySQL query: withAttendance. | ast-sqlite-boot | woo-price-updater | [View logs](/logs/plugins/w/woo-price-updater/error.json) |
+| Unexpected token in MySQL query: withAttendance. | asyncify-boot | woo-price-updater | [View logs](/logs/plugins/w/woo-price-updater/error.json) |
+| Unexpected token in MySQL query: withAttendance. | jspi-boot | woo-price-updater | [View logs](/logs/plugins/w/woo-price-updater/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | woo-wallet | [View logs](/logs/plugins/w/woo-wallet/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | woo-wallet | [View logs](/logs/plugins/w/woo-wallet/error.json) |
+| Unexpected token in MySQL query: isValid. | ast-sqlite-boot | woocommerce-ajax-filters | [View logs](/logs/plugins/w/woocommerce-ajax-filters/error.json) |
+| Unexpected token in MySQL query: isValid. | asyncify-boot | woocommerce-ajax-filters | [View logs](/logs/plugins/w/woocommerce-ajax-filters/error.json) |
+| Unexpected token in MySQL query: isValid. | jspi-boot | woocommerce-ajax-filters | [View logs](/logs/plugins/w/woocommerce-ajax-filters/error.json) |
+| Unexpected token in MySQL query: willAttend. | ast-sqlite-boot | woocommerce-ajax-filters | [View logs](/logs/plugins/w/woocommerce-ajax-filters/error.json) |
+| Unexpected token in MySQL query: willAttend. | asyncify-boot | woocommerce-ajax-filters | [View logs](/logs/plugins/w/woocommerce-ajax-filters/error.json) |
+| Unexpected token in MySQL query: willAttend. | jspi-boot | woocommerce-ajax-filters | [View logs](/logs/plugins/w/woocommerce-ajax-filters/error.json) |
+| Unexpected token in MySQL query: withAttendance. | ast-sqlite-boot | woocommerce-ajax-filters | [View logs](/logs/plugins/w/woocommerce-ajax-filters/error.json) |
+| Unexpected token in MySQL query: withAttendance. | asyncify-boot | woocommerce-ajax-filters | [View logs](/logs/plugins/w/woocommerce-ajax-filters/error.json) |
+| Unexpected token in MySQL query: withAttendance. | jspi-boot | woocommerce-ajax-filters | [View logs](/logs/plugins/w/woocommerce-ajax-filters/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | woocommerce-maintenance-mode | [View logs](/logs/plugins/w/woocommerce-maintenance-mode/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | woocommerce-maintenance-mode | [View logs](/logs/plugins/w/woocommerce-maintenance-mode/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | woocommerce-maintenance-mode | [View logs](/logs/plugins/w/woocommerce-maintenance-mode/error.json) |
@@ -1258,6 +1421,15 @@
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-core-contributions-widget | [View logs](/logs/plugins/w/wp-core-contributions-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wp-core-contributions-widget | [View logs](/logs/plugins/w/wp-core-contributions-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wp-core-contributions-widget | [View logs](/logs/plugins/w/wp-core-contributions-widget/error.json) |
+| Unexpected token in MySQL query: isValid. | ast-sqlite-boot | wp-done-this | [View logs](/logs/plugins/w/wp-done-this/error.json) |
+| Unexpected token in MySQL query: isValid. | asyncify-boot | wp-done-this | [View logs](/logs/plugins/w/wp-done-this/error.json) |
+| Unexpected token in MySQL query: isValid. | jspi-boot | wp-done-this | [View logs](/logs/plugins/w/wp-done-this/error.json) |
+| Unexpected token in MySQL query: willAttend. | ast-sqlite-boot | wp-done-this | [View logs](/logs/plugins/w/wp-done-this/error.json) |
+| Unexpected token in MySQL query: willAttend. | asyncify-boot | wp-done-this | [View logs](/logs/plugins/w/wp-done-this/error.json) |
+| Unexpected token in MySQL query: willAttend. | jspi-boot | wp-done-this | [View logs](/logs/plugins/w/wp-done-this/error.json) |
+| Unexpected token in MySQL query: withAttendance. | ast-sqlite-boot | wp-done-this | [View logs](/logs/plugins/w/wp-done-this/error.json) |
+| Unexpected token in MySQL query: withAttendance. | asyncify-boot | wp-done-this | [View logs](/logs/plugins/w/wp-done-this/error.json) |
+| Unexpected token in MySQL query: withAttendance. | jspi-boot | wp-done-this | [View logs](/logs/plugins/w/wp-done-this/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-e-commerce-catalog-visibility-and-email-inquiry | [View logs](/logs/plugins/w/wp-e-commerce-catalog-visibility-and-email-inquiry/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wp-e-commerce-catalog-visibility-and-email-inquiry | [View logs](/logs/plugins/w/wp-e-commerce-catalog-visibility-and-email-inquiry/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wp-e-commerce-catalog-visibility-and-email-inquiry | [View logs](/logs/plugins/w/wp-e-commerce-catalog-visibility-and-email-inquiry/error.json) |
@@ -1300,6 +1472,33 @@
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | ast-sqlite-boot | wp-jump | [View logs](/logs/plugins/w/wp-jump/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | asyncify-boot | wp-jump | [View logs](/logs/plugins/w/wp-jump/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | jspi-boot | wp-jump | [View logs](/logs/plugins/w/wp-jump/error.json) |
+| Unexpected token in MySQL query: isValid. | ast-sqlite-boot | wp-live-server-deploy | [View logs](/logs/plugins/w/wp-live-server-deploy/error.json) |
+| Unexpected token in MySQL query: isValid. | asyncify-boot | wp-live-server-deploy | [View logs](/logs/plugins/w/wp-live-server-deploy/error.json) |
+| Unexpected token in MySQL query: isValid. | jspi-boot | wp-live-server-deploy | [View logs](/logs/plugins/w/wp-live-server-deploy/error.json) |
+| Unexpected token in MySQL query: willAttend. | ast-sqlite-boot | wp-live-server-deploy | [View logs](/logs/plugins/w/wp-live-server-deploy/error.json) |
+| Unexpected token in MySQL query: willAttend. | asyncify-boot | wp-live-server-deploy | [View logs](/logs/plugins/w/wp-live-server-deploy/error.json) |
+| Unexpected token in MySQL query: willAttend. | jspi-boot | wp-live-server-deploy | [View logs](/logs/plugins/w/wp-live-server-deploy/error.json) |
+| Unexpected token in MySQL query: withAttendance. | ast-sqlite-boot | wp-live-server-deploy | [View logs](/logs/plugins/w/wp-live-server-deploy/error.json) |
+| Unexpected token in MySQL query: withAttendance. | asyncify-boot | wp-live-server-deploy | [View logs](/logs/plugins/w/wp-live-server-deploy/error.json) |
+| Unexpected token in MySQL query: withAttendance. | jspi-boot | wp-live-server-deploy | [View logs](/logs/plugins/w/wp-live-server-deploy/error.json) |
+| Unexpected token in MySQL query: isValid. | ast-sqlite-boot | wp-location-tracking-goldentrail-widget | [View logs](/logs/plugins/w/wp-location-tracking-goldentrail-widget/error.json) |
+| Unexpected token in MySQL query: isValid. | asyncify-boot | wp-location-tracking-goldentrail-widget | [View logs](/logs/plugins/w/wp-location-tracking-goldentrail-widget/error.json) |
+| Unexpected token in MySQL query: isValid. | jspi-boot | wp-location-tracking-goldentrail-widget | [View logs](/logs/plugins/w/wp-location-tracking-goldentrail-widget/error.json) |
+| Unexpected token in MySQL query: willAttend. | ast-sqlite-boot | wp-location-tracking-goldentrail-widget | [View logs](/logs/plugins/w/wp-location-tracking-goldentrail-widget/error.json) |
+| Unexpected token in MySQL query: willAttend. | asyncify-boot | wp-location-tracking-goldentrail-widget | [View logs](/logs/plugins/w/wp-location-tracking-goldentrail-widget/error.json) |
+| Unexpected token in MySQL query: willAttend. | jspi-boot | wp-location-tracking-goldentrail-widget | [View logs](/logs/plugins/w/wp-location-tracking-goldentrail-widget/error.json) |
+| Unexpected token in MySQL query: withAttendance. | ast-sqlite-boot | wp-location-tracking-goldentrail-widget | [View logs](/logs/plugins/w/wp-location-tracking-goldentrail-widget/error.json) |
+| Unexpected token in MySQL query: withAttendance. | asyncify-boot | wp-location-tracking-goldentrail-widget | [View logs](/logs/plugins/w/wp-location-tracking-goldentrail-widget/error.json) |
+| Unexpected token in MySQL query: withAttendance. | jspi-boot | wp-location-tracking-goldentrail-widget | [View logs](/logs/plugins/w/wp-location-tracking-goldentrail-widget/error.json) |
+| Unexpected token in MySQL query: isValid. | ast-sqlite-boot | wp-pde | [View logs](/logs/plugins/w/wp-pde/error.json) |
+| Unexpected token in MySQL query: isValid. | asyncify-boot | wp-pde | [View logs](/logs/plugins/w/wp-pde/error.json) |
+| Unexpected token in MySQL query: isValid. | jspi-boot | wp-pde | [View logs](/logs/plugins/w/wp-pde/error.json) |
+| Unexpected token in MySQL query: willAttend. | ast-sqlite-boot | wp-pde | [View logs](/logs/plugins/w/wp-pde/error.json) |
+| Unexpected token in MySQL query: willAttend. | asyncify-boot | wp-pde | [View logs](/logs/plugins/w/wp-pde/error.json) |
+| Unexpected token in MySQL query: willAttend. | jspi-boot | wp-pde | [View logs](/logs/plugins/w/wp-pde/error.json) |
+| Unexpected token in MySQL query: withAttendance. | ast-sqlite-boot | wp-pde | [View logs](/logs/plugins/w/wp-pde/error.json) |
+| Unexpected token in MySQL query: withAttendance. | asyncify-boot | wp-pde | [View logs](/logs/plugins/w/wp-pde/error.json) |
+| Unexpected token in MySQL query: withAttendance. | jspi-boot | wp-pde | [View logs](/logs/plugins/w/wp-pde/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | wp-pedigree-builder | [View logs](/logs/plugins/w/wp-pedigree-builder/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | wp-pedigree-builder | [View logs](/logs/plugins/w/wp-pedigree-builder/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | wp-pedigree-builder | [View logs](/logs/plugins/w/wp-pedigree-builder/error.json) |
@@ -1371,6 +1570,12 @@
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-travel-itinerary | [View logs](/logs/plugins/w/wp-travel-itinerary/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wp-travel-itinerary | [View logs](/logs/plugins/w/wp-travel-itinerary/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wp-travel-itinerary | [View logs](/logs/plugins/w/wp-travel-itinerary/error.json) |
+| Unexpected token in MySQL query: isValid. | asyncify-boot | wp-ultimate-csv-importer | [View logs](/logs/plugins/w/wp-ultimate-csv-importer/error.json) |
+| Unexpected token in MySQL query: isValid. | jspi-boot | wp-ultimate-csv-importer | [View logs](/logs/plugins/w/wp-ultimate-csv-importer/error.json) |
+| Unexpected token in MySQL query: willAttend. | asyncify-boot | wp-ultimate-csv-importer | [View logs](/logs/plugins/w/wp-ultimate-csv-importer/error.json) |
+| Unexpected token in MySQL query: willAttend. | jspi-boot | wp-ultimate-csv-importer | [View logs](/logs/plugins/w/wp-ultimate-csv-importer/error.json) |
+| Unexpected token in MySQL query: withAttendance. | asyncify-boot | wp-ultimate-csv-importer | [View logs](/logs/plugins/w/wp-ultimate-csv-importer/error.json) |
+| Unexpected token in MySQL query: withAttendance. | jspi-boot | wp-ultimate-csv-importer | [View logs](/logs/plugins/w/wp-ultimate-csv-importer/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-user-control | [View logs](/logs/plugins/w/wp-user-control/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wp-user-control | [View logs](/logs/plugins/w/wp-user-control/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wp-user-control | [View logs](/logs/plugins/w/wp-user-control/error.json) |
@@ -1386,12 +1591,45 @@
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | ast-sqlite-boot | wp-wonderform | [View logs](/logs/plugins/w/wp-wonderform/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | asyncify-boot | wp-wonderform | [View logs](/logs/plugins/w/wp-wonderform/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | jspi-boot | wp-wonderform | [View logs](/logs/plugins/w/wp-wonderform/error.json) |
+| Unexpected token in MySQL query: isValid. | asyncify-boot | wpcasa-pricing-tables | [View logs](/logs/plugins/w/wpcasa-pricing-tables/error.json) |
+| Unexpected token in MySQL query: isValid. | jspi-boot | wpcasa-pricing-tables | [View logs](/logs/plugins/w/wpcasa-pricing-tables/error.json) |
+| Unexpected token in MySQL query: willAttend. | asyncify-boot | wpcasa-pricing-tables | [View logs](/logs/plugins/w/wpcasa-pricing-tables/error.json) |
+| Unexpected token in MySQL query: willAttend. | jspi-boot | wpcasa-pricing-tables | [View logs](/logs/plugins/w/wpcasa-pricing-tables/error.json) |
+| Unexpected token in MySQL query: withAttendance. | asyncify-boot | wpcasa-pricing-tables | [View logs](/logs/plugins/w/wpcasa-pricing-tables/error.json) |
+| Unexpected token in MySQL query: withAttendance. | jspi-boot | wpcasa-pricing-tables | [View logs](/logs/plugins/w/wpcasa-pricing-tables/error.json) |
+| Unexpected token in MySQL query: isValid. | ast-sqlite-boot | wpdr-simple-downloads | [View logs](/logs/plugins/w/wpdr-simple-downloads/error.json) |
+| Unexpected token in MySQL query: isValid. | asyncify-boot | wpdr-simple-downloads | [View logs](/logs/plugins/w/wpdr-simple-downloads/error.json) |
+| Unexpected token in MySQL query: isValid. | jspi-boot | wpdr-simple-downloads | [View logs](/logs/plugins/w/wpdr-simple-downloads/error.json) |
+| Unexpected token in MySQL query: willAttend. | ast-sqlite-boot | wpdr-simple-downloads | [View logs](/logs/plugins/w/wpdr-simple-downloads/error.json) |
+| Unexpected token in MySQL query: willAttend. | asyncify-boot | wpdr-simple-downloads | [View logs](/logs/plugins/w/wpdr-simple-downloads/error.json) |
+| Unexpected token in MySQL query: willAttend. | jspi-boot | wpdr-simple-downloads | [View logs](/logs/plugins/w/wpdr-simple-downloads/error.json) |
+| Unexpected token in MySQL query: withAttendance. | ast-sqlite-boot | wpdr-simple-downloads | [View logs](/logs/plugins/w/wpdr-simple-downloads/error.json) |
+| Unexpected token in MySQL query: withAttendance. | asyncify-boot | wpdr-simple-downloads | [View logs](/logs/plugins/w/wpdr-simple-downloads/error.json) |
+| Unexpected token in MySQL query: withAttendance. | jspi-boot | wpdr-simple-downloads | [View logs](/logs/plugins/w/wpdr-simple-downloads/error.json) |
+| Unexpected token in MySQL query: isValid. | ast-sqlite-boot | wpklikandpay | [View logs](/logs/plugins/w/wpklikandpay/error.json) |
+| Unexpected token in MySQL query: isValid. | asyncify-boot | wpklikandpay | [View logs](/logs/plugins/w/wpklikandpay/error.json) |
+| Unexpected token in MySQL query: isValid. | jspi-boot | wpklikandpay | [View logs](/logs/plugins/w/wpklikandpay/error.json) |
+| Unexpected token in MySQL query: willAttend. | ast-sqlite-boot | wpklikandpay | [View logs](/logs/plugins/w/wpklikandpay/error.json) |
+| Unexpected token in MySQL query: willAttend. | asyncify-boot | wpklikandpay | [View logs](/logs/plugins/w/wpklikandpay/error.json) |
+| Unexpected token in MySQL query: willAttend. | jspi-boot | wpklikandpay | [View logs](/logs/plugins/w/wpklikandpay/error.json) |
+| Unexpected token in MySQL query: withAttendance. | ast-sqlite-boot | wpklikandpay | [View logs](/logs/plugins/w/wpklikandpay/error.json) |
+| Unexpected token in MySQL query: withAttendance. | asyncify-boot | wpklikandpay | [View logs](/logs/plugins/w/wpklikandpay/error.json) |
+| Unexpected token in MySQL query: withAttendance. | jspi-boot | wpklikandpay | [View logs](/logs/plugins/w/wpklikandpay/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | wpsso-wc-shipping-delivery-time | [View logs](/logs/plugins/w/wpsso-wc-shipping-delivery-time/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | wpsso-wc-shipping-delivery-time | [View logs](/logs/plugins/w/wpsso-wc-shipping-delivery-time/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | wpsso-wc-shipping-delivery-time | [View logs](/logs/plugins/w/wpsso-wc-shipping-delivery-time/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | wpsso-wc-shipping-delivery-time | [View logs](/logs/plugins/w/wpsso-wc-shipping-delivery-time/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | wpsso-wc-shipping-delivery-time | [View logs](/logs/plugins/w/wpsso-wc-shipping-delivery-time/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | wpsso-wc-shipping-delivery-time | [View logs](/logs/plugins/w/wpsso-wc-shipping-delivery-time/error.json) |
+| Unexpected token in MySQL query: isValid. | ast-sqlite-boot | writoo | [View logs](/logs/plugins/w/writoo/error.json) |
+| Unexpected token in MySQL query: isValid. | asyncify-boot | writoo | [View logs](/logs/plugins/w/writoo/error.json) |
+| Unexpected token in MySQL query: isValid. | jspi-boot | writoo | [View logs](/logs/plugins/w/writoo/error.json) |
+| Unexpected token in MySQL query: willAttend. | ast-sqlite-boot | writoo | [View logs](/logs/plugins/w/writoo/error.json) |
+| Unexpected token in MySQL query: willAttend. | asyncify-boot | writoo | [View logs](/logs/plugins/w/writoo/error.json) |
+| Unexpected token in MySQL query: willAttend. | jspi-boot | writoo | [View logs](/logs/plugins/w/writoo/error.json) |
+| Unexpected token in MySQL query: withAttendance. | ast-sqlite-boot | writoo | [View logs](/logs/plugins/w/writoo/error.json) |
+| Unexpected token in MySQL query: withAttendance. | asyncify-boot | writoo | [View logs](/logs/plugins/w/writoo/error.json) |
+| Unexpected token in MySQL query: withAttendance. | jspi-boot | writoo | [View logs](/logs/plugins/w/writoo/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | zu-media | [View logs](/logs/plugins/z/zu-media/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | zu-media | [View logs](/logs/plugins/z/zu-media/error.json) |
 | Unknown create type: INDEX. | asyncify-boot | zina | [View logs](/logs/plugins/z/zina/error.json) |
