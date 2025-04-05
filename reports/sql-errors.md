@@ -252,6 +252,49 @@
 | Unknown query type: . | ast-sqlite-boot | easy-contact-popup | [View logs](/logs/plugins/e/easy-contact-popup/error.json) |
 | Unknown query type: . | asyncify-boot | easy-contact-popup | [View logs](/logs/plugins/e/easy-contact-popup/error.json) |
 | Unknown query type: . | jspi-boot | easy-contact-popup | [View logs](/logs/plugins/e/easy-contact-popup/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | ast-sqlite-boot | geotrack | [View logs](/logs/plugins/g/geotrack/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | asyncify-boot | geotrack | [View logs](/logs/plugins/g/geotrack/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | jspi-boot | geotrack | [View logs](/logs/plugins/g/geotrack/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | ast-sqlite-boot | greentext | [View logs](/logs/plugins/g/greentext/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | asyncify-boot | greentext | [View logs](/logs/plugins/g/greentext/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | jspi-boot | greentext | [View logs](/logs/plugins/g/greentext/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | ast-sqlite-boot | gc-testimonials | [View logs](/logs/plugins/g/gc-testimonials/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | asyncify-boot | gc-testimonials | [View logs](/logs/plugins/g/gc-testimonials/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | jspi-boot | gc-testimonials | [View logs](/logs/plugins/g/gc-testimonials/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | ast-sqlite-boot | googleanalyticscounter | [View logs](/logs/plugins/g/googleanalyticscounter/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | asyncify-boot | googleanalyticscounter | [View logs](/logs/plugins/g/googleanalyticscounter/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | jspi-boot | googleanalyticscounter | [View logs](/logs/plugins/g/googleanalyticscounter/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | ast-sqlite-boot | gn-product-and-image-remover | [View logs](/logs/plugins/g/gn-product-and-image-remover/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | asyncify-boot | gn-product-and-image-remover | [View logs](/logs/plugins/g/gn-product-and-image-remover/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | jspi-boot | gn-product-and-image-remover | [View logs](/logs/plugins/g/gn-product-and-image-remover/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | ast-sqlite-boot | gpp-testimonials-widget | [View logs](/logs/plugins/g/gpp-testimonials-widget/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | asyncify-boot | gpp-testimonials-widget | [View logs](/logs/plugins/g/gpp-testimonials-widget/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | jspi-boot | gpp-testimonials-widget | [View logs](/logs/plugins/g/gpp-testimonials-widget/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | ast-sqlite-boot | google-buzz-er | [View logs](/logs/plugins/g/google-buzz-er/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | asyncify-boot | google-buzz-er | [View logs](/logs/plugins/g/google-buzz-er/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | jspi-boot | google-buzz-er | [View logs](/logs/plugins/g/google-buzz-er/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | ast-sqlite-boot | general-headers | [View logs](/logs/plugins/g/general-headers/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | asyncify-boot | general-headers | [View logs](/logs/plugins/g/general-headers/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | jspi-boot | general-headers | [View logs](/logs/plugins/g/general-headers/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | ast-sqlite-boot | gtm-ecommerce-woo | [View logs](/logs/plugins/g/gtm-ecommerce-woo/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | ast-sqlite-boot | google-plus-button | [View logs](/logs/plugins/g/google-plus-button/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | asyncify-boot | google-plus-button | [View logs](/logs/plugins/g/google-plus-button/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | jspi-boot | google-plus-button | [View logs](/logs/plugins/g/google-plus-button/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | ast-sqlite-boot | gmo-widget-custom | [View logs](/logs/plugins/g/gmo-widget-custom/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | asyncify-boot | gmo-widget-custom | [View logs](/logs/plugins/g/gmo-widget-custom/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | jspi-boot | gmo-widget-custom | [View logs](/logs/plugins/g/gmo-widget-custom/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | ast-sqlite-boot | google-maps-effortless | [View logs](/logs/plugins/g/google-maps-effortless/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | asyncify-boot | google-maps-effortless | [View logs](/logs/plugins/g/google-maps-effortless/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | jspi-boot | google-maps-effortless | [View logs](/logs/plugins/g/google-maps-effortless/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | ast-sqlite-boot | gadsense | [View logs](/logs/plugins/g/gadsense/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | asyncify-boot | gadsense | [View logs](/logs/plugins/g/gadsense/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | jspi-boot | gadsense | [View logs](/logs/plugins/g/gadsense/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | ast-sqlite-boot | guerrillas-youtube-video-widget | [View logs](/logs/plugins/g/guerrillas-youtube-video-widget/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | asyncify-boot | guerrillas-youtube-video-widget | [View logs](/logs/plugins/g/guerrillas-youtube-video-widget/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | jspi-boot | guerrillas-youtube-video-widget | [View logs](/logs/plugins/g/guerrillas-youtube-video-widget/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | ast-sqlite-boot | getreview | [View logs](/logs/plugins/g/getreview/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | asyncify-boot | getreview | [View logs](/logs/plugins/g/getreview/error.json) |
+| MySQL field type cannot be translated to SQLite: set. | jspi-boot | getreview | [View logs](/logs/plugins/g/getreview/error.json) |
 | Unknown query type: DESC. | ast-sqlite-boot | javascript-miner | [View logs](/logs/plugins/j/javascript-miner/error.json) |
 | Unknown query type: DESC. | asyncify-boot | javascript-miner | [View logs](/logs/plugins/j/javascript-miner/error.json) |
 | Unknown query type: DESC. | jspi-boot | javascript-miner | [View logs](/logs/plugins/j/javascript-miner/error.json) |
@@ -392,6 +435,21 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_klikwa_links. | ast-sqlite-boot | kudos | [View logs](/logs/plugins/k/kudos/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_klikwa_links. | asyncify-boot | kudos | [View logs](/logs/plugins/k/kudos/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_klikwa_links. | jspi-boot | kudos | [View logs](/logs/plugins/k/kudos/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | ast-sqlite-boot | local-business-microdata-widget | [View logs](/logs/plugins/l/local-business-microdata-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | asyncify-boot | local-business-microdata-widget | [View logs](/logs/plugins/l/local-business-microdata-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | jspi-boot | local-business-microdata-widget | [View logs](/logs/plugins/l/local-business-microdata-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | ast-sqlite-boot | logging-with-papertrail | [View logs](/logs/plugins/l/logging-with-papertrail/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | ast-sqlite-boot | laughstubcom | [View logs](/logs/plugins/l/laughstubcom/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | asyncify-boot | laughstubcom | [View logs](/logs/plugins/l/laughstubcom/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | jspi-boot | laughstubcom | [View logs](/logs/plugins/l/laughstubcom/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | ast-sqlite-boot | logged-in | [View logs](/logs/plugins/l/logged-in/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | asyncify-boot | logged-in | [View logs](/logs/plugins/l/logged-in/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | jspi-boot | logged-in | [View logs](/logs/plugins/l/logged-in/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | ast-sqlite-boot | live-demo-sandbox | [View logs](/logs/plugins/l/live-demo-sandbox/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | asyncify-boot | live-demo-sandbox | [View logs](/logs/plugins/l/live-demo-sandbox/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | jspi-boot | live-demo-sandbox | [View logs](/logs/plugins/l/live-demo-sandbox/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | asyncify-boot | loyalty-for-woocommerce | [View logs](/logs/plugins/l/loyalty-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | jspi-boot | loyalty-for-woocommerce | [View logs](/logs/plugins/l/loyalty-for-woocommerce/error.json) |
     [code] => 0
     [message] => Ending quote ` was expected.
     [position] => 56
@@ -402,6 +460,21 @@
 . | ast-sqlite-boot | lequiz | [View logs](/logs/plugins/l/lequiz/error.json) |
 | Array
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | lequiz | [View logs](/logs/plugins/l/lequiz/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | ast-sqlite-boot | louder-petition | [View logs](/logs/plugins/l/louder-petition/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | asyncify-boot | louder-petition | [View logs](/logs/plugins/l/louder-petition/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | jspi-boot | louder-petition | [View logs](/logs/plugins/l/louder-petition/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | ast-sqlite-boot | lp-voguepay | [View logs](/logs/plugins/l/lp-voguepay/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | asyncify-boot | lp-voguepay | [View logs](/logs/plugins/l/lp-voguepay/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | jspi-boot | lp-voguepay | [View logs](/logs/plugins/l/lp-voguepay/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | ast-sqlite-boot | liz-comment-counter-by-ozh | [View logs](/logs/plugins/l/liz-comment-counter-by-ozh/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | asyncify-boot | liz-comment-counter-by-ozh | [View logs](/logs/plugins/l/liz-comment-counter-by-ozh/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | jspi-boot | liz-comment-counter-by-ozh | [View logs](/logs/plugins/l/liz-comment-counter-by-ozh/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | ast-sqlite-boot | ltl-freight-quotes-sefl-edition | [View logs](/logs/plugins/l/ltl-freight-quotes-sefl-edition/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | asyncify-boot | ltl-freight-quotes-sefl-edition | [View logs](/logs/plugins/l/ltl-freight-quotes-sefl-edition/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | jspi-boot | ltl-freight-quotes-sefl-edition | [View logs](/logs/plugins/l/ltl-freight-quotes-sefl-edition/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | ast-sqlite-boot | lds-quotes | [View logs](/logs/plugins/l/lds-quotes/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | asyncify-boot | lds-quotes | [View logs](/logs/plugins/l/lds-quotes/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | jspi-boot | lds-quotes | [View logs](/logs/plugins/l/lds-quotes/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: apiEndpoints. | ast-sqlite-boot | my-posts-order | [View logs](/logs/plugins/m/my-posts-order/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: apiEndpoints. | asyncify-boot | my-posts-order | [View logs](/logs/plugins/m/my-posts-order/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: apiEndpoints. | jspi-boot | my-posts-order | [View logs](/logs/plugins/m/my-posts-order/error.json) |
@@ -940,6 +1013,45 @@
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | readme-detonator | [View logs](/logs/plugins/r/readme-detonator/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | readme-detonator | [View logs](/logs/plugins/r/readme-detonator/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | readme-detonator | [View logs](/logs/plugins/r/readme-detonator/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | s5-image-and-content-fader | [View logs](/logs/plugins/s/s5-image-and-content-fader/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | s5-image-and-content-fader | [View logs](/logs/plugins/s/s5-image-and-content-fader/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | s5-image-and-content-fader | [View logs](/logs/plugins/s/s5-image-and-content-fader/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | salsa-gravity-forms | [View logs](/logs/plugins/s/salsa-gravity-forms/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | salsa-gravity-forms | [View logs](/logs/plugins/s/salsa-gravity-forms/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | salsa-gravity-forms | [View logs](/logs/plugins/s/salsa-gravity-forms/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | scorm-cloud | [View logs](/logs/plugins/s/scorm-cloud/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | scorm-cloud | [View logs](/logs/plugins/s/scorm-cloud/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | scorm-cloud | [View logs](/logs/plugins/s/scorm-cloud/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | scrollarama | [View logs](/logs/plugins/s/scrollarama/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | scrollarama | [View logs](/logs/plugins/s/scrollarama/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | scrollarama | [View logs](/logs/plugins/s/scrollarama/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | sensitive-chinese-words-scanner | [View logs](/logs/plugins/s/sensitive-chinese-words-scanner/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | sensitive-chinese-words-scanner | [View logs](/logs/plugins/s/sensitive-chinese-words-scanner/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | sensitive-chinese-words-scanner | [View logs](/logs/plugins/s/sensitive-chinese-words-scanner/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | seqrly | [View logs](/logs/plugins/s/seqrly/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | seqrly | [View logs](/logs/plugins/s/seqrly/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | seqrly | [View logs](/logs/plugins/s/seqrly/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | sharedaddy-more-control | [View logs](/logs/plugins/s/sharedaddy-more-control/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | sharedaddy-more-control | [View logs](/logs/plugins/s/sharedaddy-more-control/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | sharedaddy-more-control | [View logs](/logs/plugins/s/sharedaddy-more-control/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | shoplocket | [View logs](/logs/plugins/s/shoplocket/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | shoplocket | [View logs](/logs/plugins/s/shoplocket/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | shoplocket | [View logs](/logs/plugins/s/shoplocket/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | showtweets-plugin | [View logs](/logs/plugins/s/showtweets-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | showtweets-plugin | [View logs](/logs/plugins/s/showtweets-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | showtweets-plugin | [View logs](/logs/plugins/s/showtweets-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | simple-email-subscriber | [View logs](/logs/plugins/s/simple-email-subscriber/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | simple-email-subscriber | [View logs](/logs/plugins/s/simple-email-subscriber/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | simple-email-subscriber | [View logs](/logs/plugins/s/simple-email-subscriber/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | sina-weibo-wordpress-plugin-by-wwwresult-searchcom | [View logs](/logs/plugins/s/sina-weibo-wordpress-plugin-by-wwwresult-searchcom/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | sina-weibo-wordpress-plugin-by-wwwresult-searchcom | [View logs](/logs/plugins/s/sina-weibo-wordpress-plugin-by-wwwresult-searchcom/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | sina-weibo-wordpress-plugin-by-wwwresult-searchcom | [View logs](/logs/plugins/s/sina-weibo-wordpress-plugin-by-wwwresult-searchcom/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | socialhero-promotions | [View logs](/logs/plugins/s/socialhero-promotions/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | socialhero-promotions | [View logs](/logs/plugins/s/socialhero-promotions/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | socialhero-promotions | [View logs](/logs/plugins/s/socialhero-promotions/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | super-portfolios-and-effects | [View logs](/logs/plugins/s/super-portfolios-and-effects/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | super-portfolios-and-effects | [View logs](/logs/plugins/s/super-portfolios-and-effects/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | super-portfolios-and-effects | [View logs](/logs/plugins/s/super-portfolios-and-effects/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | thanh-toan-chuyen-khoan | [View logs](/logs/plugins/t/thanh-toan-chuyen-khoan/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | thanh-toan-chuyen-khoan | [View logs](/logs/plugins/t/thanh-toan-chuyen-khoan/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | thanh-toan-chuyen-khoan | [View logs](/logs/plugins/t/thanh-toan-chuyen-khoan/error.json) |
@@ -961,20 +1073,32 @@
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | ttc-wordpress-security-plugin | [View logs](/logs/plugins/t/ttc-wordpress-security-plugin/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | ttc-wordpress-security-plugin | [View logs](/logs/plugins/t/ttc-wordpress-security-plugin/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | ttc-wordpress-security-plugin | [View logs](/logs/plugins/t/ttc-wordpress-security-plugin/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | theme-rotator | [View logs](/logs/plugins/t/theme-rotator/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | theme-rotator | [View logs](/logs/plugins/t/theme-rotator/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | theme-rotator | [View logs](/logs/plugins/t/theme-rotator/error.json) |
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | tinysocial | [View logs](/logs/plugins/t/tinysocial/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | tinysocial | [View logs](/logs/plugins/t/tinysocial/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | tinysocial | [View logs](/logs/plugins/t/tinysocial/error.json) |
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | trends-forecaster | [View logs](/logs/plugins/t/trends-forecaster/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | trends-forecaster | [View logs](/logs/plugins/t/trends-forecaster/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | trends-forecaster | [View logs](/logs/plugins/t/trends-forecaster/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | tpc-memory-usage-updated | [View logs](/logs/plugins/t/tpc-memory-usage-updated/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | tpc-memory-usage-updated | [View logs](/logs/plugins/t/tpc-memory-usage-updated/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | tpc-memory-usage-updated | [View logs](/logs/plugins/t/tpc-memory-usage-updated/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | tambar | [View logs](/logs/plugins/t/tambar/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | tambar | [View logs](/logs/plugins/t/tambar/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | treato | [View logs](/logs/plugins/t/treato/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | treato | [View logs](/logs/plugins/t/treato/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | treato | [View logs](/logs/plugins/t/treato/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | triptrus-search-widget | [View logs](/logs/plugins/t/triptrus-search-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | triptrus-search-widget | [View logs](/logs/plugins/t/triptrus-search-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | triptrus-search-widget | [View logs](/logs/plugins/t/triptrus-search-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "set": syntax error. | ast-sqlite-boot | triptrus-search-widget | [View logs](/logs/plugins/t/triptrus-search-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | triptrus-search-widget | [View logs](/logs/plugins/t/triptrus-search-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | triptrus-search-widget | [View logs](/logs/plugins/t/triptrus-search-widget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | treggo-shipping | [View logs](/logs/plugins/t/treggo-shipping/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | treggo-shipping | [View logs](/logs/plugins/t/treggo-shipping/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | treggo-shipping | [View logs](/logs/plugins/t/treggo-shipping/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | templatic-google-amp | [View logs](/logs/plugins/t/templatic-google-amp/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | templatic-google-amp | [View logs](/logs/plugins/t/templatic-google-amp/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | templatic-google-amp | [View logs](/logs/plugins/t/templatic-google-amp/error.json) |
@@ -1008,6 +1132,9 @@
 | Unknown query type: LOAD DATA. | ast-sqlite-boot | test-post-generator | [View logs](/logs/plugins/t/test-post-generator/error.json) |
 | Unknown query type: LOAD DATA. | asyncify-boot | test-post-generator | [View logs](/logs/plugins/t/test-post-generator/error.json) |
 | Unknown query type: LOAD DATA. | jspi-boot | test-post-generator | [View logs](/logs/plugins/t/test-post-generator/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | true-google404 | [View logs](/logs/plugins/t/true-google404/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | true-google404 | [View logs](/logs/plugins/t/true-google404/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | true-google404 | [View logs](/logs/plugins/t/true-google404/error.json) |
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | triplelift-native-advertising | [View logs](/logs/plugins/t/triplelift-native-advertising/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | triplelift-native-advertising | [View logs](/logs/plugins/t/triplelift-native-advertising/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | triplelift-native-advertising | [View logs](/logs/plugins/t/triplelift-native-advertising/error.json) |
@@ -1022,6 +1149,9 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_twizo_settings. | ast-sqlite-boot | tag-widget | [View logs](/logs/plugins/t/tag-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_twizo_settings. | asyncify-boot | tag-widget | [View logs](/logs/plugins/t/tag-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_twizo_settings. | jspi-boot | tag-widget | [View logs](/logs/plugins/t/tag-widget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | tiny-mass-mailer | [View logs](/logs/plugins/t/tiny-mass-mailer/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | tiny-mass-mailer | [View logs](/logs/plugins/t/tiny-mass-mailer/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | tiny-mass-mailer | [View logs](/logs/plugins/t/tiny-mass-mailer/error.json) |
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | tumblr | [View logs](/logs/plugins/t/tumblr/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | tumblr | [View logs](/logs/plugins/t/tumblr/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | tumblr | [View logs](/logs/plugins/t/tumblr/error.json) |
@@ -1037,9 +1167,15 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_twizo_settings. | ast-sqlite-boot | text-link-ads | [View logs](/logs/plugins/t/text-link-ads/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_twizo_settings. | asyncify-boot | text-link-ads | [View logs](/logs/plugins/t/text-link-ads/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_twizo_settings. | jspi-boot | text-link-ads | [View logs](/logs/plugins/t/text-link-ads/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | twitter-anywhere | [View logs](/logs/plugins/t/twitter-anywhere/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | twitter-anywhere | [View logs](/logs/plugins/t/twitter-anywhere/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | twitter-anywhere | [View logs](/logs/plugins/t/twitter-anywhere/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | tt-subscribe | [View logs](/logs/plugins/t/tt-subscribe/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | tt-subscribe | [View logs](/logs/plugins/t/tt-subscribe/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | tt-subscribe | [View logs](/logs/plugins/t/tt-subscribe/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | theme-blvd-news-scroller | [View logs](/logs/plugins/t/theme-blvd-news-scroller/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | theme-blvd-news-scroller | [View logs](/logs/plugins/t/theme-blvd-news-scroller/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | theme-blvd-news-scroller | [View logs](/logs/plugins/t/theme-blvd-news-scroller/error.json) |
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | tweet-stimonials | [View logs](/logs/plugins/t/tweet-stimonials/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | tweet-stimonials | [View logs](/logs/plugins/t/tweet-stimonials/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | tweet-stimonials | [View logs](/logs/plugins/t/tweet-stimonials/error.json) |
@@ -1067,6 +1203,11 @@
 | Unknown query type: LOAD DATA. | ast-sqlite-boot | typhoon-haiyan-donate-links | [View logs](/logs/plugins/t/typhoon-haiyan-donate-links/error.json) |
 | Unknown query type: LOAD DATA. | asyncify-boot | typhoon-haiyan-donate-links | [View logs](/logs/plugins/t/typhoon-haiyan-donate-links/error.json) |
 | Unknown query type: LOAD DATA. | jspi-boot | typhoon-haiyan-donate-links | [View logs](/logs/plugins/t/typhoon-haiyan-donate-links/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | twiget | [View logs](/logs/plugins/t/twiget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | twiget | [View logs](/logs/plugins/t/twiget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | twiget | [View logs](/logs/plugins/t/twiget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | tabulate | [View logs](/logs/plugins/t/tabulate/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | tabulate | [View logs](/logs/plugins/t/tabulate/error.json) |
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | tozz-slideshow | [View logs](/logs/plugins/t/tozz-slideshow/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | tozz-slideshow | [View logs](/logs/plugins/t/tozz-slideshow/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | tozz-slideshow | [View logs](/logs/plugins/t/tozz-slideshow/error.json) |
@@ -1098,6 +1239,12 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_twizo_settings. | ast-sqlite-boot | tablemaster | [View logs](/logs/plugins/t/tablemaster/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_twizo_settings. | asyncify-boot | tablemaster | [View logs](/logs/plugins/t/tablemaster/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_twizo_settings. | jspi-boot | tablemaster | [View logs](/logs/plugins/t/tablemaster/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | third-party-host-fix | [View logs](/logs/plugins/t/third-party-host-fix/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | third-party-host-fix | [View logs](/logs/plugins/t/third-party-host-fix/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | third-party-host-fix | [View logs](/logs/plugins/t/third-party-host-fix/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | team-up | [View logs](/logs/plugins/t/team-up/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | team-up | [View logs](/logs/plugins/t/team-up/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | team-up | [View logs](/logs/plugins/t/team-up/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | tivents-products-feed | [View logs](/logs/plugins/t/tivents-products-feed/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | tivents-products-feed | [View logs](/logs/plugins/t/tivents-products-feed/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | tivents-products-feed | [View logs](/logs/plugins/t/tivents-products-feed/error.json) |
@@ -1144,6 +1291,9 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_twizo_settings. | ast-sqlite-boot | total-user-registered | [View logs](/logs/plugins/t/total-user-registered/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_twizo_settings. | asyncify-boot | total-user-registered | [View logs](/logs/plugins/t/total-user-registered/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_twizo_settings. | jspi-boot | total-user-registered | [View logs](/logs/plugins/t/total-user-registered/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | tips | [View logs](/logs/plugins/t/tips/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | tips | [View logs](/logs/plugins/t/tips/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | tips | [View logs](/logs/plugins/t/tips/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | tentblogger-simple-top-posts | [View logs](/logs/plugins/t/tentblogger-simple-top-posts/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | tentblogger-simple-top-posts | [View logs](/logs/plugins/t/tentblogger-simple-top-posts/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | tentblogger-simple-top-posts | [View logs](/logs/plugins/t/tentblogger-simple-top-posts/error.json) |
@@ -1192,6 +1342,8 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_twizo_settings. | ast-sqlite-boot | talkomatic | [View logs](/logs/plugins/t/talkomatic/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_twizo_settings. | asyncify-boot | talkomatic | [View logs](/logs/plugins/t/talkomatic/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_twizo_settings. | jspi-boot | talkomatic | [View logs](/logs/plugins/t/talkomatic/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | tickcaptcha | [View logs](/logs/plugins/t/tickcaptcha/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | tickcaptcha | [View logs](/logs/plugins/t/tickcaptcha/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | timemk-widget | [View logs](/logs/plugins/t/timemk-widget/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | timemk-widget | [View logs](/logs/plugins/t/timemk-widget/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | timemk-widget | [View logs](/logs/plugins/t/timemk-widget/error.json) |
@@ -1225,6 +1377,9 @@
 | Unexpected token in MySQL query: willAttend. | jspi-boot | wallet-system-for-woocommerce | [View logs](/logs/plugins/w/wallet-system-for-woocommerce/error.json) |
 | Unexpected token in MySQL query: withAttendance. | asyncify-boot | wallet-system-for-woocommerce | [View logs](/logs/plugins/w/wallet-system-for-woocommerce/error.json) |
 | Unexpected token in MySQL query: withAttendance. | jspi-boot | wallet-system-for-woocommerce | [View logs](/logs/plugins/w/wallet-system-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | ast-sqlite-boot | war-renown-rank | [View logs](/logs/plugins/w/war-renown-rank/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | asyncify-boot | war-renown-rank | [View logs](/logs/plugins/w/war-renown-rank/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | jspi-boot | war-renown-rank | [View logs](/logs/plugins/w/war-renown-rank/error.json) |
 | Unexpected token in MySQL query: isValid. | asyncify-boot | watchman-site7 | [View logs](/logs/plugins/w/watchman-site7/error.json) |
 | Unexpected token in MySQL query: isValid. | jspi-boot | watchman-site7 | [View logs](/logs/plugins/w/watchman-site7/error.json) |
 | Unexpected token in MySQL query: willAttend. | asyncify-boot | watchman-site7 | [View logs](/logs/plugins/w/watchman-site7/error.json) |
@@ -1267,6 +1422,9 @@
 | Unexpected token in MySQL query: withAttendance. | ast-sqlite-boot | wc-sofinco-3xcb | [View logs](/logs/plugins/w/wc-sofinco-3xcb/error.json) |
 | Unexpected token in MySQL query: withAttendance. | asyncify-boot | wc-sofinco-3xcb | [View logs](/logs/plugins/w/wc-sofinco-3xcb/error.json) |
 | Unexpected token in MySQL query: withAttendance. | jspi-boot | wc-sofinco-3xcb | [View logs](/logs/plugins/w/wc-sofinco-3xcb/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | ast-sqlite-boot | wc-trendyol | [View logs](/logs/plugins/w/wc-trendyol/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | asyncify-boot | wc-trendyol | [View logs](/logs/plugins/w/wc-trendyol/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | jspi-boot | wc-trendyol | [View logs](/logs/plugins/w/wc-trendyol/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | weather-journal | [View logs](/logs/plugins/w/weather-journal/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | weather-journal | [View logs](/logs/plugins/w/weather-journal/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | weather-journal | [View logs](/logs/plugins/w/weather-journal/error.json) |
@@ -1294,6 +1452,9 @@
 | Unknown operation: MODIFY. | ast-sqlite-boot | whipclip | [View logs](/logs/plugins/w/whipclip/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | whipclip | [View logs](/logs/plugins/w/whipclip/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | whipclip | [View logs](/logs/plugins/w/whipclip/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | ast-sqlite-boot | widget-fixer | [View logs](/logs/plugins/w/widget-fixer/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | asyncify-boot | widget-fixer | [View logs](/logs/plugins/w/widget-fixer/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | jspi-boot | widget-fixer | [View logs](/logs/plugins/w/widget-fixer/error.json) |
 | Unexpected token in MySQL query: isValid. | ast-sqlite-boot | wolfiz-stripe-transaction-title-settings | [View logs](/logs/plugins/w/wolfiz-stripe-transaction-title-settings/error.json) |
 | Unexpected token in MySQL query: isValid. | asyncify-boot | wolfiz-stripe-transaction-title-settings | [View logs](/logs/plugins/w/wolfiz-stripe-transaction-title-settings/error.json) |
 | Unexpected token in MySQL query: isValid. | jspi-boot | wolfiz-stripe-transaction-title-settings | [View logs](/logs/plugins/w/wolfiz-stripe-transaction-title-settings/error.json) |
@@ -1309,6 +1470,9 @@
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | ast-sqlite-boot | woo-address-book | [View logs](/logs/plugins/w/woo-address-book/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | asyncify-boot | woo-address-book | [View logs](/logs/plugins/w/woo-address-book/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | jspi-boot | woo-address-book | [View logs](/logs/plugins/w/woo-address-book/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | ast-sqlite-boot | woo-advance-search | [View logs](/logs/plugins/w/woo-advance-search/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | asyncify-boot | woo-advance-search | [View logs](/logs/plugins/w/woo-advance-search/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | jspi-boot | woo-advance-search | [View logs](/logs/plugins/w/woo-advance-search/error.json) |
 | Unexpected token in MySQL query: isValid. | ast-sqlite-boot | woo-bigbuy-import | [View logs](/logs/plugins/w/woo-bigbuy-import/error.json) |
 | Unexpected token in MySQL query: isValid. | asyncify-boot | woo-bigbuy-import | [View logs](/logs/plugins/w/woo-bigbuy-import/error.json) |
 | Unexpected token in MySQL query: isValid. | jspi-boot | woo-bigbuy-import | [View logs](/logs/plugins/w/woo-bigbuy-import/error.json) |
@@ -1327,6 +1491,9 @@
 | Unexpected token in MySQL query: withAttendance. | ast-sqlite-boot | woo-mailchimp-newsletter-discount | [View logs](/logs/plugins/w/woo-mailchimp-newsletter-discount/error.json) |
 | Unexpected token in MySQL query: withAttendance. | asyncify-boot | woo-mailchimp-newsletter-discount | [View logs](/logs/plugins/w/woo-mailchimp-newsletter-discount/error.json) |
 | Unexpected token in MySQL query: withAttendance. | jspi-boot | woo-mailchimp-newsletter-discount | [View logs](/logs/plugins/w/woo-mailchimp-newsletter-discount/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | ast-sqlite-boot | woo-pin-it-button | [View logs](/logs/plugins/w/woo-pin-it-button/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | asyncify-boot | woo-pin-it-button | [View logs](/logs/plugins/w/woo-pin-it-button/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | jspi-boot | woo-pin-it-button | [View logs](/logs/plugins/w/woo-pin-it-button/error.json) |
 | Unexpected token in MySQL query: isValid. | ast-sqlite-boot | woo-price-updater | [View logs](/logs/plugins/w/woo-price-updater/error.json) |
 | Unexpected token in MySQL query: isValid. | asyncify-boot | woo-price-updater | [View logs](/logs/plugins/w/woo-price-updater/error.json) |
 | Unexpected token in MySQL query: isValid. | jspi-boot | woo-price-updater | [View logs](/logs/plugins/w/woo-price-updater/error.json) |
@@ -1373,6 +1540,9 @@
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | word-of-the-day-widget-by-wordnik | [View logs](/logs/plugins/w/word-of-the-day-widget-by-wordnik/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | word-of-the-day-widget-by-wordnik | [View logs](/logs/plugins/w/word-of-the-day-widget-by-wordnik/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | word-of-the-day-widget-by-wordnik | [View logs](/logs/plugins/w/word-of-the-day-widget-by-wordnik/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | ast-sqlite-boot | wordless | [View logs](/logs/plugins/w/wordless/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | asyncify-boot | wordless | [View logs](/logs/plugins/w/wordless/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | jspi-boot | wordless | [View logs](/logs/plugins/w/wordless/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wordpress-ads-plug-in | [View logs](/logs/plugins/w/wordpress-ads-plug-in/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wordpress-ads-plug-in | [View logs](/logs/plugins/w/wordpress-ads-plug-in/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wordpress-ads-plug-in | [View logs](/logs/plugins/w/wordpress-ads-plug-in/error.json) |
@@ -1394,6 +1564,9 @@
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | ast-sqlite-boot | wordpress-jquery-accordion | [View logs](/logs/plugins/w/wordpress-jquery-accordion/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | asyncify-boot | wordpress-jquery-accordion | [View logs](/logs/plugins/w/wordpress-jquery-accordion/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | jspi-boot | wordpress-jquery-accordion | [View logs](/logs/plugins/w/wordpress-jquery-accordion/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | ast-sqlite-boot | wordpresscom-popular-posts | [View logs](/logs/plugins/w/wordpresscom-popular-posts/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | asyncify-boot | wordpresscom-popular-posts | [View logs](/logs/plugins/w/wordpresscom-popular-posts/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | jspi-boot | wordpresscom-popular-posts | [View logs](/logs/plugins/w/wordpresscom-popular-posts/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | wp-adsense-plugin | [View logs](/logs/plugins/w/wp-adsense-plugin/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | wp-adsense-plugin | [View logs](/logs/plugins/w/wp-adsense-plugin/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | wp-adsense-plugin | [View logs](/logs/plugins/w/wp-adsense-plugin/error.json) |
@@ -1591,6 +1764,9 @@
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | ast-sqlite-boot | wp-wonderform | [View logs](/logs/plugins/w/wp-wonderform/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | asyncify-boot | wp-wonderform | [View logs](/logs/plugins/w/wp-wonderform/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | jspi-boot | wp-wonderform | [View logs](/logs/plugins/w/wp-wonderform/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | ast-sqlite-boot | wp2flickr | [View logs](/logs/plugins/w/wp2flickr/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | asyncify-boot | wp2flickr | [View logs](/logs/plugins/w/wp2flickr/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | jspi-boot | wp2flickr | [View logs](/logs/plugins/w/wp2flickr/error.json) |
 | Unexpected token in MySQL query: isValid. | asyncify-boot | wpcasa-pricing-tables | [View logs](/logs/plugins/w/wpcasa-pricing-tables/error.json) |
 | Unexpected token in MySQL query: isValid. | jspi-boot | wpcasa-pricing-tables | [View logs](/logs/plugins/w/wpcasa-pricing-tables/error.json) |
 | Unexpected token in MySQL query: willAttend. | asyncify-boot | wpcasa-pricing-tables | [View logs](/logs/plugins/w/wpcasa-pricing-tables/error.json) |
