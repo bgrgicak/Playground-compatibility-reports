@@ -138,15 +138,51 @@
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | doi-indentifier | [View logs](/logs/plugins/d/doi-indentifier/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | doi-indentifier | [View logs](/logs/plugins/d/doi-indentifier/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | doi-indentifier | [View logs](/logs/plugins/d/doi-indentifier/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | display-image-dimensions-in-media-library | [View logs](/logs/plugins/d/display-image-dimensions-in-media-library/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | display-image-dimensions-in-media-library | [View logs](/logs/plugins/d/display-image-dimensions-in-media-library/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | display-image-dimensions-in-media-library | [View logs](/logs/plugins/d/display-image-dimensions-in-media-library/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | ast-sqlite-boot | display-image-dimensions-in-media-library | [View logs](/logs/plugins/d/display-image-dimensions-in-media-library/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | asyncify-boot | display-image-dimensions-in-media-library | [View logs](/logs/plugins/d/display-image-dimensions-in-media-library/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | jspi-boot | display-image-dimensions-in-media-library | [View logs](/logs/plugins/d/display-image-dimensions-in-media-library/error.json) |
+| Unknown drop type: table. | ast-sqlite-boot | display-image-dimensions-in-media-library | [View logs](/logs/plugins/d/display-image-dimensions-in-media-library/error.json) |
+| Unknown drop type: table. | asyncify-boot | display-image-dimensions-in-media-library | [View logs](/logs/plugins/d/display-image-dimensions-in-media-library/error.json) |
+| Unknown drop type: table. | jspi-boot | display-image-dimensions-in-media-library | [View logs](/logs/plugins/d/display-image-dimensions-in-media-library/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | disable-all-updates-notifications | [View logs](/logs/plugins/d/disable-all-updates-notifications/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | disable-all-updates-notifications | [View logs](/logs/plugins/d/disable-all-updates-notifications/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | disable-all-updates-notifications | [View logs](/logs/plugins/d/disable-all-updates-notifications/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | ast-sqlite-boot | disable-all-updates-notifications | [View logs](/logs/plugins/d/disable-all-updates-notifications/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | asyncify-boot | disable-all-updates-notifications | [View logs](/logs/plugins/d/disable-all-updates-notifications/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | jspi-boot | disable-all-updates-notifications | [View logs](/logs/plugins/d/disable-all-updates-notifications/error.json) |
+| Unknown drop type: table. | ast-sqlite-boot | disable-all-updates-notifications | [View logs](/logs/plugins/d/disable-all-updates-notifications/error.json) |
+| Unknown drop type: table. | asyncify-boot | disable-all-updates-notifications | [View logs](/logs/plugins/d/disable-all-updates-notifications/error.json) |
+| Unknown drop type: table. | jspi-boot | disable-all-updates-notifications | [View logs](/logs/plugins/d/disable-all-updates-notifications/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | daily-stat | [View logs](/logs/plugins/d/daily-stat/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | daily-stat | [View logs](/logs/plugins/d/daily-stat/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | daily-stat | [View logs](/logs/plugins/d/daily-stat/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | direction-map | [View logs](/logs/plugins/d/direction-map/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | direction-map | [View logs](/logs/plugins/d/direction-map/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | direction-map | [View logs](/logs/plugins/d/direction-map/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | deliverables | [View logs](/logs/plugins/d/deliverables/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | deliverables | [View logs](/logs/plugins/d/deliverables/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | deliverables | [View logs](/logs/plugins/d/deliverables/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | ast-sqlite-boot | deliverables | [View logs](/logs/plugins/d/deliverables/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | asyncify-boot | deliverables | [View logs](/logs/plugins/d/deliverables/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | jspi-boot | deliverables | [View logs](/logs/plugins/d/deliverables/error.json) |
+| Unknown drop type: table. | ast-sqlite-boot | deliverables | [View logs](/logs/plugins/d/deliverables/error.json) |
+| Unknown drop type: table. | asyncify-boot | deliverables | [View logs](/logs/plugins/d/deliverables/error.json) |
+| Unknown drop type: table. | jspi-boot | deliverables | [View logs](/logs/plugins/d/deliverables/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | debts-assets-networth-dan | [View logs](/logs/plugins/d/debts-assets-networth-dan/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | debts-assets-networth-dan | [View logs](/logs/plugins/d/debts-assets-networth-dan/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | debts-assets-networth-dan | [View logs](/logs/plugins/d/debts-assets-networth-dan/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | dregister | [View logs](/logs/plugins/d/dregister/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | dregister | [View logs](/logs/plugins/d/dregister/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | dregister | [View logs](/logs/plugins/d/dregister/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | ast-sqlite-boot | dregister | [View logs](/logs/plugins/d/dregister/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | asyncify-boot | dregister | [View logs](/logs/plugins/d/dregister/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | jspi-boot | dregister | [View logs](/logs/plugins/d/dregister/error.json) |
+| Unknown drop type: table. | ast-sqlite-boot | dregister | [View logs](/logs/plugins/d/dregister/error.json) |
+| Unknown drop type: table. | asyncify-boot | dregister | [View logs](/logs/plugins/d/dregister/error.json) |
+| Unknown drop type: table. | jspi-boot | dregister | [View logs](/logs/plugins/d/dregister/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | digital-and-analog-clock-widget | [View logs](/logs/plugins/d/digital-and-analog-clock-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | digital-and-analog-clock-widget | [View logs](/logs/plugins/d/digital-and-analog-clock-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | digital-and-analog-clock-widget | [View logs](/logs/plugins/d/digital-and-analog-clock-widget/error.json) |
@@ -156,13 +192,40 @@
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | d-login | [View logs](/logs/plugins/d/d-login/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | d-login | [View logs](/logs/plugins/d/d-login/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | d-login | [View logs](/logs/plugins/d/d-login/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | distribution-for-bol-com-for-woocommerce | [View logs](/logs/plugins/d/distribution-for-bol-com-for-woocommerce/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | distribution-for-bol-com-for-woocommerce | [View logs](/logs/plugins/d/distribution-for-bol-com-for-woocommerce/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | distribution-for-bol-com-for-woocommerce | [View logs](/logs/plugins/d/distribution-for-bol-com-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | ast-sqlite-boot | distribution-for-bol-com-for-woocommerce | [View logs](/logs/plugins/d/distribution-for-bol-com-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | asyncify-boot | distribution-for-bol-com-for-woocommerce | [View logs](/logs/plugins/d/distribution-for-bol-com-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | jspi-boot | distribution-for-bol-com-for-woocommerce | [View logs](/logs/plugins/d/distribution-for-bol-com-for-woocommerce/error.json) |
+| Unknown drop type: table. | ast-sqlite-boot | distribution-for-bol-com-for-woocommerce | [View logs](/logs/plugins/d/distribution-for-bol-com-for-woocommerce/error.json) |
+| Unknown drop type: table. | asyncify-boot | distribution-for-bol-com-for-woocommerce | [View logs](/logs/plugins/d/distribution-for-bol-com-for-woocommerce/error.json) |
+| Unknown drop type: table. | jspi-boot | distribution-for-bol-com-for-woocommerce | [View logs](/logs/plugins/d/distribution-for-bol-com-for-woocommerce/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | debug-toolkit | [View logs](/logs/plugins/d/debug-toolkit/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | dh-is-coming-soon | [View logs](/logs/plugins/d/dh-is-coming-soon/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | dh-is-coming-soon | [View logs](/logs/plugins/d/dh-is-coming-soon/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | dh-is-coming-soon | [View logs](/logs/plugins/d/dh-is-coming-soon/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | ast-sqlite-boot | dh-is-coming-soon | [View logs](/logs/plugins/d/dh-is-coming-soon/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | asyncify-boot | dh-is-coming-soon | [View logs](/logs/plugins/d/dh-is-coming-soon/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | jspi-boot | dh-is-coming-soon | [View logs](/logs/plugins/d/dh-is-coming-soon/error.json) |
+| Unknown drop type: table. | ast-sqlite-boot | dh-is-coming-soon | [View logs](/logs/plugins/d/dh-is-coming-soon/error.json) |
+| Unknown drop type: table. | asyncify-boot | dh-is-coming-soon | [View logs](/logs/plugins/d/dh-is-coming-soon/error.json) |
+| Unknown drop type: table. | jspi-boot | dh-is-coming-soon | [View logs](/logs/plugins/d/dh-is-coming-soon/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | daily-different-corner-band | [View logs](/logs/plugins/d/daily-different-corner-band/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | daily-different-corner-band | [View logs](/logs/plugins/d/daily-different-corner-band/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | daily-different-corner-band | [View logs](/logs/plugins/d/daily-different-corner-band/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | devel | [View logs](/logs/plugins/d/devel/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | devel | [View logs](/logs/plugins/d/devel/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | devel | [View logs](/logs/plugins/d/devel/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | database-tuning | [View logs](/logs/plugins/d/database-tuning/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | database-tuning | [View logs](/logs/plugins/d/database-tuning/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | database-tuning | [View logs](/logs/plugins/d/database-tuning/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | ast-sqlite-boot | database-tuning | [View logs](/logs/plugins/d/database-tuning/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | asyncify-boot | database-tuning | [View logs](/logs/plugins/d/database-tuning/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | jspi-boot | database-tuning | [View logs](/logs/plugins/d/database-tuning/error.json) |
+| Unknown drop type: table. | ast-sqlite-boot | database-tuning | [View logs](/logs/plugins/d/database-tuning/error.json) |
+| Unknown drop type: table. | asyncify-boot | database-tuning | [View logs](/logs/plugins/d/database-tuning/error.json) |
+| Unknown drop type: table. | jspi-boot | database-tuning | [View logs](/logs/plugins/d/database-tuning/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | dataporten-oauth | [View logs](/logs/plugins/d/dataporten-oauth/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | dataporten-oauth | [View logs](/logs/plugins/d/dataporten-oauth/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | dataporten-oauth | [View logs](/logs/plugins/d/dataporten-oauth/error.json) |
@@ -181,6 +244,24 @@
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | deimos-project | [View logs](/logs/plugins/d/deimos-project/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | deimos-project | [View logs](/logs/plugins/d/deimos-project/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | deimos-project | [View logs](/logs/plugins/d/deimos-project/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | detector | [View logs](/logs/plugins/d/detector/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | detector | [View logs](/logs/plugins/d/detector/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | detector | [View logs](/logs/plugins/d/detector/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | ast-sqlite-boot | detector | [View logs](/logs/plugins/d/detector/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | asyncify-boot | detector | [View logs](/logs/plugins/d/detector/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | jspi-boot | detector | [View logs](/logs/plugins/d/detector/error.json) |
+| Unknown drop type: table. | ast-sqlite-boot | detector | [View logs](/logs/plugins/d/detector/error.json) |
+| Unknown drop type: table. | asyncify-boot | detector | [View logs](/logs/plugins/d/detector/error.json) |
+| Unknown drop type: table. | jspi-boot | detector | [View logs](/logs/plugins/d/detector/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | delivery-date-and-time | [View logs](/logs/plugins/d/delivery-date-and-time/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | delivery-date-and-time | [View logs](/logs/plugins/d/delivery-date-and-time/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | delivery-date-and-time | [View logs](/logs/plugins/d/delivery-date-and-time/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | ast-sqlite-boot | delivery-date-and-time | [View logs](/logs/plugins/d/delivery-date-and-time/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | asyncify-boot | delivery-date-and-time | [View logs](/logs/plugins/d/delivery-date-and-time/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_DaySwitcher. | jspi-boot | delivery-date-and-time | [View logs](/logs/plugins/d/delivery-date-and-time/error.json) |
+| Unknown drop type: table. | ast-sqlite-boot | delivery-date-and-time | [View logs](/logs/plugins/d/delivery-date-and-time/error.json) |
+| Unknown drop type: table. | asyncify-boot | delivery-date-and-time | [View logs](/logs/plugins/d/delivery-date-and-time/error.json) |
+| Unknown drop type: table. | jspi-boot | delivery-date-and-time | [View logs](/logs/plugins/d/delivery-date-and-time/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | destination-after-save | [View logs](/logs/plugins/d/destination-after-save/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | destination-after-save | [View logs](/logs/plugins/d/destination-after-save/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | destination-after-save | [View logs](/logs/plugins/d/destination-after-save/error.json) |
