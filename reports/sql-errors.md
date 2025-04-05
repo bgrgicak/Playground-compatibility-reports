@@ -415,6 +415,27 @@
 . | asyncify-boot | platformly-for-woocommerce | [View logs](/logs/plugins/p/platformly-for-woocommerce/error.json) |
 . | jspi-boot | platformly-for-woocommerce | [View logs](/logs/plugins/p/platformly-for-woocommerce/error.json) |
 | Array
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | parse-shortcodes | [View logs](/logs/plugins/p/parse-shortcodes/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | parse-shortcodes | [View logs](/logs/plugins/p/parse-shortcodes/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | parse-shortcodes | [View logs](/logs/plugins/p/parse-shortcodes/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | ast-sqlite-boot | parse-shortcodes | [View logs](/logs/plugins/p/parse-shortcodes/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | asyncify-boot | parse-shortcodes | [View logs](/logs/plugins/p/parse-shortcodes/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | jspi-boot | parse-shortcodes | [View logs](/logs/plugins/p/parse-shortcodes/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | parse-shortcodes | [View logs](/logs/plugins/p/parse-shortcodes/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | parse-shortcodes | [View logs](/logs/plugins/p/parse-shortcodes/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | parse-shortcodes | [View logs](/logs/plugins/p/parse-shortcodes/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | personal-newsletter | [View logs](/logs/plugins/p/personal-newsletter/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | personal-newsletter | [View logs](/logs/plugins/p/personal-newsletter/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | personal-newsletter | [View logs](/logs/plugins/p/personal-newsletter/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | ast-sqlite-boot | personal-newsletter | [View logs](/logs/plugins/p/personal-newsletter/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | asyncify-boot | personal-newsletter | [View logs](/logs/plugins/p/personal-newsletter/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | jspi-boot | personal-newsletter | [View logs](/logs/plugins/p/personal-newsletter/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | personal-newsletter | [View logs](/logs/plugins/p/personal-newsletter/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | personal-newsletter | [View logs](/logs/plugins/p/personal-newsletter/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | personal-newsletter | [View logs](/logs/plugins/p/personal-newsletter/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | proper-widgets | [View logs](/logs/plugins/p/proper-widgets/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | proper-widgets | [View logs](/logs/plugins/p/proper-widgets/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | proper-widgets | [View logs](/logs/plugins/p/proper-widgets/error.json) |
     [code] => 0
     [message] => Ending quote ' was expected.
     [position] => 38
@@ -437,6 +458,38 @@
 . | asyncify-boot | projekktor-html5-video-extensions-and-shortcodes | [View logs](/logs/plugins/p/projekktor-html5-video-extensions-and-shortcodes/error.json) |
 . | jspi-boot | projekktor-html5-video-extensions-and-shortcodes | [View logs](/logs/plugins/p/projekktor-html5-video-extensions-and-shortcodes/error.json) |
 | Array
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | pepro-inline-navigation | [View logs](/logs/plugins/p/pepro-inline-navigation/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | pepro-inline-navigation | [View logs](/logs/plugins/p/pepro-inline-navigation/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | pepro-inline-navigation | [View logs](/logs/plugins/p/pepro-inline-navigation/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | ast-sqlite-boot | pepro-inline-navigation | [View logs](/logs/plugins/p/pepro-inline-navigation/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | asyncify-boot | pepro-inline-navigation | [View logs](/logs/plugins/p/pepro-inline-navigation/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | jspi-boot | pepro-inline-navigation | [View logs](/logs/plugins/p/pepro-inline-navigation/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | pepro-inline-navigation | [View logs](/logs/plugins/p/pepro-inline-navigation/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | pepro-inline-navigation | [View logs](/logs/plugins/p/pepro-inline-navigation/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | pepro-inline-navigation | [View logs](/logs/plugins/p/pepro-inline-navigation/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | prime-timeline | [View logs](/logs/plugins/p/prime-timeline/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | prime-timeline | [View logs](/logs/plugins/p/prime-timeline/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | performance-profiler | [View logs](/logs/plugins/p/performance-profiler/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | performance-profiler | [View logs](/logs/plugins/p/performance-profiler/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | performance-profiler | [View logs](/logs/plugins/p/performance-profiler/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | ast-sqlite-boot | performance-profiler | [View logs](/logs/plugins/p/performance-profiler/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | asyncify-boot | performance-profiler | [View logs](/logs/plugins/p/performance-profiler/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | jspi-boot | performance-profiler | [View logs](/logs/plugins/p/performance-profiler/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | performance-profiler | [View logs](/logs/plugins/p/performance-profiler/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | performance-profiler | [View logs](/logs/plugins/p/performance-profiler/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | performance-profiler | [View logs](/logs/plugins/p/performance-profiler/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | post-page-association-plugin | [View logs](/logs/plugins/p/post-page-association-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | post-page-association-plugin | [View logs](/logs/plugins/p/post-page-association-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | post-page-association-plugin | [View logs](/logs/plugins/p/post-page-association-plugin/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | page-links-single-page-option | [View logs](/logs/plugins/p/page-links-single-page-option/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | page-links-single-page-option | [View logs](/logs/plugins/p/page-links-single-page-option/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | page-links-single-page-option | [View logs](/logs/plugins/p/page-links-single-page-option/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | ast-sqlite-boot | page-links-single-page-option | [View logs](/logs/plugins/p/page-links-single-page-option/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | asyncify-boot | page-links-single-page-option | [View logs](/logs/plugins/p/page-links-single-page-option/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | jspi-boot | page-links-single-page-option | [View logs](/logs/plugins/p/page-links-single-page-option/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | page-links-single-page-option | [View logs](/logs/plugins/p/page-links-single-page-option/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | page-links-single-page-option | [View logs](/logs/plugins/p/page-links-single-page-option/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | page-links-single-page-option | [View logs](/logs/plugins/p/page-links-single-page-option/error.json) |
     [code] => 0
     [message] => Ending quote ' was expected.
     [position] => 38
@@ -448,9 +501,38 @@
 . | asyncify-boot | pictpress | [View logs](/logs/plugins/p/pictpress/error.json) |
 . | jspi-boot | pictpress | [View logs](/logs/plugins/p/pictpress/error.json) |
 | Array
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | paypal-shop | [View logs](/logs/plugins/p/paypal-shop/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | paypal-shop | [View logs](/logs/plugins/p/paypal-shop/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | paypal-shop | [View logs](/logs/plugins/p/paypal-shop/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | ast-sqlite-boot | paypal-shop | [View logs](/logs/plugins/p/paypal-shop/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | asyncify-boot | paypal-shop | [View logs](/logs/plugins/p/paypal-shop/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | jspi-boot | paypal-shop | [View logs](/logs/plugins/p/paypal-shop/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | paypal-shop | [View logs](/logs/plugins/p/paypal-shop/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | paypal-shop | [View logs](/logs/plugins/p/paypal-shop/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | paypal-shop | [View logs](/logs/plugins/p/paypal-shop/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | parkvisitor-park-finder | [View logs](/logs/plugins/p/parkvisitor-park-finder/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | parkvisitor-park-finder | [View logs](/logs/plugins/p/parkvisitor-park-finder/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | parkvisitor-park-finder | [View logs](/logs/plugins/p/parkvisitor-park-finder/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | ast-sqlite-boot | parkvisitor-park-finder | [View logs](/logs/plugins/p/parkvisitor-park-finder/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | asyncify-boot | parkvisitor-park-finder | [View logs](/logs/plugins/p/parkvisitor-park-finder/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | jspi-boot | parkvisitor-park-finder | [View logs](/logs/plugins/p/parkvisitor-park-finder/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | parkvisitor-park-finder | [View logs](/logs/plugins/p/parkvisitor-park-finder/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | parkvisitor-park-finder | [View logs](/logs/plugins/p/parkvisitor-park-finder/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | parkvisitor-park-finder | [View logs](/logs/plugins/p/parkvisitor-park-finder/error.json) |
 | Unknown operation: ALTER. | ast-sqlite-boot | post-gallery-widget | [View logs](/logs/plugins/p/post-gallery-widget/error.json) |
 | Unknown operation: ALTER. | asyncify-boot | post-gallery-widget | [View logs](/logs/plugins/p/post-gallery-widget/error.json) |
 | Unknown operation: ALTER. | jspi-boot | post-gallery-widget | [View logs](/logs/plugins/p/post-gallery-widget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | panopress | [View logs](/logs/plugins/p/panopress/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | panopress | [View logs](/logs/plugins/p/panopress/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | panopress | [View logs](/logs/plugins/p/panopress/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | ast-sqlite-boot | panopress | [View logs](/logs/plugins/p/panopress/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | asyncify-boot | panopress | [View logs](/logs/plugins/p/panopress/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | jspi-boot | panopress | [View logs](/logs/plugins/p/panopress/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | panopress | [View logs](/logs/plugins/p/panopress/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | panopress | [View logs](/logs/plugins/p/panopress/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | panopress | [View logs](/logs/plugins/p/panopress/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | pardakht-delkhah | [View logs](/logs/plugins/p/pardakht-delkhah/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | pardakht-delkhah | [View logs](/logs/plugins/p/pardakht-delkhah/error.json) |
     [code] => 0
     [message] => Ending quote ' was expected.
     [position] => 38
@@ -473,9 +555,69 @@
 . | asyncify-boot | page-excerpt-widget | [View logs](/logs/plugins/p/page-excerpt-widget/error.json) |
 . | jspi-boot | page-excerpt-widget | [View logs](/logs/plugins/p/page-excerpt-widget/error.json) |
 | Array
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | pmpro-paytm-gateway | [View logs](/logs/plugins/p/pmpro-paytm-gateway/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | pmpro-paytm-gateway | [View logs](/logs/plugins/p/pmpro-paytm-gateway/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | pmpro-paytm-gateway | [View logs](/logs/plugins/p/pmpro-paytm-gateway/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | price-by-user-role-for-woocommerce | [View logs](/logs/plugins/p/price-by-user-role-for-woocommerce/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | price-by-user-role-for-woocommerce | [View logs](/logs/plugins/p/price-by-user-role-for-woocommerce/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | price-by-user-role-for-woocommerce | [View logs](/logs/plugins/p/price-by-user-role-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | ast-sqlite-boot | price-by-user-role-for-woocommerce | [View logs](/logs/plugins/p/price-by-user-role-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | asyncify-boot | price-by-user-role-for-woocommerce | [View logs](/logs/plugins/p/price-by-user-role-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | jspi-boot | price-by-user-role-for-woocommerce | [View logs](/logs/plugins/p/price-by-user-role-for-woocommerce/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | price-by-user-role-for-woocommerce | [View logs](/logs/plugins/p/price-by-user-role-for-woocommerce/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | price-by-user-role-for-woocommerce | [View logs](/logs/plugins/p/price-by-user-role-for-woocommerce/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | price-by-user-role-for-woocommerce | [View logs](/logs/plugins/p/price-by-user-role-for-woocommerce/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | poker-rakeback-calculator-widget | [View logs](/logs/plugins/p/poker-rakeback-calculator-widget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | poker-rakeback-calculator-widget | [View logs](/logs/plugins/p/poker-rakeback-calculator-widget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | poker-rakeback-calculator-widget | [View logs](/logs/plugins/p/poker-rakeback-calculator-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | ast-sqlite-boot | poker-rakeback-calculator-widget | [View logs](/logs/plugins/p/poker-rakeback-calculator-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | asyncify-boot | poker-rakeback-calculator-widget | [View logs](/logs/plugins/p/poker-rakeback-calculator-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | jspi-boot | poker-rakeback-calculator-widget | [View logs](/logs/plugins/p/poker-rakeback-calculator-widget/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | poker-rakeback-calculator-widget | [View logs](/logs/plugins/p/poker-rakeback-calculator-widget/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | poker-rakeback-calculator-widget | [View logs](/logs/plugins/p/poker-rakeback-calculator-widget/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | poker-rakeback-calculator-widget | [View logs](/logs/plugins/p/poker-rakeback-calculator-widget/error.json) |
 | Unknown operation: ALTER. | ast-sqlite-boot | post-format-permalink | [View logs](/logs/plugins/p/post-format-permalink/error.json) |
 | Unknown operation: ALTER. | asyncify-boot | post-format-permalink | [View logs](/logs/plugins/p/post-format-permalink/error.json) |
 | Unknown operation: ALTER. | jspi-boot | post-format-permalink | [View logs](/logs/plugins/p/post-format-permalink/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | pose-widget | [View logs](/logs/plugins/p/pose-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | pose-widget | [View logs](/logs/plugins/p/pose-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | pose-widget | [View logs](/logs/plugins/p/pose-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | podcastde-wordpress-plugin | [View logs](/logs/plugins/p/podcastde-wordpress-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | podcastde-wordpress-plugin | [View logs](/logs/plugins/p/podcastde-wordpress-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | podcastde-wordpress-plugin | [View logs](/logs/plugins/p/podcastde-wordpress-plugin/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | pad-article | [View logs](/logs/plugins/p/pad-article/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | pad-article | [View logs](/logs/plugins/p/pad-article/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | pad-article | [View logs](/logs/plugins/p/pad-article/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | ast-sqlite-boot | pad-article | [View logs](/logs/plugins/p/pad-article/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | asyncify-boot | pad-article | [View logs](/logs/plugins/p/pad-article/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | jspi-boot | pad-article | [View logs](/logs/plugins/p/pad-article/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | pad-article | [View logs](/logs/plugins/p/pad-article/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | pad-article | [View logs](/logs/plugins/p/pad-article/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | pad-article | [View logs](/logs/plugins/p/pad-article/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | post-pdf-export | [View logs](/logs/plugins/p/post-pdf-export/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | post-pdf-export | [View logs](/logs/plugins/p/post-pdf-export/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | post-pdf-export | [View logs](/logs/plugins/p/post-pdf-export/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | payment-gateway-for-quickpay | [View logs](/logs/plugins/p/payment-gateway-for-quickpay/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | payment-gateway-for-quickpay | [View logs](/logs/plugins/p/payment-gateway-for-quickpay/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | payment-gateway-for-quickpay | [View logs](/logs/plugins/p/payment-gateway-for-quickpay/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | ast-sqlite-boot | payment-gateway-for-quickpay | [View logs](/logs/plugins/p/payment-gateway-for-quickpay/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | asyncify-boot | payment-gateway-for-quickpay | [View logs](/logs/plugins/p/payment-gateway-for-quickpay/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | jspi-boot | payment-gateway-for-quickpay | [View logs](/logs/plugins/p/payment-gateway-for-quickpay/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | payment-gateway-for-quickpay | [View logs](/logs/plugins/p/payment-gateway-for-quickpay/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | payment-gateway-for-quickpay | [View logs](/logs/plugins/p/payment-gateway-for-quickpay/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | payment-gateway-for-quickpay | [View logs](/logs/plugins/p/payment-gateway-for-quickpay/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | pygments-for-wordpress | [View logs](/logs/plugins/p/pygments-for-wordpress/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | pygments-for-wordpress | [View logs](/logs/plugins/p/pygments-for-wordpress/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | pygments-for-wordpress | [View logs](/logs/plugins/p/pygments-for-wordpress/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | plasmapay-crypto-fiat-payment-gateway | [View logs](/logs/plugins/p/plasmapay-crypto-fiat-payment-gateway/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | plasmapay-crypto-fiat-payment-gateway | [View logs](/logs/plugins/p/plasmapay-crypto-fiat-payment-gateway/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | plasmapay-crypto-fiat-payment-gateway | [View logs](/logs/plugins/p/plasmapay-crypto-fiat-payment-gateway/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | ast-sqlite-boot | plasmapay-crypto-fiat-payment-gateway | [View logs](/logs/plugins/p/plasmapay-crypto-fiat-payment-gateway/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | asyncify-boot | plasmapay-crypto-fiat-payment-gateway | [View logs](/logs/plugins/p/plasmapay-crypto-fiat-payment-gateway/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | jspi-boot | plasmapay-crypto-fiat-payment-gateway | [View logs](/logs/plugins/p/plasmapay-crypto-fiat-payment-gateway/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | plasmapay-crypto-fiat-payment-gateway | [View logs](/logs/plugins/p/plasmapay-crypto-fiat-payment-gateway/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | plasmapay-crypto-fiat-payment-gateway | [View logs](/logs/plugins/p/plasmapay-crypto-fiat-payment-gateway/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | plasmapay-crypto-fiat-payment-gateway | [View logs](/logs/plugins/p/plasmapay-crypto-fiat-payment-gateway/error.json) |
     [code] => 0
     [message] => Ending quote ' was expected.
     [position] => 38
@@ -498,6 +640,21 @@
 . | asyncify-boot | page-speed-optimizer | [View logs](/logs/plugins/p/page-speed-optimizer/error.json) |
 . | jspi-boot | page-speed-optimizer | [View logs](/logs/plugins/p/page-speed-optimizer/error.json) |
 | Array
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | persian-woocommerce-shipping | [View logs](/logs/plugins/p/persian-woocommerce-shipping/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | persian-woocommerce-shipping | [View logs](/logs/plugins/p/persian-woocommerce-shipping/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | persian-woocommerce-shipping | [View logs](/logs/plugins/p/persian-woocommerce-shipping/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | postnl-address-validation-for-woocommerce | [View logs](/logs/plugins/p/postnl-address-validation-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | postnl-address-validation-for-woocommerce | [View logs](/logs/plugins/p/postnl-address-validation-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | postnl-address-validation-for-woocommerce | [View logs](/logs/plugins/p/postnl-address-validation-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | plugin-promoter | [View logs](/logs/plugins/p/plugin-promoter/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | plugin-promoter | [View logs](/logs/plugins/p/plugin-promoter/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | plugin-promoter | [View logs](/logs/plugins/p/plugin-promoter/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | peerboard | [View logs](/logs/plugins/p/peerboard/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | peerboard | [View logs](/logs/plugins/p/peerboard/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | asyncify-boot | peerboard | [View logs](/logs/plugins/p/peerboard/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: editable. | jspi-boot | peerboard | [View logs](/logs/plugins/p/peerboard/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | peerboard | [View logs](/logs/plugins/p/peerboard/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | peerboard | [View logs](/logs/plugins/p/peerboard/error.json) |
     [code] => 0
     [message] => Ending quote ' was expected.
     [position] => 38
@@ -509,6 +666,21 @@
 . | asyncify-boot | post-feedback | [View logs](/logs/plugins/p/post-feedback/error.json) |
 . | jspi-boot | post-feedback | [View logs](/logs/plugins/p/post-feedback/error.json) |
 | Array
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | post-images-html-resizer | [View logs](/logs/plugins/p/post-images-html-resizer/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | post-images-html-resizer | [View logs](/logs/plugins/p/post-images-html-resizer/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | post-images-html-resizer | [View logs](/logs/plugins/p/post-images-html-resizer/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | predictive-preloader | [View logs](/logs/plugins/p/predictive-preloader/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | predictive-preloader | [View logs](/logs/plugins/p/predictive-preloader/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | predictive-preloader | [View logs](/logs/plugins/p/predictive-preloader/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | plugin-wonderful | [View logs](/logs/plugins/p/plugin-wonderful/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | plugin-wonderful | [View logs](/logs/plugins/p/plugin-wonderful/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | plugin-wonderful | [View logs](/logs/plugins/p/plugin-wonderful/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | pixopoint-theme-integrator | [View logs](/logs/plugins/p/pixopoint-theme-integrator/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | pixopoint-theme-integrator | [View logs](/logs/plugins/p/pixopoint-theme-integrator/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | pixopoint-theme-integrator | [View logs](/logs/plugins/p/pixopoint-theme-integrator/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | padma-advanced | [View logs](/logs/plugins/p/padma-advanced/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | padma-advanced | [View logs](/logs/plugins/p/padma-advanced/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | padma-advanced | [View logs](/logs/plugins/p/padma-advanced/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | rate-this-site | [View logs](/logs/plugins/r/rate-this-site/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | rate-this-site | [View logs](/logs/plugins/r/rate-this-site/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | rate-this-site | [View logs](/logs/plugins/r/rate-this-site/error.json) |
@@ -548,6 +720,18 @@
 | SQLSTATE[HY000]: General error: 1 near "set": syntax error. | ast-sqlite-boot | thanh-toan-chuyen-khoan | [View logs](/logs/plugins/t/thanh-toan-chuyen-khoan/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | thanh-toan-chuyen-khoan | [View logs](/logs/plugins/t/thanh-toan-chuyen-khoan/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | thanh-toan-chuyen-khoan | [View logs](/logs/plugins/t/thanh-toan-chuyen-khoan/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | translation-adapor | [View logs](/logs/plugins/t/translation-adapor/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | translation-adapor | [View logs](/logs/plugins/t/translation-adapor/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | translation-adapor | [View logs](/logs/plugins/t/translation-adapor/error.json) |
+| Unknown query type: LOAD DATA. | ast-sqlite-boot | translation-adapor | [View logs](/logs/plugins/t/translation-adapor/error.json) |
+| Unknown query type: LOAD DATA. | asyncify-boot | translation-adapor | [View logs](/logs/plugins/t/translation-adapor/error.json) |
+| Unknown query type: LOAD DATA. | jspi-boot | translation-adapor | [View logs](/logs/plugins/t/translation-adapor/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | top-songs | [View logs](/logs/plugins/t/top-songs/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | top-songs | [View logs](/logs/plugins/t/top-songs/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | top-songs | [View logs](/logs/plugins/t/top-songs/error.json) |
+| Unknown query type: LOAD DATA. | ast-sqlite-boot | top-songs | [View logs](/logs/plugins/t/top-songs/error.json) |
+| Unknown query type: LOAD DATA. | asyncify-boot | top-songs | [View logs](/logs/plugins/t/top-songs/error.json) |
+| Unknown query type: LOAD DATA. | jspi-boot | top-songs | [View logs](/logs/plugins/t/top-songs/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | ttc-wordpress-security-plugin | [View logs](/logs/plugins/t/ttc-wordpress-security-plugin/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | ttc-wordpress-security-plugin | [View logs](/logs/plugins/t/ttc-wordpress-security-plugin/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | ttc-wordpress-security-plugin | [View logs](/logs/plugins/t/ttc-wordpress-security-plugin/error.json) |
@@ -559,6 +743,12 @@
 | SQLSTATE[HY000]: General error: 1 near "set": syntax error. | ast-sqlite-boot | triptrus-search-widget | [View logs](/logs/plugins/t/triptrus-search-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | triptrus-search-widget | [View logs](/logs/plugins/t/triptrus-search-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | triptrus-search-widget | [View logs](/logs/plugins/t/triptrus-search-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | templatic-google-amp | [View logs](/logs/plugins/t/templatic-google-amp/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | templatic-google-amp | [View logs](/logs/plugins/t/templatic-google-amp/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | templatic-google-amp | [View logs](/logs/plugins/t/templatic-google-amp/error.json) |
+| Unknown query type: LOAD DATA. | ast-sqlite-boot | templatic-google-amp | [View logs](/logs/plugins/t/templatic-google-amp/error.json) |
+| Unknown query type: LOAD DATA. | asyncify-boot | templatic-google-amp | [View logs](/logs/plugins/t/templatic-google-amp/error.json) |
+| Unknown query type: LOAD DATA. | jspi-boot | templatic-google-amp | [View logs](/logs/plugins/t/templatic-google-amp/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | translate-with-google-and-bing | [View logs](/logs/plugins/t/translate-with-google-and-bing/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | translate-with-google-and-bing | [View logs](/logs/plugins/t/translate-with-google-and-bing/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | translate-with-google-and-bing | [View logs](/logs/plugins/t/translate-with-google-and-bing/error.json) |
@@ -571,6 +761,30 @@
 | SQLSTATE[HY000]: General error: 1 near "set": syntax error. | ast-sqlite-boot | testimonial-master | [View logs](/logs/plugins/t/testimonial-master/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | testimonial-master | [View logs](/logs/plugins/t/testimonial-master/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | testimonial-master | [View logs](/logs/plugins/t/testimonial-master/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | tip-of-the-day | [View logs](/logs/plugins/t/tip-of-the-day/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | tip-of-the-day | [View logs](/logs/plugins/t/tip-of-the-day/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | tip-of-the-day | [View logs](/logs/plugins/t/tip-of-the-day/error.json) |
+| Unknown query type: LOAD DATA. | ast-sqlite-boot | tip-of-the-day | [View logs](/logs/plugins/t/tip-of-the-day/error.json) |
+| Unknown query type: LOAD DATA. | asyncify-boot | tip-of-the-day | [View logs](/logs/plugins/t/tip-of-the-day/error.json) |
+| Unknown query type: LOAD DATA. | jspi-boot | tip-of-the-day | [View logs](/logs/plugins/t/tip-of-the-day/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | test-post-generator | [View logs](/logs/plugins/t/test-post-generator/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | test-post-generator | [View logs](/logs/plugins/t/test-post-generator/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | test-post-generator | [View logs](/logs/plugins/t/test-post-generator/error.json) |
+| Unknown query type: LOAD DATA. | ast-sqlite-boot | test-post-generator | [View logs](/logs/plugins/t/test-post-generator/error.json) |
+| Unknown query type: LOAD DATA. | asyncify-boot | test-post-generator | [View logs](/logs/plugins/t/test-post-generator/error.json) |
+| Unknown query type: LOAD DATA. | jspi-boot | test-post-generator | [View logs](/logs/plugins/t/test-post-generator/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | taskfreak | [View logs](/logs/plugins/t/taskfreak/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | taskfreak | [View logs](/logs/plugins/t/taskfreak/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | taskfreak | [View logs](/logs/plugins/t/taskfreak/error.json) |
+| Unknown query type: LOAD DATA. | ast-sqlite-boot | taskfreak | [View logs](/logs/plugins/t/taskfreak/error.json) |
+| Unknown query type: LOAD DATA. | asyncify-boot | taskfreak | [View logs](/logs/plugins/t/taskfreak/error.json) |
+| Unknown query type: LOAD DATA. | jspi-boot | taskfreak | [View logs](/logs/plugins/t/taskfreak/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | terminal-for-stripe-and-woocommerce | [View logs](/logs/plugins/t/terminal-for-stripe-and-woocommerce/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | terminal-for-stripe-and-woocommerce | [View logs](/logs/plugins/t/terminal-for-stripe-and-woocommerce/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | terminal-for-stripe-and-woocommerce | [View logs](/logs/plugins/t/terminal-for-stripe-and-woocommerce/error.json) |
+| Unknown query type: LOAD DATA. | ast-sqlite-boot | terminal-for-stripe-and-woocommerce | [View logs](/logs/plugins/t/terminal-for-stripe-and-woocommerce/error.json) |
+| Unknown query type: LOAD DATA. | asyncify-boot | terminal-for-stripe-and-woocommerce | [View logs](/logs/plugins/t/terminal-for-stripe-and-woocommerce/error.json) |
+| Unknown query type: LOAD DATA. | jspi-boot | terminal-for-stripe-and-woocommerce | [View logs](/logs/plugins/t/terminal-for-stripe-and-woocommerce/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | terror-alert-level-widget | [View logs](/logs/plugins/t/terror-alert-level-widget/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | terror-alert-level-widget | [View logs](/logs/plugins/t/terror-alert-level-widget/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | terror-alert-level-widget | [View logs](/logs/plugins/t/terror-alert-level-widget/error.json) |
@@ -580,6 +794,12 @@
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | tcvn-accordion-widget | [View logs](/logs/plugins/t/tcvn-accordion-widget/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | tcvn-accordion-widget | [View logs](/logs/plugins/t/tcvn-accordion-widget/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | tcvn-accordion-widget | [View logs](/logs/plugins/t/tcvn-accordion-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | typhoon-haiyan-donate-links | [View logs](/logs/plugins/t/typhoon-haiyan-donate-links/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | typhoon-haiyan-donate-links | [View logs](/logs/plugins/t/typhoon-haiyan-donate-links/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | typhoon-haiyan-donate-links | [View logs](/logs/plugins/t/typhoon-haiyan-donate-links/error.json) |
+| Unknown query type: LOAD DATA. | ast-sqlite-boot | typhoon-haiyan-donate-links | [View logs](/logs/plugins/t/typhoon-haiyan-donate-links/error.json) |
+| Unknown query type: LOAD DATA. | asyncify-boot | typhoon-haiyan-donate-links | [View logs](/logs/plugins/t/typhoon-haiyan-donate-links/error.json) |
+| Unknown query type: LOAD DATA. | jspi-boot | typhoon-haiyan-donate-links | [View logs](/logs/plugins/t/typhoon-haiyan-donate-links/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | trumpcha | [View logs](/logs/plugins/t/trumpcha/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | trumpcha | [View logs](/logs/plugins/t/trumpcha/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | trumpcha | [View logs](/logs/plugins/t/trumpcha/error.json) |
@@ -587,6 +807,24 @@
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | terms-and-conditions-per-product | [View logs](/logs/plugins/t/terms-and-conditions-per-product/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | terms-and-conditions-per-product | [View logs](/logs/plugins/t/terms-and-conditions-per-product/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | terms-and-conditions-per-product | [View logs](/logs/plugins/t/terms-and-conditions-per-product/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | top-visited-post | [View logs](/logs/plugins/t/top-visited-post/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | top-visited-post | [View logs](/logs/plugins/t/top-visited-post/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | top-visited-post | [View logs](/logs/plugins/t/top-visited-post/error.json) |
+| Unknown query type: LOAD DATA. | ast-sqlite-boot | top-visited-post | [View logs](/logs/plugins/t/top-visited-post/error.json) |
+| Unknown query type: LOAD DATA. | asyncify-boot | top-visited-post | [View logs](/logs/plugins/t/top-visited-post/error.json) |
+| Unknown query type: LOAD DATA. | jspi-boot | top-visited-post | [View logs](/logs/plugins/t/top-visited-post/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | tivents-products-feed | [View logs](/logs/plugins/t/tivents-products-feed/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | tivents-products-feed | [View logs](/logs/plugins/t/tivents-products-feed/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | tivents-products-feed | [View logs](/logs/plugins/t/tivents-products-feed/error.json) |
+| Unknown query type: LOAD DATA. | ast-sqlite-boot | tivents-products-feed | [View logs](/logs/plugins/t/tivents-products-feed/error.json) |
+| Unknown query type: LOAD DATA. | asyncify-boot | tivents-products-feed | [View logs](/logs/plugins/t/tivents-products-feed/error.json) |
+| Unknown query type: LOAD DATA. | jspi-boot | tivents-products-feed | [View logs](/logs/plugins/t/tivents-products-feed/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | triagis-security-evaluation | [View logs](/logs/plugins/t/triagis-security-evaluation/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | triagis-security-evaluation | [View logs](/logs/plugins/t/triagis-security-evaluation/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | triagis-security-evaluation | [View logs](/logs/plugins/t/triagis-security-evaluation/error.json) |
+| Unknown query type: LOAD DATA. | ast-sqlite-boot | triagis-security-evaluation | [View logs](/logs/plugins/t/triagis-security-evaluation/error.json) |
+| Unknown query type: LOAD DATA. | asyncify-boot | triagis-security-evaluation | [View logs](/logs/plugins/t/triagis-security-evaluation/error.json) |
+| Unknown query type: LOAD DATA. | jspi-boot | triagis-security-evaluation | [View logs](/logs/plugins/t/triagis-security-evaluation/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | totosgr-xml-feed-for-woocommerce | [View logs](/logs/plugins/t/totosgr-xml-feed-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | totosgr-xml-feed-for-woocommerce | [View logs](/logs/plugins/t/totosgr-xml-feed-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | totosgr-xml-feed-for-woocommerce | [View logs](/logs/plugins/t/totosgr-xml-feed-for-woocommerce/error.json) |
@@ -636,6 +874,21 @@
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | twitpic | [View logs](/logs/plugins/t/twitpic/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | twitpic | [View logs](/logs/plugins/t/twitpic/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | twitpic | [View logs](/logs/plugins/t/twitpic/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | timemk-widget | [View logs](/logs/plugins/t/timemk-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | timemk-widget | [View logs](/logs/plugins/t/timemk-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | timemk-widget | [View logs](/logs/plugins/t/timemk-widget/error.json) |
+| Unknown query type: LOAD DATA. | ast-sqlite-boot | timemk-widget | [View logs](/logs/plugins/t/timemk-widget/error.json) |
+| Unknown query type: LOAD DATA. | asyncify-boot | timemk-widget | [View logs](/logs/plugins/t/timemk-widget/error.json) |
+| Unknown query type: LOAD DATA. | jspi-boot | timemk-widget | [View logs](/logs/plugins/t/timemk-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | the-twitter-profile | [View logs](/logs/plugins/t/the-twitter-profile/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | the-twitter-profile | [View logs](/logs/plugins/t/the-twitter-profile/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | the-twitter-profile | [View logs](/logs/plugins/t/the-twitter-profile/error.json) |
+| Unknown query type: LOAD DATA. | ast-sqlite-boot | the-twitter-profile | [View logs](/logs/plugins/t/the-twitter-profile/error.json) |
+| Unknown query type: LOAD DATA. | asyncify-boot | the-twitter-profile | [View logs](/logs/plugins/t/the-twitter-profile/error.json) |
+| Unknown query type: LOAD DATA. | jspi-boot | the-twitter-profile | [View logs](/logs/plugins/t/the-twitter-profile/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wc-customer-source | [View logs](/logs/plugins/w/wc-customer-source/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wc-customer-source | [View logs](/logs/plugins/w/wc-customer-source/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wc-customer-source | [View logs](/logs/plugins/w/wc-customer-source/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | wc-gateway-gigzter | [View logs](/logs/plugins/w/wc-gateway-gigzter/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | wc-gateway-gigzter | [View logs](/logs/plugins/w/wc-gateway-gigzter/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | wc-gateway-gigzter | [View logs](/logs/plugins/w/wc-gateway-gigzter/error.json) |
@@ -648,6 +901,15 @@
 | Unknown operation: MODIFY. | ast-sqlite-boot | weather-journal | [View logs](/logs/plugins/w/weather-journal/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | weather-journal | [View logs](/logs/plugins/w/weather-journal/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | weather-journal | [View logs](/logs/plugins/w/weather-journal/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | web-portal-lite-client-portal-secure-file-sharing-private-messaging | [View logs](/logs/plugins/w/web-portal-lite-client-portal-secure-file-sharing-private-messaging/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | web-portal-lite-client-portal-secure-file-sharing-private-messaging | [View logs](/logs/plugins/w/web-portal-lite-client-portal-secure-file-sharing-private-messaging/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | web-portal-lite-client-portal-secure-file-sharing-private-messaging | [View logs](/logs/plugins/w/web-portal-lite-client-portal-secure-file-sharing-private-messaging/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | web2print-beta | [View logs](/logs/plugins/w/web2print-beta/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | web2print-beta | [View logs](/logs/plugins/w/web2print-beta/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | web2print-beta | [View logs](/logs/plugins/w/web2print-beta/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | whats-my-status | [View logs](/logs/plugins/w/whats-my-status/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | whats-my-status | [View logs](/logs/plugins/w/whats-my-status/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | whats-my-status | [View logs](/logs/plugins/w/whats-my-status/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | whipclip | [View logs](/logs/plugins/w/whipclip/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | whipclip | [View logs](/logs/plugins/w/whipclip/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | whipclip | [View logs](/logs/plugins/w/whipclip/error.json) |
@@ -668,12 +930,32 @@
 | Unknown operation: MODIFY. | ast-sqlite-boot | woocommerce-multi-bank | [View logs](/logs/plugins/w/woocommerce-multi-bank/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | woocommerce-multi-bank | [View logs](/logs/plugins/w/woocommerce-multi-bank/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | woocommerce-multi-bank | [View logs](/logs/plugins/w/woocommerce-multi-bank/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | wooiran-commerce | [View logs](/logs/plugins/w/wooiran-commerce/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | wooiran-commerce | [View logs](/logs/plugins/w/wooiran-commerce/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | wooiran-commerce | [View logs](/logs/plugins/w/wooiran-commerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | woothemes-footer-filter | [View logs](/logs/plugins/w/woothemes-footer-filter/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | woothemes-footer-filter | [View logs](/logs/plugins/w/woothemes-footer-filter/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | woothemes-footer-filter | [View logs](/logs/plugins/w/woothemes-footer-filter/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | woothemes-footer-filter | [View logs](/logs/plugins/w/woothemes-footer-filter/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | woothemes-footer-filter | [View logs](/logs/plugins/w/woothemes-footer-filter/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | woothemes-footer-filter | [View logs](/logs/plugins/w/woothemes-footer-filter/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | wootoolkit | [View logs](/logs/plugins/w/wootoolkit/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | wootoolkit | [View logs](/logs/plugins/w/wootoolkit/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | word-of-the-day-widget-by-wordnik | [View logs](/logs/plugins/w/word-of-the-day-widget-by-wordnik/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | word-of-the-day-widget-by-wordnik | [View logs](/logs/plugins/w/word-of-the-day-widget-by-wordnik/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | word-of-the-day-widget-by-wordnik | [View logs](/logs/plugins/w/word-of-the-day-widget-by-wordnik/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wordpress-ads-plug-in | [View logs](/logs/plugins/w/wordpress-ads-plug-in/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wordpress-ads-plug-in | [View logs](/logs/plugins/w/wordpress-ads-plug-in/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wordpress-ads-plug-in | [View logs](/logs/plugins/w/wordpress-ads-plug-in/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | wp-adsense-plugin | [View logs](/logs/plugins/w/wp-adsense-plugin/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | wp-adsense-plugin | [View logs](/logs/plugins/w/wp-adsense-plugin/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | wp-adsense-plugin | [View logs](/logs/plugins/w/wp-adsense-plugin/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | wp-ajax-contact-form | [View logs](/logs/plugins/w/wp-ajax-contact-form/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | wp-ajax-contact-form | [View logs](/logs/plugins/w/wp-ajax-contact-form/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | wp-ajax-contact-form | [View logs](/logs/plugins/w/wp-ajax-contact-form/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-all-in-one-tools | [View logs](/logs/plugins/w/wp-all-in-one-tools/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wp-all-in-one-tools | [View logs](/logs/plugins/w/wp-all-in-one-tools/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wp-all-in-one-tools | [View logs](/logs/plugins/w/wp-all-in-one-tools/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | wp-cache-blocks | [View logs](/logs/plugins/w/wp-cache-blocks/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | wp-cache-blocks | [View logs](/logs/plugins/w/wp-cache-blocks/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | wp-cache-blocks | [View logs](/logs/plugins/w/wp-cache-blocks/error.json) |
@@ -686,6 +968,15 @@
 | Unknown operation: MODIFY. | ast-sqlite-boot | wp-call-to-action-widget | [View logs](/logs/plugins/w/wp-call-to-action-widget/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | wp-call-to-action-widget | [View logs](/logs/plugins/w/wp-call-to-action-widget/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | wp-call-to-action-widget | [View logs](/logs/plugins/w/wp-call-to-action-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-core-contributions-widget | [View logs](/logs/plugins/w/wp-core-contributions-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wp-core-contributions-widget | [View logs](/logs/plugins/w/wp-core-contributions-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wp-core-contributions-widget | [View logs](/logs/plugins/w/wp-core-contributions-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-e-commerce-catalog-visibility-and-email-inquiry | [View logs](/logs/plugins/w/wp-e-commerce-catalog-visibility-and-email-inquiry/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wp-e-commerce-catalog-visibility-and-email-inquiry | [View logs](/logs/plugins/w/wp-e-commerce-catalog-visibility-and-email-inquiry/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wp-e-commerce-catalog-visibility-and-email-inquiry | [View logs](/logs/plugins/w/wp-e-commerce-catalog-visibility-and-email-inquiry/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | wp-flock | [View logs](/logs/plugins/w/wp-flock/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | wp-flock | [View logs](/logs/plugins/w/wp-flock/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | wp-flock | [View logs](/logs/plugins/w/wp-flock/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | wp-grow-button | [View logs](/logs/plugins/w/wp-grow-button/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | wp-grow-button | [View logs](/logs/plugins/w/wp-grow-button/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | wp-grow-button | [View logs](/logs/plugins/w/wp-grow-button/error.json) |
@@ -698,6 +989,12 @@
 | Unknown operation: MODIFY. | ast-sqlite-boot | wp-pedigree-builder | [View logs](/logs/plugins/w/wp-pedigree-builder/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | wp-pedigree-builder | [View logs](/logs/plugins/w/wp-pedigree-builder/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | wp-pedigree-builder | [View logs](/logs/plugins/w/wp-pedigree-builder/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-post-navigator | [View logs](/logs/plugins/w/wp-post-navigator/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wp-post-navigator | [View logs](/logs/plugins/w/wp-post-navigator/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wp-post-navigator | [View logs](/logs/plugins/w/wp-post-navigator/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | wp-qore | [View logs](/logs/plugins/w/wp-qore/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | wp-qore | [View logs](/logs/plugins/w/wp-qore/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | wp-qore | [View logs](/logs/plugins/w/wp-qore/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | wp-simple-event-management-system | [View logs](/logs/plugins/w/wp-simple-event-management-system/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | wp-simple-event-management-system | [View logs](/logs/plugins/w/wp-simple-event-management-system/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | wp-simple-event-management-system | [View logs](/logs/plugins/w/wp-simple-event-management-system/error.json) |
@@ -710,8 +1007,20 @@
 | Unknown operation: MODIFY. | ast-sqlite-boot | wp-simple-web-services | [View logs](/logs/plugins/w/wp-simple-web-services/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | wp-simple-web-services | [View logs](/logs/plugins/w/wp-simple-web-services/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | wp-simple-web-services | [View logs](/logs/plugins/w/wp-simple-web-services/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | wp-smart-crm-invoices-free | [View logs](/logs/plugins/w/wp-smart-crm-invoices-free/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | wp-smart-crm-invoices-free | [View logs](/logs/plugins/w/wp-smart-crm-invoices-free/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | wp-smart-crm-invoices-free | [View logs](/logs/plugins/w/wp-smart-crm-invoices-free/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | wp-social-stream | [View logs](/logs/plugins/w/wp-social-stream/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | wp-social-stream | [View logs](/logs/plugins/w/wp-social-stream/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | wp-textmaster | [View logs](/logs/plugins/w/wp-textmaster/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | wp-textmaster | [View logs](/logs/plugins/w/wp-textmaster/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | wp-textmaster | [View logs](/logs/plugins/w/wp-textmaster/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-travel-itinerary | [View logs](/logs/plugins/w/wp-travel-itinerary/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wp-travel-itinerary | [View logs](/logs/plugins/w/wp-travel-itinerary/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wp-travel-itinerary | [View logs](/logs/plugins/w/wp-travel-itinerary/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-user-control | [View logs](/logs/plugins/w/wp-user-control/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wp-user-control | [View logs](/logs/plugins/w/wp-user-control/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wp-user-control | [View logs](/logs/plugins/w/wp-user-control/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | wp-userlogin | [View logs](/logs/plugins/w/wp-userlogin/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | wp-userlogin | [View logs](/logs/plugins/w/wp-userlogin/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | wp-userlogin | [View logs](/logs/plugins/w/wp-userlogin/error.json) |
