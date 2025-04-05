@@ -139,10 +139,19 @@
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | ast-sqlite-boot | eventz-lite | [View logs](/logs/plugins/e/eventz-lite/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | asyncify-boot | eventz-lite | [View logs](/logs/plugins/e/eventz-lite/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: id_user. | jspi-boot | eventz-lite | [View logs](/logs/plugins/e/eventz-lite/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | javascript-miner | [View logs](/logs/plugins/j/javascript-miner/error.json) |
+| Unknown query type: DESC. | asyncify-boot | javascript-miner | [View logs](/logs/plugins/j/javascript-miner/error.json) |
+| Unknown query type: DESC. | jspi-boot | javascript-miner | [View logs](/logs/plugins/j/javascript-miner/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | jr-tellyourfriends | [View logs](/logs/plugins/j/jr-tellyourfriends/error.json) |
+| Unknown query type: DESC. | asyncify-boot | jr-tellyourfriends | [View logs](/logs/plugins/j/jr-tellyourfriends/error.json) |
+| Unknown query type: DESC. | jspi-boot | jr-tellyourfriends | [View logs](/logs/plugins/j/jr-tellyourfriends/error.json) |
 | Unknown operation: CHARACTER SET. | ast-sqlite-boot | jm-avail-booking | [View logs](/logs/plugins/j/jm-avail-booking/error.json) |
 | Unknown operation: CHARACTER SET. | ast-sqlite-boot | juiz-user-custom | [View logs](/logs/plugins/j/juiz-user-custom/error.json) |
 | Unknown operation: CHARACTER SET. | asyncify-boot | juiz-user-custom | [View logs](/logs/plugins/j/juiz-user-custom/error.json) |
 | Unknown operation: CHARACTER SET. | jspi-boot | juiz-user-custom | [View logs](/logs/plugins/j/juiz-user-custom/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | js-banner-rotator | [View logs](/logs/plugins/j/js-banner-rotator/error.json) |
+| Unknown query type: DESC. | asyncify-boot | js-banner-rotator | [View logs](/logs/plugins/j/js-banner-rotator/error.json) |
+| Unknown query type: DESC. | jspi-boot | js-banner-rotator | [View logs](/logs/plugins/j/js-banner-rotator/error.json) |
 | Unknown operation: CHARACTER SET. | ast-sqlite-boot | jqueryfacebookwallwplight | [View logs](/logs/plugins/j/jqueryfacebookwallwplight/error.json) |
 | Unknown operation: CHARACTER SET. | asyncify-boot | jqueryfacebookwallwplight | [View logs](/logs/plugins/j/jqueryfacebookwallwplight/error.json) |
 | Unknown operation: CHARACTER SET. | jspi-boot | jqueryfacebookwallwplight | [View logs](/logs/plugins/j/jqueryfacebookwallwplight/error.json) |
@@ -152,30 +161,86 @@
 | Unknown operation: CHARACTER SET. | ast-sqlite-boot | jm-html5-and-responsive-gallery | [View logs](/logs/plugins/j/jm-html5-and-responsive-gallery/error.json) |
 | Unknown operation: CHARACTER SET. | asyncify-boot | jm-html5-and-responsive-gallery | [View logs](/logs/plugins/j/jm-html5-and-responsive-gallery/error.json) |
 | Unknown operation: CHARACTER SET. | jspi-boot | jm-html5-and-responsive-gallery | [View logs](/logs/plugins/j/jm-html5-and-responsive-gallery/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | jh-portfolio | [View logs](/logs/plugins/j/jh-portfolio/error.json) |
+| Unknown query type: DESC. | asyncify-boot | jh-portfolio | [View logs](/logs/plugins/j/jh-portfolio/error.json) |
+| Unknown query type: DESC. | jspi-boot | jh-portfolio | [View logs](/logs/plugins/j/jh-portfolio/error.json) |
 | Unknown operation: CHARACTER SET. | ast-sqlite-boot | jr-relatedposts | [View logs](/logs/plugins/j/jr-relatedposts/error.json) |
 | Unknown operation: CHARACTER SET. | asyncify-boot | jr-relatedposts | [View logs](/logs/plugins/j/jr-relatedposts/error.json) |
 | Unknown operation: CHARACTER SET. | jspi-boot | jr-relatedposts | [View logs](/logs/plugins/j/jr-relatedposts/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | jj-nextgen-unload | [View logs](/logs/plugins/j/jj-nextgen-unload/error.json) |
+| Unknown query type: DESC. | asyncify-boot | jj-nextgen-unload | [View logs](/logs/plugins/j/jj-nextgen-unload/error.json) |
+| Unknown query type: DESC. | jspi-boot | jj-nextgen-unload | [View logs](/logs/plugins/j/jj-nextgen-unload/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | jin10 | [View logs](/logs/plugins/j/jin10/error.json) |
+| Unknown query type: DESC. | asyncify-boot | jin10 | [View logs](/logs/plugins/j/jin10/error.json) |
+| Unknown query type: DESC. | jspi-boot | jin10 | [View logs](/logs/plugins/j/jin10/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | jigoshop-easy-print-button | [View logs](/logs/plugins/j/jigoshop-easy-print-button/error.json) |
+| Unknown query type: DESC. | asyncify-boot | jigoshop-easy-print-button | [View logs](/logs/plugins/j/jigoshop-easy-print-button/error.json) |
+| Unknown query type: DESC. | jspi-boot | jigoshop-easy-print-button | [View logs](/logs/plugins/j/jigoshop-easy-print-button/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | jm-government-widgets | [View logs](/logs/plugins/j/jm-government-widgets/error.json) |
+| Unknown query type: DESC. | asyncify-boot | jm-government-widgets | [View logs](/logs/plugins/j/jm-government-widgets/error.json) |
+| Unknown query type: DESC. | jspi-boot | jm-government-widgets | [View logs](/logs/plugins/j/jm-government-widgets/error.json) |
 | Unknown operation: CHARACTER SET. | ast-sqlite-boot | jr-twitter | [View logs](/logs/plugins/j/jr-twitter/error.json) |
 | Unknown operation: CHARACTER SET. | asyncify-boot | jr-twitter | [View logs](/logs/plugins/j/jr-twitter/error.json) |
 | Unknown operation: CHARACTER SET. | jspi-boot | jr-twitter | [View logs](/logs/plugins/j/jr-twitter/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | jet-active-blog-list-ru-edition | [View logs](/logs/plugins/j/jet-active-blog-list-ru-edition/error.json) |
+| Unknown query type: DESC. | asyncify-boot | jet-active-blog-list-ru-edition | [View logs](/logs/plugins/j/jet-active-blog-list-ru-edition/error.json) |
+| Unknown query type: DESC. | jspi-boot | jet-active-blog-list-ru-edition | [View logs](/logs/plugins/j/jet-active-blog-list-ru-edition/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | joke-of-the-day | [View logs](/logs/plugins/j/joke-of-the-day/error.json) |
+| Unknown query type: DESC. | asyncify-boot | joke-of-the-day | [View logs](/logs/plugins/j/joke-of-the-day/error.json) |
+| Unknown query type: DESC. | jspi-boot | joke-of-the-day | [View logs](/logs/plugins/j/joke-of-the-day/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | jet-what-new-user | [View logs](/logs/plugins/j/jet-what-new-user/error.json) |
+| Unknown query type: DESC. | asyncify-boot | jet-what-new-user | [View logs](/logs/plugins/j/jet-what-new-user/error.json) |
+| Unknown query type: DESC. | jspi-boot | jet-what-new-user | [View logs](/logs/plugins/j/jet-what-new-user/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | jssor-slider | [View logs](/logs/plugins/j/jssor-slider/error.json) |
+| Unknown query type: DESC. | asyncify-boot | jssor-slider | [View logs](/logs/plugins/j/jssor-slider/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | jl-yahoo-api | [View logs](/logs/plugins/j/jl-yahoo-api/error.json) |
+| Unknown query type: DESC. | asyncify-boot | jl-yahoo-api | [View logs](/logs/plugins/j/jl-yahoo-api/error.json) |
+| Unknown query type: DESC. | jspi-boot | jl-yahoo-api | [View logs](/logs/plugins/j/jl-yahoo-api/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | jobs-finder | [View logs](/logs/plugins/j/jobs-finder/error.json) |
+| Unknown query type: DESC. | asyncify-boot | jobs-finder | [View logs](/logs/plugins/j/jobs-finder/error.json) |
+| Unknown query type: DESC. | jspi-boot | jobs-finder | [View logs](/logs/plugins/j/jobs-finder/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | jb-wcarousel | [View logs](/logs/plugins/j/jb-wcarousel/error.json) |
+| Unknown query type: DESC. | asyncify-boot | jb-wcarousel | [View logs](/logs/plugins/j/jb-wcarousel/error.json) |
+| Unknown query type: DESC. | jspi-boot | jb-wcarousel | [View logs](/logs/plugins/j/jb-wcarousel/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | jaxto-marketplace | [View logs](/logs/plugins/j/jaxto-marketplace/error.json) |
+| Unknown query type: DESC. | asyncify-boot | jaxto-marketplace | [View logs](/logs/plugins/j/jaxto-marketplace/error.json) |
+| Unknown query type: DESC. | jspi-boot | jaxto-marketplace | [View logs](/logs/plugins/j/jaxto-marketplace/error.json) |
 | Unknown operation: CHARACTER SET. | ast-sqlite-boot | jump-around | [View logs](/logs/plugins/j/jump-around/error.json) |
 | Unknown operation: CHARACTER SET. | asyncify-boot | jump-around | [View logs](/logs/plugins/j/jump-around/error.json) |
 | Unknown operation: CHARACTER SET. | jspi-boot | jump-around | [View logs](/logs/plugins/j/jump-around/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | jigoshop-grouped-plugins-pro | [View logs](/logs/plugins/j/jigoshop-grouped-plugins-pro/error.json) |
+| Unknown query type: DESC. | asyncify-boot | jigoshop-grouped-plugins-pro | [View logs](/logs/plugins/j/jigoshop-grouped-plugins-pro/error.json) |
+| Unknown query type: DESC. | jspi-boot | jigoshop-grouped-plugins-pro | [View logs](/logs/plugins/j/jigoshop-grouped-plugins-pro/error.json) |
 | Unknown operation: CHARACTER SET. | ast-sqlite-boot | jenus-lightweight-social-share | [View logs](/logs/plugins/j/jenus-lightweight-social-share/error.json) |
 | Unknown operation: CHARACTER SET. | asyncify-boot | jenus-lightweight-social-share | [View logs](/logs/plugins/j/jenus-lightweight-social-share/error.json) |
 | Unknown operation: CHARACTER SET. | jspi-boot | jenus-lightweight-social-share | [View logs](/logs/plugins/j/jenus-lightweight-social-share/error.json) |
 | Unknown operation: CHARACTER SET. | ast-sqlite-boot | jigoshop-ecommerce | [View logs](/logs/plugins/j/jigoshop-ecommerce/error.json) |
 | Unknown operation: CHARACTER SET. | asyncify-boot | jigoshop-ecommerce | [View logs](/logs/plugins/j/jigoshop-ecommerce/error.json) |
 | Unknown operation: CHARACTER SET. | jspi-boot | jigoshop-ecommerce | [View logs](/logs/plugins/j/jigoshop-ecommerce/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | jr-news | [View logs](/logs/plugins/j/jr-news/error.json) |
+| Unknown query type: DESC. | asyncify-boot | jr-news | [View logs](/logs/plugins/j/jr-news/error.json) |
+| Unknown query type: DESC. | jspi-boot | jr-news | [View logs](/logs/plugins/j/jr-news/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | jr-embed | [View logs](/logs/plugins/j/jr-embed/error.json) |
+| Unknown query type: DESC. | asyncify-boot | jr-embed | [View logs](/logs/plugins/j/jr-embed/error.json) |
+| Unknown query type: DESC. | jspi-boot | jr-embed | [View logs](/logs/plugins/j/jr-embed/error.json) |
 | Unknown operation: CHARACTER SET. | ast-sqlite-boot | jr-filter | [View logs](/logs/plugins/j/jr-filter/error.json) |
 | Unknown operation: CHARACTER SET. | asyncify-boot | jr-filter | [View logs](/logs/plugins/j/jr-filter/error.json) |
 | Unknown operation: CHARACTER SET. | jspi-boot | jr-filter | [View logs](/logs/plugins/j/jr-filter/error.json) |
 | Unknown operation: CHARACTER SET. | ast-sqlite-boot | jet-member-could | [View logs](/logs/plugins/j/jet-member-could/error.json) |
 | Unknown operation: CHARACTER SET. | asyncify-boot | jet-member-could | [View logs](/logs/plugins/j/jet-member-could/error.json) |
 | Unknown operation: CHARACTER SET. | jspi-boot | jet-member-could | [View logs](/logs/plugins/j/jet-member-could/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | join-the-event | [View logs](/logs/plugins/j/join-the-event/error.json) |
+| Unknown query type: DESC. | asyncify-boot | join-the-event | [View logs](/logs/plugins/j/join-the-event/error.json) |
+| Unknown query type: DESC. | jspi-boot | join-the-event | [View logs](/logs/plugins/j/join-the-event/error.json) |
 | Unknown operation: CHARACTER SET. | ast-sqlite-boot | joomconnect-quick-ticket-lite-for-connectwise | [View logs](/logs/plugins/j/joomconnect-quick-ticket-lite-for-connectwise/error.json) |
 | Unknown operation: CHARACTER SET. | asyncify-boot | joomconnect-quick-ticket-lite-for-connectwise | [View logs](/logs/plugins/j/joomconnect-quick-ticket-lite-for-connectwise/error.json) |
 | Unknown operation: CHARACTER SET. | jspi-boot | joomconnect-quick-ticket-lite-for-connectwise | [View logs](/logs/plugins/j/joomconnect-quick-ticket-lite-for-connectwise/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | jr-nofollow | [View logs](/logs/plugins/j/jr-nofollow/error.json) |
+| Unknown query type: DESC. | asyncify-boot | jr-nofollow | [View logs](/logs/plugins/j/jr-nofollow/error.json) |
+| Unknown query type: DESC. | jspi-boot | jr-nofollow | [View logs](/logs/plugins/j/jr-nofollow/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | jetpush-for-woocommerce | [View logs](/logs/plugins/j/jetpush-for-woocommerce/error.json) |
+| Unknown query type: DESC. | asyncify-boot | jetpush-for-woocommerce | [View logs](/logs/plugins/j/jetpush-for-woocommerce/error.json) |
+| Unknown query type: DESC. | jspi-boot | jetpush-for-woocommerce | [View logs](/logs/plugins/j/jetpush-for-woocommerce/error.json) |
 | Unknown operation: CHARACTER SET. | ast-sqlite-boot | jamies-wp-arrow-newsletter-subscriber | [View logs](/logs/plugins/j/jamies-wp-arrow-newsletter-subscriber/error.json) |
 | Unknown operation: CHARACTER SET. | asyncify-boot | jamies-wp-arrow-newsletter-subscriber | [View logs](/logs/plugins/j/jamies-wp-arrow-newsletter-subscriber/error.json) |
 | Unknown operation: CHARACTER SET. | jspi-boot | jamies-wp-arrow-newsletter-subscriber | [View logs](/logs/plugins/j/jamies-wp-arrow-newsletter-subscriber/error.json) |
@@ -306,12 +371,144 @@
 | Unknown create type: INDEX. | ast-sqlite-boot | membrane | [View logs](/logs/plugins/m/membrane/error.json) |
 | Unknown create type: INDEX. | asyncify-boot | membrane | [View logs](/logs/plugins/m/membrane/error.json) |
 | Unknown create type: INDEX. | jspi-boot | membrane | [View logs](/logs/plugins/m/membrane/error.json) |
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 38
+    [query] => SHOW TABLES LIKE 'wp_asl_polling_items
+    [str] => 
+(
+)
+. | ast-sqlite-boot | post-content-slider | [View logs](/logs/plugins/p/post-content-slider/error.json) |
+. | asyncify-boot | post-content-slider | [View logs](/logs/plugins/p/post-content-slider/error.json) |
+. | jspi-boot | post-content-slider | [View logs](/logs/plugins/p/post-content-slider/error.json) |
+| Array
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 38
+    [query] => SHOW TABLES LIKE 'wp_asl_polling_items
+    [str] => 
+(
+)
+. | ast-sqlite-boot | petfinder-search-rescue | [View logs](/logs/plugins/p/petfinder-search-rescue/error.json) |
+. | asyncify-boot | petfinder-search-rescue | [View logs](/logs/plugins/p/petfinder-search-rescue/error.json) |
+. | jspi-boot | petfinder-search-rescue | [View logs](/logs/plugins/p/petfinder-search-rescue/error.json) |
+| Array
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 38
+    [query] => SHOW TABLES LIKE 'wp_asl_polling_items
+    [str] => 
+(
+)
+. | ast-sqlite-boot | pro-team | [View logs](/logs/plugins/p/pro-team/error.json) |
+. | asyncify-boot | pro-team | [View logs](/logs/plugins/p/pro-team/error.json) |
+. | jspi-boot | pro-team | [View logs](/logs/plugins/p/pro-team/error.json) |
+| Array
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 38
+    [query] => SHOW TABLES LIKE 'wp_asl_polling_items
+    [str] => 
+(
+)
+. | ast-sqlite-boot | platformly-for-woocommerce | [View logs](/logs/plugins/p/platformly-for-woocommerce/error.json) |
+. | asyncify-boot | platformly-for-woocommerce | [View logs](/logs/plugins/p/platformly-for-woocommerce/error.json) |
+. | jspi-boot | platformly-for-woocommerce | [View logs](/logs/plugins/p/platformly-for-woocommerce/error.json) |
+| Array
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 38
+    [query] => SHOW TABLES LIKE 'wp_asl_polling_items
+    [str] => 
+(
+)
+. | ast-sqlite-boot | payon-paymentgateway | [View logs](/logs/plugins/p/payon-paymentgateway/error.json) |
+. | asyncify-boot | payon-paymentgateway | [View logs](/logs/plugins/p/payon-paymentgateway/error.json) |
+. | jspi-boot | payon-paymentgateway | [View logs](/logs/plugins/p/payon-paymentgateway/error.json) |
+| Array
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 38
+    [query] => SHOW TABLES LIKE 'wp_asl_polling_items
+    [str] => 
+(
+)
+. | ast-sqlite-boot | projekktor-html5-video-extensions-and-shortcodes | [View logs](/logs/plugins/p/projekktor-html5-video-extensions-and-shortcodes/error.json) |
+. | asyncify-boot | projekktor-html5-video-extensions-and-shortcodes | [View logs](/logs/plugins/p/projekktor-html5-video-extensions-and-shortcodes/error.json) |
+. | jspi-boot | projekktor-html5-video-extensions-and-shortcodes | [View logs](/logs/plugins/p/projekktor-html5-video-extensions-and-shortcodes/error.json) |
+| Array
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 38
+    [query] => SHOW TABLES LIKE 'wp_asl_polling_items
+    [str] => 
+(
+)
+. | ast-sqlite-boot | pictpress | [View logs](/logs/plugins/p/pictpress/error.json) |
+. | asyncify-boot | pictpress | [View logs](/logs/plugins/p/pictpress/error.json) |
+. | jspi-boot | pictpress | [View logs](/logs/plugins/p/pictpress/error.json) |
+| Array
 | Unknown operation: ALTER. | ast-sqlite-boot | post-gallery-widget | [View logs](/logs/plugins/p/post-gallery-widget/error.json) |
 | Unknown operation: ALTER. | asyncify-boot | post-gallery-widget | [View logs](/logs/plugins/p/post-gallery-widget/error.json) |
 | Unknown operation: ALTER. | jspi-boot | post-gallery-widget | [View logs](/logs/plugins/p/post-gallery-widget/error.json) |
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 38
+    [query] => SHOW TABLES LIKE 'wp_asl_polling_items
+    [str] => 
+(
+)
+. | ast-sqlite-boot | pro-recent-post-widget | [View logs](/logs/plugins/p/pro-recent-post-widget/error.json) |
+. | asyncify-boot | pro-recent-post-widget | [View logs](/logs/plugins/p/pro-recent-post-widget/error.json) |
+. | jspi-boot | pro-recent-post-widget | [View logs](/logs/plugins/p/pro-recent-post-widget/error.json) |
+| Array
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 38
+    [query] => SHOW TABLES LIKE 'wp_asl_polling_items
+    [str] => 
+(
+)
+. | ast-sqlite-boot | page-excerpt-widget | [View logs](/logs/plugins/p/page-excerpt-widget/error.json) |
+. | asyncify-boot | page-excerpt-widget | [View logs](/logs/plugins/p/page-excerpt-widget/error.json) |
+. | jspi-boot | page-excerpt-widget | [View logs](/logs/plugins/p/page-excerpt-widget/error.json) |
+| Array
 | Unknown operation: ALTER. | ast-sqlite-boot | post-format-permalink | [View logs](/logs/plugins/p/post-format-permalink/error.json) |
 | Unknown operation: ALTER. | asyncify-boot | post-format-permalink | [View logs](/logs/plugins/p/post-format-permalink/error.json) |
 | Unknown operation: ALTER. | jspi-boot | post-format-permalink | [View logs](/logs/plugins/p/post-format-permalink/error.json) |
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 38
+    [query] => SHOW TABLES LIKE 'wp_asl_polling_items
+    [str] => 
+(
+)
+. | ast-sqlite-boot | pbsocialnetworks | [View logs](/logs/plugins/p/pbsocialnetworks/error.json) |
+. | asyncify-boot | pbsocialnetworks | [View logs](/logs/plugins/p/pbsocialnetworks/error.json) |
+. | jspi-boot | pbsocialnetworks | [View logs](/logs/plugins/p/pbsocialnetworks/error.json) |
+| Array
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 38
+    [query] => SHOW TABLES LIKE 'wp_asl_polling_items
+    [str] => 
+(
+)
+. | ast-sqlite-boot | page-speed-optimizer | [View logs](/logs/plugins/p/page-speed-optimizer/error.json) |
+. | asyncify-boot | page-speed-optimizer | [View logs](/logs/plugins/p/page-speed-optimizer/error.json) |
+. | jspi-boot | page-speed-optimizer | [View logs](/logs/plugins/p/page-speed-optimizer/error.json) |
+| Array
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 38
+    [query] => SHOW TABLES LIKE 'wp_asl_polling_items
+    [str] => 
+(
+)
+. | ast-sqlite-boot | post-feedback | [View logs](/logs/plugins/p/post-feedback/error.json) |
+. | asyncify-boot | post-feedback | [View logs](/logs/plugins/p/post-feedback/error.json) |
+. | jspi-boot | post-feedback | [View logs](/logs/plugins/p/post-feedback/error.json) |
+| Array
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | rate-this-site | [View logs](/logs/plugins/r/rate-this-site/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | rate-this-site | [View logs](/logs/plugins/r/rate-this-site/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | rate-this-site | [View logs](/logs/plugins/r/rate-this-site/error.json) |
@@ -345,11 +542,35 @@
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | readme-detonator | [View logs](/logs/plugins/r/readme-detonator/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | readme-detonator | [View logs](/logs/plugins/r/readme-detonator/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | readme-detonator | [View logs](/logs/plugins/r/readme-detonator/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | thanh-toan-chuyen-khoan | [View logs](/logs/plugins/t/thanh-toan-chuyen-khoan/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | thanh-toan-chuyen-khoan | [View logs](/logs/plugins/t/thanh-toan-chuyen-khoan/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | thanh-toan-chuyen-khoan | [View logs](/logs/plugins/t/thanh-toan-chuyen-khoan/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | ast-sqlite-boot | thanh-toan-chuyen-khoan | [View logs](/logs/plugins/t/thanh-toan-chuyen-khoan/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | thanh-toan-chuyen-khoan | [View logs](/logs/plugins/t/thanh-toan-chuyen-khoan/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | thanh-toan-chuyen-khoan | [View logs](/logs/plugins/t/thanh-toan-chuyen-khoan/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | ttc-wordpress-security-plugin | [View logs](/logs/plugins/t/ttc-wordpress-security-plugin/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | ttc-wordpress-security-plugin | [View logs](/logs/plugins/t/ttc-wordpress-security-plugin/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | ttc-wordpress-security-plugin | [View logs](/logs/plugins/t/ttc-wordpress-security-plugin/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | tambar | [View logs](/logs/plugins/t/tambar/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | tambar | [View logs](/logs/plugins/t/tambar/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | triptrus-search-widget | [View logs](/logs/plugins/t/triptrus-search-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | triptrus-search-widget | [View logs](/logs/plugins/t/triptrus-search-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | triptrus-search-widget | [View logs](/logs/plugins/t/triptrus-search-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | ast-sqlite-boot | triptrus-search-widget | [View logs](/logs/plugins/t/triptrus-search-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | triptrus-search-widget | [View logs](/logs/plugins/t/triptrus-search-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | triptrus-search-widget | [View logs](/logs/plugins/t/triptrus-search-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | translate-with-google-and-bing | [View logs](/logs/plugins/t/translate-with-google-and-bing/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | translate-with-google-and-bing | [View logs](/logs/plugins/t/translate-with-google-and-bing/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | translate-with-google-and-bing | [View logs](/logs/plugins/t/translate-with-google-and-bing/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | ast-sqlite-boot | translate-with-google-and-bing | [View logs](/logs/plugins/t/translate-with-google-and-bing/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | translate-with-google-and-bing | [View logs](/logs/plugins/t/translate-with-google-and-bing/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | translate-with-google-and-bing | [View logs](/logs/plugins/t/translate-with-google-and-bing/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | testimonial-master | [View logs](/logs/plugins/t/testimonial-master/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | testimonial-master | [View logs](/logs/plugins/t/testimonial-master/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | testimonial-master | [View logs](/logs/plugins/t/testimonial-master/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | ast-sqlite-boot | testimonial-master | [View logs](/logs/plugins/t/testimonial-master/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | testimonial-master | [View logs](/logs/plugins/t/testimonial-master/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | testimonial-master | [View logs](/logs/plugins/t/testimonial-master/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | terror-alert-level-widget | [View logs](/logs/plugins/t/terror-alert-level-widget/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | terror-alert-level-widget | [View logs](/logs/plugins/t/terror-alert-level-widget/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | terror-alert-level-widget | [View logs](/logs/plugins/t/terror-alert-level-widget/error.json) |
@@ -362,18 +583,56 @@
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | trumpcha | [View logs](/logs/plugins/t/trumpcha/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | trumpcha | [View logs](/logs/plugins/t/trumpcha/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | trumpcha | [View logs](/logs/plugins/t/trumpcha/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | terms-and-conditions-per-product | [View logs](/logs/plugins/t/terms-and-conditions-per-product/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | terms-and-conditions-per-product | [View logs](/logs/plugins/t/terms-and-conditions-per-product/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | terms-and-conditions-per-product | [View logs](/logs/plugins/t/terms-and-conditions-per-product/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | terms-and-conditions-per-product | [View logs](/logs/plugins/t/terms-and-conditions-per-product/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | totosgr-xml-feed-for-woocommerce | [View logs](/logs/plugins/t/totosgr-xml-feed-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | totosgr-xml-feed-for-woocommerce | [View logs](/logs/plugins/t/totosgr-xml-feed-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | totosgr-xml-feed-for-woocommerce | [View logs](/logs/plugins/t/totosgr-xml-feed-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | totosgr-xml-feed-for-woocommerce | [View logs](/logs/plugins/t/totosgr-xml-feed-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | typeahead | [View logs](/logs/plugins/t/typeahead/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | typeahead | [View logs](/logs/plugins/t/typeahead/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | typeahead | [View logs](/logs/plugins/t/typeahead/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | ast-sqlite-boot | typeahead | [View logs](/logs/plugins/t/typeahead/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | typeahead | [View logs](/logs/plugins/t/typeahead/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | typeahead | [View logs](/logs/plugins/t/typeahead/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | templates-for-posts | [View logs](/logs/plugins/t/templates-for-posts/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | templates-for-posts | [View logs](/logs/plugins/t/templates-for-posts/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | templates-for-posts | [View logs](/logs/plugins/t/templates-for-posts/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | ast-sqlite-boot | templates-for-posts | [View logs](/logs/plugins/t/templates-for-posts/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | templates-for-posts | [View logs](/logs/plugins/t/templates-for-posts/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | templates-for-posts | [View logs](/logs/plugins/t/templates-for-posts/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | trombiz | [View logs](/logs/plugins/t/trombiz/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | trombiz | [View logs](/logs/plugins/t/trombiz/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | trombiz | [View logs](/logs/plugins/t/trombiz/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | tentblogger-simple-top-posts | [View logs](/logs/plugins/t/tentblogger-simple-top-posts/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | tentblogger-simple-top-posts | [View logs](/logs/plugins/t/tentblogger-simple-top-posts/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | tentblogger-simple-top-posts | [View logs](/logs/plugins/t/tentblogger-simple-top-posts/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | tokenico-cryptocurrency-token-launchpad-presale-ico-ido-airdrop | [View logs](/logs/plugins/t/tokenico-cryptocurrency-token-launchpad-presale-ico-ido-airdrop/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | tokenico-cryptocurrency-token-launchpad-presale-ico-ido-airdrop | [View logs](/logs/plugins/t/tokenico-cryptocurrency-token-launchpad-presale-ico-ido-airdrop/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | tokenico-cryptocurrency-token-launchpad-presale-ico-ido-airdrop | [View logs](/logs/plugins/t/tokenico-cryptocurrency-token-launchpad-presale-ico-ido-airdrop/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | ast-sqlite-boot | tokenico-cryptocurrency-token-launchpad-presale-ico-ido-airdrop | [View logs](/logs/plugins/t/tokenico-cryptocurrency-token-launchpad-presale-ico-ido-airdrop/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | tokenico-cryptocurrency-token-launchpad-presale-ico-ido-airdrop | [View logs](/logs/plugins/t/tokenico-cryptocurrency-token-launchpad-presale-ico-ido-airdrop/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | tokenico-cryptocurrency-token-launchpad-presale-ico-ido-airdrop | [View logs](/logs/plugins/t/tokenico-cryptocurrency-token-launchpad-presale-ico-ido-airdrop/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | teledirwidgets | [View logs](/logs/plugins/t/teledirwidgets/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | teledirwidgets | [View logs](/logs/plugins/t/teledirwidgets/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | teledirwidgets | [View logs](/logs/plugins/t/teledirwidgets/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | the-world | [View logs](/logs/plugins/t/the-world/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | the-world | [View logs](/logs/plugins/t/the-world/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | the-world | [View logs](/logs/plugins/t/the-world/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | thethe-captcha | [View logs](/logs/plugins/t/thethe-captcha/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | thethe-captcha | [View logs](/logs/plugins/t/thethe-captcha/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | thethe-captcha | [View logs](/logs/plugins/t/thethe-captcha/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | ast-sqlite-boot | thethe-captcha | [View logs](/logs/plugins/t/thethe-captcha/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | thethe-captcha | [View logs](/logs/plugins/t/thethe-captcha/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | thethe-captcha | [View logs](/logs/plugins/t/thethe-captcha/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | troll-hunter | [View logs](/logs/plugins/t/troll-hunter/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | troll-hunter | [View logs](/logs/plugins/t/troll-hunter/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | troll-hunter | [View logs](/logs/plugins/t/troll-hunter/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | ast-sqlite-boot | troll-hunter | [View logs](/logs/plugins/t/troll-hunter/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | troll-hunter | [View logs](/logs/plugins/t/troll-hunter/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | troll-hunter | [View logs](/logs/plugins/t/troll-hunter/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | twitpic | [View logs](/logs/plugins/t/twitpic/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | twitpic | [View logs](/logs/plugins/t/twitpic/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | twitpic | [View logs](/logs/plugins/t/twitpic/error.json) |
