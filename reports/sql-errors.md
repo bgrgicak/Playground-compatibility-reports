@@ -875,6 +875,56 @@
 | Unknown create type: INDEX. | ast-sqlite-boot | membrane | [View logs](/logs/plugins/m/membrane/error.json) |
 | Unknown create type: INDEX. | asyncify-boot | membrane | [View logs](/logs/plugins/m/membrane/error.json) |
 | Unknown create type: INDEX. | jspi-boot | membrane | [View logs](/logs/plugins/m/membrane/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | nextcellent-gallery-nextgen-legacy | [View logs](/logs/plugins/n/nextcellent-gallery-nextgen-legacy/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | nextcellent-gallery-nextgen-legacy | [View logs](/logs/plugins/n/nextcellent-gallery-nextgen-legacy/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | nextcellent-gallery-nextgen-legacy | [View logs](/logs/plugins/n/nextcellent-gallery-nextgen-legacy/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | nextcellent-gallery-nextgen-legacy | [View logs](/logs/plugins/n/nextcellent-gallery-nextgen-legacy/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | nextcellent-gallery-nextgen-legacy | [View logs](/logs/plugins/n/nextcellent-gallery-nextgen-legacy/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | nextcellent-gallery-nextgen-legacy | [View logs](/logs/plugins/n/nextcellent-gallery-nextgen-legacy/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | nanoplazo-payment-gateway-for-woocommerce | [View logs](/logs/plugins/n/nanoplazo-payment-gateway-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | nanoplazo-payment-gateway-for-woocommerce | [View logs](/logs/plugins/n/nanoplazo-payment-gateway-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | nanoplazo-payment-gateway-for-woocommerce | [View logs](/logs/plugins/n/nanoplazo-payment-gateway-for-woocommerce/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | nanoplazo-payment-gateway-for-woocommerce | [View logs](/logs/plugins/n/nanoplazo-payment-gateway-for-woocommerce/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | nanoplazo-payment-gateway-for-woocommerce | [View logs](/logs/plugins/n/nanoplazo-payment-gateway-for-woocommerce/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | nanoplazo-payment-gateway-for-woocommerce | [View logs](/logs/plugins/n/nanoplazo-payment-gateway-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | nextgen-gallery-image-optimizer | [View logs](/logs/plugins/n/nextgen-gallery-image-optimizer/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | nextgen-gallery-image-optimizer | [View logs](/logs/plugins/n/nextgen-gallery-image-optimizer/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | nextgen-gallery-image-optimizer | [View logs](/logs/plugins/n/nextgen-gallery-image-optimizer/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | nextgen-gallery-image-optimizer | [View logs](/logs/plugins/n/nextgen-gallery-image-optimizer/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | nextgen-gallery-image-optimizer | [View logs](/logs/plugins/n/nextgen-gallery-image-optimizer/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | nextgen-gallery-image-optimizer | [View logs](/logs/plugins/n/nextgen-gallery-image-optimizer/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | new-floating-cart-for-woocommerce | [View logs](/logs/plugins/n/new-floating-cart-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | new-floating-cart-for-woocommerce | [View logs](/logs/plugins/n/new-floating-cart-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | new-floating-cart-for-woocommerce | [View logs](/logs/plugins/n/new-floating-cart-for-woocommerce/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | new-floating-cart-for-woocommerce | [View logs](/logs/plugins/n/new-floating-cart-for-woocommerce/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | new-floating-cart-for-woocommerce | [View logs](/logs/plugins/n/new-floating-cart-for-woocommerce/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | new-floating-cart-for-woocommerce | [View logs](/logs/plugins/n/new-floating-cart-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | nearby-flickr-photos | [View logs](/logs/plugins/n/nearby-flickr-photos/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | nearby-flickr-photos | [View logs](/logs/plugins/n/nearby-flickr-photos/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | nearby-flickr-photos | [View logs](/logs/plugins/n/nearby-flickr-photos/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | nearby-flickr-photos | [View logs](/logs/plugins/n/nearby-flickr-photos/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | nearby-flickr-photos | [View logs](/logs/plugins/n/nearby-flickr-photos/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | nearby-flickr-photos | [View logs](/logs/plugins/n/nearby-flickr-photos/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | nuwire-paper-boy | [View logs](/logs/plugins/n/nuwire-paper-boy/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | nuwire-paper-boy | [View logs](/logs/plugins/n/nuwire-paper-boy/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | nuwire-paper-boy | [View logs](/logs/plugins/n/nuwire-paper-boy/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | nuwire-paper-boy | [View logs](/logs/plugins/n/nuwire-paper-boy/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | nuwire-paper-boy | [View logs](/logs/plugins/n/nuwire-paper-boy/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | nuwire-paper-boy | [View logs](/logs/plugins/n/nuwire-paper-boy/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | neugs-intelligent-tagger | [View logs](/logs/plugins/n/neugs-intelligent-tagger/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | neugs-intelligent-tagger | [View logs](/logs/plugins/n/neugs-intelligent-tagger/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | neugs-intelligent-tagger | [View logs](/logs/plugins/n/neugs-intelligent-tagger/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | neugs-intelligent-tagger | [View logs](/logs/plugins/n/neugs-intelligent-tagger/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | neugs-intelligent-tagger | [View logs](/logs/plugins/n/neugs-intelligent-tagger/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | neugs-intelligent-tagger | [View logs](/logs/plugins/n/neugs-intelligent-tagger/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | nex-forms-express-wp-form-builder | [View logs](/logs/plugins/n/nex-forms-express-wp-form-builder/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | nex-forms-express-wp-form-builder | [View logs](/logs/plugins/n/nex-forms-express-wp-form-builder/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | nextgen-gallery-powertags | [View logs](/logs/plugins/n/nextgen-gallery-powertags/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | nextgen-gallery-powertags | [View logs](/logs/plugins/n/nextgen-gallery-powertags/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | nextgen-gallery-powertags | [View logs](/logs/plugins/n/nextgen-gallery-powertags/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | nextgen-gallery-powertags | [View logs](/logs/plugins/n/nextgen-gallery-powertags/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | nextgen-gallery-powertags | [View logs](/logs/plugins/n/nextgen-gallery-powertags/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | nextgen-gallery-powertags | [View logs](/logs/plugins/n/nextgen-gallery-powertags/error.json) |
     [code] => 0
     [message] => Ending quote ' was expected.
     [position] => 38
