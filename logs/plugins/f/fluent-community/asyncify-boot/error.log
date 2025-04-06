@@ -505,39 +505,68 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #18 {main}</pre>
  for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_as-post-store-dependencies-met', 'yes', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Action_Scheduler\Migration\Controller->maybe_hook_migration, Action_Scheduler\Migration\Controller->allow_migration, ActionScheduler_DataController::dependencies_met, apply_filters('action_scheduler_migration_dependencies_met'), WP_Hook->apply_filters, ActionScheduler_wpPostStore->migration_dependencies_met, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
 [06-Apr-2025 23:45:25 UTC] PHP Parse error:  syntax error, unexpected '=' in /wordpress/wp-content/plugins/fluent-community/vendor/wpfluent/framework/src/WPFluent/Http/Response/Response.php on line 314
+[06-Apr-2025 23:45:28 UTC] PHP Parse error:  syntax error, unexpected '=' in /wordpress/wp-content/plugins/fluent-community/vendor/wpfluent/framework/src/WPFluent/Http/Response/Response.php on line 314
+[06-Apr-2025 23:45:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fluentchatbasicActivatedTime', '1743983135', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fluentchatbasicActivatedTime' , '1743983135' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('fluentchatbasic...', 1743983135, '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'fluentchatbasic...', 1743983135)
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'fluentchatbasic...', 1743983135)
+#7 /wordpress/wp-content/plugins/fluentchat-basic/functions.php(376): update_site_option('fluentchatbasic...', 1743983135)
+#8 /wordpress/wp-includes/class-wp-hook.php(324): FluentChatBasic_ActivatePlugin(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fluent...', false)
+#12 /internal/eval.php(20): activate_plugin('fluentchat-basi...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fluentchatbasicActivatedTime', '1743983135', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_fluentchat-basic/functions.php'), WP_Hook->do_action, WP_Hook->apply_filters, FluentChatBasic_ActivatePlugin, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-Apr-2025 23:45:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fluentchatbasicSettings', 'a:36:{s:15:\"pollingInterval\";i:3;s:10:\"showWidget\";b:1;s:20:\"showWidgetEverywhere\";b:1;s:15:\"showWidgetPages\";a:0:{}s:15:\"showWidgetPosts\";a:0:{}s:14:\"disableOffline\";b:0;s:12:\"allowUploads\";b:1;s:16:\"allowUploadsSize\";i:5;s:15:\"allowScreenshot\";b:1;s:13:\"allowLocation\";b:1;s:7:\"sendSMS\";i:1;s:14:\"sendSMSNumbers\";a:1:{i:0;a:2:{s:6:\"number\";s:10:\"9999999999\";s:7:\"carrier\";s:17:\"[number]@T Mobile\";}}s:7:\"welcome\";i:1;s:19:\"welcomeMessageDelay\";i:2;s:15:\"welcomeOperator\";s:4:\"Mark\";s:8:\"askEmail\";i:1;s:15:\"askEmailAnimate\";s:5:\"cloud\";s:15:\"startChatHeader\";s:17:\"Let\'s get started\";s:17:\"askEmailNameLabel\";s:4:\"Name\";s:18:\"askEmailEmailLabel\";s:5:\"Email\";s:15:\"startChatFooter\";s:20:\"press Enter to start\";s:11:\"contactForm\";i:0;s:18:\"contactFormAnimate\";s:5:\"cloud\";s:17:\"contactFormHeader\";s:67:\"All our operators are currently offline. Please leave us a message.\";s:20:\"contactFormNameLabel\";s:4:\"Name\";s:21:\"contactFormEmailLabel\";s:5:\"Email\";s:23:\"contactFormMessageLabel\";s:7:\"Message\";s:15:\"contactFormSent\";s:60:\"Thanks!
 
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"fluent-community"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
-        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
-        at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
-        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
-        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
-        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
-        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-      response: PHPResponse {
-        httpStatusCode: 500,
-        headers: {
-          'x-powered-by': [ 'PHP/7.3.33' ],
-          'content-type': [ 'text/html; charset=UTF-8' ]
-        },
-        bytes: Uint8Array(0) [],
-        exitCode: 255,
-        errors: ''
-      },
-      source: 'request'
-    }
-  }
-}
+We have your inquiry. We will get back to you asap.\";s:18:\"contactFormSubject\";s:39:\"You have a new chat inquiry from [Name]\";s:15:\"contactFormBody\";s:70:\"New Live Chat Inquiry!
 
-Node.js v20.15.0
+Name: [Name]
+Email: [Email]
+Message: [Message]\";s:9:\"allowLogs\";i:1;s:14:\"allowLogsLabel\";s:20:\"Get Email Transcript\";s:16:\"allowLogsSubject\";s:25:\"Your Live Chat Transcript\";s:11:\"askFeedback\";i:1;s:18:\"askFeedbackMessage\";s:25:\"Thanks for your feedback!\";s:14:\"chatEndMessage\";s:74:\"Chat Ended.
+
+For further queries, please email us at:
+
+admin@example.com\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fluentchatbasicSettings' , 'a:36:{s:15:&quot;pollingInterval&quot;;i:3;s:10:&quot;showWidget&quot;;b:1;s:20:&quot;showWidgetEverywhere&quot;;b:1;s:15:&quot;showWidgetPages&quot;;a:0:{}s:15:&quot;showWidgetPosts&quot;;a:0:{}s:14:&quot;disableOffline&quot;;b:0;s:12:&quot;allowUploads&quot;;b:1;s:16:&quot;allowUploadsSize&quot;;i:5;s:15:&quot;allowScreenshot&quot;;b:1;s:13:&quot;allowLocation&quot;;b:1;s:7:&quot;sendSMS&quot;;i:1;s:14:&quot;sendSMSNumbers&quot;;a:1:{i:0;a:2:{s:6:&quot;number&quot;;s:10:&quot;9999999999&quot;;s:7:&quot;carrier&quot;;s:17:&quot;[number]@T Mobile&quot;;}}s:7:&quot;welcome&quot;;i:1;s:19:&quot;welcomeMessageDelay&quot;;i:2;s:15:&quot;welcomeOperator&quot;;s:4:&quot;Mark&quot;;s:8:&quot;askEmail&quot;;i:1;s:15:&quot;askEmailAnimate&quot;;s:5:&quot;cloud&quot;;s:15:&quot;startChatHeader&quot;;s:17:&quot;Let''s get started&quot;;s:17:&quot;askEmailNameLabel&quot;;s:4:&quot;Name&quot;;s:18:&quot;askEmailEmailLabel&quot;;s:5:&quot;Email&quot;;s:15:&quot;startChatFooter&quot;;s:20:&quot;press Enter to start&quot;;s:11:&quot;contactForm&quot;;i:0;s:18:&quot;contactFormAnimate&quot;;s:5:&quot;cloud&quot;;s:17:&quot;contactFormHeader&quot;;s:67:&quot;All our operators are currently offline. Please leave us a message.&quot;;s:20:&quot;contactFormNameLabel&quot;;s:4:&quot;Name&quot;;s:21:&quot;contactFormEmailLabel&quot;;s:5:&quot;Email&quot;;s:23:&quot;contactFormMessageLabel&quot;;s:7:&quot;Messag
