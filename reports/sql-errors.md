@@ -723,30 +723,93 @@
 | Unknown query type: RENAME. | ast-sqlite-boot | guestonline | [View logs](/logs/plugins/g/guestonline/error.json) |
 | Unknown query type: RENAME. | asyncify-boot | guestonline | [View logs](/logs/plugins/g/guestonline/error.json) |
 | Unknown query type: RENAME. | jspi-boot | guestonline | [View logs](/logs/plugins/g/guestonline/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | icharts | [View logs](/logs/plugins/i/icharts/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | icharts | [View logs](/logs/plugins/i/icharts/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | icharts | [View logs](/logs/plugins/i/icharts/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | ast-sqlite-boot | icharts | [View logs](/logs/plugins/i/icharts/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | asyncify-boot | icharts | [View logs](/logs/plugins/i/icharts/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | jspi-boot | icharts | [View logs](/logs/plugins/i/icharts/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | ast-sqlite-boot | ininbox-email-marketing-sign-up-forms | [View logs](/logs/plugins/i/ininbox-email-marketing-sign-up-forms/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | asyncify-boot | ininbox-email-marketing-sign-up-forms | [View logs](/logs/plugins/i/ininbox-email-marketing-sign-up-forms/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | jspi-boot | ininbox-email-marketing-sign-up-forms | [View logs](/logs/plugins/i/ininbox-email-marketing-sign-up-forms/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | ast-sqlite-boot | iremotewp | [View logs](/logs/plugins/i/iremotewp/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | asyncify-boot | iremotewp | [View logs](/logs/plugins/i/iremotewp/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | jspi-boot | iremotewp | [View logs](/logs/plugins/i/iremotewp/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | intellipush | [View logs](/logs/plugins/i/intellipush/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | intellipush | [View logs](/logs/plugins/i/intellipush/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | intellipush | [View logs](/logs/plugins/i/intellipush/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | ast-sqlite-boot | intellipush | [View logs](/logs/plugins/i/intellipush/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | asyncify-boot | intellipush | [View logs](/logs/plugins/i/intellipush/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | jspi-boot | intellipush | [View logs](/logs/plugins/i/intellipush/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | ast-sqlite-boot | immerstat | [View logs](/logs/plugins/i/immerstat/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | asyncify-boot | immerstat | [View logs](/logs/plugins/i/immerstat/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | jspi-boot | immerstat | [View logs](/logs/plugins/i/immerstat/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | instagrabber | [View logs](/logs/plugins/i/instagrabber/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | instagrabber | [View logs](/logs/plugins/i/instagrabber/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | ast-sqlite-boot | instagrabber | [View logs](/logs/plugins/i/instagrabber/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | asyncify-boot | instagrabber | [View logs](/logs/plugins/i/instagrabber/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | jspi-boot | instagrabber | [View logs](/logs/plugins/i/instagrabber/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | imaxel-pw2p | [View logs](/logs/plugins/i/imaxel-pw2p/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | imaxel-pw2p | [View logs](/logs/plugins/i/imaxel-pw2p/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | imaxel-pw2p | [View logs](/logs/plugins/i/imaxel-pw2p/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | ast-sqlite-boot | imaxel-pw2p | [View logs](/logs/plugins/i/imaxel-pw2p/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | asyncify-boot | imaxel-pw2p | [View logs](/logs/plugins/i/imaxel-pw2p/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | jspi-boot | imaxel-pw2p | [View logs](/logs/plugins/i/imaxel-pw2p/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | ast-sqlite-boot | instagram-zoom-widgets | [View logs](/logs/plugins/i/instagram-zoom-widgets/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | asyncify-boot | instagram-zoom-widgets | [View logs](/logs/plugins/i/instagram-zoom-widgets/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | jspi-boot | instagram-zoom-widgets | [View logs](/logs/plugins/i/instagram-zoom-widgets/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | instapress | [View logs](/logs/plugins/i/instapress/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | instapress | [View logs](/logs/plugins/i/instapress/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | instapress | [View logs](/logs/plugins/i/instapress/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | ast-sqlite-boot | instapress | [View logs](/logs/plugins/i/instapress/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | asyncify-boot | instapress | [View logs](/logs/plugins/i/instapress/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | jspi-boot | instapress | [View logs](/logs/plugins/i/instapress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | ast-sqlite-boot | image-upload | [View logs](/logs/plugins/i/image-upload/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | asyncify-boot | image-upload | [View logs](/logs/plugins/i/image-upload/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | jspi-boot | image-upload | [View logs](/logs/plugins/i/image-upload/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | international-telephone-input-with-flags-and-dial-codes | [View logs](/logs/plugins/i/international-telephone-input-with-flags-and-dial-codes/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | international-telephone-input-with-flags-and-dial-codes | [View logs](/logs/plugins/i/international-telephone-input-with-flags-and-dial-codes/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | international-telephone-input-with-flags-and-dial-codes | [View logs](/logs/plugins/i/international-telephone-input-with-flags-and-dial-codes/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | ast-sqlite-boot | international-telephone-input-with-flags-and-dial-codes | [View logs](/logs/plugins/i/international-telephone-input-with-flags-and-dial-codes/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | asyncify-boot | international-telephone-input-with-flags-and-dial-codes | [View logs](/logs/plugins/i/international-telephone-input-with-flags-and-dial-codes/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | jspi-boot | international-telephone-input-with-flags-and-dial-codes | [View logs](/logs/plugins/i/international-telephone-input-with-flags-and-dial-codes/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | ip-newsletters-for-mailchimp | [View logs](/logs/plugins/i/ip-newsletters-for-mailchimp/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | ip-newsletters-for-mailchimp | [View logs](/logs/plugins/i/ip-newsletters-for-mailchimp/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | ip-newsletters-for-mailchimp | [View logs](/logs/plugins/i/ip-newsletters-for-mailchimp/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | ast-sqlite-boot | ip-newsletters-for-mailchimp | [View logs](/logs/plugins/i/ip-newsletters-for-mailchimp/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | asyncify-boot | ip-newsletters-for-mailchimp | [View logs](/logs/plugins/i/ip-newsletters-for-mailchimp/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | jspi-boot | ip-newsletters-for-mailchimp | [View logs](/logs/plugins/i/ip-newsletters-for-mailchimp/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | include-bootstrap-elementor-components | [View logs](/logs/plugins/i/include-bootstrap-elementor-components/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | include-bootstrap-elementor-components | [View logs](/logs/plugins/i/include-bootstrap-elementor-components/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | include-bootstrap-elementor-components | [View logs](/logs/plugins/i/include-bootstrap-elementor-components/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | ast-sqlite-boot | include-bootstrap-elementor-components | [View logs](/logs/plugins/i/include-bootstrap-elementor-components/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | asyncify-boot | include-bootstrap-elementor-components | [View logs](/logs/plugins/i/include-bootstrap-elementor-components/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | jspi-boot | include-bootstrap-elementor-components | [View logs](/logs/plugins/i/include-bootstrap-elementor-components/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | ast-sqlite-boot | imagerotate | [View logs](/logs/plugins/i/imagerotate/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | asyncify-boot | imagerotate | [View logs](/logs/plugins/i/imagerotate/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | jspi-boot | imagerotate | [View logs](/logs/plugins/i/imagerotate/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | independent-analytics | [View logs](/logs/plugins/i/independent-analytics/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | independent-analytics | [View logs](/logs/plugins/i/independent-analytics/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | independent-analytics | [View logs](/logs/plugins/i/independent-analytics/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | ast-sqlite-boot | independent-analytics | [View logs](/logs/plugins/i/independent-analytics/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | asyncify-boot | independent-analytics | [View logs](/logs/plugins/i/independent-analytics/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | jspi-boot | independent-analytics | [View logs](/logs/plugins/i/independent-analytics/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | ias-countries | [View logs](/logs/plugins/i/ias-countries/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | ias-countries | [View logs](/logs/plugins/i/ias-countries/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | ias-countries | [View logs](/logs/plugins/i/ias-countries/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | ast-sqlite-boot | ias-countries | [View logs](/logs/plugins/i/ias-countries/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | asyncify-boot | ias-countries | [View logs](/logs/plugins/i/ias-countries/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | jspi-boot | ias-countries | [View logs](/logs/plugins/i/ias-countries/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | ast-sqlite-boot | interactive-excel-tables | [View logs](/logs/plugins/i/interactive-excel-tables/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | asyncify-boot | interactive-excel-tables | [View logs](/logs/plugins/i/interactive-excel-tables/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | jspi-boot | interactive-excel-tables | [View logs](/logs/plugins/i/interactive-excel-tables/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | ast-sqlite-boot | instanow-lite | [View logs](/logs/plugins/i/instanow-lite/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | asyncify-boot | instanow-lite | [View logs](/logs/plugins/i/instanow-lite/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | jspi-boot | instanow-lite | [View logs](/logs/plugins/i/instanow-lite/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | idcrm-contacts-companies | [View logs](/logs/plugins/i/idcrm-contacts-companies/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | idcrm-contacts-companies | [View logs](/logs/plugins/i/idcrm-contacts-companies/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | asyncify-boot | idcrm-contacts-companies | [View logs](/logs/plugins/i/idcrm-contacts-companies/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | jspi-boot | idcrm-contacts-companies | [View logs](/logs/plugins/i/idcrm-contacts-companies/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | ast-sqlite-boot | inesonic-speedsentry | [View logs](/logs/plugins/i/inesonic-speedsentry/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | asyncify-boot | inesonic-speedsentry | [View logs](/logs/plugins/i/inesonic-speedsentry/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | jspi-boot | inesonic-speedsentry | [View logs](/logs/plugins/i/inesonic-speedsentry/error.json) |
@@ -765,6 +828,12 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | ast-sqlite-boot | ikhokha-payment-gateway | [View logs](/logs/plugins/i/ikhokha-payment-gateway/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | asyncify-boot | ikhokha-payment-gateway | [View logs](/logs/plugins/i/ikhokha-payment-gateway/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | jspi-boot | ikhokha-payment-gateway | [View logs](/logs/plugins/i/ikhokha-payment-gateway/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | itunes-charts | [View logs](/logs/plugins/i/itunes-charts/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | itunes-charts | [View logs](/logs/plugins/i/itunes-charts/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | itunes-charts | [View logs](/logs/plugins/i/itunes-charts/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | ast-sqlite-boot | itunes-charts | [View logs](/logs/plugins/i/itunes-charts/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | asyncify-boot | itunes-charts | [View logs](/logs/plugins/i/itunes-charts/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | jspi-boot | itunes-charts | [View logs](/logs/plugins/i/itunes-charts/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | ast-sqlite-boot | ipresso | [View logs](/logs/plugins/i/ipresso/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | asyncify-boot | ipresso | [View logs](/logs/plugins/i/ipresso/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_jmk_alt_tags. | jspi-boot | ipresso | [View logs](/logs/plugins/i/ipresso/error.json) |
@@ -1167,12 +1236,30 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | ast-sqlite-boot | news-ticker-for-wordpress | [View logs](/logs/plugins/n/news-ticker-for-wordpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | asyncify-boot | news-ticker-for-wordpress | [View logs](/logs/plugins/n/news-ticker-for-wordpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | jspi-boot | news-ticker-for-wordpress | [View logs](/logs/plugins/n/news-ticker-for-wordpress/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | ast-sqlite-boot | ngentube | [View logs](/logs/plugins/n/ngentube/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | asyncify-boot | ngentube | [View logs](/logs/plugins/n/ngentube/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | jspi-boot | ngentube | [View logs](/logs/plugins/n/ngentube/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | ast-sqlite-boot | ngentube | [View logs](/logs/plugins/n/ngentube/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | asyncify-boot | ngentube | [View logs](/logs/plugins/n/ngentube/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | jspi-boot | ngentube | [View logs](/logs/plugins/n/ngentube/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | nextcellent-gallery-nextgen-legacy | [View logs](/logs/plugins/n/nextcellent-gallery-nextgen-legacy/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | nextcellent-gallery-nextgen-legacy | [View logs](/logs/plugins/n/nextcellent-gallery-nextgen-legacy/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | nextcellent-gallery-nextgen-legacy | [View logs](/logs/plugins/n/nextcellent-gallery-nextgen-legacy/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | nextcellent-gallery-nextgen-legacy | [View logs](/logs/plugins/n/nextcellent-gallery-nextgen-legacy/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | nextcellent-gallery-nextgen-legacy | [View logs](/logs/plugins/n/nextcellent-gallery-nextgen-legacy/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | nextcellent-gallery-nextgen-legacy | [View logs](/logs/plugins/n/nextcellent-gallery-nextgen-legacy/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | ast-sqlite-boot | ninjalibs-ses | [View logs](/logs/plugins/n/ninjalibs-ses/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | asyncify-boot | ninjalibs-ses | [View logs](/logs/plugins/n/ninjalibs-ses/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | jspi-boot | ninjalibs-ses | [View logs](/logs/plugins/n/ninjalibs-ses/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | ast-sqlite-boot | ninjalibs-ses | [View logs](/logs/plugins/n/ninjalibs-ses/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | asyncify-boot | ninjalibs-ses | [View logs](/logs/plugins/n/ninjalibs-ses/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | jspi-boot | ninjalibs-ses | [View logs](/logs/plugins/n/ninjalibs-ses/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | ast-sqlite-boot | nosto-for-wp-e-commerce | [View logs](/logs/plugins/n/nosto-for-wp-e-commerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | asyncify-boot | nosto-for-wp-e-commerce | [View logs](/logs/plugins/n/nosto-for-wp-e-commerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | jspi-boot | nosto-for-wp-e-commerce | [View logs](/logs/plugins/n/nosto-for-wp-e-commerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | ast-sqlite-boot | nosto-for-wp-e-commerce | [View logs](/logs/plugins/n/nosto-for-wp-e-commerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | asyncify-boot | nosto-for-wp-e-commerce | [View logs](/logs/plugins/n/nosto-for-wp-e-commerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | jspi-boot | nosto-for-wp-e-commerce | [View logs](/logs/plugins/n/nosto-for-wp-e-commerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | nanoplazo-payment-gateway-for-woocommerce | [View logs](/logs/plugins/n/nanoplazo-payment-gateway-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | nanoplazo-payment-gateway-for-woocommerce | [View logs](/logs/plugins/n/nanoplazo-payment-gateway-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | nanoplazo-payment-gateway-for-woocommerce | [View logs](/logs/plugins/n/nanoplazo-payment-gateway-for-woocommerce/error.json) |
@@ -1203,6 +1290,18 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | ast-sqlite-boot | no-copy | [View logs](/logs/plugins/n/no-copy/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | asyncify-boot | no-copy | [View logs](/logs/plugins/n/no-copy/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | jspi-boot | no-copy | [View logs](/logs/plugins/n/no-copy/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | ast-sqlite-boot | no-curly-quotes | [View logs](/logs/plugins/n/no-curly-quotes/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | asyncify-boot | no-curly-quotes | [View logs](/logs/plugins/n/no-curly-quotes/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | jspi-boot | no-curly-quotes | [View logs](/logs/plugins/n/no-curly-quotes/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | ast-sqlite-boot | no-curly-quotes | [View logs](/logs/plugins/n/no-curly-quotes/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | asyncify-boot | no-curly-quotes | [View logs](/logs/plugins/n/no-curly-quotes/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | jspi-boot | no-curly-quotes | [View logs](/logs/plugins/n/no-curly-quotes/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | ast-sqlite-boot | ns-author-widget | [View logs](/logs/plugins/n/ns-author-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | asyncify-boot | ns-author-widget | [View logs](/logs/plugins/n/ns-author-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | jspi-boot | ns-author-widget | [View logs](/logs/plugins/n/ns-author-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | ast-sqlite-boot | ns-author-widget | [View logs](/logs/plugins/n/ns-author-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | asyncify-boot | ns-author-widget | [View logs](/logs/plugins/n/ns-author-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | jspi-boot | ns-author-widget | [View logs](/logs/plugins/n/ns-author-widget/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | nextgen-cu3er-gallery | [View logs](/logs/plugins/n/nextgen-cu3er-gallery/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | nextgen-cu3er-gallery | [View logs](/logs/plugins/n/nextgen-cu3er-gallery/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | nextgen-cu3er-gallery | [View logs](/logs/plugins/n/nextgen-cu3er-gallery/error.json) |
@@ -1212,6 +1311,18 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | ast-sqlite-boot | nextgen-cu3er-gallery | [View logs](/logs/plugins/n/nextgen-cu3er-gallery/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | asyncify-boot | nextgen-cu3er-gallery | [View logs](/logs/plugins/n/nextgen-cu3er-gallery/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | jspi-boot | nextgen-cu3er-gallery | [View logs](/logs/plugins/n/nextgen-cu3er-gallery/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | ast-sqlite-boot | notify-events-wpforms | [View logs](/logs/plugins/n/notify-events-wpforms/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | asyncify-boot | notify-events-wpforms | [View logs](/logs/plugins/n/notify-events-wpforms/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | jspi-boot | notify-events-wpforms | [View logs](/logs/plugins/n/notify-events-wpforms/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | ast-sqlite-boot | notify-events-wpforms | [View logs](/logs/plugins/n/notify-events-wpforms/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | asyncify-boot | notify-events-wpforms | [View logs](/logs/plugins/n/notify-events-wpforms/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | jspi-boot | notify-events-wpforms | [View logs](/logs/plugins/n/notify-events-wpforms/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | ast-sqlite-boot | network-publisher | [View logs](/logs/plugins/n/network-publisher/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | asyncify-boot | network-publisher | [View logs](/logs/plugins/n/network-publisher/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | jspi-boot | network-publisher | [View logs](/logs/plugins/n/network-publisher/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | ast-sqlite-boot | network-publisher | [View logs](/logs/plugins/n/network-publisher/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | asyncify-boot | network-publisher | [View logs](/logs/plugins/n/network-publisher/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | jspi-boot | network-publisher | [View logs](/logs/plugins/n/network-publisher/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | notifyvisitors-lead-form | [View logs](/logs/plugins/n/notifyvisitors-lead-form/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | notifyvisitors-lead-form | [View logs](/logs/plugins/n/notifyvisitors-lead-form/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | notifyvisitors-lead-form | [View logs](/logs/plugins/n/notifyvisitors-lead-form/error.json) |
@@ -1221,6 +1332,30 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | ast-sqlite-boot | notifyvisitors-lead-form | [View logs](/logs/plugins/n/notifyvisitors-lead-form/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | asyncify-boot | notifyvisitors-lead-form | [View logs](/logs/plugins/n/notifyvisitors-lead-form/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | jspi-boot | notifyvisitors-lead-form | [View logs](/logs/plugins/n/notifyvisitors-lead-form/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | ast-sqlite-boot | ngg-image-chooser-block | [View logs](/logs/plugins/n/ngg-image-chooser-block/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | asyncify-boot | ngg-image-chooser-block | [View logs](/logs/plugins/n/ngg-image-chooser-block/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | jspi-boot | ngg-image-chooser-block | [View logs](/logs/plugins/n/ngg-image-chooser-block/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | ast-sqlite-boot | ngg-image-chooser-block | [View logs](/logs/plugins/n/ngg-image-chooser-block/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | asyncify-boot | ngg-image-chooser-block | [View logs](/logs/plugins/n/ngg-image-chooser-block/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | jspi-boot | ngg-image-chooser-block | [View logs](/logs/plugins/n/ngg-image-chooser-block/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | ast-sqlite-boot | nextend-smart-slider-lite | [View logs](/logs/plugins/n/nextend-smart-slider-lite/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | asyncify-boot | nextend-smart-slider-lite | [View logs](/logs/plugins/n/nextend-smart-slider-lite/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | jspi-boot | nextend-smart-slider-lite | [View logs](/logs/plugins/n/nextend-smart-slider-lite/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | ast-sqlite-boot | nextend-smart-slider-lite | [View logs](/logs/plugins/n/nextend-smart-slider-lite/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | asyncify-boot | nextend-smart-slider-lite | [View logs](/logs/plugins/n/nextend-smart-slider-lite/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | jspi-boot | nextend-smart-slider-lite | [View logs](/logs/plugins/n/nextend-smart-slider-lite/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | ast-sqlite-boot | nggimagerotation | [View logs](/logs/plugins/n/nggimagerotation/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | asyncify-boot | nggimagerotation | [View logs](/logs/plugins/n/nggimagerotation/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | jspi-boot | nggimagerotation | [View logs](/logs/plugins/n/nggimagerotation/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | ast-sqlite-boot | nggimagerotation | [View logs](/logs/plugins/n/nggimagerotation/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | asyncify-boot | nggimagerotation | [View logs](/logs/plugins/n/nggimagerotation/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | jspi-boot | nggimagerotation | [View logs](/logs/plugins/n/nggimagerotation/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | ast-sqlite-boot | nutsforpress-restricted-contents | [View logs](/logs/plugins/n/nutsforpress-restricted-contents/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | asyncify-boot | nutsforpress-restricted-contents | [View logs](/logs/plugins/n/nutsforpress-restricted-contents/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | jspi-boot | nutsforpress-restricted-contents | [View logs](/logs/plugins/n/nutsforpress-restricted-contents/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | ast-sqlite-boot | nutsforpress-restricted-contents | [View logs](/logs/plugins/n/nutsforpress-restricted-contents/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | asyncify-boot | nutsforpress-restricted-contents | [View logs](/logs/plugins/n/nutsforpress-restricted-contents/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | jspi-boot | nutsforpress-restricted-contents | [View logs](/logs/plugins/n/nutsforpress-restricted-contents/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | narnoo-commerce-manager | [View logs](/logs/plugins/n/narnoo-commerce-manager/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | narnoo-commerce-manager | [View logs](/logs/plugins/n/narnoo-commerce-manager/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | narnoo-commerce-manager | [View logs](/logs/plugins/n/narnoo-commerce-manager/error.json) |
@@ -1275,6 +1410,12 @@ Backtra
 | Unknown operation: MODIFY. | ast-sqlite-boot | nuwire-paper-boy | [View logs](/logs/plugins/n/nuwire-paper-boy/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | nuwire-paper-boy | [View logs](/logs/plugins/n/nuwire-paper-boy/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | nuwire-paper-boy | [View logs](/logs/plugins/n/nuwire-paper-boy/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | ast-sqlite-boot | ns8-complete-storefront-protection | [View logs](/logs/plugins/n/ns8-complete-storefront-protection/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | asyncify-boot | ns8-complete-storefront-protection | [View logs](/logs/plugins/n/ns8-complete-storefront-protection/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | jspi-boot | ns8-complete-storefront-protection | [View logs](/logs/plugins/n/ns8-complete-storefront-protection/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | ast-sqlite-boot | ns8-complete-storefront-protection | [View logs](/logs/plugins/n/ns8-complete-storefront-protection/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | asyncify-boot | ns8-complete-storefront-protection | [View logs](/logs/plugins/n/ns8-complete-storefront-protection/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | jspi-boot | ns8-complete-storefront-protection | [View logs](/logs/plugins/n/ns8-complete-storefront-protection/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | neugs-intelligent-tagger | [View logs](/logs/plugins/n/neugs-intelligent-tagger/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | neugs-intelligent-tagger | [View logs](/logs/plugins/n/neugs-intelligent-tagger/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | neugs-intelligent-tagger | [View logs](/logs/plugins/n/neugs-intelligent-tagger/error.json) |
@@ -1299,6 +1440,12 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | ast-sqlite-boot | newcarnet-news | [View logs](/logs/plugins/n/newcarnet-news/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | asyncify-boot | newcarnet-news | [View logs](/logs/plugins/n/newcarnet-news/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | jspi-boot | newcarnet-news | [View logs](/logs/plugins/n/newcarnet-news/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | ast-sqlite-boot | news2paper | [View logs](/logs/plugins/n/news2paper/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | asyncify-boot | news2paper | [View logs](/logs/plugins/n/news2paper/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | jspi-boot | news2paper | [View logs](/logs/plugins/n/news2paper/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | ast-sqlite-boot | news2paper | [View logs](/logs/plugins/n/news2paper/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | asyncify-boot | news2paper | [View logs](/logs/plugins/n/news2paper/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | jspi-boot | news2paper | [View logs](/logs/plugins/n/news2paper/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | newsletter-pro | [View logs](/logs/plugins/n/newsletter-pro/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | newsletter-pro | [View logs](/logs/plugins/n/newsletter-pro/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | newsletter-pro | [View logs](/logs/plugins/n/newsletter-pro/error.json) |
@@ -1308,6 +1455,12 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | ast-sqlite-boot | newsletter-pro | [View logs](/logs/plugins/n/newsletter-pro/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | asyncify-boot | newsletter-pro | [View logs](/logs/plugins/n/newsletter-pro/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | jspi-boot | newsletter-pro | [View logs](/logs/plugins/n/newsletter-pro/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | ast-sqlite-boot | nmedia-mailchimp-widget | [View logs](/logs/plugins/n/nmedia-mailchimp-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | asyncify-boot | nmedia-mailchimp-widget | [View logs](/logs/plugins/n/nmedia-mailchimp-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | jspi-boot | nmedia-mailchimp-widget | [View logs](/logs/plugins/n/nmedia-mailchimp-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | ast-sqlite-boot | nmedia-mailchimp-widget | [View logs](/logs/plugins/n/nmedia-mailchimp-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | asyncify-boot | nmedia-mailchimp-widget | [View logs](/logs/plugins/n/nmedia-mailchimp-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | jspi-boot | nmedia-mailchimp-widget | [View logs](/logs/plugins/n/nmedia-mailchimp-widget/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | nepali-land-converter | [View logs](/logs/plugins/n/nepali-land-converter/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | nepali-land-converter | [View logs](/logs/plugins/n/nepali-land-converter/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | nepali-land-converter | [View logs](/logs/plugins/n/nepali-land-converter/error.json) |
@@ -1343,6 +1496,18 @@ Backtra
 | Unknown operation: MODIFY. | ast-sqlite-boot | nextgen-gallery-powertags | [View logs](/logs/plugins/n/nextgen-gallery-powertags/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | nextgen-gallery-powertags | [View logs](/logs/plugins/n/nextgen-gallery-powertags/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | nextgen-gallery-powertags | [View logs](/logs/plugins/n/nextgen-gallery-powertags/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | ast-sqlite-boot | namaz-times-sofia-bulgaria | [View logs](/logs/plugins/n/namaz-times-sofia-bulgaria/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | asyncify-boot | namaz-times-sofia-bulgaria | [View logs](/logs/plugins/n/namaz-times-sofia-bulgaria/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | jspi-boot | namaz-times-sofia-bulgaria | [View logs](/logs/plugins/n/namaz-times-sofia-bulgaria/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | ast-sqlite-boot | namaz-times-sofia-bulgaria | [View logs](/logs/plugins/n/namaz-times-sofia-bulgaria/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | asyncify-boot | namaz-times-sofia-bulgaria | [View logs](/logs/plugins/n/namaz-times-sofia-bulgaria/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | jspi-boot | namaz-times-sofia-bulgaria | [View logs](/logs/plugins/n/namaz-times-sofia-bulgaria/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | ast-sqlite-boot | namaz-vakti | [View logs](/logs/plugins/n/namaz-vakti/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | asyncify-boot | namaz-vakti | [View logs](/logs/plugins/n/namaz-vakti/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | jspi-boot | namaz-vakti | [View logs](/logs/plugins/n/namaz-vakti/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | ast-sqlite-boot | namaz-vakti | [View logs](/logs/plugins/n/namaz-vakti/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | asyncify-boot | namaz-vakti | [View logs](/logs/plugins/n/namaz-vakti/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | jspi-boot | namaz-vakti | [View logs](/logs/plugins/n/namaz-vakti/error.json) |
     [code] => 0
     [message] => Ending quote ' was expected.
     [position] => 38
