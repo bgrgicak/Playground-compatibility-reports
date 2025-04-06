@@ -272,24 +272,56 @@
 | Unknown query type: SHOW_COLUMNS. | ast-sqlite-boot | bd-payment-for-quick-orders | [View logs](/logs/plugins/b/bd-payment-for-quick-orders/error.json) |
 | Unknown query type: SHOW_COLUMNS. | asyncify-boot | bd-payment-for-quick-orders | [View logs](/logs/plugins/b/bd-payment-for-quick-orders/error.json) |
 | Unknown query type: SHOW_COLUMNS. | jspi-boot | bd-payment-for-quick-orders | [View logs](/logs/plugins/b/bd-payment-for-quick-orders/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | chess-by-blog | [View logs](/logs/plugins/c/chess-by-blog/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | chess-by-blog | [View logs](/logs/plugins/c/chess-by-blog/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | chess-by-blog | [View logs](/logs/plugins/c/chess-by-blog/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | ch-fade-slider | [View logs](/logs/plugins/c/ch-fade-slider/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | ch-fade-slider | [View logs](/logs/plugins/c/ch-fade-slider/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | ch-fade-slider | [View logs](/logs/plugins/c/ch-fade-slider/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | cjte-imagezoomer | [View logs](/logs/plugins/c/cjte-imagezoomer/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | cjte-imagezoomer | [View logs](/logs/plugins/c/cjte-imagezoomer/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | cjte-imagezoomer | [View logs](/logs/plugins/c/cjte-imagezoomer/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | ast-sqlite-boot | copy-protect | [View logs](/logs/plugins/c/copy-protect/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | asyncify-boot | copy-protect | [View logs](/logs/plugins/c/copy-protect/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | jspi-boot | copy-protect | [View logs](/logs/plugins/c/copy-protect/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | cc-flickr-widget | [View logs](/logs/plugins/c/cc-flickr-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | cc-flickr-widget | [View logs](/logs/plugins/c/cc-flickr-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | cc-flickr-widget | [View logs](/logs/plugins/c/cc-flickr-widget/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | clean-up-booster | [View logs](/logs/plugins/c/clean-up-booster/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | clean-up-booster | [View logs](/logs/plugins/c/clean-up-booster/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | clean-up-booster | [View logs](/logs/plugins/c/clean-up-booster/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | chicago-food-widget-powered-by-everyblock | [View logs](/logs/plugins/c/chicago-food-widget-powered-by-everyblock/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | chicago-food-widget-powered-by-everyblock | [View logs](/logs/plugins/c/chicago-food-widget-powered-by-everyblock/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | chicago-food-widget-powered-by-everyblock | [View logs](/logs/plugins/c/chicago-food-widget-powered-by-everyblock/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | codesnippet-20 | [View logs](/logs/plugins/c/codesnippet-20/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | codesnippet-20 | [View logs](/logs/plugins/c/codesnippet-20/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | codesnippet-20 | [View logs](/logs/plugins/c/codesnippet-20/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | chartboot-for-wordpress | [View logs](/logs/plugins/c/chartboot-for-wordpress/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | chartboot-for-wordpress | [View logs](/logs/plugins/c/chartboot-for-wordpress/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | chartboot-for-wordpress | [View logs](/logs/plugins/c/chartboot-for-wordpress/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | cellulant-tingg-checkout | [View logs](/logs/plugins/c/cellulant-tingg-checkout/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | cellulant-tingg-checkout | [View logs](/logs/plugins/c/cellulant-tingg-checkout/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | cellulant-tingg-checkout | [View logs](/logs/plugins/c/cellulant-tingg-checkout/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | content-randomizer | [View logs](/logs/plugins/c/content-randomizer/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | content-randomizer | [View logs](/logs/plugins/c/content-randomizer/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | content-randomizer | [View logs](/logs/plugins/c/content-randomizer/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | cj-revision-feedback | [View logs](/logs/plugins/c/cj-revision-feedback/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | cj-revision-feedback | [View logs](/logs/plugins/c/cj-revision-feedback/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | cj-revision-feedback | [View logs](/logs/plugins/c/cj-revision-feedback/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | contentqube | [View logs](/logs/plugins/c/contentqube/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | change-font-size | [View logs](/logs/plugins/c/change-font-size/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | change-font-size | [View logs](/logs/plugins/c/change-font-size/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | change-font-size | [View logs](/logs/plugins/c/change-font-size/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | crocodoc | [View logs](/logs/plugins/c/crocodoc/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | crocodoc | [View logs](/logs/plugins/c/crocodoc/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | crocodoc | [View logs](/logs/plugins/c/crocodoc/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | contests-from-rewards-fuel | [View logs](/logs/plugins/c/contests-from-rewards-fuel/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | clinical-memcachier | [View logs](/logs/plugins/c/clinical-memcachier/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | clinical-memcachier | [View logs](/logs/plugins/c/clinical-memcachier/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | clinical-memcachier | [View logs](/logs/plugins/c/clinical-memcachier/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | clickchina | [View logs](/logs/plugins/c/clickchina/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | clickchina | [View logs](/logs/plugins/c/clickchina/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | clickchina | [View logs](/logs/plugins/c/clickchina/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | clean-options | [View logs](/logs/plugins/c/clean-options/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | clean-options | [View logs](/logs/plugins/c/clean-options/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | clean-options | [View logs](/logs/plugins/c/clean-options/error.json) |
