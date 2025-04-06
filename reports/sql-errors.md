@@ -94,6 +94,9 @@
 | Unexpected token in MySQL query: title. | ast-sqlite-boot | ajax-search | [View logs](/logs/plugins/a/ajax-search/error.json) |
 | Unexpected token in MySQL query: title. | asyncify-boot | ajax-search | [View logs](/logs/plugins/a/ajax-search/error.json) |
 | Unexpected token in MySQL query: title. | jspi-boot | ajax-search | [View logs](/logs/plugins/a/ajax-search/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | ast-sqlite-boot | awesome-code-highlighting | [View logs](/logs/plugins/a/awesome-code-highlighting/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | asyncify-boot | awesome-code-highlighting | [View logs](/logs/plugins/a/awesome-code-highlighting/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | jspi-boot | awesome-code-highlighting | [View logs](/logs/plugins/a/awesome-code-highlighting/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | ast-sqlite-boot | automatic-youtube-video-posts | [View logs](/logs/plugins/a/automatic-youtube-video-posts/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | ast-sqlite-boot | alt-link-text | [View logs](/logs/plugins/a/alt-link-text/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | asyncify-boot | alt-link-text | [View logs](/logs/plugins/a/alt-link-text/error.json) |
@@ -110,6 +113,12 @@
 | MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | author-name-in-rss-feed | [View logs](/logs/plugins/a/author-name-in-rss-feed/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | asyncify-boot | author-name-in-rss-feed | [View logs](/logs/plugins/a/author-name-in-rss-feed/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | jspi-boot | author-name-in-rss-feed | [View logs](/logs/plugins/a/author-name-in-rss-feed/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | ast-sqlite-boot | add-all-nav-links-to-bp-adminbar | [View logs](/logs/plugins/a/add-all-nav-links-to-bp-adminbar/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | asyncify-boot | add-all-nav-links-to-bp-adminbar | [View logs](/logs/plugins/a/add-all-nav-links-to-bp-adminbar/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | jspi-boot | add-all-nav-links-to-bp-adminbar | [View logs](/logs/plugins/a/add-all-nav-links-to-bp-adminbar/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | ast-sqlite-boot | androcaptcha | [View logs](/logs/plugins/a/androcaptcha/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | asyncify-boot | androcaptcha | [View logs](/logs/plugins/a/androcaptcha/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | jspi-boot | androcaptcha | [View logs](/logs/plugins/a/androcaptcha/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | audio-player | [View logs](/logs/plugins/a/audio-player/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | asyncify-boot | audio-player | [View logs](/logs/plugins/a/audio-player/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | jspi-boot | audio-player | [View logs](/logs/plugins/a/audio-player/error.json) |
@@ -155,12 +164,18 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | ast-sqlite-boot | adminpress | [View logs](/logs/plugins/a/adminpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | asyncify-boot | adminpress | [View logs](/logs/plugins/a/adminpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | jspi-boot | adminpress | [View logs](/logs/plugins/a/adminpress/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | ast-sqlite-boot | avenirsoft-directdownload | [View logs](/logs/plugins/a/avenirsoft-directdownload/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | asyncify-boot | avenirsoft-directdownload | [View logs](/logs/plugins/a/avenirsoft-directdownload/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | jspi-boot | avenirsoft-directdownload | [View logs](/logs/plugins/a/avenirsoft-directdownload/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | asyncify-boot | attendance-management-for-lifterlms | [View logs](/logs/plugins/a/attendance-management-for-lifterlms/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | jspi-boot | attendance-management-for-lifterlms | [View logs](/logs/plugins/a/attendance-management-for-lifterlms/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | asyncify-boot | attendance-management-for-lifterlms | [View logs](/logs/plugins/a/attendance-management-for-lifterlms/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | jspi-boot | attendance-management-for-lifterlms | [View logs](/logs/plugins/a/attendance-management-for-lifterlms/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | asyncify-boot | attendance-management-for-lifterlms | [View logs](/logs/plugins/a/attendance-management-for-lifterlms/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | jspi-boot | attendance-management-for-lifterlms | [View logs](/logs/plugins/a/attendance-management-for-lifterlms/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | ast-sqlite-boot | advanced-recent-posts-widget | [View logs](/logs/plugins/a/advanced-recent-posts-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | asyncify-boot | advanced-recent-posts-widget | [View logs](/logs/plugins/a/advanced-recent-posts-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | jspi-boot | advanced-recent-posts-widget | [View logs](/logs/plugins/a/advanced-recent-posts-widget/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | ad-engine | [View logs](/logs/plugins/a/ad-engine/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | asyncify-boot | ad-engine | [View logs](/logs/plugins/a/ad-engine/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | jspi-boot | ad-engine | [View logs](/logs/plugins/a/ad-engine/error.json) |
@@ -195,15 +210,25 @@
 | Unknown show type: FIELDS FROM. | jspi-boot | appmax | [View logs](/logs/plugins/a/appmax/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | asyncify-boot | author-box-pro | [View logs](/logs/plugins/a/author-box-pro/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | jspi-boot | author-box-pro | [View logs](/logs/plugins/a/author-box-pro/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | ast-sqlite-boot | automatically-hierarchic-categories-in-menu | [View logs](/logs/plugins/a/automatically-hierarchic-categories-in-menu/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | ast-sqlite-boot | aramex-optilog-woocommerce | [View logs](/logs/plugins/a/aramex-optilog-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | asyncify-boot | aramex-optilog-woocommerce | [View logs](/logs/plugins/a/aramex-optilog-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | jspi-boot | aramex-optilog-woocommerce | [View logs](/logs/plugins/a/aramex-optilog-woocommerce/error.json) |
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | ammu-demo-import | [View logs](/logs/plugins/a/ammu-demo-import/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | ammu-demo-import | [View logs](/logs/plugins/a/ammu-demo-import/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | ammu-demo-import | [View logs](/logs/plugins/a/ammu-demo-import/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | ast-sqlite-boot | act-as-user | [View logs](/logs/plugins/a/act-as-user/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | asyncify-boot | act-as-user | [View logs](/logs/plugins/a/act-as-user/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | jspi-boot | act-as-user | [View logs](/logs/plugins/a/act-as-user/error.json) |
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | apppost | [View logs](/logs/plugins/a/apppost/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | apppost | [View logs](/logs/plugins/a/apppost/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | apppost | [View logs](/logs/plugins/a/apppost/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | ast-sqlite-boot | acf-engine | [View logs](/logs/plugins/a/acf-engine/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | asyncify-boot | acf-engine | [View logs](/logs/plugins/a/acf-engine/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | jspi-boot | acf-engine | [View logs](/logs/plugins/a/acf-engine/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | ast-sqlite-boot | ayar-unicode-converter | [View logs](/logs/plugins/a/ayar-unicode-converter/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | asyncify-boot | ayar-unicode-converter | [View logs](/logs/plugins/a/ayar-unicode-converter/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | jspi-boot | ayar-unicode-converter | [View logs](/logs/plugins/a/ayar-unicode-converter/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | associated-posts | [View logs](/logs/plugins/a/associated-posts/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | asyncify-boot | associated-posts | [View logs](/logs/plugins/a/associated-posts/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | jspi-boot | associated-posts | [View logs](/logs/plugins/a/associated-posts/error.json) |
@@ -237,6 +262,9 @@
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | amazon-ses-and-dkim-mailer | [View logs](/logs/plugins/a/amazon-ses-and-dkim-mailer/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | amazon-ses-and-dkim-mailer | [View logs](/logs/plugins/a/amazon-ses-and-dkim-mailer/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | amazon-ses-and-dkim-mailer | [View logs](/logs/plugins/a/amazon-ses-and-dkim-mailer/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | ast-sqlite-boot | augmented-reality | [View logs](/logs/plugins/a/augmented-reality/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | asyncify-boot | augmented-reality | [View logs](/logs/plugins/a/augmented-reality/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | jspi-boot | augmented-reality | [View logs](/logs/plugins/a/augmented-reality/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | ast-sqlite-boot | autotopo | [View logs](/logs/plugins/a/autotopo/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | asyncify-boot | autotopo | [View logs](/logs/plugins/a/autotopo/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | jspi-boot | autotopo | [View logs](/logs/plugins/a/autotopo/error.json) |
@@ -259,6 +287,9 @@
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | avh-themed-by-browser | [View logs](/logs/plugins/a/avh-themed-by-browser/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | avh-themed-by-browser | [View logs](/logs/plugins/a/avh-themed-by-browser/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | avh-themed-by-browser | [View logs](/logs/plugins/a/avh-themed-by-browser/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | ast-sqlite-boot | active-directory-authentication | [View logs](/logs/plugins/a/active-directory-authentication/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | asyncify-boot | active-directory-authentication | [View logs](/logs/plugins/a/active-directory-authentication/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "17": syntax error. | jspi-boot | active-directory-authentication | [View logs](/logs/plugins/a/active-directory-authentication/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | ast-sqlite-boot | amazon-widgets-shortcodes | [View logs](/logs/plugins/a/amazon-widgets-shortcodes/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | asyncify-boot | amazon-widgets-shortcodes | [View logs](/logs/plugins/a/amazon-widgets-shortcodes/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | jspi-boot | amazon-widgets-shortcodes | [View logs](/logs/plugins/a/amazon-widgets-shortcodes/error.json) |
@@ -788,23 +819,65 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | ast-sqlite-boot | fightback-plugin | [View logs](/logs/plugins/f/fightback-plugin/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | asyncify-boot | fightback-plugin | [View logs](/logs/plugins/f/fightback-plugin/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | jspi-boot | fightback-plugin | [View logs](/logs/plugins/f/fightback-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | feedburner-anywhere | [View logs](/logs/plugins/f/feedburner-anywhere/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | feedburner-anywhere | [View logs](/logs/plugins/f/feedburner-anywhere/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | feedburner-anywhere | [View logs](/logs/plugins/f/feedburner-anywhere/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | ast-sqlite-boot | facebook-i-like-button | [View logs](/logs/plugins/f/facebook-i-like-button/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | asyncify-boot | facebook-i-like-button | [View logs](/logs/plugins/f/facebook-i-like-button/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | jspi-boot | facebook-i-like-button | [View logs](/logs/plugins/f/facebook-i-like-button/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | ast-sqlite-boot | foursquare-recent-checkins | [View logs](/logs/plugins/f/foursquare-recent-checkins/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | asyncify-boot | foursquare-recent-checkins | [View logs](/logs/plugins/f/foursquare-recent-checkins/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | jspi-boot | foursquare-recent-checkins | [View logs](/logs/plugins/f/foursquare-recent-checkins/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | flockler-social-wall | [View logs](/logs/plugins/f/flockler-social-wall/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | flexible-quote-rotator-plus | [View logs](/logs/plugins/f/flexible-quote-rotator-plus/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | flexible-quote-rotator-plus | [View logs](/logs/plugins/f/flexible-quote-rotator-plus/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | flexible-quote-rotator-plus | [View logs](/logs/plugins/f/flexible-quote-rotator-plus/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | flattrbutton-standalone | [View logs](/logs/plugins/f/flattrbutton-standalone/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | flattrbutton-standalone | [View logs](/logs/plugins/f/flattrbutton-standalone/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | flattrbutton-standalone | [View logs](/logs/plugins/f/flattrbutton-standalone/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | fb-wallpost-widget | [View logs](/logs/plugins/f/fb-wallpost-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | fb-wallpost-widget | [View logs](/logs/plugins/f/fb-wallpost-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | fb-wallpost-widget | [View logs](/logs/plugins/f/fb-wallpost-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | ast-sqlite-boot | f1-register-flow | [View logs](/logs/plugins/f/f1-register-flow/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | asyncify-boot | f1-register-flow | [View logs](/logs/plugins/f/f1-register-flow/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | jspi-boot | f1-register-flow | [View logs](/logs/plugins/f/f1-register-flow/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | fw-subpageinadiv-spiad | [View logs](/logs/plugins/f/fw-subpageinadiv-spiad/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | fw-subpageinadiv-spiad | [View logs](/logs/plugins/f/fw-subpageinadiv-spiad/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | fw-subpageinadiv-spiad | [View logs](/logs/plugins/f/fw-subpageinadiv-spiad/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | facebook-comment-control | [View logs](/logs/plugins/f/facebook-comment-control/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | facebook-comment-control | [View logs](/logs/plugins/f/facebook-comment-control/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | facebook-comment-control | [View logs](/logs/plugins/f/facebook-comment-control/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | fw-vimeo-videowall | [View logs](/logs/plugins/f/fw-vimeo-videowall/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | fw-vimeo-videowall | [View logs](/logs/plugins/f/fw-vimeo-videowall/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | fw-vimeo-videowall | [View logs](/logs/plugins/f/fw-vimeo-videowall/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | find-me-elsewhere | [View logs](/logs/plugins/f/find-me-elsewhere/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | find-me-elsewhere | [View logs](/logs/plugins/f/find-me-elsewhere/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | find-me-elsewhere | [View logs](/logs/plugins/f/find-me-elsewhere/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | feedburner-email-subscription-widget | [View logs](/logs/plugins/f/feedburner-email-subscription-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | feedburner-email-subscription-widget | [View logs](/logs/plugins/f/feedburner-email-subscription-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | feedburner-email-subscription-widget | [View logs](/logs/plugins/f/feedburner-email-subscription-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | flattrwidget | [View logs](/logs/plugins/f/flattrwidget/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | flattrwidget | [View logs](/logs/plugins/f/flattrwidget/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | flattrwidget | [View logs](/logs/plugins/f/flattrwidget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | asyncify-boot | ficoo-smart-connector-core | [View logs](/logs/plugins/f/ficoo-smart-connector-core/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | jspi-boot | ficoo-smart-connector-core | [View logs](/logs/plugins/f/ficoo-smart-connector-core/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | featured-images-widget | [View logs](/logs/plugins/f/featured-images-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | featured-images-widget | [View logs](/logs/plugins/f/featured-images-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | featured-images-widget | [View logs](/logs/plugins/f/featured-images-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | filesfm-file-upload-form | [View logs](/logs/plugins/f/filesfm-file-upload-form/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | filesfm-file-upload-form | [View logs](/logs/plugins/f/filesfm-file-upload-form/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | filesfm-file-upload-form | [View logs](/logs/plugins/f/filesfm-file-upload-form/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | feed-reader | [View logs](/logs/plugins/f/feed-reader/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | feed-reader | [View logs](/logs/plugins/f/feed-reader/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | ast-sqlite-boot | fusionhq-for-wordpress | [View logs](/logs/plugins/f/fusionhq-for-wordpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | asyncify-boot | fusionhq-for-wordpress | [View logs](/logs/plugins/f/fusionhq-for-wordpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | jspi-boot | fusionhq-for-wordpress | [View logs](/logs/plugins/f/fusionhq-for-wordpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | ast-sqlite-boot | facebook-url-debugger | [View logs](/logs/plugins/f/facebook-url-debugger/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | asyncify-boot | facebook-url-debugger | [View logs](/logs/plugins/f/facebook-url-debugger/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | jspi-boot | facebook-url-debugger | [View logs](/logs/plugins/f/facebook-url-debugger/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | facebook-like-box-widget | [View logs](/logs/plugins/f/facebook-like-box-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | facebook-like-box-widget | [View logs](/logs/plugins/f/facebook-like-box-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | facebook-like-box-widget | [View logs](/logs/plugins/f/facebook-like-box-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | ast-sqlite-boot | facebook-comments-counter | [View logs](/logs/plugins/f/facebook-comments-counter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | asyncify-boot | facebook-comments-counter | [View logs](/logs/plugins/f/facebook-comments-counter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | jspi-boot | facebook-comments-counter | [View logs](/logs/plugins/f/facebook-comments-counter/error.json) |
@@ -2605,6 +2678,7 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 no such table: wp_statsforwp. | ast-sqlite-boot | stumble-page-social-widget | [View logs](/logs/plugins/s/stumble-page-social-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_statsforwp. | asyncify-boot | stumble-page-social-widget | [View logs](/logs/plugins/s/stumble-page-social-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_statsforwp. | jspi-boot | stumble-page-social-widget | [View logs](/logs/plugins/s/stumble-page-social-widget/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | subscribe2-for-social-privacy | [View logs](/logs/plugins/s/subscribe2-for-social-privacy/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_statsforwp. | ast-sqlite-boot | subscribe2-widget-pro | [View logs](/logs/plugins/s/subscribe2-widget-pro/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_statsforwp. | asyncify-boot | subscribe2-widget-pro | [View logs](/logs/plugins/s/subscribe2-widget-pro/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_statsforwp. | jspi-boot | subscribe2-widget-pro | [View logs](/logs/plugins/s/subscribe2-widget-pro/error.json) |
