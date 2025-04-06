@@ -2,6 +2,9 @@
 ## Stats
 | Message | Test | Item | Logs |
 |---------|------|------|------|
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | ast-sqlite-boot | antracks | [View logs](/logs/plugins/a/antracks/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | asyncify-boot | antracks | [View logs](/logs/plugins/a/antracks/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | jspi-boot | antracks | [View logs](/logs/plugins/a/antracks/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | ast-sqlite-boot | amenities-plugin | [View logs](/logs/plugins/a/amenities-plugin/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | asyncify-boot | amenities-plugin | [View logs](/logs/plugins/a/amenities-plugin/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | jspi-boot | amenities-plugin | [View logs](/logs/plugins/a/amenities-plugin/error.json) |
@@ -118,6 +121,9 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | adjust-users-screen | [View logs](/logs/plugins/a/adjust-users-screen/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | adjust-users-screen | [View logs](/logs/plugins/a/adjust-users-screen/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | adjust-users-screen | [View logs](/logs/plugins/a/adjust-users-screen/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | ast-sqlite-boot | all-twitter | [View logs](/logs/plugins/a/all-twitter/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | asyncify-boot | all-twitter | [View logs](/logs/plugins/a/all-twitter/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | jspi-boot | all-twitter | [View logs](/logs/plugins/a/all-twitter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | ast-sqlite-boot | automatic-youtube-video-posts | [View logs](/logs/plugins/a/automatic-youtube-video-posts/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | ast-sqlite-boot | alt-link-text | [View logs](/logs/plugins/a/alt-link-text/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | asyncify-boot | alt-link-text | [View logs](/logs/plugins/a/alt-link-text/error.json) |
@@ -137,6 +143,9 @@
 | MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | author-name-in-rss-feed | [View logs](/logs/plugins/a/author-name-in-rss-feed/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | asyncify-boot | author-name-in-rss-feed | [View logs](/logs/plugins/a/author-name-in-rss-feed/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | jspi-boot | author-name-in-rss-feed | [View logs](/logs/plugins/a/author-name-in-rss-feed/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | ast-sqlite-boot | anybackup | [View logs](/logs/plugins/a/anybackup/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | asyncify-boot | anybackup | [View logs](/logs/plugins/a/anybackup/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | jspi-boot | anybackup | [View logs](/logs/plugins/a/anybackup/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | ast-sqlite-boot | add-all-nav-links-to-bp-adminbar | [View logs](/logs/plugins/a/add-all-nav-links-to-bp-adminbar/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | asyncify-boot | add-all-nav-links-to-bp-adminbar | [View logs](/logs/plugins/a/add-all-nav-links-to-bp-adminbar/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | jspi-boot | add-all-nav-links-to-bp-adminbar | [View logs](/logs/plugins/a/add-all-nav-links-to-bp-adminbar/error.json) |
@@ -179,6 +188,9 @@
 | SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | ast-sqlite-boot | admin-ajax-php-no-thank-you | [View logs](/logs/plugins/a/admin-ajax-php-no-thank-you/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | asyncify-boot | admin-ajax-php-no-thank-you | [View logs](/logs/plugins/a/admin-ajax-php-no-thank-you/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | jspi-boot | admin-ajax-php-no-thank-you | [View logs](/logs/plugins/a/admin-ajax-php-no-thank-you/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | ast-sqlite-boot | ajax-form-for-ultimate-member | [View logs](/logs/plugins/a/ajax-form-for-ultimate-member/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | asyncify-boot | ajax-form-for-ultimate-member | [View logs](/logs/plugins/a/ajax-form-for-ultimate-member/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | jspi-boot | ajax-form-for-ultimate-member | [View logs](/logs/plugins/a/ajax-form-for-ultimate-member/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | ast-sqlite-boot | aprsfi-search-widget | [View logs](/logs/plugins/a/aprsfi-search-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | asyncify-boot | aprsfi-search-widget | [View logs](/logs/plugins/a/aprsfi-search-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | jspi-boot | aprsfi-search-widget | [View logs](/logs/plugins/a/aprsfi-search-widget/error.json) |
@@ -188,6 +200,9 @@
 | Unexpected token in MySQL query: title. | ast-sqlite-boot | affiliate-link-manager | [View logs](/logs/plugins/a/affiliate-link-manager/error.json) |
 | Unexpected token in MySQL query: title. | asyncify-boot | affiliate-link-manager | [View logs](/logs/plugins/a/affiliate-link-manager/error.json) |
 | Unexpected token in MySQL query: title. | jspi-boot | affiliate-link-manager | [View logs](/logs/plugins/a/affiliate-link-manager/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | ast-sqlite-boot | ambrosite-unlink-parent-pages | [View logs](/logs/plugins/a/ambrosite-unlink-parent-pages/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | asyncify-boot | ambrosite-unlink-parent-pages | [View logs](/logs/plugins/a/ambrosite-unlink-parent-pages/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | jspi-boot | ambrosite-unlink-parent-pages | [View logs](/logs/plugins/a/ambrosite-unlink-parent-pages/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | ast-sqlite-boot | adminpress | [View logs](/logs/plugins/a/adminpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | asyncify-boot | adminpress | [View logs](/logs/plugins/a/adminpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | jspi-boot | adminpress | [View logs](/logs/plugins/a/adminpress/error.json) |
@@ -197,6 +212,12 @@
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | ast-sqlite-boot | avenirsoft-directdownload | [View logs](/logs/plugins/a/avenirsoft-directdownload/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | asyncify-boot | avenirsoft-directdownload | [View logs](/logs/plugins/a/avenirsoft-directdownload/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | jspi-boot | avenirsoft-directdownload | [View logs](/logs/plugins/a/avenirsoft-directdownload/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | ast-sqlite-boot | addpoll | [View logs](/logs/plugins/a/addpoll/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | asyncify-boot | addpoll | [View logs](/logs/plugins/a/addpoll/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | jspi-boot | addpoll | [View logs](/logs/plugins/a/addpoll/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | ast-sqlite-boot | axis | [View logs](/logs/plugins/a/axis/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | asyncify-boot | axis | [View logs](/logs/plugins/a/axis/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | jspi-boot | axis | [View logs](/logs/plugins/a/axis/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | asyncify-boot | attendance-management-for-lifterlms | [View logs](/logs/plugins/a/attendance-management-for-lifterlms/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | jspi-boot | attendance-management-for-lifterlms | [View logs](/logs/plugins/a/attendance-management-for-lifterlms/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | asyncify-boot | attendance-management-for-lifterlms | [View logs](/logs/plugins/a/attendance-management-for-lifterlms/error.json) |
@@ -226,6 +247,9 @@
 | Unexpected token in MySQL query: title. | ast-sqlite-boot | advanced-event-calendar | [View logs](/logs/plugins/a/advanced-event-calendar/error.json) |
 | Unexpected token in MySQL query: title. | asyncify-boot | advanced-event-calendar | [View logs](/logs/plugins/a/advanced-event-calendar/error.json) |
 | Unexpected token in MySQL query: title. | jspi-boot | advanced-event-calendar | [View logs](/logs/plugins/a/advanced-event-calendar/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | ast-sqlite-boot | anyfeed-slideshow | [View logs](/logs/plugins/a/anyfeed-slideshow/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | asyncify-boot | anyfeed-slideshow | [View logs](/logs/plugins/a/anyfeed-slideshow/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | jspi-boot | anyfeed-slideshow | [View logs](/logs/plugins/a/anyfeed-slideshow/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | ast-sqlite-boot | automated-aramex-livemanual-shipping-rates-labels | [View logs](/logs/plugins/a/automated-aramex-livemanual-shipping-rates-labels/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | asyncify-boot | automated-aramex-livemanual-shipping-rates-labels | [View logs](/logs/plugins/a/automated-aramex-livemanual-shipping-rates-labels/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | jspi-boot | automated-aramex-livemanual-shipping-rates-labels | [View logs](/logs/plugins/a/automated-aramex-livemanual-shipping-rates-labels/error.json) |
@@ -280,6 +304,9 @@
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | automated-dhl-parcel-shipping-labels | [View logs](/logs/plugins/a/automated-dhl-parcel-shipping-labels/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | automated-dhl-parcel-shipping-labels | [View logs](/logs/plugins/a/automated-dhl-parcel-shipping-labels/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | automated-dhl-parcel-shipping-labels | [View logs](/logs/plugins/a/automated-dhl-parcel-shipping-labels/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | ast-sqlite-boot | add-image-maps | [View logs](/logs/plugins/a/add-image-maps/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | asyncify-boot | add-image-maps | [View logs](/logs/plugins/a/add-image-maps/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | jspi-boot | add-image-maps | [View logs](/logs/plugins/a/add-image-maps/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | animated-featured-image | [View logs](/logs/plugins/a/animated-featured-image/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | animated-featured-image | [View logs](/logs/plugins/a/animated-featured-image/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | animated-featured-image | [View logs](/logs/plugins/a/animated-featured-image/error.json) |
@@ -295,6 +322,9 @@
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | amazon-ses-and-dkim-mailer | [View logs](/logs/plugins/a/amazon-ses-and-dkim-mailer/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | amazon-ses-and-dkim-mailer | [View logs](/logs/plugins/a/amazon-ses-and-dkim-mailer/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | amazon-ses-and-dkim-mailer | [View logs](/logs/plugins/a/amazon-ses-and-dkim-mailer/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | ast-sqlite-boot | author-box-2 | [View logs](/logs/plugins/a/author-box-2/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | asyncify-boot | author-box-2 | [View logs](/logs/plugins/a/author-box-2/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | jspi-boot | author-box-2 | [View logs](/logs/plugins/a/author-box-2/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | ast-sqlite-boot | augmented-reality | [View logs](/logs/plugins/a/augmented-reality/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | asyncify-boot | augmented-reality | [View logs](/logs/plugins/a/augmented-reality/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | jspi-boot | augmented-reality | [View logs](/logs/plugins/a/augmented-reality/error.json) |
@@ -320,9 +350,18 @@
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | avh-themed-by-browser | [View logs](/logs/plugins/a/avh-themed-by-browser/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | avh-themed-by-browser | [View logs](/logs/plugins/a/avh-themed-by-browser/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | avh-themed-by-browser | [View logs](/logs/plugins/a/avh-themed-by-browser/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | ast-sqlite-boot | astropress-by-ask-oracle | [View logs](/logs/plugins/a/astropress-by-ask-oracle/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | asyncify-boot | astropress-by-ask-oracle | [View logs](/logs/plugins/a/astropress-by-ask-oracle/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | jspi-boot | astropress-by-ask-oracle | [View logs](/logs/plugins/a/astropress-by-ask-oracle/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | ast-sqlite-boot | active-directory-authentication | [View logs](/logs/plugins/a/active-directory-authentication/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | asyncify-boot | active-directory-authentication | [View logs](/logs/plugins/a/active-directory-authentication/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | jspi-boot | active-directory-authentication | [View logs](/logs/plugins/a/active-directory-authentication/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | ast-sqlite-boot | add-link | [View logs](/logs/plugins/a/add-link/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | asyncify-boot | add-link | [View logs](/logs/plugins/a/add-link/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | jspi-boot | add-link | [View logs](/logs/plugins/a/add-link/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | ast-sqlite-boot | add-flickr-photo-with-geo-tag | [View logs](/logs/plugins/a/add-flickr-photo-with-geo-tag/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | asyncify-boot | add-flickr-photo-with-geo-tag | [View logs](/logs/plugins/a/add-flickr-photo-with-geo-tag/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | jspi-boot | add-flickr-photo-with-geo-tag | [View logs](/logs/plugins/a/add-flickr-photo-with-geo-tag/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | ast-sqlite-boot | amazon-widgets-shortcodes | [View logs](/logs/plugins/a/amazon-widgets-shortcodes/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | asyncify-boot | amazon-widgets-shortcodes | [View logs](/logs/plugins/a/amazon-widgets-shortcodes/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | jspi-boot | amazon-widgets-shortcodes | [View logs](/logs/plugins/a/amazon-widgets-shortcodes/error.json) |
