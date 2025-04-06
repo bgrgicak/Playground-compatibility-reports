@@ -1,17 +1,569 @@
-node:internal/event_target:1094
-  process.nextTick(() => { throw err; });
-                           ^
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21
+`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
 
-TypeError: process.stdout.clearLine is not a function
-    at C.<anonymous> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:18:538)
-    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:820:20)
-    at C.dispatchEvent (node:internal/event_target:755:26)
-    at C.notifyProgress (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:295:10)
-    at C.<anonymous> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:200:81)
-    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:820:20)
-    at C.dispatchEvent (node:internal/event_target:755:26)
-    at C.notifyProgress (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:295:10)
-    at C.<anonymous> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:200:81)
-    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:820:20)
-
+Error: [06-Apr-2025 08:48:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_562cc0375296160b6d300e88675a1534', '1743929350', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_562cc0375296160b6d300e88675a1534' , '1743929350' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1743929350, '', 'off')
+#5 /wordpress/wp-content/plugins/calendar-booking/inc/startbooking-api.php(129): set_transient('562cc0375296160...', '', 30)
+#6 /wordpress/wp-content/plugins/calendar-booking/inc/startbooking-api.php(139): StartBookingComAPI->internal_proxy('https://api.sta...', Array, 'GET', 30)
+#7 /wordpress/wp-content/plugins/calendar-booking/inc/base.php(409): cbsb_api_request('channel/wordpre...', Array, 'GET', 30)
+#8 /wordpress/wp-content/plugins/calendar-booking/inc/expedited-booking.php(9): cbsb_current_settings()
+#9 /wordpress/wp-content/plugins/calendar-booking/inc/expedited-booking.php(99): CBSB_Expedited_Booking->__construct()
+#10 /wordpress/wp-content/plugins/calendar-booking/start-booking.php(29): require_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('calendar-bookin...')
+#13 /internal/eval.php(20): activate_plugin('calendar-bookin...')
+#14 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_562cc0375296160b6d300e88675a1534', '1743929350', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/calendar-booking/start-booking.php'), require_once('/plugins/calendar-booking/inc/expedited-booking.php'), CBSB_Expedited_Booking->__construct, cbsb_current_settings, cbsb_api_request, StartBookingComAPI->internal_proxy, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-Apr-2025 08:48:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_562cc0375296160b6d300e88675a1534', '', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_562cc0375296160b6d300e88675a1534' , '' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_562c...', '', '', 'off')
+#5 /wordpress/wp-content/plugins/calendar-booking/inc/startbooking-api.php(129): set_transient('562cc0375296160...', '', 30)
+#6 /wordpress/wp-content/plugins/calendar-booking/inc/startbooking-api.php(139): StartBookingComAPI->internal_proxy('https://api.sta...', Array, 'GET', 30)
+#7 /wordpress/wp-content/plugins/calendar-booking/inc/base.php(409): cbsb_api_request('channel/wordpre...', Array, 'GET', 30)
+#8 /wordpress/wp-content/plugins/calendar-booking/inc/expedited-booking.php(9): cbsb_current_settings()
+#9 /wordpress/wp-content/plugins/calendar-booking/inc/expedited-booking.php(99): CBSB_Expedited_Booking->__construct()
+#10 /wordpress/wp-content/plugins/calendar-booking/start-booking.php(29): require_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('calendar-bookin...')
+#13 /internal/eval.php(20): activate_plugin('calendar-bookin...')
+#14 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_562cc0375296160b6d300e88675a1534', '', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/calendar-booking/start-booking.php'), require_once('/plugins/calendar-booking/inc/expedited-booking.php'), CBSB_Expedited_Booking->__construct, cbsb_current_settings, cbsb_api_request, StartBookingComAPI->internal_proxy, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-Apr-2025 08:48:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_337e307219a09ae33ff3b31ec9375c65', '1743929350', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_337e307219a09ae33ff3b31ec9375c65' , '1743929350' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1743929350, '', 'off')
+#5 /wordpress/wp-content/plugins/calendar-booking/inc/startbooking-api.php(129): set_transient('337e307219a09ae...', '', 30)
+#6 /wordpress/wp-content/plugins/calendar-booking/inc/startbooking-api.php(139): StartBookingComAPI->internal_proxy('https://api.sta...', Array, 'GET', 30)
+#7 /wordpress/wp-content/plugins/calendar-booking/inc/base.php(417): cbsb_api_request('editors/setting...', Array, 'GET', 30)
+#8 /wordpress/wp-content/plugins/calendar-booking/inc/expedited-booking.php(9): cbsb_current_settings()
+#9 /wordpress/wp-content/plugins/calendar-booking/inc/expedited-booking.php(99): CBSB_Expedited_Booking->__construct()
+#10 /wordpress/wp-content/plugins/calendar-booking/start-booking.php(29): require_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('calendar-bookin...')
+#13 /internal/eval.php(20): activate_plugin('calendar-bookin...')
+#14 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_337e307219a09ae33ff3b31ec9375c65', '1743929350', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/calendar-booking/start-booking.php'), require_once('/plugins/calendar-booking/inc/expedited-booking.php'), CBSB_Expedited_Booking->__construct, cbsb_current_settings, cbsb_api_request, StartBookingComAPI->internal_proxy, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-Apr-2025 08:48:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_337e307219a09ae33ff3b31ec9375c65', '', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_337e307219a09ae33ff3b31ec9375c65' , '' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_337e...', '', '', 'off')
+#5 /wordpress/wp-content/plugins/calendar-booking/inc/startbooking-api.php(129): set_transient('337e307219a09ae...', '', 30)
+#6 /wordpress/wp-content/plugins/calendar-booking/inc/startbooking-api.php(139): StartBookingComAPI->internal_proxy('https://api.sta...', Array, 'GET', 30)
+#7 /wordpress/wp-content/plugins/calendar-booking/inc/base.php(417): cbsb_api_request('editors/setting...', Array, 'GET', 30)
+#8 /wordpress/wp-content/plugins/calendar-booking/inc/expedited-booking.php(9): cbsb_current_settings()
+#9 /wordpress/wp-content/plugins/calendar-booking/inc/expedited-booking.php(99): CBSB_Expedited_Booking->__construct()
+#10 /wordpress/wp-content/plugins/calendar-booking/start-booking.php(29): require_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('calendar-bookin...')
+#13 /internal/eval.php(20): activate_plugin('calendar-bookin...')
+#14 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_337e307219a09ae33ff3b31ec9375c65', '', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/calendar-booking/start-booking.php'), require_once('/plugins/calendar-booking/inc/expedited-booking.php'), CBSB_Expedited_Booking->__construct, cbsb_current_settings, cbsb_api_request, StartBookingComAPI->internal_proxy, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-Apr-2025 08:48:40 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[06-Apr-2025 08:48:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[06-Apr-2025 08:48:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[06-Apr-2025 08:48:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[06-Apr-2025 08:48:40 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/calendar-booking/inc/base.php on line 23
+[06-Apr-2025 08:48:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cbsb_connection', 'a:2:{s:12:\"booking-flow\";s:1004:\"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzIyNmNjMzlkZTg3ZDE4M2FlMjE2OWQxZDYzMzZhMzczY2QwMDI0ZjE3NDUyZWRkOTE0NzI5ODNkZDBkYjQ1MWUxODNiOWMwMDM5OWU3ZjQiLCJpYXQiOjE3NDM5MjkzMjEuMTEwNTAyLCJuYmYiOjE3NDM5MjkzMjEuMTEwNTA1LCJleHAiOjIwNTk0NjIxMjEuMTA1MTExLCJzdWIiOiIzNDU4MiIsInNjb3BlcyI6WyJib29raW5nLWZsb3ciXX0.Inm-fr3qEPzh0SrX4B21P0Anb9GGaE7WkNS2lk3zTutnvHiOD0H2iuQvUjfIgC8UR-gVjLgwTjwXzmKSfLMN461ul1gM1FyMMbbE1gXWNlyidTMLHy6HIUVebI_Iq_3qUIjgi1nLdvQuItVL6-ZliB9ZgGWM9KpD_7RgMPw2AkvSnofoqDSKx3cN3RDNovdpO3S7-r2abb3KgNvi8YtrlFffKWqkUg8f0Digr0zfnyHj2-QxBtml3HAC3xnmCt_KflGoy80IeA1iP14j4Dv9boSz6Tmk9WK8N7Ab7pVBhzrKSbeHWkktrQP8Pjc1WUMdWr25EEiSrMeYVGhUvfe15gb8jOqbRgnpFgibWdgkHss7djk7W6ZxIx76ryMxOxUntISo8Lsxw7fiao-y-NJhNvPNAWB7CRJ6i58flsGnUB0VGwOdGjLdRX74aiV75uIiN96RzPsgJoUw9ylvyLbFDs3P70Ga-hHKztP5m0gczAgxegxNYOYQcXDpL6MZTrTqeFDxvJvA-hnD8niZKoyktJitxNl9Ou0ciAdt8w3XYPBnpqqwa34NAPsUIwV6D60149nSukLHKCwr3LhTIfljblpC8ejcWEvbPvdKGFLnzc2UHt61GqCl7CjW2xG6dZuM7HSRuG0FPPYo6LneU56lo_nlznoROx69GXIcCEfxfIg\";s:8:\"wp-admin\";s:999:\"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiY2Y1OGEyNWJlOTcyZDI5ZTNjYWQ5ZjJkYjAwMWJmYTJhZDdmZDcyMzliZGYzNTMyM2I3Y2ZkYmFiMzM4OGUzZDZjNzExOGYzY2Q5MTdmYTciLCJpYXQiOjE3NDM5MjkzMjEuMTI3MTgyLCJuYmYiOjE3NDM5MjkzMjEuMTI3MTgzLCJleHAiOjIwNTk0NjIxMjEuMTI0Nzc2LCJzdWIiOiIzNDU4MiIsInNjb3BlcyI6WyJ3cC1hZG1pbiJdfQ.H0uufKa5WqynVHPUJ6tZuxO_LeUcaa5X1Ax0R0qVnV1uwFmIbzMk0_X6Cl3-0hGjlz4Bk0ia_pQAHqXnx-J4LR3bKcBFQEnLVXZiKJJhDSUjb3QReUz09dUuubAT2KXZGVifZXRu5nCju9XRSPJmWuXowVTWUFJG-FqiWiLqCzlxeyCBiKawpgIN8JgkxZFf_QU86tZZ8Y0Rf5ApP3cycqpeQddXsn6XT8VbyTEMi4tth0dKsc1O2-BB3Sl3fzbge2B_kBGfAluDGeGVXN2SWQY2Hf3_coF9zHgapaFGhKpMSW_uRBOrX5qfCR67WaWX7AzUIYdoNwP6NMiSUZXhW4ixVFefm6uvCAytvqnaJxUk0AD6dT9nO9EnFXyzM2mEPnVfT3eo309501XNEY3ThSiFmSGVXpddplFKe_VGL2QRS3EWevyqxwWQVCRNsWkcsjwlVl80OO-5rlwQ7yGBBj6gIrKmSBzzxyu2ENmvSZVzVPpuQidgj3KYYxnE8PgN4U__Kf1xZ8pG3tLPYOdoTWj_hWsjUIGO0WA_4Q6PJKt5vlv-U59teHtNxnqhQZSvYHfB9GIUBjmJgOwRt2iGiuRk5vQX8aCLSaIS15jhpF6CPiWy3XWCjU-QIOrzyMC4LeXptllU-y3RUvt1YOfwdmJ2y-SC-3fxM9EQJM2Gcac\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cbsb_connection' , 'a:2:{s:12:&quot;booking-flow&quot;;s:1004:&quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzIyNmNjMzlkZTg3ZDE4M2FlMjE2OWQxZDYzMzZhMzczY2QwMDI0ZjE3NDUyZWRkOTE0NzI5ODNkZDBkYjQ1MWUxODNiOWMwMDM5OWU3ZjQiLCJpYXQiOjE3NDM5MjkzMjEuMTEwNTAyLCJuYmYiOjE3NDM5MjkzMjEuMTEwNTA1LCJleHAiOjIwNTk0NjIxMjEuMTA1MTExLCJzdWIiOiIzNDU4MiIsInNjb3BlcyI6WyJib29raW5nLWZsb3ciXX0.Inm-fr3qEPzh0SrX4B21P0Anb9GGaE7WkNS2lk3zTutnvHiOD0H2iuQvUjfIgC8UR-gVjLgwTjwXzmKSfLMN461ul1gM1FyMMbbE1gXWNlyidTMLHy6HIUVebI_Iq_3qUIjgi1nLdvQuItVL6-ZliB9ZgGWM9KpD_7RgMPw2AkvSnofoqDSKx3cN3RDNovdpO3S7-r2abb3KgNvi8YtrlFffKWqkUg8f0Digr0zfnyHj2-QxBtml3HAC3xnmCt_KflGoy80IeA1iP14j4Dv9boSz6Tmk9WK8N7Ab7pVBhzrKSbeHWkktrQP8Pjc1WUMdWr25EEiSrMeYVGhUvfe15gb8jOqbRgnpFgibWdgkHss7djk7W6ZxIx76ryMxOxUntISo8Lsxw7fiao-y-NJhNvPNAWB7CRJ6i58flsGnUB0VGwOdGjLdRX74aiV75uIiN96RzPsgJoUw9ylvyLbFDs3P70Ga-hHKztP5m0gczAgxegxNYOYQcXDpL6MZTrTqeFDxvJvA-hnD8niZKoyktJitxNl9Ou0ciAdt8w3XYPBnpqqwa34NAPsUIwV6D60149nSukLHKCwr3LhTIfljblpC8ejcWEvbPvdKGFLnzc2UHt61GqCl7CjW2xG6dZuM7HSRuG0FPPYo6LneU56lo_nlznoROx69GXIcCEfxfIg&quot;;s:8:&quot;wp-admin&quot;;s:999:&quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiY2Y1OGEyNWJlOTcyZDI5ZTNjYWQ5ZjJkYjAwMWJmYTJhZDdmZDcyMzliZGYzNTMyM2I3Y2ZkYmFiMzM4OGUzZDZjNzExOGYzY2Q5MTdmYTciLCJpYXQiOjE3NDM5MjkzMjEuMTI3MTgyLCJuYmYiOjE3NDM5MjkzMjEuMTI3MTgzLCJleHAiOjIwNTk0NjIxMjEuMTI0Nzc2LCJzdWIiOiIzNDU4MiIsInNjb3BlcyI6WyJ3cC1hZG1pbiJdfQ.H0uufKa5WqynVHPUJ6tZuxO_LeUcaa5X1Ax0R0qVnV1uwFmIbzMk0_X6Cl3-0hGjlz4Bk0ia_pQAHqXnx-J4LR3bKcBFQEnLVXZiKJJhDSUjb3QReUz09dUuubAT2KXZGVifZXRu5nCju9XRSPJmWuXowVTWUFJG-FqiWiLqCzlxeyCBiKawpgIN8JgkxZFf_QU86tZZ8Y0Rf5ApP3cycqpeQddXsn6XT8VbyTEMi4tth0dKsc1O2-BB3Sl3fzbge2B_kBGfAluDGeGVXN2SWQY2Hf3_coF9zHgapaFGhKpMSW_uRBOrX5qfCR67WaWX7AzUIYdoNwP6NMiSUZXhW4ixVFefm6uvCAytvqnaJxUk0AD6dT9nO9EnFXyzM2mEPnVfT3eo309501XNEY3ThSiFmSGVXpddplFKe_VGL2QRS3EWevyqxwWQVCRNsWkcsjwlVl80OO-5rlwQ7yGBBj6gIrKmSBzzxyu2ENmvSZVzVPpuQidgj3KYYxnE8PgN4U__Kf1xZ8pG3tLPYOdoTWj_hWsjUIGO0WA_4Q6PJKt5vlv-U59teHtNxnqhQZSvYHfB9GIUBjmJgOwRt2iGiuRk5vQX8aCLSaIS15jhpF6CPiWy3XWCjU-QIOrzyMC4LeXptllU-y3RUvt1YOfwdmJ2y-SC-3fxM9EQJM2Gcac&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('cbsb_connection', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/calendar-booking/inc/base.php(58): update_option('cbsb_connection', Array)
+#6 /wordpress/wp-includes/class-wp-hook.php(326): cbsb_activate('calendar-bookin...')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'calendar-bookin...', false)
+#10 /internal/eval.php(20): activate_plugin('calendar-bookin...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cbsb_connection', 'a:2:{s:12:\"booking-flow\";s:1004:\"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzIyNmNjMzlkZTg3ZDE4M2FlMjE2OWQxZDYzMzZhMzczY2QwMDI0ZjE3NDUyZWRkOTE0NzI5ODNkZDBkYjQ1MWUxODNiOWMwMDM5OWU3ZjQiLCJpYXQiOjE3NDM5MjkzMjEuMTEwNTAyLCJuYmYiOjE3NDM5MjkzMjEuMTEwNTA1LCJleHAiOjIwNTk0NjIxMjEuMTA1MTExLCJzdWIiOiIzNDU4MiIsInNjb3BlcyI6WyJib29raW5nLWZsb3ciXX0.Inm-fr3qEPzh0SrX4B21P0Anb9GGaE7WkNS2lk3zTutnvHiOD0H2iuQvUjfIgC8UR-gVjLgwTjwXzmKSfLMN461ul1gM1FyMMbbE1gXWNlyidTMLHy6HIUVebI_Iq_3qUIjgi1nLdvQuItVL6-ZliB9ZgGWM9KpD_7RgMPw2AkvSnofoqDSKx3cN3RDNovdpO3S7-r2abb3KgNvi8YtrlFffKWqkUg8f0Digr0zfnyHj2-QxBtml3HAC3xnmCt_KflGoy80IeA1iP14j4Dv9boSz6Tmk9WK8N7Ab7pVBhzrKSbeHWkktrQP8Pjc1WUMdWr25EEiSrMeYVGhUvfe15gb8jOqbRgnpFgibWdgkHss7djk7W6ZxIx76ryMxOxUntISo8Lsxw7fiao-y-NJhNvPNAWB7CRJ6i58flsGnUB0VGwOdGjLdRX74aiV75uIiN96RzPsgJoUw9ylvyLbFDs3P70Ga-hHKztP5m0gczAgxegxNYOYQcXDpL6MZTrTqeFDxvJvA-hnD8niZKoyktJitxNl9Ou0ciAdt8w3XYPBnpqqwa34NAPsUIwV6D60149nSukLHKCwr3LhTIfljblpC8ejcWEvbPvdKGFLnzc2UHt61GqCl7CjW2xG6dZuM7HSRuG0FPPYo6LneU56lo_nlznoROx69GXIcCEfxfIg\";s:8:\"wp-admin\";s:999:\"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiY2Y1OGEyNWJlOTcyZDI5ZTNjYWQ5ZjJkYjAwMWJmYTJhZDdmZDcyMzliZGYzNTMyM2I3Y2ZkYmFiMzM4OGUzZDZjNzExOGYzY2Q5MTdmYTciLCJpYXQiOjE3NDM5MjkzMjEuMTI3MTgyLCJuYmYiOjE3NDM5MjkzMjEuMTI3MTgzLCJleHAiOjIwNTk0NjIxMjEuMTI0Nzc2LCJzdWIiOiIzNDU4MiIsInNjb3BlcyI6WyJ3cC1hZG1pbiJdfQ.H0uufKa5WqynVHPUJ6tZuxO_LeUcaa5X1Ax0R0qVnV1uwFmIbzMk0_X6Cl3-0hGjlz4Bk0ia_pQAHqXnx-J4LR3bKcBFQEnLVXZiKJJhDSUjb3QReUz09dUuubAT2KXZGVifZXRu5nCju9XRSPJmWuXowVTWUFJG-FqiWiLqCzlxeyCBiKawpgIN8JgkxZFf_QU86tZZ8Y0Rf5ApP3cycqpeQddXsn6XT8VbyTEMi4tth0dKsc1O2-BB3Sl3fzbge2B_kBGfAluDGeGVXN2SWQY2Hf3_coF9zHgapaFGhKpMSW_uRBOrX5qfCR67WaWX7AzUIYdoNwP6NMiSUZXhW4ixVFefm6uvCAytvqnaJxUk0AD6dT9nO9EnFXyzM2mEPnVfT3eo309501XNEY3ThSiFmSGVXpddplFKe_VGL2QRS3EWevyqxwWQVCRNsWkcsjwlVl80OO-5rlwQ7yGBBj6gIrKmSBzzxyu2ENmvSZVzVPpuQidgj3KYYxnE8PgN4U__Kf1xZ8pG3tLPYOdoTWj_hWsjUIGO0WA_4Q6PJKt5vlv-U59teHtNxnqhQZSvYHfB9GIUBjmJgOwRt2iGiuRk5vQX8aCLSaIS15jhpF6CPiWy3XWCjU-QIOrzyMC4LeXptllU-y3RUvt1YOfwdmJ2y-SC-3fxM9EQJM2Gcac\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, cbsb_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-Apr-2025 08:48:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cbsb_login_hash', '92be5f57a10ceb80bb960562c7d22c70', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cbsb_login_hash' , '92be5f57a10ceb80bb960562c7d22c70' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('cbsb_login_hash', '92be5f57a10ceb8...', '', 'auto')
+#5 /wordpress/wp-content/plugins/calendar-booking/inc/base.php(59): update_option('cbsb_login_hash', '92be5f57a10ceb8...')
+#6 /wordpress/wp-includes/class-wp-hook.php(326): cbsb_activate('calendar-bookin...')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'calendar-bookin...', false)
+#10 /internal/eval.php(20): activate_plugin('calendar-bookin...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cbsb_login_hash', '92be5f57a10ceb80bb960562c7d22c70', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, cbsb_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-Apr-2025 08:48:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (1, 'cbsb_connection', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiY2Y1OGEyNWJlOTcyZDI5ZTNjYWQ5ZjJkYjAwMWJmYTJhZDdmZDcyMzliZGYzNTMyM2I3Y2ZkYmFiMzM4OGUzZDZjNzExOGYzY2Q5MTdmYTciLCJpYXQiOjE3NDM5MjkzMjEuMTI3MTgyLCJuYmYiOjE3NDM5MjkzMjEuMTI3MTgzLCJleHAiOjIwNTk0NjIxMjEuMTI0Nzc2LCJzdWIiOiIzNDU4MiIsInNjb3BlcyI6WyJ3cC1hZG1pbiJdfQ.H0uufKa5WqynVHPUJ6tZuxO_LeUcaa5X1Ax0R0qVnV1uwFmIbzMk0_X6Cl3-0hGjlz4Bk0ia_pQAHqXnx-J4LR3bKcBFQEnLVXZiKJJhDSUjb3QReUz09dUuubAT2KXZGVifZXRu5nCju9XRSPJmWuXowVTWUFJG-FqiWiLqCzlxeyCBiKawpgIN8JgkxZFf_QU86tZZ8Y0Rf5ApP3cycqpeQddXsn6XT8VbyTEMi4tth0dKsc1O2-BB3Sl3fzbge2B_kBGfAluDGeGVXN2SWQY2Hf3_coF9zHgapaFGhKpMSW_uRBOrX5qfCR67WaWX7AzUIYdoNwP6NMiSUZXhW4ixVFefm6uvCAytvqnaJxUk0AD6dT9nO9EnFXyzM2mEPnVfT3eo309501XNEY3ThSiFmSGVXpddplFKe_VGL2QRS3EWevyqxwWQVCRNsWkcsjwlVl80OO-5rlwQ7yGBBj6gIrKmSBzzxyu2ENmvSZVzVPpuQidgj3KYYxnE8PgN4U__Kf1xZ8pG3tLPYOdoTWj_hWsjUIGO0WA_4Q6PJKt5vlv-U59teHtNxnqhQZSvYHfB9GIUBjmJgOwRt2iGiuRk5vQX8aCLSaIS15jhpF6CPiWy3XWCjU-QIOrzyMC4LeXptllU-y3RUvt1YOfwdmJ2y-SC-3fxM9EQJM2Gcac')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_usermeta</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_usermeta</li>
+<li>Executing: INSERT INTO `wp_usermeta` () SELECT  FROM (VALUES ( 1 , 'cbsb_connection' , 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiY2Y1OGEyNWJlOTcyZDI5ZTNjYWQ5ZjJkYjAwMWJmYTJhZDdmZDcyMzliZGYzNTMyM2I3Y2ZkYmFiMzM4OGUzZDZjNzExOGYzY2Q5MTdmYTciLCJpYXQiOjE3NDM5MjkzMjEuMTI3MTgyLCJuYmYiOjE3NDM5MjkzMjEuMTI3MTgzLCJleHAiOjIwNTk0NjIxMjEuMTI0Nzc2LCJzdWIiOiIzNDU4MiIsInNjb3BlcyI6WyJ3cC1hZG1pbiJdfQ.H0uufKa5WqynVHPUJ6tZuxO_LeUcaa5X1Ax0R0qVnV1uwFmIbzMk0_X6Cl3-0hGjlz4Bk0ia_pQAHqXnx-J4LR3bKcBFQEnLVXZiKJJhDSUjb3QReUz09dUuubAT2KXZGVifZXRu5nCju9XRSPJmWuXowVTWUFJG-FqiWiLqCzlxeyCBiKawpgIN8JgkxZFf_QU86tZZ8Y0Rf5ApP3cycqpeQddXsn6XT8VbyTEMi4tth0dKsc1O2-BB3Sl3fzbge2B_kBGfAluDGeGVXN2SWQY2Hf3_coF9zHgapaFGhKpMSW_uRBOrX5qfCR67WaWX7AzUIYdoNwP6NMiSUZXhW4ixVFefm6uvCAytvqnaJxUk0AD6dT9nO9EnFXyzM2mEPnVfT3eo309501XNEY3ThSiFmSGVXpddplFKe_VGL2QRS3EWevyqxwWQVCRNsWkcsjwlVl80OO-5rlwQ7yGBBj6gIrKmSBzzxyu2ENmvSZVzVPpuQidgj3KYYxnE8PgN4U__Kf1xZ8pG3tLPYOdoTWj_hWsjUIGO0WA_4Q6PJKt5vlv-U59teHtNxnqhQZSvYHfB9GIUBjmJgOwRt2iGiuRk5vQX8aCLSaIS15jhpF6CPiWy3XWCjU-QIOrzyMC4LeXptllU-y3RUvt1YOfwdmJ2y-SC-3fxM9EQJM2Gcac' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_usermeta', Array, NULL, 'INSERT')
+#5 /wordpress/wp-includes/meta.php(124): wpdb->insert('wp_usermeta', Array)
+#6 /wordpress/wp-includes/meta.php(252): add_metadata('user', 1, 'cbsb_connection', 'eyJ0eXAiOiJKV1Q...')
+#7 /wordpress/wp-includes/user.php(1231): update_metadata('user', 1, 'cbsb_connection', 'eyJ0eXAiOiJKV1Q...', '')
+#8 /wordpress/wp-content/plugins/calendar-booking/inc/base.php(61): update_user_meta('1', 'cbsb_connection', 'eyJ0eXAiOiJKV1Q...')
+#9 /wordpress/wp-includes/class-wp-hook.php(326): cbsb_activate('calendar-bookin...')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'calendar-bookin...', false)
+#13 /internal/eval.php(20): activate_plugin('calendar-bookin...')
+#14 {main}</pre>
+ for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (1, 'cbsb_connection', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiY2Y1OGEyNWJlOTcyZDI5ZTNjYWQ5ZjJkYjAwMWJmYTJhZDdmZDcyMzliZGYzNTMyM2I3Y2ZkYmFiMzM4OGUzZDZjNzExOGYzY2Q5MTdmYTciLCJpYXQiOjE3NDM5MjkzMjEuMTI3MTgyLCJuYmYiOjE3NDM5MjkzMjEuMTI3MTgzLCJleHAiOjIwNTk0NjIxMjEuMTI0Nzc2LCJzdWIiOiIzNDU4MiIsInNjb3BlcyI6WyJ3cC1hZG1pbiJdfQ.H0uufKa5WqynVHPUJ6tZuxO_LeUcaa5X1Ax0R0qVnV1uwFmIbzMk0_X6Cl3-0hGjlz4Bk0ia_pQAHqXnx-J4LR3bKcBFQEnLVXZiKJJhDSUjb3QReUz09dUuubAT2KXZGVifZXRu5nCju9XRSPJmWuXowVTWUFJG-FqiWiLqCzlxeyCBiKawpgIN8JgkxZFf_QU86tZZ8Y0Rf5ApP3cycqpeQddXsn6XT8VbyTEMi4tth0dKsc1O2-BB3Sl3fzbge2B_kBGfAluDGeGVXN2SWQY2Hf3_coF9zHgapaFGhKpMSW_uRBOrX5qfCR67WaWX7AzUIYdoNwP6NMiSUZXhW4ixVFefm6uvCAytvqnaJxUk0AD6dT9nO9EnFXyzM2mEPnVfT3eo309501XNEY3ThSiFmSGVXpddplFKe_VGL2QRS3EWevyqxwWQVCRNsWkcsjwlVl80OO-5rlwQ7yGBBj6gIrKmSBzzxyu2ENmvSZVzVPpuQidgj3KYYxnE8PgN4U__Kf1xZ8pG3tLPYOdoTWj_hWsjUIGO0WA_4Q6PJKt5vlv-U59teHtNxnqhQZSvYHfB9GIUBjmJgOwRt2iGiuRk5vQX8aCLSaIS15jhpF6CPiWy3XWCjU-QIOrzyMC4LeXptllU-y3RUvt1YOfwdmJ2y-SC-3fxM9EQJM2Gcac') made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, cbsb_activate, update_user_meta, update_metadata, add_metadata, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-Apr-2025 08:48:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-06 08:48:41', '2025-04-06 08:48:41', '[startbooking flow=\"services\"]', '', 'Book Now', '', 'publish', 'page', 'closed', 'closed', '', 'book-now', '', '', '2025-04-06 08:48:41', '2025-04-06 08:48:41', 0, 0, '', '')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_posts</li>
+<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-06 08:48:41' , '2025-04-06 08:48:41' , '[startbooking flow=&quot;services&quot;]' , '' , 'Book Now' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'book-now' , '' , '' , '2025-04-06 08:48:41' , '2025-04-06 08:48:41' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
+#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
+#6 /wordpress/wp-content/plugins/calendar-booking/inc/base.php(260): wp_insert_post(Array)
+#7 /wordpress/wp-content/plugins/calendar-booking/inc/base.php(65): cbsb_create_booking_page('Book Now')
+#8 /wordpress/wp-includes/class-wp-hook.php(326): cbsb_activate('calendar-bookin...')
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'calendar-bookin...', false)
+#12 /internal/eval.php(20): activate_plugin('calendar-bookin...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-06 08:48:41', '2025-04-06 08:48:41', '[startbooking flow=\"services\"]', '', 'Book Now', '', 'publish', 'page', 'closed', 'closed', '', 'book-now', '', '', '2025-04-06 08:48:41', '2025-04-06 08:48:41', 0, 0, '', '') made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, cbsb_activate, cbsb_create_booking_page, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-Apr-2025 08:48:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_562cc0375296160b6d300e88675a1534', '1743929351', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_562cc0375296160b6d300e88675a1534' , '1743929351' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1743929351, '', 'off')
+#5 /wordpress/wp-content/plugins/calendar-booking/inc/startbooking-api.php(129): set_transient('562cc0375296160...', '', 30)
+#6 /wordpress/wp-content/plugins/calendar-booking/inc/startbooking-api.php(139): StartBookingComAPI->internal_proxy('https://api.sta...', Array, 'GET', 30)
+#7 /wordpress/wp-content/plugins/calendar-booking/inc/base.php(409): cbsb_api_request('channel/wordpre...', Array, 'GET', 30)
+#8 /wordpress/wp-content/plugins/calendar-booking/inc/expedited-booking.php(9): cbsb_current_settings()
+#9 /wordpress/wp-content/plugins/calendar-booking/inc/expedited-booking.php(99): CBSB_Expedited_Booking->__construct()
+#10 /wordpress/wp-content/plugins/calendar-booking/start-booking.php(29): require_once('/wordpress/wp-c...')
+#11 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#15 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_562cc0375296160b6d300e88675a1534', '1743929351', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/calendar-booking/start-booking.php'), require_once('/plugins/calendar-booking/inc/expedited-booking.php'), CBSB_Expedited_Booking->__construct, cbsb_current_settings, cbsb_api_request, StartBookingComAPI->internal_proxy, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-Apr-2025 08:48:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_562cc0375296160b6d300e88675a1534', '', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_562cc0375296160b6d300e88675a1534' , '' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_562c...', '', '', 'off')
+#5 /wordpress/wp-content/plugins/calendar-booking/inc/startbooking-api.php(129): set_transient('562cc0375296160...', '', 30)
+#6 /wordpress/wp-content/plugins/calendar-booking/inc/startbooking-api.php(139): StartBookingComAPI->internal_proxy('https://api.sta...', Array, 'GET', 30)
+#7 /wordpress/wp-content/plugins/calendar-booking/inc/base.php(409): cbsb_api_request('channel/wordpre...', Array, 'GET', 30)
+#8 /wordpress/wp-content/plugins/calendar-booking/inc/expedited-booking.php(9): cbsb_current_settings()
+#9 /wordpress/wp-content/plugins/calendar-booking/inc/expedited-booking.php(99): CBSB_Expedited_Booking->__construct()
+#10 /wordpress/wp-content/plugins/calendar-booking/start-booking.php(29): require_once('/wordpress/wp-c...')
+#11 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#15 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_562cc0375296160b6d300e88675a1534', '', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/calendar-booking/start-booking.php'), require_once('/plugins/calendar-booking/inc/expedited-booking.php'), CBSB_Expedited_Booking->__construct, cbsb_current_settings, cbsb_api_request, StartBookingComAPI->internal_proxy, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-Apr-2025 08:48:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_337e307219a09ae33ff3b31ec9375c65', '1743929351', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_337e307219a09ae33ff3b31ec9375c65' , '1743929351' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1743929351, '', 'off')
+#5 /wordpress/wp-content/plugins/calendar-booking/inc/startbooking-api.php(129): set_transient('337e307219a09ae...', '', 30)
+#6 /wordpress/wp-content/plugins/calendar-booking/inc/startbooking-api.php(139): StartBookingComAPI->internal_proxy('https://api.sta...', Array, 'GET', 30)
+#7 /wordpress/wp-content/plugins/calendar-booking/inc/base.php(417): cbsb_api_request('editors/setting...', Array, 'GET', 30)
+#8 /wordpress/wp-content/plugins/calendar-booking/inc/expedited-booking.php(9): cbsb_current_settings()
+#9 /wordpress/wp-content/plugins/calendar-booking/inc/expedited-booking.php(99): CBSB_Expedited_Booking->__construct()
+#10 /wordpress/wp-content/plugins/calendar-booking/start-booking.php(29): require_once('/wordpress/wp-c...')
+#11 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#15 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_337e307219a09ae33ff3b31ec9375c65', '1743929351', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/calendar-booking/start-booking.php'), require_once('/plugins/calendar-booking/inc/expedited-booking.php'), CBSB_Expedited_Booking->__construct, cbsb_current_settings, cbsb_api_request, StartBookingComAPI->internal_proxy, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-Apr-2025 08:48:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_337e307219a09ae33ff3b31ec9375c65', '', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_337e307219a09ae33ff3b31ec9375c65' , '' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_337e...', '', '', 'off')
+#5 /wordpress/wp-content/plugins/calendar-booking/inc/startbooking-api.php(129): set_transient('337e307219a09ae...', '', 30)
+#6 /wordpress/wp-content/plugins/calendar-booking/inc/startbooking-api.php(139): StartBookingComAPI->internal_proxy('https://api.sta...', Array, 'GET', 30)
+#7 /wordpress/wp-content/plugins/calendar-booking/inc/base.php(417): cbsb_api_request('editors/setting...', Array, 'GET', 30)
+#8 /wordpress/wp-content/plugins/calendar-booking/inc/expedited-booking.php(9): cbsb_current_settings()
+#9 /wordpress/wp-content/plugins/calendar-booking/inc/expedited-booking.php(99): CBSB_Expedited_Booking->__construct()
+#10 /wordpress/wp-content/plugins/calendar-booking/start-booking.php(29): require_once('/wordpress/wp-c...')
+#11 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#15 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_337e307219a09ae33ff3b31ec9375c65', '', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/calendar-booking/start-booking.php'), require_once('/plugins/calendar-booking/inc/expedited-booking.php'), CBSB_Expedited_Booking->__construct, cbsb_current_settings, cbsb_api_request, StartBookingComAPI->internal_proxy, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-Apr-2025 08:48:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_startbooking_hours_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_startbooking_hours_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('widget_startboo...', Array, '', 'auto')
+#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_startboo...', Array)
+#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
+#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
+#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#16 /wordpress/wp-settings.php(704): do_action('init')
+#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#20 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_startbooking_hours_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-Apr-2025 08:48:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_startbooking_address_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_startbooking_address_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('widget_startboo...', Array, '', 'auto')
+#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_startboo...', Array)
+#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
+#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
+#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#16 /wordpress/wp-settings.php(704): do_action('init')
+#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#20 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_startbooking_address_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[06-Apr-2025 08:48:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSE
 Node.js v20.15.0
