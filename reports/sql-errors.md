@@ -2,15 +2,51 @@
 ## Stats
 | Message | Test | Item | Logs |
 |---------|------|------|------|
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | ast-sqlite-boot | amenities-plugin | [View logs](/logs/plugins/a/amenities-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | asyncify-boot | amenities-plugin | [View logs](/logs/plugins/a/amenities-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | jspi-boot | amenities-plugin | [View logs](/logs/plugins/a/amenities-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | ast-sqlite-boot | amenities-plugin | [View logs](/logs/plugins/a/amenities-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | asyncify-boot | amenities-plugin | [View logs](/logs/plugins/a/amenities-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | jspi-boot | amenities-plugin | [View logs](/logs/plugins/a/amenities-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | ast-sqlite-boot | amenities-plugin | [View logs](/logs/plugins/a/amenities-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | asyncify-boot | amenities-plugin | [View logs](/logs/plugins/a/amenities-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | jspi-boot | amenities-plugin | [View logs](/logs/plugins/a/amenities-plugin/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | attachments-handler | [View logs](/logs/plugins/a/attachments-handler/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | asyncify-boot | attachments-handler | [View logs](/logs/plugins/a/attachments-handler/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | jspi-boot | attachments-handler | [View logs](/logs/plugins/a/attachments-handler/error.json) |
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | advanced-geo-redirect | [View logs](/logs/plugins/a/advanced-geo-redirect/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | advanced-geo-redirect | [View logs](/logs/plugins/a/advanced-geo-redirect/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | advanced-geo-redirect | [View logs](/logs/plugins/a/advanced-geo-redirect/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | ast-sqlite-boot | ap-twitter-follow-button | [View logs](/logs/plugins/a/ap-twitter-follow-button/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | asyncify-boot | ap-twitter-follow-button | [View logs](/logs/plugins/a/ap-twitter-follow-button/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | jspi-boot | ap-twitter-follow-button | [View logs](/logs/plugins/a/ap-twitter-follow-button/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | ast-sqlite-boot | ap-twitter-follow-button | [View logs](/logs/plugins/a/ap-twitter-follow-button/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | asyncify-boot | ap-twitter-follow-button | [View logs](/logs/plugins/a/ap-twitter-follow-button/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | jspi-boot | ap-twitter-follow-button | [View logs](/logs/plugins/a/ap-twitter-follow-button/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | ast-sqlite-boot | ap-twitter-follow-button | [View logs](/logs/plugins/a/ap-twitter-follow-button/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | asyncify-boot | ap-twitter-follow-button | [View logs](/logs/plugins/a/ap-twitter-follow-button/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | jspi-boot | ap-twitter-follow-button | [View logs](/logs/plugins/a/ap-twitter-follow-button/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | ast-sqlite-boot | any-user-twitter-feed | [View logs](/logs/plugins/a/any-user-twitter-feed/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | asyncify-boot | any-user-twitter-feed | [View logs](/logs/plugins/a/any-user-twitter-feed/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | jspi-boot | any-user-twitter-feed | [View logs](/logs/plugins/a/any-user-twitter-feed/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | ast-sqlite-boot | any-user-twitter-feed | [View logs](/logs/plugins/a/any-user-twitter-feed/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | asyncify-boot | any-user-twitter-feed | [View logs](/logs/plugins/a/any-user-twitter-feed/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | jspi-boot | any-user-twitter-feed | [View logs](/logs/plugins/a/any-user-twitter-feed/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | ast-sqlite-boot | any-user-twitter-feed | [View logs](/logs/plugins/a/any-user-twitter-feed/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | asyncify-boot | any-user-twitter-feed | [View logs](/logs/plugins/a/any-user-twitter-feed/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | jspi-boot | any-user-twitter-feed | [View logs](/logs/plugins/a/any-user-twitter-feed/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | author-bio-widget | [View logs](/logs/plugins/a/author-bio-widget/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | asyncify-boot | author-bio-widget | [View logs](/logs/plugins/a/author-bio-widget/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | jspi-boot | author-bio-widget | [View logs](/logs/plugins/a/author-bio-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | ast-sqlite-boot | android-market-qr-codes-wp-plugin | [View logs](/logs/plugins/a/android-market-qr-codes-wp-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | asyncify-boot | android-market-qr-codes-wp-plugin | [View logs](/logs/plugins/a/android-market-qr-codes-wp-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | jspi-boot | android-market-qr-codes-wp-plugin | [View logs](/logs/plugins/a/android-market-qr-codes-wp-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | ast-sqlite-boot | android-market-qr-codes-wp-plugin | [View logs](/logs/plugins/a/android-market-qr-codes-wp-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | asyncify-boot | android-market-qr-codes-wp-plugin | [View logs](/logs/plugins/a/android-market-qr-codes-wp-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | jspi-boot | android-market-qr-codes-wp-plugin | [View logs](/logs/plugins/a/android-market-qr-codes-wp-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | ast-sqlite-boot | android-market-qr-codes-wp-plugin | [View logs](/logs/plugins/a/android-market-qr-codes-wp-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | asyncify-boot | android-market-qr-codes-wp-plugin | [View logs](/logs/plugins/a/android-market-qr-codes-wp-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | jspi-boot | android-market-qr-codes-wp-plugin | [View logs](/logs/plugins/a/android-market-qr-codes-wp-plugin/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | ast-sqlite-boot | audiotilly | [View logs](/logs/plugins/a/audiotilly/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | asyncify-boot | audiotilly | [View logs](/logs/plugins/a/audiotilly/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | jspi-boot | audiotilly | [View logs](/logs/plugins/a/audiotilly/error.json) |
@@ -31,6 +67,21 @@
 | Unknown show type: FIELDS FROM. | jspi-boot | another-one-tips-maker | [View logs](/logs/plugins/a/another-one-tips-maker/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | alipay | [View logs](/logs/plugins/a/alipay/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | alipay | [View logs](/logs/plugins/a/alipay/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | asyncify-boot | antom-payments | [View logs](/logs/plugins/a/antom-payments/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | jspi-boot | antom-payments | [View logs](/logs/plugins/a/antom-payments/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | asyncify-boot | antom-payments | [View logs](/logs/plugins/a/antom-payments/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | jspi-boot | antom-payments | [View logs](/logs/plugins/a/antom-payments/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | asyncify-boot | antom-payments | [View logs](/logs/plugins/a/antom-payments/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | jspi-boot | antom-payments | [View logs](/logs/plugins/a/antom-payments/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | ast-sqlite-boot | amazon-showcase-wordpress-widget | [View logs](/logs/plugins/a/amazon-showcase-wordpress-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | asyncify-boot | amazon-showcase-wordpress-widget | [View logs](/logs/plugins/a/amazon-showcase-wordpress-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | jspi-boot | amazon-showcase-wordpress-widget | [View logs](/logs/plugins/a/amazon-showcase-wordpress-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | ast-sqlite-boot | amazon-showcase-wordpress-widget | [View logs](/logs/plugins/a/amazon-showcase-wordpress-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | asyncify-boot | amazon-showcase-wordpress-widget | [View logs](/logs/plugins/a/amazon-showcase-wordpress-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | jspi-boot | amazon-showcase-wordpress-widget | [View logs](/logs/plugins/a/amazon-showcase-wordpress-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | ast-sqlite-boot | amazon-showcase-wordpress-widget | [View logs](/logs/plugins/a/amazon-showcase-wordpress-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | asyncify-boot | amazon-showcase-wordpress-widget | [View logs](/logs/plugins/a/amazon-showcase-wordpress-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | jspi-boot | amazon-showcase-wordpress-widget | [View logs](/logs/plugins/a/amazon-showcase-wordpress-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | ast-sqlite-boot | ambrosite-post-formats-widget | [View logs](/logs/plugins/a/ambrosite-post-formats-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | asyncify-boot | ambrosite-post-formats-widget | [View logs](/logs/plugins/a/ambrosite-post-formats-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | jspi-boot | ambrosite-post-formats-widget | [View logs](/logs/plugins/a/ambrosite-post-formats-widget/error.json) |
@@ -44,6 +95,15 @@
 | Unexpected token in MySQL query: title. | asyncify-boot | ajax-search | [View logs](/logs/plugins/a/ajax-search/error.json) |
 | Unexpected token in MySQL query: title. | jspi-boot | ajax-search | [View logs](/logs/plugins/a/ajax-search/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | ast-sqlite-boot | automatic-youtube-video-posts | [View logs](/logs/plugins/a/automatic-youtube-video-posts/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | ast-sqlite-boot | alt-link-text | [View logs](/logs/plugins/a/alt-link-text/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | asyncify-boot | alt-link-text | [View logs](/logs/plugins/a/alt-link-text/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | jspi-boot | alt-link-text | [View logs](/logs/plugins/a/alt-link-text/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | ast-sqlite-boot | alt-link-text | [View logs](/logs/plugins/a/alt-link-text/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | asyncify-boot | alt-link-text | [View logs](/logs/plugins/a/alt-link-text/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | jspi-boot | alt-link-text | [View logs](/logs/plugins/a/alt-link-text/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | ast-sqlite-boot | alt-link-text | [View logs](/logs/plugins/a/alt-link-text/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | asyncify-boot | alt-link-text | [View logs](/logs/plugins/a/alt-link-text/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | jspi-boot | alt-link-text | [View logs](/logs/plugins/a/alt-link-text/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | ast-sqlite-boot | artemis-payment-gateway | [View logs](/logs/plugins/a/artemis-payment-gateway/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | asyncify-boot | artemis-payment-gateway | [View logs](/logs/plugins/a/artemis-payment-gateway/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | jspi-boot | artemis-payment-gateway | [View logs](/logs/plugins/a/artemis-payment-gateway/error.json) |
@@ -65,6 +125,24 @@
 | Unexpected token in MySQL query: title. | ast-sqlite-boot | advanced-navigation-menus | [View logs](/logs/plugins/a/advanced-navigation-menus/error.json) |
 | Unexpected token in MySQL query: title. | asyncify-boot | advanced-navigation-menus | [View logs](/logs/plugins/a/advanced-navigation-menus/error.json) |
 | Unexpected token in MySQL query: title. | jspi-boot | advanced-navigation-menus | [View logs](/logs/plugins/a/advanced-navigation-menus/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | ast-sqlite-boot | atpic | [View logs](/logs/plugins/a/atpic/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | asyncify-boot | atpic | [View logs](/logs/plugins/a/atpic/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | jspi-boot | atpic | [View logs](/logs/plugins/a/atpic/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | ast-sqlite-boot | atpic | [View logs](/logs/plugins/a/atpic/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | asyncify-boot | atpic | [View logs](/logs/plugins/a/atpic/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | jspi-boot | atpic | [View logs](/logs/plugins/a/atpic/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | ast-sqlite-boot | atpic | [View logs](/logs/plugins/a/atpic/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | asyncify-boot | atpic | [View logs](/logs/plugins/a/atpic/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | jspi-boot | atpic | [View logs](/logs/plugins/a/atpic/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | ast-sqlite-boot | admin-ajax-php-no-thank-you | [View logs](/logs/plugins/a/admin-ajax-php-no-thank-you/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | asyncify-boot | admin-ajax-php-no-thank-you | [View logs](/logs/plugins/a/admin-ajax-php-no-thank-you/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | jspi-boot | admin-ajax-php-no-thank-you | [View logs](/logs/plugins/a/admin-ajax-php-no-thank-you/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | ast-sqlite-boot | admin-ajax-php-no-thank-you | [View logs](/logs/plugins/a/admin-ajax-php-no-thank-you/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | asyncify-boot | admin-ajax-php-no-thank-you | [View logs](/logs/plugins/a/admin-ajax-php-no-thank-you/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | jspi-boot | admin-ajax-php-no-thank-you | [View logs](/logs/plugins/a/admin-ajax-php-no-thank-you/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | ast-sqlite-boot | admin-ajax-php-no-thank-you | [View logs](/logs/plugins/a/admin-ajax-php-no-thank-you/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | asyncify-boot | admin-ajax-php-no-thank-you | [View logs](/logs/plugins/a/admin-ajax-php-no-thank-you/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | jspi-boot | admin-ajax-php-no-thank-you | [View logs](/logs/plugins/a/admin-ajax-php-no-thank-you/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | ast-sqlite-boot | aprsfi-search-widget | [View logs](/logs/plugins/a/aprsfi-search-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | asyncify-boot | aprsfi-search-widget | [View logs](/logs/plugins/a/aprsfi-search-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | jspi-boot | aprsfi-search-widget | [View logs](/logs/plugins/a/aprsfi-search-widget/error.json) |
@@ -77,6 +155,12 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | ast-sqlite-boot | adminpress | [View logs](/logs/plugins/a/adminpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | asyncify-boot | adminpress | [View logs](/logs/plugins/a/adminpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | jspi-boot | adminpress | [View logs](/logs/plugins/a/adminpress/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | asyncify-boot | attendance-management-for-lifterlms | [View logs](/logs/plugins/a/attendance-management-for-lifterlms/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | jspi-boot | attendance-management-for-lifterlms | [View logs](/logs/plugins/a/attendance-management-for-lifterlms/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | asyncify-boot | attendance-management-for-lifterlms | [View logs](/logs/plugins/a/attendance-management-for-lifterlms/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | jspi-boot | attendance-management-for-lifterlms | [View logs](/logs/plugins/a/attendance-management-for-lifterlms/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | asyncify-boot | attendance-management-for-lifterlms | [View logs](/logs/plugins/a/attendance-management-for-lifterlms/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | jspi-boot | attendance-management-for-lifterlms | [View logs](/logs/plugins/a/attendance-management-for-lifterlms/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | ad-engine | [View logs](/logs/plugins/a/ad-engine/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | asyncify-boot | ad-engine | [View logs](/logs/plugins/a/ad-engine/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | jspi-boot | ad-engine | [View logs](/logs/plugins/a/ad-engine/error.json) |
@@ -126,6 +210,15 @@
 | MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | active-directory-sso | [View logs](/logs/plugins/a/active-directory-sso/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | asyncify-boot | active-directory-sso | [View logs](/logs/plugins/a/active-directory-sso/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | jspi-boot | active-directory-sso | [View logs](/logs/plugins/a/active-directory-sso/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | ast-sqlite-boot | adsenseoptimizer | [View logs](/logs/plugins/a/adsenseoptimizer/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | asyncify-boot | adsenseoptimizer | [View logs](/logs/plugins/a/adsenseoptimizer/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | jspi-boot | adsenseoptimizer | [View logs](/logs/plugins/a/adsenseoptimizer/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | ast-sqlite-boot | adsenseoptimizer | [View logs](/logs/plugins/a/adsenseoptimizer/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | asyncify-boot | adsenseoptimizer | [View logs](/logs/plugins/a/adsenseoptimizer/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | jspi-boot | adsenseoptimizer | [View logs](/logs/plugins/a/adsenseoptimizer/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | ast-sqlite-boot | adsenseoptimizer | [View logs](/logs/plugins/a/adsenseoptimizer/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | asyncify-boot | adsenseoptimizer | [View logs](/logs/plugins/a/adsenseoptimizer/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | jspi-boot | adsenseoptimizer | [View logs](/logs/plugins/a/adsenseoptimizer/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | apcu | [View logs](/logs/plugins/a/apcu/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | asyncify-boot | apcu | [View logs](/logs/plugins/a/apcu/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | jspi-boot | apcu | [View logs](/logs/plugins/a/apcu/error.json) |
@@ -144,6 +237,15 @@
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | amazon-ses-and-dkim-mailer | [View logs](/logs/plugins/a/amazon-ses-and-dkim-mailer/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | amazon-ses-and-dkim-mailer | [View logs](/logs/plugins/a/amazon-ses-and-dkim-mailer/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | amazon-ses-and-dkim-mailer | [View logs](/logs/plugins/a/amazon-ses-and-dkim-mailer/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | ast-sqlite-boot | autotopo | [View logs](/logs/plugins/a/autotopo/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | asyncify-boot | autotopo | [View logs](/logs/plugins/a/autotopo/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | jspi-boot | autotopo | [View logs](/logs/plugins/a/autotopo/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | ast-sqlite-boot | autotopo | [View logs](/logs/plugins/a/autotopo/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | asyncify-boot | autotopo | [View logs](/logs/plugins/a/autotopo/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | jspi-boot | autotopo | [View logs](/logs/plugins/a/autotopo/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | ast-sqlite-boot | autotopo | [View logs](/logs/plugins/a/autotopo/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | asyncify-boot | autotopo | [View logs](/logs/plugins/a/autotopo/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | jspi-boot | autotopo | [View logs](/logs/plugins/a/autotopo/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | ast-sqlite-boot | aam-protected-media-files | [View logs](/logs/plugins/a/aam-protected-media-files/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | asyncify-boot | aam-protected-media-files | [View logs](/logs/plugins/a/aam-protected-media-files/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | jspi-boot | aam-protected-media-files | [View logs](/logs/plugins/a/aam-protected-media-files/error.json) |
@@ -151,9 +253,21 @@
 | Unexpected token in MySQL query: title. | asyncify-boot | aam-protected-media-files | [View logs](/logs/plugins/a/aam-protected-media-files/error.json) |
 | Unexpected token in MySQL query: title. | jspi-boot | aam-protected-media-files | [View logs](/logs/plugins/a/aam-protected-media-files/error.json) |
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | any-popup | [View logs](/logs/plugins/a/any-popup/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | ast-sqlite-boot | advanced-responsive-video-embedder | [View logs](/logs/plugins/a/advanced-responsive-video-embedder/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | ast-sqlite-boot | advanced-responsive-video-embedder | [View logs](/logs/plugins/a/advanced-responsive-video-embedder/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | ast-sqlite-boot | advanced-responsive-video-embedder | [View logs](/logs/plugins/a/advanced-responsive-video-embedder/error.json) |
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | avh-themed-by-browser | [View logs](/logs/plugins/a/avh-themed-by-browser/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | avh-themed-by-browser | [View logs](/logs/plugins/a/avh-themed-by-browser/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | avh-themed-by-browser | [View logs](/logs/plugins/a/avh-themed-by-browser/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | ast-sqlite-boot | amazon-widgets-shortcodes | [View logs](/logs/plugins/a/amazon-widgets-shortcodes/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | asyncify-boot | amazon-widgets-shortcodes | [View logs](/logs/plugins/a/amazon-widgets-shortcodes/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_option. | jspi-boot | amazon-widgets-shortcodes | [View logs](/logs/plugins/a/amazon-widgets-shortcodes/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | ast-sqlite-boot | amazon-widgets-shortcodes | [View logs](/logs/plugins/a/amazon-widgets-shortcodes/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | asyncify-boot | amazon-widgets-shortcodes | [View logs](/logs/plugins/a/amazon-widgets-shortcodes/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | jspi-boot | amazon-widgets-shortcodes | [View logs](/logs/plugins/a/amazon-widgets-shortcodes/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | ast-sqlite-boot | amazon-widgets-shortcodes | [View logs](/logs/plugins/a/amazon-widgets-shortcodes/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | asyncify-boot | amazon-widgets-shortcodes | [View logs](/logs/plugins/a/amazon-widgets-shortcodes/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | jspi-boot | amazon-widgets-shortcodes | [View logs](/logs/plugins/a/amazon-widgets-shortcodes/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | ast-sqlite-boot | advanced-testimonial-generator | [View logs](/logs/plugins/a/advanced-testimonial-generator/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | asyncify-boot | advanced-testimonial-generator | [View logs](/logs/plugins/a/advanced-testimonial-generator/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | jspi-boot | advanced-testimonial-generator | [View logs](/logs/plugins/a/advanced-testimonial-generator/error.json) |
@@ -281,12 +395,24 @@
 | Unknown operation: MODIFY. | ast-sqlite-boot | cjte-imagezoomer | [View logs](/logs/plugins/c/cjte-imagezoomer/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | cjte-imagezoomer | [View logs](/logs/plugins/c/cjte-imagezoomer/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | cjte-imagezoomer | [View logs](/logs/plugins/c/cjte-imagezoomer/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | crowdclock | [View logs](/logs/plugins/c/crowdclock/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | crowdclock | [View logs](/logs/plugins/c/crowdclock/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | crowdclock | [View logs](/logs/plugins/c/crowdclock/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | china-pm25 | [View logs](/logs/plugins/c/china-pm25/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | china-pm25 | [View logs](/logs/plugins/c/china-pm25/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | china-pm25 | [View logs](/logs/plugins/c/china-pm25/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | ast-sqlite-boot | copy-protect | [View logs](/logs/plugins/c/copy-protect/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | asyncify-boot | copy-protect | [View logs](/logs/plugins/c/copy-protect/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | jspi-boot | copy-protect | [View logs](/logs/plugins/c/copy-protect/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | cc-flickr-widget | [View logs](/logs/plugins/c/cc-flickr-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | cc-flickr-widget | [View logs](/logs/plugins/c/cc-flickr-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | cc-flickr-widget | [View logs](/logs/plugins/c/cc-flickr-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | category-clouds-widget | [View logs](/logs/plugins/c/category-clouds-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | category-clouds-widget | [View logs](/logs/plugins/c/category-clouds-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | category-clouds-widget | [View logs](/logs/plugins/c/category-clouds-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | cpf-e-cnpj-para-contact-form-7 | [View logs](/logs/plugins/c/cpf-e-cnpj-para-contact-form-7/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | cpf-e-cnpj-para-contact-form-7 | [View logs](/logs/plugins/c/cpf-e-cnpj-para-contact-form-7/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | cpf-e-cnpj-para-contact-form-7 | [View logs](/logs/plugins/c/cpf-e-cnpj-para-contact-form-7/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | clean-up-booster | [View logs](/logs/plugins/c/clean-up-booster/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | clean-up-booster | [View logs](/logs/plugins/c/clean-up-booster/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | clean-up-booster | [View logs](/logs/plugins/c/clean-up-booster/error.json) |
@@ -299,23 +425,58 @@
 | Unknown operation: MODIFY. | ast-sqlite-boot | chartboot-for-wordpress | [View logs](/logs/plugins/c/chartboot-for-wordpress/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | chartboot-for-wordpress | [View logs](/logs/plugins/c/chartboot-for-wordpress/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | chartboot-for-wordpress | [View logs](/logs/plugins/c/chartboot-for-wordpress/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | couponbirds-product-size-charts-for-woocommerce | [View logs](/logs/plugins/c/couponbirds-product-size-charts-for-woocommerce/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | couponbirds-product-size-charts-for-woocommerce | [View logs](/logs/plugins/c/couponbirds-product-size-charts-for-woocommerce/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | couponbirds-product-size-charts-for-woocommerce | [View logs](/logs/plugins/c/couponbirds-product-size-charts-for-woocommerce/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | current-date-and-time | [View logs](/logs/plugins/c/current-date-and-time/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | current-date-and-time | [View logs](/logs/plugins/c/current-date-and-time/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | current-date-and-time | [View logs](/logs/plugins/c/current-date-and-time/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | comment-form-quicktags | [View logs](/logs/plugins/c/comment-form-quicktags/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | comment-form-quicktags | [View logs](/logs/plugins/c/comment-form-quicktags/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | comment-form-quicktags | [View logs](/logs/plugins/c/comment-form-quicktags/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | cellulant-tingg-checkout | [View logs](/logs/plugins/c/cellulant-tingg-checkout/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | cellulant-tingg-checkout | [View logs](/logs/plugins/c/cellulant-tingg-checkout/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | cellulant-tingg-checkout | [View logs](/logs/plugins/c/cellulant-tingg-checkout/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | connect-with-me | [View logs](/logs/plugins/c/connect-with-me/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | connect-with-me | [View logs](/logs/plugins/c/connect-with-me/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | connect-with-me | [View logs](/logs/plugins/c/connect-with-me/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | content-randomizer | [View logs](/logs/plugins/c/content-randomizer/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | content-randomizer | [View logs](/logs/plugins/c/content-randomizer/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | content-randomizer | [View logs](/logs/plugins/c/content-randomizer/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | cj-revision-feedback | [View logs](/logs/plugins/c/cj-revision-feedback/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | cj-revision-feedback | [View logs](/logs/plugins/c/cj-revision-feedback/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | cj-revision-feedback | [View logs](/logs/plugins/c/cj-revision-feedback/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | category-content-header | [View logs](/logs/plugins/c/category-content-header/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | category-content-header | [View logs](/logs/plugins/c/category-content-header/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | category-content-header | [View logs](/logs/plugins/c/category-content-header/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | contentqube | [View logs](/logs/plugins/c/contentqube/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | clickbank-ads | [View logs](/logs/plugins/c/clickbank-ads/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | clickbank-ads | [View logs](/logs/plugins/c/clickbank-ads/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | clickbank-ads | [View logs](/logs/plugins/c/clickbank-ads/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | change-font-size | [View logs](/logs/plugins/c/change-font-size/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | change-font-size | [View logs](/logs/plugins/c/change-font-size/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | change-font-size | [View logs](/logs/plugins/c/change-font-size/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | chatx-ai | [View logs](/logs/plugins/c/chatx-ai/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | chatx-ai | [View logs](/logs/plugins/c/chatx-ai/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | chatx-ai | [View logs](/logs/plugins/c/chatx-ai/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | cop-pdf-attachment-menu | [View logs](/logs/plugins/c/cop-pdf-attachment-menu/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | cop-pdf-attachment-menu | [View logs](/logs/plugins/c/cop-pdf-attachment-menu/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | cop-pdf-attachment-menu | [View logs](/logs/plugins/c/cop-pdf-attachment-menu/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | contributors-link-plugin | [View logs](/logs/plugins/c/contributors-link-plugin/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | contributors-link-plugin | [View logs](/logs/plugins/c/contributors-link-plugin/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | contributors-link-plugin | [View logs](/logs/plugins/c/contributors-link-plugin/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | crocodoc | [View logs](/logs/plugins/c/crocodoc/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | crocodoc | [View logs](/logs/plugins/c/crocodoc/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | crocodoc | [View logs](/logs/plugins/c/crocodoc/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | contus-video-galleryversion-10 | [View logs](/logs/plugins/c/contus-video-galleryversion-10/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | contus-video-galleryversion-10 | [View logs](/logs/plugins/c/contus-video-galleryversion-10/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | contus-video-galleryversion-10 | [View logs](/logs/plugins/c/contus-video-galleryversion-10/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | contests-from-rewards-fuel | [View logs](/logs/plugins/c/contests-from-rewards-fuel/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | cobru-for-wc | [View logs](/logs/plugins/c/cobru-for-wc/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | cobru-for-wc | [View logs](/logs/plugins/c/cobru-for-wc/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | cobru-for-wc | [View logs](/logs/plugins/c/cobru-for-wc/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | cheerlink-ai-chat | [View logs](/logs/plugins/c/cheerlink-ai-chat/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | cheerlink-ai-chat | [View logs](/logs/plugins/c/cheerlink-ai-chat/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | clinical-memcachier | [View logs](/logs/plugins/c/clinical-memcachier/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | clinical-memcachier | [View logs](/logs/plugins/c/clinical-memcachier/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | clinical-memcachier | [View logs](/logs/plugins/c/clinical-memcachier/error.json) |
@@ -325,6 +486,9 @@
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | clean-options | [View logs](/logs/plugins/c/clean-options/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | clean-options | [View logs](/logs/plugins/c/clean-options/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | clean-options | [View logs](/logs/plugins/c/clean-options/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | cellulant-tingg-payment-gateway | [View logs](/logs/plugins/c/cellulant-tingg-payment-gateway/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | asyncify-boot | cellulant-tingg-payment-gateway | [View logs](/logs/plugins/c/cellulant-tingg-payment-gateway/error.json) |
+| Data type expected in MySQL query, unknown token received: (. | jspi-boot | cellulant-tingg-payment-gateway | [View logs](/logs/plugins/c/cellulant-tingg-payment-gateway/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | doi-indentifier | [View logs](/logs/plugins/d/doi-indentifier/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | doi-indentifier | [View logs](/logs/plugins/d/doi-indentifier/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | doi-indentifier | [View logs](/logs/plugins/d/doi-indentifier/error.json) |
@@ -3189,6 +3353,9 @@ Backtra
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | wc-beautifier | [View logs](/logs/plugins/w/wc-beautifier/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | wc-beautifier | [View logs](/logs/plugins/w/wc-beautifier/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | wc-beautifier | [View logs](/logs/plugins/w/wc-beautifier/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | ast-sqlite-boot | wc-clictopay-payment-gateway | [View logs](/logs/plugins/w/wc-clictopay-payment-gateway/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | asyncify-boot | wc-clictopay-payment-gateway | [View logs](/logs/plugins/w/wc-clictopay-payment-gateway/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | jspi-boot | wc-clictopay-payment-gateway | [View logs](/logs/plugins/w/wc-clictopay-payment-gateway/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wc-customer-source | [View logs](/logs/plugins/w/wc-customer-source/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wc-customer-source | [View logs](/logs/plugins/w/wc-customer-source/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wc-customer-source | [View logs](/logs/plugins/w/wc-customer-source/error.json) |
@@ -3228,6 +3395,9 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports. | ast-sqlite-boot | wc-saman-gateway | [View logs](/logs/plugins/w/wc-saman-gateway/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports. | asyncify-boot | wc-saman-gateway | [View logs](/logs/plugins/w/wc-saman-gateway/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports. | jspi-boot | wc-saman-gateway | [View logs](/logs/plugins/w/wc-saman-gateway/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | ast-sqlite-boot | wc-shipping-tikijne | [View logs](/logs/plugins/w/wc-shipping-tikijne/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | asyncify-boot | wc-shipping-tikijne | [View logs](/logs/plugins/w/wc-shipping-tikijne/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | jspi-boot | wc-shipping-tikijne | [View logs](/logs/plugins/w/wc-shipping-tikijne/error.json) |
 | Unexpected token in MySQL query: isValid. | ast-sqlite-boot | wc-sofinco-3xcb | [View logs](/logs/plugins/w/wc-sofinco-3xcb/error.json) |
 | Unexpected token in MySQL query: isValid. | asyncify-boot | wc-sofinco-3xcb | [View logs](/logs/plugins/w/wc-sofinco-3xcb/error.json) |
 | Unexpected token in MySQL query: isValid. | jspi-boot | wc-sofinco-3xcb | [View logs](/logs/plugins/w/wc-sofinco-3xcb/error.json) |
@@ -3404,6 +3574,9 @@ Backtra
 | Unexpected token in MySQL query: withAttendance. | ast-sqlite-boot | woocommerce-ajax-filters | [View logs](/logs/plugins/w/woocommerce-ajax-filters/error.json) |
 | Unexpected token in MySQL query: withAttendance. | asyncify-boot | woocommerce-ajax-filters | [View logs](/logs/plugins/w/woocommerce-ajax-filters/error.json) |
 | Unexpected token in MySQL query: withAttendance. | jspi-boot | woocommerce-ajax-filters | [View logs](/logs/plugins/w/woocommerce-ajax-filters/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | ast-sqlite-boot | woocommerce-conversion-tracking-booster | [View logs](/logs/plugins/w/woocommerce-conversion-tracking-booster/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | asyncify-boot | woocommerce-conversion-tracking-booster | [View logs](/logs/plugins/w/woocommerce-conversion-tracking-booster/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | jspi-boot | woocommerce-conversion-tracking-booster | [View logs](/logs/plugins/w/woocommerce-conversion-tracking-booster/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whtp_hitinfo. | ast-sqlite-boot | woocommerce-login-and-registration | [View logs](/logs/plugins/w/woocommerce-login-and-registration/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whtp_hitinfo. | asyncify-boot | woocommerce-login-and-registration | [View logs](/logs/plugins/w/woocommerce-login-and-registration/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whtp_hitinfo. | jspi-boot | woocommerce-login-and-registration | [View logs](/logs/plugins/w/woocommerce-login-and-registration/error.json) |
@@ -3531,6 +3704,9 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-core-contributions-widget | [View logs](/logs/plugins/w/wp-core-contributions-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wp-core-contributions-widget | [View logs](/logs/plugins/w/wp-core-contributions-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wp-core-contributions-widget | [View logs](/logs/plugins/w/wp-core-contributions-widget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | ast-sqlite-boot | wp-coupon-system | [View logs](/logs/plugins/w/wp-coupon-system/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | asyncify-boot | wp-coupon-system | [View logs](/logs/plugins/w/wp-coupon-system/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | jspi-boot | wp-coupon-system | [View logs](/logs/plugins/w/wp-coupon-system/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports. | asyncify-boot | wp-coupons-and-deals | [View logs](/logs/plugins/w/wp-coupons-and-deals/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports. | jspi-boot | wp-coupons-and-deals | [View logs](/logs/plugins/w/wp-coupons-and-deals/error.json) |
 | Unknown query type: . | ast-sqlite-boot | wp-currency-converter | [View logs](/logs/plugins/w/wp-currency-converter/error.json) |
@@ -3539,6 +3715,9 @@ Backtra
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | wp-dealpixel-ads | [View logs](/logs/plugins/w/wp-dealpixel-ads/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | wp-dealpixel-ads | [View logs](/logs/plugins/w/wp-dealpixel-ads/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | wp-dealpixel-ads | [View logs](/logs/plugins/w/wp-dealpixel-ads/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | ast-sqlite-boot | wp-display-header | [View logs](/logs/plugins/w/wp-display-header/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | asyncify-boot | wp-display-header | [View logs](/logs/plugins/w/wp-display-header/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | jspi-boot | wp-display-header | [View logs](/logs/plugins/w/wp-display-header/error.json) |
 | Unexpected token in MySQL query: isValid. | ast-sqlite-boot | wp-done-this | [View logs](/logs/plugins/w/wp-done-this/error.json) |
 | Unexpected token in MySQL query: isValid. | asyncify-boot | wp-done-this | [View logs](/logs/plugins/w/wp-done-this/error.json) |
 | Unexpected token in MySQL query: isValid. | jspi-boot | wp-done-this | [View logs](/logs/plugins/w/wp-done-this/error.json) |
@@ -3620,6 +3799,9 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | ast-sqlite-boot | wp-jump | [View logs](/logs/plugins/w/wp-jump/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | asyncify-boot | wp-jump | [View logs](/logs/plugins/w/wp-jump/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | jspi-boot | wp-jump | [View logs](/logs/plugins/w/wp-jump/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | ast-sqlite-boot | wp-kit-cn | [View logs](/logs/plugins/w/wp-kit-cn/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | asyncify-boot | wp-kit-cn | [View logs](/logs/plugins/w/wp-kit-cn/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | jspi-boot | wp-kit-cn | [View logs](/logs/plugins/w/wp-kit-cn/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whtp_hitinfo. | ast-sqlite-boot | wp-limits | [View logs](/logs/plugins/w/wp-limits/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whtp_hitinfo. | asyncify-boot | wp-limits | [View logs](/logs/plugins/w/wp-limits/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whtp_hitinfo. | jspi-boot | wp-limits | [View logs](/logs/plugins/w/wp-limits/error.json) |
@@ -3656,9 +3838,15 @@ Backtra
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | wp-moods | [View logs](/logs/plugins/w/wp-moods/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | wp-moods | [View logs](/logs/plugins/w/wp-moods/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | wp-moods | [View logs](/logs/plugins/w/wp-moods/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | ast-sqlite-boot | wp-morph | [View logs](/logs/plugins/w/wp-morph/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | asyncify-boot | wp-morph | [View logs](/logs/plugins/w/wp-morph/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | jspi-boot | wp-morph | [View logs](/logs/plugins/w/wp-morph/error.json) |
 | Unknown query type: . | ast-sqlite-boot | wp-news-slider-widgets | [View logs](/logs/plugins/w/wp-news-slider-widgets/error.json) |
 | Unknown query type: . | asyncify-boot | wp-news-slider-widgets | [View logs](/logs/plugins/w/wp-news-slider-widgets/error.json) |
 | Unknown query type: . | jspi-boot | wp-news-slider-widgets | [View logs](/logs/plugins/w/wp-news-slider-widgets/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | ast-sqlite-boot | wp-news-ticker | [View logs](/logs/plugins/w/wp-news-ticker/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | asyncify-boot | wp-news-ticker | [View logs](/logs/plugins/w/wp-news-ticker/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | jspi-boot | wp-news-ticker | [View logs](/logs/plugins/w/wp-news-ticker/error.json) |
 | Unexpected token in MySQL query: isValid. | ast-sqlite-boot | wp-pde | [View logs](/logs/plugins/w/wp-pde/error.json) |
 | Unexpected token in MySQL query: isValid. | asyncify-boot | wp-pde | [View logs](/logs/plugins/w/wp-pde/error.json) |
 | Unexpected token in MySQL query: isValid. | jspi-boot | wp-pde | [View logs](/logs/plugins/w/wp-pde/error.json) |
@@ -3746,6 +3934,9 @@ Backtra
 | Unknown query type: . | ast-sqlite-boot | wp-server-uptime-bot | [View logs](/logs/plugins/w/wp-server-uptime-bot/error.json) |
 | Unknown query type: . | asyncify-boot | wp-server-uptime-bot | [View logs](/logs/plugins/w/wp-server-uptime-bot/error.json) |
 | Unknown query type: . | jspi-boot | wp-server-uptime-bot | [View logs](/logs/plugins/w/wp-server-uptime-bot/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | ast-sqlite-boot | wp-shortify | [View logs](/logs/plugins/w/wp-shortify/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | asyncify-boot | wp-shortify | [View logs](/logs/plugins/w/wp-shortify/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | jspi-boot | wp-shortify | [View logs](/logs/plugins/w/wp-shortify/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | wp-simple-event-management-system | [View logs](/logs/plugins/w/wp-simple-event-management-system/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | wp-simple-event-management-system | [View logs](/logs/plugins/w/wp-simple-event-management-system/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | wp-simple-event-management-system | [View logs](/logs/plugins/w/wp-simple-event-management-system/error.json) |
@@ -3805,6 +3996,8 @@ Backtra
 | Unexpected token in MySQL query: willAttend. | jspi-boot | wp-ultimate-csv-importer | [View logs](/logs/plugins/w/wp-ultimate-csv-importer/error.json) |
 | Unexpected token in MySQL query: withAttendance. | asyncify-boot | wp-ultimate-csv-importer | [View logs](/logs/plugins/w/wp-ultimate-csv-importer/error.json) |
 | Unexpected token in MySQL query: withAttendance. | jspi-boot | wp-ultimate-csv-importer | [View logs](/logs/plugins/w/wp-ultimate-csv-importer/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | asyncify-boot | wp-undelete-restore-deleted-posts | [View logs](/logs/plugins/w/wp-undelete-restore-deleted-posts/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | jspi-boot | wp-undelete-restore-deleted-posts | [View logs](/logs/plugins/w/wp-undelete-restore-deleted-posts/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-user-control | [View logs](/logs/plugins/w/wp-user-control/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wp-user-control | [View logs](/logs/plugins/w/wp-user-control/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wp-user-control | [View logs](/logs/plugins/w/wp-user-control/error.json) |
@@ -3814,6 +4007,9 @@ Backtra
 | Unknown operation: MODIFY. | ast-sqlite-boot | wp-userlogin | [View logs](/logs/plugins/w/wp-userlogin/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | wp-userlogin | [View logs](/logs/plugins/w/wp-userlogin/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | wp-userlogin | [View logs](/logs/plugins/w/wp-userlogin/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | ast-sqlite-boot | wp-visualpagination | [View logs](/logs/plugins/w/wp-visualpagination/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | asyncify-boot | wp-visualpagination | [View logs](/logs/plugins/w/wp-visualpagination/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | jspi-boot | wp-visualpagination | [View logs](/logs/plugins/w/wp-visualpagination/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports. | ast-sqlite-boot | wp-wizard-cloak | [View logs](/logs/plugins/w/wp-wizard-cloak/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports. | asyncify-boot | wp-wizard-cloak | [View logs](/logs/plugins/w/wp-wizard-cloak/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports. | jspi-boot | wp-wizard-cloak | [View logs](/logs/plugins/w/wp-wizard-cloak/error.json) |
@@ -3841,6 +4037,9 @@ Backtra
 | Unexpected token in MySQL query: withAttendance. | ast-sqlite-boot | wpdr-simple-downloads | [View logs](/logs/plugins/w/wpdr-simple-downloads/error.json) |
 | Unexpected token in MySQL query: withAttendance. | asyncify-boot | wpdr-simple-downloads | [View logs](/logs/plugins/w/wpdr-simple-downloads/error.json) |
 | Unexpected token in MySQL query: withAttendance. | jspi-boot | wpdr-simple-downloads | [View logs](/logs/plugins/w/wpdr-simple-downloads/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | ast-sqlite-boot | wpgmappity | [View logs](/logs/plugins/w/wpgmappity/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | asyncify-boot | wpgmappity | [View logs](/logs/plugins/w/wpgmappity/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | jspi-boot | wpgmappity | [View logs](/logs/plugins/w/wpgmappity/error.json) |
 | Unexpected token in MySQL query: isValid. | ast-sqlite-boot | wpklikandpay | [View logs](/logs/plugins/w/wpklikandpay/error.json) |
 | Unexpected token in MySQL query: isValid. | asyncify-boot | wpklikandpay | [View logs](/logs/plugins/w/wpklikandpay/error.json) |
 | Unexpected token in MySQL query: isValid. | jspi-boot | wpklikandpay | [View logs](/logs/plugins/w/wpklikandpay/error.json) |
@@ -3856,6 +4055,9 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports. | ast-sqlite-boot | wpml-translation-check | [View logs](/logs/plugins/w/wpml-translation-check/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports. | asyncify-boot | wpml-translation-check | [View logs](/logs/plugins/w/wpml-translation-check/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports. | jspi-boot | wpml-translation-check | [View logs](/logs/plugins/w/wpml-translation-check/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | ast-sqlite-boot | wpnsc-not-short-code | [View logs](/logs/plugins/w/wpnsc-not-short-code/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | asyncify-boot | wpnsc-not-short-code | [View logs](/logs/plugins/w/wpnsc-not-short-code/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | jspi-boot | wpnsc-not-short-code | [View logs](/logs/plugins/w/wpnsc-not-short-code/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | wpsso-wc-shipping-delivery-time | [View logs](/logs/plugins/w/wpsso-wc-shipping-delivery-time/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | wpsso-wc-shipping-delivery-time | [View logs](/logs/plugins/w/wpsso-wc-shipping-delivery-time/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | wpsso-wc-shipping-delivery-time | [View logs](/logs/plugins/w/wpsso-wc-shipping-delivery-time/error.json) |
