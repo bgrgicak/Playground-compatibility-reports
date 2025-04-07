@@ -68,6 +68,9 @@
 | Unexpected token in MySQL query: title. | ast-sqlite-boot | acf-google-maps-radius-search | [View logs](/logs/plugins/a/acf-google-maps-radius-search/error.json) |
 | Unexpected token in MySQL query: title. | asyncify-boot | acf-google-maps-radius-search | [View logs](/logs/plugins/a/acf-google-maps-radius-search/error.json) |
 | Unexpected token in MySQL query: title. | jspi-boot | acf-google-maps-radius-search | [View logs](/logs/plugins/a/acf-google-maps-radius-search/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | ast-sqlite-boot | adsense-manager | [View logs](/logs/plugins/a/adsense-manager/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | asyncify-boot | adsense-manager | [View logs](/logs/plugins/a/adsense-manager/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | jspi-boot | adsense-manager | [View logs](/logs/plugins/a/adsense-manager/error.json) |
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | another-one-tips-maker | [View logs](/logs/plugins/a/another-one-tips-maker/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | another-one-tips-maker | [View logs](/logs/plugins/a/another-one-tips-maker/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | another-one-tips-maker | [View logs](/logs/plugins/a/another-one-tips-maker/error.json) |
@@ -100,6 +103,9 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | ast-sqlite-boot | automatic-comment-scheduler | [View logs](/logs/plugins/a/automatic-comment-scheduler/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | asyncify-boot | automatic-comment-scheduler | [View logs](/logs/plugins/a/automatic-comment-scheduler/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | jspi-boot | automatic-comment-scheduler | [View logs](/logs/plugins/a/automatic-comment-scheduler/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | ast-sqlite-boot | acronyms | [View logs](/logs/plugins/a/acronyms/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | asyncify-boot | acronyms | [View logs](/logs/plugins/a/acronyms/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | jspi-boot | acronyms | [View logs](/logs/plugins/a/acronyms/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | ast-sqlite-boot | ajax-search | [View logs](/logs/plugins/a/ajax-search/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | asyncify-boot | ajax-search | [View logs](/logs/plugins/a/ajax-search/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | jspi-boot | ajax-search | [View logs](/logs/plugins/a/ajax-search/error.json) |
@@ -109,9 +115,15 @@
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | ast-sqlite-boot | awesome-code-highlighting | [View logs](/logs/plugins/a/awesome-code-highlighting/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | asyncify-boot | awesome-code-highlighting | [View logs](/logs/plugins/a/awesome-code-highlighting/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | jspi-boot | awesome-code-highlighting | [View logs](/logs/plugins/a/awesome-code-highlighting/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | ast-sqlite-boot | asteroids-widget | [View logs](/logs/plugins/a/asteroids-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | asyncify-boot | asteroids-widget | [View logs](/logs/plugins/a/asteroids-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | jspi-boot | asteroids-widget | [View logs](/logs/plugins/a/asteroids-widget/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | affinityclick-blog-integration | [View logs](/logs/plugins/a/affinityclick-blog-integration/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | affinityclick-blog-integration | [View logs](/logs/plugins/a/affinityclick-blog-integration/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | affinityclick-blog-integration | [View logs](/logs/plugins/a/affinityclick-blog-integration/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | ast-sqlite-boot | athena-post-expiration | [View logs](/logs/plugins/a/athena-post-expiration/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | asyncify-boot | athena-post-expiration | [View logs](/logs/plugins/a/athena-post-expiration/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | jspi-boot | athena-post-expiration | [View logs](/logs/plugins/a/athena-post-expiration/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | api2cart-bridge-connector | [View logs](/logs/plugins/a/api2cart-bridge-connector/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | api2cart-bridge-connector | [View logs](/logs/plugins/a/api2cart-bridge-connector/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | api2cart-bridge-connector | [View logs](/logs/plugins/a/api2cart-bridge-connector/error.json) |
@@ -124,6 +136,9 @@
 | SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | ast-sqlite-boot | all-twitter | [View logs](/logs/plugins/a/all-twitter/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | asyncify-boot | all-twitter | [View logs](/logs/plugins/a/all-twitter/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | jspi-boot | all-twitter | [View logs](/logs/plugins/a/all-twitter/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | ast-sqlite-boot | author-avatar-grid-widget | [View logs](/logs/plugins/a/author-avatar-grid-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | asyncify-boot | author-avatar-grid-widget | [View logs](/logs/plugins/a/author-avatar-grid-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | jspi-boot | author-avatar-grid-widget | [View logs](/logs/plugins/a/author-avatar-grid-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | ast-sqlite-boot | automatic-youtube-video-posts | [View logs](/logs/plugins/a/automatic-youtube-video-posts/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | ast-sqlite-boot | alt-link-text | [View logs](/logs/plugins/a/alt-link-text/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | asyncify-boot | alt-link-text | [View logs](/logs/plugins/a/alt-link-text/error.json) |
@@ -194,6 +209,9 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | ast-sqlite-boot | aprsfi-search-widget | [View logs](/logs/plugins/a/aprsfi-search-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | asyncify-boot | aprsfi-search-widget | [View logs](/logs/plugins/a/aprsfi-search-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | jspi-boot | aprsfi-search-widget | [View logs](/logs/plugins/a/aprsfi-search-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | ast-sqlite-boot | add-my-networks | [View logs](/logs/plugins/a/add-my-networks/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | asyncify-boot | add-my-networks | [View logs](/logs/plugins/a/add-my-networks/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | jspi-boot | add-my-networks | [View logs](/logs/plugins/a/add-my-networks/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | ast-sqlite-boot | affiliate-link-manager | [View logs](/logs/plugins/a/affiliate-link-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | asyncify-boot | affiliate-link-manager | [View logs](/logs/plugins/a/affiliate-link-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | jspi-boot | affiliate-link-manager | [View logs](/logs/plugins/a/affiliate-link-manager/error.json) |
@@ -209,6 +227,10 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | affiliate-hoover | [View logs](/logs/plugins/a/affiliate-hoover/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | affiliate-hoover | [View logs](/logs/plugins/a/affiliate-hoover/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | affiliate-hoover | [View logs](/logs/plugins/a/affiliate-hoover/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | asyncify-boot | accessqontrol | [View logs](/logs/plugins/a/accessqontrol/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | jspi-boot | accessqontrol | [View logs](/logs/plugins/a/accessqontrol/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | asyncify-boot | azan | [View logs](/logs/plugins/a/azan/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | jspi-boot | azan | [View logs](/logs/plugins/a/azan/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | ast-sqlite-boot | avenirsoft-directdownload | [View logs](/logs/plugins/a/avenirsoft-directdownload/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | asyncify-boot | avenirsoft-directdownload | [View logs](/logs/plugins/a/avenirsoft-directdownload/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | jspi-boot | avenirsoft-directdownload | [View logs](/logs/plugins/a/avenirsoft-directdownload/error.json) |
@@ -271,6 +293,9 @@
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | ammu-demo-import | [View logs](/logs/plugins/a/ammu-demo-import/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | ammu-demo-import | [View logs](/logs/plugins/a/ammu-demo-import/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | ammu-demo-import | [View logs](/logs/plugins/a/ammu-demo-import/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | ast-sqlite-boot | ami-link-hide-wp | [View logs](/logs/plugins/a/ami-link-hide-wp/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | asyncify-boot | ami-link-hide-wp | [View logs](/logs/plugins/a/ami-link-hide-wp/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | jspi-boot | ami-link-hide-wp | [View logs](/logs/plugins/a/ami-link-hide-wp/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | ast-sqlite-boot | act-as-user | [View logs](/logs/plugins/a/act-as-user/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | asyncify-boot | act-as-user | [View logs](/logs/plugins/a/act-as-user/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | jspi-boot | act-as-user | [View logs](/logs/plugins/a/act-as-user/error.json) |
@@ -353,6 +378,9 @@
 | SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | ast-sqlite-boot | astropress-by-ask-oracle | [View logs](/logs/plugins/a/astropress-by-ask-oracle/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | asyncify-boot | astropress-by-ask-oracle | [View logs](/logs/plugins/a/astropress-by-ask-oracle/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | jspi-boot | astropress-by-ask-oracle | [View logs](/logs/plugins/a/astropress-by-ask-oracle/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | ast-sqlite-boot | as-heard-on | [View logs](/logs/plugins/a/as-heard-on/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | asyncify-boot | as-heard-on | [View logs](/logs/plugins/a/as-heard-on/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | jspi-boot | as-heard-on | [View logs](/logs/plugins/a/as-heard-on/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | ast-sqlite-boot | active-directory-authentication | [View logs](/logs/plugins/a/active-directory-authentication/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | asyncify-boot | active-directory-authentication | [View logs](/logs/plugins/a/active-directory-authentication/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | jspi-boot | active-directory-authentication | [View logs](/logs/plugins/a/active-directory-authentication/error.json) |
@@ -537,12 +565,18 @@
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | ast-sqlite-boot | copy-protect | [View logs](/logs/plugins/c/copy-protect/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | asyncify-boot | copy-protect | [View logs](/logs/plugins/c/copy-protect/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | jspi-boot | copy-protect | [View logs](/logs/plugins/c/copy-protect/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | ast-sqlite-boot | clover-payments-for-woocommerce | [View logs](/logs/plugins/c/clover-payments-for-woocommerce/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | asyncify-boot | clover-payments-for-woocommerce | [View logs](/logs/plugins/c/clover-payments-for-woocommerce/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | jspi-boot | clover-payments-for-woocommerce | [View logs](/logs/plugins/c/clover-payments-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | cc-flickr-widget | [View logs](/logs/plugins/c/cc-flickr-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | cc-flickr-widget | [View logs](/logs/plugins/c/cc-flickr-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | cc-flickr-widget | [View logs](/logs/plugins/c/cc-flickr-widget/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | category-clouds-widget | [View logs](/logs/plugins/c/category-clouds-widget/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | category-clouds-widget | [View logs](/logs/plugins/c/category-clouds-widget/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | category-clouds-widget | [View logs](/logs/plugins/c/category-clouds-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | ast-sqlite-boot | csv-importer-for-pods | [View logs](/logs/plugins/c/csv-importer-for-pods/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | asyncify-boot | csv-importer-for-pods | [View logs](/logs/plugins/c/csv-importer-for-pods/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | jspi-boot | csv-importer-for-pods | [View logs](/logs/plugins/c/csv-importer-for-pods/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | cpf-e-cnpj-para-contact-form-7 | [View logs](/logs/plugins/c/cpf-e-cnpj-para-contact-form-7/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | cpf-e-cnpj-para-contact-form-7 | [View logs](/logs/plugins/c/cpf-e-cnpj-para-contact-form-7/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | cpf-e-cnpj-para-contact-form-7 | [View logs](/logs/plugins/c/cpf-e-cnpj-para-contact-form-7/error.json) |
@@ -552,6 +586,9 @@
 | Unknown operation: MODIFY. | ast-sqlite-boot | clean-up-booster | [View logs](/logs/plugins/c/clean-up-booster/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | clean-up-booster | [View logs](/logs/plugins/c/clean-up-booster/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | clean-up-booster | [View logs](/logs/plugins/c/clean-up-booster/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | ast-sqlite-boot | content-metadata-widget | [View logs](/logs/plugins/c/content-metadata-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | asyncify-boot | content-metadata-widget | [View logs](/logs/plugins/c/content-metadata-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | jspi-boot | content-metadata-widget | [View logs](/logs/plugins/c/content-metadata-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | chicago-food-widget-powered-by-everyblock | [View logs](/logs/plugins/c/chicago-food-widget-powered-by-everyblock/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | chicago-food-widget-powered-by-everyblock | [View logs](/logs/plugins/c/chicago-food-widget-powered-by-everyblock/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | chicago-food-widget-powered-by-everyblock | [View logs](/logs/plugins/c/chicago-food-widget-powered-by-everyblock/error.json) |
@@ -576,6 +613,7 @@
 | Unknown operation: CONVERT. | ast-sqlite-boot | comments-rating | [View logs](/logs/plugins/c/comments-rating/error.json) |
 | Unknown operation: CONVERT. | asyncify-boot | comments-rating | [View logs](/logs/plugins/c/comments-rating/error.json) |
 | Unknown operation: CONVERT. | jspi-boot | comments-rating | [View logs](/logs/plugins/c/comments-rating/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | ast-sqlite-boot | constant-contact-forms | [View logs](/logs/plugins/c/constant-contact-forms/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | connatix | [View logs](/logs/plugins/c/connatix/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | connatix | [View logs](/logs/plugins/c/connatix/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | connatix | [View logs](/logs/plugins/c/connatix/error.json) |
@@ -603,9 +641,15 @@
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | ast-sqlite-boot | cleverreach-extension | [View logs](/logs/plugins/c/cleverreach-extension/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | asyncify-boot | cleverreach-extension | [View logs](/logs/plugins/c/cleverreach-extension/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | jspi-boot | cleverreach-extension | [View logs](/logs/plugins/c/cleverreach-extension/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | ast-sqlite-boot | cf7-multislide | [View logs](/logs/plugins/c/cf7-multislide/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | asyncify-boot | cf7-multislide | [View logs](/logs/plugins/c/cf7-multislide/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | jspi-boot | cf7-multislide | [View logs](/logs/plugins/c/cf7-multislide/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | connect-with-me | [View logs](/logs/plugins/c/connect-with-me/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | connect-with-me | [View logs](/logs/plugins/c/connect-with-me/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | connect-with-me | [View logs](/logs/plugins/c/connect-with-me/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | ast-sqlite-boot | child-page-of-widget | [View logs](/logs/plugins/c/child-page-of-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | asyncify-boot | child-page-of-widget | [View logs](/logs/plugins/c/child-page-of-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | jspi-boot | child-page-of-widget | [View logs](/logs/plugins/c/child-page-of-widget/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | content-randomizer | [View logs](/logs/plugins/c/content-randomizer/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | content-randomizer | [View logs](/logs/plugins/c/content-randomizer/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | content-randomizer | [View logs](/logs/plugins/c/content-randomizer/error.json) |
@@ -640,6 +684,9 @@
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | ast-sqlite-boot | cleeng | [View logs](/logs/plugins/c/cleeng/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | asyncify-boot | cleeng | [View logs](/logs/plugins/c/cleeng/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | jspi-boot | cleeng | [View logs](/logs/plugins/c/cleeng/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | ast-sqlite-boot | company-general-contact-data | [View logs](/logs/plugins/c/company-general-contact-data/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | asyncify-boot | company-general-contact-data | [View logs](/logs/plugins/c/company-general-contact-data/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | jspi-boot | company-general-contact-data | [View logs](/logs/plugins/c/company-general-contact-data/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | cop-pdf-attachment-menu | [View logs](/logs/plugins/c/cop-pdf-attachment-menu/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | cop-pdf-attachment-menu | [View logs](/logs/plugins/c/cop-pdf-attachment-menu/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | cop-pdf-attachment-menu | [View logs](/logs/plugins/c/cop-pdf-attachment-menu/error.json) |
@@ -652,6 +699,9 @@
 | Unknown operation: CONVERT. | ast-sqlite-boot | click-pledge-paid-memberships-pro | [View logs](/logs/plugins/c/click-pledge-paid-memberships-pro/error.json) |
 | Unknown operation: CONVERT. | asyncify-boot | click-pledge-paid-memberships-pro | [View logs](/logs/plugins/c/click-pledge-paid-memberships-pro/error.json) |
 | Unknown operation: CONVERT. | jspi-boot | click-pledge-paid-memberships-pro | [View logs](/logs/plugins/c/click-pledge-paid-memberships-pro/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | ast-sqlite-boot | cluevo-lms-extension-gdocs-modules | [View logs](/logs/plugins/c/cluevo-lms-extension-gdocs-modules/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | asyncify-boot | cluevo-lms-extension-gdocs-modules | [View logs](/logs/plugins/c/cluevo-lms-extension-gdocs-modules/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | jspi-boot | cluevo-lms-extension-gdocs-modules | [View logs](/logs/plugins/c/cluevo-lms-extension-gdocs-modules/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | crocodoc | [View logs](/logs/plugins/c/crocodoc/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | crocodoc | [View logs](/logs/plugins/c/crocodoc/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | crocodoc | [View logs](/logs/plugins/c/crocodoc/error.json) |
@@ -671,6 +721,9 @@
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | ast-sqlite-boot | clickbank-in-text-affiliate-links | [View logs](/logs/plugins/c/clickbank-in-text-affiliate-links/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | asyncify-boot | clickbank-in-text-affiliate-links | [View logs](/logs/plugins/c/clickbank-in-text-affiliate-links/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | jspi-boot | clickbank-in-text-affiliate-links | [View logs](/logs/plugins/c/clickbank-in-text-affiliate-links/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | ast-sqlite-boot | contentde | [View logs](/logs/plugins/c/contentde/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | asyncify-boot | contentde | [View logs](/logs/plugins/c/contentde/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | jspi-boot | contentde | [View logs](/logs/plugins/c/contentde/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | cobru-for-wc | [View logs](/logs/plugins/c/cobru-for-wc/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | cobru-for-wc | [View logs](/logs/plugins/c/cobru-for-wc/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | cobru-for-wc | [View logs](/logs/plugins/c/cobru-for-wc/error.json) |
@@ -1799,6 +1852,39 @@ Backtra
 | Unknown create type: INDEX. | ast-sqlite-boot | most-popular-posts | [View logs](/logs/plugins/m/most-popular-posts/error.json) |
 | Unknown create type: INDEX. | asyncify-boot | most-popular-posts | [View logs](/logs/plugins/m/most-popular-posts/error.json) |
 | Unknown create type: INDEX. | jspi-boot | most-popular-posts | [View logs](/logs/plugins/m/most-popular-posts/error.json) |
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 93
+    [query] => INSERT INTO wp_massive_replacer (val1, val2) VALUES (WordPress','WordPress')
+    [str] => 
+(
+)
+. | ast-sqlite-boot | meulareta | [View logs](/logs/plugins/m/meulareta/error.json) |
+. | asyncify-boot | meulareta | [View logs](/logs/plugins/m/meulareta/error.json) |
+. | jspi-boot | meulareta | [View logs](/logs/plugins/m/meulareta/error.json) |
+| Array
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 93
+    [query] => INSERT INTO wp_massive_replacer (val1, val2) VALUES (WordPress','WordPress')
+    [str] => 
+(
+)
+. | ast-sqlite-boot | multiple-authors-on-your-posts | [View logs](/logs/plugins/m/multiple-authors-on-your-posts/error.json) |
+. | asyncify-boot | multiple-authors-on-your-posts | [View logs](/logs/plugins/m/multiple-authors-on-your-posts/error.json) |
+. | jspi-boot | multiple-authors-on-your-posts | [View logs](/logs/plugins/m/multiple-authors-on-your-posts/error.json) |
+| Array
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 93
+    [query] => INSERT INTO wp_massive_replacer (val1, val2) VALUES (WordPress','WordPress')
+    [str] => 
+(
+)
+. | ast-sqlite-boot | moon-phase-widget | [View logs](/logs/plugins/m/moon-phase-widget/error.json) |
+. | asyncify-boot | moon-phase-widget | [View logs](/logs/plugins/m/moon-phase-widget/error.json) |
+. | jspi-boot | moon-phase-widget | [View logs](/logs/plugins/m/moon-phase-widget/error.json) |
+| Array
 | Unknown create type: INDEX. | ast-sqlite-boot | maga-category-images | [View logs](/logs/plugins/m/maga-category-images/error.json) |
 | Unknown create type: INDEX. | asyncify-boot | maga-category-images | [View logs](/logs/plugins/m/maga-category-images/error.json) |
 | Unknown create type: INDEX. | jspi-boot | maga-category-images | [View logs](/logs/plugins/m/maga-category-images/error.json) |
@@ -1811,6 +1897,17 @@ Backtra
 | Unknown create type: INDEX. | ast-sqlite-boot | mo-slider | [View logs](/logs/plugins/m/mo-slider/error.json) |
 | Unknown create type: INDEX. | asyncify-boot | mo-slider | [View logs](/logs/plugins/m/mo-slider/error.json) |
 | Unknown create type: INDEX. | jspi-boot | mo-slider | [View logs](/logs/plugins/m/mo-slider/error.json) |
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 93
+    [query] => INSERT INTO wp_massive_replacer (val1, val2) VALUES (WordPress','WordPress')
+    [str] => 
+(
+)
+. | ast-sqlite-boot | mn-contact-form | [View logs](/logs/plugins/m/mn-contact-form/error.json) |
+. | asyncify-boot | mn-contact-form | [View logs](/logs/plugins/m/mn-contact-form/error.json) |
+. | jspi-boot | mn-contact-form | [View logs](/logs/plugins/m/mn-contact-form/error.json) |
+| Array
 | Unknown create type: INDEX. | ast-sqlite-boot | most-popular-posts-widget-lite | [View logs](/logs/plugins/m/most-popular-posts-widget-lite/error.json) |
 | Unknown create type: INDEX. | asyncify-boot | most-popular-posts-widget-lite | [View logs](/logs/plugins/m/most-popular-posts-widget-lite/error.json) |
 | Unknown create type: INDEX. | jspi-boot | most-popular-posts-widget-lite | [View logs](/logs/plugins/m/most-popular-posts-widget-lite/error.json) |
@@ -1820,7 +1917,40 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 duplicate column name: objectNameSingular. | ast-sqlite-boot | media-buttons | [View logs](/logs/plugins/m/media-buttons/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: objectNameSingular. | asyncify-boot | media-buttons | [View logs](/logs/plugins/m/media-buttons/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: objectNameSingular. | jspi-boot | media-buttons | [View logs](/logs/plugins/m/media-buttons/error.json) |
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 93
+    [query] => INSERT INTO wp_massive_replacer (val1, val2) VALUES (WordPress','WordPress')
+    [str] => 
+(
+)
+. | ast-sqlite-boot | mydownload | [View logs](/logs/plugins/m/mydownload/error.json) |
+. | asyncify-boot | mydownload | [View logs](/logs/plugins/m/mydownload/error.json) |
+. | jspi-boot | mydownload | [View logs](/logs/plugins/m/mydownload/error.json) |
+| Array
 | Unknown create type: INDEX. | ast-sqlite-boot | magic-the-gathering-card-tooltips | [View logs](/logs/plugins/m/magic-the-gathering-card-tooltips/error.json) |
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 93
+    [query] => INSERT INTO wp_massive_replacer (val1, val2) VALUES (WordPress','WordPress')
+    [str] => 
+(
+)
+. | ast-sqlite-boot | musopress-discography | [View logs](/logs/plugins/m/musopress-discography/error.json) |
+. | asyncify-boot | musopress-discography | [View logs](/logs/plugins/m/musopress-discography/error.json) |
+. | jspi-boot | musopress-discography | [View logs](/logs/plugins/m/musopress-discography/error.json) |
+| Array
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 93
+    [query] => INSERT INTO wp_massive_replacer (val1, val2) VALUES (WordPress','WordPress')
+    [str] => 
+(
+)
+. | ast-sqlite-boot | mysearchtermspresenter | [View logs](/logs/plugins/m/mysearchtermspresenter/error.json) |
+. | asyncify-boot | mysearchtermspresenter | [View logs](/logs/plugins/m/mysearchtermspresenter/error.json) |
+. | jspi-boot | mysearchtermspresenter | [View logs](/logs/plugins/m/mysearchtermspresenter/error.json) |
+| Array
 | SQLSTATE[HY000]: General error: 1 duplicate column name: apiEndpoints. | ast-sqlite-boot | multicom-affiliate-registration | [View logs](/logs/plugins/m/multicom-affiliate-registration/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: apiEndpoints. | asyncify-boot | multicom-affiliate-registration | [View logs](/logs/plugins/m/multicom-affiliate-registration/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: apiEndpoints. | jspi-boot | multicom-affiliate-registration | [View logs](/logs/plugins/m/multicom-affiliate-registration/error.json) |
@@ -1836,6 +1966,17 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 duplicate column name: objectNameSingular. | ast-sqlite-boot | mytreasures | [View logs](/logs/plugins/m/mytreasures/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: objectNameSingular. | asyncify-boot | mytreasures | [View logs](/logs/plugins/m/mytreasures/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: objectNameSingular. | jspi-boot | mytreasures | [View logs](/logs/plugins/m/mytreasures/error.json) |
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 93
+    [query] => INSERT INTO wp_massive_replacer (val1, val2) VALUES (WordPress','WordPress')
+    [str] => 
+(
+)
+. | ast-sqlite-boot | millionwatts-customadminmenu | [View logs](/logs/plugins/m/millionwatts-customadminmenu/error.json) |
+. | asyncify-boot | millionwatts-customadminmenu | [View logs](/logs/plugins/m/millionwatts-customadminmenu/error.json) |
+. | jspi-boot | millionwatts-customadminmenu | [View logs](/logs/plugins/m/millionwatts-customadminmenu/error.json) |
+| Array
 | Unknown create type: INDEX. | ast-sqlite-boot | my-client-builder | [View logs](/logs/plugins/m/my-client-builder/error.json) |
 | Unknown create type: INDEX. | asyncify-boot | my-client-builder | [View logs](/logs/plugins/m/my-client-builder/error.json) |
 | Unknown create type: INDEX. | jspi-boot | my-client-builder | [View logs](/logs/plugins/m/my-client-builder/error.json) |
@@ -1854,6 +1995,17 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 duplicate column name: objectNameSingular. | ast-sqlite-boot | more-file-types | [View logs](/logs/plugins/m/more-file-types/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: objectNameSingular. | asyncify-boot | more-file-types | [View logs](/logs/plugins/m/more-file-types/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: objectNameSingular. | jspi-boot | more-file-types | [View logs](/logs/plugins/m/more-file-types/error.json) |
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 93
+    [query] => INSERT INTO wp_massive_replacer (val1, val2) VALUES (WordPress','WordPress')
+    [str] => 
+(
+)
+. | ast-sqlite-boot | messenger-marketing-for-woocommerce | [View logs](/logs/plugins/m/messenger-marketing-for-woocommerce/error.json) |
+. | asyncify-boot | messenger-marketing-for-woocommerce | [View logs](/logs/plugins/m/messenger-marketing-for-woocommerce/error.json) |
+. | jspi-boot | messenger-marketing-for-woocommerce | [View logs](/logs/plugins/m/messenger-marketing-for-woocommerce/error.json) |
+| Array
 | SQLSTATE[HY000]: General error: 1 duplicate column name: apiEndpoints. | ast-sqlite-boot | multiple-ajax-calendar | [View logs](/logs/plugins/m/multiple-ajax-calendar/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: apiEndpoints. | asyncify-boot | multiple-ajax-calendar | [View logs](/logs/plugins/m/multiple-ajax-calendar/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: apiEndpoints. | jspi-boot | multiple-ajax-calendar | [View logs](/logs/plugins/m/multiple-ajax-calendar/error.json) |
@@ -1869,6 +2021,50 @@ Backtra
 | Unknown create type: INDEX. | ast-sqlite-boot | mhcode-wp-bootstrap-nav | [View logs](/logs/plugins/m/mhcode-wp-bootstrap-nav/error.json) |
 | Unknown create type: INDEX. | asyncify-boot | mhcode-wp-bootstrap-nav | [View logs](/logs/plugins/m/mhcode-wp-bootstrap-nav/error.json) |
 | Unknown create type: INDEX. | jspi-boot | mhcode-wp-bootstrap-nav | [View logs](/logs/plugins/m/mhcode-wp-bootstrap-nav/error.json) |
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 93
+    [query] => INSERT INTO wp_massive_replacer (val1, val2) VALUES (WordPress','WordPress')
+    [str] => 
+(
+)
+. | ast-sqlite-boot | mtc-fortune-cookies | [View logs](/logs/plugins/m/mtc-fortune-cookies/error.json) |
+. | asyncify-boot | mtc-fortune-cookies | [View logs](/logs/plugins/m/mtc-fortune-cookies/error.json) |
+. | jspi-boot | mtc-fortune-cookies | [View logs](/logs/plugins/m/mtc-fortune-cookies/error.json) |
+| Array
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 93
+    [query] => INSERT INTO wp_massive_replacer (val1, val2) VALUES (WordPress','WordPress')
+    [str] => 
+(
+)
+. | ast-sqlite-boot | members-only-menu-plugin | [View logs](/logs/plugins/m/members-only-menu-plugin/error.json) |
+. | asyncify-boot | members-only-menu-plugin | [View logs](/logs/plugins/m/members-only-menu-plugin/error.json) |
+. | jspi-boot | members-only-menu-plugin | [View logs](/logs/plugins/m/members-only-menu-plugin/error.json) |
+| Array
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 93
+    [query] => INSERT INTO wp_massive_replacer (val1, val2) VALUES (WordPress','WordPress')
+    [str] => 
+(
+)
+. | ast-sqlite-boot | my-tips | [View logs](/logs/plugins/m/my-tips/error.json) |
+. | asyncify-boot | my-tips | [View logs](/logs/plugins/m/my-tips/error.json) |
+. | jspi-boot | my-tips | [View logs](/logs/plugins/m/my-tips/error.json) |
+| Array
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 93
+    [query] => INSERT INTO wp_massive_replacer (val1, val2) VALUES (WordPress','WordPress')
+    [str] => 
+(
+)
+. | ast-sqlite-boot | misiek-page-category | [View logs](/logs/plugins/m/misiek-page-category/error.json) |
+. | asyncify-boot | misiek-page-category | [View logs](/logs/plugins/m/misiek-page-category/error.json) |
+. | jspi-boot | misiek-page-category | [View logs](/logs/plugins/m/misiek-page-category/error.json) |
+| Array
 | Unknown create type: INDEX. | ast-sqlite-boot | mh-board | [View logs](/logs/plugins/m/mh-board/error.json) |
 | Unknown create type: INDEX. | asyncify-boot | mh-board | [View logs](/logs/plugins/m/mh-board/error.json) |
 | Unknown create type: INDEX. | jspi-boot | mh-board | [View logs](/logs/plugins/m/mh-board/error.json) |
@@ -1878,6 +2074,28 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 duplicate column name: objectNameSingular. | ast-sqlite-boot | mariadb-health-checks | [View logs](/logs/plugins/m/mariadb-health-checks/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: objectNameSingular. | asyncify-boot | mariadb-health-checks | [View logs](/logs/plugins/m/mariadb-health-checks/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: objectNameSingular. | jspi-boot | mariadb-health-checks | [View logs](/logs/plugins/m/mariadb-health-checks/error.json) |
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 93
+    [query] => INSERT INTO wp_massive_replacer (val1, val2) VALUES (WordPress','WordPress')
+    [str] => 
+(
+)
+. | ast-sqlite-boot | multi-rss-reader-widet | [View logs](/logs/plugins/m/multi-rss-reader-widet/error.json) |
+. | asyncify-boot | multi-rss-reader-widet | [View logs](/logs/plugins/m/multi-rss-reader-widet/error.json) |
+. | jspi-boot | multi-rss-reader-widet | [View logs](/logs/plugins/m/multi-rss-reader-widet/error.json) |
+| Array
+    [code] => 0
+    [message] => Ending quote ' was expected.
+    [position] => 93
+    [query] => INSERT INTO wp_massive_replacer (val1, val2) VALUES (WordPress','WordPress')
+    [str] => 
+(
+)
+. | ast-sqlite-boot | myclang-forms | [View logs](/logs/plugins/m/myclang-forms/error.json) |
+. | asyncify-boot | myclang-forms | [View logs](/logs/plugins/m/myclang-forms/error.json) |
+. | jspi-boot | myclang-forms | [View logs](/logs/plugins/m/myclang-forms/error.json) |
+| Array
 | SQLSTATE[HY000]: General error: 1 duplicate column name: apiEndpoints. | ast-sqlite-boot | mm-did-you-know | [View logs](/logs/plugins/m/mm-did-you-know/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: apiEndpoints. | asyncify-boot | mm-did-you-know | [View logs](/logs/plugins/m/mm-did-you-know/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: apiEndpoints. | jspi-boot | mm-did-you-know | [View logs](/logs/plugins/m/mm-did-you-know/error.json) |
