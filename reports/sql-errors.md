@@ -523,6 +523,9 @@
 | Unknown query type: SHOW_COLUMNS. | ast-sqlite-boot | bd-payment-for-quick-orders | [View logs](/logs/plugins/b/bd-payment-for-quick-orders/error.json) |
 | Unknown query type: SHOW_COLUMNS. | asyncify-boot | bd-payment-for-quick-orders | [View logs](/logs/plugins/b/bd-payment-for-quick-orders/error.json) |
 | Unknown query type: SHOW_COLUMNS. | jspi-boot | bd-payment-for-quick-orders | [View logs](/logs/plugins/b/bd-payment-for-quick-orders/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | csv-importer-plus-for-acf | [View logs](/logs/plugins/c/csv-importer-plus-for-acf/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | csv-importer-plus-for-acf | [View logs](/logs/plugins/c/csv-importer-plus-for-acf/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | csv-importer-plus-for-acf | [View logs](/logs/plugins/c/csv-importer-plus-for-acf/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | catconvert | [View logs](/logs/plugins/c/catconvert/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | catconvert | [View logs](/logs/plugins/c/catconvert/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | catconvert | [View logs](/logs/plugins/c/catconvert/error.json) |
@@ -560,6 +563,9 @@
 | Unknown operation: CONVERT. | ast-sqlite-boot | contact-ajax-form | [View logs](/logs/plugins/c/contact-ajax-form/error.json) |
 | Unknown operation: CONVERT. | asyncify-boot | contact-ajax-form | [View logs](/logs/plugins/c/contact-ajax-form/error.json) |
 | Unknown operation: CONVERT. | jspi-boot | contact-ajax-form | [View logs](/logs/plugins/c/contact-ajax-form/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | calendario-runnerplace | [View logs](/logs/plugins/c/calendario-runnerplace/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | calendario-runnerplace | [View logs](/logs/plugins/c/calendario-runnerplace/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | calendario-runnerplace | [View logs](/logs/plugins/c/calendario-runnerplace/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | china-pm25 | [View logs](/logs/plugins/c/china-pm25/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | china-pm25 | [View logs](/logs/plugins/c/china-pm25/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | china-pm25 | [View logs](/logs/plugins/c/china-pm25/error.json) |
@@ -568,9 +574,17 @@
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | ast-sqlite-boot | copy-protect | [View logs](/logs/plugins/c/copy-protect/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | asyncify-boot | copy-protect | [View logs](/logs/plugins/c/copy-protect/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | jspi-boot | copy-protect | [View logs](/logs/plugins/c/copy-protect/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | cyber-slider | [View logs](/logs/plugins/c/cyber-slider/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | cyber-slider | [View logs](/logs/plugins/c/cyber-slider/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | cyber-slider | [View logs](/logs/plugins/c/cyber-slider/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | ast-sqlite-boot | clover-payments-for-woocommerce | [View logs](/logs/plugins/c/clover-payments-for-woocommerce/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | asyncify-boot | clover-payments-for-woocommerce | [View logs](/logs/plugins/c/clover-payments-for-woocommerce/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | jspi-boot | clover-payments-for-woocommerce | [View logs](/logs/plugins/c/clover-payments-for-woocommerce/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | cooksnaps | [View logs](/logs/plugins/c/cooksnaps/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | cooksnaps | [View logs](/logs/plugins/c/cooksnaps/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | cooksnaps | [View logs](/logs/plugins/c/cooksnaps/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | customer-reviews-collector-for-woocommerce | [View logs](/logs/plugins/c/customer-reviews-collector-for-woocommerce/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | customer-reviews-collector-for-woocommerce | [View logs](/logs/plugins/c/customer-reviews-collector-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | cc-flickr-widget | [View logs](/logs/plugins/c/cc-flickr-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | cc-flickr-widget | [View logs](/logs/plugins/c/cc-flickr-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | cc-flickr-widget | [View logs](/logs/plugins/c/cc-flickr-widget/error.json) |
@@ -589,6 +603,9 @@
 | Unknown operation: MODIFY. | ast-sqlite-boot | clean-up-booster | [View logs](/logs/plugins/c/clean-up-booster/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | clean-up-booster | [View logs](/logs/plugins/c/clean-up-booster/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | clean-up-booster | [View logs](/logs/plugins/c/clean-up-booster/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | coming-soon-maintenance-mode-ready | [View logs](/logs/plugins/c/coming-soon-maintenance-mode-ready/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | coming-soon-maintenance-mode-ready | [View logs](/logs/plugins/c/coming-soon-maintenance-mode-ready/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | coming-soon-maintenance-mode-ready | [View logs](/logs/plugins/c/coming-soon-maintenance-mode-ready/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | ast-sqlite-boot | content-metadata-widget | [View logs](/logs/plugins/c/content-metadata-widget/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | asyncify-boot | content-metadata-widget | [View logs](/logs/plugins/c/content-metadata-widget/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | jspi-boot | content-metadata-widget | [View logs](/logs/plugins/c/content-metadata-widget/error.json) |
@@ -617,6 +634,9 @@
 | Unknown operation: CONVERT. | asyncify-boot | comments-rating | [View logs](/logs/plugins/c/comments-rating/error.json) |
 | Unknown operation: CONVERT. | jspi-boot | comments-rating | [View logs](/logs/plugins/c/comments-rating/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | ast-sqlite-boot | constant-contact-forms | [View logs](/logs/plugins/c/constant-contact-forms/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | child-page-navigation | [View logs](/logs/plugins/c/child-page-navigation/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | child-page-navigation | [View logs](/logs/plugins/c/child-page-navigation/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | child-page-navigation | [View logs](/logs/plugins/c/child-page-navigation/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | class-snoopyphp-gzip-support | [View logs](/logs/plugins/c/class-snoopyphp-gzip-support/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | class-snoopyphp-gzip-support | [View logs](/logs/plugins/c/class-snoopyphp-gzip-support/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | class-snoopyphp-gzip-support | [View logs](/logs/plugins/c/class-snoopyphp-gzip-support/error.json) |
@@ -671,6 +691,10 @@
 | Unknown operation: MODIFY. | ast-sqlite-boot | content-randomizer | [View logs](/logs/plugins/c/content-randomizer/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | content-randomizer | [View logs](/logs/plugins/c/content-randomizer/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | content-randomizer | [View logs](/logs/plugins/c/content-randomizer/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | cbx-restaurant-booking | [View logs](/logs/plugins/c/cbx-restaurant-booking/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | cbx-restaurant-booking | [View logs](/logs/plugins/c/cbx-restaurant-booking/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | cbx-restaurant-booking | [View logs](/logs/plugins/c/cbx-restaurant-booking/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | crosswordsearch | [View logs](/logs/plugins/c/crosswordsearch/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | cj-revision-feedback | [View logs](/logs/plugins/c/cj-revision-feedback/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | cj-revision-feedback | [View logs](/logs/plugins/c/cj-revision-feedback/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | cj-revision-feedback | [View logs](/logs/plugins/c/cj-revision-feedback/error.json) |
@@ -681,6 +705,12 @@
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | asyncify-boot | coastal-factoid | [View logs](/logs/plugins/c/coastal-factoid/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | jspi-boot | coastal-factoid | [View logs](/logs/plugins/c/coastal-factoid/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | contentqube | [View logs](/logs/plugins/c/contentqube/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | comicnerdcom-comic-shop-finder-widget | [View logs](/logs/plugins/c/comicnerdcom-comic-shop-finder-widget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | comicnerdcom-comic-shop-finder-widget | [View logs](/logs/plugins/c/comicnerdcom-comic-shop-finder-widget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | comicnerdcom-comic-shop-finder-widget | [View logs](/logs/plugins/c/comicnerdcom-comic-shop-finder-widget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | commentag | [View logs](/logs/plugins/c/commentag/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | commentag | [View logs](/logs/plugins/c/commentag/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | commentag | [View logs](/logs/plugins/c/commentag/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | create-my-apps | [View logs](/logs/plugins/c/create-my-apps/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | create-my-apps | [View logs](/logs/plugins/c/create-my-apps/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | create-my-apps | [View logs](/logs/plugins/c/create-my-apps/error.json) |
@@ -732,6 +762,8 @@
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | category-and-tag-specific-widgets | [View logs](/logs/plugins/c/category-and-tag-specific-widgets/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | category-and-tag-specific-widgets | [View logs](/logs/plugins/c/category-and-tag-specific-widgets/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | category-and-tag-specific-widgets | [View logs](/logs/plugins/c/category-and-tag-specific-widgets/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | customer-email-verification-for-woocommerce | [View logs](/logs/plugins/c/customer-email-verification-for-woocommerce/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | customer-email-verification-for-woocommerce | [View logs](/logs/plugins/c/customer-email-verification-for-woocommerce/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | contributors-link-plugin | [View logs](/logs/plugins/c/contributors-link-plugin/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | contributors-link-plugin | [View logs](/logs/plugins/c/contributors-link-plugin/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | contributors-link-plugin | [View logs](/logs/plugins/c/contributors-link-plugin/error.json) |
@@ -741,6 +773,9 @@
 | Unknown operation: CONVERT. | ast-sqlite-boot | click-pledge-paid-memberships-pro | [View logs](/logs/plugins/c/click-pledge-paid-memberships-pro/error.json) |
 | Unknown operation: CONVERT. | asyncify-boot | click-pledge-paid-memberships-pro | [View logs](/logs/plugins/c/click-pledge-paid-memberships-pro/error.json) |
 | Unknown operation: CONVERT. | jspi-boot | click-pledge-paid-memberships-pro | [View logs](/logs/plugins/c/click-pledge-paid-memberships-pro/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | codigo-no-registro | [View logs](/logs/plugins/c/codigo-no-registro/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | codigo-no-registro | [View logs](/logs/plugins/c/codigo-no-registro/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | codigo-no-registro | [View logs](/logs/plugins/c/codigo-no-registro/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | ast-sqlite-boot | cluevo-lms-extension-gdocs-modules | [View logs](/logs/plugins/c/cluevo-lms-extension-gdocs-modules/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | asyncify-boot | cluevo-lms-extension-gdocs-modules | [View logs](/logs/plugins/c/cluevo-lms-extension-gdocs-modules/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | jspi-boot | cluevo-lms-extension-gdocs-modules | [View logs](/logs/plugins/c/cluevo-lms-extension-gdocs-modules/error.json) |
@@ -763,6 +798,9 @@
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | ast-sqlite-boot | clickbank-in-text-affiliate-links | [View logs](/logs/plugins/c/clickbank-in-text-affiliate-links/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | asyncify-boot | clickbank-in-text-affiliate-links | [View logs](/logs/plugins/c/clickbank-in-text-affiliate-links/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | jspi-boot | clickbank-in-text-affiliate-links | [View logs](/logs/plugins/c/clickbank-in-text-affiliate-links/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | cancanit-review-widget | [View logs](/logs/plugins/c/cancanit-review-widget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | cancanit-review-widget | [View logs](/logs/plugins/c/cancanit-review-widget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | cancanit-review-widget | [View logs](/logs/plugins/c/cancanit-review-widget/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | ast-sqlite-boot | contentde | [View logs](/logs/plugins/c/contentde/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | asyncify-boot | contentde | [View logs](/logs/plugins/c/contentde/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | jspi-boot | contentde | [View logs](/logs/plugins/c/contentde/error.json) |
@@ -774,6 +812,9 @@
 | Unknown operation: MODIFY. | ast-sqlite-boot | clinical-memcachier | [View logs](/logs/plugins/c/clinical-memcachier/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | clinical-memcachier | [View logs](/logs/plugins/c/clinical-memcachier/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | clinical-memcachier | [View logs](/logs/plugins/c/clinical-memcachier/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | comment-rating | [View logs](/logs/plugins/c/comment-rating/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | comment-rating | [View logs](/logs/plugins/c/comment-rating/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | comment-rating | [View logs](/logs/plugins/c/comment-rating/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | ast-sqlite-boot | connect-cf7-to-salesforce | [View logs](/logs/plugins/c/connect-cf7-to-salesforce/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | asyncify-boot | connect-cf7-to-salesforce | [View logs](/logs/plugins/c/connect-cf7-to-salesforce/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | jspi-boot | connect-cf7-to-salesforce | [View logs](/logs/plugins/c/connect-cf7-to-salesforce/error.json) |
@@ -801,6 +842,9 @@
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | cellulant-tingg-payment-gateway | [View logs](/logs/plugins/c/cellulant-tingg-payment-gateway/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | cellulant-tingg-payment-gateway | [View logs](/logs/plugins/c/cellulant-tingg-payment-gateway/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | cellulant-tingg-payment-gateway | [View logs](/logs/plugins/c/cellulant-tingg-payment-gateway/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | crpaid-link-manager | [View logs](/logs/plugins/c/crpaid-link-manager/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | crpaid-link-manager | [View logs](/logs/plugins/c/crpaid-link-manager/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | crpaid-link-manager | [View logs](/logs/plugins/c/crpaid-link-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | doi-indentifier | [View logs](/logs/plugins/d/doi-indentifier/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | doi-indentifier | [View logs](/logs/plugins/d/doi-indentifier/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | doi-indentifier | [View logs](/logs/plugins/d/doi-indentifier/error.json) |
@@ -2686,9 +2730,15 @@ Backtra
 . | asyncify-boot | petfinder-search-rescue | [View logs](/logs/plugins/p/petfinder-search-rescue/error.json) |
 . | jspi-boot | petfinder-search-rescue | [View logs](/logs/plugins/p/petfinder-search-rescue/error.json) |
 | Array
+| MySQL field type cannot be translated to SQLite: serial. | ast-sqlite-boot | pinterest-pinboard-widget | [View logs](/logs/plugins/p/pinterest-pinboard-widget/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | asyncify-boot | pinterest-pinboard-widget | [View logs](/logs/plugins/p/pinterest-pinboard-widget/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | jspi-boot | pinterest-pinboard-widget | [View logs](/logs/plugins/p/pinterest-pinboard-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | ast-sqlite-boot | popular-post-by-facebook-like | [View logs](/logs/plugins/p/popular-post-by-facebook-like/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | asyncify-boot | popular-post-by-facebook-like | [View logs](/logs/plugins/p/popular-post-by-facebook-like/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | jspi-boot | popular-post-by-facebook-like | [View logs](/logs/plugins/p/popular-post-by-facebook-like/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | ast-sqlite-boot | page2widget | [View logs](/logs/plugins/p/page2widget/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | asyncify-boot | page2widget | [View logs](/logs/plugins/p/page2widget/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | jspi-boot | page2widget | [View logs](/logs/plugins/p/page2widget/error.json) |
     [code] => 0
     [message] => Ending quote ' was expected.
     [position] => 38
@@ -2886,6 +2936,9 @@ Backtra
 . | asyncify-boot | pro-recent-post-widget | [View logs](/logs/plugins/p/pro-recent-post-widget/error.json) |
 . | jspi-boot | pro-recent-post-widget | [View logs](/logs/plugins/p/pro-recent-post-widget/error.json) |
 | Array
+| MySQL field type cannot be translated to SQLite: serial. | ast-sqlite-boot | photoq-photoblog-plugin | [View logs](/logs/plugins/p/photoq-photoblog-plugin/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | asyncify-boot | photoq-photoblog-plugin | [View logs](/logs/plugins/p/photoq-photoblog-plugin/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | jspi-boot | photoq-photoblog-plugin | [View logs](/logs/plugins/p/photoq-photoblog-plugin/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: openPlaylistAtStart. | ast-sqlite-boot | pofw-pizza-toppings | [View logs](/logs/plugins/p/pofw-pizza-toppings/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: openPlaylistAtStart. | asyncify-boot | pofw-pizza-toppings | [View logs](/logs/plugins/p/pofw-pizza-toppings/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: openPlaylistAtStart. | jspi-boot | pofw-pizza-toppings | [View logs](/logs/plugins/p/pofw-pizza-toppings/error.json) |
@@ -2965,6 +3018,9 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | post-pdf-export | [View logs](/logs/plugins/p/post-pdf-export/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | post-pdf-export | [View logs](/logs/plugins/p/post-pdf-export/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | post-pdf-export | [View logs](/logs/plugins/p/post-pdf-export/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | ast-sqlite-boot | photoroulette | [View logs](/logs/plugins/p/photoroulette/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | asyncify-boot | photoroulette | [View logs](/logs/plugins/p/photoroulette/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | jspi-boot | photoroulette | [View logs](/logs/plugins/p/photoroulette/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | ast-sqlite-boot | pepfeed-instant-monetization | [View logs](/logs/plugins/p/pepfeed-instant-monetization/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | asyncify-boot | pepfeed-instant-monetization | [View logs](/logs/plugins/p/pepfeed-instant-monetization/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pureticket_plugin_user. | jspi-boot | pepfeed-instant-monetization | [View logs](/logs/plugins/p/pepfeed-instant-monetization/error.json) |
@@ -2974,6 +3030,9 @@ Backtra
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | peepso-moods | [View logs](/logs/plugins/p/peepso-moods/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | peepso-moods | [View logs](/logs/plugins/p/peepso-moods/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | peepso-moods | [View logs](/logs/plugins/p/peepso-moods/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | ast-sqlite-boot | pretty-shorturls | [View logs](/logs/plugins/p/pretty-shorturls/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | asyncify-boot | pretty-shorturls | [View logs](/logs/plugins/p/pretty-shorturls/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | jspi-boot | pretty-shorturls | [View logs](/logs/plugins/p/pretty-shorturls/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | popup-in-posts-pages | [View logs](/logs/plugins/p/popup-in-posts-pages/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | popup-in-posts-pages | [View logs](/logs/plugins/p/popup-in-posts-pages/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | popup-in-posts-pages | [View logs](/logs/plugins/p/popup-in-posts-pages/error.json) |
@@ -2989,6 +3048,9 @@ Backtra
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | p2p-electronic-cash-payments-for-woocommerce | [View logs](/logs/plugins/p/p2p-electronic-cash-payments-for-woocommerce/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | p2p-electronic-cash-payments-for-woocommerce | [View logs](/logs/plugins/p/p2p-electronic-cash-payments-for-woocommerce/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | p2p-electronic-cash-payments-for-woocommerce | [View logs](/logs/plugins/p/p2p-electronic-cash-payments-for-woocommerce/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | ast-sqlite-boot | pgpcontactform | [View logs](/logs/plugins/p/pgpcontactform/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | asyncify-boot | pgpcontactform | [View logs](/logs/plugins/p/pgpcontactform/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | jspi-boot | pgpcontactform | [View logs](/logs/plugins/p/pgpcontactform/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | pygments-for-wordpress | [View logs](/logs/plugins/p/pygments-for-wordpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | pygments-for-wordpress | [View logs](/logs/plugins/p/pygments-for-wordpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | pygments-for-wordpress | [View logs](/logs/plugins/p/pygments-for-wordpress/error.json) |
@@ -3029,6 +3091,9 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | postnl-address-validation-for-woocommerce | [View logs](/logs/plugins/p/postnl-address-validation-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | postnl-address-validation-for-woocommerce | [View logs](/logs/plugins/p/postnl-address-validation-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | postnl-address-validation-for-woocommerce | [View logs](/logs/plugins/p/postnl-address-validation-for-woocommerce/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | ast-sqlite-boot | popularity-posts-widget | [View logs](/logs/plugins/p/popularity-posts-widget/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | asyncify-boot | popularity-posts-widget | [View logs](/logs/plugins/p/popularity-posts-widget/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | jspi-boot | popularity-posts-widget | [View logs](/logs/plugins/p/popularity-posts-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | ast-sqlite-boot | prayers | [View logs](/logs/plugins/p/prayers/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | asyncify-boot | prayers | [View logs](/logs/plugins/p/prayers/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | jspi-boot | prayers | [View logs](/logs/plugins/p/prayers/error.json) |
@@ -3061,6 +3126,12 @@ Backtra
 . | asyncify-boot | post-feedback | [View logs](/logs/plugins/p/post-feedback/error.json) |
 . | jspi-boot | post-feedback | [View logs](/logs/plugins/p/post-feedback/error.json) |
 | Array
+| MySQL field type cannot be translated to SQLite: serial. | ast-sqlite-boot | pommo | [View logs](/logs/plugins/p/pommo/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | asyncify-boot | pommo | [View logs](/logs/plugins/p/pommo/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | jspi-boot | pommo | [View logs](/logs/plugins/p/pommo/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | ast-sqlite-boot | polldirectory | [View logs](/logs/plugins/p/polldirectory/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | asyncify-boot | polldirectory | [View logs](/logs/plugins/p/polldirectory/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | jspi-boot | polldirectory | [View logs](/logs/plugins/p/polldirectory/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: openPlaylistAtStart. | ast-sqlite-boot | poststats | [View logs](/logs/plugins/p/poststats/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: openPlaylistAtStart. | asyncify-boot | poststats | [View logs](/logs/plugins/p/poststats/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: openPlaylistAtStart. | jspi-boot | poststats | [View logs](/logs/plugins/p/poststats/error.json) |
@@ -3148,6 +3219,9 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | ast-sqlite-boot | redeem-code | [View logs](/logs/plugins/r/redeem-code/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | asyncify-boot | redeem-code | [View logs](/logs/plugins/r/redeem-code/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | jspi-boot | redeem-code | [View logs](/logs/plugins/r/redeem-code/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | ast-sqlite-boot | related-post-with-thumbnail | [View logs](/logs/plugins/r/related-post-with-thumbnail/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | asyncify-boot | related-post-with-thumbnail | [View logs](/logs/plugins/r/related-post-with-thumbnail/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | jspi-boot | related-post-with-thumbnail | [View logs](/logs/plugins/r/related-post-with-thumbnail/error.json) |
 | Unknown query type: post_rating. | ast-sqlite-boot | real-time-twitter | [View logs](/logs/plugins/r/real-time-twitter/error.json) |
 | Unknown query type: post_rating. | asyncify-boot | real-time-twitter | [View logs](/logs/plugins/r/real-time-twitter/error.json) |
 | Unknown query type: post_rating. | jspi-boot | real-time-twitter | [View logs](/logs/plugins/r/real-time-twitter/error.json) |
@@ -3172,6 +3246,9 @@ Backtra
 | Unknown query type: post_rating. | ast-sqlite-boot | rideshare-importer | [View logs](/logs/plugins/r/rideshare-importer/error.json) |
 | Unknown query type: post_rating. | asyncify-boot | rideshare-importer | [View logs](/logs/plugins/r/rideshare-importer/error.json) |
 | Unknown query type: post_rating. | jspi-boot | rideshare-importer | [View logs](/logs/plugins/r/rideshare-importer/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | ast-sqlite-boot | rybons-coupon | [View logs](/logs/plugins/r/rybons-coupon/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | asyncify-boot | rybons-coupon | [View logs](/logs/plugins/r/rybons-coupon/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | jspi-boot | rybons-coupon | [View logs](/logs/plugins/r/rybons-coupon/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | recent-comments-with-avatars | [View logs](/logs/plugins/r/recent-comments-with-avatars/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | recent-comments-with-avatars | [View logs](/logs/plugins/r/recent-comments-with-avatars/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | recent-comments-with-avatars | [View logs](/logs/plugins/r/recent-comments-with-avatars/error.json) |
@@ -3181,15 +3258,27 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | ast-sqlite-boot | readability-buttons | [View logs](/logs/plugins/r/readability-buttons/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | asyncify-boot | readability-buttons | [View logs](/logs/plugins/r/readability-buttons/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | jspi-boot | readability-buttons | [View logs](/logs/plugins/r/readability-buttons/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | ast-sqlite-boot | rss-injection | [View logs](/logs/plugins/r/rss-injection/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | asyncify-boot | rss-injection | [View logs](/logs/plugins/r/rss-injection/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | jspi-boot | rss-injection | [View logs](/logs/plugins/r/rss-injection/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | realty-portal-agent | [View logs](/logs/plugins/r/realty-portal-agent/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | realty-portal-agent | [View logs](/logs/plugins/r/realty-portal-agent/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | realty-portal-agent | [View logs](/logs/plugins/r/realty-portal-agent/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | role-based-bulk-quantity-pricing | [View logs](/logs/plugins/r/role-based-bulk-quantity-pricing/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | role-based-bulk-quantity-pricing | [View logs](/logs/plugins/r/role-based-bulk-quantity-pricing/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | role-based-bulk-quantity-pricing | [View logs](/logs/plugins/r/role-based-bulk-quantity-pricing/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | ast-sqlite-boot | rs-coming-soon | [View logs](/logs/plugins/r/rs-coming-soon/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | asyncify-boot | rs-coming-soon | [View logs](/logs/plugins/r/rs-coming-soon/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | jspi-boot | rs-coming-soon | [View logs](/logs/plugins/r/rs-coming-soon/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | ast-sqlite-boot | roundabout-jquery-slider | [View logs](/logs/plugins/r/roundabout-jquery-slider/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | asyncify-boot | roundabout-jquery-slider | [View logs](/logs/plugins/r/roundabout-jquery-slider/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | jspi-boot | roundabout-jquery-slider | [View logs](/logs/plugins/r/roundabout-jquery-slider/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | real-estate-mls-search | [View logs](/logs/plugins/r/real-estate-mls-search/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | real-estate-mls-search | [View logs](/logs/plugins/r/real-estate-mls-search/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | real-estate-mls-search | [View logs](/logs/plugins/r/real-estate-mls-search/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | ast-sqlite-boot | rss-image-feed | [View logs](/logs/plugins/r/rss-image-feed/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | asyncify-boot | rss-image-feed | [View logs](/logs/plugins/r/rss-image-feed/error.json) |
+| MySQL field type cannot be translated to SQLite: serial. | jspi-boot | rss-image-feed | [View logs](/logs/plugins/r/rss-image-feed/error.json) |
 | Unknown query type: post_rating. | ast-sqlite-boot | responsive-social-share | [View logs](/logs/plugins/r/responsive-social-share/error.json) |
 | Unknown query type: post_rating. | asyncify-boot | responsive-social-share | [View logs](/logs/plugins/r/responsive-social-share/error.json) |
 | Unknown query type: post_rating. | jspi-boot | responsive-social-share | [View logs](/logs/plugins/r/responsive-social-share/error.json) |
