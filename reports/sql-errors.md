@@ -538,6 +538,9 @@
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | ast-sqlite-boot | cbxuseronline | [View logs](/logs/plugins/c/cbxuseronline/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | asyncify-boot | cbxuseronline | [View logs](/logs/plugins/c/cbxuseronline/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | jspi-boot | cbxuseronline | [View logs](/logs/plugins/c/cbxuseronline/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | custom-wishlist | [View logs](/logs/plugins/c/custom-wishlist/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | custom-wishlist | [View logs](/logs/plugins/c/custom-wishlist/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | custom-wishlist | [View logs](/logs/plugins/c/custom-wishlist/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | customizer-block-cf7 | [View logs](/logs/plugins/c/customizer-block-cf7/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | customizer-block-cf7 | [View logs](/logs/plugins/c/customizer-block-cf7/error.json) |
 | Unknown operation: CONVERT. | asyncify-boot | customizer-block-cf7 | [View logs](/logs/plugins/c/customizer-block-cf7/error.json) |
@@ -614,6 +617,12 @@
 | Unknown operation: CONVERT. | asyncify-boot | comments-rating | [View logs](/logs/plugins/c/comments-rating/error.json) |
 | Unknown operation: CONVERT. | jspi-boot | comments-rating | [View logs](/logs/plugins/c/comments-rating/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | ast-sqlite-boot | constant-contact-forms | [View logs](/logs/plugins/c/constant-contact-forms/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | class-snoopyphp-gzip-support | [View logs](/logs/plugins/c/class-snoopyphp-gzip-support/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | class-snoopyphp-gzip-support | [View logs](/logs/plugins/c/class-snoopyphp-gzip-support/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | class-snoopyphp-gzip-support | [View logs](/logs/plugins/c/class-snoopyphp-gzip-support/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | class-snoopyphp-gzip-support | [View logs](/logs/plugins/c/class-snoopyphp-gzip-support/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | class-snoopyphp-gzip-support | [View logs](/logs/plugins/c/class-snoopyphp-gzip-support/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | class-snoopyphp-gzip-support | [View logs](/logs/plugins/c/class-snoopyphp-gzip-support/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | connatix | [View logs](/logs/plugins/c/connatix/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | connatix | [View logs](/logs/plugins/c/connatix/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | connatix | [View logs](/logs/plugins/c/connatix/error.json) |
@@ -638,9 +647,18 @@
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | ast-sqlite-boot | clearapp | [View logs](/logs/plugins/c/clearapp/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | asyncify-boot | clearapp | [View logs](/logs/plugins/c/clearapp/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | jspi-boot | clearapp | [View logs](/logs/plugins/c/clearapp/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | currently-active-visitors | [View logs](/logs/plugins/c/currently-active-visitors/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | currently-active-visitors | [View logs](/logs/plugins/c/currently-active-visitors/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | ast-sqlite-boot | cleverreach-extension | [View logs](/logs/plugins/c/cleverreach-extension/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | asyncify-boot | cleverreach-extension | [View logs](/logs/plugins/c/cleverreach-extension/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | jspi-boot | cleverreach-extension | [View logs](/logs/plugins/c/cleverreach-extension/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | cyklodev-wp-paypal-integration | [View logs](/logs/plugins/c/cyklodev-wp-paypal-integration/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | cyklodev-wp-paypal-integration | [View logs](/logs/plugins/c/cyklodev-wp-paypal-integration/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | cyklodev-wp-paypal-integration | [View logs](/logs/plugins/c/cyklodev-wp-paypal-integration/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | cb-disable-comment-url | [View logs](/logs/plugins/c/cb-disable-comment-url/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | cb-disable-comment-url | [View logs](/logs/plugins/c/cb-disable-comment-url/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | cb-disable-comment-url | [View logs](/logs/plugins/c/cb-disable-comment-url/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | cb-disable-comment-url | [View logs](/logs/plugins/c/cb-disable-comment-url/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | ast-sqlite-boot | cf7-multislide | [View logs](/logs/plugins/c/cf7-multislide/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | asyncify-boot | cf7-multislide | [View logs](/logs/plugins/c/cf7-multislide/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | jspi-boot | cf7-multislide | [View logs](/logs/plugins/c/cf7-multislide/error.json) |
@@ -675,6 +693,24 @@
 | Unknown operation: MODIFY. | ast-sqlite-boot | change-font-size | [View logs](/logs/plugins/c/change-font-size/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | change-font-size | [View logs](/logs/plugins/c/change-font-size/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | change-font-size | [View logs](/logs/plugins/c/change-font-size/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | cpt-list | [View logs](/logs/plugins/c/cpt-list/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | cpt-list | [View logs](/logs/plugins/c/cpt-list/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | cpt-list | [View logs](/logs/plugins/c/cpt-list/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | cpt-list | [View logs](/logs/plugins/c/cpt-list/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | cpt-list | [View logs](/logs/plugins/c/cpt-list/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | cpt-list | [View logs](/logs/plugins/c/cpt-list/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | comment-warning | [View logs](/logs/plugins/c/comment-warning/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | comment-warning | [View logs](/logs/plugins/c/comment-warning/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | comment-warning | [View logs](/logs/plugins/c/comment-warning/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | comment-warning | [View logs](/logs/plugins/c/comment-warning/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | comment-warning | [View logs](/logs/plugins/c/comment-warning/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | comment-warning | [View logs](/logs/plugins/c/comment-warning/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | clocky | [View logs](/logs/plugins/c/clocky/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | clocky | [View logs](/logs/plugins/c/clocky/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | clocky | [View logs](/logs/plugins/c/clocky/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | clocky | [View logs](/logs/plugins/c/clocky/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | clocky | [View logs](/logs/plugins/c/clocky/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | clocky | [View logs](/logs/plugins/c/clocky/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | ast-sqlite-boot | child-public-post | [View logs](/logs/plugins/c/child-public-post/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | asyncify-boot | child-public-post | [View logs](/logs/plugins/c/child-public-post/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | jspi-boot | child-public-post | [View logs](/logs/plugins/c/child-public-post/error.json) |
@@ -690,6 +726,12 @@
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | cop-pdf-attachment-menu | [View logs](/logs/plugins/c/cop-pdf-attachment-menu/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | cop-pdf-attachment-menu | [View logs](/logs/plugins/c/cop-pdf-attachment-menu/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | cop-pdf-attachment-menu | [View logs](/logs/plugins/c/cop-pdf-attachment-menu/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | category-and-tag-specific-widgets | [View logs](/logs/plugins/c/category-and-tag-specific-widgets/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | category-and-tag-specific-widgets | [View logs](/logs/plugins/c/category-and-tag-specific-widgets/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | category-and-tag-specific-widgets | [View logs](/logs/plugins/c/category-and-tag-specific-widgets/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | category-and-tag-specific-widgets | [View logs](/logs/plugins/c/category-and-tag-specific-widgets/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | category-and-tag-specific-widgets | [View logs](/logs/plugins/c/category-and-tag-specific-widgets/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | category-and-tag-specific-widgets | [View logs](/logs/plugins/c/category-and-tag-specific-widgets/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | contributors-link-plugin | [View logs](/logs/plugins/c/contributors-link-plugin/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | contributors-link-plugin | [View logs](/logs/plugins/c/contributors-link-plugin/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | contributors-link-plugin | [View logs](/logs/plugins/c/contributors-link-plugin/error.json) |
@@ -744,6 +786,12 @@
 | Unknown operation: CONVERT. | ast-sqlite-boot | click-to-tweet-by-todaymade | [View logs](/logs/plugins/c/click-to-tweet-by-todaymade/error.json) |
 | Unknown operation: CONVERT. | asyncify-boot | click-to-tweet-by-todaymade | [View logs](/logs/plugins/c/click-to-tweet-by-todaymade/error.json) |
 | Unknown operation: CONVERT. | jspi-boot | click-to-tweet-by-todaymade | [View logs](/logs/plugins/c/click-to-tweet-by-todaymade/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | contact-blaster | [View logs](/logs/plugins/c/contact-blaster/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | contact-blaster | [View logs](/logs/plugins/c/contact-blaster/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | contact-blaster | [View logs](/logs/plugins/c/contact-blaster/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | contact-blaster | [View logs](/logs/plugins/c/contact-blaster/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | contact-blaster | [View logs](/logs/plugins/c/contact-blaster/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | contact-blaster | [View logs](/logs/plugins/c/contact-blaster/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | ast-sqlite-boot | category-post-contet | [View logs](/logs/plugins/c/category-post-contet/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | asyncify-boot | category-post-contet | [View logs](/logs/plugins/c/category-post-contet/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | jspi-boot | category-post-contet | [View logs](/logs/plugins/c/category-post-contet/error.json) |
