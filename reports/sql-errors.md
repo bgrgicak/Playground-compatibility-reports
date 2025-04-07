@@ -495,21 +495,45 @@
 | Unknown query type: SHOW_COLUMNS. | ast-sqlite-boot | bd-payment-for-quick-orders | [View logs](/logs/plugins/b/bd-payment-for-quick-orders/error.json) |
 | Unknown query type: SHOW_COLUMNS. | asyncify-boot | bd-payment-for-quick-orders | [View logs](/logs/plugins/b/bd-payment-for-quick-orders/error.json) |
 | Unknown query type: SHOW_COLUMNS. | jspi-boot | bd-payment-for-quick-orders | [View logs](/logs/plugins/b/bd-payment-for-quick-orders/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | catconvert | [View logs](/logs/plugins/c/catconvert/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | catconvert | [View logs](/logs/plugins/c/catconvert/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | catconvert | [View logs](/logs/plugins/c/catconvert/error.json) |
+| Unknown operation: CONVERT. | ast-sqlite-boot | catconvert | [View logs](/logs/plugins/c/catconvert/error.json) |
+| Unknown operation: CONVERT. | asyncify-boot | catconvert | [View logs](/logs/plugins/c/catconvert/error.json) |
+| Unknown operation: CONVERT. | jspi-boot | catconvert | [View logs](/logs/plugins/c/catconvert/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | chess-by-blog | [View logs](/logs/plugins/c/chess-by-blog/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | chess-by-blog | [View logs](/logs/plugins/c/chess-by-blog/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | chess-by-blog | [View logs](/logs/plugins/c/chess-by-blog/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | ch-fade-slider | [View logs](/logs/plugins/c/ch-fade-slider/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | ch-fade-slider | [View logs](/logs/plugins/c/ch-fade-slider/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | ch-fade-slider | [View logs](/logs/plugins/c/ch-fade-slider/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | ast-sqlite-boot | cbxuseronline | [View logs](/logs/plugins/c/cbxuseronline/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | asyncify-boot | cbxuseronline | [View logs](/logs/plugins/c/cbxuseronline/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | jspi-boot | cbxuseronline | [View logs](/logs/plugins/c/cbxuseronline/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | customizer-block-cf7 | [View logs](/logs/plugins/c/customizer-block-cf7/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | customizer-block-cf7 | [View logs](/logs/plugins/c/customizer-block-cf7/error.json) |
+| Unknown operation: CONVERT. | asyncify-boot | customizer-block-cf7 | [View logs](/logs/plugins/c/customizer-block-cf7/error.json) |
+| Unknown operation: CONVERT. | jspi-boot | customizer-block-cf7 | [View logs](/logs/plugins/c/customizer-block-cf7/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | ast-sqlite-boot | chimpmate | [View logs](/logs/plugins/c/chimpmate/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | asyncify-boot | chimpmate | [View logs](/logs/plugins/c/chimpmate/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | jspi-boot | chimpmate | [View logs](/logs/plugins/c/chimpmate/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | cjte-imagezoomer | [View logs](/logs/plugins/c/cjte-imagezoomer/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | cjte-imagezoomer | [View logs](/logs/plugins/c/cjte-imagezoomer/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | cjte-imagezoomer | [View logs](/logs/plugins/c/cjte-imagezoomer/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | crowdclock | [View logs](/logs/plugins/c/crowdclock/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | crowdclock | [View logs](/logs/plugins/c/crowdclock/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | crowdclock | [View logs](/logs/plugins/c/crowdclock/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | contact-ajax-form | [View logs](/logs/plugins/c/contact-ajax-form/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | contact-ajax-form | [View logs](/logs/plugins/c/contact-ajax-form/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | contact-ajax-form | [View logs](/logs/plugins/c/contact-ajax-form/error.json) |
+| Unknown operation: CONVERT. | ast-sqlite-boot | contact-ajax-form | [View logs](/logs/plugins/c/contact-ajax-form/error.json) |
+| Unknown operation: CONVERT. | asyncify-boot | contact-ajax-form | [View logs](/logs/plugins/c/contact-ajax-form/error.json) |
+| Unknown operation: CONVERT. | jspi-boot | contact-ajax-form | [View logs](/logs/plugins/c/contact-ajax-form/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | china-pm25 | [View logs](/logs/plugins/c/china-pm25/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | china-pm25 | [View logs](/logs/plugins/c/china-pm25/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | china-pm25 | [View logs](/logs/plugins/c/china-pm25/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | asyncify-boot | conditional-fields-for-elementor-form | [View logs](/logs/plugins/c/conditional-fields-for-elementor-form/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | jspi-boot | conditional-fields-for-elementor-form | [View logs](/logs/plugins/c/conditional-fields-for-elementor-form/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | ast-sqlite-boot | copy-protect | [View logs](/logs/plugins/c/copy-protect/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | asyncify-boot | copy-protect | [View logs](/logs/plugins/c/copy-protect/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_jm_cookies_tracking_ibfk_1. | jspi-boot | copy-protect | [View logs](/logs/plugins/c/copy-protect/error.json) |
@@ -522,6 +546,9 @@
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | cpf-e-cnpj-para-contact-form-7 | [View logs](/logs/plugins/c/cpf-e-cnpj-para-contact-form-7/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | cpf-e-cnpj-para-contact-form-7 | [View logs](/logs/plugins/c/cpf-e-cnpj-para-contact-form-7/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | cpf-e-cnpj-para-contact-form-7 | [View logs](/logs/plugins/c/cpf-e-cnpj-para-contact-form-7/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | ast-sqlite-boot | click-to-call | [View logs](/logs/plugins/c/click-to-call/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | asyncify-boot | click-to-call | [View logs](/logs/plugins/c/click-to-call/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | jspi-boot | click-to-call | [View logs](/logs/plugins/c/click-to-call/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | clean-up-booster | [View logs](/logs/plugins/c/clean-up-booster/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | clean-up-booster | [View logs](/logs/plugins/c/clean-up-booster/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | clean-up-booster | [View logs](/logs/plugins/c/clean-up-booster/error.json) |
@@ -534,18 +561,48 @@
 | Unknown operation: MODIFY. | ast-sqlite-boot | chartboot-for-wordpress | [View logs](/logs/plugins/c/chartboot-for-wordpress/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | chartboot-for-wordpress | [View logs](/logs/plugins/c/chartboot-for-wordpress/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | chartboot-for-wordpress | [View logs](/logs/plugins/c/chartboot-for-wordpress/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | cd-ad-sponsor | [View logs](/logs/plugins/c/cd-ad-sponsor/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | cd-ad-sponsor | [View logs](/logs/plugins/c/cd-ad-sponsor/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | cd-ad-sponsor | [View logs](/logs/plugins/c/cd-ad-sponsor/error.json) |
+| Unknown operation: CONVERT. | ast-sqlite-boot | cd-ad-sponsor | [View logs](/logs/plugins/c/cd-ad-sponsor/error.json) |
+| Unknown operation: CONVERT. | asyncify-boot | cd-ad-sponsor | [View logs](/logs/plugins/c/cd-ad-sponsor/error.json) |
+| Unknown operation: CONVERT. | jspi-boot | cd-ad-sponsor | [View logs](/logs/plugins/c/cd-ad-sponsor/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | couponbirds-product-size-charts-for-woocommerce | [View logs](/logs/plugins/c/couponbirds-product-size-charts-for-woocommerce/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | couponbirds-product-size-charts-for-woocommerce | [View logs](/logs/plugins/c/couponbirds-product-size-charts-for-woocommerce/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | couponbirds-product-size-charts-for-woocommerce | [View logs](/logs/plugins/c/couponbirds-product-size-charts-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | comments-rating | [View logs](/logs/plugins/c/comments-rating/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | comments-rating | [View logs](/logs/plugins/c/comments-rating/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | comments-rating | [View logs](/logs/plugins/c/comments-rating/error.json) |
+| Unknown operation: CONVERT. | ast-sqlite-boot | comments-rating | [View logs](/logs/plugins/c/comments-rating/error.json) |
+| Unknown operation: CONVERT. | asyncify-boot | comments-rating | [View logs](/logs/plugins/c/comments-rating/error.json) |
+| Unknown operation: CONVERT. | jspi-boot | comments-rating | [View logs](/logs/plugins/c/comments-rating/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | connatix | [View logs](/logs/plugins/c/connatix/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | connatix | [View logs](/logs/plugins/c/connatix/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | connatix | [View logs](/logs/plugins/c/connatix/error.json) |
+| Unknown operation: CONVERT. | ast-sqlite-boot | connatix | [View logs](/logs/plugins/c/connatix/error.json) |
+| Unknown operation: CONVERT. | asyncify-boot | connatix | [View logs](/logs/plugins/c/connatix/error.json) |
+| Unknown operation: CONVERT. | jspi-boot | connatix | [View logs](/logs/plugins/c/connatix/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | current-date-and-time | [View logs](/logs/plugins/c/current-date-and-time/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | current-date-and-time | [View logs](/logs/plugins/c/current-date-and-time/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | current-date-and-time | [View logs](/logs/plugins/c/current-date-and-time/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | contempo-reviews | [View logs](/logs/plugins/c/contempo-reviews/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | contempo-reviews | [View logs](/logs/plugins/c/contempo-reviews/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | contempo-reviews | [View logs](/logs/plugins/c/contempo-reviews/error.json) |
+| Unknown operation: CONVERT. | ast-sqlite-boot | contempo-reviews | [View logs](/logs/plugins/c/contempo-reviews/error.json) |
+| Unknown operation: CONVERT. | asyncify-boot | contempo-reviews | [View logs](/logs/plugins/c/contempo-reviews/error.json) |
+| Unknown operation: CONVERT. | jspi-boot | contempo-reviews | [View logs](/logs/plugins/c/contempo-reviews/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | comment-form-quicktags | [View logs](/logs/plugins/c/comment-form-quicktags/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | comment-form-quicktags | [View logs](/logs/plugins/c/comment-form-quicktags/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | comment-form-quicktags | [View logs](/logs/plugins/c/comment-form-quicktags/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | cellulant-tingg-checkout | [View logs](/logs/plugins/c/cellulant-tingg-checkout/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | cellulant-tingg-checkout | [View logs](/logs/plugins/c/cellulant-tingg-checkout/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | cellulant-tingg-checkout | [View logs](/logs/plugins/c/cellulant-tingg-checkout/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | ast-sqlite-boot | clearapp | [View logs](/logs/plugins/c/clearapp/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | asyncify-boot | clearapp | [View logs](/logs/plugins/c/clearapp/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | jspi-boot | clearapp | [View logs](/logs/plugins/c/clearapp/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | ast-sqlite-boot | cleverreach-extension | [View logs](/logs/plugins/c/cleverreach-extension/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | asyncify-boot | cleverreach-extension | [View logs](/logs/plugins/c/cleverreach-extension/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | jspi-boot | cleverreach-extension | [View logs](/logs/plugins/c/cleverreach-extension/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | connect-with-me | [View logs](/logs/plugins/c/connect-with-me/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | connect-with-me | [View logs](/logs/plugins/c/connect-with-me/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | connect-with-me | [View logs](/logs/plugins/c/connect-with-me/error.json) |
@@ -558,29 +615,62 @@
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | category-content-header | [View logs](/logs/plugins/c/category-content-header/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | category-content-header | [View logs](/logs/plugins/c/category-content-header/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | category-content-header | [View logs](/logs/plugins/c/category-content-header/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | ast-sqlite-boot | coastal-factoid | [View logs](/logs/plugins/c/coastal-factoid/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | asyncify-boot | coastal-factoid | [View logs](/logs/plugins/c/coastal-factoid/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | jspi-boot | coastal-factoid | [View logs](/logs/plugins/c/coastal-factoid/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | contentqube | [View logs](/logs/plugins/c/contentqube/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | create-my-apps | [View logs](/logs/plugins/c/create-my-apps/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | create-my-apps | [View logs](/logs/plugins/c/create-my-apps/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | create-my-apps | [View logs](/logs/plugins/c/create-my-apps/error.json) |
+| Unknown operation: CONVERT. | ast-sqlite-boot | create-my-apps | [View logs](/logs/plugins/c/create-my-apps/error.json) |
+| Unknown operation: CONVERT. | asyncify-boot | create-my-apps | [View logs](/logs/plugins/c/create-my-apps/error.json) |
+| Unknown operation: CONVERT. | jspi-boot | create-my-apps | [View logs](/logs/plugins/c/create-my-apps/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | clickbank-ads | [View logs](/logs/plugins/c/clickbank-ads/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | clickbank-ads | [View logs](/logs/plugins/c/clickbank-ads/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | clickbank-ads | [View logs](/logs/plugins/c/clickbank-ads/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | change-font-size | [View logs](/logs/plugins/c/change-font-size/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | change-font-size | [View logs](/logs/plugins/c/change-font-size/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | change-font-size | [View logs](/logs/plugins/c/change-font-size/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | ast-sqlite-boot | child-public-post | [View logs](/logs/plugins/c/child-public-post/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | asyncify-boot | child-public-post | [View logs](/logs/plugins/c/child-public-post/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | jspi-boot | child-public-post | [View logs](/logs/plugins/c/child-public-post/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | chatx-ai | [View logs](/logs/plugins/c/chatx-ai/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | chatx-ai | [View logs](/logs/plugins/c/chatx-ai/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | chatx-ai | [View logs](/logs/plugins/c/chatx-ai/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | ast-sqlite-boot | cleeng | [View logs](/logs/plugins/c/cleeng/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | asyncify-boot | cleeng | [View logs](/logs/plugins/c/cleeng/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | jspi-boot | cleeng | [View logs](/logs/plugins/c/cleeng/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | cop-pdf-attachment-menu | [View logs](/logs/plugins/c/cop-pdf-attachment-menu/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | cop-pdf-attachment-menu | [View logs](/logs/plugins/c/cop-pdf-attachment-menu/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | cop-pdf-attachment-menu | [View logs](/logs/plugins/c/cop-pdf-attachment-menu/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | contributors-link-plugin | [View logs](/logs/plugins/c/contributors-link-plugin/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | contributors-link-plugin | [View logs](/logs/plugins/c/contributors-link-plugin/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | contributors-link-plugin | [View logs](/logs/plugins/c/contributors-link-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | click-pledge-paid-memberships-pro | [View logs](/logs/plugins/c/click-pledge-paid-memberships-pro/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | click-pledge-paid-memberships-pro | [View logs](/logs/plugins/c/click-pledge-paid-memberships-pro/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | click-pledge-paid-memberships-pro | [View logs](/logs/plugins/c/click-pledge-paid-memberships-pro/error.json) |
+| Unknown operation: CONVERT. | ast-sqlite-boot | click-pledge-paid-memberships-pro | [View logs](/logs/plugins/c/click-pledge-paid-memberships-pro/error.json) |
+| Unknown operation: CONVERT. | asyncify-boot | click-pledge-paid-memberships-pro | [View logs](/logs/plugins/c/click-pledge-paid-memberships-pro/error.json) |
+| Unknown operation: CONVERT. | jspi-boot | click-pledge-paid-memberships-pro | [View logs](/logs/plugins/c/click-pledge-paid-memberships-pro/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | crocodoc | [View logs](/logs/plugins/c/crocodoc/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | crocodoc | [View logs](/logs/plugins/c/crocodoc/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | crocodoc | [View logs](/logs/plugins/c/crocodoc/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | ast-sqlite-boot | customer-reports-woocommerce | [View logs](/logs/plugins/c/customer-reports-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | asyncify-boot | customer-reports-woocommerce | [View logs](/logs/plugins/c/customer-reports-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | jspi-boot | customer-reports-woocommerce | [View logs](/logs/plugins/c/customer-reports-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | comment-refs | [View logs](/logs/plugins/c/comment-refs/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | comment-refs | [View logs](/logs/plugins/c/comment-refs/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | comment-refs | [View logs](/logs/plugins/c/comment-refs/error.json) |
+| Unknown operation: CONVERT. | ast-sqlite-boot | comment-refs | [View logs](/logs/plugins/c/comment-refs/error.json) |
+| Unknown operation: CONVERT. | asyncify-boot | comment-refs | [View logs](/logs/plugins/c/comment-refs/error.json) |
+| Unknown operation: CONVERT. | jspi-boot | comment-refs | [View logs](/logs/plugins/c/comment-refs/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | contus-video-galleryversion-10 | [View logs](/logs/plugins/c/contus-video-galleryversion-10/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | contus-video-galleryversion-10 | [View logs](/logs/plugins/c/contus-video-galleryversion-10/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | contus-video-galleryversion-10 | [View logs](/logs/plugins/c/contus-video-galleryversion-10/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | contests-from-rewards-fuel | [View logs](/logs/plugins/c/contests-from-rewards-fuel/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | ast-sqlite-boot | clickbank-in-text-affiliate-links | [View logs](/logs/plugins/c/clickbank-in-text-affiliate-links/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | asyncify-boot | clickbank-in-text-affiliate-links | [View logs](/logs/plugins/c/clickbank-in-text-affiliate-links/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | jspi-boot | clickbank-in-text-affiliate-links | [View logs](/logs/plugins/c/clickbank-in-text-affiliate-links/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | cobru-for-wc | [View logs](/logs/plugins/c/cobru-for-wc/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | cobru-for-wc | [View logs](/logs/plugins/c/cobru-for-wc/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | cobru-for-wc | [View logs](/logs/plugins/c/cobru-for-wc/error.json) |
@@ -589,9 +679,21 @@
 | Unknown operation: MODIFY. | ast-sqlite-boot | clinical-memcachier | [View logs](/logs/plugins/c/clinical-memcachier/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | clinical-memcachier | [View logs](/logs/plugins/c/clinical-memcachier/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | clinical-memcachier | [View logs](/logs/plugins/c/clinical-memcachier/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | ast-sqlite-boot | connect-cf7-to-salesforce | [View logs](/logs/plugins/c/connect-cf7-to-salesforce/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | asyncify-boot | connect-cf7-to-salesforce | [View logs](/logs/plugins/c/connect-cf7-to-salesforce/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | jspi-boot | connect-cf7-to-salesforce | [View logs](/logs/plugins/c/connect-cf7-to-salesforce/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | clickchina | [View logs](/logs/plugins/c/clickchina/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | clickchina | [View logs](/logs/plugins/c/clickchina/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | clickchina | [View logs](/logs/plugins/c/clickchina/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | click-to-tweet-by-todaymade | [View logs](/logs/plugins/c/click-to-tweet-by-todaymade/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | click-to-tweet-by-todaymade | [View logs](/logs/plugins/c/click-to-tweet-by-todaymade/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | click-to-tweet-by-todaymade | [View logs](/logs/plugins/c/click-to-tweet-by-todaymade/error.json) |
+| Unknown operation: CONVERT. | ast-sqlite-boot | click-to-tweet-by-todaymade | [View logs](/logs/plugins/c/click-to-tweet-by-todaymade/error.json) |
+| Unknown operation: CONVERT. | asyncify-boot | click-to-tweet-by-todaymade | [View logs](/logs/plugins/c/click-to-tweet-by-todaymade/error.json) |
+| Unknown operation: CONVERT. | jspi-boot | click-to-tweet-by-todaymade | [View logs](/logs/plugins/c/click-to-tweet-by-todaymade/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | ast-sqlite-boot | category-post-contet | [View logs](/logs/plugins/c/category-post-contet/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | asyncify-boot | category-post-contet | [View logs](/logs/plugins/c/category-post-contet/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | jspi-boot | category-post-contet | [View logs](/logs/plugins/c/category-post-contet/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | ast-sqlite-boot | clean-options | [View logs](/logs/plugins/c/clean-options/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | asyncify-boot | clean-options | [View logs](/logs/plugins/c/clean-options/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cbcart_message_api_request. | jspi-boot | clean-options | [View logs](/logs/plugins/c/clean-options/error.json) |
@@ -2838,12 +2940,6 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 no such table: wp_statsforwp. | ast-sqlite-boot | swtor-server-status | [View logs](/logs/plugins/s/swtor-server-status/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_statsforwp. | asyncify-boot | swtor-server-status | [View logs](/logs/plugins/s/swtor-server-status/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_statsforwp. | jspi-boot | swtor-server-status | [View logs](/logs/plugins/s/swtor-server-status/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | thanh-toan-chuyen-khoan | [View logs](/logs/plugins/t/thanh-toan-chuyen-khoan/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | thanh-toan-chuyen-khoan | [View logs](/logs/plugins/t/thanh-toan-chuyen-khoan/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | thanh-toan-chuyen-khoan | [View logs](/logs/plugins/t/thanh-toan-chuyen-khoan/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | ast-sqlite-boot | thanh-toan-chuyen-khoan | [View logs](/logs/plugins/t/thanh-toan-chuyen-khoan/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | thanh-toan-chuyen-khoan | [View logs](/logs/plugins/t/thanh-toan-chuyen-khoan/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | thanh-toan-chuyen-khoan | [View logs](/logs/plugins/t/thanh-toan-chuyen-khoan/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | translation-adapor | [View logs](/logs/plugins/t/translation-adapor/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | translation-adapor | [View logs](/logs/plugins/t/translation-adapor/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | translation-adapor | [View logs](/logs/plugins/t/translation-adapor/error.json) |
@@ -2891,12 +2987,6 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 no such table: wp_tbkl_services. | ast-sqlite-boot | tantan-reports | [View logs](/logs/plugins/t/tantan-reports/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_tbkl_services. | asyncify-boot | tantan-reports | [View logs](/logs/plugins/t/tantan-reports/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_tbkl_services. | jspi-boot | tantan-reports | [View logs](/logs/plugins/t/tantan-reports/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | triptrus-search-widget | [View logs](/logs/plugins/t/triptrus-search-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | triptrus-search-widget | [View logs](/logs/plugins/t/triptrus-search-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | triptrus-search-widget | [View logs](/logs/plugins/t/triptrus-search-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | ast-sqlite-boot | triptrus-search-widget | [View logs](/logs/plugins/t/triptrus-search-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | triptrus-search-widget | [View logs](/logs/plugins/t/triptrus-search-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | triptrus-search-widget | [View logs](/logs/plugins/t/triptrus-search-widget/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | treggo-shipping | [View logs](/logs/plugins/t/treggo-shipping/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | treggo-shipping | [View logs](/logs/plugins/t/treggo-shipping/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | treggo-shipping | [View logs](/logs/plugins/t/treggo-shipping/error.json) |
@@ -2912,12 +3002,6 @@ Backtra
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | tabber-tabs-widget | [View logs](/logs/plugins/t/tabber-tabs-widget/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | tabber-tabs-widget | [View logs](/logs/plugins/t/tabber-tabs-widget/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | tabber-tabs-widget | [View logs](/logs/plugins/t/tabber-tabs-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | translate-with-google-and-bing | [View logs](/logs/plugins/t/translate-with-google-and-bing/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | translate-with-google-and-bing | [View logs](/logs/plugins/t/translate-with-google-and-bing/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | translate-with-google-and-bing | [View logs](/logs/plugins/t/translate-with-google-and-bing/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | ast-sqlite-boot | translate-with-google-and-bing | [View logs](/logs/plugins/t/translate-with-google-and-bing/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | translate-with-google-and-bing | [View logs](/logs/plugins/t/translate-with-google-and-bing/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | translate-with-google-and-bing | [View logs](/logs/plugins/t/translate-with-google-and-bing/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_tbkl_availability. | ast-sqlite-boot | tiny-table-of-contents-tinytoc | [View logs](/logs/plugins/t/tiny-table-of-contents-tinytoc/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_tbkl_availability. | asyncify-boot | tiny-table-of-contents-tinytoc | [View logs](/logs/plugins/t/tiny-table-of-contents-tinytoc/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_tbkl_availability. | jspi-boot | tiny-table-of-contents-tinytoc | [View logs](/logs/plugins/t/tiny-table-of-contents-tinytoc/error.json) |
@@ -2936,12 +3020,6 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 no such table: wp_tbkl_services. | ast-sqlite-boot | twitter-widget-for-wordpress | [View logs](/logs/plugins/t/twitter-widget-for-wordpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_tbkl_services. | asyncify-boot | twitter-widget-for-wordpress | [View logs](/logs/plugins/t/twitter-widget-for-wordpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_tbkl_services. | jspi-boot | twitter-widget-for-wordpress | [View logs](/logs/plugins/t/twitter-widget-for-wordpress/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | testimonial-master | [View logs](/logs/plugins/t/testimonial-master/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | testimonial-master | [View logs](/logs/plugins/t/testimonial-master/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | testimonial-master | [View logs](/logs/plugins/t/testimonial-master/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | ast-sqlite-boot | testimonial-master | [View logs](/logs/plugins/t/testimonial-master/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | testimonial-master | [View logs](/logs/plugins/t/testimonial-master/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | testimonial-master | [View logs](/logs/plugins/t/testimonial-master/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_twizo_settings. | ast-sqlite-boot | total-social-counter | [View logs](/logs/plugins/t/total-social-counter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_twizo_settings. | asyncify-boot | total-social-counter | [View logs](/logs/plugins/t/total-social-counter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_twizo_settings. | jspi-boot | total-social-counter | [View logs](/logs/plugins/t/total-social-counter/error.json) |
@@ -3102,10 +3180,6 @@ Backtra
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | trumpcha | [View logs](/logs/plugins/t/trumpcha/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | trumpcha | [View logs](/logs/plugins/t/trumpcha/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | trumpcha | [View logs](/logs/plugins/t/trumpcha/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | terms-and-conditions-per-product | [View logs](/logs/plugins/t/terms-and-conditions-per-product/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | terms-and-conditions-per-product | [View logs](/logs/plugins/t/terms-and-conditions-per-product/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | terms-and-conditions-per-product | [View logs](/logs/plugins/t/terms-and-conditions-per-product/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | terms-and-conditions-per-product | [View logs](/logs/plugins/t/terms-and-conditions-per-product/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | top-visited-post | [View logs](/logs/plugins/t/top-visited-post/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | top-visited-post | [View logs](/logs/plugins/t/top-visited-post/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | top-visited-post | [View logs](/logs/plugins/t/top-visited-post/error.json) |
@@ -3163,22 +3237,6 @@ Backtra
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | theme-yaml | [View logs](/logs/plugins/t/theme-yaml/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | theme-yaml | [View logs](/logs/plugins/t/theme-yaml/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | theme-yaml | [View logs](/logs/plugins/t/theme-yaml/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | totosgr-xml-feed-for-woocommerce | [View logs](/logs/plugins/t/totosgr-xml-feed-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | totosgr-xml-feed-for-woocommerce | [View logs](/logs/plugins/t/totosgr-xml-feed-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | totosgr-xml-feed-for-woocommerce | [View logs](/logs/plugins/t/totosgr-xml-feed-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | totosgr-xml-feed-for-woocommerce | [View logs](/logs/plugins/t/totosgr-xml-feed-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | typeahead | [View logs](/logs/plugins/t/typeahead/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | typeahead | [View logs](/logs/plugins/t/typeahead/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | typeahead | [View logs](/logs/plugins/t/typeahead/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | ast-sqlite-boot | typeahead | [View logs](/logs/plugins/t/typeahead/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | typeahead | [View logs](/logs/plugins/t/typeahead/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | typeahead | [View logs](/logs/plugins/t/typeahead/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | templates-for-posts | [View logs](/logs/plugins/t/templates-for-posts/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | templates-for-posts | [View logs](/logs/plugins/t/templates-for-posts/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | templates-for-posts | [View logs](/logs/plugins/t/templates-for-posts/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | ast-sqlite-boot | templates-for-posts | [View logs](/logs/plugins/t/templates-for-posts/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | templates-for-posts | [View logs](/logs/plugins/t/templates-for-posts/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | templates-for-posts | [View logs](/logs/plugins/t/templates-for-posts/error.json) |
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | translator | [View logs](/logs/plugins/t/translator/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | translator | [View logs](/logs/plugins/t/translator/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | translator | [View logs](/logs/plugins/t/translator/error.json) |
@@ -3236,12 +3294,6 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | transferencia-bancaria-peru | [View logs](/logs/plugins/t/transferencia-bancaria-peru/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | transferencia-bancaria-peru | [View logs](/logs/plugins/t/transferencia-bancaria-peru/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | transferencia-bancaria-peru | [View logs](/logs/plugins/t/transferencia-bancaria-peru/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | tokenico-cryptocurrency-token-launchpad-presale-ico-ido-airdrop | [View logs](/logs/plugins/t/tokenico-cryptocurrency-token-launchpad-presale-ico-ido-airdrop/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | tokenico-cryptocurrency-token-launchpad-presale-ico-ido-airdrop | [View logs](/logs/plugins/t/tokenico-cryptocurrency-token-launchpad-presale-ico-ido-airdrop/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | tokenico-cryptocurrency-token-launchpad-presale-ico-ido-airdrop | [View logs](/logs/plugins/t/tokenico-cryptocurrency-token-launchpad-presale-ico-ido-airdrop/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | ast-sqlite-boot | tokenico-cryptocurrency-token-launchpad-presale-ico-ido-airdrop | [View logs](/logs/plugins/t/tokenico-cryptocurrency-token-launchpad-presale-ico-ido-airdrop/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | tokenico-cryptocurrency-token-launchpad-presale-ico-ido-airdrop | [View logs](/logs/plugins/t/tokenico-cryptocurrency-token-launchpad-presale-ico-ido-airdrop/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | tokenico-cryptocurrency-token-launchpad-presale-ico-ido-airdrop | [View logs](/logs/plugins/t/tokenico-cryptocurrency-token-launchpad-presale-ico-ido-airdrop/error.json) |
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | top-tweetmeme | [View logs](/logs/plugins/t/top-tweetmeme/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | top-tweetmeme | [View logs](/logs/plugins/t/top-tweetmeme/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | top-tweetmeme | [View logs](/logs/plugins/t/top-tweetmeme/error.json) |
@@ -3257,18 +3309,6 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 no such table: wp_twizo_settings. | ast-sqlite-boot | timelines | [View logs](/logs/plugins/t/timelines/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_twizo_settings. | asyncify-boot | timelines | [View logs](/logs/plugins/t/timelines/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_twizo_settings. | jspi-boot | timelines | [View logs](/logs/plugins/t/timelines/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | thethe-captcha | [View logs](/logs/plugins/t/thethe-captcha/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | thethe-captcha | [View logs](/logs/plugins/t/thethe-captcha/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | thethe-captcha | [View logs](/logs/plugins/t/thethe-captcha/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | ast-sqlite-boot | thethe-captcha | [View logs](/logs/plugins/t/thethe-captcha/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | thethe-captcha | [View logs](/logs/plugins/t/thethe-captcha/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | thethe-captcha | [View logs](/logs/plugins/t/thethe-captcha/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | troll-hunter | [View logs](/logs/plugins/t/troll-hunter/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | troll-hunter | [View logs](/logs/plugins/t/troll-hunter/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | troll-hunter | [View logs](/logs/plugins/t/troll-hunter/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | ast-sqlite-boot | troll-hunter | [View logs](/logs/plugins/t/troll-hunter/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | troll-hunter | [View logs](/logs/plugins/t/troll-hunter/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | troll-hunter | [View logs](/logs/plugins/t/troll-hunter/error.json) |
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | trezor-connect-plugin | [View logs](/logs/plugins/t/trezor-connect-plugin/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | trezor-connect-plugin | [View logs](/logs/plugins/t/trezor-connect-plugin/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | trezor-connect-plugin | [View logs](/logs/plugins/t/trezor-connect-plugin/error.json) |
@@ -3580,6 +3620,12 @@ Backtra
 | Unexpected token in MySQL query: willAttend. | jspi-boot | wallet-system-for-woocommerce | [View logs](/logs/plugins/w/wallet-system-for-woocommerce/error.json) |
 | Unexpected token in MySQL query: withAttendance. | asyncify-boot | wallet-system-for-woocommerce | [View logs](/logs/plugins/w/wallet-system-for-woocommerce/error.json) |
 | Unexpected token in MySQL query: withAttendance. | jspi-boot | wallet-system-for-woocommerce | [View logs](/logs/plugins/w/wallet-system-for-woocommerce/error.json) |
+| Unknown operation: COMMENT. | ast-sqlite-boot | wangguard | [View logs](/logs/plugins/w/wangguard/error.json) |
+| Unknown operation: OPT. | ast-sqlite-boot | wangguard | [View logs](/logs/plugins/w/wangguard/error.json) |
+| Unknown operation: `FIELDS`. | ast-sqlite-boot | wangguard | [View logs](/logs/plugins/w/wangguard/error.json) |
+| Unknown operation: `HIDE`. | ast-sqlite-boot | wangguard | [View logs](/logs/plugins/w/wangguard/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | ast-sqlite-boot | wangguard | [View logs](/logs/plugins/w/wangguard/error.json) |
+| Unknown operation: `TS`. | ast-sqlite-boot | wangguard | [View logs](/logs/plugins/w/wangguard/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | ast-sqlite-boot | war-renown-rank | [View logs](/logs/plugins/w/war-renown-rank/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | asyncify-boot | war-renown-rank | [View logs](/logs/plugins/w/war-renown-rank/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | jspi-boot | war-renown-rank | [View logs](/logs/plugins/w/war-renown-rank/error.json) |
@@ -3778,6 +3824,24 @@ Backtra
 | Unexpected token in MySQL query: active. | ast-sqlite-boot | woo-manage-fraud-orders | [View logs](/logs/plugins/w/woo-manage-fraud-orders/error.json) |
 | Unexpected token in MySQL query: active. | asyncify-boot | woo-manage-fraud-orders | [View logs](/logs/plugins/w/woo-manage-fraud-orders/error.json) |
 | Unexpected token in MySQL query: active. | jspi-boot | woo-manage-fraud-orders | [View logs](/logs/plugins/w/woo-manage-fraud-orders/error.json) |
+| Unknown operation: COMMENT. | ast-sqlite-boot | woo-mstoreapp-mobile-app | [View logs](/logs/plugins/w/woo-mstoreapp-mobile-app/error.json) |
+| Unknown operation: COMMENT. | asyncify-boot | woo-mstoreapp-mobile-app | [View logs](/logs/plugins/w/woo-mstoreapp-mobile-app/error.json) |
+| Unknown operation: COMMENT. | jspi-boot | woo-mstoreapp-mobile-app | [View logs](/logs/plugins/w/woo-mstoreapp-mobile-app/error.json) |
+| Unknown operation: OPT. | ast-sqlite-boot | woo-mstoreapp-mobile-app | [View logs](/logs/plugins/w/woo-mstoreapp-mobile-app/error.json) |
+| Unknown operation: OPT. | asyncify-boot | woo-mstoreapp-mobile-app | [View logs](/logs/plugins/w/woo-mstoreapp-mobile-app/error.json) |
+| Unknown operation: OPT. | jspi-boot | woo-mstoreapp-mobile-app | [View logs](/logs/plugins/w/woo-mstoreapp-mobile-app/error.json) |
+| Unknown operation: `FIELDS`. | ast-sqlite-boot | woo-mstoreapp-mobile-app | [View logs](/logs/plugins/w/woo-mstoreapp-mobile-app/error.json) |
+| Unknown operation: `FIELDS`. | asyncify-boot | woo-mstoreapp-mobile-app | [View logs](/logs/plugins/w/woo-mstoreapp-mobile-app/error.json) |
+| Unknown operation: `FIELDS`. | jspi-boot | woo-mstoreapp-mobile-app | [View logs](/logs/plugins/w/woo-mstoreapp-mobile-app/error.json) |
+| Unknown operation: `HIDE`. | ast-sqlite-boot | woo-mstoreapp-mobile-app | [View logs](/logs/plugins/w/woo-mstoreapp-mobile-app/error.json) |
+| Unknown operation: `HIDE`. | asyncify-boot | woo-mstoreapp-mobile-app | [View logs](/logs/plugins/w/woo-mstoreapp-mobile-app/error.json) |
+| Unknown operation: `HIDE`. | jspi-boot | woo-mstoreapp-mobile-app | [View logs](/logs/plugins/w/woo-mstoreapp-mobile-app/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | ast-sqlite-boot | woo-mstoreapp-mobile-app | [View logs](/logs/plugins/w/woo-mstoreapp-mobile-app/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | asyncify-boot | woo-mstoreapp-mobile-app | [View logs](/logs/plugins/w/woo-mstoreapp-mobile-app/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | jspi-boot | woo-mstoreapp-mobile-app | [View logs](/logs/plugins/w/woo-mstoreapp-mobile-app/error.json) |
+| Unknown operation: `TS`. | ast-sqlite-boot | woo-mstoreapp-mobile-app | [View logs](/logs/plugins/w/woo-mstoreapp-mobile-app/error.json) |
+| Unknown operation: `TS`. | asyncify-boot | woo-mstoreapp-mobile-app | [View logs](/logs/plugins/w/woo-mstoreapp-mobile-app/error.json) |
+| Unknown operation: `TS`. | jspi-boot | woo-mstoreapp-mobile-app | [View logs](/logs/plugins/w/woo-mstoreapp-mobile-app/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | ast-sqlite-boot | woo-pin-it-button | [View logs](/logs/plugins/w/woo-pin-it-button/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | asyncify-boot | woo-pin-it-button | [View logs](/logs/plugins/w/woo-pin-it-button/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | jspi-boot | woo-pin-it-button | [View logs](/logs/plugins/w/woo-pin-it-button/error.json) |
@@ -3893,6 +3957,18 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | ast-sqlite-boot | wordpress-jquery-accordion | [View logs](/logs/plugins/w/wordpress-jquery-accordion/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | asyncify-boot | wordpress-jquery-accordion | [View logs](/logs/plugins/w/wordpress-jquery-accordion/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | jspi-boot | wordpress-jquery-accordion | [View logs](/logs/plugins/w/wordpress-jquery-accordion/error.json) |
+| Unknown operation: COMMENT. | asyncify-boot | wordpress-petition-plugin | [View logs](/logs/plugins/w/wordpress-petition-plugin/error.json) |
+| Unknown operation: COMMENT. | jspi-boot | wordpress-petition-plugin | [View logs](/logs/plugins/w/wordpress-petition-plugin/error.json) |
+| Unknown operation: OPT. | asyncify-boot | wordpress-petition-plugin | [View logs](/logs/plugins/w/wordpress-petition-plugin/error.json) |
+| Unknown operation: OPT. | jspi-boot | wordpress-petition-plugin | [View logs](/logs/plugins/w/wordpress-petition-plugin/error.json) |
+| Unknown operation: `FIELDS`. | asyncify-boot | wordpress-petition-plugin | [View logs](/logs/plugins/w/wordpress-petition-plugin/error.json) |
+| Unknown operation: `FIELDS`. | jspi-boot | wordpress-petition-plugin | [View logs](/logs/plugins/w/wordpress-petition-plugin/error.json) |
+| Unknown operation: `HIDE`. | asyncify-boot | wordpress-petition-plugin | [View logs](/logs/plugins/w/wordpress-petition-plugin/error.json) |
+| Unknown operation: `HIDE`. | jspi-boot | wordpress-petition-plugin | [View logs](/logs/plugins/w/wordpress-petition-plugin/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | asyncify-boot | wordpress-petition-plugin | [View logs](/logs/plugins/w/wordpress-petition-plugin/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | jspi-boot | wordpress-petition-plugin | [View logs](/logs/plugins/w/wordpress-petition-plugin/error.json) |
+| Unknown operation: `TS`. | asyncify-boot | wordpress-petition-plugin | [View logs](/logs/plugins/w/wordpress-petition-plugin/error.json) |
+| Unknown operation: `TS`. | jspi-boot | wordpress-petition-plugin | [View logs](/logs/plugins/w/wordpress-petition-plugin/error.json) |
 | Unknown query type: . | asyncify-boot | wordpress-popular-posts | [View logs](/logs/plugins/w/wordpress-popular-posts/error.json) |
 | Unknown query type: . | jspi-boot | wordpress-popular-posts | [View logs](/logs/plugins/w/wordpress-popular-posts/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | ast-sqlite-boot | wordpress-totals | [View logs](/logs/plugins/w/wordpress-totals/error.json) |
@@ -3922,6 +3998,24 @@ Backtra
 | Unknown query type: DESC. | ast-sqlite-boot | wortify | [View logs](/logs/plugins/w/wortify/error.json) |
 | Unknown query type: DESC. | asyncify-boot | wortify | [View logs](/logs/plugins/w/wortify/error.json) |
 | Unknown query type: DESC. | jspi-boot | wortify | [View logs](/logs/plugins/w/wortify/error.json) |
+| Unknown operation: COMMENT. | ast-sqlite-boot | wot-cache | [View logs](/logs/plugins/w/wot-cache/error.json) |
+| Unknown operation: COMMENT. | asyncify-boot | wot-cache | [View logs](/logs/plugins/w/wot-cache/error.json) |
+| Unknown operation: COMMENT. | jspi-boot | wot-cache | [View logs](/logs/plugins/w/wot-cache/error.json) |
+| Unknown operation: OPT. | ast-sqlite-boot | wot-cache | [View logs](/logs/plugins/w/wot-cache/error.json) |
+| Unknown operation: OPT. | asyncify-boot | wot-cache | [View logs](/logs/plugins/w/wot-cache/error.json) |
+| Unknown operation: OPT. | jspi-boot | wot-cache | [View logs](/logs/plugins/w/wot-cache/error.json) |
+| Unknown operation: `FIELDS`. | ast-sqlite-boot | wot-cache | [View logs](/logs/plugins/w/wot-cache/error.json) |
+| Unknown operation: `FIELDS`. | asyncify-boot | wot-cache | [View logs](/logs/plugins/w/wot-cache/error.json) |
+| Unknown operation: `FIELDS`. | jspi-boot | wot-cache | [View logs](/logs/plugins/w/wot-cache/error.json) |
+| Unknown operation: `HIDE`. | ast-sqlite-boot | wot-cache | [View logs](/logs/plugins/w/wot-cache/error.json) |
+| Unknown operation: `HIDE`. | asyncify-boot | wot-cache | [View logs](/logs/plugins/w/wot-cache/error.json) |
+| Unknown operation: `HIDE`. | jspi-boot | wot-cache | [View logs](/logs/plugins/w/wot-cache/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | ast-sqlite-boot | wot-cache | [View logs](/logs/plugins/w/wot-cache/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | asyncify-boot | wot-cache | [View logs](/logs/plugins/w/wot-cache/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | jspi-boot | wot-cache | [View logs](/logs/plugins/w/wot-cache/error.json) |
+| Unknown operation: `TS`. | ast-sqlite-boot | wot-cache | [View logs](/logs/plugins/w/wot-cache/error.json) |
+| Unknown operation: `TS`. | asyncify-boot | wot-cache | [View logs](/logs/plugins/w/wot-cache/error.json) |
+| Unknown operation: `TS`. | jspi-boot | wot-cache | [View logs](/logs/plugins/w/wot-cache/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | wp-adsense-plugin | [View logs](/logs/plugins/w/wp-adsense-plugin/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | wp-adsense-plugin | [View logs](/logs/plugins/w/wp-adsense-plugin/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | wp-adsense-plugin | [View logs](/logs/plugins/w/wp-adsense-plugin/error.json) |
@@ -3937,6 +4031,24 @@ Backtra
 | Unknown query type: DESC. | ast-sqlite-boot | wp-app-maker | [View logs](/logs/plugins/w/wp-app-maker/error.json) |
 | Unknown query type: DESC. | asyncify-boot | wp-app-maker | [View logs](/logs/plugins/w/wp-app-maker/error.json) |
 | Unknown query type: DESC. | jspi-boot | wp-app-maker | [View logs](/logs/plugins/w/wp-app-maker/error.json) |
+| Unknown operation: COMMENT. | ast-sqlite-boot | wp-audio-gallery-playlist | [View logs](/logs/plugins/w/wp-audio-gallery-playlist/error.json) |
+| Unknown operation: COMMENT. | asyncify-boot | wp-audio-gallery-playlist | [View logs](/logs/plugins/w/wp-audio-gallery-playlist/error.json) |
+| Unknown operation: COMMENT. | jspi-boot | wp-audio-gallery-playlist | [View logs](/logs/plugins/w/wp-audio-gallery-playlist/error.json) |
+| Unknown operation: OPT. | ast-sqlite-boot | wp-audio-gallery-playlist | [View logs](/logs/plugins/w/wp-audio-gallery-playlist/error.json) |
+| Unknown operation: OPT. | asyncify-boot | wp-audio-gallery-playlist | [View logs](/logs/plugins/w/wp-audio-gallery-playlist/error.json) |
+| Unknown operation: OPT. | jspi-boot | wp-audio-gallery-playlist | [View logs](/logs/plugins/w/wp-audio-gallery-playlist/error.json) |
+| Unknown operation: `FIELDS`. | ast-sqlite-boot | wp-audio-gallery-playlist | [View logs](/logs/plugins/w/wp-audio-gallery-playlist/error.json) |
+| Unknown operation: `FIELDS`. | asyncify-boot | wp-audio-gallery-playlist | [View logs](/logs/plugins/w/wp-audio-gallery-playlist/error.json) |
+| Unknown operation: `FIELDS`. | jspi-boot | wp-audio-gallery-playlist | [View logs](/logs/plugins/w/wp-audio-gallery-playlist/error.json) |
+| Unknown operation: `HIDE`. | ast-sqlite-boot | wp-audio-gallery-playlist | [View logs](/logs/plugins/w/wp-audio-gallery-playlist/error.json) |
+| Unknown operation: `HIDE`. | asyncify-boot | wp-audio-gallery-playlist | [View logs](/logs/plugins/w/wp-audio-gallery-playlist/error.json) |
+| Unknown operation: `HIDE`. | jspi-boot | wp-audio-gallery-playlist | [View logs](/logs/plugins/w/wp-audio-gallery-playlist/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | ast-sqlite-boot | wp-audio-gallery-playlist | [View logs](/logs/plugins/w/wp-audio-gallery-playlist/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | asyncify-boot | wp-audio-gallery-playlist | [View logs](/logs/plugins/w/wp-audio-gallery-playlist/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | jspi-boot | wp-audio-gallery-playlist | [View logs](/logs/plugins/w/wp-audio-gallery-playlist/error.json) |
+| Unknown operation: `TS`. | ast-sqlite-boot | wp-audio-gallery-playlist | [View logs](/logs/plugins/w/wp-audio-gallery-playlist/error.json) |
+| Unknown operation: `TS`. | asyncify-boot | wp-audio-gallery-playlist | [View logs](/logs/plugins/w/wp-audio-gallery-playlist/error.json) |
+| Unknown operation: `TS`. | jspi-boot | wp-audio-gallery-playlist | [View logs](/logs/plugins/w/wp-audio-gallery-playlist/error.json) |
 | Unknown query type: . | ast-sqlite-boot | wp-auto-columns | [View logs](/logs/plugins/w/wp-auto-columns/error.json) |
 | Unknown query type: . | asyncify-boot | wp-auto-columns | [View logs](/logs/plugins/w/wp-auto-columns/error.json) |
 | Unknown query type: . | jspi-boot | wp-auto-columns | [View logs](/logs/plugins/w/wp-auto-columns/error.json) |
@@ -4080,6 +4192,24 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | ast-sqlite-boot | wp-janesguide | [View logs](/logs/plugins/w/wp-janesguide/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | asyncify-boot | wp-janesguide | [View logs](/logs/plugins/w/wp-janesguide/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | jspi-boot | wp-janesguide | [View logs](/logs/plugins/w/wp-janesguide/error.json) |
+| Unknown operation: COMMENT. | ast-sqlite-boot | wp-job-portal-by-jane | [View logs](/logs/plugins/w/wp-job-portal-by-jane/error.json) |
+| Unknown operation: COMMENT. | asyncify-boot | wp-job-portal-by-jane | [View logs](/logs/plugins/w/wp-job-portal-by-jane/error.json) |
+| Unknown operation: COMMENT. | jspi-boot | wp-job-portal-by-jane | [View logs](/logs/plugins/w/wp-job-portal-by-jane/error.json) |
+| Unknown operation: OPT. | ast-sqlite-boot | wp-job-portal-by-jane | [View logs](/logs/plugins/w/wp-job-portal-by-jane/error.json) |
+| Unknown operation: OPT. | asyncify-boot | wp-job-portal-by-jane | [View logs](/logs/plugins/w/wp-job-portal-by-jane/error.json) |
+| Unknown operation: OPT. | jspi-boot | wp-job-portal-by-jane | [View logs](/logs/plugins/w/wp-job-portal-by-jane/error.json) |
+| Unknown operation: `FIELDS`. | ast-sqlite-boot | wp-job-portal-by-jane | [View logs](/logs/plugins/w/wp-job-portal-by-jane/error.json) |
+| Unknown operation: `FIELDS`. | asyncify-boot | wp-job-portal-by-jane | [View logs](/logs/plugins/w/wp-job-portal-by-jane/error.json) |
+| Unknown operation: `FIELDS`. | jspi-boot | wp-job-portal-by-jane | [View logs](/logs/plugins/w/wp-job-portal-by-jane/error.json) |
+| Unknown operation: `HIDE`. | ast-sqlite-boot | wp-job-portal-by-jane | [View logs](/logs/plugins/w/wp-job-portal-by-jane/error.json) |
+| Unknown operation: `HIDE`. | asyncify-boot | wp-job-portal-by-jane | [View logs](/logs/plugins/w/wp-job-portal-by-jane/error.json) |
+| Unknown operation: `HIDE`. | jspi-boot | wp-job-portal-by-jane | [View logs](/logs/plugins/w/wp-job-portal-by-jane/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | ast-sqlite-boot | wp-job-portal-by-jane | [View logs](/logs/plugins/w/wp-job-portal-by-jane/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | asyncify-boot | wp-job-portal-by-jane | [View logs](/logs/plugins/w/wp-job-portal-by-jane/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | jspi-boot | wp-job-portal-by-jane | [View logs](/logs/plugins/w/wp-job-portal-by-jane/error.json) |
+| Unknown operation: `TS`. | ast-sqlite-boot | wp-job-portal-by-jane | [View logs](/logs/plugins/w/wp-job-portal-by-jane/error.json) |
+| Unknown operation: `TS`. | asyncify-boot | wp-job-portal-by-jane | [View logs](/logs/plugins/w/wp-job-portal-by-jane/error.json) |
+| Unknown operation: `TS`. | jspi-boot | wp-job-portal-by-jane | [View logs](/logs/plugins/w/wp-job-portal-by-jane/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "AND": syntax error. | ast-sqlite-boot | wp-jump | [View logs](/logs/plugins/w/wp-jump/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "AND": syntax error. | asyncify-boot | wp-jump | [View logs](/logs/plugins/w/wp-jump/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "AND": syntax error. | jspi-boot | wp-jump | [View logs](/logs/plugins/w/wp-jump/error.json) |
@@ -4146,6 +4276,24 @@ Backtra
 | Unknown query type: DESC. | ast-sqlite-boot | wp-notify | [View logs](/logs/plugins/w/wp-notify/error.json) |
 | Unknown query type: DESC. | asyncify-boot | wp-notify | [View logs](/logs/plugins/w/wp-notify/error.json) |
 | Unknown query type: DESC. | jspi-boot | wp-notify | [View logs](/logs/plugins/w/wp-notify/error.json) |
+| Unknown operation: COMMENT. | ast-sqlite-boot | wp-o-matic | [View logs](/logs/plugins/w/wp-o-matic/error.json) |
+| Unknown operation: COMMENT. | asyncify-boot | wp-o-matic | [View logs](/logs/plugins/w/wp-o-matic/error.json) |
+| Unknown operation: COMMENT. | jspi-boot | wp-o-matic | [View logs](/logs/plugins/w/wp-o-matic/error.json) |
+| Unknown operation: OPT. | ast-sqlite-boot | wp-o-matic | [View logs](/logs/plugins/w/wp-o-matic/error.json) |
+| Unknown operation: OPT. | asyncify-boot | wp-o-matic | [View logs](/logs/plugins/w/wp-o-matic/error.json) |
+| Unknown operation: OPT. | jspi-boot | wp-o-matic | [View logs](/logs/plugins/w/wp-o-matic/error.json) |
+| Unknown operation: `FIELDS`. | ast-sqlite-boot | wp-o-matic | [View logs](/logs/plugins/w/wp-o-matic/error.json) |
+| Unknown operation: `FIELDS`. | asyncify-boot | wp-o-matic | [View logs](/logs/plugins/w/wp-o-matic/error.json) |
+| Unknown operation: `FIELDS`. | jspi-boot | wp-o-matic | [View logs](/logs/plugins/w/wp-o-matic/error.json) |
+| Unknown operation: `HIDE`. | ast-sqlite-boot | wp-o-matic | [View logs](/logs/plugins/w/wp-o-matic/error.json) |
+| Unknown operation: `HIDE`. | asyncify-boot | wp-o-matic | [View logs](/logs/plugins/w/wp-o-matic/error.json) |
+| Unknown operation: `HIDE`. | jspi-boot | wp-o-matic | [View logs](/logs/plugins/w/wp-o-matic/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | ast-sqlite-boot | wp-o-matic | [View logs](/logs/plugins/w/wp-o-matic/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | asyncify-boot | wp-o-matic | [View logs](/logs/plugins/w/wp-o-matic/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | jspi-boot | wp-o-matic | [View logs](/logs/plugins/w/wp-o-matic/error.json) |
+| Unknown operation: `TS`. | ast-sqlite-boot | wp-o-matic | [View logs](/logs/plugins/w/wp-o-matic/error.json) |
+| Unknown operation: `TS`. | asyncify-boot | wp-o-matic | [View logs](/logs/plugins/w/wp-o-matic/error.json) |
+| Unknown operation: `TS`. | jspi-boot | wp-o-matic | [View logs](/logs/plugins/w/wp-o-matic/error.json) |
 | Unexpected token in MySQL query: isValid. | ast-sqlite-boot | wp-pde | [View logs](/logs/plugins/w/wp-pde/error.json) |
 | Unexpected token in MySQL query: isValid. | asyncify-boot | wp-pde | [View logs](/logs/plugins/w/wp-pde/error.json) |
 | Unexpected token in MySQL query: isValid. | jspi-boot | wp-pde | [View logs](/logs/plugins/w/wp-pde/error.json) |
@@ -4236,6 +4384,24 @@ Backtra
 | SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | ast-sqlite-boot | wp-shortify | [View logs](/logs/plugins/w/wp-shortify/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | asyncify-boot | wp-shortify | [View logs](/logs/plugins/w/wp-shortify/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | jspi-boot | wp-shortify | [View logs](/logs/plugins/w/wp-shortify/error.json) |
+| Unknown operation: COMMENT. | ast-sqlite-boot | wp-silcc | [View logs](/logs/plugins/w/wp-silcc/error.json) |
+| Unknown operation: COMMENT. | asyncify-boot | wp-silcc | [View logs](/logs/plugins/w/wp-silcc/error.json) |
+| Unknown operation: COMMENT. | jspi-boot | wp-silcc | [View logs](/logs/plugins/w/wp-silcc/error.json) |
+| Unknown operation: OPT. | ast-sqlite-boot | wp-silcc | [View logs](/logs/plugins/w/wp-silcc/error.json) |
+| Unknown operation: OPT. | asyncify-boot | wp-silcc | [View logs](/logs/plugins/w/wp-silcc/error.json) |
+| Unknown operation: OPT. | jspi-boot | wp-silcc | [View logs](/logs/plugins/w/wp-silcc/error.json) |
+| Unknown operation: `FIELDS`. | ast-sqlite-boot | wp-silcc | [View logs](/logs/plugins/w/wp-silcc/error.json) |
+| Unknown operation: `FIELDS`. | asyncify-boot | wp-silcc | [View logs](/logs/plugins/w/wp-silcc/error.json) |
+| Unknown operation: `FIELDS`. | jspi-boot | wp-silcc | [View logs](/logs/plugins/w/wp-silcc/error.json) |
+| Unknown operation: `HIDE`. | ast-sqlite-boot | wp-silcc | [View logs](/logs/plugins/w/wp-silcc/error.json) |
+| Unknown operation: `HIDE`. | asyncify-boot | wp-silcc | [View logs](/logs/plugins/w/wp-silcc/error.json) |
+| Unknown operation: `HIDE`. | jspi-boot | wp-silcc | [View logs](/logs/plugins/w/wp-silcc/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | ast-sqlite-boot | wp-silcc | [View logs](/logs/plugins/w/wp-silcc/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | asyncify-boot | wp-silcc | [View logs](/logs/plugins/w/wp-silcc/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | jspi-boot | wp-silcc | [View logs](/logs/plugins/w/wp-silcc/error.json) |
+| Unknown operation: `TS`. | ast-sqlite-boot | wp-silcc | [View logs](/logs/plugins/w/wp-silcc/error.json) |
+| Unknown operation: `TS`. | asyncify-boot | wp-silcc | [View logs](/logs/plugins/w/wp-silcc/error.json) |
+| Unknown operation: `TS`. | jspi-boot | wp-silcc | [View logs](/logs/plugins/w/wp-silcc/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | ast-sqlite-boot | wp-simple-event-management-system | [View logs](/logs/plugins/w/wp-simple-event-management-system/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | asyncify-boot | wp-simple-event-management-system | [View logs](/logs/plugins/w/wp-simple-event-management-system/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error. | jspi-boot | wp-simple-event-management-system | [View logs](/logs/plugins/w/wp-simple-event-management-system/error.json) |
@@ -4254,6 +4420,24 @@ Backtra
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | wp-smart-crm-invoices-free | [View logs](/logs/plugins/w/wp-smart-crm-invoices-free/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | wp-smart-crm-invoices-free | [View logs](/logs/plugins/w/wp-smart-crm-invoices-free/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | wp-smart-crm-invoices-free | [View logs](/logs/plugins/w/wp-smart-crm-invoices-free/error.json) |
+| Unknown operation: COMMENT. | ast-sqlite-boot | wp-social-feed-gallery | [View logs](/logs/plugins/w/wp-social-feed-gallery/error.json) |
+| Unknown operation: COMMENT. | asyncify-boot | wp-social-feed-gallery | [View logs](/logs/plugins/w/wp-social-feed-gallery/error.json) |
+| Unknown operation: COMMENT. | jspi-boot | wp-social-feed-gallery | [View logs](/logs/plugins/w/wp-social-feed-gallery/error.json) |
+| Unknown operation: OPT. | ast-sqlite-boot | wp-social-feed-gallery | [View logs](/logs/plugins/w/wp-social-feed-gallery/error.json) |
+| Unknown operation: OPT. | asyncify-boot | wp-social-feed-gallery | [View logs](/logs/plugins/w/wp-social-feed-gallery/error.json) |
+| Unknown operation: OPT. | jspi-boot | wp-social-feed-gallery | [View logs](/logs/plugins/w/wp-social-feed-gallery/error.json) |
+| Unknown operation: `FIELDS`. | ast-sqlite-boot | wp-social-feed-gallery | [View logs](/logs/plugins/w/wp-social-feed-gallery/error.json) |
+| Unknown operation: `FIELDS`. | asyncify-boot | wp-social-feed-gallery | [View logs](/logs/plugins/w/wp-social-feed-gallery/error.json) |
+| Unknown operation: `FIELDS`. | jspi-boot | wp-social-feed-gallery | [View logs](/logs/plugins/w/wp-social-feed-gallery/error.json) |
+| Unknown operation: `HIDE`. | ast-sqlite-boot | wp-social-feed-gallery | [View logs](/logs/plugins/w/wp-social-feed-gallery/error.json) |
+| Unknown operation: `HIDE`. | asyncify-boot | wp-social-feed-gallery | [View logs](/logs/plugins/w/wp-social-feed-gallery/error.json) |
+| Unknown operation: `HIDE`. | jspi-boot | wp-social-feed-gallery | [View logs](/logs/plugins/w/wp-social-feed-gallery/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | ast-sqlite-boot | wp-social-feed-gallery | [View logs](/logs/plugins/w/wp-social-feed-gallery/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | asyncify-boot | wp-social-feed-gallery | [View logs](/logs/plugins/w/wp-social-feed-gallery/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | jspi-boot | wp-social-feed-gallery | [View logs](/logs/plugins/w/wp-social-feed-gallery/error.json) |
+| Unknown operation: `TS`. | ast-sqlite-boot | wp-social-feed-gallery | [View logs](/logs/plugins/w/wp-social-feed-gallery/error.json) |
+| Unknown operation: `TS`. | asyncify-boot | wp-social-feed-gallery | [View logs](/logs/plugins/w/wp-social-feed-gallery/error.json) |
+| Unknown operation: `TS`. | jspi-boot | wp-social-feed-gallery | [View logs](/logs/plugins/w/wp-social-feed-gallery/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whtp_hitinfo. | ast-sqlite-boot | wp-social-media | [View logs](/logs/plugins/w/wp-social-media/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whtp_hitinfo. | asyncify-boot | wp-social-media | [View logs](/logs/plugins/w/wp-social-media/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whtp_hitinfo. | jspi-boot | wp-social-media | [View logs](/logs/plugins/w/wp-social-media/error.json) |
@@ -4286,6 +4470,24 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-travel-itinerary | [View logs](/logs/plugins/w/wp-travel-itinerary/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wp-travel-itinerary | [View logs](/logs/plugins/w/wp-travel-itinerary/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wp-travel-itinerary | [View logs](/logs/plugins/w/wp-travel-itinerary/error.json) |
+| Unknown operation: COMMENT. | ast-sqlite-boot | wp-twitter-threads | [View logs](/logs/plugins/w/wp-twitter-threads/error.json) |
+| Unknown operation: COMMENT. | asyncify-boot | wp-twitter-threads | [View logs](/logs/plugins/w/wp-twitter-threads/error.json) |
+| Unknown operation: COMMENT. | jspi-boot | wp-twitter-threads | [View logs](/logs/plugins/w/wp-twitter-threads/error.json) |
+| Unknown operation: OPT. | ast-sqlite-boot | wp-twitter-threads | [View logs](/logs/plugins/w/wp-twitter-threads/error.json) |
+| Unknown operation: OPT. | asyncify-boot | wp-twitter-threads | [View logs](/logs/plugins/w/wp-twitter-threads/error.json) |
+| Unknown operation: OPT. | jspi-boot | wp-twitter-threads | [View logs](/logs/plugins/w/wp-twitter-threads/error.json) |
+| Unknown operation: `FIELDS`. | ast-sqlite-boot | wp-twitter-threads | [View logs](/logs/plugins/w/wp-twitter-threads/error.json) |
+| Unknown operation: `FIELDS`. | asyncify-boot | wp-twitter-threads | [View logs](/logs/plugins/w/wp-twitter-threads/error.json) |
+| Unknown operation: `FIELDS`. | jspi-boot | wp-twitter-threads | [View logs](/logs/plugins/w/wp-twitter-threads/error.json) |
+| Unknown operation: `HIDE`. | ast-sqlite-boot | wp-twitter-threads | [View logs](/logs/plugins/w/wp-twitter-threads/error.json) |
+| Unknown operation: `HIDE`. | asyncify-boot | wp-twitter-threads | [View logs](/logs/plugins/w/wp-twitter-threads/error.json) |
+| Unknown operation: `HIDE`. | jspi-boot | wp-twitter-threads | [View logs](/logs/plugins/w/wp-twitter-threads/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | ast-sqlite-boot | wp-twitter-threads | [View logs](/logs/plugins/w/wp-twitter-threads/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | asyncify-boot | wp-twitter-threads | [View logs](/logs/plugins/w/wp-twitter-threads/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | jspi-boot | wp-twitter-threads | [View logs](/logs/plugins/w/wp-twitter-threads/error.json) |
+| Unknown operation: `TS`. | ast-sqlite-boot | wp-twitter-threads | [View logs](/logs/plugins/w/wp-twitter-threads/error.json) |
+| Unknown operation: `TS`. | asyncify-boot | wp-twitter-threads | [View logs](/logs/plugins/w/wp-twitter-threads/error.json) |
+| Unknown operation: `TS`. | jspi-boot | wp-twitter-threads | [View logs](/logs/plugins/w/wp-twitter-threads/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports. | ast-sqlite-boot | wp-typogrify | [View logs](/logs/plugins/w/wp-typogrify/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports. | asyncify-boot | wp-typogrify | [View logs](/logs/plugins/w/wp-typogrify/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports. | jspi-boot | wp-typogrify | [View logs](/logs/plugins/w/wp-typogrify/error.json) |
@@ -4306,9 +4508,45 @@ Backtra
 | Unknown operation: MODIFY. | ast-sqlite-boot | wp-userlogin | [View logs](/logs/plugins/w/wp-userlogin/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | wp-userlogin | [View logs](/logs/plugins/w/wp-userlogin/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | wp-userlogin | [View logs](/logs/plugins/w/wp-userlogin/error.json) |
+| Unknown operation: COMMENT. | ast-sqlite-boot | wp-vcard | [View logs](/logs/plugins/w/wp-vcard/error.json) |
+| Unknown operation: COMMENT. | asyncify-boot | wp-vcard | [View logs](/logs/plugins/w/wp-vcard/error.json) |
+| Unknown operation: COMMENT. | jspi-boot | wp-vcard | [View logs](/logs/plugins/w/wp-vcard/error.json) |
+| Unknown operation: OPT. | ast-sqlite-boot | wp-vcard | [View logs](/logs/plugins/w/wp-vcard/error.json) |
+| Unknown operation: OPT. | asyncify-boot | wp-vcard | [View logs](/logs/plugins/w/wp-vcard/error.json) |
+| Unknown operation: OPT. | jspi-boot | wp-vcard | [View logs](/logs/plugins/w/wp-vcard/error.json) |
+| Unknown operation: `FIELDS`. | ast-sqlite-boot | wp-vcard | [View logs](/logs/plugins/w/wp-vcard/error.json) |
+| Unknown operation: `FIELDS`. | asyncify-boot | wp-vcard | [View logs](/logs/plugins/w/wp-vcard/error.json) |
+| Unknown operation: `FIELDS`. | jspi-boot | wp-vcard | [View logs](/logs/plugins/w/wp-vcard/error.json) |
+| Unknown operation: `HIDE`. | ast-sqlite-boot | wp-vcard | [View logs](/logs/plugins/w/wp-vcard/error.json) |
+| Unknown operation: `HIDE`. | asyncify-boot | wp-vcard | [View logs](/logs/plugins/w/wp-vcard/error.json) |
+| Unknown operation: `HIDE`. | jspi-boot | wp-vcard | [View logs](/logs/plugins/w/wp-vcard/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | ast-sqlite-boot | wp-vcard | [View logs](/logs/plugins/w/wp-vcard/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | asyncify-boot | wp-vcard | [View logs](/logs/plugins/w/wp-vcard/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | jspi-boot | wp-vcard | [View logs](/logs/plugins/w/wp-vcard/error.json) |
+| Unknown operation: `TS`. | ast-sqlite-boot | wp-vcard | [View logs](/logs/plugins/w/wp-vcard/error.json) |
+| Unknown operation: `TS`. | asyncify-boot | wp-vcard | [View logs](/logs/plugins/w/wp-vcard/error.json) |
+| Unknown operation: `TS`. | jspi-boot | wp-vcard | [View logs](/logs/plugins/w/wp-vcard/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | ast-sqlite-boot | wp-visualpagination | [View logs](/logs/plugins/w/wp-visualpagination/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | asyncify-boot | wp-visualpagination | [View logs](/logs/plugins/w/wp-visualpagination/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | jspi-boot | wp-visualpagination | [View logs](/logs/plugins/w/wp-visualpagination/error.json) |
+| Unknown operation: COMMENT. | ast-sqlite-boot | wp-website-creator | [View logs](/logs/plugins/w/wp-website-creator/error.json) |
+| Unknown operation: COMMENT. | asyncify-boot | wp-website-creator | [View logs](/logs/plugins/w/wp-website-creator/error.json) |
+| Unknown operation: COMMENT. | jspi-boot | wp-website-creator | [View logs](/logs/plugins/w/wp-website-creator/error.json) |
+| Unknown operation: OPT. | ast-sqlite-boot | wp-website-creator | [View logs](/logs/plugins/w/wp-website-creator/error.json) |
+| Unknown operation: OPT. | asyncify-boot | wp-website-creator | [View logs](/logs/plugins/w/wp-website-creator/error.json) |
+| Unknown operation: OPT. | jspi-boot | wp-website-creator | [View logs](/logs/plugins/w/wp-website-creator/error.json) |
+| Unknown operation: `FIELDS`. | ast-sqlite-boot | wp-website-creator | [View logs](/logs/plugins/w/wp-website-creator/error.json) |
+| Unknown operation: `FIELDS`. | asyncify-boot | wp-website-creator | [View logs](/logs/plugins/w/wp-website-creator/error.json) |
+| Unknown operation: `FIELDS`. | jspi-boot | wp-website-creator | [View logs](/logs/plugins/w/wp-website-creator/error.json) |
+| Unknown operation: `HIDE`. | ast-sqlite-boot | wp-website-creator | [View logs](/logs/plugins/w/wp-website-creator/error.json) |
+| Unknown operation: `HIDE`. | asyncify-boot | wp-website-creator | [View logs](/logs/plugins/w/wp-website-creator/error.json) |
+| Unknown operation: `HIDE`. | jspi-boot | wp-website-creator | [View logs](/logs/plugins/w/wp-website-creator/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | ast-sqlite-boot | wp-website-creator | [View logs](/logs/plugins/w/wp-website-creator/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | asyncify-boot | wp-website-creator | [View logs](/logs/plugins/w/wp-website-creator/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | jspi-boot | wp-website-creator | [View logs](/logs/plugins/w/wp-website-creator/error.json) |
+| Unknown operation: `TS`. | ast-sqlite-boot | wp-website-creator | [View logs](/logs/plugins/w/wp-website-creator/error.json) |
+| Unknown operation: `TS`. | asyncify-boot | wp-website-creator | [View logs](/logs/plugins/w/wp-website-creator/error.json) |
+| Unknown operation: `TS`. | jspi-boot | wp-website-creator | [View logs](/logs/plugins/w/wp-website-creator/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports. | ast-sqlite-boot | wp-wizard-cloak | [View logs](/logs/plugins/w/wp-wizard-cloak/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports. | asyncify-boot | wp-wizard-cloak | [View logs](/logs/plugins/w/wp-wizard-cloak/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports. | jspi-boot | wp-wizard-cloak | [View logs](/logs/plugins/w/wp-wizard-cloak/error.json) |
@@ -4318,9 +4556,45 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | ast-sqlite-boot | wp-wonderform | [View logs](/logs/plugins/w/wp-wonderform/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | asyncify-boot | wp-wonderform | [View logs](/logs/plugins/w/wp-wonderform/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | jspi-boot | wp-wonderform | [View logs](/logs/plugins/w/wp-wonderform/error.json) |
+| Unknown operation: COMMENT. | ast-sqlite-boot | wp-youtube-playlist-widget | [View logs](/logs/plugins/w/wp-youtube-playlist-widget/error.json) |
+| Unknown operation: COMMENT. | asyncify-boot | wp-youtube-playlist-widget | [View logs](/logs/plugins/w/wp-youtube-playlist-widget/error.json) |
+| Unknown operation: COMMENT. | jspi-boot | wp-youtube-playlist-widget | [View logs](/logs/plugins/w/wp-youtube-playlist-widget/error.json) |
+| Unknown operation: OPT. | ast-sqlite-boot | wp-youtube-playlist-widget | [View logs](/logs/plugins/w/wp-youtube-playlist-widget/error.json) |
+| Unknown operation: OPT. | asyncify-boot | wp-youtube-playlist-widget | [View logs](/logs/plugins/w/wp-youtube-playlist-widget/error.json) |
+| Unknown operation: OPT. | jspi-boot | wp-youtube-playlist-widget | [View logs](/logs/plugins/w/wp-youtube-playlist-widget/error.json) |
+| Unknown operation: `FIELDS`. | ast-sqlite-boot | wp-youtube-playlist-widget | [View logs](/logs/plugins/w/wp-youtube-playlist-widget/error.json) |
+| Unknown operation: `FIELDS`. | asyncify-boot | wp-youtube-playlist-widget | [View logs](/logs/plugins/w/wp-youtube-playlist-widget/error.json) |
+| Unknown operation: `FIELDS`. | jspi-boot | wp-youtube-playlist-widget | [View logs](/logs/plugins/w/wp-youtube-playlist-widget/error.json) |
+| Unknown operation: `HIDE`. | ast-sqlite-boot | wp-youtube-playlist-widget | [View logs](/logs/plugins/w/wp-youtube-playlist-widget/error.json) |
+| Unknown operation: `HIDE`. | asyncify-boot | wp-youtube-playlist-widget | [View logs](/logs/plugins/w/wp-youtube-playlist-widget/error.json) |
+| Unknown operation: `HIDE`. | jspi-boot | wp-youtube-playlist-widget | [View logs](/logs/plugins/w/wp-youtube-playlist-widget/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | ast-sqlite-boot | wp-youtube-playlist-widget | [View logs](/logs/plugins/w/wp-youtube-playlist-widget/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | asyncify-boot | wp-youtube-playlist-widget | [View logs](/logs/plugins/w/wp-youtube-playlist-widget/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | jspi-boot | wp-youtube-playlist-widget | [View logs](/logs/plugins/w/wp-youtube-playlist-widget/error.json) |
+| Unknown operation: `TS`. | ast-sqlite-boot | wp-youtube-playlist-widget | [View logs](/logs/plugins/w/wp-youtube-playlist-widget/error.json) |
+| Unknown operation: `TS`. | asyncify-boot | wp-youtube-playlist-widget | [View logs](/logs/plugins/w/wp-youtube-playlist-widget/error.json) |
+| Unknown operation: `TS`. | jspi-boot | wp-youtube-playlist-widget | [View logs](/logs/plugins/w/wp-youtube-playlist-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | ast-sqlite-boot | wp2flickr | [View logs](/logs/plugins/w/wp2flickr/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | asyncify-boot | wp2flickr | [View logs](/logs/plugins/w/wp2flickr/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | jspi-boot | wp2flickr | [View logs](/logs/plugins/w/wp2flickr/error.json) |
+| Unknown operation: COMMENT. | ast-sqlite-boot | wpcareers | [View logs](/logs/plugins/w/wpcareers/error.json) |
+| Unknown operation: COMMENT. | asyncify-boot | wpcareers | [View logs](/logs/plugins/w/wpcareers/error.json) |
+| Unknown operation: COMMENT. | jspi-boot | wpcareers | [View logs](/logs/plugins/w/wpcareers/error.json) |
+| Unknown operation: OPT. | ast-sqlite-boot | wpcareers | [View logs](/logs/plugins/w/wpcareers/error.json) |
+| Unknown operation: OPT. | asyncify-boot | wpcareers | [View logs](/logs/plugins/w/wpcareers/error.json) |
+| Unknown operation: OPT. | jspi-boot | wpcareers | [View logs](/logs/plugins/w/wpcareers/error.json) |
+| Unknown operation: `FIELDS`. | ast-sqlite-boot | wpcareers | [View logs](/logs/plugins/w/wpcareers/error.json) |
+| Unknown operation: `FIELDS`. | asyncify-boot | wpcareers | [View logs](/logs/plugins/w/wpcareers/error.json) |
+| Unknown operation: `FIELDS`. | jspi-boot | wpcareers | [View logs](/logs/plugins/w/wpcareers/error.json) |
+| Unknown operation: `HIDE`. | ast-sqlite-boot | wpcareers | [View logs](/logs/plugins/w/wpcareers/error.json) |
+| Unknown operation: `HIDE`. | asyncify-boot | wpcareers | [View logs](/logs/plugins/w/wpcareers/error.json) |
+| Unknown operation: `HIDE`. | jspi-boot | wpcareers | [View logs](/logs/plugins/w/wpcareers/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | ast-sqlite-boot | wpcareers | [View logs](/logs/plugins/w/wpcareers/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | asyncify-boot | wpcareers | [View logs](/logs/plugins/w/wpcareers/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | jspi-boot | wpcareers | [View logs](/logs/plugins/w/wpcareers/error.json) |
+| Unknown operation: `TS`. | ast-sqlite-boot | wpcareers | [View logs](/logs/plugins/w/wpcareers/error.json) |
+| Unknown operation: `TS`. | asyncify-boot | wpcareers | [View logs](/logs/plugins/w/wpcareers/error.json) |
+| Unknown operation: `TS`. | jspi-boot | wpcareers | [View logs](/logs/plugins/w/wpcareers/error.json) |
 | Unexpected token in MySQL query: isValid. | asyncify-boot | wpcasa-pricing-tables | [View logs](/logs/plugins/w/wpcasa-pricing-tables/error.json) |
 | Unexpected token in MySQL query: isValid. | jspi-boot | wpcasa-pricing-tables | [View logs](/logs/plugins/w/wpcasa-pricing-tables/error.json) |
 | Unexpected token in MySQL query: willAttend. | asyncify-boot | wpcasa-pricing-tables | [View logs](/logs/plugins/w/wpcasa-pricing-tables/error.json) |
@@ -4339,6 +4613,24 @@ Backtra
 | SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | ast-sqlite-boot | wpgmappity | [View logs](/logs/plugins/w/wpgmappity/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | asyncify-boot | wpgmappity | [View logs](/logs/plugins/w/wpgmappity/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | jspi-boot | wpgmappity | [View logs](/logs/plugins/w/wpgmappity/error.json) |
+| Unknown operation: COMMENT. | ast-sqlite-boot | wpgraphicstudio | [View logs](/logs/plugins/w/wpgraphicstudio/error.json) |
+| Unknown operation: COMMENT. | asyncify-boot | wpgraphicstudio | [View logs](/logs/plugins/w/wpgraphicstudio/error.json) |
+| Unknown operation: COMMENT. | jspi-boot | wpgraphicstudio | [View logs](/logs/plugins/w/wpgraphicstudio/error.json) |
+| Unknown operation: OPT. | ast-sqlite-boot | wpgraphicstudio | [View logs](/logs/plugins/w/wpgraphicstudio/error.json) |
+| Unknown operation: OPT. | asyncify-boot | wpgraphicstudio | [View logs](/logs/plugins/w/wpgraphicstudio/error.json) |
+| Unknown operation: OPT. | jspi-boot | wpgraphicstudio | [View logs](/logs/plugins/w/wpgraphicstudio/error.json) |
+| Unknown operation: `FIELDS`. | ast-sqlite-boot | wpgraphicstudio | [View logs](/logs/plugins/w/wpgraphicstudio/error.json) |
+| Unknown operation: `FIELDS`. | asyncify-boot | wpgraphicstudio | [View logs](/logs/plugins/w/wpgraphicstudio/error.json) |
+| Unknown operation: `FIELDS`. | jspi-boot | wpgraphicstudio | [View logs](/logs/plugins/w/wpgraphicstudio/error.json) |
+| Unknown operation: `HIDE`. | ast-sqlite-boot | wpgraphicstudio | [View logs](/logs/plugins/w/wpgraphicstudio/error.json) |
+| Unknown operation: `HIDE`. | asyncify-boot | wpgraphicstudio | [View logs](/logs/plugins/w/wpgraphicstudio/error.json) |
+| Unknown operation: `HIDE`. | jspi-boot | wpgraphicstudio | [View logs](/logs/plugins/w/wpgraphicstudio/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | ast-sqlite-boot | wpgraphicstudio | [View logs](/logs/plugins/w/wpgraphicstudio/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | asyncify-boot | wpgraphicstudio | [View logs](/logs/plugins/w/wpgraphicstudio/error.json) |
+| Unknown operation: `KEEP_PRIVATE`. | jspi-boot | wpgraphicstudio | [View logs](/logs/plugins/w/wpgraphicstudio/error.json) |
+| Unknown operation: `TS`. | ast-sqlite-boot | wpgraphicstudio | [View logs](/logs/plugins/w/wpgraphicstudio/error.json) |
+| Unknown operation: `TS`. | asyncify-boot | wpgraphicstudio | [View logs](/logs/plugins/w/wpgraphicstudio/error.json) |
+| Unknown operation: `TS`. | jspi-boot | wpgraphicstudio | [View logs](/logs/plugins/w/wpgraphicstudio/error.json) |
 | Unexpected token in MySQL query: isValid. | ast-sqlite-boot | wpklikandpay | [View logs](/logs/plugins/w/wpklikandpay/error.json) |
 | Unexpected token in MySQL query: isValid. | asyncify-boot | wpklikandpay | [View logs](/logs/plugins/w/wpklikandpay/error.json) |
 | Unexpected token in MySQL query: isValid. | jspi-boot | wpklikandpay | [View logs](/logs/plugins/w/wpklikandpay/error.json) |
