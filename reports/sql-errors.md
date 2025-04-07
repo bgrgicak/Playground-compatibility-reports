@@ -2602,18 +2602,48 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | padma-advanced | [View logs](/logs/plugins/p/padma-advanced/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | padma-advanced | [View logs](/logs/plugins/p/padma-advanced/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | padma-advanced | [View logs](/logs/plugins/p/padma-advanced/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | royal-recent-posts-widget-by-category | [View logs](/logs/plugins/r/royal-recent-posts-widget-by-category/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | royal-recent-posts-widget-by-category | [View logs](/logs/plugins/r/royal-recent-posts-widget-by-category/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | royal-recent-posts-widget-by-category | [View logs](/logs/plugins/r/royal-recent-posts-widget-by-category/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | realty-portal-agent-profile | [View logs](/logs/plugins/r/realty-portal-agent-profile/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | realty-portal-agent-profile | [View logs](/logs/plugins/r/realty-portal-agent-profile/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | realty-portal-agent-profile | [View logs](/logs/plugins/r/realty-portal-agent-profile/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | rcp-allow-rest | [View logs](/logs/plugins/r/rcp-allow-rest/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | rcp-allow-rest | [View logs](/logs/plugins/r/rcp-allow-rest/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | rcp-allow-rest | [View logs](/logs/plugins/r/rcp-allow-rest/error.json) |
 | Unknown query type: post_rating. | ast-sqlite-boot | rating-review-matrix | [View logs](/logs/plugins/r/rating-review-matrix/error.json) |
 | Unknown query type: post_rating. | asyncify-boot | rating-review-matrix | [View logs](/logs/plugins/r/rating-review-matrix/error.json) |
 | Unknown query type: post_rating. | jspi-boot | rating-review-matrix | [View logs](/logs/plugins/r/rating-review-matrix/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | responsive-posts-widget | [View logs](/logs/plugins/r/responsive-posts-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | responsive-posts-widget | [View logs](/logs/plugins/r/responsive-posts-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | responsive-posts-widget | [View logs](/logs/plugins/r/responsive-posts-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | retainful-next-order-coupon-for-woocommerce | [View logs](/logs/plugins/r/retainful-next-order-coupon-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | retainful-next-order-coupon-for-woocommerce | [View logs](/logs/plugins/r/retainful-next-order-coupon-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | retainful-next-order-coupon-for-woocommerce | [View logs](/logs/plugins/r/retainful-next-order-coupon-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | restrictedarea | [View logs](/logs/plugins/r/restrictedarea/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | restrictedarea | [View logs](/logs/plugins/r/restrictedarea/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | restrictedarea | [View logs](/logs/plugins/r/restrictedarea/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | responsive-accordion-tabs | [View logs](/logs/plugins/r/responsive-accordion-tabs/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | responsive-accordion-tabs | [View logs](/logs/plugins/r/responsive-accordion-tabs/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | responsive-accordion-tabs | [View logs](/logs/plugins/r/responsive-accordion-tabs/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | rate-this-site | [View logs](/logs/plugins/r/rate-this-site/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | rate-this-site | [View logs](/logs/plugins/r/rate-this-site/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | rate-this-site | [View logs](/logs/plugins/r/rate-this-site/error.json) |
 | Unknown query type: post_rating. | ast-sqlite-boot | rl-carriers-woocommerce-shipping-method | [View logs](/logs/plugins/r/rl-carriers-woocommerce-shipping-method/error.json) |
 | Unknown query type: post_rating. | asyncify-boot | rl-carriers-woocommerce-shipping-method | [View logs](/logs/plugins/r/rl-carriers-woocommerce-shipping-method/error.json) |
 | Unknown query type: post_rating. | jspi-boot | rl-carriers-woocommerce-shipping-method | [View logs](/logs/plugins/r/rl-carriers-woocommerce-shipping-method/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | rawcode-plugin | [View logs](/logs/plugins/r/rawcode-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | rawcode-plugin | [View logs](/logs/plugins/r/rawcode-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | rawcode-plugin | [View logs](/logs/plugins/r/rawcode-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | royal-seal-ent-radio-wrse | [View logs](/logs/plugins/r/royal-seal-ent-radio-wrse/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | royal-seal-ent-radio-wrse | [View logs](/logs/plugins/r/royal-seal-ent-radio-wrse/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | royal-seal-ent-radio-wrse | [View logs](/logs/plugins/r/royal-seal-ent-radio-wrse/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | row-column-testmonial-with-widget | [View logs](/logs/plugins/r/row-column-testmonial-with-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | row-column-testmonial-with-widget | [View logs](/logs/plugins/r/row-column-testmonial-with-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | row-column-testmonial-with-widget | [View logs](/logs/plugins/r/row-column-testmonial-with-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | rebrand-cartflows | [View logs](/logs/plugins/r/rebrand-cartflows/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | rebrand-cartflows | [View logs](/logs/plugins/r/rebrand-cartflows/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | rebrand-cartflows | [View logs](/logs/plugins/r/rebrand-cartflows/error.json) |
 | Unknown query type: post_rating. | ast-sqlite-boot | rua-blog-subscriber-lite | [View logs](/logs/plugins/r/rua-blog-subscriber-lite/error.json) |
 | Unknown query type: post_rating. | asyncify-boot | rua-blog-subscriber-lite | [View logs](/logs/plugins/r/rua-blog-subscriber-lite/error.json) |
 | Unknown query type: post_rating. | jspi-boot | rua-blog-subscriber-lite | [View logs](/logs/plugins/r/rua-blog-subscriber-lite/error.json) |
@@ -2635,9 +2665,15 @@ Backtra
 | Unknown query type: post_rating. | ast-sqlite-boot | rideshare-importer | [View logs](/logs/plugins/r/rideshare-importer/error.json) |
 | Unknown query type: post_rating. | asyncify-boot | rideshare-importer | [View logs](/logs/plugins/r/rideshare-importer/error.json) |
 | Unknown query type: post_rating. | jspi-boot | rideshare-importer | [View logs](/logs/plugins/r/rideshare-importer/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | recent-comments-with-avatars | [View logs](/logs/plugins/r/recent-comments-with-avatars/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | recent-comments-with-avatars | [View logs](/logs/plugins/r/recent-comments-with-avatars/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | recent-comments-with-avatars | [View logs](/logs/plugins/r/recent-comments-with-avatars/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | rss-feed-scroller-widget | [View logs](/logs/plugins/r/rss-feed-scroller-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | rss-feed-scroller-widget | [View logs](/logs/plugins/r/rss-feed-scroller-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | rss-feed-scroller-widget | [View logs](/logs/plugins/r/rss-feed-scroller-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | realty-portal-agent | [View logs](/logs/plugins/r/realty-portal-agent/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | realty-portal-agent | [View logs](/logs/plugins/r/realty-portal-agent/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | realty-portal-agent | [View logs](/logs/plugins/r/realty-portal-agent/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | role-based-bulk-quantity-pricing | [View logs](/logs/plugins/r/role-based-bulk-quantity-pricing/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | role-based-bulk-quantity-pricing | [View logs](/logs/plugins/r/role-based-bulk-quantity-pricing/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | role-based-bulk-quantity-pricing | [View logs](/logs/plugins/r/role-based-bulk-quantity-pricing/error.json) |
@@ -2659,9 +2695,21 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | rssfeedchecker | [View logs](/logs/plugins/r/rssfeedchecker/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | rssfeedchecker | [View logs](/logs/plugins/r/rssfeedchecker/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | rssfeedchecker | [View logs](/logs/plugins/r/rssfeedchecker/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | reet-pe-tweet | [View logs](/logs/plugins/r/reet-pe-tweet/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | reet-pe-tweet | [View logs](/logs/plugins/r/reet-pe-tweet/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | reet-pe-tweet | [View logs](/logs/plugins/r/reet-pe-tweet/error.json) |
 | Unknown query type: post_rating. | ast-sqlite-boot | rax-google-language-translator | [View logs](/logs/plugins/r/rax-google-language-translator/error.json) |
 | Unknown query type: post_rating. | asyncify-boot | rax-google-language-translator | [View logs](/logs/plugins/r/rax-google-language-translator/error.json) |
 | Unknown query type: post_rating. | jspi-boot | rax-google-language-translator | [View logs](/logs/plugins/r/rax-google-language-translator/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | rv-submenus | [View logs](/logs/plugins/r/rv-submenus/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | rv-submenus | [View logs](/logs/plugins/r/rv-submenus/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | rv-submenus | [View logs](/logs/plugins/r/rv-submenus/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | restposts | [View logs](/logs/plugins/r/restposts/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | restposts | [View logs](/logs/plugins/r/restposts/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | restposts | [View logs](/logs/plugins/r/restposts/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | remove-title-attributes | [View logs](/logs/plugins/r/remove-title-attributes/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | remove-title-attributes | [View logs](/logs/plugins/r/remove-title-attributes/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | remove-title-attributes | [View logs](/logs/plugins/r/remove-title-attributes/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: "openid". | asyncify-boot | redaction-io | [View logs](/logs/plugins/r/redaction-io/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: "openid". | jspi-boot | redaction-io | [View logs](/logs/plugins/r/redaction-io/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: openid. | asyncify-boot | redaction-io | [View logs](/logs/plugins/r/redaction-io/error.json) |
@@ -2675,6 +2723,9 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | readme-detonator | [View logs](/logs/plugins/r/readme-detonator/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | readme-detonator | [View logs](/logs/plugins/r/readme-detonator/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | readme-detonator | [View logs](/logs/plugins/r/readme-detonator/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | rich-widget | [View logs](/logs/plugins/r/rich-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | rich-widget | [View logs](/logs/plugins/r/rich-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | rich-widget | [View logs](/logs/plugins/r/rich-widget/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | s5-image-and-content-fader | [View logs](/logs/plugins/s/s5-image-and-content-fader/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | s5-image-and-content-fader | [View logs](/logs/plugins/s/s5-image-and-content-fader/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | s5-image-and-content-fader | [View logs](/logs/plugins/s/s5-image-and-content-fader/error.json) |
@@ -2820,6 +2871,9 @@ Backtra
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | tpc-memory-usage-updated | [View logs](/logs/plugins/t/tpc-memory-usage-updated/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | tpc-memory-usage-updated | [View logs](/logs/plugins/t/tpc-memory-usage-updated/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | tpc-memory-usage-updated | [View logs](/logs/plugins/t/tpc-memory-usage-updated/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | tag-cloud-canvas | [View logs](/logs/plugins/t/tag-cloud-canvas/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | tag-cloud-canvas | [View logs](/logs/plugins/t/tag-cloud-canvas/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | tag-cloud-canvas | [View logs](/logs/plugins/t/tag-cloud-canvas/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | tinfoil-hat | [View logs](/logs/plugins/t/tinfoil-hat/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | tinfoil-hat | [View logs](/logs/plugins/t/tinfoil-hat/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | tinfoil-hat | [View logs](/logs/plugins/t/tinfoil-hat/error.json) |
@@ -2846,12 +2900,18 @@ Backtra
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | treggo-shipping | [View logs](/logs/plugins/t/treggo-shipping/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | treggo-shipping | [View logs](/logs/plugins/t/treggo-shipping/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | treggo-shipping | [View logs](/logs/plugins/t/treggo-shipping/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | themed-login | [View logs](/logs/plugins/t/themed-login/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | themed-login | [View logs](/logs/plugins/t/themed-login/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | themed-login | [View logs](/logs/plugins/t/themed-login/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | templatic-google-amp | [View logs](/logs/plugins/t/templatic-google-amp/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | templatic-google-amp | [View logs](/logs/plugins/t/templatic-google-amp/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | templatic-google-amp | [View logs](/logs/plugins/t/templatic-google-amp/error.json) |
 | Unknown query type: LOAD DATA. | ast-sqlite-boot | templatic-google-amp | [View logs](/logs/plugins/t/templatic-google-amp/error.json) |
 | Unknown query type: LOAD DATA. | asyncify-boot | templatic-google-amp | [View logs](/logs/plugins/t/templatic-google-amp/error.json) |
 | Unknown query type: LOAD DATA. | jspi-boot | templatic-google-amp | [View logs](/logs/plugins/t/templatic-google-amp/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | tabber-tabs-widget | [View logs](/logs/plugins/t/tabber-tabs-widget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | tabber-tabs-widget | [View logs](/logs/plugins/t/tabber-tabs-widget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | tabber-tabs-widget | [View logs](/logs/plugins/t/tabber-tabs-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | translate-with-google-and-bing | [View logs](/logs/plugins/t/translate-with-google-and-bing/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | translate-with-google-and-bing | [View logs](/logs/plugins/t/translate-with-google-and-bing/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | translate-with-google-and-bing | [View logs](/logs/plugins/t/translate-with-google-and-bing/error.json) |
@@ -2932,6 +2992,9 @@ Backtra
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | tiny-mass-mailer | [View logs](/logs/plugins/t/tiny-mass-mailer/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | tiny-mass-mailer | [View logs](/logs/plugins/t/tiny-mass-mailer/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | tiny-mass-mailer | [View logs](/logs/plugins/t/tiny-mass-mailer/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | tint | [View logs](/logs/plugins/t/tint/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | tint | [View logs](/logs/plugins/t/tint/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | tint | [View logs](/logs/plugins/t/tint/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | twitter-trends-widget | [View logs](/logs/plugins/t/twitter-trends-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | twitter-trends-widget | [View logs](/logs/plugins/t/twitter-trends-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | twitter-trends-widget | [View logs](/logs/plugins/t/twitter-trends-widget/error.json) |
@@ -3097,6 +3160,9 @@ Backtra
 | Unknown query type: LOAD DATA. | ast-sqlite-boot | triagis-security-evaluation | [View logs](/logs/plugins/t/triagis-security-evaluation/error.json) |
 | Unknown query type: LOAD DATA. | asyncify-boot | triagis-security-evaluation | [View logs](/logs/plugins/t/triagis-security-evaluation/error.json) |
 | Unknown query type: LOAD DATA. | jspi-boot | triagis-security-evaluation | [View logs](/logs/plugins/t/triagis-security-evaluation/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | theme-yaml | [View logs](/logs/plugins/t/theme-yaml/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | theme-yaml | [View logs](/logs/plugins/t/theme-yaml/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | theme-yaml | [View logs](/logs/plugins/t/theme-yaml/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | totosgr-xml-feed-for-woocommerce | [View logs](/logs/plugins/t/totosgr-xml-feed-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | totosgr-xml-feed-for-woocommerce | [View logs](/logs/plugins/t/totosgr-xml-feed-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | totosgr-xml-feed-for-woocommerce | [View logs](/logs/plugins/t/totosgr-xml-feed-for-woocommerce/error.json) |
@@ -3223,6 +3289,9 @@ Backtra
 | Unknown query type: LOAD DATA. | ast-sqlite-boot | timemk-widget | [View logs](/logs/plugins/t/timemk-widget/error.json) |
 | Unknown query type: LOAD DATA. | asyncify-boot | timemk-widget | [View logs](/logs/plugins/t/timemk-widget/error.json) |
 | Unknown query type: LOAD DATA. | jspi-boot | timemk-widget | [View logs](/logs/plugins/t/timemk-widget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | thesis-sidebar-teasers | [View logs](/logs/plugins/t/thesis-sidebar-teasers/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | thesis-sidebar-teasers | [View logs](/logs/plugins/t/thesis-sidebar-teasers/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | thesis-sidebar-teasers | [View logs](/logs/plugins/t/thesis-sidebar-teasers/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | turnkey-lender-pay-over-time | [View logs](/logs/plugins/t/turnkey-lender-pay-over-time/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | turnkey-lender-pay-over-time | [View logs](/logs/plugins/t/turnkey-lender-pay-over-time/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | turnkey-lender-pay-over-time | [View logs](/logs/plugins/t/turnkey-lender-pay-over-time/error.json) |
