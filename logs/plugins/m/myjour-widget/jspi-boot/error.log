@@ -2,14 +2,14 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [04-Apr-2025 15:26:45 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 15:26:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 15:26:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 15:26:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 15:27:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [07-Apr-2025 15:48:19 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[07-Apr-2025 15:48:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[07-Apr-2025 15:48:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[07-Apr-2025 15:48:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[07-Apr-2025 15:48:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('maxelpay_version', '1.0.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dokan_appearance', 'a:2:{s:16:\"store_open_close\";s:3:\"off\";s:26:\"doc_multislot_time_enabled\";s:2:\"on\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -21,7 +21,7 @@ Error: [04-Apr-2025 15:26:45 UTC] PHP Warning:  Undefined array key "option_valu
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'maxelpay_version' , '1.0.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'dokan_appearance' , 'a:2:{s:16:&quot;store_open_close&quot;;s:3:&quot;off&quot;;s:26:&quot;doc_multislot_time_enabled&quot;;s:2:&quot;on&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -33,19 +33,23 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('maxelpay_versio...', '1.0.0', '', 'auto')
-#5 /wordpress/wp-content/plugins/maxelpay/maxelpay.php(86): update_option('maxelpay_versio...', '1.0.0')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Maxelpay::maxelpay_activate(false)
+#4 /wordpress/wp-includes/option.php(921): add_option('dokan_appearanc...', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/multislot-business-hours-for-dokan-vendor/multislot-business-hours-for-dokan-vendor.php(132): update_option('dokan_appearanc...', Array)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): DOC\DOC->on_active(false)
 #7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_maxelp...', false)
-#10 /internal/eval.php(20): activate_plugin('maxelpay/maxelp...')
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_multis...', false)
+#10 /internal/eval.php(20): activate_plugin('multislot-busin...')
 #11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('maxelpay_version', '1.0.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_maxelpay/maxelpay.php'), WP_Hook->do_action, WP_Hook->apply_filters, Maxelpay::maxelpay_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 15:27:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('dokan_appearance', 'a:2:{s:16:\"store_open_close\";s:3:\"off\";s:26:\"doc_multislot_time_enabled\";s:2:\"on\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_multislot-business-hours-for-dokan-vendor/multislot-business-hours-for-dokan-vendor.php'), WP_Hook->do_action, WP_Hook->apply_filters, DOC\DOC->on_active, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-Apr-2025 15:48:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[07-Apr-2025 15:48:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[07-Apr-2025 15:48:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[07-Apr-2025 15:48:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[07-Apr-2025 15:48:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('maxelpay_installDate', '2025-04-04 03:27:02', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('installed_music-player-for-easy-digital-downloads', '1744040939', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -57,7 +61,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'maxelpay_installDate' , '2025-04-04 03:27:02' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'installed_music-player-for-easy-digital-downloads' , '1744040939' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -69,39 +73,22 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('maxelpay_instal...', '2025-04-04 03:2...', '', 'auto')
-#5 /wordpress/wp-content/plugins/maxelpay/maxelpay.php(87): update_option('maxelpay_instal...', '2025-04-04 03:2...')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Maxelpay::maxelpay_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_maxelp...', false)
-#10 /internal/eval.php(20): activate_plugin('maxelpay/maxelp...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('maxelpay_installDate', '2025-04-04 03:27:02', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_maxelpay/maxelpay.php'), WP_Hook->do_action, WP_Hook->apply_filters, Maxelpay::maxelpay_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 15:27:02 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 15:27:02 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 15:27:02 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 15:27:02 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 15:27:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 15:27:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 15:27:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 15:27:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 15:27:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 15:27:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 15:27:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 15:27:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 15:27:48 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 15:27:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 15:27:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 15:27:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 15:28:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 15:28:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 15:28:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 15:28:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 15:28:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('installed_music...', 1744040939, '', 'auto')
+#5 /wordpress/wp-content/plugins/music-player-for-easy-digital-downloads/feedback/cp-feedback.php(19): update_option('installed_music...', 1744040939)
+#6 /wordpress/wp-content/plugins/music-player-for-easy-digital-downloads/eddmp.php(32): EDDMP_FEEDBACK->__construct('music-player-fo...', '/wordpress/wp-c...', 'https://wordpre...')
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('music-player-fo...')
+#9 /internal/eval.php(20): activate_plugin('music-player-fo...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('installed_music-player-for-easy-digital-downloads', '1744040939', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/music-player-for-easy-digital-downloads/eddmp.php'), EDDMP_FEEDBACK->__construct, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-Apr-2025 15:48:59 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[07-Apr-2025 15:48:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[07-Apr-2025 15:48:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[07-Apr-2025 15:48:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[07-Apr-2025 15:48:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpmcs_do_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('installed_music-player-for-easy-digital-downloads', '1744040939', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -113,7 +100,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpmcs_do_activation_redirect' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'installed_music-player-for-easy-digital-downloads' , '1744040939' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -125,388 +112,166 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/media-cloud-sync/includes/admin.php(79): add_option('wpmcs_do_activa...', true)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): Dudlewebs\WPMCS\Admin->install(false)
+#4 /wordpress/wp-includes/option.php(921): add_option('installed_music...', 1744040939, '', 'auto')
+#5 /wordpress/wp-content/plugins/music-player-for-easy-digital-downloads/feedback/cp-feedback.php(19): update_option('installed_music...', 1744040939)
+#6 /wordpress/wp-content/plugins/music-player-for-easy-digital-downloads/eddmp.php(32): EDDMP_FEEDBACK->__construct('music-player-fo...', '/wordpress/wp-c...', 'https://wordpre...')
+#7 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('installed_music-player-for-easy-digital-downloads', '1744040939', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/music-player-for-easy-digital-downloads/eddmp.php'), EDDMP_FEEDBACK->__construct, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-Apr-2025 15:49:12 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[07-Apr-2025 15:49:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[07-Apr-2025 15:49:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[07-Apr-2025 15:49:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[07-Apr-2025 15:49:25 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[07-Apr-2025 15:49:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[07-Apr-2025 15:49:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[07-Apr-2025 15:49:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[07-Apr-2025 15:49:38 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[07-Apr-2025 15:49:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[07-Apr-2025 15:49:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[07-Apr-2025 15:49:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[07-Apr-2025 15:50:12 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/my-reading-library/includes/rewrite.php on line 66
+[07-Apr-2025 15:50:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('MyReadingLibraryOptions', 'a:20:{s:10:\"formatDate\";s:5:\"n/j/Y\";s:10:\"ignoreTime\";b:0;s:13:\"hideAddedDate\";b:0;s:9:\"associate\";s:16:\"passforchrimi-20\";s:6:\"domain\";s:4:\".com\";s:9:\"imageSize\";s:5:\"Small\";s:10:\"limageSize\";s:6:\"Medium\";s:7:\"httpLib\";s:6:\"snoopy\";s:13:\"useModRewrite\";b:0;s:9:\"debugMode\";b:0;s:10:\"menuLayout\";i:4;s:12:\"booksPerPage\";i:10;s:12:\"defBookCount\";i:5;s:16:\"hideCurrentBooks\";b:0;s:16:\"hidePlannedBooks\";b:0;s:17:\"hideFinishedBooks\";b:1;s:15:\"hideBooksonHold\";b:1;s:15:\"hideViewLibrary\";b:0;s:12:\"templateBase\";s:18:\"default_templates/\";s:13:\"permalinkBase\";s:11:\"my-library/\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'MyReadingLibraryOptions' , 'a:20:{s:10:&quot;formatDate&quot;;s:5:&quot;n/j/Y&quot;;s:10:&quot;ignoreTime&quot;;b:0;s:13:&quot;hideAddedDate&quot;;b:0;s:9:&quot;associate&quot;;s:16:&quot;passforchrimi-20&quot;;s:6:&quot;domain&quot;;s:4:&quot;.com&quot;;s:9:&quot;imageSize&quot;;s:5:&quot;Small&quot;;s:10:&quot;limageSize&quot;;s:6:&quot;Medium&quot;;s:7:&quot;httpLib&quot;;s:6:&quot;snoopy&quot;;s:13:&quot;useModRewrite&quot;;b:0;s:9:&quot;debugMode&quot;;b:0;s:10:&quot;menuLayout&quot;;i:4;s:12:&quot;booksPerPage&quot;;i:10;s:12:&quot;defBookCount&quot;;i:5;s:16:&quot;hideCurrentBooks&quot;;b:0;s:16:&quot;hidePlannedBooks&quot;;b:0;s:17:&quot;hideFinishedBooks&quot;;b:1;s:15:&quot;hideBooksonHold&quot;;b:1;s:15:&quot;hideViewLibrary&quot;;b:0;s:12:&quot;templateBase&quot;;s:18:&quot;default_templates/&quot;;s:13:&quot;permalinkBase&quot;;s:11:&quot;my-library/&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/my-reading-library/my-reading-library.php(201): add_option('MyReadingLibrar...', Array)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): mrl_install(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_media-...', false)
-#9 /internal/eval.php(20): activate_plugin('media-cloud-syn...')
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_my-rea...', false)
+#9 /internal/eval.php(20): activate_plugin('my-reading-libr...')
 #10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpmcs_do_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_media-cloud-sync/media-cloud-sync.php'), WP_Hook->do_action, WP_Hook->apply_filters, Dudlewebs\WPMCS\Admin->install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 15:28:17 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 15:28:17 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 15:28:17 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 15:28:17 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 15:28:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:27:\"media-download/lib/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:5:\"2.5.5\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1743780514;s:11:\"plugin_path\";s:33:\"media-download/media-download.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:33:\"media-download/media-download.php\";s:8:\"sdk_path\";s:27:\"media-download/lib/freemius\";s:7:\"version\";s:5:\"2.5.5\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1743780514;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_active_plugins' , 'O:8:&quot;stdClass&quot;:3:{s:7:&quot;plugins&quot;;a:1:{s:27:&quot;media-download/lib/freemius&quot;;O:8:&quot;stdClass&quot;:4:{s:7:&quot;version&quot;;s:5:&quot;2.5.5&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:9:&quot;timestamp&quot;;i:1743780514;s:11:&quot;plugin_path&quot;;s:33:&quot;media-download/media-download.php&quot;;}}s:7:&quot;abspath&quot;;s:11:&quot;/wordpress/&quot;;s:6:&quot;newest&quot;;O:8:&quot;stdClass&quot;:5:{s:11:&quot;plugin_path&quot;;s:33:&quot;media-download/media-download.php&quot;;s:8:&quot;sdk_path&quot;;s:27:&quot;media-download/lib/freemius&quot;;s:7:&quot;version&quot;;s:5:&quot;2.5.5&quot;;s:13:&quot;in_activation&quot;;b:1;s:9:&quot;timestamp&quot;;i:1743780514;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_active_plugi...', Object(stdClass), '', 'auto')
-#5 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/fs-essential-functions.php(276): update_option('fs_active_plugi...', Object(stdClass))
-#6 /wordpress/wp-content/plugins/media-download/lib/freemius/start.php(170): fs_update_sdk_newest_version('media-download/...', 'media-download/...')
-#7 /wordpress/wp-content/plugins/media-download/media-download.php(29): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/media-download/media-download.php(57): aagk_mlfd_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('media-download/...')
-#11 /internal/eval.php(20): activate_plugin('media-download/...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:27:\"media-download/lib/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:5:\"2.5.5\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1743780514;s:11:\"plugin_path\";s:33:\"media-download/media-download.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:33:\"media-download/media-download.php\";s:8:\"sdk_path\";s:27:\"media-download/lib/freemius\";s:7:\"version\";s:5:\"2.5.5\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1743780514;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/media-download/media-download.php'), aagk_mlfd_fs, require_once('/plugins/media-download/lib/freemius/start.php'), fs_update_sdk_newest_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 15:28:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_debug_mode' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/media-download/lib/freemius/config.php(307): add_option('fs_debug_mode', false)
-#5 /wordpress/wp-content/plugins/media-download/lib/freemius/require.php(14): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-content/plugins/media-download/lib/freemius/start.php(486): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-content/plugins/media-download/media-download.php(29): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/media-download/media-download.php(57): aagk_mlfd_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('media-download/...')
-#11 /internal/eval.php(20): activate_plugin('media-download/...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/media-download/media-download.php'), aagk_mlfd_fs, require_once('/plugins/media-download/lib/freemius/start.php'), require_once('/plugins/media-download/lib/freemius/require.php'), require_once('/plugins/media-download/lib/freemius/config.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 15:28:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:6101;a:3:{s:4:\"slug\";s:14:\"media-download\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"media-download/media-download.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:1:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6101;a:3:{s:4:&quot;slug&quot;;s:14:&quot;media-download&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;media-download/media-download.php&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('id_slug_type_pa...', Array, true)
-#8 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-freemius.php(2136): FS_Options->set_option('id_slug_type_pa...', Array, true)
-#9 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-freemius.php(417): Freemius->store_id_slug_type_path_map('6101', 'media-download')
-#10 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-freemius.php(2795): Freemius->__construct('6101', 'media-download', true)
-#11 /wordpress/wp-content/plugins/media-download/lib/freemius/start.php(525): Freemius::instance('6101', 'media-download', true)
-#12 /wordpress/wp-content/plugins/media-download/media-download.php(31): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/media-download/media-download.php(57): aagk_mlfd_fs()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('media-download/...')
-#16 /internal/eval.php(20): activate_plugin('media-download/...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:6101;a:3:{s:4:\"slug\";s:14:\"media-download\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"media-download/media-download.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/media-download/media-download.php'), aagk_mlfd_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_id_slug_type_path_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 15:28:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:6101;a:3:{s:4:\"slug\";s:14:\"media-download\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"media-download/media-download.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"media-download\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"media-download/media-download.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6101;a:3:{s:4:&quot;slug&quot;;s:14:&quot;media-download&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;media-download/media-download.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:14:&quot;media-download&quot;;a:1:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:33:&quot;media-download/media-download.php&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_main_fil...', Object(stdClass))
-#9 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-fs-storage.php(533): FS_Key_Value_Storage->__set('plugin_main_fil...', Object(stdClass))
-#10 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-freemius.php(1993): FS_Storage->__set('plugin_main_fil...', Object(stdClass))
-#11 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-freemius.php(432): Freemius->_find_caller_plugin_file(true, 'media-download/...')
-#12 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-freemius.php(2795): Freemius->__construct('6101', 'media-download', true)
-#13 /wordpress/wp-content/plugins/media-download/lib/freemius/start.php(525): Freemius::instance('6101', 'media-download', true)
-#14 /wordpress/wp-content/plugins/media-download/media-download.php(31): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/media-download/media-download.php(57): aagk_mlfd_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('media-download/...')
-#18 /internal/eval.php(20): activate_plugin('media-download/...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:6101;a:3:{s:4:\"slug\";s:14:\"media-download\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"media-download/media-download.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"media-download\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"media-download/media-download.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/media-download/media-download.php'), aagk_mlfd_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_find_caller_plugin_file, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 15:28:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:6101;a:3:{s:4:\"slug\";s:14:\"media-download\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"media-download/media-download.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"media-download\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"media-download/media-download.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6101;a:3:{s:4:&quot;slug&quot;;s:14:&quot;media-download&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;media-download/media-download.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:14:&quot;media-download&quot;;a:2:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:33:&quot;media-download/media-download.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_network_acti...', false)
-#9 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-fs-storage.php(533): FS_Key_Value_Storage->__set('is_network_acti...', false)
-#10 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-freemius.php(460): FS_Storage->__set('is_network_acti...', false)
-#11 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-freemius.php(2795): Freemius->__construct('6101', 'media-download', true)
-#12 /wordpress/wp-content/plugins/media-download/lib/freemius/start.php(525): Freemius::instance('6101', 'media-download', true)
-#13 /wordpress/wp-content/plugins/media-download/media-download.php(31): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/media-download/media-download.php(57): aagk_mlfd_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('media-download/...')
-#17 /internal/eval.php(20): activate_plugin('media-download/...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:6101;a:3:{s:4:\"slug\";s:14:\"media-download\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"media-download/media-download.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"media-download\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"media-download/media-download.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/media-download/media-download.php'), aagk_mlfd_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 15:28:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6101;a:3:{s:4:\"slug\";s:14:\"media-download\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"media-download/media-download.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"media-download\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"media-download/media-download.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:33:\"media-download/media-download.php\";s:14:\"media-download\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6101;a:3:{s:4:&quot;slug&quot;;s:14:&quot;media-download&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;media-download/media-download.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:14:&quot;media-download&quot;;a:2:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:33:&quot;media-download/media-download.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:33:&quot;media-download/media-download.php&quot;;s:14:&quot;media-download&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('file_slug_map', Array, true)
-#8 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-freemius.php(10541): FS_Options->set_option('file_slug_map', Array, true)
-#9 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-freemius.php(507): Freemius->store_file_slug_map()
-#10 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-freemius.php(2795): Freemius->__construct('6101', 'media-download', true)
-#11 /wordpress/wp-content/plugins/media-download/lib/freemius/start.php(525): Freemius::instance('6101', 'media-download', true)
-#12 /wordpress/wp-content/plugins/media-download/media-download.php(31): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/media-download/media-download.php(57): aagk_mlfd_fs()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('media-download/...')
-#16 /internal/eval.php(20): activate_plugin('media-download/...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6101;a:3:{s:4:\"slug\";s:14:\"media-download\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"media-download/media-download.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"media-download\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"media-download/media-download.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:33:\"media-download/media-download.php\";s:14:\"media-download\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/media-download/media-download.php'), aagk_mlfd_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_file_slug_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 15:28:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6101;a:3:{s:4:\"slug\";s:14:\"media-download\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"media-download/media-download.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"media-download\";a:3:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"media-download/media-download.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1743780514;}}s:13:\"file_slug_map\";a:1:{s:33:\"media-download/media-download.php\";s:14:\"media-download\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6101;a:3:{s:4:&quot;slug&quot;;s:14:&quot;media-download&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;media-download/media-download.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:14:&quot;media-download&quot;;a:3:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:33:&quot;media-download/media-download.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1743780514;}}s:13:&quot;file_slug_map&quot;;a:1:{s:33:&quot;media-download/media-download.php&quot;;s:14:&quot;media-download&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('install_timesta...', 1743780514)
-#9 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-fs-storage.php(533): FS_Key_Value_Storage->__set('install_timesta...', 1743780514)
-#10 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-freemius.php(511): FS_Storage->__set('install_timesta...', 1743780514)
-#11 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-freemius.php(2795): Freemius->__construct('6101', 'media-download', true)
-#12 /wordpress/wp-content/plugins/media-download/lib/freemius/start.php(525): Freemius::instance('6101', 'media-download', true)
-#13 /wordpress/wp-content/plugins/media-download/media-download.php(31): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/media-download/media-download.php(57): aagk_mlfd_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('media-download/...')
-#17 /internal/eval.php(20): activate_plugin('media-download/...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6101;a:3:{s:4:\"slug\";s:14:\"media-download\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"media-download/media-download.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"media-download\";a:3:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"media-download/media-download.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1743780514;}}s:13:\"file_slug_map\";a:1:{s:33:\"media-download/media-download.php\";s:14:\"media-download\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/media-download/media-download.php'), aagk_mlfd_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 15:28:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6101;a:3:{s:4:\"slug\";s:14:\"media-download\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"media-download/media-download.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"media-download\";a:4:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"media-download/media-download.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1743780514;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:33:\"media-download/media-download.php\";s:14:\"media-download\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6101;a:3:{s:4:&quot;slug&quot;;s:14:&quot;media-download&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;media-download/media-download.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:14:&quot;media-download&quot;;a:4:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:33:&quot;media-download/media-download.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1743780514;s:17:&quot;was_plugin_loaded&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:33:&quot;media-download/media-download.php&quot;;s:14:&quot;media-download&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('was_plugin_load...', true)
-#9 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-fs-storage.php(533): FS_Key_Value_Storage->__set('was_plugin_load...', true)
-#10 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-freemius.php(1330): FS_Storage->__set('was_plugin_load...', true)
-#11 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-freemius.php(1442): Freemius->_plugins_loaded()
-#12 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-freemius.php(541): Freemius->register_constructor_hooks()
-#13 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-freemius.php(2795): Freemius->__construct('6101', 'media-download', true)
-#14 /wordpress/wp-content/plugins/media-download/lib/freemius/start.php(525): Freemius::instance('6101', 'media-download', true)
-#15 /wordpress/wp-content/plugins/media-download/media-download.php(31): fs_dynamic_init(Array)
-#16 /wordpress/wp-content/plugins/media-download/media-download.php(57): aagk_mlfd_fs()
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('media-download/...')
-#19 /internal/eval.php(20): activate_plugin('media-download/...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6101;a:3:{s:4:\"slug\";s:14:\"media-download\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"media-download/media-download.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"media-download\";a:4:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"media-download/media-download.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1743780514;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:33:\"media-download/media-download.php\";s:14:\"media-download\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/media-download/media-download.php'), aagk_mlfd_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->register_constructor_hooks, Freemius->_plugins_loaded, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 15:28:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:6101;a:3:{s:4:\"slug\";s:14:\"media-download\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:33:\"media-download/media-download.php\";}}s:11:\"plugin_data\";a:1:{s:14:\"media-download\";a:5:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:33:\"media-download/media-download.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1743780514;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;}}s:13:\"file_slug_map\";a:1:{s:33:\"media-download/media-download.php\";s:14:\"media-download\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:6101;a:3:{s:4:&quot;slug&quot;;s:14:&quot;media-download&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:33:&quot;media-download/media-download.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:14:&quot;media-download&quot;;a:5:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:33:&quot;media-download/media-download.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1743780514;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:33:&quot;media-download/media-download.php&quot;;s:14:&quot;media-download&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_plugin_new_i...', true)
-#9 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-fs-storage.php(533): FS_Key_Value_Storage->__set('is_plugin_new_i...', true)
-#10 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-freemius.php(1344): FS_Storage->__set('is_plugin_new_i...', true)
-#11 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-freemius.php(1442): Freemius->_plugins_loaded()
-#12 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-freemius.php(541): Freemius->register_constructor_hooks()
-#13 /wordpress/wp-content/plugins/media-download/lib/freemius/includes/class-freemius.php(2795): Freemius->__construct('6101', 'media-download', true)
-#14 /wordpress/wp-content/plugins/media-download/lib/freemius/start.php(525): Freemius::instance('6101', 'media-download', true)
-#15 /wordpress/wp-content/plugins/media-download/media-download.php(31): fs_dynamic_init(Array)
-#16 /wordpress/wp-content/plugins/media-download/media-download.php(57): 
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('MyReadingLibraryOptions', 'a:20:{s:10:\"formatDate\";s:5:\"n/j/Y\";s:10:\"ignoreTime\";b:0;s:13:\"hideAddedDate\";b:0;s:9:\"associate\";s:16:\"passforchrimi-20\";s:6:\"domain\";s:4:\".com\";s:9:\"imageSize\";s:5:\"Small\";s:10:\"limageSize\";s:6:\"Medium\";s:7:\"httpLib\";s:6:\"snoopy\";s:13:\"useModRewrite\";b:0;s:9:\"debugMode\";b:0;s:10:\"menuLayout\";i:4;s:12:\"booksPerPage\";i:10;s:12:\"defBookCount\";i:5;s:16:\"hideCurrentBooks\";b:0;s:16:\"hidePlannedBooks\";b:0;s:17:\"hideFinishedBooks\";b:1;s:15:\"hideBooksonHold\";b:1;s:15:\"hideViewLibrary\";b:0;s:12:\"templateBase\";s:18:\"default_templates/\";s:13:\"permalinkBase\";s:11:\"my-library/\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_my-reading-library/my-reading-library.php'), WP_Hook->do_action, WP_Hook->apply_filters, mrl_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[07-Apr-2025 15:50:12 UTC] PHP Fatal error:  Uncaught TypeError: array_merge(): Argument #2 must be of type array, bool given in /wordpress/wp-content/plugins/my-reading-library/my-reading-library.php:205
+Stack trace:
+#0 /wordpress/wp-content/plugins/my-reading-library/my-reading-library.php(205): array_merge(Array, false)
+#1 /wordpress/wp-includes/class-wp-hook.php(324): mrl_install(false)
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_my-rea...', false)
+#5 /internal/eval.php(20): activate_plugin('my-reading-libr...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/my-reading-library/my-reading-library.php on line 205
+[07-Apr-2025 15:50:15 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/my-reading-library/includes/rewrite.php on line 66
+[07-Apr-2025 15:50:16 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[07-Apr-2025 15:50:16 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[07-Apr-2025 15:50:16 UTC] PHP Warning:  Undefined array key "AWSAccessKeyId" in /wordpress/wp-content/plugins/my-reading-library/my-reading-library.php on line 106
+[07-Apr-2025 15:50:16 UTC] PHP Warning:  Undefined array key "SecretAccessKey" in /wordpress/wp-content/plugins/my-reading-library/my-reading-library.php on line 107
+[07-Apr-2025 15:50:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/my-reading-library/includes/rewrite.php on line 66
+[07-Apr-2025 15:50:19 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[07-Apr-2025 15:50:19 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[07-Apr-2025 15:50:19 UTC] PHP Warning:  Undefined array key "AWSAccessKeyId" in /wordpress/wp-content/plugins/my-reading-library/my-reading-library.php on line 106
+[07-Apr-2025 15:50:19 UTC] PHP Warning:  Undefined array key "SecretAccessKey" in /wordpress/wp-content/plugins/my-reading-library/my-reading-library.php on line 107
+[07-Apr-2025 15:50:25 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[07-Apr-2025 15:50:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[07-Apr-2025 15:50:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[07-Apr-2025 15:50:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[07-Apr-2025 15:50:38 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[07-Apr-2025 15:50:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[07-Apr-2025 15:50:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[07-Apr-2025 15:50:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[07-Apr-2025 15:50:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/my-twitter-ticker/my-twitter-ticker.php:115
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('my-twitter-tick...')
+#2 /internal/eval.php(20): activate_plugin('my-twitter-tick...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/my-twitter-ticker/my-twitter-ticker.php on line 115
+[07-Apr-2025 15:50:55 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/my-twitter-ticker/my-twitter-ticker.php:115
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('my-twitter-tick...')
+#2 /internal/eval.php(20): activate_plugin('my-twitter-tick...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/my-twitter-ticker/my-twitter-ticker.php on line 115
+[07-Apr-2025 15:50:57 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/my-twitter-ticker/my-twitter-ticker.php:115
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('my-twitter-tick...')
+#2 /internal/eval.php(20): activate_plugin('my-twitter-tick...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/my-twitter-ticker/my-twitter-ticker.php on line 115
+[07-Apr-2025 15:51:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/myjour-widget/myjour-widget.php:364
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('myjour-widget/m...')
+#2 /internal/eval.php(20): activate_plugin('myjour-widget/m...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/myjour-widget/myjour-widget.php on line 364
+[07-Apr-2025 15:51:07 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/myjour-widget/myjour-widget.php:364
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('myjour-widget/m...')
+#2 /internal/eval.php(20): activate_plugin('myjour-widget/m...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/myjour-widget/myjour-widget.php on line 364
+[07-Apr-2025 15:51:09 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/myjour-widget/myjour-widget.php:364
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('myjour-widget/m...')
+#2 /internal/eval.php(20): activate_plugin('myjour-widget/m...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/myjour-widget/myjour-widget.php on line 364
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"myjour-widget"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
