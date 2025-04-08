@@ -1,17 +1,430 @@
-node:internal/event_target:1094
-  process.nextTick(() => { throw err; });
-                           ^
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21
+`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
 
-TypeError: process.stdout.clearLine is not a function
-    at C.<anonymous> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:18:538)
-    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:820:20)
-    at C.dispatchEvent (node:internal/event_target:755:26)
-    at C.notifyProgress (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:295:10)
-    at C.<anonymous> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:200:81)
-    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:820:20)
-    at C.dispatchEvent (node:internal/event_target:755:26)
-    at C.notifyProgress (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:295:10)
-    at C.<anonymous> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:200:81)
-    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:820:20)
+Error: [08-Apr-2025 21:46:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cpppc_options', 'a:14:{s:11:\"front_count\";i:10;s:17:\"front_count_paged\";i:10;s:14:\"category_count\";i:10;s:20:\"category_count_paged\";i:10;s:9:\"tag_count\";i:10;s:15:\"tag_count_paged\";i:10;s:12:\"author_count\";i:10;s:18:\"author_count_paged\";i:10;s:13:\"archive_count\";i:10;s:19:\"archive_count_paged\";i:10;s:12:\"search_count\";i:10;s:18:\"search_count_paged\";i:10;s:13:\"default_count\";i:10;s:19:\"default_count_paged\";i:10;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cpppc_options' , 'a:14:{s:11:&quot;front_count&quot;;i:10;s:17:&quot;front_count_paged&quot;;i:10;s:14:&quot;category_count&quot;;i:10;s:20:&quot;category_count_paged&quot;;i:10;s:9:&quot;tag_count&quot;;i:10;s:15:&quot;tag_count_paged&quot;;i:10;s:12:&quot;author_count&quot;;i:10;s:18:&quot;author_count_paged&quot;;i:10;s:13:&quot;archive_count&quot;;i:10;s:19:&quot;archive_count_paged&quot;;i:10;s:12:&quot;search_count&quot;;i:10;s:18:&quot;search_count_paged&quot;;i:10;s:13:&quot;default_count&quot;;i:10;s:19:&quot;default_count_paged&quot;;i:10;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('cpppc_options', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/custom-posts-per-page/custom-posts-per-page.php(165): update_option('cpppc_options', Array)
+#6 /wordpress/wp-content/plugins/custom-posts-per-page/custom-posts-per-page.php(101): Custom_Posts_Per_Page_Foghlaim->activate()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): Custom_Posts_Per_Page_Foghlaim->upgrade_check(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_custom...', false)
+#11 /internal/eval.php(20): activate_plugin('custom-posts-pe...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cpppc_options', 'a:14:{s:11:\"front_count\";i:10;s:17:\"front_count_paged\";i:10;s:14:\"category_count\";i:10;s:20:\"category_count_paged\";i:10;s:9:\"tag_count\";i:10;s:15:\"tag_count_paged\";i:10;s:12:\"author_count\";i:10;s:18:\"author_count_paged\";i:10;s:13:\"archive_count\";i:10;s:19:\"archive_count_paged\";i:10;s:12:\"search_count\";i:10;s:18:\"search_count_paged\";i:10;s:13:\"default_count\";i:10;s:19:\"default_count_paged\";i:10;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_custom-posts-per-page/custom-posts-per-page.php'), WP_Hook->do_action, WP_Hook->apply_filters, Custom_Posts_Per_Page_Foghlaim->upgrade_check, Custom_Posts_Per_Page_Foghlaim->activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 21:46:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cpppc_upgrade', '1.4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cpppc_upgrade' , '1.4' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('cpppc_upgrade', '1.4', '', 'auto')
+#5 /wordpress/wp-content/plugins/custom-posts-per-page/custom-posts-per-page.php(116): update_option('cpppc_upgrade', '1.4')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): Custom_Posts_Per_Page_Foghlaim->upgrade_check(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_custom...', false)
+#10 /internal/eval.php(20): activate_plugin('custom-posts-pe...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cpppc_upgrade', '1.4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_custom-posts-per-page/custom-posts-per-page.php'), WP_Hook->do_action, WP_Hook->apply_filters, Custom_Posts_Per_Page_Foghlaim->upgrade_check, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 21:46:14 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 21:46:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 21:46:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 21:46:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 21:46:40 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 21:46:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 21:46:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 21:46:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 21:46:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_cwm-stylish-author-widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_cwm-stylish-author-widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('widget_cwm-styl...', Array, '', 'auto')
+#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_cwm-styl...', Array)
+#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
+#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
+#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#16 /wordpress/wp-settings.php(704): do_action('init')
+#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#20 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_cwm-stylish-author-widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 21:47:07 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 21:47:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 21:47:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 21:47:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 21:47:34 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 21:47:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 21:47:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 21:47:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 21:48:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cbp_options', 'a:5:{s:14:\"cbp_post_types\";a:3:{s:4:\"post\";s:2:\"on\";s:4:\"page\";s:2:\"on\";s:10:\"attachment\";s:3:\"off\";}s:10:\"cbp_fh_loc\";s:6:\"chibi/\";s:13:\"cbp_chiattach\";s:2:\"on\";s:13:\"cbp_def_width\";i:250;s:14:\"cbp_def_height\";i:250;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cbp_options' , 'a:5:{s:14:&quot;cbp_post_types&quot;;a:3:{s:4:&quot;post&quot;;s:2:&quot;on&quot;;s:4:&quot;page&quot;;s:2:&quot;on&quot;;s:10:&quot;attachment&quot;;s:3:&quot;off&quot;;}s:10:&quot;cbp_fh_loc&quot;;s:6:&quot;chibi/&quot;;s:13:&quot;cbp_chiattach&quot;;s:2:&quot;on&quot;;s:13:&quot;cbp_def_width&quot;;i:250;s:14:&quot;cbp_def_height&quot;;i:250;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('cbp_options', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/chibipaint-for-wordpress/chibipaint.php(26): update_option('cbp_options', Array)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): cbp_activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_chibip...', false)
+#10 /internal/eval.php(20): activate_plugin('chibipaint-for-...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cbp_options', 'a:5:{s:14:\"cbp_post_types\";a:3:{s:4:\"post\";s:2:\"on\";s:4:\"page\";s:2:\"on\";s:10:\"attachment\";s:3:\"off\";}s:10:\"cbp_fh_loc\";s:6:\"chibi/\";s:13:\"cbp_chiattach\";s:2:\"on\";s:13:\"cbp_def_width\";i:250;s:14:\"cbp_def_height\";i:250;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_chibipaint-for-wordpress/chibipaint.php'), WP_Hook->do_action, WP_Hook->apply_filters, cbp_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 21:48:00 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 21:48:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 21:48:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 21:48:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 21:48:27 UTC] PHP Deprecated:  WP_SQLite_Driver::recreate_table_from_information_schema(): Implicitly marking parameter $column_map as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 2783
+[08-Apr-2025 21:48:27 UTC] PHP Deprecated:  WP_SQLite_Driver::set_result_from_affected_rows(): Implicitly marking parameter $override as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3541
+[08-Apr-2025 21:48:27 UTC] PHP Deprecated:  WP_SQLite_Driver::new_driver_exception(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3564
+[08-Apr-2025 21:48:27 UTC] PHP Deprecated:  WP_SQLite_Driver_Exception::__construct(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver-exception.php on line 19
+[08-Apr-2025 21:48:28 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 21:48:28 UTC] PHP Warning:  Trying to access array offset on null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 21:48:28 UTC] PHP Warning:  Trying to access array offset on null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 21:48:28 UTC] PHP Warning:  Trying to access array offset on null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 21:48:29 UTC] PHP Deprecated:  WP_SQLite_Driver::recreate_table_from_information_schema(): Implicitly marking parameter $column_map as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 2783
+[08-Apr-2025 21:48:29 UTC] PHP Deprecated:  WP_SQLite_Driver::set_result_from_affected_rows(): Implicitly marking parameter $override as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3541
+[08-Apr-2025 21:48:29 UTC] PHP Deprecated:  WP_SQLite_Driver::new_driver_exception(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3564
+[08-Apr-2025 21:48:29 UTC] PHP Deprecated:  WP_SQLite_Driver_Exception::__construct(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver-exception.php on line 19
+[08-Apr-2025 21:48:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cs_cache_secret_option_key', 'd2c2c99ee6a7edea8a2727ba8d923aea', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cs_cache_secret_option_key' , 'd2c2c99ee6a7edea8a2727ba8d923aea' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/codespanker-cache/authorize-cache-connection.php(17): add_option('cs_cache_secret...', 'd2c2c99ee6a7ede...')
+#5 /wordpress/wp-content/plugins/codespanker-cache/authorize-cache-connection.php(11): CS_Authorize_Cache_Connection->create_cache_secret()
+#6 /wordpress/wp-content/plugins/codespanker-cache/codespanker-cache.php(137): CS_Authorize_Cache_Connection->__construct()
+#7 /wordpress/wp-content/plugins/codespanker-cache/codespanker-cache.php(64): CS_Cache->is_cached()
+#8 /wordpress/wp-content/plugins/codespanker-cache/codespanker-cache.php(41): CS_Cache->init()
+#9 /wordpress/wp-content/plugins/codespanker-cache/codespanker-cache.php(183): CS_Cache->__construct()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('codespanker-cac...')
+#12 /internal/eval.php(20): activate_plugin('codespanker-cac...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cs_cache_secret_option_key', 'd2c2c99ee6a7edea8a2727ba8d923aea', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/codespanker-cache/codespanker-cache.php'), CS_Cache->__construct, CS_Cache->init, CS_Cache->is_cached, CS_Authorize_Cache_Connection->__construct, CS_Authorize_Cache_Connection->create_cache_secret, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 21:48:57 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 21:48:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 21:48:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 21:48:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 21:48:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cs_cache_secret_option_key', '97e856c82442a64601fb33247ad68fb9', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cs_cache_secret_option_key' , '97e856c82442a64601fb33247ad68fb9' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/codespanker-cache/authorize-cache-connection.php(17): add_option('cs_cache_secret...', '97e856c82442a64...')
+#5 /wordpress/wp-content/plugins/codespanker-cache/authorize-cache-connection.php(11): CS_Authorize_Cache_Connection->create_cache_secret()
+#6 /wordpress/wp-content/plugins/codespanker-cache/codespanker-cache.php(171): CS_Authorize_Cache_Connection->__construct()
+#7 /wordpress/wp-content/plugins/codespanker-cache/codespanker-cache.php(159): CS_Cache->cache_page_content('')
+#8 [internal function]: CS_Cache->handle_output_buffer('', 11)
+#9 /wordpress/wp-admin/includes/plugin.php(738): ob_end_clean()
+#10 /internal/eval.php(20): activate_plugin('codespanker-cac...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cs_cache_secret_option_key', '97e856c82442a64601fb33247ad68fb9', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, ob_end_clean, CS_Cache->handle_output_buffer, CS_Cache->cache_page_content, CS_Authorize_Cache_Connection->__construct, CS_Authorize_Cache_Connection->create_cache_secret, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 21:48:57 UTC] PHP Warning:  Undefined variable $group in /wordpress/wp-content/plugins/codespanker-cache/remote-cache.php on line 14
 
-Node.js v20.15.0
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:569:9)
+    at process.processTimers (node:internal/timers:543:7)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"codespanker-cache"},"options":{"activate":true}}) : 
+  "unreachable" WASM instruction executed.
+  
+  The typical reason is a PHP function missing from the ASYNCIFY_ONLY
+  list when building PHP.wasm.
+  
+  You will need to file a new issue in the WordPress Playground repository
+  and paste this error message there:
+  
+  https://github.com/WordPress/wordpress-playground/issues/new
+  
+  If you're a core developer, the typical fix is to:
+  
+  * Isolate a minimal reproduction of the error
+  * Add a reproduction of the error to php-asyncify.spec.ts in the WordPress Playground repository
+  * Run 'npm run fix-asyncify'
+  * Commit the changes, push to the repo, release updated NPM packages
+  
+  Below is a list of all the PHP functions found in the stack trace to
+  help with the minimal reproduction. If they're all already listed in
+  the Dockerfile, you'll need to trigger this error again with long stack
+  traces enabled. In node.js, you can do it using the --stack-trace-limit=100
+  CLI option: 
+  
+      * php.wasm.__wrap_select
+      * php.wasm.Curl_socket_check
+      * php.wasm.curl_multi_perform
+      * php.wasm.zif_curl_exec
+      * php.wasm.ZEND_DO_FCALL_BY_NAME_SPEC_RETVAL_UNUSED_HANDLER
+      * php.wasm.execute_ex
+      * php.wasm.zend_call_function
+      * php.wasm.zend_fcall_info_call
+  
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at runNextTicks (node:internal/process/task_queues:65:5)
+      at listOnTimeout (node:internal/timers:569:9)
+      at process.processTimers (node:internal/timers:543:7)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: Error: 
+    "unreachable" WASM instruction executed.
+    
+    The typical reason is a PHP function missing from the ASYNCIFY_ONLY
+    list when building PHP.wasm.
+    
+    You will need to file a new issue in the WordPress Playground repository
+    and paste this error message there:
+    
+    https://github.com/WordPress/wordpress-playground/issues/new
+    
+    If you're a core developer, the typical fix is to:
+    
+    * Isolate a minimal reproduction of the error
+    * Add a reproduction of the error to php-asyncify.spec.ts in the WordPress Playground repository
+    * Run 'npm run fix-asyncify'
+    * Commit the changes, push to the repo, release updated NPM packages
+    
+    Below is a list of all the PHP functions found in the stack trace to
+    help with the minimal reproduction. If they're all already listed in
+    the Dockerfile, you'll need to trigger this error again with long stack
+    traces enabled. In node.js, you can do it using the --stack-trace-limit=100
+    CLI option: 
+    
+        * php.wasm.__wrap_select
+        * php.wasm.Curl_socket_check
+        * php.wasm.curl_multi_perform
+        * php.wasm.zif_curl_exec
+        * php.wasm.ZEND_DO_FCALL_BY_NAME_SPEC_RETVAL_UNUSED_HANDLER
+        * php.wasm.execute_ex
+        * php.wasm.zend_call_function
+        * php.wasm.zend_fcall_info_call
+    
+        at PHP.ae (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:1446:78)
+        at runNextTicks (node:internal/process/task_queues:65:5)
+        at listOnTimeout (node:internal/timers:569:9)
+        at process.processTimers (node:internal/timers:543:7)
+        at async PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:981:17)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3) {
+      cause: Error: Rethrown
+          at UnhandledRejectionsTarget.e (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:1423:19)
+          at [nodejs.internal.kHybridDispatch] (node:internal/event_target:827:20)
+          at UnhandledRejectionsTarget.dispatchEvent (node:internal/event_target:762:26)
+          at t.wasmExports.<computed> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:565:15)
+          at invoke_iiiii (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:109620:14)
+          at php.wasm.php_execute_script (wasm://wasm/php.wasm-0372e072:wasm-function[11032]:0x5fcfba)
+          at php.wasm.dynCall_ii (wasm://wasm/php.wasm-0372e072:wasm-function[12823]:0x6c1791)
+          at ret.<computed> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:109067:22)
+          at t.wasmExports.<computed> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:556:18)
+          at invoke_ii (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:109631:14) {
+        cause: RuntimeError: unreachable
+            at php.wasm.ZEND_DO_ICALL_SPEC_RETVAL_UNUSED_HANDLER (wasm://wasm/php.wasm-0372e072:wasm-function[14225]:0x727519)
+            at php.wasm.execute_ex (wasm://wasm/php.wasm-0372e072:wasm-function[12641]:0x6a6f7e)
+            at php.wasm.zend_execute (wasm://wasm/php.wasm-0372e072:wasm-function[3452]:0x233807)
+            at php.wasm.zend_execute_scripts (wasm://wasm/php.wasm-0372e072:wasm-function[9170]:0x56ba45)
+            at php.wasm.dynCall_iiiii (wasm://wasm/php.wasm-0372e072:wasm-function[12820]:0x6c152d)
+            at ret.<computed> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:109067:22)
+            at t.wasmExports.<computed> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:556:18)
+            at invoke_iiiii (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:109620:14)
+            at php.wasm.php_execute_script (wasm://wasm/php.wasm-0372e072:wasm-function[11032]:0x5fcfba)
+            at php.wasm.dynCall_ii (wasm://wasm/php.wasm-0372e072:wasm-function[12823]:0x6c1791) {
+          cause: Error
+              at Asyncify.handleSleep (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:109868:45)
+              at _emscripten_sleep (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/node/index.js:107828:44)
+              at php.wasm.__wrap_select (wasm://wasm/php.wasm-0372e072:wasm-function[1345]:0xc6766)
+              at php.wasm.Curl_socket_check (wasm://wasm/php.wasm-0372e072:wasm-function[2018]:0x137537)
+              at php.wasm.curl_multi_perform (wasm://wasm/php.wasm-0372e072:wasm-function[6119]:0x41c68b)
+              at php.wasm.zif_curl_exec (wasm://wasm/php.wasm-0372e072:wasm-function[8908]:0x554101)
+              at php.wasm.ZEND_DO_FCALL_BY_NAME_SPEC_RETVAL_UNUSED_HANDLER (wasm://wasm/php.wasm-0372e072:wasm-function[14230]:0x728ddf)
+              at php.wasm.execute_ex (wasm://wasm/php.wasm-0372e072:wasm-function[12641]:0x6a6f7e)
+              at php.wasm.zend_call_function (wasm://wasm/php.wasm-0372e072:wasm-function[417]:0x2ed58)
+              at php.wasm.zend_fcall_info_call (wasm://wasm/php.wasm-0372e072:wasm-function[4540]:0x2ecae3)
+        },
+        betterMessage: '\n' +
+          '"unreachable" WASM instruction executed.\n' +
+          '\n' +
+          'The typical reason is a PHP function missing from the ASYNCIFY_ONLY\n' +
+          'list when building PHP.wasm.\n' +
+          '\n' +
+          'You will need to file a new issue in the WordPress Playground repository\n' +
+          'and paste this error message there:\n' +
+          '\n' +
+          'https://github.com/WordPress/wordpress-playground/issues/new\n' +
+          '\n' +
+          "If you're a core developer, the typical fix is to:\n" +
+          '\n' +
+          '* Isolate a minimal reproduction of the error\n' +
+          '* Add a reproduction of the error to php-asyncify.spec.ts in the WordPress Playground repository\n' +
+          "* Run 'npm run fix-asyncify'\n" +
+          '* Commit the changes, push to the repo, release updated NPM packages\n' +
+          '\n' +
+          'Below is a list of all the PHP functions found in the stack trace to\n' +
+          "help with the minimal reproduction. If they're all already listed in\n" +
+          "the Dockerfile, you'll need to trigger this error again with long stack\n" +
+          'traces enabled. In node.js, you can do it using the --stack-trace-limit=100\n' +
+          'CLI option: \n' +
+          '\n' +
+          '    * php.wasm.__wrap_select\n' +
+          '    * php.wasm.Curl_socket_check\n' +
+          '    * php.wasm.curl_multi_perform\n' +
+          '    * php.wasm.zif_curl_exec\n' +
+          '    * php.wasm.ZEND_DO_FCALL_BY_NAME_SPEC_RETVAL_UNUSED_HANDLER\n' +
+          '    * php.wasm.execute_ex\n' +
+          '    * php.wasm.zend_call_function\n' +
+          '    * php.wasm.zend_fcall_info_call\n'
+      }
+    }
+  }
+}
+
+Node.js v23.11.0
