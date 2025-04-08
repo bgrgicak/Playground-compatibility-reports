@@ -2,14 +2,14 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [04-Apr-2025 14:24:59 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 14:24:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 14:24:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 14:24:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 14:25:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [08-Apr-2025 18:56:00 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 18:56:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 18:56:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 18:56:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 18:56:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpucv_preview_images_url', 'http://127.0.0.1:9400/wp-content/uploads/wpucv-preview', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '2JR;4C~>S#fW&;^TGmjtic?$4irrKw;T,HG8(H=F0h<E.DUH81Y*3ume#[<?Tzel', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -21,7 +21,7 @@ Error: [04-Apr-2025 14:24:59 UTC] PHP Warning:  Undefined array key "option_valu
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpucv_preview_images_url' , 'http://127.0.0.1:9400/wp-content/uploads/wpucv-preview' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , '2JR;4C~&gt;S#fW&amp;;^TGmjtic?$4irrKw;T,HG8(H=F0h&lt;E.DUH81Y*3ume#[&lt;?Tzel' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -33,23 +33,351 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wpucv_preview_i...', 'http://127.0.0....', '', 'auto')
-#5 /wordpress/wp-content/plugins/ultimate-content-views/inc/WPUCV_Core.php(202): update_option('wpucv_preview_i...', 'http://127.0.0....')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): WPUCV_Core::activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', '2JR;4C~>S#fW&;^...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', '2JR;4C~>S#fW&;^...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', '2JR;4C~>S#fW&;^...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', '2JR;4C~>S#fW&;^...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40374|wp_rest|0...', 'nonce')
+#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
+#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
+#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
+#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
+#18 /wordpress/wp-content/plugins/ublux-wsp/index.php(55): wp_register_script('ublux_script', 'http://127.0.0....', Array, 1658070986, Array)
+#19 /wordpress/wp-includes/class-wp-hook.php(324): ublux_enqueue_scripts('')
+#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#22 /wordpress/wp-settings.php(704): do_action('init')
+#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#26 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '2JR;4C~>S#fW&;^TGmjtic?$4irrKw;T,HG8(H=F0h<E.DUH81Y*3ume#[<?Tzel', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ublux_enqueue_scripts, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 18:56:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '7Pk0|{nk44at0q/W~,KeDmff]M?cW%mcVRf/?]!x}>5nA*Y+D}4N?>D](BK@v{LA', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , '7Pk0|{nk44at0q/W~,KeDmff]M?cW%mcVRf/?]!x}&gt;5nA*Y+D}4N?&gt;D](BK@v{LA' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', '7Pk0|{nk44at0q/...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', '7Pk0|{nk44at0q/...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', '7Pk0|{nk44at0q/...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', '7Pk0|{nk44at0q/...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40374|wp_rest|0...', 'nonce')
+#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
+#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
+#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
+#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
+#18 /wordpress/wp-content/plugins/ublux-wsp/index.php(55): wp_register_script('ublux_script', 'http://127.0.0....', Array, 1658070986, Array)
+#19 /wordpress/wp-includes/class-wp-hook.php(324): ublux_enqueue_scripts('')
+#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#22 /wordpress/wp-settings.php(704): do_action('init')
+#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#26 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '7Pk0|{nk44at0q/W~,KeDmff]M?cW%mcVRf/?]!x}>5nA*Y+D}4N?>D](BK@v{LA', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ublux_enqueue_scripts, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 18:56:29 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 18:56:29 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 18:56:29 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 18:56:29 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 18:56:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ums_db_version', '1.2.19', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_ums_db_version' , '1.2.19' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('wp_ums_db_versi...', '1.2.19', '', 'auto')
+#5 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/classes/installer.php(335): update_option('wp_ums_db_versi...', '1.2.19')
+#6 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/classes/installer.php(387): installerUms::init()
+#7 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/ums.php(50): installerUms::update()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ultimate-maps-b...')
+#10 /internal/eval.php(20): activate_plugin('ultimate-maps-b...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ums_db_version', '1.2.19', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ultimate-maps-by-supsystic/ums.php'), installerUms::update, installerUms::init, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 18:56:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ums_db_installed', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_ums_db_installed' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/classes/installer.php(336): add_option('wp_ums_db_insta...', 1)
+#5 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/classes/installer.php(387): installerUms::init()
+#6 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/ums.php(50): installerUms::update()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ultimate-maps-b...')
+#9 /internal/eval.php(20): activate_plugin('ultimate-maps-b...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ums_db_installed', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ultimate-maps-by-supsystic/ums.php'), installerUms::update, installerUms::init, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 18:56:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ums_opts_data', 'a:8:{s:10:\"def_engine\";a:1:{s:5:\"value\";s:7:\"leaflet\";}s:8:\"bing_key\";a:1:{s:5:\"value\";s:0:\"\";}s:12:\"rapidapi_key\";a:1:{s:5:\"value\";s:0:\"\";}s:10:\"mapbox_key\";a:1:{s:5:\"value\";s:0:\"\";}s:17:\"thunderforest_key\";a:1:{s:5:\"value\";s:0:\"\";}s:13:\"add_love_link\";a:1:{s:5:\"value\";s:1:\"0\";}s:16:\"remove_love_link\";a:1:{s:5:\"value\";s:1:\"0\";}s:12:\"access_roles\";a:2:{s:5:\"value\";a:1:{i:0;s:13:\"administrator\";}s:10:\"changed_on\";i:1744138591;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ums_opts_data' , 'a:8:{s:10:&quot;def_engine&quot;;a:1:{s:5:&quot;value&quot;;s:7:&quot;leaflet&quot;;}s:8:&quot;bing_key&quot;;a:1:{s:5:&quot;value&quot;;s:0:&quot;&quot;;}s:12:&quot;rapidapi_key&quot;;a:1:{s:5:&quot;value&quot;;s:0:&quot;&quot;;}s:10:&quot;mapbox_key&quot;;a:1:{s:5:&quot;value&quot;;s:0:&quot;&quot;;}s:17:&quot;thunderforest_key&quot;;a:1:{s:5:&quot;value&quot;;s:0:&quot;&quot;;}s:13:&quot;add_love_link&quot;;a:1:{s:5:&quot;value&quot;;s:1:&quot;0&quot;;}s:16:&quot;remove_love_link&quot;;a:1:{s:5:&quot;value&quot;;s:1:&quot;0&quot;;}s:12:&quot;access_roles&quot;;a:2:{s:5:&quot;value&quot;;a:1:{i:0;s:13:&quot;administrator&quot;;}s:10:&quot;changed_on&quot;;i:1744138591;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('ums_opts_data', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/classes/installer.php(432): update_option('ums_opts_data', Array)
+#6 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/classes/installer.php(388): installerUms::updateOptionData()
+#7 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/ums.php(50): installerUms::update()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ultimate-maps-b...')
+#10 /internal/eval.php(20): activate_plugin('ultimate-maps-b...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ums_opts_data', 'a:8:{s:10:\"def_engine\";a:1:{s:5:\"value\";s:7:\"leaflet\";}s:8:\"bing_key\";a:1:{s:5:\"value\";s:0:\"\";}s:12:\"rapidapi_key\";a:1:{s:5:\"value\";s:0:\"\";}s:10:\"mapbox_key\";a:1:{s:5:\"value\";s:0:\"\";}s:17:\"thunderforest_key\";a:1:{s:5:\"value\";s:0:\"\";}s:13:\"add_love_link\";a:1:{s:5:\"value\";s:1:\"0\";}s:16:\"remove_love_link\";a:1:{s:5:\"value\";s:1:\"0\";}s:12:\"access_roles\";a:2:{s:5:\"value\";a:1:{i:0;s:13:\"administrator\";}s:10:\"changed_on\";i:1744138591;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ultimate-maps-by-supsystic/ums.php'), installerUms::update, installerUms::updateOptionData, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 18:56:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ums_db_version', '1.2.19', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_ums_db_version' , '1.2.19' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('wp_ums_db_versi...', '1.2.19', '', 'auto')
+#5 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/classes/installer.php(389): update_option('wp_ums_db_versi...', '1.2.19')
+#6 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/ums.php(50): installerUms::update()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ultimate-maps-b...')
+#9 /internal/eval.php(20): activate_plugin('ultimate-maps-b...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ums_db_version', '1.2.19', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ultimate-maps-by-supsystic/ums.php'), installerUms::update, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 18:56:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ums_def_icons_installed', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ums_def_icons_installed' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('ums_def_icons_i...', true, '', 'auto')
+#5 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/modules/icons/models/icons.php(114): update_option('ums_def_icons_i...', true)
+#6 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/modules/icons/models/icons.php(11): iconsModelUms->setDefaultIcons()
+#7 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/modules/icons/mod.php(6): iconsModelUms->checkDefIcons()
+#8 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/classes/frame.php(97): iconsUms->init()
+#9 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/classes/frame.php(107): frameUms->_initModules()
+#10 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/ums.php(56): frameUms->init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ultimate-maps-b...')
+#13 /internal/eval.php(20): activate_plugin('ultimate-maps-b...')
+#14 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ums_def_icons_installed', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ultimate-maps-by-supsystic/ums.php'), frameUms->init, frameUms->_initModules, iconsUms->init, iconsModelUms->checkDefIcons, iconsModelUms->setDefaultIcons, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 18:56:32 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 18:56:32 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 18:56:32 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 18:56:32 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 18:56:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ums_db_version', '1.2.19', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_ums_db_version' , '1.2.19' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('wp_ums_db_versi...', '1.2.19', '', 'auto')
+#5 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/classes/installer.php(335): update_option('wp_ums_db_versi...', '1.2.19')
+#6 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/classes/utils.php(380): installerUms::init()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): utilsUms::activatePlugin(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
+#11 /internal/eval.php(20): activate_plugin('ultimate-maps-b...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ums_db_version', '1.2.19', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-maps-by-supsystic/ums.php'), WP_Hook->do_action, WP_Hook->apply_filters, utilsUms::activatePlugin, installerUms::init, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 18:56:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ums_db_installed', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_ums_db_installed' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/classes/installer.php(336): add_option('wp_ums_db_insta...', 1)
+#5 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/classes/utils.php(380): installerUms::init()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): utilsUms::activatePlugin(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
 #9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
-#10 /internal/eval.php(20): activate_plugin('ultimate-conten...')
+#10 /internal/eval.php(20): activate_plugin('ultimate-maps-b...')
 #11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpucv_preview_images_url', 'http://127.0.0.1:9400/wp-content/uploads/wpucv-preview', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-content-views/ultimate-content-views.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPUCV_Core::activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 14:25:14 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 14:25:14 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 14:25:14 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 14:25:14 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 14:25:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ums_db_installed', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-maps-by-supsystic/ums.php'), WP_Hook->do_action, WP_Hook->apply_filters, utilsUms::activatePlugin, installerUms::init, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 18:56:32 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 18:56:32 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 18:56:32 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 18:56:32 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 18:56:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_ulmc_activation_notice', '1743776731', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ums_plugin_activation_errors', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -61,7 +389,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_ulmc_activation_notice' , '1743776731' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ums_plugin_activation_errors' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -73,20 +401,19 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1743776731, '', 'off')
-#5 /wordpress/wp-content/plugins/ultimate-loan-mortgage-calculator/includes/class-ulmc-activator.php(33): set_transient('ulmc_activation...', true, 5)
-#6 /wordpress/wp-content/plugins/ultimate-loan-mortgage-calculator/ultimate-loan-mortgage-calculator.php(47): ULMC_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_ulmc_free(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
-#11 /internal/eval.php(20): activate_plugin('ultimate-loan-m...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_ulmc_activation_notice', '1743776731', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-loan-mortgage-calculator/ultimate-loan-mortgage-calculator.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_ulmc_free, ULMC_Activator::activate, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 14:25:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('ums_plugin_acti...', '', '', 'auto')
+#5 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/classes/frame.php(490): update_option('ums_plugin_acti...', '')
+#6 /wordpress/wp-includes/class-wp-hook.php(326): frameUms->savePluginActivationErrors('ultimate-maps-b...')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'ultimate-maps-b...', false)
+#10 /internal/eval.php(20): activate_plugin('ultimate-maps-b...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ums_plugin_activation_errors', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, frameUms->savePluginActivationErrors, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 18:56:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_ulmc_activation_notice', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ums_db_version', '1.2.19', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -98,7 +425,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_ulmc_activation_notice' , '1' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_ums_db_version' , '1.2.19' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -110,48 +437,206 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_ulmc...', true, '', 'off')
-#5 /wordpress/wp-content/plugins/ultimate-loan-mortgage-calculator/includes/class-ulmc-activator.php(33): set_transient('ulmc_activation...', true, 5)
-#6 /wordpress/wp-content/plugins/ultimate-loan-mortgage-calculator/ultimate-loan-mortgage-calculator.php(47): ULMC_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_ulmc_free(false)
+#4 /wordpress/wp-includes/option.php(921): add_option('wp_ums_db_versi...', '1.2.19', '', 'auto')
+#5 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/classes/installer.php(335): update_option('wp_ums_db_versi...', '1.2.19')
+#6 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/classes/installer.php(387): installerUms::init()
+#7 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/ums.php(50): installerUms::update()
+#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ums_db_version', '1.2.19', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/ultimate-maps-by-supsystic/ums.php'), installerUms::update, installerUms::init, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 18:56:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ums_db_installed', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_ums_db_installed' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/classes/installer.php(336): add_option('wp_ums_db_insta...', 1)
+#5 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/classes/installer.php(387): installerUms::init()
+#6 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/ums.php(50): installerUms::update()
+#7 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ums_db_installed', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/ultimate-maps-by-supsystic/ums.php'), installerUms::update, installerUms::init, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 18:56:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ums_opts_data', 'a:8:{s:10:\"def_engine\";a:1:{s:5:\"value\";s:7:\"leaflet\";}s:8:\"bing_key\";a:1:{s:5:\"value\";s:0:\"\";}s:12:\"rapidapi_key\";a:1:{s:5:\"value\";s:0:\"\";}s:10:\"mapbox_key\";a:1:{s:5:\"value\";s:0:\"\";}s:17:\"thunderforest_key\";a:1:{s:5:\"value\";s:0:\"\";}s:13:\"add_love_link\";a:1:{s:5:\"value\";s:1:\"0\";}s:16:\"remove_love_link\";a:1:{s:5:\"value\";s:1:\"0\";}s:12:\"access_roles\";a:2:{s:5:\"value\";a:1:{i:0;s:13:\"administrator\";}s:10:\"changed_on\";i:1744138593;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ums_opts_data' , 'a:8:{s:10:&quot;def_engine&quot;;a:1:{s:5:&quot;value&quot;;s:7:&quot;leaflet&quot;;}s:8:&quot;bing_key&quot;;a:1:{s:5:&quot;value&quot;;s:0:&quot;&quot;;}s:12:&quot;rapidapi_key&quot;;a:1:{s:5:&quot;value&quot;;s:0:&quot;&quot;;}s:10:&quot;mapbox_key&quot;;a:1:{s:5:&quot;value&quot;;s:0:&quot;&quot;;}s:17:&quot;thunderforest_key&quot;;a:1:{s:5:&quot;value&quot;;s:0:&quot;&quot;;}s:13:&quot;add_love_link&quot;;a:1:{s:5:&quot;value&quot;;s:1:&quot;0&quot;;}s:16:&quot;remove_love_link&quot;;a:1:{s:5:&quot;value&quot;;s:1:&quot;0&quot;;}s:12:&quot;access_roles&quot;;a:2:{s:5:&quot;value&quot;;a:1:{i:0;s:13:&quot;administrator&quot;;}s:10:&quot;changed_on&quot;;i:1744138593;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('ums_opts_data', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/classes/installer.php(432): update_option('ums_opts_data', Array)
+#6 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/classes/installer.php(388): installerUms::updateOptionData()
+#7 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/ums.php(50): installerUms::update()
+#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ums_opts_data', 'a:8:{s:10:\"def_engine\";a:1:{s:5:\"value\";s:7:\"leaflet\";}s:8:\"bing_key\";a:1:{s:5:\"value\";s:0:\"\";}s:12:\"rapidapi_key\";a:1:{s:5:\"value\";s:0:\"\";}s:10:\"mapbox_key\";a:1:{s:5:\"value\";s:0:\"\";}s:17:\"thunderforest_key\";a:1:{s:5:\"value\";s:0:\"\";}s:13:\"add_love_link\";a:1:{s:5:\"value\";s:1:\"0\";}s:16:\"remove_love_link\";a:1:{s:5:\"value\";s:1:\"0\";}s:12:\"access_roles\";a:2:{s:5:\"value\";a:1:{i:0;s:13:\"administrator\";}s:10:\"changed_on\";i:1744138593;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/ultimate-maps-by-supsystic/ums.php'), installerUms::update, installerUms::updateOptionData, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 18:56:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ums_db_version', '1.2.19', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_ums_db_version' , '1.2.19' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('wp_ums_db_versi...', '1.2.19', '', 'auto')
+#5 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/classes/installer.php(389): update_option('wp_ums_db_versi...', '1.2.19')
+#6 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/ums.php(50): installerUms::update()
+#7 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ums_db_version', '1.2.19', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/ultimate-maps-by-supsystic/ums.php'), installerUms::update, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 18:56:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ums_def_icons_installed', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ums_def_icons_installed' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('ums_def_icons_i...', true, '', 'auto')
+#5 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/modules/icons/models/icons.php(114): update_option('ums_def_icons_i...', true)
+#6 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/modules/icons/models/icons.php(11): iconsModelUms->setDefaultIcons()
+#7 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/modules/icons/mod.php(6): iconsModelUms->checkDefIcons()
+#8 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/classes/frame.php(97): iconsUms->init()
+#9 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/classes/frame.php(107): frameUms->_initModules()
+#10 /wordpress/wp-content/plugins/ultimate-maps-by-supsystic/ums.php(56): frameUms->init()
+#11 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#15 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ums_def_icons_installed', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/ultimate-maps-by-supsystic/ums.php'), frameUms->init, frameUms->_initModules, iconsUms->init, iconsModelUms->checkDefIcons, iconsModelUms->setDefaultIcons, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 18:57:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('action_scheduler_hybrid_store_demarkation', '4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'action_scheduler_hybrid_store_demarkation' , '4' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('action_schedule...', 4, '', 'auto')
+#5 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/data-stores/ActionScheduler_HybridStore.php(157): update_option('action_schedule...', 4)
+#6 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/data-stores/ActionScheduler_HybridStore.php(95): ActionScheduler_HybridStore->set_demarkation_id()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): ActionScheduler_HybridStore->set_autoincrement('wp_actionschedu...', 'actionscheduler...')
 #8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
-#11 /internal/eval.php(20): activate_plugin('ultimate-loan-m...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_ulmc_activation_notice', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-loan-mortgage-calculator/ultimate-loan-mortgage-calculator.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_ulmc_free, ULMC_Activator::activate, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 14:25:26 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 14:25:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 14:25:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 14:25:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 14:25:37 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 14:25:37 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 14:25:37 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 14:25:37 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 14:25:37 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 14:25:37 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 14:25:37 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 14:25:37 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"ultimate-member-post-status"},"options":{"activate":true}}) : Plugin /wordpress/wp-content/plugins/ultimate-member-post-status could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-    [cause]: Error: Plugin /wordpress/wp-content/plugins/ultimate-member-post-status could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
-        at vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:119:51)
-        at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
-        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
-        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
-        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159)
-  }
-}
-
-Node.js v20.15.0
+#10 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(146): do_action('action_schedule...', 'wp_actionschedu...', 'actionscheduler...')
+#11 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(69): ActionScheduler_Abstract_Schema->update_table('actionscheduler...')
+#12 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php(55): ActionScheduler_Abstract_Schema->register_tables()
+#13 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/data-stores/ActionScheduler_HybridStore.php(76): ActionScheduler_DBStore->init()
+#14 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/abstracts/ActionScheduler.php(223): ActionScheduler_HybridStore->init()
+#15 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/action-scheduler.php(60): ActionScheduler::init('/wordpress/wp-c...')
+#16 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/action-scheduler.php(66): action_scheduler_initialize_3_dot_9_dot_0()
+#17 /wordpress/wp-content/plugins/woocommerce/includes/class-woocommerce.php(725): include_once('/wordpress/wp-c...')
+#18 /wordpress/wp-content/plugins/woocommerce/includes/class-woocommerce.php(236): WooCommerce->includes()
+#19 /wordpress/wp-content/plugins/woocommerce/includes/class-woocommerce.php(155): WooCommerce->__construct()
+#20 /wordpress/wp-content/plugins/woocommerce/woocommerce.php(47)
