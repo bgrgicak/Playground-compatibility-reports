@@ -498,12 +498,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wow_buttons. | ast-sqlite-boot | bloyal | [View logs](/logs/plugins/b/bloyal/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wow_buttons. | asyncify-boot | bloyal | [View logs](/logs/plugins/b/bloyal/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wow_buttons. | jspi-boot | bloyal | [View logs](/logs/plugins/b/bloyal/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | bookfin-widget | [View logs](/logs/plugins/b/bookfin-widget/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | bookfin-widget | [View logs](/logs/plugins/b/bookfin-widget/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | bookfin-widget | [View logs](/logs/plugins/b/bookfin-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_b0xT_states. | ast-sqlite-boot | bookfin-widget | [View logs](/logs/plugins/b/bookfin-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_b0xT_states. | asyncify-boot | bookfin-widget | [View logs](/logs/plugins/b/bookfin-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_b0xT_states. | jspi-boot | bookfin-widget | [View logs](/logs/plugins/b/bookfin-widget/error.json) |
 | Unknown query type: SHOW_COLUMNS. | ast-sqlite-boot | booked-by-webfluential | [View logs](/logs/plugins/b/booked-by-webfluential/error.json) |
 | Unknown query type: SHOW_COLUMNS. | asyncify-boot | booked-by-webfluential | [View logs](/logs/plugins/b/booked-by-webfluential/error.json) |
 | Unknown query type: SHOW_COLUMNS. | jspi-boot | booked-by-webfluential | [View logs](/logs/plugins/b/booked-by-webfluential/error.json) |
@@ -529,12 +523,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_burst_goals. | asyncify-boot | bp-profile-home-widgets | [View logs](/logs/plugins/b/bp-profile-home-widgets/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_burst_goals. | jspi-boot | bp-profile-home-widgets | [View logs](/logs/plugins/b/bp-profile-home-widgets/error.json) |
 | Unknown query type: SHOW_COLUMNS. | ast-sqlite-boot | bank-mellat | [View logs](/logs/plugins/b/bank-mellat/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | banipay-pasarela-de-pagos | [View logs](/logs/plugins/b/banipay-pasarela-de-pagos/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | banipay-pasarela-de-pagos | [View logs](/logs/plugins/b/banipay-pasarela-de-pagos/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | banipay-pasarela-de-pagos | [View logs](/logs/plugins/b/banipay-pasarela-de-pagos/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_b0xT_states. | ast-sqlite-boot | banipay-pasarela-de-pagos | [View logs](/logs/plugins/b/banipay-pasarela-de-pagos/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_b0xT_states. | asyncify-boot | banipay-pasarela-de-pagos | [View logs](/logs/plugins/b/banipay-pasarela-de-pagos/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_b0xT_states. | jspi-boot | banipay-pasarela-de-pagos | [View logs](/logs/plugins/b/banipay-pasarela-de-pagos/error.json) |
 | Unknown create type: table. | ast-sqlite-boot | business-worldpay-gateway-for-woocommerce | [View logs](/logs/plugins/b/business-worldpay-gateway-for-woocommerce/error.json) |
 | Unknown create type: table. | asyncify-boot | business-worldpay-gateway-for-woocommerce | [View logs](/logs/plugins/b/business-worldpay-gateway-for-woocommerce/error.json) |
 | Unknown create type: table. | jspi-boot | business-worldpay-gateway-for-woocommerce | [View logs](/logs/plugins/b/business-worldpay-gateway-for-woocommerce/error.json) |
@@ -550,22 +538,10 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wow_buttons. | ast-sqlite-boot | better-backgrounds | [View logs](/logs/plugins/b/better-backgrounds/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wow_buttons. | asyncify-boot | better-backgrounds | [View logs](/logs/plugins/b/better-backgrounds/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wow_buttons. | jspi-boot | better-backgrounds | [View logs](/logs/plugins/b/better-backgrounds/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | buddypress-remove-avatars | [View logs](/logs/plugins/b/buddypress-remove-avatars/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | buddypress-remove-avatars | [View logs](/logs/plugins/b/buddypress-remove-avatars/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | buddypress-remove-avatars | [View logs](/logs/plugins/b/buddypress-remove-avatars/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_b0xT_states. | ast-sqlite-boot | buddypress-remove-avatars | [View logs](/logs/plugins/b/buddypress-remove-avatars/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_b0xT_states. | asyncify-boot | buddypress-remove-avatars | [View logs](/logs/plugins/b/buddypress-remove-avatars/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_b0xT_states. | jspi-boot | buddypress-remove-avatars | [View logs](/logs/plugins/b/buddypress-remove-avatars/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_burst_goals. | ast-sqlite-boot | baw-breach-avoider | [View logs](/logs/plugins/b/baw-breach-avoider/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_burst_goals. | asyncify-boot | baw-breach-avoider | [View logs](/logs/plugins/b/baw-breach-avoider/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_burst_goals. | jspi-boot | baw-breach-avoider | [View logs](/logs/plugins/b/baw-breach-avoider/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_burst_goals. | ast-sqlite-boot | best-post-page | [View logs](/logs/plugins/b/best-post-page/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | brands-20 | [View logs](/logs/plugins/b/brands-20/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | brands-20 | [View logs](/logs/plugins/b/brands-20/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | brands-20 | [View logs](/logs/plugins/b/brands-20/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_b0xT_states. | ast-sqlite-boot | brands-20 | [View logs](/logs/plugins/b/brands-20/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_b0xT_states. | asyncify-boot | brands-20 | [View logs](/logs/plugins/b/brands-20/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_b0xT_states. | jspi-boot | brands-20 | [View logs](/logs/plugins/b/brands-20/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_bulkedittoolkit_plugin_bulk_edit_settings. | ast-sqlite-boot | bbaggregate | [View logs](/logs/plugins/b/bbaggregate/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_bulkedittoolkit_plugin_bulk_edit_settings. | asyncify-boot | bbaggregate | [View logs](/logs/plugins/b/bbaggregate/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_bulkedittoolkit_plugin_bulk_edit_settings. | jspi-boot | bbaggregate | [View logs](/logs/plugins/b/bbaggregate/error.json) |
@@ -600,10 +576,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_bulkedittoolkit_plugin_bulk_edit_settings. | ast-sqlite-boot | builderius | [View logs](/logs/plugins/b/builderius/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_bulkedittoolkit_plugin_bulk_edit_settings. | asyncify-boot | builderius | [View logs](/logs/plugins/b/builderius/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_bulkedittoolkit_plugin_bulk_edit_settings. | jspi-boot | builderius | [View logs](/logs/plugins/b/builderius/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | boxtons-woocommerce-order-fullfilment | [View logs](/logs/plugins/b/boxtons-woocommerce-order-fullfilment/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | boxtons-woocommerce-order-fullfilment | [View logs](/logs/plugins/b/boxtons-woocommerce-order-fullfilment/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_b0xT_states. | ast-sqlite-boot | boxtons-woocommerce-order-fullfilment | [View logs](/logs/plugins/b/boxtons-woocommerce-order-fullfilment/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_b0xT_states. | asyncify-boot | boxtons-woocommerce-order-fullfilment | [View logs](/logs/plugins/b/boxtons-woocommerce-order-fullfilment/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_bulkedittoolkit_plugin_bulk_edit_settings. | ast-sqlite-boot | buddypress-group-chat | [View logs](/logs/plugins/b/buddypress-group-chat/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_bulkedittoolkit_plugin_bulk_edit_settings. | asyncify-boot | buddypress-group-chat | [View logs](/logs/plugins/b/buddypress-group-chat/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_bulkedittoolkit_plugin_bulk_edit_settings. | jspi-boot | buddypress-group-chat | [View logs](/logs/plugins/b/buddypress-group-chat/error.json) |
@@ -633,12 +605,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_burst_goals. | ast-sqlite-boot | buddypress-groups-import | [View logs](/logs/plugins/b/buddypress-groups-import/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_burst_goals. | asyncify-boot | buddypress-groups-import | [View logs](/logs/plugins/b/buddypress-groups-import/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_burst_goals. | jspi-boot | buddypress-groups-import | [View logs](/logs/plugins/b/buddypress-groups-import/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | bulk-order-update-for-woocommerce | [View logs](/logs/plugins/b/bulk-order-update-for-woocommerce/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | bulk-order-update-for-woocommerce | [View logs](/logs/plugins/b/bulk-order-update-for-woocommerce/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | bulk-order-update-for-woocommerce | [View logs](/logs/plugins/b/bulk-order-update-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_b0xT_states. | ast-sqlite-boot | bulk-order-update-for-woocommerce | [View logs](/logs/plugins/b/bulk-order-update-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_b0xT_states. | asyncify-boot | bulk-order-update-for-woocommerce | [View logs](/logs/plugins/b/bulk-order-update-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_b0xT_states. | jspi-boot | bulk-order-update-for-woocommerce | [View logs](/logs/plugins/b/bulk-order-update-for-woocommerce/error.json) |
 | Unknown query type: SHOW_COLUMNS. | ast-sqlite-boot | bd-payment-for-quick-orders | [View logs](/logs/plugins/b/bd-payment-for-quick-orders/error.json) |
 | Unknown query type: SHOW_COLUMNS. | asyncify-boot | bd-payment-for-quick-orders | [View logs](/logs/plugins/b/bd-payment-for-quick-orders/error.json) |
 | Unknown query type: SHOW_COLUMNS. | jspi-boot | bd-payment-for-quick-orders | [View logs](/logs/plugins/b/bd-payment-for-quick-orders/error.json) |
@@ -3606,6 +3572,9 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | realty-portal-agent-profile | [View logs](/logs/plugins/r/realty-portal-agent-profile/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | realty-portal-agent-profile | [View logs](/logs/plugins/r/realty-portal-agent-profile/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | realty-portal-agent-profile | [View logs](/logs/plugins/r/realty-portal-agent-profile/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | rownd-accounts-and-authentication | [View logs](/logs/plugins/r/rownd-accounts-and-authentication/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | rownd-accounts-and-authentication | [View logs](/logs/plugins/r/rownd-accounts-and-authentication/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | rownd-accounts-and-authentication | [View logs](/logs/plugins/r/rownd-accounts-and-authentication/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | rcp-allow-rest | [View logs](/logs/plugins/r/rcp-allow-rest/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | rcp-allow-rest | [View logs](/logs/plugins/r/rcp-allow-rest/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | rcp-allow-rest | [View logs](/logs/plugins/r/rcp-allow-rest/error.json) |
@@ -3615,6 +3584,9 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | responsive-posts-widget | [View logs](/logs/plugins/r/responsive-posts-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | responsive-posts-widget | [View logs](/logs/plugins/r/responsive-posts-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | responsive-posts-widget | [View logs](/logs/plugins/r/responsive-posts-widget/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | resume-extended | [View logs](/logs/plugins/r/resume-extended/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | resume-extended | [View logs](/logs/plugins/r/resume-extended/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | resume-extended | [View logs](/logs/plugins/r/resume-extended/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | retainful-next-order-coupon-for-woocommerce | [View logs](/logs/plugins/r/retainful-next-order-coupon-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | retainful-next-order-coupon-for-woocommerce | [View logs](/logs/plugins/r/retainful-next-order-coupon-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | retainful-next-order-coupon-for-woocommerce | [View logs](/logs/plugins/r/retainful-next-order-coupon-for-woocommerce/error.json) |
@@ -3631,6 +3603,15 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 no such table: wp_user2group_rs. | jspi-boot | role-scoper | [View logs](/logs/plugins/r/role-scoper/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_user2role2object_rs. | asyncify-boot | role-scoper | [View logs](/logs/plugins/r/role-scoper/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_user2role2object_rs. | jspi-boot | role-scoper | [View logs](/logs/plugins/r/role-scoper/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | remote-database-api | [View logs](/logs/plugins/r/remote-database-api/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | remote-database-api | [View logs](/logs/plugins/r/remote-database-api/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | remote-database-api | [View logs](/logs/plugins/r/remote-database-api/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | ro-social-bookmarks | [View logs](/logs/plugins/r/ro-social-bookmarks/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | ro-social-bookmarks | [View logs](/logs/plugins/r/ro-social-bookmarks/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | ro-social-bookmarks | [View logs](/logs/plugins/r/ro-social-bookmarks/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | realtime-bitcoin-chart | [View logs](/logs/plugins/r/realtime-bitcoin-chart/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | realtime-bitcoin-chart | [View logs](/logs/plugins/r/realtime-bitcoin-chart/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | realtime-bitcoin-chart | [View logs](/logs/plugins/r/realtime-bitcoin-chart/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | responsive-accordion-tabs | [View logs](/logs/plugins/r/responsive-accordion-tabs/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | responsive-accordion-tabs | [View logs](/logs/plugins/r/responsive-accordion-tabs/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | responsive-accordion-tabs | [View logs](/logs/plugins/r/responsive-accordion-tabs/error.json) |
@@ -3667,6 +3648,12 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | ast-sqlite-boot | randomentries-widget | [View logs](/logs/plugins/r/randomentries-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | asyncify-boot | randomentries-widget | [View logs](/logs/plugins/r/randomentries-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | jspi-boot | randomentries-widget | [View logs](/logs/plugins/r/randomentries-widget/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | related-posts-slider | [View logs](/logs/plugins/r/related-posts-slider/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | related-posts-slider | [View logs](/logs/plugins/r/related-posts-slider/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | related-posts-slider | [View logs](/logs/plugins/r/related-posts-slider/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | really-simple-twitter-feed-widget | [View logs](/logs/plugins/r/really-simple-twitter-feed-widget/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | really-simple-twitter-feed-widget | [View logs](/logs/plugins/r/really-simple-twitter-feed-widget/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | really-simple-twitter-feed-widget | [View logs](/logs/plugins/r/really-simple-twitter-feed-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | row-column-testmonial-with-widget | [View logs](/logs/plugins/r/row-column-testmonial-with-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | row-column-testmonial-with-widget | [View logs](/logs/plugins/r/row-column-testmonial-with-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | row-column-testmonial-with-widget | [View logs](/logs/plugins/r/row-column-testmonial-with-widget/error.json) |
@@ -3682,6 +3669,9 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | rivercraft | [View logs](/logs/plugins/r/rivercraft/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | rivercraft | [View logs](/logs/plugins/r/rivercraft/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | rivercraft | [View logs](/logs/plugins/r/rivercraft/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | recently-updated-posts-widget | [View logs](/logs/plugins/r/recently-updated-posts-widget/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | recently-updated-posts-widget | [View logs](/logs/plugins/r/recently-updated-posts-widget/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | recently-updated-posts-widget | [View logs](/logs/plugins/r/recently-updated-posts-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | ast-sqlite-boot | rapidcents-payment-gateway | [View logs](/logs/plugins/r/rapidcents-payment-gateway/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | asyncify-boot | rapidcents-payment-gateway | [View logs](/logs/plugins/r/rapidcents-payment-gateway/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | jspi-boot | rapidcents-payment-gateway | [View logs](/logs/plugins/r/rapidcents-payment-gateway/error.json) |
@@ -3723,9 +3713,15 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | ast-sqlite-boot | rapidology-by-leadpages | [View logs](/logs/plugins/r/rapidology-by-leadpages/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | asyncify-boot | rapidology-by-leadpages | [View logs](/logs/plugins/r/rapidology-by-leadpages/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | jspi-boot | rapidology-by-leadpages | [View logs](/logs/plugins/r/rapidology-by-leadpages/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | recent-meetupcom-checkins | [View logs](/logs/plugins/r/recent-meetupcom-checkins/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | recent-meetupcom-checkins | [View logs](/logs/plugins/r/recent-meetupcom-checkins/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | recent-meetupcom-checkins | [View logs](/logs/plugins/r/recent-meetupcom-checkins/error.json) |
 | Unknown query type: post_rating. | ast-sqlite-boot | review-pro | [View logs](/logs/plugins/r/review-pro/error.json) |
 | Unknown query type: post_rating. | asyncify-boot | review-pro | [View logs](/logs/plugins/r/review-pro/error.json) |
 | Unknown query type: post_rating. | jspi-boot | review-pro | [View logs](/logs/plugins/r/review-pro/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | rubytabs-lite | [View logs](/logs/plugins/r/rubytabs-lite/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | rubytabs-lite | [View logs](/logs/plugins/r/rubytabs-lite/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | rubytabs-lite | [View logs](/logs/plugins/r/rubytabs-lite/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | reward-points-for-wc-marketplace | [View logs](/logs/plugins/r/reward-points-for-wc-marketplace/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | reward-points-for-wc-marketplace | [View logs](/logs/plugins/r/reward-points-for-wc-marketplace/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | reward-points-for-wc-marketplace | [View logs](/logs/plugins/r/reward-points-for-wc-marketplace/error.json) |
@@ -3750,6 +3746,9 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 no such table: wp_user2role2object_rs. | ast-sqlite-boot | reeyoungsoft-newsletter | [View logs](/logs/plugins/r/reeyoungsoft-newsletter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_user2role2object_rs. | asyncify-boot | reeyoungsoft-newsletter | [View logs](/logs/plugins/r/reeyoungsoft-newsletter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_user2role2object_rs. | jspi-boot | reeyoungsoft-newsletter | [View logs](/logs/plugins/r/reeyoungsoft-newsletter/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | retainly | [View logs](/logs/plugins/r/retainly/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | retainly | [View logs](/logs/plugins/r/retainly/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | retainly | [View logs](/logs/plugins/r/retainly/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | ast-sqlite-boot | rocket-async-css | [View logs](/logs/plugins/r/rocket-async-css/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | asyncify-boot | rocket-async-css | [View logs](/logs/plugins/r/rocket-async-css/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | jspi-boot | rocket-async-css | [View logs](/logs/plugins/r/rocket-async-css/error.json) |
@@ -3789,6 +3788,9 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | realty-portal-agent | [View logs](/logs/plugins/r/realty-portal-agent/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | realty-portal-agent | [View logs](/logs/plugins/r/realty-portal-agent/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | realty-portal-agent | [View logs](/logs/plugins/r/realty-portal-agent/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | recommended-links | [View logs](/logs/plugins/r/recommended-links/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | recommended-links | [View logs](/logs/plugins/r/recommended-links/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | recommended-links | [View logs](/logs/plugins/r/recommended-links/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | role-based-bulk-quantity-pricing | [View logs](/logs/plugins/r/role-based-bulk-quantity-pricing/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | role-based-bulk-quantity-pricing | [View logs](/logs/plugins/r/role-based-bulk-quantity-pricing/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | role-based-bulk-quantity-pricing | [View logs](/logs/plugins/r/role-based-bulk-quantity-pricing/error.json) |
@@ -3870,6 +3872,9 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | ast-sqlite-boot | radio-vera | [View logs](/logs/plugins/r/radio-vera/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | asyncify-boot | radio-vera | [View logs](/logs/plugins/r/radio-vera/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "columns_desktop": syntax error. | jspi-boot | radio-vera | [View logs](/logs/plugins/r/radio-vera/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | randomtext | [View logs](/logs/plugins/r/randomtext/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | randomtext | [View logs](/logs/plugins/r/randomtext/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | randomtext | [View logs](/logs/plugins/r/randomtext/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | recent-photos-widget | [View logs](/logs/plugins/r/recent-photos-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | recent-photos-widget | [View logs](/logs/plugins/r/recent-photos-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | recent-photos-widget | [View logs](/logs/plugins/r/recent-photos-widget/error.json) |
@@ -3933,6 +3938,9 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | remove-title-attributes | [View logs](/logs/plugins/r/remove-title-attributes/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | remove-title-attributes | [View logs](/logs/plugins/r/remove-title-attributes/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | remove-title-attributes | [View logs](/logs/plugins/r/remove-title-attributes/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | rz-bkash-pay-for-woocommerce | [View logs](/logs/plugins/r/rz-bkash-pay-for-woocommerce/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | rz-bkash-pay-for-woocommerce | [View logs](/logs/plugins/r/rz-bkash-pay-for-woocommerce/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | rz-bkash-pay-for-woocommerce | [View logs](/logs/plugins/r/rz-bkash-pay-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | ast-sqlite-boot | realtyphp | [View logs](/logs/plugins/r/realtyphp/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | asyncify-boot | realtyphp | [View logs](/logs/plugins/r/realtyphp/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | jspi-boot | realtyphp | [View logs](/logs/plugins/r/realtyphp/error.json) |
