@@ -53,21 +53,12 @@
 | SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | ast-sqlite-boot | android-market-qr-codes-wp-plugin | [View logs](/logs/plugins/a/android-market-qr-codes-wp-plugin/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | asyncify-boot | android-market-qr-codes-wp-plugin | [View logs](/logs/plugins/a/android-market-qr-codes-wp-plugin/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | jspi-boot | android-market-qr-codes-wp-plugin | [View logs](/logs/plugins/a/android-market-qr-codes-wp-plugin/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | ast-sqlite-boot | audiotilly | [View logs](/logs/plugins/a/audiotilly/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | asyncify-boot | audiotilly | [View logs](/logs/plugins/a/audiotilly/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | jspi-boot | audiotilly | [View logs](/logs/plugins/a/audiotilly/error.json) |
 | Unexpected token in MySQL query: title. | ast-sqlite-boot | audiotilly | [View logs](/logs/plugins/a/audiotilly/error.json) |
 | Unexpected token in MySQL query: title. | asyncify-boot | audiotilly | [View logs](/logs/plugins/a/audiotilly/error.json) |
 | Unexpected token in MySQL query: title. | jspi-boot | audiotilly | [View logs](/logs/plugins/a/audiotilly/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | auto-expire-widget | [View logs](/logs/plugins/a/auto-expire-widget/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | asyncify-boot | auto-expire-widget | [View logs](/logs/plugins/a/auto-expire-widget/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | jspi-boot | auto-expire-widget | [View logs](/logs/plugins/a/auto-expire-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | ast-sqlite-boot | acf-google-maps-radius-search | [View logs](/logs/plugins/a/acf-google-maps-radius-search/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | asyncify-boot | acf-google-maps-radius-search | [View logs](/logs/plugins/a/acf-google-maps-radius-search/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | jspi-boot | acf-google-maps-radius-search | [View logs](/logs/plugins/a/acf-google-maps-radius-search/error.json) |
-| Unexpected token in MySQL query: title. | ast-sqlite-boot | acf-google-maps-radius-search | [View logs](/logs/plugins/a/acf-google-maps-radius-search/error.json) |
-| Unexpected token in MySQL query: title. | asyncify-boot | acf-google-maps-radius-search | [View logs](/logs/plugins/a/acf-google-maps-radius-search/error.json) |
-| Unexpected token in MySQL query: title. | jspi-boot | acf-google-maps-radius-search | [View logs](/logs/plugins/a/acf-google-maps-radius-search/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | ast-sqlite-boot | adsense-manager | [View logs](/logs/plugins/a/adsense-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | asyncify-boot | adsense-manager | [View logs](/logs/plugins/a/adsense-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | jspi-boot | adsense-manager | [View logs](/logs/plugins/a/adsense-manager/error.json) |
@@ -97,6 +88,10 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | ast-sqlite-boot | ambrosite-post-formats-widget | [View logs](/logs/plugins/a/ambrosite-post-formats-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | asyncify-boot | ambrosite-post-formats-widget | [View logs](/logs/plugins/a/ambrosite-post-formats-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_asssu. | jspi-boot | ambrosite-post-formats-widget | [View logs](/logs/plugins/a/ambrosite-post-formats-widget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | advanced-store-control-for-woocommerce | [View logs](/logs/plugins/a/advanced-store-control-for-woocommerce/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | advanced-store-control-for-woocommerce | [View logs](/logs/plugins/a/advanced-store-control-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_asc_log. | asyncify-boot | advanced-store-control-for-woocommerce | [View logs](/logs/plugins/a/advanced-store-control-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_asc_log. | jspi-boot | advanced-store-control-for-woocommerce | [View logs](/logs/plugins/a/advanced-store-control-for-woocommerce/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | advanced-custom-blocks | [View logs](/logs/plugins/a/advanced-custom-blocks/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | advanced-custom-blocks | [View logs](/logs/plugins/a/advanced-custom-blocks/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | advanced-custom-blocks | [View logs](/logs/plugins/a/advanced-custom-blocks/error.json) |
@@ -106,12 +101,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | ast-sqlite-boot | acronyms | [View logs](/logs/plugins/a/acronyms/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | asyncify-boot | acronyms | [View logs](/logs/plugins/a/acronyms/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | jspi-boot | acronyms | [View logs](/logs/plugins/a/acronyms/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | ast-sqlite-boot | ajax-search | [View logs](/logs/plugins/a/ajax-search/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | asyncify-boot | ajax-search | [View logs](/logs/plugins/a/ajax-search/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | jspi-boot | ajax-search | [View logs](/logs/plugins/a/ajax-search/error.json) |
-| Unexpected token in MySQL query: title. | ast-sqlite-boot | ajax-search | [View logs](/logs/plugins/a/ajax-search/error.json) |
-| Unexpected token in MySQL query: title. | asyncify-boot | ajax-search | [View logs](/logs/plugins/a/ajax-search/error.json) |
-| Unexpected token in MySQL query: title. | jspi-boot | ajax-search | [View logs](/logs/plugins/a/ajax-search/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | ast-sqlite-boot | awesome-code-highlighting | [View logs](/logs/plugins/a/awesome-code-highlighting/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | asyncify-boot | awesome-code-highlighting | [View logs](/logs/plugins/a/awesome-code-highlighting/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "17": syntax error. | jspi-boot | awesome-code-highlighting | [View logs](/logs/plugins/a/awesome-code-highlighting/error.json) |
@@ -176,15 +165,6 @@
 | SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | ast-sqlite-boot | afterwork-delivery | [View logs](/logs/plugins/a/afterwork-delivery/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | asyncify-boot | afterwork-delivery | [View logs](/logs/plugins/a/afterwork-delivery/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | jspi-boot | afterwork-delivery | [View logs](/logs/plugins/a/afterwork-delivery/error.json) |
-| Unexpected token in MySQL query: title. | ast-sqlite-boot | afterwork-delivery | [View logs](/logs/plugins/a/afterwork-delivery/error.json) |
-| Unexpected token in MySQL query: title. | asyncify-boot | afterwork-delivery | [View logs](/logs/plugins/a/afterwork-delivery/error.json) |
-| Unexpected token in MySQL query: title. | jspi-boot | afterwork-delivery | [View logs](/logs/plugins/a/afterwork-delivery/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | ast-sqlite-boot | advanced-navigation-menus | [View logs](/logs/plugins/a/advanced-navigation-menus/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | asyncify-boot | advanced-navigation-menus | [View logs](/logs/plugins/a/advanced-navigation-menus/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | jspi-boot | advanced-navigation-menus | [View logs](/logs/plugins/a/advanced-navigation-menus/error.json) |
-| Unexpected token in MySQL query: title. | ast-sqlite-boot | advanced-navigation-menus | [View logs](/logs/plugins/a/advanced-navigation-menus/error.json) |
-| Unexpected token in MySQL query: title. | asyncify-boot | advanced-navigation-menus | [View logs](/logs/plugins/a/advanced-navigation-menus/error.json) |
-| Unexpected token in MySQL query: title. | jspi-boot | advanced-navigation-menus | [View logs](/logs/plugins/a/advanced-navigation-menus/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | ast-sqlite-boot | atpic | [View logs](/logs/plugins/a/atpic/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | asyncify-boot | atpic | [View logs](/logs/plugins/a/atpic/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | jspi-boot | atpic | [View logs](/logs/plugins/a/atpic/error.json) |
@@ -212,12 +192,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | ast-sqlite-boot | add-my-networks | [View logs](/logs/plugins/a/add-my-networks/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | asyncify-boot | add-my-networks | [View logs](/logs/plugins/a/add-my-networks/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | jspi-boot | add-my-networks | [View logs](/logs/plugins/a/add-my-networks/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | ast-sqlite-boot | affiliate-link-manager | [View logs](/logs/plugins/a/affiliate-link-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | asyncify-boot | affiliate-link-manager | [View logs](/logs/plugins/a/affiliate-link-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | jspi-boot | affiliate-link-manager | [View logs](/logs/plugins/a/affiliate-link-manager/error.json) |
-| Unexpected token in MySQL query: title. | ast-sqlite-boot | affiliate-link-manager | [View logs](/logs/plugins/a/affiliate-link-manager/error.json) |
-| Unexpected token in MySQL query: title. | asyncify-boot | affiliate-link-manager | [View logs](/logs/plugins/a/affiliate-link-manager/error.json) |
-| Unexpected token in MySQL query: title. | jspi-boot | affiliate-link-manager | [View logs](/logs/plugins/a/affiliate-link-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | ast-sqlite-boot | ambrosite-unlink-parent-pages | [View logs](/logs/plugins/a/ambrosite-unlink-parent-pages/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | asyncify-boot | ambrosite-unlink-parent-pages | [View logs](/logs/plugins/a/ambrosite-unlink-parent-pages/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | jspi-boot | ambrosite-unlink-parent-pages | [View logs](/logs/plugins/a/ambrosite-unlink-parent-pages/error.json) |
@@ -255,23 +229,9 @@
 | MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | actus-animated-tags | [View logs](/logs/plugins/a/actus-animated-tags/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | asyncify-boot | actus-animated-tags | [View logs](/logs/plugins/a/actus-animated-tags/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | jspi-boot | actus-animated-tags | [View logs](/logs/plugins/a/actus-animated-tags/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | ast-sqlite-boot | article-forge | [View logs](/logs/plugins/a/article-forge/error.json) |
-| Unexpected token in MySQL query: title. | ast-sqlite-boot | article-forge | [View logs](/logs/plugins/a/article-forge/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | ast-sqlite-boot | aliveio | [View logs](/logs/plugins/a/aliveio/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | asyncify-boot | aliveio | [View logs](/logs/plugins/a/aliveio/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | jspi-boot | aliveio | [View logs](/logs/plugins/a/aliveio/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | ast-sqlite-boot | adgallery-slider | [View logs](/logs/plugins/a/adgallery-slider/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | asyncify-boot | adgallery-slider | [View logs](/logs/plugins/a/adgallery-slider/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | jspi-boot | adgallery-slider | [View logs](/logs/plugins/a/adgallery-slider/error.json) |
-| Unexpected token in MySQL query: title. | ast-sqlite-boot | adgallery-slider | [View logs](/logs/plugins/a/adgallery-slider/error.json) |
-| Unexpected token in MySQL query: title. | asyncify-boot | adgallery-slider | [View logs](/logs/plugins/a/adgallery-slider/error.json) |
-| Unexpected token in MySQL query: title. | jspi-boot | adgallery-slider | [View logs](/logs/plugins/a/adgallery-slider/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | ast-sqlite-boot | advanced-event-calendar | [View logs](/logs/plugins/a/advanced-event-calendar/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | asyncify-boot | advanced-event-calendar | [View logs](/logs/plugins/a/advanced-event-calendar/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | jspi-boot | advanced-event-calendar | [View logs](/logs/plugins/a/advanced-event-calendar/error.json) |
-| Unexpected token in MySQL query: title. | ast-sqlite-boot | advanced-event-calendar | [View logs](/logs/plugins/a/advanced-event-calendar/error.json) |
-| Unexpected token in MySQL query: title. | asyncify-boot | advanced-event-calendar | [View logs](/logs/plugins/a/advanced-event-calendar/error.json) |
-| Unexpected token in MySQL query: title. | jspi-boot | advanced-event-calendar | [View logs](/logs/plugins/a/advanced-event-calendar/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | ast-sqlite-boot | anyfeed-slideshow | [View logs](/logs/plugins/a/anyfeed-slideshow/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | asyncify-boot | anyfeed-slideshow | [View logs](/logs/plugins/a/anyfeed-slideshow/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | jspi-boot | anyfeed-slideshow | [View logs](/logs/plugins/a/anyfeed-slideshow/error.json) |
@@ -338,15 +298,15 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | animated-featured-image | [View logs](/logs/plugins/a/animated-featured-image/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | animated-featured-image | [View logs](/logs/plugins/a/animated-featured-image/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | animated-featured-image | [View logs](/logs/plugins/a/animated-featured-image/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | ast-sqlite-boot | automatic-tooltips | [View logs](/logs/plugins/a/automatic-tooltips/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | asyncify-boot | automatic-tooltips | [View logs](/logs/plugins/a/automatic-tooltips/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | jspi-boot | automatic-tooltips | [View logs](/logs/plugins/a/automatic-tooltips/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | automatic-tooltips | [View logs](/logs/plugins/a/automatic-tooltips/error.json) |
+| Unknown query type: DESC. | asyncify-boot | automatic-tooltips | [View logs](/logs/plugins/a/automatic-tooltips/error.json) |
+| Unknown query type: DESC. | jspi-boot | automatic-tooltips | [View logs](/logs/plugins/a/automatic-tooltips/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | anywp-twitter | [View logs](/logs/plugins/a/anywp-twitter/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | asyncify-boot | anywp-twitter | [View logs](/logs/plugins/a/anywp-twitter/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | jspi-boot | anywp-twitter | [View logs](/logs/plugins/a/anywp-twitter/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | ast-sqlite-boot | adobe-analytics | [View logs](/logs/plugins/a/adobe-analytics/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | asyncify-boot | adobe-analytics | [View logs](/logs/plugins/a/adobe-analytics/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | jspi-boot | adobe-analytics | [View logs](/logs/plugins/a/adobe-analytics/error.json) |
-| Unexpected token in MySQL query: title. | ast-sqlite-boot | adobe-analytics | [View logs](/logs/plugins/a/adobe-analytics/error.json) |
-| Unexpected token in MySQL query: title. | asyncify-boot | adobe-analytics | [View logs](/logs/plugins/a/adobe-analytics/error.json) |
-| Unexpected token in MySQL query: title. | jspi-boot | adobe-analytics | [View logs](/logs/plugins/a/adobe-analytics/error.json) |
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | amazon-ses-and-dkim-mailer | [View logs](/logs/plugins/a/amazon-ses-and-dkim-mailer/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | amazon-ses-and-dkim-mailer | [View logs](/logs/plugins/a/amazon-ses-and-dkim-mailer/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | amazon-ses-and-dkim-mailer | [View logs](/logs/plugins/a/amazon-ses-and-dkim-mailer/error.json) |
@@ -365,12 +325,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | ast-sqlite-boot | autotopo | [View logs](/logs/plugins/a/autotopo/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | asyncify-boot | autotopo | [View logs](/logs/plugins/a/autotopo/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: zuminet_fixed_ads. | jspi-boot | autotopo | [View logs](/logs/plugins/a/autotopo/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | ast-sqlite-boot | aam-protected-media-files | [View logs](/logs/plugins/a/aam-protected-media-files/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | asyncify-boot | aam-protected-media-files | [View logs](/logs/plugins/a/aam-protected-media-files/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | jspi-boot | aam-protected-media-files | [View logs](/logs/plugins/a/aam-protected-media-files/error.json) |
-| Unexpected token in MySQL query: title. | ast-sqlite-boot | aam-protected-media-files | [View logs](/logs/plugins/a/aam-protected-media-files/error.json) |
-| Unexpected token in MySQL query: title. | asyncify-boot | aam-protected-media-files | [View logs](/logs/plugins/a/aam-protected-media-files/error.json) |
-| Unexpected token in MySQL query: title. | jspi-boot | aam-protected-media-files | [View logs](/logs/plugins/a/aam-protected-media-files/error.json) |
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | any-popup | [View logs](/logs/plugins/a/any-popup/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_option. | ast-sqlite-boot | advanced-responsive-video-embedder | [View logs](/logs/plugins/a/advanced-responsive-video-embedder/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: zuminet_ad_shortcode. | ast-sqlite-boot | advanced-responsive-video-embedder | [View logs](/logs/plugins/a/advanced-responsive-video-embedder/error.json) |
@@ -405,9 +359,6 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | apprl | [View logs](/logs/plugins/a/apprl/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | apprl | [View logs](/logs/plugins/a/apprl/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | apprl | [View logs](/logs/plugins/a/apprl/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | ast-sqlite-boot | advanced-testimonial-generator | [View logs](/logs/plugins/a/advanced-testimonial-generator/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | asyncify-boot | advanced-testimonial-generator | [View logs](/logs/plugins/a/advanced-testimonial-generator/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | jspi-boot | advanced-testimonial-generator | [View logs](/logs/plugins/a/advanced-testimonial-generator/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | animated-chat | [View logs](/logs/plugins/a/animated-chat/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | animated-chat | [View logs](/logs/plugins/a/animated-chat/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | animated-chat | [View logs](/logs/plugins/a/animated-chat/error.json) |
@@ -1001,6 +952,9 @@
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | crpaid-link-manager | [View logs](/logs/plugins/c/crpaid-link-manager/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | crpaid-link-manager | [View logs](/logs/plugins/c/crpaid-link-manager/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | crpaid-link-manager | [View logs](/logs/plugins/c/crpaid-link-manager/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_tdf. | ast-sqlite-boot | dojo-fisheye-gallery | [View logs](/logs/plugins/d/dojo-fisheye-gallery/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_tdf. | asyncify-boot | dojo-fisheye-gallery | [View logs](/logs/plugins/d/dojo-fisheye-gallery/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_tdf. | jspi-boot | dojo-fisheye-gallery | [View logs](/logs/plugins/d/dojo-fisheye-gallery/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | display-image-dimensions-in-media-library | [View logs](/logs/plugins/d/display-image-dimensions-in-media-library/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | display-image-dimensions-in-media-library | [View logs](/logs/plugins/d/display-image-dimensions-in-media-library/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | display-image-dimensions-in-media-library | [View logs](/logs/plugins/d/display-image-dimensions-in-media-library/error.json) |
@@ -1016,6 +970,12 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | daily-stat | [View logs](/logs/plugins/d/daily-stat/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | daily-stat | [View logs](/logs/plugins/d/daily-stat/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | daily-stat | [View logs](/logs/plugins/d/daily-stat/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_tdf. | ast-sqlite-boot | displet-retsidx-beta | [View logs](/logs/plugins/d/displet-retsidx-beta/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_tdf. | asyncify-boot | displet-retsidx-beta | [View logs](/logs/plugins/d/displet-retsidx-beta/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_tdf. | jspi-boot | displet-retsidx-beta | [View logs](/logs/plugins/d/displet-retsidx-beta/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_tdf. | ast-sqlite-boot | dynamic-photo-album | [View logs](/logs/plugins/d/dynamic-photo-album/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_tdf. | asyncify-boot | dynamic-photo-album | [View logs](/logs/plugins/d/dynamic-photo-album/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_tdf. | jspi-boot | dynamic-photo-album | [View logs](/logs/plugins/d/dynamic-photo-album/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | debts-assets-networth-dan | [View logs](/logs/plugins/d/debts-assets-networth-dan/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | debts-assets-networth-dan | [View logs](/logs/plugins/d/debts-assets-networth-dan/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | debts-assets-networth-dan | [View logs](/logs/plugins/d/debts-assets-networth-dan/error.json) |
@@ -1465,48 +1425,39 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | ast-sqlite-boot | facebook-comments-counter | [View logs](/logs/plugins/f/facebook-comments-counter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | asyncify-boot | facebook-comments-counter | [View logs](/logs/plugins/f/facebook-comments-counter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | jspi-boot | facebook-comments-counter | [View logs](/logs/plugins/f/facebook-comments-counter/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | ast-sqlite-boot | google-analytics-tracking-for-forms | [View logs](/logs/plugins/g/google-analytics-tracking-for-forms/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | asyncify-boot | google-analytics-tracking-for-forms | [View logs](/logs/plugins/g/google-analytics-tracking-for-forms/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | jspi-boot | google-analytics-tracking-for-forms | [View logs](/logs/plugins/g/google-analytics-tracking-for-forms/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | ast-sqlite-boot | google-analytics-tracking-for-forms | [View logs](/logs/plugins/g/google-analytics-tracking-for-forms/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | asyncify-boot | google-analytics-tracking-for-forms | [View logs](/logs/plugins/g/google-analytics-tracking-for-forms/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | jspi-boot | google-analytics-tracking-for-forms | [View logs](/logs/plugins/g/google-analytics-tracking-for-forms/error.json) |
-| Unknown query type: RENAME. | ast-sqlite-boot | google-analytics-tracking-for-forms | [View logs](/logs/plugins/g/google-analytics-tracking-for-forms/error.json) |
-| Unknown query type: RENAME. | asyncify-boot | google-analytics-tracking-for-forms | [View logs](/logs/plugins/g/google-analytics-tracking-for-forms/error.json) |
-| Unknown query type: RENAME. | jspi-boot | google-analytics-tracking-for-forms | [View logs](/logs/plugins/g/google-analytics-tracking-for-forms/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | guild-network | [View logs](/logs/plugins/g/guild-network/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | guild-network | [View logs](/logs/plugins/g/guild-network/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | guild-network | [View logs](/logs/plugins/g/guild-network/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ".": syntax error. | ast-sqlite-boot | guild-network | [View logs](/logs/plugins/g/guild-network/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ".": syntax error. | asyncify-boot | guild-network | [View logs](/logs/plugins/g/guild-network/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ".": syntax error. | jspi-boot | guild-network | [View logs](/logs/plugins/g/guild-network/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | ast-sqlite-boot | guahan-flickr-widget | [View logs](/logs/plugins/g/guahan-flickr-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | asyncify-boot | guahan-flickr-widget | [View logs](/logs/plugins/g/guahan-flickr-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | jspi-boot | guahan-flickr-widget | [View logs](/logs/plugins/g/guahan-flickr-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | ast-sqlite-boot | guahan-flickr-widget | [View logs](/logs/plugins/g/guahan-flickr-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | asyncify-boot | guahan-flickr-widget | [View logs](/logs/plugins/g/guahan-flickr-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | jspi-boot | guahan-flickr-widget | [View logs](/logs/plugins/g/guahan-flickr-widget/error.json) |
-| Unknown query type: RENAME. | ast-sqlite-boot | guahan-flickr-widget | [View logs](/logs/plugins/g/guahan-flickr-widget/error.json) |
-| Unknown query type: RENAME. | asyncify-boot | guahan-flickr-widget | [View logs](/logs/plugins/g/guahan-flickr-widget/error.json) |
-| Unknown query type: RENAME. | jspi-boot | guahan-flickr-widget | [View logs](/logs/plugins/g/guahan-flickr-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: "board_name". | ast-sqlite-boot | gna-woo-coupons | [View logs](/logs/plugins/g/gna-woo-coupons/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: "board_name". | asyncify-boot | gna-woo-coupons | [View logs](/logs/plugins/g/gna-woo-coupons/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: "board_name". | jspi-boot | gna-woo-coupons | [View logs](/logs/plugins/g/gna-woo-coupons/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: "count". | ast-sqlite-boot | gna-woo-coupons | [View logs](/logs/plugins/g/gna-woo-coupons/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: "count". | asyncify-boot | gna-woo-coupons | [View logs](/logs/plugins/g/gna-woo-coupons/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: "count". | jspi-boot | gna-woo-coupons | [View logs](/logs/plugins/g/gna-woo-coupons/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: "show_pin_title". | ast-sqlite-boot | gna-woo-coupons | [View logs](/logs/plugins/g/gna-woo-coupons/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: "show_pin_title". | asyncify-boot | gna-woo-coupons | [View logs](/logs/plugins/g/gna-woo-coupons/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: "show_pin_title". | jspi-boot | gna-woo-coupons | [View logs](/logs/plugins/g/gna-woo-coupons/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: "userid". | ast-sqlite-boot | gna-woo-coupons | [View logs](/logs/plugins/g/gna-woo-coupons/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: "userid". | asyncify-boot | gna-woo-coupons | [View logs](/logs/plugins/g/gna-woo-coupons/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: "userid". | jspi-boot | gna-woo-coupons | [View logs](/logs/plugins/g/gna-woo-coupons/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | ast-sqlite-boot | growth-hacking-analytics-by-qunb | [View logs](/logs/plugins/g/growth-hacking-analytics-by-qunb/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | asyncify-boot | growth-hacking-analytics-by-qunb | [View logs](/logs/plugins/g/growth-hacking-analytics-by-qunb/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | jspi-boot | growth-hacking-analytics-by-qunb | [View logs](/logs/plugins/g/growth-hacking-analytics-by-qunb/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | ast-sqlite-boot | google | [View logs](/logs/plugins/g/google/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | asyncify-boot | google | [View logs](/logs/plugins/g/google/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | jspi-boot | google | [View logs](/logs/plugins/g/google/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | ast-sqlite-boot | google | [View logs](/logs/plugins/g/google/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | asyncify-boot | google | [View logs](/logs/plugins/g/google/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | jspi-boot | google | [View logs](/logs/plugins/g/google/error.json) |
-| Unknown query type: RENAME. | ast-sqlite-boot | google | [View logs](/logs/plugins/g/google/error.json) |
-| Unknown query type: RENAME. | asyncify-boot | google | [View logs](/logs/plugins/g/google/error.json) |
-| Unknown query type: RENAME. | jspi-boot | google | [View logs](/logs/plugins/g/google/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | ast-sqlite-boot | growelfare-connect | [View logs](/logs/plugins/g/growelfare-connect/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | asyncify-boot | growelfare-connect | [View logs](/logs/plugins/g/growelfare-connect/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | jspi-boot | growelfare-connect | [View logs](/logs/plugins/g/growelfare-connect/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | ast-sqlite-boot | geotrack | [View logs](/logs/plugins/g/geotrack/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | asyncify-boot | geotrack | [View logs](/logs/plugins/g/geotrack/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | jspi-boot | geotrack | [View logs](/logs/plugins/g/geotrack/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_gdpraccept_consentformfield_fk. | ast-sqlite-boot | gravatar-widget | [View logs](/logs/plugins/g/gravatar-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_gdpraccept_consentformfield_fk. | asyncify-boot | gravatar-widget | [View logs](/logs/plugins/g/gravatar-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_gdpraccept_consentformfield_fk. | jspi-boot | gravatar-widget | [View logs](/logs/plugins/g/gravatar-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_gdpraccept_emailtpl_fk. | ast-sqlite-boot | gravatar-widget | [View logs](/logs/plugins/g/gravatar-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_gdpraccept_emailtpl_fk. | asyncify-boot | gravatar-widget | [View logs](/logs/plugins/g/gravatar-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_gdpraccept_emailtpl_fk. | jspi-boot | gravatar-widget | [View logs](/logs/plugins/g/gravatar-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_gdpraccept_import_fk. | ast-sqlite-boot | gravatar-widget | [View logs](/logs/plugins/g/gravatar-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_gdpraccept_import_fk. | asyncify-boot | gravatar-widget | [View logs](/logs/plugins/g/gravatar-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_gdpraccept_import_fk. | jspi-boot | gravatar-widget | [View logs](/logs/plugins/g/gravatar-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_gdpraccept_token_fk. | ast-sqlite-boot | gravatar-widget | [View logs](/logs/plugins/g/gravatar-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_gdpraccept_token_fk. | asyncify-boot | gravatar-widget | [View logs](/logs/plugins/g/gravatar-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_gdpraccept_token_fk. | jspi-boot | gravatar-widget | [View logs](/logs/plugins/g/gravatar-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | ast-sqlite-boot | gcal-sidebar | [View logs](/logs/plugins/g/gcal-sidebar/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | asyncify-boot | gcal-sidebar | [View logs](/logs/plugins/g/gcal-sidebar/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | jspi-boot | gcal-sidebar | [View logs](/logs/plugins/g/gcal-sidebar/error.json) |
@@ -1528,57 +1479,24 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | ast-sqlite-boot | genesis-optimized-social-share | [View logs](/logs/plugins/g/genesis-optimized-social-share/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | asyncify-boot | genesis-optimized-social-share | [View logs](/logs/plugins/g/genesis-optimized-social-share/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | jspi-boot | genesis-optimized-social-share | [View logs](/logs/plugins/g/genesis-optimized-social-share/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | ast-sqlite-boot | gna-google-analytics | [View logs](/logs/plugins/g/gna-google-analytics/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | asyncify-boot | gna-google-analytics | [View logs](/logs/plugins/g/gna-google-analytics/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | jspi-boot | gna-google-analytics | [View logs](/logs/plugins/g/gna-google-analytics/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | ast-sqlite-boot | gna-google-analytics | [View logs](/logs/plugins/g/gna-google-analytics/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | asyncify-boot | gna-google-analytics | [View logs](/logs/plugins/g/gna-google-analytics/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | jspi-boot | gna-google-analytics | [View logs](/logs/plugins/g/gna-google-analytics/error.json) |
-| Unknown query type: RENAME. | ast-sqlite-boot | gna-google-analytics | [View logs](/logs/plugins/g/gna-google-analytics/error.json) |
-| Unknown query type: RENAME. | asyncify-boot | gna-google-analytics | [View logs](/logs/plugins/g/gna-google-analytics/error.json) |
-| Unknown query type: RENAME. | jspi-boot | gna-google-analytics | [View logs](/logs/plugins/g/gna-google-analytics/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | ast-sqlite-boot | gtg-audio-player | [View logs](/logs/plugins/g/gtg-audio-player/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | asyncify-boot | gtg-audio-player | [View logs](/logs/plugins/g/gtg-audio-player/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | jspi-boot | gtg-audio-player | [View logs](/logs/plugins/g/gtg-audio-player/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | ast-sqlite-boot | gtg-audio-player | [View logs](/logs/plugins/g/gtg-audio-player/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | asyncify-boot | gtg-audio-player | [View logs](/logs/plugins/g/gtg-audio-player/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | jspi-boot | gtg-audio-player | [View logs](/logs/plugins/g/gtg-audio-player/error.json) |
-| Unknown query type: RENAME. | ast-sqlite-boot | gtg-audio-player | [View logs](/logs/plugins/g/gtg-audio-player/error.json) |
-| Unknown query type: RENAME. | asyncify-boot | gtg-audio-player | [View logs](/logs/plugins/g/gtg-audio-player/error.json) |
-| Unknown query type: RENAME. | jspi-boot | gtg-audio-player | [View logs](/logs/plugins/g/gtg-audio-player/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | ast-sqlite-boot | gpp-testimonials-widget | [View logs](/logs/plugins/g/gpp-testimonials-widget/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | asyncify-boot | gpp-testimonials-widget | [View logs](/logs/plugins/g/gpp-testimonials-widget/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | jspi-boot | gpp-testimonials-widget | [View logs](/logs/plugins/g/gpp-testimonials-widget/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | genesis-featured-images | [View logs](/logs/plugins/g/genesis-featured-images/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | genesis-featured-images | [View logs](/logs/plugins/g/genesis-featured-images/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | genesis-featured-images | [View logs](/logs/plugins/g/genesis-featured-images/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ".": syntax error. | ast-sqlite-boot | genesis-featured-images | [View logs](/logs/plugins/g/genesis-featured-images/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ".": syntax error. | asyncify-boot | genesis-featured-images | [View logs](/logs/plugins/g/genesis-featured-images/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ".": syntax error. | jspi-boot | genesis-featured-images | [View logs](/logs/plugins/g/genesis-featured-images/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | ast-sqlite-boot | gravatargrid | [View logs](/logs/plugins/g/gravatargrid/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | asyncify-boot | gravatargrid | [View logs](/logs/plugins/g/gravatargrid/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | jspi-boot | gravatargrid | [View logs](/logs/plugins/g/gravatargrid/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | ast-sqlite-boot | gravatargrid | [View logs](/logs/plugins/g/gravatargrid/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | asyncify-boot | gravatargrid | [View logs](/logs/plugins/g/gravatargrid/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | jspi-boot | gravatargrid | [View logs](/logs/plugins/g/gravatargrid/error.json) |
-| Unknown query type: RENAME. | ast-sqlite-boot | gravatargrid | [View logs](/logs/plugins/g/gravatargrid/error.json) |
-| Unknown query type: RENAME. | asyncify-boot | gravatargrid | [View logs](/logs/plugins/g/gravatargrid/error.json) |
-| Unknown query type: RENAME. | jspi-boot | gravatargrid | [View logs](/logs/plugins/g/gravatargrid/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_gdpraccept_consentformfield_fk. | ast-sqlite-boot | gdgt-gadget-list-widget | [View logs](/logs/plugins/g/gdgt-gadget-list-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_gdpraccept_consentformfield_fk. | asyncify-boot | gdgt-gadget-list-widget | [View logs](/logs/plugins/g/gdgt-gadget-list-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_gdpraccept_consentformfield_fk. | jspi-boot | gdgt-gadget-list-widget | [View logs](/logs/plugins/g/gdgt-gadget-list-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_gdpraccept_emailtpl_fk. | ast-sqlite-boot | gdgt-gadget-list-widget | [View logs](/logs/plugins/g/gdgt-gadget-list-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_gdpraccept_emailtpl_fk. | asyncify-boot | gdgt-gadget-list-widget | [View logs](/logs/plugins/g/gdgt-gadget-list-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_gdpraccept_emailtpl_fk. | jspi-boot | gdgt-gadget-list-widget | [View logs](/logs/plugins/g/gdgt-gadget-list-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_gdpraccept_import_fk. | ast-sqlite-boot | gdgt-gadget-list-widget | [View logs](/logs/plugins/g/gdgt-gadget-list-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_gdpraccept_import_fk. | asyncify-boot | gdgt-gadget-list-widget | [View logs](/logs/plugins/g/gdgt-gadget-list-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_gdpraccept_import_fk. | jspi-boot | gdgt-gadget-list-widget | [View logs](/logs/plugins/g/gdgt-gadget-list-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_gdpraccept_token_fk. | ast-sqlite-boot | gdgt-gadget-list-widget | [View logs](/logs/plugins/g/gdgt-gadget-list-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_gdpraccept_token_fk. | asyncify-boot | gdgt-gadget-list-widget | [View logs](/logs/plugins/g/gdgt-gadget-list-widget/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_gdpraccept_token_fk. | jspi-boot | gdgt-gadget-list-widget | [View logs](/logs/plugins/g/gdgt-gadget-list-widget/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | ast-sqlite-boot | google-buzz-er | [View logs](/logs/plugins/g/google-buzz-er/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | asyncify-boot | google-buzz-er | [View logs](/logs/plugins/g/google-buzz-er/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | jspi-boot | google-buzz-er | [View logs](/logs/plugins/g/google-buzz-er/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | gtalk-widget | [View logs](/logs/plugins/g/gtalk-widget/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | gtalk-widget | [View logs](/logs/plugins/g/gtalk-widget/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | gtalk-widget | [View logs](/logs/plugins/g/gtalk-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ".": syntax error. | ast-sqlite-boot | gtalk-widget | [View logs](/logs/plugins/g/gtalk-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ".": syntax error. | asyncify-boot | gtalk-widget | [View logs](/logs/plugins/g/gtalk-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ".": syntax error. | jspi-boot | gtalk-widget | [View logs](/logs/plugins/g/gtalk-widget/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | guerrillas-facebook-like-box | [View logs](/logs/plugins/g/guerrillas-facebook-like-box/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | guerrillas-facebook-like-box | [View logs](/logs/plugins/g/guerrillas-facebook-like-box/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | guerrillas-facebook-like-box | [View logs](/logs/plugins/g/guerrillas-facebook-like-box/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ".": syntax error. | ast-sqlite-boot | guerrillas-facebook-like-box | [View logs](/logs/plugins/g/guerrillas-facebook-like-box/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ".": syntax error. | asyncify-boot | guerrillas-facebook-like-box | [View logs](/logs/plugins/g/guerrillas-facebook-like-box/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ".": syntax error. | jspi-boot | guerrillas-facebook-like-box | [View logs](/logs/plugins/g/guerrillas-facebook-like-box/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | ast-sqlite-boot | general-headers | [View logs](/logs/plugins/g/general-headers/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | asyncify-boot | general-headers | [View logs](/logs/plugins/g/general-headers/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | jspi-boot | general-headers | [View logs](/logs/plugins/g/general-headers/error.json) |
@@ -1586,15 +1504,6 @@
 | MySQL field type cannot be translated to SQLite: set. | ast-sqlite-boot | google-plus-button | [View logs](/logs/plugins/g/google-plus-button/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | asyncify-boot | google-plus-button | [View logs](/logs/plugins/g/google-plus-button/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | jspi-boot | google-plus-button | [View logs](/logs/plugins/g/google-plus-button/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | ast-sqlite-boot | guestonlin | [View logs](/logs/plugins/g/guestonlin/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | asyncify-boot | guestonlin | [View logs](/logs/plugins/g/guestonlin/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | jspi-boot | guestonlin | [View logs](/logs/plugins/g/guestonlin/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | ast-sqlite-boot | guestonlin | [View logs](/logs/plugins/g/guestonlin/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | asyncify-boot | guestonlin | [View logs](/logs/plugins/g/guestonlin/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | jspi-boot | guestonlin | [View logs](/logs/plugins/g/guestonlin/error.json) |
-| Unknown query type: RENAME. | ast-sqlite-boot | guestonlin | [View logs](/logs/plugins/g/guestonlin/error.json) |
-| Unknown query type: RENAME. | asyncify-boot | guestonlin | [View logs](/logs/plugins/g/guestonlin/error.json) |
-| Unknown query type: RENAME. | jspi-boot | guestonlin | [View logs](/logs/plugins/g/guestonlin/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | ast-sqlite-boot | gravitydance | [View logs](/logs/plugins/g/gravitydance/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | asyncify-boot | gravitydance | [View logs](/logs/plugins/g/gravitydance/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | jspi-boot | gravitydance | [View logs](/logs/plugins/g/gravitydance/error.json) |
@@ -1613,36 +1522,9 @@
 | MySQL field type cannot be translated to SQLite: set. | ast-sqlite-boot | gadsense | [View logs](/logs/plugins/g/gadsense/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | asyncify-boot | gadsense | [View logs](/logs/plugins/g/gadsense/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | jspi-boot | gadsense | [View logs](/logs/plugins/g/gadsense/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | ast-sqlite-boot | gbatchtalk | [View logs](/logs/plugins/g/gbatchtalk/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | asyncify-boot | gbatchtalk | [View logs](/logs/plugins/g/gbatchtalk/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | jspi-boot | gbatchtalk | [View logs](/logs/plugins/g/gbatchtalk/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | ast-sqlite-boot | gbatchtalk | [View logs](/logs/plugins/g/gbatchtalk/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | asyncify-boot | gbatchtalk | [View logs](/logs/plugins/g/gbatchtalk/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | jspi-boot | gbatchtalk | [View logs](/logs/plugins/g/gbatchtalk/error.json) |
-| Unknown query type: RENAME. | ast-sqlite-boot | gbatchtalk | [View logs](/logs/plugins/g/gbatchtalk/error.json) |
-| Unknown query type: RENAME. | asyncify-boot | gbatchtalk | [View logs](/logs/plugins/g/gbatchtalk/error.json) |
-| Unknown query type: RENAME. | jspi-boot | gbatchtalk | [View logs](/logs/plugins/g/gbatchtalk/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | ast-sqlite-boot | google-app-engine | [View logs](/logs/plugins/g/google-app-engine/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | asyncify-boot | google-app-engine | [View logs](/logs/plugins/g/google-app-engine/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | jspi-boot | google-app-engine | [View logs](/logs/plugins/g/google-app-engine/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | ast-sqlite-boot | guthrie | [View logs](/logs/plugins/g/guthrie/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | asyncify-boot | guthrie | [View logs](/logs/plugins/g/guthrie/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | jspi-boot | guthrie | [View logs](/logs/plugins/g/guthrie/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | ast-sqlite-boot | guthrie | [View logs](/logs/plugins/g/guthrie/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | asyncify-boot | guthrie | [View logs](/logs/plugins/g/guthrie/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | jspi-boot | guthrie | [View logs](/logs/plugins/g/guthrie/error.json) |
-| Unknown query type: RENAME. | ast-sqlite-boot | guthrie | [View logs](/logs/plugins/g/guthrie/error.json) |
-| Unknown query type: RENAME. | asyncify-boot | guthrie | [View logs](/logs/plugins/g/guthrie/error.json) |
-| Unknown query type: RENAME. | jspi-boot | guthrie | [View logs](/logs/plugins/g/guthrie/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | ast-sqlite-boot | get-user-info | [View logs](/logs/plugins/g/get-user-info/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | asyncify-boot | get-user-info | [View logs](/logs/plugins/g/get-user-info/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | jspi-boot | get-user-info | [View logs](/logs/plugins/g/get-user-info/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | ast-sqlite-boot | get-user-info | [View logs](/logs/plugins/g/get-user-info/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | asyncify-boot | get-user-info | [View logs](/logs/plugins/g/get-user-info/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | jspi-boot | get-user-info | [View logs](/logs/plugins/g/get-user-info/error.json) |
-| Unknown query type: RENAME. | ast-sqlite-boot | get-user-info | [View logs](/logs/plugins/g/get-user-info/error.json) |
-| Unknown query type: RENAME. | asyncify-boot | get-user-info | [View logs](/logs/plugins/g/get-user-info/error.json) |
-| Unknown query type: RENAME. | jspi-boot | get-user-info | [View logs](/logs/plugins/g/get-user-info/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | ast-sqlite-boot | guerrillas-youtube-video-widget | [View logs](/logs/plugins/g/guerrillas-youtube-video-widget/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | asyncify-boot | guerrillas-youtube-video-widget | [View logs](/logs/plugins/g/guerrillas-youtube-video-widget/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | jspi-boot | guerrillas-youtube-video-widget | [View logs](/logs/plugins/g/guerrillas-youtube-video-widget/error.json) |
@@ -1658,36 +1540,9 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | ast-sqlite-boot | google-groups-widget | [View logs](/logs/plugins/g/google-groups-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | asyncify-boot | google-groups-widget | [View logs](/logs/plugins/g/google-groups-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | jspi-boot | google-groups-widget | [View logs](/logs/plugins/g/google-groups-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | ast-sqlite-boot | google-rank-checker | [View logs](/logs/plugins/g/google-rank-checker/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | asyncify-boot | google-rank-checker | [View logs](/logs/plugins/g/google-rank-checker/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | jspi-boot | google-rank-checker | [View logs](/logs/plugins/g/google-rank-checker/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | ast-sqlite-boot | google-rank-checker | [View logs](/logs/plugins/g/google-rank-checker/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | asyncify-boot | google-rank-checker | [View logs](/logs/plugins/g/google-rank-checker/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | jspi-boot | google-rank-checker | [View logs](/logs/plugins/g/google-rank-checker/error.json) |
-| Unknown query type: RENAME. | ast-sqlite-boot | google-rank-checker | [View logs](/logs/plugins/g/google-rank-checker/error.json) |
-| Unknown query type: RENAME. | asyncify-boot | google-rank-checker | [View logs](/logs/plugins/g/google-rank-checker/error.json) |
-| Unknown query type: RENAME. | jspi-boot | google-rank-checker | [View logs](/logs/plugins/g/google-rank-checker/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | ast-sqlite-boot | google-map-plugin | [View logs](/logs/plugins/g/google-map-plugin/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | asyncify-boot | google-map-plugin | [View logs](/logs/plugins/g/google-map-plugin/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | jspi-boot | google-map-plugin | [View logs](/logs/plugins/g/google-map-plugin/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | ast-sqlite-boot | gosearch | [View logs](/logs/plugins/g/gosearch/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | asyncify-boot | gosearch | [View logs](/logs/plugins/g/gosearch/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | jspi-boot | gosearch | [View logs](/logs/plugins/g/gosearch/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | ast-sqlite-boot | gosearch | [View logs](/logs/plugins/g/gosearch/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | asyncify-boot | gosearch | [View logs](/logs/plugins/g/gosearch/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | jspi-boot | gosearch | [View logs](/logs/plugins/g/gosearch/error.json) |
-| Unknown query type: RENAME. | ast-sqlite-boot | gosearch | [View logs](/logs/plugins/g/gosearch/error.json) |
-| Unknown query type: RENAME. | asyncify-boot | gosearch | [View logs](/logs/plugins/g/gosearch/error.json) |
-| Unknown query type: RENAME. | jspi-boot | gosearch | [View logs](/logs/plugins/g/gosearch/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | ast-sqlite-boot | guestonline | [View logs](/logs/plugins/g/guestonline/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | asyncify-boot | guestonline | [View logs](/logs/plugins/g/guestonline/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp. | jspi-boot | guestonline | [View logs](/logs/plugins/g/guestonline/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | ast-sqlite-boot | guestonline | [View logs](/logs/plugins/g/guestonline/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | asyncify-boot | guestonline | [View logs](/logs/plugins/g/guestonline/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_googlemapsforwp_flags. | jspi-boot | guestonline | [View logs](/logs/plugins/g/guestonline/error.json) |
-| Unknown query type: RENAME. | ast-sqlite-boot | guestonline | [View logs](/logs/plugins/g/guestonline/error.json) |
-| Unknown query type: RENAME. | asyncify-boot | guestonline | [View logs](/logs/plugins/g/guestonline/error.json) |
-| Unknown query type: RENAME. | jspi-boot | guestonline | [View logs](/logs/plugins/g/guestonline/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | ast-sqlite-boot | grad-aparat-rss | [View logs](/logs/plugins/g/grad-aparat-rss/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | asyncify-boot | grad-aparat-rss | [View logs](/logs/plugins/g/grad-aparat-rss/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_kbqurcode_url. | jspi-boot | grad-aparat-rss | [View logs](/logs/plugins/g/grad-aparat-rss/error.json) |
@@ -2724,6 +2579,9 @@ Backtra
 | Unknown operation: CONVERT. | ast-sqlite-boot | ncaaf-news-scroller | [View logs](/logs/plugins/n/ncaaf-news-scroller/error.json) |
 | Unknown operation: CONVERT. | asyncify-boot | ncaaf-news-scroller | [View logs](/logs/plugins/n/ncaaf-news-scroller/error.json) |
 | Unknown operation: CONVERT. | jspi-boot | ncaaf-news-scroller | [View logs](/logs/plugins/n/ncaaf-news-scroller/error.json) |
+| Unknown drop type: table. | ast-sqlite-boot | netangels-cloud-storage | [View logs](/logs/plugins/n/netangels-cloud-storage/error.json) |
+| Unknown drop type: table. | asyncify-boot | netangels-cloud-storage | [View logs](/logs/plugins/n/netangels-cloud-storage/error.json) |
+| Unknown drop type: table. | jspi-boot | netangels-cloud-storage | [View logs](/logs/plugins/n/netangels-cloud-storage/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | ast-sqlite-boot | notify-events-wpforms | [View logs](/logs/plugins/n/notify-events-wpforms/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | asyncify-boot | notify-events-wpforms | [View logs](/logs/plugins/n/notify-events-wpforms/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "VALUE": syntax error. | jspi-boot | notify-events-wpforms | [View logs](/logs/plugins/n/notify-events-wpforms/error.json) |
@@ -2769,6 +2627,10 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | ast-sqlite-boot | nggimagerotation | [View logs](/logs/plugins/n/nggimagerotation/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | asyncify-boot | nggimagerotation | [View logs](/logs/plugins/n/nggimagerotation/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_netreviews_configuration. | jspi-boot | nggimagerotation | [View logs](/logs/plugins/n/nggimagerotation/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: active. | jspi-boot | notify-events-contact-form-7 | [View logs](/logs/plugins/n/notify-events-contact-form-7/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: terms. | jspi-boot | notify-events-contact-form-7 | [View logs](/logs/plugins/n/notify-events-contact-form-7/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | jspi-boot | notify-events-contact-form-7 | [View logs](/logs/plugins/n/notify-events-contact-form-7/error.json) |
+| Unknown show type: KEYS FROM. | jspi-boot | notify-events-contact-form-7 | [View logs](/logs/plugins/n/notify-events-contact-form-7/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | nt-post-view-hits-counter | [View logs](/logs/plugins/n/nt-post-view-hits-counter/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | nt-post-view-hits-counter | [View logs](/logs/plugins/n/nt-post-view-hits-counter/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | nt-post-view-hits-counter | [View logs](/logs/plugins/n/nt-post-view-hits-counter/error.json) |
@@ -4301,6 +4163,9 @@ Backtra
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | smaily-for-woocommerce | [View logs](/logs/plugins/s/smaily-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | smaily-for-woocommerce | [View logs](/logs/plugins/s/smaily-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | smaily-for-woocommerce | [View logs](/logs/plugins/s/smaily-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_linkboss_sync_batch. | ast-sqlite-boot | smarts3 | [View logs](/logs/plugins/s/smarts3/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_linkboss_sync_batch. | asyncify-boot | smarts3 | [View logs](/logs/plugins/s/smarts3/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_linkboss_sync_batch. | jspi-boot | smarts3 | [View logs](/logs/plugins/s/smarts3/error.json) |
 | MySQL field type cannot be translated to SQLite: serial. | ast-sqlite-boot | sms | [View logs](/logs/plugins/s/sms/error.json) |
 | MySQL field type cannot be translated to SQLite: serial. | asyncify-boot | sms | [View logs](/logs/plugins/s/sms/error.json) |
 | MySQL field type cannot be translated to SQLite: serial. | jspi-boot | sms | [View logs](/logs/plugins/s/sms/error.json) |
@@ -4904,6 +4769,15 @@ Backtra
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | unitlicious | [View logs](/logs/plugins/u/unitlicious/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | unitlicious | [View logs](/logs/plugins/u/unitlicious/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | unitlicious | [View logs](/logs/plugins/u/unitlicious/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | update-stat | [View logs](/logs/plugins/u/update-stat/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | update-stat | [View logs](/logs/plugins/u/update-stat/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | update-stat | [View logs](/logs/plugins/u/update-stat/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | update-stat | [View logs](/logs/plugins/u/update-stat/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | update-stat | [View logs](/logs/plugins/u/update-stat/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | update-stat | [View logs](/logs/plugins/u/update-stat/error.json) |
+| Unknown create type: OR REPLACE. | ast-sqlite-boot | update-stat | [View logs](/logs/plugins/u/update-stat/error.json) |
+| Unknown create type: OR REPLACE. | asyncify-boot | update-stat | [View logs](/logs/plugins/u/update-stat/error.json) |
+| Unknown create type: OR REPLACE. | jspi-boot | update-stat | [View logs](/logs/plugins/u/update-stat/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_restricted. | ast-sqlite-boot | urlin-protector-wp | [View logs](/logs/plugins/u/urlin-protector-wp/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_restricted. | asyncify-boot | urlin-protector-wp | [View logs](/logs/plugins/u/urlin-protector-wp/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_restricted. | jspi-boot | urlin-protector-wp | [View logs](/logs/plugins/u/urlin-protector-wp/error.json) |
@@ -4916,11 +4790,29 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 no such table: wp_restricted. | ast-sqlite-boot | user-messages | [View logs](/logs/plugins/u/user-messages/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_restricted. | asyncify-boot | user-messages | [View logs](/logs/plugins/u/user-messages/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_restricted. | jspi-boot | user-messages | [View logs](/logs/plugins/u/user-messages/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | userisle | [View logs](/logs/plugins/u/userisle/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | userisle | [View logs](/logs/plugins/u/userisle/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | userisle | [View logs](/logs/plugins/u/userisle/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | userisle | [View logs](/logs/plugins/u/userisle/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | userisle | [View logs](/logs/plugins/u/userisle/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | userisle | [View logs](/logs/plugins/u/userisle/error.json) |
+| Unknown create type: OR REPLACE. | ast-sqlite-boot | userisle | [View logs](/logs/plugins/u/userisle/error.json) |
+| Unknown create type: OR REPLACE. | asyncify-boot | userisle | [View logs](/logs/plugins/u/userisle/error.json) |
+| Unknown create type: OR REPLACE. | jspi-boot | userisle | [View logs](/logs/plugins/u/userisle/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_utt_attribute_taxonomies. | asyncify-boot | upsellwp-mini-cart | [View logs](/logs/plugins/u/upsellwp-mini-cart/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_utt_attribute_taxonomies. | jspi-boot | upsellwp-mini-cart | [View logs](/logs/plugins/u/upsellwp-mini-cart/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | ultimate-live-chat | [View logs](/logs/plugins/u/ultimate-live-chat/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | ultimate-live-chat | [View logs](/logs/plugins/u/ultimate-live-chat/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | ultimate-live-chat | [View logs](/logs/plugins/u/ultimate-live-chat/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | update-message | [View logs](/logs/plugins/u/update-message/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | update-message | [View logs](/logs/plugins/u/update-message/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | update-message | [View logs](/logs/plugins/u/update-message/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | update-message | [View logs](/logs/plugins/u/update-message/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | update-message | [View logs](/logs/plugins/u/update-message/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | update-message | [View logs](/logs/plugins/u/update-message/error.json) |
+| Unknown create type: OR REPLACE. | ast-sqlite-boot | update-message | [View logs](/logs/plugins/u/update-message/error.json) |
+| Unknown create type: OR REPLACE. | asyncify-boot | update-message | [View logs](/logs/plugins/u/update-message/error.json) |
+| Unknown create type: OR REPLACE. | jspi-boot | update-message | [View logs](/logs/plugins/u/update-message/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | user-switching | [View logs](/logs/plugins/u/user-switching/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | user-switching | [View logs](/logs/plugins/u/user-switching/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imagecounter. | asyncify-boot | visitor-counter | [View logs](/logs/plugins/v/visitor-counter/error.json) |
@@ -5391,12 +5283,6 @@ Backtra
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | wc-gateway-payburner | [View logs](/logs/plugins/w/wc-gateway-payburner/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | wc-gateway-payburner | [View logs](/logs/plugins/w/wc-gateway-payburner/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | wc-gateway-payburner | [View logs](/logs/plugins/w/wc-gateway-payburner/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_whtp_hitinfo. | ast-sqlite-boot | wc-klarna-payments-via-stripe-payment-gateway-by-cartdna | [View logs](/logs/plugins/w/wc-klarna-payments-via-stripe-payment-gateway-by-cartdna/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_whtp_hitinfo. | asyncify-boot | wc-klarna-payments-via-stripe-payment-gateway-by-cartdna | [View logs](/logs/plugins/w/wc-klarna-payments-via-stripe-payment-gateway-by-cartdna/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_whtp_hitinfo. | jspi-boot | wc-klarna-payments-via-stripe-payment-gateway-by-cartdna | [View logs](/logs/plugins/w/wc-klarna-payments-via-stripe-payment-gateway-by-cartdna/error.json) |
-| Unexpected token in MySQL query: active. | ast-sqlite-boot | wc-klarna-payments-via-stripe-payment-gateway-by-cartdna | [View logs](/logs/plugins/w/wc-klarna-payments-via-stripe-payment-gateway-by-cartdna/error.json) |
-| Unexpected token in MySQL query: active. | asyncify-boot | wc-klarna-payments-via-stripe-payment-gateway-by-cartdna | [View logs](/logs/plugins/w/wc-klarna-payments-via-stripe-payment-gateway-by-cartdna/error.json) |
-| Unexpected token in MySQL query: active. | jspi-boot | wc-klarna-payments-via-stripe-payment-gateway-by-cartdna | [View logs](/logs/plugins/w/wc-klarna-payments-via-stripe-payment-gateway-by-cartdna/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports. | ast-sqlite-boot | wc-payme-hsbc-payments-by-cartdna | [View logs](/logs/plugins/w/wc-payme-hsbc-payments-by-cartdna/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports. | asyncify-boot | wc-payme-hsbc-payments-by-cartdna | [View logs](/logs/plugins/w/wc-payme-hsbc-payments-by-cartdna/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports. | jspi-boot | wc-payme-hsbc-payments-by-cartdna | [View logs](/logs/plugins/w/wc-payme-hsbc-payments-by-cartdna/error.json) |
@@ -5409,6 +5295,7 @@ Backtra
 | SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | ast-sqlite-boot | wc-shipping-tikijne | [View logs](/logs/plugins/w/wc-shipping-tikijne/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | asyncify-boot | wc-shipping-tikijne | [View logs](/logs/plugins/w/wc-shipping-tikijne/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | jspi-boot | wc-shipping-tikijne | [View logs](/logs/plugins/w/wc-shipping-tikijne/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: required. | jspi-boot | wcloyality | [View logs](/logs/plugins/w/wcloyality/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports. | ast-sqlite-boot | wcs-custom-permalinks-hotfix | [View logs](/logs/plugins/w/wcs-custom-permalinks-hotfix/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports. | asyncify-boot | wcs-custom-permalinks-hotfix | [View logs](/logs/plugins/w/wcs-custom-permalinks-hotfix/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pmxi_imports. | jspi-boot | wcs-custom-permalinks-hotfix | [View logs](/logs/plugins/w/wcs-custom-permalinks-hotfix/error.json) |
