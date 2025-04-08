@@ -1,10 +1,554 @@
-file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/wordpress/index.js:1
-import{joinPaths as a,phpVar as l}from"@php-wasm/util";import{createMemoizedFetch as _,unzipFile as d}from"@wp-playground/common";import{PHPRequestHandler as g,withPHPIniValues as f,PHP as h,setPhpIniEntries as w,writeFiles as m,proxyFileSystem as b,rotatePHPRuntime as y}from"@php-wasm/universal";import{logger as $}from"@php-wasm/logger";async function q(e){async function r(n,o){const s=new h(await e.createPhpRuntime());return e.sapiName&&s.setSapiName(e.sapiName),n&&(s.requestHandler=n),e.phpIniEntries&&w(s,e.phpIniEntries),o?(await T(s),await m(s,"/",e.createFiles||{}),await L(s,a(new URL(e.siteUrl).pathname,"phpinfo.php"))):b(await n.getPrimaryPhp(),s,["/tmp",n.documentRoot,"/internal/shared"]),e.spawnHandler&&await s.setSpawnHandler(e.spawnHandler(n.processManager)),y({php:s,cwd:n.documentRoot,recreateRuntime:e.createPhpRuntime,maxRequests:400}),s}const i=new g({phpFactory:async({isPrimary:n})=>r(i,n),documentRoot:e.documentRoot||"/wordpress",absoluteUrl:e.siteUrl,rewriteRules:S,getFileNotFoundAction:e.getFileNotFoundAction??E}),t=await i.getPrimaryPhp();if(e.hooks?.beforeWordPressFiles&&await e.hooks.beforeWordPressFiles(t),e.wordPressZip&&await v(t,await e.wordPressZip),e.constants)for(const n in e.constants)t.defineConstant(n,e.constants[n]);if(t.defineConstant("WP_HOME",e.siteUrl),t.defineConstant("WP_SITEURL",e.siteUrl),e.hooks?.beforeDatabaseSetup&&await e.hooks.beforeDatabaseSetup(t),e.sqliteIntegrationPluginZip&&await I(t,await e.sqliteIntegrationPluginZip),await c(t)||await P(t),!await c(t))throw new Error("WordPress installation has failed.");return i}async function c(e){return(await e.run({code:`<?php
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21
+`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
 
-Error: WordPress installation has failed.
-    at q (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/wordpress/index.js:1:1536)
-    at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:20:811)
-    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159)
-
-Node.js v20.15.0
+Error: [08-Apr-2025 23:25:02 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 23:25:02 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 23:25:02 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 23:25:02 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 23:25:29 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 23:25:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 23:25:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 23:25:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 23:25:30 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 23:25:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 23:25:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 23:25:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 23:25:56 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 23:25:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 23:25:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 23:25:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 23:26:24 UTC] PHP Deprecated:  Required parameter $shippingClassid follows optional parameter $token in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 30
+[08-Apr-2025 23:26:24 UTC] PHP Deprecated:  Required parameter $taxClass follows optional parameter $token in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 30
+[08-Apr-2025 23:26:24 UTC] PHP Deprecated:  Required parameter $taxStatus follows optional parameter $token in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 30
+[08-Apr-2025 23:26:24 UTC] PHP Deprecated:  Required parameter $total follows optional parameter $token in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 30
+[08-Apr-2025 23:26:24 UTC] PHP Deprecated:  Required parameter $price follows optional parameter $taxes in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 108
+[08-Apr-2025 23:26:24 UTC] PHP Deprecated:  Required parameter $country_code follows optional parameter $data in /wordpress/wp-content/plugins/tapify/includes/class-tpf-ajax-events.php on line 742
+[08-Apr-2025 23:26:24 UTC] PHP Deprecated:  Required parameter $country_code follows optional parameter $data in /wordpress/wp-content/plugins/tapify/includes/class-tpf-ajax-events.php on line 789
+[08-Apr-2025 23:26:24 UTC] PHP Deprecated:  Required parameter $country_code follows optional parameter $data in /wordpress/wp-content/plugins/tapify/includes/class-tpf-ajax-events.php on line 1883
+[08-Apr-2025 23:26:24 UTC] PHP Deprecated:  Required parameter $product_type follows optional parameter $thisProduct in /wordpress/wp-content/plugins/tapify/includes/class-tpf-bloggers.php on line 112
+[08-Apr-2025 23:26:24 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 23:26:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 23:26:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 23:26:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 23:26:27 UTC] PHP Deprecated:  Required parameter $shippingClassid follows optional parameter $token in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 30
+[08-Apr-2025 23:26:27 UTC] PHP Deprecated:  Required parameter $taxClass follows optional parameter $token in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 30
+[08-Apr-2025 23:26:27 UTC] PHP Deprecated:  Required parameter $taxStatus follows optional parameter $token in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 30
+[08-Apr-2025 23:26:27 UTC] PHP Deprecated:  Required parameter $total follows optional parameter $token in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 30
+[08-Apr-2025 23:26:27 UTC] PHP Deprecated:  Required parameter $price follows optional parameter $taxes in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 108
+[08-Apr-2025 23:26:27 UTC] PHP Deprecated:  Required parameter $country_code follows optional parameter $data in /wordpress/wp-content/plugins/tapify/includes/class-tpf-ajax-events.php on line 742
+[08-Apr-2025 23:26:27 UTC] PHP Deprecated:  Required parameter $country_code follows optional parameter $data in /wordpress/wp-content/plugins/tapify/includes/class-tpf-ajax-events.php on line 789
+[08-Apr-2025 23:26:27 UTC] PHP Deprecated:  Required parameter $country_code follows optional parameter $data in /wordpress/wp-content/plugins/tapify/includes/class-tpf-ajax-events.php on line 1883
+[08-Apr-2025 23:26:27 UTC] PHP Deprecated:  Required parameter $product_type follows optional parameter $thisProduct in /wordpress/wp-content/plugins/tapify/includes/class-tpf-bloggers.php on line 112
+[08-Apr-2025 23:26:35 UTC] PHP Deprecated:  Required parameter $shippingClassid follows optional parameter $token in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 30
+[08-Apr-2025 23:26:35 UTC] PHP Deprecated:  Required parameter $taxClass follows optional parameter $token in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 30
+[08-Apr-2025 23:26:35 UTC] PHP Deprecated:  Required parameter $taxStatus follows optional parameter $token in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 30
+[08-Apr-2025 23:26:35 UTC] PHP Deprecated:  Required parameter $total follows optional parameter $token in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 30
+[08-Apr-2025 23:26:35 UTC] PHP Deprecated:  Required parameter $price follows optional parameter $taxes in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 108
+[08-Apr-2025 23:26:35 UTC] PHP Deprecated:  Required parameter $country_code follows optional parameter $data in /wordpress/wp-content/plugins/tapify/includes/class-tpf-ajax-events.php on line 742
+[08-Apr-2025 23:26:35 UTC] PHP Deprecated:  Required parameter $country_code follows optional parameter $data in /wordpress/wp-content/plugins/tapify/includes/class-tpf-ajax-events.php on line 789
+[08-Apr-2025 23:26:35 UTC] PHP Deprecated:  Required parameter $country_code follows optional parameter $data in /wordpress/wp-content/plugins/tapify/includes/class-tpf-ajax-events.php on line 1883
+[08-Apr-2025 23:26:35 UTC] PHP Deprecated:  Required parameter $product_type follows optional parameter $thisProduct in /wordpress/wp-content/plugins/tapify/includes/class-tpf-bloggers.php on line 112
+[08-Apr-2025 23:26:42 UTC] PHP Deprecated:  Required parameter $shippingClassid follows optional parameter $token in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 30
+[08-Apr-2025 23:26:42 UTC] PHP Deprecated:  Required parameter $taxClass follows optional parameter $token in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 30
+[08-Apr-2025 23:26:42 UTC] PHP Deprecated:  Required parameter $taxStatus follows optional parameter $token in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 30
+[08-Apr-2025 23:26:42 UTC] PHP Deprecated:  Required parameter $total follows optional parameter $token in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 30
+[08-Apr-2025 23:26:42 UTC] PHP Deprecated:  Required parameter $price follows optional parameter $taxes in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 108
+[08-Apr-2025 23:26:42 UTC] PHP Deprecated:  Required parameter $country_code follows optional parameter $data in /wordpress/wp-content/plugins/tapify/includes/class-tpf-ajax-events.php on line 742
+[08-Apr-2025 23:26:42 UTC] PHP Deprecated:  Required parameter $country_code follows optional parameter $data in /wordpress/wp-content/plugins/tapify/includes/class-tpf-ajax-events.php on line 789
+[08-Apr-2025 23:26:42 UTC] PHP Deprecated:  Required parameter $country_code follows optional parameter $data in /wordpress/wp-content/plugins/tapify/includes/class-tpf-ajax-events.php on line 1883
+[08-Apr-2025 23:26:42 UTC] PHP Deprecated:  Required parameter $product_type follows optional parameter $thisProduct in /wordpress/wp-content/plugins/tapify/includes/class-tpf-bloggers.php on line 112
+[08-Apr-2025 23:26:52 UTC] PHP Deprecated:  Required parameter $shippingClassid follows optional parameter $token in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 30
+[08-Apr-2025 23:26:52 UTC] PHP Deprecated:  Required parameter $taxClass follows optional parameter $token in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 30
+[08-Apr-2025 23:26:52 UTC] PHP Deprecated:  Required parameter $taxStatus follows optional parameter $token in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 30
+[08-Apr-2025 23:26:52 UTC] PHP Deprecated:  Required parameter $total follows optional parameter $token in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 30
+[08-Apr-2025 23:26:52 UTC] PHP Deprecated:  Required parameter $price follows optional parameter $taxes in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 108
+[08-Apr-2025 23:26:52 UTC] PHP Deprecated:  Required parameter $country_code follows optional parameter $data in /wordpress/wp-content/plugins/tapify/includes/class-tpf-ajax-events.php on line 742
+[08-Apr-2025 23:26:52 UTC] PHP Deprecated:  Required parameter $country_code follows optional parameter $data in /wordpress/wp-content/plugins/tapify/includes/class-tpf-ajax-events.php on line 789
+[08-Apr-2025 23:26:52 UTC] PHP Deprecated:  Required parameter $country_code follows optional parameter $data in /wordpress/wp-content/plugins/tapify/includes/class-tpf-ajax-events.php on line 1883
+[08-Apr-2025 23:26:52 UTC] PHP Deprecated:  Required parameter $product_type follows optional parameter $thisProduct in /wordpress/wp-content/plugins/tapify/includes/class-tpf-bloggers.php on line 112
+[08-Apr-2025 23:26:53 UTC] PHP Deprecated:  Required parameter $shippingClassid follows optional parameter $token in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 30
+[08-Apr-2025 23:26:53 UTC] PHP Deprecated:  Required parameter $taxClass follows optional parameter $token in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 30
+[08-Apr-2025 23:26:53 UTC] PHP Deprecated:  Required parameter $taxStatus follows optional parameter $token in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 30
+[08-Apr-2025 23:26:53 UTC] PHP Deprecated:  Required parameter $total follows optional parameter $token in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 30
+[08-Apr-2025 23:26:53 UTC] PHP Deprecated:  Required parameter $price follows optional parameter $taxes in /wordpress/wp-content/plugins/tapify/includes/class-tpf-get-shipping-tax.php on line 108
+[08-Apr-2025 23:26:53 UTC] PHP Deprecated:  Required parameter $country_code follows optional parameter $data in /wordpress/wp-content/plugins/tapify/includes/class-tpf-ajax-events.php on line 742
+[08-Apr-2025 23:26:53 UTC] PHP Deprecated:  Required parameter $country_code follows optional parameter $data in /wordpress/wp-content/plugins/tapify/includes/class-tpf-ajax-events.php on line 789
+[08-Apr-2025 23:26:53 UTC] PHP Deprecated:  Required parameter $country_code follows optional parameter $data in /wordpress/wp-content/plugins/tapify/includes/class-tpf-ajax-events.php on line 1883
+[08-Apr-2025 23:26:53 UTC] PHP Deprecated:  Required parameter $product_type follows optional parameter $thisProduct in /wordpress/wp-content/plugins/tapify/includes/class-tpf-bloggers.php on line 112
+[08-Apr-2025 23:27:04 UTC] Create_TPUL_Terms_User_State_Table Version: 0
+[08-Apr-2025 23:27:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('tpul_terms_user_state_version', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'tpul_terms_user_state_version' , '1' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('tpul_terms_user...', 1, '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'tpul_terms_user...', 1)
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'tpul_terms_user...', 1)
+#7 /wordpress/wp-content/plugins/terms-popup-on-user-login/includes/db/class-terms-popup-on-user-login-db-service.php(90): update_site_option('tpul_terms_user...', 1)
+#8 /wordpress/wp-content/plugins/terms-popup-on-user-login/includes/db/class-terms-popup-on-user-login-db-service.php(106): TPUL_DB_Service::Create_TPUL_Terms_User_State_Table()
+#9 /wordpress/wp-content/plugins/terms-popup-on-user-login/includes/class-terms-popup-on-user-login-activator.php(38): TPUL_DB_Service::create_TPUL_Userstate_table_if_missing()
+#10 /wordpress/wp-content/plugins/terms-popup-on-user-login/terms-popup-on-user-login.php(46): Terms_Popup_On_User_Login_Activator::activate()
+#11 /wordpress/wp-includes/class-wp-hook.php(324): activate_terms_popup_on_user_login(false)
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#14 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_terms-...', false)
+#15 /internal/eval.php(20): activate_plugin('terms-popup-on-...')
+#16 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('tpul_terms_user_state_version', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_terms-popup-on-user-login/terms-popup-on-user-login.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_terms_popup_on_user_login, Terms_Popup_On_User_Login_Activator::activate, TPUL_DB_Service::create_TPUL_Userstate_table_if_missing, TPUL_DB_Service::Create_TPUL_Terms_User_State_Table, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 23:27:05 UTC] Create_tpul_terms_user_state_Table Success: 1
+[08-Apr-2025 23:27:05 UTC] create_TPUL_userstate_DB: 1
+[08-Apr-2025 23:27:05 UTC] TPUL Userstate Table Created
+[08-Apr-2025 23:27:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('tpul_terms_user_state_version', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'tpul_terms_user_state_version' , '1' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('tpul_terms_user...', 1, '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'tpul_terms_user...', 1)
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'tpul_terms_user...', 1)
+#7 /wordpress/wp-content/plugins/terms-popup-on-user-login/includes/db/class-terms-popup-on-user-login-db-service.php(118): update_site_option('tpul_terms_user...', 1)
+#8 /wordpress/wp-content/plugins/terms-popup-on-user-login/includes/db/class-terms-popup-on-user-login-db-service.php(110): TPUL_DB_Service::set_TPUL_userstate_table_version()
+#9 /wordpress/wp-content/plugins/terms-popup-on-user-login/includes/class-terms-popup-on-user-login-activator.php(38): TPUL_DB_Service::create_TPUL_Userstate_table_if_missing()
+#10 /wordpress/wp-content/plugins/terms-popup-on-user-login/terms-popup-on-user-login.php(46): Terms_Popup_On_User_Login_Activator::activate()
+#11 /wordpress/wp-includes/class-wp-hook.php(324): activate_terms_popup_on_user_login(false)
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#14 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_terms-...', false)
+#15 /internal/eval.php(20): activate_plugin('terms-popup-on-...')
+#16 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('tpul_terms_user_state_version', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_terms-popup-on-user-login/terms-popup-on-user-login.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_terms_popup_on_user_login, Terms_Popup_On_User_Login_Activator::activate, TPUL_DB_Service::create_TPUL_Userstate_table_if_missing, TPUL_DB_Service::set_TPUL_userstate_table_version, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 23:27:05 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 23:27:05 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 23:27:05 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 23:27:05 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 23:27:15 UTC] Create_TPUL_Terms_User_State_Table Version: 0
+[08-Apr-2025 23:27:15 UTC] Create_tpul_terms_user_state_Table Success: 1
+[08-Apr-2025 23:27:15 UTC] create_TPUL_userstate_DB: 1
+[08-Apr-2025 23:27:15 UTC] TPUL Userstate Table Created
+[08-Apr-2025 23:27:25 UTC] Create_TPUL_Terms_User_State_Table Version: 0
+[08-Apr-2025 23:27:25 UTC] Create_tpul_terms_user_state_Table Success: 1
+[08-Apr-2025 23:27:25 UTC] create_TPUL_userstate_DB: 1
+[08-Apr-2025 23:27:25 UTC] TPUL Userstate Table Created
+[08-Apr-2025 23:27:34 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twitter-blockquotes/twitter-blockquotes.php:249
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('twitter-blockqu...')
+#2 /internal/eval.php(20): activate_plugin('twitter-blockqu...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/twitter-blockquotes/twitter-blockquotes.php on line 249
+[08-Apr-2025 23:27:43 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twitter-blockquotes/twitter-blockquotes.php:249
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('twitter-blockqu...')
+#2 /internal/eval.php(20): activate_plugin('twitter-blockqu...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/twitter-blockquotes/twitter-blockquotes.php on line 249
+[08-Apr-2025 23:27:51 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twitter-blockquotes/twitter-blockquotes.php:249
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('twitter-blockqu...')
+#2 /internal/eval.php(20): activate_plugin('twitter-blockqu...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/twitter-blockquotes/twitter-blockquotes.php on line 249
+[08-Apr-2025 23:28:00 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/the-stiz-audio-for-woocommerce/classes/WCJDServeAudio.php on line 149
+[08-Apr-2025 23:28:08 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/the-stiz-audio-for-woocommerce/classes/WCJDServeAudio.php on line 149
+[08-Apr-2025 23:28:16 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/the-stiz-audio-for-woocommerce/classes/WCJDServeAudio.php on line 149
+[08-Apr-2025 23:28:25 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/time-since-date/time-since-date.php:136
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('time-since-date...')
+#2 /internal/eval.php(20): activate_plugin('time-since-date...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/time-since-date/time-since-date.php on line 136
+[08-Apr-2025 23:28:33 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/time-since-date/time-since-date.php:136
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('time-since-date...')
+#2 /internal/eval.php(20): activate_plugin('time-since-date...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/time-since-date/time-since-date.php on line 136
+[08-Apr-2025 23:28:41 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/time-since-date/time-since-date.php:136
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('time-since-date...')
+#2 /internal/eval.php(20): activate_plugin('time-since-date...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/time-since-date/time-since-date.php on line 136
+[08-Apr-2025 23:28:49 UTC] PHP Warning:  require_once(t72/t72.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/t72-output-html/plugin.php on line 15
+[08-Apr-2025 23:28:49 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 't72/t72.php' (include_path='.:') in /wordpress/wp-content/plugins/t72-output-html/plugin.php:15
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('t72-output-html...')
+#2 /internal/eval.php(20): activate_plugin('t72-output-html...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/t72-output-html/plugin.php on line 15
+[08-Apr-2025 23:28:56 UTC] PHP Warning:  require_once(t72/t72.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/t72-output-html/plugin.php on line 15
+[08-Apr-2025 23:28:56 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 't72/t72.php' (include_path='.:') in /wordpress/wp-content/plugins/t72-output-html/plugin.php:15
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('t72-output-html...')
+#2 /internal/eval.php(20): activate_plugin('t72-output-html...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/t72-output-html/plugin.php on line 15
+[08-Apr-2025 23:29:03 UTC] PHP Warning:  require_once(t72/t72.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/t72-output-html/plugin.php on line 15
+[08-Apr-2025 23:29:03 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 't72/t72.php' (include_path='.:') in /wordpress/wp-content/plugins/t72-output-html/plugin.php:15
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('t72-output-html...')
+#2 /internal/eval.php(20): activate_plugin('t72-output-html...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/t72-output-html/plugin.php on line 15
+[08-Apr-2025 23:29:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yydev_tagmanager_settings', '####exclude_users####exclude_option####exclude_ids####lazy_load_time####google_analytics_id####yandex_metrika_id####facebook_pixel_id####google_tag_manager_id####custom_lazy_load_js####remove_custom_lazy_load_js_on_elementor####no_lazy_load_wait_pages####wp_body_open####add_plugin_to_settings***####none####none########5000########################0########1####0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'yydev_tagmanager_settings' , '####exclude_users####exclude_option####exclude_ids####lazy_load_time####google_analytics_id####yandex_metrika_id####facebook_pixel_id####google_tag_manager_id####custom_lazy_load_js####remove_custom_lazy_load_js_on_elementor####no_lazy_load_wait_pages####wp_body_open####add_plugin_to_settings***####none####none########5000########################0########1####0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('yydev_tagmanage...', '####exclude_use...', '', 'auto')
+#5 /wordpress/wp-content/plugins/tag-manager-header-body-footer/include/install.php(130): update_option('yydev_tagmanage...', '####exclude_use...')
+#6 /wordpress/wp-content/plugins/tag-manager-header-body-footer/index.php(41): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tag-manager-hea...')
+#9 /internal/eval.php(20): activate_plugin('tag-manager-hea...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yydev_tagmanager_settings', '####exclude_users####exclude_option####exclude_ids####lazy_load_time####google_analytics_id####yandex_metrika_id####facebook_pixel_id####google_tag_manager_id####custom_lazy_load_js####remove_custom_lazy_load_js_on_elementor####no_lazy_load_wait_pages####wp_body_open####add_plugin_to_settings***####none####none########5000########################0########1####0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/tag-manager-header-body-footer/index.php'), require_once('/plugins/tag-manager-header-body-footer/include/install.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 23:29:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yydev_tag_manager_version', '3.5.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'yydev_tag_manager_version' , '3.5.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('yydev_tag_manag...', '3.5.0', '', 'auto')
+#5 /wordpress/wp-content/plugins/tag-manager-header-body-footer/index.php(44): update_option('yydev_tag_manag...', '3.5.0')
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tag-manager-hea...')
+#8 /internal/eval.php(20): activate_plugin('tag-manager-hea...')
+#9 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yydev_tag_manager_version', '3.5.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/tag-manager-header-body-footer/index.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 23:29:11 UTC] PHP Warning:  Undefined array key "add_plugin_to_settings" in /wordpress/wp-content/plugins/tag-manager-header-body-footer/index.php on line 83
+[08-Apr-2025 23:29:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yydev_tagmanager_timestamp', '1754522951', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'yydev_tagmanager_timestamp' , '1754522951' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('yydev_tagmanage...', 1754522951, '', 'auto')
+#5 /wordpress/wp-content/plugins/tag-manager-header-body-footer/notices.php(32): update_option('yydev_tagmanage...', 1754522951)
+#6 /wordpress/wp-content/plugins/tag-manager-header-body-footer/index.php(140): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tag-manager-hea...')
+#9 /internal/eval.php(20): activate_plugin('tag-manager-hea...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yydev_tagmanager_timestamp', '1754522951', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/tag-manager-header-body-footer/index.php'), include_once('/plugins/tag-manager-header-body-footer/notices.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 23:29:11 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 23:29:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 23:29:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 23:29:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 23:29:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yydev_tagmanager_settings', '####exclude_users####exclude_option####exclude_ids####lazy_load_time####google_analytics_id####yandex_metrika_id####facebook_pixel_id####google_tag_manager_id####custom_lazy_load_js####remove_custom_lazy_load_js_on_elementor####no_lazy_load_wait_pages####wp_body_open####add_plugin_to_settings***####none####none########5000########################0########1####0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'yydev_tagmanager_settings' , '####exclude_users####exclude_option####exclude_ids####lazy_load_time####google_analytics_id####yandex_metrika_id####facebook_pixel_id####google_tag_manager_id####custom_lazy_load_js####remove_custom_lazy_load_js_on_elementor####no_lazy_load_wait_pages####wp_body_open####add_plugin_to_settings***####none####none########5000########################0########1####0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('yydev_tagmanage...', '####exclude_use...', '', 'auto')
+#5 /wordpress/wp-content/plugins/tag-manager-header-body-footer/include/install.php(130): update_option('yydev_tagmanage...', '####exclude_use...')
+#6 /wordpress/wp-content/plugins/tag-manager-header-body-footer/index.php(41): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yydev_tagmanager_settings', '####exclude_users####exclude_option####exclude_ids####lazy_load_time####google_analytics_id####yandex_metrika_id####facebook_pixel_id####google_tag_manager_id####custom_lazy_load_js####remove_custom_lazy_load_js_on_elementor####no_lazy_load_wait_pages####wp_body_open####add_plugin_to_settings***####none####none########5000########################0########1####0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/tag-manager-header-body-footer/index.php'), require_once('/plugins/tag-manager-header-body-footer/include/install.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 23:29:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yydev_tag_manager_version', '3.5.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'yydev_tag_manager_version' , '3.5.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('yydev_tag_manag...', '3.5.0', '', 'auto')
+#5 /wordpress/wp-content/plugins/tag-manager-header-body-footer/index.php(44): update_option('yydev_tag_manag...', '3.5.0')
+#6 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yydev_tag_manager_version', '3.5.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/tag-manager-header-body-footer/index.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 23:29:12 UTC] PHP Warning:  Undefined array key "add_plugin_to_settings" in /wordpress/wp-content/plugins/tag-manager-header-body-footer/index.php on line 83
+[08-Apr-2025 23:29:12 UTC] PHP Warning:  Undefined array key "google_analytics_id" in /wordpress/wp-content/plugins/tag-manager-header-body-footer/include/front-end-output.php on line 69
+[08-Apr-2025 23:29:12 UTC] PHP Warning:  Undefined array key "yandex_metrika_id" in /wordpress/wp-content/plugins/tag-manager-header-body-footer/include/front-end-output.php on line 70
+[08-Apr-2025 23:29:12 UTC] PHP Warning:  Undefined array key "facebook_pixel_id" in /wordpress/wp-content/plugins/tag-manager-header-body-footer/include/front-end-output.php on line 71
+[08-Apr-2025 23:29:12 UTC] PHP Warning:  Undefined array key "google_tag_manager_id" in /wordpress/wp-content/plugins/tag-manager-header-body-footer/include/front-end-output.php on line 72
+[08-Apr-2025 23:29:12 UTC] PHP Warning:  Undefined array key "custom_lazy_load_js" in /wordpress/wp-content/plugins/tag-manager-header-body-footer/include/front-end-output.php on line 74
+[08-Apr-2025 23:29:12 UTC] PHP Warning:  Undefined array key "remove_custom_lazy_load_js_on_elementor" in /wordpress/wp-content/plugins/tag-manager-header-body-footer/include/front-end-output.php on line 75
+[08-Apr-2025 23:29:12 UTC] PHP Warning:  Undefined array key "wp_body_open" in /wordpress/wp-content/plugins/tag-manager-header-body-footer/include/front-end-output.php on line 77
+[08-Apr-2025 23:29:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('tap_cookies_information_box_title', 'Politica de Cookies', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'tap_cookies_information_box_title' , 'Politica de Cookies' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/tap-cookies/public/class-tap-cookies.php(386): add_option('tap_cookies_inf...', 'Politica de Coo...')
+#5 /wordpress/wp-content/plugins/tap-cookies/public/class-tap-cookies.php(294): TAP_Cookies::single_activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): TAP_Cookies::activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tap-co...', false)
+#10 /internal/eval.php(20): activate_plugin('tap-cookies/tap...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('tap_cookies_information_box_title', 'Politica de Cookies', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_tap-cookies/tap-cookies.php'), WP_Hook->do_action, WP_Hook->apply_filters, TAP_Cookies::activate, TAP_Cookies::single_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 23:29:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('tap_cookies_information_box_text', 'Este sitio web utiliza cookies propias y de terceros que nos permiten ofrecer nuestros servicios. Al utilizar nuestros servicios, aceptas el uso que hacemos de las cookies. <a href=\"http://todoapuestas.org/blog/politica-de-cookies/\" rel=\"nofollow\" target=\"_blank\">Mas informacion</a>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'tap_cookies_information_box_text' , 'Este sitio web utiliza cookies propias y de terceros que nos permiten ofrecer nuestros servicios. Al utilizar nuestros servicios, aceptas el uso que hacemos de las cookies. &lt;a href=&quot;http://todoapuestas.org/blog/politica-de-cookies/&quot; rel=&quot;nofollow&quot; target=&quot;_blank&quot;&gt;Mas informacion&lt;/a&gt;' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/tap-cookies/public/class-tap-cookies.php(389): add_option('tap_cookies_inf...', 'Este sitio web ...')
+#5 /wordpress/wp-content/plugins/tap-cookies/public/class-tap-cookies.php(294): TAP_Cookies::single_activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): TAP_Cookies::activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tap-co...', false)
+#10 /internal/eval.php(20): activate_plugin('tap-cookies/tap...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('tap_cookies_information_box_text', 'Este sitio web utiliza cookies propias y de terceros que nos permiten ofrecer nuestros servicios. Al utilizar nuestros servicios, aceptas el uso que hacemos de las cookies. <a href=\"http://todoapuestas.org/blog/politica-de-cookies/\" rel=\"nofollow\" target=\"_blank\">Mas informacion</a>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_tap-cookies/tap-cookies.php'), WP_Hook->do_action, WP_Hook->apply_filters, TAP_Cookies::activate, TAP_Cookies::single_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 23:29:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('tap_cookies_information_box_position', 'bottom-full-width', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'tap_cookies_information_box_position' , 'bottom-full-width' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/tap-cookies/public/class-tap-cookies.php(392): add_option('tap_cookies_inf...', 'bottom-full-wid...')
+#5 /wordpress/wp-content/plugins/tap-cookies/public/class-tap-cookies.php(294): TAP_Cookies::single_activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): TAP_Cookies::activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tap-co...', false)
+#10 /internal/eval.php(20): activate_plugin('tap-cookies/tap...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('tap_cookies_information_box_position', 'bottom-full-width', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_tap-cookies/tap-cookies.php'), WP_Hook->do_action, WP_Hook->apply_filters, TAP_Cookies::activate, TAP_Cookies::single_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 23:29:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('tap_cookies_list', 'a:8:{i:0;a:3:{s:4:\"name\";s:6:\"__utma\";s:11:\"description\";s:0:\"\";s:5:\"group\";s:16:\"Google Analytics\";}i:1;a:3:{s:4:\"name\";s:6:\"__utmb\";s:11:\"description\";s:0:\"\";s:5:\"group\";s:16:\"Google Analytics\";}i:2;a:3:{s:4:\"name\";s:6:\"__utmc\";s:11:\"description\";s:0:\"\";s:5:\"group\";s:16:\"Google Analytics\";}i:3;a:3:{s:4:\"name\";s:6:\"__utmv\";s:11:\"description\";s:0:\"\";s:5:\"group\";s:16:\"Google Analytics\";}i:4;a:3:{s:4:\"name\";s:6:\"__utmz\";s:11:\"description\";s:0:\"\";s:5:\"group\";s:16:\"Google Analytics\";}i:5;a:3:{s:4:\"name\";s:18:\"wp-settings-time-1\";s:11:\"description\";s:0:\"\";s:5:\"group\";s:9:\"WordPress\";}i:6;a:3:{s:4:\"name\";s:13:\"wp-settings-1\";s:11:\"description\";s:0:\"\";s:5:\"group\";s:9:\"WordPress\";}i:7;a:3:{s:4:\"name\";s:21:\"wordpress_test_cookie\";s:11:\"description\";s:21:\"Wordpress test cookie\";s:5:\"group\";s:9:\"WordPress\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_n
