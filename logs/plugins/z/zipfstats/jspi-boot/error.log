@@ -2,18 +2,11 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [06-Apr-2025 20:25:42 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 20:25:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 20:25:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 20:25:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 20:25:57 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 20:25:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 20:25:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 20:25:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 20:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [08-Apr-2025 21:47:21 UTC] PHP Warning:  Undefined variable $zsc_db_version in /wordpress/wp-content/plugins/zielke-specialized-catalog/install_zsc.php on line 174
+[08-Apr-2025 21:47:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_zimrate', '1743971230', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('zsc_db_version', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -25,7 +18,7 @@ Error: [06-Apr-2025 20:25:42 UTC] PHP Warning:  Undefined array key "option_valu
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_zimrate' , '1743971230' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'zsc_db_version' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -37,21 +30,197 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1743971230, '', 'off')
-#5 /wordpress/wp-content/plugins/zimrate/includes/functions.php(82): set_transient('zimrate', Array, 60)
-#6 /wordpress/wp-content/plugins/zimrate/includes/class-zimrate-activator.php(38): zimrate_get_rates()
-#7 /wordpress/wp-content/plugins/zimrate/zimrate.php(49): Zimrate_Activator::activate()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): activate_zimrate(false)
+#4 /wordpress/wp-content/plugins/zielke-specialized-catalog/install_zsc.php(174): add_option('zsc_db_version', NULL)
+#5 /wordpress/wp-content/plugins/zielke-specialized-catalog/index.php(28): include('/wordpress/wp-c...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): zsc_install(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_zielke...', false)
+#10 /internal/eval.php(20): activate_plugin('zielke-speciali...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('zsc_db_version', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_zielke-specialized-catalog/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, zsc_install, include('/plugins/zielke-specialized-catalog/install_zsc.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 21:47:21 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 21:47:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 21:47:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 21:47:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 21:47:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('zsc_db_version', '1.3', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'zsc_db_version' , '1.3' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/zielke-specialized-catalog/install_zsc.php(174): add_option('zsc_db_version', '1.3')
+#5 /wordpress/wp-content/plugins/zielke-specialized-catalog/index.php(41): include('/wordpress/wp-c...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): zsc_update_db_check('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('zsc_db_version', '1.3', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, zsc_update_db_check, include('/plugins/zielke-specialized-catalog/install_zsc.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 21:47:22 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 21:47:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 21:47:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 21:47:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 21:47:32 UTC] PHP Warning:  Undefined variable $zsc_db_version in /wordpress/wp-content/plugins/zielke-specialized-catalog/install_zsc.php on line 174
+[08-Apr-2025 21:47:43 UTC] PHP Warning:  Undefined variable $zsc_db_version in /wordpress/wp-content/plugins/zielke-specialized-catalog/install_zsc.php on line 174
+[08-Apr-2025 21:47:54 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 21:47:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 21:47:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 21:47:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 21:48:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('zsw_plugin_do_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'zsw_plugin_do_activation_redirect' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/zingit-scheduling-widget/z2-schdeule-widget.php(30): add_option('zsw_plugin_do_a...', true)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): zsw_plugin_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_zingit...', false)
+#9 /internal/eval.php(20): activate_plugin('zingit-scheduli...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('zsw_plugin_do_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_zingit-scheduling-widget/z2-schdeule-widget.php'), WP_Hook->do_action, WP_Hook->apply_filters, zsw_plugin_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 21:48:22 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 21:48:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 21:48:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 21:48:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 21:48:48 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 21:48:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 21:48:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 21:48:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 21:49:16 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method zocialtv_wp_widget::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_zocial...', false)
+#3 /internal/eval.php(20): activate_plugin('zocialtv-real-t...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[08-Apr-2025 21:49:24 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method zocialtv_wp_widget::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_zocial...', false)
+#3 /internal/eval.php(20): activate_plugin('zocialtv-real-t...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[08-Apr-2025 21:49:32 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method zocialtv_wp_widget::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_zocial...', false)
+#3 /internal/eval.php(20): activate_plugin('zocialtv-real-t...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[08-Apr-2025 21:49:41 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zorro/zorro.php:92
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('zorro/zorro.php')
+#2 /internal/eval.php(20): activate_plugin('zorro/zorro.php')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/zorro/zorro.php on line 92
+[08-Apr-2025 21:49:49 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zorro/zorro.php:92
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('zorro/zorro.php')
+#2 /internal/eval.php(20): activate_plugin('zorro/zorro.php')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/zorro/zorro.php on line 92
+[08-Apr-2025 21:49:57 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/zorro/zorro.php:92
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('zorro/zorro.php')
+#2 /internal/eval.php(20): activate_plugin('zorro/zorro.php')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/zorro/zorro.php on line 92
+[08-Apr-2025 21:50:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('zws_contacts_database_options', 'a:22:{s:39:\"zws_contacts_database_plugin_table_name\";s:28:\"zws_contacts_database_plugin\";s:38:\"zws_contacts_database_memcached_active\";s:5:\"FALSE\";s:38:\"zws_contacts_database_memcached_period\";i:86400;s:34:\"zws_contacts_database_memcached_ip\";s:9:\"127.0.0.1\";s:36:\"zws_contacts_database_memcached_port\";s:5:\"11211\";s:39:\"zws_contacts_database_plugin_db_version\";s:1:\"0\";s:47:\"zws_contacts_database_plugin_privacy_policy_url\";s:0:\"\";s:43:\"zws_contacts_database_google_server_api_key\";s:0:\"\";s:49:\"zws_contacts_database_plugin_map_contact_icon_url\";s:0:\"\";s:48:\"zws_contacts_database_plugin_map_target_icon_url\";s:0:\"\";s:46:\"zws_contacts_database_plugin_map_base_icon_url\";s:0:\"\";s:46:\"zws_contacts_database_plugin_memcached_keybase\";s:35:\"ZWS_CONTACTS_DATABASE_KEY_732765614\";s:44:\"zws_contacts_database_plugin_google_map_zoom\";i:7;s:38:\"zws_contacts_database_plugin_base_name\";s:0:\"\";s:42:\"zws_contacts_database_plugin_base_postcode\";s:0:\"\";s:45:\"zws_contacts_database_plugin_base_coordinates\";a:0:{}s:47:\"zws_contacts_database_plugin_admin_email_active\";s:5:\"FALSE\";s:40:\"zws_contacts_database_plugin_admin_email\";a:0:{}s:45:\"zws_contacts_database_plugin_reg_email_active\";s:5:\"FALSE\";s:43:\"zws_contacts_database_plugin_reg_email_from\";a:2:{i:0;s:20:\"My WordPress Website\";i:1;s:19:\"admin@localhost.com\";}s:46:\"zws_contacts_database_plugin_reg_email_subject\";s:32:\"Thank you for your registration!\";s:43:\"zws_contacts_database_plugin_country_of_use\";s:2:\"GB\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'zws_contacts_database_options' , 'a:22:{s:39:&quot;zws_contacts_database_plugin_table_name&quot;;s:28:&quot;zws_contacts_database_plugin&quot;;s:38:&quot;zws_contacts_database_memcached_active&quot;;s:5:&quot;FALSE&quot;;s:38:&quot;zws_contacts_database_memcached_period&quot;;i:86400;s:34:&quot;zws_contacts_database_memcached_ip&quot;;s:9:&quot;127.0.0.1&quot;;s:36:&quot;zws_contacts_database_memcached_port&quot;;s:5:&quot;11211&quot;;s:39:&quot;zws_contacts_database_plugin_db_version&quot;;s:1:&quot;0&quot;;s:47:&quot;zws_contacts_database_plugin_privacy_policy_url&quot;;s:0:&quot;&quot;;s:43:&quot;zws_contacts_database_google_server_api_key&quot;;s:0:&quot;&quot;;s:49:&quot;zws_contacts_database_plugin_map_contact_icon_url&quot;;s:0:&quot;&quot;;s:48:&quot;zws_contacts_database_plugin_map_target_icon_url&quot;;s:0:&quot;&quot;;s:46:&quot;zws_contacts_database_plugin_map_base_icon_url&quot;;s:0:&quot;&quot;;s:46:&quot;zws_contacts_database_plugin_memcached_keybase&quot;;s:35:&quot;ZWS_CONTACTS_DATABASE_KEY_732765614&quot;;s:44:&quot;zws_contacts_database_plugin_google_map_zoom&quot;;i:7;s:38:&quot;zws_contacts_database_plugin_base_name&quot;;s:0:&quot;&quot;;s:42:&quot;zws_contacts_database_plugin_base_postcode&quot;;s:0:&quot;&quot;;s:45:&quot;zws_contacts_database_plugin_base_coordinates&quot;;a:0:{}s:47:&quot;zws_contacts_database_plugin_admin_email_active&quot;;s:5:&quot;FALSE&quot;;s:40:&quot;zws_contacts_database_plugin_admin_email&quot;;a:0:{}s:45:&quot;zws_contacts_database_plugin_reg_email_active&quot;;s:5:&quot;FALSE&quot;;s:43:&quot;zws_contacts_database_plugin_reg_email_from&quot;;a:2:{i:0;s:20:&quot;My WordPress Website&quot;;i:1;s:19:&quot;admin@localhost.com&quot;;}s:46:&quot;zws_contacts_database_plugin_reg_email_subject&quot;;s:32:&quot;Thank you for your registration!&quot;;s:43:&quot;zws_contacts_database_plugin_country_of_use&quot;;s:2:&quot;GB&quot;;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('zws_contacts_da...', Array, '', 'off')
+#5 /wordpress/wp-includes/option.php(1928): add_network_option(1, 'zws_contacts_da...', Array)
+#6 /wordpress/wp-content/plugins/zws-contacts-database/src/Installer.php(67): add_site_option('zws_contacts_da...', Array)
+#7 /wordpress/wp-content/plugins/zws-contacts-database/ZwsContactsDatabase.php(55): ZwsContactsDatabase\Installer::install()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): ZwsContactsDatabase\ZwsContactsDatabase::run_installer(false)
 #9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_zimrat...', false)
-#12 /internal/eval.php(20): activate_plugin('zimrate/zimrate...')
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_zws-co...', false)
+#12 /internal/eval.php(20): activate_plugin('zws-contacts-da...')
 #13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_zimrate', '1743971230', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_zimrate/zimrate.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_zimrate, Zimrate_Activator::activate, zimrate_get_rates, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('zws_contacts_database_options', 'a:22:{s:39:\"zws_contacts_database_plugin_table_name\";s:28:\"zws_contacts_database_plugin\";s:38:\"zws_contacts_database_memcached_active\";s:5:\"FALSE\";s:38:\"zws_contacts_database_memcached_period\";i:86400;s:34:\"zws_contacts_database_memcached_ip\";s:9:\"127.0.0.1\";s:36:\"zws_contacts_database_memcached_port\";s:5:\"11211\";s:39:\"zws_contacts_database_plugin_db_version\";s:1:\"0\";s:47:\"zws_contacts_database_plugin_privacy_policy_url\";s:0:\"\";s:43:\"zws_contacts_database_google_server_api_key\";s:0:\"\";s:49:\"zws_contacts_database_plugin_map_contact_icon_url\";s:0:\"\";s:48:\"zws_contacts_database_plugin_map_target_icon_url\";s:0:\"\";s:46:\"zws_contacts_database_plugin_map_base_icon_url\";s:0:\"\";s:46:\"zws_contacts_database_plugin_memcached_keybase\";s:35:\"ZWS_CONTACTS_DATABASE_KEY_732765614\";s:44:\"zws_contacts_database_plugin_google_map_zoom\";i:7;s:38:\"zws_contacts_database_plugin_base_name\";s:0:\"\";s:42:\"zws_contacts_database_plugin_base_postcode\";s:0:\"\";s:45:\"zws_contacts_database_plugin_base_coordinates\";a:0:{}s:47:\"zws_contacts_database_plugin_admin_email_active\";s:5:\"FALSE\";s:40:\"zws_contacts_database_plugin_admin_email\";a:0:{}s:45:\"zws_contacts_database_plugin_reg_email_active\";s:5:\"FALSE\";s:43:\"zws_contacts_database_plugin_reg_email_from\";a:2:{i:0;s:20:\"My WordPress Website\";i:1;s:19:\"admin@localhost.com\";}s:46:\"zws_contacts_database_plugin_reg_email_subject\";s:32:\"Thank you for your registration!\";s:43:\"zws_contacts_database_plugin_country_of_use\";s:2:\"GB\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_zws-contacts-database/ZwsContactsDatabase.php'), WP_Hook->do_action, WP_Hook->apply_filters, ZwsContactsDatabase\ZwsContactsDatabase::run_installer, ZwsContactsDatabase\Installer::install, add_site_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 21:50:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_zimrate', 'a:2:{s:6:\"status\";b:0;s:7:\"message\";s:36:\"The currency field must be a string.\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('zws_contacts_database_remove_data', 'FALSE', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -63,7 +232,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_zimrate' , 'a:2:{s:6:&quot;status&quot;;b:0;s:7:&quot;message&quot;;s:36:&quot;The currency field must be a string.&quot;;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'zws_contacts_database_remove_data' , 'FALSE' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -75,21 +244,23 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_zimr...', Array, '', 'off')
-#5 /wordpress/wp-content/plugins/zimrate/includes/functions.php(82): set_transient('zimrate', Array, 60)
-#6 /wordpress/wp-content/plugins/zimrate/includes/class-zimrate-activator.php(38): zimrate_get_rates()
-#7 /wordpress/wp-content/plugins/zimrate/zimrate.php(49): Zimrate_Activator::activate()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): activate_zimrate(false)
+#4 /wordpress/wp-includes/option.php(2145): add_option('zws_contacts_da...', 'FALSE', '', 'off')
+#5 /wordpress/wp-includes/option.php(1928): add_network_option(1, 'zws_contacts_da...', 'FALSE')
+#6 /wordpress/wp-content/plugins/zws-contacts-database/src/Installer.php(84): add_site_option('zws_contacts_da...', 'FALSE')
+#7 /wordpress/wp-content/plugins/zws-contacts-database/ZwsContactsDatabase.php(55): ZwsContactsDatabase\Installer::install()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): ZwsContactsDatabase\ZwsContactsDatabase::run_installer(false)
 #9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_zimrat...', false)
-#12 /internal/eval.php(20): activate_plugin('zimrate/zimrate...')
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_zws-co...', false)
+#12 /internal/eval.php(20): activate_plugin('zws-contacts-da...')
 #13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_zimrate', 'a:2:{s:6:\"status\";b:0;s:7:\"message\";s:36:\"The currency field must be a string.\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_zimrate/zimrate.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_zimrate, Zimrate_Activator::activate, zimrate_get_rates, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('zws_contacts_database_remove_data', 'FALSE', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_zws-contacts-database/ZwsContactsDatabase.php'), WP_Hook->do_action, WP_Hook->apply_filters, ZwsContactsDatabase\ZwsContactsDatabase::run_installer, ZwsContactsDatabase\Installer::install, add_site_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 21:50:06 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/zws-contacts-database/src/Database.php on line 30
+[08-Apr-2025 21:50:06 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/zws-contacts-database/src/Database.php on line 31
+[08-Apr-2025 21:50:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_zimrate-backup', '1746563170', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('zws_contacts_database_options', 'a:1:{s:39:\"zws_contacts_database_plugin_db_version\";s:3:\"1.1\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -101,7 +272,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_zimrate-backup' , '1746563170' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'zws_contacts_database_options' , 'a:1:{s:39:&quot;zws_contacts_database_plugin_db_version&quot;;s:3:&quot;1.1&quot;;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -113,21 +284,28 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1746563170, '', 'off')
-#5 /wordpress/wp-content/plugins/zimrate/includes/functions.php(86): set_transient('zimrate-backup', Array, 2592000)
-#6 /wordpress/wp-content/plugins/zimrate/includes/class-zimrate-activator.php(38): zimrate_get_rates()
-#7 /wordpress/wp-content/plugins/zimrate/zimrate.php(49): Zimrate_Activator::activate()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): activate_zimrate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_zimrat...', false)
-#12 /internal/eval.php(20): activate_plugin('zimrate/zimrate...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_zimrate-backup', '1746563170', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_zimrate/zimrate.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_zimrate, Zimrate_Activator::activate, zimrate_get_rates, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(2145): add_option('zws_contacts_da...', Array, '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'zws_contacts_da...', Array)
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'zws_contacts_da...', Array)
+#7 /wordpress/wp-content/plugins/zws-contacts-database/src/Database.php(70): update_site_option('zws_contacts_da...', Array)
+#8 /wordpress/wp-content/plugins/zws-contacts-database/src/Installer.php(89): ZwsContactsDatabase\Database::update_database()
+#9 /wordpress/wp-content/plugins/zws-contacts-database/ZwsContactsDatabase.php(55): ZwsContactsDatabase\Installer::install()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): ZwsContactsDatabase\ZwsContactsDatabase::run_installer(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_zws-co...', false)
+#14 /internal/eval.php(20): activate_plugin('zws-contacts-da...')
+#15 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('zws_contacts_database_options', 'a:1:{s:39:\"zws_contacts_database_plugin_db_version\";s:3:\"1.1\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_zws-contacts-database/ZwsContactsDatabase.php'), WP_Hook->do_action, WP_Hook->apply_filters, ZwsContactsDatabase\ZwsContactsDatabase::run_installer, ZwsContactsDatabase\Installer::install, ZwsContactsDatabase\Database::update_database, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 21:50:07 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 21:50:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 21:50:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 21:50:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 21:50:08 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/zws-contacts-database/ZwsContactsDatabase.php on line 84
+[08-Apr-2025 21:50:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_zimrate-backup', 'a:2:{s:6:\"status\";b:0;s:7:\"message\";s:36:\"The currency field must be a string.\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '0+ns(E-OU% 5~C;|:52mjO2l dc&Ch;VOFuhUn%Df#^yV@N+[mZhw& u=d/%_j1@', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -139,7 +317,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_zimrate-backup' , 'a:2:{s:6:&quot;status&quot;;b:0;s:7:&quot;message&quot;;s:36:&quot;The currency field must be a string.&quot;;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , '0+ns(E-OU% 5~C;|:52mjO2l dc&amp;Ch;VOFuhUn%Df#^yV@N+[mZhw&amp; u=d/%_j1@' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -151,21 +329,34 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_zimr...', Array, '', 'off')
-#5 /wordpress/wp-content/plugins/zimrate/includes/functions.php(86): set_transient('zimrate-backup', Array, 2592000)
-#6 /wordpress/wp-content/plugins/zimrate/includes/class-zimrate-activator.php(38): zimrate_get_rates()
-#7 /wordpress/wp-content/plugins/zimrate/zimrate.php(49): Zimrate_Activator::activate()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): activate_zimrate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_zimrat...', false)
-#12 /internal/eval.php(20): activate_plugin('zimrate/zimrate...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_zimrate-backup', 'a:2:{s:6:\"status\";b:0;s:7:\"message\";s:36:\"The currency field must be a string.\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_zimrate/zimrate.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_zimrate, Zimrate_Activator::activate, zimrate_get_rates, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', '0+ns(E-OU% 5~C;...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', '0+ns(E-OU% 5~C;...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', '0+ns(E-OU% 5~C;...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', '0+ns(E-OU% 5~C;...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40374|wp_rest|0...', 'nonce')
+#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
+#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
+#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
+#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
+#18 /wordpress/wp-content/plugins/zws-contacts-database/ZwsContactsDatabase.php(87): wp_register_script('jquery_ui_js', 'http://127.0.0....', Array)
+#19 /wordpress/wp-includes/class-wp-hook.php(324): ZwsContactsDatabase\ZwsContactsDatabase::load_scripts('')
+#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#22 /wordpress/wp-settings.php(704): do_action('init')
+#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#26 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '0+ns(E-OU% 5~C;|:52mjO2l dc&Ch;VOFuhUn%Df#^yV@N+[mZhw& u=d/%_j1@', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ZwsContactsDatabase\ZwsContactsDatabase::load_scripts, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 21:50:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_zimrate-rate', '1751747170', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'qQqsjt/^F>(K1J>w}Ei%]38{c$^&x7:Ew_>k%dO<(XuGj,S`!:AcO&aRjgm;c4q7', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -177,7 +368,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_zimrate-rate' , '1751747170' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'qQqsjt/^F&gt;(K1J&gt;w}Ei%]38{c$^&amp;x7:Ew_&gt;k%dO&lt;(XuGj,S`!:AcO&amp;aRjgm;c4q7' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -189,358 +380,255 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1751747170, '', 'off')
-#5 /wordpress/wp-content/plugins/zimrate/includes/class-zimrate-activator.php(41): set_transient('zimrate-rate', true, 7776000)
-#6 /wordpress/wp-content/plugins/zimrate/zimrate.php(49): Zimrate_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_zimrate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'qQqsjt/^F>(K1J>...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'qQqsjt/^F>(K1J>...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'qQqsjt/^F>(K1J>...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'qQqsjt/^F>(K1J>...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40374|wp_rest|0...', 'nonce')
+#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
+#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
+#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
+#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
+#18 /wordpress/wp-content/plugins/zws-contacts-database/ZwsContactsDatabase.php(87): wp_register_script('jquery_ui_js', 'http://127.0.0....', Array)
+#19 /wordpress/wp-includes/class-wp-hook.php(324): ZwsContactsDatabase\ZwsContactsDatabase::load_scripts('')
+#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#22 /wordpress/wp-settings.php(704): do_action('init')
+#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#26 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'qQqsjt/^F>(K1J>w}Ei%]38{c$^&x7:Ew_>k%dO<(XuGj,S`!:AcO&aRjgm;c4q7', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ZwsContactsDatabase\ZwsContactsDatabase::load_scripts, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 21:50:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_zws_contacts_database_plugin (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+        first_name varchar(255) DEFAULT '' NOT NULL,
+        last_name varchar(255) DEFAULT '' NOT NULL,
+        postcode varchar(8) DEFAULT '' NOT NULL,
+        lat varchar(15) DEFAULT '' NOT NULL,
+        lng varchar(15) DEFAULT '' NOT NULL,
+        phone varchar(20) NOT NULL,
+        email varchar(255) DEFAULT '' NOT NULL,
+        max_radius mediumint(9) NOT NULL,
+        extra_info varchar(1000),
+        earliest_time_mondays varchar(5) NULL,
+        latest_time_mondays varchar(5) NULL,
+        earliest_time_tuesdays varchar(5) NULL,
+        latest_time_tuesdays varchar(5) NULL,
+        earliest_time_wednesdays varchar(5) NULL,
+        latest_time_wednesdays varchar(5) NULL,
+        earliest_time_thursdays varchar(5) NULL,
+        latest_time_thursdays varchar(5) NULL,
+        earliest_time_fridays varchar(5) NULL,
+        latest_time_fridays varchar(5) NULL,
+        earliest_time_saturdays varchar(5) NULL,
+        latest_time_saturdays varchar(5) NULL,
+        earliest_time_sundays varchar(5) NULL,
+        latest_time_sundays varchar(5) NULL,
+        pp_accepted tinyint(1) DEFAULT '0' NOT NULL,
+        CONSTRAINT UNIQUE  (phone),
+        CONSTRAINT UNIQUE  (email),
+        PRIMARY KEY  id (id)
+	)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/zws-contacts-database/src/Database.php(67): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/zws-contacts-database/src/Installer.php(89): ZwsContactsDatabase\Database::update_database()
+#4 /wordpress/wp-content/plugins/zws-contacts-database/ZwsContactsDatabase.php(55): ZwsContactsDatabase\Installer::install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): ZwsContactsDatabase\ZwsContactsDatabase::run_installer(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_zws-co...', false)
+#9 /internal/eval.php(20): activate_plugin('zws-contacts-da...')
+#10 {main}</pre>
+ for query CREATE TABLE wp_zws_contacts_database_plugin (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+        first_name varchar(255) DEFAULT '' NOT NULL,
+        last_name varchar(255) DEFAULT '' NOT NULL,
+        postcode varchar(8) DEFAULT '' NOT NULL,
+        lat varchar(15) DEFAULT '' NOT NULL,
+        lng varchar(15) DEFAULT '' NOT NULL,
+        phone varchar(20) NOT NULL,
+        email varchar(255) DEFAULT '' NOT NULL,
+        max_radius mediumint(9) NOT NULL,
+        extra_info varchar(1000),
+        earliest_time_mondays varchar(5) NULL,
+        latest_time_mondays varchar(5) NULL,
+        earliest_time_tuesdays varchar(5) NULL,
+        latest_time_tuesdays varchar(5) NULL,
+        earliest_time_wednesdays varchar(5) NULL,
+        latest_time_wednesdays varchar(5) NULL,
+        earliest_time_thursdays varchar(5) NULL,
+        latest_time_thursdays varchar(5) NULL,
+        earliest_time_fridays varchar(5) NULL,
+        latest_time_fridays varchar(5) NULL,
+        earliest_time_saturdays varchar(5) NULL,
+        latest_time_saturdays varchar(5) NULL,
+        earliest_time_sundays varchar(5) NULL,
+        latest_time_sundays varchar(5) NULL,
+        pp_accepted tinyint(1) DEFAULT '0' NOT NULL,
+        CONSTRAINT UNIQUE  (phone),
+        CONSTRAINT UNIQUE  (email),
+        PRIMARY KEY  id (id)
+	) made by activate_plugin, do_action('activate_zws-contacts-database/ZwsContactsDatabase.php'), WP_Hook->do_action, WP_Hook->apply_filters, ZwsContactsDatabase\ZwsContactsDatabase::run_installer, ZwsContactsDatabase\Installer::install, ZwsContactsDatabase\Database::update_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 21:50:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_zws_contacts_database_plugin (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+        first_name varchar(255) DEFAULT '' NOT NULL,
+        last_name varchar(255) DEFAULT '' NOT NULL,
+        postcode varchar(8) DEFAULT '' NOT NULL,
+        lat varchar(15) DEFAULT '' NOT NULL,
+        lng varchar(15) DEFAULT '' NOT NULL,
+        phone varchar(20) NOT NULL,
+        email varchar(255) DEFAULT '' NOT NULL,
+        max_radius mediumint(9) NOT NULL,
+        extra_info varchar(1000),
+        earliest_time_mondays varchar(5) NULL,
+        latest_time_mondays varchar(5) NULL,
+        earliest_time_tuesdays varchar(5) NULL,
+        latest_time_tuesdays varchar(5) NULL,
+        earliest_time_wednesdays varchar(5) NULL,
+        latest_time_wednesdays varchar(5) NULL,
+        earliest_time_thursdays varchar(5) NULL,
+        latest_time_thursdays varchar(5) NULL,
+        earliest_time_fridays varchar(5) NULL,
+        latest_time_fridays varchar(5) NULL,
+        earliest_time_saturdays varchar(5) NULL,
+        latest_time_saturdays varchar(5) NULL,
+        earliest_time_sundays varchar(5) NULL,
+        latest_time_sundays varchar(5) NULL,
+        pp_accepted tinyint(1) DEFAULT '0' NOT NULL,
+        CONSTRAINT UNIQUE  (phone),
+        CONSTRAINT UNIQUE  (email),
+        PRIMARY KEY  id (id)
+	)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/zws-contacts-database/src/Database.php(67): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/zws-contacts-database/src/Installer.php(89): ZwsContactsDatabase\Database::update_database()
+#4 /wordpress/wp-content/plugins/zws-contacts-database/ZwsContactsDatabase.php(55): ZwsContactsDatabase\Installer::install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): ZwsContactsDatabase\ZwsContactsDatabase::run_installer(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_zws-co...', false)
+#9 /internal/eval.php(20): activate_plugin('zws-contacts-da...')
+#10 {main}</pre>
+ for query CREATE TABLE wp_zws_contacts_database_plugin (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+        first_name varchar(255) DEFAULT '' NOT NULL,
+        last_name varchar(255) DEFAULT '' NOT NULL,
+        postcode varchar(8) DEFAULT '' NOT NULL,
+        lat varchar(15) DEFAULT '' NOT NULL,
+        lng varchar(15) DEFAULT '' NOT NULL,
+        phone varchar(20) NOT NULL,
+        email varchar(255) DEFAULT '' NOT NULL,
+        max_radius mediumint(9) NOT NULL,
+        extra_info varchar(1000),
+        earliest_time_mondays varchar(5) NULL,
+        latest_time_mondays varchar(5) NULL,
+        earliest_time_tuesdays varchar(5) NULL,
+        latest_time_tuesdays varchar(5) NULL,
+        earliest_time_wednesdays varchar(5) NULL,
+        latest_time_wednesdays varchar(5) NULL,
+        earliest_time_thursdays varchar(5) NULL,
+        latest_time_thursdays varchar(5) NULL,
+        earliest_time_fridays varchar(5) NULL,
+        latest_time_fridays varchar(5) NULL,
+        earliest_time_saturdays varchar(5) NULL,
+        latest_time_saturdays varchar(5) NULL,
+        earliest_time_sundays varchar(5) NULL,
+        latest_time_sundays varchar(5) NULL,
+        pp_accepted tinyint(1) DEFAULT '0' NOT NULL,
+        CONSTRAINT UNIQUE  (phone),
+        CONSTRAINT UNIQUE  (email),
+        PRIMARY KEY  id (id)
+	) made by activate_plugin, do_action('activate_zws-contacts-database/ZwsContactsDatabase.php'), WP_Hook->do_action, WP_Hook->apply_filters, ZwsContactsDatabase\ZwsContactsDatabase::run_installer, ZwsContactsDatabase\Installer::install, ZwsContactsDatabase\Database::update_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 21:50:37 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 21:50:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 21:50:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 21:50:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 21:51:05 UTC] PHP Warning:  include(work/keyConfig.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/talkback-secure-linkback-protocol/talkbackClass.php on line 10
+[08-Apr-2025 21:51:05 UTC] PHP Warning:  include(): Failed opening 'work/keyConfig.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/talkback-secure-linkback-protocol/talkbackClass.php on line 10
+[08-Apr-2025 21:51:05 UTC] PHP Warning:  DOMDocument::load(): I/O warning : failed to load external entity &quot;/config.xml&quot; in /wordpress/wp-content/plugins/talkback-secure-linkback-protocol/config.php on line 15
+[08-Apr-2025 21:51:05 UTC] PHP Warning:  Attempt to read property "childNodes" on null in /wordpress/wp-content/plugins/talkback-secure-linkback-protocol/config.php on line 19
+[08-Apr-2025 21:51:05 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/talkback-secure-linkback-protocol/config.php on line 19
+[08-Apr-2025 21:51:05 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 21:51:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 21:51:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 21:51:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 21:51:06 UTC] PHP Warning:  include(work/keyConfig.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/talkback-secure-linkback-protocol/talkbackClass.php on line 10
+[08-Apr-2025 21:51:06 UTC] PHP Warning:  include(): Failed opening 'work/keyConfig.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/talkback-secure-linkback-protocol/talkbackClass.php on line 10
+[08-Apr-2025 21:51:13 UTC] PHP Warning:  include(work/keyConfig.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/talkback-secure-linkback-protocol/talkbackClass.php on line 10
+[08-Apr-2025 21:51:13 UTC] PHP Warning:  include(): Failed opening 'work/keyConfig.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/talkback-secure-linkback-protocol/talkbackClass.php on line 10
+[08-Apr-2025 21:51:13 UTC] PHP Warning:  DOMDocument::load(): I/O warning : failed to load external entity &quot;/config.xml&quot; in /wordpress/wp-content/plugins/talkback-secure-linkback-protocol/config.php on line 15
+[08-Apr-2025 21:51:13 UTC] PHP Warning:  Attempt to read property "childNodes" on null in /wordpress/wp-content/plugins/talkback-secure-linkback-protocol/config.php on line 19
+[08-Apr-2025 21:51:13 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/talkback-secure-linkback-protocol/config.php on line 19
+[08-Apr-2025 21:51:14 UTC] PHP Warning:  include(work/keyConfig.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/talkback-secure-linkback-protocol/talkbackClass.php on line 10
+[08-Apr-2025 21:51:14 UTC] PHP Warning:  include(): Failed opening 'work/keyConfig.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/talkback-secure-linkback-protocol/talkbackClass.php on line 10
+[08-Apr-2025 21:51:23 UTC] PHP Warning:  include(work/keyConfig.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/talkback-secure-linkback-protocol/talkbackClass.php on line 10
+[08-Apr-2025 21:51:23 UTC] PHP Warning:  include(): Failed opening 'work/keyConfig.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/talkback-secure-linkback-protocol/talkbackClass.php on line 10
+[08-Apr-2025 21:51:23 UTC] PHP Warning:  DOMDocument::load(): I/O warning : failed to load external entity &quot;/config.xml&quot; in /wordpress/wp-content/plugins/talkback-secure-linkback-protocol/config.php on line 15
+[08-Apr-2025 21:51:23 UTC] PHP Warning:  Attempt to read property "childNodes" on null in /wordpress/wp-content/plugins/talkback-secure-linkback-protocol/config.php on line 19
+[08-Apr-2025 21:51:23 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/talkback-secure-linkback-protocol/config.php on line 19
+[08-Apr-2025 21:51:24 UTC] PHP Warning:  include(work/keyConfig.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/talkback-secure-linkback-protocol/talkbackClass.php on line 10
+[08-Apr-2025 21:51:24 UTC] PHP Warning:  include(): Failed opening 'work/keyConfig.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/talkback-secure-linkback-protocol/talkbackClass.php on line 10
+[08-Apr-2025 21:51:33 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 21:51:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 21:51:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 21:51:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 21:52:00 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 21:52:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 21:52:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 21:52:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 21:52:02 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('zipfstats_widge...')
+#2 /wordpress/wp-content/plugins/zipfstats/jbl-zipfstats.php(57): register_widget('zipfstats_widge...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): zipfstats_register_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_zimrat...', false)
-#11 /internal/eval.php(20): activate_plugin('zimrate/zimrate...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_zimrate-rate', '1751747170', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_zimrate/zimrate.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_zimrate, Zimrate_Activator::activate, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:26:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_zimrate-rate', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_zimrate-rate' , '1' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_zimr...', true, '', 'off')
-#5 /wordpress/wp-content/plugins/zimrate/includes/class-zimrate-activator.php(41): set_transient('zimrate-rate', true, 7776000)
-#6 /wordpress/wp-content/plugins/zimrate/zimrate.php(49): Zimrate_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_zimrate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_zimrat...', false)
-#11 /internal/eval.php(20): activate_plugin('zimrate/zimrate...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_zimrate-rate', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_zimrate/zimrate.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_zimrate, Zimrate_Activator::activate, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:26:10 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 20:26:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 20:26:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 20:26:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 20:26:37 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 20:26:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 20:26:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 20:26:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 20:26:56 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 20:26:56 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 20:26:56 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 20:26:56 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 20:27:09 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 20:27:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 20:27:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 20:27:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 20:27:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:34:\"zip-codes-redirect/vendor/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:6:\"2.11.0\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1743971242;s:11:\"plugin_path\";s:38:\"zip-codes-redirect/zipcoderedirect.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:38:\"zip-codes-redirect/zipcoderedirect.php\";s:8:\"sdk_path\";s:34:\"zip-codes-redirect/vendor/freemius\";s:7:\"version\";s:6:\"2.11.0\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1743971242;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_active_plugins' , 'O:8:&quot;stdClass&quot;:3:{s:7:&quot;plugins&quot;;a:1:{s:34:&quot;zip-codes-redirect/vendor/freemius&quot;;O:8:&quot;stdClass&quot;:4:{s:7:&quot;version&quot;;s:6:&quot;2.11.0&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:9:&quot;timestamp&quot;;i:1743971242;s:11:&quot;plugin_path&quot;;s:38:&quot;zip-codes-redirect/zipcoderedirect.php&quot;;}}s:7:&quot;abspath&quot;;s:11:&quot;/wordpress/&quot;;s:6:&quot;newest&quot;;O:8:&quot;stdClass&quot;:5:{s:11:&quot;plugin_path&quot;;s:38:&quot;zip-codes-redirect/zipcoderedirect.php&quot;;s:8:&quot;sdk_path&quot;;s:34:&quot;zip-codes-redirect/vendor/freemius&quot;;s:7:&quot;version&quot;;s:6:&quot;2.11.0&quot;;s:13:&quot;in_activation&quot;;b:1;s:9:&quot;timestamp&quot;;i:1743971242;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_active_plugi...', Object(stdClass), '', 'auto')
-#5 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/fs-essential-functions.php(1669): update_option('fs_active_plugi...', Object(stdClass))
-#6 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/start.php(1447): fs_update_sdk_newest_version('zip-codes-redir...', 'zip-codes-redir...')
-#7 /wordpress/wp-content/plugins/zip-codes-redirect/zipcoderedirect.php(39): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/zip-codes-redirect/zipcoderedirect.php(62): zcr_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('zip-codes-redir...')
-#11 /internal/eval.php(20): activate_plugin('zip-codes-redir...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:34:\"zip-codes-redirect/vendor/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:6:\"2.11.0\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1743971242;s:11:\"plugin_path\";s:38:\"zip-codes-redirect/zipcoderedirect.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:38:\"zip-codes-redirect/zipcoderedirect.php\";s:8:\"sdk_path\";s:34:\"zip-codes-redirect/vendor/freemius\";s:7:\"version\";s:6:\"2.11.0\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1743971242;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/zip-codes-redirect/zipcoderedirect.php'), zcr_fs, require_once('/plugins/zip-codes-redirect/vendor/freemius/start.php'), fs_update_sdk_newest_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:27:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_debug_mode' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/config.php(1837): add_option('fs_debug_mode', false)
-#5 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/require.php(79): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/start.php(3451): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-content/plugins/zip-codes-redirect/zipcoderedirect.php(39): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/zip-codes-redirect/zipcoderedirect.php(62): zcr_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('zip-codes-redir...')
-#11 /internal/eval.php(20): activate_plugin('zip-codes-redir...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/zip-codes-redirect/zipcoderedirect.php'), zcr_fs, require_once('/plugins/zip-codes-redirect/vendor/freemius/start.php'), require_once('/plugins/zip-codes-redirect/vendor/freemius/require.php'), require_once('/plugins/zip-codes-redirect/vendor/freemius/config.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:27:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:7791;a:3:{s:4:\"slug\";s:18:\"zip-codes-redirect\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:38:\"zip-codes-redirect/zipcoderedirect.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:1:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:7791;a:3:{s:4:&quot;slug&quot;;s:18:&quot;zip-codes-redirect&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:38:&quot;zip-codes-redirect/zipcoderedirect.php&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/managers/class-fs-option-manager.php(2479): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/managers/class-fs-option-manager.php(2137): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/class-fs-options.php(835): FS_Option_Manager->set_option('id_slug_type_pa...', Array, true)
-#8 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/class-freemius.php(13249): FS_Options->set_option('id_slug_type_pa...', Array, true)
-#9 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/class-freemius.php(2491): Freemius->store_id_slug_type_path_map('7791', 'zip-codes-redir...')
-#10 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/class-freemius.php(17203): Freemius->__construct('7791', 'zip-codes-redir...', true)
-#11 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/start.php(3685): Freemius::instance('7791', 'zip-codes-redir...', true)
-#12 /wordpress/wp-content/plugins/zip-codes-redirect/zipcoderedirect.php(41): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/zip-codes-redirect/zipcoderedirect.php(62): zcr_fs()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('zip-codes-redir...')
-#16 /internal/eval.php(20): activate_plugin('zip-codes-redir...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:7791;a:3:{s:4:\"slug\";s:18:\"zip-codes-redirect\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:38:\"zip-codes-redirect/zipcoderedirect.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/zip-codes-redirect/zipcoderedirect.php'), zcr_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_id_slug_type_path_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:27:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:7791;a:3:{s:4:\"slug\";s:18:\"zip-codes-redirect\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:38:\"zip-codes-redirect/zipcoderedirect.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"zip-codes-redirect\";a:1:{s:19:\"last_load_timestamp\";i:1743971242;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:7791;a:3:{s:4:&quot;slug&quot;;s:18:&quot;zip-codes-redirect&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:38:&quot;zip-codes-redirect/zipcoderedirect.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:18:&quot;zip-codes-redirect&quot;;a:1:{s:19:&quot;last_load_timestamp&quot;;i:1743971242;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/managers/class-fs-option-manager.php(2479): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/managers/class-fs-option-manager.php(2137): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/managers/class-fs-key-value-storage.php(1099): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/managers/class-fs-key-value-storage.php(1711): FS_Key_Value_Storage->store('last_load_times...', 1743971242)
-#9 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/class-fs-storage.php(3205): FS_Key_Value_Storage->__set('last_load_times...', 1743971242)
-#10 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/class-freemius.php(2587): FS_Storage->__set('last_load_times...', 1743971242)
-#11 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/class-freemius.php(17203): Freemius->__construct('7791', 'zip-codes-redir...', true)
-#12 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/start.php(3685): Freemius::instance('7791', 'zip-codes-redir...', true)
-#13 /wordpress/wp-content/plugins/zip-codes-redirect/zipcoderedirect.php(41): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/zip-codes-redirect/zipcoderedirect.php(62): zcr_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('zip-codes-redir...')
-#17 /internal/eval.php(20): activate_plugin('zip-codes-redir...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:7791;a:3:{s:4:\"slug\";s:18:\"zip-codes-redirect\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:38:\"zip-codes-redirect/zipcoderedirect.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"zip-codes-redirect\";a:1:{s:19:\"last_load_timestamp\";i:1743971242;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/zip-codes-redirect/zipcoderedirect.php'), zcr_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:27:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:7791;a:3:{s:4:\"slug\";s:18:\"zip-codes-redirect\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:38:\"zip-codes-redirect/zipcoderedirect.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"zip-codes-redirect\";a:2:{s:19:\"last_load_timestamp\";i:1743971242;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:38:\"zip-codes-redirect/zipcoderedirect.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:7791;a:3:{s:4:&quot;slug&quot;;s:18:&quot;zip-codes-redirect&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:38:&quot;zip-codes-redirect/zipcoderedirect.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:18:&quot;zip-codes-redirect&quot;;a:2:{s:19:&quot;last_load_timestamp&quot;;i:1743971242;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:38:&quot;zip-codes-redirect/zipcoderedirect.php&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/managers/class-fs-option-manager.php(2479): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/managers/class-fs-option-manager.php(2137): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/managers/class-fs-key-value-storage.php(1099): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/managers/class-fs-key-value-storage.php(1711): FS_Key_Value_Storage->store('plugin_main_fil...', Object(stdClass))
-#9 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/class-fs-storage.php(3205): FS_Key_Value_Storage->__set('plugin_main_fil...', Object(stdClass))
-#10 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/class-freemius.php(12391): FS_Storage->__set('plugin_main_fil...', Object(stdClass))
-#11 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/class-freemius.php(2629): Freemius->_find_caller_plugin_file(true, 'zip-codes-redir...')
-#12 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/class-freemius.php(17203): Freemius->__construct('7791', 'zip-codes-redir...', true)
-#13 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/start.php(3685): Freemius::instance('7791', 'zip-codes-redir...', true)
-#14 /wordpress/wp-content/plugins/zip-codes-redirect/zipcoderedirect.php(41): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/zip-codes-redirect/zipcoderedirect.php(62): zcr_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('zip-codes-redir...')
-#18 /internal/eval.php(20): activate_plugin('zip-codes-redir...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:7791;a:3:{s:4:\"slug\";s:18:\"zip-codes-redirect\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:38:\"zip-codes-redirect/zipcoderedirect.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"zip-codes-redirect\";a:2:{s:19:\"last_load_timestamp\";i:1743971242;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:38:\"zip-codes-redirect/zipcoderedirect.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/zip-codes-redirect/zipcoderedirect.php'), zcr_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_find_caller_plugin_file, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:27:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:7791;a:3:{s:4:\"slug\";s:18:\"zip-codes-redirect\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:38:\"zip-codes-redirect/zipcoderedirect.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"zip-codes-redirect\";a:3:{s:19:\"last_load_timestamp\";i:1743971242;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:38:\"zip-codes-redirect/zipcoderedirect.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:7791;a:3:{s:4:&quot;slug&quot;;s:18:&quot;zip-codes-redirect&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:38:&quot;zip-codes-redirect/zipcoderedirect.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:18:&quot;zip-codes-redirect&quot;;a:3:{s:19:&quot;last_load_timestamp&quot;;i:1743971242;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:38:&quot;zip-codes-redirect/zipcoderedirect.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/managers/class-fs-option-manager.php(2479): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/managers/class-fs-option-manager.php(2137): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/managers/class-fs-key-value-storage.php(1099): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/managers/class-fs-key-value-storage.php(1711): FS_Key_Value_Storage->store('is_network_acti...', false)
-#9 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/class-fs-storage.php(3205): FS_Key_Value_Storage->__set('is_network_acti...', false)
-#10 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/class-freemius.php(2797): FS_Storage->__set('is_network_acti...', false)
-#11 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/class-freemius.php(17203): Freemius->__construct('7791', 'zip-codes-redir...', true)
-#12 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/start.php(3685): Freemius::instance('7791', 'zip-codes-redir...', true)
-#13 /wordpress/wp-content/plugins/zip-codes-redirect/zipcoderedirect.php(41): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/zip-codes-redirect/zipcoderedirect.php(62): zcr_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('zip-codes-redir...')
-#17 /internal/eval.php(20): activate_plugin('zip-codes-redir...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:7791;a:3:{s:4:\"slug\";s:18:\"zip-codes-redirect\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:38:\"zip-codes-redirect/zipcoderedirect.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"zip-codes-redirect\";a:3:{s:19:\"last_load_timestamp\";i:1743971242;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:38:\"zip-codes-redirect/zipcoderedirect.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/zip-codes-redirect/zipcoderedirect.php'), zcr_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:27:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:7791;a:3:{s:4:\"slug\";s:18:\"zip-codes-redirect\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:38:\"zip-codes-redirect/zipcoderedirect.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"zip-codes-redirect\";a:3:{s:19:\"last_load_timestamp\";i:1743971242;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:38:\"zip-codes-redirect/zipcoderedirect.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:38:\"zip-codes-redirect/zipcoderedirect.php\";s:18:\"zip-codes-redirect\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:7791;a:3:{s:4:&quot;slug&quot;;s:18:&quot;zip-codes-redirect&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:38:&quot;zip-codes-redirect/zipcoderedirect.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:18:&quot;zip-codes-redirect&quot;;a:3:{s:19:&quot;last_load_timestamp&quot;;i:1743971242;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:38:&quot;zip-codes-redirect/zipcoderedirect.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:38:&quot;zip-codes-redirect/zipcoderedirect.php&quot;;s:18:&quot;zip-codes-redirect&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/managers/class-fs-option-manager.php(2479): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/managers/class-fs-option-manager.php(2137): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/class-fs-options.php(835): FS_Option_Manager->set_option('file_slug_map', Array, true)
-#8 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/class-freemius.php(62125): FS_Options->set_option('file_slug_map', Array, true)
-#9 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/class-freemius.php(3079): Freemius->store_file_slug_map()
-#10 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/includes/class-freemius.php(17203): Freemius->__construct('7791', 'zip-codes-redir...', true)
-#11 /wordpress/wp-content/plugins/zip-codes-redirect/vendor/freemius/start.php(3685): Freemius::instance('7791', 'zip-codes-redir...', true)
-#12 /wordpress/wp-content/plugins/zip-codes-redirect/zipcoderedirect.php(41): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/zip-codes-redirect/zipcoderedirect.php(62): zcr_fs()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('zip-codes-redir...')
-#16 /internal/eval.php(20): activate_plugin('zip-codes-redir...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:7791;a:3:{s:4:\"slug\";s:18:\"zip-codes-redirect\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:38:\"zip-codes-redirect/zipcoderedirect.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"zip-codes-redirect\";a:3:{s:19:\"last_load_timestamp\";i:1743971242;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:38:\"zip-codes-redirect/zipcoderedirect.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:38:\"zip-codes-redirect/zipcoderedirect.php\";s:18:\"zip-codes-redirect\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/zip-codes-redirect/zipcoderedirect.php'), zcr_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_file_slug_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:27:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:7791;a:3:{s:4:\"slug\";s:18:\"zip-codes-redirect\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:38:\"zip-codes-redirect/zipcoderedirect.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"zip-codes-redirect\";a:4:{s:19:\"last_load_timestamp\";i:1743971242;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:38:\"zip-codes-redirect/zipcoderedirect.php\";}s:20:
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[08-Apr-2025 21:52:11 UTC] PHP Fatal error:  Uncaught A
