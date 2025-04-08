@@ -2,10 +2,14 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [06-Apr-2025 17:11:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [08-Apr-2025 20:29:43 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 20:29:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 20:29:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 20:29:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 20:30:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('__uagb_do_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:45:\"upfiv-complete-all-in-one-seo-wizard/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:5:\"2.3.2\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744144215;s:11:\"plugin_path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";s:8:\"sdk_path\";s:45:\"upfiv-complete-all-in-one-seo-wizard/freemius\";s:7:\"version\";s:5:\"2.3.2\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744144215;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -17,7 +21,7 @@ Error: [06-Apr-2025 17:11:40 UTC] WordPress database error <div style="clear:bot
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '__uagb_do_redirect' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_active_plugins' , 'O:8:&quot;stdClass&quot;:3:{s:7:&quot;plugins&quot;;a:1:{s:45:&quot;upfiv-complete-all-in-one-seo-wizard/freemius&quot;;O:8:&quot;stdClass&quot;:4:{s:7:&quot;version&quot;;s:5:&quot;2.3.2&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:9:&quot;timestamp&quot;;i:1744144215;s:11:&quot;plugin_path&quot;;s:46:&quot;upfiv-complete-all-in-one-seo-wizard/upfiv.php&quot;;}}s:7:&quot;abspath&quot;;s:11:&quot;/wordpress/&quot;;s:6:&quot;newest&quot;;O:8:&quot;stdClass&quot;:5:{s:11:&quot;plugin_path&quot;;s:46:&quot;upfiv-complete-all-in-one-seo-wizard/upfiv.php&quot;;s:8:&quot;sdk_path&quot;;s:45:&quot;upfiv-complete-all-in-one-seo-wizard/freemius&quot;;s:7:&quot;version&quot;;s:5:&quot;2.3.2&quot;;s:13:&quot;in_activation&quot;;b:1;s:9:&quot;timestamp&quot;;i:1744144215;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -29,19 +33,20 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('__uagb_do_redir...', true, '', 'auto')
-#5 /wordpress/wp-content/plugins/ultimate-addons-for-gutenberg/classes/class-uagb-loader.php(451): update_option('__uagb_do_redir...', true)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): UAGB_Loader->activation_reset(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
-#10 /internal/eval.php(20): activate_plugin('ultimate-addons...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('__uagb_do_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-addons-for-gutenberg/ultimate-addons-for-gutenberg.php'), WP_Hook->do_action, WP_Hook->apply_filters, UAGB_Loader->activation_reset, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 17:11:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_active_plugi...', Object(stdClass), '', 'auto')
+#5 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/fs-essential-functions.php(366): update_option('fs_active_plugi...', Object(stdClass))
+#6 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/start.php(158): fs_update_sdk_newest_version('upfiv-complete-...', 'upfiv-complete-...')
+#7 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php(45): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php(67): pf_fs()
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('upfiv-complete-...')
+#11 /internal/eval.php(20): activate_plugin('upfiv-complete-...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:45:\"upfiv-complete-all-in-one-seo-wizard/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:5:\"2.3.2\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744144215;s:11:\"plugin_path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";s:8:\"sdk_path\";s:45:\"upfiv-complete-all-in-one-seo-wizard/freemius\";s:7:\"version\";s:5:\"2.3.2\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744144215;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php'), pf_fs, require_once('/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/start.php'), fs_update_sdk_newest_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 20:30:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('__uagb_activated_before', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -53,7 +58,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '__uagb_activated_before' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_debug_mode' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -65,19 +70,21 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('__uagb_activate...', true, '', 'auto')
-#5 /wordpress/wp-content/plugins/ultimate-addons-for-gutenberg/classes/class-uagb-loader.php(452): update_option('__uagb_activate...', true)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): UAGB_Loader->activation_reset(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
-#10 /internal/eval.php(20): activate_plugin('ultimate-addons...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('__uagb_activated_before', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-addons-for-gutenberg/ultimate-addons-for-gutenberg.php'), WP_Hook->do_action, WP_Hook->apply_filters, UAGB_Loader->activation_reset, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 17:11:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/config.php(307): add_option('fs_debug_mode', false)
+#5 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/require.php(10): require_once('/wordpress/wp-c...')
+#6 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/start.php(474): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php(45): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php(67): pf_fs()
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('upfiv-complete-...')
+#11 /internal/eval.php(20): activate_plugin('upfiv-complete-...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php'), pf_fs, require_once('/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/start.php'), require_once('/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/require.php'), require_once('/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/config.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 20:30:15 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-fs-logger.php on line 145
+[08-Apr-2025 20:30:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('__uagb_asset_version', '1743959500', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:5619;a:3:{s:4:\"slug\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -89,7 +96,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '__uagb_asset_version' , '1743959500' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:1:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:5619;a:3:{s:4:&quot;slug&quot;;s:36:&quot;UpfivCompleteAllInOneSEOWizardPlugin&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:46:&quot;upfiv-complete-all-in-one-seo-wizard/upfiv.php&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -101,23 +108,25 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('__uagb_asset_ve...', 1743959500, '', 'auto')
-#5 /wordpress/wp-content/plugins/ultimate-addons-for-gutenberg/classes/class-uagb-loader.php(453): update_option('__uagb_asset_ve...', 1743959500)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): UAGB_Loader->activation_reset(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
-#10 /internal/eval.php(20): activate_plugin('ultimate-addons...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('__uagb_asset_version', '1743959500', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-addons-for-gutenberg/ultimate-addons-for-gutenberg.php'), WP_Hook->do_action, WP_Hook->apply_filters, UAGB_Loader->activation_reset, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 17:11:40 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 17:11:40 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 17:11:40 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 17:11:40 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 17:11:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('id_slug_type_pa...', Array, true)
+#8 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-freemius.php(2213): FS_Options->set_option('id_slug_type_pa...', Array, true)
+#9 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-freemius.php(389): Freemius->store_id_slug_type_path_map('5619', 'UpfivCompleteAl...')
+#10 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-freemius.php(2784): Freemius->__construct('5619', 'UpfivCompleteAl...', true)
+#11 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/start.php(513): Freemius::instance('5619', 'UpfivCompleteAl...', true)
+#12 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php(48): fs_dynamic_init(Array)
+#13 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php(67): pf_fs()
+#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('upfiv-complete-...')
+#16 /internal/eval.php(20): activate_plugin('upfiv-complete-...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:5619;a:3:{s:4:\"slug\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php'), pf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_id_slug_type_path_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 20:30:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('uagb_site_url', '127-0-0-1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:5619;a:3:{s:4:\"slug\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}}s:11:\"plugin_data\";a:1:{s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -129,7 +138,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'uagb_site_url' , '127-0-0-1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:5619;a:3:{s:4:&quot;slug&quot;;s:36:&quot;UpfivCompleteAllInOneSEOWizardPlugin&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:46:&quot;upfiv-complete-all-in-one-seo-wizard/upfiv.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:36:&quot;UpfivCompleteAllInOneSEOWizardPlugin&quot;;a:1:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:46:&quot;upfiv-complete-all-in-one-seo-wizard/upfiv.php&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -141,87 +150,27 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('uagb_site_url', '127-0-0-1', '', 'auto')
-#5 /wordpress/wp-content/plugins/ultimate-addons-for-gutenberg/classes/class-uagb-admin-helper.php(201): update_option('uagb_site_url', '127-0-0-1')
-#6 /wordpress/wp-content/plugins/ultimate-addons-for-gutenberg/classes/class-uagb-loader.php(603): UAGB_Admin_Helper::update_admin_settings_option('uagb_site_url', '127-0-0-1')
-#7 /wordpress/wp-content/plugins/ultimate-addons-for-gutenberg/classes/class-uagb-loader.php(527): UAGB_Loader->get_regenerate_assets_on_migration()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): UAGB_Loader->init_actions('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(704): do_action('init')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('uagb_site_url', '127-0-0-1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, UAGB_Loader->init_actions, UAGB_Loader->get_regenerate_assets_on_migration, UAGB_Admin_Helper::update_admin_settings_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 17:11:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ultimate-amp/ultimate-amp.php on line 851
-[06-Apr-2025 17:11:57 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 17:11:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 17:11:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 17:11:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 17:11:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ultimate-amp/ultimate-amp.php on line 851
-[06-Apr-2025 17:11:57 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/ultimate-amp/inc/admin/redux-core/inc/class.redux_helpers.php on line 69
-[06-Apr-2025 17:11:57 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/ultimate-amp/inc/admin/redux-core/inc/class.redux_helpers.php on line 69
-[06-Apr-2025 17:11:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('redux_version_upgraded_from', '3.6.9', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'redux_version_upgraded_from' , '3.6.9' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('redux_version_u...', '3.6.9', '', 'auto')
-#5 /wordpress/wp-content/plugins/ultimate-amp/inc/admin/redux-core/inc/welcome/welcome.php(49): update_option('redux_version_u...', '3.6.9')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Redux_Welcome->init(Object(ReduxFramework))
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-content/plugins/ultimate-amp/inc/admin/redux-core/framework.php(447): do_action('redux/loaded', Object(ReduxFramework))
-#10 /wordpress/wp-content/plugins/ultimate-amp/inc/admin/redux-core/inc/class.redux_api.php(122): ReduxFramework->__construct(Array, Array)
-#11 /wordpress/wp-content/plugins/ultimate-amp/inc/admin/redux-core/inc/class.redux_api.php(134): Redux::loadRedux('uamp_options')
-#12 /wordpress/wp-includes/class-wp-hook.php(324): Redux::createRedux('')
-#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#15 /wordpress/wp-settings.php(682): do_action('after_setup_the...')
-#16 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#17 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#18 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_main_fil...', Object(stdClass))
+#9 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-fs-storage.php(506): FS_Key_Value_Storage->__set('plugin_main_fil...', Object(stdClass))
+#10 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-freemius.php(2110): FS_Storage->__set('plugin_main_fil...', Object(stdClass))
+#11 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-freemius.php(404): Freemius->_find_caller_plugin_file(true)
+#12 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-freemius.php(2784): Freemius->__construct('5619', 'UpfivCompleteAl...', true)
+#13 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/start.php(513): Freemius::instance('5619', 'UpfivCompleteAl...', true)
+#14 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php(48): fs_dynamic_init(Array)
+#15 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php(67): pf_fs()
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('upfiv-complete-...')
+#18 /internal/eval.php(20): activate_plugin('upfiv-complete-...')
 #19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('redux_version_upgraded_from', '3.6.9', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('after_setup_theme'), WP_Hook->do_action, WP_Hook->apply_filters, Redux::createRedux, Redux::loadRedux, ReduxFramework->__construct, do_action('redux/loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Redux_Welcome->init, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 17:11:57 UTC] PHP Warning:  Undefined array key "uamp_endpoint" in /wordpress/wp-content/plugins/ultimate-amp/ultimate-amp.php on line 758
-[06-Apr-2025 17:12:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ultimate-amp/ultimate-amp.php on line 851
-[06-Apr-2025 17:12:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ultimate-amp/ultimate-amp.php on line 851
-[06-Apr-2025 17:12:01 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/ultimate-amp/inc/admin/redux-core/inc/class.redux_helpers.php on line 69
-[06-Apr-2025 17:12:01 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/ultimate-amp/inc/admin/redux-core/inc/class.redux_helpers.php on line 69
-[06-Apr-2025 17:12:01 UTC] PHP Warning:  Undefined array key "uamp_endpoint" in /wordpress/wp-content/plugins/ultimate-amp/ultimate-amp.php on line 758
-[06-Apr-2025 17:12:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ultimate-amp/ultimate-amp.php on line 851
-[06-Apr-2025 17:12:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/ultimate-amp/ultimate-amp.php on line 851
-[06-Apr-2025 17:12:04 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/ultimate-amp/inc/admin/redux-core/inc/class.redux_helpers.php on line 69
-[06-Apr-2025 17:12:04 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/ultimate-amp/inc/admin/redux-core/inc/class.redux_helpers.php on line 69
-[06-Apr-2025 17:12:04 UTC] PHP Warning:  Undefined array key "uamp_endpoint" in /wordpress/wp-content/plugins/ultimate-amp/ultimate-amp.php on line 758
-[06-Apr-2025 17:12:11 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 17:12:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:5619;a:3:{s:4:\"slug\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}}s:11:\"plugin_data\";a:1:{s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php'), pf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_find_caller_plugin_file, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 20:30:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nyams_ultimate_button', 'a:8:{s:4:\"text\";s:6:\"&uarr;\";s:5:\"title\";s:11:\"Back to top\";s:6:\"enable\";b:1;s:11:\"borderColor\";s:7:\"#0089d3\";s:15:\"backgroundColor\";s:7:\"#ffffff\";s:9:\"fontColor\";s:7:\"#0089d3\";s:8:\"position\";s:5:\"right\";s:6:\"offset\";s:1:\"7\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:5619;a:3:{s:4:\"slug\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}}s:11:\"plugin_data\";a:1:{s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -233,7 +182,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nyams_ultimate_button' , 'a:8:{s:4:&quot;text&quot;;s:6:&quot;&amp;uarr;&quot;;s:5:&quot;title&quot;;s:11:&quot;Back to top&quot;;s:6:&quot;enable&quot;;b:1;s:11:&quot;borderColor&quot;;s:7:&quot;#0089d3&quot;;s:15:&quot;backgroundColor&quot;;s:7:&quot;#ffffff&quot;;s:9:&quot;fontColor&quot;;s:7:&quot;#0089d3&quot;;s:8:&quot;position&quot;;s:5:&quot;right&quot;;s:6:&quot;offset&quot;;s:1:&quot;7&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:5619;a:3:{s:4:&quot;slug&quot;;s:36:&quot;UpfivCompleteAllInOneSEOWizardPlugin&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:46:&quot;upfiv-complete-all-in-one-seo-wizard/upfiv.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:36:&quot;UpfivCompleteAllInOneSEOWizardPlugin&quot;;a:2:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:46:&quot;upfiv-complete-all-in-one-seo-wizard/upfiv.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -245,99 +194,26 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nyams_ultimate_...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/ultimate-back-to-top/nyams-ultimate-button.php(360): update_option('nyams_ultimate_...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Nyams_Ultimate_Button->init_plugin(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
-#10 /internal/eval.php(20): activate_plugin('ultimate-back-t...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nyams_ultimate_button', 'a:8:{s:4:\"text\";s:6:\"&uarr;\";s:5:\"title\";s:11:\"Back to top\";s:6:\"enable\";b:1;s:11:\"borderColor\";s:7:\"#0089d3\";s:15:\"backgroundColor\";s:7:\"#ffffff\";s:9:\"fontColor\";s:7:\"#0089d3\";s:8:\"position\";s:5:\"right\";s:6:\"offset\";s:1:\"7\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-back-to-top/nyams-ultimate-button.php'), WP_Hook->do_action, WP_Hook->apply_filters, Nyams_Ultimate_Button->init_plugin, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 17:12:11 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 17:12:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 17:12:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 17:12:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 17:12:11 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 17:12:13 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 17:12:14 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 17:12:16 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 17:12:16 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 17:12:23 UTC] PHP Deprecated:  Required parameter $headfootcolumn follows optional parameter $type in /wordpress/wp-content/plugins/ultimate-cms/class-xydac-ultimate-cms-core.php on line 370
-[06-Apr-2025 17:12:23 UTC] PHP Fatal error:  Uncaught TypeError: closedir(): supplied resource is not a valid Directory resource in /wordpress/wp-content/plugins/ultimate-cms/index.php:175
-Stack trace:
-#0 /wordpress/wp-content/plugins/ultimate-cms/index.php(175): closedir(Resource id #515)
-#1 /wordpress/wp-content/plugins/ultimate-cms/index.php(102): xydac_ultimate_cms::get_module_data()
-#2 /wordpress/wp-content/plugins/ultimate-cms/index.php(79): xydac_ultimate_cms::load_modules()
-#3 /wordpress/wp-content/plugins/ultimate-cms/index.php(39): xydac_ultimate_cms::cms()
-#4 /wordpress/wp-content/plugins/ultimate-cms/index.php(391): xydac()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ultimate-cms/in...')
-#7 /internal/eval.php(20): activate_plugin('ultimate-cms/in...')
-#8 {main}
-  thrown in /wordpress/wp-content/plugins/ultimate-cms/index.php on line 175
-[06-Apr-2025 17:12:26 UTC] PHP Deprecated:  Required parameter $headfootcolumn follows optional parameter $type in /wordpress/wp-content/plugins/ultimate-cms/class-xydac-ultimate-cms-core.php on line 370
-[06-Apr-2025 17:12:26 UTC] PHP Fatal error:  Uncaught TypeError: closedir(): supplied resource is not a valid Directory resource in /wordpress/wp-content/plugins/ultimate-cms/index.php:175
-Stack trace:
-#0 /wordpress/wp-content/plugins/ultimate-cms/index.php(175): closedir(Resource id #504)
-#1 /wordpress/wp-content/plugins/ultimate-cms/index.php(102): xydac_ultimate_cms::get_module_data()
-#2 /wordpress/wp-content/plugins/ultimate-cms/index.php(79): xydac_ultimate_cms::load_modules()
-#3 /wordpress/wp-content/plugins/ultimate-cms/index.php(39): xydac_ultimate_cms::cms()
-#4 /wordpress/wp-content/plugins/ultimate-cms/index.php(391): xydac()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ultimate-cms/in...')
-#7 /internal/eval.php(20): activate_plugin('ultimate-cms/in...')
-#8 {main}
-  thrown in /wordpress/wp-content/plugins/ultimate-cms/index.php on line 175
-[06-Apr-2025 17:12:29 UTC] PHP Deprecated:  Required parameter $headfootcolumn follows optional parameter $type in /wordpress/wp-content/plugins/ultimate-cms/class-xydac-ultimate-cms-core.php on line 370
-[06-Apr-2025 17:12:29 UTC] PHP Fatal error:  Uncaught TypeError: closedir(): supplied resource is not a valid Directory resource in /wordpress/wp-content/plugins/ultimate-cms/index.php:175
-Stack trace:
-#0 /wordpress/wp-content/plugins/ultimate-cms/index.php(175): closedir(Resource id #504)
-#1 /wordpress/wp-content/plugins/ultimate-cms/index.php(102): xydac_ultimate_cms::get_module_data()
-#2 /wordpress/wp-content/plugins/ultimate-cms/index.php(79): xydac_ultimate_cms::load_modules()
-#3 /wordpress/wp-content/plugins/ultimate-cms/index.php(39): xydac_ultimate_cms::cms()
-#4 /wordpress/wp-content/plugins/ultimate-cms/index.php(391): xydac()
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ultimate-cms/in...')
-#7 /internal/eval.php(20): activate_plugin('ultimate-cms/in...')
-#8 {main}
-  thrown in /wordpress/wp-content/plugins/ultimate-cms/index.php on line 175
-[06-Apr-2025 17:12:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 17:12:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 17:12:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 17:12:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 17:12:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ultimate-converter/modules/widgets.php:53
-Stack trace:
-#0 /wordpress/wp-content/plugins/ultimate-converter/wp-unit-convertor.php(12): include()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ultimate-conver...')
-#3 /internal/eval.php(20): activate_plugin('ultimate-conver...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/ultimate-converter/modules/widgets.php on line 53
-[06-Apr-2025 17:12:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ultimate-converter/modules/widgets.php:53
-Stack trace:
-#0 /wordpress/wp-content/plugins/ultimate-converter/wp-unit-convertor.php(12): include()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ultimate-conver...')
-#3 /internal/eval.php(20): activate_plugin('ultimate-conver...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/ultimate-converter/modules/widgets.php on line 53
-[06-Apr-2025 17:12:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ultimate-converter/modules/widgets.php:53
-Stack trace:
-#0 /wordpress/wp-content/plugins/ultimate-converter/wp-unit-convertor.php(12): include()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ultimate-conver...')
-#3 /internal/eval.php(20): activate_plugin('ultimate-conver...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/ultimate-converter/modules/widgets.php on line 53
-[06-Apr-2025 17:12:59 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 17:12:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 17:12:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 17:12:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 17:12:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_network_acti...', false)
+#9 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-fs-storage.php(506): FS_Key_Value_Storage->__set('is_network_acti...', false)
+#10 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-freemius.php(432): FS_Storage->__set('is_network_acti...', false)
+#11 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-freemius.php(2784): Freemius->__construct('5619', 'UpfivCompleteAl...', true)
+#12 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/start.php(513): Freemius::instance('5619', 'UpfivCompleteAl...', true)
+#13 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php(48): fs_dynamic_init(Array)
+#14 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php(67): pf_fs()
+#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('upfiv-complete-...')
+#17 /internal/eval.php(20): activate_plugin('upfiv-complete-...')
+#18 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:5619;a:3:{s:4:\"slug\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}}s:11:\"plugin_data\";a:1:{s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php'), pf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 20:30:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ultimate-fonts', 'a:1:{s:8:\"elements\";a:2:{i:0;a:3:{s:5:\"label\";s:4:\"Body\";s:8:\"selector\";s:4:\"body\";s:6:\"forced\";b:0;}i:1;a:3:{s:5:\"label\";s:8:\"Headings\";s:8:\"selector\";s:22:\"h1, h2, h3, h4, h5, h6\";s:6:\"forced\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:5619;a:3:{s:4:\"slug\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}}s:11:\"plugin_data\";a:1:{s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -349,7 +225,7 @@ Stack trace:
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ultimate-fonts' , 'a:1:{s:8:&quot;elements&quot;;a:2:{i:0;a:3:{s:5:&quot;label&quot;;s:4:&quot;Body&quot;;s:8:&quot;selector&quot;;s:4:&quot;body&quot;;s:6:&quot;forced&quot;;b:0;}i:1;a:3:{s:5:&quot;label&quot;;s:8:&quot;Headings&quot;;s:8:&quot;selector&quot;;s:22:&quot;h1, h2, h3, h4, h5, h6&quot;;s:6:&quot;forced&quot;;b:0;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:5619;a:3:{s:4:&quot;slug&quot;;s:36:&quot;UpfivCompleteAllInOneSEOWizardPlugin&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:46:&quot;upfiv-complete-all-in-one-seo-wizard/upfiv.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:36:&quot;UpfivCompleteAllInOneSEOWizardPlugin&quot;;a:2:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:46:&quot;upfiv-complete-all-in-one-seo-wizard/upfiv.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:46:&quot;upfiv-complete-all-in-one-seo-wizard/upfiv.php&quot;;s:36:&quot;UpfivCompleteAllInOneSEOWizardPlugin&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -361,37 +237,25 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/ultimate-fonts/ultimate-fonts.php(124): add_option('ultimate-fonts', Array)
-#5 /wordpress/wp-content/plugins/ultimate-fonts/ultimate-fonts.php(72): Ultimate_Fonts->set_default()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Ultimate_Fonts->init('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(704): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ultimate-fonts', 'a:1:{s:8:\"elements\";a:2:{i:0;a:3:{s:5:\"label\";s:4:\"Body\";s:8:\"selector\";s:4:\"body\";s:6:\"forced\";b:0;}i:1;a:3:{s:5:\"label\";s:8:\"Headings\";s:8:\"selector\";s:22:\"h1, h2, h3, h4, h5, h6\";s:6:\"forced\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Ultimate_Fonts->init, Ultimate_Fonts->set_default, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 17:13:19 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 17:13:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 17:13:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 17:13:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 17:13:31 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 17:13:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 17:13:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 17:13:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 17:13:44 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 17:13:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 17:13:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 17:13:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 17:13:44 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 17:13:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 17:13:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 17:13:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 17:13:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('file_slug_map', Array, true)
+#8 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-freemius.php(9994): FS_Options->set_option('file_slug_map', Array, true)
+#9 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-freemius.php(479): Freemius->store_file_slug_map()
+#10 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-freemius.php(2784): Freemius->__construct('5619', 'UpfivCompleteAl...', true)
+#11 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/start.php(513): Freemius::instance('5619', 'UpfivCompleteAl...', true)
+#12 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php(48): fs_dynamic_init(Array)
+#13 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php(67): pf_fs()
+#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('upfiv-complete-...')
+#16 /internal/eval.php(20): activate_plugin('upfiv-complete-...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:5619;a:3:{s:4:\"slug\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}}s:11:\"plugin_data\";a:1:{s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php'), pf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_file_slug_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 20:30:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('analyst_cache', 's:55:\"a:1:{s:17:\"plugin_to_install\";s:16:\"ao6grd4ed38kyeqz\";}\";', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:5619;a:3:{s:4:\"slug\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}}s:11:\"plugin_data\";a:1:{s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";a:3:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744144215;}}s:13:\"file_slug_map\";a:1:{s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -403,7 +267,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'analyst_cache' , 's:55:&quot;a:1:{s:17:&quot;plugin_to_install&quot;;s:16:&quot;ao6grd4ed38kyeqz&quot;;}&quot;;' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:5619;a:3:{s:4:&quot;slug&quot;;s:36:&quot;UpfivCompleteAllInOneSEOWizardPlugin&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:46:&quot;upfiv-complete-all-in-one-seo-wizard/upfiv.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:36:&quot;UpfivCompleteAllInOneSEOWizardPlugin&quot;;a:3:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:46:&quot;upfiv-complete-all-in-one-seo-wizard/upfiv.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744144215;}}s:13:&quot;file_slug_map&quot;;a:1:{s:46:&quot;upfiv-complete-all-in-one-seo-wizard/upfiv.php&quot;;s:36:&quot;UpfivCompleteAllInOneSEOWizardPlugin&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -415,21 +279,26 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('analyst_cache', 'a:1:{s:17:"plug...', '', 'auto')
-#5 /wordpress/wp-content/plugins/ultimate-social-media-icons/analyst/src/Cache/DatabaseCache.php(109): update_option('analyst_cache', 'a:1:{s:17:"plug...')
-#6 /wordpress/wp-content/plugins/ultimate-social-media-icons/analyst/src/Cache/DatabaseCache.php(68): Analyst\Cache\DatabaseCache->sync()
-#7 /wordpress/wp-content/plugins/ultimate-social-media-icons/analyst/src/Account/Account.php(257): Analyst\Cache\DatabaseCache->put('plugin_to_insta...', 'ao6grd4ed38kyeq...')
-#8 /wordpress/wp-includes/class-wp-hook.php(324): Account\Account->onActivePluginListener(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
-#12 /internal/eval.php(20): activate_plugin('ultimate-social...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('analyst_cache', 's:55:\"a:1:{s:17:\"plugin_to_install\";s:16:\"ao6grd4ed38kyeqz\";}\";', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-social-media-icons/ultimate_social_media_icons.php'), WP_Hook->do_action, WP_Hook->apply_filters, Account\Account->onActivePluginListener, Analyst\Cache\DatabaseCache->put, Analyst\Cache\DatabaseCache->sync, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 17:13:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('install_timesta...', 1744144215)
+#9 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-fs-storage.php(506): FS_Key_Value_Storage->__set('install_timesta...', 1744144215)
+#10 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-freemius.php(483): FS_Storage->__set('install_timesta...', 1744144215)
+#11 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-freemius.php(2784): Freemius->__construct('5619', 'UpfivCompleteAl...', true)
+#12 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/start.php(513): Freemius::instance('5619', 'UpfivCompleteAl...', true)
+#13 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php(48): fs_dynamic_init(Array)
+#14 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php(67): pf_fs()
+#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('upfiv-complete-...')
+#17 /internal/eval.php(20): activate_plugin('upfiv-complete-...')
+#18 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:5619;a:3:{s:4:\"slug\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}}s:11:\"plugin_data\";a:1:{s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";a:3:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744144215;}}s:13:\"file_slug_map\";a:1:{s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php'), pf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 20:30:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sfsi_plugin_do_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:5619;a:3:{s:4:\"slug\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}}s:11:\"plugin_data\";a:1:{s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";a:4:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744144215;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -441,7 +310,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'sfsi_plugin_do_activation_redirect' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:5619;a:3:{s:4:&quot;slug&quot;;s:36:&quot;UpfivCompleteAllInOneSEOWizardPlugin&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:46:&quot;upfiv-complete-all-in-one-seo-wizard/upfiv.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:36:&quot;UpfivCompleteAllInOneSEOWizardPlugin&quot;;a:4:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:46:&quot;upfiv-complete-all-in-one-seo-wizard/upfiv.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744144215;s:17:&quot;was_plugin_loaded&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:46:&quot;upfiv-complete-all-in-one-seo-wizard/upfiv.php&quot;;s:36:&quot;UpfivCompleteAllInOneSEOWizardPlugin&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -453,18 +322,28 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/ultimate-social-media-icons/libs/sfsi_install_uninstall.php(1059): add_option('sfsi_plugin_do_...', true)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): sfsi_activate_plugin(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
-#9 /internal/eval.php(20): activate_plugin('ultimate-social...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sfsi_plugin_do_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-social-media-icons/ultimate_social_media_icons.php'), WP_Hook->do_action, WP_Hook->apply_filters, sfsi_activate_plugin, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 17:13:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('was_plugin_load...', true)
+#9 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-fs-storage.php(506): FS_Key_Value_Storage->__set('was_plugin_load...', true)
+#10 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-freemius.php(1446): FS_Storage->__set('was_plugin_load...', true)
+#11 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-freemius.php(1589): Freemius->_plugins_loaded()
+#12 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-freemius.php(510): Freemius->register_constructor_hooks()
+#13 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-freemius.php(2784): Freemius->__construct('5619', 'UpfivCompleteAl...', true)
+#14 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/start.php(513): Freemius::instance('5619', 'UpfivCompleteAl...', true)
+#15 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php(48): fs_dynamic_init(Array)
+#16 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php(67): pf_fs()
+#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('upfiv-complete-...')
+#19 /internal/eval.php(20): activate_plugin('upfiv-complete-...')
+#20 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:5619;a:3:{s:4:\"slug\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}}s:11:\"plugin_data\";a:1:{s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";a:4:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744144215;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php'), pf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->register_constructor_hooks, Freemius->_plugins_loaded, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 20:30:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('show_new_notification', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:5619;a:3:{s:4:\"slug\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}}s:11:\"plugin_data\";a:1:{s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";a:5:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744144215;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;}}s:13:\"file_slug_map\";a:1:{s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -476,7 +355,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'show_new_notification' , 'yes' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:5619;a:3:{s:4:&quot;slug&quot;;s:36:&quot;UpfivCompleteAllInOneSEOWizardPlugin&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:46:&quot;upfiv-complete-all-in-one-seo-wizard/upfiv.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:36:&quot;UpfivCompleteAllInOneSEOWizardPlugin&quot;;a:5:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:46:&quot;upfiv-complete-all-in-one-seo-wizard/upfiv.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744144215;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:46:&quot;upfiv-complete-all-in-one-seo-wizard/upfiv.php&quot;;s:36:&quot;UpfivCompleteAllInOneSEOWizardPlugin&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -488,18 +367,28 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/ultimate-social-media-icons/libs/sfsi_install_uninstall.php(1065): add_option('show_new_notifi...', 'yes')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): sfsi_activate_plugin(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
-#9 /internal/eval.php(20): activate_plugin('ultimate-social...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('show_new_notification', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-social-media-icons/ultimate_social_media_icons.php'), WP_Hook->do_action, WP_Hook->apply_filters, sfsi_activate_plugin, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 17:13:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_plugin_new_i...', false)
+#9 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-fs-storage.php(506): FS_Key_Value_Storage->__set('is_plugin_new_i...', false)
+#10 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-freemius.php(1460): FS_Storage->__set('is_plugin_new_i...', false)
+#11 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-freemius.php(1589): Freemius->_plugins_loaded()
+#12 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-freemius.php(510): Freemius->register_constructor_hooks()
+#13 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-freemius.php(2784): Freemius->__construct('5619', 'UpfivCompleteAl...', true)
+#14 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/start.php(513): Freemius::instance('5619', 'UpfivCompleteAl...', true)
+#15 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php(48): fs_dynamic_init(Array)
+#16 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php(67): pf_fs()
+#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('upfiv-complete-...')
+#19 /internal/eval.php(20): activate_plugin('upfiv-complete-...')
+#20 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:5619;a:3:{s:4:\"slug\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}}s:11:\"plugin_data\";a:1:{s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";a:5:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744144215;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;}}s:13:\"file_slug_map\";a:1:{s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php'), pf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->register_constructor_hooks, Freemius->_plugins_loaded, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 20:30:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('show_premium_cumulative_count_notification', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:5619;a:3:{s:4:\"slug\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}}s:11:\"plugin_data\";a:1:{s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";a:6:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744144215;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -511,7 +400,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'show_premium_cumulative_count_notification' , 'yes' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:5619;a:3:{s:4:&quot;slug&quot;;s:36:&quot;UpfivCompleteAllInOneSEOWizardPlugin&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:46:&quot;upfiv-complete-all-in-one-seo-wizard/upfiv.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:36:&quot;UpfivCompleteAllInOneSEOWizardPlugin&quot;;a:6:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:46:&quot;upfiv-complete-all-in-one-seo-wizard/upfiv.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744144215;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:0;s:16:&quot;sdk_last_version&quot;;N;}}s:13:&quot;file_slug_map&quot;;a:1:{s:46:&quot;upfiv-complete-all-in-one-seo-wizard/upfiv.php&quot;;s:36:&quot;UpfivCompleteAllInOneSEOWizardPlugin&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -523,18 +412,27 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/ultimate-social-media-icons/libs/sfsi_install_uninstall.php(1069): add_option('show_premium_cu...', 'yes')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): sfsi_activate_plugin(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
-#9 /internal/eval.php(20): activate_plugin('ultimate-social...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('show_premium_cumulative_count_notification', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-social-media-icons/ultimate_social_media_icons.php'), WP_Hook->do_action, WP_Hook->apply_filters, sfsi_activate_plugin, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 17:13:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_last_versio...', NULL)
+#9 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-fs-storage.php(506): FS_Key_Value_Storage->__set('sdk_last_versio...', NULL)
+#10 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-freemius.php(855): FS_Storage->__set('sdk_last_versio...', NULL)
+#11 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-freemius.php(523): Freemius->_version_updates_handler()
+#12 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/includes/class-freemius.php(2784): Freemius->__construct('5619', 'UpfivCompleteAl...', true)
+#13 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/freemius/start.php(513): Freemius::instance('5619', 'UpfivCompleteAl...', true)
+#14 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php(48): fs_dynamic_init(Array)
+#15 /wordpress/wp-content/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php(67): pf_fs()
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('upfiv-complete-...')
+#18 /internal/eval.php(20): activate_plugin('upfiv-complete-...')
+#19 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:5619;a:3:{s:4:\"slug\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}}s:11:\"plugin_data\";a:1:{s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";a:6:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744144215;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/upfiv-complete-all-in-one-seo-wizard/upfiv.php'), pf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 20:30:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sfsi_custom_icons', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:5619;a:3:{s:4:\"slug\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}}s:11:\"plugin_data\";a:1:{s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";a:7:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744144215;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.3.2\";}}s:13:\"file_slug_map\";a:1:{s:46:\"upfiv-complete-all-in-one-seo-wizard/upfiv.php\";s:36:\"UpfivCompleteAllInOneSEOWizardPlugin\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -546,48 +444,4 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'sfsi_custom_icons' , 'no' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('sfsi_custom_ico...', 'no', '', 'auto')
-#5 /wordpress/wp-content/plugins/ultimate-social-media-icons/libs/sfsi_install_uninstall.php(1071): update_option('sfsi_custom_ico...', 'no')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): sfsi_activate_plugin(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
-#10 /internal/eval.php(20): activate_plugin('ultimate-social...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sfsi_custom_icons', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-social-media-icons/ultimate_social_media_icons.php'), WP_Hook->do_action, WP_Hook->apply_filters, sfsi_activate_plugin, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 17:13:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sfsi_section1_options', 's:727:\"a:20:{s:16:\"sfsi_rss_display\";s:3:\"yes\";s:18:\"sfsi_email_display\";s:3:\"yes\";s:21:\"sfsi_facebook_display\";s:3:\"yes\";s:20:\"sfsi_twitter_display\";s:3:\"yes\";s:22:\"sfsi_pinterest_display\";s:2:\"no\";s:21:\"sfsi_telegram_display\";s:2:\"no\";s:15:\"sfsi_vk_display\";s:2:\"no\";s:15:\"sfsi_ok_display\";s:2:\"no\";s:19:\"sfsi_wechat_display\";s:2:\"no\";s:18:\"sfsi_weibo_display\";s:2:\"no\";s:22:\"sfsi_instagram_display\";s:2:\"no\";s:16:\"sfsi_ria_display\";s:2:\"no\";s:17:\"sfsi_inha_display\";s:2:\"no\";s:21:\"sfsi_linkedin_display\";s:2:\"no\";s:20:\"sfsi_youtube_display\";s:2:\"no\";s:19:\"sfsi_custom_display\";s:0:\"\";s:17:\"sfsi_custom_files\";s:0:\"\";s:21:\"sfsi_whatsapp_display\";s:2:\"no\";s:21:\"sfsi_copylink_display\";s:2:\"no\";s:21:\"sfsi_mastodon_display\";s:2:\"no\";}\";', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'sfsi_section1_options' , 's:727:&quot;a:20:{s:16:&quot;sfsi_rss_display&quot;;s:3:&quot;yes&quot;;s:18:&quot;sfsi_email_display&quot;;s:3:&quot;yes&quot;;s:21:&quot;sfsi_facebook_display&quot;;s:3:&quot;yes&quot;;s:20:&quot;sfsi_twitter_display&quot;;s:3:&quot;yes&quot;;s:22:&quot;sfsi_pinterest_display&quot;;s:2:&quot;no&quot;;s:21:&quot;sfsi_telegram_display&quot;;s:2:&quot;no&quot;;s:15:&quot;sfsi_vk_display&quot;;s:2:&quot;no&quot;;s:15:&quot;sfsi_ok_display&quot;;s:2:&quot;no&quot;;s:19:&quot;sfsi_wechat_display&quot;;s:2:&quot;no&quot;;s:18:&quot;sfsi_weibo_display&quot;;s:2:&quot;no&quot;;s:22:&quot;sfsi_instagram_display&quot;;s:2:&quot;no&quot;;s:16:&quot;sfsi_ria_display&quot;;s:2:&quot;no&quot;;s:17:&quot;sfsi_inha_display&quot;;s:2:&quot;no&quot;;s:21:&quot;sfsi_linkedin_display&quot;;s:2:&quot;no&quot;;s:20:&quot;sfsi_youtube_display&quot;;s:2:&quot;no&quot;;s:19:&quot;sfsi_custom_display&quot;;s:0:&quot;&quot;;s:17:&quot;sfsi_custom_files&quot;;s:0:&quot;&quot;;s:21:&quot;sfsi_whatsapp_display&quot;;s:2:&quot;no&quot;;s:21:&quot;sfsi_copylink_display&quot;;s:2:&quot;no&quot;;s:21:&quot;sfsi_mastodon_display&quot;;s:2:&quot;no&quot;;}&quot;;' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:5619;a:3:{s:4:&quot;slug&quot;;s:36:&quot;UpfivCompleteAllInOneSEOWizardPlugin&quot;;s:4:&quot;type&quot;;s:6:&quot;plug
