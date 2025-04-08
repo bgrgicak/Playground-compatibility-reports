@@ -2109,7 +2109,6 @@
 | SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order. | ast-sqlite-boot | kontxt-semantic-engine | [View logs](/logs/plugins/k/kontxt-semantic-engine/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order. | asyncify-boot | kontxt-semantic-engine | [View logs](/logs/plugins/k/kontxt-semantic-engine/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order. | jspi-boot | kontxt-semantic-engine | [View logs](/logs/plugins/k/kontxt-semantic-engine/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_klikwa_links. | ast-sqlite-boot | kubio | [View logs](/logs/plugins/k/kubio/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order. | ast-sqlite-boot | kv-alexa-status-dashboard | [View logs](/logs/plugins/k/kv-alexa-status-dashboard/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order. | asyncify-boot | kv-alexa-status-dashboard | [View logs](/logs/plugins/k/kv-alexa-status-dashboard/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order. | jspi-boot | kv-alexa-status-dashboard | [View logs](/logs/plugins/k/kv-alexa-status-dashboard/error.json) |
@@ -2141,9 +2140,6 @@
 | SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order. | ast-sqlite-boot | kahanit-wp-fw | [View logs](/logs/plugins/k/kahanit-wp-fw/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order. | asyncify-boot | kahanit-wp-fw | [View logs](/logs/plugins/k/kahanit-wp-fw/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order. | jspi-boot | kahanit-wp-fw | [View logs](/logs/plugins/k/kahanit-wp-fw/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_klikwa_links. | ast-sqlite-boot | kwista-binary-clock | [View logs](/logs/plugins/k/kwista-binary-clock/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_klikwa_links. | asyncify-boot | kwista-binary-clock | [View logs](/logs/plugins/k/kwista-binary-clock/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_klikwa_links. | jspi-boot | kwista-binary-clock | [View logs](/logs/plugins/k/kwista-binary-clock/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | kikfyre-events-calendar-tickets | [View logs](/logs/plugins/k/kikfyre-events-calendar-tickets/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order. | ast-sqlite-boot | kramer | [View logs](/logs/plugins/k/kramer/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order. | asyncify-boot | kramer | [View logs](/logs/plugins/k/kramer/error.json) |
@@ -2229,9 +2225,6 @@
 | SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order. | ast-sqlite-boot | komodo-for-woocommerce | [View logs](/logs/plugins/k/komodo-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order. | asyncify-boot | komodo-for-woocommerce | [View logs](/logs/plugins/k/komodo-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order. | jspi-boot | komodo-for-woocommerce | [View logs](/logs/plugins/k/komodo-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_klikwa_links. | ast-sqlite-boot | kudos | [View logs](/logs/plugins/k/kudos/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_klikwa_links. | asyncify-boot | kudos | [View logs](/logs/plugins/k/kudos/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_klikwa_links. | jspi-boot | kudos | [View logs](/logs/plugins/k/kudos/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order. | ast-sqlite-boot | kingkong-board | [View logs](/logs/plugins/k/kingkong-board/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order. | asyncify-boot | kingkong-board | [View logs](/logs/plugins/k/kingkong-board/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: sort_order. | jspi-boot | kingkong-board | [View logs](/logs/plugins/k/kingkong-board/error.json) |
@@ -2253,13 +2246,25 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_limit_access. | ast-sqlite-boot | lastunes | [View logs](/logs/plugins/l/lastunes/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_limit_access. | asyncify-boot | lastunes | [View logs](/logs/plugins/l/lastunes/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_limit_access. | jspi-boot | lastunes | [View logs](/logs/plugins/l/lastunes/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | ast-sqlite-boot | languageswitcher | [View logs](/logs/plugins/l/languageswitcher/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | asyncify-boot | languageswitcher | [View logs](/logs/plugins/l/languageswitcher/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | jspi-boot | languageswitcher | [View logs](/logs/plugins/l/languageswitcher/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | ast-sqlite-boot | local-business-microdata-widget | [View logs](/logs/plugins/l/local-business-microdata-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | asyncify-boot | local-business-microdata-widget | [View logs](/logs/plugins/l/local-business-microdata-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | jspi-boot | local-business-microdata-widget | [View logs](/logs/plugins/l/local-business-microdata-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_limit_access. | ast-sqlite-boot | less-compiler | [View logs](/logs/plugins/l/less-compiler/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_limit_access. | asyncify-boot | less-compiler | [View logs](/logs/plugins/l/less-compiler/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_limit_access. | jspi-boot | less-compiler | [View logs](/logs/plugins/l/less-compiler/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | ast-sqlite-boot | last-year-post-widget | [View logs](/logs/plugins/l/last-year-post-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | asyncify-boot | last-year-post-widget | [View logs](/logs/plugins/l/last-year-post-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | jspi-boot | last-year-post-widget | [View logs](/logs/plugins/l/last-year-post-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | ast-sqlite-boot | learnpress-buddypress | [View logs](/logs/plugins/l/learnpress-buddypress/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | asyncify-boot | learnpress-buddypress | [View logs](/logs/plugins/l/learnpress-buddypress/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | jspi-boot | learnpress-buddypress | [View logs](/logs/plugins/l/learnpress-buddypress/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | ast-sqlite-boot | logging-with-papertrail | [View logs](/logs/plugins/l/logging-with-papertrail/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | ast-sqlite-boot | lcs-security | [View logs](/logs/plugins/l/lcs-security/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | asyncify-boot | lcs-security | [View logs](/logs/plugins/l/lcs-security/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | jspi-boot | lcs-security | [View logs](/logs/plugins/l/lcs-security/error.json) |
 
  | ast-sqlite-boot | livegrounds | [View logs](/logs/plugins/l/livegrounds/error.json) |
  | asyncify-boot | livegrounds | [View logs](/logs/plugins/l/livegrounds/error.json) |
@@ -2284,12 +2289,21 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 no such table: wp_limit_access. | ast-sqlite-boot | loylap-gift-cards | [View logs](/logs/plugins/l/loylap-gift-cards/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_limit_access. | asyncify-boot | loylap-gift-cards | [View logs](/logs/plugins/l/loylap-gift-cards/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_limit_access. | jspi-boot | loylap-gift-cards | [View logs](/logs/plugins/l/loylap-gift-cards/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | ast-sqlite-boot | lesson-plan-book | [View logs](/logs/plugins/l/lesson-plan-book/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | asyncify-boot | lesson-plan-book | [View logs](/logs/plugins/l/lesson-plan-book/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | jspi-boot | lesson-plan-book | [View logs](/logs/plugins/l/lesson-plan-book/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | ast-sqlite-boot | lightbox-by-supsystic | [View logs](/logs/plugins/l/lightbox-by-supsystic/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | asyncify-boot | lightbox-by-supsystic | [View logs](/logs/plugins/l/lightbox-by-supsystic/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | jspi-boot | lightbox-by-supsystic | [View logs](/logs/plugins/l/lightbox-by-supsystic/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | ast-sqlite-boot | logged-in | [View logs](/logs/plugins/l/logged-in/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | asyncify-boot | logged-in | [View logs](/logs/plugins/l/logged-in/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | jspi-boot | logged-in | [View logs](/logs/plugins/l/logged-in/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_limit_access. | ast-sqlite-boot | list-category | [View logs](/logs/plugins/l/list-category/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_limit_access. | asyncify-boot | list-category | [View logs](/logs/plugins/l/list-category/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_limit_access. | jspi-boot | list-category | [View logs](/logs/plugins/l/list-category/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | ast-sqlite-boot | links-roundups | [View logs](/logs/plugins/l/links-roundups/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | asyncify-boot | links-roundups | [View logs](/logs/plugins/l/links-roundups/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | jspi-boot | links-roundups | [View logs](/logs/plugins/l/links-roundups/error.json) |
 
  | ast-sqlite-boot | login-form-in-restricted-message-for-ultimate-member | [View logs](/logs/plugins/l/login-form-in-restricted-message-for-ultimate-member/error.json) |
  | asyncify-boot | login-form-in-restricted-message-for-ultimate-member | [View logs](/logs/plugins/l/login-form-in-restricted-message-for-ultimate-member/error.json) |
@@ -2299,21 +2313,14 @@ Backtra
 | Data type expected in MySQL query, unknown token received: mappings. | ast-sqlite-boot | login-form-in-restricted-message-for-ultimate-member | [View logs](/logs/plugins/l/login-form-in-restricted-message-for-ultimate-member/error.json) |
 | Data type expected in MySQL query, unknown token received: mappings. | asyncify-boot | login-form-in-restricted-message-for-ultimate-member | [View logs](/logs/plugins/l/login-form-in-restricted-message-for-ultimate-member/error.json) |
 | Data type expected in MySQL query, unknown token received: mappings. | jspi-boot | login-form-in-restricted-message-for-ultimate-member | [View logs](/logs/plugins/l/login-form-in-restricted-message-for-ultimate-member/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | ast-sqlite-boot | leafly-reviews | [View logs](/logs/plugins/l/leafly-reviews/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | asyncify-boot | leafly-reviews | [View logs](/logs/plugins/l/leafly-reviews/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | jspi-boot | leafly-reviews | [View logs](/logs/plugins/l/leafly-reviews/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | ast-sqlite-boot | live-demo-sandbox | [View logs](/logs/plugins/l/live-demo-sandbox/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | asyncify-boot | live-demo-sandbox | [View logs](/logs/plugins/l/live-demo-sandbox/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | jspi-boot | live-demo-sandbox | [View logs](/logs/plugins/l/live-demo-sandbox/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | asyncify-boot | loyalty-for-woocommerce | [View logs](/logs/plugins/l/loyalty-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | jspi-boot | loyalty-for-woocommerce | [View logs](/logs/plugins/l/loyalty-for-woocommerce/error.json) |
-    [code] => 0
-    [message] => Ending quote ` was expected.
-    [position] => 56
-    [query] => SELECT COUNT(cms_id) AS total FROM `wp_mab_cms_page_data
-    [str] => 
-(
-)
-. | ast-sqlite-boot | lequiz | [View logs](/logs/plugins/l/lequiz/error.json) |
-| Array
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | lequiz | [View logs](/logs/plugins/l/lequiz/error.json) |
 
  | ast-sqlite-boot | lime-export | [View logs](/logs/plugins/l/lime-export/error.json) |
  | asyncify-boot | lime-export | [View logs](/logs/plugins/l/lime-export/error.json) |
@@ -2325,9 +2332,23 @@ Backtra
 | Data type expected in MySQL query, unknown token received: mappings. | jspi-boot | lime-export | [View logs](/logs/plugins/l/lime-export/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_limit_access. | asyncify-boot | lazy-load-control-for-elementor | [View logs](/logs/plugins/l/lazy-load-control-for-elementor/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_limit_access. | jspi-boot | lazy-load-control-for-elementor | [View logs](/logs/plugins/l/lazy-load-control-for-elementor/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | ast-sqlite-boot | lbak-user-tracking | [View logs](/logs/plugins/l/lbak-user-tracking/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | asyncify-boot | lbak-user-tracking | [View logs](/logs/plugins/l/lbak-user-tracking/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | jspi-boot | lbak-user-tracking | [View logs](/logs/plugins/l/lbak-user-tracking/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | ast-sqlite-boot | latest-posts-widget | [View logs](/logs/plugins/l/latest-posts-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | asyncify-boot | latest-posts-widget | [View logs](/logs/plugins/l/latest-posts-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | jspi-boot | latest-posts-widget | [View logs](/logs/plugins/l/latest-posts-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | asyncify-boot | lici-wp | [View logs](/logs/plugins/l/lici-wp/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | jspi-boot | lici-wp | [View logs](/logs/plugins/l/lici-wp/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_limit_access. | ast-sqlite-boot | last-revision-widget | [View logs](/logs/plugins/l/last-revision-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_limit_access. | asyncify-boot | last-revision-widget | [View logs](/logs/plugins/l/last-revision-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_limit_access. | jspi-boot | last-revision-widget | [View logs](/logs/plugins/l/last-revision-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | ast-sqlite-boot | lemonnews | [View logs](/logs/plugins/l/lemonnews/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | asyncify-boot | lemonnews | [View logs](/logs/plugins/l/lemonnews/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | jspi-boot | lemonnews | [View logs](/logs/plugins/l/lemonnews/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | ast-sqlite-boot | login-logout-shortcode-simple | [View logs](/logs/plugins/l/login-logout-shortcode-simple/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | asyncify-boot | login-logout-shortcode-simple | [View logs](/logs/plugins/l/login-logout-shortcode-simple/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | jspi-boot | login-logout-shortcode-simple | [View logs](/logs/plugins/l/login-logout-shortcode-simple/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_limit_access. | ast-sqlite-boot | landing-pages-leads-analytics-seo-content | [View logs](/logs/plugins/l/landing-pages-leads-analytics-seo-content/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_limit_access. | asyncify-boot | landing-pages-leads-analytics-seo-content | [View logs](/logs/plugins/l/landing-pages-leads-analytics-seo-content/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_limit_access. | jspi-boot | landing-pages-leads-analytics-seo-content | [View logs](/logs/plugins/l/landing-pages-leads-analytics-seo-content/error.json) |
@@ -2355,12 +2376,24 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | ast-sqlite-boot | liz-comment-counter-by-ozh | [View logs](/logs/plugins/l/liz-comment-counter-by-ozh/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | asyncify-boot | liz-comment-counter-by-ozh | [View logs](/logs/plugins/l/liz-comment-counter-by-ozh/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | jspi-boot | liz-comment-counter-by-ozh | [View logs](/logs/plugins/l/liz-comment-counter-by-ozh/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | ast-sqlite-boot | lightning-dashboard | [View logs](/logs/plugins/l/lightning-dashboard/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | asyncify-boot | lightning-dashboard | [View logs](/logs/plugins/l/lightning-dashboard/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | jspi-boot | lightning-dashboard | [View logs](/logs/plugins/l/lightning-dashboard/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | ast-sqlite-boot | ltl-freight-quotes-sefl-edition | [View logs](/logs/plugins/l/ltl-freight-quotes-sefl-edition/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | asyncify-boot | ltl-freight-quotes-sefl-edition | [View logs](/logs/plugins/l/ltl-freight-quotes-sefl-edition/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | jspi-boot | ltl-freight-quotes-sefl-edition | [View logs](/logs/plugins/l/ltl-freight-quotes-sefl-edition/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | ast-sqlite-boot | latest-legal-news-by-lawyers | [View logs](/logs/plugins/l/latest-legal-news-by-lawyers/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | asyncify-boot | latest-legal-news-by-lawyers | [View logs](/logs/plugins/l/latest-legal-news-by-lawyers/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | jspi-boot | latest-legal-news-by-lawyers | [View logs](/logs/plugins/l/latest-legal-news-by-lawyers/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | ast-sqlite-boot | lds-quotes | [View logs](/logs/plugins/l/lds-quotes/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | asyncify-boot | lds-quotes | [View logs](/logs/plugins/l/lds-quotes/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | jspi-boot | lds-quotes | [View logs](/logs/plugins/l/lds-quotes/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | ast-sqlite-boot | liner-soccer | [View logs](/logs/plugins/l/liner-soccer/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | asyncify-boot | liner-soccer | [View logs](/logs/plugins/l/liner-soccer/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | jspi-boot | liner-soccer | [View logs](/logs/plugins/l/liner-soccer/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | ast-sqlite-boot | logaholic-live-web-analytics-for-wordpress | [View logs](/logs/plugins/l/logaholic-live-web-analytics-for-wordpress/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | asyncify-boot | logaholic-live-web-analytics-for-wordpress | [View logs](/logs/plugins/l/logaholic-live-web-analytics-for-wordpress/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_lici_options has 16 columns but 15 values were supplied. | jspi-boot | logaholic-live-web-analytics-for-wordpress | [View logs](/logs/plugins/l/logaholic-live-web-analytics-for-wordpress/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | mini-mail-dashboard-widget | [View logs](/logs/plugins/m/mini-mail-dashboard-widget/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | mini-mail-dashboard-widget | [View logs](/logs/plugins/m/mini-mail-dashboard-widget/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | mini-mail-dashboard-widget | [View logs](/logs/plugins/m/mini-mail-dashboard-widget/error.json) |
@@ -5496,9 +5529,6 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wpcdnkoloss_files. | ast-sqlite-boot | weekly-archive-widget | [View logs](/logs/plugins/w/weekly-archive-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wpcdnkoloss_files. | asyncify-boot | weekly-archive-widget | [View logs](/logs/plugins/w/weekly-archive-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wpcdnkoloss_files. | jspi-boot | weekly-archive-widget | [View logs](/logs/plugins/w/weekly-archive-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | whats-my-status | [View logs](/logs/plugins/w/whats-my-status/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | whats-my-status | [View logs](/logs/plugins/w/whats-my-status/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | whats-my-status | [View logs](/logs/plugins/w/whats-my-status/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "AND": syntax error. | ast-sqlite-boot | where-can-i-find | [View logs](/logs/plugins/w/where-can-i-find/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "AND": syntax error. | asyncify-boot | where-can-i-find | [View logs](/logs/plugins/w/where-can-i-find/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "AND": syntax error. | jspi-boot | where-can-i-find | [View logs](/logs/plugins/w/where-can-i-find/error.json) |
@@ -5760,9 +5790,6 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | ast-sqlite-boot | wordless | [View logs](/logs/plugins/w/wordless/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | asyncify-boot | wordless | [View logs](/logs/plugins/w/wordless/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whos_online. | jspi-boot | wordless | [View logs](/logs/plugins/w/wordless/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wordpress-ads-plug-in | [View logs](/logs/plugins/w/wordpress-ads-plug-in/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wordpress-ads-plug-in | [View logs](/logs/plugins/w/wordpress-ads-plug-in/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wordpress-ads-plug-in | [View logs](/logs/plugins/w/wordpress-ads-plug-in/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "AND": syntax error. | ast-sqlite-boot | wordpress-banner-widget | [View logs](/logs/plugins/w/wordpress-banner-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "AND": syntax error. | asyncify-boot | wordpress-banner-widget | [View logs](/logs/plugins/w/wordpress-banner-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "AND": syntax error. | jspi-boot | wordpress-banner-widget | [View logs](/logs/plugins/w/wordpress-banner-widget/error.json) |
@@ -5894,9 +5921,6 @@ Backtra
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | wp-ajax-contact-form | [View logs](/logs/plugins/w/wp-ajax-contact-form/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | wp-ajax-contact-form | [View logs](/logs/plugins/w/wp-ajax-contact-form/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | wp-ajax-contact-form | [View logs](/logs/plugins/w/wp-ajax-contact-form/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-all-in-one-tools | [View logs](/logs/plugins/w/wp-all-in-one-tools/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wp-all-in-one-tools | [View logs](/logs/plugins/w/wp-all-in-one-tools/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wp-all-in-one-tools | [View logs](/logs/plugins/w/wp-all-in-one-tools/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | ast-sqlite-boot | wp-app-maker | [View logs](/logs/plugins/w/wp-app-maker/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | asyncify-boot | wp-app-maker | [View logs](/logs/plugins/w/wp-app-maker/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | jspi-boot | wp-app-maker | [View logs](/logs/plugins/w/wp-app-maker/error.json) |
@@ -6029,9 +6053,6 @@ Backtra
 | Unknown query type: . | ast-sqlite-boot | wp-contactme | [View logs](/logs/plugins/w/wp-contactme/error.json) |
 | Unknown query type: . | asyncify-boot | wp-contactme | [View logs](/logs/plugins/w/wp-contactme/error.json) |
 | Unknown query type: . | jspi-boot | wp-contactme | [View logs](/logs/plugins/w/wp-contactme/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-core-contributions-widget | [View logs](/logs/plugins/w/wp-core-contributions-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wp-core-contributions-widget | [View logs](/logs/plugins/w/wp-core-contributions-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wp-core-contributions-widget | [View logs](/logs/plugins/w/wp-core-contributions-widget/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | ast-sqlite-boot | wp-coupon-system | [View logs](/logs/plugins/w/wp-coupon-system/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | asyncify-boot | wp-coupon-system | [View logs](/logs/plugins/w/wp-coupon-system/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | jspi-boot | wp-coupon-system | [View logs](/logs/plugins/w/wp-coupon-system/error.json) |
@@ -6064,9 +6085,6 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wpcdnkoloss_files. | ast-sqlite-boot | wp-e-commerce-best-sellers | [View logs](/logs/plugins/w/wp-e-commerce-best-sellers/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wpcdnkoloss_files. | asyncify-boot | wp-e-commerce-best-sellers | [View logs](/logs/plugins/w/wp-e-commerce-best-sellers/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wpcdnkoloss_files. | jspi-boot | wp-e-commerce-best-sellers | [View logs](/logs/plugins/w/wp-e-commerce-best-sellers/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-e-commerce-catalog-visibility-and-email-inquiry | [View logs](/logs/plugins/w/wp-e-commerce-catalog-visibility-and-email-inquiry/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wp-e-commerce-catalog-visibility-and-email-inquiry | [View logs](/logs/plugins/w/wp-e-commerce-catalog-visibility-and-email-inquiry/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wp-e-commerce-catalog-visibility-and-email-inquiry | [View logs](/logs/plugins/w/wp-e-commerce-catalog-visibility-and-email-inquiry/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_countries. | ast-sqlite-boot | wp-e-commerce-featured-products | [View logs](/logs/plugins/w/wp-e-commerce-featured-products/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_countries. | asyncify-boot | wp-e-commerce-featured-products | [View logs](/logs/plugins/w/wp-e-commerce-featured-products/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_countries. | jspi-boot | wp-e-commerce-featured-products | [View logs](/logs/plugins/w/wp-e-commerce-featured-products/error.json) |
@@ -6344,9 +6362,6 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 no such table: wp_private_messages. | ast-sqlite-boot | wp-polls-with-cubepoints | [View logs](/logs/plugins/w/wp-polls-with-cubepoints/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_private_messages. | asyncify-boot | wp-polls-with-cubepoints | [View logs](/logs/plugins/w/wp-polls-with-cubepoints/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_private_messages. | jspi-boot | wp-polls-with-cubepoints | [View logs](/logs/plugins/w/wp-polls-with-cubepoints/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-post-navigator | [View logs](/logs/plugins/w/wp-post-navigator/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wp-post-navigator | [View logs](/logs/plugins/w/wp-post-navigator/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wp-post-navigator | [View logs](/logs/plugins/w/wp-post-navigator/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "AND": syntax error. | ast-sqlite-boot | wp-prayer-times | [View logs](/logs/plugins/w/wp-prayer-times/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "AND": syntax error. | asyncify-boot | wp-prayer-times | [View logs](/logs/plugins/w/wp-prayer-times/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "AND": syntax error. | jspi-boot | wp-prayer-times | [View logs](/logs/plugins/w/wp-prayer-times/error.json) |
@@ -6555,9 +6570,6 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_user_countries. | ast-sqlite-boot | wp-tracklink | [View logs](/logs/plugins/w/wp-tracklink/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_user_countries. | asyncify-boot | wp-tracklink | [View logs](/logs/plugins/w/wp-tracklink/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_user_countries. | jspi-boot | wp-tracklink | [View logs](/logs/plugins/w/wp-tracklink/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-travel-itinerary | [View logs](/logs/plugins/w/wp-travel-itinerary/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wp-travel-itinerary | [View logs](/logs/plugins/w/wp-travel-itinerary/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wp-travel-itinerary | [View logs](/logs/plugins/w/wp-travel-itinerary/error.json) |
 | Unknown operation: COMMENT. | ast-sqlite-boot | wp-twitter-threads | [View logs](/logs/plugins/w/wp-twitter-threads/error.json) |
 | Unknown operation: COMMENT. | asyncify-boot | wp-twitter-threads | [View logs](/logs/plugins/w/wp-twitter-threads/error.json) |
 | Unknown operation: COMMENT. | jspi-boot | wp-twitter-threads | [View logs](/logs/plugins/w/wp-twitter-threads/error.json) |
@@ -6587,9 +6599,6 @@ Backtra
 | Unexpected token in MySQL query: withAttendance. | jspi-boot | wp-ultimate-csv-importer | [View logs](/logs/plugins/w/wp-ultimate-csv-importer/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | asyncify-boot | wp-undelete-restore-deleted-posts | [View logs](/logs/plugins/w/wp-undelete-restore-deleted-posts/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_id. | jspi-boot | wp-undelete-restore-deleted-posts | [View logs](/logs/plugins/w/wp-undelete-restore-deleted-posts/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wp-user-control | [View logs](/logs/plugins/w/wp-user-control/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wp-user-control | [View logs](/logs/plugins/w/wp-user-control/error.json) |
-| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wp-user-control | [View logs](/logs/plugins/w/wp-user-control/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | wp-user-count | [View logs](/logs/plugins/w/wp-user-count/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | wp-user-count | [View logs](/logs/plugins/w/wp-user-count/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | wp-user-count | [View logs](/logs/plugins/w/wp-user-count/error.json) |
@@ -6866,6 +6875,48 @@ Backtra
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wpie_template. | ast-sqlite-boot | wyzermebadge | [View logs](/logs/plugins/w/wyzermebadge/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wpie_template. | asyncify-boot | wyzermebadge | [View logs](/logs/plugins/w/wyzermebadge/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wpie_template. | jspi-boot | wyzermebadge | [View logs](/logs/plugins/w/wyzermebadge/error.json) |
+| Unexpected token in MySQL query: /. | ast-sqlite-boot | yith-live-chat | [View logs](/logs/plugins/y/yith-live-chat/error.json) |
+| Unexpected token in MySQL query: /. | asyncify-boot | yith-live-chat | [View logs](/logs/plugins/y/yith-live-chat/error.json) |
+| Unexpected token in MySQL query: /. | jspi-boot | yith-live-chat | [View logs](/logs/plugins/y/yith-live-chat/error.json) |
+| Unexpected token in MySQL query: /. | ast-sqlite-boot | yourls-widget | [View logs](/logs/plugins/y/yourls-widget/error.json) |
+| Unexpected token in MySQL query: /. | asyncify-boot | yourls-widget | [View logs](/logs/plugins/y/yourls-widget/error.json) |
+| Unexpected token in MySQL query: /. | jspi-boot | yourls-widget | [View logs](/logs/plugins/y/yourls-widget/error.json) |
+| Unexpected token in MySQL query: /. | ast-sqlite-boot | yaft-yet-another-flickr-template | [View logs](/logs/plugins/y/yaft-yet-another-flickr-template/error.json) |
+| Unexpected token in MySQL query: /. | asyncify-boot | yaft-yet-another-flickr-template | [View logs](/logs/plugins/y/yaft-yet-another-flickr-template/error.json) |
+| Unexpected token in MySQL query: /. | jspi-boot | yaft-yet-another-flickr-template | [View logs](/logs/plugins/y/yaft-yet-another-flickr-template/error.json) |
+| Unexpected token in MySQL query: /. | ast-sqlite-boot | yellow-pages-reviews | [View logs](/logs/plugins/y/yellow-pages-reviews/error.json) |
+| Unexpected token in MySQL query: /. | asyncify-boot | yellow-pages-reviews | [View logs](/logs/plugins/y/yellow-pages-reviews/error.json) |
+| Unexpected token in MySQL query: /. | jspi-boot | yellow-pages-reviews | [View logs](/logs/plugins/y/yellow-pages-reviews/error.json) |
+| Unexpected token in MySQL query: /. | ast-sqlite-boot | yakadanda-google-hangout-events | [View logs](/logs/plugins/y/yakadanda-google-hangout-events/error.json) |
+| Unexpected token in MySQL query: /. | asyncify-boot | yakadanda-google-hangout-events | [View logs](/logs/plugins/y/yakadanda-google-hangout-events/error.json) |
+| Unexpected token in MySQL query: /. | jspi-boot | yakadanda-google-hangout-events | [View logs](/logs/plugins/y/yakadanda-google-hangout-events/error.json) |
+| Unexpected token in MySQL query: /. | ast-sqlite-boot | youtube-channel-gallery | [View logs](/logs/plugins/y/youtube-channel-gallery/error.json) |
+| Unexpected token in MySQL query: /. | asyncify-boot | youtube-channel-gallery | [View logs](/logs/plugins/y/youtube-channel-gallery/error.json) |
+| Unexpected token in MySQL query: /. | jspi-boot | youtube-channel-gallery | [View logs](/logs/plugins/y/youtube-channel-gallery/error.json) |
+| Unexpected token in MySQL query: /. | ast-sqlite-boot | yith-woocommerce-order-tracking | [View logs](/logs/plugins/y/yith-woocommerce-order-tracking/error.json) |
+| Unexpected token in MySQL query: /. | asyncify-boot | yith-woocommerce-order-tracking | [View logs](/logs/plugins/y/yith-woocommerce-order-tracking/error.json) |
+| Unexpected token in MySQL query: /. | jspi-boot | yith-woocommerce-order-tracking | [View logs](/logs/plugins/y/yith-woocommerce-order-tracking/error.json) |
+| Unexpected token in MySQL query: /. | ast-sqlite-boot | yd-profile-visitor-tracker | [View logs](/logs/plugins/y/yd-profile-visitor-tracker/error.json) |
+| Unexpected token in MySQL query: /. | asyncify-boot | yd-profile-visitor-tracker | [View logs](/logs/plugins/y/yd-profile-visitor-tracker/error.json) |
+| Unexpected token in MySQL query: /. | jspi-boot | yd-profile-visitor-tracker | [View logs](/logs/plugins/y/yd-profile-visitor-tracker/error.json) |
+| Unexpected token in MySQL query: /. | ast-sqlite-boot | yd-webhook-to-xml-rpc | [View logs](/logs/plugins/y/yd-webhook-to-xml-rpc/error.json) |
+| Unexpected token in MySQL query: /. | asyncify-boot | yd-webhook-to-xml-rpc | [View logs](/logs/plugins/y/yd-webhook-to-xml-rpc/error.json) |
+| Unexpected token in MySQL query: /. | jspi-boot | yd-webhook-to-xml-rpc | [View logs](/logs/plugins/y/yd-webhook-to-xml-rpc/error.json) |
+| Unexpected token in MySQL query: /. | ast-sqlite-boot | yackstar-stream-widget | [View logs](/logs/plugins/y/yackstar-stream-widget/error.json) |
+| Unexpected token in MySQL query: /. | asyncify-boot | yackstar-stream-widget | [View logs](/logs/plugins/y/yackstar-stream-widget/error.json) |
+| Unexpected token in MySQL query: /. | jspi-boot | yackstar-stream-widget | [View logs](/logs/plugins/y/yackstar-stream-widget/error.json) |
+| Unexpected token in MySQL query: /. | ast-sqlite-boot | yd-prevent-comment-impersonation | [View logs](/logs/plugins/y/yd-prevent-comment-impersonation/error.json) |
+| Unexpected token in MySQL query: /. | asyncify-boot | yd-prevent-comment-impersonation | [View logs](/logs/plugins/y/yd-prevent-comment-impersonation/error.json) |
+| Unexpected token in MySQL query: /. | jspi-boot | yd-prevent-comment-impersonation | [View logs](/logs/plugins/y/yd-prevent-comment-impersonation/error.json) |
+| Unexpected token in MySQL query: /. | ast-sqlite-boot | youtube-user-videos | [View logs](/logs/plugins/y/youtube-user-videos/error.json) |
+| Unexpected token in MySQL query: /. | asyncify-boot | youtube-user-videos | [View logs](/logs/plugins/y/youtube-user-videos/error.json) |
+| Unexpected token in MySQL query: /. | jspi-boot | youtube-user-videos | [View logs](/logs/plugins/y/youtube-user-videos/error.json) |
+| Unexpected token in MySQL query: /. | ast-sqlite-boot | yith-woocommerce-subscription | [View logs](/logs/plugins/y/yith-woocommerce-subscription/error.json) |
+| Unexpected token in MySQL query: /. | asyncify-boot | yith-woocommerce-subscription | [View logs](/logs/plugins/y/yith-woocommerce-subscription/error.json) |
+| Unexpected token in MySQL query: /. | jspi-boot | yith-woocommerce-subscription | [View logs](/logs/plugins/y/yith-woocommerce-subscription/error.json) |
+| Unexpected token in MySQL query: /. | ast-sqlite-boot | yt-player-replace | [View logs](/logs/plugins/y/yt-player-replace/error.json) |
+| Unexpected token in MySQL query: /. | asyncify-boot | yt-player-replace | [View logs](/logs/plugins/y/yt-player-replace/error.json) |
+| Unexpected token in MySQL query: /. | jspi-boot | yt-player-replace | [View logs](/logs/plugins/y/yt-player-replace/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: configuration. | ast-sqlite-boot | zoho-marketinghub | [View logs](/logs/plugins/z/zoho-marketinghub/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: configuration. | asyncify-boot | zoho-marketinghub | [View logs](/logs/plugins/z/zoho-marketinghub/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: configuration. | jspi-boot | zoho-marketinghub | [View logs](/logs/plugins/z/zoho-marketinghub/error.json) |
