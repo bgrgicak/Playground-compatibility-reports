@@ -2,22 +2,22 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [06-Apr-2025 04:18:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [08-Apr-2025 22:25:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opalestate_use_php_sessions', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-08 22:25:56', '2025-04-08 22:25:56', '[nautilus-trips]', '', 'Nautilus Trips', '', 'publish', 'page', 'closed', 'closed', '', 'nautilus-trips', '', '', '2025-04-08 22:25:56', '2025-04-08 22:25:56', 0, 0, '', '')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'opalestate_use_php_sessions' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_posts</li>
+<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-08 22:25:56' , '2025-04-08 22:25:56' , '[nautilus-trips]' , '' , 'Nautilus Trips' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'nautilus-trips' , '' , '' , '2025-04-08 22:25:56' , '2025-04-08 22:25:56' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -28,22 +28,22 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('opalestate_use_...', true, '', 'auto')
-#5 /wordpress/wp-content/plugins/opal-estate-pro/inc/classes/class-opalestate-session.php(243): update_option('opalestate_use_...', true)
-#6 /wordpress/wp-content/plugins/opal-estate-pro/inc/classes/class-opalestate-session.php(72): Opalestate_Session->use_php_sessions()
-#7 /wordpress/wp-content/plugins/opal-estate-pro/opal-estate-pro.php(133): Opalestate_Session->__construct()
-#8 /wordpress/wp-content/plugins/opal-estate-pro/opal-estate-pro.php(488): OpalEstate::get_instance()
-#9 /wordpress/wp-content/plugins/opal-estate-pro/opal-estate-pro.php(492): OpalEstate()
-#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('opal-estate-pro...')
-#12 /internal/eval.php(20): activate_plugin('opal-estate-pro...')
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
+#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
+#6 /wordpress/wp-content/plugins/nautilus-trips/includes/class-nautilus-trips-activator.php(41): wp_insert_post(Array)
+#7 /wordpress/wp-content/plugins/nautilus-trips/nautilus-trips.php(45): Nautilus_Trips_Activator::activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): activate_nautilus_trips(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_nautil...', false)
+#12 /internal/eval.php(20): activate_plugin('nautilus-trips/...')
 #13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opalestate_use_php_sessions', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/opal-estate-pro/opal-estate-pro.php'), OpalEstate, OpalEstate::get_instance, Opalestate_Session->__construct, Opalestate_Session->use_php_sessions, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 04:18:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-08 22:25:56', '2025-04-08 22:25:56', '[nautilus-trips]', '', 'Nautilus Trips', '', 'publish', 'page', 'closed', 'closed', '', 'nautilus-trips', '', '', '2025-04-08 22:25:56', '2025-04-08 22:25:56', 0, 0, '', '') made by activate_plugin, do_action('activate_nautilus-trips/nautilus-trips.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_nautilus_trips, Nautilus_Trips_Activator::activate, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 22:25:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_opalestate_installing', '1743913714', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nautilus_trips_page_id', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -55,7 +55,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_opalestate_installing' , '1743913714' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nautilus_trips_page_id' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -67,19 +67,75 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1743913714, '', 'off')
-#5 /wordpress/wp-content/plugins/opal-estate-pro/inc/class-opalestate-install.php(28): set_transient('opalestate_inst...', 'yes', 600)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Opalestate_Install::install(false)
+#4 /wordpress/wp-content/plugins/nautilus-trips/includes/class-nautilus-trips-activator.php(43): add_option('nautilus_trips_...', 0)
+#5 /wordpress/wp-content/plugins/nautilus-trips/nautilus-trips.php(45): Nautilus_Trips_Activator::activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): activate_nautilus_trips(false)
 #7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opal-e...', false)
-#10 /internal/eval.php(20): activate_plugin('opal-estate-pro...')
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_nautil...', false)
+#10 /internal/eval.php(20): activate_plugin('nautilus-trips/...')
 #11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_opalestate_installing', '1743913714', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_opal-estate-pro/opal-estate-pro.php'), WP_Hook->do_action, WP_Hook->apply_filters, Opalestate_Install::install, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 04:18:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nautilus_trips_page_id', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_nautilus-trips/nautilus-trips.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_nautilus_trips, Nautilus_Trips_Activator::activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 22:25:56 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 22:25:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 22:25:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 22:25:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 22:26:23 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 22:26:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 22:26:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 22:26:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 22:26:50 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 22:26:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 22:26:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 22:26:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 22:27:17 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 22:27:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 22:27:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 22:27:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 22:27:44 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/nikeplus/functions/list-runs.php:301
+Stack trace:
+#0 /wordpress/wp-content/plugins/nikeplus/nikeplus.php(30): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nikeplus/nikepl...')
+#3 /internal/eval.php(20): activate_plugin('nikeplus/nikepl...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/nikeplus/functions/list-runs.php on line 301
+[08-Apr-2025 22:27:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/nikeplus/functions/list-runs.php:301
+Stack trace:
+#0 /wordpress/wp-content/plugins/nikeplus/nikeplus.php(30): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nikeplus/nikepl...')
+#3 /internal/eval.php(20): activate_plugin('nikeplus/nikepl...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/nikeplus/functions/list-runs.php on line 301
+[08-Apr-2025 22:28:00 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/nikeplus/functions/list-runs.php:301
+Stack trace:
+#0 /wordpress/wp-content/plugins/nikeplus/nikeplus.php(30): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('nikeplus/nikepl...')
+#3 /internal/eval.php(20): activate_plugin('nikeplus/nikepl...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/nikeplus/functions/list-runs.php on line 301
+[08-Apr-2025 22:28:09 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 22:28:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 22:28:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 22:28:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 22:28:36 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 22:28:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 22:28:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 22:28:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 22:29:03 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 22:29:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 22:29:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 22:29:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 22:29:31 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 22:29:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 22:29:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 22:29:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 22:29:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_opalestate_installing', 'yes', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nswp_pif_opts', 'a:12:{s:6:\"enable\";i:1;s:15:\"inquiry_btn_txt\";s:15:\"Product Inquiry\";s:17:\"inquiry_btn_bgclr\";s:7:\"#00588f\";s:18:\"inquiry_btn_txtclr\";s:7:\"#ffffff\";s:19:\"inquiry_heading_txt\";s:20:\"Product Inquiry Form\";s:14:\"submit_btn_txt\";s:6:\"Submit\";s:16:\"submit_btn_bgclr\";s:7:\"#00588f\";s:17:\"submit_btn_txtclr\";s:7:\"#ffffff\";s:8:\"email_to\";s:0:\"\";s:13:\"email_subject\";s:20:\"Product Inquiry Form\";s:13:\"email_heading\";s:19:\"New Inquiry Receive\";s:9:\"email_msg\";s:254:\"Hi <strong>{name}</strong>,<br/><br/>You have received a new inquiry. Inquiry data is as follows.<br/><br/><strong>Name:</strong> {name}\\n<strong>Email Address:</strong> {email}\\n<strong>Phone Number:</strong> {phone}\\n<strong>Message:</strong> {message}\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -91,7 +147,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_opalestate_installing' , 'yes' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nswp_pif_opts' , 'a:12:{s:6:&quot;enable&quot;;i:1;s:15:&quot;inquiry_btn_txt&quot;;s:15:&quot;Product Inquiry&quot;;s:17:&quot;inquiry_btn_bgclr&quot;;s:7:&quot;#00588f&quot;;s:18:&quot;inquiry_btn_txtclr&quot;;s:7:&quot;#ffffff&quot;;s:19:&quot;inquiry_heading_txt&quot;;s:20:&quot;Product Inquiry Form&quot;;s:14:&quot;submit_btn_txt&quot;;s:6:&quot;Submit&quot;;s:16:&quot;submit_btn_bgclr&quot;;s:7:&quot;#00588f&quot;;s:17:&quot;submit_btn_txtclr&quot;;s:7:&quot;#ffffff&quot;;s:8:&quot;email_to&quot;;s:0:&quot;&quot;;s:13:&quot;email_subject&quot;;s:20:&quot;Product Inquiry Form&quot;;s:13:&quot;email_heading&quot;;s:19:&quot;New Inquiry Receive&quot;;s:9:&quot;email_msg&quot;;s:254:&quot;Hi &lt;strong&gt;{name}&lt;/strong&gt;,&lt;br/&gt;&lt;br/&gt;You have received a new inquiry. Inquiry data is as follows.&lt;br/&gt;&lt;br/&gt;&lt;strong&gt;Name:&lt;/strong&gt; {name}\n&lt;strong&gt;Email Address:&lt;/strong&gt; {email}\n&lt;strong&gt;Phone Number:&lt;/strong&gt; {phone}\n&lt;strong&gt;Message:&lt;/strong&gt; {message}&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -103,133 +159,60 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_opal...', 'yes', '', 'off')
-#5 /wordpress/wp-content/plugins/opal-estate-pro/inc/class-opalestate-install.php(28): set_transient('opalestate_inst...', 'yes', 600)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Opalestate_Install::install(false)
+#4 /wordpress/wp-includes/option.php(921): add_option('nswp_pif_opts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/nswp-product-inquiry-form/includes/admin/settings/register-settings.php(59): update_option('nswp_pif_opts', Array)
+#6 /wordpress/wp-content/plugins/nswp-product-inquiry-form/nswp-product-inquiry-form.php(91): nswp_pif_default_settings()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): nswp_pif_install(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_nswp-p...', false)
+#11 /internal/eval.php(20): activate_plugin('nswp-product-in...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nswp_pif_opts', 'a:12:{s:6:\"enable\";i:1;s:15:\"inquiry_btn_txt\";s:15:\"Product Inquiry\";s:17:\"inquiry_btn_bgclr\";s:7:\"#00588f\";s:18:\"inquiry_btn_txtclr\";s:7:\"#ffffff\";s:19:\"inquiry_heading_txt\";s:20:\"Product Inquiry Form\";s:14:\"submit_btn_txt\";s:6:\"Submit\";s:16:\"submit_btn_bgclr\";s:7:\"#00588f\";s:17:\"submit_btn_txtclr\";s:7:\"#ffffff\";s:8:\"email_to\";s:0:\"\";s:13:\"email_subject\";s:20:\"Product Inquiry Form\";s:13:\"email_heading\";s:19:\"New Inquiry Receive\";s:9:\"email_msg\";s:254:\"Hi <strong>{name}</strong>,<br/><br/>You have received a new inquiry. Inquiry data is as follows.<br/><br/><strong>Name:</strong> {name}\\n<strong>Email Address:</strong> {email}\\n<strong>Phone Number:</strong> {phone}\\n<strong>Message:</strong> {message}\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_nswp-product-inquiry-form/nswp-product-inquiry-form.php'), WP_Hook->do_action, WP_Hook->apply_filters, nswp_pif_install, nswp_pif_default_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 22:29:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nswp_pif_plugin_options', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nswp_pif_plugin_options' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('nswp_pif_plugin...', 1, '', 'auto')
+#5 /wordpress/wp-content/plugins/nswp-product-inquiry-form/nswp-product-inquiry-form.php(93): update_option('nswp_pif_plugin...', 1)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): nswp_pif_install(false)
 #7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opal-e...', false)
-#10 /internal/eval.php(20): activate_plugin('opal-estate-pro...')
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_nswp-p...', false)
+#10 /internal/eval.php(20): activate_plugin('nswp-product-in...')
 #11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_opalestate_installing', 'yes', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_opal-estate-pro/opal-estate-pro.php'), WP_Hook->do_action, WP_Hook->apply_filters, Opalestate_Install::install, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 04:18:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nswp_pif_plugin_options', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_nswp-product-inquiry-form/nswp-product-inquiry-form.php'), WP_Hook->do_action, WP_Hook->apply_filters, nswp_pif_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 22:29:58 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 22:29:58 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 22:29:58 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 22:29:58 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 15:30:27 America/Los_Angeles] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-06 04:18:34', '2025-04-06 04:18:34', '', '', 'User Dashboard Page', '', 'publish', 'page', 'closed', 'closed', '', 'user-dashboard-page', '', '', '2025-04-06 04:18:34', '2025-04-06 04:18:34', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-06 04:18:34' , '2025-04-06 04:18:34' , '' , '' , 'User Dashboard Page' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'user-dashboard-page' , '' , '' , '2025-04-06 04:18:34' , '2025-04-06 04:18:34' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/opal-estate-pro/inc/class-opalestate-install.php(163): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/opal-estate-pro/inc/class-opalestate-install.php(30): Opalestate_Install::create_options()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): Opalestate_Install::install(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opal-e...', false)
-#12 /internal/eval.php(20): activate_plugin('opal-estate-pro...')
-#13 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-06 04:18:34', '2025-04-06 04:18:34', '', '', 'User Dashboard Page', '', 'publish', 'page', 'closed', 'closed', '', 'user-dashboard-page', '', '', '2025-04-06 04:18:34', '2025-04-06 04:18:34', 0, 0, '', '') made by activate_plugin, do_action('activate_opal-estate-pro/opal-estate-pro.php'), WP_Hook->do_action, WP_Hook->apply_filters, Opalestate_Install::install, Opalestate_Install::create_options, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 04:18:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-06 04:18:34', '2025-04-06 04:18:34', '[opalestate_myaccount]', '', 'My Account', '', 'publish', 'page', 'closed', 'closed', '', 'my-account', '', '', '2025-04-06 04:18:34', '2025-04-06 04:18:34', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-06 04:18:34' , '2025-04-06 04:18:34' , '[opalestate_myaccount]' , '' , 'My Account' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'my-account' , '' , '' , '2025-04-06 04:18:34' , '2025-04-06 04:18:34' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/opal-estate-pro/inc/class-opalestate-install.php(180): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/opal-estate-pro/inc/class-opalestate-install.php(30): Opalestate_Install::create_options()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): Opalestate_Install::install(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opal-e...', false)
-#12 /internal/eval.php(20): activate_plugin('opal-estate-pro...')
-#13 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-06 04:18:34', '2025-04-06 04:18:34', '[opalestate_myaccount]', '', 'My Account', '', 'publish', 'page', 'closed', 'closed', '', 'my-account', '', '', '2025-04-06 04:18:34', '2025-04-06 04:18:34', 0, 0, '', '') made by activate_plugin, do_action('activate_opal-estate-pro/opal-estate-pro.php'), WP_Hook->do_action, WP_Hook->apply_filters, Opalestate_Install::install, Opalestate_Install::create_options, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 04:18:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-06 04:18:34', '2025-04-06 04:18:34', '[opalestate_submission]', '', 'Property Submission Page', '', 'publish', 'page', 'closed', 'closed', '', 'property-submission-page', '', '', '2025-04-06 04:18:34', '2025-04-06 04:18:34', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-06 04:18:34' , '2025-04-06 04:18:34' , '[opalestate_submission]' , '' , 'Property Submission Page' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'property-submission-page' , '' , '' , '2025-04-06 04:18:34' , '2025-04-06 04:18:34' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/opal-estate-pro/inc/class-opalestate-install.php(198): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/opal-estate-pro/inc/class-opalestate-install.php(30): Opalestate_Install::create_options()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): Opalestate_Install::install(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opal-e...', false)
-#12 /internal/eval.php(20): activate_plugin('opal-estate-pro...')
-#13 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-06 04:18:34', '2025-04-06 04:18:34', '[opalestate_submission]', '', 'Property Submission Page', '', 'publish', 'page', 'closed', 'closed', '', 'property-submission-page', '', '', '2025-04-06 04:18:34', '2025-04-06 04:18:34', 0, 0, '', '') made by activate_plugin, do_action('activate_opal-estate-pro/opal-estate-pro.php'), WP_Hook->do_action, WP_Hook->apply_filters, Opalestate_Install::install, Opalestate_Install::create_options, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 04:18:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opalestate_settings', 'a:50:{i:0;b:0;s:9:\"test_mode\";i:1;s:8:\"currency\";s:3:\"USD\";s:17:\"currency_position\";s:6:\"before\";s:16:\"measurement_unit\";s:4:\"sqft\";s:19:\"google_map_api_keys\";s:39:\"AIzaSyCfMVNIa7khIqYHCw6VBn8ShUWWm4tjbG8\";s:9:\"from_name\";s:20:\"My WordPress Website\";s:10:\"from_email\";s:19:\"admin@localhost.com\";s:11:\"message_log\";i:1;s:27:\"opalestate_ppt_bedrooms_opt\";s:2:\"on\";s:26:\"opalestate_ppt_parking_opt\";s:2:\"on\";s:28:\"opalestate_ppt_bathrooms_opt\";s:2:\"on\";s:27:\"opalestate_ppt_areasize_opt\";s:2:\"on\";s:24:\"opalestate_ppt_price_opt\";s:2:\"on\";s:29:\"opalestate_ppt_bedrooms_opt_v\";s:2:\"on\";s:28:\"opalestate_ppt_parking_opt_v\";s:2:\"on\";s:30:\"opalestate_ppt_bathrooms_opt_v\";s:2:\"on\";s:29:\"opalestate_ppt_areasize_opt_v\";s:2:\"on\";s:26:\"opalestate_ppt_price_opt_v\";s:2:\"on\";s:29:\"enable_single_request_viewing\";s:2:\"on\";s:23:\"enable_single_amenities\";s:2:\"on\";s:24:\"enable_single_facilities\";s:2:\"on\";s:25:\"enable_single_attachments\";s:2:\"on\";s:19:\"enable_single_video\";s:2:\"on\";s:17:\"enable_single_map\";s:2:\"on\";s:20:\"enable_single_nearby\";s:2:\"on\";s:24:\"enable_single_walkscores\";s:2:\"on\";s:24:\"enable_single_apartments\";s:2:\"on\";s:25:\"enable_single_floor_plans\";s:2:\"on\";s:30:\"enable_single_views_statistics\";s:2:\"on\";s:29:\"single_views_statistics_limit\";i:8;s:24:\"enable_single_author_box\";s:2:\"on\";s:26:\"enable_single_enquire_form\";s:2:\"on\";s:22:\"enable_single_mortgage\";s:2:\"on\";s:23:\"enable_property_reviews\";s:2:\"on\";s:21:\"enable_agency_reviews\";s:2:\"on\";s:20:\"enable_agent_reviews\";s:2:\"on\";s:30:\"enable_customer_new_submission\";s:2:\"on\";s:27:\"enable_admin_new_submission\";s:2:\"on\";s:29:\"enable_approve_property_email\";s:2:\"on\";s:13:\"admin_approve\";s:2:\"on\";s:27:\"enable_submission_tab_media\";s:2:\"on\";s:30:\"enable_submission_tab_location\";s:2:\"on\";s:31:\"enable_submission_tab_amenities\";s:2:\"on\";s:32:\"enable_submission_tab_facilities\";s:2:\"on\";s:32:\"enable_submission_tab_apartments\";s:2:\"on\";s:33:\"enable_submission_tab_floor_plans\";s:2:\"on\";s:20:\"user_management_page\";i:0;s:19:\"user_myaccount_page\";i:0;s:15:\"submission_page\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nextcart_url_redirect', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -241,7 +224,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'opalestate_settings' , 'a:50:{i:0;b:0;s:9:&quot;test_mode&quot;;i:1;s:8:&quot;currency&quot;;s:3:&quot;USD&quot;;s:17:&quot;currency_position&quot;;s:6:&quot;before&quot;;s:16:&quot;measurement_unit&quot;;s:4:&quot;sqft&quot;;s:19:&quot;google_map_api_keys&quot;;s:39:&quot;AIzaSyCfMVNIa7khIqYHCw6VBn8ShUWWm4tjbG8&quot;;s:9:&quot;from_name&quot;;s:20:&quot;My WordPress Website&quot;;s:10:&quot;from_email&quot;;s:19:&quot;admin@localhost.com&quot;;s:11:&quot;message_log&quot;;i:1;s:27:&quot;opalestate_ppt_bedrooms_opt&quot;;s:2:&quot;on&quot;;s:26:&quot;opalestate_ppt_parking_opt&quot;;s:2:&quot;on&quot;;s:28:&quot;opalestate_ppt_bathrooms_opt&quot;;s:2:&quot;on&quot;;s:27:&quot;opalestate_ppt_areasize_opt&quot;;s:2:&quot;on&quot;;s:24:&quot;opalestate_ppt_price_opt&quot;;s:2:&quot;on&quot;;s:29:&quot;opalestate_ppt_bedrooms_opt_v&quot;;s:2:&quot;on&quot;;s:28:&quot;opalestate_ppt_parking_opt_v&quot;;s:2:&quot;on&quot;;s:30:&quot;opalestate_ppt_bathrooms_opt_v&quot;;s:2:&quot;on&quot;;s:29:&quot;opalestate_ppt_areasize_opt_v&quot;;s:2:&quot;on&quot;;s:26:&quot;opalestate_ppt_price_opt_v&quot;;s:2:&quot;on&quot;;s:29:&quot;enable_single_request_viewing&quot;;s:2:&quot;on&quot;;s:23:&quot;enable_single_amenities&quot;;s:2:&quot;on&quot;;s:24:&quot;enable_single_facilities&quot;;s:2:&quot;on&quot;;s:25:&quot;enable_single_attachments&quot;;s:2:&quot;on&quot;;s:19:&quot;enable_single_video&quot;;s:2:&quot;on&quot;;s:17:&quot;enable_single_map&quot;;s:2:&quot;on&quot;;s:20:&quot;enable_single_nearby&quot;;s:2:&quot;on&quot;;s:24:&quot;enable_single_walkscores&quot;;s:2:&quot;on&quot;;s:24:&quot;enable_single_apartments&quot;;s:2:&quot;on&quot;;s:25:&quot;enable_single_floor_plans&quot;;s:2:&quot;on&quot;;s:30:&quot;enable_single_views_statistics&quot;;s:2:&quot;on&quot;;s:29:&quot;single_views_statistics_limit&quot;;i:8;s:24:&quot;enable_single_author_box&quot;;s:2:&quot;on&quot;;s:26:&quot;enable_single_enquire_form&quot;;s:2:&quot;on&quot;;s:22:&quot;enable_single_mortgage&quot;;s:2:&quot;on&quot;;s:23:&quot;enable_property_reviews&quot;;s:2:&quot;on&quot;;s:21:&quot;enable_agency_reviews&quot;;s:2:&quot;on&quot;;s:20:&quot;enable_agent_reviews&quot;;s:2:&quot;on&quot;;s:30:&quot;enable_customer_new_submission&quot;;s:2:&quot;on&quot;;s:27:&quot;enable_admin_new_submission&quot;;s:2:&quot;on&quot;;s:29:&quot;enable_approve_property_email&quot;;s:2:&quot;on&quot;;s:13:&quot;admin_approve&quot;;s:2:&quot;on&quot;;s:27:&quot;enable_submission_tab_media&quot;;s:2:&quot;on&quot;;s:30:&quot;enable_submission_tab_location&quot;;s:2:&quot;on&quot;;s:31:&quot;enable_submission_tab_amenities&quot;;s:2:&quot;on&quot;;s:32:&quot;enable_submission_tab_facilities&quot;;s:2:&quot;on&quot;;s:32:&quot;enable_submission_tab_apartments&quot;;s:2:&quot;on&quot;;s:33:&quot;enable_submission_tab_floor_plans&quot;;s:2:&quot;on&quot;;s:20:&quot;user_management_page&quot;;i:0;s:19:&quot;user_myaccount_page&quot;;i:0;s:15:&quot;submission_page&quot;;i:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nextcart_url_redirect' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -253,20 +236,43 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('opalestate_sett...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/opal-estate-pro/inc/class-opalestate-install.php(226): update_option('opalestate_sett...', Array)
-#6 /wordpress/wp-content/plugins/opal-estate-pro/inc/class-opalestate-install.php(30): Opalestate_Install::create_options()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Opalestate_Install::install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opal-e...', false)
-#11 /internal/eval.php(20): activate_plugin('opal-estate-pro...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opalestate_settings', 'a:50:{i:0;b:0;s:9:\"test_mode\";i:1;s:8:\"currency\";s:3:\"USD\";s:17:\"currency_position\";s:6:\"before\";s:16:\"measurement_unit\";s:4:\"sqft\";s:19:\"google_map_api_keys\";s:39:\"AIzaSyCfMVNIa7khIqYHCw6VBn8ShUWWm4tjbG8\";s:9:\"from_name\";s:20:\"My WordPress Website\";s:10:\"from_email\";s:19:\"admin@localhost.com\";s:11:\"message_log\";i:1;s:27:\"opalestate_ppt_bedrooms_opt\";s:2:\"on\";s:26:\"opalestate_ppt_parking_opt\";s:2:\"on\";s:28:\"opalestate_ppt_bathrooms_opt\";s:2:\"on\";s:27:\"opalestate_ppt_areasize_opt\";s:2:\"on\";s:24:\"opalestate_ppt_price_opt\";s:2:\"on\";s:29:\"opalestate_ppt_bedrooms_opt_v\";s:2:\"on\";s:28:\"opalestate_ppt_parking_opt_v\";s:2:\"on\";s:30:\"opalestate_ppt_bathrooms_opt_v\";s:2:\"on\";s:29:\"opalestate_ppt_areasize_opt_v\";s:2:\"on\";s:26:\"opalestate_ppt_price_opt_v\";s:2:\"on\";s:29:\"enable_single_request_viewing\";s:2:\"on\";s:23:\"enable_single_amenities\";s:2:\"on\";s:24:\"enable_single_facilities\";s:2:\"on\";s:25:\"enable_single_attachments\";s:2:\"on\";s:19:\"enable_single_video\";s:2:\"on\";s:17:\"enable_single_map\";s:2:\"on\";s:20:\"enable_single_nearby\";s:2:\"on\";s:24:\"enable_single_walkscores\";s:2:\"on\";s:24:\"enable_single_apartments\";s:2:\"on\";s:25:\"enable_single_floor_plans\";s:2:\"on\";s:30:\"enable_single_views_statistics\";s:2:\"on\";s:29:\"single_views_statistics_limit\";i:8;s:24:\"enable_single_author_box\";s:2:\"on\";s:26:\"enable_single_enquire_form\";s:2:\"on\";s:22:\"enable_single_mortgage\";s:2:\"on\";s:23:\"enable_property_reviews\";s:2:\"on\";s:21:\"enable_agency_reviews\";s:2:\"on\";s:20:\"enable_agent_reviews\";s:2:\"on\";s:30:\"enable_customer_new_submission\";s:2:\"on\";s:27:\"enable_admin_new_submission\";s:2:\"on\";s:29:\"enable_approve_property_email\";s:2:\"on\";s:13:\"admin_approve\";s:2:\"on\";s:27:\"enable_submission_tab_media\";s:2:\"on\";s:30:\"enable_submission_tab_location\";s:2:\"on\";s:31:\"enable_submission_tab_amenities\";s:2:\"on\";s:32:\"enable_submission_tab_facilities\";s:2:\"on\";s:32:\"enable_submission_tab_apartments\";s:2:\"on\";s:33:\"enable_submission_tab_floor_plans\";s:2:\"on\";s:20:\"user_management_page\";i:0;s:19:\"user_myaccount_page\";i:0;s:15:\"submission_page\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_opal-estate-pro/opal-estate-pro.php'), WP_Hook->do_action, WP_Hook->apply_filters, Opalestate_Install::install, Opalestate_Install::create_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 04:18:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/nextcart-woocommerce-migration/includes/main.php(185): add_option('nextcart_url_re...', '')
+#5 /wordpress/wp-content/plugins/nextcart-woocommerce-migration/includes/main.php(118): NCWM_Main->create_options()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): NCWM_Main->install(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_nextca...', false)
+#10 /internal/eval.php(20): activate_plugin('nextcart-woocom...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nextcart_url_redirect', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_nextcart-woocommerce-migration/nextcart-woocommerce-migration.php'), WP_Hook->do_action, WP_Hook->apply_filters, NCWM_Main->install, NCWM_Main->create_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 15:30:27 America/Los_Angeles] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 15:30:27 America/Los_Angeles] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 15:30:27 America/Los_Angeles] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 15:30:27 America/Los_Angeles] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 22:31:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 22:31:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 22:31:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 22:31:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 22:31:32 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 22:31:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 22:31:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 22:31:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 22:31:58 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 22:31:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 22:31:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 22:31:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 22:31:59 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 22:31:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 22:31:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 22:31:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 22:32:26 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 22:32:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 22:32:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 22:32:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 22:33:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout__opalestate_installed', '1743913144', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('webpush', 'a:2:{s:9:\"secretkey\";s:0:\"\";s:7:\"brandID\";s:0:\"\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -278,7 +284,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout__opalestate_installed' , '1743913144' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'webpush' , 'a:2:{s:9:&quot;secretkey&quot;;s:0:&quot;&quot;;s:7:&quot;brandID&quot;;s:0:&quot;&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -290,20 +296,85 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1743913144, '', 'off')
-#5 /wordpress/wp-content/plugins/opal-estate-pro/inc/class-opalestate-install.php(229): set_transient('_opalestate_ins...', Array, 30)
-#6 /wordpress/wp-content/plugins/opal-estate-pro/inc/class-opalestate-install.php(30): Opalestate_Install::create_options()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Opalestate_Install::install(false)
+#4 /wordpress/wp-includes/option.php(921): add_option('webpush', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/notifyvisitors-web-push-notification/webpush.php(124): update_option('webpush', Array)
+#6 /wordpress/wp-content/plugins/notifyvisitors-web-push-notification/webpush.php(163): Webpush->update_options(Array)
+#7 /wordpress/wp-includes/class-wp-hook.php(324): Webpush->install(false)
 #8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opal-e...', false)
-#11 /internal/eval.php(20): activate_plugin('opal-estate-pro...')
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_notify...', false)
+#11 /internal/eval.php(20): activate_plugin('notifyvisitors-...')
 #12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout__opalestate_installed', '1743913144', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_opal-estate-pro/opal-estate-pro.php'), WP_Hook->do_action, WP_Hook->apply_filters, Opalestate_Install::install, Opalestate_Install::create_options, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 04:18:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('webpush', 'a:2:{s:9:\"secretkey\";s:0:\"\";s:7:\"brandID\";s:0:\"\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_notifyvisitors-web-push-notification/webpush.php'), WP_Hook->do_action, WP_Hook->apply_filters, Webpush->install, Webpush->update_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 22:33:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 22:33:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 22:33:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 22:33:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 22:33:16 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WebPushWidget')
+#2 /wordpress/wp-content/plugins/notifyvisitors-web-push-notification/webpush.php(62): register_widget('WebPushWidget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): webpush_widget_register_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[08-Apr-2025 22:33:25 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WebPushWidget')
+#2 /wordpress/wp-content/plugins/notifyvisitors-web-push-notification/webpush.php(62): register_widget('WebPushWidget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): webpush_widget_register_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[08-Apr-2025 22:33:34 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WebPushWidget')
+#2 /wordpress/wp-content/plugins/notifyvisitors-web-push-notification/webpush.php(62): register_widget('WebPushWidget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): webpush_widget_register_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[08-Apr-2025 22:33:43 UTC] PHP Parse error:  Unmatched '}' in /wordpress/wp-content/plugins/nsfw-wp-images/nsfw-wp-images.php on line 123
+[08-Apr-2025 22:33:51 UTC] PHP Parse error:  Unmatched '}' in /wordpress/wp-content/plugins/nsfw-wp-images/nsfw-wp-images.php on line 123
+[08-Apr-2025 22:33:59 UTC] PHP Parse error:  Unmatched '}' in /wordpress/wp-content/plugins/nsfw-wp-images/nsfw-wp-images.php on line 123
+[08-Apr-2025 22:34:07 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 22:34:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 22:34:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 22:34:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 22:34:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient__opalestate_installed', 'a:49:{s:9:\"test_mode\";i:1;s:8:\"currency\";s:3:\"USD\";s:17:\"currency_position\";s:6:\"before\";s:16:\"measurement_unit\";s:4:\"sqft\";s:19:\"google_map_api_keys\";s:39:\"AIzaSyCfMVNIa7khIqYHCw6VBn8ShUWWm4tjbG8\";s:9:\"from_name\";s:20:\"My WordPress Website\";s:10:\"from_email\";s:19:\"admin@localhost.com\";s:11:\"message_log\";i:1;s:27:\"opalestate_ppt_bedrooms_opt\";s:2:\"on\";s:26:\"opalestate_ppt_parking_opt\";s:2:\"on\";s:28:\"opalestate_ppt_bathrooms_opt\";s:2:\"on\";s:27:\"opalestate_ppt_areasize_opt\";s:2:\"on\";s:24:\"opalestate_ppt_price_opt\";s:2:\"on\";s:29:\"opalestate_ppt_bedrooms_opt_v\";s:2:\"on\";s:28:\"opalestate_ppt_parking_opt_v\";s:2:\"on\";s:30:\"opalestate_ppt_bathrooms_opt_v\";s:2:\"on\";s:29:\"opalestate_ppt_areasize_opt_v\";s:2:\"on\";s:26:\"opalestate_ppt_price_opt_v\";s:2:\"on\";s:29:\"enable_single_request_viewing\";s:2:\"on\";s:23:\"enable_single_amenities\";s:2:\"on\";s:24:\"enable_single_facilities\";s:2:\"on\";s:25:\"enable_single_attachments\";s:2:\"on\";s:19:\"enable_single_video\";s:2:\"on\";s:17:\"enable_single_map\";s:2:\"on\";s:20:\"enable_single_nearby\";s:2:\"on\";s:24:\"enable_single_walkscores\";s:2:\"on\";s:24:\"enable_single_apartments\";s:2:\"on\";s:25:\"enable_single_floor_plans\";s:2:\"on\";s:30:\"enable_single_views_statistics\";s:2:\"on\";s:29:\"single_views_statistics_limit\";i:8;s:24:\"enable_single_author_box\";s:2:\"on\";s:26:\"enable_single_enquire_form\";s:2:\"on\";s:22:\"enable_single_mortgage\";s:2:\"on\";s:23:\"enable_property_reviews\";s:2:\"on\";s:21:\"enable_agency_reviews\";s:2:\"on\";s:20:\"enable_agent_reviews\";s:2:\"on\";s:30:\"enable_customer_new_submission\";s:2:\"on\";s:27:\"enable_admin_new_submission\";s:2:\"on\";s:29:\"enable_approve_property_email\";s:2:\"on\";s:13:\"admin_approve\";s:2:\"on\";s:27:\"enable_submission_tab_media\";s:2:\"on\";s:30:\"enable_submission_tab_location\";s:2:\"on\";s:31:\"enable_submission_tab_amenities\";s:2:\"on\";s:32:\"enable_submission_tab_facilities\";s:2:\"on\";s:32:\"enable_submission_tab_apartments\";s:2:\"on\";s:33:\"enable_submission_tab_floor_plans\";s:2:\"on\";s:20:\"user_management_page\";i:0;s:19:\"user_myaccount_page\";i:0;s:15:\"submission_page\";i:0;}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_nfproot_plugins_settings', 'a:1:{s:6:\"nfpdap\";a:4:{s:6:\"prefix\";s:6:\"nfpdap\";s:4:\"slug\";s:15:\"nfpdap-settings\";s:7:\"edition\";s:10:\"repository\";s:4:\"name\";s:19:\"Duplicate Any Posts\";}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -315,7 +386,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient__opalestate_installed' , 'a:49:{s:9:&quot;test_mode&quot;;i:1;s:8:&quot;currency&quot;;s:3:&quot;USD&quot;;s:17:&quot;currency_position&quot;;s:6:&quot;before&quot;;s:16:&quot;measurement_unit&quot;;s:4:&quot;sqft&quot;;s:19:&quot;google_map_api_keys&quot;;s:39:&quot;AIzaSyCfMVNIa7khIqYHCw6VBn8ShUWWm4tjbG8&quot;;s:9:&quot;from_name&quot;;s:20:&quot;My WordPress Website&quot;;s:10:&quot;from_email&quot;;s:19:&quot;admin@localhost.com&quot;;s:11:&quot;message_log&quot;;i:1;s:27:&quot;opalestate_ppt_bedrooms_opt&quot;;s:2:&quot;on&quot;;s:26:&quot;opalestate_ppt_parking_opt&quot;;s:2:&quot;on&quot;;s:28:&quot;opalestate_ppt_bathrooms_opt&quot;;s:2:&quot;on&quot;;s:27:&quot;opalestate_ppt_areasize_opt&quot;;s:2:&quot;on&quot;;s:24:&quot;opalestate_ppt_price_opt&quot;;s:2:&quot;on&quot;;s:29:&quot;opalestate_ppt_bedrooms_opt_v&quot;;s:2:&quot;on&quot;;s:28:&quot;opalestate_ppt_parking_opt_v&quot;;s:2:&quot;on&quot;;s:30:&quot;opalestate_ppt_bathrooms_opt_v&quot;;s:2:&quot;on&quot;;s:29:&quot;opalestate_ppt_areasize_opt_v&quot;;s:2:&quot;on&quot;;s:26:&quot;opalestate_ppt_price_opt_v&quot;;s:2:&quot;on&quot;;s:29:&quot;enable_single_request_viewing&quot;;s:2:&quot;on&quot;;s:23:&quot;enable_single_amenities&quot;;s:2:&quot;on&quot;;s:24:&quot;enable_single_facilities&quot;;s:2:&quot;on&quot;;s:25:&quot;enable_single_attachments&quot;;s:2:&quot;on&quot;;s:19:&quot;enable_single_video&quot;;s:2:&quot;on&quot;;s:17:&quot;enable_single_map&quot;;s:2:&quot;on&quot;;s:20:&quot;enable_single_nearby&quot;;s:2:&quot;on&quot;;s:24:&quot;enable_single_walkscores&quot;;s:2:&quot;on&quot;;s:24:&quot;enable_single_apartments&quot;;s:2:&quot;on&quot;;s:25:&quot;enable_single_floor_plans&quot;;s:2:&quot;on&quot;;s:30:&quot;enable_single_views_statistics&quot;;s:2:&quot;on&quot;;s:29:&quot;single_views_statistics_limit&quot;;i:8;s:24:&quot;enable_single_author_box&quot;;s:2:&quot;on&quot;;s:26:&quot;enable_single_enquire_form&quot;;s:2:&quot;on&quot;;s:22:&quot;enable_single_mortgage&quot;;s:2:&quot;on&quot;;s:23:&quot;enable_property_reviews&quot;;s:2:&quot;on&quot;;s:21:&quot;enable_agency_reviews&quot;;s:2:&quot;on&quot;;s:20:&quot;enable_agent_reviews&quot;;s:2:&quot;on&quot;;s:30:&quot;enable_customer_new_submission&quot;;s:2:&quot;on&quot;;s:27:&quot;enable_admin_new_submission&quot;;s:2:&quot;on&quot;;s:29:&quot;enable_approve_property_email&quot;;s:2:&quot;on&quot;;s:13:&quot;admin_approve&quot;;s:2:&quot;on&quot;;s:27:&quot;enable_submission_tab_media&quot;;s:2:&quot;on&quot;;s:30:&quot;enable_submission_tab_location&quot;;s:2:&quot;on&quot;;s:31:&quot;enable_submission_tab_amenities&quot;;s:2:&quot;on&quot;;s:32:&quot;enable_submission_tab_facilities&quot;;s:2:&quot;on&quot;;s:32:&quot;enable_submission_tab_apartments&quot;;s:2:&quot;on&quot;;s:33:&quot;enable_submission_tab_floor_plans&quot;;s:2:&quot;on&quot;;s:20:&quot;user_management_page&quot;;i:0;s:19:&quot;user_myaccount_page&quot;;i:0;s:15:&quot;submission_page&quot;;i:0;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_nfproot_plugins_settings' , 'a:1:{s:6:&quot;nfpdap&quot;;a:4:{s:6:&quot;prefix&quot;;s:6:&quot;nfpdap&quot;;s:4:&quot;slug&quot;;s:15:&quot;nfpdap-settings&quot;;s:7:&quot;edition&quot;;s:10:&quot;repository&quot;;s:4:&quot;name&quot;;s:19:&quot;Duplicate Any Posts&quot;;}}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -327,94 +398,79 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient__opa...', Array, '', 'off')
-#5 /wordpress/wp-content/plugins/opal-estate-pro/inc/class-opalestate-install.php(229): set_transient('_opalestate_ins...', Array, 30)
-#6 /wordpress/wp-content/plugins/opal-estate-pro/inc/class-opalestate-install.php(30): Opalestate_Install::create_options()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Opalestate_Install::install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opal-e...', false)
-#11 /internal/eval.php(20): activate_plugin('opal-estate-pro...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient__opalestate_installed', 'a:49:{s:9:\"test_mode\";i:1;s:8:\"currency\";s:3:\"USD\";s:17:\"currency_position\";s:6:\"before\";s:16:\"measurement_unit\";s:4:\"sqft\";s:19:\"google_map_api_keys\";s:39:\"AIzaSyCfMVNIa7khIqYHCw6VBn8ShUWWm4tjbG8\";s:9:\"from_name\";s:20:\"My WordPress Website\";s:10:\"from_email\";s:19:\"admin@localhost.com\";s:11:\"message_log\";i:1;s:27:\"opalestate_ppt_bedrooms_opt\";s:2:\"on\";s:26:\"opalestate_ppt_parking_opt\";s:2:\"on\";s:28:\"opalestate_ppt_bathrooms_opt\";s:2:\"on\";s:27:\"opalestate_ppt_areasize_opt\";s:2:\"on\";s:24:\"opalestate_ppt_price_opt\";s:2:\"on\";s:29:\"opalestate_ppt_bedrooms_opt_v\";s:2:\"on\";s:28:\"opalestate_ppt_parking_opt_v\";s:2:\"on\";s:30:\"opalestate_ppt_bathrooms_opt_v\";s:2:\"on\";s:29:\"opalestate_ppt_areasize_opt_v\";s:2:\"on\";s:26:\"opalestate_ppt_price_opt_v\";s:2:\"on\";s:29:\"enable_single_request_viewing\";s:2:\"on\";s:23:\"enable_single_amenities\";s:2:\"on\";s:24:\"enable_single_facilities\";s:2:\"on\";s:25:\"enable_single_attachments\";s:2:\"on\";s:19:\"enable_single_video\";s:2:\"on\";s:17:\"enable_single_map\";s:2:\"on\";s:20:\"enable_single_nearby\";s:2:\"on\";s:24:\"enable_single_walkscores\";s:2:\"on\";s:24:\"enable_single_apartments\";s:2:\"on\";s:25:\"enable_single_floor_plans\";s:2:\"on\";s:30:\"enable_single_views_statistics\";s:2:\"on\";s:29:\"single_views_statistics_limit\";i:8;s:24:\"enable_single_author_box\";s:2:\"on\";s:26:\"enable_single_enquire_form\";s:2:\"on\";s:22:\"enable_single_mortgage\";s:2:\"on\";s:23:\"enable_property_reviews\";s:2:\"on\";s:21:\"enable_agency_reviews\";s:2:\"on\";s:20:\"enable_agent_reviews\";s:2:\"on\";s:30:\"enable_customer_new_submission\";s:2:\"on\";s:27:\"enable_admin_new_submission\";s:2:\"on\";s:29:\"enable_approve_property_email\";s:2:\"on\";s:13:\"admin_approve\";s:2:\"on\";s:27:\"enable_submission_tab_media\";s:2:\"on\";s:30:\"enable_submission_tab_location\";s:2:\"on\";s:31:\"enable_submission_tab_amenities\";s:2:\"on\";s:32:\"enable_submission_tab_facilities\";s:2:\"on\";s:32:\"enable_submission_tab_apartments\";s:2:\"on\";s:33:\"enable_submission_tab_floor_plans\";s:2:\"on\";s:20:\"user_management_page\";i:0;s:19:\"user_myaccount_page\";i:0;s:15:\"submission_page\";i:0;}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_opal-estate-pro/opal-estate-pro.php'), WP_Hook->do_action, WP_Hook->apply_filters, Opalestate_Install::install, Opalestate_Install::create_options, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 04:18:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 04:18:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-include
+#4 /wordpress/wp-includes/option.php(921): add_option('_nfproot_plugin...', Array, '', 'off')
+#5 /wordpress/wp-content/plugins/nutsforpress-duplicate-any-posts/includes/nfpdap-plugin-activate.php(22): update_option('_nfproot_plugin...', Array, false)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): nfpdap_plugin_activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_nutsfo...', false)
+#10 /internal/eval.php(20): activate_plugin('nutsforpress-du...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_nfproot_plugins_settings', 'a:1:{s:6:\"nfpdap\";a:4:{s:6:\"prefix\";s:6:\"nfpdap\";s:4:\"slug\";s:15:\"nfpdap-settings\";s:7:\"edition\";s:10:\"repository\";s:4:\"name\";s:19:\"Duplicate Any Posts\";}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_nutsforpress-duplicate-any-posts/nuts-for-press-duplicate-any-posts.php'), WP_Hook->do_action, WP_Hook->apply_filters, nfpdap_plugin_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 22:34:07 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 22:34:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 22:34:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 22:34:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 22:34:33 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 22:34:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 22:34:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 22:34:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 22:35:00 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 22:35:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 22:35:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 22:35:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 22:35:36 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 22:35:36 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 22:35:36 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 22:35:36 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 22:35:36 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 22:35:36 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 22:35:36 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 22:35:36 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 22:36:26 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 22:36:26 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 22:36:26 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 22:36:26 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 22:36:36 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array in /wordpress/wp-content/plugins/oauth-client-for-user-authentication/Assets/services/customerUtility.php:36
+Stack trace:
+#0 /wordpress/wp-content/plugins/oauth-client-for-user-authentication/oauthclient_controller.php(56): contact::contactUs('admin', 'admin@localhost...', 'Activated', 'User has activa...')
+#1 /wordpress/wp-includes/class-wp-hook.php(324): oc_oauthclient_controller->lwliad_activate_oauth_plug(false)
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_oauth-...', false)
+#5 /internal/eval.php(20): activate_plugin('oauth-client-fo...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/oauth-client-for-user-authentication/Assets/services/customerUtility.php on line 36
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"oauth-client-for-user-authentication"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/7.4.31-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
