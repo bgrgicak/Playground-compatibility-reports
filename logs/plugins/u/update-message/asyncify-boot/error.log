@@ -2,583 +2,1002 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [04-Apr-2025 14:24:59 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 14:24:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 14:24:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 14:24:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 14:25:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [08-Apr-2025 19:23:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 19:23:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 19:23:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 19:23:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 19:23:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpucv_preview_images_url', 'http://127.0.0.1:9400/wp-content/uploads/wpucv-preview', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TABLE IF NOT EXISTS `wp_utt_groups` (
+            groupID int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'unique - for use in the Lectures table',
+            periodID int UNSIGNED NOT NULL COMMENT 'FKey from Periods',
+            subjectID int UNSIGNED NOT NULL COMMENT 'FKey from Subjects',
+            groupName varchar(30) NOT NULL COMMENT 'name of the group',
+            PRIMARY KEY  (periodID, subjectID, groupName),
+            KEY `fk_Groups_Periods_idx` (periodID ASC),
+            KEY `fk_Groups_Subject1_idx` (subjectID ASC),
+            UNIQUE KEY `groupID_UNIQUE` (groupID ASC),
+            CONSTRAINT `fk_Groups_Periods`
+            FOREIGN KEY (periodID)
+            REFERENCES `wp_utt_periods` (periodID)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE,
+            CONSTRAINT `fk_Groups_Subjects`
+            FOREIGN KEY (subjectID)
+            REFERENCES `wp_utt_subjects` (subjectID)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE)
+            ENGINE = InnoDB
+            DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_utt_groups</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpucv_preview_images_url' , 'http://127.0.0.1:9400/wp-content/uploads/wpucv-preview' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+				INSERT INTO _wp_sqlite_mysql_information_schema_tables (table_schema, table_name, table_type, engine, row_format, table_collation)
+				VALUES (?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_groups, BASE TABLE, InnoDB, Dynamic, utf8mb4_general_ci</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_groups, groupID, 1, , NO, int, , , 10, 0, , , , int unsigned, , auto_increment, select,insert,update,references, unique - for use in the Lectures table, , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_groups, periodID, 2, , NO, int, , , 10, 0, , , , int unsigned, , , select,insert,update,references, FKey from Periods, , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_groups, subjectID, 3, , NO, int, , , 10, 0, , , , int unsigned, , , select,insert,update,references, FKey from Subjects, , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_groups, groupName, 4, , NO, varchar, 30, 120, , , , utf8mb4, utf8mb4_general_ci, varchar(30), , , select,insert,update,references, name of the group, , </li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM _wp_sqlite_mysql_information_schema_columns
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?,?,?)
+				 | parameters: database_name_here, wp_utt_groups, periodID, subjectID, groupName</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_groups, 0, database_name_here, PRIMARY, 1, periodID, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_groups, 0, database_name_here, PRIMARY, 2, subjectID, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_groups, 0, database_name_here, PRIMARY, 3, groupName, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_information_schema_statistics
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_utt_groups, database_name_here, wp_utt_groups</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM _wp_sqlite_mysql_information_schema_columns
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_utt_groups, periodID</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_groups, 1, database_name_here, fk_Groups_Periods_idx, 1, periodID, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_information_schema_statistics
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_utt_groups, database_name_here, wp_utt_groups</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM _wp_sqlite_mysql_information_schema_columns
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_utt_groups, subjectID</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_groups, 1, database_name_here, fk_Groups_Subject1_idx, 1, subjectID, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_information_schema_statistics
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_utt_groups, database_name_here, wp_utt_groups</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM _wp_sqlite_mysql_information_schema_columns
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_utt_groups, groupID</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_groups, 0, database_name_here, groupID_UNIQUE, 1, groupID, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_information_schema_statistics
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_utt_groups, database_name_here, wp_utt_groups</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+FOREIGN KEY and CHECK constraints are not supported yet.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wpucv_preview_i...', 'http://127.0.0....', '', 'auto')
-#5 /wordpress/wp-content/plugins/ultimate-content-views/inc/WPUCV_Core.php(202): update_option('wpucv_preview_i...', 'http://127.0.0....')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): WPUCV_Core::activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
-#10 /internal/eval.php(20): activate_plugin('ultimate-conten...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpucv_preview_images_url', 'http://127.0.0.1:9400/wp-content/uploads/wpucv-preview', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-content-views/ultimate-content-views.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPUCV_Core::activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 14:25:14 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 14:25:14 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 14:25:14 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 14:25:14 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 14:25:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_ulmc_activation_notice', '1743776731', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_ulmc_activation_notice' , '1743776731' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1743776731, '', 'off')
-#5 /wordpress/wp-content/plugins/ultimate-loan-mortgage-calculator/includes/class-ulmc-activator.php(33): set_transient('ulmc_activation...', true, 5)
-#6 /wordpress/wp-content/plugins/ultimate-loan-mortgage-calculator/ultimate-loan-mortgage-calculator.php(47): ULMC_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_ulmc_free(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
-#11 /internal/eval.php(20): activate_plugin('ultimate-loan-m...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_ulmc_activation_notice', '1743776731', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-loan-mortgage-calculator/ultimate-loan-mortgage-calculator.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_ulmc_free, ULMC_Activator::activate, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 14:25:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_ulmc_activation_notice', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_ulmc_activation_notice' , '1' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_ulmc...', true, '', 'off')
-#5 /wordpress/wp-content/plugins/ultimate-loan-mortgage-calculator/includes/class-ulmc-activator.php(33): set_transient('ulmc_activation...', true, 5)
-#6 /wordpress/wp-content/plugins/ultimate-loan-mortgage-calculator/ultimate-loan-mortgage-calculator.php(47): ULMC_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_ulmc_free(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
-#11 /internal/eval.php(20): activate_plugin('ultimate-loan-m...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_ulmc_activation_notice', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-loan-mortgage-calculator/ultimate-loan-mortgage-calculator.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_ulmc_free, ULMC_Activator::activate, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 14:25:26 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 14:25:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 14:25:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 14:25:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 14:25:37 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 14:25:37 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 14:25:37 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 14:25:37 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 14:25:37 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 14:25:37 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 14:25:37 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 14:25:37 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 14:26:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 14:26:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 14:26:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 14:26:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 14:26:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'B|V6sS%o@|Gf:cYrxD7+oGxx9C3Pcp;_pnQ.yw{X-${C[|;XN+X V(0/ExC=h-NX', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'B|V6sS%o@|Gf:cYrxD7+oGxx9C3Pcp;_pnQ.yw{X-${C[|;XN+X V(0/ExC=h-NX' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'B|V6sS%o@|Gf:cY...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'B|V6sS%o@|Gf:cY...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'B|V6sS%o@|Gf:cY...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'B|V6sS%o@|Gf:cY...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40366|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/ultimate-page-builder/includes/class-upb-elements.php(518): wp_register_script('upb-element-upb...', 'http://127.0.0....', Array, false, Array)
-#19 /wordpress/wp-content/plugins/ultimate-page-builder/includes/class-upb-elements.php(445): UPB_Elements->register_assets('upb-accordion', Array)
-#20 /wordpress/wp-content/plugins/ultimate-page-builder/elements/with-upb.php(174): UPB_Elements->register('upb-accordion', Array, Array, Array)
-#21 /wordpress/wp-includes/class-wp-hook.php(324): Ultimate_Page_Builder->{closure}(Object(UPB_Elements))
-#22 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#23 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#24 /wordpress/wp-content/plugins/ultimate-page-builder/includes/upb-hooks.php(6): do_action('upb_register_el...', Object(UPB_Elements))
-#25 /wordpress/wp-includes/class-wp-hook.php(324): upb_elements_register_action('')
-#26 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#27 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#28 /wordpress/wp-settings.php(726): do_action('wp_loaded')
-#29 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#30 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#31 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#32 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'B|V6sS%o@|Gf:cYrxD7+oGxx9C3Pcp;_pnQ.yw{X-${C[|;XN+X V(0/ExC=h-NX', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('wp_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, upb_elements_register_action, do_action('upb_register_element'), WP_Hook->do_action, WP_Hook->apply_filters, Ultimate_Page_Builder->{closure}, UPB_Elements->register, UPB_Elements->register_assets, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 14:26:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '^u?_fX<t6&>jkR#5s,68u+lw#.vDEuaR;8 &^/Pwq#MNxqNtqk^*Z5D^am/SjqVG', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , '^u?_fX&lt;t6&amp;&gt;jkR#5s,68u+lw#.vDEuaR;8 &amp;^/Pwq#MNxqNtqk^*Z5D^am/SjqVG' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', '^u?_fX<t6&>jkR#...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', '^u?_fX<t6&>jkR#...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', '^u?_fX<t6&>jkR#...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', '^u?_fX<t6&>jkR#...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40366|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/ultimate-page-builder/includes/class-upb-elements.php(518): wp_register_script('upb-element-upb...', 'http://127.0.0....', Array, false, Array)
-#19 /wordpress/wp-content/plugins/ultimate-page-builder/includes/class-upb-elements.php(445): UPB_Elements->register_assets('upb-accordion', Array)
-#20 /wordpress/wp-content/plugins/ultimate-page-builder/elements/with-upb.php(174): UPB_Elements->register('upb-accordion', Array, Array, Array)
-#21 /wordpress/wp-includes/class-wp-hook.php(324): Ultimate_Page_Builder->{closure}(Object(UPB_Elements))
-#22 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#23 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#24 /wordpress/wp-content/plugins/ultimate-page-builder/includes/upb-hooks.php(6): do_action('upb_register_el...', Object(UPB_Elements))
-#25 /wordpress/wp-includes/class-wp-hook.php(324): upb_elements_register_action('')
-#26 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#27 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#28 /wordpress/wp-settings.php(726): do_action('wp_loaded')
-#29 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#30 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#31 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#32 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '^u?_fX<t6&>jkR#5s,68u+lw#.vDEuaR;8 &^/Pwq#MNxqNtqk^*Z5D^am/SjqVG', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('wp_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, upb_elements_register_action, do_action('upb_register_element'), WP_Hook->do_action, WP_Hook->apply_filters, Ultimate_Page_Builder->{closure}, UPB_Elements->register, UPB_Elements->register_assets, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 14:26:30 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 14:26:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 14:26:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 14:26:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 14:26:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('up_opts', 'a:12:{s:11:\"enabled_opt\";s:1:\"1\";s:12:\"homeonly_opt\";s:1:\"1\";s:14:\"percetange_opt\";s:1:\"1\";s:19:\"percetange_size_opt\";s:2:\"40\";s:14:\"line_color_opt\";s:7:\"#29a2db\";s:12:\"bg_color_opt\";s:7:\"#000000\";s:19:\"preloader_style_opt\";s:1:\"3\";s:14:\"bar_height_opt\";s:1:\"1\";s:16:\"custom_width_opt\";s:1:\"0\";s:12:\"bg_image_opt\";s:0:\"\";s:21:\"bg_image_position_opt\";s:1:\"1\";s:23:\"percetange_position_opt\";s:1:\"1\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'up_opts' , 'a:12:{s:11:&quot;enabled_opt&quot;;s:1:&quot;1&quot;;s:12:&quot;homeonly_opt&quot;;s:1:&quot;1&quot;;s:14:&quot;percetange_opt&quot;;s:1:&quot;1&quot;;s:19:&quot;percetange_size_opt&quot;;s:2:&quot;40&quot;;s:14:&quot;line_color_opt&quot;;s:7:&quot;#29a2db&quot;;s:12:&quot;bg_color_opt&quot;;s:7:&quot;#000000&quot;;s:19:&quot;preloader_style_opt&quot;;s:1:&quot;3&quot;;s:14:&quot;bar_height_opt&quot;;s:1:&quot;1&quot;;s:16:&quot;custom_width_opt&quot;;s:1:&quot;0&quot;;s:12:&quot;bg_image_opt&quot;;s:0:&quot;&quot;;s:21:&quot;bg_image_position_opt&quot;;s:1:&quot;1&quot;;s:23:&quot;percetange_position_opt&quot;;s:1:&quot;1&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/ultimate-preloader/ultimate_preloader.php(60): add_option('up_opts', Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): up_activated(false)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE TABLE IF...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE IF...')
+#4 /wordpress/wp-content/plugins/unitimetable/UniTimetable.php(76): dbDelta(Array)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): utt_activate(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
-#9 /internal/eval.php(20): activate_plugin('ultimate-preloa...')
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_unitim...', false)
+#9 /internal/eval.php(20): activate_plugin('unitimetable/Un...')
 #10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('up_opts', 'a:12:{s:11:\"enabled_opt\";s:1:\"1\";s:12:\"homeonly_opt\";s:1:\"1\";s:14:\"percetange_opt\";s:1:\"1\";s:19:\"percetange_size_opt\";s:2:\"40\";s:14:\"line_color_opt\";s:7:\"#29a2db\";s:12:\"bg_color_opt\";s:7:\"#000000\";s:19:\"preloader_style_opt\";s:1:\"3\";s:14:\"bar_height_opt\";s:1:\"1\";s:16:\"custom_width_opt\";s:1:\"0\";s:12:\"bg_image_opt\";s:0:\"\";s:21:\"bg_image_position_opt\";s:1:\"1\";s:23:\"percetange_position_opt\";s:1:\"1\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-preloader/ultimate_preloader.php'), WP_Hook->do_action, WP_Hook->apply_filters, up_activated, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 14:26:51 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 14:26:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 14:26:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 14:26:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 14:27:03 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 14:27:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 14:27:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 14:27:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 14:27:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query CREATE TABLE IF NOT EXISTS `wp_utt_groups` (
+            groupID int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'unique - for use in the Lectures table',
+            periodID int UNSIGNED NOT NULL COMMENT 'FKey from Periods',
+            subjectID int UNSIGNED NOT NULL COMMENT 'FKey from Subjects',
+            groupName varchar(30) NOT NULL COMMENT 'name of the group',
+            PRIMARY KEY  (periodID, subjectID, groupName),
+            KEY `fk_Groups_Periods_idx` (periodID ASC),
+            KEY `fk_Groups_Subject1_idx` (subjectID ASC),
+            UNIQUE KEY `groupID_UNIQUE` (groupID ASC),
+            CONSTRAINT `fk_Groups_Periods`
+            FOREIGN KEY (periodID)
+            REFERENCES `wp_utt_periods` (periodID)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE,
+            CONSTRAINT `fk_Groups_Subjects`
+            FOREIGN KEY (subjectID)
+            REFERENCES `wp_utt_subjects` (subjectID)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE)
+            ENGINE = InnoDB
+            DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_unitimetable/UniTimetable.php'), WP_Hook->do_action, WP_Hook->apply_filters, utt_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 19:23:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ultimate_security_checker_color', '0', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TABLE IF NOT EXISTS `wp_utt_lectures` (
+            lectureID int UNSIGNED NOT NULL AUTO_INCREMENT,
+            groupID int UNSIGNED NOT NULL COMMENT 'FKey from Groups',
+            classroomID smallint UNSIGNED NOT NULL COMMENT 'FKey from Classrooms',
+            teacherID smallint UNSIGNED NOT NULL COMMENT 'FKey from Teachers',
+            start datetime NOT NULL COMMENT 'date-time when the event starts',
+            end datetime NOT NULL COMMENT 'date-time when the event ends',
+            KEY `fk_Lecture_Classrooms1_idx` (classroomID ASC),
+            KEY `fk_Lecture_Teachers1_idx` (teacherID ASC),
+            PRIMARY KEY  (lectureID),
+            CONSTRAINT `fk_Lectures_Classrooms`
+            FOREIGN KEY (classroomID)
+            REFERENCES `wp_utt_classrooms` (classroomID)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE,
+            CONSTRAINT `fk_Lectures_Teachers`
+            FOREIGN KEY (teacherID)
+            REFERENCES `wp_utt_teachers` (teacherID)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE,
+            CONSTRAINT `fk_Lectures_Groups1`
+            FOREIGN KEY (groupID)
+            REFERENCES `wp_utt_groups` (groupID)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE)
+            ENGINE = InnoDB
+            DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_utt_lectures</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_ultimate_security_checker_color' , '0' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+				INSERT INTO _wp_sqlite_mysql_information_schema_tables (table_schema, table_name, table_type, engine, row_format, table_collation)
+				VALUES (?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_lectures, BASE TABLE, InnoDB, Dynamic, utf8mb4_general_ci</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_lectures, lectureID, 1, , NO, int, , , 10, 0, , , , int unsigned, , auto_increment, select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_lectures, groupID, 2, , NO, int, , , 10, 0, , , , int unsigned, , , select,insert,update,references, FKey from Groups, , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_lectures, classroomID, 3, , NO, smallint, , , 5, 0, , , , smallint unsigned, , , select,insert,update,references, FKey from Classrooms, , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_lectures, teacherID, 4, , NO, smallint, , , 5, 0, , , , smallint unsigned, , , select,insert,update,references, FKey from Teachers, , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_lectures, start, 5, , NO, datetime, , , , , 0, , , datetime, , , select,insert,update,references, date-time when the event starts, , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_lectures, end, 6, , NO, datetime, , , , , 0, , , datetime, , , select,insert,update,references, date-time when the event ends, , </li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM _wp_sqlite_mysql_information_schema_columns
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_utt_lectures, classroomID</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_lectures, 1, database_name_here, fk_Lecture_Classrooms1_idx, 1, classroomID, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_information_schema_statistics
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_utt_lectures, database_name_here, wp_utt_lectures</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM _wp_sqlite_mysql_information_schema_columns
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_utt_lectures, teacherID</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_lectures, 1, database_name_here, fk_Lecture_Teachers1_idx, 1, teacherID, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_information_schema_statistics
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_utt_lectures, database_name_here, wp_utt_lectures</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM _wp_sqlite_mysql_information_schema_columns
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_utt_lectures, lectureID</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_lectures, 0, database_name_here, PRIMARY, 1, lectureID, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_information_schema_statistics
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_utt_lectures, database_name_here, wp_utt_lectures</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+FOREIGN KEY and CHECK constraints are not supported yet.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/ultimate-security-checker/wp-ultimate-security.php(40): add_option('wp_ultimate_sec...', 0, NULL, 'on')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wp_ultimate_security_checker_activate(false)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE TABLE IF...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE IF...')
+#4 /wordpress/wp-content/plugins/unitimetable/UniTimetable.php(127): dbDelta(Array)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): utt_activate(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
-#9 /internal/eval.php(20): activate_plugin('ultimate-securi...')
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_unitim...', false)
+#9 /internal/eval.php(20): activate_plugin('unitimetable/Un...')
 #10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ultimate_security_checker_color', '0', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-security-checker/wp-ultimate-security.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_ultimate_security_checker_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 14:27:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query CREATE TABLE IF NOT EXISTS `wp_utt_lectures` (
+            lectureID int UNSIGNED NOT NULL AUTO_INCREMENT,
+            groupID int UNSIGNED NOT NULL COMMENT 'FKey from Groups',
+            classroomID smallint UNSIGNED NOT NULL COMMENT 'FKey from Classrooms',
+            teacherID smallint UNSIGNED NOT NULL COMMENT 'FKey from Teachers',
+            start datetime NOT NULL COMMENT 'date-time when the event starts',
+            end datetime NOT NULL COMMENT 'date-time when the event ends',
+            KEY `fk_Lecture_Classrooms1_idx` (classroomID ASC),
+            KEY `fk_Lecture_Teachers1_idx` (teacherID ASC),
+            PRIMARY KEY  (lectureID),
+            CONSTRAINT `fk_Lectures_Classrooms`
+            FOREIGN KEY (classroomID)
+            REFERENCES `wp_utt_classrooms` (classroomID)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE,
+            CONSTRAINT `fk_Lectures_Teachers`
+            FOREIGN KEY (teacherID)
+            REFERENCES `wp_utt_teachers` (teacherID)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE,
+            CONSTRAINT `fk_Lectures_Groups1`
+            FOREIGN KEY (groupID)
+            REFERENCES `wp_utt_groups` (groupID)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE)
+            ENGINE = InnoDB
+            DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_unitimetable/UniTimetable.php'), WP_Hook->do_action, WP_Hook->apply_filters, utt_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 19:23:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ultimate_security_checker_score', '0', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TABLE IF NOT EXISTS `wp_utt_events` (
+            eventID int UNSIGNED NOT NULL AUTO_INCREMENT,
+            eventType varchar(45) NOT NULL COMMENT 'type of the event',
+            eventTitle varchar(45) NOT NULL COMMENT 'title of the event',
+            eventDescr varchar(255) NULL COMMENT 'description of the event',
+            classroomID smallint UNSIGNED NOT NULL COMMENT 'Fkey from classrooms',
+            eventStart datetime NOT NULL COMMENT 'Date-time when the event starts',
+            eventEnd datetime NOT NULL COMMENT 'date-time when the event ends',
+            PRIMARY KEY  (eventID),
+            KEY `fk_wp_utt_events_wp_utt_classrooms1_idx` (classroomID ASC),
+            CONSTRAINT `fk_wp_utt_events_wp_utt_classrooms1`
+            FOREIGN KEY (classroomID)
+            REFERENCES `wp_utt_classrooms` (classroomID)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE)
+            ENGINE = InnoDB
+            DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_utt_events</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_ultimate_security_checker_score' , '0' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+				INSERT INTO _wp_sqlite_mysql_information_schema_tables (table_schema, table_name, table_type, engine, row_format, table_collation)
+				VALUES (?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_events, BASE TABLE, InnoDB, Dynamic, utf8mb4_general_ci</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_events, eventID, 1, , NO, int, , , 10, 0, , , , int unsigned, , auto_increment, select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_events, eventType, 2, , NO, varchar, 45, 180, , , , utf8mb4, utf8mb4_general_ci, varchar(45), , , select,insert,update,references, type of the event, , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_events, eventTitle, 3, , NO, varchar, 45, 180, , , , utf8mb4, utf8mb4_general_ci, varchar(45), , , select,insert,update,references, title of the event, , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_events, eventDescr, 4, , YES, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, description of the event, , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_events, classroomID, 5, , NO, smallint, , , 5, 0, , , , smallint unsigned, , , select,insert,update,references, Fkey from classrooms, , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_events, eventStart, 6, , NO, datetime, , , , , 0, , , datetime, , , select,insert,update,references, Date-time when the event starts, , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_events, eventEnd, 7, , NO, datetime, , , , , 0, , , datetime, , , select,insert,update,references, date-time when the event ends, , </li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM _wp_sqlite_mysql_information_schema_columns
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_utt_events, eventID</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_events, 0, database_name_here, PRIMARY, 1, eventID, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_information_schema_statistics
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_utt_events, database_name_here, wp_utt_events</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM _wp_sqlite_mysql_information_schema_columns
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_utt_events, classroomID</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_utt_events, 1, database_name_here, fk_wp_utt_events_wp_utt_classrooms1_idx, 1, classroomID, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_information_schema_statistics
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_utt_events, database_name_here, wp_utt_events</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+FOREIGN KEY and CHECK constraints are not supported yet.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/ultimate-security-checker/wp-ultimate-security.php(41): add_option('wp_ultimate_sec...', 0, NULL, 'on')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wp_ultimate_security_checker_activate(false)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE TABLE IF...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE IF...')
+#4 /wordpress/wp-content/plugins/unitimetable/UniTimetable.php(154): dbDelta(Array)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): utt_activate(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
-#9 /internal/eval.php(20): activate_plugin('ultimate-securi...')
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_unitim...', false)
+#9 /internal/eval.php(20): activate_plugin('unitimetable/Un...')
 #10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ultimate_security_checker_score', '0', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-security-checker/wp-ultimate-security.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_ultimate_security_checker_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 14:27:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query CREATE TABLE IF NOT EXISTS `wp_utt_events` (
+            eventID int UNSIGNED NOT NULL AUTO_INCREMENT,
+            eventType varchar(45) NOT NULL COMMENT 'type of the event',
+            eventTitle varchar(45) NOT NULL COMMENT 'title of the event',
+            eventDescr varchar(255) NULL COMMENT 'description of the event',
+            classroomID smallint UNSIGNED NOT NULL COMMENT 'Fkey from classrooms',
+            eventStart datetime NOT NULL COMMENT 'Date-time when the event starts',
+            eventEnd datetime NOT NULL COMMENT 'date-time when the event ends',
+            PRIMARY KEY  (eventID),
+            KEY `fk_wp_utt_events_wp_utt_classrooms1_idx` (classroomID ASC),
+            CONSTRAINT `fk_wp_utt_events_wp_utt_classrooms1`
+            FOREIGN KEY (classroomID)
+            REFERENCES `wp_utt_classrooms` (classroomID)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE)
+            ENGINE = InnoDB
+            DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_unitimetable/UniTimetable.php'), WP_Hook->do_action, WP_Hook->apply_filters, utt_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 19:23:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ultimate_security_checker_issues', '', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE  OR REPLACE VIEW wp_utt_lectures_view AS
+            SELECT
+                periodID,
+                lectureID,
+                semester,
+                wp_utt_lectures.groupID,
+                wp_utt_lectures.classroomID,
+                wp_utt_lectures.teacherID,
+                start,
+                end,
+                groupName,
+                wp_utt_subjects.subjectID,
+                wp_utt_subjects.title AS subjectTitle,
+                wp_utt_subjects.type AS subjectType,
+                color,
+                wp_utt_classrooms.name AS classroomName,
+                wp_utt_classrooms.type AS classroomType,
+                surname as teacherSurname,
+                wp_utt_teachers.name as teacherName
+            FROM
+                wp_utt_lectures,
+                wp_utt_groups,
+                wp_utt_subjects,
+                wp_utt_classrooms,
+                wp_utt_teachers
+            WHERE
+                wp_utt_lectures.groupID = wp_utt_groups.groupID
+                    AND wp_utt_groups.subjectID = wp_utt_subjects.subjectID
+                    AND wp_utt_lectures.classroomID = wp_utt_classrooms.classroomID
+                    AND wp_utt_lectures.teacherID = wp_utt_teachers.teacherID;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_ultimate_security_checker_issues' , '' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+MySQL query not supported. Cause: statement type: "createStatement" > "createView"
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/ultimate-security-checker/wp-ultimate-security.php(42): add_option('wp_ultimate_sec...', '', NULL, 'on')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wp_ultimate_security_checker_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
-#9 /internal/eval.php(20): activate_plugin('ultimate-securi...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ultimate_security_checker_issues', '', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-security-checker/wp-ultimate-security.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_ultimate_security_checker_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 14:27:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE  OR REPL...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE  OR REPL...')
+#3 /wordpress/wp-content/plugins/unitimetable/UniTimetable.php(186): WP_SQLite_DB->query('CREATE  OR REPL...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): utt_activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_unitim...', false)
+#8 /internal/eval.php(20): activate_plugin('unitimetable/Un...')
+#9 {main}</pre>
+ for query CREATE  OR REPLACE VIEW wp_utt_lectures_view AS
+            SELECT
+                periodID,
+                lectureID,
+                semester,
+                wp_utt_lectures.groupID,
+                wp_utt_lectures.classroomID,
+                wp_utt_lectures.teacherID,
+                start,
+                end,
+                groupName,
+                wp_utt_subjects.subjectID,
+                wp_utt_subjects.title AS subjectTitle,
+                wp_utt_subjects.type AS subjectType,
+                color,
+                wp_utt_classrooms.name AS classroomName,
+                wp_utt_classrooms.type AS classroomType,
+                surname as teacherSurname,
+                wp_utt_teachers.name as teacherName
+            FROM
+                wp_utt_lectures,
+                wp_utt_groups,
+                wp_utt_subjects,
+                wp_utt_classrooms,
+                wp_utt_teachers
+            WHERE
+                wp_utt_lectures.groupID = wp_utt_groups.groupID
+                    AND wp_utt_groups.subjectID = wp_utt_subjects.subjectID
+                    AND wp_utt_lectures.classroomID = wp_utt_classrooms.classroomID
+                    AND wp_utt_lectures.teacherID = wp_utt_teachers.teacherID; made by activate_plugin, do_action('activate_unitimetable/UniTimetable.php'), WP_Hook->do_action, WP_Hook->apply_filters, utt_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 19:23:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[08-Apr-2025 19:23:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[08-Apr-2025 19:23:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[08-Apr-2025 19:23:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[08-Apr-2025 19:23:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ultimate_security_checker_lastcheck', '', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TABLE IF NOT EXISTS `wp_utt_periods` (
+            periodID int UNSIGNED NOT NULL AUTO_INCREMENT,
+            year year NOT NULL COMMENT 'year - this way we can keep history',
+            semester varchar(45) NOT NULL COMMENT 'Summer, Winter',
+            PRIMARY  KEY (periodID),
+            UNIQUE KEY `unique_period` (year ASC, semester ASC))
+            ENGINE = InnoDB
+            DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_ultimate_security_checker_lastcheck' , '' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/ultimate-security-checker/wp-ultimate-security.php(43): add_option('wp_ultimate_sec...', '', NULL, 'on')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wp_ultimate_security_checker_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
-#9 /internal/eval.php(20): activate_plugin('ultimate-securi...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ultimate_security_checker_lastcheck', '', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-security-checker/wp-ultimate-security.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_ultimate_security_checker_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 14:27:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/unitimetable/UniTimetable.php(40): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): utt_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_unitim...', false)
+#7 /internal/eval.php(20): activate_plugin('unitimetable/Un...')
+#8 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `wp_utt_periods` (
+            periodID int UNSIGNED NOT NULL AUTO_INCREMENT,
+            year year NOT NULL COMMENT 'year - this way we can keep history',
+            semester varchar(45) NOT NULL COMMENT 'Summer, Winter',
+            PRIMARY  KEY (periodID),
+            UNIQUE KEY `unique_period` (year ASC, semester ASC))
+            ENGINE = InnoDB
+            DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_unitimetable/UniTimetable.php'), WP_Hook->do_action, WP_Hook->apply_filters, utt_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 19:23:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ultimate_security_checker_hide_header', '0', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TABLE IF NOT EXISTS `wp_utt_groups` (
+            groupID int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'unique - for use in the Lectures table',
+            periodID int UNSIGNED NOT NULL COMMENT 'FKey from Periods',
+            subjectID int UNSIGNED NOT NULL COMMENT 'FKey from Subjects',
+            groupName varchar(30) NOT NULL COMMENT 'name of the group',
+            PRIMARY KEY  (periodID, subjectID, groupName),
+            KEY `fk_Groups_Periods_idx` (periodID ASC),
+            KEY `fk_Groups_Subject1_idx` (subjectID ASC),
+            UNIQUE KEY `groupID_UNIQUE` (groupID ASC),
+            CONSTRAINT `fk_Groups_Periods`
+            FOREIGN KEY (periodID)
+            REFERENCES `wp_utt_periods` (periodID)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE,
+            CONSTRAINT `fk_Groups_Subjects`
+            FOREIGN KEY (subjectID)
+            REFERENCES `wp_utt_subjects` (subjectID)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE)
+            ENGINE = InnoDB
+            DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_ultimate_security_checker_hide_header' , '0' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/ultimate-security-checker/wp-ultimate-security.php(44): add_option('wp_ultimate_sec...', 0, NULL, 'on')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wp_ultimate_security_checker_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
-#9 /internal/eval.php(20): activate_plugin('ultimate-securi...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_ultimate_security_checker_hide_header', '0', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-security-checker/wp-ultimate-security.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_ultimate_security_checker_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 14:27:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 14:27:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 14:27:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 14:27:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 14:27:26 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 14:27:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 14:27:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 14:27:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 14:27:27 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 14:27:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 14:27:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 14:27:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 14:27:38 UTC] PHP Deprecated:  Required parameter $meta_value follows optional parameter $meta_key in /wordpress/wp-content/plugins/ultimate-team-member/options/functions/fallback.php on line 31
-[04-Apr-2025 14:27:38 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 14:27:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 14:27:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 14:27:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 14:27:38 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 14:27:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 14:27:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 14:27:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 14:27:39 UTC] PHP Deprecated:  Required parameter $meta_value follows optional parameter $meta_key in /wordpress/wp-content/plugins/ultimate-team-member/options/functions/fallback.php on line 31
-[04-Apr-2025 14:27:41 UTC] PHP Deprecated:  Required parameter $meta_value follows optional parameter $meta_key in /wordpress/wp-content/plugins/ultimate-team-member/options/functions/fallback.php on line 31
-[04-Apr-2025 14:27:42 UTC] PHP Deprecated:  Required parameter $meta_value follows optional parameter $meta_key in /wordpress/wp-content/plugins/ultimate-team-member/options/functions/fallback.php on line 31
-[04-Apr-2025 14:27:44 UTC] PHP Deprecated:  Required parameter $meta_value follows optional parameter $meta_key in /wordpress/wp-content/plugins/ultimate-team-member/options/functions/fallback.php on line 31
-[04-Apr-2025 14:27:44 UTC] PHP Deprecated:  Required parameter $meta_value follows optional parameter $meta_key in /wordpress/wp-content/plugins/ultimate-team-member/options/functions/fallback.php on line 31
-[04-Apr-2025 14:27:51 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 14:27:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 14:27:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 14:27:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 14:28:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 14:28:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 14:28:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 14:28:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 14:28:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/unitimetable/UniTimetable.php(76): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): utt_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_unitim...', false)
+#7 /internal/eval.php(20): activate_plugin('unitimetable/Un...')
+#8 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `wp_utt_groups` (
+            groupID int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'unique - for use in the Lectures table',
+            periodID int UNSIGNED NOT NULL COMMENT 'FKey from Periods',
+            subjectID int UNSIGNED NOT NULL COMMENT 'FKey from Subjects',
+            groupName varchar(30) NOT NULL COMMENT 'name of the group',
+            PRIMARY KEY  (periodID, subjectID, groupName),
+            KEY `fk_Groups_Periods_idx` (periodID ASC),
+            KEY `fk_Groups_Subject1_idx` (subjectID ASC),
+            UNIQUE KEY `groupID_UNIQUE` (groupID ASC),
+            CONSTRAINT `fk_Groups_Periods`
+            FOREIGN KEY (periodID)
+            REFERENCES `wp_utt_periods` (periodID)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE,
+            CONSTRAINT `fk_Groups_Subjects`
+            FOREIGN KEY (subjectID)
+            REFERENCES `wp_utt_subjects` (subjectID)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE)
+            ENGINE = InnoDB
+            DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_unitimetable/UniTimetable.php'), WP_Hook->do_action, WP_Hook->apply_filters, utt_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 19:23:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('um-bootstrap-carousels', 'YTowOnt9', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TABLE IF NOT EXISTS `wp_utt_lectures` (
+            lectureID int UNSIGNED NOT NULL AUTO_INCREMENT,
+            groupID int UNSIGNED NOT NULL COMMENT 'FKey from Groups',
+            classroomID smallint UNSIGNED NOT NULL COMMENT 'FKey from Classrooms',
+            teacherID smallint UNSIGNED NOT NULL COMMENT 'FKey from Teachers',
+            start datetime NOT NULL COMMENT 'date-time when the event starts',
+            end datetime NOT NULL COMMENT 'date-time when the event ends',
+            KEY `fk_Lecture_Classrooms1_idx` (classroomID ASC),
+            KEY `fk_Lecture_Teachers1_idx` (teacherID ASC),
+            PRIMARY KEY  (lectureID),
+            CONSTRAINT `fk_Lectures_Classrooms`
+            FOREIGN KEY (classroomID)
+            REFERENCES `wp_utt_classrooms` (classroomID)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE,
+            CONSTRAINT `fk_Lectures_Teachers`
+            FOREIGN KEY (teacherID)
+            REFERENCES `wp_utt_teachers` (teacherID)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE,
+            CONSTRAINT `fk_Lectures_Groups1`
+            FOREIGN KEY (groupID)
+            REFERENCES `wp_utt_groups` (groupID)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE)
+            ENGINE = InnoDB
+            DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'um-bootstrap-carousels' , 'YTowOnt9' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_utt_lectures, lectureID, int UNSIGNED</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_utt_lectures, groupID, int UNSIGNED</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_utt_lectures, classroomID, smallint UNSIGNED</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_utt_lectures, teacherID, smallint UNSIGNED</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_utt_lectures, start, datetime</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_utt_lectures, end, datetime</li>
+<li>Executing: CREATE TABLE IF NOT EXISTS &quot;wp_utt_lectures&quot; (
+&quot;lectureID&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;groupID&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;classroomID&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;teacherID&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
+&quot;start&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;end&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE) | (no parameters)</li>
+<li>Executing: CREATE  INDEX IF NOT EXISTS &quot;wp_utt_lectures__fk_Lecture_Classrooms1_idx&quot; ON &quot;wp_utt_lectures&quot; (&quot;classroomID&quot;, &quot;)&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_utt_lectures, wp_utt_lectures__fk_Lecture_Classrooms1_idx, KEY</li>
+<li>Executing: CREATE  INDEX IF NOT EXISTS &quot;wp_utt_lectures__&quot; ON &quot;wp_utt_lectures&quot; (&quot;&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_utt_lectures, wp_utt_lectures__, </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/um-bootstrap-carousels/um-bootstrap-carousels-activate.php(26): add_option('um-bootstrap-ca...', 'YTowOnt9')
-#5 /wordpress/wp-content/plugins/um-bootstrap-carousels/um-bootstrap-carousels.php(34): Um_Bootstrap_Carousels_Activate::create_options()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): um_bootstrap_carousels_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_um-boo...', false)
-#10 /internal/eval.php(20): activate_plugin('um-bootstrap-ca...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('um-bootstrap-carousels', 'YTowOnt9', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_um-bootstrap-carousels/um-bootstrap-carousels.php'), WP_Hook->do_action, WP_Hook->apply_filters, um_bootstrap_carousels_activate, Um_Bootstrap_Carousels_Activate::create_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 14:28:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE IF...')
+#2 /wordpress/wp-content/plugins/unitimetable/UniTimetable.php(127): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): utt_activate(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_unitim...', false)
+#7 /internal/eval.php(20): activate_plugin('unitimetable/Un...')
+#8 {main}</pre>
+ for query CREATE TABLE IF NOT EXISTS `wp_utt_lectures` (
+            lectureID int UNSIGNED NOT NULL AUTO_INCREMENT,
+            groupID int UNSIGNED NOT NULL COMMENT 'FKey from Groups',
+            classroomID smallint UNSIGNED NOT NULL COMMENT 'FKey from Classrooms',
+            teacherID smallint UNSIGNED NOT NULL COMMENT 'FKey from Teachers',
+            start datetime NOT NULL COMMENT 'date-time when the event starts',
+            end datetime NOT NULL COMMENT 'date-time when the event ends',
+            KEY `fk_Lecture_Classrooms1_idx` (classroomID ASC),
+            KEY `fk_Lecture_Teachers1_idx` (teacherID ASC),
+            PRIMARY KEY  (lectureID),
+            CONSTRAINT `fk_Lectures_Classrooms`
+            FOREIGN KEY (classroomID)
+            REFERENCES `wp_utt_classrooms` (classroomID)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE,
+            CONSTRAINT `fk_Lectures_Teachers`
+            FOREIGN KEY (teacherID)
+            REFERENCES `wp_utt_teachers` (teacherID)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE,
+            CONSTRAINT `fk_Lectures_Groups1`
+            FOREIGN KEY (groupID)
+            REFERENCES `wp_utt_groups` (groupID)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE)
+            ENGINE = InnoDB
+            DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_unitimetable/UniTimetable.php'), WP_Hook->do_action, WP_Hook->apply_filters, utt_activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[08-Apr-2025 19:23:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('um-bootstrap-carousels-settings', 'YToyOntzOjk6ImJvb3RzdHJhcCI7YToxOntzOjc6InZlcnNpb24iO3M6MzoiNC4zIjt9czo2OiJzdHlsZXMiO2E6Mjp7aTowO3M6NDoibm9uZSI7aToxO3M6NToiYmFzaWMiO319', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE  OR REPLACE VIEW wp_utt_lectures_view AS
+            SELECT
+                periodID,
+                lectureID,
+                semester,
+                wp_utt_lectures.groupID,
+                wp_utt_lectures.classroomID,
+                wp_utt_lectures.teacherID,
+                start,
+                end,
+                groupName,
+                wp_utt_subjects.subjectID,
+                wp_utt_subjects.title AS subjectTitle,
+                wp_utt_subjects.type AS subjectType,
+                color,
+                wp_utt_classrooms.name AS classroomName,
+                wp_utt_classrooms.type AS classroomType,
+                surname as teacherSurname,
+                wp_utt_teachers.name as teacherName
+            FROM
+                wp_utt_lectures,
+                wp_utt_groups,
+                wp_utt_subjects,
+                wp_utt_classrooms,
+                wp_utt_teachers
+            WHERE
+                wp_utt_lectures.groupID = wp_utt_groups.groupID
+                    AND wp_utt_groups.subjectID = wp_utt_subjects.subjectID
+                    AND wp_utt_lectures.classroomID = wp_utt_classrooms.classroomID
+                    AND wp_utt_lectures.teacherID = wp_utt_teachers.teacherID;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'um-bootstrap-carousels-settings' , 'YToyOntzOjk6ImJvb3RzdHJhcCI7YToxOntzOjc6InZlcnNpb24iO3M6MzoiNC4zIjt9czo2OiJzdHlsZXMiO2E6Mjp7aTowO3M6NDoibm9uZSI7aToxO3M6NToiYmFzaWMiO319' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: OR REPLACE.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/um-bootstrap-carousels/um-bootstrap-carousels-activate.php(40): add_option('um-bootstrap-ca...', 'YToyOntzOjk6ImJ...')
-#5 /wordpress/wp-content/plugins/um-bootstrap-carousels/um-bootstrap-carousels.php(34): Um_Bootstrap_Carousels_Activate::create_options()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): um_bootstrap_carousels_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_um-boo...', false)
-#10 /internal/eval.php(20): activate_plugin('um-bootstrap-ca...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('um-bootstrap-carousels-settings', 'YToyOntzOjk6ImJvb3RzdHJhcCI7YToxOntzOjc6InZlcnNpb24iO3M6MzoiNC4zIjt9czo2OiJzdHlsZXMiO2E6Mjp7aTowO3M6NDoibm9uZSI7aToxO3M6NToiYmFzaWMiO319', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_um-bootstrap-carousels/um-bootstrap-carousels.php'), WP_Hook->do_action, WP_Hook->apply_filters, um_bootstrap_carousels_activate, Um_Bootstrap_Carousels_Activate::create_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 14:28:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/unitimetable/UniTimetable.php(186): WP_SQLite_DB->query('CREATE  OR REPL...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): utt_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_unitim...', false)
+#6 /internal/eval.php(20): activate_plugin('unitimetable/Un...')
+#7 {main}</pre>
+ for query CREATE  OR REPLACE VIEW wp_utt_lectures_view AS
+            SELECT
+                periodID,
+                lectureID,
+                semester,
+                wp_utt_lectures.groupID,
+                wp_utt_lectures.classroomID,
+                wp_utt_lectures.teacherID,
+                start,
+                end,
+                groupName,
+                wp_utt_subjects.subjectID,
+                wp_utt_subjects.title AS subjectTitle,
+                wp_utt_subjects.type AS subjectType,
+                color,
+                wp_utt_classrooms.name AS classroomName,
+                wp_utt_classrooms.type AS classroomType,
+                surname as teacherSurname,
+                wp_utt_teachers.name as teacherName
+            FROM
+                wp_utt_lectures,
+                wp_utt_groups,
+                wp_utt_subjects,
+                wp_utt_classrooms,
+                wp_utt_teachers
+            WHERE
+                wp_utt_lectures.groupID = wp_utt_groups.groupID
+                    AND wp_utt_groups.subjectID = wp_utt_subjects.subjectID
+                    AND wp_utt_lectures.classroomID = wp_utt_classrooms.classroomID
+                    AND wp_utt_lectures.teacherID = wp_utt_teachers.teacherID; made by activate_plugin, do_action('activate_unitime
