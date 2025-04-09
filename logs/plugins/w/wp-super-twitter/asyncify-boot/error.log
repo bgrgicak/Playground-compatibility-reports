@@ -2,10 +2,14 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [06-Apr-2025 05:17:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [09-Apr-2025 04:51:06 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 04:51:06 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 04:51:06 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 04:51:06 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 04:51:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wildcard_show_activation_notice', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'O!*P$bYX>(x%4*Y~C;8ziJKR$*s^GoI#!xum~fGBXHH5 6+E9}dh*B!-6,(&;(j@', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -17,7 +21,7 @@ Error: [06-Apr-2025 05:17:47 UTC] WordPress database error <div style="clear:bot
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wildcard_show_activation_notice' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'O!*P$bYX&gt;(x%4*Y~C;8ziJKR$*s^GoI#!xum~fGBXHH5 6+E9}dh*B!-6,(&amp;;(j@' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -29,56 +33,12 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wildcard_show_a...', true, '', 'auto')
-#5 /wordpress/wp-content/plugins/wildcard/wildcard.php(51): update_option('wildcard_show_a...', true)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Wildcard_API::plugin_activated(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wildca...', false)
-#10 /internal/eval.php(20): activate_plugin('wildcard/wildca...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wildcard_show_activation_notice', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wildcard/wildcard.php'), WP_Hook->do_action, WP_Hook->apply_filters, Wildcard_API::plugin_activated, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 05:17:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 05:17:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 05:17:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 05:17:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 05:18:03 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 05:18:03 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 05:18:03 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 05:18:03 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 05:18:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '^-~Fzn:1<$Y}lci2&$6[Mk`hZ4!k4Rd(Ps$RlWj~R+gj_*@SD)TFYl`$%J]ZQ.TZ', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , '^-~Fzn:1&lt;$Y}lci2&amp;$6[Mk`hZ4!k4Rd(Ps$RlWj~R+gj_*@SD)TFYl`$%J]ZQ.TZ' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', '^-~Fzn:1<$Y}lci...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', '^-~Fzn:1<$Y}lci...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', '^-~Fzn:1<$Y}lci...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', '^-~Fzn:1<$Y}lci...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'O!*P$bYX>(x%4*Y...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'O!*P$bYX>(x%4*Y...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'O!*P$bYX>(x%4*Y...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'O!*P$bYX>(x%4*Y...')
 #8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40369|wp_rest|0...', 'nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|0...', 'nonce')
 #10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
 #11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
 #12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
@@ -96,11 +56,11 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
 #25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '^-~Fzn:1<$Y}lci2&$6[Mk`hZ4!k4Rd(Ps$RlWj~R+gj_*@SD)TFYl`$%J]ZQ.TZ', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, will_work_for_ko_fi_cgb_block_assets, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 05:18:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'O!*P$bYX>(x%4*Y~C;8ziJKR$*s^GoI#!xum~fGBXHH5 6+E9}dh*B!-6,(&;(j@', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, will_work_for_ko_fi_cgb_block_assets, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 04:51:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'po E)*>o9`l@E|uie5)gK^p)KfkeNwL[`)hJA;n~c{(z+AodMn[z=G}X`x$FrKYU', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'a)Yq?Z|F &`~O/@,J_@=iIF/+RlBnbf5#EjCp)9&>S^60|>G|7V38pAczzkqs84h', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -112,7 +72,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'po E)*&gt;o9`l@E|uie5)gK^p)KfkeNwL[`)hJA;n~c{(z+AodMn[z=G}X`x$FrKYU' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'a)Yq?Z|F &amp;`~O/@,J_@=iIF/+RlBnbf5#EjCp)9&amp;&gt;S^60|&gt;G|7V38pAczzkqs84h' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -124,12 +84,12 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'po E)*>o9`l@E|u...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'po E)*>o9`l@E|u...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'po E)*>o9`l@E|u...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'po E)*>o9`l@E|u...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'a)Yq?Z|F &`~O/@...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'a)Yq?Z|F &`~O/@...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'a)Yq?Z|F &`~O/@...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'a)Yq?Z|F &`~O/@...')
 #8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40369|wp_rest|0...', 'nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|0...', 'nonce')
 #10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
 #11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
 #12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
@@ -147,15 +107,19 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
 #25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'po E)*>o9`l@E|uie5)gK^p)KfkeNwL[`)hJA;n~c{(z+AodMn[z=G}X`x$FrKYU', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, will_work_for_ko_fi_cgb_block_assets, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 05:18:16 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 05:18:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 05:18:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 05:18:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 05:18:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'a)Yq?Z|F &`~O/@,J_@=iIF/+RlBnbf5#EjCp)9&>S^60|>G|7V38pAczzkqs84h', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, will_work_for_ko_fi_cgb_block_assets, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 04:51:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 04:51:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 04:51:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 04:51:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 04:52:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 04:52:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 04:52:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 04:52:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 04:52:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:75:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:6:\"2.11.0\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1743916709;s:11:\"plugin_path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";s:8:\"sdk_path\";s:75:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius\";s:7:\"version\";s:6:\"2.11.0\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1743916709;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:34:\"woocommerce-delivery-date/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:5:\"2.7.3\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744174349;s:11:\"plugin_path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";s:8:\"sdk_path\";s:34:\"woocommerce-delivery-date/freemius\";s:7:\"version\";s:5:\"2.7.3\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744174349;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -167,7 +131,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_active_plugins' , 'O:8:&quot;stdClass&quot;:3:{s:7:&quot;plugins&quot;;a:1:{s:75:&quot;woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius&quot;;O:8:&quot;stdClass&quot;:4:{s:7:&quot;version&quot;;s:6:&quot;2.11.0&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:9:&quot;timestamp&quot;;i:1743916709;s:11:&quot;plugin_path&quot;;s:90:&quot;woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php&quot;;}}s:7:&quot;abspath&quot;;s:11:&quot;/wordpress/&quot;;s:6:&quot;newest&quot;;O:8:&quot;stdClass&quot;:5:{s:11:&quot;plugin_path&quot;;s:90:&quot;woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php&quot;;s:8:&quot;sdk_path&quot;;s:75:&quot;woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius&quot;;s:7:&quot;version&quot;;s:6:&quot;2.11.0&quot;;s:13:&quot;in_activation&quot;;b:1;s:9:&quot;timestamp&quot;;i:1743916709;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_active_plugins' , 'O:8:&quot;stdClass&quot;:3:{s:7:&quot;plugins&quot;;a:1:{s:34:&quot;woocommerce-delivery-date/freemius&quot;;O:8:&quot;stdClass&quot;:4:{s:7:&quot;version&quot;;s:5:&quot;2.7.3&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:9:&quot;timestamp&quot;;i:1744174349;s:11:&quot;plugin_path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}}s:7:&quot;abspath&quot;;s:11:&quot;/wordpress/&quot;;s:6:&quot;newest&quot;;O:8:&quot;stdClass&quot;:5:{s:11:&quot;plugin_path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;s:8:&quot;sdk_path&quot;;s:34:&quot;woocommerce-delivery-date/freemius&quot;;s:7:&quot;version&quot;;s:5:&quot;2.7.3&quot;;s:13:&quot;in_activation&quot;;b:1;s:9:&quot;timestamp&quot;;i:1744174349;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -180,16 +144,16 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
 #4 /wordpress/wp-includes/option.php(921): add_option('fs_active_plugi...', Object(stdClass), '', 'auto')
-#5 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/fs-essential-functions.php(279): update_option('fs_active_plugi...', Object(stdClass))
-#6 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/start.php(242): fs_update_sdk_newest_version('woo-blocker-lit...', 'woo-blocker-lit...')
-#7 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php(49): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php(76): wbpfoabfc_fs()
+#5 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/fs-essential-functions.php(279): update_option('fs_active_plugi...', Object(stdClass))
+#6 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/start.php(198): fs_update_sdk_newest_version('woocommerce-del...', 'woocommerce-del...')
+#7 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(39): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(66): dreamfox_delivery_date()
 #9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woo-blocker-lit...')
-#11 /internal/eval.php(20): activate_plugin('woo-blocker-lit...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woocommerce-del...')
+#11 /internal/eval.php(20): activate_plugin('woocommerce-del...')
 #12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:75:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:6:\"2.11.0\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1743916709;s:11:\"plugin_path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";s:8:\"sdk_path\";s:75:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius\";s:7:\"version\";s:6:\"2.11.0\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1743916709;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php'), wbpfoabfc_fs, require_once('/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/start.php'), fs_update_sdk_newest_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 05:18:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:34:\"woocommerce-delivery-date/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:5:\"2.7.3\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744174349;s:11:\"plugin_path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";s:8:\"sdk_path\";s:34:\"woocommerce-delivery-date/freemius\";s:7:\"version\";s:5:\"2.7.3\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744174349;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php'), dreamfox_delivery_date, require_once('/plugins/woocommerce-delivery-date/freemius/start.php'), fs_update_sdk_newest_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 04:52:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
@@ -216,20 +180,20 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/config.php(307): add_option('fs_debug_mode', false)
-#5 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/require.php(14): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/start.php(576): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php(49): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php(76): wbpfoabfc_fs()
+#4 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/config.php(307): add_option('fs_debug_mode', false)
+#5 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/require.php(14): require_once('/wordpress/wp-c...')
+#6 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/start.php(514): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(39): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(66): dreamfox_delivery_date()
 #9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woo-blocker-lit...')
-#11 /internal/eval.php(20): activate_plugin('woo-blocker-lit...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woocommerce-del...')
+#11 /internal/eval.php(20): activate_plugin('woocommerce-del...')
 #12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php'), wbpfoabfc_fs, require_once('/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/start.php'), require_once('/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/require.php'), require_once('/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/config.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 05:18:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php'), dreamfox_delivery_date, require_once('/plugins/woocommerce-delivery-date/freemius/start.php'), require_once('/plugins/woocommerce-delivery-date/freemius/require.php'), require_once('/plugins/woocommerce-delivery-date/freemius/config.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 04:52:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:3493;a:3:{s:4:\"slug\";s:19:\"woocommerce-blocker\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -241,7 +205,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:1:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:3493;a:3:{s:4:&quot;slug&quot;;s:19:&quot;woocommerce-blocker&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:90:&quot;woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:1:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10651;a:3:{s:4:&quot;slug&quot;;s:21:&quot;dreamfox-deliverydate&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -254,24 +218,24 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
 #4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('id_slug_type_pa...', Array, true)
-#8 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/class-freemius.php(2209): FS_Options->set_option('id_slug_type_pa...', Array, true)
-#9 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/class-freemius.php(416): Freemius->store_id_slug_type_path_map('3493', 'woocommerce-blo...')
-#10 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/class-freemius.php(2868): Freemius->__construct('3493', 'woocommerce-blo...', true)
-#11 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/start.php(615): Freemius::instance('3493', 'woocommerce-blo...', true)
-#12 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php(51): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php(76): wbpfoabfc_fs()
+#5 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('id_slug_type_pa...', Array, true)
+#8 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(2169): FS_Options->set_option('id_slug_type_pa...', Array, true)
+#9 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(417): Freemius->store_id_slug_type_path_map('10651', 'dreamfox-delive...')
+#10 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(2828): Freemius->__construct('10651', 'dreamfox-delive...', true)
+#11 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/start.php(553): Freemius::instance('10651', 'dreamfox-delive...', true)
+#12 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(41): fs_dynamic_init(Array)
+#13 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(66): dreamfox_delivery_date()
 #14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woo-blocker-lit...')
-#16 /internal/eval.php(20): activate_plugin('woo-blocker-lit...')
+#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woocommerce-del...')
+#16 /internal/eval.php(20): activate_plugin('woocommerce-del...')
 #17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:3493;a:3:{s:4:\"slug\";s:19:\"woocommerce-blocker\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php'), wbpfoabfc_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_id_slug_type_path_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 05:18:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php'), dreamfox_delivery_date, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_id_slug_type_path_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 04:52:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:3493;a:3:{s:4:\"slug\";s:19:\"woocommerce-blocker\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"woocommerce-blocker\";a:1:{s:19:\"last_load_timestamp\";i:1743916709;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:1:{s:19:\"last_load_timestamp\";i:1744174349;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -283,7 +247,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:3493;a:3:{s:4:&quot;slug&quot;;s:19:&quot;woocommerce-blocker&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:90:&quot;woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:19:&quot;woocommerce-blocker&quot;;a:1:{s:19:&quot;last_load_timestamp&quot;;i:1743916709;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10651;a:3:{s:4:&quot;slug&quot;;s:21:&quot;dreamfox-deliverydate&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:21:&quot;dreamfox-deliverydate&quot;;a:1:{s:19:&quot;last_load_timestamp&quot;;i:1744174349;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -296,25 +260,25 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
 #4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('last_load_times...', 1743916709)
-#9 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('last_load_times...', 1743916709)
-#10 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/class-freemius.php(432): FS_Storage->__set('last_load_times...', 1743916709)
-#11 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/class-freemius.php(2868): Freemius->__construct('3493', 'woocommerce-blo...', true)
-#12 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/start.php(615): Freemius::instance('3493', 'woocommerce-blo...', true)
-#13 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php(51): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php(76): wbpfoabfc_fs()
+#5 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('last_load_times...', 1744174349)
+#9 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-fs-storage.php(534): FS_Key_Value_Storage->__set('last_load_times...', 1744174349)
+#10 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(433): FS_Storage->__set('last_load_times...', 1744174349)
+#11 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(2828): Freemius->__construct('10651', 'dreamfox-delive...', true)
+#12 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/start.php(553): Freemius::instance('10651', 'dreamfox-delive...', true)
+#13 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(41): fs_dynamic_init(Array)
+#14 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(66): dreamfox_delivery_date()
 #15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woo-blocker-lit...')
-#17 /internal/eval.php(20): activate_plugin('woo-blocker-lit...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woocommerce-del...')
+#17 /internal/eval.php(20): activate_plugin('woocommerce-del...')
 #18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:3493;a:3:{s:4:\"slug\";s:19:\"woocommerce-blocker\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"woocommerce-blocker\";a:1:{s:19:\"last_load_timestamp\";i:1743916709;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php'), wbpfoabfc_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 05:18:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:1:{s:19:\"last_load_timestamp\";i:1744174349;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php'), dreamfox_delivery_date, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 04:52:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:3493;a:3:{s:4:\"slug\";s:19:\"woocommerce-blocker\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"woocommerce-blocker\";a:2:{s:19:\"last_load_timestamp\";i:1743916709;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:2:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -326,7 +290,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:3493;a:3:{s:4:&quot;slug&quot;;s:19:&quot;woocommerce-blocker&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:90:&quot;woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:19:&quot;woocommerce-blocker&quot;;a:2:{s:19:&quot;last_load_timestamp&quot;;i:1743916709;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:90:&quot;woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10651;a:3:{s:4:&quot;slug&quot;;s:21:&quot;dreamfox-deliverydate&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:21:&quot;dreamfox-deliverydate&quot;;a:2:{s:19:&quot;last_load_timestamp&quot;;i:1744174349;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -339,26 +303,26 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
 #4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_main_fil...', Object(stdClass))
-#9 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('plugin_main_fil...', Object(stdClass))
-#10 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/class-freemius.php(2066): FS_Storage->__set('plugin_main_fil...', Object(stdClass))
-#11 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/class-freemius.php(439): Freemius->_find_caller_plugin_file(true, 'woo-blocker-lit...')
-#12 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/class-freemius.php(2868): Freemius->__construct('3493', 'woocommerce-blo...', true)
-#13 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/start.php(615): Freemius::instance('3493', 'woocommerce-blo...', true)
-#14 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php(51): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php(76): wbpfoabfc_fs()
+#5 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_main_fil...', Object(stdClass))
+#9 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-fs-storage.php(534): FS_Key_Value_Storage->__set('plugin_main_fil...', Object(stdClass))
+#10 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(2026): FS_Storage->__set('plugin_main_fil...', Object(stdClass))
+#11 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(440): Freemius->_find_caller_plugin_file(true, 'woocommerce-del...')
+#12 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(2828): Freemius->__construct('10651', 'dreamfox-delive...', true)
+#13 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/start.php(553): Freemius::instance('10651', 'dreamfox-delive...', true)
+#14 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(41): fs_dynamic_init(Array)
+#15 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(66): dreamfox_delivery_date()
 #16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woo-blocker-lit...')
-#18 /internal/eval.php(20): activate_plugin('woo-blocker-lit...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woocommerce-del...')
+#18 /internal/eval.php(20): activate_plugin('woocommerce-del...')
 #19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:3493;a:3:{s:4:\"slug\";s:19:\"woocommerce-blocker\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"woocommerce-blocker\";a:2:{s:19:\"last_load_timestamp\";i:1743916709;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php'), wbpfoabfc_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_find_caller_plugin_file, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 05:18:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:2:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php'), dreamfox_delivery_date, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_find_caller_plugin_file, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 04:52:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:3493;a:3:{s:4:\"slug\";s:19:\"woocommerce-blocker\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"woocommerce-blocker\";a:3:{s:19:\"last_load_timestamp\";i:1743916709;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:3:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -370,7 +334,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:3493;a:3:{s:4:&quot;slug&quot;;s:19:&quot;woocommerce-blocker&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:90:&quot;woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:19:&quot;woocommerce-blocker&quot;;a:3:{s:19:&quot;last_load_timestamp&quot;;i:1743916709;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:90:&quot;woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10651;a:3:{s:4:&quot;slug&quot;;s:21:&quot;dreamfox-deliverydate&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:21:&quot;dreamfox-deliverydate&quot;;a:3:{s:19:&quot;last_load_timestamp&quot;;i:1744174349;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -383,25 +347,25 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
 #4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_network_acti...', false)
-#9 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('is_network_acti...', false)
-#10 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/class-freemius.php(467): FS_Storage->__set('is_network_acti...', false)
-#11 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/class-freemius.php(2868): Freemius->__construct('3493', 'woocommerce-blo...', true)
-#12 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/start.php(615): Freemius::instance('3493', 'woocommerce-blo...', true)
-#13 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php(51): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php(76): wbpfoabfc_fs()
+#5 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_network_acti...', false)
+#9 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-fs-storage.php(534): FS_Key_Value_Storage->__set('is_network_acti...', false)
+#10 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(468): FS_Storage->__set('is_network_acti...', false)
+#11 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(2828): Freemius->__construct('10651', 'dreamfox-delive...', true)
+#12 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/start.php(553): Freemius::instance('10651', 'dreamfox-delive...', true)
+#13 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(41): fs_dynamic_init(Array)
+#14 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(66): dreamfox_delivery_date()
 #15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woo-blocker-lit...')
-#17 /internal/eval.php(20): activate_plugin('woo-blocker-lit...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woocommerce-del...')
+#17 /internal/eval.php(20): activate_plugin('woocommerce-del...')
 #18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:3493;a:3:{s:4:\"slug\";s:19:\"woocommerce-blocker\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"woocommerce-blocker\";a:3:{s:19:\"last_load_timestamp\";i:1743916709;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php'), wbpfoabfc_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 05:18:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:3:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php'), dreamfox_delivery_date, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 04:52:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:3493;a:3:{s:4:\"slug\";s:19:\"woocommerce-blocker\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"woocommerce-blocker\";a:3:{s:19:\"last_load_timestamp\";i:1743916709;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";s:19:\"woocommerce-blocker\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:3:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";s:21:\"dreamfox-deliverydate\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -413,7 +377,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:3493;a:3:{s:4:&quot;slug&quot;;s:19:&quot;woocommerce-blocker&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:90:&quot;woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:19:&quot;woocommerce-blocker&quot;;a:3:{s:19:&quot;last_load_timestamp&quot;;i:1743916709;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:90:&quot;woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:90:&quot;woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php&quot;;s:19:&quot;woocommerce-blocker&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10651;a:3:{s:4:&quot;slug&quot;;s:21:&quot;dreamfox-deliverydate&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:21:&quot;dreamfox-deliverydate&quot;;a:3:{s:19:&quot;last_load_timestamp&quot;;i:1744174349;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;s:21:&quot;dreamfox-deliverydate&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -426,24 +390,24 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
 #4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('file_slug_map', Array, true)
-#8 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/class-freemius.php(10355): FS_Options->set_option('file_slug_map', Array, true)
-#9 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/class-freemius.php(514): Freemius->store_file_slug_map()
-#10 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/class-freemius.php(2868): Freemius->__construct('3493', 'woocommerce-blo...', true)
-#11 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/start.php(615): Freemius::instance('3493', 'woocommerce-blo...', true)
-#12 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php(51): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php(76): wbpfoabfc_fs()
+#5 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('file_slug_map', Array, true)
+#8 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(10622): FS_Options->set_option('file_slug_map', Array, true)
+#9 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(515): Freemius->store_file_slug_map()
+#10 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(2828): Freemius->__construct('10651', 'dreamfox-delive...', true)
+#11 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/start.php(553): Freemius::instance('10651', 'dreamfox-delive...', true)
+#12 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(41): fs_dynamic_init(Array)
+#13 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(66): dreamfox_delivery_date()
 #14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woo-blocker-lit...')
-#16 /internal/eval.php(20): activate_plugin('woo-blocker-lit...')
+#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woocommerce-del...')
+#16 /internal/eval.php(20): activate_plugin('woocommerce-del...')
 #17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:3493;a:3:{s:4:\"slug\";s:19:\"woocommerce-blocker\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"woocommerce-blocker\";a:3:{s:19:\"last_load_timestamp\";i:1743916709;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";s:19:\"woocommerce-blocker\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php'), wbpfoabfc_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_file_slug_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 05:18:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:3:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";s:21:\"dreamfox-deliverydate\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php'), dreamfox_delivery_date, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_file_slug_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 04:52:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:3493;a:3:{s:4:\"slug\";s:19:\"woocommerce-blocker\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"woocommerce-blocker\";a:4:{s:19:\"last_load_timestamp\";i:1743916709;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1743916709;}}s:13:\"file_slug_map\";a:1:{s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";s:19:\"woocommerce-blocker\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:4:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744174349;}}s:13:\"file_slug_map\";a:1:{s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";s:21:\"dreamfox-deliverydate\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -455,7 +419,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:3493;a:3:{s:4:&quot;slug&quot;;s:19:&quot;woocommerce-blocker&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:90:&quot;woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:19:&quot;woocommerce-blocker&quot;;a:4:{s:19:&quot;last_load_timestamp&quot;;i:1743916709;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:90:&quot;woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1743916709;}}s:13:&quot;file_slug_map&quot;;a:1:{s:90:&quot;woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php&quot;;s:19:&quot;woocommerce-blocker&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10651;a:3:{s:4:&quot;slug&quot;;s:21:&quot;dreamfox-deliverydate&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:21:&quot;dreamfox-deliverydate&quot;;a:4:{s:19:&quot;last_load_timestamp&quot;;i:1744174349;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744174349;}}s:13:&quot;file_slug_map&quot;;a:1:{s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;s:21:&quot;dreamfox-deliverydate&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -468,25 +432,25 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
 #4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('install_timesta...', 1743916709)
-#9 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('install_timesta...', 1743916709)
-#10 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/class-freemius.php(518): FS_Storage->__set('install_timesta...', 1743916709)
-#11 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/includes/class-freemius.php(2868): Freemius->__construct('3493', 'woocommerce-blo...', true)
-#12 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/freemius/start.php(615): Freemius::instance('3493', 'woocommerce-blo...', true)
-#13 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php(51): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php(76): wbpfoabfc_fs()
+#5 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('install_timesta...', 1744174349)
+#9 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-fs-storage.php(534): FS_Key_Value_Storage->__set('install_timesta...', 1744174349)
+#10 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(519): FS_Storage->__set('install_timesta...', 1744174349)
+#11 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(2828): Freemius->__construct('10651', 'dreamfox-delive...', true)
+#12 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/start.php(553): Freemius::instance('10651', 'dreamfox-delive...', true)
+#13 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(41): fs_dynamic_init(Array)
+#14 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(66): dreamfox_delivery_date()
 #15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woo-blocker-lit...')
-#17 /internal/eval.php(20): activate_plugin('woo-blocker-lit...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woocommerce-del...')
+#17 /internal/eval.php(20): activate_plugin('woocommerce-del...')
 #18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:3493;a:3:{s:4:\"slug\";s:19:\"woocommerce-blocker\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"woocommerce-blocker\";a:4:{s:19:\"last_load_timestamp\";i:1743916709;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1743916709;}}s:13:\"file_slug_map\";a:1:{s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";s:19:\"woocommerce-blocker\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php'), wbpfoabfc_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 05:18:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:4:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744174349;}}s:13:\"file_slug_map\";a:1:{s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";s:21:\"dreamfox-deliverydate\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php'), dreamfox_delivery_date, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 04:52:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:3493;a:3:{s:4:\"slug\";s:19:\"woocommerce-blocker\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"woocommerce-blocker\";a:5:{s:19:\"last_load_timestamp\";i:1743916709;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1743916709;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:90:\"woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php\";s:19:\"woocommerce-blocker\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:5:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744174349;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";s:21:\"dreamfox-deliverydate\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -498,4 +462,420 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:3493;a:3:{s:4:&quot;slug&quot;;s:19:&quot;woocommerce-blocker&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:90:&quot;woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:19:&quot;woocommerce-blocker&quot;;a:5:{s:19:&quot;last_load_timestamp&quot;;i:1743916709;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:90:&quot;woo-blocker-lite-prevent-fake-orders-and-blacklist-fraud-customers/woocommerce-blocker.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1743916
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10651;a:3:{s:4:&quot;slug&quot;;s:21:&quot;dreamfox-deliverydate&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:21:&quot;dreamfox-deliverydate&quot;;a:5:{s:19:&quot;last_load_timestamp&quot;;i:1744174349;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744174349;s:17:&quot;was_plugin_loaded&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;s:21:&quot;dreamfox-deliverydate&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('was_plugin_load...', true)
+#9 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-fs-storage.php(534): FS_Key_Value_Storage->__set('was_plugin_load...', true)
+#10 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(1338): FS_Storage->__set('was_plugin_load...', true)
+#11 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(1473): Freemius->_plugins_loaded()
+#12 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(549): Freemius->register_constructor_hooks()
+#13 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(2828): Freemius->__construct('10651', 'dreamfox-delive...', true)
+#14 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/start.php(553): Freemius::instance('10651', 'dreamfox-delive...', true)
+#15 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(41): fs_dynamic_init(Array)
+#16 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(66): dreamfox_delivery_date()
+#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woocommerce-del...')
+#19 /internal/eval.php(20): activate_plugin('woocommerce-del...')
+#20 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:5:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744174349;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";s:21:\"dreamfox-deliverydate\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php'), dreamfox_delivery_date, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->register_constructor_hooks, Freemius->_plugins_loaded, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 04:52:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:6:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744174349;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;}}s:13:\"file_slug_map\";a:1:{s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";s:21:\"dreamfox-deliverydate\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10651;a:3:{s:4:&quot;slug&quot;;s:21:&quot;dreamfox-deliverydate&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:21:&quot;dreamfox-deliverydate&quot;;a:6:{s:19:&quot;last_load_timestamp&quot;;i:1744174349;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744174349;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;s:21:&quot;dreamfox-deliverydate&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_plugin_new_i...', true)
+#9 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-fs-storage.php(534): FS_Key_Value_Storage->__set('is_plugin_new_i...', true)
+#10 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(1352): FS_Storage->__set('is_plugin_new_i...', true)
+#11 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(1473): Freemius->_plugins_loaded()
+#12 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(549): Freemius->register_constructor_hooks()
+#13 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(2828): Freemius->__construct('10651', 'dreamfox-delive...', true)
+#14 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/start.php(553): Freemius::instance('10651', 'dreamfox-delive...', true)
+#15 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(41): fs_dynamic_init(Array)
+#16 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(66): dreamfox_delivery_date()
+#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woocommerce-del...')
+#19 /internal/eval.php(20): activate_plugin('woocommerce-del...')
+#20 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:6:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744174349;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;}}s:13:\"file_slug_map\";a:1:{s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";s:21:\"dreamfox-deliverydate\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php'), dreamfox_delivery_date, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->register_constructor_hooks, Freemius->_plugins_loaded, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 04:52:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:7:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744174349;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";s:21:\"dreamfox-deliverydate\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10651;a:3:{s:4:&quot;slug&quot;;s:21:&quot;dreamfox-deliverydate&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:21:&quot;dreamfox-deliverydate&quot;;a:7:{s:19:&quot;last_load_timestamp&quot;;i:1744174349;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744174349;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;}}s:13:&quot;file_slug_map&quot;;a:1:{s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;s:21:&quot;dreamfox-deliverydate&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_last_versio...', NULL)
+#9 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-fs-storage.php(534): FS_Key_Value_Storage->__set('sdk_last_versio...', NULL)
+#10 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(898): FS_Storage->__set('sdk_last_versio...', NULL)
+#11 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(562): Freemius->_version_updates_handler()
+#12 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(2828): Freemius->__construct('10651', 'dreamfox-delive...', true)
+#13 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/start.php(553): Freemius::instance('10651', 'dreamfox-delive...', true)
+#14 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(41): fs_dynamic_init(Array)
+#15 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(66): dreamfox_delivery_date()
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woocommerce-del...')
+#18 /internal/eval.php(20): activate_plugin('woocommerce-del...')
+#19 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:7:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744174349;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";s:21:\"dreamfox-deliverydate\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php'), dreamfox_delivery_date, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 04:52:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:8:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744174349;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.7.3\";}}s:13:\"file_slug_map\";a:1:{s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";s:21:\"dreamfox-deliverydate\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10651;a:3:{s:4:&quot;slug&quot;;s:21:&quot;dreamfox-deliverydate&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:21:&quot;dreamfox-deliverydate&quot;;a:8:{s:19:&quot;last_load_timestamp&quot;;i:1744174349;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744174349;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;2.7.3&quot;;}}s:13:&quot;file_slug_map&quot;;a:1:{s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;s:21:&quot;dreamfox-deliverydate&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_version', '2.7.3')
+#9 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-fs-storage.php(534): FS_Key_Value_Storage->__set('sdk_version', '2.7.3')
+#10 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(899): FS_Storage->__set('sdk_version', '2.7.3')
+#11 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(562): Freemius->_version_updates_handler()
+#12 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(2828): Freemius->__construct('10651', 'dreamfox-delive...', true)
+#13 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/start.php(553): Freemius::instance('10651', 'dreamfox-delive...', true)
+#14 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(41): fs_dynamic_init(Array)
+#15 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(66): dreamfox_delivery_date()
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woocommerce-del...')
+#18 /internal/eval.php(20): activate_plugin('woocommerce-del...')
+#19 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:8:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744174349;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.7.3\";}}s:13:\"file_slug_map\";a:1:{s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";s:21:\"dreamfox-deliverydate\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php'), dreamfox_delivery_date, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 04:52:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:9:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744174349;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.7.3\";s:16:\"sdk_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";s:21:\"dreamfox-deliverydate\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10651;a:3:{s:4:&quot;slug&quot;;s:21:&quot;dreamfox-deliverydate&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:21:&quot;dreamfox-deliverydate&quot;;a:9:{s:19:&quot;last_load_timestamp&quot;;i:1744174349;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744174349;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;2.7.3&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;s:21:&quot;dreamfox-deliverydate&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_upgrade_mod...', true)
+#9 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-fs-storage.php(534): FS_Key_Value_Storage->__set('sdk_upgrade_mod...', true)
+#10 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(904): FS_Storage->__set('sdk_upgrade_mod...', true)
+#11 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(562): Freemius->_version_updates_handler()
+#12 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(2828): Freemius->__construct('10651', 'dreamfox-delive...', true)
+#13 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/start.php(553): Freemius::instance('10651', 'dreamfox-delive...', true)
+#14 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(41): fs_dynamic_init(Array)
+#15 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(66): dreamfox_delivery_date()
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woocommerce-del...')
+#18 /internal/eval.php(20): activate_plugin('woocommerce-del...')
+#19 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:9:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744174349;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.7.3\";s:16:\"sdk_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";s:21:\"dreamfox-deliverydate\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php'), dreamfox_delivery_date, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 04:52:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:10:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744174349;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.7.3\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";s:21:\"dreamfox-deliverydate\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10651;a:3:{s:4:&quot;slug&quot;;s:21:&quot;dreamfox-deliverydate&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:21:&quot;dreamfox-deliverydate&quot;;a:10:{s:19:&quot;last_load_timestamp&quot;;i:1744174349;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744174349;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;2.7.3&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;s:21:&quot;dreamfox-deliverydate&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_downgrade_m...', false)
+#9 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-fs-storage.php(534): FS_Key_Value_Storage->__set('sdk_downgrade_m...', false)
+#10 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(905): FS_Storage->__set('sdk_downgrade_m...', false)
+#11 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(562): Freemius->_version_updates_handler()
+#12 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(2828): Freemius->__construct('10651', 'dreamfox-delive...', true)
+#13 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/start.php(553): Freemius::instance('10651', 'dreamfox-delive...', true)
+#14 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(41): fs_dynamic_init(Array)
+#15 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(66): dreamfox_delivery_date()
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woocommerce-del...')
+#18 /internal/eval.php(20): activate_plugin('woocommerce-del...')
+#19 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:10:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744174349;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.7.3\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";s:21:\"dreamfox-deliverydate\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php'), dreamfox_delivery_date, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 04:52:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:11:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744174349;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.7.3\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";s:21:\"dreamfox-deliverydate\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10651;a:3:{s:4:&quot;slug&quot;;s:21:&quot;dreamfox-deliverydate&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:21:&quot;dreamfox-deliverydate&quot;;a:11:{s:19:&quot;last_load_timestamp&quot;;i:1744174349;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744174349;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;2.7.3&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;}}s:13:&quot;file_slug_map&quot;;a:1:{s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;s:21:&quot;dreamfox-deliverydate&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_last_ver...', NULL)
+#9 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-fs-storage.php(534): FS_Key_Value_Storage->__set('plugin_last_ver...', NULL)
+#10 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(918): FS_Storage->__set('plugin_last_ver...', NULL)
+#11 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(562): Freemius->_version_updates_handler()
+#12 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(2828): Freemius->__construct('10651', 'dreamfox-delive...', true)
+#13 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/start.php(553): Freemius::instance('10651', 'dreamfox-delive...', true)
+#14 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(41): fs_dynamic_init(Array)
+#15 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(66): dreamfox_delivery_date()
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woocommerce-del...')
+#18 /internal/eval.php(20): activate_plugin('woocommerce-del...')
+#19 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:11:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744174349;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.7.3\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";s:21:\"dreamfox-deliverydate\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php'), dreamfox_delivery_date, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 04:52:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:12:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744174349;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.7.3\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:5:\"2.2.0\";}}s:13:\"file_slug_map\";a:1:{s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";s:21:\"dreamfox-deliverydate\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10651;a:3:{s:4:&quot;slug&quot;;s:21:&quot;dreamfox-deliverydate&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:21:&quot;dreamfox-deliverydate&quot;;a:12:{s:19:&quot;last_load_timestamp&quot;;i:1744174349;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744174349;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;2.7.3&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;s:14:&quot;plugin_version&quot;;s:5:&quot;2.2.0&quot;;}}s:13:&quot;file_slug_map&quot;;a:1:{s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;s:21:&quot;dreamfox-deliverydate&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_version', '2.2.0')
+#9 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-fs-storage.php(534): FS_Key_Value_Storage->__set('plugin_version', '2.2.0')
+#10 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(919): FS_Storage->__set('plugin_version', '2.2.0')
+#11 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(562): Freemius->_version_updates_handler()
+#12 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(2828): Freemius->__construct('10651', 'dreamfox-delive...', true)
+#13 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/start.php(553): Freemius::instance('10651', 'dreamfox-delive...', true)
+#14 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(41): fs_dynamic_init(Array)
+#15 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(66): dreamfox_delivery_date()
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woocommerce-del...')
+#18 /internal/eval.php(20): activate_plugin('woocommerce-del...')
+#19 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:12:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744174349;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.7.3\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:5:\"2.2.0\";}}s:13:\"file_slug_map\";a:1:{s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";s:21:\"dreamfox-deliverydate\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php'), dreamfox_delivery_date, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 04:52:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:13:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744174349;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.7.3\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:5:\"2.2.0\";s:19:\"plugin_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";s:21:\"dreamfox-deliverydate\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10651;a:3:{s:4:&quot;slug&quot;;s:21:&quot;dreamfox-deliverydate&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:21:&quot;dreamfox-deliverydate&quot;;a:13:{s:19:&quot;last_load_timestamp&quot;;i:1744174349;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744174349;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;2.7.3&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;s:14:&quot;plugin_version&quot;;s:5:&quot;2.2.0&quot;;s:19:&quot;plugin_upgrade_mode&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;s:21:&quot;dreamfox-deliverydate&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_upgrade_...', true)
+#9 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-fs-storage.php(534): FS_Key_Value_Storage->__set('plugin_upgrade_...', true)
+#10 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(924): FS_Storage->__set('plugin_upgrade_...', true)
+#11 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(562): Freemius->_version_updates_handler()
+#12 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-freemius.php(2828): Freemius->__construct('10651', 'dreamfox-delive...', true)
+#13 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/start.php(553): Freemius::instance('10651', 'dreamfox-delive...', true)
+#14 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(41): fs_dynamic_init(Array)
+#15 /wordpress/wp-content/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php(66): dreamfox_delivery_date()
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woocommerce-del...')
+#18 /internal/eval.php(20): activate_plugin('woocommerce-del...')
+#19 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:13:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744174349;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.7.3\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:5:\"2.2.0\";s:19:\"plugin_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";s:21:\"dreamfox-deliverydate\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woocommerce-delivery-date/woocommerce-delivery-date.php'), dreamfox_delivery_date, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 04:52:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10651;a:3:{s:4:\"slug\";s:21:\"dreamfox-deliverydate\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"dreamfox-deliverydate\";a:14:{s:19:\"last_load_timestamp\";i:1744174349;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744174349;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.7.3\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:5:\"2.2.0\";s:19:\"plugin_upgrade_mode\";b:1;s:21:\"plugin_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:55:\"woocommerce-delivery-date/woocommerce-delivery-date.php\";s:21:\"dreamfox-deliverydate\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10651;a:3:{s:4:&quot;slug&quot;;s:21:&quot;dreamfox-deliverydate&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:21:&quot;dreamfox-deliverydate&quot;;a:14:{s:19:&quot;last_load_timestamp&quot;;i:1744174349;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744174349;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;2.7.3&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;s:14:&quot;plugin_version&quot;;s:5:&quot;2.2.0&quot;;s:19:&quot;plugin_upgrade_mode&quot;;b:1;s:21:&quot;plugin_downgrade_mode&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:55:&quot;woocommerce-delivery-date/woocommerce-delivery-date.php&quot;;s:21:&quot;dreamfox-deliverydate&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_downgrad...', false)
+#9 /wordpress/wp-content/plugins/woocommerce-delivery-date/freemius/includes/class-fs-storage.php(534): FS_Key_Value_Storage->__set('plugin_downgrad...', false)
+#10 /wordpress/wp-content/plugins/woocommerce-
