@@ -1,17 +1,585 @@
-node:internal/event_target:1094
-  process.nextTick(() => { throw err; });
-                           ^
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21
+`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
 
-TypeError: process.stdout.clearLine is not a function
-    at C.<anonymous> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:18:538)
-    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:820:20)
-    at C.dispatchEvent (node:internal/event_target:755:26)
-    at C.notifyProgress (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:295:10)
-    at C.<anonymous> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:200:81)
-    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:820:20)
-    at C.dispatchEvent (node:internal/event_target:755:26)
-    at C.notifyProgress (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:295:10)
-    at C.<anonymous> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:200:81)
-    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:820:20)
-
-Node.js v20.15.0
+Error: [09-Apr-2025 03:08:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ce_html', '<p>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ce_html' , '&lt;p&gt;' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/custom-excerpts/custom_excerpts.php(25): add_option('ce_html', '<p>')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): ce_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_custom...', false)
+#9 /internal/eval.php(20): activate_plugin('custom-excerpts...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ce_html', '<p>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_custom-excerpts/custom_excerpts.php'), WP_Hook->do_action, WP_Hook->apply_filters, ce_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 03:08:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ce_length', '80', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ce_length' , '80' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/custom-excerpts/custom_excerpts.php(26): add_option('ce_length', 80)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): ce_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_custom...', false)
+#9 /internal/eval.php(20): activate_plugin('custom-excerpts...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ce_length', '80', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_custom-excerpts/custom_excerpts.php'), WP_Hook->do_action, WP_Hook->apply_filters, ce_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 03:08:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ce_moretext', '..read more', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ce_moretext' , '..read more' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/custom-excerpts/custom_excerpts.php(27): add_option('ce_moretext', '..read more')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): ce_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_custom...', false)
+#9 /internal/eval.php(20): activate_plugin('custom-excerpts...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ce_moretext', '..read more', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_custom-excerpts/custom_excerpts.php'), WP_Hook->do_action, WP_Hook->apply_filters, ce_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 03:08:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ce_nofollow', 'Yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ce_nofollow' , 'Yes' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/custom-excerpts/custom_excerpts.php(28): add_option('ce_nofollow', 'Yes')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): ce_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_custom...', false)
+#9 /internal/eval.php(20): activate_plugin('custom-excerpts...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ce_nofollow', 'Yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_custom-excerpts/custom_excerpts.php'), WP_Hook->do_action, WP_Hook->apply_filters, ce_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 03:08:52 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 03:08:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 03:08:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 03:08:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 03:09:19 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 03:09:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 03:09:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 03:09:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 03:09:44 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/case-converter/case-converter.php:214
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('case-converter/...')
+#2 /internal/eval.php(20): activate_plugin('case-converter/...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/case-converter/case-converter.php on line 214
+[09-Apr-2025 03:09:51 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/case-converter/case-converter.php:214
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('case-converter/...')
+#2 /internal/eval.php(20): activate_plugin('case-converter/...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/case-converter/case-converter.php on line 214
+[09-Apr-2025 03:09:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/case-converter/case-converter.php:214
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('case-converter/...')
+#2 /internal/eval.php(20): activate_plugin('case-converter/...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/case-converter/case-converter.php on line 214
+[09-Apr-2025 03:10:24 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 03:10:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 03:10:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 03:10:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 03:10:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 03:10:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 03:10:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 03:10:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 03:11:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('smart-cache-settings-misc', 'a:0:{}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'smart-cache-settings-misc' , 'a:0:{}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('smart-cache-set...', Array, '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'smart-cache-set...', Array)
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'smart-cache-set...', Array)
+#7 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(269): update_site_option('smart-cache-set...', Array)
+#8 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(191): Smart_Cache_Base->save_settings('smart-cache-set...', 'misc', Array)
+#9 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(66): Smart_Cache_Base->get_settings('smart-cache-set...')
+#10 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-init.php(70): Smart_Cache_Base->__construct('/wordpress/wp-c...', true)
+#11 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-init.php(32): Smart_Cache->load_dependencies()
+#12 /wordpress/wp-content/plugins/codedragon-smartcache/smart-cache.php(136): Smart_Cache->__construct()
+#13 /wordpress/wp-content/plugins/codedragon-smartcache/smart-cache.php(139): Smart_Cache_run()
+#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('codedragon-smar...')
+#16 /internal/eval.php(20): activate_plugin('codedragon-smar...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('smart-cache-settings-misc', 'a:0:{}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/codedragon-smartcache/smart-cache.php'), Smart_Cache_run, Smart_Cache->__construct, Smart_Cache->load_dependencies, Smart_Cache_Base->__construct, Smart_Cache_Base->get_settings, Smart_Cache_Base->save_settings, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 03:11:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('smart-cache-cacheable-urls', 'a:0:{}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'smart-cache-cacheable-urls' , 'a:0:{}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('smart-cache-cac...', Array, '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'smart-cache-cac...', Array)
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'smart-cache-cac...', Array)
+#7 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-system.php(794): update_site_option('smart-cache-cac...', Array)
+#8 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(253): Smart_Cache_System->update_cacheable_info(NULL, NULL, Array)
+#9 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(191): Smart_Cache_Base->save_settings('smart-cache-set...', 'minify', Array)
+#10 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(66): Smart_Cache_Base->get_settings('smart-cache-set...')
+#11 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-init.php(70): Smart_Cache_Base->__construct('/wordpress/wp-c...', true)
+#12 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-init.php(32): Smart_Cache->load_dependencies()
+#13 /wordpress/wp-content/plugins/codedragon-smartcache/smart-cache.php(136): Smart_Cache->__construct()
+#14 /wordpress/wp-content/plugins/codedragon-smartcache/smart-cache.php(139): Smart_Cache_run()
+#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('codedragon-smar...')
+#17 /internal/eval.php(20): activate_plugin('codedragon-smar...')
+#18 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('smart-cache-cacheable-urls', 'a:0:{}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/codedragon-smartcache/smart-cache.php'), Smart_Cache_run, Smart_Cache->__construct, Smart_Cache->load_dependencies, Smart_Cache_Base->__construct, Smart_Cache_Base->get_settings, Smart_Cache_Base->save_settings, Smart_Cache_System->update_cacheable_info, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 03:11:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('smart-cache-cacheable-files', 'a:2:{s:7:\"scripts\";a:0:{}s:6:\"styles\";a:0:{}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'smart-cache-cacheable-files' , 'a:2:{s:7:&quot;scripts&quot;;a:0:{}s:6:&quot;styles&quot;;a:0:{}}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('smart-cache-cac...', Array, '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'smart-cache-cac...', Array)
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'smart-cache-cac...', Array)
+#7 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-system.php(795): update_site_option('smart-cache-cac...', Array)
+#8 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(253): Smart_Cache_System->update_cacheable_info(NULL, NULL, Array)
+#9 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(191): Smart_Cache_Base->save_settings('smart-cache-set...', 'minify', Array)
+#10 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(66): Smart_Cache_Base->get_settings('smart-cache-set...')
+#11 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-init.php(70): Smart_Cache_Base->__construct('/wordpress/wp-c...', true)
+#12 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-init.php(32): Smart_Cache->load_dependencies()
+#13 /wordpress/wp-content/plugins/codedragon-smartcache/smart-cache.php(136): Smart_Cache->__construct()
+#14 /wordpress/wp-content/plugins/codedragon-smartcache/smart-cache.php(139): Smart_Cache_run()
+#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('codedragon-smar...')
+#17 /internal/eval.php(20): activate_plugin('codedragon-smar...')
+#18 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('smart-cache-cacheable-files', 'a:2:{s:7:\"scripts\";a:0:{}s:6:\"styles\";a:0:{}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/codedragon-smartcache/smart-cache.php'), Smart_Cache_run, Smart_Cache->__construct, Smart_Cache->load_dependencies, Smart_Cache_Base->__construct, Smart_Cache_Base->get_settings, Smart_Cache_Base->save_settings, Smart_Cache_System->update_cacheable_info, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 03:11:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('smart-cache-settings-minify', 'a:22:{s:6:\"active\";b:1;s:10:\"minify-css\";b:1;s:9:\"minify-js\";b:1;s:11:\"minify-html\";b:1;s:13:\"minify-expiry\";i:691200;s:22:\"minify-logged-in-users\";b:0;s:11:\"admin-users\";a:0:{}s:20:\"remove-query-strings\";b:1;s:22:\"only-ver-query-strings\";b:0;s:13:\"load-js-defer\";b:1;s:13:\"load-js-async\";b:1;s:14:\"load-css-async\";b:1;s:22:\"exclude-jquery-migrate\";b:1;s:21:\"include-wp-core-files\";b:0;s:18:\"use-google-closure\";b:0;s:16:\"exclude-js-files\";s:0:\"\";s:17:\"exclude-css-files\";s:0:\"\";s:16:\"css-files-by-cpt\";a:0:{}s:15:\"js-files-by-cpt\";a:0:{}s:15:\"extract-@import\";b:1;s:6:\"styles\";N;s:7:\"scripts\";N;}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'smart-cache-settings-minify' , 'a:22:{s:6:&quot;active&quot;;b:1;s:10:&quot;minify-css&quot;;b:1;s:9:&quot;minify-js&quot;;b:1;s:11:&quot;minify-html&quot;;b:1;s:13:&quot;minify-expiry&quot;;i:691200;s:22:&quot;minify-logged-in-users&quot;;b:0;s:11:&quot;admin-users&quot;;a:0:{}s:20:&quot;remove-query-strings&quot;;b:1;s:22:&quot;only-ver-query-strings&quot;;b:0;s:13:&quot;load-js-defer&quot;;b:1;s:13:&quot;load-js-async&quot;;b:1;s:14:&quot;load-css-async&quot;;b:1;s:22:&quot;exclude-jquery-migrate&quot;;b:1;s:21:&quot;include-wp-core-files&quot;;b:0;s:18:&quot;use-google-closure&quot;;b:0;s:16:&quot;exclude-js-files&quot;;s:0:&quot;&quot;;s:17:&quot;exclude-css-files&quot;;s:0:&quot;&quot;;s:16:&quot;css-files-by-cpt&quot;;a:0:{}s:15:&quot;js-files-by-cpt&quot;;a:0:{}s:15:&quot;extract-@import&quot;;b:1;s:6:&quot;styles&quot;;N;s:7:&quot;scripts&quot;;N;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('smart-cache-set...', Array, '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'smart-cache-set...', Array)
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'smart-cache-set...', Array)
+#7 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(269): update_site_option('smart-cache-set...', Array)
+#8 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(191): Smart_Cache_Base->save_settings('smart-cache-set...', 'minify', Array)
+#9 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(66): Smart_Cache_Base->get_settings('smart-cache-set...')
+#10 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-init.php(70): Smart_Cache_Base->__construct('/wordpress/wp-c...', true)
+#11 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-init.php(32): Smart_Cache->load_dependencies()
+#12 /wordpress/wp-content/plugins/codedragon-smartcache/smart-cache.php(136): Smart_Cache->__construct()
+#13 /wordpress/wp-content/plugins/codedragon-smartcache/smart-cache.php(139): Smart_Cache_run()
+#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('codedragon-smar...')
+#16 /internal/eval.php(20): activate_plugin('codedragon-smar...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('smart-cache-settings-minify', 'a:22:{s:6:\"active\";b:1;s:10:\"minify-css\";b:1;s:9:\"minify-js\";b:1;s:11:\"minify-html\";b:1;s:13:\"minify-expiry\";i:691200;s:22:\"minify-logged-in-users\";b:0;s:11:\"admin-users\";a:0:{}s:20:\"remove-query-strings\";b:1;s:22:\"only-ver-query-strings\";b:0;s:13:\"load-js-defer\";b:1;s:13:\"load-js-async\";b:1;s:14:\"load-css-async\";b:1;s:22:\"exclude-jquery-migrate\";b:1;s:21:\"include-wp-core-files\";b:0;s:18:\"use-google-closure\";b:0;s:16:\"exclude-js-files\";s:0:\"\";s:17:\"exclude-css-files\";s:0:\"\";s:16:\"css-files-by-cpt\";a:0:{}s:15:\"js-files-by-cpt\";a:0:{}s:15:\"extract-@import\";b:1;s:6:\"styles\";N;s:7:\"scripts\";N;}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/codedragon-smartcache/smart-cache.php'), Smart_Cache_run, Smart_Cache->__construct, Smart_Cache->load_dependencies, Smart_Cache_Base->__construct, Smart_Cache_Base->get_settings, Smart_Cache_Base->save_settings, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 03:11:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('smart-cache-settings-combine', 'a:6:{s:6:\"active\";b:1;s:23:\"combine-logged-in-users\";b:0;s:11:\"admin-users\";a:0:{}s:10:\"combine-js\";b:1;s:11:\"combine-css\";b:1;s:13:\"combine-fonts\";b:1;}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'smart-cache-settings-combine' , 'a:6:{s:6:&quot;active&quot;;b:1;s:23:&quot;combine-logged-in-users&quot;;b:0;s:11:&quot;admin-users&quot;;a:0:{}s:10:&quot;combine-js&quot;;b:1;s:11:&quot;combine-css&quot;;b:1;s:13:&quot;combine-fonts&quot;;b:1;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('smart-cache-set...', Array, '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'smart-cache-set...', Array)
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'smart-cache-set...', Array)
+#7 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(269): update_site_option('smart-cache-set...', Array)
+#8 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(191): Smart_Cache_Base->save_settings('smart-cache-set...', 'combine', Array)
+#9 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(66): Smart_Cache_Base->get_settings('smart-cache-set...')
+#10 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-init.php(70): Smart_Cache_Base->__construct('/wordpress/wp-c...', true)
+#11 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-init.php(32): Smart_Cache->load_dependencies()
+#12 /wordpress/wp-content/plugins/codedragon-smartcache/smart-cache.php(136): Smart_Cache->__construct()
+#13 /wordpress/wp-content/plugins/codedragon-smartcache/smart-cache.php(139): Smart_Cache_run()
+#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('codedragon-smar...')
+#16 /internal/eval.php(20): activate_plugin('codedragon-smar...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('smart-cache-settings-combine', 'a:6:{s:6:\"active\";b:1;s:23:\"combine-logged-in-users\";b:0;s:11:\"admin-users\";a:0:{}s:10:\"combine-js\";b:1;s:11:\"combine-css\";b:1;s:13:\"combine-fonts\";b:1;}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/codedragon-smartcache/smart-cache.php'), Smart_Cache_run, Smart_Cache->__construct, Smart_Cache->load_dependencies, Smart_Cache_Base->__construct, Smart_Cache_Base->get_settings, Smart_Cache_Base->save_settings, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 03:11:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('smart-cache-settings-page-caching', 'a:9:{s:6:\"active\";b:1;s:28:\"page-caching-logged-in-users\";b:0;s:11:\"admin-users\";a:0:{}s:16:\"gzip-compression\";b:1;s:5:\"https\";b:0;s:12:\"static-cache\";b:0;s:18:\"exclude-front-page\";b:0;s:15:\"exclude-by-page\";a:0:{}s:20:\"exclude-by-post-type\";a:0:{}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'smart-cache-settings-page-caching' , 'a:9:{s:6:&quot;active&quot;;b:1;s:28:&quot;page-caching-logged-in-users&quot;;b:0;s:11:&quot;admin-users&quot;;a:0:{}s:16:&quot;gzip-compression&quot;;b:1;s:5:&quot;https&quot;;b:0;s:12:&quot;static-cache&quot;;b:0;s:18:&quot;exclude-front-page&quot;;b:0;s:15:&quot;exclude-by-page&quot;;a:0:{}s:20:&quot;exclude-by-post-type&quot;;a:0:{}}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('smart-cache-set...', Array, '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'smart-cache-set...', Array)
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'smart-cache-set...', Array)
+#7 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(269): update_site_option('smart-cache-set...', Array)
+#8 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(191): Smart_Cache_Base->save_settings('smart-cache-set...', 'page-caching', Array)
+#9 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(66): Smart_Cache_Base->get_settings('smart-cache-set...')
+#10 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-init.php(70): Smart_Cache_Base->__construct('/wordpress/wp-c...', true)
+#11 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-init.php(32): Smart_Cache->load_dependencies()
+#12 /wordpress/wp-content/plugins/codedragon-smartcache/smart-cache.php(136): Smart_Cache->__construct()
+#13 /wordpress/wp-content/plugins/codedragon-smartcache/smart-cache.php(139): Smart_Cache_run()
+#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('codedragon-smar...')
+#16 /internal/eval.php(20): activate_plugin('codedragon-smar...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('smart-cache-settings-page-caching', 'a:9:{s:6:\"active\";b:1;s:28:\"page-caching-logged-in-users\";b:0;s:11:\"admin-users\";a:0:{}s:16:\"gzip-compression\";b:1;s:5:\"https\";b:0;s:12:\"static-cache\";b:0;s:18:\"exclude-front-page\";b:0;s:15:\"exclude-by-page\";a:0:{}s:20:\"exclude-by-post-type\";a:0:{}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/codedragon-smartcache/smart-cache.php'), Smart_Cache_run, Smart_Cache->__construct, Smart_Cache->load_dependencies, Smart_Cache_Base->__construct, Smart_Cache_Base->get_settings, Smart_Cache_Base->save_settings, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 03:11:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('smart-cache-settings-browser-caching', 'a:12:{s:6:\"active\";b:1;s:19:\"exclude-user-agents\";a:0:{}s:20:\"isolate-mobile-cache\";b:1;s:22:\"exclude-mobile-devices\";a:0:{}s:24:\"set-last-modified-header\";b:1;s:21:\"set-expires-header-js\";i:604800;s:22:\"set-expires-header-css\";i:604800;s:23:\"set-expires-header-imgs\";i:604800;s:22:\"set-expires-header-pdf\";i:604800;s:26:\"set-accept-encoding-header\";b:1;s:15:\"add-etag-header\";b:0;s:12:\"cookie-block\";N;}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'smart-cache-settings-browser-caching' , 'a:12:{s:6:&quot;active&quot;;b:1;s:19:&quot;exclude-user-agents&quot;;a:0:{}s:20:&quot;isolate-mobile-cache&quot;;b:1;s:22:&quot;exclude-mobile-devices&quot;;a:0:{}s:24:&quot;set-last-modified-header&quot;;b:1;s:21:&quot;set-expires-header-js&quot;;i:604800;s:22:&quot;set-expires-header-css&quot;;i:604800;s:23:&quot;set-expires-header-imgs&quot;;i:604800;s:22:&quot;set-expires-header-pdf&quot;;i:604800;s:26:&quot;set-accept-encoding-header&quot;;b:1;s:15:&quot;add-etag-header&quot;;b:0;s:12:&quot;cookie-block&quot;;N;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('smart-cache-set...', Array, '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'smart-cache-set...', Array)
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'smart-cache-set...', Array)
+#7 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(269): update_site_option('smart-cache-set...', Array)
+#8 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(191): Smart_Cache_Base->save_settings('smart-cache-set...', 'browser-caching', Array)
+#9 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(66): Smart_Cache_Base->get_settings('smart-cache-set...')
+#10 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-init.php(70): Smart_Cache_Base->__construct('/wordpress/wp-c...', true)
+#11 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-init.php(32): Smart_Cache->load_dependencies()
+#12 /wordpress/wp-content/plugins/codedragon-smartcache/smart-cache.php(136): Smart_Cache->__construct()
+#13 /wordpress/wp-content/plugins/codedragon-smartcache/smart-cache.php(139): Smart_Cache_run()
+#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('codedragon-smar...')
+#16 /internal/eval.php(20): activate_plugin('codedragon-smar...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('smart-cache-settings-browser-caching', 'a:12:{s:6:\"active\";b:1;s:19:\"exclude-user-agents\";a:0:{}s:20:\"isolate-mobile-cache\";b:1;s:22:\"exclude-mobile-devices\";a:0:{}s:24:\"set-last-modified-header\";b:1;s:21:\"set-expires-header-js\";i:604800;s:22:\"set-expires-header-css\";i:604800;s:23:\"set-expires-header-imgs\";i:604800;s:22:\"set-expires-header-pdf\";i:604800;s:26:\"set-accept-encoding-header\";b:1;s:15:\"add-etag-header\";b:0;s:12:\"cookie-block\";N;}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/codedragon-smartcache/smart-cache.php'), Smart_Cache_run, Smart_Cache->__construct, Smart_Cache->load_dependencies, Smart_Cache_Base->__construct, Smart_Cache_Base->get_settings, Smart_Cache_Base->save_settings, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 03:11:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('smart-cache-settings-cdn', 'a:7:{s:6:\"active\";b:0;s:19:\"include-attachments\";a:0:{}s:19:\"include-theme-files\";a:0:{}s:22:\"include-minified-files\";b:0;s:20:\"include-custom-files\";a:0:{}s:20:\"exclude-custom-files\";a:0:{}s:13:\"cdn-validated\";b:0;}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'smart-cache-settings-cdn' , 'a:7:{s:6:&quot;active&quot;;b:0;s:19:&quot;include-attachments&quot;;a:0:{}s:19:&quot;include-theme-files&quot;;a:0:{}s:22:&quot;include-minified-files&quot;;b:0;s:20:&quot;include-custom-files&quot;;a:0:{}s:20:&quot;exclude-custom-files&quot;;a:0:{}s:13:&quot;cdn-validated&quot;;b:0;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('smart-cache-set...', Array, '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'smart-cache-set...', Array)
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'smart-cache-set...', Array)
+#7 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(269): update_site_option('smart-cache-set...', Array)
+#8 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(191): Smart_Cache_Base->save_settings('smart-cache-set...', 'cdn', Array)
+#9 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(66): Smart_Cache_Base->get_settings('smart-cache-set...')
+#10 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-init.php(70): Smart_Cache_Base->__construct('/wordpress/wp-c...', true)
+#11 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-init.php(32): Smart_Cache->load_dependencies()
+#12 /wordpress/wp-content/plugins/codedragon-smartcache/smart-cache.php(136): Smart_Cache->__construct()
+#13 /wordpress/wp-content/plugins/codedragon-smartcache/smart-cache.php(139): Smart_Cache_run()
+#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('codedragon-smar...')
+#16 /internal/eval.php(20): activate_plugin('codedragon-smar...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('smart-cache-settings-cdn', 'a:7:{s:6:\"active\";b:0;s:19:\"include-attachments\";a:0:{}s:19:\"include-theme-files\";a:0:{}s:22:\"include-minified-files\";b:0;s:20:\"include-custom-files\";a:0:{}s:20:\"exclude-custom-files\";a:0:{}s:13:\"cdn-validated\";b:0;}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/codedragon-smartcache/smart-cache.php'), Smart_Cache_run, Smart_Cache->__construct, Smart_Cache->load_dependencies, Smart_Cache_Base->__construct, Smart_Cache_Base->get_settings, Smart_Cache_Base->save_settings, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 03:11:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('smart-cache-settings-tools', 'a:10:{s:22:\"gtmetrix-test-username\";N;s:17:\"gtmetrix-test-api\";N;s:21:\"pingdon-test-username\";N;s:16:\"pingdon-test-api\";N;s:23:\"pagespeed-test-username\";N;s:18:\"pagespeed-test-api\";N;s:22:\"clear-post-type-saving\";a:2:{i:0;s:5:\"posts\";i:1;s:5:\"pages\";}s:19:\"custom-cache-folder\";N;s:10:\"debug-mode\";b:0;s:16:\"deactivate-tasks\";a:0:{}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'smart-cache-settings-tools' , 'a:10:{s:22:&quot;gtmetrix-test-username&quot;;N;s:17:&quot;gtmetrix-test-api&quot;;N;s:21:&quot;pingdon-test-username&quot;;N;s:16:&quot;pingdon-test-api&quot;;N;s:23:&quot;pagespeed-test-username&quot;;N;s:18:&quot;pagespeed-test-api&quot;;N;s:22:&quot;clear-post-type-saving&quot;;a:2:{i:0;s:5:&quot;posts&quot;;i:1;s:5:&quot;pages&quot;;}s:19:&quot;custom-cache-folder&quot;;N;s:10:&quot;debug-mode&quot;;b:0;s:16:&quot;deactivate-tasks&quot;;a:0:{}}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('smart-cache-set...', Array, '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'smart-cache-set...', Array)
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'smart-cache-set...', Array)
+#7 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(269): update_site_option('smart-cache-set...', Array)
+#8 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(191): Smart_Cache_Base->save_settings('smart-cache-set...', 'tools', Array)
+#9 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-base.php(66): Smart_Cache_Base->get_settings('smart-cache-set...')
+#10 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-init.php(70): Smart_Cache_Base->__construct('/wordpress/wp-c...', true)
+#11 /wordpress/wp-content/plugins/codedragon-smartcache/includes/class-sc-init.php(32): Smart_Cache->load_dependencies()
+#12 /wordpress/wp-content/plugins/codedragon-smartcache/smart-cache.php(136): Smart_Cache->__construct()
+#13 /wordpress/wp-content/plugins/codedragon-smartcache/smart-cache.php(139): Smart_Cache_run()
+#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('codedragon-smar...')
+#16 /internal/eval.php(20): activate_plugin('codedragon-smar...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('smart-cache-settings-tools', 'a:10:{s:22:\"gtmetrix-test-username\";N;s:17:\"gtmetrix-test-api\";N;s:21:\"pingdon-test-username\";N;s:16:\"pingdon-test-api\";N;s:23:\"pagespeed-test-username\";N;s:18:\"pagespeed-test-api\";N;s:22:\"clear-post-type-saving\";a:2:{i:0;s:5:\"posts\";i:1;s:5:\"pages\";}s:19:\"custom-cache-folder\";N;s:10:\"debug-mode\";b:0;s:16:\"deactivate-tasks\";a:0:{}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/codedragon-smartcache/smart-cache.php'), Smart_Cache_run, Smart_Cache->__construct, Smart_Cache->load_dependencies, Smart_Cache_Base->__construct, Smart_Cache_Base->get_settings, Smart_Cache_Base->save_settings, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 03:11:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('smart-cache-settings-reports', 'a:0:{}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'smart-cache-settings-reports' , 'a:0:{}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-databas
