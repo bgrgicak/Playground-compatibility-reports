@@ -2,68 +2,326 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [07-Apr-2025 07:52:59 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 07:52:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 07:52:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 07:52:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 07:53:14 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 07:53:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 07:53:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 07:53:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 07:53:25 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 07:53:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 07:53:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 07:53:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 07:53:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [09-Apr-2025 12:48:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ad_manager', 'a:2:{s:7:\"version\";s:5:\"0.9.4\";s:4:\"data\";a:0:{}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TABLE wp_awp_notifications_log (
+            id BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            user_id BIGINT(20) UNSIGNED DEFAULT NULL,
+            order_id BIGINT(20) UNSIGNED DEFAULT NULL,
+            customer_name VARCHAR(255) NOT NULL,
+            sent_at DATETIME NOT NULL,
+            whatsapp_number VARCHAR(20) NOT NULL,
+            message TEXT NOT NULL,
+            image_attachment VARCHAR(255) DEFAULT NULL,
+            message_type VARCHAR(100) NOT NULL,
+            wawp_status TEXT NOT NULL,
+            resend_id BIGINT(20) UNSIGNED DEFAULT NULL,
+            INDEX idx_user_id (user_id),
+            INDEX idx_order_id (order_id),
+            INDEX idx_sent_at (sent_at),
+            INDEX idx_message_type (message_type),
+            INDEX idx_resend_id (resend_id),
+            FOREIGN KEY (resend_id) REFERENCES wp_awp_notifications_log(id) ON DELETE SET NULL
+        ) DEFAULT CHARACTER SET utf8mb4</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ad_manager' , 'a:2:{s:7:&quot;version&quot;;s:5:&quot;0.9.4&quot;;s:4:&quot;data&quot;;a:0:{}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+				INSERT INTO _wp_sqlite_mysql_information_schema_tables (table_schema, table_name, table_type, engine, row_format, table_collation)
+				VALUES (?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_awp_notifications_log, BASE TABLE, InnoDB, Dynamic, utf8mb4_general_ci</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_awp_notifications_log, id, 1, , NO, bigint, , , 20, 0, , , , bigint(20) unsigned, PRI, auto_increment, select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_awp_notifications_log, 0, database_name_here, PRIMARY, 1, id, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_awp_notifications_log, user_id, 2, , YES, bigint, , , 20, 0, , , , bigint(20) unsigned, , , select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_awp_notifications_log, order_id, 3, , YES, bigint, , , 20, 0, , , , bigint(20) unsigned, , , select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_awp_notifications_log, customer_name, 4, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_awp_notifications_log, sent_at, 5, , NO, datetime, , , , , 0, , , datetime, , , select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_awp_notifications_log, whatsapp_number, 6, , NO, varchar, 20, 80, , , , utf8mb4, utf8mb4_general_ci, varchar(20), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_awp_notifications_log, message, 7, , NO, text, 65535, 65535, , , , utf8mb4, utf8mb4_general_ci, text, , , select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_awp_notifications_log, image_attachment, 8, , YES, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_awp_notifications_log, message_type, 9, , NO, varchar, 100, 400, , , , utf8mb4, utf8mb4_general_ci, varchar(100), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_awp_notifications_log, wawp_status, 10, , NO, text, 65535, 65535, , , , utf8mb4, utf8mb4_general_ci, text, , , select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_awp_notifications_log, resend_id, 11, , YES, bigint, , , 20, 0, , , , bigint(20) unsigned, , , select,insert,update,references, , , </li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM _wp_sqlite_mysql_information_schema_columns
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_awp_notifications_log, user_id</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_awp_notifications_log, 1, database_name_here, idx_user_id, 1, user_id, A, 0, , , YES, BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_information_schema_statistics
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_awp_notifications_log, database_name_here, wp_awp_notifications_log</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM _wp_sqlite_mysql_information_schema_columns
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_awp_notifications_log, order_id</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_awp_notifications_log, 1, database_name_here, idx_order_id, 1, order_id, A, 0, , , YES, BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_information_schema_statistics
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_awp_notifications_log, database_name_here, wp_awp_notifications_log</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM _wp_sqlite_mysql_information_schema_columns
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_awp_notifications_log, sent_at</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_awp_notifications_log, 1, database_name_here, idx_sent_at, 1, sent_at, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_information_schema_statistics
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_awp_notifications_log, database_name_here, wp_awp_notifications_log</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM _wp_sqlite_mysql_information_schema_columns
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_awp_notifications_log, message_type</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_awp_notifications_log, 1, database_name_here, idx_message_type, 1, message_type, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_information_schema_statistics
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_awp_notifications_log, database_name_here, wp_awp_notifications_log</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM _wp_sqlite_mysql_information_schema_columns
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_awp_notifications_log, resend_id</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_awp_notifications_log, 1, database_name_here, idx_resend_id, 1, resend_id, A, 0, , , YES, BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_information_schema_statistics
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_awp_notifications_log, database_name_here, wp_awp_notifications_log</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+FOREIGN KEY and CHECK constraints are not supported yet.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ad_manager', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/ad-manager-for-wp/ad-manager.php(201): update_option('ad_manager', Array)
-#6 /wordpress/wp-content/plugins/ad-manager-for-wp/ad-manager.php(138): AdManager->getOptions()
-#7 /wordpress/wp-content/plugins/ad-manager-for-wp/ad-manager.php(91): AdManager->__construct()
-#8 /wordpress/wp-content/plugins/ad-manager-for-wp/ad-manager.php(1509): AdManager::app()
-#9 /wordpress/wp-content/plugins/ad-manager-for-wp/ad-manager.php(1515): AdManager()
-#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ad-manager-for-...')
-#12 /internal/eval.php(20): activate_plugin('ad-manager-for-...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('FOREIGN KEY and...', 0, Object(Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE TABLE wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#4 /wordpress/wp-content/plugins/automation-web-platform/includes/class-database-manager.php(179): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/automation-web-platform/includes/class-database-manager.php(106): AWP_Database_Manager->run_dbDelta('wp_awp_notifica...', '(\n            i...')
+#6 /wordpress/wp-content/plugins/automation-web-platform/includes/class-database-manager.php(37): AWP_Database_Manager->create_notifications_log_table()
+#7 /wordpress/wp-content/plugins/automation-web-platform/class-awp.php(212): AWP_Database_Manager->create_all_tables()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): {closure}(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_automa...', false)
+#12 /internal/eval.php(20): activate_plugin('automation-web-...')
 #13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ad_manager', 'a:2:{s:7:\"version\";s:5:\"0.9.4\";s:4:\"data\";a:0:{}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ad-manager-for-wp/ad-manager.php'), AdManager, AdManager::app, AdManager->__construct, AdManager->getOptions, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 07:53:37 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 07:53:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 07:53:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 07:53:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 07:53:37 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 07:53:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 07:53:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 07:53:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 07:53:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query CREATE TABLE wp_awp_notifications_log (
+            id BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            user_id BIGINT(20) UNSIGNED DEFAULT NULL,
+            order_id BIGINT(20) UNSIGNED DEFAULT NULL,
+            customer_name VARCHAR(255) NOT NULL,
+            sent_at DATETIME NOT NULL,
+            whatsapp_number VARCHAR(20) NOT NULL,
+            message TEXT NOT NULL,
+            image_attachment VARCHAR(255) DEFAULT NULL,
+            message_type VARCHAR(100) NOT NULL,
+            wawp_status TEXT NOT NULL,
+            resend_id BIGINT(20) UNSIGNED DEFAULT NULL,
+            INDEX idx_user_id (user_id),
+            INDEX idx_order_id (order_id),
+            INDEX idx_sent_at (sent_at),
+            INDEX idx_message_type (message_type),
+            INDEX idx_resend_id (resend_id),
+            FOREIGN KEY (resend_id) REFERENCES wp_awp_notifications_log(id) ON DELETE SET NULL
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_automation-web-platform/class-awp.php'), WP_Hook->do_action, WP_Hook->apply_filters, {closure}, AWP_Database_Manager->create_all_tables, AWP_Database_Manager->create_notifications_log_table, AWP_Database_Manager->run_dbDelta, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Undefined index: autoload in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Undefined index: autoload in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Undefined index: autoload in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 12:48:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ad_manager', 'a:2:{s:7:\"version\";s:5:\"0.9.4\";s:4:\"data\";a:0:{}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('awp_otp_settings', 'a:17:{s:8:\"instance\";i:0;s:20:\"otp_message_whatsapp\";s:25:\"Your OTP code is: {{otp}}\";s:17:\"otp_message_email\";s:25:\"Your OTP code is: {{otp}}\";s:12:\"login_method\";s:12:\"whatsapp_otp\";s:15:\"enable_whatsapp\";i:1;s:12:\"enable_email\";i:1;s:21:\"enable_email_password\";i:1;s:14:\"redirect_rules\";a:0:{}s:11:\"signup_logo\";a:2:{s:7:\"default\";s:77:\"/wordpress/wp-content/plugins/automation-web-platform/login-WhatsApp_icon.png\";s:17:\"sanitize_callback\";s:11:\"esc_url_raw\";}s:5:\"title\";s:12:\"Welcome back\";s:11:\"description\";s:35:\"Choose a sign-in method to continue\";s:24:\"request_otp_button_color\";s:7:\"#22c55e\";s:23:\"verify_otp_button_color\";s:7:\"#22c55e\";s:23:\"resend_otp_button_color\";s:7:\"#22c55e\";s:18:\"login_button_color\";s:7:\"#22c55e\";s:16:\"custom_shortcode\";s:0:\"\";s:10:\"custom_css\";s:0:\"\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -75,7 +333,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ad_manager' , 'a:2:{s:7:&quot;version&quot;;s:5:&quot;0.9.4&quot;;s:4:&quot;data&quot;;a:0:{}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'awp_otp_settings' , 'a:17:{s:8:&quot;instance&quot;;i:0;s:20:&quot;otp_message_whatsapp&quot;;s:25:&quot;Your OTP code is: {{otp}}&quot;;s:17:&quot;otp_message_email&quot;;s:25:&quot;Your OTP code is: {{otp}}&quot;;s:12:&quot;login_method&quot;;s:12:&quot;whatsapp_otp&quot;;s:15:&quot;enable_whatsapp&quot;;i:1;s:12:&quot;enable_email&quot;;i:1;s:21:&quot;enable_email_password&quot;;i:1;s:14:&quot;redirect_rules&quot;;a:0:{}s:11:&quot;signup_logo&quot;;a:2:{s:7:&quot;default&quot;;s:77:&quot;/wordpress/wp-content/plugins/automation-web-platform/login-WhatsApp_icon.png&quot;;s:17:&quot;sanitize_callback&quot;;s:11:&quot;esc_url_raw&quot;;}s:5:&quot;title&quot;;s:12:&quot;Welcome back&quot;;s:11:&quot;description&quot;;s:35:&quot;Choose a sign-in method to continue&quot;;s:24:&quot;request_otp_button_color&quot;;s:7:&quot;#22c55e&quot;;s:23:&quot;verify_otp_button_color&quot;;s:7:&quot;#22c55e&quot;;s:23:&quot;resend_otp_button_color&quot;;s:7:&quot;#22c55e&quot;;s:18:&quot;login_button_color&quot;;s:7:&quot;#22c55e&quot;;s:16:&quot;custom_shortcode&quot;;s:0:&quot;&quot;;s:10:&quot;custom_css&quot;;s:0:&quot;&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -87,26 +345,55 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ad_manager', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/ad-manager-for-wp/ad-manager.php(201): update_option('ad_manager', Array)
-#6 /wordpress/wp-content/plugins/ad-manager-for-wp/ad-manager.php(138): AdManager->getOptions()
-#7 /wordpress/wp-content/plugins/ad-manager-for-wp/ad-manager.php(91): AdManager->__construct()
-#8 /wordpress/wp-content/plugins/ad-manager-for-wp/ad-manager.php(1509): AdManager::app()
-#9 /wordpress/wp-content/plugins/ad-manager-for-wp/ad-manager.php(1515): AdManager()
-#10 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ad_manager', 'a:2:{s:7:\"version\";s:5:\"0.9.4\";s:4:\"data\";a:0:{}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/ad-manager-for-wp/ad-manager.php'), AdManager, AdManager::app, AdManager->__construct, AdManager->getOptions, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 07:53:49 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 07:53:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 07:53:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 07:53:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 07:53:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/automation-web-platform/class-awp.php(247): add_option('awp_otp_setting...', Array)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): {closure}(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_automa...', false)
+#9 /internal/eval.php(20): activate_plugin('automation-web-...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('awp_otp_settings', 'a:17:{s:8:\"instance\";i:0;s:20:\"otp_message_whatsapp\";s:25:\"Your OTP code is: {{otp}}\";s:17:\"otp_message_email\";s:25:\"Your OTP code is: {{otp}}\";s:12:\"login_method\";s:12:\"whatsapp_otp\";s:15:\"enable_whatsapp\";i:1;s:12:\"enable_email\";i:1;s:21:\"enable_email_password\";i:1;s:14:\"redirect_rules\";a:0:{}s:11:\"signup_logo\";a:2:{s:7:\"default\";s:77:\"/wordpress/wp-content/plugins/automation-web-platform/login-WhatsApp_icon.png\";s:17:\"sanitize_callback\";s:11:\"esc_url_raw\";}s:5:\"title\";s:12:\"Welcome back\";s:11:\"description\";s:35:\"Choose a sign-in method to continue\";s:24:\"request_otp_button_color\";s:7:\"#22c55e\";s:23:\"verify_otp_button_color\";s:7:\"#22c55e\";s:23:\"resend_otp_button_color\";s:7:\"#22c55e\";s:18:\"login_button_color\";s:7:\"#22c55e\";s:16:\"custom_shortcode\";s:0:\"\";s:10:\"custom_css\";s:0:\"\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_automation-web-platform/class-awp.php'), WP_Hook->do_action, WP_Hook->apply_filters, {closure}, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:48:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '2025-04-07 07:53:49', '2025-04-07 07:53:49', '<!-- wp:page-list /-->', '', 'Navigation', '', 'publish', 'wp_navigation', 'closed', 'closed', '', 'navigation', '', '', '2025-04-07 07:53:49', '2025-04-07 07:53:49', 0, 0, '', '')</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woo_intl_tel_options', 'a:3:{s:19:\"enable_ip_detection\";i:1;s:12:\"phone_fields\";a:4:{i:0;a:3:{s:2:\"id\";s:14:\"#billing-phone\";s:4:\"name\";s:13:\"billing_phone\";s:7:\"enabled\";s:1:\"1\";}i:1;a:3:{s:2:\"id\";s:14:\"#billing_phone\";s:4:\"name\";s:13:\"billing_phone\";s:7:\"enabled\";s:1:\"1\";}i:2;a:3:{s:2:\"id\";s:13:\"#awp_whatsapp\";s:4:\"name\";s:12:\"awp_whatsapp\";s:7:\"enabled\";s:1:\"1\";}i:3;a:3:{s:2:\"id\";s:10:\"#awp_phone\";s:4:\"name\";s:9:\"awp_phone\";s:7:\"enabled\";s:1:\"1\";}}s:17:\"enabled_countries\";a:253:{i:0;s:2:\"eg\";i:1;s:2:\"sa\";i:2;s:2:\"af\";i:3;s:2:\"al\";i:4;s:2:\"dz\";i:5;s:2:\"as\";i:6;s:2:\"ad\";i:7;s:2:\"ao\";i:8;s:2:\"ai\";i:9;s:2:\"ag\";i:10;s:2:\"ar\";i:11;s:2:\"am\";i:12;s:2:\"aw\";i:13;s:2:\"au\";i:14;s:2:\"at\";i:15;s:2:\"az\";i:16;s:2:\"bs\";i:17;s:2:\"bh\";i:18;s:2:\"bd\";i:19;s:2:\"bb\";i:20;s:2:\"by\";i:21;s:2:\"be\";i:22;s:2:\"bz\";i:23;s:2:\"bj\";i:24;s:2:\"bm\";i:25;s:2:\"bt\";i:26;s:2:\"bo\";i:27;s:2:\"ba\";i:28;s:2:\"bw\";i:29;s:2:\"br\";i:30;s:2:\"bn\";i:31;s:2:\"bg\";i:32;s:2:\"bf\";i:33;s:2:\"bi\";i:34;s:2:\"cv\";i:35;s:2:\"kh\";i:36;s:2:\"cm\";i:37;s:2:\"ca\";i:38;s:2:\"cf\";i:39;s:2:\"td\";i:40;s:2:\"cl\";i:41;s:2:\"cn\";i:42;s:2:\"co\";i:43;s:2:\"km\";i:44;s:2:\"cd\";i:45;s:2:\"cg\";i:46;s:2:\"cr\";i:47;s:2:\"ci\";i:48;s:2:\"hr\";i:49;s:2:\"cu\";i:50;s:2:\"cy\";i:51;s:2:\"cz\";i:52;s:2:\"dk\";i:53;s:2:\"dj\";i:54;s:2:\"dm\";i:55;s:2:\"do\";i:56;s:2:\"ec\";i:57;s:2:\"sv\";i:58;s:2:\"gq\";i:59;s:2:\"er\";i:60;s:2:\"ee\";i:61;s:2:\"sz\";i:62;s:2:\"et\";i:63;s:2:\"fj\";i:64;s:2:\"fi\";i:65;s:2:\"fr\";i:66;s:2:\"ga\";i:67;s:2:\"gm\";i:68;s:2:\"ge\";i:69;s:2:\"de\";i:70;s:2:\"gh\";i:71;s:2:\"gr\";i:72;s:2:\"gd\";i:73;s:2:\"gu\";i:74;s:2:\"gt\";i:75;s:2:\"gn\";i:76;s:2:\"gw\";i:77;s:2:\"gy\";i:78;s:2:\"ht\";i:79;s:2:\"hn\";i:80;s:2:\"hk\";i:81;s:2:\"hu\";i:82;s:2:\"is\";i:83;s:2:\"in\";i:84;s:2:\"id\";i:85;s:2:\"ir\";i:86;s:2:\"iq\";i:87;s:2:\"ie\";i:88;s:2:\"it\";i:89;s:2:\"jm\";i:90;s:2:\"jp\";i:91;s:2:\"jo\";i:92;s:2:\"kz\";i:93;s:2:\"ke\";i:94;s:2:\"ki\";i:95;s:2:\"kp\";i:96;s:2:\"kr\";i:97;s:2:\"kw\";i:98;s:2:\"kg\";i:99;s:2:\"la\";i:100;s:2:\"lv\";i:101;s:2:\"lb\";i:102;s:2:\"ls\";i:103;s:2:\"lr\";i:104;s:2:\"ly\";i:105;s:2:\"li\";i:106;s:2:\"lt\";i:107;s:2:\"lu\";i:108;s:2:\"mo\";i:109;s:2:\"mg\";i:110;s:2:\"mw\";i:111;s:2:\"my\";i:112;s:2:\"mv\";i:113;s:2:\"ml\";i:114;s:2:\"mt\";i:115;s:2:\"mh\";i:116;s:2:\"mr\";i:117;s:2:\"mu\";i:118;s:2:\"mx\";i:119;s:2:\"fm\";i:120;s:2:\"md\";i:121;s:2:\"mc\";i:122;s:2:\"mn\";i:123;s:2:\"me\";i:124;s:2:\"ma\";i:125;s:2:\"mz\";i:126;s:2:\"mm\";i:127;s:2:\"na\";i:128;s:2:\"nr\";i:129;s:2:\"np\";i:130;s:2:\"nl\";i:131;s:2:\"nz\";i:132;s:2:\"ni\";i:133;s:2:\"ne\";i:134;s:2:\"ng\";i:135;s:2:\"nu\";i:136;s:2:\"mk\";i:137;s:2:\"no\";i:138;s:2:\"om\";i:139;s:2:\"pk\";i:140;s:2:\"pw\";i:141;s:2:\"ps\";i:142;s:2:\"pa\";i:143;s:2:\"pg\";i:144;s:2:\"py\";i:145;s:2:\"pe\";i:146;s:2:\"ph\";i:147;s:2:\"pl\";i:148;s:2:\"pt\";i:149;s:2:\"qa\";i:150;s:2:\"ro\";i:151;s:2:\"ru\";i:152;s:2:\"rw\";i:153;s:2:\"kn\";i:154;s:2:\"lc\";i:155;s:2:\"vc\";i:156;s:2:\"ws\";i:157;s:2:\"sm\";i:158;s:2:\"st\";i:159;s:2:\"sn\";i:160;s:2:\"rs\";i:161;s:2:\"sc\";i:162;s:2:\"sl\";i:163;s:2:\"sg\";i:164;s:2:\"sk\";i:165;s:2:\"si\";i:166;s:2:\"sb\";i:167;s:2:\"so\";i:168;s:2:\"za\";i:169;s:2:\"ss\";i:170;s:2:\"es\";i:171;s:2:\"lk\";i:172;s:2:\"sd\";i:173;s:2:\"sr\";i:174;s:2:\"se\";i:175;s:2:\"ch\";i:176;s:2:\"sy\";i:177;s:2:\"tw\";i:178;s:2:\"tj\";i:179;s:2:\"tz\";i:180;s:2:\"th\";i:181;s:2:\"tl\";i:182;s:2:\"tg\";i:183;s:2:\"to\";i:184;s:2:\"tt\";i:185;s:2:\"tn\";i:186;s:2:\"tr\";i:187;s:2:\"tm\";i:188;s:2:\"tv\";i:189;s:2:\"ug\";i:190;s:2:\"ua\";i:191;s:2:\"ae\";i:192;s:2:\"gb\";i:193;s:2:\"us\";i:194;s:2:\"uy\";i:195;s:2:\"uz\";i:196;s:2:\"vu\";i:197;s:2:\"ve\";i:198;s:2:\"vn\";i:199;s:2:\"ye\";i:200;s:2:\"zm\";i:201;s:2:\"zw\";i:202;s:2:\"ca\";i:203;s:2:\"us\";i:204;s:2:\"ru\";i:205;s:2:\"kz\";i:206;s:2:\"aq\";i:207;s:2:\"ax\";i:208;s:2:\"bl\";i:209;s:2:\"bq\";i:210;s:2:\"bv\";i:211;s:2:\"cc\";i:212;s:2:\"ck\";i:213;s:2:\"cw\";i:214;s:2:\"cx\";i:215;s:2:\"eh\";i:216;s:2:\"fk\";i:217;s:2:\"fo\";i:218;s:2:\"gf\";i:219;s:2:\"gg\";i:220;s:2:\"gi\";i:221;s:2:\"gl\";i:222;s:2:\"gp\";i:223;s:2:\"gs\";i:224;s:2:\"hm\";i:225;s:2:\"im\";i:226;s:2:\"io\";i:227;s:2:\"je\";i:228;s:2:\"ky\";i:229;s:2:\"mf\";i:230;s:2:\"mp\";i:231;s:2:\"mq\";i:232;s:2:\"ms\";i:233;s:2:\"nc\";i:234;s:2:\"nf\";i:235;s:2:\"pf\";i:236;s:2:\"pm\";i:237;s:2:\"pn\";i:238;s:2:\"pr\";i:239;s:2:\"re\";i:240;s:2:\"sh\";i:241;s:2:\"sj\";i:242;s:2:\"sx\";i:243;s:2:\"tc\";i:244;s:2:\"tf\";i:245;s:2:\"tk\";i:246;s:2:\"um\";i:247;s:2:\"va\";i:248;s:2:\"vg\";i:249;s:2:\"vi\";i:250;s:2:\"wf\";i:251;s:2:\"yt\";i:252;s:2:\"il\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'woo_intl_tel_options' , 'a:3:{s:19:&quot;enable_ip_detection&quot;;i:1;s:12:&quot;phone_fields&quot;;a:4:{i:0;a:3:{s:2:&quot;id&quot;;s:14:&quot;#billing-phone&quot;;s:4:&quot;name&quot;;s:13:&quot;billing_phone&quot;;s:7:&quot;enabled&quot;;s:1:&quot;1&quot;;}i:1;a:3:{s:2:&quot;id&quot;;s:14:&quot;#billing_phone&quot;;s:4:&quot;name&quot;;s:13:&quot;billing_phone&quot;;s:7:&quot;enabled&quot;;s:1:&quot;1&quot;;}i:2;a:3:{s:2:&quot;id&quot;;s:13:&quot;#awp_whatsapp&quot;;s:4:&quot;name&quot;;s:12:&quot;awp_whatsapp&quot;;s:7:&quot;enabled&quot;;s:1:&quot;1&quot;;}i:3;a:3:{s:2:&quot;id&quot;;s:10:&quot;#awp_phone&quot;;s:4:&quot;name&quot;;s:9:&quot;awp_phone&quot;;s:7:&quot;enabled&quot;;s:1:&quot;1&quot;;}}s:17:&quot;enabled_countries&quot;;a:253:{i:0;s:2:&quot;eg&quot;;i:1;s:2:&quot;sa&quot;;i:2;s:2:&quot;af&quot;;i:3;s:2:&quot;al&quot;;i:4;s:2:&quot;dz&quot;;i:5;s:2:&quot;as&quot;;i:6;s:2:&quot;ad&quot;;i:7;s:2:&quot;ao&quot;;i:8;s:2:&quot;ai&quot;;i:9;s:2:&quot;ag&quot;;i:10;s:2:&quot;ar&quot;;i:11;s:2:&quot;am&quot;;i:12;s:2:&quot;aw&quot;;i:13;s:2:&quot;au&quot;;i:14;s:2:&quot;at&quot;;i:15;s:2:&quot;az&quot;;i:16;s:2:&quot;bs&quot;;i:17;s:2:&quot;bh&quot;;i:18;s:2:&quot;bd&quot;;i:19;s:2:&quot;bb&quot;;i:20;s:2:&quot;by&quot;;i:21;s:2:&quot;be&quot;;i:22;s:2:&quot;bz&quot;;i:23;s:2:&quot;bj&quot;;i:24;s:2:&quot;bm&quot;;i:25;s:2:&quot;bt&quot;;i:26;s:2:&quot;bo&quot;;i:27;s:2:&quot;ba&quot;;i:28;s:2:&quot;bw&quot;;i:29;s:2:&quot;br&quot;;i:30;s:2:&quot;bn&quot;;i:31;s:2:&quot;bg&quot;;i:32;s:2:&quot;bf&quot;;i:33;s:2:&quot;bi&quot;;i:34;s:2:&quot;cv&quot;;i:35;s:2:&quot;kh&quot;;i:36;s:2:&quot;cm&quot;;i:37;s:2:&quot;ca&quot;;i:38;s:2:&quot;cf&quot;;i:39;s:2:&quot;td&quot;;i:40;s:2:&quot;cl&quot;;i:41;s:2:&quot;cn&quot;;i:42;s:2:&quot;co&quot;;i:43;s:2:&quot;km&quot;;i:44;s:2:&quot;cd&quot;;i:45;s:2:&quot;cg&quot;;i:46;s:2:&quot;cr&quot;;i:47;s:2:&quot;ci&quot;;i:48;s:2:&quot;hr&quot;;i:49;s:2:&quot;cu&quot;;i:50;s:2:&quot;cy&quot;;i:51;s:2:&quot;cz&quot;;i:52;s:2:&quot;dk&quot;;i:53;s:2:&quot;dj&quot;;i:54;s:2:&quot;dm&quot;;i:55;s:2:&quot;do&quot;;i:56;s:2:&quot;ec&quot;;i:57;s:2:&quot;sv&quot;;i:58;s:2:&quot;gq&quot;;i:59;s:2:&quot;er&quot;;i:60;s:2:&quot;ee&quot;;i:61;s:2:&quot;sz&quot;;i:62;s:2:&quot;et&quot;;i:63;s:2:&quot;fj&quot;;i:64;s:2:&quot;fi&quot;;i:65;s:2:&quot;fr&quot;;i:66;s:2:&quot;ga&quot;;i:67;s:2:&quot;gm&quot;;i:68;s:2:&quot;ge&quot;;i:69;s:2:&quot;de&quot;;i:70;s:2:&quot;gh&quot;;i:71;s:2:&quot;gr&quot;;i:72;s:2:&quot;gd&quot;;i:73;s:2:&quot;gu&quot;;i:74;s:2:&quot;gt&quot;;i:75;s:2:&quot;gn&quot;;i:76;s:2:&quot;gw&quot;;i:77;s:2:&quot;gy&quot;;i:78;s:2:&quot;ht&quot;;i:79;s:2:&quot;hn&quot;;i:80;s:2:&quot;hk&quot;;i:81;s:2:&quot;hu&quot;;i:82;s:2:&quot;is&quot;;i:83;s:2:&quot;in&quot;;i:84;s:2:&quot;id&quot;;i:85;s:2:&quot;ir&quot;;i:86;s:2:&quot;iq&quot;;i:87;s:2:&quot;ie&quot;;i:88;s:2:&quot;it&quot;;i:89;s:2:&quot;jm&quot;;i:90;s:2:&quot;jp&quot;;i:91;s:2:&quot;jo&quot;;i:92;s:2:&quot;kz&quot;;i:93;s:2:&quot;ke&quot;;i:94;s:2:&quot;ki&quot;;i:95;s:2:&quot;kp&quot;;i:96;s:2:&quot;kr&quot;;i:97;s:2:&quot;kw&quot;;i:98;s:2:&quot;kg&quot;;i:99;s:2:&quot;la&quot;;i:100;s:2:&quot;lv&quot;;i:101;s:2:&quot;lb&quot;;i:102;s:2:&quot;ls&quot;;i:103;s:2:&quot;lr&quot;;i:104;s:2:&quot;ly&quot;;i:105;s:2:&quot;li&quot;;i:106;s:2:&quot;lt&quot;;i:107;s:2:&quot;lu&quot;;i:108;s:2:&quot;mo&quot;;i:109;s:2:&quot;mg&quot;;i:110;s:2:&quot;mw&quot;;i:111;s:2:&quot;my&quot;;i:112;s:2:&quot;mv&quot;;i:113;s:2:&quot;ml&quot;;i:114;s:2:&quot;mt&quot;;i:115;s:2:&quot;mh&quot;;i:116;s:2:&quot;mr&quot;;i:117;s:2:&quot;mu&quot;;i:118;s:2:&quot;mx&quot;;i:119;s:2:&quot;fm&quot;;i:120;s:2:&quot;md&quot;;i:121;s:2:&quot;mc&quot;;i:122;s:2:&quot;mn&quot;;i:123;s:2:&quot;me&quot;;i:124;s:2:&quot;ma&quot;;i:125;s:2:&quot;mz&quot;;i:126;s:2:&quot;mm&quot;;i:127;s:2:&quot;na&quot;;i:128;s:2:&quot;nr&quot;;i:129;s:2:&quot;np&quot;;i:130;s:2:&quot;nl&quot;;i:131;s:2:&quot;nz&quot;;i:132;s:2:&quot;ni&quot;;i:133;s:2:&quot;ne&quot;;i:134;s:2:&quot;ng&quot;;i:135;s:2:&quot;nu&quot;;i:136;s:2:&quot;mk&quot;;i:137;s:2:&quot;no&quot;;i:138;s:2:&quot;om&quot;;i:139;s:2:&quot;pk&quot;;i:140;s:2:&quot;pw&quot;;i:141;s:2:&quot;ps&quot;;i:142;s:2:&quot;pa&quot;;i:143;s:2:&quot;pg&quot;;i:144;s:2:&quot;py&quot;;i:145;s:2:&quot;pe&quot;;i:146;s:2:&quot;ph&quot;;i:147;s:2:&quot;pl&quot;;i:148;s:2:&quot;pt&quot;;i:149;s:2:&quot;qa&quot;;i:150;s:2:&quot;ro&quot;;i:151;s:2:&quot;ru&quot;;i:152;s:2:&quot;rw&quot;;i:153;s:2:&quot;kn&quot;;i:154;s:2:&quot;lc&quot;;i:155;s:2:&quot;vc&quot;;i:156;s:2:&quot;ws&quot;;i:157;s:2:&quot;sm&quot;;i:158;s:2:&quot;st&quot;;i:159;s:2:&quot;sn&quot;;i:160;s:2:&quot;rs&quot;;i:161;s:2:&quot;sc&quot;;i:162;s:2:&quot;sl&quot;;i:163;s:2:&quot;sg&quot;;i:164;s:2:&quot;sk&quot;;i:165;s:2:&quot;si&quot;;i:166;s:2:&quot;sb&quot;;i:167;s:2:&quot;so&quot;;i:168;s:2:&quot;za&quot;;i:169;s:2:&quot;ss&quot;;i:170;s:2:&quot;es&quot;;i:171;s:2:&quot;lk&quot;;i:172;s:2:&quot;sd&quot;;i:173;s:2:&quot;sr&quot;;i:174;s:2:&quot;se&quot;;i:175;s:2:&quot;ch&quot;;i:176;s:2:&quot;sy&quot;;i:177;s:2:&quot;tw&quot;;i:178;s:2:&quot;tj&quot;;i:179;s:2:&quot;tz&quot;;i:180;s:2:&quot;th&quot;;i:181;s:2:&quot;tl&quot;;i:182;s:2:&quot;tg&quot;;i:183;s:2:&quot;to&quot;;i:184;s:2:&quot;tt&quot;;i:185;s:2:&quot;tn&quot;;i:186;s:2:&quot;tr&quot;;i:187;s:2:&quot;tm&quot;;i:188;s:2:&quot;tv&quot;;i:189;s:2:&quot;ug&quot;;i:190;s:2:&quot;ua&quot;;i:191;s:2:&quot;ae&quot;;i:192;s:2:&quot;gb&quot;;i:193;s:2:&quot;us&quot;;i:194;s:2:&quot;uy&quot;;i:195;s:2:&quot;uz&quot;;i:196;s:2:&quot;vu&quot;;i:197;s:2:&quot;ve&quot;;i:198;s:2:&quot;vn&quot;;i:199;s:2:&quot;ye&quot;;i:200;s:2:&quot;zm&quot;;i:201;s:2:&quot;zw&quot;;i:202;s:2:&quot;ca&quot;;i:203;s:2:&quot;us&quot;;i:204;s:2:&quot;ru&quot;;i:205;s:2:&quot;kz&quot;;i:206;s:2:&quot;aq&quot;;i:207;s:2:&quot;ax&quot;;i:208;s:2:&quot;bl&quot;;i:209;s:2:&quot;bq&quot;;i:210;s:2:&quot;bv&quot;;i:211;s:2:&quot;cc&quot;;i:212;s:2:&quot;ck&quot;;i:213;s:2:&quot;cw&quot;;i:214;s:2:&quot;cx&quot;;i:215;s:2:&quot;eh&quot;;i:216;s:2:&quot;fk&quot;;i:217;s:2:&quot;fo&quot;;i:218;s:2:&quot;gf&quot;;i:219;s:2:&quot;gg&quot;;i:220;s:2:&quot;gi&quot;;i:221;s:2:&quot;gl&quot;;i:222;s:2:&quot;gp&quot;;i:223;s:2:&quot;gs&quot;;i:224;s:2:&quot;hm&quot;;i:225;s:2:&quot;im&quot;;i:226;s:2:&quot;io&quot;;i:227;s:2:&quot;je&quot;;i:228;s:2:&quot;ky&quot;;i:229;s:2:&quot;mf&quot;;i:230;s:2:&quot;mp&quot;;i:231;s:2:&quot;mq&quot;;i:232;s:2:&quot;ms&quot;;i:233;s:2:&quot;nc&quot;;i:234;s:2:&quot;nf&quot;;i:235;s:2:&quot;pf&quot;;i:236;s:2:&quot;pm&quot;;i:237;s:2:&quot;pn&quot;;i:238;s:2:&quot;pr&quot;;i:239;s:2:&quot;re&quot;;i:240;s:2:&quot;sh&quot;;i:241;s:2:&quot;sj&quot;;i:242;s:2:&quot;sx&quot;;i:243;s:2:&quot;tc&quot;;i:244;s:2:&quot;tf&quot;;i:245;s:2:&quot;tk&quot;;i:246;s:2:&quot;um&quot;;i:247;s:2:&quot;va&quot;;i:248;s:2:&quot;vg&quot;;i:249;s:2:&quot;vi&quot;;i:250;s:2:&quot;wf&quot;;i:251;s:2:&quot;yt&quot;;i:252;s:2:&quot;il&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('woo_intl_tel_op...', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/automation-web-platform/class-awp.php(271): update_option('woo_intl_tel_op...', Array)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): {closure}(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_automa...', false)
+#10 /internal/eval.php(20): activate_plugin('automation-web-...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woo_intl_tel_options', 'a:3:{s:19:\"enable_ip_detection\";i:1;s:12:\"phone_fields\";a:4:{i:0;a:3:{s:2:\"id\";s:14:\"#billing-phone\";s:4:\"name\";s:13:\"billing_phone\";s:7:\"enabled\";s:1:\"1\";}i:1;a:3:{s:2:\"id\";s:14:\"#billing_phone\";s:4:\"name\";s:13:\"billing_phone\";s:7:\"enabled\";s:1:\"1\";}i:2;a:3:{s:2:\"id\";s:13:\"#awp_whatsapp\";s:4:\"name\";s:12:\"awp_whatsapp\";s:7:\"enabled\";s:1:\"1\";}i:3;a:3:{s:2:\"id\";s:10:\"#awp_phone\";s:4:\"name\";s:9:\"awp_phone\";s:7:\"enabled\";s:1:\"1\";}}s:17:\"enabled_countries\";a:253:{i:0;s:2:\"eg\";i:1;s:2:\"sa\";i:2;s:2:\"af\";i:3;s:2:\"al\";i:4;s:2:\"dz\";i:5;s:2:\"as\";i:6;s:2:\"ad\";i:7;s:2:\"ao\";i:8;s:2:\"ai\";i:9;s:2:\"ag\";i:10;s:2:\"ar\";i:11;s:2:\"am\";i:12;s:2:\"aw\";i:13;s:2:\"au\";i:14;s:2:\"at\";i:15;s:2:\"az\";i:16;s:2:\"bs\";i:17;s:2:\"bh\";i:18;s:2:\"bd\";i:19;s:2:\"bb\";i:20;s:2:\"by\";i:21;s:2:\"be\";i:22;s:2:\"bz\";i:23;s:2:\"bj\";i:24;s:2:\"bm\";i:25;s:2:\"bt\";i:26;s:2:\"bo\";i:27;s:2:\"ba\";i:28;s:2:\"bw\";i:29;s:2:\"br\";i:30;s:2:\"bn\";i:31;s:2:\"bg\";i:32;s:2:\"bf\";i:33;s:2:\"bi\";i:34;s:2:\"cv\";i:35;s:2:\"kh\";i:36;s:2:\"cm\";i:37;s:2:\"ca\";i:38;s:2:\"cf\";i:39;s:2:\"td\";i:40;s:2:\"cl\";i:41;s:2:\"cn\";i:42;s:2:\"co\";i:43;s:2:\"km\";i:44;s:2:\"cd\";i:45;s:2:\"cg\";i:46;s:2:\"cr\";i:47;s:2:\"ci\";i:48;s:2:\"hr\";i:49;s:2:\"cu\";i:50;s:2:\"cy\";i:51;s:2:\"cz\";i:52;s:2:\"dk\";i:53;s:2:\"dj\";i:54;s:2:\"dm\";i:55;s:2:\"do\";i:56;s:2:\"ec\";i:57;s:2:\"sv\";i:58;s:2:\"gq\";i:59;s:2:\"er\";i:60;s:2:\"ee\";i:61;s:2:\"sz\";i:62;s:2:\"et\";i:63;s:2:\"fj\";i:64;s:2:\"fi\";i:65;s:2:\"fr\";i:66;s:2:\"ga\";i:67;s:2:\"gm\";i:68;s:2:\"ge\";i:69;s:2:\"de\";i:70;s:2:\"gh\";i:71;s:2:\"gr\";i:72;s:2:\"gd\";i:73;s:2:\"gu\";i:74;s:2:\"gt\";i:75;s:2:\"gn\";i:76;s:2:\"gw\";i:77;s:2:\"gy\";i:78;s:2:\"ht\";i:79;s:2:\"hn\";i:80;s:2:\"hk\";i:81;s:2:\"hu\";i:82;s:2:\"is\";i:83;s:2:\"in\";i:84;s:2:\"id\";i:85;s:2:\"ir\";i:86;s:2:\"iq\";i:87;s:2:\"ie\";i:88;s:2:\"it\";i:89;s:2:\"jm\";i:90;s:2:\"jp\";i:91;s:2:\"jo\";i:92;s:2:\"kz\";i:93;s:2:\"ke\";i:94;s:2:\"ki\";i:95;s:2:\"kp\";i:96;s:2:\"kr\";i:97;s:2:\"kw\";i:98;s:2:\"kg\";i:99;s:2:\"la\";i:100;s:2:\"lv\";i:101;s:2:\"lb\";i:102;s:2:\"ls\";i:103;s:2:\"lr\";i:104;s:2:\"ly\";i:105;s:2:\"li\";i:106;s:2:\"lt\";i:107;s:2:\"lu\";i:108;s:2:\"mo\";i:109;s:2:\"mg\";i:110;s:2:\"mw\";i:111;s:2:\"my\";i:112;s:2:\"mv\";i:113;s:2:\"ml\";i:114;s:2:\"mt\";i:115;s:2:\"mh\";i:116;s:2:\"mr\";i:117;s:2:\"mu\";i:118;s:2:\"mx\";i:119;s:2:\"fm\";i:120;s:2:\"md\";i:121;s:2:\"mc\";i:122;s:2:\"mn\";i:123;s:2:\"me\";i:124;s:2:\"ma\";i:125;s:2:\"mz\";i:126;s:2:\"mm\";i:127;s:2:\"na\";i:128;s:2:\"nr\";i:129;s:2:\"np\";i:130;s:2:\"nl\";i:131;s:2:\"nz\";i:132;s:2:\"ni\";i:133;s:2:\"ne\";i:134;s:2:\"ng\";i:135;s:2:\"nu\";i:136;s:2:\"mk\";i:137;s:2:\"no\";i:138;s:2:\"om\";i:139;s:2:\"pk\";i:140;s:2:\"pw\";i:141;s:2:\"ps\";i:142;s:2:\"pa\";i:143;s:2:\"pg\";i:144;s:2:\"py\";i:145;s:2:\"pe\";i:146;s:2:\"ph\";i:147;s:2:\"pl\";i:148;s:2:\"pt\";i:149;s:2:\"qa\";i:150;s:2:\"ro\";i:151;s:2:\"ru\";i:152;s:2:\"rw\";i:153;s:2:\"kn\";i:154;s:2:\"lc\";i:155;s:2:\"vc\";i:156;s:2:\"ws\";i:157;s:2:\"sm\";i:158;s:2:\"st\";i:159;s:2:\"sn\";i:160;s:2:\"rs\";i:161;s:2:\"sc\";i:162;s:2:\"sl\";i:163;s:2:\"sg\";i:164;s:2:\"sk\";i:165;s:2:\"si\";i:166;s:2:\"sb\";i:167;s:2:\"so\";i:168;s:2:\"za\";i:169;s:2:\"ss\";i:170;s:2:\"es\";i:171;s:2:\"lk\";i:172;s:2:\"sd\";i:173;s:2:\"sr\";i:174;s:2:\"se\";i:175;s:2:\"ch\";i:176;s:2:\"sy\";i:177;s:2:\"tw\";i:178;s:2:\"tj\";i:179;s:2:\"tz\";i:180;s:2:\"th\";i:181;s:2:\"tl\";i:182;s:2:\"tg\";i:183;s:2:\"to\";i:184;s:2:\"tt\";i:185;s:2:\"tn\";i:186;s:2:\"tr\";i:187;s:2:\"tm\";i:188;s:2:\"tv\";i:189;s:2:\"ug\";i:190;s:2:\"ua\";i:191;s:2:\"ae\";i:192;s:2:\"gb\";i:193;s:2:\"us\";i:194;s:2:\"uy\";i:195;s:2:\"uz\";i:196;s:2:\"vu\";i:197;s:2:\"ve\";i:198;s:2:\"vn\";i:199;s:2:\"ye\";i:200;s:2:\"zm\";i:201;s:2:\"zw\";i:202;s:2:\"ca\";i:203;s:2:\"us\";i:204;s:2:\"ru\";i:205;s:2:\"kz\";i:206;s:2:\"aq\";i:207;s:2:\"ax\";i:208;s:2:\"bl\";i:209;s:2:\"bq\";i:210;s:2:\"bv\";i:211;s:2:\"cc\";i:212;s:2:\"ck\";i:213;s:2:\"cw\";i:214;s:2:\"cx\";i:215;s:2:\"eh\";i:216;s:2:\"fk\";i:217;s:2:\"fo\";i:218;s:2:\"gf\";i:219;s:2:\"gg\";i:220;s:2:\"gi\";i:221;s:2:\"gl\";i:222;s:2:\"gp\";i:223;s:2:\"gs\";i:224;s:2:\"hm\";i:225;s:2:\"im\";i:226;s:2:\"io\";i:227;s:2:\"je\";i:228;s:2:\"ky\";i:229;s:2:\"mf\";i:230;s:2:\"mp\";i:231;s:2:\"mq\";i:232;s:2:\"ms\";i:233;s:2:\"nc\";i:234;s:2:\"nf\";i:235;s:2:\"pf\";i:236;s:2:\"pm\";i:237;s:2:\"pn\";i:238;s:2:\"pr\";i:239;s:2:\"re\";i:240;s:2:\"sh\";i:241;s:2:\"sj\";i:242;s:2:\"sx\";i:243;s:2:\"tc\";i:244;s:2:\"tf\";i:245;s:2:\"tk\";i:246;s:2:\"um\";i:247;s:2:\"va\";i:248;s:2:\"vg\";i:249;s:2:\"vi\";i:250;s:2:\"wf\";i:251;s:2:\"yt\";i:252;s:2:\"il\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_automation-web-platform/class-awp.php'), WP_Hook->do_action, WP_Hook->apply_filters, {closure}, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:48:24 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 12:48:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 12:48:24', '2025-04-09 12:48:24', '[wawp-fast-login]', '', 'Fast Login', '', 'publish', 'page', 'closed', 'closed', '', 'fast-login', '', '', '2025-04-09 12:48:24', '2025-04-09 12:48:24', 0, 0, '', '')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -118,7 +405,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 0 , '2025-04-07 07:53:49' , '2025-04-07 07:53:49' , '&lt;!-- wp:page-list /--&gt;' , '' , 'Navigation' , '' , 'publish' , 'wp_navigation' , 'closed' , 'closed' , '' , 'navigation' , '' , '' , '2025-04-07 07:53:49' , '2025-04-07 07:53:49' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 12:48:24' , '2025-04-09 12:48:24' , '[wawp-fast-login]' , '' , 'Fast Login' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'fast-login' , '' , '' , '2025-04-09 12:48:24' , '2025-04-09 12:48:24' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -132,39 +419,19 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
 #4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
 #5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-includes/class-wp-navigation-fallback.php(284): wp_insert_post(Array, true)
-#7 /wordpress/wp-includes/class-wp-navigation-fallback.php(94): WP_Navigation_Fallback::create_default_fallback()
-#8 /wordpress/wp-includes/blocks/navigation.php(1062): WP_Navigation_Fallback::get_fallback()
-#9 /wordpress/wp-includes/blocks/navigation.php(265): block_core_navigation_get_fallback_blocks()
-#10 /wordpress/wp-includes/blocks/navigation.php(314): WP_Navigation_Block_Renderer::get_inner_blocks_from_fallback(Array)
-#11 /wordpress/wp-includes/blocks/navigation.php(695): WP_Navigation_Block_Renderer::get_inner_blocks(Array, Object(WP_Block))
-#12 /wordpress/wp-includes/blocks/navigation.php(1148): WP_Navigation_Block_Renderer::render(Array, '', Object(WP_Block))
-#13 /wordpress/wp-includes/class-wp-block.php(537): render_block_core_navigation(Array, '', Object(WP_Block))
-#14 /wordpress/wp-includes/class-wp-block.php(517): WP_Block->render()
-#15 /wordpress/wp-includes/class-wp-block.php(517): WP_Block->render()
-#16 /wordpress/wp-includes/class-wp-block.php(517): WP_Block->render()
-#17 /wordpress/wp-includes/class-wp-block.php(517): WP_Block->render()
-#18 /wordpress/wp-includes/blocks.php(2191): WP_Block->render()
-#19 /wordpress/wp-includes/blocks.php(2243): render_block(Array)
-#20 /wordpress/wp-includes/blocks/pattern.php(70): do_blocks('<!-- wp:group {...')
-#21 /wordpress/wp-includes/class-wp-block.php(537): render_block_core_pattern(Array, '', Object(WP_Block))
-#22 /wordpress/wp-includes/blocks.php(2191): WP_Block->render()
-#23 /wordpress/wp-includes/blocks.php(2243): render_block(Array)
-#24 /wordpress/wp-includes/blocks/template-part.php(154): do_blocks('<!-- wp:pattern...')
-#25 /wordpress/wp-includes/class-wp-block.php(537): render_block_core_template_part(Array, '', Object(WP_Block))
-#26 /wordpress/wp-includes/blocks.php(2191): WP_Block->render()
-#27 /wordpress/wp-includes/blocks.php(2243): render_block(Array)
-#28 /wordpress/wp-includes/block-template.php(263): do_blocks('<!-- wp:templat...')
-#29 /wordpress/wp-includes/template-canvas.php(12): get_the_block_template_html()
-#30 /wordpress/wp-includes/template-loader.php(106): include('/wordpress/wp-i...')
-#31 /wordpress/wp-blog-header.php(19): require_once('/wordpress/wp-i...')
-#32 /wordpress/index.php(17): require('/wordpress/wp-b...')
-#33 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '2025-04-07 07:53:49', '2025-04-07 07:53:49', '<!-- wp:page-list /-->', '', 'Navigation', '', 'publish', 'wp_navigation', 'closed', 'closed', '', 'navigation', '', '', '2025-04-07 07:53:49', '2025-04-07 07:53:49', 0, 0, '', '') made by require('wp-blog-header.php'), require_once('wp-includes/template-loader.php'), include('wp-includes/template-canvas.php'), get_the_block_template_html, do_blocks, render_block, WP_Block->render, render_block_core_template_part, do_blocks, render_block, WP_Block->render, render_block_core_pattern, do_blocks, render_block, WP_Block->render, WP_Block->render, WP_Block->render, WP_Block->render, WP_Block->render, render_block_core_navigation, WP_Navigation_Block_Renderer::render, WP_Navigation_Block_Renderer::get_inner_blocks, WP_Navigation_Block_Renderer::get_inner_blocks_from_fallback, block_core_navigation_get_fallback_blocks, WP_Navigation_Fallback::get_fallback, WP_Navigation_Fallback::create_default_fallback, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 07:53:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#6 /wordpress/wp-content/plugins/automation-web-platform/includes/class-awp-others.php(489): wp_insert_post(Array)
+#7 /wordpress/wp-content/plugins/automation-web-platform/class-awp.php(273): AWP_Others::on_activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): {closure}(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_automa...', false)
+#12 /internal/eval.php(20): activate_plugin('automation-web-...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 12:48:24', '2025-04-09 12:48:24', '[wawp-fast-login]', '', 'Fast Login', '', 'publish', 'page', 'closed', 'closed', '', 'fast-login', '', '', '2025-04-09 12:48:24', '2025-04-09 12:48:24', 0, 0, '', '') made by activate_plugin, do_action('activate_automation-web-platform/class-awp.php'), WP_Hook->do_action, WP_Hook->apply_filters, {closure}, AWP_Others::on_activate, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:48:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('theme_mods_twentytwentyfive', 'a:1:{s:18:\"custom_css_post_id\";i:-1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout__awp_activation_redirect', '1744202934', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -176,7 +443,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'theme_mods_twentytwentyfive' , 'a:1:{s:18:&quot;custom_css_post_id&quot;;i:-1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout__awp_activation_redirect' , '1744202934' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -188,29 +455,19 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('theme_mods_twen...', Array, '', 'auto')
-#5 /wordpress/wp-includes/theme.php(1115): update_option('theme_mods_twen...', Array)
-#6 /wordpress/wp-includes/theme.php(2012): set_theme_mod('custom_css_post...', -1)
-#7 /wordpress/wp-includes/theme.php(2037): wp_get_custom_css_post('twentytwentyfiv...')
-#8 /wordpress/wp-includes/script-loader.php(2523): wp_get_custom_css()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): wp_enqueue_global_styles('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/script-loader.php(2272): do_action('wp_enqueue_scri...')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_enqueue_scripts('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-includes/general-template.php(3064): do_action('wp_head')
-#17 /wordpress/wp-includes/template-canvas.php(17): wp_head()
-#18 /wordpress/wp-includes/template-loader.php(106): include('/wordpress/wp-i...')
-#19 /wordpress/wp-blog-header.php(19): require_once('/wordpress/wp-i...')
-#20 /wordpress/index.php(17): require('/wordpress/wp-b...')
-#21 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('theme_mods_twentytwentyfive', 'a:1:{s:18:\"custom_css_post_id\";i:-1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require('wp-blog-header.php'), require_once('wp-includes/template-loader.php'), include('wp-includes/template-canvas.php'), wp_head, do_action('wp_head'), WP_Hook->do_action, WP_Hook->apply_filters, wp_enqueue_scripts, do_action('wp_enqueue_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_enqueue_global_styles, wp_get_custom_css, wp_get_custom_css_post, set_theme_mod, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 07:53:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1744202934, '', 'off')
+#5 /wordpress/wp-content/plugins/automation-web-platform/class-awp.php(275): set_transient('_awp_activation...', true, 30)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): {closure}(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_automa...', false)
+#10 /internal/eval.php(20): activate_plugin('automation-web-...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout__awp_activation_redirect', '1744202934', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_automation-web-platform/class-awp.php'), WP_Hook->do_action, WP_Hook->apply_filters, {closure}, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:48:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_wp_styles_for_blocks', 'a:2:{s:4:\"hash\";s:32:\"6a64f06d5174183821b9e5e1b0e89c36\";s:6:\"blocks\";a:52:{s:11:\"core/button\";s:0:\"\";s:14:\"core/site-logo\";s:0:\"\";s:18:\"core/post-template\";s:0:\"\";s:12:\"core/columns\";s:769:\":root :where(.wp-block-columns-is-layout-flow) > :first-child{margin-block-start: 0;}:root :where(.wp-block-columns-is-layout-flow) > :last-child{margin-block-end: 0;}:root :where(.wp-block-columns-is-layout-flow) > *{margin-block-start: var(--wp--preset--spacing--50);margin-block-end: 0;}:root :where(.wp-block-columns-is-layout-constrained) > :first-child{margin-block-start: 0;}:root :where(.wp-block-columns-is-layout-constrained) > :last-child{margin-block-end: 0;}:root :where(.wp-block-columns-is-layout-constrained) > *{margin-block-start: var(--wp--preset--spacing--50);margin-block-end: 0;}:root :where(.wp-block-columns-is-layout-flex){gap: var(--wp--preset--spacing--50);}:root :where(.wp-block-columns-is-layout-grid){gap: var(--wp--preset--spacing--50);}\";s:14:\"core/pullquote\";s:306:\":root :where(.wp-block-pullquote){font-size: var(--wp--preset--font-size--xx-large);font-weight: 300;line-height: 1.2;padding-top: var(--wp--preset--spacing--30);padding-bottom: var(--wp--preset--spacing--30);}:root :where(.wp-block-pullquote p:last-of-type){margin-bottom: var(--wp--preset--spacing--30);}\";s:32:\"c48738dcb285a3f6ab83acff204fc486\";s:106:\":root :where(.wp-block-pullquote cite){font-size: var(--wp--preset--font-size--small);font-style: normal;}\";s:11:\"core/avatar\";s:57:\":root :where(.wp-block-avatar img){border-radius: 100px;}\";s:12:\"core/buttons\";s:665:\":root :where(.wp-block-buttons-is-layout-flow) > :first-child{margin-block-start: 0;}:root :where(.wp-block-buttons-is-layout-flow) > :last-child{margin-block-end: 0;}:root :where(.wp-block-buttons-is-layout-flow) > *{margin-block-start: 16px;margin-block-end: 0;}:root :where(.wp-block-buttons-is-layout-constrained) > :first-child{margin-block-start: 0;}:root :where(.wp-block-buttons-is-layout-constrained) > :last-child{margin-block-end: 0;}:root :where(.wp-block-buttons-is-layout-constrained) > *{margin-block-start: 16px;margin-block-end: 0;}:root :where(.wp-block-buttons-is-layout-flex){gap: 16px;}:root :where(.wp-block-buttons-is-layout-grid){gap: 16px;}\";s:9:\"core/code\";s:427:\":root :where(.wp-block-code){background-color: var(--wp--preset--color--accent-5);color: var(--wp--preset--color--contrast);font-family: var(--wp--preset--font-family--fira-code);font-size: var(--wp--preset--font-size--medium);font-weight: 300;padding-top: var(--wp--preset--spacing--40);padding-right: var(--wp--preset--spacing--40);padding-bottom: var(--wp--preset--spacing--40);padding-left: var(--wp--preset--spacing--40);}\";s:24:\"core/comment-author-name\";s:169:\":root :where(.wp-block-comment-author-name){color: var(--wp--preset--color--accent-4);font-size: var(--wp--preset--font-size--small);margin-top: 5px;margin-bottom: 0px;}\";s:32:\"c0002c260f8238c4212f3e4c369fc4f7\";s:143:\":root :where(.wp-block-comment-author-name a:where(:not(.wp-element-button))){color: var(--wp--preset--color--accent-4);text-decoration: none;}\";s:32:\"1e7c38b45537b325dbbbaec17a301676\";s:112:\":root :where(.wp-block-comment-author-name a:where(:not(.wp-element-button)):hover){text-decoration: underline;}\";s:20:\"core/comment-content\";s:178:\":root :where(.wp-block-comment-content){font-size: var(--wp--preset--font-size--medium);margin-top: var(--wp--preset--spacing--30);margin-bottom: var(--wp--preset--spacing--30);}\";s:17:\"core/comment-date\";s:127:\":root :where(.wp-block-comment-date){color: var(--wp--preset--color--contrast);font-size: var(--wp--preset--font-size--small);}\";s:32:\"c83ca7b3e52884c70f7830c54f99b318\";s:114:\":root :where(.wp-block-comment-date a:where(:not(.wp-element-button))){color: var(--wp--preset--color--contrast);}\";s:22:\"core/comment-edit-link\";s:90:\":root :where(.wp-block-comment-edit-link){font-size: var(--wp--preset--font-size--small);}\";s:32:\"41d70710612536a90e368c12bcb0efea\";s:119:\":root :where(.wp-block-comment-edit-link a:where(:not(.wp-element-button))){color: var(--wp--preset--color--contrast);}\";s:23:\"core/comment-reply-link\";s:91:\":root :where(.wp-block-comment-reply-link){font-size: var(--wp--preset--font-size--small);}\";s:32:\"13c96340dbf37700add1f4c5cae19f3e\";s:120:\":root :where(.wp-block-comment-reply-link a:where(:not(.wp-element-button))){color: var(--wp--preset--color--contrast);}\";s:23:\"core/post-comments-form\";s:565:\":root :where(.wp-block-post-comments-form){font-size: var(--wp--preset--font-size--medium);padding-top: var(--wp--preset--spacing--40);padding-bottom: var(--wp--preset--spacing--40);}:root :where(.wp-block-post-comments-form textarea, .wp-block-post-comments-form input:not([type=submit])){border-radius:.25rem; border-color: var(--wp--preset--color--accent-6) !important;}:root :where(.wp-block-post-comments-form input[type=checkbox]){margin:0 .2rem 0 0 !important;}:root :where(.wp-block-post-comments-form label){font-size: var(--wp--preset--font-size--small);}\";s:24:\"core/comments-pagination\";s:182:\":root :where(.wp-block-comments-pagination){font-size: var(--wp--preset--font-size--medium);margin-top: var(--wp--preset--spacing--40);margin-bottom: var(--wp--preset--spacing--40);}\";s:29:\"core/comments-pagination-next\";s:98:\":root :where(.wp-block-comments-pagination-next){font-size: var(--wp--preset--font-size--medium);}\";s:32:\"core/comments-pagination-numbers\";s:101:\":root :where(.wp-block-comments-pagination-numbers){font-size: var(--wp--preset--font-size--medium);}\";s:33:\"core/comments-pagination-previous\";s:102:\":root :where(.wp-block-comments-pagination-previous){font-size: var(--wp--preset--font-size--medium);}\";s:14:\"core/post-date\";s:124:\":root :where(.wp-block-post-date){color: var(--wp--preset--color--accent-4);font-size: var(--wp--preset--font-size--small);}\";s:32:\"ac0d4e00f5ec22d14451759983e5bd43\";s:133:\":root :where(.wp-block-post-date a:where(:not(.wp-element-button))){color: var(--wp--preset--color--accent-4);text-decoration: none;}\";s:32:\"0ae6ffd1b886044c2da62d75d05ab13d\";s:102:\":root :where(.wp-block-post-date a:where(:not(.wp-element-button)):hover){text-decoration: underline;}\";s:25:\"core/post-navigation-link\";s:94:\":root :where(.wp-block-post-navigation-link){font-size: var(--wp--preset--font-size--medium);}\";s:15:\"core/post-terms\";s:158:\":root :where(.wp-block-post-terms){font-size: var(--wp--preset--font-size--small);font-weight: 600;}:root :where(.wp-block-post-terms a){white-space: nowrap;}\";s:15:\"core/post-title\";s:0:\"\";s:32:\"bb496d3fcd9be3502ce57ff8281e5687\";s:92:\":root :where(.wp-block-post-title a:where(:not(.wp-element-button))){text-decoration: none;}\";s:32:\"12380ab98fdc81351bb32a39bbfc9249\";s:103:\":root :where(.wp-block-post-title a:where(:not(.wp-element-button)):hover){text-decoration: underline;}\";s:10:\"core/quote\";s:1315:\":root :where(.wp-block-quote){border-color: currentColor;border-width: 0 0 0 2px;border-style: solid;font-size: var(--wp--preset--font-size--large);font-weight: 300;margin-right: 0;margin-left: 0;padding-top: var(--wp--preset--spacing--30);padding-right: var(--wp--preset--spacing--40);padding-bottom: var(--wp--preset--spacing--30);padding-left: var(--wp--preset--spacing--40);}:root :where(.wp-block-quote-is-layout-flow) > :first-child{margin-block-start: 0;}:root :where(.wp-block-quote-is-layout-flow) > :last-child{margin-block-end: 0;}:root :where(.wp-block-quote-is-layout-flow) > *{margin-block-start: var(--wp--preset--spacing--30);margin-block-end: 0;}:root :where(.wp-block-quote-is-layout-constrained) > :first-child{margin-block-start: 0;}:root :where(.wp-block-quote-is-layout-constrained) > :last-child{margin-block-end: 0;}:root :where(.wp-block-quote-is-layout-constrained) > *{margin-block-start: var(--wp--preset--spacing--30);margin-block-end: 0;}:root :where(.wp-block-quote-is-layout-flex){gap: var(--wp--preset--spacing--30);}:root :where(.wp-block-quote-is-layout-grid){gap: var(--wp--preset--spacing--30);}:root :where(.wp-block-quote.has-text-align-right ){border-width: 0 2px 0 0;}:root :where(.wp-block-quote.has-text-align-center ){border-width: 0;border-inline: 0; padding-inline: 0;}\";s:32:\"1de7a22e22013106efc5be82788cb6c0\";s:176:\":root :where(.wp-block-quote cite){font-size: var(--wp--preset--font-size--small);font-style: normal;font-weight: 300;}:root :where(.wp-block-quote cite sub){font-size: 0.65em}\";s:21:\"core/query-pagination\";s:107:\":root :where(.wp-block-query-pagination){font-size: var(--wp--preset--font-size--medium);font-weight: 500;}\";s:11:\"core/search\";s:380:\":root :where(.wp-block-search .wp-block-search__label, .wp-block-search .wp-block-search__input, .wp-block-search .wp-block-search__button){font-size: var(--wp--preset--font-size--medium);line-height: 1.6;}:root :where(.wp-block-search .wp-block-search__input){border-radius:3.125rem;padding-left:1.5625rem;padding-right:1.5625rem;border-color:var(--wp--preset--color--accent-6);}\";s:32:\"14fa6a3d0cfbde171cbc0fb04aa8a6cf\";s:138:\":root :where(.wp-block-search .wp-element-button,.wp-block-search  .wp-block-button__link){border-radius: 3.125rem;margin-left: 1.125rem;}\";s:32:\"05993ee2f3de94b5d1350998a7e9b6b0\";s:130:\":root :where(.wp-block-search .wp-element-button:hover,.wp-block-search  .wp-block-button__link:hover){border-color: transparent;}\";s:14:\"core/separator\";s:148:\":root :where(.wp-block-separator){border-color: currentColor;border-width: 0 0 1px 0;border-style: solid;color: var(--wp--preset--color--accent-6);}\";s:17:\"core/site-tagline\";s:86:\":root :where(.wp-block-site-tagline){font-size: var(--wp--preset--font-size--medium);}\";s:15:\"core/site-title\";s:75:\":root :where(.wp-block-site-title){font-weight: 700;letter-spacing: -.5px;}\";s:32:\"f513d889cf971b13995cc3fffed2f39b\";s:92:\":root :where(.wp-block-site-title a:where(:not(.wp-element-button))){text-decoration: none;}\";s:32:\"22c37a317cc0ebd50155b5ad78564f37\";s:103:\":root :where(.wp-block-site-title a:where(:not(.wp-element-button)):hover){text-decoration: underline;}\";s:21:\"core/term-description\";s:90:\":root :where(.wp-block-term-description){font-size: var(--wp--preset--font-size--medium);}\";s:15:\"core/navigation\";s:84:\":root :where(.wp-block-navigation){font-size: var(--wp--preset--font-size--medium);}\";s:32:\"25289a01850f5a0264ddb79a9a3baf3d\";s:92:\":root :where(.wp-block-navigation a:where(:not(.wp-element-button))){text-decoration: none;}\";s:32:\"026c04da08398d655a95047f1f235d97\";s:103:\":root :where(.wp-block-navigation a:where(:not(.wp-element-button)):hover){text-decoration: underline;}\";s:9:\"core/list\";s:52:\":root :where(.wp-block-list li){margin-top: 0.5rem;}\";s:12:\"core/heading\";s:0:\"\";s:14:\"core/paragraph\";s:0:\"\";s:10:\"core/group\";s:0:\"\";s:11:\"core/column\";s:0:\"\";}}', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient__awp_activation_redirect', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -222,7 +479,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_wp_styles_for_blocks' , 'a:2:{s:4:&quot;hash&quot;;s:32:&quot;6a64f06d5174183821b9e5e1b0e89c36&quot;;s:6:&quot;blocks&quot;;a:52:{s:11:&quot;core/button&quot;;s:0:&quot;&quot;;s:14:&quot;core/site-logo&quot;;s:0:&quot;&quot;;s:18:&quot;core/post-template&quot;;s:0:&quot;&quot;;s:12:&quot;core/columns&quot;;s:769:&quot;:root :where(.wp-block-columns-is-layout-flow) &gt; :first-child{margin-block-start: 0;}:root :where(.wp-block-columns-is-layout-flow) &gt; :last-child{margin-block-end: 0;}:root :where(.wp-block-columns-is-layout-flow) &gt; *{margin-block-start: var(--wp--preset--spacing--50);margin-block-end: 0;}:root :where(.wp-block-columns-is-layout-constrained) &gt; :first-child{margin-block-start: 0;}:root :where(.wp-block-columns-is-layout-constrained) &gt; :last-child{margin-block-end: 0;}:root :where(.wp-block-columns-is-layout-constrained) &gt; *{margin-block-start: var(--wp--preset--spacing--50);margin-block-end: 0;}:root :where(.wp-block-columns-is-layout-flex){gap: var(--wp--preset--spacing--50);}:root :where(.wp-block-columns-is-layout-grid){gap: var(--wp--preset--spacing--50);}&quot;;s:14:&quot;core/pullquote&quot;;s:306:&quot;:root :where(.wp-block-pullquote){font-size: var(--wp--preset--font-size--xx-large);font-weight: 300;line-height: 1.2;padding-top: var(--wp--preset--spacing--30);padding-bottom: var(--wp--preset--spacing--30);}:root :where(.wp-block-pullquote p:last-of-type){margin-bottom: var(--wp--preset--spacing--30);}&quot;;s:32:&quot;c48738dcb285a3f6ab83acff204fc486&quot;;s:106:&quot;:root :where(.wp-block-pullquote cite){font-size: var(--wp--preset--font-size--small);font-style: normal;}&quot;;s:11:&quot;core/avatar&quot;;s:57:&quot;:root :where(.wp-block-avatar img){border-radius: 100px;}&quot;;s:12:&quot;core/buttons&quot;;s:665:&quot;:root :where(.wp-block-buttons-is-layout-flow) &gt; :first-child{margin-block-start: 0;}:root :where(.wp-block-buttons-is-layout-flow) &gt; :last-child{margin-block-end: 0;}:root :where(.wp-block-buttons-is-layout-flow) &gt; *{margin-block-start: 16px;margin-block-end: 0;}:root :where(.wp-block-buttons-is-layout-constrained) &gt; :first-child{margin-block-start: 0;}:root :where(.wp-block-buttons-is-layout-constrained) &gt; :last-child{margin-block-end: 0;}:root :where(.wp-block-buttons-is-layout-constrained) &gt; *{margin-block-start: 16px;margin-block-end: 0;}:root :where(.wp-block-buttons-is-layout-flex){gap: 16px;}:root :where(.wp-block-buttons-is-layout-grid){gap: 16px;}&quot;;s:9:&quot;core/code&quot;;s:427:&quot;:root :where(.wp-block-code){background-color: var(--wp--preset--color--accent-5);color: var(--wp--preset--color--contrast);font-family: var(--wp--preset--font-family--fira-code);font-size: var(--wp--preset--font-size--medium);font-weight: 300;padding-top: var(--wp--preset--spacing--40);padding-right: var(--wp--preset--spacing--40);padding-bottom: var(--wp--preset--spacing--40);padding-left: var(--wp--preset--spacing--40);}&quot;;s:24:&quot;core/comment-author-name&quot;;s:169:&quot;:root :where(.wp-block-comment-author-name){color: var(--wp--preset--color--accent-4);font-size: var(--wp--preset--font-size--small);margin-top: 5px;margin-bottom: 0px;}&quot;;s:32:&quot;c0002c260f8238c4212f3e4c369fc4f7&quot;;s:143:&quot;:root :where(.wp-block-comment-author-name a:where(:not(.wp-element-button))){color: var(--wp--preset--color--accent-4);text-decoration: none;}&quot;;s:32:&quot;1e7c38b45537b325dbbbaec17a301676&quot;;s:112:&quot;:root :where(.wp-block-comment-author-name a:where(:not(.wp-element-button)):hover){text-decoration: underline;}&quot;;s:20:&quot;core/comment-content&quot;;s:178:&quot;:root :where(.wp-block-comment-content){font-size: var(--wp--preset--font-size--medium);margin-top: var(--wp--preset--spacing--30);margin-bottom: var(--wp--preset--spacing--30);}&quot;;s:17:&quot;core/comment-date&quot;;s:127:&quot;:root :where(.wp-block-comment-date){color: var(--wp--preset--color--contrast);font-size: var(--wp--preset--font-size--small);}&quot;;s:32:&quot;c83ca7b3e52884c70f7830c54f99b318&quot;;s:114:&quot;:root :where(.wp-block-comment-date a:where(:not(.wp-element-button))){color: var(--wp--preset--color--contrast);}&quot;;s:22:&quot;core/comment-edit-link&quot;;s:90:&quot;:root :where(.wp-block-comment-edit-link){font-size: var(--wp--preset--font-size--small);}&quot;;s:32:&quot;41d70710612536a90e368c12bcb0efea&quot;;s:119:&quot;:root :where(.wp-block-comment-edit-link a:where(:not(.wp-element-button))){color: var(--wp--preset--color--contrast);}&quot;;s:23:&quot;core/comment-reply-link&quot;;s:91:&quot;:root :where(.wp-block-comment-reply-link){font-size: var(--wp--preset--font-size--small);}&quot;;s:32:&quot;13c96340dbf37700add1f4c5cae19f3e&quot;;s:120:&quot;:root :where(.wp-block-comment-reply-link a:where(:not(.wp-element-button))){color: var(--wp--preset--color--contrast);}&quot;;s:23:&quot;core/post-comments-form&quot;;s:565:&quot;:root :where(.wp-block-post-comments-form){font-size: var(--wp--preset--font-size--medium);padding-top: var(--wp--preset--spacing--40);padding-bottom: var(--wp--preset--spacing--40);}:root :where(.wp-block-post-comments-form textarea, .wp-block-post-comments-form input:not([type=submit])){border-radius:.25rem; border-color: var(--wp--preset--color--accent-6) !important;}:root :where(.wp-block-post-comments-form input[type=checkbox]){margin:0 .2rem 0 0 !important;}:root :where(.wp-block-post-comments-form label){font-size: var(--wp--preset--font-size--small);}&quot;;s:24:&quot;core/comments-pagination&quot;;s:182:&quot;:root :where(.wp-block-comments-pagination){font-size: var(--wp--preset--font-size--medium);margin-top: var(--wp--preset--spacing--40);margin-bottom: var(--wp--preset--spacing--40);}&quot;;s:29:&quot;core/comments-pagination-next&quot;;s:98:&quot;:root :where(.wp-block-comments-pagination-next){font-size: var(--wp--preset--font-size--medium);}&quot;;s:32:&quot;core/comments-pagination-numbers&quot;;s:101:&quot;:root :where(.wp-block-comments-pagination-numbers){font-size: var(--wp--preset--font-size--medium);}&quot;;s:33:&quot;core/comments-pagination-previous&quot;;s:102:&quot;:root :where(.wp-block-comments-pagination-previous){font-size: var(--wp--preset--font-size--medium);}&quot;;s:14:&quot;core/post-date&quot;;s:124:&quot;:root :where(.wp-block-post-date){color: var(--wp--preset--color--accent-4);font-size: var(--wp--preset--font-size--small);}&quot;;s:32:&quot;ac0d4e00f5ec22d14451759983e5bd43&quot;;s:133:&quot;:root :where(.wp-block-post-date a:where(:not(.wp-element-button))){color: var(--wp--preset--color--accent-4);text-decoration: none;}&quot;;s:32:&quot;0ae6ffd1b886044c2da62d75d05ab13d&quot;;s:102:&quot;:root :where(.wp-block-post-date a:where(:not(.wp-element-button)):hover){text-decoration: underline;}&quot;;s:25:&quot;core/post-navigation-link&quot;;s:94:&quot;:root :where(.wp-block-post-navigation-link){font-size: var(--wp--preset--font-size--medium);}&quot;;s:15:&quot;core/post-terms&quot;;s:158:&quot;:root :where(.wp-block-post-terms){font-size: var(--wp--preset--font-size--small);font-weight: 600;}:root :where(.wp-block-post-terms a){white-space: nowrap;}&quot;;s:15:&quot;core/post-title&quot;;s:0:&quot;&quot;;s:32:&quot;bb496d3fcd9be3502ce57ff8281e5687&quot;;s:92:&quot;:root :where(.wp-block-post-title a:where(:not(.wp-element-button))){text-decoration: none;}&quot;;s:32:&quot;12380ab98fdc81351bb32a39bbfc9249&quot;;s:103:&quot;:root :where(.wp-block-post-title a:where(:not(.wp-element-button)):hover){text-decoration: underline;}&quot;;s:10:&quot;core/quote&quot;;s:1315:&quot;:root :where(.wp-block-quote){border-color: currentColor;border-width: 0 0 0 2px;border-style: solid;font-size: var(--wp--preset--font-size--large);font-weight: 300;margin-right: 0;margin-left: 0;padding-top: var(--wp--preset--spacing--30);padding-right: var(--wp--preset--spacing--40);padding-bottom: var(--wp--preset--spacing--30);padding-left: var(--wp--preset--spacing--40);}:root :where(.wp-block-quote-is-layout-flow) &gt; :first-child{margin-block-start: 0;}:root :where(.wp-block-quote-is-layout-flow) &gt; :last-child{margin-block-end: 0;}:root :where(.wp-block-quote-is-layout-flow) &gt; *{margin-block-start: var(--wp--preset--spacing--30);margin-block-end: 0;}:root :where(.wp-block-quote-is-layout-constrained) &gt; :first-child{margin-block-start: 0;}:root :where(.wp-block-quote-is-layout-constrained) &gt; :last-child{margin-block-end: 0;}:root :where(.wp-block-quote-is-layout-constrained) &gt; *{margin-block-start: var(--wp--preset--spacing--30);margin-block-end: 0;}:root :where(.wp-block-quote-is-layout-flex){gap: var(--wp--preset--spacing--30);}:root :where(.wp-block-quote-is-layout-grid){gap: var(--wp--preset--spacing--30);}:root :where(.wp-block-quote.has-text-align-right ){border-width: 0 2px 0 0;}:root :where(.wp-block-quote.has-text-align-center ){border-width: 0;border-inline: 0; padding-inline: 0;}&quot;;s:32:&quot;1de7a22e22013106efc5be82788cb6c0&quot;;s:176:&quot;:root :where(.wp-block-quote cite){font-size: var(--wp--preset--font-size--small);font-style: normal;font-weight: 300;}:root :where(.wp-block-quote cite sub){font-size: 0.65em}&quot;;s:21:&quot;core/query-pagination&quot;;s:107:&quot;:root :where(.wp-block-query-pagination){font-size: var(--wp--preset--font-size--medium);font-weight: 500;}&quot;;s:11:&quot;core/search&quot;;s:380:&quot;:root :where(.wp-block-search .wp-block-search__label, .wp-block-search .wp-block-search__input, .wp-block-search .wp-block-search__button){font-size: var(--wp--preset--font-size--medium);line-height: 1.6;}:root :where(.wp-block-search .wp-block-search__input){border-radius:3.125rem;padding-left:1.5625rem;padding-right:1.5625rem;border-color:var(--wp--preset--color--accent-6);}&quot;;s:32:&quot;14fa6a3d0cfbde171cbc0fb04aa8a6cf&quot;;s:138:&quot;:root :where(.wp-block-search .wp-element-button,.wp-block-search  .wp-block-button__link){border-radius: 3.125rem;margin-left: 1.125rem;}&quot;;s:32:&quot;05993ee2f3de94b5d1350998a7e9b6b0&quot;;s:130:&quot;:root :where(.wp-block-search .wp-element-button:hover,.wp-block-search  .wp-block-button__link:hover){border-color: transparent;}&quot;;s:14:&quot;core/separator&quot;;s:148:&quot;:root :where(.wp-block-separator){border-color: currentColor;border-width: 0 0 1px 0;border-style: solid;color: var(--wp--preset--color--accent-6);}&quot;;s:17:&quot;core/site-tagline&quot;;s:86:&quot;:root :where(.wp-block-site-tagline){font-size: var(--wp--preset--font-size--medium);}&quot;;s:15:&quot;core/site-title&quot;;s:75:&quot;:root :where(.wp-block-site-title){font-weight: 700;letter-spacing: -.5px;}&quot;;s:32:&quot;f513d889cf971b13995cc3fffed2f39b&quot;;s:92:&quot;:root :where(.wp-block-site-title a:where(:not(.wp-element-button))){text-decoration: none;}&quot;;s:32:&quot;22c37a317cc0ebd50155b5ad78564f37&quot;;s:103:&quot;:root :where(.wp-block-site-title a:where(:not(.wp-element-button)):hover){text-decoration: underline;}&quot;;s:21:&quot;core/term-description&quot;;s:90:&quot;:root :where(.wp-block-term-description){font-size: var(--wp--preset--font-size--medium);}&quot;;s:15:&quot;core/navigation&quot;;s:84:&quot;:root :where(.wp-block-navigation){font-size: var(--wp--preset--font-size--medium);}&quot;;s:32:&quot;25289a01850f5a0264ddb79a9a3baf3d&quot;;s:92:&quot;:root :where(.wp-block-navigation a:where(:not(.wp-element-button))){text-decoration: none;}&quot;;s:32:&quot;026c04da08398d655a95047f1f235d97&quot;;s:103:&quot;:root :where(.wp-block-navigation a:where(:not(.wp-element-button)):hover){text-decoration: underline;}&quot;;s:9:&quot;core/list&quot;;s:52:&quot;:root :where(.wp-block-list li){margin-top: 0.5rem;}&quot;;s:12:&quot;core/heading&quot;;s:0:&quot;&quot;;s:14:&quot;core/paragraph&quot;;s:0:&quot;&quot;;s:10:&quot;core/group&quot;;s:0:&quot;&quot;;s:11:&quot;core/column&quot;;s:0:&quot;&quot;;}}' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient__awp_activation_redirect' , '1' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -234,27 +491,23 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_wp_s...', Array, '', 'on')
-#5 /wordpress/wp-includes/global-styles-and-settings.php(347): set_transient('wp_styles_for_b...', Array)
-#6 /wordpress/wp-includes/script-loader.php(2539): wp_add_global_styles_for_blocks()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_enqueue_global_styles('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-includes/script-loader.php(2272): do_action('wp_enqueue_scri...')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_enqueue_scripts('')
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/general-template.php(3064): do_action('wp_head')
-#15 /wordpress/wp-includes/template-canvas.php(17): wp_head()
-#16 /wordpress/wp-includes/template-loader.php(106): include('/wordpress/wp-i...')
-#17 /wordpress/wp-blog-header.php(19): require_once('/wordpress/wp-i...')
-#18 /wordpress/index.php(17): require('/wordpress/wp-b...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_wp_styles_for_blocks', 'a:2:{s:4:\"hash\";s:32:\"6a64f06d5174183821b9e5e1b0e89c36\";s:6:\"blocks\";a:52:{s:11:\"core/button\";s:0:\"\";s:14:\"core/site-logo\";s:0:\"\";s:18:\"core/post-template\";s:0:\"\";s:12:\"core/columns\";s:769:\":root :where(.wp-block-columns-is-layout-flow) > :first-child{margin-block-start: 0;}:root :where(.wp-block-columns-is-layout-flow) > :last-child{margin-block-end: 0;}:root :where(.wp-block-columns-is-layout-flow) > *{margin-block-start: var(--wp--preset--spacing--50);margin-block-end: 0;}:root :where(.wp-block-columns-is-layout-constrained) > :first-child{margin-block-start: 0;}:root :where(.wp-block-columns-is-layout-constrained) > :last-child{margin-block-end: 0;}:root :where(.wp-block-columns-is-layout-constrained) > *{margin-block-start: var(--wp--preset--spacing--50);margin-block-end: 0;}:root :where(.wp-block-columns-is-layout-flex){gap: var(--wp--preset--spacing--50);}:root :where(.wp-block-columns-is-layout-grid){gap: var(--wp--preset--spacing--50);}\";s:14:\"core/pullquote\";s:306:\":root :where(.wp-block-pullquote){font-size: var(--wp--preset--font-size--xx-large);font-weight: 300;line-height: 1.2;padding-top: var(--wp--preset--spacing--30);padding-bottom: var(--wp--preset--spacing--30);}:root :where(.wp-block-pullquote p:last-of-type){margin-bottom: var(--wp--preset--spacing--30);}\";s:32:\"c48738dcb285a3f6ab83acff204fc486\";s:106:\":root :where(.wp-block-pullquote cite){font-size: var(--wp--preset--font-size--small);font-style: normal;}\";s:11:\"core/avatar\";s:57:\":root :where(.wp-block-avatar img){border-radius: 100px;}\";s:12:\"core/buttons\";s:665:\":root :where(.wp-block-buttons-is-layout-flow) > :first-child{margin-block-start: 0;}:root :where(.wp-block-buttons-is-layout-flow) > :last-child{margin-block-end: 0;}:root :where(.wp-block-buttons-is-layout-flow) > *{margin-block-start: 16px;margin-block-end: 0;}:root :where(.wp-block-buttons-is-layout-constrained) > :first-child{margin-block-start: 0;}:root :where(.wp-block-buttons-is-layout-constrained) > :last-child{margin-block-end: 0;}:root :where(.wp-block-buttons-is-layout-constrained) > *{margin-block-start: 16px;margin-block-end: 0;}:root :where(.wp-block-buttons-is-layout-flex){gap: 16px;}:root :where(.wp-block-buttons-is-layout-grid){gap: 16px;}\";s:9:\"core/code\";s:427:\":root :where(.wp-block-code){background-color: var(--wp--preset--color--accent-5);color: var(--wp--preset--color--contrast);font-family: var(--wp--preset--font-family--fira-code);font-size: var(--wp--preset--font-size--medium);font-weight: 300;padding-top: var(--wp--preset--spacing--40);padding-right: var(--wp--preset--spacing--40);padding-bottom: var(--wp--preset--spacing--40);padding-left: var(--wp--preset--spacing--40);}\";s:24:\"core/comment-author-name\";s:169:\":root :where(.wp-block-comment-author-name){color: var(--wp--preset--color--accent-4);font-size: var(--wp--preset--font-size--small);margin-top: 5px;margin-bottom: 0px;}\";s:32:\"c0002c260f8238c4212f3e4c369fc4f7\";s:143:\":root :where(.wp-block-comment-author-name a:where(:not(.wp-element-button))){color: var(--wp--preset--color--accent-4);text-decoration: none;}\";s:32:\"1e7c38b45537b325dbbbaec17a301676\";s:112:\":root :where(.wp-block-comment-author-name a:where(:not(.wp-element-button)):hover){text-decoration: underline;}\";s:20:\"core/comment-content\";s:178:\":root :where(.wp-block-comment-content){font-size: var(--wp--preset--font-size--medium);margin-top: var(--wp--preset--spacing--30);margin-bottom: var(--wp--preset--spacing--30);}\";s:17:\"core/comment-date\";s:127:\":root :where(.wp-block-comment-date){color: var(--wp--preset--color--contrast);font-size: var(--wp--preset--font-size--small);}\";s:32:\"c83ca7b3e52884c70f7830c54f99b318\";s:114:\":root :where(.wp-block-comment-date a:where(:not(.wp-element-button))){color: var(--wp--preset--color--contrast);}\";s:22:\"core/comment-edit-link\";s:90:\":root :where(.wp-block-comment-edit-link){font-size: var(--wp--preset--font-size--small);}\";s:32:\"41d70710612536a90e368c12bcb0efea\";s:119:\":root :where(.wp-block-comment-edit-link a:where(:not(.wp-element-button))){color: var(--wp--preset--color--contrast);}\";s:23:\"core/comment-reply-link\";s:91:\":root :where(.wp-block-comment-reply-link){font-size: var(--wp--preset--font-size--small);}\";s:32:\"13c96340dbf37700add1f4c5cae19f3e\";s:120:\":root :where(.wp-block-comment-reply-link a:where(:not(.wp-element-button))){color: var(--wp--preset--color--contrast);}\";s:23:\"core/post-comments-form\";s:565:\":root :where(.wp-block-post-comments-form){font-size: var(--wp--preset--font-size--medium);padding-top: var(--wp--preset--spacing--40);padding-bottom: var(--wp--preset--spacing--40);}:root :where(.wp-block-post-comments-form textarea, .wp-block-post-comments-form input:not([type=submit])){border-radius:.25rem; border-color: var(--wp--preset--color--accent-6) !important;}:root :where(.wp-block-post-comments-form input[type=checkbox]){margin:0 .2rem 0 0 !important;}:root :where(.wp-block-post-comments-form label){font-size: var(--wp--preset--font-size--small);}\";s:24:\"core/comments-pagination\";s:182:\":root :where(.wp-block-comments-pagination){font-size: var(--wp--preset--font-size--medium);margin-top: var(--wp--preset--spacing--40);margin-bottom: var(--wp--preset--spacing--40);}\";s:29:\"core/comments-pagination-next\";s:98:\":root :where(.wp-block-comments-pagination-next){font-size: var(--wp--preset--font-size--medium);}\";s:32:\"core/comments-pagination-numbers\";s:101:\":root :where(.wp-block-comments-pagination-numbers){font-size: var(--wp--preset--font-size--medium);}\";s:33:\"core/comments-pagination-previous\";s:102:\":root :where(.wp-block-comments-pagination-previous){font-size: var(--wp--preset--font-size--medium);}\";s:14:\"core/post-date\";s:124:\":root :where(.wp-block-post-date){color: var(--wp--preset--color--accent-4);font-size: var(--wp--preset--font-size--small);}\";s:32:\"ac0d4e00f5ec22d14451759983e5bd43\";s:133:\":root :where(.wp-block-post-date a:where(:not(.wp-element-button))){color: var(--wp--preset--color--accent-4);text-decoration: none;}\";s:32:\"0ae6ffd1b886044c2da62d75d05ab13d\";s:102:\":root :where(.wp-block-post-date a:where(:not(.wp-element-button)):hover){text-decoration: underline;}\";s:25:\"core/post-navigation-link\";s:94:\":root :where(.wp-block-post-navigation-link){font-size: var(--wp--preset--font-size--medium);}\";s:15:\"core/post-terms\";s:158:\":root :where(.wp-block-post-terms){font-size: var(--wp--preset--font-size--small);font-weight: 600;}:root :where(.wp-block-post-terms a){white-space: nowrap;}\";s:15:\"core/post-title\";s:0:\"\";s:32:\"bb496d3fcd9be3502ce57ff8281e5687\";s:92:\":root :where(.wp-block-post-title a:where(:not(.wp-element-button))){text-decoration: none;}\";s:32:\"12380ab98fdc81351bb32a39bbfc9249\";s:103:\":root :where(.wp-block-post-title a:where(:not(.wp-element-button)):hover){text-decoration: underline;}\";s:10:\"core/quote\";s:1315:\":root :where(.wp-block-quote){border-color: currentColor;border-width: 0 0 0 2px;border-style: solid;font-size: var(--wp--preset--font-size--large);font-weight: 300;margin-right: 0;margin-left: 0;padding-top: var(--wp--preset--spacing--30);padding-right: var(--wp--preset--spacing--40);padding-bottom: var(--wp--preset--spacing--30);padding-left: var(--wp--preset--spacing--40);}:root :where(.wp-block-quote-is-layout-flow) > :first-child{margin-block-start: 0;}:root :where(.wp-block-quote-is-layout-flow) > :last-child{margin-block-end: 0;}:root :where(.wp-block-quote-is-layout-flow) > *{margin-block-start: var(--wp--preset--spacing--30);margin-block-end: 0;}:root :where(.wp-block-quote-is-layout-constrained) > :first-child{margin-block-start: 0;}:root :where(.wp-block-quote-is-layout-constrained) > :last-child{margin-block-end: 0;}:root :where(.wp-block-quote-is-layout-constrained) > *{margin-block-start: var(--wp--preset--spacing--30);margin-block-end: 0;}:root :where(.wp-block-quote-is-layout-flex){gap: var(--wp--preset--spacing--30);}:root :where(.wp-block-quote-is-layout-grid){gap: var(--wp--preset--spacing--30);}:root :where(.wp-block-quote.has-text-align-right ){border-width: 0 2px 0 0;}:root :where(.wp-block-quote.has-text-align-center ){border-width: 0;border-inline: 0; padding-inline: 0;}\";s:32:\"1de7a22e22013106efc5be82788cb6c0\";s:176:\":root :where(.wp-block-quote cite){font-size: var(--wp--preset--font-size--small);font-style: normal;font-weight: 300;}:root :where(.wp-block-quote cite sub){font-size: 0.65em}\";s:21:\"core/query-pagination\";s:107:\":root :where(.wp-block-query-pagination){font-size: var(--wp--preset--font-size--medium);font-weight: 500;}\";s:11:\"core/search\";s:380:\":root :where(.wp-block-search .wp-block-search__label, .wp-block-search .wp-block-search__input, .wp-block-search .wp-block-search__button){font-size: var(--wp--preset--font-size--medium);line-height: 1.6;}:root :where(.wp-block-search .wp-block-search__input){border-radius:3.125rem;padding-left:1.5625rem;padding-right:1.5625rem;border-color:var(--wp--preset--color--accent-6);}\";s:32:\"14fa6a3d0cfbde171cbc0fb04aa8a6cf\";s:138:\":root :where(.wp-block-search .wp-element-button,.wp-block-search  .wp-block-button__link){border-radius: 3.125rem;margin-left: 1.125rem;}\";s:32:\"05993ee2f3de94b5d1350998a7e9b6b0\";s:130:\":root :where(.wp-block-search .wp-element-button:hover,.wp-block-search  .wp-block-button__link:hover){border-color: transparent;}\";s:14:\"core/separator\";s:148:\":root :where(.wp-block-separator){border-color: currentColor;border-width: 0 0 1px 0;border-style: solid;color: var(--wp--preset--color--accent-6);}\";s:17:\"core/site-tagline\";s:86:\":root :where(.wp-block-site-tagline){font-size: var(--wp--preset--font-size--medium);}\";s:15:\"core/site-title\";s:75:\":root :where(.wp-block-site-title){font-weight: 700;letter-spacing: -.5px;}\";s:32:\"f513d889cf971b13995cc3fffed2f39b\";s:92:\":root :where(.wp-block-site-title a:where(:not(.wp-element-button))){text-decoration: none;}\";s:32:\"22c37a317cc0ebd50155b5ad78564f37\";s:103:\":root :where(.wp-block-site-title a:where(:not(.wp-element-button)):hover){text-decoration: underline;}\";s:21:\"core/term-description\";s:90:\":root :where(.wp-block-term-description){font-size: var(--wp--preset--font-size--medium);}\";s:15:\"core/navigation\";s:84:\":root :where(.wp-block-navigation){font-size: var(--wp--preset--font-size--medium);}\";s:32:\"25289a01850f5a0264ddb79a9a3baf3d\";s:92:\":root :where(.wp-block-navigation a:where(:not(.wp-element-button))){text-decoration: none;}\";s:32:\"026c04da08398d655a95047f1f235d97\";s:103:\":root :where(.wp-block-navigation a:where(:not(.wp-element-button)):hover){text-decoration: underline;}\";s:9:\"core/list\";s:52:\":root :where(.wp-block-list li){margin-top: 0.5rem;}\";s:12:\"core/heading\";s:0:\"\";s:14:\"core/paragraph\";s:0:\"\";s:10:\"core/group\";s:0:\"\";s:11:\"core/column\";s:0:\"\";}}', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require('wp-blog-header.php'), require_once('wp-includes/template-loader.php'), include('wp-includes/template-canvas.php'), wp_head, do_action('wp_head'), WP_Hook->do_action, WP_Hook->apply_filters, wp_enqueue_scripts, do_action('wp_enqueue_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_enqueue_global_styles, wp_add_global_styles_for_blocks, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 07:53:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(1545): add_option('_transient__awp...', true, '', 'off')
+#5 /wordpress/wp-content/plugins/automation-web-platform/class-awp.php(275): set_transient('_awp_activation...', true, 30)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): {closure}(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_automa...', false)
+#10 /internal/eval.php(20): activate_plugin('automation-web-...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient__awp_activation_redirect', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_automation-web-platform/class-awp.php'), WP_Hook->do_action, WP_Hook->apply_filters, {closure}, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 12:48:24 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 12:48:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '!f8Q=,@==492rpk5|fvi(t}V_T)IMl}9d.7b?7$mWH#T].hN&hyi#9htN-~O~-Ul', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('awp_wawp_for_woocommerce_enabled', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -266,7 +519,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , '!f8Q=,@==492rpk5|fvi(t}V_T)IMl}9d.7b?7$mWH#T].hN&amp;hyi#9htN-~O~-Ul' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'awp_wawp_for_woocommerce_enabled' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -278,16 +531,698 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', '!f8Q=,@==492rpk...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', '!f8Q=,@==492rpk...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', '!f8Q=,@==492rpk...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', '!f8Q=,@==492rpk...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40371|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includ
+#4 /wordpress/wp-includes/option.php(921): add_option('awp_wawp_for_wo...', 0, '', 'auto')
+#5 /wordpress/wp-content/plugins/automation-web-platform/class-awp.php(64): update_option('awp_wawp_for_wo...', 0)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): awp_handle_wc_features_based_on_wc_status('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('awp_wawp_for_woocommerce_enabled', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, awp_handle_wc_features_based_on_wc_status, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:48:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('awp_woo_notification_enabled', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'awp_woo_notification_enabled' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('awp_woo_notific...', 0, '', 'auto')
+#5 /wordpress/wp-content/plugins/automation-web-platform/class-awp.php(65): update_option('awp_woo_notific...', 0)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): awp_handle_wc_features_based_on_wc_status('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('awp_woo_notification_enabled', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, awp_handle_wc_features_based_on_wc_status, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:48:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('awp_admin_notification_enabled', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'awp_admin_notification_enabled' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('awp_admin_notif...', 0, '', 'auto')
+#5 /wordpress/wp-content/plugins/automation-web-platform/class-awp.php(66): update_option('awp_admin_notif...', 0)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): awp_handle_wc_features_based_on_wc_status('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('awp_admin_notification_enabled', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, awp_handle_wc_features_based_on_wc_status, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:48:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('awp_followup_messages_enabled', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'awp_followup_messages_enabled' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('awp_followup_me...', 0, '', 'auto')
+#5 /wordpress/wp-content/plugins/automation-web-platform/class-awp.php(67): update_option('awp_followup_me...', 0)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): awp_handle_wc_features_based_on_wc_status('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('awp_followup_messages_enabled', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, awp_handle_wc_features_based_on_wc_status, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:48:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('awp_checkout_otp_enabled', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'awp_checkout_otp_enabled' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('awp_checkout_ot...', 0, '', 'auto')
+#5 /wordpress/wp-content/plugins/automation-web-platform/class-awp.php(68): update_option('awp_checkout_ot...', 0)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): awp_handle_wc_features_based_on_wc_status('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('awp_checkout_otp_enabled', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, awp_handle_wc_features_based_on_wc_status, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:48:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_awp_notifications_log (
+            id BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            user_id BIGINT(20) UNSIGNED DEFAULT NULL,
+            order_id BIGINT(20) UNSIGNED DEFAULT NULL,
+            customer_name VARCHAR(255) NOT NULL,
+            sent_at DATETIME NOT NULL,
+            whatsapp_number VARCHAR(20) NOT NULL,
+            message TEXT NOT NULL,
+            image_attachment VARCHAR(255) DEFAULT NULL,
+            message_type VARCHAR(100) NOT NULL,
+            wawp_status TEXT NOT NULL,
+            resend_id BIGINT(20) UNSIGNED DEFAULT NULL,
+            INDEX idx_user_id (user_id),
+            INDEX idx_order_id (order_id),
+            INDEX idx_sent_at (sent_at),
+            INDEX idx_message_type (message_type),
+            INDEX idx_resend_id (resend_id),
+            FOREIGN KEY (resend_id) REFERENCES wp_awp_notifications_log(id) ON DELETE SET NULL
+        ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, id, bigint(20) UNSIGNED</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, user_id, bigint(20) UNSIGNED</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, order_id, bigint(20) UNSIGNED</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, customer_name, varchar(255)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, sent_at, datetime</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, whatsapp_number, varchar(20)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, message, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, image_attachment, varchar(255)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, message_type, varchar(100)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, wawp_status, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, resend_id, bigint(20) UNSIGNED</li>
+<li>Executing: CREATE TABLE &quot;wp_awp_notifications_log&quot; (
+&quot;id&quot; integer PRIMARY KEY AUTOINCREMENT,
+&quot;user_id&quot; integer DEFAULT NULL,
+&quot;order_id&quot; integer DEFAULT NULL,
+&quot;customer_name&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;sent_at&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;whatsapp_number&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;message&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;image_attachment&quot; text DEFAULT NULL COLLATE NOCASE,
+&quot;message_type&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;wawp_status&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;resend_id&quot; integer DEFAULT NULL) | (no parameters)</li>
+<li>Executing: CREATE  INDEX  &quot;wp_awp_notifications_log__idx_user_id&quot; ON &quot;wp_awp_notifications_log&quot; (&quot;user_id&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, wp_awp_notifications_log__idx_user_id, KEY</li>
+<li>Executing: CREATE  INDEX  &quot;wp_awp_notifications_log__idx_order_id&quot; ON &quot;wp_awp_notifications_log&quot; (&quot;order_id&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, wp_awp_notifications_log__idx_order_id, KEY</li>
+<li>Executing: CREATE  INDEX  &quot;wp_awp_notifications_log__idx_sent_at&quot; ON &quot;wp_awp_notifications_log&quot; (&quot;sent_at&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, wp_awp_notifications_log__idx_sent_at, KEY</li>
+<li>Executing: CREATE  INDEX  &quot;wp_awp_notifications_log__idx_message_type&quot; ON &quot;wp_awp_notifications_log&quot; (&quot;message_type&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, wp_awp_notifications_log__idx_message_type, KEY</li>
+<li>Executing: CREATE  INDEX  &quot;wp_awp_notifications_log__idx_resend_id&quot; ON &quot;wp_awp_notifications_log&quot; (&quot;resend_id&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, wp_awp_notifications_log__idx_resend_id, KEY</li>
+<li>Executing: CREATE  INDEX  &quot;wp_awp_notifications_log__&quot; ON &quot;wp_awp_notifications_log&quot; (&quot;&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, wp_awp_notifications_log__, </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/automation-web-platform/includes/class-database-manager.php(179): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/automation-web-platform/includes/class-database-manager.php(106): AWP_Database_Manager->run_dbDelta('wp_awp_notifica...', '(\n            i...')
+#4 /wordpress/wp-content/plugins/automation-web-platform/includes/class-database-manager.php(37): AWP_Database_Manager->create_notifications_log_table()
+#5 /wordpress/wp-content/plugins/automation-web-platform/class-awp.php(212): AWP_Database_Manager->create_all_tables()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): {closure}(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_automa...', false)
+#10 /internal/eval.php(20): activate_plugin('automation-web-...')
+#11 {main}</pre>
+ for query CREATE TABLE wp_awp_notifications_log (
+            id BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            user_id BIGINT(20) UNSIGNED DEFAULT NULL,
+            order_id BIGINT(20) UNSIGNED DEFAULT NULL,
+            customer_name VARCHAR(255) NOT NULL,
+            sent_at DATETIME NOT NULL,
+            whatsapp_number VARCHAR(20) NOT NULL,
+            message TEXT NOT NULL,
+            image_attachment VARCHAR(255) DEFAULT NULL,
+            message_type VARCHAR(100) NOT NULL,
+            wawp_status TEXT NOT NULL,
+            resend_id BIGINT(20) UNSIGNED DEFAULT NULL,
+            INDEX idx_user_id (user_id),
+            INDEX idx_order_id (order_id),
+            INDEX idx_sent_at (sent_at),
+            INDEX idx_message_type (message_type),
+            INDEX idx_resend_id (resend_id),
+            FOREIGN KEY (resend_id) REFERENCES wp_awp_notifications_log(id) ON DELETE SET NULL
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_automation-web-platform/class-awp.php'), WP_Hook->do_action, WP_Hook->apply_filters, {closure}, AWP_Database_Manager->create_all_tables, AWP_Database_Manager->create_notifications_log_table, AWP_Database_Manager->run_dbDelta, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:48:36 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 12:48:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_awp_notifications_log (
+            id BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            user_id BIGINT(20) UNSIGNED DEFAULT NULL,
+            order_id BIGINT(20) UNSIGNED DEFAULT NULL,
+            customer_name VARCHAR(255) NOT NULL,
+            sent_at DATETIME NOT NULL,
+            whatsapp_number VARCHAR(20) NOT NULL,
+            message TEXT NOT NULL,
+            image_attachment VARCHAR(255) DEFAULT NULL,
+            message_type VARCHAR(100) NOT NULL,
+            wawp_status TEXT NOT NULL,
+            resend_id BIGINT(20) UNSIGNED DEFAULT NULL,
+            INDEX idx_user_id (user_id),
+            INDEX idx_order_id (order_id),
+            INDEX idx_sent_at (sent_at),
+            INDEX idx_message_type (message_type),
+            INDEX idx_resend_id (resend_id),
+            FOREIGN KEY (resend_id) REFERENCES wp_awp_notifications_log(id) ON DELETE SET NULL
+        ) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, id, bigint(20) UNSIGNED</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, user_id, bigint(20) UNSIGNED</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, order_id, bigint(20) UNSIGNED</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, customer_name, varchar(255)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, sent_at, datetime</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, whatsapp_number, varchar(20)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, message, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, image_attachment, varchar(255)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, message_type, varchar(100)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, wawp_status, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, resend_id, bigint(20) UNSIGNED</li>
+<li>Executing: CREATE TABLE &quot;wp_awp_notifications_log&quot; (
+&quot;id&quot; integer PRIMARY KEY AUTOINCREMENT,
+&quot;user_id&quot; integer DEFAULT NULL,
+&quot;order_id&quot; integer DEFAULT NULL,
+&quot;customer_name&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;sent_at&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;whatsapp_number&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;message&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;image_attachment&quot; text DEFAULT NULL COLLATE NOCASE,
+&quot;message_type&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;wawp_status&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;resend_id&quot; integer DEFAULT NULL) | (no parameters)</li>
+<li>Executing: CREATE  INDEX  &quot;wp_awp_notifications_log__idx_user_id&quot; ON &quot;wp_awp_notifications_log&quot; (&quot;user_id&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, wp_awp_notifications_log__idx_user_id, KEY</li>
+<li>Executing: CREATE  INDEX  &quot;wp_awp_notifications_log__idx_order_id&quot; ON &quot;wp_awp_notifications_log&quot; (&quot;order_id&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, wp_awp_notifications_log__idx_order_id, KEY</li>
+<li>Executing: CREATE  INDEX  &quot;wp_awp_notifications_log__idx_sent_at&quot; ON &quot;wp_awp_notifications_log&quot; (&quot;sent_at&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, wp_awp_notifications_log__idx_sent_at, KEY</li>
+<li>Executing: CREATE  INDEX  &quot;wp_awp_notifications_log__idx_message_type&quot; ON &quot;wp_awp_notifications_log&quot; (&quot;message_type&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, wp_awp_notifications_log__idx_message_type, KEY</li>
+<li>Executing: CREATE  INDEX  &quot;wp_awp_notifications_log__idx_resend_id&quot; ON &quot;wp_awp_notifications_log&quot; (&quot;resend_id&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, wp_awp_notifications_log__idx_resend_id, KEY</li>
+<li>Executing: CREATE  INDEX  &quot;wp_awp_notifications_log__&quot; ON &quot;wp_awp_notifications_log&quot; (&quot;&quot;) | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_awp_notifications_log, wp_awp_notifications_log__, </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/automation-web-platform/includes/class-database-manager.php(179): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/automation-web-platform/includes/class-database-manager.php(106): AWP_Database_Manager->run_dbDelta('wp_awp_notifica...', '(\n            i...')
+#4 /wordpress/wp-content/plugins/automation-web-platform/includes/class-database-manager.php(37): AWP_Database_Manager->create_notifications_log_table()
+#5 /wordpress/wp-content/plugins/automation-web-platform/class-awp.php(212): AWP_Database_Manager->create_all_tables()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): {closure}(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_automa...', false)
+#10 /internal/eval.php(20): activate_plugin('automation-web-...')
+#11 {main}</pre>
+ for query CREATE TABLE wp_awp_notifications_log (
+            id BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            user_id BIGINT(20) UNSIGNED DEFAULT NULL,
+            order_id BIGINT(20) UNSIGNED DEFAULT NULL,
+            customer_name VARCHAR(255) NOT NULL,
+            sent_at DATETIME NOT NULL,
+            whatsapp_number VARCHAR(20) NOT NULL,
+            message TEXT NOT NULL,
+            image_attachment VARCHAR(255) DEFAULT NULL,
+            message_type VARCHAR(100) NOT NULL,
+            wawp_status TEXT NOT NULL,
+            resend_id BIGINT(20) UNSIGNED DEFAULT NULL,
+            INDEX idx_user_id (user_id),
+            INDEX idx_order_id (order_id),
+            INDEX idx_sent_at (sent_at),
+            INDEX idx_message_type (message_type),
+            INDEX idx_resend_id (resend_id),
+            FOREIGN KEY (resend_id) REFERENCES wp_awp_notifications_log(id) ON DELETE SET NULL
+        ) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_automation-web-platform/class-awp.php'), WP_Hook->do_action, WP_Hook->apply_filters, {closure}, AWP_Database_Manager->create_all_tables, AWP_Database_Manager->create_notifications_log_table, AWP_Database_Manager->run_dbDelta, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:48:48 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 12:48:59 UTC] PHP Deprecated:  Required parameter $sanitizeType follows optional parameter $initVar in /wordpress/wp-content/plugins/addon-library/inc_php/framework/functions.class.php on line 52
+[09-Apr-2025 12:48:59 UTC] PHP Deprecated:  Required parameter $sanitizeType follows optional parameter $initVar in /wordpress/wp-content/plugins/addon-library/inc_php/framework/functions.class.php on line 66
+[09-Apr-2025 12:48:59 UTC] PHP Deprecated:  Required parameter $sanitizeType follows optional parameter $initVar in /wordpress/wp-content/plugins/addon-library/inc_php/framework/functions.class.php on line 80
+[09-Apr-2025 12:48:59 UTC] PHP Deprecated:  Required parameter $mode follows optional parameter $filterSapID in /wordpress/wp-content/plugins/addon-library/inc_php/framework/settings_output.class.php on line 1207
+[09-Apr-2025 12:48:59 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $addType in /wordpress/wp-content/plugins/addon-library/inc_php/unitecreator_categories.class.php on line 281
+[09-Apr-2025 12:48:59 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $selecteCatID in /wordpress/wp-content/plugins/addon-library/inc_php/unitecreator_categories.class.php on line 497
+[09-Apr-2025 12:48:59 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $publishedCatOnly in /wordpress/wp-content/plugins/addon-library/inc_php/unitecreator_addons.class.php on line 307
+[09-Apr-2025 12:49:00 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 12:49:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 12:49:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 12:49:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 12:49:00 UTC] PHP Deprecated:  Required parameter $sanitizeType follows optional parameter $initVar in /wordpress/wp-content/plugins/addon-library/inc_php/framework/functions.class.php on line 52
+[09-Apr-2025 12:49:00 UTC] PHP Deprecated:  Required parameter $sanitizeType follows optional parameter $initVar in /wordpress/wp-content/plugins/addon-library/inc_php/framework/functions.class.php on line 66
+[09-Apr-2025 12:49:00 UTC] PHP Deprecated:  Required parameter $sanitizeType follows optional parameter $initVar in /wordpress/wp-content/plugins/addon-library/inc_php/framework/functions.class.php on line 80
+[09-Apr-2025 12:49:00 UTC] PHP Deprecated:  Required parameter $mode follows optional parameter $filterSapID in /wordpress/wp-content/plugins/addon-library/inc_php/framework/settings_output.class.php on line 1207
+[09-Apr-2025 12:49:00 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $addType in /wordpress/wp-content/plugins/addon-library/inc_php/unitecreator_categories.class.php on line 281
+[09-Apr-2025 12:49:00 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $selecteCatID in /wordpress/wp-content/plugins/addon-library/inc_php/unitecreator_categories.class.php on line 497
+[09-Apr-2025 12:49:00 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $publishedCatOnly in /wordpress/wp-content/plugins/addon-library/inc_php/unitecreator_addons.class.php on line 307
+[09-Apr-2025 12:49:10 UTC] PHP Deprecated:  Required parameter $sanitizeType follows optional parameter $initVar in /wordpress/wp-content/plugins/addon-library/inc_php/framework/functions.class.php on line 52
+[09-Apr-2025 12:49:10 UTC] PHP Deprecated:  Required parameter $sanitizeType follows optional parameter $initVar in /wordpress/wp-content/plugins/addon-library/inc_php/framework/functions.class.php on line 66
+[09-Apr-2025 12:49:10 UTC] PHP Deprecated:  Required parameter $sanitizeType follows optional parameter $initVar in /wordpress/wp-content/plugins/addon-library/inc_php/framework/functions.class.php on line 80
+[09-Apr-2025 12:49:10 UTC] PHP Deprecated:  Required parameter $mode follows optional parameter $filterSapID in /wordpress/wp-content/plugins/addon-library/inc_php/framework/settings_output.class.php on line 1207
+[09-Apr-2025 12:49:11 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $addType in /wordpress/wp-content/plugins/addon-library/inc_php/unitecreator_categories.class.php on line 281
+[09-Apr-2025 12:49:11 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $selecteCatID in /wordpress/wp-content/plugins/addon-library/inc_php/unitecreator_categories.class.php on line 497
+[09-Apr-2025 12:49:11 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $publishedCatOnly in /wordpress/wp-content/plugins/addon-library/inc_php/unitecreator_addons.class.php on line 307
+[09-Apr-2025 12:49:12 UTC] PHP Deprecated:  Required parameter $sanitizeType follows optional parameter $initVar in /wordpress/wp-content/plugins/addon-library/inc_php/framework/functions.class.php on line 52
+[09-Apr-2025 12:49:12 UTC] PHP Deprecated:  Required parameter $sanitizeType follows optional parameter $initVar in /wordpress/wp-content/plugins/addon-library/inc_php/framework/functions.class.php on line 66
+[09-Apr-2025 12:49:12 UTC] PHP Deprecated:  Required parameter $sanitizeType follows optional parameter $initVar in /wordpress/wp-content/plugins/addon-library/inc_php/framework/functions.class.php on line 80
+[09-Apr-2025 12:49:12 UTC] PHP Deprecated:  Required parameter $mode follows optional parameter $filterSapID in /wordpress/wp-content/plugins/addon-library/inc_php/framework/settings_output.class.php on line 1207
+[09-Apr-2025 12:49:12 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $addType in /wordpress/wp-content/plugins/addon-library/inc_php/unitecreator_categories.class.php on line 281
+[09-Apr-2025 12:49:12 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $selecteCatID in /wordpress/wp-content/plugins/addon-library/inc_php/unitecreator_categories.class.php on line 497
+[09-Apr-2025 12:49:12 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $publishedCatOnly in /wordpress/wp-content/plugins/addon-library/inc_php/unitecreator_addons.class.php on line 307
+[09-Apr-2025 12:49:22 UTC] PHP Deprecated:  Required parameter $sanitizeType follows optional parameter $initVar in /wordpress/wp-content/plugins/addon-library/inc_php/framework/functions.class.php on line 52
+[09-Apr-2025 12:49:22 UTC] PHP Deprecated:  Required parameter $sanitizeType follows optional parameter $initVar in /wordpress/wp-content/plugins/addon-library/inc_php/framework/functions.class.php on line 66
+[09-Apr-2025 12:49:22 UTC] PHP Deprecated:  Required parameter $sanitizeType follows optional parameter $initVar in /wordpress/wp-content/plugins/addon-library/inc_php/framework/functions.class.php on line 80
+[09-Apr-2025 12:49:22 UTC] PHP Deprecated:  Required parameter $mode follows optional parameter $filterSapID in /wordpress/wp-content/plugins/addon-library/inc_php/framework/settings_output.class.php on line 1207
+[09-Apr-2025 12:49:22 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $addType in /wordpress/wp-content/plugins/addon-library/inc_php/unitecreator_categories.class.php on line 281
+[09-Apr-2025 12:49:22 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $selecteCatID in /wordpress/wp-content/plugins/addon-library/inc_php/unitecreator_categories.class.php on line 497
+[09-Apr-2025 12:49:22 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $publishedCatOnly in /wordpress/wp-content/plugins/addon-library/inc_php/unitecreator_addons.class.php on line 307
+[09-Apr-2025 12:49:24 UTC] PHP Deprecated:  Required parameter $sanitizeType follows optional parameter $initVar in /wordpress/wp-content/plugins/addon-library/inc_php/framework/functions.class.php on line 52
+[09-Apr-2025 12:49:24 UTC] PHP Deprecated:  Required parameter $sanitizeType follows optional parameter $initVar in /wordpress/wp-content/plugins/addon-library/inc_php/framework/functions.class.php on line 66
+[09-Apr-2025 12:49:24 UTC] PHP Deprecated:  Required parameter $sanitizeType follows optional parameter $initVar in /wordpress/wp-content/plugins/addon-library/inc_php/framework/functions.class.php on line 80
+[09-Apr-2025 12:49:24 UTC] PHP Deprecated:  Required parameter $mode follows optional parameter $filterSapID in /wordpress/wp-content/plugins/addon-library/inc_php/framework/settings_output.class.php on line 1207
+[09-Apr-2025 12:49:24 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $addType in /wordpress/wp-content/plugins/addon-library/inc_php/unitecreator_categories.class.php on line 281
+[09-Apr-2025 12:49:24 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $selecteCatID in /wordpress/wp-content/plugins/addon-library/inc_php/unitecreator_categories.class.php on line 497
+[09-Apr-2025 12:49:24 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $publishedCatOnly in /wordpress/wp-content/plugins/addon-library/inc_php/unitecreator_addons.class.php on line 307
+[09-Apr-2025 12:49:33 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/admin-tag-ui/admin-tag-ui.php on line 32
+[09-Apr-2025 12:49:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('atui_settings', 'a:4:{s:14:\"number_to_show\";s:3:\"all\";s:17:\"number_of_columns\";i:2;s:8:\"tag_size\";s:4:\"same\";s:11:\"auto_reveal\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'atui_settings' , 'a:4:{s:14:&quot;number_to_show&quot;;s:3:&quot;all&quot;;s:17:&quot;number_of_columns&quot;;i:2;s:8:&quot;tag_size&quot;;s:4:&quot;same&quot;;s:11:&quot;auto_reveal&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/admin-tag-ui/admin-tag-ui.php(397): add_option('atui_settings', Array)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Admin_Tag_UI_Plugin->install_plugin(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_admin-...', false)
+#9 /internal/eval.php(20): activate_plugin('admin-tag-ui/ad...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('atui_settings', 'a:4:{s:14:\"number_to_show\";s:3:\"all\";s:17:\"number_of_columns\";i:2;s:8:\"tag_size\";s:4:\"same\";s:11:\"auto_reveal\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_admin-tag-ui/admin-tag-ui.php'), WP_Hook->do_action, WP_Hook->apply_filters, Admin_Tag_UI_Plugin->install_plugin, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:49:33 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 12:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 12:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 12:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 12:49:42 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/admin-tag-ui/admin-tag-ui.php on line 32
+[09-Apr-2025 12:49:52 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/admin-tag-ui/admin-tag-ui.php on line 32
+[09-Apr-2025 12:50:01 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 12:50:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 12:50:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 12:50:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 12:50:28 UTC] PHP Fatal error:  Declaration of itemsTable::prepare_items($data) must be compatible with WP_List_Table::prepare_items() in /wordpress/wp-content/plugins/affiliate-press/includes/class-items-table.php on line 182
+[09-Apr-2025 12:50:37 UTC] PHP Fatal error:  Declaration of itemsTable::prepare_items($data) must be compatible with WP_List_Table::prepare_items() in /wordpress/wp-content/plugins/affiliate-press/includes/class-items-table.php on line 182
+[09-Apr-2025 12:50:46 UTC] PHP Fatal error:  Declaration of itemsTable::prepare_items($data) must be compatible with WP_List_Table::prepare_items() in /wordpress/wp-content/plugins/affiliate-press/includes/class-items-table.php on line 182
+[09-Apr-2025 12:50:56 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/agile-video-player/admin.php on line 257
+[09-Apr-2025 12:50:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('agileplayer_options', 'a:11:{s:18:\"agileplayer_height\";s:3:\"264\";s:17:\"agileplayer_width\";s:3:\"640\";s:19:\"agileplayer_preload\";s:0:\"\";s:20:\"agileplayer_autoplay\";s:0:\"\";s:22:\"agileplayer_responsive\";s:0:\"\";s:15:\"agileplayer_cdn\";s:2:\"on\";s:21:\"agileplayer_color_one\";s:4:\"#ccc\";s:21:\"agileplayer_color_two\";s:7:\"#66A8CC\";s:23:\"agileplayer_color_three\";s:4:\"#000\";s:27:\"agileplayer_video_shortcode\";s:2:\"on\";s:17:\"agileplayer_reset\";s:0:\"\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'agileplayer_options' , 'a:11:{s:18:&quot;agileplayer_height&quot;;s:3:&quot;264&quot;;s:17:&quot;agileplayer_width&quot;;s:3:&quot;640&quot;;s:19:&quot;agileplayer_preload&quot;;s:0:&quot;&quot;;s:20:&quot;agileplayer_autoplay&quot;;s:0:&quot;&quot;;s:22:&quot;agileplayer_responsive&quot;;s:0:&quot;&quot;;s:15:&quot;agileplayer_cdn&quot;;s:2:&quot;on&quot;;s:21:&quot;agileplayer_color_one&quot;;s:4:&quot;#ccc&quot;;s:21:&quot;agileplayer_color_two&quot;;s:7:&quot;#66A8CC&quot;;s:23:&quot;agileplayer_color_three&quot;;s:4:&quot;#000&quot;;s:27:&quot;agileplayer_video_shortcode&quot;;s:2:&quot;on&quot;;s:17:&quot;agileplayer_reset&quot;;s:0:&quot;&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('agileplayer_opt...', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/agile-video-player/admin.php(259): update_option('agileplayer_opt...', Array)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): add_defaults_fn(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_agile-...', false)
+#10 /internal/eval.php(20): activate_plugin('agile-video-pla...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('agileplayer_options', 'a:11:{s:18:\"agileplayer_height\";s:3:\"264\";s:17:\"agileplayer_width\";s:3:\"640\";s:19:\"agileplayer_preload\";s:0:\"\";s:20:\"agileplayer_autoplay\";s:0:\"\";s:22:\"agileplayer_responsive\";s:0:\"\";s:15:\"agileplayer_cdn\";s:2:\"on\";s:21:\"agileplayer_color_one\";s:4:\"#ccc\";s:21:\"agileplayer_color_two\";s:7:\"#66A8CC\";s:23:\"agileplayer_color_three\";s:4:\"#000\";s:27:\"agileplayer_video_shortcode\";s:2:\"on\";s:17:\"agileplayer_reset\";s:0:\"\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_agile-video-player/app.php'), WP_Hook->do_action, WP_Hook->apply_filters, add_defaults_fn, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:50:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('agileplayer_db_version', '1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'agileplayer_db_version' , '1.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('agileplayer_db_...', '1.0', '', 'auto')
+#5 /wordpress/wp-content/plugins/agile-video-player/admin.php(260): update_option('agileplayer_db_...', '1.0')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): add_defaults_fn(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_agile-...', false)
+#10 /internal/eval.php(20): activate_plugin('agile-video-pla...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('agileplayer_db_version', '1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_agile-video-player/app.php'), WP_Hook->do_action, WP_Hook->apply_filters, add_defaults_fn, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:50:56 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 12:50:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 12:50:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 12:50:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 12:51:06 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/agile-video-player/admin.php on line 257
+[09-Apr-2025 12:51:17 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/agile-video-player/admin.php on line 257
+[09-Apr-2025 12:51:49 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 12:51:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 12:51:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 12:51:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 12:52:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 12:52:18 UTC] PHP Warning:  Trying to access array offset on null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 12:52:18 UTC] PHP Warning:  Trying to access array offset on null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 12:52:18 UTC] PHP Warning:  Trying to access array offset on null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 12:52:55 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 12:52:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 12:52:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 12:52:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 12:52:55 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ANNOUNCEMENT_BAR_POST_TYPE" in /wordpress/wp-content/plugins/announcement-bar/announcement.php:226
+Stack trace:
+#0 /wordpress/wp-content/plugins/announcement-bar/announcement.php(94): Announcement_Bar->register_post_type()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): Announcement_Bar::activate(false)
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_announ...', false)
+#5 /internal/eval.php(20): activate_plugin('announcement-ba...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/announcement-bar/announcement.php on line 226
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"announcement-bar"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
