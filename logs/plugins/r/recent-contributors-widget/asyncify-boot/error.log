@@ -2,14 +2,379 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [07-Apr-2025 02:23:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/recent-contributors-widget/recent-contributors-widget.php:162
+Error: [09-Apr-2025 09:48:54 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:48:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:48:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:48:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:49:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rapidmail_connector', 'a:2:{s:11:\"connect_url\";s:50:\"https://my.rapidmail.de/datalink/store/credentials\";s:12:\"overview_url\";s:59:\"https://my.rapidmail.de/datalink/wizard.html#/datalink/list\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'rapidmail_connector' , 'a:2:{s:11:&quot;connect_url&quot;;s:50:&quot;https://my.rapidmail.de/datalink/store/credentials&quot;;s:12:&quot;overview_url&quot;;s:59:&quot;https://my.rapidmail.de/datalink/wizard.html#/datalink/list&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('rapidmail_conne...', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/rapidmail-newsletter-e-mail-marketing-for-woocommerce/includes/Activator.php(46): update_option('rapidmail_conne...', Array)
+#6 /wordpress/wp-content/plugins/rapidmail-newsletter-e-mail-marketing-for-woocommerce/rapidmail-connector.php(45): Rapidmail\Connector\Activator::activate()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_rapidmail_connector(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_rapidm...', false)
+#11 /internal/eval.php(20): activate_plugin('rapidmail-newsl...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rapidmail_connector', 'a:2:{s:11:\"connect_url\";s:50:\"https://my.rapidmail.de/datalink/store/credentials\";s:12:\"overview_url\";s:59:\"https://my.rapidmail.de/datalink/wizard.html#/datalink/list\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_rapidmail-newsletter-e-mail-marketing-for-woocommerce/rapidmail-connector.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_rapidmail_connector, Rapidmail\Connector\Activator::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 09:49:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rapidmail_connector_newsletter', 'a:4:{s:7:\"enabled\";b:1;s:8:\"location\";a:2:{i:0;s:8:\"register\";i:1;s:6:\"submit\";}s:7:\"default\";i:0;s:5:\"label\";s:27:\"Subscribe to our newsletter\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'rapidmail_connector_newsletter' , 'a:4:{s:7:&quot;enabled&quot;;b:1;s:8:&quot;location&quot;;a:2:{i:0;s:8:&quot;register&quot;;i:1;s:6:&quot;submit&quot;;}s:7:&quot;default&quot;;i:0;s:5:&quot;label&quot;;s:27:&quot;Subscribe to our newsletter&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('rapidmail_conne...', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/rapidmail-newsletter-e-mail-marketing-for-woocommerce/includes/Activator.php(59): update_option('rapidmail_conne...', Array)
+#6 /wordpress/wp-content/plugins/rapidmail-newsletter-e-mail-marketing-for-woocommerce/rapidmail-connector.php(45): Rapidmail\Connector\Activator::activate()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_rapidmail_connector(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_rapidm...', false)
+#11 /internal/eval.php(20): activate_plugin('rapidmail-newsl...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rapidmail_connector_newsletter', 'a:4:{s:7:\"enabled\";b:1;s:8:\"location\";a:2:{i:0;s:8:\"register\";i:1;s:6:\"submit\";}s:7:\"default\";i:0;s:5:\"label\";s:27:\"Subscribe to our newsletter\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_rapidmail-newsletter-e-mail-marketing-for-woocommerce/rapidmail-connector.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_rapidmail_connector, Rapidmail\Connector\Activator::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 09:49:21 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:49:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:49:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:49:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:49:47 UTC] Building plugin rcp-allow-rest v1.0.0
+[09-Apr-2025 09:49:47 UTC] Please activate RCP plugin
+[09-Apr-2025 09:49:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:49:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:49:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:49:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:49:48 UTC] Building plugin rcp-allow-rest v1.0.0
+[09-Apr-2025 09:49:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function is_plugin_active() in /wordpress/wp-content/plugins/rcp-allow-rest/public/class-rcp-allow-rest-public.php:66
+Stack trace:
+#0 /wordpress/wp-content/plugins/rcp-allow-rest/includes/class-rcp-allow-rest.php(168): Rcp_Allow_Rest_Public->__construct('rcp-allow-rest', '1.0.0')
+#1 /wordpress/wp-content/plugins/rcp-allow-rest/includes/class-rcp-allow-rest.php(77): Rcp_Allow_Rest->define_public_hooks()
+#2 /wordpress/wp-content/plugins/rcp-allow-rest/rcp-allow-rest.php(71): Rcp_Allow_Rest->__construct()
+#3 /wordpress/wp-content/plugins/rcp-allow-rest/rcp-allow-rest.php(75): run_rcp_allow_rest()
+#4 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/rcp-allow-rest/public/class-rcp-allow-rest-public.php on line 66
+[09-Apr-2025 09:49:56 UTC] Building plugin rcp-allow-rest v1.0.0
+[09-Apr-2025 09:49:56 UTC] Please activate RCP plugin
+[09-Apr-2025 09:49:57 UTC] Building plugin rcp-allow-rest v1.0.0
+[09-Apr-2025 09:49:57 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function is_plugin_active() in /wordpress/wp-content/plugins/rcp-allow-rest/public/class-rcp-allow-rest-public.php:66
+Stack trace:
+#0 /wordpress/wp-content/plugins/rcp-allow-rest/includes/class-rcp-allow-rest.php(168): Rcp_Allow_Rest_Public->__construct('rcp-allow-rest', '1.0.0')
+#1 /wordpress/wp-content/plugins/rcp-allow-rest/includes/class-rcp-allow-rest.php(77): Rcp_Allow_Rest->define_public_hooks()
+#2 /wordpress/wp-content/plugins/rcp-allow-rest/rcp-allow-rest.php(71): Rcp_Allow_Rest->__construct()
+#3 /wordpress/wp-content/plugins/rcp-allow-rest/rcp-allow-rest.php(75): run_rcp_allow_rest()
+#4 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/rcp-allow-rest/public/class-rcp-allow-rest-public.php on line 66
+[09-Apr-2025 09:50:04 UTC] Building plugin rcp-allow-rest v1.0.0
+[09-Apr-2025 09:50:04 UTC] Please activate RCP plugin
+[09-Apr-2025 09:50:05 UTC] Building plugin rcp-allow-rest v1.0.0
+[09-Apr-2025 09:50:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function is_plugin_active() in /wordpress/wp-content/plugins/rcp-allow-rest/public/class-rcp-allow-rest-public.php:66
+Stack trace:
+#0 /wordpress/wp-content/plugins/rcp-allow-rest/includes/class-rcp-allow-rest.php(168): Rcp_Allow_Rest_Public->__construct('rcp-allow-rest', '1.0.0')
+#1 /wordpress/wp-content/plugins/rcp-allow-rest/includes/class-rcp-allow-rest.php(77): Rcp_Allow_Rest->define_public_hooks()
+#2 /wordpress/wp-content/plugins/rcp-allow-rest/rcp-allow-rest.php(71): Rcp_Allow_Rest->__construct()
+#3 /wordpress/wp-content/plugins/rcp-allow-rest/rcp-allow-rest.php(75): run_rcp_allow_rest()
+#4 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/rcp-allow-rest/public/class-rcp-allow-rest-public.php on line 66
+[09-Apr-2025 09:50:13 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:50:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:50:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:50:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:50:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rprotect_replacement_code', 'Login to view.', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'rprotect_replacement_code' , 'Login to view.' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/region-protect/region-protect.php(47): add_option('rprotect_replac...', 'Login to view.', '', 'on')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): rprotect_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_region...', false)
+#9 /internal/eval.php(20): activate_plugin('region-protect/...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rprotect_replacement_code', 'Login to view.', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_region-protect/region-protect.php'), WP_Hook->do_action, WP_Hook->apply_filters, rprotect_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 09:50:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rprotect_default_visibility', 'private', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'rprotect_default_visibility' , 'private' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/region-protect/region-protect.php(48): add_option('rprotect_defaul...', 'private', '', 'on')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): rprotect_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_region...', false)
+#9 /internal/eval.php(20): activate_plugin('region-protect/...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rprotect_default_visibility', 'private', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_region-protect/region-protect.php'), WP_Hook->do_action, WP_Hook->apply_filters, rprotect_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 09:50:41 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:50:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:50:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:50:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:51:25 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:51:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:51:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:51:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:51:52 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:51:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:51:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:51:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:52:20 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:52:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:52:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:52:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:52:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:52:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:52:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:52:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:52:47 UTC] PHP Deprecated:  Required parameter $ddeals_table follows optional parameter $page in /wordpress/wp-content/plugins/revglue-daily-deals/includes/ajax-calls.php on line 528
+[09-Apr-2025 09:52:47 UTC] PHP Deprecated:  Required parameter $wpdb follows optional parameter $page in /wordpress/wp-content/plugins/revglue-daily-deals/includes/ajax-calls.php on line 528
+[09-Apr-2025 09:52:47 UTC] PHP Deprecated:  Required parameter $date follows optional parameter $page in /wordpress/wp-content/plugins/revglue-daily-deals/includes/ajax-calls.php on line 528
+[09-Apr-2025 09:52:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rg_db_version', '1.0.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'rg_db_version' , '1.0.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/revglue-daily-deals/includes/rg-install.php(8): add_option('rg_db_version', '1.0.0')
+#5 /wordpress/wp-content/plugins/revglue-daily-deals/revglue-daily-deals.php(36): include('/wordpress/wp-c...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): rg_ddeals_install(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_revglu...', false)
+#10 /internal/eval.php(20): activate_plugin('revglue-daily-d...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rg_db_version', '1.0.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_revglue-daily-deals/revglue-daily-deals.php'), WP_Hook->do_action, WP_Hook->apply_filters, rg_ddeals_install, include('/plugins/revglue-daily-deals/includes/rg-install.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 09:52:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:52:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:52:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:52:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:52:48 UTC] PHP Deprecated:  Required parameter $ddeals_table follows optional parameter $page in /wordpress/wp-content/plugins/revglue-daily-deals/includes/ajax-calls.php on line 528
+[09-Apr-2025 09:52:48 UTC] PHP Deprecated:  Required parameter $wpdb follows optional parameter $page in /wordpress/wp-content/plugins/revglue-daily-deals/includes/ajax-calls.php on line 528
+[09-Apr-2025 09:52:48 UTC] PHP Deprecated:  Required parameter $date follows optional parameter $page in /wordpress/wp-content/plugins/revglue-daily-deals/includes/ajax-calls.php on line 528
+[09-Apr-2025 09:52:56 UTC] PHP Deprecated:  Required parameter $ddeals_table follows optional parameter $page in /wordpress/wp-content/plugins/revglue-daily-deals/includes/ajax-calls.php on line 528
+[09-Apr-2025 09:52:56 UTC] PHP Deprecated:  Required parameter $wpdb follows optional parameter $page in /wordpress/wp-content/plugins/revglue-daily-deals/includes/ajax-calls.php on line 528
+[09-Apr-2025 09:52:56 UTC] PHP Deprecated:  Required parameter $date follows optional parameter $page in /wordpress/wp-content/plugins/revglue-daily-deals/includes/ajax-calls.php on line 528
+[09-Apr-2025 09:52:57 UTC] PHP Deprecated:  Required parameter $ddeals_table follows optional parameter $page in /wordpress/wp-content/plugins/revglue-daily-deals/includes/ajax-calls.php on line 528
+[09-Apr-2025 09:52:57 UTC] PHP Deprecated:  Required parameter $wpdb follows optional parameter $page in /wordpress/wp-content/plugins/revglue-daily-deals/includes/ajax-calls.php on line 528
+[09-Apr-2025 09:52:57 UTC] PHP Deprecated:  Required parameter $date follows optional parameter $page in /wordpress/wp-content/plugins/revglue-daily-deals/includes/ajax-calls.php on line 528
+[09-Apr-2025 09:53:04 UTC] PHP Deprecated:  Required parameter $ddeals_table follows optional parameter $page in /wordpress/wp-content/plugins/revglue-daily-deals/includes/ajax-calls.php on line 528
+[09-Apr-2025 09:53:04 UTC] PHP Deprecated:  Required parameter $wpdb follows optional parameter $page in /wordpress/wp-content/plugins/revglue-daily-deals/includes/ajax-calls.php on line 528
+[09-Apr-2025 09:53:04 UTC] PHP Deprecated:  Required parameter $date follows optional parameter $page in /wordpress/wp-content/plugins/revglue-daily-deals/includes/ajax-calls.php on line 528
+[09-Apr-2025 09:53:05 UTC] PHP Deprecated:  Required parameter $ddeals_table follows optional parameter $page in /wordpress/wp-content/plugins/revglue-daily-deals/includes/ajax-calls.php on line 528
+[09-Apr-2025 09:53:05 UTC] PHP Deprecated:  Required parameter $wpdb follows optional parameter $page in /wordpress/wp-content/plugins/revglue-daily-deals/includes/ajax-calls.php on line 528
+[09-Apr-2025 09:53:05 UTC] PHP Deprecated:  Required parameter $date follows optional parameter $page in /wordpress/wp-content/plugins/revglue-daily-deals/includes/ajax-calls.php on line 528
+[09-Apr-2025 09:53:14 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "REALTY_PORTAL" in /wordpress/wp-content/plugins/realty-portal-agent-profile/realty-portal-agent-profile.php:99
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): RP_AddOn_Agent_Profile::activation(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_realty...', false)
+#4 /internal/eval.php(20): activate_plugin('realty-portal-a...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/realty-portal-agent-profile/realty-portal-agent-profile.php on line 99
+[09-Apr-2025 09:53:22 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "REALTY_PORTAL" in /wordpress/wp-content/plugins/realty-portal-agent-profile/realty-portal-agent-profile.php:99
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): RP_AddOn_Agent_Profile::activation(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_realty...', false)
+#4 /internal/eval.php(20): activate_plugin('realty-portal-a...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/realty-portal-agent-profile/realty-portal-agent-profile.php on line 99
+[09-Apr-2025 09:53:29 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "REALTY_PORTAL" in /wordpress/wp-content/plugins/realty-portal-agent-profile/realty-portal-agent-profile.php:99
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): RP_AddOn_Agent_Profile::activation(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_realty...', false)
+#4 /internal/eval.php(20): activate_plugin('realty-portal-a...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/realty-portal-agent-profile/realty-portal-agent-profile.php on line 99
+[09-Apr-2025 09:53:38 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:53:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:53:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:53:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:54:05 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:54:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:54:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:54:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:54:05 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/ron-paul-2012/ron-paul-2012.php on line 76
+[09-Apr-2025 09:54:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rp2012_options', 'a:4:{s:13:\"rp2012_enable\";s:1:\"0\";s:12:\"rp2012_style\";s:9:\"rp_circle\";s:17:\"rp2012_custom_div\";s:38:\"position:fixed; right:5px; bottom:5px;\";s:18:\"rp2012_custom_link\";s:28:\"background:#fff; color:blue;\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'rp2012_options' , 'a:4:{s:13:&quot;rp2012_enable&quot;;s:1:&quot;0&quot;;s:12:&quot;rp2012_style&quot;;s:9:&quot;rp_circle&quot;;s:17:&quot;rp2012_custom_div&quot;;s:38:&quot;position:fixed; right:5px; bottom:5px;&quot;;s:18:&quot;rp2012_custom_link&quot;;s:28:&quot;background:#fff; color:blue;&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('rp2012_options', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/ron-paul-2012/ron-paul-2012.php(83): update_option('rp2012_options', Array)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): rp2012_add_defaults(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ron-pa...', false)
+#10 /internal/eval.php(20): activate_plugin('ron-paul-2012/r...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rp2012_options', 'a:4:{s:13:\"rp2012_enable\";s:1:\"0\";s:12:\"rp2012_style\";s:9:\"rp_circle\";s:17:\"rp2012_custom_div\";s:38:\"position:fixed; right:5px; bottom:5px;\";s:18:\"rp2012_custom_link\";s:28:\"background:#fff; color:blue;\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ron-paul-2012/ron-paul-2012.php'), WP_Hook->do_action, WP_Hook->apply_filters, rp2012_add_defaults, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 09:54:05 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:54:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:54:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:54:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:54:13 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/ron-paul-2012/ron-paul-2012.php on line 76
+[09-Apr-2025 09:54:22 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/ron-paul-2012/ron-paul-2012.php on line 76
+[09-Apr-2025 09:54:32 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:54:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:54:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:54:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:55:18 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/recent-contributors-widget/recent-contributors-widget.php:162
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('recent-contribu...')
 #2 /internal/eval.php(20): activate_plugin('recent-contribu...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/recent-contributors-widget/recent-contributors-widget.php on line 162
-[07-Apr-2025 02:23:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/recent-contributors-widget/recent-contributors-widget.php:162
+[09-Apr-2025 09:55:26 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/recent-contributors-widget/recent-contributors-widget.php:162
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('recent-contribu...')
@@ -18,17 +383,17 @@ Stack trace:
   thrown in /wordpress/wp-content/plugins/recent-contributors-widget/recent-contributors-widget.php on line 162
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
     at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
   [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"recent-contributors-widget"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
       at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
       at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
       at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
       at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
     [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
         at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
-        at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
         at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
         at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
         at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
@@ -51,4 +416,4 @@ Stack trace:
   }
 }
 
-Node.js v20.15.0
+Node.js v23.11.0
