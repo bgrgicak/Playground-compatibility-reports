@@ -2,10 +2,18 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [06-Apr-2025 20:46:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [09-Apr-2025 08:35:55 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 08:35:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 08:35:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 08:35:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 08:36:24 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 08:36:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 08:36:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 08:36:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 08:37:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_application_id', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('Sports_News_Options', 'a:2:{s:19:\"snwp_author_linking\";s:1:\"1\";s:15:\"snwp_initial_dt\";i:1744187821;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -17,7 +25,7 @@ Error: [06-Apr-2025 20:46:31 UTC] WordPress database error <div style="clear:bot
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'algolia_application_id' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'Sports_News_Options' , 'a:2:{s:19:&quot;snwp_author_linking&quot;;s:1:&quot;1&quot;;s:15:&quot;snwp_initial_dt&quot;;i:1744187821;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -29,384 +37,24 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-settings.php(9): add_option('algolia_applica...', '')
-#5 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(66): Algolia_Settings->__construct()
-#6 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(52): Algolia_Plugin->__construct()
-#7 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/algolia.php(56): Algolia_Plugin::get_instance()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('search-by-algol...')
-#10 /internal/eval.php(20): activate_plugin('search-by-algol...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_application_id', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/search-by-algolia-instant-relevant-results/algolia.php'), Algolia_Plugin::get_instance, Algolia_Plugin->__construct, Algolia_Settings->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:46:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_search_api_key', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'algolia_search_api_key' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-settings.php(10): add_option('algolia_search_...', '')
-#5 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(66): Algolia_Settings->__construct()
-#6 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(52): Algolia_Plugin->__construct()
-#7 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/algolia.php(56): Algolia_Plugin::get_instance()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('search-by-algol...')
-#10 /internal/eval.php(20): activate_plugin('search-by-algol...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_search_api_key', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/search-by-algolia-instant-relevant-results/algolia.php'), Algolia_Plugin::get_instance, Algolia_Plugin->__construct, Algolia_Settings->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:46:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_api_key', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'algolia_api_key' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-settings.php(11): add_option('algolia_api_key', '')
-#5 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(66): Algolia_Settings->__construct()
-#6 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(52): Algolia_Plugin->__construct()
-#7 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/algolia.php(56): Algolia_Plugin::get_instance()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('search-by-algol...')
-#10 /internal/eval.php(20): activate_plugin('search-by-algol...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_api_key', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/search-by-algolia-instant-relevant-results/algolia.php'), Algolia_Plugin::get_instance, Algolia_Plugin->__construct, Algolia_Settings->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:46:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_synced_indices_ids', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'algolia_synced_indices_ids' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-settings.php(12): add_option('algolia_synced_...', Array)
-#5 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(66): Algolia_Settings->__construct()
-#6 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(52): Algolia_Plugin->__construct()
-#7 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/algolia.php(56): Algolia_Plugin::get_instance()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('search-by-algol...')
-#10 /internal/eval.php(20): activate_plugin('search-by-algol...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_synced_indices_ids', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/search-by-algolia-instant-relevant-results/algolia.php'), Algolia_Plugin::get_instance, Algolia_Plugin->__construct, Algolia_Settings->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:46:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_autocomplete_enabled', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'algolia_autocomplete_enabled' , 'no' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-settings.php(13): add_option('algolia_autocom...', 'no')
-#5 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(66): Algolia_Settings->__construct()
-#6 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(52): Algolia_Plugin->__construct()
-#7 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/algolia.php(56): Algolia_Plugin::get_instance()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('search-by-algol...')
-#10 /internal/eval.php(20): activate_plugin('search-by-algol...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_autocomplete_enabled', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/search-by-algolia-instant-relevant-results/algolia.php'), Algolia_Plugin::get_instance, Algolia_Plugin->__construct, Algolia_Settings->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:46:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_autocomplete_config', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'algolia_autocomplete_config' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-settings.php(14): add_option('algolia_autocom...', Array)
-#5 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(66): Algolia_Settings->__construct()
-#6 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(52): Algolia_Plugin->__construct()
-#7 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/algolia.php(56): Algolia_Plugin::get_instance()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('search-by-algol...')
-#10 /internal/eval.php(20): activate_plugin('search-by-algol...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_autocomplete_config', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/search-by-algolia-instant-relevant-results/algolia.php'), Algolia_Plugin::get_instance, Algolia_Plugin->__construct, Algolia_Settings->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:46:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_override_native_search', 'native', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'algolia_override_native_search' , 'native' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-settings.php(15): add_option('algolia_overrid...', 'native')
-#5 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(66): Algolia_Settings->__construct()
-#6 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(52): Algolia_Plugin->__construct()
-#7 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/algolia.php(56): Algolia_Plugin::get_instance()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('search-by-algol...')
-#10 /internal/eval.php(20): activate_plugin('search-by-algol...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_override_native_search', 'native', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/search-by-algolia-instant-relevant-results/algolia.php'), Algolia_Plugin::get_instance, Algolia_Plugin->__construct, Algolia_Settings->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:46:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_index_name_prefix', 'wp_', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'algolia_index_name_prefix' , 'wp_' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-settings.php(16): add_option('algolia_index_n...', 'wp_')
-#5 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(66): Algolia_Settings->__construct()
-#6 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(52): Algolia_Plugin->__construct()
-#7 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/algolia.php(56): Algolia_Plugin::get_instance()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('search-by-algol...')
-#10 /internal/eval.php(20): activate_plugin('search-by-algol...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_index_name_prefix', 'wp_', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/search-by-algolia-instant-relevant-results/algolia.php'), Algolia_Plugin::get_instance, Algolia_Plugin->__construct, Algolia_Settings->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:46:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_api_is_reachable', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'algolia_api_is_reachable' , 'no' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-settings.php(17): add_option('algolia_api_is_...', 'no')
-#5 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(66): Algolia_Settings->__construct()
-#6 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(52): Algolia_Plugin->__construct()
-#7 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/algolia.php(56): Algolia_Plugin::get_instance()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('search-by-algol...')
-#10 /internal/eval.php(20): activate_plugin('search-by-algol...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_api_is_reachable', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/search-by-algolia-instant-relevant-results/algolia.php'), Algolia_Plugin::get_instance, Algolia_Plugin->__construct, Algolia_Settings->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:46:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_powered_by_enabled', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'algolia_powered_by_enabled' , 'yes' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-settings.php(18): add_option('algolia_powered...', 'yes')
-#5 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(66): Algolia_Settings->__construct()
-#6 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(52): Algolia_Plugin->__construct()
-#7 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/algolia.php(56): Algolia_Plugin::get_instance()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('search-by-algol...')
-#10 /internal/eval.php(20): activate_plugin('search-by-algol...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_powered_by_enabled', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/search-by-algolia-instant-relevant-results/algolia.php'), Algolia_Plugin::get_instance, Algolia_Plugin->__construct, Algolia_Settings->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:46:31 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 20:46:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 20:46:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 20:46:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 20:46:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_application_id', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'algolia_application_id' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-settings.php(9): add_option('algolia_applica...', '')
-#5 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(66): Algolia_Settings->__construct()
-#6 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(52): Algolia_Plugin->__construct()
-#7 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/algolia.php(56): Algolia_Plugin::get_instance()
-#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#4 /wordpress/wp-includes/option.php(921): add_option('Sports_News_Opt...', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/sports-news/classes/snwp-setting.php(68): update_option('Sports_News_Opt...', Array)
+#6 /wordpress/wp-content/plugins/sports-news/classes/snwp-main.php(51): snwp_Settings::get_options()
+#7 /wordpress/wp-content/plugins/sports-news/classes/snwp-module.php(57): snwp_Main->__construct()
+#8 /wordpress/wp-content/plugins/sports-news/sportsnews.php(71): snwp_Module::get_instance()
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('sports-news/spo...')
+#11 /internal/eval.php(20): activate_plugin('sports-news/spo...')
 #12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_application_id', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/search-by-algolia-instant-relevant-results/algolia.php'), Algolia_Plugin::get_instance, Algolia_Plugin->__construct, Algolia_Settings->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:46:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('Sports_News_Options', 'a:2:{s:19:\"snwp_author_linking\";s:1:\"1\";s:15:\"snwp_initial_dt\";i:1744187821;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/sports-news/sportsnews.php'), snwp_Module::get_instance, snwp_Main->__construct, snwp_Settings::get_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 08:37:01 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 08:37:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 08:37:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 08:37:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 08:37:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_search_api_key', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('Sports_News_Options', 'a:2:{s:19:\"snwp_author_linking\";s:1:\"1\";s:15:\"snwp_initial_dt\";i:1744187822;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -418,7 +66,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'algolia_search_api_key' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'Sports_News_Options' , 'a:2:{s:19:&quot;snwp_author_linking&quot;;s:1:&quot;1&quot;;s:15:&quot;snwp_initial_dt&quot;;i:1744187822;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -430,20 +78,21 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-settings.php(10): add_option('algolia_search_...', '')
-#5 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(66): Algolia_Settings->__construct()
-#6 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(52): Algolia_Plugin->__construct()
-#7 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/algolia.php(56): Algolia_Plugin::get_instance()
-#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_search_api_key', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/search-by-algolia-instant-relevant-results/algolia.php'), Algolia_Plugin::get_instance, Algolia_Plugin->__construct, Algolia_Settings->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:46:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('Sports_News_Opt...', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/sports-news/classes/snwp-setting.php(68): update_option('Sports_News_Opt...', Array)
+#6 /wordpress/wp-content/plugins/sports-news/classes/snwp-main.php(51): snwp_Settings::get_options()
+#7 /wordpress/wp-content/plugins/sports-news/classes/snwp-module.php(57): snwp_Main->__construct()
+#8 /wordpress/wp-content/plugins/sports-news/sportsnews.php(71): snwp_Module::get_instance()
+#9 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('Sports_News_Options', 'a:2:{s:19:\"snwp_author_linking\";s:1:\"1\";s:15:\"snwp_initial_dt\";i:1744187822;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/sports-news/sportsnews.php'), snwp_Module::get_instance, snwp_Main->__construct, snwp_Settings::get_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 08:37:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_api_key', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_table_active', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -455,7 +104,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'algolia_api_key' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ssgsw_table_active' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -467,20 +116,21 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-settings.php(11): add_option('algolia_api_key', '')
-#5 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(66): Algolia_Settings->__construct()
-#6 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(52): Algolia_Plugin->__construct()
-#7 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/algolia.php(56): Algolia_Plugin::get_instance()
-#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_api_key', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/search-by-algolia-instant-relevant-results/algolia.php'), Algolia_Plugin::get_instance, Algolia_Plugin->__construct, Algolia_Settings->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:46:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('ssgsw_table_act...', 1, '', 'auto')
+#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(147): update_option('ssgsw_table_act...', 1)
+#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(44): StockSyncWithGoogleSheetForWooCommerce\Install->create_a_table()
+#7 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(237): StockSyncWithGoogleSheetForWooCommerce\Install::init()
+#8 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php(61): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php(35): require_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stock-sync-with...')
+#12 /internal/eval.php(20): activate_plugin('stock-sync-with...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_table_active', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php'), require_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php'), include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php'), StockSyncWithGoogleSheetForWooCommerce\Install::init, StockSyncWithGoogleSheetForWooCommerce\Install->create_a_table, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 08:37:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_synced_indices_ids', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_table_active_new_columns_new_uniq', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -492,7 +142,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'algolia_synced_indices_ids' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ssgsw_table_active_new_columns_new_uniq' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -504,20 +154,21 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-settings.php(12): add_option('algolia_synced_...', Array)
-#5 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(66): Algolia_Settings->__construct()
-#6 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(52): Algolia_Plugin->__construct()
-#7 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/algolia.php(56): Algolia_Plugin::get_instance()
-#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_synced_indices_ids', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/search-by-algolia-instant-relevant-results/algolia.php'), Algolia_Plugin::get_instance, Algolia_Plugin->__construct, Algolia_Settings->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:46:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('ssgsw_table_act...', 1, '', 'auto')
+#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(123): update_option('ssgsw_table_act...', 1)
+#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(48): StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns()
+#7 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(237): StockSyncWithGoogleSheetForWooCommerce\Install::init()
+#8 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php(61): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php(35): require_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stock-sync-with...')
+#12 /internal/eval.php(20): activate_plugin('stock-sync-with...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_table_active_new_columns_new_uniq', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php'), require_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php'), include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php'), StockSyncWithGoogleSheetForWooCommerce\Install::init, StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 08:37:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_autocomplete_enabled', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_table_active_new_columns_new_uniq', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -529,7 +180,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'algolia_autocomplete_enabled' , 'no' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ssgsw_table_active_new_columns_new_uniq' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -541,20 +192,21 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-settings.php(13): add_option('algolia_autocom...', 'no')
-#5 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(66): Algolia_Settings->__construct()
-#6 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(52): Algolia_Plugin->__construct()
-#7 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/algolia.php(56): Algolia_Plugin::get_instance()
-#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_autocomplete_enabled', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/search-by-algolia-instant-relevant-results/algolia.php'), Algolia_Plugin::get_instance, Algolia_Plugin->__construct, Algolia_Settings->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:46:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('ssgsw_table_act...', 1, '', 'auto')
+#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(123): update_option('ssgsw_table_act...', 1)
+#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(48): StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns()
+#7 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(237): StockSyncWithGoogleSheetForWooCommerce\Install::init()
+#8 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php(61): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php(35): require_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stock-sync-with...')
+#12 /internal/eval.php(20): activate_plugin('stock-sync-with...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_table_active_new_columns_new_uniq', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php'), require_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php'), include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php'), StockSyncWithGoogleSheetForWooCommerce\Install::init, StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 08:37:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_autocomplete_config', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_table_active_new_columns_new_uniq', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -566,7 +218,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'algolia_autocomplete_config' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ssgsw_table_active_new_columns_new_uniq' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -578,20 +230,21 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-settings.php(14): add_option('algolia_autocom...', Array)
-#5 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(66): Algolia_Settings->__construct()
-#6 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(52): Algolia_Plugin->__construct()
-#7 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/algolia.php(56): Algolia_Plugin::get_instance()
-#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_autocomplete_config', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/search-by-algolia-instant-relevant-results/algolia.php'), Algolia_Plugin::get_instance, Algolia_Plugin->__construct, Algolia_Settings->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:46:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('ssgsw_table_act...', 1, '', 'auto')
+#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(123): update_option('ssgsw_table_act...', 1)
+#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(48): StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns()
+#7 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(237): StockSyncWithGoogleSheetForWooCommerce\Install::init()
+#8 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php(61): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php(35): require_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stock-sync-with...')
+#12 /internal/eval.php(20): activate_plugin('stock-sync-with...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_table_active_new_columns_new_uniq', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php'), require_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php'), include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php'), StockSyncWithGoogleSheetForWooCommerce\Install::init, StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 08:37:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_override_native_search', 'native', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_table_active_new_columns_new_uniq', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -603,7 +256,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'algolia_override_native_search' , 'native' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ssgsw_table_active_new_columns_new_uniq' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -615,20 +268,21 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-settings.php(15): add_option('algolia_overrid...', 'native')
-#5 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(66): Algolia_Settings->__construct()
-#6 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(52): Algolia_Plugin->__construct()
-#7 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/algolia.php(56): Algolia_Plugin::get_instance()
-#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_override_native_search', 'native', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/search-by-algolia-instant-relevant-results/algolia.php'), Algolia_Plugin::get_instance, Algolia_Plugin->__construct, Algolia_Settings->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 20:46:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('ssgsw_table_act...', 1, '', 'auto')
+#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(123): update_option('ssgsw_table_act...', 1)
+#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(48): StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns()
+#7 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(237): StockSyncWithGoogleSheetForWooCommerce\Install::init()
+#8 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php(61): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php(35): require_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stock-sync-with...')
+#12 /internal/eval.php(20): activate_plugin('stock-sync-with...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_table_active_new_columns_new_uniq', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php'), require_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php'), include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php'), StockSyncWithGoogleSheetForWooCommerce\Install::init, StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 08:37:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_index_name_prefix', 'wp_', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_table_active_new_columns_new_uniq', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -640,7 +294,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'algolia_index_name_prefix' , 'wp_' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ssgsw_table_active_new_columns_new_uniq' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -652,13 +306,295 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-settings.php(16): add_option('algolia_index_n...', 'wp_')
-#5 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(66): Algolia_Settings->__construct()
-#6 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/includes/class-algolia-plugin.php(52): Algolia_Plugin->__construct()
-#7 /wordpress/wp-content/plugins/search-by-algolia-instant-relevant-results/algolia.php(56): Algolia_Plugin::get_instance()
-#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#4 /wordpress/wp-includes/option.php(921): add_option('ssgsw_table_act...', 1, '', 'auto')
+#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(123): update_option('ssgsw_table_act...', 1)
+#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(48): StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns()
+#7 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(237): StockSyncWithGoogleSheetForWooCommerce\Install::init()
+#8 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php(61): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php(35): require_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stock-sync-with...')
+#12 /internal/eval.php(20): activate_plugin('stock-sync-with...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_table_active_new_columns_new_uniq', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php'), require_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php'), include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php'), StockSyncWithGoogleSheetForWooCommerce\Install::init, StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 08:37:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_table_active_new_columns_new_uniq', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ssgsw_table_active_new_columns_new_uniq' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('ssgsw_table_act...', 1, '', 'auto')
+#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(123): update_option('ssgsw_table_act...', 1)
+#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(48): StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns()
+#7 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(237): StockSyncWithGoogleSheetForWooCommerce\Install::init()
+#8 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php(61): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php(35): require_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stock-sync-with...')
+#12 /internal/eval.php(20): activate_plugin('stock-sync-with...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_table_active_new_columns_new_uniq', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php'), require_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php'), include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php'), StockSyncWithGoogleSheetForWooCommerce\Install::init, StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 08:37:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_table_active_new_columns_new_uniq', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ssgsw_table_active_new_columns_new_uniq' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('ssgsw_table_act...', 1, '', 'auto')
+#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(123): update_option('ssgsw_table_act...', 1)
+#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(48): StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns()
+#7 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(237): StockSyncWithGoogleSheetForWooCommerce\Install::init()
+#8 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php(61): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php(35): require_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stock-sync-with...')
+#12 /internal/eval.php(20): activate_plugin('stock-sync-with...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_table_active_new_columns_new_uniq', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php'), require_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php'), include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php'), StockSyncWithGoogleSheetForWooCommerce\Install::init, StockSyncWithGoogleSheetForWooCommerce\Install->add_new_columns, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 08:37:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_credentials', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ssgsw_credentials' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-app.php(368): add_option('ssgsw_credentia...', Array)
+#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(56): StockSyncWithGoogleSheetForWooCommerce\App->reset_options(false)
+#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(237): StockSyncWithGoogleSheetForWooCommerce\Install::init()
+#7 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php(61): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php(35): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stock-sync-with...')
+#11 /internal/eval.php(20): activate_plugin('stock-sync-with...')
 #12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('algolia_index_name_prefix', 'wp_', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/search-by-algolia-instant-relevant-results/algolia.php'), Algolia_Plugin::get_instance, Algolia_Plugin->__construct, Algolia_Settings->__construct, add_option, WP_SQLite_DB->quer
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_credentials', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php'), require_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php'), include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php'), StockSyncWithGoogleSheetForWooCommerce\Install::init, StockSyncWithGoogleSheetForWooCommerce\App->reset_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 08:37:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_show_custom_fileds', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ssgsw_show_custom_fileds' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-app.php(368): add_option('ssgsw_show_cust...', Array)
+#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(56): StockSyncWithGoogleSheetForWooCommerce\App->reset_options(false)
+#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(237): StockSyncWithGoogleSheetForWooCommerce\Install::init()
+#7 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php(61): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php(35): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stock-sync-with...')
+#11 /internal/eval.php(20): activate_plugin('stock-sync-with...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_show_custom_fileds', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php'), require_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php'), include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php'), StockSyncWithGoogleSheetForWooCommerce\Install::init, StockSyncWithGoogleSheetForWooCommerce\App->reset_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 08:37:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_credential_file', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ssgsw_credential_file' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-app.php(368): add_option('ssgsw_credentia...', '')
+#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(56): StockSyncWithGoogleSheetForWooCommerce\App->reset_options(false)
+#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(237): StockSyncWithGoogleSheetForWooCommerce\Install::init()
+#7 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php(61): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php(35): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stock-sync-with...')
+#11 /internal/eval.php(20): activate_plugin('stock-sync-with...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_credential_file', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php'), require_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php'), include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php'), StockSyncWithGoogleSheetForWooCommerce\Install::init, StockSyncWithGoogleSheetForWooCommerce\App->reset_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 08:37:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_spreadsheet_url', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ssgsw_spreadsheet_url' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-app.php(368): add_option('ssgsw_spreadshe...', '')
+#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(56): StockSyncWithGoogleSheetForWooCommerce\App->reset_options(false)
+#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(237): StockSyncWithGoogleSheetForWooCommerce\Install::init()
+#7 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php(61): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php(35): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stock-sync-with...')
+#11 /internal/eval.php(20): activate_plugin('stock-sync-with...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_spreadsheet_url', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php'), require_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php'), include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php'), StockSyncWithGoogleSheetForWooCommerce\Install::init, StockSyncWithGoogleSheetForWooCommerce\App->reset_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 08:37:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_spreadsheet_id', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ssgsw_spreadsheet_id' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-app.php(368): add_option('ssgsw_spreadshe...', '')
+#5 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(56): StockSyncWithGoogleSheetForWooCommerce\App->reset_options(false)
+#6 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php(237): StockSyncWithGoogleSheetForWooCommerce\Install::init()
+#7 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php(61): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php(35): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('stock-sync-with...')
+#11 /internal/eval.php(20): activate_plugin('stock-sync-with...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_spreadsheet_id', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/stock-sync-with-google-sheet-for-woocommerce.php'), require_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/boot.php'), include_once('/plugins/stock-sync-with-google-sheet-for-woocommerce/includes/classes/class-install.php'), StockSyncWithGoogleSheetForWooCommerce\Install::init, StockSyncWithGoogleSheetForWooCommerce\App->reset_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 08:37:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ssgsw_sheet_tab', 'Sheet1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ssgsw_sheet_tab' , 'Sheet1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;borde
