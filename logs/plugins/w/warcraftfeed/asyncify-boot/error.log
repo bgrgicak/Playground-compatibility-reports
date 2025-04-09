@@ -2,10 +2,10 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [06-Apr-2025 14:23:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [09-Apr-2025 09:28:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('always_show_profiling', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout__welcome_redirect_wktc', '1744190995', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -17,7 +17,7 @@ Error: [06-Apr-2025 14:23:04 UTC] WordPress database error <div style="clear:bot
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'always_show_profiling' , 'yes' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout__welcome_redirect_wktc' , '1744190995' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -29,18 +29,19 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wpdb-profiling/wpdb-profiling.php(191): add_option('always_show_pro...', 'yes')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): set_wpdb_profiling_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpdb-p...', false)
-#9 /internal/eval.php(20): activate_plugin('wpdb-profiling/...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('always_show_profiling', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wpdb-profiling/wpdb-profiling.php'), WP_Hook->do_action, WP_Hook->apply_filters, set_wpdb_profiling_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 14:23:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1744190995, '', 'off')
+#5 /wordpress/wp-content/plugins/woo-keep-the-change/assets/admin/welcome/welcome-init.php(28): set_transient('_welcome_redire...', true, 60)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): wktc_welcome_activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woo-ke...', false)
+#10 /internal/eval.php(20): activate_plugin('woo-keep-the-ch...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout__welcome_redirect_wktc', '1744190995', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_woo-keep-the-change/woo-keep-the-change.php'), WP_Hook->do_action, WP_Hook->apply_filters, wktc_welcome_activate, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 09:28:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('allow_get_request', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient__welcome_redirect_wktc', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -52,7 +53,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'allow_get_request' , 'no' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient__welcome_redirect_wktc' , '1' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -64,18 +65,23 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wpdb-profiling/wpdb-profiling.php(194): add_option('allow_get_reque...', 'no')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): set_wpdb_profiling_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpdb-p...', false)
-#9 /internal/eval.php(20): activate_plugin('wpdb-profiling/...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('allow_get_request', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wpdb-profiling/wpdb-profiling.php'), WP_Hook->do_action, WP_Hook->apply_filters, set_wpdb_profiling_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 14:23:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(1545): add_option('_transient__wel...', true, '', 'off')
+#5 /wordpress/wp-content/plugins/woo-keep-the-change/assets/admin/welcome/welcome-init.php(28): set_transient('_welcome_redire...', true, 60)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): wktc_welcome_activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woo-ke...', false)
+#10 /internal/eval.php(20): activate_plugin('woo-keep-the-ch...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient__welcome_redirect_wktc', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_woo-keep-the-change/woo-keep-the-change.php'), WP_Hook->do_action, WP_Hook->apply_filters, wktc_welcome_activate, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 09:28:55 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:28:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:28:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:28:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:29:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('profiling_user_permission_1', '8,9,10', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '}+{-r.CkOEF7Dhk}/sfuJK;iU>@nd0GS(>(hAh<MXA#vjQrS*Bg_K1~u<3I2v_+%', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -87,7 +93,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'profiling_user_permission_1' , '8,9,10' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , '}+{-r.CkOEF7Dhk}/sfuJK;iU&gt;@nd0GS(&gt;(hAh&lt;MXA#vjQrS*Bg_K1~u&lt;3I2v_+%' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -99,18 +105,30 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wpdb-profiling/wpdb-profiling.php(197): add_option('profiling_user_...', '8,9,10')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): set_wpdb_profiling_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpdb-p...', false)
-#9 /internal/eval.php(20): activate_plugin('wpdb-profiling/...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('profiling_user_permission_1', '8,9,10', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wpdb-profiling/wpdb-profiling.php'), WP_Hook->do_action, WP_Hook->apply_filters, set_wpdb_profiling_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 14:23:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', '}+{-r.CkOEF7Dhk...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', '}+{-r.CkOEF7Dhk...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', '}+{-r.CkOEF7Dhk...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', '}+{-r.CkOEF7Dhk...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|1...', 'nonce')
+#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
+#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
+#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
+#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
+#18 /wordpress/wp-content/plugins/wp-comments-manager/wp-comments-manager.php(18): wp_register_script('wpcm', 'http://127.0.0....', 'jquery', '1.6')
+#19 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#20 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-comments-man...')
+#21 /internal/eval.php(20): activate_plugin('wp-comments-man...')
+#22 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '}+{-r.CkOEF7Dhk}/sfuJK;iU>@nd0GS(>(hAh<MXA#vjQrS*Bg_K1~u<3I2v_+%', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-comments-manager/wp-comments-manager.php'), wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 09:29:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('profiling_user_permission_2', '8,9,10', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'L^g.,39e(yb ~JVzR3aMkV#Q<gStstd09BH2@cF,7aUjD_L0]>e0{{cf0gVb 8%,', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -122,7 +140,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'profiling_user_permission_2' , '8,9,10' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'L^g.,39e(yb ~JVzR3aMkV#Q&lt;gStstd09BH2@cF,7aUjD_L0]&gt;e0{{cf0gVb 8%,' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -134,18 +152,37 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wpdb-profiling/wpdb-profiling.php(200): add_option('profiling_user_...', '8,9,10')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): set_wpdb_profiling_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpdb-p...', false)
-#9 /internal/eval.php(20): activate_plugin('wpdb-profiling/...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('profiling_user_permission_2', '8,9,10', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wpdb-profiling/wpdb-profiling.php'), WP_Hook->do_action, WP_Hook->apply_filters, set_wpdb_profiling_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 14:23:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'L^g.,39e(yb ~JV...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'L^g.,39e(yb ~JV...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'L^g.,39e(yb ~JV...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'L^g.,39e(yb ~JV...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|1...', 'nonce')
+#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
+#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
+#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
+#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
+#18 /wordpress/wp-content/plugins/wp-comments-manager/wp-comments-manager.php(18): wp_register_script('wpcm', 'http://127.0.0....', 'jquery', '1.6')
+#19 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#20 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-comments-man...')
+#21 /internal/eval.php(20): activate_plugin('wp-comments-man...')
+#22 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'L^g.,39e(yb ~JVzR3aMkV#Q<gStstd09BH2@cF,7aUjD_L0]>e0{{cf0gVb 8%,', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-comments-manager/wp-comments-manager.php'), wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 09:29:23 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:29:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:29:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:29:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:29:23 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>wpcm</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 09:29:23 UTC] PHP Notice:  Function wp_register_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>wpcm</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 09:29:23 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 09:29:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('override_disable_auto_save', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'Aa%e<e,WBG*n@KM:HuZhi[+ T~|YTIEwF1`(LuEiE5TVF0CjWrXrH Zy4M.lp[tz', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -157,7 +194,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'override_disable_auto_save' , 'yes' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'Aa%e&lt;e,WBG*n@KM:HuZhi[+ T~|YTIEwF1`(LuEiE5TVF0CjWrXrH Zy4M.lp[tz' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -169,18 +206,30 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wpdb-profiling/wpdb-profiling.php(203): add_option('override_disabl...', 'yes')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): set_wpdb_profiling_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpdb-p...', false)
-#9 /internal/eval.php(20): activate_plugin('wpdb-profiling/...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('override_disable_auto_save', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wpdb-profiling/wpdb-profiling.php'), WP_Hook->do_action, WP_Hook->apply_filters, set_wpdb_profiling_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 14:23:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'Aa%e<e,WBG*n@KM...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'Aa%e<e,WBG*n@KM...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'Aa%e<e,WBG*n@KM...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'Aa%e<e,WBG*n@KM...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|0...', 'nonce')
+#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
+#15 /wordpress/wp-includes/class-wp-hook.php(324): WP_Scripts->init('')
+#16 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#17 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#18 /wordpress/wp-settings.php(704): do_action('init')
+#19 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#20 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#21 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#22 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'Aa%e<e,WBG*n@KM:HuZhi[+ T~|YTIEwF1`(LuEiE5TVF0CjWrXrH Zy4M.lp[tz', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 09:29:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('override_disable_revisioning', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'h<#Ee#+TbQVz|0/xzMPWrg%b_p,bf}DKQgWYOm)p1?O3lqs?mc~-#kawk={ja!.h', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -192,7 +241,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'override_disable_revisioning' , 'no' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'h&lt;#Ee#+TbQVz|0/xzMPWrg%b_p,bf}DKQgWYOm)p1?O3lqs?mc~-#kawk={ja!.h' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -204,57 +253,55 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wpdb-profiling/wpdb-profiling.php(206): add_option('override_disabl...', 'no')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): set_wpdb_profiling_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpdb-p...', false)
-#9 /internal/eval.php(20): activate_plugin('wpdb-profiling/...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('override_disable_revisioning', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wpdb-profiling/wpdb-profiling.php'), WP_Hook->do_action, WP_Hook->apply_filters, set_wpdb_profiling_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 14:23:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 14:23:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 14:23:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 14:23:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 14:23:19 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 14:23:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 14:23:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 14:23:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 14:23:32 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 14:23:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 14:23:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 14:23:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 14:23:32 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/wpfacebookchat-free/fbchat.php:93
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): fbchat_install(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpface...', false)
-#4 /internal/eval.php(20): activate_plugin('wpfacebookchat-...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/wpfacebookchat-free/fbchat.php on line 93
-[06-Apr-2025 14:23:35 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/wpfacebookchat-free/fbchat.php:93
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): fbchat_install(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpface...', false)
-#4 /internal/eval.php(20): activate_plugin('wpfacebookchat-...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/wpfacebookchat-free/fbchat.php on line 93
-[06-Apr-2025 14:23:38 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/wpfacebookchat-free/fbchat.php:93
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): fbchat_install(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpface...', false)
-#4 /internal/eval.php(20): activate_plugin('wpfacebookchat-...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/wpfacebookchat-free/fbchat.php on line 93
-[06-Apr-2025 14:23:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'h<#Ee#+TbQVz|0/...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'h<#Ee#+TbQVz|0/...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'h<#Ee#+TbQVz|0/...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'h<#Ee#+TbQVz|0/...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|0...', 'nonce')
+#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
+#15 /wordpress/wp-includes/class-wp-hook.php(324): WP_Scripts->init('')
+#16 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#17 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#18 /wordpress/wp-settings.php(704): do_action('init')
+#19 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#20 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#21 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#22 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'h<#Ee#+TbQVz|0/xzMPWrg%b_p,bf}DKQgWYOm)p1?O3lqs?mc~-#kawk={ja!.h', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 09:29:32 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>wpcm</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 09:29:32 UTC] PHP Notice:  Function wp_register_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>wpcm</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 09:29:32 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 09:29:41 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>wpcm</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 09:29:41 UTC] PHP Notice:  Function wp_register_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>wpcm</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 09:29:41 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 09:29:50 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:29:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:29:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:29:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:30:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:30:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:30:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:30:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:30:41 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:30:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:30:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:30:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:31:07 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-morph/wp-morph.php on line 62
+[09-Apr-2025 09:31:13 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-morph/wp-morph.php on line 62
+[09-Apr-2025 09:31:21 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/wp-morph/wp-morph.php on line 62
+[09-Apr-2025 09:31:29 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:31:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:31:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:31:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:31:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`) VALUES ('wpx_shortcodes_manager_light_slug', '{\"general\":{\"enable_alert_unregistered_shortcodes\":true}}')</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:21:\"wp-rest-user/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:5:\"2.2.4\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744191117;s:11:\"plugin_path\";s:29:\"wp-rest-user/wp-rest-user.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:29:\"wp-rest-user/wp-rest-user.php\";s:8:\"sdk_path\";s:21:\"wp-rest-user/freemius\";s:7:\"version\";s:5:\"2.2.4\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744191117;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -266,55 +313,7 @@ Stack trace:
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpx_shortcodes_manager_light_slug' , '{&quot;general&quot;:{&quot;enable_alert_unregistered_shortcodes&quot;:true}}' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_options', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/wpx-shortcodes-manager-light/vendor/wpbones/wpbones/src/Database/WordPressOption.php(80): wpdb->insert('wp_options', Array)
-#6 /wordpress/wp-content/plugins/wpx-shortcodes-manager-light/vendor/wpbones/wpbones/src/Foundation/Plugin.php(213): WPXShortcodesManagerLight\WPBones\Database\WordPressOption->__construct(Object(WPXShortcodesManagerLight\WPBones\Foundation\Plugin))
-#7 /wordpress/wp-content/plugins/wpx-shortcodes-manager-light/vendor/wpbones/wpbones/src/Support/Traits/HasAttributes.php(17): WPXShortcodesManagerLight\WPBones\Foundation\Plugin->getOptionsAttribute()
-#8 /wordpress/wp-content/plugins/wpx-shortcodes-manager-light/vendor/wpbones/wpbones/src/Foundation/Plugin.php(256): WPXShortcodesManagerLight\WPBones\Foundation\Plugin->mutateAttribute('options')
-#9 /wordpress/wp-content/plugins/wpx-shortcodes-manager-light/vendor/wpbones/wpbones/src/Foundation/Plugin.php(443): WPXShortcodesManagerLight\WPBones\Foundation\Plugin->__get('options')
-#10 /wordpress/wp-includes/class-wp-hook.php(324): WPXShortcodesManagerLight\WPBones\Foundation\Plugin->activation(false)
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpx-sh...', false)
-#14 /internal/eval.php(20): activate_plugin('wpx-shortcodes-...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`) VALUES ('wpx_shortcodes_manager_light_slug', '{\"general\":{\"enable_alert_unregistered_shortcodes\":true}}') made by activate_plugin, do_action('activate_wpx-shortcodes-manager-light/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPXShortcodesManagerLight\WPBones\Foundation\Plugin->activation, WPXShortcodesManagerLight\WPBones\Foundation\Plugin->__get, WPXShortcodesManagerLight\WPBones\Foundation\Plugin->mutateAttribute, WPXShortcodesManagerLight\WPBones\Foundation\Plugin->getOptionsAttribute, WPXShortcodesManagerLight\WPBones\Database\WordPressOption->__construct, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 14:23:59 UTC] PHP Warning:  Undefined array key "option_name" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 14:23:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 14:23:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 14:23:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 14:23:59 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 14:23:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 14:23:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 14:23:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 14:23:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpxsm-shortcodes-custom', 'a:1:{s:13:\"wpxsm-example\";a:2:{s:4:\"name\";s:13:\"wpxsm-example\";s:4:\"html\";s:52:\"PHN0cm9uZyBzdHlsZT0icmVkIj4kY29udGVudDwvc3Ryb25nPg==\";}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpxsm-shortcodes-custom' , 'a:1:{s:13:&quot;wpxsm-example&quot;;a:2:{s:4:&quot;name&quot;;s:13:&quot;wpxsm-example&quot;;s:4:&quot;html&quot;;s:52:&quot;PHN0cm9uZyBzdHlsZT0icmVkIj4kY29udGVudDwvc3Ryb25nPg==&quot;;}}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_active_plugins' , 'O:8:&quot;stdClass&quot;:3:{s:7:&quot;plugins&quot;;a:1:{s:21:&quot;wp-rest-user/freemius&quot;;O:8:&quot;stdClass&quot;:4:{s:7:&quot;version&quot;;s:5:&quot;2.2.4&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:9:&quot;timestamp&quot;;i:1744191117;s:11:&quot;plugin_path&quot;;s:29:&quot;wp-rest-user/wp-rest-user.php&quot;;}}s:7:&quot;abspath&quot;;s:11:&quot;/wordpress/&quot;;s:6:&quot;newest&quot;;O:8:&quot;stdClass&quot;:5:{s:11:&quot;plugin_path&quot;;s:29:&quot;wp-rest-user/wp-rest-user.php&quot;;s:8:&quot;sdk_path&quot;;s:21:&quot;wp-rest-user/freemius&quot;;s:7:&quot;version&quot;;s:5:&quot;2.2.4&quot;;s:13:&quot;in_activation&quot;;b:1;s:9:&quot;timestamp&quot;;i:1744191117;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -326,36 +325,100 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('wpxsm-shortcode...', Array, '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'wpxsm-shortcode...', Array)
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'wpxsm-shortcode...', Array)
-#7 /wordpress/wp-content/plugins/wpx-shortcodes-manager-light/plugin/Models/Shortcode.php(59): update_site_option('wpxsm-shortcode...', Array)
-#8 [internal function]: WPXShortcodesManagerLight\Models\Shortcode->create(Array)
-#9 /wordpress/wp-content/plugins/wpx-shortcodes-manager-light/plugin/Models/Shortcode.php(38): call_user_func_array(Array, Array)
-#10 /wordpress/wp-content/plugins/wpx-shortcodes-manager-light/plugin/activation.php(19): WPXShortcodesManagerLight\Models\Shortcode::__callStatic('create', Array)
-#11 /wordpress/wp-content/plugins/wpx-shortcodes-manager-light/vendor/wpbones/wpbones/src/Foundation/Plugin.php(446): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-includes/class-wp-hook.php(324): WPXShortcodesManagerLight\WPBones\Foundation\Plugin->activation(false)
-#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#15 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wpx-sh...', false)
-#16 /internal/eval.php(20): activate_plugin('wpx-shortcodes-...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_active_plugi...', Object(stdClass), '', 'auto')
+#5 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/fs-essential-functions.php(362): update_option('fs_active_plugi...', Object(stdClass))
+#6 /wordpress/wp-content/plugins/wp-rest-user/freemius/start.php(158): fs_update_sdk_newest_version('wp-rest-user/fr...', 'wp-rest-user/wp...')
+#7 /wordpress/wp-content/plugins/wp-rest-user/wp-rest-user.php(54): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/wp-rest-user/wp-rest-user.php(75): wru_fs()
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-rest-user/wp...')
+#11 /internal/eval.php(20): activate_plugin('wp-rest-user/wp...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:21:\"wp-rest-user/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:5:\"2.2.4\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744191117;s:11:\"plugin_path\";s:29:\"wp-rest-user/wp-rest-user.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:29:\"wp-rest-user/wp-rest-user.php\";s:8:\"sdk_path\";s:21:\"wp-rest-user/freemius\";s:7:\"version\";s:5:\"2.2.4\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744191117;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-rest-user/wp-rest-user.php'), wru_fs, require_once('/plugins/wp-rest-user/freemius/start.php'), fs_update_sdk_newest_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 09:31:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_debug_mode' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/wp-rest-user/freemius/config.php(307): add_option('fs_debug_mode', false)
+#5 /wordpress/wp-content/plugins/wp-rest-user/freemius/require.php(10): require_once('/wordpress/wp-c...')
+#6 /wordpress/wp-content/plugins/wp-rest-user/freemius/start.php(474): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/wp-rest-user/wp-rest-user.php(54): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/wp-rest-user/wp-rest-user.php(75): wru_fs()
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-rest-user/wp...')
+#11 /internal/eval.php(20): activate_plugin('wp-rest-user/wp...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-rest-user/wp-rest-user.php'), wru_fs, require_once('/plugins/wp-rest-user/freemius/start.php'), require_once('/plugins/wp-rest-user/freemius/require.php'), require_once('/plugins/wp-rest-user/freemius/config.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 09:31:57 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/class-fs-logger.php on line 145
+[09-Apr-2025 09:31:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:3362;a:3:{s:4:\"slug\";s:12:\"wp-rest-user\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:29:\"wp-rest-user/wp-rest-user.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:1:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:3362;a:3:{s:4:&quot;slug&quot;;s:12:&quot;wp-rest-user&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:29:&quot;wp-rest-user/wp-rest-user.php&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/managers/class-fs-option-manager.php(406): update_option('fs_accounts', Array)
+#6 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/managers/class-fs-option-manager.php(349): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('id_slug_type_pa...', Array, true)
+#8 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/class-freemius.php(1805): FS_Options->set_option('id_slug_type_pa...', Array, true)
+#9 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/class-freemius.php(372): Freemius->store_id_slug_type_path_map('3362', 'wp-rest-user')
+#10 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/class-freemius.php(2303): Freemius->__construct('3362', 'wp-rest-user', true)
+#11 /wordpress/wp-content/plugins/wp-rest-user/freemius/start.php(513): Freemius::instance('3362', 'wp-rest-user', true)
+#12 /wordpress/wp-content/plugins/wp-rest-user/wp-rest-user.php(57): fs_dynamic_init(Array)
+#13 /wordpress/wp-content/plugins/wp-rest-user/wp-rest-user.php(75): wru_fs()
+#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-rest-user/wp...')
+#16 /internal/eval.php(20): activate_plugin('wp-rest-user/wp...')
 #17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpxsm-shortcodes-custom', 'a:1:{s:13:\"wpxsm-example\";a:2:{s:4:\"name\";s:13:\"wpxsm-example\";s:4:\"html\";s:52:\"PHN0cm9uZyBzdHlsZT0icmVkIj4kY29udGVudDwvc3Ryb25nPg==\";}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wpx-shortcodes-manager-light/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPXShortcodesManagerLight\WPBones\Foundation\Plugin->activation, include_once('/plugins/wpx-shortcodes-manager-light/plugin/activation.php'), WPXShortcodesManagerLight\Models\Shortcode::__callStatic, call_user_func_array, WPXShortcodesManagerLight\Models\Shortcode->create, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 14:23:59 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 14:23:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 14:23:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 14:23:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 14:23:59 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpx-shortcodes-manager-light</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 14:24:02 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpx-shortcodes-manager-light</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 14:24:05 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpx-shortcodes-manager-light</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 14:24:11 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 14:24:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 14:24:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 14:24:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 14:24:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:3362;a:3:{s:4:\"slug\";s:12:\"wp-rest-user\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:29:\"wp-rest-user/wp-rest-user.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-rest-user/wp-rest-user.php'), wru_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_id_slug_type_path_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 09:31:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_ws_linkedin_follow_button_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:3362;a:3:{s:4:\"slug\";s:12:\"wp-rest-user\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:29:\"wp-rest-user/wp-rest-user.php\";}}s:11:\"plugin_data\";a:1:{s:12:\"wp-rest-user\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:29:\"wp-rest-user/wp-rest-user.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -367,7 +430,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_ws_linkedin_follow_button_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:3362;a:3:{s:4:&quot;slug&quot;;s:12:&quot;wp-rest-user&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:29:&quot;wp-rest-user/wp-rest-user.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:12:&quot;wp-rest-user&quot;;a:1:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:29:&quot;wp-rest-user/wp-rest-user.php&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -379,28 +442,27 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_ws_linke...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_ws_linke...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_ws_linkedin_follow_button_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 14:24:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/managers/class-fs-option-manager.php(406): update_option('fs_accounts', Array)
+#6 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/managers/class-fs-option-manager.php(349): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_main_fil...', Object(stdClass))
+#9 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/class-fs-storage.php(499): FS_Key_Value_Storage->__set('plugin_main_fil...', Object(stdClass))
+#10 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/class-freemius.php(1702): FS_Storage->__set('plugin_main_fil...', Object(stdClass))
+#11 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/class-freemius.php(387): Freemius->_find_caller_plugin_file(true)
+#12 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/class-freemius.php(2303): Freemius->__construct('3362', 'wp-rest-user', true)
+#13 /wordpress/wp-content/plugins/wp-rest-user/freemius/start.php(513): Freemius::instance('3362', 'wp-rest-user', true)
+#14 /wordpress/wp-content/plugins/wp-rest-user/wp-rest-user.php(57): fs_dynamic_init(Array)
+#15 /wordpress/wp-content/plugins/wp-rest-user/wp-rest-user.php(75): wru_fs()
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-rest-user/wp...')
+#18 /internal/eval.php(20): activate_plugin('wp-rest-user/wp...')
+#19 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:3362;a:3:{s:4:\"slug\";s:12:\"wp-rest-user\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:29:\"wp-rest-user/wp-rest-user.php\";}}s:11:\"plugin_data\";a:1:{s:12:\"wp-rest-user\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:29:\"wp-rest-user/wp-rest-user.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-rest-user/wp-rest-user.php'), wru_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_find_caller_plugin_file, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 09:31:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wt_seq_basic_installation_date', '1743949464', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:3362;a:3:{s:4:\"slug\";s:12:\"wp-rest-user\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:29:\"wp-rest-user/wp-rest-user.php\";}}s:11:\"plugin_data\";a:1:{s:12:\"wp-rest-user\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:29:\"wp-rest-user/wp-rest-user.php\";}}}s:13:\"file_slug_map\";a:1:{s:29:\"wp-rest-user/wp-rest-user.php\";s:12:\"wp-rest-user\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -412,7 +474,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wt_seq_basic_installation_date' , '1743949464' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:3362;a:3:{s:4:&quot;slug&quot;;s:12:&quot;wp-rest-user&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:29:&quot;wp-rest-user/wp-rest-user.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:12:&quot;wp-rest-user&quot;;a:1:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:29:&quot;wp-rest-user/wp-rest-user.php&quot;;}}}s:13:&quot;file_slug_map&quot;;a:1:{s:29:&quot;wp-rest-user/wp-rest-user.php&quot;;s:12:&quot;wp-rest-user&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -424,25 +486,25 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wt_seq_basic_in...', 1743949464, '', 'auto')
-#5 /wordpress/wp-content/plugins/wt-woocommerce-sequential-order-numbers/includes/class-wt-advanced-order-number-activator.php(28): update_option('wt_seq_basic_in...', 1743949464)
-#6 /wordpress/wp-content/plugins/wt-woocommerce-sequential-order-numbers/includes/class-wt-advanced-order-number-activator.php(12): Wt_Advanced_Order_Number_Activator::wt_seq_save_plugin_details()
-#7 /wordpress/wp-content/plugins/wt-woocommerce-sequential-order-numbers/wt-advanced-order-number.php(86): Wt_Advanced_Order_Number_Activator::activate()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): activate_wt_advanced_order_number(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wt-woo...', false)
-#12 /internal/eval.php(20): activate_plugin('wt-woocommerce-...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wt_seq_basic_installation_date', '1743949464', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wt-woocommerce-sequential-order-numbers/wt-advanced-order-number.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_wt_advanced_order_number, Wt_Advanced_Order_Number_Activator::activate, Wt_Advanced_Order_Number_Activator::wt_seq_save_plugin_details, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 14:24:24 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 14:24:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 14:24:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 14:24:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 14:24:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/managers/class-fs-option-manager.php(406): update_option('fs_accounts', Array)
+#6 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/managers/class-fs-option-manager.php(349): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('file_slug_map', Array, true)
+#8 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/class-freemius.php(9042): FS_Options->set_option('file_slug_map', Array, true)
+#9 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/class-freemius.php(449): Freemius->store_file_slug_map()
+#10 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/class-freemius.php(2303): Freemius->__construct('3362', 'wp-rest-user', true)
+#11 /wordpress/wp-content/plugins/wp-rest-user/freemius/start.php(513): Freemius::instance('3362', 'wp-rest-user', true)
+#12 /wordpress/wp-content/plugins/wp-rest-user/wp-rest-user.php(57): fs_dynamic_init(Array)
+#13 /wordpress/wp-content/plugins/wp-rest-user/wp-rest-user.php(75): wru_fs()
+#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-rest-user/wp...')
+#16 /internal/eval.php(20): activate_plugin('wp-rest-user/wp...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:3362;a:3:{s:4:\"slug\";s:12:\"wp-rest-user\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:29:\"wp-rest-user/wp-rest-user.php\";}}s:11:\"plugin_data\";a:1:{s:12:\"wp-rest-user\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:29:\"wp-rest-user/wp-rest-user.php\";}}}s:13:\"file_slug_map\";a:1:{s:29:\"wp-rest-user/wp-rest-user.php\";s:12:\"wp-rest-user\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-rest-user/wp-rest-user.php'), wru_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_file_slug_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 09:31:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', ',-?E.{>r8H/2;_{> dnc[D[i2Yo|%cso^}mrGH*wB46{bNECrrH78^op;JWRJHMW', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:3362;a:3:{s:4:\"slug\";s:12:\"wp-rest-user\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:29:\"wp-rest-user/wp-rest-user.php\";}}s:11:\"plugin_data\";a:1:{s:12:\"wp-rest-user\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:29:\"wp-rest-user/wp-rest-user.php\";}s:17:\"install_timestamp\";i:1744191117;}}s:13:\"file_slug_map\";a:1:{s:29:\"wp-rest-user/wp-rest-user.php\";s:12:\"wp-rest-user\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -454,7 +516,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , ',-?E.{&gt;r8H/2;_{&gt; dnc[D[i2Yo|%cso^}mrGH*wB46{bNECrrH78^op;JWRJHMW' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:3362;a:3:{s:4:&quot;slug&quot;;s:12:&quot;wp-rest-user&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:29:&quot;wp-rest-user/wp-rest-user.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:12:&quot;wp-rest-user&quot;;a:2:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:29:&quot;wp-rest-user/wp-rest-user.php&quot;;}s:17:&quot;install_timestamp&quot;;i:1744191117;}}s:13:&quot;file_slug_map&quot;;a:1:{s:29:&quot;wp-rest-user/wp-rest-user.php&quot;;s:12:&quot;wp-rest-user&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -466,122 +528,11 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', ',-?E.{>r8H/2;_{...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', ',-?E.{>r8H/2;_{...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', ',-?E.{>r8H/2;_{...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', ',-?E.{>r8H/2;_{...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40370|wp_rest|1...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/warcraftfeed/warcraftfeed.php(13): wp_enqueue_script('jquery', false, false, '1.5.1')
-#19 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#20 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('warcraftfeed/wa...')
-#21 /internal/eval.php(20): activate_plugin('warcraftfeed/wa...')
-#22 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', ',-?E.{>r8H/2;_{> dnc[D[i2Yo|%cso^}mrGH*wB46{bNECrrH78^op;JWRJHMW', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/warcraftfeed/warcraftfeed.php'), wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 14:24:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '6lSo6GcFS{i#DO~t;1og=#G@uQ/dR^NNVLa8eLahQy!YR~^W_V,@eGH[C;fbcEmt', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , '6lSo6GcFS{i#DO~t;1og=#G@uQ/dR^NNVLa8eLahQy!YR~^W_V,@eGH[C;fbcEmt' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', '6lSo6GcFS{i#DO~...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', '6lSo6GcFS{i#DO~...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', '6lSo6GcFS{i#DO~...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', '6lSo6GcFS{i#DO~...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40370|wp_rest|1...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/warcraftfeed/warcraftfeed.php(13): wp_enqueue_script('jquery', false, false, '1.5.1')
-#19 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#20 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('warcraftfeed/wa...')
-#21 /internal/eval.php(20): activate_plugin('warcraftfeed/wa...')
-#22 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '6lSo6GcFS{i#DO~t;1og=#G@uQ/dR^NNVLa8eLahQy!YR~^W_V,@eGH[C;fbcEmt', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/warcraftfeed/warcraftfeed.php'), wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 14:24:37 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method warcraftfeed::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_warcra...', false)
-#3 /internal/eval.php(20): activate_plugin('warcraftfeed/wa...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[06-Apr-2025 14:24:40 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method warcraftfeed::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_warcra...', false)
-#3 /internal/eval.php(20): activate_plugin('warcraftfeed/wa...')
-#4 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"warcraftfeed"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
-        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
-        at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
-        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
-        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
-        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
-        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-      response: PHPResponse {
-        httpStatusCode: 500,
-        headers: {
-          'x-powered-by': [ 'PHP/8.0.30-dev' ],
-          'content-type': [ 'text/html; charset=UTF-8' ]
-        },
-        bytes: Uint8Array(0) [],
-        exitCode: 255,
-        errors: ''
-      },
-      source: 'request'
-    }
-  }
-}
-
-Node.js v20.15.0
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/managers/class-fs-option-manager.php(406): update_option('fs_accounts', Array)
+#6 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/managers/class-fs-option-manager.php(349): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('install_timesta...', 1744191117)
+#9 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/class-fs-storage.php(499): FS_Key_Value_Storage->__set('install_timesta...', 1744191117)
+#10 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/class-freemius.php(453): FS_Storage->__set('install_timesta...', 1744191117)
+#11 /wordpress/wp-content/plugins/wp-rest-user/freemius/includes/class
