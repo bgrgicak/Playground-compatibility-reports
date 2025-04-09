@@ -2,14 +2,14 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [06-Apr-2025 19:24:11 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 19:24:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 19:24:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 19:24:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 19:24:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [09-Apr-2025 07:26:09 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 07:26:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 07:26:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 07:26:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 07:26:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yydev_notes_timestamp', '1754335465', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pushmagnet_do_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -21,7 +21,7 @@ Error: [06-Apr-2025 19:24:11 UTC] PHP Warning:  Undefined array key "option_valu
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'yydev_notes_timestamp' , '1754335465' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pushmagnet_do_activation_redirect' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -33,103 +33,23 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('yydev_notes_tim...', 1754335465, '', 'auto')
-#5 /wordpress/wp-content/plugins/page-post-notes/notices.php(32): update_option('yydev_notes_tim...', 1754335465)
-#6 /wordpress/wp-content/plugins/page-post-notes/index.php(124): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('page-post-notes...')
-#9 /internal/eval.php(20): activate_plugin('page-post-notes...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yydev_notes_timestamp', '1754335465', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/page-post-notes/index.php'), include_once('/plugins/page-post-notes/notices.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 19:24:25 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 19:24:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 19:24:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 19:24:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 19:24:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pm_options', 'a:4:{s:7:\"version\";s:3:\"1.5\";s:6:\"palpad\";s:17:\"celular, LCD, DVD\";s:4:\"meta\";s:4:\"tags\";s:6:\"coluna\";s:3:\"sim\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pm_options' , 'a:4:{s:7:&quot;version&quot;;s:3:&quot;1.5&quot;;s:6:&quot;palpad&quot;;s:17:&quot;celular, LCD, DVD&quot;;s:4:&quot;meta&quot;;s:4:&quot;tags&quot;;s:6:&quot;coluna&quot;;s:3:&quot;sim&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/palavras-de-monetizacao/palavrasmonetizacao.php(169): add_option('pm_options', Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): pm_activate(false)
+#4 /wordpress/wp-content/plugins/push-magnet-web-push-notifications/include/push-magnet_functions.php(47): add_option('pushmagnet_do_a...', true)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): pushMagnet_setup(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_palavr...', false)
-#9 /internal/eval.php(20): activate_plugin('palavras-de-mon...')
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_push-m...', false)
+#9 /internal/eval.php(20): activate_plugin('push-magnet-web...')
 #10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pm_options', 'a:4:{s:7:\"version\";s:3:\"1.5\";s:6:\"palpad\";s:17:\"celular, LCD, DVD\";s:4:\"meta\";s:4:\"tags\";s:6:\"coluna\";s:3:\"sim\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_palavras-de-monetizacao/palavrasmonetizacao.php'), WP_Hook->do_action, WP_Hook->apply_filters, pm_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 19:24:46 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 19:24:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 19:24:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 19:24:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 19:24:57 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 19:24:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 19:24:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 19:24:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 19:24:57 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/palomma/palomma.php:88
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): init_palomma_gateway_class('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/palomma/palomma.php on line 88
-[06-Apr-2025 19:25:00 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/palomma/palomma.php:88
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): init_palomma_gateway_class('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/palomma/palomma.php on line 88
-[06-Apr-2025 19:25:02 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/palomma/palomma.php:88
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): init_palomma_gateway_class('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/palomma/palomma.php on line 88
-[06-Apr-2025 19:25:08 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 19:25:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 19:25:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 19:25:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 19:25:20 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 19:25:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 19:25:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 19:25:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 19:25:20 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pushmagnet_do_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_push-magnet-web-push-notifications/push-magnet.php'), WP_Hook->do_action, WP_Hook->apply_filters, pushMagnet_setup, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:26:36 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 07:26:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 07:26:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 07:26:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 07:27:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 07:27:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 07:27:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 07:27:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 07:27:06 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('pp_WP_Widget_Re...')
@@ -147,7 +67,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[06-Apr-2025 19:25:23 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[09-Apr-2025 07:27:15 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('pp_WP_Widget_Re...')
@@ -165,7 +85,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[06-Apr-2025 19:25:25 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[09-Apr-2025 07:27:24 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('pp_WP_Widget_Re...')
@@ -183,14 +103,15 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[06-Apr-2025 19:25:31 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 19:25:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 19:25:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 19:25:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 19:25:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[09-Apr-2025 07:28:02 UTC] PHP Deprecated:  Required parameter $app_id follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 59
+[09-Apr-2025 07:28:02 UTC] PHP Deprecated:  Required parameter $app_secret follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 59
+[09-Apr-2025 07:28:02 UTC] PHP Deprecated:  Required parameter $app_id follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 71
+[09-Apr-2025 07:28:02 UTC] PHP Deprecated:  Required parameter $app_secret follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 71
+[09-Apr-2025 07:28:02 UTC] PHP Deprecated:  Required parameter $current_photoset follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 1623
+[09-Apr-2025 07:28:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'E;_C~X:;=H{XRoxn^lo:0{ctp`8!.I6&=cLFn26=:!V>hN(~<Tq;-?JeG<_>e6y6', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('adamlabsgallery_grids_version', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -202,7 +123,7 @@ Stack trace:
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'E;_C~X:;=H{XRoxn^lo:0{ctp`8!.I6&amp;=cLFn26=:!V&gt;hN(~&lt;Tq;-?JeG&lt;_&gt;e6y6' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'adamlabsgallery_grids_version' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -214,221 +135,652 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'E;_C~X:;=H{XRox...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'E;_C~X:;=H{XRox...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'E;_C~X:;=H{XRox...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'E;_C~X:;=H{XRox...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40370|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/pathpic/pathpic.php(172): wp_enqueue_script('jquery')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): pathpic_agregar_cabecera('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'E;_C~X:;=H{XRoxn^lo:0{ctp`8!.I6&=cLFn26=:!V>hN(~<Tq;-?JeG<_>e6y6', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, pathpic_agregar_cabecera, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 19:25:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'qA1bsSC7r:Qjw&G2,&z52D5^@6vH.L}a-u#0lWQeq/rTrV`Z/35;f*>kq#Uz6l@p', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'qA1bsSC7r:Qjw&amp;G2,&amp;z52D5^@6vH.L}a-u#0lWQeq/rTrV`Z/35;f*&gt;kq#Uz6l@p' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'qA1bsSC7r:Qjw&G...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'qA1bsSC7r:Qjw&G...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'qA1bsSC7r:Qjw&G...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'qA1bsSC7r:Qjw&G...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40370|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/pathpic/pathpic.php(172): wp_enqueue_script('jquery')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): pathpic_agregar_cabecera('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'qA1bsSC7r:Qjw&G2,&z52D5^@6vH.L}a-u#0lWQeq/rTrV`Z/35;f*>kq#Uz6l@p', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, pathpic_agregar_cabecera, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 19:25:42 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/payease-payment/bwx_payment.php:904
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('payease-payment...')
-#2 /internal/eval.php(20): activate_plugin('payease-payment...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/payease-payment/bwx_payment.php on line 904
-[06-Apr-2025 19:25:45 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/payease-payment/bwx_payment.php:904
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('payease-payment...')
-#2 /internal/eval.php(20): activate_plugin('payease-payment...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/payease-payment/bwx_payment.php on line 904
-[06-Apr-2025 19:25:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/payease-payment/bwx_payment.php:904
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('payease-payment...')
-#2 /internal/eval.php(20): activate_plugin('payease-payment...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/payease-payment/bwx_payment.php on line 904
-[06-Apr-2025 19:26:06 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 19:26:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 19:26:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 19:26:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 19:26:17 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 19:26:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 19:26:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 19:26:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 19:26:17 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woo-gccpay</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 19:26:20 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woo-gccpay</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 19:26:22 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>woo-gccpay</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 19:26:28 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 19:26:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 19:26:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 19:26:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 19:26:28 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/payment-gateway-poli-for-woocommerce/woocommerce-poli.php:20
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): init_woocommerce_poli('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/payment-gateway-poli-for-woocommerce/woocommerce-poli.php on line 20
-[06-Apr-2025 19:26:31 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/payment-gateway-poli-for-woocommerce/woocommerce-poli.php:20
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): init_woocommerce_poli('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/payment-gateway-poli-for-woocommerce/woocommerce-poli.php on line 20
-[06-Apr-2025 19:26:33 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/payment-gateway-poli-for-woocommerce/woocommerce-poli.php:20
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): init_woocommerce_poli('')
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/payment-gateway-poli-for-woocommerce/woocommerce-poli.php on line 20
-[06-Apr-2025 19:26:40 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 19:26:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 19:26:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 19:26:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 19:26:40 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Paypal_Donation...')
-#2 /wordpress/wp-content/plugins/paypal-donation-buttons/admin/partials/paypal-donation-for-wordpress-admin-widget.php(167): register_widget('Paypal_Donation...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): myplugin_register_widgets('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#4 /wordpress/wp-includes/option.php(921): add_option('adamlabsgallery...', '1', '', 'auto')
+#5 /wordpress/wp-content/plugins/photo-gallery-portfolio/com/class-adamlabsgallery.php(884): update_option('adamlabsgallery...', '1')
+#6 /wordpress/wp-content/plugins/photo-gallery-portfolio/com/class-adamlabsgallery.php(806): AdamLabsGallery::_create_tables()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): AdamLabsGallery::create_tables(false)
 #8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[06-Apr-2025 19:26:44 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Paypal_Donation...')
-#2 /wordpress/wp-content/plugins/paypal-donation-buttons/admin/partials/paypal-donation-for-wordpress-admin-widget.php(167): register_widget('Paypal_Donation...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): myplugin_register_widgets('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_photo-...', false)
+#11 /internal/eval.php(20): activate_plugin('photo-gallery-p...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('adamlabsgallery_grids_version', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_photo-gallery-portfolio/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, AdamLabsGallery::create_tables, AdamLabsGallery::_create_tables, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:28:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('adamlabsgallery_custom_css_imported', 'true', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'adamlabsgallery_custom_css_imported' , 'true' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('adamlabsgallery...', 'true', '', 'auto')
+#5 /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-global-css.php(81): update_option('adamlabsgallery...', 'true')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): AdamLabsGallery_Global_Css::propagate_default_global_css(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_photo-...', false)
+#10 /internal/eval.php(20): activate_plugin('photo-gallery-p...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('adamlabsgallery_custom_css_imported', 'true', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_photo-gallery-portfolio/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, AdamLabsGallery_Global_Css::propagate_default_global_css, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:28:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('adamlabsgallery_custom_css', '/* HENRY HARRISON */
+
+a.adamlabsgallery-henryharrison-element-1,
+a.adamlabsgallery-henryharrison-element-2 {
+  -webkit-transition: all .4s linear;  
+    -moz-transition: all .4s linear;  
+    -o-transition: all .4s linear;  
+    -ms-transition: all .4s linear;  
+    transition: all .4s linear; 
+}
+
+/* JIMMY CARTER */
+.adamlabsgallery-jimmy-carter-element-11 i:before { margin-left:0px; margin-right:0px;}
+
+
+/* HARDING */
+.adamlabsgallery-harding-element-17 { letter-spacing:1px}
+.adamlabsgallery-harding-wrapper .adamlabsgallery-entry-media { overflow:hidden; 
+            box-sizing:border-box;
+            -webkit-box-sizing:border-box;
+            -moz-box-sizing:border-box;
+            padding:30px 30px 0px 30px;
+}
+
+.adamlabsgallery-harding-wrapper .adamlabsgallery-media-poster { overflow:hidden; 
+            border-radius:50%;
+            -webkit-border-radius:50%;
+            -moz-border-radius:50%;
+}
+
+/*ULYSSES S GRANT */
+.adamlabsgallery-ulysses-s-grant-wrapper .adamlabsgallery-entry-media { overflow:hidden; 
+            box-sizing:border-box;
+            -webkit-box-sizing:border-box;
+            -moz-box-sizing:border-box;
+            padding:30px 30px 0px 30px;
+}
+
+.adamlabsgallery-ulysses-s-grant-wrapper .adamlabsgallery-media-poster { overflow:hidden; 
+            border-radius:50%;
+            -webkit-border-radius:50%;
+            -moz-border-radius:50%;
+}
+
+/*RICHARD NIXON */
+.adamlabsgallery-richard-nixon-wrapper .adamlabsgallery-entry-media { overflow:hidden; 
+            box-sizing:border-box;
+            -webkit-box-sizing:border-box;
+            -moz-box-sizing:border-box;
+            padding:30px 30px 0px 30px;
+}
+
+.adamlabsgallery-richard-nixon-wrapper .adamlabsgallery-media-poster { overflow:hidden; 
+            border-radius:50%;
+            -webkit-border-radius:50%;
+            -moz-border-radius:50%;
+}
+
+
+/* HERBERT HOOVER */
+.adamlabsgallery-herbert-hoover-wrapper .adamlabsgallery-media-poster{
+    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale\"); /* Firefox 10+, Firefox on Android */
+    filter: gray; /* IE6-9 */
+    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+}
+
+.adamlabsgallery-herbert-hoover-wrapper:hover .adamlabsgallery-media-poster{
+    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale\");
+    -webkit-filter: grayscale(0%);}
+
+
+/* JOOHNSON */
+.adamlabsgallery-lyndon-johnson-wrapper .adamlabsgallery-media-poster{
+    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale\"); /* Firefox 10+, Firefox on Android */
+    filter: gray; /* IE6-9 */
+    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+}
+
+.adamlabsgallery-lyndon-johnson-wrapper:hover .adamlabsgallery-media-poster{
+    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale\");
+    -webkit-filter: grayscale(0%);}
+
+
+/*RONALD REAGAN*/
+.adamlabsgallery-overlay.adamlabsgallery-ronald-reagan-container {background: -moz-linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.83) 99%, rgba(0,0,0,0.85) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,rgba(0,0,0,0)), color-stop(99%,rgba(0,0,0,0.83)), color-stop(100%,rgba(0,0,0,0.85))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* IE10+ */
+background: linear-gradient(to bottom, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#00000000\', endColorstr=\'#d9000000\',GradientType=0 ); /* IE6-9 */}
+
+/*GEORGE BUSH*/
+.adamlabsgallery-georgebush-wrapper .adamlabsgallery-entry-cover {background: -moz-linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.83) 99%, rgba(0,0,0,0.85) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,rgba(0,0,0,0)), color-stop(99%,rgba(0,0,0,0.83)), color-stop(100%,rgba(0,0,0,0.85))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* IE10+ */
+background: linear-gradient(to bottom, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#00000000\', endColorstr=\'#d9000000\',GradientType=0 ); /* IE6-9 */}
+
+/*GEORGE BUSH
+.adamlabsgallery-georgebush-wrapper .adamlabsgallery-entry-cover { background: rgba(0,0,0,0.5);}*/
+
+/*JEFFERSON*/
+.adamlabsgallery-jefferson-wrapper { -webkit-border-radius: 5px !important; -moz-border-radius: 5px !important; border-radius: 5px !important; -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC) !important; }
+
+/*MONROE*/
+.adamlabsgallery-monroe-element-1 { text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); }
+
+/*LYNDON JOHNSON*/
+.adamlabsgallery-lyndon-johnson-wrapper .adamlabsgallery-entry-cover { background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%, rgba(18,18,18,0) 96%, rgba(19,19,19,0) 100%); /* FF3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0.35)), color-stop(96%,rgba(18,18,18,0)), color-stop(100%,rgba(19,19,19,0))); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* Opera 12+ */
+background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* IE10+ */
+background: radial-gradient(ellipse at center,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#59000000\', endColorstr=\'#00131313\',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+ }
+
+/*WILBERT*/
+.adamlabsgallery-wilbert-wrapper .adamlabsgallery-entry-cover { background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%, rgba(18,18,18,0) 96%, rgba(19,19,19,0) 100%); /* FF3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0.35)), color-stop(96%,rgba(18,18,18,0)), color-stop(100%,rgba(19,19,19,0))); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* Opera 12+ */
+background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* IE10+ */
+background: radial-gradient(ellipse at center,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#59000000\', endColorstr=\'#00131313\',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+ }
+.adamlabsgallery-wilbert-wrapper .adamlabsgallery-media-poster{
+  -webkit-transition: 0.4s ease-in-out;
+    -moz-transition:  0.4s ease-in-out;
+    -o-transition:  0.4s ease-in-out;
+    transition:  0.4s ease-in-out;
+    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale\"); /* Firefox 10+, Firefox on Android */
+    filter: gray; /* IE6-9 */
+    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+}
+
+.adamlabsgallery-wilbert-wrapper:hover .adamlabsgallery-media-poster{
+    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale\");
+    -webkit-filter: grayscale(0%);}
+
+/*PHILLIE*/
+.adamlabsgallery-phillie-element-3:after { 
+content:\" \";
+width: 0px;
+height: 0px;
+border-style: solid;
+border-width: 5px 5px 0 5px;
+border-color: #000 transparent transparent transparent;
+left:50%;
+margin-left:-5px; bottom:-5px; position:absolute; }
+
+/*HOWARD TAFT*/
+.adamlabsgallery-howardtaft-wrapper .adamlabsgallery-media-poster{
+    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale\");
+    -webkit-filter: grayscale(0%);
+}
+
+.adamlabsgallery-howardtaft-wrapper:hover .adamlabsgallery-media-poster{
+    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale\"); /* Firefox 10+, Firefox on Android */
+    filter: gray; /* IE6-9 */
+    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+}
+
+/* WOOCOMMERCE */
+.myportfolio-container .added_to_cart.wc-forward { font-family: \"Open Sans\"; font-size: 13px; color: #fff; margin-top: 10px; }
+
+/* LIGHTBOX */
+.adamlabsgallerybox-title.adamlabsgallerybox-title-outside-wrap { font-size: 15px; font-weight: 700; text-align: center; }
+.adamlabsgallerybox-title.adamlabsgallerybox-title-inside-wrap { padding-bottom: 10px; font-size: 15px; font-weight: 700; text-align: center; }', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'adamlabsgallery_custom_css' , '/* HENRY HARRISON */
+
+a.adamlabsgallery-henryharrison-element-1,
+a.adamlabsgallery-henryharrison-element-2 {
+  -webkit-transition: all .4s linear;  
+    -moz-transition: all .4s linear;  
+    -o-transition: all .4s linear;  
+    -ms-transition: all .4s linear;  
+    transition: all .4s linear; 
+}
+
+/* JIMMY CARTER */
+.adamlabsgallery-jimmy-carter-element-11 i:before { margin-left:0px; margin-right:0px;}
+
+
+/* HARDING */
+.adamlabsgallery-harding-element-17 { letter-spacing:1px}
+.adamlabsgallery-harding-wrapper .adamlabsgallery-entry-media { overflow:hidden; 
+            box-sizing:border-box;
+            -webkit-box-sizing:border-box;
+            -moz-box-sizing:border-box;
+            padding:30px 30px 0px 30px;
+}
+
+.adamlabsgallery-harding-wrapper .adamlabsgallery-media-poster { overflow:hidden; 
+            border-radius:50%;
+            -webkit-border-radius:50%;
+            -moz-border-radius:50%;
+}
+
+/*ULYSSES S GRANT */
+.adamlabsgallery-ulysses-s-grant-wrapper .adamlabsgallery-entry-media { overflow:hidden; 
+            box-sizing:border-box;
+            -webkit-box-sizing:border-box;
+            -moz-box-sizing:border-box;
+            padding:30px 30px 0px 30px;
+}
+
+.adamlabsgallery-ulysses-s-grant-wrapper .adamlabsgallery-media-poster { overflow:hidden; 
+            border-radius:50%;
+            -webkit-border-radius:50%;
+            -moz-border-radius:50%;
+}
+
+/*RICHARD NIXON */
+.adamlabsgallery-richard-nixon-wrapper .adamlabsgallery-entry-media { overflow:hidden; 
+            box-sizing:border-box;
+            -webkit-box-sizing:border-box;
+            -moz-box-sizing:border-box;
+            padding:30px 30px 0px 30px;
+}
+
+.adamlabsgallery-richard-nixon-wrapper .adamlabsgallery-media-poster { overflow:hidden; 
+            border-radius:50%;
+            -webkit-border-radius:50%;
+            -moz-border-radius:50%;
+}
+
+
+/* HERBERT HOOVER */
+.adamlabsgallery-herbert-hoover-wrapper .adamlabsgallery-media-poster{
+    filter: url(&quot;data:image/svg+xml;utf8,&lt;svg xmlns=''http://www.w3.org/2000/svg''&gt;&lt;filter id=''grayscale''&gt;&lt;feColorMatrix type=''matrix'' values=''0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0''/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale&quot;); /* Firefox 10+, Firefox on Android */
+    filter: gray; /* IE6-9 */
+    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+}
+
+.adamlabsgallery-herbert-hoover-wrapper:hover .adamlabsgallery-media-poster{
+    filter: url(&quot;data:image/svg+xml;utf8,&lt;svg xmlns=''http://www.w3.org/2000/svg''&gt;&lt;filter id=''grayscale''&gt;&lt;feColorMatrix type=''matrix'' values=''1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0''/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale&quot;);
+    -webkit-filter: grayscale(0%);}
+
+
+/* JOOHNSON */
+.adamlabsgallery-lyndon-johnson-wrapper .adamlabsgallery-media-poster{
+    filter: url(&quot;data:image/svg+xml;utf8,&lt;svg xmlns=''http://www.w3.org/2000/svg''&gt;&lt;filter id=''grayscale''&gt;&lt;feColorMatrix type=''matrix'' values=''0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0''/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale&quot;); /* Firefox 10+, Firefox on Android */
+    filter: gray; /* IE6-9 */
+    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+}
+
+.adamlabsgallery-lyndon-johnson-wrapper:hover .adamlabsgallery-media-poster{
+    filter: url(&quot;data:image/svg+xml;utf8,&lt;svg xmlns=''http://www.w3.org/2000/svg''&gt;&lt;filter id=''grayscale''&gt;&lt;feColorMatrix type=''matrix'' values=''1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0''/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale&quot;);
+    -webkit-filter: grayscale(0%);}
+
+
+/*RONALD REAGAN*/
+.adamlabsgallery-overlay.adamlabsgallery-ronald-reagan-container {background: -moz-linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.83) 99%, rgba(0,0,0,0.85) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,rgba(0,0,0,0)), color-stop(99%,rgba(0,0,0,0.83)), color-stop(100%,rgba(0,0,0,0.85))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* IE10+ */
+background: linear-gradient(to bottom, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=''#00000000'', endColorstr=''#d9000000'',GradientType=0 ); /* IE6-9 */}
+
+/*GEORGE BUSH*/
+.adamlabsgallery-georgebush-wrapper .adamlabsgallery-entry-cover {background: -moz-linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.83) 99%, rgba(0,0,0,0.85) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,rgba(0,0,0,0)), color-stop(99%,rgba(0,0,0,0.83)), color-stop(100%,rgba(0,0,0,0.85))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* IE10+ */
+background: linear-gradient(to bottom, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=''#00000000'', endColorstr=''#d9000000'',GradientType=0 ); /* IE6-9 */}
+
+/*GEORGE BUSH
+.adamlabsgallery-georgebush-wrapper .adamlabsgallery-entry-cover { background: rgba(0,0,0,0.5);}*/
+
+/*JEFFERSON*/
+.adamlabsgallery-jefferson-wrapper { -webkit-border-radius: 5px !important; -moz-border-radius: 5px !important; border-radius: 5px !important; -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC) !important; }
+
+/*MONROE*/
+.adamlabsgallery-monroe-element-1 { text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); }
+
+/*LYNDON JOHNSON*/
+.adamlabsgallery-lyndon-johnson-wrapper .adamlabsgallery-entry-cover { background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%, rgba(18,18,18,0) 96%, rgba(19,19,19,0) 100%); /* FF3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0.35)), color-stop(96%,rgba(18,18,18,0)), color-stop(100%,rgba(19,19,19,0))); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* Opera 12+ */
+background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* IE10+ */
+background: radial-gradient(ellipse at center,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=''#59000000'', endColorstr=''#00131313'',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+ }
+
+/*WILBERT*/
+.adamlabsgallery-wilbert-wrapper .adamlabsgallery-entry-cover { background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%, rgba(18,18,18,0) 96%, rgba(19,19,19,0) 100%); /* FF3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0.35)), color-stop(96%,rgba(18,18,18,0)), color-stop(100%,rgba(19,19,19,0))); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* Opera 12+ */
+background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* IE10+ */
+background: radial-gradient(ellipse at center,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=''#59000000'', endColorstr=''#00131313'',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+ }
+.adamlabsgallery-wilbert-wrapper .adamlabsgallery-media-poster{
+  -webkit-transition: 0.4s ease-in-out;
+    -moz-transition:  0.4s ease-in-out;
+    -o-transition:  0.4s ease-in-out;
+    transition:  0.4s ease-in-out;
+    filter: url(&quot;data:image/svg+xml;utf8,&lt;svg xmlns=''http://www.w3.org/2000/svg''&gt;&lt;filter id=''grayscale''&gt;&lt;feColorMatrix type=''matrix'' values=''0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0''/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale&quot;); /* Firefox 10+, Firefox on Android */
+    filter: gray; /* IE6-9 */
+    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+}
+
+.adamlabsgallery-wilbert-wrapper:hover .adamlabsgallery-media-poster{
+    filter: url(&quot;data:image/svg+xml;utf8,&lt;svg xmlns=''http://www.w3.org/2000/svg''&gt;&lt;filter id=''grayscale''&gt;&lt;feColorMatrix type=''matrix'' values=''1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0''/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale&quot;);
+    -webkit-filter: grayscale(0%);}
+
+/*PHILLIE*/
+.adamlabsgallery-phillie-element-3:after { 
+content:&quot; &quot;;
+width: 0px;
+height: 0px;
+border-style: solid;
+border-width: 5px 5px 0 5px;
+border-color: #000 transparent transparent transparent;
+left:50%;
+margin-left:-5px; bottom:-5px; position:absolute; }
+
+/*HOWARD TAFT*/
+.adamlabsgallery-howardtaft-wrapper .adamlabsgallery-media-poster{
+    filter: url(&quot;data:image/svg+xml;utf8,&lt;svg xmlns=''http://www.w3.org/2000/svg''&gt;&lt;filter id=''grayscale''&gt;&lt;feColorMatrix type=''matrix'' values=''1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0''/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale&quot;);
+    -webkit-filter: grayscale(0%);
+}
+
+.adamlabsgallery-howardtaft-wrapper:hover .adamlabsgallery-media-poster{
+    filter: url(&quot;data:image/svg+xml;utf8,&lt;svg xmlns=''http://www.w3.org/2000/svg''&gt;&lt;filter id=''grayscale''&gt;&lt;feColorMatrix type=''matrix'' values=''0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0''/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale&quot;); /* Firefox 10+, Firefox on Android */
+    filter: gray; /* IE6-9 */
+    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+}
+
+/* WOOCOMMERCE */
+.myportfolio-container .added_to_cart.wc-forward { font-family: &quot;Open Sans&quot;; font-size: 13px; color: #fff; margin-top: 10px; }
+
+/* LIGHTBOX */
+.adamlabsgallerybox-title.adamlabsgallerybox-title-outside-wrap { font-size: 15px; font-weight: 700; text-align: center; }
+.adamlabsgallerybox-title.adamlabsgallerybox-title-inside-wrap { padding-bottom: 10px; font-size: 15px; font-weight: 700; text-align: center; }' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('adamlabsgallery...', '/* HENRY HARRIS...', '', 'auto')
+#5 /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-global-css.php(24): update_option('adamlabsgallery...', '/* HENRY HARRIS...')
+#6 /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-global-css.php(83): AdamLabsGallery_Global_Css::set_global_css_styles('/* HENRY HARRIS...')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): AdamLabsGallery_Global_Css::propagate_default_global_css(false)
 #8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[06-Apr-2025 19:26:47 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Paypal_Donation...')
-#2 /wordpress/wp-content/plugins/paypal-donation-buttons/admin/partials/paypal-donation-for-wordpress-admin-widget.php(167): register_widget('Paypal_Donation...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): myplugin_register_widgets('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_photo-...', false)
+#11 /internal/eval.php(20): activate_plugin('photo-gallery-p...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('adamlabsgallery_custom_css', '/* HENRY HARRISON */
+
+a.adamlabsgallery-henryharrison-element-1,
+a.adamlabsgallery-henryharrison-element-2 {
+  -webkit-transition: all .4s linear;  
+    -moz-transition: all .4s linear;  
+    -o-transition: all .4s linear;  
+    -ms-transition: all .4s linear;  
+    transition: all .4s linear; 
+}
+
+/* JIMMY CARTER */
+.adamlabsgallery-jimmy-carter-element-11 i:before { margin-left:0px; margin-right:0px;}
+
+
+/* HARDING */
+.adamlabsgallery-harding-element-17 { letter-spacing:1px}
+.adamlabsgallery-harding-wrapper .adamlabsgallery-entry-media { overflow:hidden; 
+            box-sizing:border-box;
+            -webkit-box-sizing:border-box;
+            -moz-box-sizing:border-box;
+            padding:30px 30px 0px 30px;
+}
+
+.adamlabsgallery-harding-wrapper .adamlabsgallery-media-poster { overflow:hidden; 
+            border-radius:50%;
+            -webkit-border-radius:50%;
+            -moz-border-radius:50%;
+}
+
+/*ULYSSES S GRANT */
+.adamlabsgallery-ulysses-s-grant-wrapper .adamlabsgallery-entry-media { overflow:hidden; 
+            box-sizing:border-box;
+            -webkit-box-sizing:border-box;
+            -moz-box-sizing:border-box;
+            padding:30px 30px 0px 30px;
+}
+
+.adamlabsgallery-ulysses-s-grant-wrapper .adamlabsgallery-media-poster { overflow:hidden; 
+            border-radius:50%;
+            -webkit-border-radius:50%;
+            -moz-border-radius:50%;
+}
+
+/*RICHARD NIXON */
+.adamlabsgallery-richard-nixon-wrapper .adamlabsgallery-entry-media { overflow:hidden; 
+            box-sizing:border-box;
+            -webkit-box-sizing:border-box;
+            -moz-box-sizing:border-box;
+            padding:30px 30px 0px 30px;
+}
+
+.adamlabsgallery-richard-nixon-wrapper .adamlabsgallery-media-poster { overflow:hidden; 
+            border-radius:50%;
+            -webkit-border-radius:50%;
+            -moz-border-radius:50%;
+}
+
+
+/* HERBERT HOOVER */
+.adamlabsgallery-herbert-hoover-wrapper .adamlabsgallery-media-poster{
+    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale\"); /* Firefox 10+, Firefox on Android */
+    filter: gray; /* IE6-9 */
+    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+}
+
+.adamlabsgallery-herbert-hoover-wrapper:hover .adamlabsgallery-media-poster{
+    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale\");
+    -webkit-filter: grayscale(0%);}
+
+
+/* JOOHNSON */
+.adamlabsgallery-lyndon-johnson-wrapper .adamlabsgallery-media-poster{
+    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale\"); /* Firefox 10+, Firefox on Android */
+    filter: gray; /* IE6-9 */
+    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+}
+
+.adamlabsgallery-lyndon-johnson-wrapper:hover .adamlabsgallery-media-poster{
+    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale\");
+    -webkit-filter: grayscale(0%);}
+
+
+/*RONALD REAGAN*/
+.adamlabsgallery-overlay.adamlabsgallery-ronald-reagan-container {background: -moz-linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.83) 99%, rgba(0,0,0,0.85) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,rgba(0,0,0,0)), color-stop(99%,rgba(0,0,0,0.83)), color-stop(100%,rgba(0,0,0,0.85))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* IE10+ */
+background: linear-gradient(to bottom, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#00000000\', endColorstr=\'#d9000000\',GradientType=0 ); /* IE6-9 */}
+
+/*GEORGE BUSH*/
+.adamlabsgallery-georgebush-wrapper .adamlabsgallery-entry-cover {background: -moz-linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,0.83) 99%, rgba(0,0,0,0.85) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,rgba(0,0,0,0)), color-stop(99%,rgba(0,0,0,0.83)), color-stop(100%,rgba(0,0,0,0.85))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* IE10+ */
+background: linear-gradient(to bottom, rgba(0,0,0,0) 50%,rgba(0,0,0,0.83) 99%,rgba(0,0,0,0.85) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#00000000\', endColorstr=\'#d9000000\',GradientType=0 ); /* IE6-9 */}
+
+/*GEORGE BUSH
+.adamlabsgallery-georgebush-wrapper .adamlabsgallery-entry-cover { background: rgba(0,0,0,0.5);}*/
+
+/*JEFFERSON*/
+.adamlabsgallery-jefferson-wrapper { -webkit-border-radius: 5px !important; -moz-border-radius: 5px !important; border-radius: 5px !important; -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC) !important; }
+
+/*MONROE*/
+.adamlabsgallery-monroe-element-1 { text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); }
+
+/*LYNDON JOHNSON*/
+.adamlabsgallery-lyndon-johnson-wrapper .adamlabsgallery-entry-cover { background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%, rgba(18,18,18,0) 96%, rgba(19,19,19,0) 100%); /* FF3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0.35)), color-stop(96%,rgba(18,18,18,0)), color-stop(100%,rgba(19,19,19,0))); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* Opera 12+ */
+background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* IE10+ */
+background: radial-gradient(ellipse at center,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#59000000\', endColorstr=\'#00131313\',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+ }
+
+/*WILBERT*/
+.adamlabsgallery-wilbert-wrapper .adamlabsgallery-entry-cover { background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%, rgba(18,18,18,0) 96%, rgba(19,19,19,0) 100%); /* FF3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0.35)), color-stop(96%,rgba(18,18,18,0)), color-stop(100%,rgba(19,19,19,0))); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* Opera 12+ */
+background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* IE10+ */
+background: radial-gradient(ellipse at center,  rgba(0,0,0,0.35) 0%,rgba(18,18,18,0) 96%,rgba(19,19,19,0) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#59000000\', endColorstr=\'#00131313\',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+ }
+.adamlabsgallery-wilbert-wrapper .adamlabsgallery-media-poster{
+  -webkit-transition: 0.4s ease-in-out;
+    -moz-transition:  0.4s ease-in-out;
+    -o-transition:  0.4s ease-in-out;
+    transition:  0.4s ease-in-out;
+    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale\"); /* Firefox 10+, Firefox on Android */
+    filter: gray; /* IE6-9 */
+    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+}
+
+.adamlabsgallery-wilbert-wrapper:hover .adamlabsgallery-media-poster{
+    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale\");
+    -webkit-filter: grayscale(0%);}
+
+/*PHILLIE*/
+.adamlabsgallery-phillie-element-3:after { 
+content:\" \";
+width: 0px;
+height: 0px;
+border-style: solid;
+border-width: 5px 5px 0 5px;
+border-color: #000 transparent transparent transparent;
+left:50%;
+margin-left:-5px; bottom:-5px; position:absolute; }
+
+/*HOWARD TAFT*/
+.adamlabsgallery-howardtaft-wrapper .adamlabsgallery-media-poster{
+    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale\");
+    -webkit-filter: grayscale(0%);
+}
+
+.adamlabsgallery-howardtaft-wrapper:hover .adamlabsgallery-media-poster{
+    filter: url(\"data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale\"); /* Firefox 10+, Firefox on Android */
+    filter: gray; /* IE6-9 */
+    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+}
+
+/* WOOCOMMERCE */
+.myportfolio-container .added_to_cart.wc-forward { font-family: \"Open Sans\"; font-size: 13px; color: #fff; margin-top: 10px; }
+
+/* LIGHTBOX */
+.adamlabsgallerybox-title.adamlabsgallerybox-title-outside-wrap { font-size: 15px; font-weight: 700; text-align: center; }
+.adamlabsgallerybox-title.adamlabsgallerybox-title-inside-wrap { padding-bottom: 10px; font-size: 15px; font-weight: 700; text-align: center; }', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_photo-gallery-portfolio/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, AdamLabsGallery_Global_Css::propagate_default_global_css, AdamLabsGallery_Global_Css::set_global_css_styles, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:28:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('adamlabs-google-fonts', 'a:3:{i:0;a:2:{s:3:\"url\";s:29:\"Open+Sans:300,400,600,700,800\";s:6:\"handle\";s:9:\"open-sans\";}i:1;a:2:{s:3:\"url\";s:43:\"Raleway:100,200,300,400,500,600,700,800,900\";s:6:\"handle\";s:7:\"raleway\";}i:2;a:2:{s:3:\"url\";s:19:\"Droid+Serif:400,700\";s:6:\"handle\";s:11:\"droid-serif\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'adamlabs-google-fonts' , 'a:3:{i:0;a:2:{s:3:&quot;url&quot;;s:29:&quot;Open+Sans:300,400,600,700,800&quot;;s:6:&quot;handle&quot;;s:9:&quot;open-sans&quot;;}i:1;a:2:{s:3:&quot;url&quot;;s:43:&quot;Raleway:100,200,300,400,500,600,700,800,900&quot;;s:6:&quot;handle&quot;;s:7:&quot;raleway&quot;;}i:2;a:2:{s:3:&quot;url&quot;;s:19:&quot;Droid+Serif:400,700&quot;;s:6:&quot;handle&quot;;s:11:&quot;droid-serif&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('adamlabs-google...', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-fonts.php(224): update_option('adamlabs-google...', Array)
+#6 /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-fonts.php(193): AdamLabs_Fonts::_propagate_default_fonts(Array)
+#7 /wordpress/wp-includes/class-wp-hook.php(324): AdamLabs_Fonts::propagate_default_fonts(false)
 #8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[06-Apr-2025 19:26:53 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 19:26:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 19:26:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 19:26:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 19:27:05 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 19:27:05 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 19:27:05 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 19:27:05 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 19:27:17 UTC] PHP Warning:  Undefined variable $order_id in /wordpress/wp-content/plugins/pdf-invoicespacking-slip-and-shipping-label-free-for-woocommerce/admin/class-pdf-invoices-packing-slip-shipping-label-for-woocommerce-admin.php on line 104
-[06-Apr-2025 19:27:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_photo-...', false)
+#11 /internal/eval.php(20): activate_plugin('photo-gallery-p...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('adamlabs-google-fonts', 'a:3:{i:0;a:2:{s:3:\"url\";s:29:\"Open+Sans:300,400,600,700,800\";s:6:\"handle\";s:9:\"open-sans\";}i:1;a:2:{s:3:\"url\";s:43:\"Raleway:100,200,300,400,500,600,700,800,900\";s:6:\"handle\";s:7:\"raleway\";}i:2;a:2:{s:3:\"url\";s:19:\"Droid+Serif:400,700\";s:6:\"handle\";s:11:\"droid-serif\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_photo-gallery-portfolio/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, AdamLabs_Fonts::propagate_default_fonts, AdamLabs_Fonts::_propagate_default_fonts, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:28:03 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 07:28:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 07:28:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 07:28:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 07:28:04 UTC] PHP Deprecated:  Required parameter $app_id follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 59
+[09-Apr-2025 07:28:04 UTC] PHP Deprecated:  Required parameter $app_secret follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 59
+[09-Apr-2025 07:28:04 UTC] PHP Deprecated:  Required parameter $app_id follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 71
+[09-Apr-2025 07:28:04 UTC] PHP Deprecated:  Required parameter $app_secret follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 71
+[09-Apr-2025 07:28:04 UTC] PHP Deprecated:  Required parameter $current_photoset follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 1623
+[09-Apr-2025 07:28:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_invoice_enable_invoice_plugin', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_adamlabsgallery-widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -440,7 +792,7 @@ Stack trace:
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'woocommerce_invoice_enable_invoice_plugin' , 'yes' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_adamlabsgallery-widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -452,20 +804,48 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('woocommerce_inv...', 'yes', '', 'auto')
-#5 /wordpress/wp-content/plugins/pdf-invoicespacking-slip-and-shipping-label-free-for-woocommerce/includes/class-pdf-invoices-packing-slip-shipping-label-for-woocommerce-activator.php(38): update_option('woocommerce_inv...', 'yes')
-#6 /wordpress/wp-content/plugins/pdf-invoicespacking-slip-and-shipping-label-free-for-woocommerce/pdf-invoices-packing-slip-shipping-label-for-woocommerce.php(55): Phoen_Pdf_Invoices_Packing_Slip_Shipping_Label_For_Woocommerce_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): phoen_pdf_activate_pdf_invoices_packing_slip_shipping_label_for_woocommerce(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pdf-in...', false)
-#11 /internal/eval.php(20): activate_plugin('pdf-invoicespac...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_invoice_enable_invoice_plugin', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_pdf-invoicespacking-slip-and-shipping-label-free-for-woocommerce/pdf-invoices-packing-slip-shipping-label-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, phoen_pdf_activate_pdf_invoices_packing_slip_shipping_label_for_woocommerce, Phoen_Pdf_Invoices_Packing_Slip_Shipping_Label_For_Woocommerce_Activator::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 19:27:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('widget_adamlabs...', Array, '', 'auto')
+#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_adamlabs...', Array)
+#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
+#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
+#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#16 /wordpress/wp-settings.php(704): do_action('init')
+#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#20 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_adamlabsgallery-widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:28:12 UTC] PHP Deprecated:  Required parameter $app_id follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 59
+[09-Apr-2025 07:28:12 UTC] PHP Deprecated:  Required parameter $app_secret follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 59
+[09-Apr-2025 07:28:12 UTC] PHP Deprecated:  Required parameter $app_id follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 71
+[09-Apr-2025 07:28:12 UTC] PHP Deprecated:  Required parameter $app_secret follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 71
+[09-Apr-2025 07:28:12 UTC] PHP Deprecated:  Required parameter $current_photoset follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 1623
+[09-Apr-2025 07:28:14 UTC] PHP Deprecated:  Required parameter $app_id follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 59
+[09-Apr-2025 07:28:14 UTC] PHP Deprecated:  Required parameter $app_secret follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 59
+[09-Apr-2025 07:28:14 UTC] PHP Deprecated:  Required parameter $app_id follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 71
+[09-Apr-2025 07:28:14 UTC] PHP Deprecated:  Required parameter $app_secret follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 71
+[09-Apr-2025 07:28:14 UTC] PHP Deprecated:  Required parameter $current_photoset follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 1623
+[09-Apr-2025 07:28:23 UTC] PHP Deprecated:  Required parameter $app_id follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 59
+[09-Apr-2025 07:28:23 UTC] PHP Deprecated:  Required parameter $app_secret follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 59
+[09-Apr-2025 07:28:23 UTC] PHP Deprecated:  Required parameter $app_id follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 71
+[09-Apr-2025 07:28:23 UTC] PHP Deprecated:  Required parameter $app_secret follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 71
+[09-Apr-2025 07:28:23 UTC] PHP Deprecated:  Required parameter $current_photoset follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 1623
+[09-Apr-2025 07:28:25 UTC] PHP Deprecated:  Required parameter $app_id follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 59
+[09-Apr-2025 07:28:25 UTC] PHP Deprecated:  Required parameter $app_secret follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 59
+[09-Apr-2025 07:28:25 UTC] PHP Deprecated:  Required parameter $app_id follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 71
+[09-Apr-2025 07:28:25 UTC] PHP Deprecated:  Required parameter $app_secret follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 71
+[09-Apr-2025 07:28:25 UTC] PHP Deprecated:  Required parameter $current_photoset follows optional parameter $item_count in /wordpress/wp-content/plugins/photo-gallery-portfolio/com/core/class-external-sources.php on line 1623
+[09-Apr-2025 07:28:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_invoice_enable_myaccount', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('PinyinPermalink_separator', '_', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -477,7 +857,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'woocommerce_invoice_enable_myaccount' , 'yes' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'PinyinPermalink_separator' , '_' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -489,20 +869,18 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('woocommerce_inv...', 'yes', '', 'auto')
-#5 /wordpress/wp-content/plugins/pdf-invoicespacking-slip-and-shipping-label-free-for-woocommerce/includes/class-pdf-invoices-packing-slip-shipping-label-for-woocommerce-activator.php(39): update_option('woocommerce_inv...', 'yes')
-#6 /wordpress/wp-content/plugins/pdf-invoicespacking-slip-and-shipping-label-free-for-woocommerce/pdf-invoices-packing-slip-shipping-label-for-woocommerce.php(55): Phoen_Pdf_Invoices_Packing_Slip_Shipping_Label_For_Woocommerce_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): phoen_pdf_activate_pdf_invoices_packing_slip_shipping_label_for_woocommerce(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pdf-in...', false)
-#11 /internal/eval.php(20): activate_plugin('pdf-invoicespac...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_invoice_enable_myaccount', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_pdf-invoicespacking-slip-and-shipping-label-free-for-woocommerce/pdf-invoices-packing-slip-shipping-label-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, phoen_pdf_activate_pdf_invoices_packing_slip_shipping_label_for_woocommerce, Phoen_Pdf_Invoices_Packing_Slip_Shipping_Label_For_Woocommerce_Activator::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 19:27:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/pinyin-permalink/pinyin-permalink.php(23): add_option('PinyinPermalink...', '_')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): PinyinPermalinkActive(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pinyin...', false)
+#9 /internal/eval.php(20): activate_plugin('pinyin-permalin...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('PinyinPermalink_separator', '_', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_pinyin-permalink/pinyin-permalink.php'), WP_Hook->do_action, WP_Hook->apply_filters, PinyinPermalinkActive, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:28:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_settings_invoice_pdf_cname', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('PinyinPermalink_fullword', 'fullword', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -514,7 +892,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'woocommerce_settings_invoice_pdf_cname' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'PinyinPermalink_fullword' , 'fullword' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -526,20 +904,18 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('woocommerce_set...', '', '', 'auto')
-#5 /wordpress/wp-content/plugins/pdf-invoicespacking-slip-and-shipping-label-free-for-woocommerce/includes/class-pdf-invoices-packing-slip-shipping-label-for-woocommerce-activator.php(40): update_option('woocommerce_set...', '')
-#6 /wordpress/wp-content/plugins/pdf-invoicespacking-slip-and-shipping-label-free-for-woocommerce/pdf-invoices-packing-slip-shipping-label-for-woocommerce.php(55): Phoen_Pdf_Invoices_Packing_Slip_Shipping_Label_For_Woocommerce_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): phoen_pdf_activate_pdf_invoices_packing_slip_shipping_label_for_woocommerce(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pdf-in...', false)
-#11 /internal/eval.php(20): activate_plugin('pdf-invoicespac...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_settings_invoice_pdf_cname', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_pdf-invoicespacking-slip-and-shipping-label-free-for-woocommerce/pdf-invoices-packing-slip-shipping-label-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, phoen_pdf_activate_pdf_invoices_packing_slip_shipping_label_for_woocommerce, Phoen_Pdf_Invoices_Packing_Slip_Shipping_Label_For_Woocommerce_Activator::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 19:27:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/pinyin-permalink/pinyin-permalink.php(24): add_option('PinyinPermalink...', 'fullword')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): PinyinPermalinkActive(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pinyin...', false)
+#9 /internal/eval.php(20): activate_plugin('pinyin-permalin...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('PinyinPermalink_fullword', 'fullword', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_pinyin-permalink/pinyin-permalink.php'), WP_Hook->do_action, WP_Hook->apply_filters, PinyinPermalinkActive, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:28:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_settings_invoice_pdf_invoice_number', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('PinyinPermalink_length', '100', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -551,7 +927,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'woocommerce_settings_invoice_pdf_invoice_number' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'PinyinPermalink_length' , '100' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -563,20 +939,22 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('woocommerce_set...', 1, '', 'auto')
-#5 /wordpress/wp-content/plugins/pdf-invoicespacking-slip-and-shipping-label-free-for-woocommerce/includes/class-pdf-invoices-packing-slip-shipping-label-for-woocommerce-activator.php(41): update_option('woocommerce_set...', 1)
-#6 /wordpress/wp-content/plugins/pdf-invoicespacking-slip-and-shipping-label-free-for-woocommerce/pdf-invoices-packing-slip-shipping-label-for-woocommerce.php(55): Phoen_Pdf_Invoices_Packing_Slip_Shipping_Label_For_Woocommerce_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): phoen_pdf_activate_pdf_invoices_packing_slip_shipping_label_for_woocommerce(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pdf-in...', false)
-#11 /internal/eval.php(20): activate_plugin('pdf-invoicespac...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_settings_invoice_pdf_invoice_number', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_pdf-invoicespacking-slip-and-shipping-label-free-for-woocommerce/pdf-invoices-packing-slip-shipping-label-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, phoen_pdf_activate_pdf_invoices_packing_slip_shipping_label_for_woocommerce, Phoen_Pdf_Invoices_Packing_Slip_Shipping_Label_For_Woocommerce_Activator::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 19:27:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/pinyin-permalink/pinyin-permalink.php(25): add_option('PinyinPermalink...', 100)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): PinyinPermalinkActive(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pinyin...', false)
+#9 /internal/eval.php(20): activate_plugin('pinyin-permalin...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('PinyinPermalink_length', '100', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_pinyin-permalink/pinyin-permalink.php'), WP_Hook->do_action, WP_Hook->apply_filters, PinyinPermalinkActive, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:28:33 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 07:28:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 07:28:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 07:28:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 07:29:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_settings_invoice_pdf_invoice_prefix', '06', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('plug_monitor_installed', '1744183741', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -588,7 +966,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'woocommerce_settings_invoice_pdf_invoice_prefix' , '06' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'plug_monitor_installed' , '1744183741' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -600,18 +978,291 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('woocommerce_set...', '06', '', 'auto')
-#5 /wordpress/wp-content/plugins/pdf-invoicespacking-slip-and-shipping-label-free-for-woocommerce/includes/class-pdf-invoices-packing-slip-shipping-label-for-woocommerce-activator.php(42): update_option('woocommerce_set...', '06')
-#6 /wordpress/wp-content/plugins/pdf-invoicespacking-slip-and-shipping-label-free-for-woocommerce/pdf-invoices-packing-slip-shipping-label-for-woocommerce.php(55): Phoen_Pdf_Invoices_Packing_Slip_Shipping_Label_For_Woocommerce_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): phoen_pdf_activate_pdf_invoices_packing_slip_shipping_label_for_woocommerce(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pdf-in...', false)
-#11 /internal/eval.php(20): activate_plugin('pdf-invoicespac...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_settings_invoice_pdf_invoice_prefix', '06', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_pdf-invoicespacking-slip-and-shipping-label-free-for-woocommerce/pdf-invoices-packing-slip-shipping-label-for-woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, phoen_pdf_activate_pdf_invoices_packing_slip_shipping_label_for_woocommerce, Phoen_Pdf_Invoices_Packing_Slip_Shipping_Label_For_Woocommerce_Activator::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 19:27:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('plug_monitor_in...', 1744183741, '', 'auto')
+#5 /wordpress/wp-content/plugins/plug-in-monitor/plug-monitor.php(144): update_option('plug_monitor_in...', 1744183741)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): Plug_Monitor->activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_plug-i...', false)
+#10 /internal/eval.php(20): activate_plugin('plug-in-monitor...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('plug_monitor_installed', '1744183741', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_plug-in-monitor/plug-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, Plug_Monitor->activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:29:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_settings_invoice_pdf_invoice_suffix', '2025', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = V
-Node.js v20.15.0
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('plug_monitor_version', '1.1.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'plug_monitor_version' , '1.1.2' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('plug_monitor_ve...', '1.1.2', '', 'auto')
+#5 /wordpress/wp-content/plugins/plug-in-monitor/plug-monitor.php(147): update_option('plug_monitor_ve...', '1.1.2')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): Plug_Monitor->activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_plug-i...', false)
+#10 /internal/eval.php(20): activate_plugin('plug-in-monitor...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('plug_monitor_version', '1.1.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_plug-in-monitor/plug-monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, Plug_Monitor->activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:29:01 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 07:29:01 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 07:29:01 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 07:29:01 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 07:29:02 UTC] PHP Fatal error:  Uncaught Error: Class 'Plug\Monitor\Plugins\pluginMonitor' not found in /wordpress/wp-content/plugins/plug-in-monitor/plug-monitor.php:85
+Stack trace:
+#0 /wordpress/wp-content/plugins/plug-in-monitor/plug-monitor.php(123): Plug_Monitor->init_classes()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): Plug_Monitor->init_plugin('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/plug-in-monitor/plug-monitor.php on line 85
+[09-Apr-2025 07:29:11 UTC] PHP Fatal error:  Uncaught Error: Class 'Plug\Monitor\Plugins\pluginMonitor' not found in /wordpress/wp-content/plugins/plug-in-monitor/plug-monitor.php:85
+Stack trace:
+#0 /wordpress/wp-content/plugins/plug-in-monitor/plug-monitor.php(123): Plug_Monitor->init_classes()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): Plug_Monitor->init_plugin('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/plug-in-monitor/plug-monitor.php on line 85
+[09-Apr-2025 07:29:20 UTC] PHP Fatal error:  Uncaught Error: Class 'Plug\Monitor\Plugins\pluginMonitor' not found in /wordpress/wp-content/plugins/plug-in-monitor/plug-monitor.php:85
+Stack trace:
+#0 /wordpress/wp-content/plugins/plug-in-monitor/plug-monitor.php(123): Plug_Monitor->init_classes()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): Plug_Monitor->init_plugin('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/plug-in-monitor/plug-monitor.php on line 85
+[09-Apr-2025 07:29:30 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 07:29:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 07:29:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 07:29:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 07:29:59 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 07:29:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 07:29:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 07:29:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 07:30:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('powr_install_time', '1744183825', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'powr_install_time' , '1744183825' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/powr-tabs/powr-tabs.php(184): add_option('powr_install_ti...', '1744183825', '', 'on')
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('powr-tabs/powr-...')
+#7 /internal/eval.php(20): activate_plugin('powr-tabs/powr-...')
+#8 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('powr_install_time', '1744183825', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/powr-tabs/powr-tabs.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:30:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('powr_tabs_plugin_do_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'powr_tabs_plugin_do_activation_redirect' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/powr-tabs/powr-tabs.php(179): add_option('powr_tabs_plugi...', true)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): powr_tabs_plugin_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_powr-t...', false)
+#9 /internal/eval.php(20): activate_plugin('powr-tabs/powr-...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('powr_tabs_plugin_do_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_powr-tabs/powr-tabs.php'), WP_Hook->do_action, WP_Hook->apply_filters, powr_tabs_plugin_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:30:25 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 07:30:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 07:30:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 07:30:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 07:30:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('powr_install_time', '1744183826', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'powr_install_time' , '1744183826' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/powr-tabs/powr-tabs.php(184): add_option('powr_install_ti...', '1744183826', '', 'on')
+#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('powr_install_time', '1744183826', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/powr-tabs/powr-tabs.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:30:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_powr_tabs', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_powr_tabs' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('widget_powr_tab...', Array, '', 'auto')
+#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_powr_tab...', Array)
+#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
+#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
+#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#16 /wordpress/wp-settings.php(704): do_action('init')
+#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#20 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_powr_tabs', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:30:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/prodotti/prodotti_widget.php:72
+Stack trace:
+#0 /wordpress/wp-content/plugins/prodotti/prodotti.php(22): include()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('prodotti/prodot...')
+#3 /internal/eval.php(20): activate_plugin('prodotti/prodot...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/prodotti/prodotti_widget.php on line 72
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"prodotti"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
