@@ -2,10 +2,19 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [07-Apr-2025 10:29:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [09-Apr-2025 17:25:01 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 17:25:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 17:25:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 17:25:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 17:25:48 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 17:25:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 17:25:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 17:25:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 17:26:15 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hypercomments/hypercomments.php on line 15
+[09-Apr-2025 17:26:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_admin', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hc_selector', '.hc_counter_comments', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -17,7 +26,7 @@ Error: [07-Apr-2025 10:29:58 UTC] WordPress database error <div style="clear:bot
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_admin' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'hc_selector' , '.hc_counter_comments' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -29,18 +38,19 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/hack-me-if-you-can/hack_me_if_you_can.php(96): add_option('wp_admin')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): fa_set_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hack-m...', false)
-#9 /internal/eval.php(20): activate_plugin('hack-me-if-you-...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_admin', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hack-me-if-you-can/hack_me_if_you_can.php'), WP_Hook->do_action, WP_Hook->apply_filters, fa_set_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 10:29:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('hc_selector', '.hc_counter_com...', '', 'auto')
+#5 /wordpress/wp-content/plugins/hypercomments/hypercomments.php(260): update_option('hc_selector', '.hc_counter_com...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): hc_active(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hyperc...', false)
+#10 /internal/eval.php(20): activate_plugin('hypercomments/h...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hc_selector', '.hc_counter_comments', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hypercomments/hypercomments.php'), WP_Hook->do_action, WP_Hook->apply_filters, hc_active, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 17:26:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fa_text', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hc_append', '#hypercomments_widget', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -52,7 +62,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fa_text' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'hc_append' , '#hypercomments_widget' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -64,18 +74,19 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/hack-me-if-you-can/hack_me_if_you_can.php(97): add_option('fa_text')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): fa_set_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hack-m...', false)
-#9 /internal/eval.php(20): activate_plugin('hack-me-if-you-...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fa_text', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hack-me-if-you-can/hack_me_if_you_can.php'), WP_Hook->do_action, WP_Hook->apply_filters, fa_set_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 10:29:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('hc_append', '#hypercomments_...', '', 'auto')
+#5 /wordpress/wp-content/plugins/hypercomments/hypercomments.php(261): update_option('hc_append', '#hypercomments_...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): hc_active(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hyperc...', false)
+#10 /internal/eval.php(20): activate_plugin('hypercomments/h...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hc_append', '#hypercomments_widget', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hypercomments/hypercomments.php'), WP_Hook->do_action, WP_Hook->apply_filters, hc_active, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 17:26:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('current_lang', 'en_EN', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hc_word_limit', '10', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -87,7 +98,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'current_lang' , 'en_EN' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'hc_word_limit' , '10' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -99,23 +110,19 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/hack-me-if-you-can/hack_me_if_you_can.php(98): add_option('current_lang', 'en_EN')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): fa_set_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hack-m...', false)
-#9 /internal/eval.php(20): activate_plugin('hack-me-if-you-...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('current_lang', 'en_EN', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hack-me-if-you-can/hack_me_if_you_can.php'), WP_Hook->do_action, WP_Hook->apply_filters, fa_set_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 10:29:58 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 10:29:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 10:29:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 10:29:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 10:30:12 UTC] PHP Deprecated:  Function supports_collation is <strong>deprecated</strong> since version 3.5.0! Use wpdb::has_cap( 'collation' ) instead. in /wordpress/wp-includes/functions.php on line 6114
-[07-Apr-2025 10:30:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('hc_word_limit', 10, '', 'auto')
+#5 /wordpress/wp-content/plugins/hypercomments/hypercomments.php(262): update_option('hc_word_limit', 10)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): hc_active(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hyperc...', false)
+#10 /internal/eval.php(20): activate_plugin('hypercomments/h...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hc_word_limit', '10', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hypercomments/hypercomments.php'), WP_Hook->do_action, WP_Hook->apply_filters, hc_active, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 17:26:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('download_path', '/wordpress/wp-content/files', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hc_realtime', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -127,7 +134,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'download_path' , '/wordpress/wp-content/files' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'hc_realtime' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -139,18 +146,19 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/hacklog-downloadmanager/includes/hacklogdm.class.php(1048): add_option('download_path', '/wordpress/wp-c...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): hacklogdm->create_download_table(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hacklo...', false)
-#9 /internal/eval.php(20): activate_plugin('hacklog-downloa...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('download_path', '/wordpress/wp-content/files', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hacklog-downloadmanager/hacklog-downloadmanager.php'), WP_Hook->do_action, WP_Hook->apply_filters, hacklogdm->create_download_table, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 10:30:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('hc_realtime', true, '', 'auto')
+#5 /wordpress/wp-content/plugins/hypercomments/hypercomments.php(263): update_option('hc_realtime', true)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): hc_active(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hyperc...', false)
+#10 /internal/eval.php(20): activate_plugin('hypercomments/h...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hc_realtime', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hypercomments/hypercomments.php'), WP_Hook->do_action, WP_Hook->apply_filters, hc_active, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 17:26:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('download_path_url', 'http://127.0.0.1:9400/wp-content/files', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hc_comments_level', '4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -162,7 +170,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'download_path_url' , 'http://127.0.0.1:9400/wp-content/files' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'hc_comments_level' , '4' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -174,18 +182,19 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/hacklog-downloadmanager/includes/hacklogdm.class.php(1049): add_option('download_path_u...', 'http://127.0.0....')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): hacklogdm->create_download_table(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hacklo...', false)
-#9 /internal/eval.php(20): activate_plugin('hacklog-downloa...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('download_path_url', 'http://127.0.0.1:9400/wp-content/files', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hacklog-downloadmanager/hacklog-downloadmanager.php'), WP_Hook->do_action, WP_Hook->apply_filters, hacklogdm->create_download_table, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 10:30:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('hc_comments_lev...', 4, '', 'auto')
+#5 /wordpress/wp-content/plugins/hypercomments/hypercomments.php(264): update_option('hc_comments_lev...', 4)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): hc_active(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hyperc...', false)
+#10 /internal/eval.php(20): activate_plugin('hypercomments/h...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hc_comments_level', '4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hypercomments/hypercomments.php'), WP_Hook->do_action, WP_Hook->apply_filters, hc_active, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 17:26:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('download_method', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hc_locale', 'en', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -197,7 +206,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'download_method' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'hc_locale' , 'en' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -209,18 +218,45 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/hacklog-downloadmanager/includes/hacklogdm.class.php(1051): add_option('download_method', 0)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): hacklogdm->create_download_table(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hacklo...', false)
-#9 /internal/eval.php(20): activate_plugin('hacklog-downloa...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('download_method', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hacklog-downloadmanager/hacklog-downloadmanager.php'), WP_Hook->do_action, WP_Hook->apply_filters, hacklogdm->create_download_table, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 10:30:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('hc_locale', 'en', '', 'auto')
+#5 /wordpress/wp-content/plugins/hypercomments/hypercomments.php(265): update_option('hc_locale', 'en')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): hc_active(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hyperc...', false)
+#10 /internal/eval.php(20): activate_plugin('hypercomments/h...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hc_locale', 'en', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hypercomments/hypercomments.php'), WP_Hook->do_action, WP_Hook->apply_filters, hc_active, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 17:26:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 17:26:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 17:26:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 17:26:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 17:26:16 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hypercomments/hypercomments.php on line 15
+[09-Apr-2025 17:26:24 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hypercomments/hypercomments.php on line 15
+[09-Apr-2025 17:26:25 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hypercomments/hypercomments.php on line 15
+[09-Apr-2025 17:26:33 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hypercomments/hypercomments.php on line 15
+[09-Apr-2025 17:26:34 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/hypercomments/hypercomments.php on line 15
+[09-Apr-2025 17:26:42 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 17:26:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 17:26:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 17:26:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 17:26:42 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 17:26:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 17:26:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 17:26:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 17:27:09 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 17:27:09 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 17:27:09 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 17:27:09 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 17:27:36 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 17:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 17:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 17:27:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 17:27:37 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in Help_Me_Write is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 17:27:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('download_display_type', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_help_me_write', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -232,7 +268,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'download_display_type' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_help_me_write' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -244,18 +280,31 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/hacklog-downloadmanager/includes/hacklogdm.class.php(1052): add_option('download_displa...', 0)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): hacklogdm->create_download_table(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hacklo...', false)
-#9 /internal/eval.php(20): activate_plugin('hacklog-downloa...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('download_display_type', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hacklog-downloadmanager/hacklog-downloadmanager.php'), WP_Hook->do_action, WP_Hook->apply_filters, hacklogdm->create_download_table, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 10:30:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('widget_help_me_...', Array, '', 'auto')
+#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_help_me_...', Array)
+#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
+#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
+#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#16 /wordpress/wp-settings.php(704): do_action('init')
+#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#20 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_help_me_write', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 17:27:46 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in Help_Me_Write is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 17:27:55 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in Help_Me_Write is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 17:28:03 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/hidden-by-roles-the-admin-bar/HBRAB.php on line 124
+[09-Apr-2025 17:28:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('download_template_embedded', 'a:2:{i:0;s:262:\"<p><img src=\"http://127.0.0.1:9400/wp-content/plugins/hacklog-downloadmanager/images/ext/%FILE_ICON%\" alt=\"\" title=\"\" style=\"vertical-align: middle;\" />&nbsp;&nbsp;<strong><a href=\"%FILE_DOWNLOAD_URL%\">%FILE_NAME%</a></strong> (%FILE_SIZE%, %FILE_HITS% hits)</p>\";i:1;s:290:\"<p><img src=\"http://127.0.0.1:9400/wp-content/plugins/hacklog-downloadmanager/images/ext/%FILE_ICON%\" alt=\"\" title=\"\" style=\"vertical-align: middle;\" />&nbsp;&nbsp;<strong>%FILE_NAME%</strong> (%FILE_SIZE%, %FILE_HITS% hits)<br /><i>You do not have permission to download this file.</i></p>\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hbrab_db_version', '1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -267,7 +316,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'download_template_embedded' , 'a:2:{i:0;s:262:&quot;&lt;p&gt;&lt;img src=&quot;http://127.0.0.1:9400/wp-content/plugins/hacklog-downloadmanager/images/ext/%FILE_ICON%&quot; alt=&quot;&quot; title=&quot;&quot; style=&quot;vertical-align: middle;&quot; /&gt;&amp;nbsp;&amp;nbsp;&lt;strong&gt;&lt;a href=&quot;%FILE_DOWNLOAD_URL%&quot;&gt;%FILE_NAME%&lt;/a&gt;&lt;/strong&gt; (%FILE_SIZE%, %FILE_HITS% hits)&lt;/p&gt;&quot;;i:1;s:290:&quot;&lt;p&gt;&lt;img src=&quot;http://127.0.0.1:9400/wp-content/plugins/hacklog-downloadmanager/images/ext/%FILE_ICON%&quot; alt=&quot;&quot; title=&quot;&quot; style=&quot;vertical-align: middle;&quot; /&gt;&amp;nbsp;&amp;nbsp;&lt;strong&gt;%FILE_NAME%&lt;/strong&gt; (%FILE_SIZE%, %FILE_HITS% hits)&lt;br /&gt;&lt;i&gt;You do not have permission to download this file.&lt;/i&gt;&lt;/p&gt;&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'hbrab_db_version' , '1.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -279,377 +328,55 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/hacklog-downloadmanager/includes/hacklogdm.class.php(1053): add_option('download_templa...', Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): hacklogdm->create_download_table(false)
+#4 /wordpress/wp-content/plugins/hidden-by-roles-the-admin-bar/HBRAB.php(50): add_option('hbrab_db_versio...', '1.0')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): hbrabInstall(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hacklo...', false)
-#9 /internal/eval.php(20): activate_plugin('hacklog-downloa...')
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hidden...', false)
+#9 /internal/eval.php(20): activate_plugin('hidden-by-roles...')
 #10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('download_template_embedded', 'a:2:{i:0;s:262:\"<p><img src=\"http://127.0.0.1:9400/wp-content/plugins/hacklog-downloadmanager/images/ext/%FILE_ICON%\" alt=\"\" title=\"\" style=\"vertical-align: middle;\" />&nbsp;&nbsp;<strong><a href=\"%FILE_DOWNLOAD_URL%\">%FILE_NAME%</a></strong> (%FILE_SIZE%, %FILE_HITS% hits)</p>\";i:1;s:290:\"<p><img src=\"http://127.0.0.1:9400/wp-content/plugins/hacklog-downloadmanager/images/ext/%FILE_ICON%\" alt=\"\" title=\"\" style=\"vertical-align: middle;\" />&nbsp;&nbsp;<strong>%FILE_NAME%</strong> (%FILE_SIZE%, %FILE_HITS% hits)<br /><i>You do not have permission to download this file.</i></p>\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hacklog-downloadmanager/hacklog-downloadmanager.php'), WP_Hook->do_action, WP_Hook->apply_filters, hacklogdm->create_download_table, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 10:30:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('download_options', 'a:6:{s:12:\"use_filename\";i:0;s:13:\"download_slug\";s:7:\"getfile\";s:14:\"nice_permalink\";i:0;s:10:\"time_limit\";i:300;s:9:\"hash_func\";s:3:\"md5\";s:13:\"check_referer\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'download_options' , 'a:6:{s:12:&quot;use_filename&quot;;i:0;s:13:&quot;download_slug&quot;;s:7:&quot;getfile&quot;;s:14:&quot;nice_permalink&quot;;i:0;s:10:&quot;time_limit&quot;;i:300;s:9:&quot;hash_func&quot;;s:3:&quot;md5&quot;;s:13:&quot;check_referer&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/hacklog-downloadmanager/includes/hacklogdm.class.php(1054): add_option('download_option...', Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): hacklogdm->create_download_table(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hacklo...', false)
-#9 /internal/eval.php(20): activate_plugin('hacklog-downloa...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('download_options', 'a:6:{s:12:\"use_filename\";i:0;s:13:\"download_slug\";s:7:\"getfile\";s:14:\"nice_permalink\";i:0;s:10:\"time_limit\";i:300;s:9:\"hash_func\";s:3:\"md5\";s:13:\"check_referer\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hacklog-downloadmanager/hacklog-downloadmanager.php'), WP_Hook->do_action, WP_Hook->apply_filters, hacklogdm->create_download_table, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 10:30:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('download_template_custom_css', '.hacklogdownload_downlinks{width:500px}.hacklogdownload_down_link{margin-top:10px;background:#e0e2e4;border:1px solid #330;color:#222;padding:5px 5px 5px 20px}.hacklogdownload_down_link a{color:#57d}.hacklogdownload_views{color:red}.hacklogdownload_box{border-bottom:1px solid #aaa;padding:10px 0}.hacklogdownload_box_content{line-height:18px;padding:0 0 0 10px}.hacklogdownload_box_content p{margin:5px 0}.hacklogdownload_box_content a{color:#d54e21}.hacklogdownload_box_content a:hover{color:#1d1d1d}.hacklogdownload_left{float:left;width:320px}.hacklogdownload_right{width:160px;float:right;margin:0 auto}.hacklogdownload_right img{max-width:160px}.hacklogdownload_notice{padding-top:10px;text-align:center}#facebox .content{width:600px;background:none repeat scroll 0 0 #e0e2e4;color:#333}#facebox .popup{border:6px solid #444}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'download_template_custom_css' , '.hacklogdownload_downlinks{width:500px}.hacklogdownload_down_link{margin-top:10px;background:#e0e2e4;border:1px solid #330;color:#222;padding:5px 5px 5px 20px}.hacklogdownload_down_link a{color:#57d}.hacklogdownload_views{color:red}.hacklogdownload_box{border-bottom:1px solid #aaa;padding:10px 0}.hacklogdownload_box_content{line-height:18px;padding:0 0 0 10px}.hacklogdownload_box_content p{margin:5px 0}.hacklogdownload_box_content a{color:#d54e21}.hacklogdownload_box_content a:hover{color:#1d1d1d}.hacklogdownload_left{float:left;width:320px}.hacklogdownload_right{width:160px;float:right;margin:0 auto}.hacklogdownload_right img{max-width:160px}.hacklogdownload_notice{padding-top:10px;text-align:center}#facebox .content{width:600px;background:none repeat scroll 0 0 #e0e2e4;color:#333}#facebox .popup{border:6px solid #444}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/hacklog-downloadmanager/includes/hacklogdm.class.php(1055): add_option('download_templa...', '.hacklogdownloa...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): hacklogdm->create_download_table(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hacklo...', false)
-#9 /internal/eval.php(20): activate_plugin('hacklog-downloa...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('download_template_custom_css', '.hacklogdownload_downlinks{width:500px}.hacklogdownload_down_link{margin-top:10px;background:#e0e2e4;border:1px solid #330;color:#222;padding:5px 5px 5px 20px}.hacklogdownload_down_link a{color:#57d}.hacklogdownload_views{color:red}.hacklogdownload_box{border-bottom:1px solid #aaa;padding:10px 0}.hacklogdownload_box_content{line-height:18px;padding:0 0 0 10px}.hacklogdownload_box_content p{margin:5px 0}.hacklogdownload_box_content a{color:#d54e21}.hacklogdownload_box_content a:hover{color:#1d1d1d}.hacklogdownload_left{float:left;width:320px}.hacklogdownload_right{width:160px;float:right;margin:0 auto}.hacklogdownload_right img{max-width:160px}.hacklogdownload_notice{padding-top:10px;text-align:center}#facebox .content{width:600px;background:none repeat scroll 0 0 #e0e2e4;color:#333}#facebox .popup{border:6px solid #444}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hacklog-downloadmanager/hacklog-downloadmanager.php'), WP_Hook->do_action, WP_Hook->apply_filters, hacklogdm->create_download_table, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 10:30:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('download_template_popup', 'a:2:{i:0;s:1821:\"<div id=\"hacklog_download_list%FILE_ID%\" style=\"display:none\">
-			<div class=\"hacklogdownload_box\">
-				<strong>Download statement：</strong>
-				<div class=\"hacklogdownload_box_content\">
-					<p>
-					1. Download statement 1
-					</p>
-					<p>
-					2. Download statement 2
-					</p>
-				</div>
-			</div>	
-			<div class=\"hacklogdownload_box\">
-				<strong>File info：</strong>
-				<div class=\"hacklogdownload_box_content\">
-					<div class=\"hacklogdownload_left\">
-						<p>File name：<img src=\"http://127.0.0.1:9400/wp-content/plugins/hacklog-downloadmanager/images/ext/%FILE_ICON%\" alt=\"\" title=\"\" style=\"vertical-align: middle;\" />&nbsp;&nbsp;%FILE_NAME% </p>
-						<p>File hash：%FILE_HASH%</p>
-						<p>File size：%FILE_SIZE%</p>
-						<p>File uploaded：%FILE_DATE%</p>
-						<p>File updated：%FILE_UPDATED_DATE%</p>
-						<p>File description：%FILE_DESCRIPTION%</p>
-					</div>
-					
-					<div class=\"hacklogdownload_right\">
-					<strong>Download URL：</strong><a href=\"%FILE_DOWNLOAD_URL%\" title=\"download %FILE_NAME%\"><img style=\"vertical-align: middle;\" src=\"http://127.0.0.1:9400/wp-content/plugins/hacklog-downloadmanager/images/download.png\" alt=\"download\"/></a>
-					</div>
-				</div>
-				<div style=\"clear:both\"></div>
-			</div>
-			<div class=\"hacklogdownload_notice\">
-			<span style=\"color:#f00;\">Other notice</span>
-			</div>
-</div><!-- end hacklog_download_list%FILE_ID% -->
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('hbrab_db_version', '1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hidden-by-roles-the-admin-bar/HBRAB.php'), WP_Hook->do_action, WP_Hook->apply_filters, hbrabInstall, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 17:28:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 17:28:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 17:28:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 17:28:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 17:28:05 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/hidden-by-roles-the-admin-bar/HBRAB.php on line 124
+[09-Apr-2025 17:28:13 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/hidden-by-roles-the-admin-bar/HBRAB.php on line 124
+[09-Apr-2025 17:28:14 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/hidden-by-roles-the-admin-bar/HBRAB.php on line 124
+[09-Apr-2025 17:28:22 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/hidden-by-roles-the-admin-bar/HBRAB.php on line 124
+[09-Apr-2025 17:28:23 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/hidden-by-roles-the-admin-bar/HBRAB.php on line 124
+[09-Apr-2025 17:28:40 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 17:28:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 17:28:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 17:28:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 17:29:07 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 17:29:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 17:29:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 17:29:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 17:29:32 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 17:29:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 17:29:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 17:29:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
 
-<div class=\"hacklogdownload_down_link\"><img src=\"http://127.0.0.1:9400/wp-content/plugins/hacklog-downloadmanager/images/ext/%FILE_ICON%\" alt=\"\" title=\"\" style=\"vertical-align: middle;\" />&nbsp;&nbsp;<span class=\"hacklogdownload_filename\">%FILE_NAME%</span>&nbsp;&nbsp;<strong><a rel=\"facebox\" href=\"#hacklog_download_list%FILE_ID%\" title=\"download %FILE_NAME%\">Download</a></strong> (%FILE_SIZE%, %FILE_HITS% hits)</div>
-\";i:1;s:290:\"<p><img src=\"http://127.0.0.1:9400/wp-content/plugins/hacklog-downloadmanager/images/ext/%FILE_ICON%\" alt=\"\" title=\"\" style=\"vertical-align: middle;\" />&nbsp;&nbsp;<strong>%FILE_NAME%</strong> (%FILE_SIZE%, %FILE_HITS% hits)<br /><i>You do not have permission to download this file.</i></p>\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'download_template_popup' , 'a:2:{i:0;s:1821:&quot;&lt;div id=&quot;hacklog_download_list%FILE_ID%&quot; style=&quot;display:none&quot;&gt;
-			&lt;div class=&quot;hacklogdownload_box&quot;&gt;
-				&lt;strong&gt;Download statement：&lt;/strong&gt;
-				&lt;div class=&quot;hacklogdownload_box_content&quot;&gt;
-					&lt;p&gt;
-					1. Download statement 1
-					&lt;/p&gt;
-					&lt;p&gt;
-					2. Download statement 2
-					&lt;/p&gt;
-				&lt;/div&gt;
-			&lt;/div&gt;	
-			&lt;div class=&quot;hacklogdownload_box&quot;&gt;
-				&lt;strong&gt;File info：&lt;/strong&gt;
-				&lt;div class=&quot;hacklogdownload_box_content&quot;&gt;
-					&lt;div class=&quot;hacklogdownload_left&quot;&gt;
-						&lt;p&gt;File name：&lt;img src=&quot;http://127.0.0.1:9400/wp-content/plugins/hacklog-downloadmanager/images/ext/%FILE_ICON%&quot; alt=&quot;&quot; title=&quot;&quot; style=&quot;vertical-align: middle;&quot; /&gt;&amp;nbsp;&amp;nbsp;%FILE_NAME% &lt;/p&gt;
-						&lt;p&gt;File hash：%FILE_HASH%&lt;/p&gt;
-						&lt;p&gt;File size：%FILE_SIZE%&lt;/p&gt;
-						&lt;p&gt;File uploaded：%FILE_DATE%&lt;/p&gt;
-						&lt;p&gt;File updated：%FILE_UPDATED_DATE%&lt;/p&gt;
-						&lt;p&gt;File description：%FILE_DESCRIPTION%&lt;/p&gt;
-					&lt;/div&gt;
-					
-					&lt;div class=&quot;hacklogdownload_right&quot;&gt;
-					&lt;strong&gt;Download URL：&lt;/strong&gt;&lt;a href=&quot;%FILE_DOWNLOAD_URL%&quot; title=&quot;download %FILE_NAME%&quot;&gt;&lt;img style=&quot;vertical-align: middle;&quot; src=&quot;http://127.0.0.1:9400/wp-content/plugins/hacklog-downloadmanager/images/download.png&quot; alt=&quot;download&quot;/&gt;&lt;/a&gt;
-					&lt;/div&gt;
-				&lt;/div&gt;
-				&lt;div style=&quot;clear:both&quot;&gt;&lt;/div&gt;
-			&lt;/div&gt;
-			&lt;div class=&quot;hacklogdownload_notice&quot;&gt;
-			&lt;span style=&quot;color:#f00;&quot;&gt;Other notice&lt;/span&gt;
-			&lt;/div&gt;
-&lt;/div&gt;&lt;!-- end hacklog_download_list%FILE_ID% --&gt;
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"holiday-message"},"options":{"activate":true}}) : Plugin /wordpress/wp-content/plugins/holiday-message could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: Error: Plugin /wordpress/wp-content/plugins/holiday-message could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
+        at vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:119:51)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159)
+  }
+}
 
-&lt;div class=&quot;hacklogdownload_down_link&quot;&gt;&lt;img src=&quot;http://127.0.0.1:9400/wp-content/plugins/hacklog-downloadmanager/images/ext/%FILE_ICON%&quot; alt=&quot;&quot; title=&quot;&quot; style=&quot;vertical-align: middle;&quot; /&gt;&amp;nbsp;&amp;nbsp;&lt;span class=&quot;hacklogdownload_filename&quot;&gt;%FILE_NAME%&lt;/span&gt;&amp;nbsp;&amp;nbsp;&lt;strong&gt;&lt;a rel=&quot;facebox&quot; href=&quot;#hacklog_download_list%FILE_ID%&quot; title=&quot;download %FILE_NAME%&quot;&gt;Download&lt;/a&gt;&lt;/strong&gt; (%FILE_SIZE%, %FILE_HITS% hits)&lt;/div&gt;
-&quot;;i:1;s:290:&quot;&lt;p&gt;&lt;img src=&quot;http://127.0.0.1:9400/wp-content/plugins/hacklog-downloadmanager/images/ext/%FILE_ICON%&quot; alt=&quot;&quot; title=&quot;&quot; style=&quot;vertical-align: middle;&quot; /&gt;&amp;nbsp;&amp;nbsp;&lt;strong&gt;%FILE_NAME%&lt;/strong&gt; (%FILE_SIZE%, %FILE_HITS% hits)&lt;br /&gt;&lt;i&gt;You do not have permission to download this file.&lt;/i&gt;&lt;/p&gt;&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/hacklog-downloadmanager/includes/hacklogdm.class.php(1056): add_option('download_templa...', Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): hacklogdm->create_download_table(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_hacklo...', false)
-#9 /internal/eval.php(20): activate_plugin('hacklog-downloa...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('download_template_popup', 'a:2:{i:0;s:1821:\"<div id=\"hacklog_download_list%FILE_ID%\" style=\"display:none\">
-			<div class=\"hacklogdownload_box\">
-				<strong>Download statement：</strong>
-				<div class=\"hacklogdownload_box_content\">
-					<p>
-					1. Download statement 1
-					</p>
-					<p>
-					2. Download statement 2
-					</p>
-				</div>
-			</div>	
-			<div class=\"hacklogdownload_box\">
-				<strong>File info：</strong>
-				<div class=\"hacklogdownload_box_content\">
-					<div class=\"hacklogdownload_left\">
-						<p>File name：<img src=\"http://127.0.0.1:9400/wp-content/plugins/hacklog-downloadmanager/images/ext/%FILE_ICON%\" alt=\"\" title=\"\" style=\"vertical-align: middle;\" />&nbsp;&nbsp;%FILE_NAME% </p>
-						<p>File hash：%FILE_HASH%</p>
-						<p>File size：%FILE_SIZE%</p>
-						<p>File uploaded：%FILE_DATE%</p>
-						<p>File updated：%FILE_UPDATED_DATE%</p>
-						<p>File description：%FILE_DESCRIPTION%</p>
-					</div>
-					
-					<div class=\"hacklogdownload_right\">
-					<strong>Download URL：</strong><a href=\"%FILE_DOWNLOAD_URL%\" title=\"download %FILE_NAME%\"><img style=\"vertical-align: middle;\" src=\"http://127.0.0.1:9400/wp-content/plugins/hacklog-downloadmanager/images/download.png\" alt=\"download\"/></a>
-					</div>
-				</div>
-				<div style=\"clear:both\"></div>
-			</div>
-			<div class=\"hacklogdownload_notice\">
-			<span style=\"color:#f00;\">Other notice</span>
-			</div>
-</div><!-- end hacklog_download_list%FILE_ID% -->
-
-<div class=\"hacklogdownload_down_link\"><img src=\"http://127.0.0.1:9400/wp-content/plugins/hacklog-downloadmanager/images/ext/%FILE_ICON%\" alt=\"\" title=\"\" style=\"vertical-align: middle;\" />&nbsp;&nbsp;<span class=\"hacklogdownload_filename\">%FILE_NAME%</span>&nbsp;&nbsp;<strong><a rel=\"facebox\" href=\"#hacklog_download_list%FILE_ID%\" title=\"download %FILE_NAME%\">Download</a></strong> (%FILE_SIZE%, %FILE_HITS% hits)</div>
-\";i:1;s:290:\"<p><img src=\"http://127.0.0.1:9400/wp-content/plugins/hacklog-downloadmanager/images/ext/%FILE_ICON%\" alt=\"\" title=\"\" style=\"vertical-align: middle;\" />&nbsp;&nbsp;<strong>%FILE_NAME%</strong> (%FILE_SIZE%, %FILE_HITS% hits)<br /><i>You do not have permission to download this file.</i></p>\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_hacklog-downloadmanager/hacklog-downloadmanager.php'), WP_Hook->do_action, WP_Hook->apply_filters, hacklogdm->create_download_table, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 10:30:12 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 10:30:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 10:30:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 10:30:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 10:30:12 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 10:30:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 10:30:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 10:30:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 10:30:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '0P2S[k/%BS>:?or//Dv_H7&t*qOeRrr#l9lYyXghzm]ErLp<xXWyDe31F6ZjjBLh', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , '0P2S[k/%BS&gt;:?or//Dv_H7&amp;t*qOeRrr#l9lYyXghzm]ErLp&lt;xXWyDe31F6ZjjBLh' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', '0P2S[k/%BS>:?or...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', '0P2S[k/%BS>:?or...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', '0P2S[k/%BS>:?or...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', '0P2S[k/%BS>:?or...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40371|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/hacklog-downloadmanager/includes/hacklogdm.class.php(269): wp_register_script('facebox', 'http://127.0.0....', Array, '1.2', Array)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): hacklogdm::register_front_js('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '0P2S[k/%BS>:?or//Dv_H7&t*qOeRrr#l9lYyXghzm]ErLp<xXWyDe31F6ZjjBLh', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, hacklogdm::register_front_js, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 10:30:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '%eL5o_w7).4S+z?CkBw~]U%:co:f?${7D^GT{@d.LoxwbCLvD)v&QRU65Zmm&O8m', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , '%eL5o_w7).4S+z?CkBw~]U%:co:f?${7D^GT{@d.LoxwbCLvD)v&amp;QRU65Zmm&amp;O8m' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', '%eL5o_w7).4S+z?...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', '%eL5o_w7).4S+z?...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', '%eL5o_w7).4S+z?...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', '%eL5o_w7).4S+z?...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40371|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/hacklog-downloadmanager/includes/hacklogdm.class.php(269): wp_register_script('facebox', 'http://127.0.0....', Array, '1.2', Array)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): hacklogdm::register_front_js('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '%eL5o_w7).4S+z?CkBw~]U%:co:f?${7D^GT{@d.LoxwbCLvD)v&QRU65Zmm&O8m', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, hacklogdm::register_front_js, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 10:30:15 UTC] PHP Deprecated:  Function supports_collation is <strong>deprecated</strong> since version 3.5.0! Use wpdb::has_cap( 'collation' ) instead. in /wordpress/wp-includes/functions.php on line 6114
-[07-Apr-2025 10:30:18 UTC] PHP Deprecated:  Function supports_collation is <strong>deprecated</strong> since version 3.5.0! Use wpdb::has_cap( 'collation' ) instead. in /wordpress/wp-includes/functions.php on line 6114
-[07-Apr-2025 10:30:25 UTC] PHP Notice: Undefined index: option_value	/internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:3080
-WP_SQLite_Driver->translate_update_list_in_non_strict_mode	/internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:1084
-WP_SQLite_Driver->execute_update_statement	/internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:818
-WP_SQLite_Driver->execute_mysql_query	/internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:680
-WP_SQLite_Driver->query	/internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php:472
-WP_SQLite_DB->_do_query	/internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php:413
-WP_SQLite_DB->query	/wordpress/wp-includes/class-wpdb.php:2716
-wpdb->update	/wordpress/wp-includes/option.php:955
-update_option	/wordpress/wp-admin/includes/plugin.php:714
-activate_plugin	/internal/eval.php:20
-URI: CLI
-[07-Apr-2025 10:30:25 UTC] PHP Notice: Trying to access array offset on value of type null	/internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:3081
-WP_SQLite_Driver->translate_update_list_in_non_strict_mode	/internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:1084
-WP_SQLite_Driver->execute_update_statement	/internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:818
-WP_SQLite_Driver->execute_mysql_query	/internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:680
-WP_SQLite_Driver->query	/internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php:472
-WP_SQLite_DB->_do_query	/internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php:413
-WP_SQLite_DB->query	/wordpress/wp-includes/class-wpdb.php:2716
-wpdb->update	/wordpress/wp-includes/option.php:955
-update_option	/wordpress/wp-admin/includes/plugin.php:714
-activate_plugin	/internal/eval.php:20
-URI: CLI
-[07-Apr-2025 10:30:25 UTC] PHP Notice: Trying to access array offset on value of type null	/internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:3082
-WP_SQLite_Driver->translate_update_list_in_non_strict_mode	/internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:1084
-WP_SQLite_Driver->execute_update_statement	/internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:818
-WP_SQLite_Driver->execute_mysql_query	/internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:680
-WP_SQLite_Driver->query	/internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php:472
-WP_SQLite_DB->_do_query	/internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php:413
-WP_SQLite_DB->query	/wordpress/wp-includes/class-wpdb.php:2716
-wpdb->update	/wordpress/wp-includes/option.php:955
-update_option	/wordpress/wp-admin/includes/plugin.php:714
-activate_plugin	/internal/eval.php:20
-URI: CLI
-[07-Apr-2025 10:30:25 UTC] PHP Notice: Trying to access array offset on value of type null	/internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:3083
-WP_SQLite_Driver->translate_update_list_in_non_strict_mode	/internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:1084
-WP_SQLite_Driver->execute_update_statement	/internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:818
-WP_SQLite_Driver->execute_mysql_query	/internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php:680
-WP_SQLite_Driver->query	/internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php:472
-WP_SQLite_DB->_do_query	/internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php:413
-WP_SQLite_DB->query	/wordpress/wp-includes/class-wpdb.php:2716
-wpdb-
+Node.js v23.11.0
