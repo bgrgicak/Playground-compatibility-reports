@@ -2,10 +2,18 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 19:22:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [09-Apr-2025 19:23:45 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 19:23:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 19:23:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 19:23:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 19:24:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 19:24:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 19:24:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 19:24:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 19:24:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rpb-options', 'delay_out=1000;delay_in=1500;delay_interval=5000;title_only=0;excerpt=0;strip_tags=0;show_meta=0;cat_method=exclude;cat_items=;post_datelimit=14', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('powr_install_time', '1744226655', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -17,7 +25,7 @@ Error: [09-Apr-2025 19:22:35 UTC] WordPress database error <div style="clear:bot
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'rpb-options' , 'delay_out=1000;delay_in=1500;delay_interval=5000;title_only=0;excerpt=0;strip_tags=0;show_meta=0;cat_method=exclude;cat_items=;post_datelimit=14' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'powr_install_time' , '1744226655' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -29,23 +37,55 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/random-post-box/random-post-box.php(76): add_option('rpb-options', 'delay_out=1000;...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): rpb_activate(false)
+#4 /wordpress/wp-content/plugins/powr-event-slider/powr-event-slider.php(184): add_option('powr_install_ti...', '1744226655', '', 'on')
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('powr-event-slid...')
+#7 /internal/eval.php(20): activate_plugin('powr-event-slid...')
+#8 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('powr_install_time', '1744226655', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/powr-event-slider/powr-event-slider.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 19:24:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('powr_event_slider_plugin_do_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'powr_event_slider_plugin_do_activation_redirect' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/powr-event-slider/powr-event-slider.php(179): add_option('powr_event_slid...', true)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): powr_event_slider_plugin_activate(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_random...', false)
-#9 /internal/eval.php(20): activate_plugin('random-post-box...')
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_powr-e...', false)
+#9 /internal/eval.php(20): activate_plugin('powr-event-slid...')
 #10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rpb-options', 'delay_out=1000;delay_in=1500;delay_interval=5000;title_only=0;excerpt=0;strip_tags=0;show_meta=0;cat_method=exclude;cat_items=;post_datelimit=14', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_random-post-box/random-post-box.php'), WP_Hook->do_action, WP_Hook->apply_filters, rpb_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:22:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 19:22:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 19:22:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 19:22:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 19:22:36 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:22:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('powr_event_slider_plugin_do_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_powr-event-slider/powr-event-slider.php'), WP_Hook->do_action, WP_Hook->apply_filters, powr_event_slider_plugin_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 19:24:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 19:24:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 19:24:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 19:24:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 19:24:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'gDv0G*b6j3nu5!Ca#BT3]+f>|I8%*NUJ8=NI:@OGcVev&Fh/:Nw~^]KkC<fu>m0S', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('powr_install_time', '1744226656', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -57,7 +97,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'gDv0G*b6j3nu5!Ca#BT3]+f&gt;|I8%*NUJ8=NI:@OGcVev&amp;Fh/:Nw~^]KkC&lt;fu&gt;m0S' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'powr_install_time' , '1744226656' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -69,34 +109,17 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'gDv0G*b6j3nu5!C...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'gDv0G*b6j3nu5!C...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'gDv0G*b6j3nu5!C...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'gDv0G*b6j3nu5!C...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/random-post-box/random-post-box.php(524): wp_enqueue_script('jquery')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): rpb_init('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'gDv0G*b6j3nu5!Ca#BT3]+f>|I8%*NUJ8=NI:@OGcVev&Fh/:Nw~^]KkC<fu>m0S', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, rpb_init, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:22:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/powr-event-slider/powr-event-slider.php(184): add_option('powr_install_ti...', '1744226656', '', 'on')
+#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('powr_install_time', '1744226656', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/powr-event-slider/powr-event-slider.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 19:24:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'TGWvevKr:x14Rv&D><?cZox);U;dUSHj<%a~;>r6v0g{n7iCZ}6eayDw=,z(yme^', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_powr_event_slider', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -108,7 +131,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'TGWvevKr:x14Rv&amp;D&gt;&lt;?cZox);U;dUSHj&lt;%a~;&gt;r6v0g{n7iCZ}6eayDw=,z(yme^' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_powr_event_slider' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -120,36 +143,97 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'TGWvevKr:x14Rv&...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'TGWvevKr:x14Rv&...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'TGWvevKr:x14Rv&...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'TGWvevKr:x14Rv&...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/random-post-box/random-post-box.php(524): wp_enqueue_script('jquery')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): rpb_init('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'TGWvevKr:x14Rv&D><?cZox);U;dUSHj<%a~;>r6v0g{n7iCZ}6eayDw=,z(yme^', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, rpb_init, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:22:45 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:22:54 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 19:23:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('widget_powr_eve...', Array, '', 'auto')
+#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_powr_eve...', Array)
+#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
+#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
+#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#16 /wordpress/wp-settings.php(704): do_action('init')
+#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#20 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_powr_event_slider', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 19:24:44 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 19:24:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 19:24:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 19:24:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 19:25:24 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 19:25:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 19:25:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 19:25:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 19:25:25 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('psmailer_widget')
+#2 /wordpress/wp-content/plugins/psmailer/psmailer_settings.php(36): register_widget('psmailer_widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): register_psmailer_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[09-Apr-2025 19:25:35 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('psmailer_widget')
+#2 /wordpress/wp-content/plugins/psmailer/psmailer_settings.php(36): register_widget('psmailer_widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): register_psmailer_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[09-Apr-2025 19:25:45 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('psmailer_widget')
+#2 /wordpress/wp-content/plugins/psmailer/psmailer_settings.php(36): register_widget('psmailer_widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): register_psmailer_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[09-Apr-2025 19:25:53 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 19:25:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 19:25:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 19:25:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 19:25:55 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>p2-check-in</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 19:26:04 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>p2-check-in</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 19:26:13 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>p2-check-in</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 19:26:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:52:\"range-slider-addon-for-gravity-forms/vendor/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:6:\"2.11.0\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744226584;s:11:\"plugin_path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";s:8:\"sdk_path\";s:52:\"range-slider-addon-for-gravity-forms/vendor/freemius\";s:7:\"version\";s:6:\"2.11.0\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744226584;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nomis_search_min_price_steps', '500,750,1000,1250,1500,2000,2500', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -161,7 +245,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_active_plugins' , 'O:8:&quot;stdClass&quot;:3:{s:7:&quot;plugins&quot;;a:1:{s:52:&quot;range-slider-addon-for-gravity-forms/vendor/freemius&quot;;O:8:&quot;stdClass&quot;:4:{s:7:&quot;version&quot;;s:6:&quot;2.11.0&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:9:&quot;timestamp&quot;;i:1744226584;s:11:&quot;plugin_path&quot;;s:56:&quot;range-slider-addon-for-gravity-forms/gf-range-slider.php&quot;;}}s:7:&quot;abspath&quot;;s:11:&quot;/wordpress/&quot;;s:6:&quot;newest&quot;;O:8:&quot;stdClass&quot;:5:{s:11:&quot;plugin_path&quot;;s:56:&quot;range-slider-addon-for-gravity-forms/gf-range-slider.php&quot;;s:8:&quot;sdk_path&quot;;s:52:&quot;range-slider-addon-for-gravity-forms/vendor/freemius&quot;;s:7:&quot;version&quot;;s:6:&quot;2.11.0&quot;;s:13:&quot;in_activation&quot;;b:1;s:9:&quot;timestamp&quot;;i:1744226584;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nomis_search_min_price_steps' , '500,750,1000,1250,1500,2000,2500' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -173,20 +257,21 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_active_plugi...', Object(stdClass), '', 'auto')
-#5 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/fs-essential-functions.php(279): update_option('fs_active_plugi...', Object(stdClass))
-#6 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/start.php(242): fs_update_sdk_newest_version('range-slider-ad...', 'range-slider-ad...')
-#7 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/gf-range-slider.php(27): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/gf-range-slider.php(56): rsfgf_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('range-slider-ad...')
-#11 /internal/eval.php(20): activate_plugin('range-slider-ad...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:52:\"range-slider-addon-for-gravity-forms/vendor/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:6:\"2.11.0\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744226584;s:11:\"plugin_path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";s:8:\"sdk_path\";s:52:\"range-slider-addon-for-gravity-forms/vendor/freemius\";s:7:\"version\";s:6:\"2.11.0\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744226584;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/range-slider-addon-for-gravity-forms/gf-range-slider.php'), rsfgf_fs, require_once('/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/start.php'), fs_update_sdk_newest_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:23:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('nomis_search_mi...', '500,750,1000,12...', '', 'auto')
+#5 /wordpress/wp-content/plugins/pararius-office/admin/lib/Admin.php(234): update_option('nomis_search_mi...', '500,750,1000,12...')
+#6 /wordpress/wp-content/plugins/pararius-office/admin/lib/Admin.php(17): ParariusOffice_Base_Admin->_storeDefaultsToDatabase(Array, Array, Array)
+#7 /wordpress/wp-content/plugins/pararius-office/lib/Base.php(22): ParariusOffice_Base_Admin->_init()
+#8 /wordpress/wp-content/plugins/pararius-office/lib/Base.php(14): ParariusOffice_Base->__construct()
+#9 /wordpress/wp-content/plugins/pararius-office/parariusoffice.php(23): ParariusOffice_Base::run()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pararius-office...')
+#12 /internal/eval.php(20): activate_plugin('pararius-office...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nomis_search_min_price_steps', '500,750,1000,1250,1500,2000,2500', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/pararius-office/parariusoffice.php'), ParariusOffice_Base::run, ParariusOffice_Base->__construct, ParariusOffice_Base_Admin->_init, ParariusOffice_Base_Admin->_storeDefaultsToDatabase, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 19:26:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nomis_search_max_price_steps', '750,1000,1250,1500,2000,3000,4000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -198,7 +283,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_debug_mode' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nomis_search_max_price_steps' , '750,1000,1250,1500,2000,3000,4000' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -210,20 +295,21 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/config.php(307): add_option('fs_debug_mode', false)
-#5 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/require.php(14): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/start.php(576): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/gf-range-slider.php(27): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/gf-range-slider.php(56): rsfgf_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('range-slider-ad...')
-#11 /internal/eval.php(20): activate_plugin('range-slider-ad...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/range-slider-addon-for-gravity-forms/gf-range-slider.php'), rsfgf_fs, require_once('/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/start.php'), require_once('/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/require.php'), require_once('/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/config.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:23:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('nomis_search_ma...', '750,1000,1250,1...', '', 'auto')
+#5 /wordpress/wp-content/plugins/pararius-office/admin/lib/Admin.php(235): update_option('nomis_search_ma...', '750,1000,1250,1...')
+#6 /wordpress/wp-content/plugins/pararius-office/admin/lib/Admin.php(17): ParariusOffice_Base_Admin->_storeDefaultsToDatabase(Array, Array, Array)
+#7 /wordpress/wp-content/plugins/pararius-office/lib/Base.php(22): ParariusOffice_Base_Admin->_init()
+#8 /wordpress/wp-content/plugins/pararius-office/lib/Base.php(14): ParariusOffice_Base->__construct()
+#9 /wordpress/wp-content/plugins/pararius-office/parariusoffice.php(23): ParariusOffice_Base::run()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pararius-office...')
+#12 /internal/eval.php(20): activate_plugin('pararius-office...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nomis_search_max_price_steps', '750,1000,1250,1500,2000,3000,4000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/pararius-office/parariusoffice.php'), ParariusOffice_Base::run, ParariusOffice_Base->__construct, ParariusOffice_Base_Admin->_init, ParariusOffice_Base_Admin->_storeDefaultsToDatabase, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 19:26:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:15078;a:3:{s:4:\"slug\";s:30:\"range-slider-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nomis_search_min_price_steps_sale', '50000,100000,150000,200000,300000,500000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -235,7 +321,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:1:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:15078;a:3:{s:4:&quot;slug&quot;;s:30:&quot;range-slider-for-gravity-forms&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:56:&quot;range-slider-addon-for-gravity-forms/gf-range-slider.php&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nomis_search_min_price_steps_sale' , '50000,100000,150000,200000,300000,500000' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -247,25 +333,21 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('id_slug_type_pa...', Array, true)
-#8 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/class-freemius.php(2209): FS_Options->set_option('id_slug_type_pa...', Array, true)
-#9 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/class-freemius.php(416): Freemius->store_id_slug_type_path_map('15078', 'range-slider-fo...')
-#10 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/class-freemius.php(2868): Freemius->__construct('15078', 'range-slider-fo...', true)
-#11 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/start.php(615): Freemius::instance('15078', 'range-slider-fo...', true)
-#12 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/gf-range-slider.php(29): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/gf-range-slider.php(56): rsfgf_fs()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('range-slider-ad...')
-#16 /internal/eval.php(20): activate_plugin('range-slider-ad...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:15078;a:3:{s:4:\"slug\";s:30:\"range-slider-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/range-slider-addon-for-gravity-forms/gf-range-slider.php'), rsfgf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_id_slug_type_path_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:23:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('nomis_search_mi...', '50000,100000,15...', '', 'auto')
+#5 /wordpress/wp-content/plugins/pararius-office/admin/lib/Admin.php(237): update_option('nomis_search_mi...', '50000,100000,15...')
+#6 /wordpress/wp-content/plugins/pararius-office/admin/lib/Admin.php(17): ParariusOffice_Base_Admin->_storeDefaultsToDatabase(Array, Array, Array)
+#7 /wordpress/wp-content/plugins/pararius-office/lib/Base.php(22): ParariusOffice_Base_Admin->_init()
+#8 /wordpress/wp-content/plugins/pararius-office/lib/Base.php(14): ParariusOffice_Base->__construct()
+#9 /wordpress/wp-content/plugins/pararius-office/parariusoffice.php(23): ParariusOffice_Base::run()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pararius-office...')
+#12 /internal/eval.php(20): activate_plugin('pararius-office...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nomis_search_min_price_steps_sale', '50000,100000,150000,200000,300000,500000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/pararius-office/parariusoffice.php'), ParariusOffice_Base::run, ParariusOffice_Base->__construct, ParariusOffice_Base_Admin->_init, ParariusOffice_Base_Admin->_storeDefaultsToDatabase, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 19:26:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:15078;a:3:{s:4:\"slug\";s:30:\"range-slider-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";}}s:11:\"plugin_data\";a:1:{s:30:\"range-slider-for-gravity-forms\";a:1:{s:19:\"last_load_timestamp\";i:1744226584;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nomis_search_max_price_steps_sale', '100000,150000,200000,30000,500000,700000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -277,7 +359,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:15078;a:3:{s:4:&quot;slug&quot;;s:30:&quot;range-slider-for-gravity-forms&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:56:&quot;range-slider-addon-for-gravity-forms/gf-range-slider.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:30:&quot;range-slider-for-gravity-forms&quot;;a:1:{s:19:&quot;last_load_timestamp&quot;;i:1744226584;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nomis_search_max_price_steps_sale' , '100000,150000,200000,30000,500000,700000' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -289,26 +371,21 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('last_load_times...', 1744226584)
-#9 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('last_load_times...', 1744226584)
-#10 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/class-freemius.php(432): FS_Storage->__set('last_load_times...', 1744226584)
-#11 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/class-freemius.php(2868): Freemius->__construct('15078', 'range-slider-fo...', true)
-#12 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/start.php(615): Freemius::instance('15078', 'range-slider-fo...', true)
-#13 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/gf-range-slider.php(29): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/gf-range-slider.php(56): rsfgf_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('range-slider-ad...')
-#17 /internal/eval.php(20): activate_plugin('range-slider-ad...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:15078;a:3:{s:4:\"slug\";s:30:\"range-slider-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";}}s:11:\"plugin_data\";a:1:{s:30:\"range-slider-for-gravity-forms\";a:1:{s:19:\"last_load_timestamp\";i:1744226584;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/range-slider-addon-for-gravity-forms/gf-range-slider.php'), rsfgf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:23:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('nomis_search_ma...', '100000,150000,2...', '', 'auto')
+#5 /wordpress/wp-content/plugins/pararius-office/admin/lib/Admin.php(238): update_option('nomis_search_ma...', '100000,150000,2...')
+#6 /wordpress/wp-content/plugins/pararius-office/admin/lib/Admin.php(17): ParariusOffice_Base_Admin->_storeDefaultsToDatabase(Array, Array, Array)
+#7 /wordpress/wp-content/plugins/pararius-office/lib/Base.php(22): ParariusOffice_Base_Admin->_init()
+#8 /wordpress/wp-content/plugins/pararius-office/lib/Base.php(14): ParariusOffice_Base->__construct()
+#9 /wordpress/wp-content/plugins/pararius-office/parariusoffice.php(23): ParariusOffice_Base::run()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pararius-office...')
+#12 /internal/eval.php(20): activate_plugin('pararius-office...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nomis_search_max_price_steps_sale', '100000,150000,200000,30000,500000,700000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/pararius-office/parariusoffice.php'), ParariusOffice_Base::run, ParariusOffice_Base->__construct, ParariusOffice_Base_Admin->_init, ParariusOffice_Base_Admin->_storeDefaultsToDatabase, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 19:26:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:15078;a:3:{s:4:\"slug\";s:30:\"range-slider-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";}}s:11:\"plugin_data\";a:1:{s:30:\"range-slider-for-gravity-forms\";a:2:{s:19:\"last_load_timestamp\";i:1744226584;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nomis_quick_search_min_price_steps', '750,1000,1250,1500,2000,3000,4000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -320,7 +397,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:15078;a:3:{s:4:&quot;slug&quot;;s:30:&quot;range-slider-for-gravity-forms&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:56:&quot;range-slider-addon-for-gravity-forms/gf-range-slider.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:30:&quot;range-slider-for-gravity-forms&quot;;a:2:{s:19:&quot;last_load_timestamp&quot;;i:1744226584;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:56:&quot;range-slider-addon-for-gravity-forms/gf-range-slider.php&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nomis_quick_search_min_price_steps' , '750,1000,1250,1500,2000,3000,4000' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -332,27 +409,21 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_main_fil...', Object(stdClass))
-#9 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('plugin_main_fil...', Object(stdClass))
-#10 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/class-freemius.php(2066): FS_Storage->__set('plugin_main_fil...', Object(stdClass))
-#11 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/class-freemius.php(439): Freemius->_find_caller_plugin_file(true, 'range-slider-ad...')
-#12 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/class-freemius.php(2868): Freemius->__construct('15078', 'range-slider-fo...', true)
-#13 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/start.php(615): Freemius::instance('15078', 'range-slider-fo...', true)
-#14 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/gf-range-slider.php(29): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/gf-range-slider.php(56): rsfgf_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('range-slider-ad...')
-#18 /internal/eval.php(20): activate_plugin('range-slider-ad...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:15078;a:3:{s:4:\"slug\";s:30:\"range-slider-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";}}s:11:\"plugin_data\";a:1:{s:30:\"range-slider-for-gravity-forms\";a:2:{s:19:\"last_load_timestamp\";i:1744226584;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/range-slider-addon-for-gravity-forms/gf-range-slider.php'), rsfgf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_find_caller_plugin_file, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:23:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('nomis_quick_sea...', '750,1000,1250,1...', '', 'auto')
+#5 /wordpress/wp-content/plugins/pararius-office/admin/lib/Admin.php(240): update_option('nomis_quick_sea...', '750,1000,1250,1...')
+#6 /wordpress/wp-content/plugins/pararius-office/admin/lib/Admin.php(17): ParariusOffice_Base_Admin->_storeDefaultsToDatabase(Array, Array, Array)
+#7 /wordpress/wp-content/plugins/pararius-office/lib/Base.php(22): ParariusOffice_Base_Admin->_init()
+#8 /wordpress/wp-content/plugins/pararius-office/lib/Base.php(14): ParariusOffice_Base->__construct()
+#9 /wordpress/wp-content/plugins/pararius-office/parariusoffice.php(23): ParariusOffice_Base::run()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pararius-office...')
+#12 /internal/eval.php(20): activate_plugin('pararius-office...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nomis_quick_search_min_price_steps', '750,1000,1250,1500,2000,3000,4000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/pararius-office/parariusoffice.php'), ParariusOffice_Base::run, ParariusOffice_Base->__construct, ParariusOffice_Base_Admin->_init, ParariusOffice_Base_Admin->_storeDefaultsToDatabase, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 19:26:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:15078;a:3:{s:4:\"slug\";s:30:\"range-slider-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";}}s:11:\"plugin_data\";a:1:{s:30:\"range-slider-for-gravity-forms\";a:3:{s:19:\"last_load_timestamp\";i:1744226584;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nomis_quick_search_max_price_steps', '500,750,1000,1250,1500,2000,2500', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -364,7 +435,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:15078;a:3:{s:4:&quot;slug&quot;;s:30:&quot;range-slider-for-gravity-forms&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:56:&quot;range-slider-addon-for-gravity-forms/gf-range-slider.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:30:&quot;range-slider-for-gravity-forms&quot;;a:3:{s:19:&quot;last_load_timestamp&quot;;i:1744226584;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:56:&quot;range-slider-addon-for-gravity-forms/gf-range-slider.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nomis_quick_search_max_price_steps' , '500,750,1000,1250,1500,2000,2500' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -376,26 +447,21 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_network_acti...', false)
-#9 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('is_network_acti...', false)
-#10 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/class-freemius.php(467): FS_Storage->__set('is_network_acti...', false)
-#11 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/class-freemius.php(2868): Freemius->__construct('15078', 'range-slider-fo...', true)
-#12 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/start.php(615): Freemius::instance('15078', 'range-slider-fo...', true)
-#13 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/gf-range-slider.php(29): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/gf-range-slider.php(56): rsfgf_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('range-slider-ad...')
-#17 /internal/eval.php(20): activate_plugin('range-slider-ad...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:15078;a:3:{s:4:\"slug\";s:30:\"range-slider-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";}}s:11:\"plugin_data\";a:1:{s:30:\"range-slider-for-gravity-forms\";a:3:{s:19:\"last_load_timestamp\";i:1744226584;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/range-slider-addon-for-gravity-forms/gf-range-slider.php'), rsfgf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:23:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('nomis_quick_sea...', '500,750,1000,12...', '', 'auto')
+#5 /wordpress/wp-content/plugins/pararius-office/admin/lib/Admin.php(241): update_option('nomis_quick_sea...', '500,750,1000,12...')
+#6 /wordpress/wp-content/plugins/pararius-office/admin/lib/Admin.php(17): ParariusOffice_Base_Admin->_storeDefaultsToDatabase(Array, Array, Array)
+#7 /wordpress/wp-content/plugins/pararius-office/lib/Base.php(22): ParariusOffice_Base_Admin->_init()
+#8 /wordpress/wp-content/plugins/pararius-office/lib/Base.php(14): ParariusOffice_Base->__construct()
+#9 /wordpress/wp-content/plugins/pararius-office/parariusoffice.php(23): ParariusOffice_Base::run()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pararius-office...')
+#12 /internal/eval.php(20): activate_plugin('pararius-office...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nomis_quick_search_max_price_steps', '500,750,1000,1250,1500,2000,2500', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/pararius-office/parariusoffice.php'), ParariusOffice_Base::run, ParariusOffice_Base->__construct, ParariusOffice_Base_Admin->_init, ParariusOffice_Base_Admin->_storeDefaultsToDatabase, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 19:26:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:15078;a:3:{s:4:\"slug\";s:30:\"range-slider-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";}}s:11:\"plugin_data\";a:1:{s:30:\"range-slider-for-gravity-forms\";a:3:{s:19:\"last_load_timestamp\";i:1744226584;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";s:30:\"range-slider-for-gravity-forms\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nomis_property_layout', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -407,7 +473,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:15078;a:3:{s:4:&quot;slug&quot;;s:30:&quot;range-slider-for-gravity-forms&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:56:&quot;range-slider-addon-for-gravity-forms/gf-range-slider.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:30:&quot;range-slider-for-gravity-forms&quot;;a:3:{s:19:&quot;last_load_timestamp&quot;;i:1744226584;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:56:&quot;range-slider-addon-for-gravity-forms/gf-range-slider.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:56:&quot;range-slider-addon-for-gravity-forms/gf-range-slider.php&quot;;s:30:&quot;range-slider-for-gravity-forms&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nomis_property_layout' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -419,25 +485,21 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('file_slug_map', Array, true)
-#8 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/class-freemius.php(10355): FS_Options->set_option('file_slug_map', Array, true)
-#9 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/class-freemius.php(514): Freemius->store_file_slug_map()
-#10 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/class-freemius.php(2868): Freemius->__construct('15078', 'range-slider-fo...', true)
-#11 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/start.php(615): Freemius::instance('15078', 'range-slider-fo...', true)
-#12 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/gf-range-slider.php(29): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/gf-range-slider.php(56): rsfgf_fs()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('range-slider-ad...')
-#16 /internal/eval.php(20): activate_plugin('range-slider-ad...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:15078;a:3:{s:4:\"slug\";s:30:\"range-slider-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";}}s:11:\"plugin_data\";a:1:{s:30:\"range-slider-for-gravity-forms\";a:3:{s:19:\"last_load_timestamp\";i:1744226584;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";s:30:\"range-slider-for-gravity-forms\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/range-slider-addon-for-gravity-forms/gf-range-slider.php'), rsfgf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_file_slug_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:23:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('nomis_property_...', '1', '', 'auto')
+#5 /wordpress/wp-content/plugins/pararius-office/admin/lib/Admin.php(243): update_option('nomis_property_...', '1')
+#6 /wordpress/wp-content/plugins/pararius-office/admin/lib/Admin.php(17): ParariusOffice_Base_Admin->_storeDefaultsToDatabase(Array, Array, Array)
+#7 /wordpress/wp-content/plugins/pararius-office/lib/Base.php(22): ParariusOffice_Base_Admin->_init()
+#8 /wordpress/wp-content/plugins/pararius-office/lib/Base.php(14): ParariusOffice_Base->__construct()
+#9 /wordpress/wp-content/plugins/pararius-office/parariusoffice.php(23): ParariusOffice_Base::run()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pararius-office...')
+#12 /internal/eval.php(20): activate_plugin('pararius-office...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nomis_property_layout', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/pararius-office/parariusoffice.php'), ParariusOffice_Base::run, ParariusOffice_Base->__construct, ParariusOffice_Base_Admin->_init, ParariusOffice_Base_Admin->_storeDefaultsToDatabase, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 19:26:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:15078;a:3:{s:4:\"slug\";s:30:\"range-slider-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";}}s:11:\"plugin_data\";a:1:{s:30:\"range-slider-for-gravity-forms\";a:4:{s:19:\"last_load_timestamp\";i:1744226584;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744226584;}}s:13:\"file_slug_map\";a:1:{s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";s:30:\"range-slider-for-gravity-forms\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nomis_properties_order', 'price=asc', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -449,7 +511,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:15078;a:3:{s:4:&quot;slug&quot;;s:30:&quot;range-slider-for-gravity-forms&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:56:&quot;range-slider-addon-for-gravity-forms/gf-range-slider.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:30:&quot;range-slider-for-gravity-forms&quot;;a:4:{s:19:&quot;last_load_timestamp&quot;;i:1744226584;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:56:&quot;range-slider-addon-for-gravity-forms/gf-range-slider.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744226584;}}s:13:&quot;file_slug_map&quot;;a:1:{s:56:&quot;range-slider-addon-for-gravity-forms/gf-range-slider.php&quot;;s:30:&quot;range-slider-for-gravity-forms&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nomis_properties_order' , 'price=asc' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -461,26 +523,21 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('install_timesta...', 1744226584)
-#9 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('install_timesta...', 1744226584)
-#10 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/class-freemius.php(518): FS_Storage->__set('install_timesta...', 1744226584)
-#11 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/includes/class-freemius.php(2868): Freemius->__construct('15078', 'range-slider-fo...', true)
-#12 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/vendor/freemius/start.php(615): Freemius::instance('15078', 'range-slider-fo...', true)
-#13 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/gf-range-slider.php(29): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/range-slider-addon-for-gravity-forms/gf-range-slider.php(56): rsfgf_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('range-slider-ad...')
-#17 /internal/eval.php(20): activate_plugin('range-slider-ad...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:15078;a:3:{s:4:\"slug\";s:30:\"range-slider-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";}}s:11:\"plugin_data\";a:1:{s:30:\"range-slider-for-gravity-forms\";a:4:{s:19:\"last_load_timestamp\";i:1744226584;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744226584;}}s:13:\"file_slug_map\";a:1:{s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";s:30:\"range-slider-for-gravity-forms\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/range-slider-addon-for-gravity-forms/gf-range-slider.php'), rsfgf_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 19:23:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('nomis_propertie...', 'price=asc', '', 'auto')
+#5 /wordpress/wp-content/plugins/pararius-office/admin/lib/Admin.php(244): update_option('nomis_propertie...', 'price=asc')
+#6 /wordpress/wp-content/plugins/pararius-office/admin/lib/Admin.php(17): ParariusOffice_Base_Admin->_storeDefaultsToDatabase(Array, Array, Array)
+#7 /wordpress/wp-content/plugins/pararius-office/lib/Base.php(22): ParariusOffice_Base_Admin->_init()
+#8 /wordpress/wp-content/plugins/pararius-office/lib/Base.php(14): ParariusOffice_Base->__construct()
+#9 /wordpress/wp-content/plugins/pararius-office/parariusoffice.php(23): ParariusOffice_Base::run()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pararius-office...')
+#12 /internal/eval.php(20): activate_plugin('pararius-office...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nomis_properties_order', 'price=asc', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/pararius-office/parariusoffice.php'), ParariusOffice_Base::run, ParariusOffice_Base->__construct, ParariusOffice_Base_Admin->_init, ParariusOffice_Base_Admin->_storeDefaultsToDatabase, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 19:26:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:15078;a:3:{s:4:\"slug\";s:30:\"range-slider-for-gravity-forms\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";}}s:11:\"plugin_data\";a:1:{s:30:\"range-slider-for-gravity-forms\";a:5:{s:19:\"last_load_timestamp\";i:1744226584;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744226584;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:56:\"range-slider-addon-for-gravity-forms/gf-range-slider.php\";s:30:\"range-slider-for-gravity-forms\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nomis_add_request_form', 'a:11:{s:9:\"last_name\";a:1:{s:7:\"options\";a:2:{s:8:\"required\";b:1;s:5:\"label\";s:18:\"[:en]Name[:nl]Naam\";}}s:7:\"company\";a:0:{}s:9:\"telephone\";a:0:{}s:12:\"emailaddress\";a:1:{s:7:\"options\";a:2:{s:5:\"regex\";s:5:\"email\";s:5:\"label\";s:32:\"[:en]Emailaddress[:nl]Emailadres\";}}s:8:\"interior\";a:1:{s:7:\"options\";a:3:{s:4:\"type\";s:6:\"select\";s:5:\"label\";s:27:\"[:en]Interior[:nl]Interieur\";s:7:\"options\";a:4:{s:0:\"\";s:0:\"\";i:13;s:35:\"[:en]Unfurnished[:nl]Ongemeubileerd\";i:14;s:31:\"[:en]Furnished[:nl]Gemeubileerd\";i:15;s:27:\"[:en]Bare[:nl]Helemaal leeg\";}}}s:8:\"bedrooms\";a:1:{s:7:\"options\";a:3:{s:4:\"type\";s:6:\"select\";s:5:\"label\";s:29:\"[:en]Bedrooms[:nl]Slaapkamers\";s:7:\"options\";a:5:{s:0:\"\";s:0:\"\";i:1;s:2:\"1+\";i:2;s:2:\"2+\";i:3;s:2:\"3+\";i:4;s:2:\"4+\";}}}s:4:\"city\";a:0:{}s:8:\"district\";a:0:{}s:15:\"commencing_date\";a:1:{s:7:\"options\";a:4:{s:11:\"description\";s:63:\"[:en]Commencing date in dd/mm/yyyy[:nl]Begindatum in dd/mm/yyyy\";s:5:\"label\";s:54:\"[:en]When do you want to rent[:nl]Wanneer wilt u huren\";s:5:\"class\";s:5:\"regex\";s:5:\"regex\";s:4:\"date\";}}s:9:\"max_price\";a:1:{s:7:\"options\";a:2:{s:5:\"regex\";s:6:\"number\";s:5:\"label\";s:36:\"[:en]Maximum price[:nl]Maximum prijs\";}}s:12:\"other_wishes\";a:1:{s:7:\"options\";a:2:{s:5:\"label\";s:35:\"[:en]Other wishes[:nl]Andere wensen\";s:4:\"type\";s:8:\"textarea\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -492,4 +549,30 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:15078;a:3:{s:4:&quot;slug&quot;;s:30:&quot;range-slider-for-gravity-forms&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:56:&quot;range-slider-addon-for-gravity-forms/gf-range-slider.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:30:&quot;range-slider-for-gravity-forms&quot;;a:5:{s:19:&quot;last_load_timestamp&quot;;i:1744226584;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:56:&quot;range-slider-addon-for-gravity-forms/gf-range-slider.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744226584;s:17:&quot;was_plugin_loaded&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:56:&q
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nomis_add_request_form' , 'a:11:{s:9:&quot;last_name&quot;;a:1:{s:7:&quot;options&quot;;a:2:{s:8:&quot;required&quot;;b:1;s:5:&quot;label&quot;;s:18:&quot;[:en]Name[:nl]Naam&quot;;}}s:7:&quot;company&quot;;a:0:{}s:9:&quot;telephone&quot;;a:0:{}s:12:&quot;emailaddress&quot;;a:1:{s:7:&quot;options&quot;;a:2:{s:5:&quot;regex&quot;;s:5:&quot;email&quot;;s:5:&quot;label&quot;;s:32:&quot;[:en]Emailaddress[:nl]Emailadres&quot;;}}s:8:&quot;interior&quot;;a:1:{s:7:&quot;options&quot;;a:3:{s:4:&quot;type&quot;;s:6:&quot;select&quot;;s:5:&quot;label&quot;;s:27:&quot;[:en]Interior[:nl]Interieur&quot;;s:7:&quot;options&quot;;a:4:{s:0:&quot;&quot;;s:0:&quot;&quot;;i:13;s:35:&quot;[:en]Unfurnished[:nl]Ongemeubileerd&quot;;i:14;s:31:&quot;[:en]Furnished[:nl]Gemeubileerd&quot;;i:15;s:27:&quot;[:en]Bare[:nl]Helemaal leeg&quot;;}}}s:8:&quot;bedrooms&quot;;a:1:{s:7:&quot;options&quot;;a:3:{s:4:&quot;type&quot;;s:6:&quot;select&quot;;s:5:&quot;label&quot;;s:29:&quot;[:en]Bedrooms[:nl]Slaapkamers&quot;;s:7:&quot;options&quot;;a:5:{s:0:&quot;&quot;;s:0:&quot;&quot;;i:1;s:2:&quot;1+&quot;;i:2;s:2:&quot;2+&quot;;i:3;s:2:&quot;3+&quot;;i:4;s:2:&quot;4+&quot;;}}}s:4:&quot;city&quot;;a:0:{}s:8:&quot;district&quot;;a:0:{}s:15:&quot;commencing_date&quot;;a:1:{s:7:&quot;options&quot;;a:4:{s:11:&quot;description&quot;;s:63:&quot;[:en]Commencing date in dd/mm/yyyy[:nl]Begindatum in dd/mm/yyyy&quot;;s:5:&quot;label&quot;;s:54:&quot;[:en]When do you want to rent[:nl]Wanneer wilt u huren&quot;;s:5:&quot;class&quot;;s:5:&quot;regex&quot;;s:5:&quot;regex&quot;;s:4:&quot;date&quot;;}}s:9:&quot;max_price&quot;;a:1:{s:7:&quot;options&quot;;a:2:{s:5:&quot;regex&quot;;s:6:&quot;number&quot;;s:5:&quot;label&quot;;s:36:&quot;[:en]Maximum price[:nl]Maximum prijs&quot;;}}s:12:&quot;other_wishes&quot;;a:1:{s:7:&quot;options&quot;;a:2:{s:5:&quot;label&quot;;s:35:&quot;[:en]Other wishes[:nl]Andere wensen&quot;;s:4:&quot;type&quot;;s:8:&quot;textarea&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('nomis_add_reque...', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/pararius-office/admin/lib/Admin.php(245): update_option('nomis_add_reque...', Array)
+#6 /wordpress/wp-content/plugins/pararius-office/admin/lib/Admin.php(17): ParariusOffice_Base_Admin->_storeDefaultsToDatabase(Array, Array, Array)
+#7 /wordpress/wp-content/plugins/pararius-office/lib/Base.php(22): ParariusOffice_Base_Admin->_init()
+#8 /wordpress/wp-content/plugins/pararius-office/lib/Base.php(14): ParariusOffice_Base->__construct()
+#9 /wordpress/wp-content/plugins/pararius-office/parariusoffice.php(23): ParariusOffice_Base::run()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pararius-office...')
+#12 /internal/eval.php(20): activate_plugin('pararius-office...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nomis_add_request_form', 'a:11:{s:9:\"last_name\";a:1:{s:7:\"options\";a:2:{s:8:\"required\";b:1;s:5:\"label\";s:18:\"[:en]Name[:nl]Naam\";}}s:7:\"company\";a:0:{}s:9:\"telephone\";a:0:{}s:12:\"emailaddress\";a:1:{s:7:\"options\";a:2:{s:5:\"regex\";s:5:\"email\";s:5:\"label\";s:32:\"[:en]Emailaddress[:nl]Emailadres\";}}s:8:\"interior\";a:1:{s:7:\"options\";a:3:{s:4:\"type\";s:6:\"select\";s:5:\"label\";s:27:\"[:en]Interior[:nl]Interieur\";s:7:\"options\";a:4:{s:0:\"\";s:0:\"\";i:13;s:35:\"[:en]Unfurnished[:nl]Ongemeubileerd\";i:14;s:31:\"[:en]Furnished[:nl]Gemeubileerd\";i:15;s:27:\"[:en]Bare[:nl]Helemaal leeg\";}}}s:8:\"bedrooms\";a:1:{s:7:\"options\";a:3:{s:4:\"type\";s:6:\"select\";s:5:\"label\";s:29:\"[:en]Bedrooms[:nl]Slaapkamers\";s:7:\"options\";a:5:{s:0:\"\";s:0:\"\";i:1;s:2:\"1+\";i:2;s:2:\"2+\";i:3;s:2:\"3+\";i:4;s:2:\"4+\";}}}s:4:\"city\";a:0:{}s:8:\"district\";a:0:{}s:15:\"commencing_date\";a:1:{s:7:\"options\";a:4:{s:11:\"description\";s:63:\"[:en]Commencing date in dd/mm/yyyy[:nl]Begindatum in dd/mm/yyyy\";s:5:\"label\";s:54:\"[:en]When do you want to rent[:nl]Wanneer wilt u huren\";s:5:\"class\";s:5:\"regex\";s:5:\"regex\";s:4:\"date\";}}s:9:\"max_price\";a:1:{s:7:\"options\";a:2:{s:5:\"regex\";s:6:\"number\";s:5:\"label\";s:36:\"[:en]Maximum price[:nl]Maximum prijs\";}}s:12:\"other_wishes\";a:1:{s:7:\"options\";a:2:{s:5:\"label\";s:35:\"[:en]Other wishes[:nl]Andere wensen\";s:4:\"type\";s:8:\"textarea\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/pararius-office/parariusoffice.php'), ParariusOffice_Base::run, ParariusOffice_Base->__construct, ParariusOffice_Base_Admin->_init, ParariusOffice_Base_Admin->_storeDefaultsToDatabase, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 19:26:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nomis_rental_declaration_form', 'a:12:{s:9:\"last_name\";a:1:{s:7:\"options\";a:2:{s:8:\"required\";b:1;s:5:\"label\";s:4:\"Name\";}}s:7:\"address\";a:1:{s:7:\"options\";a:1:{s:8:\"required\";b:1;}}s:7:\"zipcode\";a:1:{s:7:\"options\";a:1:{s:8:\"required\";b:1;}}s:4:\"city\";a:1:{s:7:\"options\";a:1:{s:8:\"required\";b:1;}}s:9:\"telephone\";a:1:{s:7:\"options\";a:1:{s:8:\"required\";b:1;}}s:16:\"mobile_telephone\";a:1:{s:7:\"options\";a:1:{s:5:\"label\";s:16:\"Mobile telephone\";}}s:12:\"emailaddress\";a:1:{s:7:\"options\";a:2:{s:8:\"required\";b:1;s:5:\"reqex\";s:5:\"email\";}}s:13:\"house_address\";a:1:{s:7:\"options\";a:2:{s:8:\"required\";b:1;s:5:\"label\";s:13:\"House address\";}}s:13:\"house_zipcode\";a:1:{s:7:\"options\";a:1:{s:8:\"required\";b:1;}}s:10:\"house_city\";a:1:{s:7:\"options\";a:1:{s:8:\"required\";b:1;}}s:14:\"house_bedrooms\";a:1:{s:7:\"options\";a:3:{s:8:\"required\";b:1;s:4:\"type\";s:6:\"select\";s:7:\"options\";a:4:{i:1;s:1:\"1\";i:2;s:1:\"2\";i:3;s:1:\"3\";i:4;s:1:\"4\";}}}s:13:\"house_surface\";a:1:{s:7:\"options\";a:1:{s:5:\"regex\";s:6:\"number\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = V
