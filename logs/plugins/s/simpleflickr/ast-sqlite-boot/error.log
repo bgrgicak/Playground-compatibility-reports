@@ -1,17 +1,291 @@
-node:internal/event_target:1094
-  process.nextTick(() => { throw err; });
-                           ^
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21
+`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
 
-TypeError: process.stdout.clearLine is not a function
-    at C.<anonymous> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:18:538)
-    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:820:20)
-    at C.dispatchEvent (node:internal/event_target:755:26)
-    at C.notifyProgress (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:295:10)
-    at C.<anonymous> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:200:81)
-    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:820:20)
-    at C.dispatchEvent (node:internal/event_target:755:26)
-    at C.notifyProgress (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:295:10)
-    at C.<anonymous> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:200:81)
-    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:820:20)
+Error: [09-Apr-2025 05:25:20 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 05:25:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 05:25:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 05:25:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 05:25:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_spr_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_spr_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('widget_spr_widg...', Array, '', 'auto')
+#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_spr_widg...', Array)
+#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
+#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
+#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#16 /wordpress/wp-settings.php(704): do_action('init')
+#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#20 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_spr_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 05:25:48 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method SimpleDailyQuotes::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
+#3 /internal/eval.php(20): activate_plugin('simple-daily-qu...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[09-Apr-2025 05:25:56 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method SimpleDailyQuotes::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
+#3 /internal/eval.php(20): activate_plugin('simple-daily-qu...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[09-Apr-2025 05:26:05 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method SimpleDailyQuotes::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simple...', false)
+#3 /internal/eval.php(20): activate_plugin('simple-daily-qu...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[09-Apr-2025 05:26:13 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 05:26:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 05:26:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 05:26:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 05:26:40 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 05:26:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 05:26:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 05:26:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 05:27:09 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/social-media-tabs/dcwp_social_media_tabs.php:53
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('social-media-ta...')
+#2 /internal/eval.php(20): activate_plugin('social-media-ta...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/social-media-tabs/dcwp_social_media_tabs.php on line 53
+[09-Apr-2025 05:27:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/social-media-tabs/dcwp_social_media_tabs.php:53
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('social-media-ta...')
+#2 /internal/eval.php(20): activate_plugin('social-media-ta...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/social-media-tabs/dcwp_social_media_tabs.php on line 53
+[09-Apr-2025 05:27:26 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/social-media-tabs/dcwp_social_media_tabs.php:53
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('social-media-ta...')
+#2 /internal/eval.php(20): activate_plugin('social-media-ta...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/social-media-tabs/dcwp_social_media_tabs.php on line 53
+[09-Apr-2025 05:27:34 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 05:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 05:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 05:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 05:28:03 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 05:28:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 05:28:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 05:28:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 05:28:31 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function vc_add_param() in /wordpress/wp-content/plugins/swiperevert-columns-on-mobile-for-wpbakery-builder/swipe-on-mobile.php:31
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('swiperevert-col...')
+#2 /internal/eval.php(20): activate_plugin('swiperevert-col...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/swiperevert-columns-on-mobile-for-wpbakery-builder/swipe-on-mobile.php on line 31
+[09-Apr-2025 05:28:40 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function vc_add_param() in /wordpress/wp-content/plugins/swiperevert-columns-on-mobile-for-wpbakery-builder/swipe-on-mobile.php:31
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('swiperevert-col...')
+#2 /internal/eval.php(20): activate_plugin('swiperevert-col...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/swiperevert-columns-on-mobile-for-wpbakery-builder/swipe-on-mobile.php on line 31
+[09-Apr-2025 05:28:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function vc_add_param() in /wordpress/wp-content/plugins/swiperevert-columns-on-mobile-for-wpbakery-builder/swipe-on-mobile.php:31
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('swiperevert-col...')
+#2 /internal/eval.php(20): activate_plugin('swiperevert-col...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/swiperevert-columns-on-mobile-for-wpbakery-builder/swipe-on-mobile.php on line 31
+[09-Apr-2025 05:28:57 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method Core_Controller::getInstance() in /wordpress/wp-content/plugins/search-friend-multi-shipping-address/searchfriend.php:15
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('search-friend-m...')
+#2 /internal/eval.php(20): activate_plugin('search-friend-m...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/search-friend-multi-shipping-address/searchfriend.php on line 15
+[09-Apr-2025 05:29:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method Core_Controller::getInstance() in /wordpress/wp-content/plugins/search-friend-multi-shipping-address/searchfriend.php:15
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('search-friend-m...')
+#2 /internal/eval.php(20): activate_plugin('search-friend-m...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/search-friend-multi-shipping-address/searchfriend.php on line 15
+[09-Apr-2025 05:29:13 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method Core_Controller::getInstance() in /wordpress/wp-content/plugins/search-friend-multi-shipping-address/searchfriend.php:15
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('search-friend-m...')
+#2 /internal/eval.php(20): activate_plugin('search-friend-m...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/search-friend-multi-shipping-address/searchfriend.php on line 15
+[09-Apr-2025 05:29:22 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 05:29:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 05:29:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 05:29:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 05:29:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/scrolling-notice-board/hosts.php:88
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('scrolling-notic...')
+#2 /internal/eval.php(20): activate_plugin('scrolling-notic...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/scrolling-notice-board/hosts.php on line 88
+[09-Apr-2025 05:29:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/scrolling-notice-board/hosts.php:88
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('scrolling-notic...')
+#2 /internal/eval.php(20): activate_plugin('scrolling-notic...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/scrolling-notice-board/hosts.php on line 88
+[09-Apr-2025 05:30:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/scrolling-notice-board/hosts.php:88
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('scrolling-notic...')
+#2 /internal/eval.php(20): activate_plugin('scrolling-notic...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/scrolling-notice-board/hosts.php on line 88
+[09-Apr-2025 05:30:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('simple_photo_sphere_settings', 'a:15:{s:32:\"simple_photo_sphere_text_field_1\";s:12:\"Photo Sphere\";s:32:\"simple_photo_sphere_text_field_2\";s:27:\"Use two fingers to navigate\";s:32:\"simple_photo_sphere_text_field_3\";s:18:\"Automatic rotation\";s:32:\"simple_photo_sphere_text_field_4\";s:4:\"Zoom\";s:32:\"simple_photo_sphere_text_field_5\";s:8:\"Zoom Out\";s:32:\"simple_photo_sphere_text_field_6\";s:7:\"Zoom In\";s:32:\"simple_photo_sphere_text_field_7\";s:11:\"Normal Size\";s:32:\"simple_photo_sphere_text_field_8\";s:9:\"Full Size\";s:34:\"simple_photo_sphere_select_field_9\";s:1:\"0\";s:35:\"simple_photo_sphere_select_field_10\";s:1:\"0\";s:33:\"simple_photo_sphere_text_field_11\";s:3:\"800\";s:33:\"simple_photo_sphere_text_field_12\";s:3:\"600\";s:33:\"simple_photo_sphere_text_field_13\";s:2:\"10\";s:33:\"simple_photo_sphere_text_field_14\";s:0:\"\";s:33:\"simple_photo_sphere_text_field_15\";s:2:\"80\";}', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'simple_photo_sphere_settings' , 'a:15:{s:32:&quot;simple_photo_sphere_text_field_1&quot;;s:12:&quot;Photo Sphere&quot;;s:32:&quot;simple_photo_sphere_text_field_2&quot;;s:27:&quot;Use two fingers to navigate&quot;;s:32:&quot;simple_photo_sphere_text_field_3&quot;;s:18:&quot;Automatic rotation&quot;;s:32:&quot;simple_photo_sphere_text_field_4&quot;;s:4:&quot;Zoom&quot;;s:32:&quot;simple_photo_sphere_text_field_5&quot;;s:8:&quot;Zoom Out&quot;;s:32:&quot;simple_photo_sphere_text_field_6&quot;;s:7:&quot;Zoom In&quot;;s:32:&quot;simple_photo_sphere_text_field_7&quot;;s:11:&quot;Normal Size&quot;;s:32:&quot;simple_photo_sphere_text_field_8&quot;;s:9:&quot;Full Size&quot;;s:34:&quot;simple_photo_sphere_select_field_9&quot;;s:1:&quot;0&quot;;s:35:&quot;simple_photo_sphere_select_field_10&quot;;s:1:&quot;0&quot;;s:33:&quot;simple_photo_sphere_text_field_11&quot;;s:3:&quot;800&quot;;s:33:&quot;simple_photo_sphere_text_field_12&quot;;s:3:&quot;600&quot;;s:33:&quot;simple_photo_sphere_text_field_13&quot;;s:2:&quot;10&quot;;s:33:&quot;simple_photo_sphere_text_field_14&quot;;s:0:&quot;&quot;;s:33:&quot;simple_photo_sphere_text_field_15&quot;;s:2:&quot;80&quot;;}' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/simple-photo-sphere/admin-page.php(14): add_option('simple_photo_sp...', Array, '', 'on')
+#5 /wordpress/wp-content/plugins/simple-photo-sphere/simple-photo-sphere.php(12): require_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('simple-photo-sp...')
+#8 /internal/eval.php(20): activate_plugin('simple-photo-sp...')
+#9 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('simple_photo_sphere_settings', 'a:15:{s:32:\"simple_photo_sphere_text_field_1\";s:12:\"Photo Sphere\";s:32:\"simple_photo_sphere_text_field_2\";s:27:\"Use two fingers to navigate\";s:32:\"simple_photo_sphere_text_field_3\";s:18:\"Automatic rotation\";s:32:\"simple_photo_sphere_text_field_4\";s:4:\"Zoom\";s:32:\"simple_photo_sphere_text_field_5\";s:8:\"Zoom Out\";s:32:\"simple_photo_sphere_text_field_6\";s:7:\"Zoom In\";s:32:\"simple_photo_sphere_text_field_7\";s:11:\"Normal Size\";s:32:\"simple_photo_sphere_text_field_8\";s:9:\"Full Size\";s:34:\"simple_photo_sphere_select_field_9\";s:1:\"0\";s:35:\"simple_photo_sphere_select_field_10\";s:1:\"0\";s:33:\"simple_photo_sphere_text_field_11\";s:3:\"800\";s:33:\"simple_photo_sphere_text_field_12\";s:3:\"600\";s:33:\"simple_photo_sphere_text_field_13\";s:2:\"10\";s:33:\"simple_photo_sphere_text_field_14\";s:0:\"\";s:33:\"simple_photo_sphere_text_field_15\";s:2:\"80\";}', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/simple-photo-sphere/simple-photo-sphere.php'), require_once('/plugins/simple-photo-sphere/admin-page.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 05:30:57 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 05:30:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 05:30:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 05:30:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 05:30:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('simple_photo_sphere_settings', 'a:15:{s:32:\"simple_photo_sphere_text_field_1\";s:12:\"Photo Sphere\";s:32:\"simple_photo_sphere_text_field_2\";s:27:\"Use two fingers to navigate\";s:32:\"simple_photo_sphere_text_field_3\";s:18:\"Automatic rotation\";s:32:\"simple_photo_sphere_text_field_4\";s:4:\"Zoom\";s:32:\"simple_photo_sphere_text_field_5\";s:8:\"Zoom Out\";s:32:\"simple_photo_sphere_text_field_6\";s:7:\"Zoom In\";s:32:\"simple_photo_sphere_text_field_7\";s:11:\"Normal Size\";s:32:\"simple_photo_sphere_text_field_8\";s:9:\"Full Size\";s:34:\"simple_photo_sphere_select_field_9\";s:1:\"0\";s:35:\"simple_photo_sphere_select_field_10\";s:1:\"0\";s:33:\"simple_photo_sphere_text_field_11\";s:3:\"800\";s:33:\"simple_photo_sphere_text_field_12\";s:3:\"600\";s:33:\"simple_photo_sphere_text_field_13\";s:2:\"10\";s:33:\"simple_photo_sphere_text_field_14\";s:0:\"\";s:33:\"simple_photo_sphere_text_field_15\";s:2:\"80\";}', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'simple_photo_sphere_settings' , 'a:15:{s:32:&quot;simple_photo_sphere_text_field_1&quot;;s:12:&quot;Photo Sphere&quot;;s:32:&quot;simple_photo_sphere_text_field_2&quot;;s:27:&quot;Use two fingers to navigate&quot;;s:32:&quot;simple_photo_sphere_text_field_3&quot;;s:18:&quot;Automatic rotation&quot;;s:32:&quot;simple_photo_sphere_text_field_4&quot;;s:4:&quot;Zoom&quot;;s:32:&quot;simple_photo_sphere_text_field_5&quot;;s:8:&quot;Zoom Out&quot;;s:32:&quot;simple_photo_sphere_text_field_6&quot;;s:7:&quot;Zoom In&quot;;s:32:&quot;simple_photo_sphere_text_field_7&quot;;s:11:&quot;Normal Size&quot;;s:32:&quot;simple_photo_sphere_text_field_8&quot;;s:9:&quot;Full Size&quot;;s:34:&quot;simple_photo_sphere_select_field_9&quot;;s:1:&quot;0&quot;;s:35:&quot;simple_photo_sphere_select_field_10&quot;;s:1:&quot;0&quot;;s:33:&quot;simple_photo_sphere_text_field_11&quot;;s:3:&quot;800&quot;;s:33:&quot;simple_photo_sphere_text_field_12&quot;;s:3:&quot;600&quot;;s:33:&quot;simple_photo_sphere_text_field_13&quot;;s:2:&quot;10&quot;;s:33:&quot;simple_photo_sphere_text_field_14&quot;;s:0:&quot;&quot;;s:33:&quot;simple_photo_sphere_text_field_15&quot;;s:2:&quot;80&quot;;}' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/simple-photo-sphere/admin-page.php(14): add_option('simple_photo_sp...', Array, '', 'on')
+#5 /wordpress/wp-content/plugins/simple-photo-sphere/simple-photo-sphere.php(12): require_once('/wordpress/wp-c...')
+#6 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('simple_photo_sphere_settings', 'a:15:{s:32:\"simple_photo_sphere_text_field_1\";s:12:\"Photo Sphere\";s:32:\"simple_photo_sphere_text_field_2\";s:27:\"Use two fingers to navigate\";s:32:\"simple_photo_sphere_text_field_3\";s:18:\"Automatic rotation\";s:32:\"simple_photo_sphere_text_field_4\";s:4:\"Zoom\";s:32:\"simple_photo_sphere_text_field_5\";s:8:\"Zoom Out\";s:32:\"simple_photo_sphere_text_field_6\";s:7:\"Zoom In\";s:32:\"simple_photo_sphere_text_field_7\";s:11:\"Normal Size\";s:32:\"simple_photo_sphere_text_field_8\";s:9:\"Full Size\";s:34:\"simple_photo_sphere_select_field_9\";s:1:\"0\";s:35:\"simple_photo_sphere_select_field_10\";s:1:\"0\";s:33:\"simple_photo_sphere_text_field_11\";s:3:\"800\";s:33:\"simple_photo_sphere_text_field_12\";s:3:\"600\";s:33:\"simple_photo_sphere_text_field_13\";s:2:\"10\";s:33:\"simple_photo_sphere_text_field_14\";s:0:\"\";s:33:\"simple_photo_sphere_text_field_15\";s:2:\"80\";}', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/simple-photo-sphere/simple-photo-sphere.php'), require_once('/plugins/simple-photo-sphere/admin-page.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 05:31:26 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/simpleflickr/simpleFlickr.php on line 1040
 
-Node.js v20.15.0
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"simpleflickr"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
