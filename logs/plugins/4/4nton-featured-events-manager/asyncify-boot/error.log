@@ -2,22 +2,22 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [04-Apr-2025 13:49:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [09-Apr-2025 13:10:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wcr_installed', '1743774560', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 13:10:30', '2025-04-09 13:10:30', '', '', 'AcuD_logo_2', '', 'inherit', 'attachment', 'open', 'closed', '', 'acud_logo_2', '', '', '2025-04-09 13:10:30', '2025-04-09 13:10:30', 0, 0, 'image/jpeg', 'http://127.0.0.1:9408/wp-content/uploads/4-author-cheer-up-donate/AcuD_logo_2.jpg')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wcr_installed' , '1743774560' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_posts</li>
+<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 13:10:30' , '2025-04-09 13:10:30' , '' , '' , 'AcuD_logo_2' , '' , 'inherit' , 'attachment' , 'open' , 'closed' , '' , 'acud_logo_2' , '' , '' , '2025-04-09 13:10:30' , '2025-04-09 13:10:30' , 0 , 0 , 'image/jpeg' , 'http://127.0.0.1:9408/wp-content/uploads/4-author-cheer-up-donate/AcuD_logo_2.jpg' )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -28,380 +28,59 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wcr_installed', 1743774560, '', 'auto')
-#5 /wordpress/wp-content/plugins/add-to-cart-redirect/add-to-cart-redirect.php(87): update_option('wcr_installed', 1743774560)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Atcr->activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_add-to...', false)
-#10 /internal/eval.php(20): activate_plugin('add-to-cart-red...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wcr_installed', '1743774560', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_add-to-cart-redirect/add-to-cart-redirect.php'), WP_Hook->do_action, WP_Hook->apply_filters, Atcr->activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 13:49:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wcr_version', '1.0.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wcr_version' , '1.0.2' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wcr_version', '1.0.2', '', 'auto')
-#5 /wordpress/wp-content/plugins/add-to-cart-redirect/add-to-cart-redirect.php(89): update_option('wcr_version', '1.0.2')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Atcr->activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_add-to...', false)
-#10 /internal/eval.php(20): activate_plugin('add-to-cart-red...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wcr_version', '1.0.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_add-to-cart-redirect/add-to-cart-redirect.php'), WP_Hook->do_action, WP_Hook->apply_filters, Atcr->activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 13:49:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('do_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'do_activation_redirect' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/add-to-cart-redirect/add-to-cart-redirect.php(90): add_option('do_activation_r...', true)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): Atcr->activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_add-to...', false)
-#9 /internal/eval.php(20): activate_plugin('add-to-cart-red...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('do_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_add-to-cart-redirect/add-to-cart-redirect.php'), WP_Hook->do_action, WP_Hook->apply_filters, Atcr->activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 13:49:20 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 13:49:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 13:49:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 13:49:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 13:49:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 13:49:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 13:49:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 13:49:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 13:49:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 13:49:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 13:49:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 13:49:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 13:49:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('abdc_options', 'a:2:{s:17:\"disable_admin_bar\";s:3:\"yes\";s:24:\"disable_dashboard_access\";s:3:\"yes\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'abdc_options' , 'a:2:{s:17:&quot;disable_admin_bar&quot;;s:3:&quot;yes&quot;;s:24:&quot;disable_dashboard_access&quot;;s:3:&quot;yes&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/admin-bar-dashboard-control/admin-bar-dashboard-control.php(154): add_option('abdc_options', Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): ProfilePress\PP_Admin_Bar_Control\PP_Admin_Bar_Control::on_activation(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_admin-...', false)
-#9 /internal/eval.php(20): activate_plugin('admin-bar-dashb...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('abdc_options', 'a:2:{s:17:\"disable_admin_bar\";s:3:\"yes\";s:24:\"disable_dashboard_access\";s:3:\"yes\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_admin-bar-dashboard-control/admin-bar-dashboard-control.php'), WP_Hook->do_action, WP_Hook->apply_filters, ProfilePress\PP_Admin_Bar_Control\PP_Admin_Bar_Control::on_activation, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 13:49:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 13:49:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 13:49:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 13:49:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 13:49:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_wsx-rss-feed-admin-notice', '1743774604', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_wsx-rss-feed-admin-notice' , '1743774604' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1743774604, '', 'off')
-#5 /wordpress/wp-content/plugins/admin-dashboard-rss-feed/admin-rss-feed.php(29): set_transient('wsx-rss-feed-ad...', true, 5)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): wsx_rss_feed_plugin_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_admin-...', false)
-#10 /internal/eval.php(20): activate_plugin('admin-dashboard...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_wsx-rss-feed-admin-notice', '1743774604', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_admin-dashboard-rss-feed/admin-rss-feed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wsx_rss_feed_plugin_activate, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 13:49:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_wsx-rss-feed-admin-notice', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_wsx-rss-feed-admin-notice' , '1' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_wsx-...', true, '', 'off')
-#5 /wordpress/wp-content/plugins/admin-dashboard-rss-feed/admin-rss-feed.php(29): set_transient('wsx-rss-feed-ad...', true, 5)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): wsx_rss_feed_plugin_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_admin-...', false)
-#10 /internal/eval.php(20): activate_plugin('admin-dashboard...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_wsx-rss-feed-admin-notice', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_admin-dashboard-rss-feed/admin-rss-feed.php'), WP_Hook->do_action, WP_Hook->apply_filters, wsx_rss_feed_plugin_activate, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 13:49:59 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 13:49:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 13:49:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 13:49:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 13:50:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('aop_db_version', '1.0.0', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'aop_db_version' , '1.0.0' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/admin-options-pages/App/Plugin.php(102): add_option('aop_db_version', '1.0.0', '', 'off')
-#5 /wordpress/wp-content/plugins/admin-options-pages/App/Plugin.php(72): AOP\App\Plugin::addOptions()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): AOP\App\Plugin::AOP\App\{closure}(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_admin-...', false)
-#10 /internal/eval.php(20): activate_plugin('admin-options-p...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('aop_db_version', '1.0.0', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_admin-options-pages/admin-options-pages.php'), WP_Hook->do_action, WP_Hook->apply_filters, AOP\App\Plugin::AOP\App\{closure}, AOP\App\Plugin::addOptions, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 13:50:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('aop_option_names', 'a:0:{}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'aop_option_names' , 'a:0:{}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/admin-options-pages/App/Plugin.php(103): add_option('aop_option_name...', Array, '', 'off')
-#5 /wordpress/wp-content/plugins/admin-options-pages/App/Plugin.php(72): AOP\App\Plugin::addOptions()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): AOP\App\Plugin::AOP\App\{closure}(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_admin-...', false)
-#10 /internal/eval.php(20): activate_plugin('admin-options-p...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('aop_option_names', 'a:0:{}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_admin-options-pages/admin-options-pages.php'), WP_Hook->do_action, WP_Hook->apply_filters, AOP\App\Plugin::AOP\App\{closure}, AOP\App\Plugin::addOptions, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 13:50:11 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 13:50:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 13:50:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 13:50:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 13:50:23 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 13:50:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 13:50:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 13:50:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 13:50:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 13:50:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 13:50:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 13:50:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 13:50:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 13:50:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 13:50:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 13:50:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 13:50:47 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/advanced-security-logger-by-pentest7/classes/class-url-logger.php on line 79
-[04-Apr-2025 13:50:50 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/advanced-security-logger-by-pentest7/classes/class-url-logger.php on line 79
-[04-Apr-2025 13:50:53 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/advanced-security-logger-by-pentest7/classes/class-url-logger.php on line 79
-[04-Apr-2025 13:50:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('af_tf_plugin_options', 'a:10:{s:16:\"af_tf_form_title\";s:44:\"Send message about this page to your friend!\";s:25:\"af_tf_email_title_message\";s:40:\"Please see this page on >>website name<<\";s:26:\"af_tf_form_content_message\";s:41:\"Hello, I think this page is interesting: \";s:15:\"af_tf_windowURL\";s:74:\"http://127.0.0.1:9400/wp-content/plugins/af-tell-a-friend/af-tf-window.php\";s:21:\"af_tf_email_greetings\";s:12:\"best regards\";s:17:\"af_tf_button_text\";s:13:\"Tell a Friend\";s:17:\"af_tf_text_visual\";s:13:\"Tell a Friend\";s:19:\"af_tf_window_height\";i:380;s:18:\"af_tf_window_width\";i:500;s:15:\"af_tf_font_size\";s:4:\"12px\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'af_tf_plugin_options' , 'a:10:{s:16:&quot;af_tf_form_title&quot;;s:44:&quot;Send message about this page to your friend!&quot;;s:25:&quot;af_tf_email_title_message&quot;;s:40:&quot;Please see this page on &gt;&gt;website name&lt;&lt;&quot;;s:26:&quot;af_tf_form_content_message&quot;;s:41:&quot;Hello, I think this page is interesting: &quot;;s:15:&quot;af_tf_windowURL&quot;;s:74:&quot;http://127.0.0.1:9400/wp-content/plugins/af-tell-a-friend/af-tf-window.php&quot;;s:21:&quot;af_tf_email_greetings&quot;;s:12:&quot;best regards&quot;;s:17:&quot;af_tf_button_text&quot;;s:13:&quot;Tell a Friend&quot;;s:17:&quot;af_tf_text_visual&quot;;s:13:&quot;Tell a Friend&quot;;s:19:&quot;af_tf_window_height&quot;;i:380;s:18:&quot;af_tf_window_width&quot;;i:500;s:15:&quot;af_tf_font_size&quot;;s:4:&quot;12px&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('af_tf_plugin_op...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/af-tell-a-friend/af-tell-friend.php(35): update_option('af_tf_plugin_op...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): af_tf_activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_af-tel...', false)
-#10 /internal/eval.php(20): activate_plugin('af-tell-a-frien...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('af_tf_plugin_options', 'a:10:{s:16:\"af_tf_form_title\";s:44:\"Send message about this page to your friend!\";s:25:\"af_tf_email_title_message\";s:40:\"Please see this page on >>website name<<\";s:26:\"af_tf_form_content_message\";s:41:\"Hello, I think this page is interesting: \";s:15:\"af_tf_windowURL\";s:74:\"http://127.0.0.1:9400/wp-content/plugins/af-tell-a-friend/af-tf-window.php\";s:21:\"af_tf_email_greetings\";s:12:\"best regards\";s:17:\"af_tf_button_text\";s:13:\"Tell a Friend\";s:17:\"af_tf_text_visual\";s:13:\"Tell a Friend\";s:19:\"af_tf_window_height\";i:380;s:18:\"af_tf_window_width\";i:500;s:15:\"af_tf_font_size\";s:4:\"12px\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_af-tell-a-friend/af-tell-friend.php'), WP_Hook->do_action, WP_Hook->apply_filters, af_tf_activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 13:50:59 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "‘af_tf_uninstall’" in /wordpress/wp-content/plugins/af-tell-a-friend/af-tell-friend.php:38
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
+#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
+#6 /wordpress/wp-includes/post.php(6527): wp_insert_post(Array, false, true)
+#7 /wordpress/wp-content/plugins/4-author-cheer-up-donate/4-author-cheer-up-donate.php(136): wp_insert_attachment(Array, '/wordpress/wp-c...')
+#8 /wordpress/wp-includes/class-wp-hook.php(324): AcuD_Plugin_activ(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_4-auth...', false)
+#12 /internal/eval.php(20): activate_plugin('4-author-cheer-...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 13:10:30', '2025-04-09 13:10:30', '', '', 'AcuD_logo_2', '', 'inherit', 'attachment', 'open', 'closed', '', 'acud_logo_2', '', '', '2025-04-09 13:10:30', '2025-04-09 13:10:30', 0, 0, 'image/jpeg', 'http://127.0.0.1:9408/wp-content/uploads/4-author-cheer-up-donate/AcuD_logo_2.jpg') made by activate_plugin, do_action('activate_4-author-cheer-up-donate/4-author-cheer-up-donate.php'), WP_Hook->do_action, WP_Hook->apply_filters, AcuD_Plugin_activ, wp_insert_attachment, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 13:10:30 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wp_generate_attachment_metadata() in /wordpress/wp-content/plugins/4-author-cheer-up-donate/4-author-cheer-up-donate.php:137
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): af_tf_activation(false)
+#0 /wordpress/wp-includes/class-wp-hook.php(324): AcuD_Plugin_activ(false)
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_af-tel...', false)
-#4 /internal/eval.php(20): activate_plugin('af-tell-a-frien...')
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_4-auth...', false)
+#4 /internal/eval.php(20): activate_plugin('4-author-cheer-...')
 #5 {main}
-  thrown in /wordpress/wp-content/plugins/af-tell-a-friend/af-tell-friend.php on line 38
-[04-Apr-2025 13:51:01 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "‘af_tf_uninstall’" in /wordpress/wp-content/plugins/af-tell-a-friend/af-tell-friend.php:38
+  thrown in /wordpress/wp-content/plugins/4-author-cheer-up-donate/4-author-cheer-up-donate.php on line 137
+[09-Apr-2025 13:10:39 UTC] PHP Warning:  mkdir(): File exists in /wordpress/wp-content/plugins/4-author-cheer-up-donate/4-author-cheer-up-donate.php on line 127
+[09-Apr-2025 13:10:39 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wp_generate_attachment_metadata() in /wordpress/wp-content/plugins/4-author-cheer-up-donate/4-author-cheer-up-donate.php:137
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): af_tf_activation(false)
+#0 /wordpress/wp-includes/class-wp-hook.php(324): AcuD_Plugin_activ(false)
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_af-tel...', false)
-#4 /internal/eval.php(20): activate_plugin('af-tell-a-frien...')
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_4-auth...', false)
+#4 /internal/eval.php(20): activate_plugin('4-author-cheer-...')
 #5 {main}
-  thrown in /wordpress/wp-content/plugins/af-tell-a-friend/af-tell-friend.php on line 38
-[04-Apr-2025 13:51:04 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "‘af_tf_uninstall’" in /wordpress/wp-content/plugins/af-tell-a-friend/af-tell-friend.php:38
+  thrown in /wordpress/wp-content/plugins/4-author-cheer-up-donate/4-author-cheer-up-donate.php on line 137
+[09-Apr-2025 13:10:48 UTC] PHP Warning:  mkdir(): File exists in /wordpress/wp-content/plugins/4-author-cheer-up-donate/4-author-cheer-up-donate.php on line 127
+[09-Apr-2025 13:10:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wp_generate_attachment_metadata() in /wordpress/wp-content/plugins/4-author-cheer-up-donate/4-author-cheer-up-donate.php:137
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): af_tf_activation(false)
+#0 /wordpress/wp-includes/class-wp-hook.php(324): AcuD_Plugin_activ(false)
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_af-tel...', false)
-#4 /internal/eval.php(20): activate_plugin('af-tell-a-frien...')
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_4-auth...', false)
+#4 /internal/eval.php(20): activate_plugin('4-author-cheer-...')
 #5 {main}
-  thrown in /wordpress/wp-content/plugins/af-tell-a-friend/af-tell-friend.php on line 38
-[04-Apr-2025 13:51:11 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 13:51:11 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 13:51:11 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 13:51:11 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 13:51:23 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 13:51:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 13:51:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 13:51:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 13:51:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+  thrown in /wordpress/wp-content/plugins/4-author-cheer-up-donate/4-author-cheer-up-donate.php on line 137
+[09-Apr-2025 13:10:58 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 13:10:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 13:10:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 13:10:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 13:11:44 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 13:11:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 13:11:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 13:11:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 13:12:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pj-prevention', '1|1743774683', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('abj404_settings', '', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -413,7 +92,7 @@ Stack trace:
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pj-prevention' , '1|1743774683' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'abj404_settings' , '' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -425,20 +104,42 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('pj-prevention', '1|1743774683', '', 'auto')
-#5 /wordpress/wp-content/plugins/affiliate-post-monster/pj_functions.php(101): update_option('pj-prevention', '1|1743774683')
-#6 /wordpress/wp-content/plugins/affiliate-post-monster/pj_functions.php(327): ticktock('off')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): ticktocksurpressed('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-includes/load.php(1279): do_action('shutdown')
-#11 [internal function]: shutdown_action_hook()
+#4 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(409): add_option('abj404_settings', '', '', 'off')
+#5 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(27): ABJ_404_Solution_PluginLogic->getOptions()
+#6 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(43): ABJ_404_Solution_SpellChecker::getInstance()
+#7 /wordpress/wp-content/plugins/404-solution/includes/Loader.php(51): ABJ_404_Solution_SpellChecker::init()
+#8 /wordpress/wp-content/plugins/404-solution/404-solution.php(89): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('404-solution/40...')
+#11 /internal/eval.php(20): activate_plugin('404-solution/40...')
 #12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pj-prevention', '1|1743774683', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by shutdown_action_hook, do_action('shutdown'), WP_Hook->do_action, WP_Hook->apply_filters, ticktocksurpressed, ticktock, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 13:51:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('abj404_settings', '', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/404-solution/404-solution.php'), require_once('/plugins/404-solution/includes/Loader.php'), ABJ_404_Solution_SpellChecker::init, ABJ_404_Solution_SpellChecker::getInstance, ABJ_404_Solution_PluginLogic->getOptions, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 13:12:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('postcounter', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('abj404_settings', 'a:44:{s:16:\"default_redirect\";s:3:\"301\";s:15:\"send_error_logs\";s:1:\"0\";s:11:\"capture_404\";s:1:\"1\";s:16:\"capture_deletion\";i:1095;s:15:\"manual_deletion\";s:1:\"0\";s:12:\"log_deletion\";s:3:\"365\";s:18:\"admin_notification\";s:1:\"0\";s:14:\"remove_matches\";s:1:\"1\";s:16:\"suggest_minscore\";s:2:\"25\";s:11:\"suggest_max\";s:1:\"5\";s:13:\"suggest_title\";s:40:\"<h3>Here are some other great pages</h3>\";s:14:\"suggest_before\";s:4:\"<ol>\";s:13:\"suggest_after\";s:5:\"</ol>\";s:19:\"suggest_entrybefore\";s:4:\"<li>\";s:18:\"suggest_entryafter\";s:5:\"</li>\";s:17:\"suggest_noresults\";s:26:\"<p>No suggestions. :/ </p>\";s:12:\"suggest_cats\";s:1:\"1\";s:12:\"suggest_tags\";s:1:\"1\";s:18:\"update_suggest_url\";s:1:\"0\";s:14:\"auto_redirects\";s:1:\"1\";s:10:\"auto_score\";s:2:\"90\";s:26:\"template_redirect_priority\";s:1:\"9\";s:13:\"auto_deletion\";s:4:\"1095\";s:9:\"auto_cats\";s:1:\"1\";s:9:\"auto_tags\";s:1:\"1\";s:11:\"dest404page\";s:3:\"0|0\";s:22:\"maximum_log_disk_usage\";s:2:\"10\";s:18:\"ignore_dontprocess\";s:18:\"zemanta aggregator\";s:16:\"ignore_doprocess\";s:243:\"Googlebot
+Mediapartners-Google
+AdsBot-Google
+developers.google.com
+Bingbot
+Yahoo! Slurp
+DuckDuckBot
+Baiduspider
+YandexBot
+www.sogou.com
+Sogou-Test-Spider
+Exabot
+facebot
+facebookexternalhit
+ia_archiver
+SeznamBot
+Pinterestbot
+UptimeRobot
+MJ12bot\";s:21:\"recognized_post_types\";s:17:\"page
+post
+product\";s:21:\"recognized_categories\";s:0:\"\";s:20:\"folders_files_ignore\";s:69:\"wp-content/plugins/*
+wp-content/themes/*
+.well-known/acme-challenge/*\";s:27:\"folders_files_ignore_usable\";s:0:\"\";s:18:\"plugin_admin_users\";s:0:\"\";s:10:\"debug_mode\";i:0;s:29:\"days_wait_before_major_update\";i:30;s:10:\"DB_VERSION\";s:5:\"0.0.0\";s:12:\"menuLocation\";s:13:\"underSettings\";s:24:\"admin_notification_email\";s:0:\"\";s:23:\"page_redirects_order_by\";s:3:\"url\";s:20:\"page_redirects_order\";s:3:\"ASC\";s:17:\"captured_order_by\";s:8:\"logshits\";s:14:\"captured_order\";s:4:\"DESC\";s:14:\"excludePages[]\";s:0:\"\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -450,7 +151,29 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'postcounter' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'abj404_settings' , 'a:44:{s:16:&quot;default_redirect&quot;;s:3:&quot;301&quot;;s:15:&quot;send_error_logs&quot;;s:1:&quot;0&quot;;s:11:&quot;capture_404&quot;;s:1:&quot;1&quot;;s:16:&quot;capture_deletion&quot;;i:1095;s:15:&quot;manual_deletion&quot;;s:1:&quot;0&quot;;s:12:&quot;log_deletion&quot;;s:3:&quot;365&quot;;s:18:&quot;admin_notification&quot;;s:1:&quot;0&quot;;s:14:&quot;remove_matches&quot;;s:1:&quot;1&quot;;s:16:&quot;suggest_minscore&quot;;s:2:&quot;25&quot;;s:11:&quot;suggest_max&quot;;s:1:&quot;5&quot;;s:13:&quot;suggest_title&quot;;s:40:&quot;&lt;h3&gt;Here are some other great pages&lt;/h3&gt;&quot;;s:14:&quot;suggest_before&quot;;s:4:&quot;&lt;ol&gt;&quot;;s:13:&quot;suggest_after&quot;;s:5:&quot;&lt;/ol&gt;&quot;;s:19:&quot;suggest_entrybefore&quot;;s:4:&quot;&lt;li&gt;&quot;;s:18:&quot;suggest_entryafter&quot;;s:5:&quot;&lt;/li&gt;&quot;;s:17:&quot;suggest_noresults&quot;;s:26:&quot;&lt;p&gt;No suggestions. :/ &lt;/p&gt;&quot;;s:12:&quot;suggest_cats&quot;;s:1:&quot;1&quot;;s:12:&quot;suggest_tags&quot;;s:1:&quot;1&quot;;s:18:&quot;update_suggest_url&quot;;s:1:&quot;0&quot;;s:14:&quot;auto_redirects&quot;;s:1:&quot;1&quot;;s:10:&quot;auto_score&quot;;s:2:&quot;90&quot;;s:26:&quot;template_redirect_priority&quot;;s:1:&quot;9&quot;;s:13:&quot;auto_deletion&quot;;s:4:&quot;1095&quot;;s:9:&quot;auto_cats&quot;;s:1:&quot;1&quot;;s:9:&quot;auto_tags&quot;;s:1:&quot;1&quot;;s:11:&quot;dest404page&quot;;s:3:&quot;0|0&quot;;s:22:&quot;maximum_log_disk_usage&quot;;s:2:&quot;10&quot;;s:18:&quot;ignore_dontprocess&quot;;s:18:&quot;zemanta aggregator&quot;;s:16:&quot;ignore_doprocess&quot;;s:243:&quot;Googlebot
+Mediapartners-Google
+AdsBot-Google
+developers.google.com
+Bingbot
+Yahoo! Slurp
+DuckDuckBot
+Baiduspider
+YandexBot
+www.sogou.com
+Sogou-Test-Spider
+Exabot
+facebot
+facebookexternalhit
+ia_archiver
+SeznamBot
+Pinterestbot
+UptimeRobot
+MJ12bot&quot;;s:21:&quot;recognized_post_types&quot;;s:17:&quot;page
+post
+product&quot;;s:21:&quot;recognized_categories&quot;;s:0:&quot;&quot;;s:20:&quot;folders_files_ignore&quot;;s:69:&quot;wp-content/plugins/*
+wp-content/themes/*
+.well-known/acme-challenge/*&quot;;s:27:&quot;folders_files_ignore_usable&quot;;s:0:&quot;&quot;;s:18:&quot;plugin_admin_users&quot;;s:0:&quot;&quot;;s:10:&quot;debug_mode&quot;;i:0;s:29:&quot;days_wait_before_major_update&quot;;i:30;s:10:&quot;DB_VERSION&quot;;s:5:&quot;0.0.0&quot;;s:12:&quot;menuLocation&quot;;s:13:&quot;underSettings&quot;;s:24:&quot;admin_notification_email&quot;;s:0:&quot;&quot;;s:23:&quot;page_redirects_order_by&quot;;s:3:&quot;url&quot;;s:20:&quot;page_redirects_order&quot;;s:3:&quot;ASC&quot;;s:17:&quot;captured_order_by&quot;;s:8:&quot;logshits&quot;;s:14:&quot;captured_order&quot;;s:4:&quot;DESC&quot;;s:14:&quot;excludePages[]&quot;;s:0:&quot;&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -462,50 +185,44 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('postcounter', 1, '', 'auto')
-#5 /wordpress/wp-content/plugins/affiliate-post-monster/pj_functions.php(137): update_option('postcounter', 1)
-#6 /wordpress/wp-content/plugins/affiliate-post-monster/pj_functions.php(327): ticktock('off')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): ticktocksurpressed('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-includes/load.php(1279): do_action('shutdown')
-#11 [internal function]: shutdown_action_hook()
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('postcounter', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by shutdown_action_hook, do_action('shutdown'), WP_Hook->do_action, WP_Hook->apply_filters, ticktocksurpressed, ticktock, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 13:51:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('abj404_settings', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(438): update_option('abj404_settings', Array)
+#6 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(425): ABJ_404_Solution_PluginLogic->updateOptions(Array)
+#7 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(27): ABJ_404_Solution_PluginLogic->getOptions()
+#8 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(43): ABJ_404_Solution_SpellChecker::getInstance()
+#9 /wordpress/wp-content/plugins/404-solution/includes/Loader.php(51): ABJ_404_Solution_SpellChecker::init()
+#10 /wordpress/wp-content/plugins/404-solution/404-solution.php(89): require_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('404-solution/40...')
+#13 /internal/eval.php(20): activate_plugin('404-solution/40...')
+#14 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('abj404_settings', 'a:44:{s:16:\"default_redirect\";s:3:\"301\";s:15:\"send_error_logs\";s:1:\"0\";s:11:\"capture_404\";s:1:\"1\";s:16:\"capture_deletion\";i:1095;s:15:\"manual_deletion\";s:1:\"0\";s:12:\"log_deletion\";s:3:\"365\";s:18:\"admin_notification\";s:1:\"0\";s:14:\"remove_matches\";s:1:\"1\";s:16:\"suggest_minscore\";s:2:\"25\";s:11:\"suggest_max\";s:1:\"5\";s:13:\"suggest_title\";s:40:\"<h3>Here are some other great pages</h3>\";s:14:\"suggest_before\";s:4:\"<ol>\";s:13:\"suggest_after\";s:5:\"</ol>\";s:19:\"suggest_entrybefore\";s:4:\"<li>\";s:18:\"suggest_entryafter\";s:5:\"</li>\";s:17:\"suggest_noresults\";s:26:\"<p>No suggestions. :/ </p>\";s:12:\"suggest_cats\";s:1:\"1\";s:12:\"suggest_tags\";s:1:\"1\";s:18:\"update_suggest_url\";s:1:\"0\";s:14:\"auto_redirects\";s:1:\"1\";s:10:\"auto_score\";s:2:\"90\";s:26:\"template_redirect_priority\";s:1:\"9\";s:13:\"auto_deletion\";s:4:\"1095\";s:9:\"auto_cats\";s:1:\"1\";s:9:\"auto_tags\";s:1:\"1\";s:11:\"dest404page\";s:3:\"0|0\";s:22:\"maximum_log_disk_usage\";s:2:\"10\";s:18:\"ignore_dontprocess\";s:18:\"zemanta aggregator\";s:16:\"ignore_doprocess\";s:243:\"Googlebot
+Mediapartners-Google
+AdsBot-Google
+developers.google.com
+Bingbot
+Yahoo! Slurp
+DuckDuckBot
+Baiduspider
+YandexBot
+www.sogou.com
+Sogou-Test-Spider
+Exabot
+facebot
+facebookexternalhit
+ia_archiver
+SeznamBot
+Pinterestbot
+UptimeRobot
+MJ12bot\";s:21:\"recognized_post_types\";s:17:\"page
+post
+product\";s:21:\"recognized_categories\";s:0:\"\";s:20:\"folders_files_ignore\";s:69:\"wp-content/plugins/*
+wp-content/themes/*
+.well-known/acme-challenge/*\";s:27:\"folders_files_ignore_usable\";s:0:\"\";s:18:\"plugin_admin_users\";s:0:\"\";s:10:\"debug_mode\";i:0;s:29:\"days_wait_before_major_update\";i:30;s:10:\"DB_VERSION\";s:5:\"0.0.0\";s:12:\"menuLocation\";s:13:\"underSettings\";s:24:\"admin_notification_email\";s:0:\"\";s:23:\"page_redirects_order_by\";s:3:\"url\";s:20:\"page_redirects_order\";s:3:\"ASC\";s:17:\"captured_order_by\";s:8:\"logshits\";s:14:\"captured_order\";s:4:\"DESC\";s:14:\"excludePages[]\";s:0:\"\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/404-solution/404-solution.php'), require_once('/plugins/404-solution/includes/Loader.php'), ABJ_404_Solution_SpellChecker::init, ABJ_404_Solution_SpellChecker::getInstance, ABJ_404_Solution_PluginLogic->getOptions, ABJ_404_Solution_PluginLogic->updateOptions, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 13:12:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT ID FROM wp_posts WHERE post_title = '' && post_status = 'publish' </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `ID` FROM `wp_posts` WHERE `post_title` = '' &amp;&amp; `post_status` = 'publish' | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "&": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT ID FROM ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT ID FROM ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT ID FROM ...')
-#4 /wordpress/wp-content/plugins/affiliate-post-monster/pj_functions.php(9): wpdb->get_row('SELECT ID FROM ...', 'ARRAY_N')
-#5 /wordpress/wp-content/plugins/affiliate-post-monster/pj_functions.php(176): pj_exist('')
-#6 /wordpress/wp-content/plugins/affiliate-post-monster/pj_functions.php(327): ticktock('off')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): ticktocksurpressed('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-includes/load.php(1279): do_action('shutdown')
-#11 [internal function]: shutdown_action_hook()
-#12 {main}</pre>
- for query SELECT ID FROM wp_posts WHERE post_title = '' && post_status = 'publish'  made by shutdown_action_hook, do_action('shutdown'), WP_Hook->do_action, WP_Hook->apply_filters, ticktocksurpressed, ticktock, pj_exist, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 13:51:23 UTC] PHP Warning:  Undefined variable $gap in /wordpress/wp-content/plugins/affiliate-post-monster/pj_functions.php on line 225
-[04-Apr-2025 13:51:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pj_timer', '1743774683', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('abj404_solution_SYNC_testing', '1744204332.599_testing_3dc23123a78b9767f6722c923d89.27844127', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -517,7 +234,7 @@ SQLSTATE[HY000]: General error: 1 near "&": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pj_timer' , '1743774683' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'abj404_solution_SYNC_testing' , '1744204332.599_testing_3dc23123a78b9767f6722c923d89.27844127' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -529,38 +246,48 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('pj_timer', 1743774683, '', 'auto')
-#5 /wordpress/wp-content/plugins/affiliate-post-monster/pj_functions.php(225): update_option('pj_timer', 1743774683)
-#6 /wordpress/wp-content/plugins/affiliate-post-monster/pj_functions.php(327): ticktock('off')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): ticktocksurpressed('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-includes/load.php(1279): do_action('shutdown')
-#11 [internal function]: shutdown_action_hook()
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pj_timer', '1743774683', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by shutdown_action_hook, do_action('shutdown'), WP_Hook->do_action, WP_Hook->apply_filters, ticktocksurpressed, ticktock, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 13:51:23 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('l66_widget_4')
-#2 /wordpress/wp-content/plugins/affiliate-post-monster/pj-plugin.php(19): register_widget('l66_widget_4')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): l66_load_widgets2('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[04-Apr-2025 13:51:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('abj404_solution...', '1744204332.599_...', '', 'auto')
+#5 /wordpress/wp-content/plugins/404-solution/includes/SynchronizationUtils.php(52): update_option('abj404_solution...', '1744204332.599_...')
+#6 /wordpress/wp-content/plugins/404-solution/includes/SynchronizationUtils.php(234): ABJ_404_Solution_SynchronizationUtils->isFileMode()
+#7 /wordpress/wp-content/plugins/404-solution/includes/SynchronizationUtils.php(138): ABJ_404_Solution_SynchronizationUtils->readOwner('abj404_solution...')
+#8 /wordpress/wp-content/plugins/404-solution/includes/SynchronizationUtils.php(112): ABJ_404_Solution_SynchronizationUtils->fixAnUnforeseenIssue('update_db_versi...')
+#9 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(452): ABJ_404_Solution_SynchronizationUtils->synchronizerAcquireLockTry('update_db_versi...')
+#10 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(430): ABJ_404_Solution_PluginLogic->updateToNewVersion(Array)
+#11 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(27): ABJ_404_Solution_PluginLogic->getOptions()
+#12 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(43): ABJ_404_Solution_SpellChecker::getInstance()
+#13 /wordpress/wp-content/plugins/404-solution/includes/Loader.php(51): ABJ_404_Solution_SpellChecker::init()
+#14 /wordpress/wp-content/plugins/404-solution/404-solution.php(89): require_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('404-solution/40...')
+#17 /internal/eval.php(20): activate_plugin('404-solution/40...')
+#18 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('abj404_solution_SYNC_testing', '1744204332.599_testing_3dc23123a78b9767f6722c923d89.27844127', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/404-solution/404-solution.php'), require_once('/plugins/404-solution/includes/Loader.php'), ABJ_404_Solution_SpellChecker::init, ABJ_404_Solution_SpellChecker::getInstance, ABJ_404_Solution_PluginLogic->getOptions, ABJ_404_Solution_PluginLogic->updateToNewVersion, ABJ_404_Solution_SynchronizationUtils->synchronizerAcquireLockTry, ABJ_404_Solution_SynchronizationUtils->fixAnUnforeseenIssue, ABJ_404_Solution_SynchronizationUtils->readOwner, ABJ_404_Solution_SynchronizationUtils->isFileMode, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 13:12:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pj-prevention', '1|1743774683', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('abj404_settings', 'a:44:{s:16:\"default_redirect\";s:3:\"301\";s:15:\"send_error_logs\";s:1:\"0\";s:11:\"capture_404\";s:1:\"1\";s:16:\"capture_deletion\";i:1095;s:15:\"manual_deletion\";s:1:\"0\";s:12:\"log_deletion\";s:3:\"365\";s:18:\"admin_notification\";s:1:\"0\";s:14:\"remove_matches\";s:1:\"1\";s:16:\"suggest_minscore\";s:2:\"25\";s:11:\"suggest_max\";s:1:\"5\";s:13:\"suggest_title\";s:40:\"<h3>Here are some other great pages</h3>\";s:14:\"suggest_before\";s:4:\"<ol>\";s:13:\"suggest_after\";s:5:\"</ol>\";s:19:\"suggest_entrybefore\";s:4:\"<li>\";s:18:\"suggest_entryafter\";s:5:\"</li>\";s:17:\"suggest_noresults\";s:26:\"<p>No suggestions. :/ </p>\";s:12:\"suggest_cats\";s:1:\"1\";s:12:\"suggest_tags\";s:1:\"1\";s:18:\"update_suggest_url\";s:1:\"0\";s:14:\"auto_redirects\";s:1:\"1\";s:10:\"auto_score\";s:2:\"90\";s:26:\"template_redirect_priority\";s:1:\"9\";s:13:\"auto_deletion\";s:4:\"1095\";s:9:\"auto_cats\";s:1:\"1\";s:9:\"auto_tags\";s:1:\"1\";s:11:\"dest404page\";s:3:\"0|0\";s:22:\"maximum_log_disk_usage\";s:2:\"10\";s:18:\"ignore_dontprocess\";s:18:\"zemanta aggregator\";s:16:\"ignore_doprocess\";s:243:\"Googlebot
+Mediapartners-Google
+AdsBot-Google
+developers.google.com
+Bingbot
+Yahoo! Slurp
+DuckDuckBot
+Baiduspider
+YandexBot
+www.sogou.com
+Sogou-Test-Spider
+Exabot
+facebot
+facebookexternalhit
+ia_archiver
+SeznamBot
+Pinterestbot
+UptimeRobot
+MJ12bot\";s:21:\"recognized_post_types\";s:17:\"page
+post
+product\";s:21:\"recognized_categories\";s:0:\"\";s:20:\"folders_files_ignore\";s:69:\"wp-content/plugins/*
+wp-content/themes/*
+.well-known/acme-challenge/*\";s:27:\"folders_files_ignore_usable\";s:0:\"\";s:18:\"plugin_admin_users\";s:0:\"\";s:10:\"debug_mode\";i:0;s:29:\"days_wait_before_major_update\";i:30;s:10:\"DB_VERSION\";s:5:\"0.0.0\";s:12:\"menuLocation\";s:13:\"underSettings\";s:24:\"admin_notification_email\";s:0:\"\";s:23:\"page_redirects_order_by\";s:3:\"url\";s:20:\"page_redirects_order\";s:3:\"ASC\";s:17:\"captured_order_by\";s:8:\"logshits\";s:14:\"captured_order\";s:4:\"DESC\";s:14:\"excludePages[]\";s:0:\"\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -572,7 +299,29 @@ Stack trace:
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pj-prevention' , '1|1743774683' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'abj404_settings' , 'a:44:{s:16:&quot;default_redirect&quot;;s:3:&quot;301&quot;;s:15:&quot;send_error_logs&quot;;s:1:&quot;0&quot;;s:11:&quot;capture_404&quot;;s:1:&quot;1&quot;;s:16:&quot;capture_deletion&quot;;i:1095;s:15:&quot;manual_deletion&quot;;s:1:&quot;0&quot;;s:12:&quot;log_deletion&quot;;s:3:&quot;365&quot;;s:18:&quot;admin_notification&quot;;s:1:&quot;0&quot;;s:14:&quot;remove_matches&quot;;s:1:&quot;1&quot;;s:16:&quot;suggest_minscore&quot;;s:2:&quot;25&quot;;s:11:&quot;suggest_max&quot;;s:1:&quot;5&quot;;s:13:&quot;suggest_title&quot;;s:40:&quot;&lt;h3&gt;Here are some other great pages&lt;/h3&gt;&quot;;s:14:&quot;suggest_before&quot;;s:4:&quot;&lt;ol&gt;&quot;;s:13:&quot;suggest_after&quot;;s:5:&quot;&lt;/ol&gt;&quot;;s:19:&quot;suggest_entrybefore&quot;;s:4:&quot;&lt;li&gt;&quot;;s:18:&quot;suggest_entryafter&quot;;s:5:&quot;&lt;/li&gt;&quot;;s:17:&quot;suggest_noresults&quot;;s:26:&quot;&lt;p&gt;No suggestions. :/ &lt;/p&gt;&quot;;s:12:&quot;suggest_cats&quot;;s:1:&quot;1&quot;;s:12:&quot;suggest_tags&quot;;s:1:&quot;1&quot;;s:18:&quot;update_suggest_url&quot;;s:1:&quot;0&quot;;s:14:&quot;auto_redirects&quot;;s:1:&quot;1&quot;;s:10:&quot;auto_score&quot;;s:2:&quot;90&quot;;s:26:&quot;template_redirect_priority&quot;;s:1:&quot;9&quot;;s:13:&quot;auto_deletion&quot;;s:4:&quot;1095&quot;;s:9:&quot;auto_cats&quot;;s:1:&quot;1&quot;;s:9:&quot;auto_tags&quot;;s:1:&quot;1&quot;;s:11:&quot;dest404page&quot;;s:3:&quot;0|0&quot;;s:22:&quot;maximum_log_disk_usage&quot;;s:2:&quot;10&quot;;s:18:&quot;ignore_dontprocess&quot;;s:18:&quot;zemanta aggregator&quot;;s:16:&quot;ignore_doprocess&quot;;s:243:&quot;Googlebot
+Mediapartners-Google
+AdsBot-Google
+developers.google.com
+Bingbot
+Yahoo! Slurp
+DuckDuckBot
+Baiduspider
+YandexBot
+www.sogou.com
+Sogou-Test-Spider
+Exabot
+facebot
+facebookexternalhit
+ia_archiver
+SeznamBot
+Pinterestbot
+UptimeRobot
+MJ12bot&quot;;s:21:&quot;recognized_post_types&quot;;s:17:&quot;page
+post
+product&quot;;s:21:&quot;recognized_categories&quot;;s:0:&quot;&quot;;s:20:&quot;folders_files_ignore&quot;;s:69:&quot;wp-content/plugins/*
+wp-content/themes/*
+.well-known/acme-challenge/*&quot;;s:27:&quot;folders_files_ignore_usable&quot;;s:0:&quot;&quot;;s:18:&quot;plugin_admin_users&quot;;s:0:&quot;&quot;;s:10:&quot;debug_mode&quot;;i:0;s:29:&quot;days_wait_before_major_update&quot;;i:30;s:10:&quot;DB_VERSION&quot;;s:5:&quot;0.0.0&quot;;s:12:&quot;menuLocation&quot;;s:13:&quot;underSettings&quot;;s:24:&quot;admin_notification_email&quot;;s:0:&quot;&quot;;s:23:&quot;page_redirects_order_by&quot;;s:3:&quot;url&quot;;s:20:&quot;page_redirects_order&quot;;s:3:&quot;ASC&quot;;s:17:&quot;captured_order_by&quot;;s:8:&quot;logshits&quot;;s:14:&quot;captured_order&quot;;s:4:&quot;DESC&quot;;s:14:&quot;excludePages[]&quot;;s:0:&quot;&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -584,20 +333,73 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('pj-prevention', '1|1743774683', '', 'auto')
-#5 /wordpress/wp-content/plugins/affiliate-post-monster/pj_functions.php(101): update_option('pj-prevention', '1|1743774683')
-#6 /wordpress/wp-content/plugins/affiliate-post-monster/pj_functions.php(327): ticktock('off')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): ticktocksurpressed('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-includes/load.php(1279): do_action('shutdown')
-#11 [internal function]: shutdown_action_hook()
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pj-prevention', '1|1743774683', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by shutdown_action_hook, do_action('shutdown'), WP_Hook->do_action, WP_Hook->apply_filters, ticktocksurpressed, ticktock, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 13:51:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('abj404_settings', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(438): update_option('abj404_settings', Array)
+#6 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(425): ABJ_404_Solution_PluginLogic->updateOptions(Array)
+#7 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(350): ABJ_404_Solution_PluginLogic->getOptions(true)
+#8 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(343): ABJ_404_Solution_Logging->getDebugFilename()
+#9 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(158): ABJ_404_Solution_Logging->getDebugFilePath()
+#10 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(92): ABJ_404_Solution_Logging->writeLineToDebugFile('2025-04-09 13:1...')
+#11 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(492): ABJ_404_Solution_Logging->infoMessage('67f6722c72fd80....')
+#12 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(460): ABJ_404_Solution_PluginLogic->updateToNewVersionAction(Array)
+#13 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(430): ABJ_404_Solution_PluginLogic->updateToNewVersion(Array)
+#14 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(27): ABJ_404_Solution_PluginLogic->getOptions()
+#15 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(43): ABJ_404_Solution_SpellChecker::getInstance()
+#16 /wordpress/wp-content/plugins/404-solution/includes/Loader.php(51): ABJ_404_Solution_SpellChecker::init()
+#17 /wordpress/wp-content/plugins/404-solution/404-solution.php(89): require_once('/wordpress/wp-c...')
+#18 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#19 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('404-solution/40...')
+#20 /internal/eval.php(20): activate_plugin('404-solution/40...')
+#21 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('abj404_settings', 'a:44:{s:16:\"default_redirect\";s:3:\"301\";s:15:\"send_error_logs\";s:1:\"0\";s:11:\"capture_404\";s:1:\"1\";s:16:\"capture_deletion\";i:1095;s:15:\"manual_deletion\";s:1:\"0\";s:12:\"log_deletion\";s:3:\"365\";s:18:\"admin_notification\";s:1:\"0\";s:14:\"remove_matches\";s:1:\"1\";s:16:\"suggest_minscore\";s:2:\"25\";s:11:\"suggest_max\";s:1:\"5\";s:13:\"suggest_title\";s:40:\"<h3>Here are some other great pages</h3>\";s:14:\"suggest_before\";s:4:\"<ol>\";s:13:\"suggest_after\";s:5:\"</ol>\";s:19:\"suggest_entrybefore\";s:4:\"<li>\";s:18:\"suggest_entryafter\";s:5:\"</li>\";s:17:\"suggest_noresults\";s:26:\"<p>No suggestions. :/ </p>\";s:12:\"suggest_cats\";s:1:\"1\";s:12:\"suggest_tags\";s:1:\"1\";s:18:\"update_suggest_url\";s:1:\"0\";s:14:\"auto_redirects\";s:1:\"1\";s:10:\"auto_score\";s:2:\"90\";s:26:\"template_redirect_priority\";s:1:\"9\";s:13:\"auto_deletion\";s:4:\"1095\";s:9:\"auto_cats\";s:1:\"1\";s:9:\"auto_tags\";s:1:\"1\";s:11:\"dest404page\";s:3:\"0|0\";s:22:\"maximum_log_disk_usage\";s:2:\"10\";s:18:\"ignore_dontprocess\";s:18:\"zemanta aggregator\";s:16:\"ignore_doprocess\";s:243:\"Googlebot
+Mediapartners-Google
+AdsBot-Google
+developers.google.com
+Bingbot
+Yahoo! Slurp
+DuckDuckBot
+Baiduspider
+YandexBot
+www.sogou.com
+Sogou-Test-Spider
+Exabot
+facebot
+facebookexternalhit
+ia_archiver
+SeznamBot
+Pinterestbot
+UptimeRobot
+MJ12bot\";s:21:\"recognized_post_types\";s:17:\"page
+post
+product\";s:21:\"recognized_categories\";s:0:\"\";s:20:\"folders_files_ignore\";s:69:\"wp-content/plugins/*
+wp-content/themes/*
+.well-known/acme-challenge/*\";s:27:\"folders_files_ignore_usable\";s:0:\"\";s:18:\"plugin_admin_users\";s:0:\"\";s:10:\"debug_mode\";i:0;s:29:\"days_wait_before_major_update\";i:30;s:10:\"DB_VERSION\";s:5:\"0.0.0\";s:12:\"menuLocation\";s:13:\"underSettings\";s:24:\"admin_notification_email\";s:0:\"\";s:23:\"page_redirects_order_by\";s:3:\"url\";s:20:\"page_redirects_order\";s:3:\"ASC\";s:17:\"captured_order_by\";s:8:\"logshits\";s:14:\"captured_order\";s:4:\"DESC\";s:14:\"excludePages[]\";s:0:\"\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/404-solution/404-solution.php'), require_once('/plugins/404-solution/includes/Loader.php'), ABJ_404_Solution_SpellChecker::init, ABJ_404_Solution_SpellChecker::getInstance, ABJ_404_Solution_PluginLogic->getOptions, ABJ_404_Solution_PluginLogic->updateToNewVersion, ABJ_404_Solution_PluginLogic->updateToNewVersionAction, ABJ_404_Solution_Logging->infoMessage, ABJ_404_Solution_Logging->writeLineToDebugFile, ABJ_404_Solution_Logging->getDebugFilePath, ABJ_404_Solution_Logging->getDebugFilename, ABJ_404_Solution_PluginLogic->getOptions, ABJ_404_Solution_PluginLogic->updateOptions, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 13:12:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('postcounter', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('abj404_settings', 'a:44:{s:16:\"default_redirect\";s:3:\"301\";s:15:\"send_error_logs\";s:1:\"0\";s:11:\"capture_404\";s:1:\"1\";s:16:\"capture_deletion\";i:1095;s:15:\"manual_deletion\";s:1:\"0\";s:12:\"log_deletion\";s:3:\"365\";s:18:\"admin_notification\";s:1:\"0\";s:14:\"remove_matches\";s:1:\"1\";s:16:\"suggest_minscore\";s:2:\"25\";s:11:\"suggest_max\";s:1:\"5\";s:13:\"suggest_title\";s:40:\"<h3>Here are some other great pages</h3>\";s:14:\"suggest_before\";s:4:\"<ol>\";s:13:\"suggest_after\";s:5:\"</ol>\";s:19:\"suggest_entrybefore\";s:4:\"<li>\";s:18:\"suggest_entryafter\";s:5:\"</li>\";s:17:\"suggest_noresults\";s:26:\"<p>No suggestions. :/ </p>\";s:12:\"suggest_cats\";s:1:\"1\";s:12:\"suggest_tags\";s:1:\"1\";s:18:\"update_suggest_url\";s:1:\"0\";s:14:\"auto_redirects\";s:1:\"1\";s:10:\"auto_score\";s:2:\"90\";s:26:\"template_redirect_priority\";s:1:\"9\";s:13:\"auto_deletion\";s:4:\"1095\";s:9:\"auto_cats\";s:1:\"1\";s:9:\"auto_tags\";s:1:\"1\";s:11:\"dest404page\";s:3:\"0|0\";s:22:\"maximum_log_disk_usage\";s:2:\"10\";s:18:\"ignore_dontprocess\";s:18:\"zemanta aggregator\";s:16:\"ignore_doprocess\";s:243:\"Googlebot
+Mediapartners-Google
+AdsBot-Google
+developers.google.com
+Bingbot
+Yahoo! Slurp
+DuckDuckBot
+Baiduspider
+YandexBot
+www.sogou.com
+Sogou-Test-Spider
+Exabot
+facebot
+facebookexternalhit
+ia_archiver
+SeznamBot
+Pinterestbot
+UptimeRobot
+MJ12bot\";s:21:\"recognized_post_types\";s:17:\"page
+post
+product\";s:21:\"recognized_categories\";s:0:\"\";s:20:\"folders_files_ignore\";s:69:\"wp-content/plugins/*
+wp-content/themes/*
+.well-known/acme-challenge/*\";s:27:\"folders_files_ignore_usable\";s:0:\"\";s:18:\"plugin_admin_users\";s:0:\"\";s:10:\"debug_mode\";i:0;s:29:\"days_wait_before_major_update\";i:30;s:10:\"DB_VERSION\";s:5:\"0.0.0\";s:12:\"menuLocation\";s:13:\"underSettings\";s:24:\"admin_notification_email\";s:0:\"\";s:23:\"page_redirects_order_by\";s:3:\"url\";s:20:\"page_redirects_order\";s:3:\"ASC\";s:17:\"captured_order_by\";s:8:\"logshits\";s:14:\"captured_order\";s:4:\"DESC\";s:14:\"excludePages[]\";s:0:\"\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -609,7 +411,29 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'postcounter' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'abj404_settings' , 'a:44:{s:16:&quot;default_redirect&quot;;s:3:&quot;301&quot;;s:15:&quot;send_error_logs&quot;;s:1:&quot;0&quot;;s:11:&quot;capture_404&quot;;s:1:&quot;1&quot;;s:16:&quot;capture_deletion&quot;;i:1095;s:15:&quot;manual_deletion&quot;;s:1:&quot;0&quot;;s:12:&quot;log_deletion&quot;;s:3:&quot;365&quot;;s:18:&quot;admin_notification&quot;;s:1:&quot;0&quot;;s:14:&quot;remove_matches&quot;;s:1:&quot;1&quot;;s:16:&quot;suggest_minscore&quot;;s:2:&quot;25&quot;;s:11:&quot;suggest_max&quot;;s:1:&quot;5&quot;;s:13:&quot;suggest_title&quot;;s:40:&quot;&lt;h3&gt;Here are some other great pages&lt;/h3&gt;&quot;;s:14:&quot;suggest_before&quot;;s:4:&quot;&lt;ol&gt;&quot;;s:13:&quot;suggest_after&quot;;s:5:&quot;&lt;/ol&gt;&quot;;s:19:&quot;suggest_entrybefore&quot;;s:4:&quot;&lt;li&gt;&quot;;s:18:&quot;suggest_entryafter&quot;;s:5:&quot;&lt;/li&gt;&quot;;s:17:&quot;suggest_noresults&quot;;s:26:&quot;&lt;p&gt;No suggestions. :/ &lt;/p&gt;&quot;;s:12:&quot;suggest_cats&quot;;s:1:&quot;1&quot;;s:12:&quot;suggest_tags&quot;;s:1:&quot;1&quot;;s:18:&quot;update_suggest_url&quot;;s:1:&quot;0&quot;;s:14:&quot;auto_redirects&quot;;s:1:&quot;1&quot;;s:10:&quot;auto_score&quot;;s:2:&quot;90&quot;;s:26:&quot;template_redirect_priority&quot;;s:1:&quot;9&quot;;s:13:&quot;auto_deletion&quot;;s:4:&quot;1095&quot;;s:9:&quot;auto_cats&quot;;s:1:&quot;1&quot;;s:9:&quot;auto_tags&quot;;s:1:&quot;1&quot;;s:11:&quot;dest404page&quot;;s:3:&quot;0|0&quot;;s:22:&quot;maximum_log_disk_usage&quot;;s:2:&quot;10&quot;;s:18:&quot;ignore_dontprocess&quot;;s:18:&quot;zemanta aggregator&quot;;s:16:&quot;ignore_doprocess&quot;;s:243:&quot;Googlebot
+Mediapartners-Google
+AdsBot-Google
+developers.google.com
+Bingbot
+Yahoo! Slurp
+DuckDuckBot
+Baiduspider
+YandexBot
+www.sogou.com
+Sogou-Test-Spider
+Exabot
+facebot
+facebookexternalhit
+ia_archiver
+SeznamBot
+Pinterestbot
+UptimeRobot
+MJ12bot&quot;;s:21:&quot;recognized_post_types&quot;;s:17:&quot;page
+post
+product&quot;;s:21:&quot;recognized_categories&quot;;s:0:&quot;&quot;;s:20:&quot;folders_files_ignore&quot;;s:69:&quot;wp-content/plugins/*
+wp-content/themes/*
+.well-known/acme-challenge/*&quot;;s:27:&quot;folders_files_ignore_usable&quot;;s:0:&quot;&quot;;s:18:&quot;plugin_admin_users&quot;;s:0:&quot;&quot;;s:10:&quot;debug_mode&quot;;i:0;s:29:&quot;days_wait_before_major_update&quot;;i:30;s:10:&quot;DB_VERSION&quot;;s:5:&quot;0.0.0&quot;;s:12:&quot;menuLocation&quot;;s:13:&quot;underSettings&quot;;s:24:&quot;admin_notification_email&quot;;s:0:&quot;&quot;;s:23:&quot;page_redirects_order_by&quot;;s:3:&quot;url&quot;;s:20:&quot;page_redirects_order&quot;;s:3:&quot;ASC&quot;;s:17:&quot;captured_order_by&quot;;s:8:&quot;logshits&quot;;s:14:&quot;captured_order&quot;;s:4:&quot;DESC&quot;;s:14:&quot;excludePages[]&quot;;s:0:&quot;&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -621,33 +445,781 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('postcounter', 1, '', 'auto')
-#5 /wordpress/wp-content/plugins/affiliate-post-monster/pj_functions.php(137): update_option('postcounter', 1)
-#6 /wordpress/wp-content/plugins/affiliate-post-monster/pj_functions.php(327): ticktock('off')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): ticktocksurpressed('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-includes/load.php(1279): do_action('shutdown')
-#11 [internal function]: shutdown_action_hook()
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('postcounter', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by shutdown_action_hook, do_action('shutdown'), WP_Hook->do_action, WP_Hook->apply_filters, ticktocksurpressed, ticktock, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 13:51:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('abj404_settings', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(438): update_option('abj404_settings', Array)
+#6 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(425): ABJ_404_Solution_PluginLogic->updateOptions(Array)
+#7 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(430): ABJ_404_Solution_PluginLogic->getOptions(true)
+#8 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(447): ABJ_404_Solution_Logging->removeLastSentErrorLineFromDatabase()
+#9 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(358): ABJ_404_Solution_Logging->deleteDebugFile()
+#10 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(343): ABJ_404_Solution_Logging->getDebugFilename()
+#11 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(158): ABJ_404_Solution_Logging->getDebugFilePath()
+#12 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(92): ABJ_404_Solution_Logging->writeLineToDebugFile('2025-04-09 13:1...')
+#13 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(492): ABJ_404_Solution_Logging->infoMessage('67f6722c72fd80....')
+#14 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(460): ABJ_404_Solution_PluginLogic->updateToNewVersionAction(Array)
+#15 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(430): ABJ_404_Solution_PluginLogic->updateToNewVersion(Array)
+#16 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(27): ABJ_404_Solution_PluginLogic->getOptions()
+#17 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(43): ABJ_404_Solution_SpellChecker::getInstance()
+#18 /wordpress/wp-content/plugins/404-solution/includes/Loader.php(51): ABJ_404_Solution_SpellChecker::init()
+#19 /wordpress/wp-content/plugins/404-solution/404-solution.php(89): require_once('/wordpress/wp-c...')
+#20 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#21 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('404-solution/40...')
+#22 /internal/eval.php(20): activate_plugin('404-solution/40...')
+#23 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('abj404_settings', 'a:44:{s:16:\"default_redirect\";s:3:\"301\";s:15:\"send_error_logs\";s:1:\"0\";s:11:\"capture_404\";s:1:\"1\";s:16:\"capture_deletion\";i:1095;s:15:\"manual_deletion\";s:1:\"0\";s:12:\"log_deletion\";s:3:\"365\";s:18:\"admin_notification\";s:1:\"0\";s:14:\"remove_matches\";s:1:\"1\";s:16:\"suggest_minscore\";s:2:\"25\";s:11:\"suggest_max\";s:1:\"5\";s:13:\"suggest_title\";s:40:\"<h3>Here are some other great pages</h3>\";s:14:\"suggest_before\";s:4:\"<ol>\";s:13:\"suggest_after\";s:5:\"</ol>\";s:19:\"suggest_entrybefore\";s:4:\"<li>\";s:18:\"suggest_entryafter\";s:5:\"</li>\";s:17:\"suggest_noresults\";s:26:\"<p>No suggestions. :/ </p>\";s:12:\"suggest_cats\";s:1:\"1\";s:12:\"suggest_tags\";s:1:\"1\";s:18:\"update_suggest_url\";s:1:\"0\";s:14:\"auto_redirects\";s:1:\"1\";s:10:\"auto_score\";s:2:\"90\";s:26:\"template_redirect_priority\";s:1:\"9\";s:13:\"auto_deletion\";s:4:\"1095\";s:9:\"auto_cats\";s:1:\"1\";s:9:\"auto_tags\";s:1:\"1\";s:11:\"dest404page\";s:3:\"0|0\";s:22:\"maximum_log_disk_usage\";s:2:\"10\";s:18:\"ignore_dontprocess\";s:18:\"zemanta aggregator\";s:16:\"ignore_doprocess\";s:243:\"Googlebot
+Mediapartners-Google
+AdsBot-Google
+developers.google.com
+Bingbot
+Yahoo! Slurp
+DuckDuckBot
+Baiduspider
+YandexBot
+www.sogou.com
+Sogou-Test-Spider
+Exabot
+facebot
+facebookexternalhit
+ia_archiver
+SeznamBot
+Pinterestbot
+UptimeRobot
+MJ12bot\";s:21:\"recognized_post_types\";s:17:\"page
+post
+product\";s:21:\"recognized_categories\";s:0:\"\";s:20:\"folders_files_ignore\";s:69:\"wp-content/plugins/*
+wp-content/themes/*
+.well-known/acme-challenge/*\";s:27:\"folders_files_ignore_usable\";s:0:\"\";s:18:\"plugin_admin_users\";s:0:\"\";s:10:\"debug_mode\";i:0;s:29:\"days_wait_before_major_update\";i:30;s:10:\"DB_VERSION\";s:5:\"0.0.0\";s:12:\"menuLocation\";s:13:\"underSettings\";s:24:\"admin_notification_email\";s:0:\"\";s:23:\"page_redirects_order_by\";s:3:\"url\";s:20:\"page_redirects_order\";s:3:\"ASC\";s:17:\"captured_order_by\";s:8:\"logshits\";s:14:\"captured_order\";s:4:\"DESC\";s:14:\"excludePages[]\";s:0:\"\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/404-solution/404-solution.php'), require_once('/plugins/404-solution/includes/Loader.php'), ABJ_404_Solution_SpellChecker::init, ABJ_404_Solution_SpellChecker::getInstance, ABJ_404_Solution_PluginLogic->getOptions, ABJ_404_Solution_PluginLogic->updateToNewVersion, ABJ_404_Solution_PluginLogic->updateToNewVersionAction, ABJ_404_Solution_Logging->infoMessage, ABJ_404_Solution_Logging->writeLineToDebugFile, ABJ_404_Solution_Logging->getDebugFilePath, ABJ_404_Solution_Logging->getDebugFilename, ABJ_404_Solution_Logging->deleteDebugFile, ABJ_404_Solution_Logging->removeLastSentErrorLineFromDatabase, ABJ_404_Solution_PluginLogic->getOptions, ABJ_404_Solution_PluginLogic->updateOptions, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 13:12:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT ID FROM wp_posts WHERE post_title = '' && post_status = 'publish' </p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('abj404_settings', 'a:45:{s:16:\"default_redirect\";s:3:\"301\";s:15:\"send_error_logs\";s:1:\"0\";s:11:\"capture_404\";s:1:\"1\";s:16:\"capture_deletion\";i:1095;s:15:\"manual_deletion\";s:1:\"0\";s:12:\"log_deletion\";s:3:\"365\";s:18:\"admin_notification\";s:1:\"0\";s:14:\"remove_matches\";s:1:\"1\";s:16:\"suggest_minscore\";s:2:\"25\";s:11:\"suggest_max\";s:1:\"5\";s:13:\"suggest_title\";s:40:\"<h3>Here are some other great pages</h3>\";s:14:\"suggest_before\";s:4:\"<ol>\";s:13:\"suggest_after\";s:5:\"</ol>\";s:19:\"suggest_entrybefore\";s:4:\"<li>\";s:18:\"suggest_entryafter\";s:5:\"</li>\";s:17:\"suggest_noresults\";s:26:\"<p>No suggestions. :/ </p>\";s:12:\"suggest_cats\";s:1:\"1\";s:12:\"suggest_tags\";s:1:\"1\";s:18:\"update_suggest_url\";s:1:\"0\";s:14:\"auto_redirects\";s:1:\"1\";s:10:\"auto_score\";s:2:\"90\";s:26:\"template_redirect_priority\";s:1:\"9\";s:13:\"auto_deletion\";s:4:\"1095\";s:9:\"auto_cats\";s:1:\"1\";s:9:\"auto_tags\";s:1:\"1\";s:11:\"dest404page\";s:3:\"0|0\";s:22:\"maximum_log_disk_usage\";s:2:\"10\";s:18:\"ignore_dontprocess\";s:18:\"zemanta aggregator\";s:16:\"ignore_doprocess\";s:243:\"Googlebot
+Mediapartners-Google
+AdsBot-Google
+developers.google.com
+Bingbot
+Yahoo! Slurp
+DuckDuckBot
+Baiduspider
+YandexBot
+www.sogou.com
+Sogou-Test-Spider
+Exabot
+facebot
+facebookexternalhit
+ia_archiver
+SeznamBot
+Pinterestbot
+UptimeRobot
+MJ12bot\";s:21:\"recognized_post_types\";s:17:\"page
+post
+product\";s:21:\"recognized_categories\";s:0:\"\";s:20:\"folders_files_ignore\";s:69:\"wp-content/plugins/*
+wp-content/themes/*
+.well-known/acme-challenge/*\";s:27:\"folders_files_ignore_usable\";s:0:\"\";s:18:\"plugin_admin_users\";s:0:\"\";s:10:\"debug_mode\";i:0;s:29:\"days_wait_before_major_update\";i:30;s:10:\"DB_VERSION\";s:5:\"0.0.0\";s:12:\"menuLocation\";s:13:\"underSettings\";s:24:\"admin_notification_email\";s:0:\"\";s:23:\"page_redirects_order_by\";s:3:\"url\";s:20:\"page_redirects_order\";s:3:\"ASC\";s:17:\"captured_order_by\";s:8:\"logshits\";s:14:\"captured_order\";s:4:\"DESC\";s:14:\"excludePages[]\";s:0:\"\";s:14:\"last_sent_line\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `ID` FROM `wp_posts` WHERE `post_title` = '' &amp;&amp; `post_status` = 'publish' | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'abj404_settings' , 'a:45:{s:16:&quot;default_redirect&quot;;s:3:&quot;301&quot;;s:15:&quot;send_error_logs&quot;;s:1:&quot;0&quot;;s:11:&quot;capture_404&quot;;s:1:&quot;1&quot;;s:16:&quot;capture_deletion&quot;;i:1095;s:15:&quot;manual_deletion&quot;;s:1:&quot;0&quot;;s:12:&quot;log_deletion&quot;;s:3:&quot;365&quot;;s:18:&quot;admin_notification&quot;;s:1:&quot;0&quot;;s:14:&quot;remove_matches&quot;;s:1:&quot;1&quot;;s:16:&quot;suggest_minscore&quot;;s:2:&quot;25&quot;;s:11:&quot;suggest_max&quot;;s:1:&quot;5&quot;;s:13:&quot;suggest_title&quot;;s:40:&quot;&lt;h3&gt;Here are some other great pages&lt;/h3&gt;&quot;;s:14:&quot;suggest_before&quot;;s:4:&quot;&lt;ol&gt;&quot;;s:13:&quot;suggest_after&quot;;s:5:&quot;&lt;/ol&gt;&quot;;s:19:&quot;suggest_entrybefore&quot;;s:4:&quot;&lt;li&gt;&quot;;s:18:&quot;suggest_entryafter&quot;;s:5:&quot;&lt;/li&gt;&quot;;s:17:&quot;suggest_noresults&quot;;s:26:&quot;&lt;p&gt;No suggestions. :/ &lt;/p&gt;&quot;;s:12:&quot;suggest_cats&quot;;s:1:&quot;1&quot;;s:12:&quot;suggest_tags&quot;;s:1:&quot;1&quot;;s:18:&quot;update_suggest_url&quot;;s:1:&quot;0&quot;;s:14:&quot;auto_redirects&quot;;s:1:&quot;1&quot;;s:10:&quot;auto_score&quot;;s:2:&quot;90&quot;;s:26:&quot;template_redirect_priority&quot;;s:1:&quot;9&quot;;s:13:&quot;auto_deletion&quot;;s:4:&quot;1095&quot;;s:9:&quot;auto_cats&quot;;s:1:&quot;1&quot;;s:9:&quot;auto_tags&quot;;s:1:&quot;1&quot;;s:11:&quot;dest404page&quot;;s:3:&quot;0|0&quot;;s:22:&quot;maximum_log_disk_usage&quot;;s:2:&quot;10&quot;;s:18:&quot;ignore_dontprocess&quot;;s:18:&quot;zemanta aggregator&quot;;s:16:&quot;ignore_doprocess&quot;;s:243:&quot;Googlebot
+Mediapartners-Google
+AdsBot-Google
+developers.google.com
+Bingbot
+Yahoo! Slurp
+DuckDuckBot
+Baiduspider
+YandexBot
+www.sogou.com
+Sogou-Test-Spider
+Exabot
+facebot
+facebookexternalhit
+ia_archiver
+SeznamBot
+Pinterestbot
+UptimeRobot
+MJ12bot&quot;;s:21:&quot;recognized_post_types&quot;;s:17:&quot;page
+post
+product&quot;;s:21:&quot;recognized_categories&quot;;s:0:&quot;&quot;;s:20:&quot;folders_files_ignore&quot;;s:69:&quot;wp-content/plugins/*
+wp-content/themes/*
+.well-known/acme-challenge/*&quot;;s:27:&quot;folders_files_ignore_usable&quot;;s:0:&quot;&quot;;s:18:&quot;plugin_admin_users&quot;;s:0:&quot;&quot;;s:10:&quot;debug_mode&quot;;i:0;s:29:&quot;days_wait_before_major_update&quot;;i:30;s:10:&quot;DB_VERSION&quot;;s:5:&quot;0.0.0&quot;;s:12:&quot;menuLocation&quot;;s:13:&quot;underSettings&quot;;s:24:&quot;admin_notification_email&quot;;s:0:&quot;&quot;;s:23:&quot;page_redirects_order_by&quot;;s:3:&quot;url&quot;;s:20:&quot;page_redirects_order&quot;;s:3:&quot;ASC&quot;;s:17:&quot;captured_order_by&quot;;s:8:&quot;logshits&quot;;s:14:&quot;captured_order&quot;;s:4:&quot;DESC&quot;;s:14:&quot;excludePages[]&quot;;s:0:&quot;&quot;;s:14:&quot;last_sent_line&quot;;i:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "&": syntax error
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT ID FROM ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT ID FROM ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT ID FROM ...')
-#4 /wordpress/wp-content/plugins/affiliate-post-monster/pj_functions.php(9): wpdb->get_row('SELECT I
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('abj404_settings', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(438): update_option('abj404_settings', Array)
+#6 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(432): ABJ_404_Solution_PluginLogic->updateOptions(Array)
+#7 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(447): ABJ_404_Solution_Logging->removeLastSentErrorLineFromDatabase()
+#8 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(358): ABJ_404_Solution_Logging->deleteDebugFile()
+#9 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(343): ABJ_404_Solution_Logging->getDebugFilename()
+#10 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(158): ABJ_404_Solution_Logging->getDebugFilePath()
+#11 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(92): ABJ_404_Solution_Logging->writeLineToDebugFile('2025-04-09 13:1...')
+#12 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(492): ABJ_404_Solution_Logging->infoMessage('67f6722c72fd80....')
+#13 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(460): ABJ_404_Solution_PluginLogic->updateToNewVersionAction(Array)
+#14 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(430): ABJ_404_Solution_PluginLogic->updateToNewVersion(Array)
+#15 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(27): ABJ_404_Solution_PluginLogic->getOptions()
+#16 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(43): ABJ_404_Solution_SpellChecker::getInstance()
+#17 /wordpress/wp-content/plugins/404-solution/includes/Loader.php(51): ABJ_404_Solution_SpellChecker::init()
+#18 /wordpress/wp-content/plugins/404-solution/404-solution.php(89): require_once('/wordpress/wp-c...')
+#19 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#20 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('404-solution/40...')
+#21 /internal/eval.php(20): activate_plugin('404-solution/40...')
+#22 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('abj404_settings', 'a:45:{s:16:\"default_redirect\";s:3:\"301\";s:15:\"send_error_logs\";s:1:\"0\";s:11:\"capture_404\";s:1:\"1\";s:16:\"capture_deletion\";i:1095;s:15:\"manual_deletion\";s:1:\"0\";s:12:\"log_deletion\";s:3:\"365\";s:18:\"admin_notification\";s:1:\"0\";s:14:\"remove_matches\";s:1:\"1\";s:16:\"suggest_minscore\";s:2:\"25\";s:11:\"suggest_max\";s:1:\"5\";s:13:\"suggest_title\";s:40:\"<h3>Here are some other great pages</h3>\";s:14:\"suggest_before\";s:4:\"<ol>\";s:13:\"suggest_after\";s:5:\"</ol>\";s:19:\"suggest_entrybefore\";s:4:\"<li>\";s:18:\"suggest_entryafter\";s:5:\"</li>\";s:17:\"suggest_noresults\";s:26:\"<p>No suggestions. :/ </p>\";s:12:\"suggest_cats\";s:1:\"1\";s:12:\"suggest_tags\";s:1:\"1\";s:18:\"update_suggest_url\";s:1:\"0\";s:14:\"auto_redirects\";s:1:\"1\";s:10:\"auto_score\";s:2:\"90\";s:26:\"template_redirect_priority\";s:1:\"9\";s:13:\"auto_deletion\";s:4:\"1095\";s:9:\"auto_cats\";s:1:\"1\";s:9:\"auto_tags\";s:1:\"1\";s:11:\"dest404page\";s:3:\"0|0\";s:22:\"maximum_log_disk_usage\";s:2:\"10\";s:18:\"ignore_dontprocess\";s:18:\"zemanta aggregator\";s:16:\"ignore_doprocess\";s:243:\"Googlebot
+Mediapartners-Google
+AdsBot-Google
+developers.google.com
+Bingbot
+Yahoo! Slurp
+DuckDuckBot
+Baiduspider
+YandexBot
+www.sogou.com
+Sogou-Test-Spider
+Exabot
+facebot
+facebookexternalhit
+ia_archiver
+SeznamBot
+Pinterestbot
+UptimeRobot
+MJ12bot\";s:21:\"recognized_post_types\";s:17:\"page
+post
+product\";s:21:\"recognized_categories\";s:0:\"\";s:20:\"folders_files_ignore\";s:69:\"wp-content/plugins/*
+wp-content/themes/*
+.well-known/acme-challenge/*\";s:27:\"folders_files_ignore_usable\";s:0:\"\";s:18:\"plugin_admin_users\";s:0:\"\";s:10:\"debug_mode\";i:0;s:29:\"days_wait_before_major_update\";i:30;s:10:\"DB_VERSION\";s:5:\"0.0.0\";s:12:\"menuLocation\";s:13:\"underSettings\";s:24:\"admin_notification_email\";s:0:\"\";s:23:\"page_redirects_order_by\";s:3:\"url\";s:20:\"page_redirects_order\";s:3:\"ASC\";s:17:\"captured_order_by\";s:8:\"logshits\";s:14:\"captured_order\";s:4:\"DESC\";s:14:\"excludePages[]\";s:0:\"\";s:14:\"last_sent_line\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/404-solution/404-solution.php'), require_once('/plugins/404-solution/includes/Loader.php'), ABJ_404_Solution_SpellChecker::init, ABJ_404_Solution_SpellChecker::getInstance, ABJ_404_Solution_PluginLogic->getOptions, ABJ_404_Solution_PluginLogic->updateToNewVersion, ABJ_404_Solution_PluginLogic->updateToNewVersionAction, ABJ_404_Solution_Logging->infoMessage, ABJ_404_Solution_Logging->writeLineToDebugFile, ABJ_404_Solution_Logging->getDebugFilePath, ABJ_404_Solution_Logging->getDebugFilename, ABJ_404_Solution_Logging->deleteDebugFile, ABJ_404_Solution_Logging->removeLastSentErrorLineFromDatabase, ABJ_404_Solution_PluginLogic->updateOptions, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 13:12:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('abj404_settings', 'a:45:{s:16:\"default_redirect\";s:3:\"301\";s:15:\"send_error_logs\";s:1:\"0\";s:11:\"capture_404\";s:1:\"1\";s:16:\"capture_deletion\";i:1095;s:15:\"manual_deletion\";s:1:\"0\";s:12:\"log_deletion\";s:3:\"365\";s:18:\"admin_notification\";s:1:\"0\";s:14:\"remove_matches\";s:1:\"1\";s:16:\"suggest_minscore\";s:2:\"25\";s:11:\"suggest_max\";s:1:\"5\";s:13:\"suggest_title\";s:40:\"<h3>Here are some other great pages</h3>\";s:14:\"suggest_before\";s:4:\"<ol>\";s:13:\"suggest_after\";s:5:\"</ol>\";s:19:\"suggest_entrybefore\";s:4:\"<li>\";s:18:\"suggest_entryafter\";s:5:\"</li>\";s:17:\"suggest_noresults\";s:26:\"<p>No suggestions. :/ </p>\";s:12:\"suggest_cats\";s:1:\"1\";s:12:\"suggest_tags\";s:1:\"1\";s:18:\"update_suggest_url\";s:1:\"0\";s:14:\"auto_redirects\";s:1:\"1\";s:10:\"auto_score\";s:2:\"90\";s:26:\"template_redirect_priority\";s:1:\"9\";s:13:\"auto_deletion\";s:4:\"1095\";s:9:\"auto_cats\";s:1:\"1\";s:9:\"auto_tags\";s:1:\"1\";s:11:\"dest404page\";s:3:\"0|0\";s:22:\"maximum_log_disk_usage\";s:2:\"10\";s:18:\"ignore_dontprocess\";s:18:\"zemanta aggregator\";s:16:\"ignore_doprocess\";s:243:\"Googlebot
+Mediapartners-Google
+AdsBot-Google
+developers.google.com
+Bingbot
+Yahoo! Slurp
+DuckDuckBot
+Baiduspider
+YandexBot
+www.sogou.com
+Sogou-Test-Spider
+Exabot
+facebot
+facebookexternalhit
+ia_archiver
+SeznamBot
+Pinterestbot
+UptimeRobot
+MJ12bot\";s:21:\"recognized_post_types\";s:17:\"page
+post
+product\";s:21:\"recognized_categories\";s:0:\"\";s:20:\"folders_files_ignore\";s:69:\"wp-content/plugins/*
+wp-content/themes/*
+.well-known/acme-challenge/*\";s:27:\"folders_files_ignore_usable\";s:0:\"\";s:18:\"plugin_admin_users\";s:0:\"\";s:10:\"debug_mode\";i:0;s:29:\"days_wait_before_major_update\";i:30;s:10:\"DB_VERSION\";s:5:\"0.0.0\";s:12:\"menuLocation\";s:13:\"underSettings\";s:24:\"admin_notification_email\";s:0:\"\";s:23:\"page_redirects_order_by\";s:3:\"url\";s:20:\"page_redirects_order\";s:3:\"ASC\";s:17:\"captured_order_by\";s:8:\"logshits\";s:14:\"captured_order\";s:4:\"DESC\";s:14:\"excludePages[]\";s:0:\"\";s:14:\"last_sent_line\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'abj404_settings' , 'a:45:{s:16:&quot;default_redirect&quot;;s:3:&quot;301&quot;;s:15:&quot;send_error_logs&quot;;s:1:&quot;0&quot;;s:11:&quot;capture_404&quot;;s:1:&quot;1&quot;;s:16:&quot;capture_deletion&quot;;i:1095;s:15:&quot;manual_deletion&quot;;s:1:&quot;0&quot;;s:12:&quot;log_deletion&quot;;s:3:&quot;365&quot;;s:18:&quot;admin_notification&quot;;s:1:&quot;0&quot;;s:14:&quot;remove_matches&quot;;s:1:&quot;1&quot;;s:16:&quot;suggest_minscore&quot;;s:2:&quot;25&quot;;s:11:&quot;suggest_max&quot;;s:1:&quot;5&quot;;s:13:&quot;suggest_title&quot;;s:40:&quot;&lt;h3&gt;Here are some other great pages&lt;/h3&gt;&quot;;s:14:&quot;suggest_before&quot;;s:4:&quot;&lt;ol&gt;&quot;;s:13:&quot;suggest_after&quot;;s:5:&quot;&lt;/ol&gt;&quot;;s:19:&quot;suggest_entrybefore&quot;;s:4:&quot;&lt;li&gt;&quot;;s:18:&quot;suggest_entryafter&quot;;s:5:&quot;&lt;/li&gt;&quot;;s:17:&quot;suggest_noresults&quot;;s:26:&quot;&lt;p&gt;No suggestions. :/ &lt;/p&gt;&quot;;s:12:&quot;suggest_cats&quot;;s:1:&quot;1&quot;;s:12:&quot;suggest_tags&quot;;s:1:&quot;1&quot;;s:18:&quot;update_suggest_url&quot;;s:1:&quot;0&quot;;s:14:&quot;auto_redirects&quot;;s:1:&quot;1&quot;;s:10:&quot;auto_score&quot;;s:2:&quot;90&quot;;s:26:&quot;template_redirect_priority&quot;;s:1:&quot;9&quot;;s:13:&quot;auto_deletion&quot;;s:4:&quot;1095&quot;;s:9:&quot;auto_cats&quot;;s:1:&quot;1&quot;;s:9:&quot;auto_tags&quot;;s:1:&quot;1&quot;;s:11:&quot;dest404page&quot;;s:3:&quot;0|0&quot;;s:22:&quot;maximum_log_disk_usage&quot;;s:2:&quot;10&quot;;s:18:&quot;ignore_dontprocess&quot;;s:18:&quot;zemanta aggregator&quot;;s:16:&quot;ignore_doprocess&quot;;s:243:&quot;Googlebot
+Mediapartners-Google
+AdsBot-Google
+developers.google.com
+Bingbot
+Yahoo! Slurp
+DuckDuckBot
+Baiduspider
+YandexBot
+www.sogou.com
+Sogou-Test-Spider
+Exabot
+facebot
+facebookexternalhit
+ia_archiver
+SeznamBot
+Pinterestbot
+UptimeRobot
+MJ12bot&quot;;s:21:&quot;recognized_post_types&quot;;s:17:&quot;page
+post
+product&quot;;s:21:&quot;recognized_categories&quot;;s:0:&quot;&quot;;s:20:&quot;folders_files_ignore&quot;;s:69:&quot;wp-content/plugins/*
+wp-content/themes/*
+.well-known/acme-challenge/*&quot;;s:27:&quot;folders_files_ignore_usable&quot;;s:0:&quot;&quot;;s:18:&quot;plugin_admin_users&quot;;s:0:&quot;&quot;;s:10:&quot;debug_mode&quot;;i:0;s:29:&quot;days_wait_before_major_update&quot;;i:30;s:10:&quot;DB_VERSION&quot;;s:5:&quot;0.0.0&quot;;s:12:&quot;menuLocation&quot;;s:13:&quot;underSettings&quot;;s:24:&quot;admin_notification_email&quot;;s:0:&quot;&quot;;s:23:&quot;page_redirects_order_by&quot;;s:3:&quot;url&quot;;s:20:&quot;page_redirects_order&quot;;s:3:&quot;ASC&quot;;s:17:&quot;captured_order_by&quot;;s:8:&quot;logshits&quot;;s:14:&quot;captured_order&quot;;s:4:&quot;DESC&quot;;s:14:&quot;excludePages[]&quot;;s:0:&quot;&quot;;s:14:&quot;last_sent_line&quot;;i:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('abj404_settings', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(438): update_option('abj404_settings', Array)
+#6 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(425): ABJ_404_Solution_PluginLogic->updateOptions(Array)
+#7 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(467): ABJ_404_Solution_PluginLogic->getOptions(true)
+#8 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(358): ABJ_404_Solution_Logging->deleteDebugFile()
+#9 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(343): ABJ_404_Solution_Logging->getDebugFilename()
+#10 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(158): ABJ_404_Solution_Logging->getDebugFilePath()
+#11 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(92): ABJ_404_Solution_Logging->writeLineToDebugFile('2025-04-09 13:1...')
+#12 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(492): ABJ_404_Solution_Logging->infoMessage('67f6722c72fd80....')
+#13 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(460): ABJ_404_Solution_PluginLogic->updateToNewVersionAction(Array)
+#14 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(430): ABJ_404_Solution_PluginLogic->updateToNewVersion(Array)
+#15 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(27): ABJ_404_Solution_PluginLogic->getOptions()
+#16 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(43): ABJ_404_Solution_SpellChecker::getInstance()
+#17 /wordpress/wp-content/plugins/404-solution/includes/Loader.php(51): ABJ_404_Solution_SpellChecker::init()
+#18 /wordpress/wp-content/plugins/404-solution/404-solution.php(89): require_once('/wordpress/wp-c...')
+#19 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#20 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('404-solution/40...')
+#21 /internal/eval.php(20): activate_plugin('404-solution/40...')
+#22 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('abj404_settings', 'a:45:{s:16:\"default_redirect\";s:3:\"301\";s:15:\"send_error_logs\";s:1:\"0\";s:11:\"capture_404\";s:1:\"1\";s:16:\"capture_deletion\";i:1095;s:15:\"manual_deletion\";s:1:\"0\";s:12:\"log_deletion\";s:3:\"365\";s:18:\"admin_notification\";s:1:\"0\";s:14:\"remove_matches\";s:1:\"1\";s:16:\"suggest_minscore\";s:2:\"25\";s:11:\"suggest_max\";s:1:\"5\";s:13:\"suggest_title\";s:40:\"<h3>Here are some other great pages</h3>\";s:14:\"suggest_before\";s:4:\"<ol>\";s:13:\"suggest_after\";s:5:\"</ol>\";s:19:\"suggest_entrybefore\";s:4:\"<li>\";s:18:\"suggest_entryafter\";s:5:\"</li>\";s:17:\"suggest_noresults\";s:26:\"<p>No suggestions. :/ </p>\";s:12:\"suggest_cats\";s:1:\"1\";s:12:\"suggest_tags\";s:1:\"1\";s:18:\"update_suggest_url\";s:1:\"0\";s:14:\"auto_redirects\";s:1:\"1\";s:10:\"auto_score\";s:2:\"90\";s:26:\"template_redirect_priority\";s:1:\"9\";s:13:\"auto_deletion\";s:4:\"1095\";s:9:\"auto_cats\";s:1:\"1\";s:9:\"auto_tags\";s:1:\"1\";s:11:\"dest404page\";s:3:\"0|0\";s:22:\"maximum_log_disk_usage\";s:2:\"10\";s:18:\"ignore_dontprocess\";s:18:\"zemanta aggregator\";s:16:\"ignore_doprocess\";s:243:\"Googlebot
+Mediapartners-Google
+AdsBot-Google
+developers.google.com
+Bingbot
+Yahoo! Slurp
+DuckDuckBot
+Baiduspider
+YandexBot
+www.sogou.com
+Sogou-Test-Spider
+Exabot
+facebot
+facebookexternalhit
+ia_archiver
+SeznamBot
+Pinterestbot
+UptimeRobot
+MJ12bot\";s:21:\"recognized_post_types\";s:17:\"page
+post
+product\";s:21:\"recognized_categories\";s:0:\"\";s:20:\"folders_files_ignore\";s:69:\"wp-content/plugins/*
+wp-content/themes/*
+.well-known/acme-challenge/*\";s:27:\"folders_files_ignore_usable\";s:0:\"\";s:18:\"plugin_admin_users\";s:0:\"\";s:10:\"debug_mode\";i:0;s:29:\"days_wait_before_major_update\";i:30;s:10:\"DB_VERSION\";s:5:\"0.0.0\";s:12:\"menuLocation\";s:13:\"underSettings\";s:24:\"admin_notification_email\";s:0:\"\";s:23:\"page_redirects_order_by\";s:3:\"url\";s:20:\"page_redirects_order\";s:3:\"ASC\";s:17:\"captured_order_by\";s:8:\"logshits\";s:14:\"captured_order\";s:4:\"DESC\";s:14:\"excludePages[]\";s:0:\"\";s:14:\"last_sent_line\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/404-solution/404-solution.php'), require_once('/plugins/404-solution/includes/Loader.php'), ABJ_404_Solution_SpellChecker::init, ABJ_404_Solution_SpellChecker::getInstance, ABJ_404_Solution_PluginLogic->getOptions, ABJ_404_Solution_PluginLogic->updateToNewVersion, ABJ_404_Solution_PluginLogic->updateToNewVersionAction, ABJ_404_Solution_Logging->infoMessage, ABJ_404_Solution_Logging->writeLineToDebugFile, ABJ_404_Solution_Logging->getDebugFilePath, ABJ_404_Solution_Logging->getDebugFilename, ABJ_404_Solution_Logging->deleteDebugFile, ABJ_404_Solution_PluginLogic->getOptions, ABJ_404_Solution_PluginLogic->updateOptions, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 13:12:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('abj404_settings', 'a:46:{s:16:\"default_redirect\";s:3:\"301\";s:15:\"send_error_logs\";s:1:\"0\";s:11:\"capture_404\";s:1:\"1\";s:16:\"capture_deletion\";i:1095;s:15:\"manual_deletion\";s:1:\"0\";s:12:\"log_deletion\";s:3:\"365\";s:18:\"admin_notification\";s:1:\"0\";s:14:\"remove_matches\";s:1:\"1\";s:16:\"suggest_minscore\";s:2:\"25\";s:11:\"suggest_max\";s:1:\"5\";s:13:\"suggest_title\";s:40:\"<h3>Here are some other great pages</h3>\";s:14:\"suggest_before\";s:4:\"<ol>\";s:13:\"suggest_after\";s:5:\"</ol>\";s:19:\"suggest_entrybefore\";s:4:\"<li>\";s:18:\"suggest_entryafter\";s:5:\"</li>\";s:17:\"suggest_noresults\";s:26:\"<p>No suggestions. :/ </p>\";s:12:\"suggest_cats\";s:1:\"1\";s:12:\"suggest_tags\";s:1:\"1\";s:18:\"update_suggest_url\";s:1:\"0\";s:14:\"auto_redirects\";s:1:\"1\";s:10:\"auto_score\";s:2:\"90\";s:26:\"template_redirect_priority\";s:1:\"9\";s:13:\"auto_deletion\";s:4:\"1095\";s:9:\"auto_cats\";s:1:\"1\";s:9:\"auto_tags\";s:1:\"1\";s:11:\"dest404page\";s:3:\"0|0\";s:22:\"maximum_log_disk_usage\";s:2:\"10\";s:18:\"ignore_dontprocess\";s:18:\"zemanta aggregator\";s:16:\"ignore_doprocess\";s:243:\"Googlebot
+Mediapartners-Google
+AdsBot-Google
+developers.google.com
+Bingbot
+Yahoo! Slurp
+DuckDuckBot
+Baiduspider
+YandexBot
+www.sogou.com
+Sogou-Test-Spider
+Exabot
+facebot
+facebookexternalhit
+ia_archiver
+SeznamBot
+Pinterestbot
+UptimeRobot
+MJ12bot\";s:21:\"recognized_post_types\";s:17:\"page
+post
+product\";s:21:\"recognized_categories\";s:0:\"\";s:20:\"folders_files_ignore\";s:69:\"wp-content/plugins/*
+wp-content/themes/*
+.well-known/acme-challenge/*\";s:27:\"folders_files_ignore_usable\";s:0:\"\";s:18:\"plugin_admin_users\";s:0:\"\";s:10:\"debug_mode\";i:0;s:29:\"days_wait_before_major_update\";i:30;s:10:\"DB_VERSION\";s:5:\"0.0.0\";s:12:\"menuLocation\";s:13:\"underSettings\";s:24:\"admin_notification_email\";s:0:\"\";s:23:\"page_redirects_order_by\";s:3:\"url\";s:20:\"page_redirects_order\";s:3:\"ASC\";s:17:\"captured_order_by\";s:8:\"logshits\";s:14:\"captured_order\";s:4:\"DESC\";s:14:\"excludePages[]\";s:0:\"\";s:14:\"last_sent_line\";i:0;s:14:\"debug_file_key\";N;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'abj404_settings' , 'a:46:{s:16:&quot;default_redirect&quot;;s:3:&quot;301&quot;;s:15:&quot;send_error_logs&quot;;s:1:&quot;0&quot;;s:11:&quot;capture_404&quot;;s:1:&quot;1&quot;;s:16:&quot;capture_deletion&quot;;i:1095;s:15:&quot;manual_deletion&quot;;s:1:&quot;0&quot;;s:12:&quot;log_deletion&quot;;s:3:&quot;365&quot;;s:18:&quot;admin_notification&quot;;s:1:&quot;0&quot;;s:14:&quot;remove_matches&quot;;s:1:&quot;1&quot;;s:16:&quot;suggest_minscore&quot;;s:2:&quot;25&quot;;s:11:&quot;suggest_max&quot;;s:1:&quot;5&quot;;s:13:&quot;suggest_title&quot;;s:40:&quot;&lt;h3&gt;Here are some other great pages&lt;/h3&gt;&quot;;s:14:&quot;suggest_before&quot;;s:4:&quot;&lt;ol&gt;&quot;;s:13:&quot;suggest_after&quot;;s:5:&quot;&lt;/ol&gt;&quot;;s:19:&quot;suggest_entrybefore&quot;;s:4:&quot;&lt;li&gt;&quot;;s:18:&quot;suggest_entryafter&quot;;s:5:&quot;&lt;/li&gt;&quot;;s:17:&quot;suggest_noresults&quot;;s:26:&quot;&lt;p&gt;No suggestions. :/ &lt;/p&gt;&quot;;s:12:&quot;suggest_cats&quot;;s:1:&quot;1&quot;;s:12:&quot;suggest_tags&quot;;s:1:&quot;1&quot;;s:18:&quot;update_suggest_url&quot;;s:1:&quot;0&quot;;s:14:&quot;auto_redirects&quot;;s:1:&quot;1&quot;;s:10:&quot;auto_score&quot;;s:2:&quot;90&quot;;s:26:&quot;template_redirect_priority&quot;;s:1:&quot;9&quot;;s:13:&quot;auto_deletion&quot;;s:4:&quot;1095&quot;;s:9:&quot;auto_cats&quot;;s:1:&quot;1&quot;;s:9:&quot;auto_tags&quot;;s:1:&quot;1&quot;;s:11:&quot;dest404page&quot;;s:3:&quot;0|0&quot;;s:22:&quot;maximum_log_disk_usage&quot;;s:2:&quot;10&quot;;s:18:&quot;ignore_dontprocess&quot;;s:18:&quot;zemanta aggregator&quot;;s:16:&quot;ignore_doprocess&quot;;s:243:&quot;Googlebot
+Mediapartners-Google
+AdsBot-Google
+developers.google.com
+Bingbot
+Yahoo! Slurp
+DuckDuckBot
+Baiduspider
+YandexBot
+www.sogou.com
+Sogou-Test-Spider
+Exabot
+facebot
+facebookexternalhit
+ia_archiver
+SeznamBot
+Pinterestbot
+UptimeRobot
+MJ12bot&quot;;s:21:&quot;recognized_post_types&quot;;s:17:&quot;page
+post
+product&quot;;s:21:&quot;recognized_categories&quot;;s:0:&quot;&quot;;s:20:&quot;folders_files_ignore&quot;;s:69:&quot;wp-content/plugins/*
+wp-content/themes/*
+.well-known/acme-challenge/*&quot;;s:27:&quot;folders_files_ignore_usable&quot;;s:0:&quot;&quot;;s:18:&quot;plugin_admin_users&quot;;s:0:&quot;&quot;;s:10:&quot;debug_mode&quot;;i:0;s:29:&quot;days_wait_before_major_update&quot;;i:30;s:10:&quot;DB_VERSION&quot;;s:5:&quot;0.0.0&quot;;s:12:&quot;menuLocation&quot;;s:13:&quot;underSettings&quot;;s:24:&quot;admin_notification_email&quot;;s:0:&quot;&quot;;s:23:&quot;page_redirects_order_by&quot;;s:3:&quot;url&quot;;s:20:&quot;page_redirects_order&quot;;s:3:&quot;ASC&quot;;s:17:&quot;captured_order_by&quot;;s:8:&quot;logshits&quot;;s:14:&quot;captured_order&quot;;s:4:&quot;DESC&quot;;s:14:&quot;excludePages[]&quot;;s:0:&quot;&quot;;s:14:&quot;last_sent_line&quot;;i:0;s:14:&quot;debug_file_key&quot;;N;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('abj404_settings', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(438): update_option('abj404_settings', Array)
+#6 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(469): ABJ_404_Solution_PluginLogic->updateOptions(Array)
+#7 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(358): ABJ_404_Solution_Logging->deleteDebugFile()
+#8 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(343): ABJ_404_Solution_Logging->getDebugFilename()
+#9 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(158): ABJ_404_Solution_Logging->getDebugFilePath()
+#10 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(92): ABJ_404_Solution_Logging->writeLineToDebugFile('2025-04-09 13:1...')
+#11 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(492): ABJ_404_Solution_Logging->infoMessage('67f6722c72fd80....')
+#12 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(460): ABJ_404_Solution_PluginLogic->updateToNewVersionAction(Array)
+#13 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(430): ABJ_404_Solution_PluginLogic->updateToNewVersion(Array)
+#14 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(27): ABJ_404_Solution_PluginLogic->getOptions()
+#15 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(43): ABJ_404_Solution_SpellChecker::getInstance()
+#16 /wordpress/wp-content/plugins/404-solution/includes/Loader.php(51): ABJ_404_Solution_SpellChecker::init()
+#17 /wordpress/wp-content/plugins/404-solution/404-solution.php(89): require_once('/wordpress/wp-c...')
+#18 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#19 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('404-solution/40...')
+#20 /internal/eval.php(20): activate_plugin('404-solution/40...')
+#21 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('abj404_settings', 'a:46:{s:16:\"default_redirect\";s:3:\"301\";s:15:\"send_error_logs\";s:1:\"0\";s:11:\"capture_404\";s:1:\"1\";s:16:\"capture_deletion\";i:1095;s:15:\"manual_deletion\";s:1:\"0\";s:12:\"log_deletion\";s:3:\"365\";s:18:\"admin_notification\";s:1:\"0\";s:14:\"remove_matches\";s:1:\"1\";s:16:\"suggest_minscore\";s:2:\"25\";s:11:\"suggest_max\";s:1:\"5\";s:13:\"suggest_title\";s:40:\"<h3>Here are some other great pages</h3>\";s:14:\"suggest_before\";s:4:\"<ol>\";s:13:\"suggest_after\";s:5:\"</ol>\";s:19:\"suggest_entrybefore\";s:4:\"<li>\";s:18:\"suggest_entryafter\";s:5:\"</li>\";s:17:\"suggest_noresults\";s:26:\"<p>No suggestions. :/ </p>\";s:12:\"suggest_cats\";s:1:\"1\";s:12:\"suggest_tags\";s:1:\"1\";s:18:\"update_suggest_url\";s:1:\"0\";s:14:\"auto_redirects\";s:1:\"1\";s:10:\"auto_score\";s:2:\"90\";s:26:\"template_redirect_priority\";s:1:\"9\";s:13:\"auto_deletion\";s:4:\"1095\";s:9:\"auto_cats\";s:1:\"1\";s:9:\"auto_tags\";s:1:\"1\";s:11:\"dest404page\";s:3:\"0|0\";s:22:\"maximum_log_disk_usage\";s:2:\"10\";s:18:\"ignore_dontprocess\";s:18:\"zemanta aggregator\";s:16:\"ignore_doprocess\";s:243:\"Googlebot
+Mediapartners-Google
+AdsBot-Google
+developers.google.com
+Bingbot
+Yahoo! Slurp
+DuckDuckBot
+Baiduspider
+YandexBot
+www.sogou.com
+Sogou-Test-Spider
+Exabot
+facebot
+facebookexternalhit
+ia_archiver
+SeznamBot
+Pinterestbot
+UptimeRobot
+MJ12bot\";s:21:\"recognized_post_types\";s:17:\"page
+post
+product\";s:21:\"recognized_categories\";s:0:\"\";s:20:\"folders_files_ignore\";s:69:\"wp-content/plugins/*
+wp-content/themes/*
+.well-known/acme-challenge/*\";s:27:\"folders_files_ignore_usable\";s:0:\"\";s:18:\"plugin_admin_users\";s:0:\"\";s:10:\"debug_mode\";i:0;s:29:\"days_wait_before_major_update\";i:30;s:10:\"DB_VERSION\";s:5:\"0.0.0\";s:12:\"menuLocation\";s:13:\"underSettings\";s:24:\"admin_notification_email\";s:0:\"\";s:23:\"page_redirects_order_by\";s:3:\"url\";s:20:\"page_redirects_order\";s:3:\"ASC\";s:17:\"captured_order_by\";s:8:\"logshits\";s:14:\"captured_order\";s:4:\"DESC\";s:14:\"excludePages[]\";s:0:\"\";s:14:\"last_sent_line\";i:0;s:14:\"debug_file_key\";N;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/404-solution/404-solution.php'), require_once('/plugins/404-solution/includes/Loader.php'), ABJ_404_Solution_SpellChecker::init, ABJ_404_Solution_SpellChecker::getInstance, ABJ_404_Solution_PluginLogic->getOptions, ABJ_404_Solution_PluginLogic->updateToNewVersion, ABJ_404_Solution_PluginLogic->updateToNewVersionAction, ABJ_404_Solution_Logging->infoMessage, ABJ_404_Solution_Logging->writeLineToDebugFile, ABJ_404_Solution_Logging->getDebugFilePath, ABJ_404_Solution_Logging->getDebugFilename, ABJ_404_Solution_Logging->deleteDebugFile, ABJ_404_Solution_PluginLogic->updateOptions, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 13:12:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('abj404_settings', 'a:45:{s:16:\"default_redirect\";s:3:\"301\";s:15:\"send_error_logs\";s:1:\"0\";s:11:\"capture_404\";s:1:\"1\";s:16:\"capture_deletion\";i:1095;s:15:\"manual_deletion\";s:1:\"0\";s:12:\"log_deletion\";s:3:\"365\";s:18:\"admin_notification\";s:1:\"0\";s:14:\"remove_matches\";s:1:\"1\";s:16:\"suggest_minscore\";s:2:\"25\";s:11:\"suggest_max\";s:1:\"5\";s:13:\"suggest_title\";s:40:\"<h3>Here are some other great pages</h3>\";s:14:\"suggest_before\";s:4:\"<ol>\";s:13:\"suggest_after\";s:5:\"</ol>\";s:19:\"suggest_entrybefore\";s:4:\"<li>\";s:18:\"suggest_entryafter\";s:5:\"</li>\";s:17:\"suggest_noresults\";s:26:\"<p>No suggestions. :/ </p>\";s:12:\"suggest_cats\";s:1:\"1\";s:12:\"suggest_tags\";s:1:\"1\";s:18:\"update_suggest_url\";s:1:\"0\";s:14:\"auto_redirects\";s:1:\"1\";s:10:\"auto_score\";s:2:\"90\";s:26:\"template_redirect_priority\";s:1:\"9\";s:13:\"auto_deletion\";s:4:\"1095\";s:9:\"auto_cats\";s:1:\"1\";s:9:\"auto_tags\";s:1:\"1\";s:11:\"dest404page\";s:3:\"0|0\";s:22:\"maximum_log_disk_usage\";s:2:\"10\";s:18:\"ignore_dontprocess\";s:18:\"zemanta aggregator\";s:16:\"ignore_doprocess\";s:243:\"Googlebot
+Mediapartners-Google
+AdsBot-Google
+developers.google.com
+Bingbot
+Yahoo! Slurp
+DuckDuckBot
+Baiduspider
+YandexBot
+www.sogou.com
+Sogou-Test-Spider
+Exabot
+facebot
+facebookexternalhit
+ia_archiver
+SeznamBot
+Pinterestbot
+UptimeRobot
+MJ12bot\";s:21:\"recognized_post_types\";s:17:\"page
+post
+product\";s:21:\"recognized_categories\";s:0:\"\";s:20:\"folders_files_ignore\";s:69:\"wp-content/plugins/*
+wp-content/themes/*
+.well-known/acme-challenge/*\";s:27:\"folders_files_ignore_usable\";s:0:\"\";s:18:\"plugin_admin_users\";s:0:\"\";s:10:\"debug_mode\";i:0;s:29:\"days_wait_before_major_update\";i:30;s:10:\"DB_VERSION\";s:5:\"0.0.0\";s:12:\"menuLocation\";s:13:\"underSettings\";s:24:\"admin_notification_email\";s:0:\"\";s:23:\"page_redirects_order_by\";s:3:\"url\";s:20:\"page_redirects_order\";s:3:\"ASC\";s:17:\"captured_order_by\";s:8:\"logshits\";s:14:\"captured_order\";s:4:\"DESC\";s:14:\"excludePages[]\";s:0:\"\";s:14:\"debug_file_key\";s:14:\"eb7b5778a9ced1\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'abj404_settings' , 'a:45:{s:16:&quot;default_redirect&quot;;s:3:&quot;301&quot;;s:15:&quot;send_error_logs&quot;;s:1:&quot;0&quot;;s:11:&quot;capture_404&quot;;s:1:&quot;1&quot;;s:16:&quot;capture_deletion&quot;;i:1095;s:15:&quot;manual_deletion&quot;;s:1:&quot;0&quot;;s:12:&quot;log_deletion&quot;;s:3:&quot;365&quot;;s:18:&quot;admin_notification&quot;;s:1:&quot;0&quot;;s:14:&quot;remove_matches&quot;;s:1:&quot;1&quot;;s:16:&quot;suggest_minscore&quot;;s:2:&quot;25&quot;;s:11:&quot;suggest_max&quot;;s:1:&quot;5&quot;;s:13:&quot;suggest_title&quot;;s:40:&quot;&lt;h3&gt;Here are some other great pages&lt;/h3&gt;&quot;;s:14:&quot;suggest_before&quot;;s:4:&quot;&lt;ol&gt;&quot;;s:13:&quot;suggest_after&quot;;s:5:&quot;&lt;/ol&gt;&quot;;s:19:&quot;suggest_entrybefore&quot;;s:4:&quot;&lt;li&gt;&quot;;s:18:&quot;suggest_entryafter&quot;;s:5:&quot;&lt;/li&gt;&quot;;s:17:&quot;suggest_noresults&quot;;s:26:&quot;&lt;p&gt;No suggestions. :/ &lt;/p&gt;&quot;;s:12:&quot;suggest_cats&quot;;s:1:&quot;1&quot;;s:12:&quot;suggest_tags&quot;;s:1:&quot;1&quot;;s:18:&quot;update_suggest_url&quot;;s:1:&quot;0&quot;;s:14:&quot;auto_redirects&quot;;s:1:&quot;1&quot;;s:10:&quot;auto_score&quot;;s:2:&quot;90&quot;;s:26:&quot;template_redirect_priority&quot;;s:1:&quot;9&quot;;s:13:&quot;auto_deletion&quot;;s:4:&quot;1095&quot;;s:9:&quot;auto_cats&quot;;s:1:&quot;1&quot;;s:9:&quot;auto_tags&quot;;s:1:&quot;1&quot;;s:11:&quot;dest404page&quot;;s:3:&quot;0|0&quot;;s:22:&quot;maximum_log_disk_usage&quot;;s:2:&quot;10&quot;;s:18:&quot;ignore_dontprocess&quot;;s:18:&quot;zemanta aggregator&quot;;s:16:&quot;ignore_doprocess&quot;;s:243:&quot;Googlebot
+Mediapartners-Google
+AdsBot-Google
+developers.google.com
+Bingbot
+Yahoo! Slurp
+DuckDuckBot
+Baiduspider
+YandexBot
+www.sogou.com
+Sogou-Test-Spider
+Exabot
+facebot
+facebookexternalhit
+ia_archiver
+SeznamBot
+Pinterestbot
+UptimeRobot
+MJ12bot&quot;;s:21:&quot;recognized_post_types&quot;;s:17:&quot;page
+post
+product&quot;;s:21:&quot;recognized_categories&quot;;s:0:&quot;&quot;;s:20:&quot;folders_files_ignore&quot;;s:69:&quot;wp-content/plugins/*
+wp-content/themes/*
+.well-known/acme-challenge/*&quot;;s:27:&quot;folders_files_ignore_usable&quot;;s:0:&quot;&quot;;s:18:&quot;plugin_admin_users&quot;;s:0:&quot;&quot;;s:10:&quot;debug_mode&quot;;i:0;s:29:&quot;days_wait_before_major_update&quot;;i:30;s:10:&quot;DB_VERSION&quot;;s:5:&quot;0.0.0&quot;;s:12:&quot;menuLocation&quot;;s:13:&quot;underSettings&quot;;s:24:&quot;admin_notification_email&quot;;s:0:&quot;&quot;;s:23:&quot;page_redirects_order_by&quot;;s:3:&quot;url&quot;;s:20:&quot;page_redirects_order&quot;;s:3:&quot;ASC&quot;;s:17:&quot;captured_order_by&quot;;s:8:&quot;logshits&quot;;s:14:&quot;captured_order&quot;;s:4:&quot;DESC&quot;;s:14:&quot;excludePages[]&quot;;s:0:&quot;&quot;;s:14:&quot;debug_file_key&quot;;s:14:&quot;eb7b5778a9ced1&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('abj404_settings', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(438): update_option('abj404_settings', Array)
+#6 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(364): ABJ_404_Solution_PluginLogic->updateOptions(Array)
+#7 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(343): ABJ_404_Solution_Logging->getDebugFilename()
+#8 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(158): ABJ_404_Solution_Logging->getDebugFilePath()
+#9 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(92): ABJ_404_Solution_Logging->writeLineToDebugFile('2025-04-09 13:1...')
+#10 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(492): ABJ_404_Solution_Logging->infoMessage('67f6722c72fd80....')
+#11 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(460): ABJ_404_Solution_PluginLogic->updateToNewVersionAction(Array)
+#12 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(430): ABJ_404_Solution_PluginLogic->updateToNewVersion(Array)
+#13 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(27): ABJ_404_Solution_PluginLogic->getOptions()
+#14 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(43): ABJ_404_Solution_SpellChecker::getInstance()
+#15 /wordpress/wp-content/plugins/404-solution/includes/Loader.php(51): ABJ_404_Solution_SpellChecker::init()
+#16 /wordpress/wp-content/plugins/404-solution/404-solution.php(89): require_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('404-solution/40...')
+#19 /internal/eval.php(20): activate_plugin('404-solution/40...')
+#20 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('abj404_settings', 'a:45:{s:16:\"default_redirect\";s:3:\"301\";s:15:\"send_error_logs\";s:1:\"0\";s:11:\"capture_404\";s:1:\"1\";s:16:\"capture_deletion\";i:1095;s:15:\"manual_deletion\";s:1:\"0\";s:12:\"log_deletion\";s:3:\"365\";s:18:\"admin_notification\";s:1:\"0\";s:14:\"remove_matches\";s:1:\"1\";s:16:\"suggest_minscore\";s:2:\"25\";s:11:\"suggest_max\";s:1:\"5\";s:13:\"suggest_title\";s:40:\"<h3>Here are some other great pages</h3>\";s:14:\"suggest_before\";s:4:\"<ol>\";s:13:\"suggest_after\";s:5:\"</ol>\";s:19:\"suggest_entrybefore\";s:4:\"<li>\";s:18:\"suggest_entryafter\";s:5:\"</li>\";s:17:\"suggest_noresults\";s:26:\"<p>No suggestions. :/ </p>\";s:12:\"suggest_cats\";s:1:\"1\";s:12:\"suggest_tags\";s:1:\"1\";s:18:\"update_suggest_url\";s:1:\"0\";s:14:\"auto_redirects\";s:1:\"1\";s:10:\"auto_score\";s:2:\"90\";s:26:\"template_redirect_priority\";s:1:\"9\";s:13:\"auto_deletion\";s:4:\"1095\";s:9:\"auto_cats\";s:1:\"1\";s:9:\"auto_tags\";s:1:\"1\";s:11:\"dest404page\";s:3:\"0|0\";s:22:\"maximum_log_disk_usage\";s:2:\"10\";s:18:\"ignore_dontprocess\";s:18:\"zemanta aggregator\";s:16:\"ignore_doprocess\";s:243:\"Googlebot
+Mediapartners-Google
+AdsBot-Google
+developers.google.com
+Bingbot
+Yahoo! Slurp
+DuckDuckBot
+Baiduspider
+YandexBot
+www.sogou.com
+Sogou-Test-Spider
+Exabot
+facebot
+facebookexternalhit
+ia_archiver
+SeznamBot
+Pinterestbot
+UptimeRobot
+MJ12bot\";s:21:\"recognized_post_types\";s:17:\"page
+post
+product\";s:21:\"recognized_categories\";s:0:\"\";s:20:\"folders_files_ignore\";s:69:\"wp-content/plugins/*
+wp-content/themes/*
+.well-known/acme-challenge/*\";s:27:\"folders_files_ignore_usable\";s:0:\"\";s:18:\"plugin_admin_users\";s:0:\"\";s:10:\"debug_mode\";i:0;s:29:\"days_wait_before_major_update\";i:30;s:10:\"DB_VERSION\";s:5:\"0.0.0\";s:12:\"menuLocation\";s:13:\"underSettings\";s:24:\"admin_notification_email\";s:0:\"\";s:23:\"page_redirects_order_by\";s:3:\"url\";s:20:\"page_redirects_order\";s:3:\"ASC\";s:17:\"captured_order_by\";s:8:\"logshits\";s:14:\"captured_order\";s:4:\"DESC\";s:14:\"excludePages[]\";s:0:\"\";s:14:\"debug_file_key\";s:14:\"eb7b5778a9ced1\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/404-solution/404-solution.php'), require_once('/plugins/404-solution/includes/Loader.php'), ABJ_404_Solution_SpellChecker::init, ABJ_404_Solution_SpellChecker::getInstance, ABJ_404_Solution_PluginLogic->getOptions, ABJ_404_Solution_PluginLogic->updateToNewVersion, ABJ_404_Solution_PluginLogic->updateToNewVersionAction, ABJ_404_Solution_Logging->infoMessage, ABJ_404_Solution_Logging->writeLineToDebugFile, ABJ_404_Solution_Logging->getDebugFilePath, ABJ_404_Solution_Logging->getDebugFilename, ABJ_404_Solution_PluginLogic->updateOptions, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 13:12:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+/* ------------------ /wordpress/wp-content/plugins/404-solution/includes/sql/correctLookupTableIssue.sql BEGIN ----- */ 
+
+delete from wp_abj404_lookup
+where lkup_value in (
+    select * from (
+	    SELECT DISTINCT lkup_value 
+	    FROM wp_abj404_lookup 
+	    group by lkup_value 
+	    having count(lkup_value) > 1
+    ) a
+)
+
+/* ------------------ /wordpress/wp-content/plugins/404-solution/includes/sql/correctLookupTableIssue.sql END ----- */ 
+</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: delete from `wp_abj404_lookup` where `lkup_value` in ( select * from ( SELECT DISTINCT `lkup_value` FROM `wp_abj404_lookup` group by `lkup_value` having count ( `lkup_value` ) &gt; 1 ) `a` ) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_abj404_lookup
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\n/* -----------...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\n/* -----------...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('\n/* -----------...')
+#4 /wordpress/wp-content/plugins/404-solution/includes/DataAccess.php(194): wpdb->get_results('\n/* -----------...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/404-solution/includes/DataAccess.php(495): ABJ_404_Solution_DataAccess->queryAndGetResults('\n/* -----------...')
+#6 /wordpress/wp-content/plugins/404-solution/includes/DatabaseUpgradesEtc.php(77): ABJ_404_Solution_DataAccess->correctDuplicateLookupValues()
+#7 /wordpress/wp-content/plugins/404-solution/includes/DatabaseUpgradesEtc.php(53): ABJ_404_Solution_DatabaseUpgradesEtc->correctIssuesBefore()
+#8 /wordpress/wp-content/plugins/404-solution/includes/DatabaseUpgradesEtc.php(41): ABJ_404_Solution_DatabaseUpgradesEtc->reallyCreateDatabaseTables(true)
+#9 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(500): ABJ_404_Solution_DatabaseUpgradesEtc->createDatabaseTables(true)
+#10 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(460): ABJ_404_Solution_PluginLogic->updateToNewVersionAction(Array)
+#11 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(430): ABJ_404_Solution_PluginLogic->updateToNewVersion(Array)
+#12 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(27): ABJ_404_Solution_PluginLogic->getOptions()
+#13 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(43): ABJ_404_Solution_SpellChecker::getInstance()
+#14 /wordpress/wp-content/plugins/404-solution/includes/Loader.php(51): ABJ_404_Solution_SpellChecker::init()
+#15 /wordpress/wp-content/plugins/404-solution/404-solution.php(89): require_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('404-solution/40...')
+#18 /internal/eval.php(20): activate_plugin('404-solution/40...')
+#19 {main}</pre>
+ for query 
+/* ------------------ /wordpress/wp-content/plugins/404-solution/includes/sql/correctLookupTableIssue.sql BEGIN ----- */ 
+
+delete from wp_abj404_lookup
+where lkup_value in (
+    select * from (
+	    SELECT DISTINCT lkup_value 
+	    FROM wp_abj404_lookup 
+	    group by lkup_value 
+	    having count(lkup_value) > 1
+    ) a
+)
+
+/* ------------------ /wordpress/wp-content/plugins/404-solution/includes/sql/correctLookupTableIssue.sql END ----- */ 
+ made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/404-solution/404-solution.php'), require_once('/plugins/404-solution/includes/Loader.php'), ABJ_404_Solution_SpellChecker::init, ABJ_404_Solution_SpellChecker::getInstance, ABJ_404_Solution_PluginLogic->getOptions, ABJ_404_Solution_PluginLogic->updateToNewVersion, ABJ_404_Solution_PluginLogic->updateToNewVersionAction, ABJ_404_Solution_DatabaseUpgradesEtc->createDatabaseTables, ABJ_404_Solution_DatabaseUpgradesEtc->reallyCreateDatabaseTables, ABJ_404_Solution_DatabaseUpgradesEtc->correctIssuesBefore, ABJ_404_Solution_DataAccess->correctDuplicateLookupValues, ABJ_404_Solution_DataAccess->queryAndGetResults, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 13:12:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>select @@max_join_size as max_join_size, @@sql_big_selects as sql_big_selects, @@character_set_database as character_set_database</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: select NULL AS `@@max_join_size` as `max_join_size` , NULL AS `@@sql_big_selects` as `sql_big_selects` , NULL AS `@@character_set_database` as `character_set_database` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "as": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('select @@max_jo...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('select @@max_jo...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('select @@max_jo...')
+#4 /wordpress/wp-content/plugins/404-solution/includes/DataAccess.php(246): wpdb->get_results('select @@max_jo...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/404-solution/includes/DataAccess.php(495): ABJ_404_Solution_DataAccess->queryAndGetResults('\n/* -----------...')
+#6 /wordpress/wp-content/plugins/404-solution/includes/DatabaseUpgradesEtc.php(77): ABJ_404_Solution_DataAccess->correctDuplicateLookupValues()
+#7 /wordpress/wp-content/plugins/404-solution/includes/DatabaseUpgradesEtc.php(53): ABJ_404_Solution_DatabaseUpgradesEtc->correctIssuesBefore()
+#8 /wordpress/wp-content/plugins/404-solution/includes/DatabaseUpgradesEtc.php(41): ABJ_404_Solution_DatabaseUpgradesEtc->reallyCreateDatabaseTables(true)
+#9 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(500): ABJ_404_Solution_DatabaseUpgradesEtc->createDatabaseTables(true)
+#10 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(460): ABJ_404_Solution_PluginLogic->updateToNewVersionAction(Array)
+#11 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(430): ABJ_404_Solution_PluginLogic->updateToNewVersion(Array)
+#12 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(27): ABJ_404_Solution_PluginLogic->getOptions()
+#13 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(43): ABJ_404_Solution_SpellChecker::getInstance()
+#14 /wordpress/wp-content/plugins/404-solution/includes/Loader.php(51): ABJ_404_Solution_SpellChecker::init()
+#15 /wordpress/wp-content/plugins/404-solution/404-solution.php(89): require_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('404-solution/40...')
+#18 /internal/eval.php(20): activate_plugin('404-solution/40...')
+#19 {main}</pre>
+ for query select @@max_join_size as max_join_size, @@sql_big_selects as sql_big_selects, @@character_set_database as character_set_database made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/404-solution/404-solution.php'), require_once('/plugins/404-solution/includes/Loader.php'), ABJ_404_Solution_SpellChecker::init, ABJ_404_Solution_SpellChecker::getInstance, ABJ_404_Solution_PluginLogic->getOptions, ABJ_404_Solution_PluginLogic->updateToNewVersion, ABJ_404_Solution_PluginLogic->updateToNewVersionAction, ABJ_404_Solution_DatabaseUpgradesEtc->createDatabaseTables, ABJ_404_Solution_DatabaseUpgradesEtc->reallyCreateDatabaseTables, ABJ_404_Solution_DatabaseUpgradesEtc->correctIssuesBefore, ABJ_404_Solution_DataAccess->correctDuplicateLookupValues, ABJ_404_Solution_DataAccess->queryAndGetResults, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 13:12:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('abj404_settings', 'a:45:{s:16:\"default_redirect\";s:3:\"301\";s:15:\"send_error_logs\";s:1:\"0\";s:11:\"capture_404\";s:1:\"1\";s:16:\"capture_deletion\";i:1095;s:15:\"manual_deletion\";s:1:\"0\";s:12:\"log_deletion\";s:3:\"365\";s:18:\"admin_notification\";s:1:\"0\";s:14:\"remove_matches\";s:1:\"1\";s:16:\"suggest_minscore\";s:2:\"25\";s:11:\"suggest_max\";s:1:\"5\";s:13:\"suggest_title\";s:40:\"<h3>Here are some other great pages</h3>\";s:14:\"suggest_before\";s:4:\"<ol>\";s:13:\"suggest_after\";s:5:\"</ol>\";s:19:\"suggest_entrybefore\";s:4:\"<li>\";s:18:\"suggest_entryafter\";s:5:\"</li>\";s:17:\"suggest_noresults\";s:26:\"<p>No suggestions. :/ </p>\";s:12:\"suggest_cats\";s:1:\"1\";s:12:\"suggest_tags\";s:1:\"1\";s:18:\"update_suggest_url\";s:1:\"0\";s:14:\"auto_redirects\";s:1:\"1\";s:10:\"auto_score\";s:2:\"90\";s:26:\"template_redirect_priority\";s:1:\"9\";s:13:\"auto_deletion\";s:4:\"1095\";s:9:\"auto_cats\";s:1:\"1\";s:9:\"auto_tags\";s:1:\"1\";s:11:\"dest404page\";s:3:\"0|0\";s:22:\"maximum_log_disk_usage\";s:2:\"10\";s:18:\"ignore_dontprocess\";s:18:\"zemanta aggregator\";s:16:\"ignore_doprocess\";s:243:\"Googlebot
+Mediapartners-Google
+AdsBot-Google
+developers.google.com
+Bingbot
+Yahoo! Slurp
+DuckDuckBot
+Baiduspider
+YandexBot
+www.sogou.com
+Sogou-Test-Spider
+Exabot
+facebot
+facebookexternalhit
+ia_archiver
+SeznamBot
+Pinterestbot
+UptimeRobot
+MJ12bot\";s:21:\"recognized_post_types\";s:17:\"page
+post
+product\";s:21:\"recognized_categories\";s:0:\"\";s:20:\"folders_files_ignore\";s:69:\"wp-content/plugins/*
+wp-content/themes/*
+.well-known/acme-challenge/*\";s:27:\"folders_files_ignore_usable\";s:0:\"\";s:18:\"plugin_admin_users\";s:0:\"\";s:10:\"debug_mode\";i:0;s:29:\"days_wait_before_major_update\";i:30;s:10:\"DB_VERSION\";s:5:\"0.0.0\";s:12:\"menuLocation\";s:13:\"underSettings\";s:24:\"admin_notification_email\";s:0:\"\";s:23:\"page_redirects_order_by\";s:3:\"url\";s:20:\"page_redirects_order\";s:3:\"ASC\";s:17:\"captured_order_by\";s:8:\"logshits\";s:14:\"captured_order\";s:4:\"DESC\";s:14:\"excludePages[]\";s:0:\"\";s:14:\"debug_file_key\";s:14:\"eb7b5778a9ced1\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'abj404_settings' , 'a:45:{s:16:&quot;default_redirect&quot;;s:3:&quot;301&quot;;s:15:&quot;send_error_logs&quot;;s:1:&quot;0&quot;;s:11:&quot;capture_404&quot;;s:1:&quot;1&quot;;s:16:&quot;capture_deletion&quot;;i:1095;s:15:&quot;manual_deletion&quot;;s:1:&quot;0&quot;;s:12:&quot;log_deletion&quot;;s:3:&quot;365&quot;;s:18:&quot;admin_notification&quot;;s:1:&quot;0&quot;;s:14:&quot;remove_matches&quot;;s:1:&quot;1&quot;;s:16:&quot;suggest_minscore&quot;;s:2:&quot;25&quot;;s:11:&quot;suggest_max&quot;;s:1:&quot;5&quot;;s:13:&quot;suggest_title&quot;;s:40:&quot;&lt;h3&gt;Here are some other great pages&lt;/h3&gt;&quot;;s:14:&quot;suggest_before&quot;;s:4:&quot;&lt;ol&gt;&quot;;s:13:&quot;suggest_after&quot;;s:5:&quot;&lt;/ol&gt;&quot;;s:19:&quot;suggest_entrybefore&quot;;s:4:&quot;&lt;li&gt;&quot;;s:18:&quot;suggest_entryafter&quot;;s:5:&quot;&lt;/li&gt;&quot;;s:17:&quot;suggest_noresults&quot;;s:26:&quot;&lt;p&gt;No suggestions. :/ &lt;/p&gt;&quot;;s:12:&quot;suggest_cats&quot;;s:1:&quot;1&quot;;s:12:&quot;suggest_tags&quot;;s:1:&quot;1&quot;;s:18:&quot;update_suggest_url&quot;;s:1:&quot;0&quot;;s:14:&quot;auto_redirects&quot;;s:1:&quot;1&quot;;s:10:&quot;auto_score&quot;;s:2:&quot;90&quot;;s:26:&quot;template_redirect_priority&quot;;s:1:&quot;9&quot;;s:13:&quot;auto_deletion&quot;;s:4:&quot;1095&quot;;s:9:&quot;auto_cats&quot;;s:1:&quot;1&quot;;s:9:&quot;auto_tags&quot;;s:1:&quot;1&quot;;s:11:&quot;dest404page&quot;;s:3:&quot;0|0&quot;;s:22:&quot;maximum_log_disk_usage&quot;;s:2:&quot;10&quot;;s:18:&quot;ignore_dontprocess&quot;;s:18:&quot;zemanta aggregator&quot;;s:16:&quot;ignore_doprocess&quot;;s:243:&quot;Googlebot
+Mediapartners-Google
+AdsBot-Google
+developers.google.com
+Bingbot
+Yahoo! Slurp
+DuckDuckBot
+Baiduspider
+YandexBot
+www.sogou.com
+Sogou-Test-Spider
+Exabot
+facebot
+facebookexternalhit
+ia_archiver
+SeznamBot
+Pinterestbot
+UptimeRobot
+MJ12bot&quot;;s:21:&quot;recognized_post_types&quot;;s:17:&quot;page
+post
+product&quot;;s:21:&quot;recognized_categories&quot;;s:0:&quot;&quot;;s:20:&quot;folders_files_ignore&quot;;s:69:&quot;wp-content/plugins/*
+wp-content/themes/*
+.well-known/acme-challenge/*&quot;;s:27:&quot;folders_files_ignore_usable&quot;;s:0:&quot;&quot;;s:18:&quot;plugin_admin_users&quot;;s:0:&quot;&quot;;s:10:&quot;debug_mode&quot;;i:0;s:29:&quot;days_wait_before_major_update&quot;;i:30;s:10:&quot;DB_VERSION&quot;;s:5:&quot;0.0.0&quot;;s:12:&quot;menuLocation&quot;;s:13:&quot;underSettings&quot;;s:24:&quot;admin_notification_email&quot;;s:0:&quot;&quot;;s:23:&quot;page_redirects_order_by&quot;;s:3:&quot;url&quot;;s:20:&quot;page_redirects_order&quot;;s:3:&quot;ASC&quot;;s:17:&quot;captured_order_by&quot;;s:8:&quot;logshits&quot;;s:14:&quot;captured_order&quot;;s:4:&quot;DESC&quot;;s:14:&quot;excludePages[]&quot;;s:0:&quot;&quot;;s:14:&quot;debug_file_key&quot;;s:14:&quot;eb7b5778a9ced1&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('abj404_settings', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(438): update_option('abj404_settings', Array)
+#6 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(425): ABJ_404_Solution_PluginLogic->updateOptions(Array)
+#7 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(350): ABJ_404_Solution_PluginLogic->getOptions(true)
+#8 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(343): ABJ_404_Solution_Logging->getDebugFilename()
+#9 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(158): ABJ_404_Solution_Logging->getDebugFilePath()
+#10 /wordpress/wp-content/plugins/404-solution/includes/Logging.php(129): ABJ_404_Solution_Logging->writeLineToDebugFile('2025-04-09 13:1...')
+#11 /wordpress/wp-content/plugins/404-solution/includes/DataAccess.php(253): ABJ_404_Solution_Logging->errorMessage('Ugh. SQL query ...')
+#12 /wordpress/wp-content/plugins/404-solution/includes/DataAccess.php(495): ABJ_404_Solution_DataAccess->queryAndGetResults('\n/* -----------...')
+#13 /wordpress/wp-content/plugins/404-solution/includes/DatabaseUpgradesEtc.php(77): ABJ_404_Solution_DataAccess->correctDuplicateLookupValues()
+#14 /wordpress/wp-content/plugins/404-solution/includes/DatabaseUpgradesEtc.php(53): ABJ_404_Solution_DatabaseUpgradesEtc->correctIssuesBefore()
+#15 /wordpress/wp-content/plugins/404-solution/includes/DatabaseUpgradesEtc.php(41): ABJ_404_Solution_DatabaseUpgradesEtc->reallyCreateDatabaseTables(true)
+#16 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(500): ABJ_404_Solution_DatabaseUpgradesEtc->createDatabaseTables(true)
+#17 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(460): ABJ_404_Solution_PluginLogic->updateToNewVersionAction(Array)
+#18 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(430): ABJ_404_Solution_PluginLogic->updateToNewVersion(Array)
+#19 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(27): ABJ_404_Solution_PluginLogic->getOptions()
+#20 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(43): ABJ_404_Solution_SpellChecker::getInstance()
+#21 /wordpress/wp-content/plugins/404-solution/includes/Loader.php(51): ABJ_404_Solution_SpellChecker::init()
+#22 /wordpress/wp-content/plugins/404-solution/404-solution.php(89): require_once('/wordpress/wp-c...')
+#23 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#24 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('404-solution/40...')
+#25 /internal/eval.php(20): activate_plugin('404-solution/40...')
+#26 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('abj404_settings', 'a:45:{s:16:\"default_redirect\";s:3:\"301\";s:15:\"send_error_logs\";s:1:\"0\";s:11:\"capture_404\";s:1:\"1\";s:16:\"capture_deletion\";i:1095;s:15:\"manual_deletion\";s:1:\"0\";s:12:\"log_deletion\";s:3:\"365\";s:18:\"admin_notification\";s:1:\"0\";s:14:\"remove_matches\";s:1:\"1\";s:16:\"suggest_minscore\";s:2:\"25\";s:11:\"suggest_max\";s:1:\"5\";s:13:\"suggest_title\";s:40:\"<h3>Here are some other great pages</h3>\";s:14:\"suggest_before\";s:4:\"<ol>\";s:13:\"suggest_after\";s:5:\"</ol>\";s:19:\"suggest_entrybefore\";s:4:\"<li>\";s:18:\"suggest_entryafter\";s:5:\"</li>\";s:17:\"suggest_noresults\";s:26:\"<p>No suggestions. :/ </p>\";s:12:\"suggest_cats\";s:1:\"1\";s:12:\"suggest_tags\";s:1:\"1\";s:18:\"update_suggest_url\";s:1:\"0\";s:14:\"auto_redirects\";s:1:\"1\";s:10:\"auto_score\";s:2:\"90\";s:26:\"template_redirect_priority\";s:1:\"9\";s:13:\"auto_deletion\";s:4:\"1095\";s:9:\"auto_cats\";s:1:\"1\";s:9:\"auto_tags\";s:1:\"1\";s:11:\"dest404page\";s:3:\"0|0\";s:22:\"maximum_log_disk_usage\";s:2:\"10\";s:18:\"ignore_dontprocess\";s:18:\"zemanta aggregator\";s:16:\"ignore_doprocess\";s:243:\"Googlebot
+Mediapartners-Google
+AdsBot-Google
+developers.google.com
+Bingbot
+Yahoo! Slurp
+DuckDuckBot
+Baiduspider
+YandexBot
+www.sogou.com
+Sogou-Test-Spider
+Exabot
+facebot
+facebookexternalhit
+ia_archiver
+SeznamBot
+Pinterestbot
+UptimeRobot
+MJ12bot\";s:21:\"recognized_post_types\";s:17:\"page
+post
+product\";s:21:\"recognized_categories\";s:0:\"\";s:20:\"folders_files_ignore\";s:69:\"wp-content/plugins/*
+wp-content/themes/*
+.well-known/acme-challenge/*\";s:27:\"folders_files_ignore_usable\";s:0:\"\";s:18:\"plugin_admin_users\";s:0:\"\";s:10:\"debug_mode\";i:0;s:29:\"days_wait_before_major_update\";i:30;s:10:\"DB_VERSION\";s:5:\"0.0.0\";s:12:\"menuLocation\";s:13:\"underSettings\";s:24:\"admin_notification_email\";s:0:\"\";s:23:\"page_redirects_order_by\";s:3:\"url\";s:20:\"page_redirects_order\";s:3:\"ASC\";s:17:\"captured_order_by\";s:8:\"logshits\";s:14:\"captured_order\";s:4:\"DESC\";s:14:\"excludePages[]\";s:0:\"\";s:14:\"debug_file_key\";s:14:\"eb7b5778a9ced1\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/404-solution/404-solution.php'), require_once('/plugins/404-solution/includes/Loader.php'), ABJ_404_Solution_SpellChecker::init, ABJ_404_Solution_SpellChecker::getInstance, ABJ_404_Solution_PluginLogic->getOptions, ABJ_404_Solution_PluginLogic->updateToNewVersion, ABJ_404_Solution_PluginLogic->updateToNewVersionAction, ABJ_404_Solution_DatabaseUpgradesEtc->createDatabaseTables, ABJ_404_Solution_DatabaseUpgradesEtc->reallyCreateDatabaseTables, ABJ_404_Solution_DatabaseUpgradesEtc->correctIssuesBefore, ABJ_404_Solution_DataAccess->correctDuplicateLookupValues, ABJ_404_Solution_DataAccess->queryAndGetResults, ABJ_404_Solution_Logging->errorMessage, ABJ_404_Solution_Logging->writeLineToDebugFile, ABJ_404_Solution_Logging->getDebugFilePath, ABJ_404_Solution_Logging->getDebugFilename, ABJ_404_Solution_PluginLogic->getOptions, ABJ_404_Solution_PluginLogic->updateOptions, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 13:12:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>delete from wp_abj404_spelling_cache where matchdata is null or matchdata = ''</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: delete from `wp_abj404_spelling_cache` where `matchdata` is null or `matchdata` = '' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_abj404_spelling_cache
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('delete from wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('delete from wp_...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('delete from wp_...')
+#4 /wordpress/wp-content/plugins/404-solution/includes/DataAccess.php(194): wpdb->get_results('delete from wp_...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/404-solution/includes/DatabaseUpgradesEtc.php(125): ABJ_404_Solution_DataAccess->queryAndGetResults('delete from wp_...')
+#6 /wordpress/wp-content/plugins/404-solution/includes/DatabaseUpgradesEtc.php(79): ABJ_404_Solution_DatabaseUpgradesEtc->correctMatchData()
+#7 /wordpress/wp-content/plugins/404-solution/includes/DatabaseUpgradesEtc.php(53): ABJ_404_Solution_DatabaseUpgradesEtc->correctIssuesBefore()
+#8 /wordpress/wp-content/plugins/404-solution/includes/DatabaseUpgradesEtc.php(41): ABJ_404_Solution_DatabaseUpgradesEtc->reallyCreateDatabaseTables(true)
+#9 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(500): ABJ_404_Solution_DatabaseUpgradesEtc->createDatabaseTables(true)
+#10 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(460): ABJ_404_Solution_PluginLogic->updateToNewVersionAction(Array)
+#11 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(430): ABJ_404_Solution_PluginLogic->updateToNewVersion(Array)
+#12 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(27): ABJ_404_Solution_PluginLogic->getOptions()
+#13 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(43): ABJ_404_Solution_SpellChecker::getInstance()
+#14 /wordpress/wp-content/plugins/404-solution/includes/Loader.php(51): ABJ_404_Solution_SpellChecker::init()
+#15 /wordpress/wp-content/plugins/404-solution/404-solution.php(89): require_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('404-solution/40...')
+#18 /internal/eval.php(20): activate_plugin('404-solution/40...')
+#19 {main}</pre>
+ for query delete from wp_abj404_spelling_cache where matchdata is null or matchdata = '' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/404-solution/404-solution.php'), require_once('/plugins/404-solution/includes/Loader.php'), ABJ_404_Solution_SpellChecker::init, ABJ_404_Solution_SpellChecker::getInstance, ABJ_404_Solution_PluginLogic->getOptions, ABJ_404_Solution_PluginLogic->updateToNewVersion, ABJ_404_Solution_PluginLogic->updateToNewVersionAction, ABJ_404_Solution_DatabaseUpgradesEtc->createDatabaseTables, ABJ_404_Solution_DatabaseUpgradesEtc->reallyCreateDatabaseTables, ABJ_404_Solution_DatabaseUpgradesEtc->correctIssuesBefore, ABJ_404_Solution_DatabaseUpgradesEtc->correctMatchData, ABJ_404_Solution_DataAccess->queryAndGetResults, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 13:12:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>select @@max_join_size as max_join_size, @@sql_big_selects as sql_big_selects, @@character_set_database as character_set_database</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: select NULL AS `@@max_join_size` as `max_join_size` , NULL AS `@@sql_big_selects` as `sql_big_selects` , NULL AS `@@character_set_database` as `character_set_database` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "as": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('select @@max_jo...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('select @@max_jo...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('select @@max_jo...')
+#4 /wordpress/wp-content/plugins/404-solution/includes/DataAccess.php(246): wpdb->get_results('select @@max_jo...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/404-solution/includes/DatabaseUpgradesEtc.php(125): ABJ_404_Solution_DataAccess->queryAndGetResults('delete from wp_...')
+#6 /wordpress/wp-content/plugins/404-solution/includes/DatabaseUpgradesEtc.php(79): ABJ_404_Solution_DatabaseUpgradesEtc->correctMatchData()
+#7 /wordpress/wp-content/plugins/404-solution/includes/DatabaseUpgradesEtc.php(53): ABJ_404_Solution_DatabaseUpgradesEtc->correctIssuesBefore()
+#8 /wordpress/wp-content/plugins/404-solution/includes/DatabaseUpgradesEtc.php(41): ABJ_404_Solution_DatabaseUpgradesEtc->reallyCreateDatabaseTables(true)
+#9 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(500): ABJ_404_Solution_DatabaseUpgradesEtc->createDatabaseTables(true)
+#10 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(460): ABJ_404_Solution_PluginLogic->updateToNewVersionAction(Array)
+#11 /wordpress/wp-content/plugins/404-solution/includes/PluginLogic.php(430): ABJ_404_Solution_PluginLogic->updateToNewVersion(Array)
+#12 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(27): ABJ_404_Solution_PluginLogic->getOptions()
+#13 /wordpress/wp-content/plugins/404-solution/includes/SpellChecker.php(43): ABJ_404_Solution_SpellChecker::getInstance()
+#14 /wordpress/wp-content/plugins/404-solution/includes/Loader.php(51): ABJ_404_Solution_SpellChecker::init()
+#15 /wordpress/wp-content/plugins/404-solution/404-solution.php(89): require_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_sc
