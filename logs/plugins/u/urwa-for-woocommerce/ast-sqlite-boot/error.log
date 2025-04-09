@@ -2,10 +2,14 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [08-Apr-2025 19:23:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [09-Apr-2025 20:49:19 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 20:49:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 20:49:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 20:49:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 20:49:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:27:\"unite-gallery-lite/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:6:\"2.5.10\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744140196;s:11:\"plugin_path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:35:\"unite-gallery-lite/unitegallery.php\";s:8:\"sdk_path\";s:27:\"unite-gallery-lite/freemius\";s:7:\"version\";s:6:\"2.5.10\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744140196;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('um_last_version_upgrade', '2.10.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -17,7 +21,7 @@ Error: [08-Apr-2025 19:23:16 UTC] WordPress database error <div style="clear:bot
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_active_plugins' , 'O:8:&quot;stdClass&quot;:3:{s:7:&quot;plugins&quot;;a:1:{s:27:&quot;unite-gallery-lite/freemius&quot;;O:8:&quot;stdClass&quot;:4:{s:7:&quot;version&quot;;s:6:&quot;2.5.10&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:9:&quot;timestamp&quot;;i:1744140196;s:11:&quot;plugin_path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}}s:7:&quot;abspath&quot;;s:11:&quot;/wordpress/&quot;;s:6:&quot;newest&quot;;O:8:&quot;stdClass&quot;:5:{s:11:&quot;plugin_path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;s:8:&quot;sdk_path&quot;;s:27:&quot;unite-gallery-lite/freemius&quot;;s:7:&quot;version&quot;;s:6:&quot;2.5.10&quot;;s:13:&quot;in_activation&quot;;b:1;s:9:&quot;timestamp&quot;;i:1744140196;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'um_last_version_upgrade' , '2.10.2' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -29,20 +33,20 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_active_plugi...', Object(stdClass), '', 'auto')
-#5 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/fs-essential-functions.php(276): update_option('fs_active_plugi...', Object(stdClass))
-#6 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/start.php(170): fs_update_sdk_newest_version('unite-gallery-l...', 'unite-gallery-l...')
-#7 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(27): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(53): ugl_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('unite-gallery-l...')
-#11 /internal/eval.php(20): activate_plugin('unite-gallery-l...')
+#4 /wordpress/wp-includes/option.php(921): add_option('um_last_version...', '2.10.2', '', 'auto')
+#5 /wordpress/wp-content/plugins/ultimate-member/includes/class-init.php(419): update_option('um_last_version...', '2.10.2')
+#6 /wordpress/wp-content/plugins/ultimate-member/includes/class-init.php(367): UM->single_site_activation()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): UM->activation(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
+#11 /internal/eval.php(20): activate_plugin('ultimate-member...')
 #12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:27:\"unite-gallery-lite/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:6:\"2.5.10\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744140196;s:11:\"plugin_path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:35:\"unite-gallery-lite/unitegallery.php\";s:8:\"sdk_path\";s:27:\"unite-gallery-lite/freemius\";s:7:\"version\";s:6:\"2.5.10\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744140196;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/unite-gallery-lite/unitegallery.php'), ugl_fs, require_once('/plugins/unite-gallery-lite/freemius/start.php'), fs_update_sdk_newest_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 19:23:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('um_last_version_upgrade', '2.10.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-member/ultimate-member.php'), WP_Hook->do_action, WP_Hook->apply_filters, UM->activation, UM->single_site_activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 20:49:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('um_first_activation_date', '1744231790', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -54,7 +58,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_debug_mode' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'um_first_activation_date' , '1744231790' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -66,20 +70,235 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/config.php(307): add_option('fs_debug_mode', false)
-#5 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/require.php(14): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/start.php(486): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(27): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(53): ugl_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('unite-gallery-l...')
-#11 /internal/eval.php(20): activate_plugin('unite-gallery-l...')
+#4 /wordpress/wp-content/plugins/ultimate-member/includes/class-init.php(421): add_option('um_first_activa...', 1744231790)
+#5 /wordpress/wp-content/plugins/ultimate-member/includes/class-init.php(367): UM->single_site_activation()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): UM->activation(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
+#10 /internal/eval.php(20): activate_plugin('ultimate-member...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('um_first_activation_date', '1744231790', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-member/ultimate-member.php'), WP_Hook->do_action, WP_Hook->apply_filters, UM->activation, UM->single_site_activation, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 20:49:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('um_version', '2.10.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'um_version' , '2.10.2' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('um_version', '2.10.2', '', 'auto')
+#5 /wordpress/wp-content/plugins/ultimate-member/includes/class-init.php(432): update_option('um_version', '2.10.2')
+#6 /wordpress/wp-content/plugins/ultimate-member/includes/class-init.php(367): UM->single_site_activation()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): UM->activation(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
+#11 /internal/eval.php(20): activate_plugin('ultimate-member...')
 #12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/unite-gallery-lite/unitegallery.php'), ugl_fs, require_once('/plugins/unite-gallery-lite/freemius/start.php'), require_once('/plugins/unite-gallery-lite/freemius/require.php'), require_once('/plugins/unite-gallery-lite/freemius/config.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 19:23:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('um_version', '2.10.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-member/ultimate-member.php'), WP_Hook->do_action, WP_Hook->apply_filters, UM->activation, UM->single_site_activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 20:49:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TABLE wp_um_metadata (
+umeta_id bigint(20) unsigned NOT NULL auto_increment,
+user_id bigint(20) unsigned NOT NULL default '0',
+um_key varchar(255) default NULL,
+um_value longtext default NULL,
+PRIMARY KEY  (umeta_id),
+KEY user_id_indx (user_id),
+KEY meta_key_indx (um_key),
+KEY meta_value_indx (um_value(191))
+) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_tables (table_schema, table_name, table_type, engine, row_format, table_collation)
+				VALUES (?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_um_metadata, BASE TABLE, InnoDB, Dynamic, utf8mb4_general_ci</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_um_metadata, umeta_id, 1, , NO, bigint, , , 20, 0, , , , bigint(20) unsigned, , auto_increment, select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_um_metadata, user_id, 2, 0, NO, bigint, , , 20, 0, , , , bigint(20) unsigned, , , select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_um_metadata, um_key, 3, , YES, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_um_metadata, um_value, 4, , YES, longtext, 4294967295, 4294967295, , , , utf8mb4, utf8mb4_general_ci, longtext, , , select,insert,update,references, , , </li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM _wp_sqlite_mysql_information_schema_columns
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_um_metadata, umeta_id</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_um_metadata, 0, database_name_here, PRIMARY, 1, umeta_id, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_information_schema_statistics
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_um_metadata, database_name_here, wp_um_metadata</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM _wp_sqlite_mysql_information_schema_columns
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_um_metadata, user_id</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_um_metadata, 1, database_name_here, user_id_indx, 1, user_id, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_information_schema_statistics
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_um_metadata, database_name_here, wp_um_metadata</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM _wp_sqlite_mysql_information_schema_columns
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_um_metadata, um_key</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_um_metadata, 1, database_name_here, meta_key_indx, 1, um_key, A, 0, , , YES, BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_information_schema_statistics
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_um_metadata, database_name_here, wp_um_metadata</li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM _wp_sqlite_mysql_information_schema_columns
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_um_metadata, um_value</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+WP_SQLite_Information_Schema_Builder::get_index_column_sub_part(): Argument #2 ($max_length) must be of type ?int, string given, called in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 940
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('WP_SQLite_Infor...', 0, Object(TypeError))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE TABLE wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE TABLE wp...')
+#3 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#4 /wordpress/wp-content/plugins/ultimate-member/includes/core/class-setup.php(51): dbDelta(Array)
+#5 /wordpress/wp-content/plugins/ultimate-member/includes/core/class-setup.php(23): um\core\Setup->create_db()
+#6 /wordpress/wp-content/plugins/ultimate-member/includes/class-init.php(437): um\core\Setup->run_setup()
+#7 /wordpress/wp-content/plugins/ultimate-member/includes/class-init.php(367): UM->single_site_activation()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): UM->activation(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
+#12 /internal/eval.php(20): activate_plugin('ultimate-member...')
+#13 {main}</pre>
+ for query CREATE TABLE wp_um_metadata (
+umeta_id bigint(20) unsigned NOT NULL auto_increment,
+user_id bigint(20) unsigned NOT NULL default '0',
+um_key varchar(255) default NULL,
+um_value longtext default NULL,
+PRIMARY KEY  (umeta_id),
+KEY user_id_indx (user_id),
+KEY meta_key_indx (um_key),
+KEY meta_value_indx (um_value(191))
+) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_ultimate-member/ultimate-member.php'), WP_Hook->do_action, WP_Hook->apply_filters, UM->activation, UM->single_site_activation, um\core\Setup->run_setup, um\core\Setup->create_db, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 20:49:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('__ultimatemember_sitekey', '127.0.0.1:9404-byamUUleX7rAO2kDfaQX', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -91,7 +310,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:1:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:12303;a:3:{s:4:&quot;slug&quot;;s:18:&quot;unite-gallery-lite&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '__ultimatemember_sitekey' , '127.0.0.1:9404-byamUUleX7rAO2kDfaQX' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -103,25 +322,22 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('id_slug_type_pa...', Array, true)
-#8 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(2136): FS_Options->set_option('id_slug_type_pa...', Array, true)
-#9 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(417): Freemius->store_id_slug_type_path_map('12303', 'unite-gallery-l...')
-#10 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(2795): Freemius->__construct('12303', 'unite-gallery-l...', true)
-#11 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/start.php(525): Freemius::instance('12303', 'unite-gallery-l...', true)
-#12 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(30): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(53): ugl_fs()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('unite-gallery-l...')
-#16 /internal/eval.php(20): activate_plugin('unite-gallery-l...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/unite-gallery-lite/unitegallery.php'), ugl_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_id_slug_type_path_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 19:23:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('__ultimatemembe...', '127.0.0.1:9404-...', '', 'auto')
+#5 /wordpress/wp-content/plugins/ultimate-member/includes/core/class-setup.php(59): update_option('__ultimatemembe...', '127.0.0.1:9404-...')
+#6 /wordpress/wp-content/plugins/ultimate-member/includes/core/class-setup.php(24): um\core\Setup->install_basics()
+#7 /wordpress/wp-content/plugins/ultimate-member/includes/class-init.php(437): um\core\Setup->run_setup()
+#8 /wordpress/wp-content/plugins/ultimate-member/includes/class-init.php(367): UM->single_site_activation()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): UM->activation(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
+#13 /internal/eval.php(20): activate_plugin('ultimate-member...')
+#14 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('__ultimatemember_sitekey', '127.0.0.1:9404-byamUUleX7rAO2kDfaQX', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-member/ultimate-member.php'), WP_Hook->do_action, WP_Hook->apply_filters, UM->activation, UM->single_site_activation, um\core\Setup->run_setup, um\core\Setup->install_basics, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 20:49:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('um_is_installed', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -133,7 +349,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:12303;a:3:{s:4:&quot;slug&quot;;s:18:&quot;unite-gallery-lite&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:18:&quot;unite-gallery-lite&quot;;a:1:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'um_is_installed' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -145,27 +361,142 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_main_fil...', Object(stdClass))
-#9 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-fs-storage.php(533): FS_Key_Value_Storage->__set('plugin_main_fil...', Object(stdClass))
-#10 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(1993): FS_Storage->__set('plugin_main_fil...', Object(stdClass))
-#11 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(432): Freemius->_find_caller_plugin_file(true, 'unite-gallery-l...')
-#12 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(2795): Freemius->__construct('12303', 'unite-gallery-l...', true)
-#13 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/start.php(525): Freemius::instance('12303', 'unite-gallery-l...', true)
-#14 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(30): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(53): ugl_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('unite-gallery-l...')
-#18 /internal/eval.php(20): activate_plugin('unite-gallery-l...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/unite-gallery-lite/unitegallery.php'), ugl_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_find_caller_plugin_file, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 19:23:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('um_is_installed', 1, '', 'auto')
+#5 /wordpress/wp-content/plugins/ultimate-member/includes/core/class-setup.php(70): update_option('um_is_installed', 1)
+#6 /wordpress/wp-content/plugins/ultimate-member/includes/core/class-setup.php(25): um\core\Setup->install_default_forms()
+#7 /wordpress/wp-content/plugins/ultimate-member/includes/class-init.php(437): um\core\Setup->run_setup()
+#8 /wordpress/wp-content/plugins/ultimate-member/includes/class-init.php(367): UM->single_site_activation()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): UM->activation(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
+#13 /internal/eval.php(20): activate_plugin('ultimate-member...')
+#14 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('um_is_installed', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-member/ultimate-member.php'), WP_Hook->do_action, WP_Hook->apply_filters, UM->activation, UM->single_site_activation, um\core\Setup->run_setup, um\core\Setup->install_default_forms, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 20:49:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 20:49:50', '2025-04-09 20:49:50', '', '', 'Default Registration', '', 'publish', 'um_form', 'closed', 'closed', '', 'default-registration', '', '', '2025-04-09 20:49:50', '2025-04-09 20:49:50', 0, 0, '', '')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_posts</li>
+<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 20:49:50' , '2025-04-09 20:49:50' , '' , '' , 'Default Registration' , '' , 'publish' , 'um_form' , 'closed' , 'closed' , '' , 'default-registration' , '' , '' , '2025-04-09 20:49:50' , '2025-04-09 20:49:50' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
+#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
+#6 /wordpress/wp-content/plugins/ultimate-member/includes/core/class-setup.php(98): wp_insert_post(Array)
+#7 /wordpress/wp-content/plugins/ultimate-member/includes/core/class-setup.php(25): um\core\Setup->install_default_forms()
+#8 /wordpress/wp-content/plugins/ultimate-member/includes/class-init.php(437): um\core\Setup->run_setup()
+#9 /wordpress/wp-content/plugins/ultimate-member/includes/class-init.php(367): UM->single_site_activation()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): UM->activation(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
+#14 /internal/eval.php(20): activate_plugin('ultimate-member...')
+#15 {main}</pre>
+ for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 20:49:50', '2025-04-09 20:49:50', '', '', 'Default Registration', '', 'publish', 'um_form', 'closed', 'closed', '', 'default-registration', '', '', '2025-04-09 20:49:50', '2025-04-09 20:49:50', 0, 0, '', '') made by activate_plugin, do_action('activate_ultimate-member/ultimate-member.php'), WP_Hook->do_action, WP_Hook->apply_filters, UM->activation, UM->single_site_activation, um\core\Setup->run_setup, um\core\Setup->install_default_forms, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 20:49:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 20:49:50', '2025-04-09 20:49:50', '', '', 'Default Login', '', 'publish', 'um_form', 'closed', 'closed', '', 'default-login', '', '', '2025-04-09 20:49:50', '2025-04-09 20:49:50', 0, 0, '', '')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_posts</li>
+<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 20:49:50' , '2025-04-09 20:49:50' , '' , '' , 'Default Login' , '' , 'publish' , 'um_form' , 'closed' , 'closed' , '' , 'default-login' , '' , '' , '2025-04-09 20:49:50' , '2025-04-09 20:49:50' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
+#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
+#6 /wordpress/wp-content/plugins/ultimate-member/includes/core/class-setup.php(98): wp_insert_post(Array)
+#7 /wordpress/wp-content/plugins/ultimate-member/includes/core/class-setup.php(25): um\core\Setup->install_default_forms()
+#8 /wordpress/wp-content/plugins/ultimate-member/includes/class-init.php(437): um\core\Setup->run_setup()
+#9 /wordpress/wp-content/plugins/ultimate-member/includes/class-init.php(367): UM->single_site_activation()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): UM->activation(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
+#14 /internal/eval.php(20): activate_plugin('ultimate-member...')
+#15 {main}</pre>
+ for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 20:49:50', '2025-04-09 20:49:50', '', '', 'Default Login', '', 'publish', 'um_form', 'closed', 'closed', '', 'default-login', '', '', '2025-04-09 20:49:50', '2025-04-09 20:49:50', 0, 0, '', '') made by activate_plugin, do_action('activate_ultimate-member/ultimate-member.php'), WP_Hook->do_action, WP_Hook->apply_filters, UM->activation, UM->single_site_activation, um\core\Setup->run_setup, um\core\Setup->install_default_forms, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 20:49:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 20:49:50', '2025-04-09 20:49:50', '', '', 'Default Profile', '', 'publish', 'um_form', 'closed', 'closed', '', 'default-profile', '', '', '2025-04-09 20:49:50', '2025-04-09 20:49:50', 0, 0, '', '')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_posts</li>
+<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 20:49:50' , '2025-04-09 20:49:50' , '' , '' , 'Default Profile' , '' , 'publish' , 'um_form' , 'closed' , 'closed' , '' , 'default-profile' , '' , '' , '2025-04-09 20:49:50' , '2025-04-09 20:49:50' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
+#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
+#6 /wordpress/wp-content/plugins/ultimate-member/includes/core/class-setup.php(98): wp_insert_post(Array)
+#7 /wordpress/wp-content/plugins/ultimate-member/includes/core/class-setup.php(25): um\core\Setup->install_default_forms()
+#8 /wordpress/wp-content/plugins/ultimate-member/includes/class-init.php(437): um\core\Setup->run_setup()
+#9 /wordpress/wp-content/plugins/ultimate-member/includes/class-init.php(367): UM->single_site_activation()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): UM->activation(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
+#14 /internal/eval.php(20): activate_plugin('ultimate-member...')
+#15 {main}</pre>
+ for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 20:49:50', '2025-04-09 20:49:50', '', '', 'Default Profile', '', 'publish', 'um_form', 'closed', 'closed', '', 'default-profile', '', '', '2025-04-09 20:49:50', '2025-04-09 20:49:50', 0, 0, '', '') made by activate_plugin, do_action('activate_ultimate-member/ultimate-member.php'), WP_Hook->do_action, WP_Hook->apply_filters, UM->activation, UM->single_site_activation, um\core\Setup->run_setup, um\core\Setup->install_default_forms, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 20:49:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('um_core_forms', 'a:3:{s:8:\"register\";i:0;s:5:\"login\";i:0;s:7:\"profile\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -177,7 +508,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:12303;a:3:{s:4:&quot;slug&quot;;s:18:&quot;unite-gallery-lite&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:18:&quot;unite-gallery-lite&quot;;a:2:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'um_core_forms' , 'a:3:{s:8:&quot;register&quot;;i:0;s:5:&quot;login&quot;;i:0;s:7:&quot;profile&quot;;i:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -189,26 +520,62 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_network_acti...', false)
-#9 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-fs-storage.php(533): FS_Key_Value_Storage->__set('is_network_acti...', false)
-#10 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(460): FS_Storage->__set('is_network_acti...', false)
-#11 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(2795): Freemius->__construct('12303', 'unite-gallery-l...', true)
-#12 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/start.php(525): Freemius::instance('12303', 'unite-gallery-l...', true)
-#13 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(30): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(53): ugl_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('unite-gallery-l...')
-#17 /internal/eval.php(20): activate_plugin('unite-gallery-l...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/unite-gallery-lite/unitegallery.php'), ugl_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 19:23:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('um_core_forms', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/ultimate-member/includes/core/class-setup.php(110): update_option('um_core_forms', Array)
+#6 /wordpress/wp-content/plugins/ultimate-member/includes/core/class-setup.php(25): um\core\Setup->install_default_forms()
+#7 /wordpress/wp-content/plugins/ultimate-member/includes/class-init.php(437): um\core\Setup->run_setup()
+#8 /wordpress/wp-content/plugins/ultimate-member/includes/class-init.php(367): UM->single_site_activation()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): UM->activation(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
+#13 /internal/eval.php(20): activate_plugin('ultimate-member...')
+#14 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('um_core_forms', 'a:3:{s:8:\"register\";i:0;s:5:\"login\";i:0;s:7:\"profile\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-member/ultimate-member.php'), WP_Hook->do_action, WP_Hook->apply_filters, UM->activation, UM->single_site_activation, um\core\Setup->run_setup, um\core\Setup->install_default_forms, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 20:49:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 20:49:50', '2025-04-09 20:49:50', '', '', 'Members', '', 'publish', 'um_directory', 'closed', 'closed', '', 'members', '', '', '2025-04-09 20:49:50', '2025-04-09 20:49:50', 0, 0, '', '')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_posts</li>
+<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 20:49:50' , '2025-04-09 20:49:50' , '' , '' , 'Members' , '' , 'publish' , 'um_directory' , 'closed' , 'closed' , '' , 'members' , '' , '' , '2025-04-09 20:49:50' , '2025-04-09 20:49:50' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
+#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
+#6 /wordpress/wp-content/plugins/ultimate-member/includes/core/class-setup.php(128): wp_insert_post(Array)
+#7 /wordpress/wp-content/plugins/ultimate-member/includes/core/class-setup.php(25): um\core\Setup->install_default_forms()
+#8 /wordpress/wp-content/plugins/ultimate-member/includes/class-init.php(437): um\core\Setup->run_setup()
+#9 /wordpress/wp-content/plugins/ultimate-member/includes/class-init.php(367): UM->single_site_activation()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): UM->activation(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
+#14 /internal/eval.php(20): activate_plugin('ultimate-member...')
+#15 {main}</pre>
+ for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 20:49:50', '2025-04-09 20:49:50', '', '', 'Members', '', 'publish', 'um_directory', 'closed', 'closed', '', 'members', '', '', '2025-04-09 20:49:50', '2025-04-09 20:49:50', 0, 0, '', '') made by activate_plugin, do_action('activate_ultimate-member/ultimate-member.php'), WP_Hook->do_action, WP_Hook->apply_filters, UM->activation, UM->single_site_activation, um\core\Setup->run_setup, um\core\Setup->install_default_forms, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 20:49:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('um_core_directories', 'a:1:{s:7:\"members\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -220,7 +587,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:12303;a:3:{s:4:&quot;slug&quot;;s:18:&quot;unite-gallery-lite&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:18:&quot;unite-gallery-lite&quot;;a:2:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;s:18:&quot;unite-gallery-lite&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'um_core_directories' , 'a:1:{s:7:&quot;members&quot;;i:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -232,592 +599,23 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('file_slug_map', Array, true)
-#8 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(10554): FS_Options->set_option('file_slug_map', Array, true)
-#9 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(507): Freemius->store_file_slug_map()
-#10 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(2795): Freemius->__construct('12303', 'unite-gallery-l...', true)
-#11 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/start.php(525): Freemius::instance('12303', 'unite-gallery-l...', true)
-#12 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(30): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(53): ugl_fs()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('unite-gallery-l...')
-#16 /internal/eval.php(20): activate_plugin('unite-gallery-l...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/unite-gallery-lite/unitegallery.php'), ugl_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_file_slug_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 19:23:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('um_core_directo...', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/ultimate-member/includes/core/class-setup.php(140): update_option('um_core_directo...', Array)
+#6 /wordpress/wp-content/plugins/ultimate-member/includes/core/class-setup.php(25): um\core\Setup->install_default_forms()
+#7 /wordpress/wp-content/plugins/ultimate-member/includes/class-init.php(437): um\core\Setup->run_setup()
+#8 /wordpress/wp-content/plugins/ultimate-member/includes/class-init.php(367): UM->single_site_activation()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): UM->activation(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ultima...', false)
+#13 /internal/eval.php(20): activate_plugin('ultimate-member...')
+#14 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('um_core_directories', 'a:1:{s:7:\"members\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ultimate-member/ultimate-member.php'), WP_Hook->do_action, WP_Hook->apply_filters, UM->activation, UM->single_site_activation, um\core\Setup->run_setup, um\core\Setup->install_default_forms, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 20:49:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:3:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:12303;a:3:{s:4:&quot;slug&quot;;s:18:&quot;unite-gallery-lite&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:18:&quot;unite-gallery-lite&quot;;a:3:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744140196;}}s:13:&quot;file_slug_map&quot;;a:1:{s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;s:18:&quot;unite-gallery-lite&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('install_timesta...', 1744140196)
-#9 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-fs-storage.php(533): FS_Key_Value_Storage->__set('install_timesta...', 1744140196)
-#10 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(511): FS_Storage->__set('install_timesta...', 1744140196)
-#11 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(2795): Freemius->__construct('12303', 'unite-gallery-l...', true)
-#12 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/start.php(525): Freemius::instance('12303', 'unite-gallery-l...', true)
-#13 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(30): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(53): ugl_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('unite-gallery-l...')
-#17 /internal/eval.php(20): activate_plugin('unite-gallery-l...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:3:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/unite-gallery-lite/unitegallery.php'), ugl_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 19:23:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:4:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:12303;a:3:{s:4:&quot;slug&quot;;s:18:&quot;unite-gallery-lite&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:18:&quot;unite-gallery-lite&quot;;a:4:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744140196;s:17:&quot;was_plugin_loaded&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;s:18:&quot;unite-gallery-lite&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('was_plugin_load...', true)
-#9 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-fs-storage.php(533): FS_Key_Value_Storage->__set('was_plugin_load...', true)
-#10 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(1330): FS_Storage->__set('was_plugin_load...', true)
-#11 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(1442): Freemius->_plugins_loaded()
-#12 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(541): Freemius->register_constructor_hooks()
-#13 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(2795): Freemius->__construct('12303', 'unite-gallery-l...', true)
-#14 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/start.php(525): Freemius::instance('12303', 'unite-gallery-l...', true)
-#15 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(30): fs_dynamic_init(Array)
-#16 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(53): ugl_fs()
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('unite-gallery-l...')
-#19 /internal/eval.php(20): activate_plugin('unite-gallery-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:4:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/unite-gallery-lite/unitegallery.php'), ugl_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->register_constructor_hooks, Freemius->_plugins_loaded, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 19:23:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:5:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:12303;a:3:{s:4:&quot;slug&quot;;s:18:&quot;unite-gallery-lite&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:18:&quot;unite-gallery-lite&quot;;a:5:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744140196;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;s:18:&quot;unite-gallery-lite&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_plugin_new_i...', true)
-#9 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-fs-storage.php(533): FS_Key_Value_Storage->__set('is_plugin_new_i...', true)
-#10 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(1344): FS_Storage->__set('is_plugin_new_i...', true)
-#11 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(1442): Freemius->_plugins_loaded()
-#12 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(541): Freemius->register_constructor_hooks()
-#13 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(2795): Freemius->__construct('12303', 'unite-gallery-l...', true)
-#14 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/start.php(525): Freemius::instance('12303', 'unite-gallery-l...', true)
-#15 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(30): fs_dynamic_init(Array)
-#16 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(53): ugl_fs()
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('unite-gallery-l...')
-#19 /internal/eval.php(20): activate_plugin('unite-gallery-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:5:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/unite-gallery-lite/unitegallery.php'), ugl_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->register_constructor_hooks, Freemius->_plugins_loaded, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 19:23:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:6:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:12303;a:3:{s:4:&quot;slug&quot;;s:18:&quot;unite-gallery-lite&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:18:&quot;unite-gallery-lite&quot;;a:6:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744140196;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;}}s:13:&quot;file_slug_map&quot;;a:1:{s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;s:18:&quot;unite-gallery-lite&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_last_versio...', NULL)
-#9 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-fs-storage.php(533): FS_Key_Value_Storage->__set('sdk_last_versio...', NULL)
-#10 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(890): FS_Storage->__set('sdk_last_versio...', NULL)
-#11 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(554): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(2795): Freemius->__construct('12303', 'unite-gallery-l...', true)
-#13 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/start.php(525): Freemius::instance('12303', 'unite-gallery-l...', true)
-#14 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(30): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(53): ugl_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('unite-gallery-l...')
-#18 /internal/eval.php(20): activate_plugin('unite-gallery-l...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:6:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/unite-gallery-lite/unitegallery.php'), ugl_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 19:23:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:7:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.5.10\";}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:12303;a:3:{s:4:&quot;slug&quot;;s:18:&quot;unite-gallery-lite&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:18:&quot;unite-gallery-lite&quot;;a:7:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744140196;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:6:&quot;2.5.10&quot;;}}s:13:&quot;file_slug_map&quot;;a:1:{s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;s:18:&quot;unite-gallery-lite&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_version', '2.5.10')
-#9 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-fs-storage.php(533): FS_Key_Value_Storage->__set('sdk_version', '2.5.10')
-#10 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(891): FS_Storage->__set('sdk_version', '2.5.10')
-#11 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(554): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(2795): Freemius->__construct('12303', 'unite-gallery-l...', true)
-#13 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/start.php(525): Freemius::instance('12303', 'unite-gallery-l...', true)
-#14 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(30): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(53): ugl_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('unite-gallery-l...')
-#18 /internal/eval.php(20): activate_plugin('unite-gallery-l...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:7:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.5.10\";}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/unite-gallery-lite/unitegallery.php'), ugl_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 19:23:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:8:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.5.10\";s:16:\"sdk_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:12303;a:3:{s:4:&quot;slug&quot;;s:18:&quot;unite-gallery-lite&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:18:&quot;unite-gallery-lite&quot;;a:8:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744140196;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:6:&quot;2.5.10&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;s:18:&quot;unite-gallery-lite&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_upgrade_mod...', true)
-#9 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-fs-storage.php(533): FS_Key_Value_Storage->__set('sdk_upgrade_mod...', true)
-#10 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(896): FS_Storage->__set('sdk_upgrade_mod...', true)
-#11 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(554): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(2795): Freemius->__construct('12303', 'unite-gallery-l...', true)
-#13 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/start.php(525): Freemius::instance('12303', 'unite-gallery-l...', true)
-#14 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(30): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(53): ugl_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('unite-gallery-l...')
-#18 /internal/eval.php(20): activate_plugin('unite-gallery-l...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:8:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.5.10\";s:16:\"sdk_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/unite-gallery-lite/unitegallery.php'), ugl_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 19:23:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:9:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.5.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:12303;a:3:{s:4:&quot;slug&quot;;s:18:&quot;unite-gallery-lite&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:18:&quot;unite-gallery-lite&quot;;a:9:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744140196;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:6:&quot;2.5.10&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;s:18:&quot;unite-gallery-lite&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_downgrade_m...', false)
-#9 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-fs-storage.php(533): FS_Key_Value_Storage->__set('sdk_downgrade_m...', false)
-#10 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(897): FS_Storage->__set('sdk_downgrade_m...', false)
-#11 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(554): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(2795): Freemius->__construct('12303', 'unite-gallery-l...', true)
-#13 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/start.php(525): Freemius::instance('12303', 'unite-gallery-l...', true)
-#14 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(30): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(53): ugl_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('unite-gallery-l...')
-#18 /internal/eval.php(20): activate_plugin('unite-gallery-l...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:9:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.5.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/unite-gallery-lite/unitegallery.php'), ugl_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 19:23:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:10:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.5.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:12303;a:3:{s:4:&quot;slug&quot;;s:18:&quot;unite-gallery-lite&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:18:&quot;unite-gallery-lite&quot;;a:10:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744140196;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:6:&quot;2.5.10&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;}}s:13:&quot;file_slug_map&quot;;a:1:{s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;s:18:&quot;unite-gallery-lite&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_last_ver...', NULL)
-#9 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-fs-storage.php(533): FS_Key_Value_Storage->__set('plugin_last_ver...', NULL)
-#10 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(910): FS_Storage->__set('plugin_last_ver...', NULL)
-#11 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(554): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(2795): Freemius->__construct('12303', 'unite-gallery-l...', true)
-#13 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/start.php(525): Freemius::instance('12303', 'unite-gallery-l...', true)
-#14 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(30): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(53): ugl_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('unite-gallery-l...')
-#18 /internal/eval.php(20): activate_plugin('unite-gallery-l...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:10:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.5.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/unite-gallery-lite/unitegallery.php'), ugl_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 19:23:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:11:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.5.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"1.7.62\";}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:12303;a:3:{s:4:&quot;slug&quot;;s:18:&quot;unite-gallery-lite&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:18:&quot;unite-gallery-lite&quot;;a:11:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744140196;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:6:&quot;2.5.10&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;s:14:&quot;plugin_version&quot;;s:6:&quot;1.7.62&quot;;}}s:13:&quot;file_slug_map&quot;;a:1:{s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;s:18:&quot;unite-gallery-lite&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_version', '1.7.62')
-#9 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-fs-storage.php(533): FS_Key_Value_Storage->__set('plugin_version', '1.7.62')
-#10 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(911): FS_Storage->__set('plugin_version', '1.7.62')
-#11 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(554): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(2795): Freemius->__construct('12303', 'unite-gallery-l...', true)
-#13 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/start.php(525): Freemius::instance('12303', 'unite-gallery-l...', true)
-#14 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(30): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(53): ugl_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('unite-gallery-l...')
-#18 /internal/eval.php(20): activate_plugin('unite-gallery-l...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:11:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.5.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"1.7.62\";}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/unite-gallery-lite/unitegallery.php'), ugl_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 19:23:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:12:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.5.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"1.7.62\";s:19:\"plugin_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:12303;a:3:{s:4:&quot;slug&quot;;s:18:&quot;unite-gallery-lite&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:18:&quot;unite-gallery-lite&quot;;a:12:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744140196;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:6:&quot;2.5.10&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;s:14:&quot;plugin_version&quot;;s:6:&quot;1.7.62&quot;;s:19:&quot;plugin_upgrade_mode&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;s:18:&quot;unite-gallery-lite&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_upgrade_...', true)
-#9 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-fs-storage.php(533): FS_Key_Value_Storage->__set('plugin_upgrade_...', true)
-#10 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(916): FS_Storage->__set('plugin_upgrade_...', true)
-#11 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(554): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(2795): Freemius->__construct('12303', 'unite-gallery-l...', true)
-#13 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/start.php(525): Freemius::instance('12303', 'unite-gallery-l...', true)
-#14 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(30): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(53): ugl_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('unite-gallery-l...')
-#18 /internal/eval.php(20): activate_plugin('unite-gallery-l...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:12:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.5.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"1.7.62\";s:19:\"plugin_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/unite-gallery-lite/unitegallery.php'), ugl_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 19:23:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:13:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.5.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"1.7.62\";s:19:\"plugin_upgrade_mode\";b:1;s:21:\"plugin_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:12303;a:3:{s:4:&quot;slug&quot;;s:18:&quot;unite-gallery-lite&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:18:&quot;unite-gallery-lite&quot;;a:13:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744140196;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:6:&quot;2.5.10&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;s:14:&quot;plugin_version&quot;;s:6:&quot;1.7.62&quot;;s:19:&quot;plugin_upgrade_mode&quot;;b:1;s:21:&quot;plugin_downgrade_mode&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;s:18:&quot;unite-gallery-lite&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_downgrad...', false)
-#9 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-fs-storage.php(533): FS_Key_Value_Storage->__set('plugin_downgrad...', false)
-#10 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(917): FS_Storage->__set('plugin_downgrad...', false)
-#11 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(554): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(2795): Freemius->__construct('12303', 'unite-gallery-l...', true)
-#13 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/start.php(525): Freemius::instance('12303', 'unite-gallery-l...', true)
-#14 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(30): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(53): ugl_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('unite-gallery-l...')
-#18 /internal/eval.php(20): activate_plugin('unite-gallery-l...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:13:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.5.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"1.7.62\";s:19:\"plugin_upgrade_mode\";b:1;s:21:\"plugin_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/unite-gallery-lite/unitegallery.php'), ugl_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 19:23:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:4:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:13:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.5.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"1.7.62\";s:19:\"plugin_upgrade_mode\";b:1;s:21:\"plugin_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}s:7:\"plugins\";a:1:{s:18:\"unite-gallery-lite\";O:9:\"FS_Plugin\":24:{s:16:\"parent_plugin_id\";N;s:5:\"title\";s:18:\"Unite Gallery Lite\";s:4:\"slug\";s:18:\"unite-gallery-lite\";s:12:\"premium_slug\";s:12:\"unitegallery\";s:4:\"type\";s:6:\"plugin\";s:20:\"affiliate_moderation\";b:0;s:19:\"is_wp_org_compliant\";b:1;s:22:\"premium_releases_count\";N;s:4:\"file\";s:35:\"unite-gallery-lite/unitegallery.php\";s:7:\"version\";s:6:\"1.7.62\";s:11:\"auto_update\";N;s:4:\"info\";N;s:10:\"is_premium\";b:0;s:14:\"premium_suffix\";s:17:\"Unite Gallery Pro\";s:7:\"is_live\";b:1;s:9:\"bundle_id\";N;s:17:\"bundle_public_key\";N;s:17:\"opt_in_moderation\";N;s:10:\"public_key\";s:32:\"pk_5e92c0d17c394ac5373e6d1d4ec97\";s:10:\"secret_key\";N;s:2:\"id\";s:5:\"12303\";s:7:\"updated\";N;s:7:\"created\";N;s:22:\"\0FS_Entity\0_is_updated\";b:1;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , ('a:4:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:12303;a:3:{s:4:&quot;slug&quot;;s:18:&quot;unite-gallery-lite&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:18:&quot;unite-gallery-lite&quot;;a:13:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744140196;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:6:&quot;2.5.10&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;s:14:&quot;plugin_version&quot;;s:6:&quot;1.7.62&quot;;s:19:&quot;plugin_upgrade_mode&quot;;b:1;s:21:&quot;plugin_downgrade_mode&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;s:18:&quot;unite-gallery-lite&quot;;}s:7:&quot;plugins&quot;;a:1:{s:18:&quot;unite-gallery-lite&quot;;O:9:&quot;FS_Plugin&quot;:24:{s:16:&quot;parent_plugin_id&quot;;N;s:5:&quot;title&quot;;s:18:&quot;Unite Gallery Lite&quot;;s:4:&quot;slug&quot;;s:18:&quot;unite-gallery-lite&quot;;s:12:&quot;premium_slug&quot;;s:12:&quot;unitegallery&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:20:&quot;affiliate_moderation&quot;;b:0;s:19:&quot;is_wp_org_compliant&quot;;b:1;s:22:&quot;premium_releases_count&quot;;N;s:4:&quot;file&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;s:7:&quot;version&quot;;s:6:&quot;1.7.62&quot;;s:11:&quot;auto_update&quot;;N;s:4:&quot;info&quot;;N;s:10:&quot;is_premium&quot;;b:0;s:14:&quot;premium_suffix&quot;;s:17:&quot;Unite Gallery Pro&quot;;s:7:&quot;is_live&quot;;b:1;s:9:&quot;bundle_id&quot;;N;s:17:&quot;bundle_public_key&quot;;N;s:17:&quot;opt_in_moderation&quot;;N;s:10:&quot;public_key&quot;;s:32:&quot;pk_5e92c0d17c394ac5373e6d1d4ec97&quot;;s:10:&quot;secret_key&quot;;N;s:2:&quot;id&quot;;s:5:&quot;12303&quot;;s:7:&quot;updated&quot;;N;s:7:&quot;created&quot;;N;s:22:&quot;' || CHAR(0) || 'FS_Entity' || CHAR(0) || '_is_updated&quot;;b:1;}}}') , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-plugin-manager.php(160): FS_Option_Manager->set_option('plugins', Array, true)
-#8 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(5433): FS_Plugin_Manager->store(Object(FS_Plugin))
-#9 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(4637): Freemius->parse_settings(Array)
-#10 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/start.php(526): Freemius->dynamic_init(Array)
-#11 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(30): fs_dynamic_init(Array)
-#12 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(53): ugl_fs()
-#13 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#14 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('unite-gallery-l...')
-#15 /internal/eval.php(20): activate_plugin('unite-gallery-l...')
-#16 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:4:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:13:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.5.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"1.7.62\";s:19:\"plugin_upgrade_mode\";b:1;s:21:\"plugin_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}s:7:\"plugins\";a:1:{s:18:\"unite-gallery-lite\";O:9:\"FS_Plugin\":24:{s:16:\"parent_plugin_id\";N;s:5:\"title\";s:18:\"Unite Gallery Lite\";s:4:\"slug\";s:18:\"unite-gallery-lite\";s:12:\"premium_slug\";s:12:\"unitegallery\";s:4:\"type\";s:6:\"plugin\";s:20:\"affiliate_moderation\";b:0;s:19:\"is_wp_org_compliant\";b:1;s:22:\"premium_releases_count\";N;s:4:\"file\";s:35:\"unite-gallery-lite/unitegallery.php\";s:7:\"version\";s:6:\"1.7.62\";s:11:\"auto_update\";N;s:4:\"info\";N;s:10:\"is_premium\";b:0;s:14:\"premium_suffix\";s:17:\"Unite Gallery Pro\";s:7:\"is_live\";b:1;s:9:\"bundle_id\";N;s:17:\"bundle_public_key\";N;s:17:\"opt_in_moderation\";N;s:10:\"public_key\";s:32:\"pk_5e92c0d17c394ac5373e6d1d4ec97\";s:10:\"secret_key\";N;s:2:\"id\";s:5:\"12303\";s:7:\"updated\";N;s:7:\"created\";N;s:22:\"\0FS_Entity\0_is_updated\";b:1;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/unite-gallery-lite/unitegallery.php'), ugl_fs, fs_dynamic_init, Freemius->dynamic_init, Freemius->parse_settings, FS_Plugin_Manager->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 19:23:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:4:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:14:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.5.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"1.7.62\";s:19:\"plugin_upgrade_mode\";b:1;s:21:\"plugin_downgrade_mode\";b:0;s:17:\"connectivity_test\";a:6:{s:12:\"is_connected\";N;s:4:\"host\";s:15:\"example.com:443\";s:9:\"server_ip\";N;s:9:\"is_active\";b:1;s:9:\"timestamp\";i:1744140196;s:7:\"version\";s:6:\"1.7.62\";}}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}s:7:\"plugins\";a:1:{s:18:\"unite-gallery-lite\";O:9:\"FS_Plugin\":24:{s:16:\"parent_plugin_id\";N;s:5:\"title\";s:18:\"Unite Gallery Lite\";s:4:\"slug\";s:18:\"unite-gallery-lite\";s:12:\"premium_slug\";s:12:\"unitegallery\";s:4:\"type\";s:6:\"plugin\";s:20:\"affiliate_moderation\";b:0;s:19:\"is_wp_org_compliant\";b:1;s:22:\"premium_releases_count\";N;s:4:\"file\";s:35:\"unite-gallery-lite/unitegallery.php\";s:7:\"version\";s:6:\"1.7.62\";s:11:\"auto_update\";N;s:4:\"info\";N;s:10:\"is_premium\";b:0;s:14:\"premium_suffix\";s:17:\"Unite Gallery Pro\";s:7:\"is_live\";b:1;s:9:\"bundle_id\";N;s:17:\"bundle_public_key\";N;s:17:\"opt_in_moderation\";N;s:10:\"public_key\";s:32:\"pk_5e92c0d17c394ac5373e6d1d4ec97\";s:10:\"secret_key\";N;s:2:\"id\";s:5:\"12303\";s:7:\"updated\";N;s:7:\"created\";N;s:22:\"\0FS_Entity\0_is_updated\";b:1;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , ('a:4:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:12303;a:3:{s:4:&quot;slug&quot;;s:18:&quot;unite-gallery-lite&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:18:&quot;unite-gallery-lite&quot;;a:14:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744140196;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:6:&quot;2.5.10&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;s:14:&quot;plugin_version&quot;;s:6:&quot;1.7.62&quot;;s:19:&quot;plugin_upgrade_mode&quot;;b:1;s:21:&quot;plugin_downgrade_mode&quot;;b:0;s:17:&quot;connectivity_test&quot;;a:6:{s:12:&quot;is_connected&quot;;N;s:4:&quot;host&quot;;s:15:&quot;example.com:443&quot;;s:9:&quot;server_ip&quot;;N;s:9:&quot;is_active&quot;;b:1;s:9:&quot;timestamp&quot;;i:1744140196;s:7:&quot;version&quot;;s:6:&quot;1.7.62&quot;;}}}s:13:&quot;file_slug_map&quot;;a:1:{s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;s:18:&quot;unite-gallery-lite&quot;;}s:7:&quot;plugins&quot;;a:1:{s:18:&quot;unite-gallery-lite&quot;;O:9:&quot;FS_Plugin&quot;:24:{s:16:&quot;parent_plugin_id&quot;;N;s:5:&quot;title&quot;;s:18:&quot;Unite Gallery Lite&quot;;s:4:&quot;slug&quot;;s:18:&quot;unite-gallery-lite&quot;;s:12:&quot;premium_slug&quot;;s:12:&quot;unitegallery&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:20:&quot;affiliate_moderation&quot;;b:0;s:19:&quot;is_wp_org_compliant&quot;;b:1;s:22:&quot;premium_releases_count&quot;;N;s:4:&quot;file&quot;;s:35:&quot;unite-gallery-lite/unitegallery.php&quot;;s:7:&quot;version&quot;;s:6:&quot;1.7.62&quot;;s:11:&quot;auto_update&quot;;N;s:4:&quot;info&quot;;N;s:10:&quot;is_premium&quot;;b:0;s:14:&quot;premium_suffix&quot;;s:17:&quot;Unite Gallery Pro&quot;;s:7:&quot;is_live&quot;;b:1;s:9:&quot;bundle_id&quot;;N;s:17:&quot;bundle_public_key&quot;;N;s:17:&quot;opt_in_moderation&quot;;N;s:10:&quot;public_key&quot;;s:32:&quot;pk_5e92c0d17c394ac5373e6d1d4ec97&quot;;s:10:&quot;secret_key&quot;;N;s:2:&quot;id&quot;;s:5:&quot;12303&quot;;s:7:&quot;updated&quot;;N;s:7:&quot;created&quot;;N;s:22:&quot;' || CHAR(0) || 'FS_Entity' || CHAR(0) || '_is_updated&quot;;b:1;}}}') , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('connectivity_te...', Array)
-#9 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-fs-storage.php(533): FS_Key_Value_Storage->__set('connectivity_te...', Array)
-#10 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(4182): FS_Storage->__set('connectivity_te...', Array)
-#11 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(4137): Freemius->store_connectivity_info(Object(stdClass), NULL)
-#12 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/includes/class-freemius.php(4681): Freemius->has_api_connectivity()
-#13 /wordpress/wp-content/plugins/unite-gallery-lite/freemius/start.php(526): Freemius->dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(30): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/unite-gallery-lite/unitegallery.php(53): ugl_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('unite-gallery-l...')
-#18 /internal/eval.php(20): activate_plugin('unite-gallery-l...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:4:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:14:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.5.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"1.7.62\";s:19:\"plugin_upgrade_mode\";b:1;s:21:\"plugin_downgrade_mode\";b:0;s:17:\"connectivity_test\";a:6:{s:12:\"is_connected\";N;s:4:\"host\";s:15:\"example.com:443\";s:9:\"server_ip\";N;s:9:\"is_active\";b:1;s:9:\"timestamp\";i:1744140196;s:7:\"version\";s:6:\"1.7.62\";}}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}s:7:\"plugins\";a:1:{s:18:\"unite-gallery-lite\";O:9:\"FS_Plugin\":24:{s:16:\"parent_plugin_id\";N;s:5:\"title\";s:18:\"Unite Gallery Lite\";s:4:\"slug\";s:18:\"unite-gallery-lite\";s:12:\"premium_slug\";s:12:\"unitegallery\";s:4:\"type\";s:6:\"plugin\";s:20:\"affiliate_moderation\";b:0;s:19:\"is_wp_org_compliant\";b:1;s:22:\"premium_releases_count\";N;s:4:\"file\";s:35:\"unite-gallery-lite/unitegallery.php\";s:7:\"version\";s:6:\"1.7.62\";s:11:\"auto_update\";N;s:4:\"info\";N;s:10:\"is_premium\";b:0;s:14:\"premium_suffix\";s:17:\"Unite Gallery Pro\";s:7:\"is_live\";b:1;s:9:\"bundle_id\";N;s:17:\"bundle_public_key\";N;s:17:\"opt_in_moderation\";N;s:10:\"public_key\";s:32:\"pk_5e92c0d17c394ac5373e6d1d4ec97\";s:10:\"secret_key\";N;s:2:\"id\";s:5:\"12303\";s:7:\"updated\";N;s:7:\"created\";N;s:22:\"\0FS_Entity\0_is_updated\";b:1;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/unite-gallery-lite/unitegallery.php'), ugl_fs, fs_dynamic_init, Freemius->dynamic_init, Freemius->has_api_connectivity, Freemius->store_connectivity_info, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 19:23:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:4:{s:21:\"id_slug_type_path_map\";a:1:{i:12303;a:3:{s:4:\"slug\";s:18:\"unite-gallery-lite\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}}s:11:\"plugin_data\";a:1:{s:18:\"unite-gallery-lite\";a:15:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:35:\"unite-gallery-lite/unitegallery.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744140196;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.5.10\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:6:\"1.7.62\";s:19:\"plugin_upgrade_mode\";b:1;s:21:\"plugin_downgrade_mode\";b:0;s:17:\"connectivity_test\";a:6:{s:12:\"is_connected\";N;s:4:\"host\";s:15:\"example.com:443\";s:9:\"server_ip\";N;s:9:\"is_active\";b:1;s:9:\"timestamp\";i:1744140196;s:7:\"version\";s:6:\"1.7.62\";}s:15:\"prev_is_premium\";b:0;}}s:13:\"file_slug_map\";a:1:{s:35:\"unite-gallery-lite/unitegallery.php\";s:18:\"unite-gallery-lite\";}s:7:\"plugins\";a:1:{s:18:\"unite-gallery-lite\";O:9:\"FS_Plugin\":24:{s:16:\"parent_plugin_id\";N;s:5:\"title\";s:18:\"Unite Gallery Lite\";s:4:\"slug\";s:18:\"unite-gallery-lite\";s:12:\"premium_slug\";s:12:\"unitegallery\";s:4:\"type\";s:6:\"plugin\";s:20:\"affiliate_moderation\";b:0;s:19:\"is_wp_org_compliant\";b:1;s:22:\"premium_releases_count\";N;s:4:\"file\";s:35:\"unite-gallery-lite/unitegallery.php\";s:7:\"version\";s:6:\"1.7.62\";s:11:\"auto_update\";N;s:4:\"info\";N;s:10:\"is_premium\";b:0;s:14:\"premium_suffix\";s:17:\"Unite Gal
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('um_options', 'a:189:{s:30:\"restricted_access_post_metabox\";a:2:{s:4:\"post\";i:1;s:4:\"page\";i:1;}s:31:\"disable_restriction_pre_queries\";b:0;s:19:\"uninstall_on_delete\";b:0;s:14:\"permalink_base\";s:10:\"user_login\";s:26:\"permalink_base_custom_meta\";s:0:\"\";s:12:\"display_name\";s:9:\"full_name\";s:18:\"display_name_field\";s:0:\"\";s:15:\"author_redirect\";b:1;s:12:\"members_page\";b:1;s:13:\"use_gravatars\";b:0;s:37:\"use_um_gravatar_default_builtin_image\";s:7:\"default\";s:29:\"use_um_gravatar_default_image\";b:0;s:15:\"toggle_password\";b:0;s:18:\"require_strongpass\";b:0;s:18:\"password_min_chars\";i:8;s:18:\"password_max_chars\";i:30;s:20:\"account_tab_password\";b:1;s:19:\"account_tab_privacy\";b:1;s:25:\"account_tab_notifications\";b:1;s:18:\"account_tab_delete\";b:1;s:19:\"delete_account_text\";s:151:\"Are you sure you want to delete your account? This will erase all of your account data from the site. To delete your account enter your password below.\";s:36:\"delete_account_no_pass_required_text\";s:152:\"Are you sure you want to delete your account? This will erase all of your account data from the site. To delete your account, click on the button below.\";s:12:\"account_name\";b:1;s:20:\"account_name_disable\";b:0;s:20:\"account_name_require\";b:1;s:13:\"account_email\";b:1;s:24:\"account_general_password\";b:0;s:25:\"account_hide_in_directory\";b:1;s:33:\"account_hide_in_directory_default\";s:2:\"No\";s:17:\"photo_thumb_sizes\";a:3:{i:0;i:40;i:1;i:80;i:2;i:190;}s:17:\"cover_thumb_sizes\";a:2:{i:0;i:300;i:1;i:600;}s:10:\"accessible\";i:0;s:15:\"access_redirect\";s:0:\"\";s:19:\"access_exclude_uris\";a:0:{}s:20:\"home_page_accessible\";b:1;s:24:\"category_page_accessible\";b:1;s:29:\"restricted_post_title_replace\";b:1;s:28:\"restricted_access_post_title\";s:18:\"Restricted content\";s:25:\"restricted_access_message\";s:0:\"\";s:17:\"restricted_blocks\";b:0;s:13:\"enable_blocks\";b:0;s:24:\"restricted_block_message\";s:0:\"\";s:27:\"enable_reset_password_limit\";b:1;s:27:\"reset_password_limit_number\";i:3;s:29:\"change_password_request_limit\";b:0;s:33:\"only_approved_user_reset_password\";b:1;s:14:\"blocked_emails\";s:0:\"\";s:13:\"blocked_words\";s:47:\"admin
+administrator
+webmaster
+support
+staff\";s:24:\"allowed_choice_callbacks\";s:0:\"\";s:26:\"allow_url_redirect_confirm\";b:1;s:14:\"default_avatar\";s:0:\"\";s:13:\"default_cover\";s:0:\"\";s:28:\"disable_profile_photo_upload\";b:0;s:21:\"profile_show_metaicon\";b:0;s:12:\"profile_menu\";b:1;s:24:\"profile_menu_default_tab\";s:4:\"main\";s:18:\"profile_menu_icons\";b:1;s:13:\"form_asterisk\";b:0;s:13:\"profile_title\";s:28:\"{display_name} | {site_name}\";s:12:\"profile_desc\";s:83:\"{display_name} is on {site_name}. Join {site_name} to view {display_name}\'s profile\";s:11:\"admin_email\";s:19:\"admin@localhost.com\";s:9:\"mail_from\";s:20:\"My WordPress Website\";s:14:\"mail_from_addr\";s:19:\"admin@localhost.com\";s:10:\"email_html\";b:1;s:25:\"image_orientation_by_exif\";b:0;s:17:\"image_compression\";i:60;s:15:\"image_max_width\";i:1000;s:15:\"cover_min_width\";i:1000;s:22:\"profile_photo_max_size\";i:999999999;s:20:\"cover_photo_max_size\";i:999999999;s:22:\"custom_roles_increment\";i:1;s:28:\"um_profile_object_cache_stop\";b:0;s:16:\"rest_api_version\";s:3:\"2.0\";s:26:\"member_directory_own_table\";b:0;s:16:\"profile_show_bio\";i:1;s:21:\"profile_show_html_bio\";b:0;s:20:\"profile_bio_maxchars\";i:180;s:15:\"profile_noindex\";i:0;s:27:\"activation_link_expiry_time\";s:0:\"\";s:19:\"lock_register_forms\";b:0;s:25:\"display_login_form_notice\";b:0;s:26:\"secure_ban_admins_accounts\";b:0;s:19:\"banned_capabilities\";a:3:{i:0;s:14:\"manage_options\";i:1;s:13:\"promote_users\";i:2;s:8:\"level_10\";}s:36:\"secure_notify_admins_banned_accounts\";b:0;s:46:\"secure_notify_admins_banned_accounts__interval\";s:7:\"instant\";s:29:\"secure_allowed_redirect_hosts\";s:0:\"\";s:15:\"delete_comments\";b:0;s:23:\"enable_action_scheduler\";b:0;s:16:\"profile_tab_main\";i:1;s:24:\"profile_tab_main_privacy\";i:0;s:22:\"profile_tab_main_roles\";s:0:\"\";s:17:\"profile_tab_posts\";i:1;s:25:\"profile_tab_posts_privacy\";i:0;s:23:\"profile_tab_posts_roles\";s:0:\"\";s:20:\"profile_tab_comments\";i:1;s:28:\"profile_tab_comments_privacy\";i:0;s:26:\"profile_tab_comments_roles\";s:0:\"\";s:16:\"welcome_email_on\";b:1;s:17:\"welcome_email_sub\";s:23:\"Welcome to {site_name}!\";s:13:\"welcome_email\";s:340:\"Hi {display_name},<br /><br />Thank you for signing up with {site_name}! Your account is now active.<br /><br />{action_title}:<br /><br />{action_url} <br /><br />Your account email: {email} <br />Your account username: {username} <br /><br />If you have any problems, please contact us at {admin_email}<br /><br />Thanks,<br />{site_name}\";s:18:\"checkmail_email_on\";b:0;s:19:\"checkmail_email_sub\";s:28:\"Please activate your account\";s:15:\"checkmail_email\";s:304:\"Hi {display_name},<br /><br />Thank you for signing up with {site_name}! To activate your account, please click the link below to confirm your email address:<br /><br />{account_activation_link} <br /><br />If you have any problems, please contact us at {admin_email}<br /><br />Thanks, <br />{site_name}\";s:16:\"pending_email_on\";b:0;s:17:\"pending_email_sub\";s:30:\"[{site_name}] New user account\";s:13:\"pending_email\";s:309:\"Hi {display_name}, <br /><br />Thank you for signing up with {site_name}! Your account is currently being reviewed by a member of our team.<br /><br />Please allow us some time to process your request.<br /><br />If you have any problems, please contact us at {admin_email}<br /><br />Thanks,<br />{site_name}\";s:17:\"approved_email_on\";b:0;s:18:\"approved_email_sub\";s:41:\"Your account at {site_name} is now active\";s:14:\"approved_email\";s:437:\"Hi {display_name},<br /><br />Thank you for signing up with {site_name}! Your account has been approved and is now active.<br /><br />To login please visit the following url:<br /><br />{login_url}<br /><br />Your account email: {email}<br />Your account username: {username}<br />Set your account password: {password_reset_link}<br /><br />If you have any problems, please contact us at {admin_email}<br /><br />Thanks,<br />{site_name}\";s:17:\"rejected_email_on\";b:0;s:18:\"rejected_email_sub\";s:30:\"Your account has been rejected\";s:14:\"rejected_email\";s:288:\"Hi {display_name},<br /><br />Thank you for applying for membership to {site_name}! We have reviewed your information and unfortunately we are unable to accept you as a member at this moment.<br /><br />Please feel free to apply again at a future date.<br /><br />Thanks,<br />{site_name}\";s:17:\"inactive_email_on\";b:1;s:18:\"inactive_email_sub\";s:33:\"Your account has been deactivated\";s:14:\"inactive_email\";s:250:\"Hi {display_name},<br /><br />This is an automated email to let you know your {site_name} account has been deactivated.<br /><br />If you would like your account to be reactivated please contact us at {admin_email}<br /><br />Thanks,<br />{site_name}\";s:17:\"deletion_email_on\";b:1;s:18:\"deletion_email_sub\";s:29:\"Your account has been deleted\";s:14:\"deletion_email\";s:355:\"Hi {display_name},<br /><br />This is an automated email to let you know your {site_name} account has been deleted. All of your personal information has been permanently deleted and you will no longer be able to login to {site_name}.<br /><br />If your account has been deleted by accident please contact us at {admin_email} <br />Thanks,<br />{site_name}\";s:16:\"resetpw_email_on\";b:1;s:17:\"resetpw_email_sub\";s:19:\"Reset your password\";s:13:\"resetpw_email\";s:303:\"Hi {display_name},<br /><br />We received a request to reset the password for your account. If you made this request, click the link below to change your password:<br /><br />{password_reset_link}<br /><br />If you didn\'t make this request, you can ignore this email <br /><br />Thanks,<br />{site_name}\";s:18:\"changedpw_email_on\";b:1;s:19:\"changedpw_email_sub\";s:42:\"Your {site_name} password has been changed\";s:15:\"changedpw_email\";s:307:\"Hi {display_name},<br /><br />You recently changed the password associated with your {site_name} account.<br /><br />If you did not make this change and believe your {site_name} account has been compromised, please contact us at the following email address: {admin_email}<br /><br />Thanks,<br />{site_name}\";s:23:\"changedaccount_email_on\";b:1;s:24:\"changedaccount_email_sub\";s:39:\"Your account at {site_name} was updated\";s:20:\"changedaccount_email\";s:278:\"Hi {display_name},<br /><br />You recently updated your {site_name} account.<br /><br />If you did not make this change and believe your {site_name} account has been compromised, please contact us at the following email address: {admin_email}<br /><br />Thanks,<br />{site_name}\";s:24:\"notification_new_user_on\";b:1;s:25:\"notification_new_user_sub\";s:30:\"[{site_name}] New user account\";s:21:\"notification_new_user\";s:211:\"{display_name} has just created an account on {site_name}. To view their profile click here:<br /><br />{user_profile_link}<br /><br />Here is the submitted registration form:<br /><br />{submitted_registration}\";s:22:\"notification_review_on\";b:0;s:23:\"notification_review_sub\";s:38:\"[{site_name}] New user awaiting review\";s:19:\"notification_review\";s:277:\"{display_name} has just applied for membership to {site_name} and is waiting to be reviewed.<br /><br />To review this member please click the followin
