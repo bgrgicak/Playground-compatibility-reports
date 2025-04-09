@@ -2,10 +2,14 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [07-Apr-2025 18:52:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [09-Apr-2025 18:53:34 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php on line 29
+[09-Apr-2025 18:53:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php on line 29
+[09-Apr-2025 18:53:34 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form-settings.php on line 36
+[09-Apr-2025 18:53:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form-settings.php on line 36
+[09-Apr-2025 18:53:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('randimage_config', 'a:5:{s:6:\"amount\";i:2;s:6:\"before\";s:4:\"<li>\";s:6:\"spacer\";s:9:\"</li><li>\";s:6:\"behind\";s:5:\"</li>\";s:6:\"linkto\";s:5:\"image\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('myplugin_version', '1.0.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -17,7 +21,7 @@ Error: [07-Apr-2025 18:52:38 UTC] WordPress database error <div style="clear:bot
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'randimage_config' , 'a:5:{s:6:&quot;amount&quot;;i:2;s:6:&quot;before&quot;;s:4:&quot;&lt;li&gt;&quot;;s:6:&quot;spacer&quot;;s:9:&quot;&lt;/li&gt;&lt;li&gt;&quot;;s:6:&quot;behind&quot;;s:5:&quot;&lt;/li&gt;&quot;;s:6:&quot;linkto&quot;;s:5:&quot;image&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'myplugin_version' , '1.0.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -29,397 +33,17 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('randimage_confi...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/randimage/randimage.php(274): update_option('randimage_confi...', Array)
-#6 /wordpress/wp-content/plugins/randimage/randimage.php(14): randimage_check_config()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('randimage/randi...')
-#9 /internal/eval.php(20): activate_plugin('randimage/randi...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('randimage_config', 'a:5:{s:6:\"amount\";i:2;s:6:\"before\";s:4:\"<li>\";s:6:\"spacer\";s:9:\"</li><li>\";s:6:\"behind\";s:5:\"</li>\";s:6:\"linkto\";s:5:\"image\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/randimage/randimage.php'), randimage_check_config, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 18:52:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('randimage_tracker', 'a:2:{s:8:\"register\";s:1:\"Y\";s:9:\"anonymous\";s:1:\"N\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'randimage_tracker' , 'a:2:{s:8:&quot;register&quot;;s:1:&quot;Y&quot;;s:9:&quot;anonymous&quot;;s:1:&quot;N&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('randimage_track...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/randimage/randimage.php(280): update_option('randimage_track...', Array)
-#6 /wordpress/wp-content/plugins/randimage/randimage.php(14): randimage_check_config()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('randimage/randi...')
-#9 /internal/eval.php(20): activate_plugin('randimage/randi...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('randimage_tracker', 'a:2:{s:8:\"register\";s:1:\"Y\";s:9:\"anonymous\";s:1:\"N\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/randimage/randimage.php'), randimage_check_config, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 18:52:38 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/randimage/randimage.php on line 226
-[07-Apr-2025 18:52:38 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 18:52:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 18:52:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 18:52:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 18:52:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('randimage_config', 'a:5:{s:6:\"amount\";i:2;s:6:\"before\";s:4:\"<li>\";s:6:\"spacer\";s:9:\"</li><li>\";s:6:\"behind\";s:5:\"</li>\";s:6:\"linkto\";s:5:\"image\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'randimage_config' , 'a:5:{s:6:&quot;amount&quot;;i:2;s:6:&quot;before&quot;;s:4:&quot;&lt;li&gt;&quot;;s:6:&quot;spacer&quot;;s:9:&quot;&lt;/li&gt;&lt;li&gt;&quot;;s:6:&quot;behind&quot;;s:5:&quot;&lt;/li&gt;&quot;;s:6:&quot;linkto&quot;;s:5:&quot;image&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('randimage_confi...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/randimage/randimage.php(274): update_option('randimage_confi...', Array)
-#6 /wordpress/wp-content/plugins/randimage/randimage.php(14): randimage_check_config()
-#7 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('randimage_config', 'a:5:{s:6:\"amount\";i:2;s:6:\"before\";s:4:\"<li>\";s:6:\"spacer\";s:9:\"</li><li>\";s:6:\"behind\";s:5:\"</li>\";s:6:\"linkto\";s:5:\"image\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/randimage/randimage.php'), randimage_check_config, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 18:52:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('randimage_tracker', 'a:2:{s:8:\"register\";s:1:\"Y\";s:9:\"anonymous\";s:1:\"N\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'randimage_tracker' , 'a:2:{s:8:&quot;register&quot;;s:1:&quot;Y&quot;;s:9:&quot;anonymous&quot;;s:1:&quot;N&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('randimage_track...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/randimage/randimage.php(280): update_option('randimage_track...', Array)
-#6 /wordpress/wp-content/plugins/randimage/randimage.php(14): randimage_check_config()
-#7 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('randimage_tracker', 'a:2:{s:8:\"register\";s:1:\"Y\";s:9:\"anonymous\";s:1:\"N\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/randimage/randimage.php'), randimage_check_config, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 18:52:41 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/randimage/randimage.php on line 226
-[07-Apr-2025 18:52:44 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/randimage/randimage.php on line 226
-[07-Apr-2025 18:52:50 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 18:52:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 18:52:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 18:52:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 18:52:50 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 18:52:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 18:52:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 18:52:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 18:53:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/random-business-quotes/random-business-quotes.php:68
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('random-business...')
-#2 /internal/eval.php(20): activate_plugin('random-business...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/random-business-quotes/random-business-quotes.php on line 68
-[07-Apr-2025 18:53:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/random-business-quotes/random-business-quotes.php:68
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('random-business...')
-#2 /internal/eval.php(20): activate_plugin('random-business...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/random-business-quotes/random-business-quotes.php on line 68
-[07-Apr-2025 18:53:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/random-business-quotes/random-business-quotes.php:68
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('random-business...')
-#2 /internal/eval.php(20): activate_plugin('random-business...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/random-business-quotes/random-business-quotes.php on line 68
-[07-Apr-2025 18:53:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 18:53:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 18:53:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 18:53:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 18:53:27 UTC] PHP Fatal error:  Declaration of ryv_widget::widget($args) must be compatible with WP_Widget::widget($args, $instance) in /wordpress/wp-content/plugins/random-youtube-video/widget.php on line 14
-[07-Apr-2025 18:53:30 UTC] PHP Fatal error:  Declaration of ryv_widget::widget($args) must be compatible with WP_Widget::widget($args, $instance) in /wordpress/wp-content/plugins/random-youtube-video/widget.php on line 14
-[07-Apr-2025 18:53:32 UTC] PHP Fatal error:  Declaration of ryv_widget::widget($args) must be compatible with WP_Widget::widget($args, $instance) in /wordpress/wp-content/plugins/random-youtube-video/widget.php on line 14
-[07-Apr-2025 18:53:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_ocgfrs-first-rating', '1746644018', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_ocgfrs-first-rating' , '1746644018' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1746644018, '', 'off')
-#5 /wordpress/wp-content/plugins/range-slider-gravity-form/gravityform-rangeslider.php(77): set_transient('ocgfrs-first-ra...', true, 2592000)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): OCRSGF::do_activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_range-...', false)
-#10 /internal/eval.php(20): activate_plugin('range-slider-gr...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_ocgfrs-first-rating', '1746644018', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_range-slider-gravity-form/gravityform-rangeslider.php'), WP_Hook->do_action, WP_Hook->apply_filters, OCRSGF::do_activation, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 18:53:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_ocgfrs-first-rating', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_ocgfrs-first-rating' , '1' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_ocgf...', true, '', 'off')
-#5 /wordpress/wp-content/plugins/range-slider-gravity-form/gravityform-rangeslider.php(77): set_transient('ocgfrs-first-ra...', true, 2592000)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): OCRSGF::do_activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_range-...', false)
-#10 /internal/eval.php(20): activate_plugin('range-slider-gr...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_ocgfrs-first-rating', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_range-slider-gravity-form/gravityform-rangeslider.php'), WP_Hook->do_action, WP_Hook->apply_filters, OCRSGF::do_activation, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 18:53:38 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 18:53:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 18:53:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 18:53:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 18:53:39 UTC] PHP Fatal error:  Uncaught Error: Class "GF_Field" not found in /wordpress/wp-content/plugins/range-slider-gravity-form/admin/gravity_rangeslider.php:2
-Stack trace:
-#0 /wordpress/wp-content/plugins/range-slider-gravity-form/gravityform-rangeslider.php(37): include_once()
-#1 /wordpress/wp-content/plugins/range-slider-gravity-form/gravityform-rangeslider.php(85): OCRSGF->includes()
-#2 /wordpress/wp-includes/class-wp-hook.php(324): OCRSGF::OCRSGF_instance('')
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}
-  thrown in /wordpress/wp-content/plugins/range-slider-gravity-form/admin/gravity_rangeslider.php on line 2
-[07-Apr-2025 18:53:41 UTC] PHP Fatal error:  Uncaught Error: Class "GF_Field" not found in /wordpress/wp-content/plugins/range-slider-gravity-form/admin/gravity_rangeslider.php:2
-Stack trace:
-#0 /wordpress/wp-content/plugins/range-slider-gravity-form/gravityform-rangeslider.php(37): include_once()
-#1 /wordpress/wp-content/plugins/range-slider-gravity-form/gravityform-rangeslider.php(85): OCRSGF->includes()
-#2 /wordpress/wp-includes/class-wp-hook.php(324): OCRSGF::OCRSGF_instance('')
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}
-  thrown in /wordpress/wp-content/plugins/range-slider-gravity-form/admin/gravity_rangeslider.php on line 2
-[07-Apr-2025 18:53:44 UTC] PHP Fatal error:  Uncaught Error: Class "GF_Field" not found in /wordpress/wp-content/plugins/range-slider-gravity-form/admin/gravity_rangeslider.php:2
-Stack trace:
-#0 /wordpress/wp-content/plugins/range-slider-gravity-form/gravityform-rangeslider.php(37): include_once()
-#1 /wordpress/wp-content/plugins/range-slider-gravity-form/gravityform-rangeslider.php(85): OCRSGF->includes()
-#2 /wordpress/wp-includes/class-wp-hook.php(324): OCRSGF::OCRSGF_instance('')
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}
-  thrown in /wordpress/wp-content/plugins/range-slider-gravity-form/admin/gravity_rangeslider.php on line 2
-[07-Apr-2025 18:53:51 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_home_path() in /wordpress/wp-content/plugins/rb-gallery/includes/rb-gallery-activator.php:24
-Stack trace:
-#0 /wordpress/wp-content/plugins/rb-gallery/rb-gallery.php(28): Rb_gallery_activator::activate()
-#1 /wordpress/wp-includes/class-wp-hook.php(324): activate_rb_gallery(false)
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_rb-gal...', false)
-#5 /internal/eval.php(20): activate_plugin('rb-gallery/rb-g...')
-#6 {main}
-  thrown in /wordpress/wp-content/plugins/rb-gallery/includes/rb-gallery-activator.php on line 24
-[07-Apr-2025 18:53:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_home_path() in /wordpress/wp-content/plugins/rb-gallery/includes/rb-gallery-activator.php:24
-Stack trace:
-#0 /wordpress/wp-content/plugins/rb-gallery/rb-gallery.php(28): Rb_gallery_activator::activate()
-#1 /wordpress/wp-includes/class-wp-hook.php(324): activate_rb_gallery(false)
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_rb-gal...', false)
-#5 /internal/eval.php(20): activate_plugin('rb-gallery/rb-g...')
-#6 {main}
-  thrown in /wordpress/wp-content/plugins/rb-gallery/includes/rb-gallery-activator.php on line 24
-[07-Apr-2025 18:53:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_home_path() in /wordpress/wp-content/plugins/rb-gallery/includes/rb-gallery-activator.php:24
-Stack trace:
-#0 /wordpress/wp-content/plugins/rb-gallery/rb-gallery.php(28): Rb_gallery_activator::activate()
-#1 /wordpress/wp-includes/class-wp-hook.php(324): activate_rb_gallery(false)
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_rb-gal...', false)
-#5 /internal/eval.php(20): activate_plugin('rb-gallery/rb-g...')
-#6 {main}
-  thrown in /wordpress/wp-content/plugins/rb-gallery/includes/rb-gallery-activator.php on line 24
-[07-Apr-2025 18:54:02 UTC] PHP Deprecated:  Required parameter $amount follows optional parameter $args in /wordpress/wp-content/plugins/rcp-edd-wallet/rcp-edd-wallet.php on line 70
-[07-Apr-2025 18:54:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 18:54:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 18:54:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 18:54:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 18:54:02 UTC] PHP Deprecated:  Required parameter $amount follows optional parameter $args in /wordpress/wp-content/plugins/rcp-edd-wallet/rcp-edd-wallet.php on line 70
-[07-Apr-2025 18:54:05 UTC] PHP Deprecated:  Required parameter $amount follows optional parameter $args in /wordpress/wp-content/plugins/rcp-edd-wallet/rcp-edd-wallet.php on line 70
-[07-Apr-2025 18:54:05 UTC] PHP Deprecated:  Required parameter $amount follows optional parameter $args in /wordpress/wp-content/plugins/rcp-edd-wallet/rcp-edd-wallet.php on line 70
-[07-Apr-2025 18:54:08 UTC] PHP Deprecated:  Required parameter $amount follows optional parameter $args in /wordpress/wp-content/plugins/rcp-edd-wallet/rcp-edd-wallet.php on line 70
-[07-Apr-2025 18:54:08 UTC] PHP Deprecated:  Required parameter $amount follows optional parameter $args in /wordpress/wp-content/plugins/rcp-edd-wallet/rcp-edd-wallet.php on line 70
-[07-Apr-2025 18:54:15 UTC] PHP Deprecated:  Required parameter $meta_value follows optional parameter $meta_key in /wordpress/wp-content/plugins/rd-hover-effects/options/functions/fallback.php on line 31
-[07-Apr-2025 18:54:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 18:54:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 18:54:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 18:54:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 18:54:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 18:54:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 18:54:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 18:54:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 18:54:15 UTC] PHP Deprecated:  Required parameter $meta_value follows optional parameter $meta_key in /wordpress/wp-content/plugins/rd-hover-effects/options/functions/fallback.php on line 31
-[07-Apr-2025 18:54:18 UTC] PHP Deprecated:  Required parameter $meta_value follows optional parameter $meta_key in /wordpress/wp-content/plugins/rd-hover-effects/options/functions/fallback.php on line 31
-[07-Apr-2025 18:54:18 UTC] PHP Deprecated:  Required parameter $meta_value follows optional parameter $meta_key in /wordpress/wp-content/plugins/rd-hover-effects/options/functions/fallback.php on line 31
-[07-Apr-2025 18:54:21 UTC] PHP Deprecated:  Required parameter $meta_value follows optional parameter $meta_key in /wordpress/wp-content/plugins/rd-hover-effects/options/functions/fallback.php on line 31
-[07-Apr-2025 18:54:21 UTC] PHP Deprecated:  Required parameter $meta_value follows optional parameter $meta_key in /wordpress/wp-content/plugins/rd-hover-effects/options/functions/fallback.php on line 31
-[07-Apr-2025 18:54:27 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 18:54:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 18:54:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 18:54:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 18:54:39 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 18:54:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 18:54:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 18:54:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 18:55:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 18:55:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 18:55:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 18:55:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 18:55:14 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 18:55:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 18:55:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 18:55:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 18:55:26 UTC] PHP Warning:  Undefined variable $table_prefix in /wordpress/wp-content/plugins/real-estate-rss/real_estate_rss.php on line 15
-[07-Apr-2025 18:55:26 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/real-estate-rss/library/simplepie.php on line 737
-[07-Apr-2025 18:55:29 UTC] PHP Warning:  Undefined variable $table_prefix in /wordpress/wp-content/plugins/real-estate-rss/real_estate_rss.php on line 15
-[07-Apr-2025 18:55:29 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/real-estate-rss/library/simplepie.php on line 737
-[07-Apr-2025 18:55:31 UTC] PHP Warning:  Undefined variable $table_prefix in /wordpress/wp-content/plugins/real-estate-rss/real_estate_rss.php on line 15
-[07-Apr-2025 18:55:31 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/real-estate-rss/library/simplepie.php on line 737
-[07-Apr-2025 18:55:38 UTC] PHP Warning:  Undefined array key "post_type" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 18:55:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 18:55:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 18:55:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 18:55:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('realkit_plugin_version', '5.0.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'realkit_plugin_version' , '5.0.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('realkit_plugin_...', '5.0.0', '', 'auto')
-#5 /wordpress/wp-content/plugins/real-kit/real-kit.php(94): update_option('realkit_plugin_...', '5.0.0')
+#4 /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php(42): add_option('myplugin_versio...', '1.0.0')
+#5 /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php(198): Raidify_Contact_Form->__construct()
 #6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('real-kit/real-k...')
-#8 /internal/eval.php(20): activate_plugin('real-kit/real-k...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('raidify-contact...')
+#8 /internal/eval.php(20): activate_plugin('raidify-contact...')
 #9 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('realkit_plugin_version', '5.0.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/real-kit/real-kit.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 18:55:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('myplugin_version', '1.0.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/raidify-contact-form/raidify-contact-form.php'), Raidify_Contact_Form->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 18:53:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('realkit_translit_notice', 'on', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rcf_admin_settings', 'a:9:{s:14:\"input-elements\";a:3:{i:0;s:4:\"name\";i:1;s:7:\"subject\";i:2;s:5:\"email\";}s:18:\"text-area-elements\";a:1:{i:0;s:7:\"message\";}s:8:\"required\";a:4:{i:0;s:4:\"name\";i:1;s:7:\"subject\";i:2;s:5:\"email\";i:3;s:7:\"message\";}s:14:\"required-label\";s:10:\"(required)\";s:11:\"placeholder\";a:4:{s:4:\"name\";s:0:\"\";s:7:\"subject\";s:0:\"\";s:5:\"email\";s:0:\"\";s:7:\"message\";s:0:\"\";}s:6:\"sendto\";a:2:{s:4:\"user\";s:10:\"rcf-wpuser\";s:10:\"user-email\";s:0:\"\";}s:6:\"mailer\";s:7:\"phpmail\";s:11:\"smtp-option\";a:8:{s:14:\"authentication\";s:0:\"\";s:11:\"host-server\";s:0:\"\";s:11:\"port-number\";s:0:\"\";s:10:\"encryption\";s:12:\"noencryption\";s:4:\"from\";s:0:\"\";s:9:\"from-name\";s:0:\"\";s:8:\"username\";s:0:\"\";s:8:\"password\";s:0:\"\";}s:16:\"google-recaptcha\";a:3:{s:24:\"rcf_use_google_recaptcha\";s:0:\"\";s:14:\"rcf_gr_sitekey\";s:0:\"\";s:16:\"rcf_gr_secretkey\";s:0:\"\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -431,7 +55,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'realkit_translit_notice' , 'on' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'rcf_admin_settings' , 'a:9:{s:14:&quot;input-elements&quot;;a:3:{i:0;s:4:&quot;name&quot;;i:1;s:7:&quot;subject&quot;;i:2;s:5:&quot;email&quot;;}s:18:&quot;text-area-elements&quot;;a:1:{i:0;s:7:&quot;message&quot;;}s:8:&quot;required&quot;;a:4:{i:0;s:4:&quot;name&quot;;i:1;s:7:&quot;subject&quot;;i:2;s:5:&quot;email&quot;;i:3;s:7:&quot;message&quot;;}s:14:&quot;required-label&quot;;s:10:&quot;(required)&quot;;s:11:&quot;placeholder&quot;;a:4:{s:4:&quot;name&quot;;s:0:&quot;&quot;;s:7:&quot;subject&quot;;s:0:&quot;&quot;;s:5:&quot;email&quot;;s:0:&quot;&quot;;s:7:&quot;message&quot;;s:0:&quot;&quot;;}s:6:&quot;sendto&quot;;a:2:{s:4:&quot;user&quot;;s:10:&quot;rcf-wpuser&quot;;s:10:&quot;user-email&quot;;s:0:&quot;&quot;;}s:6:&quot;mailer&quot;;s:7:&quot;phpmail&quot;;s:11:&quot;smtp-option&quot;;a:8:{s:14:&quot;authentication&quot;;s:0:&quot;&quot;;s:11:&quot;host-server&quot;;s:0:&quot;&quot;;s:11:&quot;port-number&quot;;s:0:&quot;&quot;;s:10:&quot;encryption&quot;;s:12:&quot;noencryption&quot;;s:4:&quot;from&quot;;s:0:&quot;&quot;;s:9:&quot;from-name&quot;;s:0:&quot;&quot;;s:8:&quot;username&quot;;s:0:&quot;&quot;;s:8:&quot;password&quot;;s:0:&quot;&quot;;}s:16:&quot;google-recaptcha&quot;;a:3:{s:24:&quot;rcf_use_google_recaptcha&quot;;s:0:&quot;&quot;;s:14:&quot;rcf_gr_sitekey&quot;;s:0:&quot;&quot;;s:16:&quot;rcf_gr_secretkey&quot;;s:0:&quot;&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -443,76 +67,30 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('realkit_transli...', 'on', '', 'auto')
-#5 /wordpress/wp-content/plugins/real-kit/mod/translit/index.php(19): update_option('realkit_transli...', 'on')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): {closure}(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_real-k...', false)
-#10 /internal/eval.php(20): activate_plugin('real-kit/real-k...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('realkit_translit_notice', 'on', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_real-kit/real-kit.php'), WP_Hook->do_action, WP_Hook->apply_filters, {closure}, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 18:55:38 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 18:55:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 18:55:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 18:55:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 18:55:38 UTC] PHP Warning:  Undefined array key "post_type" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 18:55:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 18:55:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 18:55:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 18:55:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('realkit_plugin_version', '5.0.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'realkit_plugin_version' , '5.0.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('realkit_plugin_...', '5.0.0', '', 'auto')
-#5 /wordpress/wp-content/plugins/real-kit/real-kit.php(94): update_option('realkit_plugin_...', '5.0.0')
-#6 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#4 /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php(181): add_option('rcf_admin_setti...', Array)
+#5 /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php(65): Raidify_Contact_Form->rcf_init_settings()
+#6 /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php(198): Raidify_Contact_Form->__construct()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('raidify-contact...')
+#9 /internal/eval.php(20): activate_plugin('raidify-contact...')
 #10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('realkit_plugin_version', '5.0.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/real-kit/real-kit.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 18:55:50 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 18:55:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 18:55:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 18:55:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 18:55:50 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[07-Apr-2025 18:55:50 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[07-Apr-2025 18:55:53 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[07-Apr-2025 18:55:53 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[07-Apr-2025 18:55:55 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[07-Apr-2025 18:55:55 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[07-Apr-2025 18:56:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 18:56:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 18:56:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 18:56:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 18:56:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rcf_admin_settings', 'a:9:{s:14:\"input-elements\";a:3:{i:0;s:4:\"name\";i:1;s:7:\"subject\";i:2;s:5:\"email\";}s:18:\"text-area-elements\";a:1:{i:0;s:7:\"message\";}s:8:\"required\";a:4:{i:0;s:4:\"name\";i:1;s:7:\"subject\";i:2;s:5:\"email\";i:3;s:7:\"message\";}s:14:\"required-label\";s:10:\"(required)\";s:11:\"placeholder\";a:4:{s:4:\"name\";s:0:\"\";s:7:\"subject\";s:0:\"\";s:5:\"email\";s:0:\"\";s:7:\"message\";s:0:\"\";}s:6:\"sendto\";a:2:{s:4:\"user\";s:10:\"rcf-wpuser\";s:10:\"user-email\";s:0:\"\";}s:6:\"mailer\";s:7:\"phpmail\";s:11:\"smtp-option\";a:8:{s:14:\"authentication\";s:0:\"\";s:11:\"host-server\";s:0:\"\";s:11:\"port-number\";s:0:\"\";s:10:\"encryption\";s:12:\"noencryption\";s:4:\"from\";s:0:\"\";s:9:\"from-name\";s:0:\"\";s:8:\"username\";s:0:\"\";s:8:\"password\";s:0:\"\";}s:16:\"google-recaptcha\";a:3:{s:24:\"rcf_use_google_recaptcha\";s:0:\"\";s:14:\"rcf_gr_sitekey\";s:0:\"\";s:16:\"rcf_gr_secretkey\";s:0:\"\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/raidify-contact-form/raidify-contact-form.php'), Raidify_Contact_Form->__construct, Raidify_Contact_Form->rcf_init_settings, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 18:53:34 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 18:53:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 18:53:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 18:53:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 18:53:43 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php on line 29
+[09-Apr-2025 18:53:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php on line 29
+[09-Apr-2025 18:53:43 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form-settings.php on line 36
+[09-Apr-2025 18:53:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form-settings.php on line 36
+[09-Apr-2025 18:53:52 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php on line 29
+[09-Apr-2025 18:53:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form.php on line 29
+[09-Apr-2025 18:53:52 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form-settings.php on line 36
+[09-Apr-2025 18:53:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/raidify-contact-form/raidify-contact-form-settings.php on line 36
+[09-Apr-2025 18:54:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_recent_categories_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('read_more_data', 'Read More', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -524,7 +102,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_recent_categories_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'read_more_data' , 'Read More' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -536,50 +114,383 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_recent_c...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_recent_c...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_recent_categories_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 18:56:14 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/recent-custom-post-widget/recent-custom-post-widget.php on line 24
-[07-Apr-2025 18:56:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/recent-custom-post-widget/recent-custom-post-widget.php:211
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('recent-custom-p...')
-#2 /internal/eval.php(20): activate_plugin('recent-custom-p...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/recent-custom-post-widget/recent-custom-post-widget.php on line 211
-[07-Apr-2025 18:56:17 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/recent-custom-post-widget/recent-custom-post-widget.php on line 24
-[07-Apr-2025 18:56:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/recent-custom-post-widget/recent-custom-post-widget.php:211
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('recent-custom-p...')
-#2 /internal/eval.php(20): activate_plugin('recent-custom-p...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/recent-custom-post-widget/recent-custom-post-widget.php on line 211
-[07-Apr-2025 18:56:19 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/recent-custom-post-widget/recent-custom-post-widget.php on line 24
-[07-Apr-2025 18:56:19 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/recent-custom-post-widget/recent-custom-post-widget.php:211
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('recent-custom-p...')
-#2 /internal/eval.php(20): activate_plugin('recent-custom-p...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/recent-custom-post-widget/recent-custom-post-widget.php on line 211
-[07-Apr-2025 18:56:26 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 18:56:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 18:56:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 18:56:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 18:56:26 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factor
+#4 /wordpress/wp-content/plugins/read-more-for-feed-burner-feed/Read-More-for-Feed-Burner-Feed.php(15): add_option('read_more_data', 'Read More', '', 'on')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): read_more_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_read-m...', false)
+#9 /internal/eval.php(20): activate_plugin('read-more-for-f...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('read_more_data', 'Read More', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_read-more-for-feed-burner-feed/Read-More-for-Feed-Burner-Feed.php'), WP_Hook->do_action, WP_Hook->apply_filters, read_more_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 18:54:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 18:54:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 18:54:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 18:54:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 18:54:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:22:\"recipe-master/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:5:\"2.7.4\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744224869;s:11:\"plugin_path\";s:31:\"recipe-master/recipe-master.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:31:\"recipe-master/recipe-master.php\";s:8:\"sdk_path\";s:22:\"recipe-master/freemius\";s:7:\"version\";s:5:\"2.7.4\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744224869;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_active_plugins' , 'O:8:&quot;stdClass&quot;:3:{s:7:&quot;plugins&quot;;a:1:{s:22:&quot;recipe-master/freemius&quot;;O:8:&quot;stdClass&quot;:4:{s:7:&quot;version&quot;;s:5:&quot;2.7.4&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:9:&quot;timestamp&quot;;i:1744224869;s:11:&quot;plugin_path&quot;;s:31:&quot;recipe-master/recipe-master.php&quot;;}}s:7:&quot;abspath&quot;;s:11:&quot;/wordpress/&quot;;s:6:&quot;newest&quot;;O:8:&quot;stdClass&quot;:5:{s:11:&quot;plugin_path&quot;;s:31:&quot;recipe-master/recipe-master.php&quot;;s:8:&quot;sdk_path&quot;;s:22:&quot;recipe-master/freemius&quot;;s:7:&quot;version&quot;;s:5:&quot;2.7.4&quot;;s:13:&quot;in_activation&quot;;b:1;s:9:&quot;timestamp&quot;;i:1744224869;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_active_plugi...', Object(stdClass), '', 'auto')
+#5 /wordpress/wp-content/plugins/recipe-master/freemius/includes/fs-essential-functions.php(279): update_option('fs_active_plugi...', Object(stdClass))
+#6 /wordpress/wp-content/plugins/recipe-master/freemius/start.php(198): fs_update_sdk_newest_version('recipe-master/f...', 'recipe-master/r...')
+#7 /wordpress/wp-content/plugins/recipe-master/recipe-master.php(41): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/recipe-master/recipe-master.php(68): Recipe_Master\rm_fs()
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('recipe-master/r...')
+#11 /internal/eval.php(20): activate_plugin('recipe-master/r...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:22:\"recipe-master/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:5:\"2.7.4\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744224869;s:11:\"plugin_path\";s:31:\"recipe-master/recipe-master.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:31:\"recipe-master/recipe-master.php\";s:8:\"sdk_path\";s:22:\"recipe-master/freemius\";s:7:\"version\";s:5:\"2.7.4\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744224869;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/recipe-master/recipe-master.php'), Recipe_Master\rm_fs, require_once('/plugins/recipe-master/freemius/start.php'), fs_update_sdk_newest_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 18:54:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_debug_mode' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/recipe-master/freemius/config.php(307): add_option('fs_debug_mode', false)
+#5 /wordpress/wp-content/plugins/recipe-master/freemius/require.php(14): require_once('/wordpress/wp-c...')
+#6 /wordpress/wp-content/plugins/recipe-master/freemius/start.php(514): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/recipe-master/recipe-master.php(41): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/recipe-master/recipe-master.php(68): Recipe_Master\rm_fs()
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('recipe-master/r...')
+#11 /internal/eval.php(20): activate_plugin('recipe-master/r...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/recipe-master/recipe-master.php'), Recipe_Master\rm_fs, require_once('/plugins/recipe-master/freemius/start.php'), require_once('/plugins/recipe-master/freemius/require.php'), require_once('/plugins/recipe-master/freemius/config.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 18:54:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:15777;a:3:{s:4:\"slug\";s:13:\"recipe-master\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"recipe-master/recipe-master.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:1:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:15777;a:3:{s:4:&quot;slug&quot;;s:13:&quot;recipe-master&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:31:&quot;recipe-master/recipe-master.php&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/recipe-master/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/recipe-master/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('id_slug_type_pa...', Array, true)
+#8 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-freemius.php(2169): FS_Options->set_option('id_slug_type_pa...', Array, true)
+#9 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-freemius.php(417): Freemius->store_id_slug_type_path_map('15777', 'recipe-master')
+#10 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-freemius.php(2828): Freemius->__construct('15777', 'recipe-master', true)
+#11 /wordpress/wp-content/plugins/recipe-master/freemius/start.php(553): Freemius::instance('15777', 'recipe-master', true)
+#12 /wordpress/wp-content/plugins/recipe-master/recipe-master.php(43): fs_dynamic_init(Array)
+#13 /wordpress/wp-content/plugins/recipe-master/recipe-master.php(68): Recipe_Master\rm_fs()
+#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('recipe-master/r...')
+#16 /internal/eval.php(20): activate_plugin('recipe-master/r...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:15777;a:3:{s:4:\"slug\";s:13:\"recipe-master\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"recipe-master/recipe-master.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/recipe-master/recipe-master.php'), Recipe_Master\rm_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_id_slug_type_path_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 18:54:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:15777;a:3:{s:4:\"slug\";s:13:\"recipe-master\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"recipe-master/recipe-master.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"recipe-master\";a:1:{s:19:\"last_load_timestamp\";i:1744224869;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:15777;a:3:{s:4:&quot;slug&quot;;s:13:&quot;recipe-master&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:31:&quot;recipe-master/recipe-master.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:13:&quot;recipe-master&quot;;a:1:{s:19:&quot;last_load_timestamp&quot;;i:1744224869;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/recipe-master/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/recipe-master/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/recipe-master/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/recipe-master/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('last_load_times...', 1744224869)
+#9 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-fs-storage.php(534): FS_Key_Value_Storage->__set('last_load_times...', 1744224869)
+#10 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-freemius.php(433): FS_Storage->__set('last_load_times...', 1744224869)
+#11 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-freemius.php(2828): Freemius->__construct('15777', 'recipe-master', true)
+#12 /wordpress/wp-content/plugins/recipe-master/freemius/start.php(553): Freemius::instance('15777', 'recipe-master', true)
+#13 /wordpress/wp-content/plugins/recipe-master/recipe-master.php(43): fs_dynamic_init(Array)
+#14 /wordpress/wp-content/plugins/recipe-master/recipe-master.php(68): Recipe_Master\rm_fs()
+#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('recipe-master/r...')
+#17 /internal/eval.php(20): activate_plugin('recipe-master/r...')
+#18 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:15777;a:3:{s:4:\"slug\";s:13:\"recipe-master\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"recipe-master/recipe-master.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"recipe-master\";a:1:{s:19:\"last_load_timestamp\";i:1744224869;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/recipe-master/recipe-master.php'), Recipe_Master\rm_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 18:54:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:15777;a:3:{s:4:\"slug\";s:13:\"recipe-master\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"recipe-master/recipe-master.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"recipe-master\";a:2:{s:19:\"last_load_timestamp\";i:1744224869;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:31:\"recipe-master/recipe-master.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:15777;a:3:{s:4:&quot;slug&quot;;s:13:&quot;recipe-master&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:31:&quot;recipe-master/recipe-master.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:13:&quot;recipe-master&quot;;a:2:{s:19:&quot;last_load_timestamp&quot;;i:1744224869;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:31:&quot;recipe-master/recipe-master.php&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/recipe-master/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/recipe-master/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/recipe-master/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/recipe-master/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_main_fil...', Object(stdClass))
+#9 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-fs-storage.php(534): FS_Key_Value_Storage->__set('plugin_main_fil...', Object(stdClass))
+#10 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-freemius.php(2026): FS_Storage->__set('plugin_main_fil...', Object(stdClass))
+#11 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-freemius.php(440): Freemius->_find_caller_plugin_file(true, 'recipe-master/r...')
+#12 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-freemius.php(2828): Freemius->__construct('15777', 'recipe-master', true)
+#13 /wordpress/wp-content/plugins/recipe-master/freemius/start.php(553): Freemius::instance('15777', 'recipe-master', true)
+#14 /wordpress/wp-content/plugins/recipe-master/recipe-master.php(43): fs_dynamic_init(Array)
+#15 /wordpress/wp-content/plugins/recipe-master/recipe-master.php(68): Recipe_Master\rm_fs()
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('recipe-master/r...')
+#18 /internal/eval.php(20): activate_plugin('recipe-master/r...')
+#19 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:15777;a:3:{s:4:\"slug\";s:13:\"recipe-master\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"recipe-master/recipe-master.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"recipe-master\";a:2:{s:19:\"last_load_timestamp\";i:1744224869;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:31:\"recipe-master/recipe-master.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/recipe-master/recipe-master.php'), Recipe_Master\rm_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_find_caller_plugin_file, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 18:54:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:15777;a:3:{s:4:\"slug\";s:13:\"recipe-master\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"recipe-master/recipe-master.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"recipe-master\";a:3:{s:19:\"last_load_timestamp\";i:1744224869;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:31:\"recipe-master/recipe-master.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:15777;a:3:{s:4:&quot;slug&quot;;s:13:&quot;recipe-master&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:31:&quot;recipe-master/recipe-master.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:13:&quot;recipe-master&quot;;a:3:{s:19:&quot;last_load_timestamp&quot;;i:1744224869;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:31:&quot;recipe-master/recipe-master.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/recipe-master/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/recipe-master/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/recipe-master/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/recipe-master/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_network_acti...', false)
+#9 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-fs-storage.php(534): FS_Key_Value_Storage->__set('is_network_acti...', false)
+#10 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-freemius.php(468): FS_Storage->__set('is_network_acti...', false)
+#11 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-freemius.php(2828): Freemius->__construct('15777', 'recipe-master', true)
+#12 /wordpress/wp-content/plugins/recipe-master/freemius/start.php(553): Freemius::instance('15777', 'recipe-master', true)
+#13 /wordpress/wp-content/plugins/recipe-master/recipe-master.php(43): fs_dynamic_init(Array)
+#14 /wordpress/wp-content/plugins/recipe-master/recipe-master.php(68): Recipe_Master\rm_fs()
+#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('recipe-master/r...')
+#17 /internal/eval.php(20): activate_plugin('recipe-master/r...')
+#18 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:15777;a:3:{s:4:\"slug\";s:13:\"recipe-master\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"recipe-master/recipe-master.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"recipe-master\";a:3:{s:19:\"last_load_timestamp\";i:1744224869;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:31:\"recipe-master/recipe-master.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/recipe-master/recipe-master.php'), Recipe_Master\rm_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 18:54:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:15777;a:3:{s:4:\"slug\";s:13:\"recipe-master\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"recipe-master/recipe-master.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"recipe-master\";a:3:{s:19:\"last_load_timestamp\";i:1744224869;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:31:\"recipe-master/recipe-master.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:31:\"recipe-master/recipe-master.php\";s:13:\"recipe-master\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:15777;a:3:{s:4:&quot;slug&quot;;s:13:&quot;recipe-master&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:31:&quot;recipe-master/recipe-master.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:13:&quot;recipe-master&quot;;a:3:{s:19:&quot;last_load_timestamp&quot;;i:1744224869;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:31:&quot;recipe-master/recipe-master.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:31:&quot;recipe-master/recipe-master.php&quot;;s:13:&quot;recipe-master&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/recipe-master/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/recipe-master/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('file_slug_map', Array, true)
+#8 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-freemius.php(10622): FS_Options->set_option('file_slug_map', Array, true)
+#9 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-freemius.php(515): Freemius->store_file_slug_map()
+#10 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-freemius.php(2828): Freemius->__construct('15777', 'recipe-master', true)
+#11 /wordpress/wp-content/plugins/recipe-master/freemius/start.php(553): Freemius::instance('15777', 'recipe-master', true)
+#12 /wordpress/wp-content/plugins/recipe-master/recipe-master.php(43): fs_dynamic_init(Array)
+#13 /wordpress/wp-content/plugins/recipe-master/recipe-master.php(68): Recipe_Master\rm_fs()
+#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('recipe-master/r...')
+#16 /internal/eval.php(20): activate_plugin('recipe-master/r...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:15777;a:3:{s:4:\"slug\";s:13:\"recipe-master\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"recipe-master/recipe-master.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"recipe-master\";a:3:{s:19:\"last_load_timestamp\";i:1744224869;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:31:\"recipe-master/recipe-master.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:31:\"recipe-master/recipe-master.php\";s:13:\"recipe-master\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/recipe-master/recipe-master.php'), Recipe_Master\rm_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_file_slug_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 18:54:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:15777;a:3:{s:4:\"slug\";s:13:\"recipe-master\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"recipe-master/recipe-master.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"recipe-master\";a:4:{s:19:\"last_load_timestamp\";i:1744224869;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:31:\"recipe-master/recipe-master.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744224869;}}s:13:\"file_slug_map\";a:1:{s:31:\"recipe-master/recipe-master.php\";s:13:\"recipe-master\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:15777;a:3:{s:4:&quot;slug&quot;;s:13:&quot;recipe-master&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:31:&quot;recipe-master/recipe-master.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:13:&quot;recipe-master&quot;;a:4:{s:19:&quot;last_load_timestamp&quot;;i:1744224869;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:31:&quot;recipe-master/recipe-master.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744224869;}}s:13:&quot;file_slug_map&quot;;a:1:{s:31:&quot;recipe-master/recipe-master.php&quot;;s:13:&quot;recipe-master&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/recipe-master/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/recipe-master/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/recipe-master/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/recipe-master/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('install_timesta...', 1744224869)
+#9 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-fs-storage.php(534): FS_Key_Value_Storage->__set('install_timesta...', 1744224869)
+#10 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-freemius.php(519): FS_Storage->__set('install_timesta...', 1744224869)
+#11 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-freemius.php(2828): Freemius->__construct('15777', 'recipe-master', true)
+#12 /wordpress/wp-content/plugins/recipe-master/freemius/start.php(553): Freemius::instance('15777', 'recipe-master', true)
+#13 /wordpress/wp-content/plugins/recipe-master/recipe-master.php(43): fs_dynamic_init(Array)
+#14 /wordpress/wp-content/plugins/recipe-master/recipe-master.php(68): Recipe_Master\rm_fs()
+#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('recipe-master/r...')
+#17 /internal/eval.php(20): activate_plugin('recipe-master/r...')
+#18 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:15777;a:3:{s:4:\"slug\";s:13:\"recipe-master\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"recipe-master/recipe-master.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"recipe-master\";a:4:{s:19:\"last_load_timestamp\";i:1744224869;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:31:\"recipe-master/recipe-master.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744224869;}}s:13:\"file_slug_map\";a:1:{s:31:\"recipe-master/recipe-master.php\";s:13:\"recipe-master\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/recipe-master/recipe-master.php'), Recipe_Master\rm_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 18:54:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:15777;a:3:{s:4:\"slug\";s:13:\"recipe-master\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:31:\"recipe-master/recipe-master.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"recipe-master\";a:5:{s:19:\"last_load_timestamp\";i:1744224869;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:31:\"recipe-master/recipe-master.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744224869;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:31:\"recipe-master/recipe-master.php\";s:13:\"recipe-master\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:15777;a:3:{s:4:&quot;slug&quot;;s:13:&quot;recipe-master&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:31:&quot;recipe-master/recipe-master.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:13:&quot;recipe-master&quot;;a:5:{s:19:&quot;last_load_timestamp&quot;;i:1744224869;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:31:&quot;recipe-master/recipe-master.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744224869;s:17:&quot;was_plugin_loaded&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:31:&quot;recipe-master/recipe-master.php&quot;;s:13:&quot;recipe-master&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/recipe-master/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/recipe-master/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/recipe-master/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/recipe-master/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('was_plugin_load...', true)
+#9 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-fs-storage.php(534): FS_Key_Value_Storage->__set('was_plugin_load...', true)
+#10 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-freemius.php(1338): FS_Storage->__set('was_plugin_load...', true)
+#11 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-freemius.php(1473): Freemius->_plugins_loaded()
+#12 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-freemius.php(549): Freemius->register_constructor_hooks()
+#13 /wordpress/wp-content/plugins/recipe-master/freemius/includes/class-freemius.php(2828): Freemius->__c
