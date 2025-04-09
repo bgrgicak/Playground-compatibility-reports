@@ -1,17 +1,522 @@
-node:internal/event_target:1101
-  process.nextTick(() => { throw err; });
-                           ^
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21
+`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
 
-TypeError: process.stdout.clearLine is not a function
-    at C.<anonymous> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:18:538)
-    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:827:20)
-    at C.dispatchEvent (node:internal/event_target:762:26)
-    at C.notifyProgress (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:295:10)
-    at C.<anonymous> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:200:81)
-    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:827:20)
-    at C.dispatchEvent (node:internal/event_target:762:26)
-    at C.notifyProgress (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:295:10)
-    at C.<anonymous> (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/progress/index.js:200:81)
-    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:827:20)
+Error: [09-Apr-2025 02:18:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gs_acct', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'gs_acct' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/gosquared-livestats/hooks.php(14): add_option('gs_acct')
+#5 /wordpress/wp-content/plugins/gosquared-livestats/index.php(19): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gosquared-lives...')
+#8 /internal/eval.php(20): activate_plugin('gosquared-lives...')
+#9 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gs_acct', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gosquared-livestats/index.php'), include_once('/plugins/gosquared-livestats/hooks.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 02:18:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gs_api', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'gs_api' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/gosquared-livestats/hooks.php(14): add_option('gs_api')
+#5 /wordpress/wp-content/plugins/gosquared-livestats/index.php(19): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('gosquared-lives...')
+#8 /internal/eval.php(20): activate_plugin('gosquared-lives...')
+#9 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gs_api', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/gosquared-livestats/index.php'), include_once('/plugins/gosquared-livestats/hooks.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 02:18:36 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 02:18:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 02:18:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 02:18:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 02:18:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gs_acct', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'gs_acct' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/gosquared-livestats/hooks.php(14): add_option('gs_acct')
+#5 /wordpress/wp-content/plugins/gosquared-livestats/index.php(19): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gs_acct', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/gosquared-livestats/index.php'), include_once('/plugins/gosquared-livestats/hooks.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 02:18:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gs_api', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'gs_api' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/gosquared-livestats/hooks.php(14): add_option('gs_api')
+#5 /wordpress/wp-content/plugins/gosquared-livestats/index.php(19): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gs_api', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/gosquared-livestats/index.php'), include_once('/plugins/gosquared-livestats/hooks.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 02:19:03 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 02:19:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 02:19:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 02:19:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 02:19:04 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 02:19:04 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 02:19:12 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 02:19:12 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 02:19:21 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 02:19:21 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 02:19:49 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 02:19:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 02:19:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 02:19:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 02:19:50 UTC] PHP Deprecated:  Required parameter $data_to_save follows optional parameter $object_id in /wordpress/wp-content/plugins/guarantee-box/cmb2/includes/CMB2.php on line 360
+[09-Apr-2025 02:19:59 UTC] PHP Deprecated:  Required parameter $data_to_save follows optional parameter $object_id in /wordpress/wp-content/plugins/guarantee-box/cmb2/includes/CMB2.php on line 360
+[09-Apr-2025 02:20:08 UTC] PHP Deprecated:  Required parameter $data_to_save follows optional parameter $object_id in /wordpress/wp-content/plugins/guarantee-box/cmb2/includes/CMB2.php on line 360
+[09-Apr-2025 02:20:25 UTC] PHP Deprecated:  Required parameter $post follows optional parameter $field in /wordpress/wp-content/plugins/gauges-analytics/includes/lib/class-gauges-admin-api.php on line 287
+[09-Apr-2025 02:20:25 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 02:20:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 02:20:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 02:20:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 02:20:26 UTC] PHP Deprecated:  Required parameter $post follows optional parameter $field in /wordpress/wp-content/plugins/gauges-analytics/includes/lib/class-gauges-admin-api.php on line 287
+[09-Apr-2025 02:20:34 UTC] PHP Deprecated:  Required parameter $post follows optional parameter $field in /wordpress/wp-content/plugins/gauges-analytics/includes/lib/class-gauges-admin-api.php on line 287
+[09-Apr-2025 02:20:35 UTC] PHP Deprecated:  Required parameter $post follows optional parameter $field in /wordpress/wp-content/plugins/gauges-analytics/includes/lib/class-gauges-admin-api.php on line 287
+[09-Apr-2025 02:20:43 UTC] PHP Deprecated:  Required parameter $post follows optional parameter $field in /wordpress/wp-content/plugins/gauges-analytics/includes/lib/class-gauges-admin-api.php on line 287
+[09-Apr-2025 02:20:43 UTC] PHP Deprecated:  Required parameter $post follows optional parameter $field in /wordpress/wp-content/plugins/gauges-analytics/includes/lib/class-gauges-admin-api.php on line 287
+[09-Apr-2025 02:21:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 02:21:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 02:21:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 02:21:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 02:21:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('action_scheduler_hybrid_store_demarkation', '4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'action_scheduler_hybrid_store_demarkation' , '4' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('action_schedule...', 4, '', 'auto')
+#5 /wordpress/wp-content/plugins/give/vendor/woocommerce/action-scheduler/classes/data-stores/ActionScheduler_HybridStore.php(157): update_option('action_schedule...', 4)
+#6 /wordpress/wp-content/plugins/give/vendor/woocommerce/action-scheduler/classes/data-stores/ActionScheduler_HybridStore.php(95): ActionScheduler_HybridStore->set_demarkation_id()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): ActionScheduler_HybridStore->set_autoincrement('wp_actionschedu...', 'actionscheduler...')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-content/plugins/give/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(146): do_action('action_schedule...', 'wp_actionschedu...', 'actionscheduler...')
+#11 /wordpress/wp-content/plugins/give/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(69): ActionScheduler_Abstract_Schema->update_table('actionscheduler...')
+#12 /wordpress/wp-content/plugins/give/vendor/woocommerce/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php(55): ActionScheduler_Abstract_Schema->register_tables()
+#13 /wordpress/wp-content/plugins/give/vendor/woocommerce/action-scheduler/classes/data-stores/ActionScheduler_HybridStore.php(76): ActionScheduler_DBStore->init()
+#14 /wordpress/wp-content/plugins/give/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler.php(223): ActionScheduler_HybridStore->init()
+#15 /wordpress/wp-content/plugins/give/vendor/woocommerce/action-scheduler/action-scheduler.php(60): ActionScheduler::init('/wordpress/wp-c...')
+#16 /wordpress/wp-content/plugins/give/vendor/woocommerce/action-scheduler/action-scheduler.php(66): action_scheduler_initialize_3_dot_9_dot_0()
+#17 /wordpress/wp-content/plugins/give/give.php(619): require('/wordpress/wp-c...')
+#18 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#19 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('give/give.php')
+#20 /internal/eval.php(20): activate_plugin('give/give.php')
+#21 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('action_scheduler_hybrid_store_demarkation', '4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/give/give.php'), require('/plugins/give/vendor/woocommerce/action-scheduler/action-scheduler.php'), action_scheduler_initialize_3_dot_9_dot_0, ActionScheduler::init, ActionScheduler_HybridStore->init, ActionScheduler_DBStore->init, ActionScheduler_Abstract_Schema->register_tables, ActionScheduler_Abstract_Schema->update_table, do_action('action_scheduler/created_table'), WP_Hook->do_action, WP_Hook->apply_filters, ActionScheduler_HybridStore->set_autoincrement, ActionScheduler_HybridStore->set_demarkation_id, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 02:21:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('schema-ActionScheduler_StoreSchema', '7.0.1744165314', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'schema-ActionScheduler_StoreSchema' , '7.0.1744165314' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('schema-ActionSc...', '7.0.1744165314', '', 'auto')
+#5 /wordpress/wp-content/plugins/give/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(129): update_option('schema-ActionSc...', '7.0.1744165314')
+#6 /wordpress/wp-content/plugins/give/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(71): ActionScheduler_Abstract_Schema->mark_schema_update_complete()
+#7 /wordpress/wp-content/plugins/give/vendor/woocommerce/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php(55): ActionScheduler_Abstract_Schema->register_tables()
+#8 /wordpress/wp-content/plugins/give/vendor/woocommerce/action-scheduler/classes/data-stores/ActionScheduler_HybridStore.php(76): ActionScheduler_DBStore->init()
+#9 /wordpress/wp-content/plugins/give/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler.php(223): ActionScheduler_HybridStore->init()
+#10 /wordpress/wp-content/plugins/give/vendor/woocommerce/action-scheduler/action-scheduler.php(60): ActionScheduler::init('/wordpress/wp-c...')
+#11 /wordpress/wp-content/plugins/give/vendor/woocommerce/action-scheduler/action-scheduler.php(66): action_scheduler_initialize_3_dot_9_dot_0()
+#12 /wordpress/wp-content/plugins/give/give.php(619): require('/wordpress/wp-c...')
+#13 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#14 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('give/give.php')
+#15 /internal/eval.php(20): activate_plugin('give/give.php')
+#16 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('schema-ActionScheduler_StoreSchema', '7.0.1744165314', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/give/give.php'), require('/plugins/give/vendor/woocommerce/action-scheduler/action-scheduler.php'), action_scheduler_initialize_3_dot_9_dot_0, ActionScheduler::init, ActionScheduler_HybridStore->init, ActionScheduler_DBStore->init, ActionScheduler_Abstract_Schema->register_tables, ActionScheduler_Abstract_Schema->mark_schema_update_complete, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 02:21:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('schema-ActionScheduler_LoggerSchema', '3.0.1744165314', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'schema-ActionScheduler_LoggerSchema' , '3.0.1744165314' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('schema-ActionSc...', '3.0.1744165314', '', 'auto')
+#5 /wordpress/wp-content/plugins/give/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(129): update_option('schema-ActionSc...', '3.0.1744165314')
+#6 /wordpress/wp-content/plugins/give/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(71): ActionScheduler_Abstract_Schema->mark_schema_update_complete()
+#7 /wordpress/wp-content/plugins/give/vendor/woocommerce/action-scheduler/classes/data-stores/ActionScheduler_DBLogger.php(108): ActionScheduler_Abstract_Schema->register_tables()
+#8 /wordpress/wp-content/plugins/give/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler.php(224): ActionScheduler_DBLogger->init()
+#9 /wordpress/wp-content/plugins/give/vendor/woocommerce/action-scheduler/action-scheduler.php(60): ActionScheduler::init('/wordpress/wp-c...')
+#10 /wordpress/wp-content/plugins/give/vendor/woocommerce/action-scheduler/action-scheduler.php(66): action_scheduler_initialize_3_dot_9_dot_0()
+#11 /wordpress/wp-content/plugins/give/give.php(619): require('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#13 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('give/give.php')
+#14 /internal/eval.php(20): activate_plugin('give/give.php')
+#15 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('schema-ActionScheduler_LoggerSchema', '3.0.1744165314', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/give/give.php'), require('/plugins/give/vendor/woocommerce/action-scheduler/action-scheduler.php'), action_scheduler_initialize_3_dot_9_dot_0, ActionScheduler::init, ActionScheduler_DBLogger->init, ActionScheduler_Abstract_Schema->register_tables, ActionScheduler_Abstract_Schema->mark_schema_update_complete, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 02:21:54 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 02:21:54 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 02:21:54 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 02:21:54 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 02:21:54 UTC] PHP Notice:  Undefined index: autoload in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 02:21:54 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 02:21:54 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 02:21:54 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 02:21:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('givewp_feature_flag_notifications_count', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'givewp_feature_flag_notifications_count' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('givewp_feature_...', 1, '', 'auto')
+#5 /wordpress/wp-content/plugins/give/src/BetaFeatures/ServiceProvider.php(62): update_option('givewp_feature_...', 1)
+#6 /wordpress/wp-content/plugins/give/src/BetaFeatures/ServiceProvider.php(29): Give\BetaFeatures\ServiceProvider->setFeatureFlagNotificationCounter()
+#7 /wordpress/wp-content/plugins/give/give.php(380): Give\BetaFeatures\ServiceProvider->boot()
+#8 /wordpress/wp-content/plugins/give/give.php(523): Give->loadServiceProviders()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): Give->install(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_give/g...', false)
+#13 /internal/eval.php(20): activate_plugin('give/give.php')
+#14 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('givewp_feature_flag_notifications_count', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_give/give.php'), WP_Hook->do_action, WP_Hook->apply_filters, Give->install, Give->loadServiceProviders, Give\BetaFeatures\ServiceProvider->boot, Give\BetaFeatures\ServiceProvider->setFeatureFlagNotificationCounter, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 02:21:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('give_settings', 'a:44:{s:12:\"base_country\";s:2:\"US\";s:9:\"test_mode\";s:7:\"enabled\";s:8:\"currency\";s:3:\"USD\";s:17:\"currency_position\";s:6:\"before\";s:16:\"session_lifetime\";s:6:\"604800\";s:12:\"email_access\";s:7:\"enabled\";s:19:\"thousands_separator\";s:1:\",\";s:17:\"decimal_separator\";s:1:\".\";s:15:\"number_decimals\";i:2;s:26:\"sequential-ordering_status\";s:7:\"enabled\";s:3:\"css\";s:7:\"enabled\";s:11:\"floatlabels\";s:8:\"disabled\";s:13:\"company_field\";s:8:\"disabled\";s:17:\"name_title_prefix\";s:8:\"disabled\";s:14:\"forms_singular\";s:7:\"enabled\";s:14:\"forms_archives\";s:7:\"enabled\";s:13:\"forms_excerpt\";s:7:\"enabled\";s:17:\"form_featured_img\";s:7:\"enabled\";s:12:\"form_sidebar\";s:7:\"enabled\";s:10:\"categories\";s:8:\"disabled\";s:4:\"tags\";s:8:\"disabled\";s:5:\"terms\";s:8:\"disabled\";s:13:\"admin_notices\";s:7:\"enabled\";s:5:\"cache\";s:7:\"enabled\";s:19:\"uninstall_on_delete\";s:8:\"disabled\";s:18:\"the_content_filter\";s:7:\"enabled\";s:14:\"scripts_footer\";s:8:\"disabled\";s:20:\"agree_to_terms_label\";s:15:\"Agree to Terms?\";s:14:\"agreement_text\";s:2068:\"<p>Acceptance of any contribution, gift or grant is at the discretion of the My WordPress Website. The  My WordPress Website will not accept any gift unless it can be used or expended consistently with the purpose and mission of the  My WordPress Website.</p>
+				<p>No irrevocable gift, whether outright or life-income in character, will be accepted if under any reasonable set of circumstances the gift would jeopardize the donor’s financial security.</p>
+				<p>The My WordPress Website will refrain from providing advice about the tax or other treatment of gifts and will encourage donors to seek guidance from their own professional advisers to assist them in the process of making their donation.</p>
+				<p>The My WordPress Website will accept donations of cash or publicly traded securities. Gifts of in-kind services will be accepted at the discretion of the My WordPress Website.</p>
+				<p>Certain other gifts, real property, personal property, in-kind gifts, non-liquid securities, and contributions whose sources are not transparent or whose use is restricted in some manner, must be reviewed prior to acceptance due to the special obligations raised or liabilities they may pose for My WordPress Website.</p>
+				<p>The My WordPress Website will provide acknowledgments to donors meeting tax requirements for property received by the charity as a gift. However, except for gifts of cash and publicly traded securities, no value shall be ascribed to any receipt or other form of substantiation of a gift received by My WordPress Website.</p>
+				<p>The My WordPress Website will respect the intent of the donor relating to gifts for restricted purposes and those relating to the desire to remain anonymous. With respect to anonymous gifts, the My WordPress Website will restrict information about the donor to only those staff members with a need to know.</p>
+				<p>The My WordPress Website will not compensate, whether through commissions, finders\' fees, or other means, any third party for directing a gift or a donor to the My WordPress Website.</p>\";s:21:\"babel_polyfill_script\";s:7:\"enabled\";s:8:\"gateways\";a:2:{s:6:\"manual\";i:1;s:7:\"offline\";i:1;}s:11:\"gateways_v3\";a:2:{s:6:\"manual\";i:1;s:7:\"offline\";i:1;}s:15:\"default_gateway\";s:6:\"manual\";s:18:\"default_gateway_v3\";s:6:\"manual\";s:31:\"global_offline_donation_content\";s:331:\"<p>To make an offline donation toward this cause, follow these steps: </p><ol><li>Write a check payable to \"{sitename}\"</li><li>On the memo line of the check, indicate that the donation is for \"{sitename}\"</li><li>Mail your check to:</li></ol>{offline_mailing_address}<br><p>Your tax-deductible donation is greatly appreciated!</p>\";s:29:\"global_offline_donation_email\";s:331:\"<p>To make an offline donation toward this cause, follow these steps: </p><ol><li>Write a check payable to \"{sitename}\"</li><li>On the memo line of the check, indicate that the donation is for \"{sitename}\"</li><li>Mail your check to:</li></ol>{offline_mailing_address}<br><p>Your tax-deductible donation is greatly appreciated!</p>\";s:43:\"give_offline_donation_enable_billing_fields\";s:8:\"disabled\";s:21:\"donation_notification\";s:280:\"Hi there,
 
-Node.js v23.10.0
+This email is to inform you that a new donation has been made on your website: {site_url}.
+
+<strong>Donor:</strong> {name}
+<strong>Donation:</strong> {donation}
+<strong>Amount:</strong> {amount}
+<strong>Payment Method:</strong> {payment_method}
+
+Thank you,
+
+{sitename}
+\";s:16:\"donation_receipt\";s:394:\"Dear {name},
+
+Thank you for your donation. Your generosity is appreciated! Here are the details of your donation:
+
+<strong>Donor:</strong> {fullname}
+<strong>Donation:</strong> {donation}
+<strong>Donation Date:</strong> {date}
+<strong>Amount:</strong> {amount}
+<strong>Payment Method:</strong> {payment_method}
+<strong>Payment ID:</strong> {payment_id}
+
+{receipt_link}
+
+
+
+Sincerely,
+{sitename}
+\";s:23:\"donor_default_user_role\";s:10:\"give_donor\";s:20:\"form_page_url_prefix\";s:4:\"give\";s:29:\"_give_stripe_get_all_accounts\";a:0:{}s:18:\"setup_page_enabled\";s:7:\"enabled\";s:14:\"usage_tracking\";s:8:\"disabled\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'give_settings' , 'a:44:{s:12:&quot;base_country&quot;;s:2:&quot;US&quot;;s:9:&quot;test_mode&quot;;s:7:&quot;enabled&quot;;s:8:&quot;currency&quot;;s:3:&quot;USD&quot;;s:17:&quot;currency_position&quot;;s:6:&quot;before&quot;;s:16:&quot;session_lifetime&quot;;s:6:&quot;604800&quot;;s:12:&quot;email_access&quot;;s:7:&quot;enabled&quot;;s:19:&quot;thousands_separator&quot;;s:1:&quot;,&quot;;s:17:&quot;decimal_separator&quot;;s:1:&quot;.&quot;;s:15:&quot;number_decimals&quot;;i:2;s:26:&quot;sequential-ordering_status&quot;;s:7:&quot;enabled&quot;;s:3:&quot;css&quot;;s:7:&quot;enabled&quot;;s:11:&quot;floatlabels&quot;;s:8:&quot;disabled&quot;;s:13:&quot;company_field&quot;;s:8:&quot;disabled&quot;;s:17:&quot;name_title_prefix&quot;;s:8:&quot;disabled&quot;;s:14:&quot;forms_singular&quot;;s:7:&quot;enabled&quot;;s:14:&quot;forms_archives&quot;;s:7:&quot;enabled&quot;;s:13:&quot;forms_excerpt&quot;;s:7:&quot;enabled&quot;;s:17:&quot;form_featured_img&quot;;s:7:&quot;enabled&quot;;s:12:&quot;form_sidebar&quot;;s:7:&quot;enabled&quot;;s:10:&quot;categories&quot;;s:8:&quot;disabled&quot;;s:4:&quot;tags&quot;;s:8:&quot;disabled&quot;;s:5:&quot;terms&quot;;s:8:&quot;disabled&quot;;s:13:&quot;admin_notices&quot;;s:7:&quot;enabled&quot;;s:5:&quot;cache&quot;;s:7:&quot;enabled&quot;;s:19:&quot;uninstall_on_delete&quot;;s:8:&quot;disabled&quot;;s:18:&quot;the_content_filter&quot;;s:7:&quot;enabled&quot;;s:14:&quot;scripts_footer&quot;;s:8:&quot;disabled&quot;;s:20:&quot;agree_to_terms_label&quot;;s:15:&quot;Agree to Terms?&quot;;s:14:&quot;agreement_text&quot;;s:2068:&quot;&lt;p&gt;Acceptance of any contribution, gift or grant is at the discretion of the My WordPress Website. The  My WordPress Website will not accept any gift unless it can be used or expended consistently with the purpose and mission of the  My WordPress Website.&lt;/p&gt;
+				&lt;p&gt;No irrevocable gift, whether outright or life-income in character, will be accepted if under any reasonable set of circumstances the gift would jeopardize the donor’s financial security.&lt;/p&gt;
+				&lt;p&gt;The My WordPress Website will refrain from providing advice about the tax or other treatment of gifts and will encourage donors to seek guidance from their own professional advisers to assist them in the process of making their donation.&lt;/p&gt;
+				&lt;p&gt;The My WordPress Website will accept donations of cash or publicly traded securities. Gifts of in-kind services will be accepted at the discretion of the My WordPress Website.&lt;/p&gt;
+				&lt;p&gt;Certain other gifts, real property, personal property, in-kind gifts, non-liquid securities, and contributions whose sources are not transparent or whose use is restricted in some manner, must be reviewed prior to acceptance due to the special obligations raised or liabilities they may pose for My WordPress Website.&lt;/p&gt;
+				&lt;p&gt;The My WordPress Website will provide acknowledgments to donors meeting tax requirements for property received by the charity as a gift. However, except for gifts of cash and publicly traded securities, no value shall be ascribed to any receipt or other form of substantiation of a gift received by My WordPress Website.&lt;/p&gt;
+				&lt;p&gt;The My WordPress Website will respect the intent of the donor relating to gifts for restricted purposes and those relating to the desire to remain anonymous. With respect to anonymous gifts, the My WordPress Website will restrict information about the donor to only those staff members with a need to know.&lt;/p&gt;
+				&lt;p&gt;The My WordPress Website will not compensate, whether through commissions, finders'' fees, or other means, any third party for directing a gift or a donor to the My WordPress Website.&lt;/p&gt;&quot;;s:21:&quot;babel_polyfill_script&quot;;s:7:&quot;enabled&quot;;s:8:&quot;gateways&quot;;a:2:{s:6:&quot;manual&quot;;i:1;s:7:&quot;offline&quot;;i:1;}s:11:&quot;gateways_v3&quot;;a:2:{s:6:&quot;manual&quot;;i:1;s:7:&quot;offline&quot;;i:1;}s:15:&quot;default_gateway&quot;;s:6:&quot;manual&quot;;s:18:&quot;default_gateway_v3&quot;;s:6:&quot;manual&quot;;s:31:&quot;global_offline_donation_content&quot;;s:331:&quot;&lt;p&gt;To make an offline donation toward this cause, follow these steps: &lt;/p&gt;&lt;ol&gt;&lt;li&gt;Write a check payable to &quot;{sitename}&quot;&lt;/li&gt;&lt;li&gt;On the memo line of the check, indicate that the donation is for &quot;{sitename}&quot;&lt;/li&gt;&lt;li&gt;Mail your check to:&lt;/li&gt;&lt;/ol&gt;{offline_mailing_address}&lt;br&gt;&lt;p&gt;Your tax-deductible donation is greatly appreciated!&lt;/p&gt;&quot;;s:29:&quot;global_offline_donation_email&quot;;s:331:&quot;&lt;p&gt;To make an offline donation toward this cause, follow these steps: &lt;/p&gt;&lt;ol&gt;&lt;li&gt;Write a check payable to &quot;{sitename}&quot;&lt;/li&gt;&lt;li&gt;On the memo line of the check, indicate that the donation is for &quot;{sitename}&quot;&lt;/li&gt;&lt;li&gt;Mail your check to:&lt;/li&gt;&lt;/ol&gt;{offline_mailing_address}&lt;br&gt;&lt;p&gt;Your tax-deductible donation is greatly appreciated!&lt;/p&gt;&quot;;s:43:&quot;give_offline_donation_enable_billing_fields&quot;;s:8:&quot;disabled&quot;;s:21:&quot;donation_notification&quot;;s:280:&quot;Hi there,
+
+This email is to inform you that a new donation has been made on your website: {site_url}.
+
+&lt;strong&gt;Donor:&lt;/strong&gt; {name}
+&lt;strong&gt;Donation:&lt;/strong&gt; {donation}
+&lt;strong&gt;Amount:&lt;/strong&gt; {amount}
+&lt;strong&gt;Payment Method:&lt;/strong&gt; {payment_method}
+
+Thank you,
+
+{sitename}
+&quot;;s:16:&quot;donation_receipt&quot;;s:394:&quot;Dear {name},
+
+Thank you for your donation. Your generosity is appreciated! Here are the details of your donation:
+
+&lt;strong&gt;Donor:&lt;/strong&gt; {fullname}
+&lt;strong&gt;Donation:&lt;/strong&gt; {donation}
+&lt;strong&gt;Donation Date:&lt;/strong&gt; {date}
+&lt;strong&gt;Amount:&lt;/strong&gt; {amount}
+&lt;strong&gt;Payment Method:&lt;/strong&gt; {payment_method}
+&lt;strong&gt;Payment ID:&lt;/strong&gt; {payment_id}
+
+{receipt_link}
+
+
+
+Sincerely,
+{sitename}
+&quot;;s:23:&quot;donor_default_user_role&quot;;s:10:&quot;give_donor&quot;;s:20:&quot;form_page_url_prefix&quot;;s:4:&quot;give&quot;;s:29:&quot;_give_stripe_get_all_accounts&quot;;a:0:{}s:18:&quot;setup_page_enabled&quot;;s:7:&quot;enabled&quot;;s:14:&quot;usage_tracking&quot;;s:8:&quot;disabled&quot;;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('give_settings', Array, '', 'off')
+#5 /wordpress/wp-content/plugins/give/includes/install.php(86): update_option('give_settings', Array, false)
+#6 /wordpress/wp-content/plugins/give/includes/install.php(49): give_run_install()
+#7 /wordpress/wp-content/plugins/give/give.php(524): give_install(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(324): Give->install(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_give/g...', false)
+#12 /internal/eval.php(20): activate_plugin('give/give.php')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('give_settings', 'a:44:{s:12:\"base_country\";s:2:\"US\";s:9:\"test_mode\";s:7:\"enabled\";s:8:\"currency\";s:3:\"USD\";s:17:\"currency_position\";s:6:\"before\";s:16:\"session_lifetime\";s:6:\"604800\";s:12:\"email_access\";s:7:\"enabled\";s:19:\"thousands_separator\";s:1:\",\";s:17:\"decimal_separator\";s:1:\".\";s:15:\"number_decimals\";i:2;s:26:\"sequential-ordering_status\";s:7:\"enabled\";s:3:\"css\";s:7:\"enabled\";s:11:\"floatlabels\";s:8:\"disabled\";s:13:\"company_field\";s:8:\"disabled\";s:17:\"name_title_prefix\";s:8:\"disabled\";s:14:\"forms_singular\";s:7:\"enabled\";s:14:\"forms_archives\";s:7:\"enabled\";s:13:\"forms_excerpt\";s:7:\"enabled\";s:17:\"form_featured_img\";s:7:\"enabled\";s:12:\"form_sidebar\";s:7:\"enabled\";s:10:\"categories\";s:8:\"disabled\";s:4:\"tags\";s:8:\"disabled\";s:5:\"terms\";s:8:\"disabled\";s:13:\"admin_notices\";s:7:\"enabled\";s:5:\"cache\";s:7:\"enabled\";s:19:\"uninstall_on_delete\";s:8:\"disabled\";s:18:\"the_content_filter\";s:7:\"enabled\";s:14:\"scripts_footer\";s:8:\"disabled\";s:20:\"agree_to_terms_label\";s:15:\"Agree to Terms?\";s:14:\"agreement_text\";s:2068:\"<p>Acceptance of any contribution, gift or grant is at the discretion of the My WordPress Website. The  My WordPress Website will not accept any gift unless it can be used or expended consistently with the purpose and mission of the  My WordPress Website.</p>
+				<p>No irrevocable gift, whether outright or life-income in character, will be accepted if under any reasonable set of circumstances the gift would jeopardize the donor’s financial security.</p>
+				<p>The My WordPress Website will refrain from providing advice about the tax or other treatment of gifts and will encourage donors to seek guidance from their own professional advisers to assist them in the process of making their donation.</p>
+				<p>The My WordPress Website will accept donations of cash or publicly traded securities. Gifts of in-kind services will be accepted at the discretion of the My WordPress Website.</p>
+				<p>Certain other gifts, real property, personal property, in-kind gifts, non-liquid securities, and contributions whose sources are not transparent or whose use is restricted in some manner, must be reviewed prior to acceptance due to the special obligations raised or liabilities they may pose for My WordPress Website.</p>
+				<p>The My WordPress Website will provide acknowledgments to donors meeting tax requirements for property received by the charity as a gift. However, except for gifts of cash and publicly traded securities, no value shall be ascribed to any receipt or other form of substantiation of a gift received by My WordPress Website.</p>
+				<p>The My WordPress Website will respect the intent of the donor relating to gifts for restricted purposes and those relating to the desire to remain anonymous. With respect to anonymous gifts, the My WordPress Website will restrict information about the donor to only those staff members with a need to know.</p>
+				<p>The My WordPress Website will not compensate, whether through commissions, finders\' fees, or other means, any third party for directing a gift or a donor to the My WordPress Website.</p>\";s:21:\"babel_polyfill_script\";s:7:\"enabled\";s:8:\"gateways\";a:2:{s:6:\"manual\";i:1;s:7:\"offline\";i:1;}s:11:\"gateways_v3\";a:2:{s:6:\"manual\";i:1;s:7:\"offline\";i:1;}s:15:\"default_gateway\";s:6:\"manual\";s:18:\"default_gateway_v3\";s:6:\"manual\";s:31:\"global_offline_donation_content\";s:331:\"<p>To make an offline donation toward this cause, follow these steps: </p><ol><li>Write a check payable to \"{sitename}\"</li><li>On the memo line of the check, indicate that the donation is for \"{sitename}\"</li><li>Mail your check to:</li></ol>{offline_mailing_address}<br><p>Your tax-deductible donation is greatly appreciated!</p>\";s:29:\"global_offline_donation_email\";s:331:\"<p>To make an offline donation toward this cause, follow these steps: </p><ol><li>Write a check payable to \"{sitename}\"</li><li>On the memo line of the check, indicate that the donation is for \"{sitename}\"</li><li>Mail your check to:</li></ol>{offline_mailing_address}<br><p>Your tax-deductible donation is greatly appreciated!</p>\";s:43:\"give_offline_donation_enable_billing_fields\";s:8:\"disabled\";s:21:\"donation_notification\";s:280:\"Hi there,
+
+This email is to inform you that a new donation has been made on your website: {site_url}.
+
+<strong>Donor:</strong> {name}
+<strong>Donation:</strong> {donation}
+<strong>Amount:</strong> {amount}
+<strong>Payment Method:</strong> {payment_method}
+
+Thank you,
+
+{sitename}
+\";s:16:\"donation_receipt\";s:394:\"Dear {name},
+
+Thank you for your donation. Your generosity is appreciated! Here are the details of your donation:
+
+<strong>Donor:</strong> {fullname}
+<strong>Donation:</strong> {donation}
+<strong>Donation Date:</strong> {date}
+<strong>Amount:</strong> {amount}
+<strong>Payment Method:</strong> {payment_method}
+<strong>Payment ID:</strong> {payment_id}
+
+{receipt_link}
+
+
+
+Sincerely,
+{sitename}
+\";s:23:\"donor_default_user_role\";s:10:\"give_donor\";s:20:\"form_page_url_prefix\";s:4:\"give\";s:29:\"_give_stripe_get_all_accounts\";a:0:{}s:18:\"setup_page_enabled\";s:7:\"enabled\";s:14:\"usage_tracking\";s:8:\"disabled\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_give/give.php'), WP_Hook->do_action, WP_Hook->apply_filters, Give->install, give_install, give_run_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 02:21:55 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 02:21:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 02:21:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 02:21:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 02:21:55 UTC] PHP Notice:  Undefined index: autoload in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 02:21:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 02:21:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 02:21:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 02:21:55 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 02:21:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 02:21:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 02:21:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 02:21:55 UTC] PHP Notice:  Undefined index: autoload in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 02:21:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 02:21:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 02:21:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 02:21:55 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 02:21:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 02:21:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 02:21:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 02:21:55 UTC] PHP Notice:  Undefined index: autoload in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 02:21:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 02:21:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 02:21:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 02:21:55 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sq
