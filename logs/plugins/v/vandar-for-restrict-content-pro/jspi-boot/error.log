@@ -2,274 +2,365 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [07-Apr-2025 21:47:25 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 21:47:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 21:47:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 21:47:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 21:47:34 UTC] Automatic updates starting...
-[07-Apr-2025 21:47:34 UTC]   Automatic plugin updates starting...
-[07-Apr-2025 21:47:34 UTC]   Automatic plugin updates complete.
-[07-Apr-2025 21:47:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [09-Apr-2025 11:24:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT * FROM wp_VST_registros LIMIT 1</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'j6:UM]Fu?wN85wN@O2SeT.1:,4ugF5lN7a(QwM]?^Wk5bpn^65Uq1uk9e4|nx@@&', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM `wp_VST_registros` LIMIT 1 | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'j6:UM]Fu?wN85wN@O2SeT.1:,4ugF5lN7a(QwM]?^Wk5bpn^65Uq1uk9e4|nx@@&amp;' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_VST_registros
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'j6:UM]Fu?wN85wN...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'j6:UM]Fu?wN85wN...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'j6:UM]Fu?wN85wN...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'j6:UM]Fu?wN85wN...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|1...', 'nonce')
+#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
+#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
+#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
+#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
+#18 /wordpress/wp-content/plugins/vstemplate-creator/require_once.php(1): wp_enqueue_script('jquery')
+#19 /wordpress/wp-content/plugins/vstemplate-creator/VSTEMPLATE-creator.php(307): require_once('/wordpress/wp-c...')
+#20 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#21 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('vstemplate-crea...')
+#22 /internal/eval.php(20): activate_plugin('vstemplate-crea...')
+#23 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'j6:UM]Fu?wN85wN@O2SeT.1:,4ugF5lN7a(QwM]?^Wk5bpn^65Uq1uk9e4|nx@@&', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/vstemplate-creator/VSTEMPLATE-creator.php'), require_once('/plugins/vstemplate-creator/require_once.php'), wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:24:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '}?z. <8aoo3qu,si#-W@>WKZ&)ek!j[&UgZ~#NA,W.?D,wR3,r3jvKkPY7W&D6r]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , '}?z. &lt;8aoo3qu,si#-W@&gt;WKZ&amp;)ek!j[&amp;UgZ~#NA,W.?D,wR3,r3jvKkPY7W&amp;D6r]' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', '}?z. <8aoo3qu,s...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', '}?z. <8aoo3qu,s...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', '}?z. <8aoo3qu,s...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', '}?z. <8aoo3qu,s...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|1...', 'nonce')
+#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
+#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
+#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
+#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
+#18 /wordpress/wp-content/plugins/vstemplate-creator/require_once.php(1): wp_enqueue_script('jquery')
+#19 /wordpress/wp-content/plugins/vstemplate-creator/VSTEMPLATE-creator.php(307): require_once('/wordpress/wp-c...')
+#20 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#21 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('vstemplate-crea...')
+#22 /internal/eval.php(20): activate_plugin('vstemplate-crea...')
+#23 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '}?z. <8aoo3qu,si#-W@>WKZ&)ek!j[&UgZ~#NA,W.?D,wR3,r3jvKkPY7W&D6r]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/vstemplate-creator/VSTEMPLATE-creator.php'), require_once('/plugins/vstemplate-creator/require_once.php'), wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:24:08 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:24:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:24:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:24:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:24:09 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 11:24:09 UTC] PHP Notice:  Function wp_register_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>wpvs-style</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 11:24:09 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 11:24:09 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>wpvs-style</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 11:24:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', ':z,$+JfV_|[^#,;gFW)_R]PRlA-|ptW_Tbm[jayXU,9e]m4z4<,m6qH/JV0}A3C-', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , ':z,$+JfV_|[^#,;gFW)_R]PRlA-|ptW_Tbm[jayXU,9e]m4z4&lt;,m6qH/JV0}A3C-' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', ':z,$+JfV_|[^#,;...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', ':z,$+JfV_|[^#,;...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', ':z,$+JfV_|[^#,;...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', ':z,$+JfV_|[^#,;...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|0...', 'nonce')
+#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
+#15 /wordpress/wp-includes/class-wp-hook.php(324): WP_Scripts->init('')
+#16 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#17 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#18 /wordpress/wp-settings.php(704): do_action('init')
+#19 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#20 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#21 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#22 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', ':z,$+JfV_|[^#,;gFW)_R]PRlA-|ptW_Tbm[jayXU,9e]m4z4<,m6qH/JV0}A3C-', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:24:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'v<!Xq!_;ty)5ll@(P_jBPo`+h<|PE~xtFhq<Av/#nmAO>#q!x;PrLQJ@g)87mhpR', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'v&lt;!Xq!_;ty)5ll@(P_jBPo`+h&lt;|PE~xtFhq&lt;Av/#nmAO&gt;#q!x;PrLQJ@g)87mhpR' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'v<!Xq!_;ty)5ll@...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'v<!Xq!_;ty)5ll@...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'v<!Xq!_;ty)5ll@...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'v<!Xq!_;ty)5ll@...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|0...', 'nonce')
+#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
+#15 /wordpress/wp-includes/class-wp-hook.php(324): WP_Scripts->init('')
+#16 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#17 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#18 /wordpress/wp-settings.php(704): do_action('init')
+#19 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#20 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#21 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#22 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'v<!Xq!_;ty)5ll@(P_jBPo`+h<|PE~xtFhq<Av/#nmAO>#q!x;PrLQJ@g)87mhpR', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:24:18 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 11:24:18 UTC] PHP Notice:  Function wp_register_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>wpvs-style</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 11:24:18 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 11:24:18 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>wpvs-style</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 11:24:27 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 11:24:27 UTC] PHP Notice:  Function wp_register_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>wpvs-style</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 11:24:27 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 11:24:27 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>wpvs-style</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 11:24:36 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/video-importer/php/class-refactored-video-importer-provider.php on line 30
+[09-Apr-2025 11:24:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('refactored_video_importer', 'a:4:{s:7:\"version\";s:5:\"1.6.2\";s:7:\"general\";a:1:{s:7:\"logging\";s:8:\"disabled\";}s:7:\"youtube\";a:1:{s:7:\"api_key\";s:0:\"\";}s:5:\"vimeo\";a:2:{s:9:\"client_id\";s:0:\"\";s:13:\"client_secret\";s:0:\"\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'refactored_video_importer' , 'a:4:{s:7:&quot;version&quot;;s:5:&quot;1.6.2&quot;;s:7:&quot;general&quot;;a:1:{s:7:&quot;logging&quot;;s:8:&quot;disabled&quot;;}s:7:&quot;youtube&quot;;a:1:{s:7:&quot;api_key&quot;;s:0:&quot;&quot;;}s:5:&quot;vimeo&quot;;a:2:{s:9:&quot;client_id&quot;;s:0:&quot;&quot;;s:13:&quot;client_secret&quot;;s:0:&quot;&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/video-importer/php/class-refactored-settings.php(50): add_option('refactored_vide...', Array)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Refactored_Settings_0_4_2->plugin_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_video-...', false)
+#9 /internal/eval.php(20): activate_plugin('video-importer/...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('refactored_video_importer', 'a:4:{s:7:\"version\";s:5:\"1.6.2\";s:7:\"general\";a:1:{s:7:\"logging\";s:8:\"disabled\";}s:7:\"youtube\";a:1:{s:7:\"api_key\";s:0:\"\";}s:5:\"vimeo\";a:2:{s:9:\"client_id\";s:0:\"\";s:13:\"client_secret\";s:0:\"\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_video-importer/video-importer.php'), WP_Hook->do_action, WP_Hook->apply_filters, Refactored_Settings_0_4_2->plugin_activation, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:24:36 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:24:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:24:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:24:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:24:37 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/video-importer/php/class-refactored-video-importer-provider.php on line 30
+[09-Apr-2025 11:24:46 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/video-importer/php/class-refactored-video-importer-provider.php on line 30
+[09-Apr-2025 11:24:55 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/video-importer/php/class-refactored-video-importer-provider.php on line 30
+[09-Apr-2025 11:25:26 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:25:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:25:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:25:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:25:53 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:25:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:25:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:25:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:25:55 UTC] PHP Warning:  Undefined array key "session_key" in /wordpress/wp-content/plugins/virtual-shop-for-woocommecre/wc_virtual_shop.php on line 227
+[09-Apr-2025 11:25:55 UTC] PHP Warning:  Undefined array key "session_key" in /wordpress/wp-content/plugins/virtual-shop-for-woocommecre/wc_virtual_shop.php on line 229
+[09-Apr-2025 11:25:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wc_vr_shop_session WHERE session_key = ''</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_wc_vr_shop_session` WHERE `session_key` = '' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_wc_vr_shop_session
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
-#3 /wordpress/wp-content/plugins/visitors-app/includes/database.php(8): WP_SQLite_DB->query('SELECT * FROM w...')
-#4 /wordpress/wp-content/plugins/visitors-app/includes/activate_deactivate.php(9): VST_create_table_records()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): VST_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/virtual-shop-for-woocommecre/wc_virtual_shop.php(248): wpdb->get_row('SELECT * FROM w...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): wc_vrshop_validate_session('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#9 /internal/eval.php(20): activate_plugin('visitors-app/Vi...')
+#8 /wordpress/wp-settings.php(704): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query SELECT * FROM wp_wc_vr_shop_session WHERE session_key = '' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wc_vrshop_validate_session, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:26:04 UTC] PHP Warning:  Undefined array key "session_key" in /wordpress/wp-content/plugins/virtual-shop-for-woocommecre/wc_virtual_shop.php on line 227
+[09-Apr-2025 11:26:04 UTC] PHP Warning:  Undefined array key "session_key" in /wordpress/wp-content/plugins/virtual-shop-for-woocommecre/wc_virtual_shop.php on line 229
+[09-Apr-2025 11:26:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wc_vr_shop_session WHERE session_key = ''</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_wc_vr_shop_session WHERE session_key = :param0  | parameters: </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wc_vr_shop_session.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/virtual-shop-for-woocommecre/wc_virtual_shop.php(248): wpdb->get_row('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wc_vrshop_validate_session('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #10 {main}</pre>
- for query SELECT * FROM wp_VST_registros LIMIT 1 made by activate_plugin, do_action('activate_visitors-app/Visitors.php'), WP_Hook->do_action, WP_Hook->apply_filters, VST_activate, VST_create_table_records, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 21:47:42 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 21:47:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 21:47:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 21:47:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 21:47:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SELECT * FROM wp_wc_vr_shop_session WHERE session_key = '' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wc_vrshop_validate_session, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:26:12 UTC] PHP Warning:  Undefined array key "session_key" in /wordpress/wp-content/plugins/virtual-shop-for-woocommecre/wc_virtual_shop.php on line 227
+[09-Apr-2025 11:26:12 UTC] PHP Warning:  Undefined array key "session_key" in /wordpress/wp-content/plugins/virtual-shop-for-woocommecre/wc_virtual_shop.php on line 229
+[09-Apr-2025 11:26:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT * FROM wp_VST_registros LIMIT 1</p>
+<p>SELECT * FROM wp_wc_vr_shop_session WHERE session_key = ''</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_VST_registros LIMIT 1 | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_wc_vr_shop_session WHERE session_key = :param0  | parameters: </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_VST_registros.
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wc_vr_shop_session.
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/visitors-app/includes/database.php(8): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/visitors-app/includes/activate_deactivate.php(9): VST_create_table_records()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): VST_activate(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/virtual-shop-for-woocommecre/wc_virtual_shop.php(248): wpdb->get_row('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wc_vrshop_validate_session('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#7 /internal/eval.php(20): activate_plugin('visitors-app/Vi...')
-#8 {main}</pre>
- for query SELECT * FROM wp_VST_registros LIMIT 1 made by activate_plugin, do_action('activate_visitors-app/Visitors.php'), WP_Hook->do_action, WP_Hook->apply_filters, VST_activate, VST_create_table_records, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 21:47:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-					ALTER TABLE `wp_VST_registros` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT, add PRIMARY KEY (`id`);
-				</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_VST_registros, id, int(11)</li>
-<li>Executing: DROP TRIGGER IF EXISTS &quot;__wp_VST_registros_id_on_update__&quot; | (no parameters)</li>
-<li>Executing: SELECT sql FROM sqlite_master WHERE type=&quot;table&quot; AND name=:table | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_index_list(&quot;wp_VST_registros&quot;) as l; | (no parameters)</li>
-<li>Executing: CREATE TABLE `_tmp__wp_VST_registros_67210617` as SELECT * FROM `wp_VST_registros` | (no parameters)</li>
-<li>Executing: DROP TABLE `wp_VST_registros` | (no parameters)</li>
-<li>Executing: CREATE TABLE &quot;wp_VST_registros&quot; (
-       &quot;id&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;patch&quot; text DEFAULT NULL COLLATE NOCASE,
-&quot;datetime&quot; text DEFAULT NULL COLLATE NOCASE,
-&quot;useragent&quot; text DEFAULT NULL COLLATE NOCASE,
-&quot;ip&quot; text DEFAULT NULL COLLATE NOCASE)
- | (no parameters)</li>
-<li>Executing: INSERT INTO wp_VST_registros SELECT * FROM _tmp__wp_VST_registros_67210617 | (no parameters)</li>
-<li>Executing: DROP TABLE `_tmp__wp_VST_registros_67210617` | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_VST_registros, wp_VST_registros__(, PRIMARY</li>
-<li>Executing: CREATE PRIMARY KEY &quot;wp_VST_registros__(&quot; ON &quot;wp_VST_registros&quot; ();
-				 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/visitors-app/includes/database.php(19): WP_SQLite_DB->query('\r\n\t\t\t\t\tALTER TA...')
-#2 /wordpress/wp-content/plugins/visitors-app/includes/activate_deactivate.php(9): VST_create_table_records()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): VST_activate(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#7 /internal/eval.php(20): activate_plugin('visitors-app/Vi...')
-#8 {main}</pre>
- for query 
-					ALTER TABLE `wp_VST_registros` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT, add PRIMARY KEY (`id`);
-				 made by activate_plugin, do_action('activate_visitors-app/Visitors.php'), WP_Hook->do_action, WP_Hook->apply_filters, VST_activate, VST_create_table_records, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 21:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM wp_VST_registros LIMIT 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM wp_VST_registros LIMIT 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_VST_registros.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/visitors-app/includes/database.php(8): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/visitors-app/includes/activate_deactivate.php(9): VST_create_table_records()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): VST_activate(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#7 /internal/eval.php(20): activate_plugin('visitors-app/Vi...')
-#8 {main}</pre>
- for query SELECT * FROM wp_VST_registros LIMIT 1 made by activate_plugin, do_action('activate_visitors-app/Visitors.php'), WP_Hook->do_action, WP_Hook->apply_filters, VST_activate, VST_create_table_records, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 21:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>
-					ALTER TABLE `wp_VST_registros` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT, add PRIMARY KEY (`id`);
-				</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_VST_registros, id, int(11)</li>
-<li>Executing: DROP TRIGGER IF EXISTS &quot;__wp_VST_registros_id_on_update__&quot; | (no parameters)</li>
-<li>Executing: SELECT sql FROM sqlite_master WHERE type=&quot;table&quot; AND name=:table | (no parameters)</li>
-<li>Executing: SELECT * FROM pragma_index_list(&quot;wp_VST_registros&quot;) as l; | (no parameters)</li>
-<li>Executing: CREATE TABLE `_tmp__wp_VST_registros_86166579` as SELECT * FROM `wp_VST_registros` | (no parameters)</li>
-<li>Executing: DROP TABLE `wp_VST_registros` | (no parameters)</li>
-<li>Executing: CREATE TABLE &quot;wp_VST_registros&quot; (
-       &quot;id&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;patch&quot; text DEFAULT NULL COLLATE NOCASE,
-&quot;datetime&quot; text DEFAULT NULL COLLATE NOCASE,
-&quot;useragent&quot; text DEFAULT NULL COLLATE NOCASE,
-&quot;ip&quot; text DEFAULT NULL COLLATE NOCASE)
- | (no parameters)</li>
-<li>Executing: INSERT INTO wp_VST_registros SELECT * FROM _tmp__wp_VST_registros_86166579 | (no parameters)</li>
-<li>Executing: DROP TABLE `_tmp__wp_VST_registros_86166579` | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_VST_registros, wp_VST_registros__(, PRIMARY</li>
-<li>Executing: CREATE PRIMARY KEY &quot;wp_VST_registros__(&quot; ON &quot;wp_VST_registros&quot; ();
-				 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "PRIMARY": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/visitors-app/includes/database.php(19): WP_SQLite_DB->query('\r\n\t\t\t\t\tALTER TA...')
-#2 /wordpress/wp-content/plugins/visitors-app/includes/activate_deactivate.php(9): VST_create_table_records()
-#3 /wordpress/wp-includes/class-wp-hook.php(324): VST_activate(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#7 /internal/eval.php(20): activate_plugin('visitors-app/Vi...')
-#8 {main}</pre>
- for query 
-					ALTER TABLE `wp_VST_registros` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT, add PRIMARY KEY (`id`);
-				 made by activate_plugin, do_action('activate_visitors-app/Visitors.php'), WP_Hook->do_action, WP_Hook->apply_filters, VST_activate, VST_create_table_records, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 21:47:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ahcfree_new_updates', '2025-04-07', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ahcfree_new_updates' , '2025-04-07' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php(199): add_option('ahcfree_new_upd...', '2025-04-07')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('visitors-traffi...')
-#7 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#8 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ahcfree_new_updates', '2025-04-07', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 21:47:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ahcfree_wp_hits_counter_options', 'a:4:{s:11:\"ahc_version\";s:3:\"1.0\";s:19:\"available_languages\";a:2:{s:2:\"ar\";s:8:\"عربي\";s:2:\"en\";s:7:\"English\";}s:8:\"ahc_lang\";s:2:\"en\";s:23:\"user_roles_to_not_track\";a:5:{s:13:\"administrator\";b:1;s:6:\"editor\";b:1;s:6:\"author\";b:1;s:11:\"contributor\";b:1;s:10:\"subscriber\";b:0;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ahcfree_wp_hits_counter_options' , 'a:4:{s:11:&quot;ahc_version&quot;;s:3:&quot;1.0&quot;;s:19:&quot;available_languages&quot;;a:2:{s:2:&quot;ar&quot;;s:8:&quot;عربي&quot;;s:2:&quot;en&quot;;s:7:&quot;English&quot;;}s:8:&quot;ahc_lang&quot;;s:2:&quot;en&quot;;s:23:&quot;user_roles_to_not_track&quot;;a:5:{s:13:&quot;administrator&quot;;b:1;s:6:&quot;editor&quot;;b:1;s:6:&quot;author&quot;;b:1;s:11:&quot;contributor&quot;;b:1;s:10:&quot;subscriber&quot;;b:0;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(609): add_option('ahcfree_wp_hits...', Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#9 /internal/eval.php(20): activate_plugin('visitors-traffi...')
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ahcfree_wp_hits_counter_options', 'a:4:{s:11:\"ahc_version\";s:3:\"1.0\";s:19:\"available_languages\";a:2:{s:2:\"ar\";s:8:\"عربي\";s:2:\"en\";s:7:\"English\";}s:8:\"ahc_lang\";s:2:\"en\";s:23:\"user_roles_to_not_track\";a:5:{s:13:\"administrator\";b:1;s:6:\"editor\";b:1;s:6:\"author\";b:1;s:11:\"contributor\";b:1;s:10:\"subscriber\";b:0;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 21:47:56 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 21:47:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 21:47:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 21:47:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 21:47:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SELECT * FROM wp_wc_vr_shop_session WHERE session_key = '' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wc_vrshop_validate_session, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:26:21 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:26:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:26:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:26:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:26:21 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:26:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:26:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:26:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:26:21 UTC] PHP Warning:  Undefined variable $charset_collate in /wordpress/wp-content/plugins/visitor-map/index.php on line 84
+[09-Apr-2025 11:26:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ahcfree_new_updates', '2025-04-07', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('activetime', '100', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -281,7 +372,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ahcfree_new_updates' , '2025-04-07' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'activetime' , '100' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -293,56 +384,19 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php(199): add_option('ahcfree_new_upd...', '2025-04-07')
-#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ahcfree_new_updates', '2025-04-07', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 21:47:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ahcfree_custom_timezone', 'Europe/London', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ahcfree_custom_timezone' , 'Europe/London' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ahcfree_custom_...', 'Europe/London', '', 'auto')
-#5 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php(53): update_option('ahcfree_custom_...', 'Europe/London')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_timezone_and_send_request('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/option.php(921): add_option('activetime', 100, '', 'auto')
+#5 /wordpress/wp-content/plugins/visitor-map/index.php(89): update_option('activetime', 100)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): Visitor_map_plugin_activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ahcfree_custom_timezone', 'Europe/London', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_timezone_and_send_request, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 21:47:56 UTC] Sending first visit request...
-[07-Apr-2025 21:47:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
+#10 /internal/eval.php(20): activate_plugin('visitor-map/ind...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('activetime', '100', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_visitor-map/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, Visitor_map_plugin_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:26:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ahcfree_first_time_setup', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('storedays', '30', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -354,7 +408,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ahcfree_first_time_setup' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'storedays' , '30' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -366,21 +420,25 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ahcfree_first_t...', '0', '', 'auto')
-#5 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php(59): update_option('ahcfree_first_t...', '0')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_timezone_and_send_request('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/option.php(921): add_option('storedays', 30, '', 'auto')
+#5 /wordpress/wp-content/plugins/visitor-map/index.php(90): update_option('storedays', 30)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): Visitor_map_plugin_activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ahcfree_first_time_setup', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_timezone_and_send_request, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 21:47:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
+#10 /internal/eval.php(20): activate_plugin('visitor-map/ind...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('storedays', '30', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_visitor-map/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, Visitor_map_plugin_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:26:21 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:26:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:26:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:26:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:26:22 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>visitor_map_style</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 11:26:22 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 11:26:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_ahcfree_vtrts_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_visitor_map_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -392,7 +450,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_ahcfree_vtrts_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_visitor_map_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -404,8 +462,8 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_ahcfree_...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_ahcfree_...', Array)
+#4 /wordpress/wp-includes/option.php(921): add_option('widget_visitor_...', Array, '', 'auto')
+#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_visitor_...', Array)
 #6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
 #7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
 #8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
@@ -421,314 +479,923 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
 #19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_ahcfree_vtrts_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 21:48:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_visitor_map_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:26:30 UTC] PHP Warning:  Undefined variable $charset_collate in /wordpress/wp-content/plugins/visitor-map/index.php on line 84
+[09-Apr-2025 11:26:31 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>visitor_map_style</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 11:26:31 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 11:26:39 UTC] PHP Warning:  Undefined variable $charset_collate in /wordpress/wp-content/plugins/visitor-map/index.php on line 84
+[09-Apr-2025 11:26:40 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>visitor_map_style</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 11:26:40 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 11:26:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT set_hits_days, set_ajax_check, set_ips, set_google_map FROM ahc_settings where site_id=1</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('vandapardakht_do_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT set_hits_days, set_ajax_check, set_ips, set_google_map FROM ahc_settings where site_id=1 | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'vandapardakht_do_activation_redirect' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: ahc_settings.
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT set_hits...')
-#2 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(422): wpdb->get_results('SELECT set_hits...', 'OBJECT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/init.php(35): ahcfree_get_save_settings()
-#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php(17): require_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('visitors-traffi...')
-#7 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#8 {main}</pre>
- for query SELECT set_hits_days, set_ajax_check, set_ips, set_google_map FROM ahc_settings where site_id=1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), require_once('/plugins/visitors-traffic-real-time-statistics/init.php'), ahcfree_get_save_settings, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 21:48:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT COUNT(  `ctr_id` ) cnt FROM ahc_countries where site_id = 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT(  `ctr_id` ) cnt FROM ahc_countries where site_id = 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such column: site_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT COUNT(  ...')
-#2 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(550): wpdb->get_results('SELECT COUNT(  ...', 'OBJECT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(628): ahcfree_getCountriesCount(1)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#8 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#9 {main}</pre>
- for query SELECT COUNT(  `ctr_id` ) cnt FROM ahc_countries where site_id = 1 made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_getCountriesCount, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 21:48:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `ahc_countries` (`ctr_name`, `ctr_internet_code`, `ctr_latitude`, `ctr_longitude`, `site_id`) VALUES ('Anonymous Proxy', 'A1', NULL, NULL, 1)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `ahc_countries` (`ctr_name`, `ctr_internet_code`, `ctr_latitude`, `ctr_longitude`, `site_id`) VALUES (:param0 , :param1 , NULL, NULL, 1) | parameters: Anonymous Proxy, A1</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 table ahc_countries has no column named site_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `ah...')
-#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('ahc_countries', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(1324): wpdb->insert('ahc_countries', Array, Array)
-#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(629): ahcfree_insert_countries_into_table(Array, Array, 1)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/vandapardakht-payment-for-woocommerce/vandapardakht.php(249): add_option('vandapardakht_d...', true)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): {closure}(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#9 /internal/eval.php(20): activate_plugin('visitors-traffi...')
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vandap...', false)
+#9 /internal/eval.php(20): activate_plugin('vandapardakht-p...')
 #10 {main}</pre>
- for query INSERT INTO `ahc_countries` (`ctr_name`, `ctr_internet_code`, `ctr_latitude`, `ctr_longitude`, `site_id`) VALUES ('Anonymous Proxy', 'A1', NULL, NULL, 1) made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_insert_countries_into_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 21:48:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('vandapardakht_do_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_vandapardakht-payment-for-woocommerce/vandapardakht.php'), WP_Hook->do_action, WP_Hook->apply_filters, {closure}, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:26:49 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:26:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:26:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:26:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:27:16 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:27:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:27:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:27:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:27:18 UTC] PHP Deprecated:  Required parameter $message follows optional parameter $title in /wordpress/wp-content/plugins/vc-owl/vsp-framework/functions/admin-notices-functions.php on line 103
+[09-Apr-2025 11:27:18 UTC] PHP Deprecated:  Required parameter $message follows optional parameter $title in /wordpress/wp-content/plugins/vc-owl/vsp-framework/functions/admin-notices-functions.php on line 123
+[09-Apr-2025 11:27:18 UTC] PHP Deprecated:  Required parameter $message follows optional parameter $title in /wordpress/wp-content/plugins/vc-owl/vsp-framework/functions/admin-notices-functions.php on line 143
+[09-Apr-2025 11:27:18 UTC] PHP Deprecated:  Required parameter $instance follows optional parameter $key in /wordpress/wp-content/plugins/vc-owl/vsp-framework/core/abstract/class-handler.php on line 213
+[09-Apr-2025 11:27:18 UTC] PHP Deprecated:  Required parameter $defaults follows optional parameter $new in /wordpress/wp-content/plugins/vc-owl/vsp-framework/core/abstract/class-handler.php on line 257
+[09-Apr-2025 11:27:18 UTC] PHP Fatal error:  Uncaught Error: Class "WPBakeryShortCode" not found in /wordpress/wp-content/plugins/vc-owl/includes/class-owl-container.php:9
+Stack trace:
+#0 /wordpress/wp-content/plugins/vc-owl/vsp-framework/vsp-functions.php(200): require()
+#1 /wordpress/wp-content/plugins/vc-owl/bootstrap.php(113): vsp_load_file('/wordpress/wp-c...')
+#2 /wordpress/wp-content/plugins/vc-owl/vsp-framework/core/class-framework.php(194): Visual_Composer_OWL->wp_init()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): VSP_Framework->__wp_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /wordpress/wp-content/plugins/vc-owl/includes/class-owl-container.php on line 9
+[09-Apr-2025 11:27:28 UTC] PHP Deprecated:  Required parameter $message follows optional parameter $title in /wordpress/wp-content/plugins/vc-owl/vsp-framework/functions/admin-notices-functions.php on line 103
+[09-Apr-2025 11:27:28 UTC] PHP Deprecated:  Required parameter $message follows optional parameter $title in /wordpress/wp-content/plugins/vc-owl/vsp-framework/functions/admin-notices-functions.php on line 123
+[09-Apr-2025 11:27:28 UTC] PHP Deprecated:  Required parameter $message follows optional parameter $title in /wordpress/wp-content/plugins/vc-owl/vsp-framework/functions/admin-notices-functions.php on line 143
+[09-Apr-2025 11:27:28 UTC] PHP Deprecated:  Required parameter $instance follows optional parameter $key in /wordpress/wp-content/plugins/vc-owl/vsp-framework/core/abstract/class-handler.php on line 213
+[09-Apr-2025 11:27:28 UTC] PHP Deprecated:  Required parameter $defaults follows optional parameter $new in /wordpress/wp-content/plugins/vc-owl/vsp-framework/core/abstract/class-handler.php on line 257
+[09-Apr-2025 11:27:28 UTC] PHP Fatal error:  Uncaught Error: Class "WPBakeryShortCode" not found in /wordpress/wp-content/plugins/vc-owl/includes/class-owl-container.php:9
+Stack trace:
+#0 /wordpress/wp-content/plugins/vc-owl/vsp-framework/vsp-functions.php(200): require()
+#1 /wordpress/wp-content/plugins/vc-owl/bootstrap.php(113): vsp_load_file('/wordpress/wp-c...')
+#2 /wordpress/wp-content/plugins/vc-owl/vsp-framework/core/class-framework.php(194): Visual_Composer_OWL->wp_init()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): VSP_Framework->__wp_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /wordpress/wp-content/plugins/vc-owl/includes/class-owl-container.php on line 9
+[09-Apr-2025 11:27:40 UTC] PHP Deprecated:  Required parameter $message follows optional parameter $title in /wordpress/wp-content/plugins/vc-owl/vsp-framework/functions/admin-notices-functions.php on line 103
+[09-Apr-2025 11:27:40 UTC] PHP Deprecated:  Required parameter $message follows optional parameter $title in /wordpress/wp-content/plugins/vc-owl/vsp-framework/functions/admin-notices-functions.php on line 123
+[09-Apr-2025 11:27:40 UTC] PHP Deprecated:  Required parameter $message follows optional parameter $title in /wordpress/wp-content/plugins/vc-owl/vsp-framework/functions/admin-notices-functions.php on line 143
+[09-Apr-2025 11:27:40 UTC] PHP Deprecated:  Required parameter $instance follows optional parameter $key in /wordpress/wp-content/plugins/vc-owl/vsp-framework/core/abstract/class-handler.php on line 213
+[09-Apr-2025 11:27:40 UTC] PHP Deprecated:  Required parameter $defaults follows optional parameter $new in /wordpress/wp-content/plugins/vc-owl/vsp-framework/core/abstract/class-handler.php on line 257
+[09-Apr-2025 11:27:40 UTC] PHP Fatal error:  Uncaught Error: Class "WPBakeryShortCode" not found in /wordpress/wp-content/plugins/vc-owl/includes/class-owl-container.php:9
+Stack trace:
+#0 /wordpress/wp-content/plugins/vc-owl/vsp-framework/vsp-functions.php(200): require()
+#1 /wordpress/wp-content/plugins/vc-owl/bootstrap.php(113): vsp_load_file('/wordpress/wp-c...')
+#2 /wordpress/wp-content/plugins/vc-owl/vsp-framework/core/class-framework.php(194): Visual_Composer_OWL->wp_init()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): VSP_Framework->__wp_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /wordpress/wp-content/plugins/vc-owl/includes/class-owl-container.php on line 9
+[09-Apr-2025 11:27:49 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:27:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:27:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:27:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:28:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT COUNT(  `vtm_id` ) cnt FROM ahc_visits_time where site_id =1</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('item_details_page', 'Done', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT(  `vtm_id` ) cnt FROM ahc_visits_time where site_id =1 | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'item_details_page' , 'Done' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such column: site_id.
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT COUNT(  ...')
-#2 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(251): wpdb->get_results('SELECT COUNT(  ...', 'OBJECT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(631): ahcfree_getVisitsTime(1)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#8 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#9 {main}</pre>
- for query SELECT COUNT(  `vtm_id` ) cnt FROM ahc_visits_time where site_id =1 made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_getVisitsTime, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 21:48:00 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php on line 253
-[07-Apr-2025 21:48:00 UTC] PHP Warning:  Attempt to read property "cnt" on null in /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php on line 253
-[07-Apr-2025 21:48:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('item_details_pa...', 'Done', '', 'auto')
+#5 /wordpress/wp-content/plugins/vf-expansion/inc/activator.php(26): update_option('item_details_pa...', 'Done')
+#6 /wordpress/wp-content/plugins/vf-expansion/vf-expansion.php(33): Vf_Expansion_Activator::activate()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): vf_expansion_activates(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vf-exp...', false)
+#11 /internal/eval.php(20): activate_plugin('vf-expansion/vf...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('item_details_page', 'Done', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_vf-expansion/vf-expansion.php'), WP_Hook->do_action, WP_Hook->apply_filters, vf_expansion_activates, Vf_Expansion_Activator::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:28:36 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:28:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:28:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:28:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:29:24 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:29:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:29:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:29:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:29:52 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:29:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:29:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:29:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:29:53 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>vindi-payment-gateway</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 11:30:02 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>vindi-payment-gateway</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 11:30:11 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>vindi-payment-gateway</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 11:30:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/visfeed/visfeed.php on line 39
+[09-Apr-2025 11:30:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `ahc_visits_time` (`vtm_time_from`, `vtm_time_to`, `vtm_visitors`, `site_id`) VALUES ('00:00:00', '00:59:59', 0, 1)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('visfeed_Plugin_options', 'a:14:{s:25:\"visfeed_Token_text_string\";s:19:\"go to visbridge.com\";s:27:\"visfeed_Ownerid_text_string\";s:3:\"263\";s:22:\"visfeed_Instructbox_id\";s:15:\"#bookingRequest\";s:35:\"visfeed_bookingrequestInstruct_text\";s:111:\"Click and drag to create a single booking request. On mobile, touch and hold to select, rotate to change views.\";s:30:\"visfeed_bookingdialogText_text\";s:96:\"This Request will be processed immediately and a confirmation will be sent to your mobile phone.\";s:38:\"visfeed_bookingdialogCompleteText_text\";s:73:\"Your confirmation will be texted to you along with your door access code.\";s:23:\"visfeed_RestoreDef_chk1\";s:2:\"on\";s:23:\"visfeed_CalendarDiv_chk\";s:2:\"on\";s:23:\"visfeed_InstructDiv_chk\";s:2:\"on\";s:26:\"visfeed_InstructPicker_chk\";s:2:\"on\";s:24:\"visfeed_stripe_data_name\";s:9:\"Visbridge\";s:25:\"visfeed_stripe_data_image\";s:35:\"http://image location for your logo\";s:28:\"visfeed_Confirmation_BusName\";s:9:\"Visbridge\";s:31:\"visfeed_Confirmation_Email_from\";s:19:\"admin@visbridge.com\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `ahc_visits_time` (`vtm_time_from`, `vtm_time_to`, `vtm_visitors`, `site_id`) VALUES (:param0 , :param1 , 0, 1) | parameters: 00:00:00, 00:59:59</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'visfeed_Plugin_options' , 'a:14:{s:25:&quot;visfeed_Token_text_string&quot;;s:19:&quot;go to visbridge.com&quot;;s:27:&quot;visfeed_Ownerid_text_string&quot;;s:3:&quot;263&quot;;s:22:&quot;visfeed_Instructbox_id&quot;;s:15:&quot;#bookingRequest&quot;;s:35:&quot;visfeed_bookingrequestInstruct_text&quot;;s:111:&quot;Click and drag to create a single booking request. On mobile, touch and hold to select, rotate to change views.&quot;;s:30:&quot;visfeed_bookingdialogText_text&quot;;s:96:&quot;This Request will be processed immediately and a confirmation will be sent to your mobile phone.&quot;;s:38:&quot;visfeed_bookingdialogCompleteText_text&quot;;s:73:&quot;Your confirmation will be texted to you along with your door access code.&quot;;s:23:&quot;visfeed_RestoreDef_chk1&quot;;s:2:&quot;on&quot;;s:23:&quot;visfeed_CalendarDiv_chk&quot;;s:2:&quot;on&quot;;s:23:&quot;visfeed_InstructDiv_chk&quot;;s:2:&quot;on&quot;;s:26:&quot;visfeed_InstructPicker_chk&quot;;s:2:&quot;on&quot;;s:24:&quot;visfeed_stripe_data_name&quot;;s:9:&quot;Visbridge&quot;;s:25:&quot;visfeed_stripe_data_image&quot;;s:35:&quot;http://image location for your logo&quot;;s:28:&quot;visfeed_Confirmation_BusName&quot;;s:9:&quot;Visbridge&quot;;s:31:&quot;visfeed_Confirmation_Email_from&quot;;s:19:&quot;admin@visbridge.com&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 table ahc_visits_time has no column named site_id.
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `ah...')
-#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('ahc_visits_time', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(1476): wpdb->insert('ahc_visits_time', Array, Array)
-#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(632): ahcfree_insert_visit_times_into_table(Array, 1)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('visfeed_Plugin_...', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/visfeed/visfeed.php(41): update_option('visfeed_Plugin_...', Array)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): visfeed_add_defaults_fn(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visfee...', false)
+#10 /internal/eval.php(20): activate_plugin('visfeed/visfeed...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('visfeed_Plugin_options', 'a:14:{s:25:\"visfeed_Token_text_string\";s:19:\"go to visbridge.com\";s:27:\"visfeed_Ownerid_text_string\";s:3:\"263\";s:22:\"visfeed_Instructbox_id\";s:15:\"#bookingRequest\";s:35:\"visfeed_bookingrequestInstruct_text\";s:111:\"Click and drag to create a single booking request. On mobile, touch and hold to select, rotate to change views.\";s:30:\"visfeed_bookingdialogText_text\";s:96:\"This Request will be processed immediately and a confirmation will be sent to your mobile phone.\";s:38:\"visfeed_bookingdialogCompleteText_text\";s:73:\"Your confirmation will be texted to you along with your door access code.\";s:23:\"visfeed_RestoreDef_chk1\";s:2:\"on\";s:23:\"visfeed_CalendarDiv_chk\";s:2:\"on\";s:23:\"visfeed_InstructDiv_chk\";s:2:\"on\";s:26:\"visfeed_InstructPicker_chk\";s:2:\"on\";s:24:\"visfeed_stripe_data_name\";s:9:\"Visbridge\";s:25:\"visfeed_stripe_data_image\";s:35:\"http://image location for your logo\";s:28:\"visfeed_Confirmation_BusName\";s:9:\"Visbridge\";s:31:\"visfeed_Confirmation_Email_from\";s:19:\"admin@visbridge.com\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_visfeed/visfeed.php'), WP_Hook->do_action, WP_Hook->apply_filters, visfeed_add_defaults_fn, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:30:19 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:30:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:30:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:30:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:30:28 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/visfeed/visfeed.php on line 39
+[09-Apr-2025 11:30:38 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/visfeed/visfeed.php on line 39
+[09-Apr-2025 11:31:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('vod_infomaniak', 'a:18:{s:5:\"width\";i:480;s:6:\"height\";i:360;s:8:\"template\";s:7:\"{video}\";s:7:\"stretch\";i:0;s:4:\"loop\";i:0;s:8:\"autoplay\";i:0;s:7:\"privacy\";i:0;s:5:\"wtext\";s:0:\"\";s:6:\"wtitle\";s:0:\"\";s:3:\"tag\";s:3:\"vod\";s:6:\"iframe\";s:2:\"on\";s:18:\"updateFilterFolder\";s:0:\"\";s:17:\"vod_api_connected\";s:3:\"off\";s:21:\"vod_right_integration\";i:1;s:16:\"vod_right_upload\";i:1;s:16:\"vod_right_player\";i:1;s:18:\"vod_right_playlist\";i:1;s:22:\"vod_api_valid_callback\";s:3:\"off\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'vod_infomaniak' , 'a:18:{s:5:&quot;width&quot;;i:480;s:6:&quot;height&quot;;i:360;s:8:&quot;template&quot;;s:7:&quot;{video}&quot;;s:7:&quot;stretch&quot;;i:0;s:4:&quot;loop&quot;;i:0;s:8:&quot;autoplay&quot;;i:0;s:7:&quot;privacy&quot;;i:0;s:5:&quot;wtext&quot;;s:0:&quot;&quot;;s:6:&quot;wtitle&quot;;s:0:&quot;&quot;;s:3:&quot;tag&quot;;s:3:&quot;vod&quot;;s:6:&quot;iframe&quot;;s:2:&quot;on&quot;;s:18:&quot;updateFilterFolder&quot;;s:0:&quot;&quot;;s:17:&quot;vod_api_connected&quot;;s:3:&quot;off&quot;;s:21:&quot;vod_right_integration&quot;;i:1;s:16:&quot;vod_right_upload&quot;;i:1;s:16:&quot;vod_right_player&quot;;i:1;s:18:&quot;vod_right_playlist&quot;;i:1;s:22:&quot;vod_api_valid_callback&quot;;s:3:&quot;off&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('vod_infomaniak', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(657): update_option('vod_infomaniak', Array)
+#6 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(29): EasyVod->get_options()
+#7 /wordpress/wp-content/plugins/vod-infomaniak/vod.php(15): EasyVod->__construct()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('vod-infomaniak/...')
+#10 /internal/eval.php(20): activate_plugin('vod-infomaniak/...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('vod_infomaniak', 'a:18:{s:5:\"width\";i:480;s:6:\"height\";i:360;s:8:\"template\";s:7:\"{video}\";s:7:\"stretch\";i:0;s:4:\"loop\";i:0;s:8:\"autoplay\";i:0;s:7:\"privacy\";i:0;s:5:\"wtext\";s:0:\"\";s:6:\"wtitle\";s:0:\"\";s:3:\"tag\";s:3:\"vod\";s:6:\"iframe\";s:2:\"on\";s:18:\"updateFilterFolder\";s:0:\"\";s:17:\"vod_api_connected\";s:3:\"off\";s:21:\"vod_right_integration\";i:1;s:16:\"vod_right_upload\";i:1;s:16:\"vod_right_player\";i:1;s:18:\"vod_right_playlist\";i:1;s:22:\"vod_api_valid_callback\";s:3:\"off\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/vod-infomaniak/vod.php'), EasyVod->__construct, EasyVod->get_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:31:22 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:31:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:31:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:31:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:31:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('vod_infomaniak', 'a:18:{s:5:\"width\";i:480;s:6:\"height\";i:360;s:8:\"template\";s:7:\"{video}\";s:7:\"stretch\";i:0;s:4:\"loop\";i:0;s:8:\"autoplay\";i:0;s:7:\"privacy\";i:0;s:5:\"wtext\";s:0:\"\";s:6:\"wtitle\";s:0:\"\";s:3:\"tag\";s:3:\"vod\";s:6:\"iframe\";s:2:\"on\";s:18:\"updateFilterFolder\";s:0:\"\";s:17:\"vod_api_connected\";s:3:\"off\";s:21:\"vod_right_integration\";i:1;s:16:\"vod_right_upload\";i:1;s:16:\"vod_right_player\";i:1;s:18:\"vod_right_playlist\";i:1;s:22:\"vod_api_valid_callback\";s:3:\"off\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'vod_infomaniak' , 'a:18:{s:5:&quot;width&quot;;i:480;s:6:&quot;height&quot;;i:360;s:8:&quot;template&quot;;s:7:&quot;{video}&quot;;s:7:&quot;stretch&quot;;i:0;s:4:&quot;loop&quot;;i:0;s:8:&quot;autoplay&quot;;i:0;s:7:&quot;privacy&quot;;i:0;s:5:&quot;wtext&quot;;s:0:&quot;&quot;;s:6:&quot;wtitle&quot;;s:0:&quot;&quot;;s:3:&quot;tag&quot;;s:3:&quot;vod&quot;;s:6:&quot;iframe&quot;;s:2:&quot;on&quot;;s:18:&quot;updateFilterFolder&quot;;s:0:&quot;&quot;;s:17:&quot;vod_api_connected&quot;;s:3:&quot;off&quot;;s:21:&quot;vod_right_integration&quot;;i:1;s:16:&quot;vod_right_upload&quot;;i:1;s:16:&quot;vod_right_player&quot;;i:1;s:18:&quot;vod_right_playlist&quot;;i:1;s:22:&quot;vod_api_valid_callback&quot;;s:3:&quot;off&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('vod_infomaniak', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(657): update_option('vod_infomaniak', Array)
+#6 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(29): EasyVod->get_options()
+#7 /wordpress/wp-content/plugins/vod-infomaniak/vod.php(15): EasyVod->__construct()
+#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('vod_infomaniak', 'a:18:{s:5:\"width\";i:480;s:6:\"height\";i:360;s:8:\"template\";s:7:\"{video}\";s:7:\"stretch\";i:0;s:4:\"loop\";i:0;s:8:\"autoplay\";i:0;s:7:\"privacy\";i:0;s:5:\"wtext\";s:0:\"\";s:6:\"wtitle\";s:0:\"\";s:3:\"tag\";s:3:\"vod\";s:6:\"iframe\";s:2:\"on\";s:18:\"updateFilterFolder\";s:0:\"\";s:17:\"vod_api_connected\";s:3:\"off\";s:21:\"vod_right_integration\";i:1;s:16:\"vod_right_upload\";i:1;s:16:\"vod_right_player\";i:1;s:18:\"vod_right_playlist\";i:1;s:22:\"vod_api_valid_callback\";s:3:\"off\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/vod-infomaniak/vod.php'), EasyVod->__construct, EasyVod->get_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:31:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP TABLE wp_vod_player</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_vod_player</li>
+<li>Executing: 
+				DELETE FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_schema = ? AND table_name = ?
+			 | parameters: database_name_here, wp_vod_player</li>
+<li>Executing: 
+				DELETE FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ? AND table_name = ?
+			 | parameters: database_name_here, wp_vod_player</li>
+<li>Executing: 
+				DELETE FROM _wp_sqlite_mysql_information_schema_statistics
+				WHERE table_schema = ? AND table_name = ?
+			 | parameters: database_name_here, wp_vod_player</li>
+<li>Executing: DROP TABLE `wp_vod_player` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_vod_player
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('DROP TABLE wp_v...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('DROP TABLE wp_v...')
+#3 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(1365): WP_SQLite_DB->query('DROP TABLE wp_v...')
+#4 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(167): EasyVod_db->delete_db()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): EasyVod->update_db('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#9 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#10 {main}</pre>
- for query INSERT INTO `ahc_visits_time` (`vtm_time_from`, `vtm_time_to`, `vtm_visitors`, `site_id`) VALUES ('00:00:00', '00:59:59', 0, 1) made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_insert_visit_times_into_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 21:48:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query DROP TABLE wp_vod_player made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, EasyVod->update_db, EasyVod_db->delete_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:31:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT COUNT(  `bsr_id` ) cnt FROM ahc_browsers  where site_id = 1</p>
+<p>DROP TABLE wp_vod_folder</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT(  `bsr_id` ) cnt FROM ahc_browsers  where site_id = 1 | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_vod_folder</li>
+<li>Executing: 
+				DELETE FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_schema = ? AND table_name = ?
+			 | parameters: database_name_here, wp_vod_folder</li>
+<li>Executing: 
+				DELETE FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ? AND table_name = ?
+			 | parameters: database_name_here, wp_vod_folder</li>
+<li>Executing: 
+				DELETE FROM _wp_sqlite_mysql_information_schema_statistics
+				WHERE table_schema = ? AND table_name = ?
+			 | parameters: database_name_here, wp_vod_folder</li>
+<li>Executing: DROP TABLE `wp_vod_folder` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such column: site_id.
+SQLSTATE[HY000]: General error: 1 no such table: wp_vod_folder
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT COUNT(  ...')
-#2 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(569): wpdb->get_results('SELECT COUNT(  ...', 'OBJECT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(634): ahcfree_getBrowsersCount(1)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#8 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#9 {main}</pre>
- for query SELECT COUNT(  `bsr_id` ) cnt FROM ahc_browsers  where site_id = 1 made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_getBrowsersCount, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 21:48:00 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php on line 571
-[07-Apr-2025 21:48:00 UTC] PHP Warning:  Attempt to read property "cnt" on null in /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php on line 571
-[07-Apr-2025 21:48:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `ahc_browsers` (`bsr_id`, `bsr_name`, `bsr_icon`, `site_id`) VALUES (1, 'IE', 'ie.png', 1)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `ahc_browsers` (`bsr_id`, `bsr_name`, `bsr_icon`, `site_id`) VALUES (1, :param0 , :param1 , 1) | parameters: IE, ie.png</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 table ahc_browsers has no column named site_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `ah...')
-#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('ahc_browsers', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(1441): wpdb->insert('ahc_browsers', Array, Array)
-#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(635): ahcfree_insert_browsers_into_table(Array, 1)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('DROP TABLE wp_v...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('DROP TABLE wp_v...')
+#3 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(1366): WP_SQLite_DB->query('DROP TABLE wp_v...')
+#4 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(167): EasyVod_db->delete_db()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): EasyVod->update_db('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#9 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#10 {main}</pre>
- for query INSERT INTO `ahc_browsers` (`bsr_id`, `bsr_name`, `bsr_icon`, `site_id`) VALUES (1, 'IE', 'ie.png', 1) made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_insert_browsers_into_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 21:48:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query DROP TABLE wp_vod_folder made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, EasyVod->update_db, EasyVod_db->delete_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:31:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `ahc_search_engine_crawlers` (`bot_name`, `srh_id`, `site_id`) VALUES ('Googlebot', 1, 1)</p>
+<p>DROP TABLE wp_vod_video</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `ahc_search_engine_crawlers` (`bot_name`, `srh_id`, `site_id`) VALUES (:param0 , 1, 1) | parameters: Googlebot</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_vod_video</li>
+<li>Executing: 
+				DELETE FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_schema = ? AND table_name = ?
+			 | parameters: database_name_here, wp_vod_video</li>
+<li>Executing: 
+				DELETE FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ? AND table_name = ?
+			 | parameters: database_name_here, wp_vod_video</li>
+<li>Executing: 
+				DELETE FROM _wp_sqlite_mysql_information_schema_statistics
+				WHERE table_schema = ? AND table_name = ?
+			 | parameters: database_name_here, wp_vod_video</li>
+<li>Executing: DROP TABLE `wp_vod_video` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 table ahc_search_engine_crawlers has no column named site_id.
+SQLSTATE[HY000]: General error: 1 no such table: wp_vod_video
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `ah...')
-#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('ahc_search_engi...', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(1402): wpdb->insert('ahc_search_engi...', Array, Array)
-#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(640): ahcfree_insert_search_engines_into_table(Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('DROP TABLE wp_v...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('DROP TABLE wp_v...')
+#3 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(1367): WP_SQLite_DB->query('DROP TABLE wp_v...')
+#4 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(167): EasyVod_db->delete_db()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): EasyVod->update_db('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#9 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#10 {main}</pre>
- for query INSERT INTO `ahc_search_engine_crawlers` (`bot_name`, `srh_id`, `site_id`) VALUES ('Googlebot', 1, 1) made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_insert_search_engines_into_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 21:48:00 UTC] Sending first visit request...
-[07-Apr-2025 21:48:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query DROP TABLE wp_vod_video made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, EasyVod->update_db, EasyVod_db->delete_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:31:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT set_hits_days, set_ajax_check, set_ips, set_google_map FROM ahc_settings where site_id=1</p>
+<p>DROP TABLE wp_vod_playlist</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT set_hits_days, set_ajax_check, set_ips, set_google_map FROM ahc_settings where site_id=1 | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_vod_playlist</li>
+<li>Executing: 
+				DELETE FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_schema = ? AND table_name = ?
+			 | parameters: database_name_here, wp_vod_playlist</li>
+<li>Executing: 
+				DELETE FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ? AND table_name = ?
+			 | parameters: database_name_here, wp_vod_playlist</li>
+<li>Executing: 
+				DELETE FROM _wp_sqlite_mysql_information_schema_statistics
+				WHERE table_schema = ? AND table_name = ?
+			 | parameters: database_name_here, wp_vod_playlist</li>
+<li>Executing: DROP TABLE `wp_vod_playlist` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: ahc_settings.
+SQLSTATE[HY000]: General error: 1 no such table: wp_vod_playlist
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT set_hits...')
-#2 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(422): wpdb->get_results('SELECT set_hits...', 'OBJECT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/init.php(35): ahcfree_get_save_settings()
-#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php(17): require_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('visitors-traffi...')
-#7 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#8 {main}</pre>
- for query SELECT set_hits_days, set_ajax_check, set_ips, set_google_map FROM ahc_settings where site_id=1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), require_once('/plugins/visitors-traffic-real-time-statistics/init.php'), ahcfree_get_save_settings, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 21:48:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT COUNT(  `ctr_id` ) cnt FROM ahc_countries where site_id = 1</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT(  `ctr_id` ) cnt FROM ahc_countries where site_id = 1 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such column: site_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT COUNT(  ...')
-#2 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(550): wpdb->get_results('SELECT COUNT(  ...', 'OBJECT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(628): ahcfree_getCountriesCount(1)
-#4 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#8 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#9 {main}</pre>
- for query SELECT COUNT(  `ctr_id` ) cnt FROM ahc_countries where site_id = 1 made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_getCountriesCount, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 21:48:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `ahc_countries` (`ctr_name`, `ctr_internet_code`, `ctr_latitude`, `ctr_longitude`, `site_id`) VALUES ('Anonymous Proxy', 'A1', NULL, NULL, 1)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO `ahc_countries` (`ctr_name`, `ctr_internet_code`, `ctr_latitude`, `ctr_longitude`, `site_id`) VALUES (:param0 , :param1 , NULL, NULL, 1) | parameters: Anonymous Proxy, A1</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 table ahc_countries has no column named site_id.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `ah...')
-#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('ahc_countries', Array, Array, 'INSERT')
-#3 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(1324): wpdb->insert('ahc_countries', Array, Array)
-#4 /wordpress/wp-content/plugins/visitors-traffic-real-time-statistics/functions.php(629): ahcfree_insert_countries_into_table(Array, Array, 1)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): ahcfree_set_default_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('DROP TABLE wp_v...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('DROP TABLE wp_v...')
+#3 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(1368): WP_SQLite_DB->query('DROP TABLE wp_v...')
+#4 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(167): EasyVod_db->delete_db()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): EasyVod->update_db('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_visito...', false)
-#9 /internal/eval.php(20): activate_plugin('visitors-traffi...')
-#10 {main}</pre>
- for query INSERT INTO `ahc_countries` (`ctr_name`, `ctr_internet_code`, `ctr_latitude`, `ctr_longitude`, `site_id`) VALUES ('Anonymous Proxy', 'A1', NULL, NULL, 1) made by activate_plugin, do_action('activate_visitors-traffic-real-time-statistics/Visitors-Traffic-Real-Time-Statistics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ahcfree_set_default_options, ahcfree_insert_countries_into_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 21:48:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query DROP TABLE wp_vod_playlist made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, EasyVod->update_db, EasyVod_db->delete_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:31:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT COUNT(  `vtm_id` ) cnt FROM ahc_visits_time where site_id =1</p>
+<p>DROP TABLE wp_vod_upload</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT(  `vtm_id` ) cnt FROM ahc_visits_time where site_id =1 | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_vod_upload</li>
+<li>Executing: 
+				DELETE FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_schema = ? AND table_name = ?
+			 | parameters: database_name_here, wp_vod_upload</li>
+<li>Executing: 
+				DELETE FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ? AND table_name = ?
+			 | parameters: database_name_here, wp_vod_upload</li>
+<li>Executing: 
+				DELETE FROM _wp_sqlite_mysql_information_schema_statistics
+				WHERE table_schema = ? AND table_name = ?
+			 | parameters: database_name_here, wp_vod_upload</li>
+<li>Executing: DROP TABLE `wp_vod_upload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such column: site_id.
+SQLSTATE[HY000]: General error: 1 no such table: wp_vod_upload
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqli
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('DROP TABLE wp_v...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('DROP TABLE wp_v...')
+#3 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(1369): WP_SQLite_DB->query('DROP TABLE wp_v...')
+#4 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(167): EasyVod_db->delete_db()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): EasyVod->update_db('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query DROP TABLE wp_vod_upload made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, EasyVod->update_db, EasyVod_db->delete_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:31:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('vod_db_version', '1.0.34', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'vod_db_version' , '1.0.34' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('vod_db_version', '1.0.34', '', 'auto')
+#5 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(1459): update_option('vod_db_version', '1.0.34')
+#6 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(160): EasyVod_db->install_db()
+#7 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(168): EasyVod->install_db()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): EasyVod->update_db('')
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#15 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('vod_db_version', '1.0.34', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, EasyVod->update_db, EasyVod->install_db, EasyVod_db->install_db, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:31:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP TABLE wp_vod_player</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: DROP TABLE wp_vod_player | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vod_player.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(1365): WP_SQLite_DB->query('DROP TABLE wp_v...')
+#2 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(167): EasyVod_db->delete_db()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): EasyVod->update_db('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query DROP TABLE wp_vod_player made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, EasyVod->update_db, EasyVod_db->delete_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:31:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP TABLE wp_vod_folder</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: DROP TABLE wp_vod_folder | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vod_folder.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(1366): WP_SQLite_DB->query('DROP TABLE wp_v...')
+#2 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(167): EasyVod_db->delete_db()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): EasyVod->update_db('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query DROP TABLE wp_vod_folder made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, EasyVod->update_db, EasyVod_db->delete_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:31:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP TABLE wp_vod_video</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: DROP TABLE wp_vod_video | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vod_video.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(1367): WP_SQLite_DB->query('DROP TABLE wp_v...')
+#2 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(167): EasyVod_db->delete_db()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): EasyVod->update_db('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query DROP TABLE wp_vod_video made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, EasyVod->update_db, EasyVod_db->delete_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:31:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP TABLE wp_vod_playlist</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: DROP TABLE wp_vod_playlist | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vod_playlist.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(1368): WP_SQLite_DB->query('DROP TABLE wp_v...')
+#2 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(167): EasyVod_db->delete_db()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): EasyVod->update_db('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query DROP TABLE wp_vod_playlist made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, EasyVod->update_db, EasyVod_db->delete_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:31:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP TABLE wp_vod_upload</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: DROP TABLE wp_vod_upload | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vod_upload.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(1369): WP_SQLite_DB->query('DROP TABLE wp_v...')
+#2 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(167): EasyVod_db->delete_db()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): EasyVod->update_db('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query DROP TABLE wp_vod_upload made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, EasyVod->update_db, EasyVod_db->delete_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:31:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP TABLE wp_vod_player</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: DROP TABLE wp_vod_player | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vod_player.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(1365): WP_SQLite_DB->query('DROP TABLE wp_v...')
+#2 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(167): EasyVod_db->delete_db()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): EasyVod->update_db('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query DROP TABLE wp_vod_player made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, EasyVod->update_db, EasyVod_db->delete_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:31:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP TABLE wp_vod_folder</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: DROP TABLE wp_vod_folder | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vod_folder.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(1366): WP_SQLite_DB->query('DROP TABLE wp_v...')
+#2 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(167): EasyVod_db->delete_db()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): EasyVod->update_db('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query DROP TABLE wp_vod_folder made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, EasyVod->update_db, EasyVod_db->delete_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:31:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP TABLE wp_vod_video</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: DROP TABLE wp_vod_video | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vod_video.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(1367): WP_SQLite_DB->query('DROP TABLE wp_v...')
+#2 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(167): EasyVod_db->delete_db()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): EasyVod->update_db('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query DROP TABLE wp_vod_video made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, EasyVod->update_db, EasyVod_db->delete_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:31:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP TABLE wp_vod_playlist</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: DROP TABLE wp_vod_playlist | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vod_playlist.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(1368): WP_SQLite_DB->query('DROP TABLE wp_v...')
+#2 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(167): EasyVod_db->delete_db()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): EasyVod->update_db('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query DROP TABLE wp_vod_playlist made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, EasyVod->update_db, EasyVod_db->delete_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:31:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>DROP TABLE wp_vod_upload</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: DROP TABLE wp_vod_upload | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vod_upload.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(1369): WP_SQLite_DB->query('DROP TABLE wp_v...')
+#2 /wordpress/wp-content/plugins/vod-infomaniak/vod.class.php(167): EasyVod_db->delete_db()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): EasyVod->update_db('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query DROP TABLE wp_vod_upload made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, EasyVod->update_db, EasyVod_db->delete_db, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:31:51 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:31:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:31:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:31:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:31:51 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method VospariForms::activation() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vospar...', false)
+#3 /internal/eval.php(20): activate_plugin('vospari-forms/v...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[09-Apr-2025 11:31:58 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method VospariForms::activation() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vospar...', false)
+#3 /internal/eval.php(20): activate_plugin('vospari-forms/v...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[09-Apr-2025 11:32:06 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method VospariForms::activation() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vospar...', false)
+#3 /internal/eval.php(20): activate_plugin('vospari-forms/v...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[09-Apr-2025 11:32:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:32:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:32:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:32:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:32:36 UTC] PHP Fatal error:  Uncaught Error: Class "RCP_Payment_Gateway" not found in /wordpress/wp-content/plugins/vandar-for-restrict-content-pro/includes/RCP_Payment_Gateway_vandar.php:6
+Stack trace:
+#0 /wordpress/wp-content/plugins/vandar-for-restrict-content-pro/vandar-for-rcp.php(99): require_once()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): RCP_Vandar->includes('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/vandar-for-restrict-content-pro/includes/RCP_Payment_Gateway_vandar.php on line 6
+[09-Apr-2025 11:32:45 UTC] PHP Fatal error:  Uncaught Error: Class "RCP_Payment_Gateway" not found in /wordpress/wp-content/plugins/vandar-for-restrict-content-pro/includes/RCP_Payment_Gateway_vandar.php:6
+Stack trace:
+#0 /wordpress/wp-content/plugins/vandar-for-restrict-content-pro/vandar-for-rcp.php(99): require_once()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): RCP_Vandar->includes('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/vandar-for-restrict-content-pro/includes/RCP_Payment_Gateway_vandar.php on line 6
+[09-Apr-2025 11:32:55 UTC] PHP Fatal error:  Uncaught Error: Class "RCP_Payment_Gateway" not found in /wordpress/wp-content/plugins/vandar-for-restrict-content-pro/includes/RCP_Payment_Gateway_vandar.php:6
+Stack trace:
+#0 /wordpress/wp-content/plugins/vandar-for-restrict-content-pro/vandar-for-rcp.php(99): require_once()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): RCP_Vandar->includes('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/vandar-for-restrict-content-pro/includes/RCP_Payment_Gateway_vandar.php on line 6
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"vandar-for-restrict-content-pro"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:73:13)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ],
+          expires: [ 'Wed, 11 Jan 1984 05:00:00 GMT' ],
+          'cache-control': [ 'no-cache, must-revalidate, max-age=0' ]
+        },
+        bytes: Uint8Array(2653) [
+           60,  33,  68,  79,  67,  84,  89,  80,  69,  32, 104, 116,
+          109, 108,  62,  10,  60, 104, 116, 109, 108,  32, 108,  97,
+          110, 103,  61,  34, 101, 110,  45,  85,  83,  34,  62,  10,
+           60, 104, 101,  97, 100,  62,  10,   9,  60, 109, 101, 116,
+           97,  32, 104, 116, 116, 112,  45, 101, 113, 117, 105, 118,
+           61,  34,  67, 111, 110, 116, 101, 110, 116,  45,  84, 121,
+          112, 101,  34,  32,  99, 111, 110, 116, 101, 110, 116,  61,
+           34, 116, 101, 120, 116,  47, 104, 116, 109, 108,  59,  32,
+           99, 104,  97, 114,
+          ... 2553 more items
+        ],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
