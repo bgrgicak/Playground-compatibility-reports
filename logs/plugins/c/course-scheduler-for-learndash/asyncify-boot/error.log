@@ -1,13 +1,377 @@
-file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/wordpress/index.js:1
-import{joinPaths as a,phpVar as l}from"@php-wasm/util";import{createMemoizedFetch as _,unzipFile as d}from"@wp-playground/common";import{PHPRequestHandler as g,withPHPIniValues as f,PHP as h,setPhpIniEntries as w,writeFiles as m,proxyFileSystem as b,rotatePHPRuntime as y}from"@php-wasm/universal";import{logger as $}from"@php-wasm/logger";async function q(e){async function r(n,o){const s=new h(await e.createPhpRuntime());return e.sapiName&&s.setSapiName(e.sapiName),n&&(s.requestHandler=n),e.phpIniEntries&&w(s,e.phpIniEntries),o?(await T(s),await m(s,"/",e.createFiles||{}),await L(s,a(new URL(e.siteUrl).pathname,"phpinfo.php"))):b(await n.getPrimaryPhp(),s,["/tmp",n.documentRoot,"/internal/shared"]),e.spawnHandler&&await s.setSpawnHandler(e.spawnHandler(n.processManager)),y({php:s,cwd:n.documentRoot,recreateRuntime:e.createPhpRuntime,maxRequests:400}),s}const i=new g({phpFactory:async({isPrimary:n})=>r(i,n),documentRoot:e.documentRoot||"/wordpress",absoluteUrl:e.siteUrl,rewriteRules:S,getFileNotFoundAction:e.getFileNotFoundAction??E}),t=await i.getPrimaryPhp();if(e.hooks?.beforeWordPressFiles&&await e.hooks.beforeWordPressFiles(t),e.wordPressZip&&await v(t,await e.wordPressZip),e.constants)for(const n in e.constants)t.defineConstant(n,e.constants[n]);if(t.defineConstant("WP_HOME",e.siteUrl),t.defineConstant("WP_SITEURL",e.siteUrl),e.hooks?.beforeDatabaseSetup&&await e.hooks.beforeDatabaseSetup(t),e.sqliteIntegrationPluginZip&&await I(t,await e.sqliteIntegrationPluginZip),await c(t)||await P(t),!await c(t))throw new Error("WordPress installation has failed.");return i}async function c(e){return(await e.run({code:`<?php
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21
+`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
 
-Error: WordPress installation has failed.
-    at q (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/wordpress/index.js:1:1536)
-    at runNextTicks (node:internal/process/task_queues:60:5)
-    at listOnTimeout (node:internal/timers:540:9)
-    at process.processTimers (node:internal/timers:514:7)
-    at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:20:811)
-    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159)
-
-Node.js v20.15.0
+Error: [09-Apr-2025 10:53:44 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 10:53:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 10:53:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 10:53:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 10:53:45 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Curs_Widget')
+#2 /wordpress/wp-content/plugins/cursul-valutar-bnr/cursul-valutar-bnr.php(314): register_widget('Curs_Widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): cursLoadWidget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[09-Apr-2025 10:53:53 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Curs_Widget')
+#2 /wordpress/wp-content/plugins/cursul-valutar-bnr/cursul-valutar-bnr.php(314): register_widget('Curs_Widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): cursLoadWidget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[09-Apr-2025 10:54:02 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Curs_Widget')
+#2 /wordpress/wp-content/plugins/cursul-valutar-bnr/cursul-valutar-bnr.php(314): register_widget('Curs_Widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): cursLoadWidget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[09-Apr-2025 10:54:11 UTC] PHP Notice:  spl_autoload_register(): Argument #2 ($do_throw) has been ignored, spl_autoload_register() will always throw in /wordpress/wp-content/plugins/cart2cart-epages-to-woocommerce-migration/class/AutoLoad.php on line 11
+[09-Apr-2025 10:54:11 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 10:54:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 10:54:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 10:54:11 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 10:54:11 UTC] PHP Fatal error:  Uncaught ValueError: curl_setopt(): Argument #2 ($option) is not a valid cURL option in /wordpress/wp-content/plugins/cart2cart-epages-to-woocommerce-migration/class/Api.php:41
+Stack trace:
+#0 /wordpress/wp-content/plugins/cart2cart-epages-to-woocommerce-migration/class/Api.php(41): curl_setopt(Object(CurlHandle), 1, true)
+#1 /wordpress/wp-content/plugins/cart2cart-epages-to-woocommerce-migration/class/Api.php(21): Cart2cart\Api->_init()
+#2 /wordpress/wp-content/plugins/cart2cart-epages-to-woocommerce-migration/class/Api.php(49): Cart2cart\Api->__construct('https://woocomm...', 10)
+#3 /wordpress/wp-content/plugins/cart2cart-epages-to-woocommerce-migration/class/Installer.php(9): Cart2cart\Api::getInstance('https://woocomm...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Cart2cart\Installer::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cart2c...', false)
+#8 /internal/eval.php(20): activate_plugin('cart2cart-epage...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/cart2cart-epages-to-woocommerce-migration/class/Api.php on line 41
+[09-Apr-2025 10:54:18 UTC] PHP Notice:  spl_autoload_register(): Argument #2 ($do_throw) has been ignored, spl_autoload_register() will always throw in /wordpress/wp-content/plugins/cart2cart-epages-to-woocommerce-migration/class/AutoLoad.php on line 11
+[09-Apr-2025 10:54:18 UTC] PHP Fatal error:  Uncaught ValueError: curl_setopt(): Argument #2 ($option) is not a valid cURL option in /wordpress/wp-content/plugins/cart2cart-epages-to-woocommerce-migration/class/Api.php:41
+Stack trace:
+#0 /wordpress/wp-content/plugins/cart2cart-epages-to-woocommerce-migration/class/Api.php(41): curl_setopt(Object(CurlHandle), 1, true)
+#1 /wordpress/wp-content/plugins/cart2cart-epages-to-woocommerce-migration/class/Api.php(21): Cart2cart\Api->_init()
+#2 /wordpress/wp-content/plugins/cart2cart-epages-to-woocommerce-migration/class/Api.php(49): Cart2cart\Api->__construct('https://woocomm...', 10)
+#3 /wordpress/wp-content/plugins/cart2cart-epages-to-woocommerce-migration/class/Installer.php(9): Cart2cart\Api::getInstance('https://woocomm...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Cart2cart\Installer::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cart2c...', false)
+#8 /internal/eval.php(20): activate_plugin('cart2cart-epage...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/cart2cart-epages-to-woocommerce-migration/class/Api.php on line 41
+[09-Apr-2025 10:54:26 UTC] PHP Notice:  spl_autoload_register(): Argument #2 ($do_throw) has been ignored, spl_autoload_register() will always throw in /wordpress/wp-content/plugins/cart2cart-epages-to-woocommerce-migration/class/AutoLoad.php on line 11
+[09-Apr-2025 10:54:26 UTC] PHP Fatal error:  Uncaught ValueError: curl_setopt(): Argument #2 ($option) is not a valid cURL option in /wordpress/wp-content/plugins/cart2cart-epages-to-woocommerce-migration/class/Api.php:41
+Stack trace:
+#0 /wordpress/wp-content/plugins/cart2cart-epages-to-woocommerce-migration/class/Api.php(41): curl_setopt(Object(CurlHandle), 1, true)
+#1 /wordpress/wp-content/plugins/cart2cart-epages-to-woocommerce-migration/class/Api.php(21): Cart2cart\Api->_init()
+#2 /wordpress/wp-content/plugins/cart2cart-epages-to-woocommerce-migration/class/Api.php(49): Cart2cart\Api->__construct('https://woocomm...', 10)
+#3 /wordpress/wp-content/plugins/cart2cart-epages-to-woocommerce-migration/class/Installer.php(9): Cart2cart\Api::getInstance('https://woocomm...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Cart2cart\Installer::activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cart2c...', false)
+#8 /internal/eval.php(20): activate_plugin('cart2cart-epage...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/cart2cart-epages-to-woocommerce-migration/class/Api.php on line 41
+[09-Apr-2025 10:54:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 10:54:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 10:54:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 10:54:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 10:54:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 10:54:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 10:54:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 10:54:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 10:55:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 10:55:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 10:55:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 10:55:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 10:55:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('facebook_contact_info', 'a:2:{s:7:\"version\";s:3:\"1.0\";s:10:\"db_version\";s:3:\"1.0\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'facebook_contact_info' , 'a:2:{s:7:&quot;version&quot;;s:3:&quot;1.0&quot;;s:10:&quot;db_version&quot;;s:3:&quot;1.0&quot;;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('facebook_contac...', Array, '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'facebook_contac...', Array)
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'facebook_contac...', Array)
+#7 /wordpress/wp-content/plugins/cf7-facebook-contactor/facebook-contactor.php(334): update_site_option('facebook_contac...', Array)
+#8 /wordpress/wp-content/plugins/cf7-facebook-contactor/facebook-contactor.php(118): CF7FB_Contactor_Init->run_on_activation()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): CF7FB_Contactor_Init->cf7fb_contactor_activate(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cf7-fa...', false)
+#13 /internal/eval.php(20): activate_plugin('cf7-facebook-co...')
+#14 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('facebook_contact_info', 'a:2:{s:7:\"version\";s:3:\"1.0\";s:10:\"db_version\";s:3:\"1.0\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_cf7-facebook-contactor/facebook-contactor.php'), WP_Hook->do_action, WP_Hook->apply_filters, CF7FB_Contactor_Init->cf7fb_contactor_activate, CF7FB_Contactor_Init->run_on_activation, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 10:55:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fb_app_id', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fb_app_id' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fb_app_id', '', '', 'auto')
+#5 /wordpress/wp-content/plugins/cf7-facebook-contactor/facebook-contactor.php(347): update_option('fb_app_id', '')
+#6 /wordpress/wp-content/plugins/cf7-facebook-contactor/facebook-contactor.php(134): CF7FB_Contactor_Init->run_for_site()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): CF7FB_Contactor_Init->cf7fb_contactor_activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cf7-fa...', false)
+#11 /internal/eval.php(20): activate_plugin('cf7-facebook-co...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fb_app_id', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_cf7-facebook-contactor/facebook-contactor.php'), WP_Hook->do_action, WP_Hook->apply_filters, CF7FB_Contactor_Init->cf7fb_contactor_activate, CF7FB_Contactor_Init->run_for_site, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 10:55:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fb_app_secret', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fb_app_secret' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fb_app_secret', '', '', 'auto')
+#5 /wordpress/wp-content/plugins/cf7-facebook-contactor/facebook-contactor.php(351): update_option('fb_app_secret', '')
+#6 /wordpress/wp-content/plugins/cf7-facebook-contactor/facebook-contactor.php(134): CF7FB_Contactor_Init->run_for_site()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): CF7FB_Contactor_Init->cf7fb_contactor_activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cf7-fa...', false)
+#11 /internal/eval.php(20): activate_plugin('cf7-facebook-co...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fb_app_secret', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_cf7-facebook-contactor/facebook-contactor.php'), WP_Hook->do_action, WP_Hook->apply_filters, CF7FB_Contactor_Init->cf7fb_contactor_activate, CF7FB_Contactor_Init->run_for_site, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 10:55:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 10:55:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 10:55:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 10:55:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 10:55:29 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 10:55:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 10:55:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 10:55:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 10:55:56 UTC] PHP Deprecated:  Function supports_collation is <strong>deprecated</strong> since version 3.5.0! Use wpdb::has_cap( 'collation' ) instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 10:55:56 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 10:55:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 10:55:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 10:55:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 10:56:05 UTC] PHP Deprecated:  Function supports_collation is <strong>deprecated</strong> since version 3.5.0! Use wpdb::has_cap( 'collation' ) instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 10:56:14 UTC] PHP Deprecated:  Function supports_collation is <strong>deprecated</strong> since version 3.5.0! Use wpdb::has_cap( 'collation' ) instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 10:56:23 UTC] PHP Deprecated:  WP_SQLite_Driver::recreate_table_from_information_schema(): Implicitly marking parameter $column_map as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 2783
+[09-Apr-2025 10:56:23 UTC] PHP Deprecated:  WP_SQLite_Driver::set_result_from_affected_rows(): Implicitly marking parameter $override as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3541
+[09-Apr-2025 10:56:23 UTC] PHP Deprecated:  WP_SQLite_Driver::new_driver_exception(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3564
+[09-Apr-2025 10:56:23 UTC] PHP Deprecated:  WP_SQLite_Driver_Exception::__construct(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver-exception.php on line 19
+[09-Apr-2025 10:56:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_code_snippets_welcome_data', '1744368985', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( &#039;_transient_timeout_code_snippets_welcome_data&#039; , &#039;1744368985&#039; , &#039;off&#039; )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1744368985, '', 'off')
+#5 /wordpress/wp-content/plugins/code-snippets/php/class-welcome-api.php(71): set_transient('code_snippets_w...', Array, 172800)
+#6 /wordpress/wp-content/plugins/code-snippets/php/class-admin.php(35): Code_Snippets\Welcome_API->__construct()
+#7 /wordpress/wp-content/plugins/code-snippets/php/class-plugin.php(111): Code_Snippets\Admin->__construct()
+#8 /wordpress/wp-content/plugins/code-snippets/php/load.php(65): Code_Snippets\Plugin->load_plugin()
+#9 /wordpress/wp-content/plugins/code-snippets/code-snippets.php(61): require_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('code-snippets/c...')
+#12 /internal/eval.php(20): activate_plugin('code-snippets/c...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_code_snippets_welcome_data', '1744368985', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/code-snippets/code-snippets.php'), require_once('/plugins/code-snippets/php/load.php'), Code_Snippets\Plugin->load_plugin, Code_Snippets\Admin->__construct, Code_Snippets\Welcome_API->__construct, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 10:56:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_code_snippets_welcome_data', 'a:5:{s:6:\"banner\";a:9:{s:3:\"key\";s:12:\"backtonormal\";s:14:\"start_datetime\";O:17:\"DateTimeImmutable\":3:{s:4:\"date\";s:26:\"2025-01-24 07:00:00.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}s:12:\"end_datetime\";O:17:\"DateTimeImmutable\":3:{s:4:\"date\";s:26:\"2025-07-05 16:00:00.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}s:9:\"text_free\";s:79:\"Code Without Limits – Experience Ultimate Flexibility with Code Snippets Pro!\";s:15:\"action_url_free\";s:22:\"https://snipco.de/TFHM\";s:17:\"action_label_free\";s:10:\"Go Pro now\";s:8:\"text_pro\";s:73:\"Enjoying the Power of Pro? Make It Yours Forever with a Lifetime Upgrade!\";s:14:\"action_url_pro\";s:22:\"https://snipco.de/TFIP\";s:16:\"action_label_pro\";s:10:\"Go Pro now\";}s:9:\"hero-item\";a:3:{s:4:\"name\";s:26:\"Code Snippet AI is here…\";s:10:\"follow_url\";s:54:\"https://codesnippets.pro/blog/code-snippet-ai-is-here/\";s:9:\"image_url\";s:71:\"https://codesnippets.pro/wp-content/uploads/2024/05/cs_ai_demo_full.gif\";}s:8:\"features\";a:4:{i:0;a:5:{s:5:\"title\";s:28:\"Pssss... Get Secret Discount\";s:10:\"follow_url\";s:22:\"https://snipco.de/TFIG\";s:9:\"image_url\";s:81:\"https://codesnippets.pro/wp-content/uploads/2024/09/Promotions_Hero_All_Plans.png\";s:8:\"category\";s:5:\"offer\";s:11:\"description\";s:100:\"Get secret discount on all Code Snippets Pro plans. Just use coupon code \'General5\' at the checkout!\";}i:1;a:5:{s:5:\"title\";s:25:\"Add Unsplash to WordPress\";s:10:\"follow_url\";s:22:\"https://snipco.de/Mind\";s:9:\"image_url\";s:53:\"https://i3.ytimg.com/vi/kRSwWDanX0A/maxresdefault.jpg\";s:8:\"category\";s:3:\"tip\";s:11:\"description\";s:70:\"Code Snippet to Add Unsplash to WordPress - Find and Download Images..\";}i:2;a:5:{s:5:\"title\";s:30:\"Code Snippet Cloud Setup Guide\";s:10:\"follow_url\";s:22:\"https://snipco.de/Mine\";s:9:\"image_url\";s:149:\"https://cdn.getgist.com/attachment_images/76ca6cef08ca8e69ac1e7fbc15004bebbd08ad595ee67e0d7b55d1a9555354bfScreenshot%202023-11-23%20at%2000.50.02.png\";s:8:\"category\";s:5:\"guide\";s:11:\"description\";s:143:\"We have done our best to make the cloud set up as smooth and easy as possible. This guide below will walk you through the process step by step.\";}i:3;a:5:{s:5:\"title\";s:14:\"Cloud and AI +\";s:10:\"follow_url\";s:22:\"https://snipco.de/Minf\";s:9:\"image_url\";s:53:\"https://i3.ytimg.com/vi/rEOC2bIwY-w/maxresdefault.jpg\";s:8:\"category\";s:11:\"new feature\";s:11:\"description\";s:68:\"Code Snippets 3.6 Announcement - AI CodeSnippets - Generate AI Code!\";}}s:8:\"partners\";a:4:{i:0;a:3:{s:5:\"title\";s:9:\"Elementor\";s:10:\"follow_url\";s:22:\"https://snipco.de/KK3d\";s:9:\"image_url\";s:76:\"https://codesnippets.pro/wp-content/uploads/2024/05/Elementor-logo-green.png\";}i:1;a:3:{s:5:\"title\";s:7:\"InstaWP\";s:10:\"follow_url\";s:22:\"https://snipco.de/KK3n\";s:9:\"image_url\";s:68:\"https://codesnippets.pro/wp-content/uploads/2024/05/instawp-logo.png\";}i:2;a:3:{s:5:\"title\";s:8:\"Codeable\";s:10:\"follow_url\";s:22:\"https://snipco.de/KK3j\";s:9:\"image_url\";s:69:\"https://codesnippets.pro/wp-content/uploads/2024/05/codeable-logo.png\";}i:3;a:3:{s:5:\"title\";s:10:\"Crocoblock\";s:10:\"follow_url\";s:22:\"https://snipco.de/KK3l\";s:9:\"image_url\";s:71:\"https://codesnippets.pro/wp-content/uploads/2024/05/crocoblock-logo.png\";}}s:9:\"changelog\";a:4:{s:5:\"3.6.8\";a:4:{s:5:\"Added\";a:1:{s:4:\"core\";a:1:{i:0;s:87:\"`code_snippets/hide_welcome_banner` filter hook for hiding welcome banner in dashboard.\";}}s:7:\"Changed\";a:1:{s:3:\"pro\";a:1:{i:0;s:43:\"Updated Freemius SDK to the latest version.\";}}s:7:\"Removed\";a:1:{s:4:\"core\";a:1:{i:0;s:122:\"Functionality allowing `[code_snippet]` shortcodes to be embedded recursively – it will be re-added in a future version.\";}}s:5:\"Fixed\";a:2:{s:4:\"core\";a:4:{i:0;s:80:\"Shortcodes embedded within `[code_snippet]` shortcodes not evaluating correctly.\";i:1;s:92:\"Translation functions being called too early in some instances when loading plugin settings.\";i:2;s:71:\"Incorrect arrow entity used in cloud list table (props to [brandonjp]).\";i:3;s:69:\"Removed reference to missing plugins.css file in core plugin version.\";}s:3:\"pro\";a:1:{i:0;s:46:\"\'Generate\' button not appearing on some sites.\";}}}s:5:\"3.6.7\";a:3:{s:5:\"Added\";a:1:{s:4:\"core\";a:2:{i:0;s:90:\"Generated snippet shortcode tags will include the snippet name, for easier identification.\";i:1;s:130:\"Admin notices will dismiss automatically after five seconds. ([#208](https://github.com/codesnippetspro/code-snippets/issues/208))\";}}s:7:\"Changed\";a:1:{s:4:\"core\";a:3:{i:0;s:40:\"Updated CSS to use latest Sass features.\";i:1;s:161:\"Moved theme selector to just above editor preview on settings page (thanks to [brandonjp]). ([#206](https://github.com/codesnippetspro/code-snippets/issues/206))\";i:2;s:134:\"`[code_snippet]` shortcodes can now be nested within each other. ([#198](https://github.com/codesnippetspro/code-snippets/issues/198))\";}}s:5:\"Fixed\";a:2:{s:3:\"pro\";a:2:{i:0;s:144:\"Save buttons above editor did not follow usual validation process in Pro.  ([#197](https://github.com/codesnippetspro/code-snippets/issues/197))\";i:1;s:111:\"Issue with Elementor source code widget.  ([#205](https://github.com/codesnippetspro/code-snippets/issues/205))\";}s:4:\"core\";a:5:{i:0;s:69:\"Minor inconsistencies in consistent UI elements between Core and Pro.\";i:1;s:100:\"Tags input not allowing input. ([#211](https://github.com/codesnippetspro/code-snippets/issues/211))\";i:2;s:67:\"Snippet descriptions not visible when viewing cloud search results.\";i:3;s:76:\"Snippet import page not displaying number of successfully imported snippets.\";i:4;s:60:\"Use UTC time when deciding when to display campaign notices.\";}}}s:7:\"3.6.6.1\";a:1:{s:5:\"Fixed\";a:2:{s:4:\"core\";a:1:{i:0;s:79:\"Redeployment of [v3.6.6](#366-2024-11-27) to overcome issue with initial build.\";}s:3:\"pro\";a:1:{i:0;s:36:\"Type issue when caching cloud links.\";}}}s:5:\"3.6.6\";a:2:{s:7:\"Changed\";a:1:{s:4:\"core\";a:4:{i:0;s:51:\"Improved compatability with modern versions of PHP.\";i:1;s:46:\"Extended welcome API to include admin notices.\";i:2;s:111:\"Action hook `code_snippets/update_snippet` now only includes the snippet ID instead of the full snippet object.\";i:3;s:80:\"Action hook `code_snippets/admin/manage` now includes the currently viewed type.\";}}s:5:\"Fixed\";a:1:{s:4:\"core\";a:5:{i:0;s:86:\"Memory issue from checking aggregate posts while loading front-end syntax highlighter.\";i:1;s:98:\"Translation functions being called too early on upgrade, resulting in localisation loading errors.\";i:2;s:89:\"Bug preventing the \'share on network\' status of network snippets from correctly updating.\";i:3;s:98:\"Incorrect logic controlling when to display \'Save Changes\' or \'Save Changes and Activate\' buttons.\";i:4;s:76:\"Old notices persisting when switching between editing and creating snippets.\";}}}}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( &#039;_transient_code_snippets_welcome_data&#039; , &#039;a:5:{s:6:&quot;banner&quot;;a:9:{s:3:&quot;key&quot;;s:12:&quot;backtonormal&quot;;s:14:&quot;start_datetime&quot;;O:17:&quot;DateTimeImmutable&quot;:3:{s:4:&quot;date&quot;;s:26:&quot;2025-01-24 07:00:00.000000&quot;;s:13:&quot;timezone_type&quot;;i:3;s:8:&quot;timezone&quot;;s:3:&quot;UTC&quot;;}s:12:&quot;end_datetime&quot;;O:17:&quot;DateTimeImmutable&quot;:3:{s:4:&quot;date&quot;;s:26:&quot;2025-07-05 16:00:00.000000&quot;;s:13:&quot;timezone_type&quot;;i:3;s:8:&quot;timezone&quot;;s:3:&quot;UTC&quot;;}s:9:&quot;text_free&quot;;s:79:&quot;Code Without Limits – Experience Ultimate Flexibility with Code Snippets Pro!&quot;;s:15:&quot;action_url_free&quot;;s:22:&quot;https://snipco.de/TFHM&quot;;s:17:&quot;action_label_free&quot;;s:10:&quot;Go Pro now&quot;;s:8:&quot;text_pro&quot;;s:73:&quot;Enjoying the Power of Pro? Make It Yours Forever with a Lifetime Upgrade!&quot;;s:14:&quot;action_url_pro&quot;;s:22:&quot;https://snipco.de/TFIP&quot;;s:16:&quot;action_label_pro&quot;;s:10:&quot;Go Pro now&quot;;}s:9:&quot;hero-item&quot;;a:3:{s:4:&quot;name&quot;;s:26:&quot;Code Snippet AI is here…&quot;;s:10:&quot;follow_url&quot;;s:54:&quot;https://codesnippets.pro/blog/code-snippet-ai-is-here/&quot;;s:9:&quot;image_url&quot;;s:71:&quot;https://codesnippets.pro/wp-content/uploads/2024/05/cs_ai_demo_full.gif&quot;;}s:8:&quot;features&quot;;a:4:{i:0;a:5:{s:5:&quot;title&quot;;s:28:&quot;Pssss... Get Secret Discount&quot;;s:10:&quot;follow_url&quot;;s:22:&quot;https://snipco.de/TFIG&quot;;s:9:&quot;image_url&quot;;s:81:&quot;https://codesnippets.pro/wp-content/uploads/2024/09/Promotions_Hero_All_Plans.png&quot;;s:8:&quot;category&quot;;s:5:&quot;offer&quot;;s:11:&quot;description&quot;;s:100:&quot;Get secret discount on all Code Snippets Pro plans. Just use coupon code &#039;&#039;General5&#039;&#039; at the checkout!&quot;;}i:1;a:5:{s:5:&quot;title&quot;;s:25:&quot;Add Unsplash to WordPress&quot;;s:10:&quot;follow_url&quot;;s:22:&quot;https://snipco.de/Mind&quot;;s:9:&quot;image_url&quot;;s:53:&quot;https://i3.ytimg.com/vi/kRSwWDanX0A/maxresdefault.jpg&quot;;s:8:&quot;category&quot;;s:3:&quot;tip&quot;;s:11:&quot;description&quot;;s:70:&quot;Code Snippet to Add Unsplash to WordPress - Find and Download Images..&quot;;}i:2;a:5:{s:5:&quot;title&quot;;s:30:&quot;Code Snippet Cloud Setup Guide&quot;;s:10:&quot;follow_url&quot;;s:22:&quot;https://snipco.de/Mine&quot;;s:9:&quot;image_url&quot;;s:149:&quot;https://cdn.getgist.com/attachment_images/76ca6cef08ca8e69ac1e7fbc15004bebbd08ad595ee67e0d7b55d1a9555354bfScreenshot%202023-11-23%20at%2000.50.02.png&quot;;s:8:&quot;category&quot;;s:5:&quot;guide&quot;;s:11:&quot;description&quot;;s:143:&quot;We have done our best to make the cloud set up as smooth and easy as possible. This guide below will walk you through the process step by step.&quot;;}i:3;a:5:{s:5:&quot;title&quot;;s:14:&quot;Cloud and AI +&quot;;s:10:&quot;follow_url&quot;;s:22:&quot;https://snipco.de/Minf&quot;;s:9:&quot;image_url&quot;;s:53:&quot;https://i3.ytimg.com/vi/rEOC2bIwY-w/maxresdefault.jpg&quot;;s:8:&quot;category&quot;;s:11:&quot;new feature&quot;;s:11:&quot;description&quot;;s:68:&quot;Code Snippets 3.6 Announcement - AI CodeSnippets - Generate AI Code!&quot;;}}s:8:&quot;partners&quot;;a:4:{i:0;a:3:{s:5:&quot;title&quot;;s:9:&quot;Elementor&quot;;s:10:&quot;follow_url&quot;;s:22:&quot;https://snipco.de/KK3d&quot;;s:9:&quot;image_url&quot;;s:76:&quot;https://codesnippets.pro/wp-content/uploads/2024/05/Elementor-logo-green.png&quot;;}i:1;a:3:{s:5:&quot;title&quot;;s:7:&quot;InstaWP&quot;;s:10:&quot;follow_url&quot;;s:22:&quot;https://snipco.de/KK3n&quot;;s:9:&quot;image_url&quot;;s:68:&quot;https://codesnippets.pro/wp-content/uploads/2024/05/instawp-logo.png&quot;;}i:2;a:3:{s:5:&quot;title&quot;;s:8:&quot;Codeable&quot;;s:10:&quot;follow_url&quot;;s:22:&quot;https://snipco.de/KK3j&quot;;s:9:&quot;image_url&quot;;s:69:&quot;https://codesnippets.pro/wp-content/uploads/2024/05/codeable-logo.png&quot;;}i:3;a:3:{s:5:&quot;title&quot;;s:10:&quot;Crocoblock&quot;;s:10:&quot;follow_url&quot;;s:22:&quot;https://snipco.de/KK3l&quot;;s:9:&quot;image_url&quot;;s:71:&quot;https://codesnippets.pro/wp-content/uploads/2024/05/crocoblock-logo.png&quot;;}}s:9:&quot;changelog&quot;;a:4:{s:5:&quot;3.6.8&quot;;a:4:{s:5:&quot;Added&quot;;a:1:{s:4:&quot;core&quot;;a:1:{i:0;s:87:&quot;`code_snippets/hide_welcome_banner` filter hook for hiding welcome banner in dashboard.&quot;;}}s:7:&quot;Changed&quot;;a:1:{s:3:&quot;pro&quot;;a:1:{i:0;s:43:&quot;Updated Freemius SDK to the latest version.&quot;;}}s:7:&quot;Removed&quot;;a:1:{s:4:&quot;core&quot;;a:1:{i:0;s:122:&quot;Functionality allowing `[code_snippet]` shortcodes to be embedded recursively – it will be re-added in a future version.&quot;;}}s:5:&quot;Fixed&quot;;a:2:{s:4:&quot;core&quot;;a:4:{i:0;s:80:&quot;Shortcodes embedded within `[code_snippet]` shortcodes not evaluating correctly.&quot;;i:1;s:92:&quot;Translation functions being called too early in some instances when loading plugin settings.&quot;;i:2;s:71:&quot;Incorrect arrow entity used in cloud list table (props to [brandonjp]).&quot;;i:3;s:69:&quot;Removed reference to missing plugins.css file in core plugin version.&quot;;}s:3:&quot;pro&quot;;a:1:{i:0;s:46:&quot;&#039;&#039;Generate&#039;&#039; button not appearing on some sites.&quot;;}}}s:5:&quot;3.6.7&quot;;a:3:{s:5:&quot;Added&quot;;a:1:{s:4:&quot;core&quot;;a:2:{i:0;s:90:&quot;Generated snippet shortcode tags will include the snippet name, for easier identification.&quot;;i:1;s:130:&quot;Admin notices will dismiss automatically after five seconds. ([#208](https://github.com/codesnippetspro/code-snippets/issues/208))&quot;;}}s:7:&quot;Changed&quot;;a:1:{s:4:&quot;core&quot;;a:3:{i:0;s:40:&quot;Updated CSS to use latest Sass features.&quot;;i:1;s:161:&quot;Moved theme selector to just above editor preview on settings page (thanks to [brandonjp]). ([#206](https://github.com/codesnippetspro/code-snippets/issues/206))&quot;;i:2;s:134:&quot;`[code_snippet]` shortcodes can now be nested within each other. ([#198](https://github.com/codesnippetspro/code-snippets/issues/198))&quot;;}}s:5:&quot;Fixed&quot;;a:2:{s:3:&quot;pro&quot;;a:2:{i:0;s:144:&quot;Save buttons above editor did not follow usual validation process in Pro.  ([#197](https://github.com/codesnippetspro/code-snippets/issues/197))&quot;;i:1;s:111:&quot;Issue with Elementor source code widget.  ([#205](https://github.com/codesnippetspro/code-snippets/issues/205))&quot;;}s:4:&quot;core&quot;;a:5:{i:0;s:69:&quot;Minor inconsistencies in consistent UI elements between Core and Pro.&quot;;i:1;s:100:&quot;Tags input not allowing input. ([#211](https://github.com/codesnippetspro/code-snippets/issues/211))&quot;;i:2;s:67:&quot;Snippet descriptions not visible when viewing cloud search results.&quot;;i:3;s:76:&quot;Snippet import page not displaying number of successfully imported snippets.&quot;;i:4;s:60:&quot;Use UTC time when deciding when to display campaign notices.&quot;;}}}s:7:&quot;3.6.6.1&quot;;a:1:{s:5:&quot;Fixed&quot;;a:2:{s:4:&quot;core&quot;;a:1:{i:0;s:79:&quot;Redeployment of [v3.6.6](#366-2024-11-27) to overcome issue with initial build.&quot;;}s:3:&quot;pro&quot;;a:1:{i:0;s:36:&quot;Type issue when caching cloud links.&quot;;}}}s:5:&quot;3.6.6&quot;;a:2:{s:7:&quot;Changed&quot;;a:1:{s:4:&quot;core&quot;;a:4:{i:0;s:51:&quot;Improved compatability with modern versions of PHP.&quot;;i:1;s:46:&quot;Extended welcome API to include admin notices.&quot;;i:2;s:111:&quot;Action hook `code_snippets/update_snippet` now only includes the snippet ID instead of the full snippet object.&quot;;i:3;s:80:&quot;Action hook `code_snippets/admin/manage` now includes the currently viewed type.&quot;;}}s:5:&quot;Fixed&quot;;a:1:{s:4:&quot;core&quot;;a:5:{i:0;s:86:&quot;Memory issue from checking aggregate posts while loading front-end syntax highlighter.&quot;;i:1;s:98:&quot;Translation functions being called too early on upgrade, resulting in localisation loading errors.&quot;;i:2;s:89:&quot;Bug preventing the &#039;&#039;share on network&#039;&#039; status of network snippets from correctly updating.&quot;;i:3;s:98:&quot;Incorrect logic controlling when to display &#039;&#039;Save Changes&#039;&#039; or &#039;&#039;Save Changes and Activate&#039;&#039; buttons.&quot;;i:4;s:76:&quot;Old notices persisting when switching between editing and creating snippets.&quot;;}}}}}&#039; , &#039;off&#039; )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_code...', Array, '', 'off')
+#5 /wordpress/wp-content/plugins/code-snippets/php/class-welcome-api.php(71): set_transient('code_snippets_w...', Array, 172800)
+#6 /wordpress/wp-content/plugins/code-snippets/php/class-admin.php(35): Code_Snippets\Welcome_API->__construct()
+#7 /wordpress/wp-content/plugins/code-snippets/php/class-plugin.php(111): Code_Snippets\Admin->__construct()
+#8 /wordpress/wp-content/plugins/code-snippets/php/load.php(65): Code_Snippets\Plugin->load_plugin()
+#9 /wordpress/wp-content/plugins/code-snippets/code-snippets.php(61): require_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('code-snippets/c...')
+#12 /internal/eval.php(20): activate_plugin('code-snippets/c...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_code_snippets_welcome_data', 'a:5:{s:6:\"banner\";a:9:{s:3:\"key\";s:12:\"backtonormal\";s:14:\"start_datetime\";O:17:\"DateTimeImmutable\":3:{s:4:\"date\";s:26:\"2025-01-24 07:00:00.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}s:12:\"end_datetime\";O:17:\"DateTimeImmutable\":3:{s:4:\"date\";s:26:\"2025-07-05 16:00:00.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}s:9:\"text_free\";s:79:\"Code Without Limits – Experience Ultimate Flexibility with Code Snippets Pro!\";s:15:\"action_url_free\";s:22:\"https://snipco.de/TFHM\";s:17:\"action_label_free\";s:10:\"Go Pro now\";s:8:\"text_pro\";s:73:\"Enjoying the Power of Pro? Make It Yours Forever with a Lifetime Upgrade!\";s:14:\"action_url_pro\";s:22:\"https://snipco.de/TFIP\";s:16:\"action_label_pro\";s:10:\"Go Pro now\";}s:9:\"hero-item\";a:3:{s:4:\"name\";s:26:\"Code Snippet AI is here…\";s:10:\"follow_url\";s:54:\"https://codesnippets.pro/blog/code-snippet-ai-is-here/\";s:9:\"image_url\";s:71:\"https://codesnippets.pro/wp-content/uploads/2024/05/cs_ai_demo_full.gif\";}s:8:\"features\";a:4:{i:0;a:5:{s:5:\"title\";s:28:\"Pssss... Get Secret Discount\";s:10:\"follow_url\";s:22:\"https://snipco.de/TFIG\";s:9:\"image_url\";s:81:\"https://codesnippets.pro/wp-content/uploads/2024/09/Promotions_Hero_All_Plans.png\";s:8:\"category\";s:5:\"offer\";s:11:\"description\";s:100:\"Get secret discount on all Code Snippets Pro plans. Just use coupon code \'General5\' at the checkout!\";}i:1;a:5:{s:5:\"title\";s:25:\"Add Unsplash to WordPress\";s:10:\"follow_url\";s:22:\"https://snipco.de/Mind\";s:9:\"image_url\";s:53:\"https://i3.ytimg.com/vi/kRSwWDanX0A/maxresdefault.jpg\";s:8:\"category\";s:3:\"tip\";s:11:\"description\";s:70:\"Code Snippet to Add Unsplash to WordPress - Find and Download Images..\";}i:2;a:5:{s:5:\"title\";s:30:\"Code Snippet Cloud Setup Guide\";s:10:\"follow_url\";s:22:\"https://snipco.de/Mine\";s:9:\"image_url\";s:149:\"https://cdn.getgist.com/attachment_images/76ca6cef08ca8e69ac1e7fbc15004bebbd08ad595ee67e0d7b55d1a9555354bfScreenshot%202023-11-23%20at%2000.50.02.png\";s:8:\"category\";s:5:\"guide\";s:11:\"description\";s:143:\"We have done our best to make the cloud set up as smooth and easy as possible. This guide below will walk you through the process step by step.\";}i:3;a:5:{s:5:\"title\";s:14:\"Cloud and AI +\";s:10:\"follow_url\";s:22:\"https://snipco.de/Minf\";s:9:\"image_url\";s:53:\"https://i3.ytimg.com/vi/rEOC2bIwY-w/maxresdefault.jpg\";s:8:\"category\";s:11:\"new feature\";s:11:\"description\";s:68:\"Code Snippets 3.6 Announcement - AI CodeSnippets - Generate AI Code!\";}}s:8:\"partners\";a:4:{i:0;a:3:{s:5:\"title\";s:9:\"Elementor\";s:10:\"follow_url\";s:22:\"https://snipco.de/KK3d\";s:9:\"image_url\";s:76:\"https://codesnippets.pro/wp-content/uploads/2024/05/Elementor-logo-green.png\";}i:1;a:3:{s:5:\"title\";s:7:\"InstaWP\";s:10:\"follow_url\";s:22:\"https://snipco.de/KK3n\";s:9:\"image_url\";s:68:\"https://codesnippets.pro/wp-content/uploads/2024/05/instawp-logo.png\";}i:2;a:3:{s:5:\"title\";s:8:\"Codeable\";s:10:\"follow_url\";s:22:\"https://snipco.de/KK3j\";s:9:\"image_url\";s:69:\"https://codesnippets.pro/wp-content/uploads/2024/05/codeable-logo.png\";}i:3;a:3:{s:5:\"title\";s:10:\"Crocoblock\";s:10:\"follow_url\";s:22:\"https://snipco.de/KK3l\";s:9:\"image_url\";s:71:\"https://codesnippets.pro/wp-content/uploads/2024/05/crocoblock-logo.png\";}}s:9:\"changelog\";a:4:{s:5:\"3.6.8\";a:4:{s:5:\"Added\";a:1:{s:4:\"core\";a:1:{i:0;s:87:\"`code_snippets/hide_welcome_banner` filter hook for hiding welcome banner in dashboard.\";}}s:7:\"Changed\";a:1:{s:3:\"pro\";a:1:{i:0;s:43:\"Updated Freemius SDK to the latest version.\";}}s:7:\"Removed\";a:1:{s:4:\"core\";a:1:{i:0;s:122:\"Functionality allowing `[code_snippet]` shortcodes to be embedded recursively – it will be re-added in a future version.\";}}s:5:\"Fixed\";a:2:{s:4:\"core\";a:4:{i:0;s:80:\"Shortcodes embedded within `[code_snippet]` shortcodes not evaluating correctly.\";i:1;s:92:\"Translation functions being called too early in some instances when loading plugin settings.\";i:2;s:71:\"Incorrect arrow entity used in cloud list table (props to [brandonjp]).\";i:3;s:69:\"Removed reference to missing plugins.css file in core plugin version.\";}s:3:\"pro\";a:1:{i:0;s:46:\"\'Generate\' button not appearing on some sites.\";}}}s:5:\"3.6.7\";a:3:{s:5:\"Added\";a:1:{s:4:\"core\";a:2:{i:0;s:90:\"Generated snippet shortcode tags will include the snippet name, for easier identification.\";i:1;s:130:\"Admin notices will dismiss automatically after five seconds. ([#208](https://github.com/codesnippetspro/code-snippets/issues/208))\";}}s:7:\"Changed\";a:1:{s:4:\"core\";a:3:{i:0;s:40:\"Updated CSS to use latest Sass features.\";i:1;s:161:\"Moved theme selector to just above editor preview on settings page (thanks to [brandonjp]). ([#206](https://github.com/codesnippetspro/code-snippets/issues/206))\";i:2;s:134:\"`[code_snippet]` shortcodes can now be nested within each other. ([#198](https://github.com/codesnippetspro/code-snippets/issues/198))\";}}s:5:\"Fixed\";a:2:{s:3:\"pro\";a:2:{i:0;s:144:\"Save buttons above editor did not follow usual validation process in Pro.  ([#197](https://github.com/codesnippetspro/code-snippets/issues/197))\";i:1;s:111:\"Issue with Elementor source code widget.  ([#205](https://github.com/codesnippetspro/code-snippets/issues/205))\";}s:4:\"core\";a:5:{i:0;s:69:\"Minor inconsistencies in consistent UI elements between Core and Pro.\";i:1;s:100:\"Tags input not allowing input. ([#211](https://github.com/codesnippetspro/code-snippets/issues/211))\";i:2;s:67:\"Snippet descriptions not visible when viewing cloud search results.\";i:3;s:76:\"Snippet import page not displaying number of successfully imported snippets.\";i:4;s:60:\"Use UTC time when deciding when to display campaign notices.\";}}}s:7:\"3.6.6.1\";a:1:{s:5:\"Fixed\";a:2:{s:4:\"core\";a:1:{i:0;s:79:\"Redeployment of [v3.6.6](#366-2024-11-27) to overcome issue with initial build.\";}s:3:\"pro\";a:1:{i:0;s:36:\"Type issue when caching cloud links.\";}}}s:5:\"3.6.6\";a:2:{s:7:\"Changed\";a:1:{s:4:\"core\";a:4:{i:0;s:51:\"Improved compatability with modern versions of PHP.\";i:1;s:46:\"Extended welcome API to include admin notices.\";i:2;s:111:\"Action hook `code_snippets/update_snippet` now only includes the snippet ID instead of the full snippet object.\";i:3;s:80:\"Action hook `code_snippets/admin/manage` now includes the currently viewed type.\";}}s:5:\"Fixed\";a:1:{s:4:\"core\";a:5:{i:0;s:86:\"Memory issue from checking aggregate posts while loading front-end syntax highlighter.\";i:1;s:98:\"Translation functions being called too early on upgrade, resulting in localisation loading errors.\";i:2;s:89:\"Bug preventing the \'share on network\' status of network snippets from correctly updating.\";i:3;s:98:\"Incorrect logic controlling when to display \'Save Changes\' or \'Save Changes and Activate\' buttons.\";i:4;s:76:\"Old notices persisting when switching between editing and creating snippets.\";}}}}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/code-snippets/code-snippets.php'), require_once('/plugins/code-snippets/php/load.php'), Code_Snippets\Plugin->load_plugin, Code_Snippets\Admin->__construct, Code_Snippets\Welcome_API->__construct, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 10:56:25 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 10:56:25 UTC] PHP Warning:  Trying to access array offset on null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 10:56:25 UTC] PHP Warning:  Trying to access array offset on null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 10:56:25 UTC] PHP Warning:  Trying to access array offset on null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 10:56:25 UTC] PHP Deprecated:  WP_SQLite_Driver::recreate_table_from_information_schema(): Implicitly marking parameter $column_map as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 2783
+[09-Apr-2025 10:56:25 UTC] PHP Deprecated:  WP_SQLite_Driver::set_result_from_affected_rows(): Implicitly marking parameter $override as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3541
+[09-Apr-2025 10:56:25 UTC] PHP Deprecated:  WP_SQLite_Driver::new_driver_exception(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3564
+[09-Apr-2025 10:56:25 UTC] PHP Deprecated:  WP_SQLite_Driver_Exception::__construct(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver-exception.php on line 19
+[09-Apr-2025 10:56:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('code_snippets_version', '3.6.8', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( &#039;code_snippets_version&#039; , &#039;3.6.8&#039; , &#039;auto&#039; )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('code_snippets_v...', '3.6.8', '', 'auto')
+#5 /wordpress/wp-content/plugins/code-snippets/php/class-upgrade.php(63): update_option('code_snippets_v...', '3.6.8')
+#6 /wordpress/wp-content/plugins/code-snippets/php/class-upgrade.php(47): Code_Snippets\Upgrade->do_site_upgrades()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): Code_Snippets\Upgrade->run('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('code_snippets_version', '3.6.8', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Code_Snippets\Upgrade->run, Code_Snippets\Upgrade->do_site_upgrades, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 10:57:17 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 1
