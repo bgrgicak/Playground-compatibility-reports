@@ -1,10 +1,555 @@
-file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/wordpress/index.js:1
-import{joinPaths as a,phpVar as l}from"@php-wasm/util";import{createMemoizedFetch as _,unzipFile as d}from"@wp-playground/common";import{PHPRequestHandler as g,withPHPIniValues as f,PHP as h,setPhpIniEntries as w,writeFiles as m,proxyFileSystem as b,rotatePHPRuntime as y}from"@php-wasm/universal";import{logger as $}from"@php-wasm/logger";async function q(e){async function r(n,o){const s=new h(await e.createPhpRuntime());return e.sapiName&&s.setSapiName(e.sapiName),n&&(s.requestHandler=n),e.phpIniEntries&&w(s,e.phpIniEntries),o?(await T(s),await m(s,"/",e.createFiles||{}),await L(s,a(new URL(e.siteUrl).pathname,"phpinfo.php"))):b(await n.getPrimaryPhp(),s,["/tmp",n.documentRoot,"/internal/shared"]),e.spawnHandler&&await s.setSpawnHandler(e.spawnHandler(n.processManager)),y({php:s,cwd:n.documentRoot,recreateRuntime:e.createPhpRuntime,maxRequests:400}),s}const i=new g({phpFactory:async({isPrimary:n})=>r(i,n),documentRoot:e.documentRoot||"/wordpress",absoluteUrl:e.siteUrl,rewriteRules:S,getFileNotFoundAction:e.getFileNotFoundAction??E}),t=await i.getPrimaryPhp();if(e.hooks?.beforeWordPressFiles&&await e.hooks.beforeWordPressFiles(t),e.wordPressZip&&await v(t,await e.wordPressZip),e.constants)for(const n in e.constants)t.defineConstant(n,e.constants[n]);if(t.defineConstant("WP_HOME",e.siteUrl),t.defineConstant("WP_SITEURL",e.siteUrl),e.hooks?.beforeDatabaseSetup&&await e.hooks.beforeDatabaseSetup(t),e.sqliteIntegrationPluginZip&&await I(t,await e.sqliteIntegrationPluginZip),await c(t)||await P(t),!await c(t))throw new Error("WordPress installation has failed.");return i}async function c(e){return(await e.run({code:`<?php
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21
+`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
 
-Error: WordPress installation has failed.
-    at q (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/wordpress/index.js:1:1536)
-    at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:20:811)
-    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159)
-
-Node.js v20.15.0
+Error: [09-Apr-2025 11:45:47 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ckd_esc" in /wordpress/wp-content/plugins/cyklodev-wp-paypal-integration/index.php:18
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cyklodev-wp-pay...')
+#2 /internal/eval.php(20): activate_plugin('cyklodev-wp-pay...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/cyklodev-wp-paypal-integration/index.php on line 18
+[09-Apr-2025 11:45:56 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ckd_esc" in /wordpress/wp-content/plugins/cyklodev-wp-paypal-integration/index.php:18
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cyklodev-wp-pay...')
+#2 /internal/eval.php(20): activate_plugin('cyklodev-wp-pay...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/cyklodev-wp-paypal-integration/index.php on line 18
+[09-Apr-2025 11:46:03 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ckd_esc" in /wordpress/wp-content/plugins/cyklodev-wp-paypal-integration/index.php:18
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cyklodev-wp-pay...')
+#2 /internal/eval.php(20): activate_plugin('cyklodev-wp-pay...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/cyklodev-wp-paypal-integration/index.php on line 18
+[09-Apr-2025 11:46:32 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:46:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:46:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:46:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:46:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'tc)6ZiA>4=s8}J]8,CfX$GnP<$:1m2ds^Ax3Pm>Y-I,/gGj<;p}lI59J2-U*f{OW', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'tc)6ZiA&gt;4=s8}J]8,CfX$GnP&lt;$:1m2ds^Ax3Pm&gt;Y-I,/gGj&lt;;p}lI59J2-U*f{OW' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'tc)6ZiA>4=s8}J]...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'tc)6ZiA>4=s8}J]...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'tc)6ZiA>4=s8}J]...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'tc)6ZiA>4=s8}J]...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|0...', 'nonce')
+#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
+#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
+#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
+#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
+#18 /wordpress/wp-content/plugins/comment-form-validation/comment-form-validation.php(15): wp_enqueue_script('validate', 'http://127.0.0....', Array)
+#19 /wordpress/wp-includes/class-wp-hook.php(324): cf_validation('')
+#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#22 /wordpress/wp-settings.php(704): do_action('init')
+#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#26 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'tc)6ZiA>4=s8}J]8,CfX$GnP<$:1m2ds^Ax3Pm>Y-I,/gGj<;p}lI59J2-U*f{OW', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, cf_validation, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:46:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'L*hZFvAvn4H1T}.D{%et3>^5?R}YJb]AjE@2&*d~32k)WShhJx!`Qhpy82;H-sf[', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'L*hZFvAvn4H1T}.D{%et3&gt;^5?R}YJb]AjE@2&amp;*d~32k)WShhJx!`Qhpy82;H-sf[' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'L*hZFvAvn4H1T}....', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'L*hZFvAvn4H1T}....')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'L*hZFvAvn4H1T}....')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'L*hZFvAvn4H1T}....')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|0...', 'nonce')
+#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
+#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
+#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
+#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
+#18 /wordpress/wp-content/plugins/comment-form-validation/comment-form-validation.php(15): wp_enqueue_script('validate', 'http://127.0.0....', Array)
+#19 /wordpress/wp-includes/class-wp-hook.php(324): cf_validation('')
+#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#22 /wordpress/wp-settings.php(704): do_action('init')
+#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#26 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'L*hZFvAvn4H1T}.D{%et3>^5?R}YJb]AjE@2&*d~32k)WShhJx!`Qhpy82;H-sf[', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, cf_validation, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:47:00 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:47:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:47:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:47:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:47:27 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/cotacao-euro-hoje/index.php:115
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cotacao-euro-ho...')
+#2 /internal/eval.php(20): activate_plugin('cotacao-euro-ho...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/cotacao-euro-hoje/index.php on line 115
+[09-Apr-2025 11:47:35 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/cotacao-euro-hoje/index.php:115
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cotacao-euro-ho...')
+#2 /internal/eval.php(20): activate_plugin('cotacao-euro-ho...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/cotacao-euro-hoje/index.php on line 115
+[09-Apr-2025 11:47:43 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/cotacao-euro-hoje/index.php:115
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cotacao-euro-ho...')
+#2 /internal/eval.php(20): activate_plugin('cotacao-euro-ho...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/cotacao-euro-hoje/index.php on line 115
+[09-Apr-2025 11:47:52 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:47:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:47:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:47:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:48:19 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:48:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:48:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:48:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:48:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT VERSION() AS version, @@SESSION.sql_mode AS mode</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `VERSION` ( ) AS `version` , 'ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION,NO_ZERO_IN_DATE' AS `@@SESSION.sql_mode` AS `mode` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "AS": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT VERSION(...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT VERSION(...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT VERSION(...')
+#4 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_base.php(338): wpdb->get_results('SELECT VERSION(...')
+#5 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_base.php(142): WPCardzNetLibGenericDBaseClass->get_results('SELECT VERSION(...', true, Array)
+#6 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_base.php(107): WPCardzNetLibGenericDBaseClass->GetMySQLGlobals()
+#7 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_base.php(63): WPCardzNetLibGenericDBaseClass->SetMySQLGlobals()
+#8 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_api.php(87): WPCardzNetLibGenericDBaseClass->__construct(Array)
+#9 /wordpress/wp-content/plugins/cardznet/include/wpcardznet_dbase_api.php(130): WPCardzNetLibDBaseClass->__construct(Array)
+#10 /wordpress/wp-content/plugins/cardznet/wpcardznet.php(622): WPCardzNetDBaseClass->__construct('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cardznet/wpcard...')
+#13 /internal/eval.php(20): activate_plugin('cardznet/wpcard...')
+#14 {main}</pre>
+ for query SELECT VERSION() AS version, @@SESSION.sql_mode AS mode made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/cardznet/wpcardznet.php'), WPCardzNetDBaseClass->__construct, WPCardzNetLibDBaseClass->__construct, WPCardzNetLibGenericDBaseClass->__construct, WPCardzNetLibGenericDBaseClass->SetMySQLGlobals, WPCardzNetLibGenericDBaseClass->GetMySQLGlobals, WPCardzNetLibGenericDBaseClass->get_results, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:48:46 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_base.php on line 143
+[09-Apr-2025 11:48:46 UTC] PHP Warning:  Attempt to read property "mode" on null in /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_base.php on line 108
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:48:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW COLUMNS FROM wp_cardznet_games WHERE field = 'gameTickFilename'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cardznet_games</li>
+<li>Executing: SELECT 1 FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_cardznet_games</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? AND `field` = 'gameTickFilename' | parameters: database_name_here, wp_cardznet_games</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: field
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW COLUMNS FR...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW COLUMNS FR...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW COLUMNS FR...')
+#4 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_base.php(338): wpdb->get_results('SHOW COLUMNS FR...')
+#5 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_api.php(628): WPCardzNetLibGenericDBaseClass->get_results('SHOW COLUMNS FR...')
+#6 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_api.php(664): WPCardzNetLibDBaseClass->getColumnSpec('wp_cardznet_gam...', 'gameTickFilenam...')
+#7 /wordpress/wp-content/plugins/cardznet/include/wpcardznet_dbase_api.php(279): WPCardzNetLibDBaseClass->IfColumnExists('wp_cardznet_gam...', 'gameTickFilenam...')
+#8 /wordpress/wp-content/plugins/cardznet/wpcardznet.php(124): WPCardzNetDBaseClass->upgradeDB()
+#9 /wordpress/wp-content/plugins/cardznet/wpcardznet.php(84): WPCardzNetPluginClass->activate()
+#10 /wordpress/wp-content/plugins/cardznet/wpcardznet.php(622): WPCardzNetPluginClass->__construct('/wordpress/wp-c...', Object(WPCardzNetDBaseClass))
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cardznet/wpcard...')
+#13 /internal/eval.php(20): activate_plugin('cardznet/wpcard...')
+#14 {main}</pre>
+ for query SHOW COLUMNS FROM wp_cardznet_games WHERE field = 'gameTickFilename' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/cardznet/wpcardznet.php'), WPCardzNetPluginClass->__construct, WPCardzNetPluginClass->activate, WPCardzNetDBaseClass->upgradeDB, WPCardzNetLibDBaseClass->IfColumnExists, WPCardzNetLibDBaseClass->getColumnSpec, WPCardzNetLibGenericDBaseClass->get_results, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:48:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW COLUMNS FROM wp_cardznet_games WHERE field = 'gameTickFilename'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cardznet_games</li>
+<li>Executing: SELECT 1 FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_cardznet_games</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? AND `field` = 'gameTickFilename' | parameters: database_name_here, wp_cardznet_games</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: field
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW COLUMNS FR...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW COLUMNS FR...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW COLUMNS FR...')
+#4 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_base.php(338): wpdb->get_results('SHOW COLUMNS FR...')
+#5 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_api.php(628): WPCardzNetLibGenericDBaseClass->get_results('SHOW COLUMNS FR...')
+#6 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_api.php(664): WPCardzNetLibDBaseClass->getColumnSpec('wp_cardznet_gam...', 'gameTickFilenam...')
+#7 /wordpress/wp-content/plugins/cardznet/include/wpcardznet_dbase_api.php(279): WPCardzNetLibDBaseClass->IfColumnExists('wp_cardznet_gam...', 'gameTickFilenam...')
+#8 /wordpress/wp-content/plugins/cardznet/wpcardznet.php(124): WPCardzNetDBaseClass->upgradeDB()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): WPCardzNetPluginClass->activate(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cardzn...', false)
+#13 /internal/eval.php(20): activate_plugin('cardznet/wpcard...')
+#14 {main}</pre>
+ for query SHOW COLUMNS FROM wp_cardznet_games WHERE field = 'gameTickFilename' made by activate_plugin, do_action('activate_cardznet/wpcardznet.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPCardzNetPluginClass->activate, WPCardzNetDBaseClass->upgradeDB, WPCardzNetLibDBaseClass->IfColumnExists, WPCardzNetLibDBaseClass->getColumnSpec, WPCardzNetLibGenericDBaseClass->get_results, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:48:48 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 11:48:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 11:48:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 11:48:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 11:48:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT VERSION() AS version, @@SESSION.sql_mode AS mode</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `VERSION` ( ) AS `version` , 'ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION,NO_ZERO_IN_DATE' AS `@@SESSION.sql_mode` AS `mode` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "AS": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT VERSION(...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT VERSION(...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT VERSION(...')
+#4 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_base.php(338): wpdb->get_results('SELECT VERSION(...')
+#5 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_base.php(142): WPCardzNetLibGenericDBaseClass->get_results('SELECT VERSION(...', true, Array)
+#6 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_base.php(107): WPCardzNetLibGenericDBaseClass->GetMySQLGlobals()
+#7 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_base.php(63): WPCardzNetLibGenericDBaseClass->SetMySQLGlobals()
+#8 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_api.php(87): WPCardzNetLibGenericDBaseClass->__construct(Array)
+#9 /wordpress/wp-content/plugins/cardznet/include/wpcardznet_dbase_api.php(130): WPCardzNetLibDBaseClass->__construct(Array)
+#10 /wordpress/wp-content/plugins/cardznet/wpcardznet.php(622): WPCardzNetDBaseClass->__construct('/wordpress/wp-c...')
+#11 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#15 {main}</pre>
+ for query SELECT VERSION() AS version, @@SESSION.sql_mode AS mode made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/cardznet/wpcardznet.php'), WPCardzNetDBaseClass->__construct, WPCardzNetLibDBaseClass->__construct, WPCardzNetLibGenericDBaseClass->__construct, WPCardzNetLibGenericDBaseClass->SetMySQLGlobals, WPCardzNetLibGenericDBaseClass->GetMySQLGlobals, WPCardzNetLibGenericDBaseClass->get_results, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:48:49 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_base.php on line 143
+[09-Apr-2025 11:48:49 UTC] PHP Warning:  Attempt to read property "mode" on null in /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_base.php on line 108
+[09-Apr-2025 11:48:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW COLUMNS FROM wp_cardznet_games WHERE field = 'gameTickFilename'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cardznet_games</li>
+<li>Executing: SELECT 1 FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_cardznet_games</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? AND `field` = 'gameTickFilename' | parameters: database_name_here, wp_cardznet_games</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: field
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW COLUMNS FR...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW COLUMNS FR...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW COLUMNS FR...')
+#4 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_base.php(338): wpdb->get_results('SHOW COLUMNS FR...')
+#5 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_api.php(628): WPCardzNetLibGenericDBaseClass->get_results('SHOW COLUMNS FR...')
+#6 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_api.php(664): WPCardzNetLibDBaseClass->getColumnSpec('wp_cardznet_gam...', 'gameTickFilenam...')
+#7 /wordpress/wp-content/plugins/cardznet/include/wpcardznet_dbase_api.php(279): WPCardzNetLibDBaseClass->IfColumnExists('wp_cardznet_gam...', 'gameTickFilenam...')
+#8 /wordpress/wp-content/plugins/cardznet/wpcardznet.php(124): WPCardzNetDBaseClass->upgradeDB()
+#9 /wordpress/wp-content/plugins/cardznet/wpcardznet.php(84): WPCardzNetPluginClass->activate()
+#10 /wordpress/wp-content/plugins/cardznet/wpcardznet.php(622): WPCardzNetPluginClass->__construct('/wordpress/wp-c...', Object(WPCardzNetDBaseClass))
+#11 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#15 {main}</pre>
+ for query SHOW COLUMNS FROM wp_cardznet_games WHERE field = 'gameTickFilename' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/cardznet/wpcardznet.php'), WPCardzNetPluginClass->__construct, WPCardzNetPluginClass->activate, WPCardzNetDBaseClass->upgradeDB, WPCardzNetLibDBaseClass->IfColumnExists, WPCardzNetLibDBaseClass->getColumnSpec, WPCardzNetLibGenericDBaseClass->get_results, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:48:59 UTC] PHP Warning:  Undefined property: stdClass::$mode in /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_base.php on line 108
+[09-Apr-2025 11:48:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE wp_cardznet_settings SET option_value = "a:9:{s:15:\"ActivationCount\";i:0;s:11:\"LastVersion\";s:0:\"\";s:14:\"OrganisationID\";s:20:\"My WordPress Website\";s:16:\"BccEMailsToAdmin\";b:1;s:17:\"UseCurrencySymbol\";b:0;s:14:\"LogsFolderPath\";s:4:\"logs\";s:10:\"PageLength\";i:20;s:16:\"Unused_EndOfList\";s:0:\"\";s:10:\"pluginInfo\";a:15:{s:4:\"Name\";s:8:\"CardzNet\";s:9:\"PluginURI\";s:27:\"http://www.corondeck.co.uk/\";s:7:\"Version\";s:5:\"2.5.1\";s:11:\"Description\";s:40:\"Internet Connected Multiplayer Card Game\";s:6:\"Author\";s:16:\"Malcolm Shergold\";s:9:\"AuthorURI\";s:26:\"http://www.corondeck.co.uk\";s:10:\"TextDomain\";s:8:\"cardznet\";s:10:\"DomainPath\";s:0:\"\";s:7:\"Network\";b:0;s:10:\"RequiresWP\";s:0:\"\";s:11:\"RequiresPHP\";s:0:\"\";s:9:\"UpdateURI\";s:0:\"\";s:15:\"RequiresPlugins\";s:0:\"\";s:5:\"Title\";s:8:\"CardzNet\";s:10:\"AuthorName\";s:16:\"Malcolm Shergold\";}}" WHERE option_name='cardznetsettings'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: UPDATE wp_cardznet_settings SET option_value = &quot;a:9:{s:15:\&quot;ActivationCount\&quot;;i:0;s:11:\&quot;LastVersion\&quot;;s:0:\&quot;\&quot;;s:14:\&quot;OrganisationID\&quot;;s:20:\&quot;My WordPress Website\&quot;;s:16:\&quot;BccEMailsToAdmin\&quot;;b:1;s:17:\&quot;UseCurrencySymbol\&quot;;b:0;s:14:\&quot;LogsFolderPath\&quot;;s:4:\&quot;logs\&quot;;s:10:\&quot;PageLength\&quot;;i:20;s:16:\&quot;Unused_EndOfList\&quot;;s:0:\&quot;\&quot;;s:10:\&quot;pluginInfo\&quot;;a:15:{s:4:\&quot;Name\&quot;;s:8:\&quot;CardzNet\&quot;;s:9:\&quot;PluginURI\&quot;;s:27:\&quot;http://www.corondeck.co.uk/\&quot;;s:7:\&quot;Version\&quot;;s:5:\&quot;2.5.1\&quot;;s:11:\&quot;Description\&quot;;s:40:\&quot;Internet Connected Multiplayer Card Game\&quot;;s:6:\&quot;Author\&quot;;s:16:\&quot;Malcolm Shergold\&quot;;s:9:\&quot;AuthorURI\&quot;;s:26:\&quot;http://www.corondeck.co.uk\&quot;;s:10:\&quot;TextDomain\&quot;;s:8:\&quot;cardznet\&quot;;s:10:\&quot;DomainPath\&quot;;s:0:\&quot;\&quot;;s:7:\&quot;Network\&quot;;b:0;s:10:\&quot;RequiresWP\&quot;;s:0:\&quot;\&quot;;s:11:\&quot;RequiresPHP\&quot;;s:0:\&quot;\&quot;;s:9:\&quot;UpdateURI\&quot;;s:0:\&quot;\&quot;;s:15:\&quot;RequiresPlugins\&quot;;s:0:\&quot;\&quot;;s:5:\&quot;Title\&quot;;s:8:\&quot;CardzNet\&quot;;s:10:\&quot;AuthorName\&quot;;s:16:\&quot;Malcolm Shergold\&quot;;}}&quot; WHERE rowid IN (SELECT rowid FROM wp_cardznet_settings WHERE option_name=:param0 ) | parameters: cardznetsettings</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_base.php(290): WP_SQLite_DB->query('UPDATE wp_cardz...')
+#2 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_api.php(1531): WPCardzNetLibGenericDBaseClass->query('UPDATE wp_cardz...')
+#3 /wordpress/wp-content/plugins/cardznet/include/wpcardznet_dbase_api.php(227): WPCardzNetLibDBaseClass->query('UPDATE wp_cardz...')
+#4 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_api.php(941): WPCardzNetDBaseClass->query('UPDATE wp_cardz...')
+#5 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_api.php(875): WPCardzNetLibDBaseClass->WriteSettings('cardznetsetting...', 'a:9:{s:15:\\"Act...')
+#6 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_api.php(810): WPCardzNetLibDBaseClass->saveOptions()
+#7 /wordpress/wp-content/plugins/cardznet/include/wpcardznet_dbase_api.php(454): WPCardzNetLibDBaseClass->getOptions(Array)
+#8 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_api.php(90): WPCardzNetDBaseClass->getOptions()
+#9 /wordpress/wp-content/plugins/cardznet/include/wpcardznet_dbase_api.php(130): WPCardzNetLibDBaseClass->__construct(Array)
+#10 /wordpress/wp-content/plugins/cardznet/wpcardznet.php(622): WPCardzNetDBaseClass->__construct('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cardznet/wpcard...')
+#13 /internal/eval.php(20): activate_plugin('cardznet/wpcard...')
+#14 {main}</pre>
+ for query UPDATE wp_cardznet_settings SET option_value = "a:9:{s:15:\"ActivationCount\";i:0;s:11:\"LastVersion\";s:0:\"\";s:14:\"OrganisationID\";s:20:\"My WordPress Website\";s:16:\"BccEMailsToAdmin\";b:1;s:17:\"UseCurrencySymbol\";b:0;s:14:\"LogsFolderPath\";s:4:\"logs\";s:10:\"PageLength\";i:20;s:16:\"Unused_EndOfList\";s:0:\"\";s:10:\"pluginInfo\";a:15:{s:4:\"Name\";s:8:\"CardzNet\";s:9:\"PluginURI\";s:27:\"http://www.corondeck.co.uk/\";s:7:\"Version\";s:5:\"2.5.1\";s:11:\"Description\";s:40:\"Internet Connected Multiplayer Card Game\";s:6:\"Author\";s:16:\"Malcolm Shergold\";s:9:\"AuthorURI\";s:26:\"http://www.corondeck.co.uk\";s:10:\"TextDomain\";s:8:\"cardznet\";s:10:\"DomainPath\";s:0:\"\";s:7:\"Network\";b:0;s:10:\"RequiresWP\";s:0:\"\";s:11:\"RequiresPHP\";s:0:\"\";s:9:\"UpdateURI\";s:0:\"\";s:15:\"RequiresPlugins\";s:0:\"\";s:5:\"Title\";s:8:\"CardzNet\";s:10:\"AuthorName\";s:16:\"Malcolm Shergold\";}}" WHERE option_name='cardznetsettings' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/cardznet/wpcardznet.php'), WPCardzNetDBaseClass->__construct, WPCardzNetLibDBaseClass->__construct, WPCardzNetDBaseClass->getOptions, WPCardzNetLibDBaseClass->getOptions, WPCardzNetLibDBaseClass->saveOptions, WPCardzNetLibDBaseClass->WriteSettings, WPCardzNetDBaseClass->query, WPCardzNetLibDBaseClass->query, WPCardzNetLibGenericDBaseClass->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:48:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE wp_cardznet_settings SET option_value = "a:9:{s:15:\"ActivationCount\";i:0;s:11:\"LastVersion\";s:0:\"\";s:14:\"OrganisationID\";s:20:\"My WordPress Website\";s:16:\"BccEMailsToAdmin\";b:1;s:17:\"UseCurrencySymbol\";b:0;s:14:\"LogsFolderPath\";s:4:\"logs\";s:10:\"PageLength\";i:20;s:16:\"Unused_EndOfList\";s:0:\"\";s:10:\"pluginInfo\";a:15:{s:4:\"Name\";s:8:\"CardzNet\";s:9:\"PluginURI\";s:27:\"http://www.corondeck.co.uk/\";s:7:\"Version\";s:5:\"2.5.1\";s:11:\"Description\";s:40:\"Internet Connected Multiplayer Card Game\";s:6:\"Author\";s:16:\"Malcolm Shergold\";s:9:\"AuthorURI\";s:26:\"http://www.corondeck.co.uk\";s:10:\"TextDomain\";s:8:\"cardznet\";s:10:\"DomainPath\";s:0:\"\";s:7:\"Network\";b:0;s:10:\"RequiresWP\";s:0:\"\";s:11:\"RequiresPHP\";s:0:\"\";s:9:\"UpdateURI\";s:0:\"\";s:15:\"RequiresPlugins\";s:0:\"\";s:5:\"Title\";s:8:\"CardzNet\";s:10:\"AuthorName\";s:16:\"Malcolm Shergold\";}}" WHERE option_name='cardznetsettings'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: UPDATE wp_cardznet_settings SET option_value = &quot;a:9:{s:15:\&quot;ActivationCount\&quot;;i:0;s:11:\&quot;LastVersion\&quot;;s:0:\&quot;\&quot;;s:14:\&quot;OrganisationID\&quot;;s:20:\&quot;My WordPress Website\&quot;;s:16:\&quot;BccEMailsToAdmin\&quot;;b:1;s:17:\&quot;UseCurrencySymbol\&quot;;b:0;s:14:\&quot;LogsFolderPath\&quot;;s:4:\&quot;logs\&quot;;s:10:\&quot;PageLength\&quot;;i:20;s:16:\&quot;Unused_EndOfList\&quot;;s:0:\&quot;\&quot;;s:10:\&quot;pluginInfo\&quot;;a:15:{s:4:\&quot;Name\&quot;;s:8:\&quot;CardzNet\&quot;;s:9:\&quot;PluginURI\&quot;;s:27:\&quot;http://www.corondeck.co.uk/\&quot;;s:7:\&quot;Version\&quot;;s:5:\&quot;2.5.1\&quot;;s:11:\&quot;Description\&quot;;s:40:\&quot;Internet Connected Multiplayer Card Game\&quot;;s:6:\&quot;Author\&quot;;s:16:\&quot;Malcolm Shergold\&quot;;s:9:\&quot;AuthorURI\&quot;;s:26:\&quot;http://www.corondeck.co.uk\&quot;;s:10:\&quot;TextDomain\&quot;;s:8:\&quot;cardznet\&quot;;s:10:\&quot;DomainPath\&quot;;s:0:\&quot;\&quot;;s:7:\&quot;Network\&quot;;b:0;s:10:\&quot;RequiresWP\&quot;;s:0:\&quot;\&quot;;s:11:\&quot;RequiresPHP\&quot;;s:0:\&quot;\&quot;;s:9:\&quot;UpdateURI\&quot;;s:0:\&quot;\&quot;;s:15:\&quot;RequiresPlugins\&quot;;s:0:\&quot;\&quot;;s:5:\&quot;Title\&quot;;s:8:\&quot;CardzNet\&quot;;s:10:\&quot;AuthorName\&quot;;s:16:\&quot;Malcolm Shergold\&quot;;}}&quot; WHERE rowid IN (SELECT rowid FROM wp_cardznet_settings WHERE option_name=:param0 ) | parameters: cardznetsettings</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_base.php(290): WP_SQLite_DB->query('UPDATE wp_cardz...')
+#2 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_api.php(1531): WPCardzNetLibGenericDBaseClass->query('UPDATE wp_cardz...')
+#3 /wordpress/wp-content/plugins/cardznet/include/wpcardznet_dbase_api.php(227): WPCardzNetLibDBaseClass->query('UPDATE wp_cardz...')
+#4 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_api.php(941): WPCardzNetDBaseClass->query('UPDATE wp_cardz...')
+#5 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_api.php(875): WPCardzNetLibDBaseClass->WriteSettings('cardznetsetting...', 'a:9:{s:15:\\"Act...')
+#6 /wordpress/wp-content/plugins/cardznet/wpcardznet.php(112): WPCardzNetLibDBaseClass->saveOptions()
+#7 /wordpress/wp-content/plugins/cardznet/wpcardznet.php(122): WPCardzNetPluginClass->SaveWPCardzNetOptions()
+#8 /wordpress/wp-content/plugins/cardznet/wpcardznet.php(84): WPCardzNetPluginClass->activate()
+#9 /wordpress/wp-content/plugins/cardznet/wpcardznet.php(622): WPCardzNetPluginClass->__construct('/wordpress/wp-c...', Object(WPCardzNetDBaseClass))
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cardznet/wpcard...')
+#12 /internal/eval.php(20): activate_plugin('cardznet/wpcard...')
+#13 {main}</pre>
+ for query UPDATE wp_cardznet_settings SET option_value = "a:9:{s:15:\"ActivationCount\";i:0;s:11:\"LastVersion\";s:0:\"\";s:14:\"OrganisationID\";s:20:\"My WordPress Website\";s:16:\"BccEMailsToAdmin\";b:1;s:17:\"UseCurrencySymbol\";b:0;s:14:\"LogsFolderPath\";s:4:\"logs\";s:10:\"PageLength\";i:20;s:16:\"Unused_EndOfList\";s:0:\"\";s:10:\"pluginInfo\";a:15:{s:4:\"Name\";s:8:\"CardzNet\";s:9:\"PluginURI\";s:27:\"http://www.corondeck.co.uk/\";s:7:\"Version\";s:5:\"2.5.1\";s:11:\"Description\";s:40:\"Internet Connected Multiplayer Card Game\";s:6:\"Author\";s:16:\"Malcolm Shergold\";s:9:\"AuthorURI\";s:26:\"http://www.corondeck.co.uk\";s:10:\"TextDomain\";s:8:\"cardznet\";s:10:\"DomainPath\";s:0:\"\";s:7:\"Network\";b:0;s:10:\"RequiresWP\";s:0:\"\";s:11:\"RequiresPHP\";s:0:\"\";s:9:\"UpdateURI\";s:0:\"\";s:15:\"RequiresPlugins\";s:0:\"\";s:5:\"Title\";s:8:\"CardzNet\";s:10:\"AuthorName\";s:16:\"Malcolm Shergold\";}}" WHERE option_name='cardznetsettings' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/cardznet/wpcardznet.php'), WPCardzNetPluginClass->__construct, WPCardzNetPluginClass->activate, WPCardzNetPluginClass->SaveWPCardzNetOptions, WPCardzNetLibDBaseClass->saveOptions, WPCardzNetLibDBaseClass->WriteSettings, WPCardzNetDBaseClass->query, WPCardzNetLibDBaseClass->query, WPCardzNetLibGenericDBaseClass->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:48:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_cardznet_games (gameId INT UNSIGNED NOT NULL AUTO_INCREMENT, 
+						gameName VARCHAR(32),
+						gameStartDateTime DATETIME NOT NULL,
+						gameEndDateTime DATETIME,
+						gameStatus VARCHAR(20) DEFAULT "in-progress",
+						gameLoginId INT,
+						gameNoOfPlayers INT,
+						gameCardsPerPlayer INT DEFAULT 0,
+						gameCardFace VARCHAR(30) DEFAULT "Standard",
+						firstPlayerId INT DEFAULT 0,
+						nextPlayerId INT DEFAULT 0,
+						gameMeta TEXT DEFAULT "",
+						gameTicker INT DEFAULT 1,
+						gameReset BOOL DEFAULT FALSE,
+					UNIQUE KEY gameId (gameId)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: gameReset.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_api.php(591): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_api.php(556): WPCardzNetLibDBaseClass->dbDelta('CREATE TABLE wp...')
+#4 /wordpress/wp-content/plugins/cardznet/include/wpcardznet_dbase_api.php(475): WPCardzNetLibDBaseClass->createDBTable('wp_cardznet_gam...', 'gameId', false)
+#5 /wordpress/wp-content/plugins/cardznet/include/wpcardznet_dbase_api.php(239): WPCardzNetDBaseClass->createDB()
+#6 /wordpress/wp-content/plugins/cardznet/wpcardznet.php(124): WPCardzNetDBaseClass->upgradeDB()
+#7 /wordpress/wp-content/plugins/cardznet/wpcardznet.php(84): WPCardzNetPluginClass->activate()
+#8 /wordpress/wp-content/plugins/cardznet/wpcardznet.php(622): WPCardzNetPluginClass->__construct('/wordpress/wp-c...', Object(WPCardzNetDBaseClass))
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cardznet/wpcard...')
+#11 /internal/eval.php(20): activate_plugin('cardznet/wpcard...')
+#12 {main}</pre>
+ for query CREATE TABLE wp_cardznet_games (gameId INT UNSIGNED NOT NULL AUTO_INCREMENT, 
+						gameName VARCHAR(32),
+						gameStartDateTime DATETIME NOT NULL,
+						gameEndDateTime DATETIME,
+						gameStatus VARCHAR(20) DEFAULT "in-progress",
+						gameLoginId INT,
+						gameNoOfPlayers INT,
+						gameCardsPerPlayer INT DEFAULT 0,
+						gameCardFace VARCHAR(30) DEFAULT "Standard",
+						firstPlayerId INT DEFAULT 0,
+						nextPlayerId INT DEFAULT 0,
+						gameMeta TEXT DEFAULT "",
+						gameTicker INT DEFAULT 1,
+						gameReset BOOL DEFAULT FALSE,
+					UNIQUE KEY gameId (gameId)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/cardznet/wpcardznet.php'), WPCardzNetPluginClass->__construct, WPCardzNetPluginClass->activate, WPCardzNetDBaseClass->upgradeDB, WPCardzNetDBaseClass->createDB, WPCardzNetLibDBaseClass->createDBTable, WPCardzNetLibDBaseClass->dbDelta, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:48:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_cardznet_tricks (trickId INT UNSIGNED NOT NULL AUTO_INCREMENT, 
+						roundID INT UNSIGNED NOT NULL,
+						playerId INT DEFAULT 0,
+						playerOrder INT DEFAULT 0,
+						cardsList TEXT,
+						winnerId INT DEFAULT 0,
+						complete BOOL DEFAULT FALSE,
+						score INT DEFAULT 0,
+					UNIQUE KEY trickId (trickId)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: complete.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_api.php(591): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_api.php(556): WPCardzNetLibDBaseClass->dbDelta('CREATE TABLE wp...')
+#4 /wordpress/wp-content/plugins/cardznet/include/wpcardznet_dbase_api.php(479): WPCardzNetLibDBaseClass->createDBTable('wp_cardznet_tri...', 'trickId', false)
+#5 /wordpress/wp-content/plugins/cardznet/include/wpcardznet_dbase_api.php(239): WPCardzNetDBaseClass->createDB()
+#6 /wordpress/wp-content/plugins/cardznet/wpcardznet.php(124): WPCardzNetDBaseClass->upgradeDB()
+#7 /wordpress/wp-content/plugins/cardznet/wpcardznet.php(84): WPCardzNetPluginClass->activate()
+#8 /wordpress/wp-content/plugins/cardznet/wpcardznet.php(622): WPCardzNetPluginClass->__construct('/wordpress/wp-c...', Object(WPCardzNetDBaseClass))
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cardznet/wpcard...')
+#11 /internal/eval.php(20): activate_plugin('cardznet/wpcard...')
+#12 {main}</pre>
+ for query CREATE TABLE wp_cardznet_tricks (trickId INT UNSIGNED NOT NULL AUTO_INCREMENT, 
+						roundID INT UNSIGNED NOT NULL,
+						playerId INT DEFAULT 0,
+						playerOrder INT DEFAULT 0,
+						cardsList TEXT,
+						winnerId INT DEFAULT 0,
+						complete BOOL DEFAULT FALSE,
+						score INT DEFAULT 0,
+					UNIQUE KEY trickId (trickId)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/cardznet/wpcardznet.php'), WPCardzNetPluginClass->__construct, WPCardzNetPluginClass->activate, WPCardzNetDBaseClass->upgradeDB, WPCardzNetDBaseClass->createDB, WPCardzNetLibDBaseClass->createDBTable, WPCardzNetLibDBaseClass->dbDelta, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 11:48:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE wp_cardznet_settings SET option_value = "a:9:{s:15:\"ActivationCount\";i:0;s:11:\"LastVersion\";s:0:\"\";s:14:\"OrganisationID\";s:20:\"My WordPress Website\";s:16:\"BccEMailsToAdmin\";b:1;s:17:\"UseCurrencySymbol\";b:0;s:14:\"LogsFolderPath\";s:4:\"logs\";s:10:\"PageLength\";i:20;s:16:\"Unused_EndOfList\";s:0:\"\";s:10:\"pluginInfo\";a:15:{s:4:\"Name\";s:8:\"CardzNet\";s:9:\"PluginURI\";s:27:\"http://www.corondeck.co.uk/\";s:7:\"Version\";s:5:\"2.5.1\";s:11:\"Description\";s:40:\"Internet Connected Multiplayer Card Game\";s:6:\"Author\";s:16:\"Malcolm Shergold\";s:9:\"AuthorURI\";s:26:\"http://www.corondeck.co.uk\";s:10:\"TextDomain\";s:8:\"cardznet\";s:10:\"DomainPath\";s:0:\"\";s:7:\"Network\";b:0;s:10:\"RequiresWP\";s:0:\"\";s:11:\"RequiresPHP\";s:0:\"\";s:9:\"UpdateURI\";s:0:\"\";s:15:\"RequiresPlugins\";s:0:\"\";s:5:\"Title\";s:8:\"CardzNet\";s:10:\"AuthorName\";s:16:\"Malcolm Shergold\";}}" WHERE option_name='cardznetsettings'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: UPDATE wp_cardznet_settings SET option_value = &quot;a:9:{s:15:\&quot;ActivationCount\&quot;;i:0;s:11:\&quot;LastVersion\&quot;;s:0:\&quot;\&quot;;s:14:\&quot;OrganisationID\&quot;;s:20:\&quot;My WordPress Website\&quot;;s:16:\&quot;BccEMailsToAdmin\&quot;;b:1;s:17:\&quot;UseCurrencySymbol\&quot;;b:0;s:14:\&quot;LogsFolderPath\&quot;;s:4:\&quot;logs\&quot;;s:10:\&quot;PageLength\&quot;;i:20;s:16:\&quot;Unused_EndOfList\&quot;;s:0:\&quot;\&quot;;s:10:\&quot;pluginInfo\&quot;;a:15:{s:4:\&quot;Name\&quot;;s:8:\&quot;CardzNet\&quot;;s:9:\&quot;PluginURI\&quot;;s:27:\&quot;http://www.corondeck.co.uk/\&quot;;s:7:\&quot;Version\&quot;;s:5:\&quot;2.5.1\&quot;;s:11:\&quot;Description\&quot;;s:40:\&quot;Internet Connected Multiplayer Card Game\&quot;;s:6:\&quot;Author\&quot;;s:16:\&quot;Malcolm Shergold\&quot;;s:9:\&quot;AuthorURI\&quot;;s:26:\&quot;http://www.corondeck.co.uk\&quot;;s:10:\&quot;TextDomain\&quot;;s:8:\&quot;cardznet\&quot;;s:10:\&quot;DomainPath\&quot;;s:0:\&quot;\&quot;;s:7:\&quot;Network\&quot;;b:0;s:10:\&quot;RequiresWP\&quot;;s:0:\&quot;\&quot;;s:11:\&quot;RequiresPHP\&quot;;s:0:\&quot;\&quot;;s:9:\&quot;UpdateURI\&quot;;s:0:\&quot;\&quot;;s:15:\&quot;RequiresPlugins\&quot;;s:0:\&quot;\&quot;;s:5:\&quot;Title\&quot;;s:8:\&quot;CardzNet\&quot;;s:10:\&quot;AuthorName\&quot;;s:16:\&quot;Malcolm Shergold\&quot;;}}&quot; WHERE rowid IN (SELECT rowid FROM wp_cardznet_settings WHERE option_name=:param0 ) | parameters: cardznetsettings</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_base.php(290): WP_SQLite_DB->query('UPDATE wp_cardz...')
+#2 /wordpress/wp-content/plugins/cardznet/include/wpcardznetlib_dbase_api.php(
