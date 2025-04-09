@@ -2,31 +2,10 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [07-Apr-2025 05:32:32 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getConstantFile() in /wordpress/wp-content/plugins/servicepublic/ServicePublic.php:21
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('servicepublic/S...')
-#2 /internal/eval.php(20): activate_plugin('servicepublic/S...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/servicepublic/ServicePublic.php on line 21
-[07-Apr-2025 05:32:35 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getConstantFile() in /wordpress/wp-content/plugins/servicepublic/ServicePublic.php:21
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('servicepublic/S...')
-#2 /internal/eval.php(20): activate_plugin('servicepublic/S...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/servicepublic/ServicePublic.php on line 21
-[07-Apr-2025 05:32:37 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getConstantFile() in /wordpress/wp-content/plugins/servicepublic/ServicePublic.php:21
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('servicepublic/S...')
-#2 /internal/eval.php(20): activate_plugin('servicepublic/S...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/servicepublic/ServicePublic.php on line 21
-[07-Apr-2025 05:32:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [09-Apr-2025 12:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('alex_set_favicon_value', 'nothing', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_appid', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -38,7 +17,7 @@ Stack trace:
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'alex_set_favicon_value' , 'nothing' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fnc_appid' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -50,20 +29,18 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/set-favicon/set-favicon.php(19): add_option('alex_set_favico...', 'nothing')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('set-favicon/set...')
-#7 /internal/eval.php(20): activate_plugin('set-favicon/set...')
-#8 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('alex_set_favicon_value', 'nothing', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/set-favicon/set-favicon.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 05:32:43 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 05:32:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 05:32:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 05:32:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 05:32:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/seo-with-fannewscast/seo-with-fannewscast.php(147): add_option('fnc_appid', NULL)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): init_plugin(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_seo-wi...', false)
+#9 /internal/eval.php(20): activate_plugin('seo-with-fannew...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_appid', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_seo-with-fannewscast/seo-with-fannewscast.php'), WP_Hook->do_action, WP_Hook->apply_filters, init_plugin, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('alex_set_favicon_value', 'nothing', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_ck', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -75,7 +52,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'alex_set_favicon_value' , 'nothing' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fnc_ck' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -87,33 +64,18 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/set-favicon/set-favicon.php(19): add_option('alex_set_favico...', 'nothing')
-#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('alex_set_favicon_value', 'nothing', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/set-favicon/set-favicon.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 05:33:01 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 05:33:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 05:33:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 05:33:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 05:33:12 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 05:33:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 05:33:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 05:33:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 05:33:23 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 05:33:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 05:33:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 05:33:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 05:33:34 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 05:33:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 05:33:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 05:33:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 05:33:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/seo-with-fannewscast/seo-with-fannewscast.php(148): add_option('fnc_ck', NULL)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): init_plugin(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_seo-wi...', false)
+#9 /internal/eval.php(20): activate_plugin('seo-with-fannew...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_ck', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_seo-with-fannewscast/seo-with-fannewscast.php'), WP_Hook->do_action, WP_Hook->apply_filters, init_plugin, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_shoppersmindtrustmark', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_query', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -125,7 +87,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_shoppersmindtrustmark' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fnc_query' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -137,32 +99,18 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_shoppers...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_shoppers...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_shoppersmindtrustmark', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 05:34:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 05:34:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 05:34:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 05:34:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 05:34:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/seo-with-fannewscast/seo-with-fannewscast.php(149): add_option('fnc_query', NULL)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): init_plugin(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_seo-wi...', false)
+#9 /internal/eval.php(20): activate_plugin('seo-with-fannew...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_query', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_seo-with-fannewscast/seo-with-fannewscast.php'), WP_Hook->do_action, WP_Hook->apply_filters, init_plugin, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_shortcode-widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_search', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -174,7 +122,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_shortcode-widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fnc_search' , 'yes' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -186,28 +134,18 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_shortcod...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_shortcod...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_shortcode-widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 05:34:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/seo-with-fannewscast/seo-with-fannewscast.php(150): add_option('fnc_search', 'yes')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): init_plugin(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_seo-wi...', false)
+#9 /internal/eval.php(20): activate_plugin('seo-with-fannew...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_search', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_seo-with-fannewscast/seo-with-fannewscast.php'), WP_Hook->do_action, WP_Hook->apply_filters, init_plugin, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shst_email', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_sortmenu', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -219,7 +157,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shst_email' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fnc_sortmenu' , 'yes' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -231,20 +169,18 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(99): add_option('shst_email', '')
-#5 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(346): Shortest_Monetization::set_options(Array)
-#6 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(252): Shortest_Monetization::single_activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Shortest_Monetization::activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shorte...', false)
-#11 /internal/eval.php(20): activate_plugin('shortest-websit...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shst_email', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_shortest-website-monetization/shortest-website-monetization.php'), WP_Hook->do_action, WP_Hook->apply_filters, Shortest_Monetization::activate, Shortest_Monetization::single_activate, Shortest_Monetization::set_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 05:34:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/seo-with-fannewscast/seo-with-fannewscast.php(151): add_option('fnc_sortmenu', 'yes')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): init_plugin(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_seo-wi...', false)
+#9 /internal/eval.php(20): activate_plugin('seo-with-fannew...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_sortmenu', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_seo-with-fannewscast/seo-with-fannewscast.php'), WP_Hook->do_action, WP_Hook->apply_filters, init_plugin, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shst_token', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_ajax', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -256,7 +192,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shst_token' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fnc_ajax' , 'yes' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -268,20 +204,18 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(99): add_option('shst_token', '')
-#5 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(346): Shortest_Monetization::set_options(Array)
-#6 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(252): Shortest_Monetization::single_activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Shortest_Monetization::activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shorte...', false)
-#11 /internal/eval.php(20): activate_plugin('shortest-websit...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shst_token', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_shortest-website-monetization/shortest-website-monetization.php'), WP_Hook->do_action, WP_Hook->apply_filters, Shortest_Monetization::activate, Shortest_Monetization::single_activate, Shortest_Monetization::set_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 05:34:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/seo-with-fannewscast/seo-with-fannewscast.php(152): add_option('fnc_ajax', 'yes')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): init_plugin(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_seo-wi...', false)
+#9 /internal/eval.php(20): activate_plugin('seo-with-fannew...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_ajax', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_seo-with-fannewscast/seo-with-fannewscast.php'), WP_Hook->do_action, WP_Hook->apply_filters, init_plugin, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shst_fps_enabled', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_range', '10', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -293,7 +227,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shst_fps_enabled' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fnc_range' , '10' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -305,20 +239,32 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(99): add_option('shst_fps_enable...', true)
-#5 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(346): Shortest_Monetization::set_options(Array)
-#6 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(252): Shortest_Monetization::single_activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Shortest_Monetization::activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shorte...', false)
-#11 /internal/eval.php(20): activate_plugin('shortest-websit...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shst_fps_enabled', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_shortest-website-monetization/shortest-website-monetization.php'), WP_Hook->do_action, WP_Hook->apply_filters, Shortest_Monetization::activate, Shortest_Monetization::single_activate, Shortest_Monetization::set_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 05:34:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/seo-with-fannewscast/seo-with-fannewscast.php(153): add_option('fnc_range', 10)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): init_plugin(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_seo-wi...', false)
+#9 /internal/eval.php(20): activate_plugin('seo-with-fannew...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_range', '10', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_seo-with-fannewscast/seo-with-fannewscast.php'), WP_Hook->do_action, WP_Hook->apply_filters, init_plugin, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shst_fps_domains_list', '127.0.0.1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_entry_template', '<div class=\"entry\" onmousemove=\"addClass(this,\'hover\');\" onmouseout=\"removeClass(this,\'hover\');\">
+    <div class=\"topentry\">
+        [%tmplImage%]
+        <span class=\"title\">
+            <a target=\"_blank\" href=\"[%url%]\">[%title%]</a>
+        </span>
+        <span class=\"metadata\">
+            <span class=\"source\">[%source%]</span>
+            <span class=\"contentdate\">  -  
+                [%contentDate%]</span>
+        </span>
+    </div>
+    <p>[%abstract%]</p>
+    [%tmplSocial%]
+</div>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -330,7 +276,21 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shst_fps_domains_list' , '127.0.0.1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fnc_entry_template' , '&lt;div class=&quot;entry&quot; onmousemove=&quot;addClass(this,''hover'');&quot; onmouseout=&quot;removeClass(this,''hover'');&quot;&gt;
+    &lt;div class=&quot;topentry&quot;&gt;
+        [%tmplImage%]
+        &lt;span class=&quot;title&quot;&gt;
+            &lt;a target=&quot;_blank&quot; href=&quot;[%url%]&quot;&gt;[%title%]&lt;/a&gt;
+        &lt;/span&gt;
+        &lt;span class=&quot;metadata&quot;&gt;
+            &lt;span class=&quot;source&quot;&gt;[%source%]&lt;/span&gt;
+            &lt;span class=&quot;contentdate&quot;&gt;  -  
+                [%contentDate%]&lt;/span&gt;
+        &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;p&gt;[%abstract%]&lt;/p&gt;
+    [%tmplSocial%]
+&lt;/div&gt;' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -342,20 +302,84 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(99): add_option('shst_fps_domain...', '127.0.0.1')
-#5 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(346): Shortest_Monetization::set_options(Array)
-#6 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(252): Shortest_Monetization::single_activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Shortest_Monetization::activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shorte...', false)
-#11 /internal/eval.php(20): activate_plugin('shortest-websit...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shst_fps_domains_list', '127.0.0.1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_shortest-website-monetization/shortest-website-monetization.php'), WP_Hook->do_action, WP_Hook->apply_filters, Shortest_Monetization::activate, Shortest_Monetization::single_activate, Shortest_Monetization::set_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 05:34:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/seo-with-fannewscast/seo-with-fannewscast.php(155): add_option('fnc_entry_templ...', '<div class="ent...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): init_plugin(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_seo-wi...', false)
+#9 /internal/eval.php(20): activate_plugin('seo-with-fannew...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_entry_template', '<div class=\"entry\" onmousemove=\"addClass(this,\'hover\');\" onmouseout=\"removeClass(this,\'hover\');\">
+    <div class=\"topentry\">
+        [%tmplImage%]
+        <span class=\"title\">
+            <a target=\"_blank\" href=\"[%url%]\">[%title%]</a>
+        </span>
+        <span class=\"metadata\">
+            <span class=\"source\">[%source%]</span>
+            <span class=\"contentdate\">  -  
+                [%contentDate%]</span>
+        </span>
+    </div>
+    <p>[%abstract%]</p>
+    [%tmplSocial%]
+</div>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_seo-with-fannewscast/seo-with-fannewscast.php'), WP_Hook->do_action, WP_Hook->apply_filters, init_plugin, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shst_fps_selection_type', '2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_social_template', '<div class=\"entry_actions clr\">
+    <div class=\"clr\"></div>
+    <div class=\"left_actions rate_[%aggregatelikecount%]\">
+        <a href=\"#\" onclick=\"addClass(findParentNode(\'entry\',this),\'rate_detail\');return false;\" class=\"sotial_rate default\">[%aggregatelikecount%]</a>
+        <span class=\"close\" onclick=\"removeClass(findParentNode(\'entry\',this),\'rate_detail\');return false;\"> </span>
+    </div>
+    <div class=\"right_actions\">
+              <ul class=\"entrySocialActions\">
+                  <li class=\"facebook-root\">
+                  <a href=\"http://www.facebook.com/sharer.php?t=[%titleUrl%]&amp;u=[%url%]\" target=\"_blank\"> </a>
+                </li>
+                  <li class=\"linkedin-root\">
+                  <a href=\"http://www.linkedin.com/shareArticle?mini=true&amp;title=[%titleUrl%]&amp;url=[%url%]\" target=\"_blank\"> </a>
+                </li>
+                <li class=\"twitter-root\">
+                  <a href=\"http://twitter.com/share?text=[%titleUrl%]&amp;url=[%url%]&amp;count=none\" target=\"_blank\"> </a>
+                </li>
+                
+                
+              </ul>
+            </div>
+    <div class=\"rate_breakdown\">
+        <table style=\"width: 100%;\">
+            <tr>
+                <td class=\"fb_bd_text\">
+                    <span class=\"ds\">Social Rank Breakdown: [%aggregatelikecount%]</span>
+                    <span class=\"eqil\">=</span>
+                </td>
+                <td class=\"fb_db_num rate_[%totallikecount%]\">
+                    <span class=\"fb_rate\">[%totallikecount%]</span>
+                </td>
+                <td class=\"fb_db_num rate_[%retweetcount%]\">
+                    <span class=\"retweetcount_rate\">[%retweetcount%]</span>
+                </td>
+                <td class=\"fb_db_num rate_[%youtubelikecount%]\">
+                    <span class=\"youtube_rate\">[%youtubelikecount%]</span>
+                </td>
+                <td class=\"fb_db_num rate_[%linkedin%]\">
+                    <span class=\"linkedin_rate\">[%linkedin%]</span>
+                </td>
+                <td class=\"fb_db_num rate_[%google%]\">
+                    <span class=\"google_rate\">[%google%]</span>
+                </td>
+                <td class=\"fb_db_num rate_[%pinterest%]\">
+                    <span class=\"pinterest_rate\">[%pinterest%]</span>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    <div class=\"clr\"></div>
+</div>
+', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -367,7 +391,59 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shst_fps_selection_type' , '2' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fnc_social_template' , '&lt;div class=&quot;entry_actions clr&quot;&gt;
+    &lt;div class=&quot;clr&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;left_actions rate_[%aggregatelikecount%]&quot;&gt;
+        &lt;a href=&quot;#&quot; onclick=&quot;addClass(findParentNode(''entry'',this),''rate_detail'');return false;&quot; class=&quot;sotial_rate default&quot;&gt;[%aggregatelikecount%]&lt;/a&gt;
+        &lt;span class=&quot;close&quot; onclick=&quot;removeClass(findParentNode(''entry'',this),''rate_detail'');return false;&quot;&gt; &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;right_actions&quot;&gt;
+              &lt;ul class=&quot;entrySocialActions&quot;&gt;
+                  &lt;li class=&quot;facebook-root&quot;&gt;
+                  &lt;a href=&quot;http://www.facebook.com/sharer.php?t=[%titleUrl%]&amp;amp;u=[%url%]&quot; target=&quot;_blank&quot;&gt; &lt;/a&gt;
+                &lt;/li&gt;
+                  &lt;li class=&quot;linkedin-root&quot;&gt;
+                  &lt;a href=&quot;http://www.linkedin.com/shareArticle?mini=true&amp;amp;title=[%titleUrl%]&amp;amp;url=[%url%]&quot; target=&quot;_blank&quot;&gt; &lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li class=&quot;twitter-root&quot;&gt;
+                  &lt;a href=&quot;http://twitter.com/share?text=[%titleUrl%]&amp;amp;url=[%url%]&amp;amp;count=none&quot; target=&quot;_blank&quot;&gt; &lt;/a&gt;
+                &lt;/li&gt;
+                
+                
+              &lt;/ul&gt;
+            &lt;/div&gt;
+    &lt;div class=&quot;rate_breakdown&quot;&gt;
+        &lt;table style=&quot;width: 100%;&quot;&gt;
+            &lt;tr&gt;
+                &lt;td class=&quot;fb_bd_text&quot;&gt;
+                    &lt;span class=&quot;ds&quot;&gt;Social Rank Breakdown: [%aggregatelikecount%]&lt;/span&gt;
+                    &lt;span class=&quot;eqil&quot;&gt;=&lt;/span&gt;
+                &lt;/td&gt;
+                &lt;td class=&quot;fb_db_num rate_[%totallikecount%]&quot;&gt;
+                    &lt;span class=&quot;fb_rate&quot;&gt;[%totallikecount%]&lt;/span&gt;
+                &lt;/td&gt;
+                &lt;td class=&quot;fb_db_num rate_[%retweetcount%]&quot;&gt;
+                    &lt;span class=&quot;retweetcount_rate&quot;&gt;[%retweetcount%]&lt;/span&gt;
+                &lt;/td&gt;
+                &lt;td class=&quot;fb_db_num rate_[%youtubelikecount%]&quot;&gt;
+                    &lt;span class=&quot;youtube_rate&quot;&gt;[%youtubelikecount%]&lt;/span&gt;
+                &lt;/td&gt;
+                &lt;td class=&quot;fb_db_num rate_[%linkedin%]&quot;&gt;
+                    &lt;span class=&quot;linkedin_rate&quot;&gt;[%linkedin%]&lt;/span&gt;
+                &lt;/td&gt;
+                &lt;td class=&quot;fb_db_num rate_[%google%]&quot;&gt;
+                    &lt;span class=&quot;google_rate&quot;&gt;[%google%]&lt;/span&gt;
+                &lt;/td&gt;
+                &lt;td class=&quot;fb_db_num rate_[%pinterest%]&quot;&gt;
+                    &lt;span class=&quot;pinterest_rate&quot;&gt;[%pinterest%]&lt;/span&gt;
+                &lt;/td&gt;
+                &lt;td&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;clr&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -379,20 +455,70 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(99): add_option('shst_fps_select...', 2)
-#5 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(346): Shortest_Monetization::set_options(Array)
-#6 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(252): Shortest_Monetization::single_activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Shortest_Monetization::activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shorte...', false)
-#11 /internal/eval.php(20): activate_plugin('shortest-websit...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shst_fps_selection_type', '2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_shortest-website-monetization/shortest-website-monetization.php'), WP_Hook->do_action, WP_Hook->apply_filters, Shortest_Monetization::activate, Shortest_Monetization::single_activate, Shortest_Monetization::set_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 05:34:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/seo-with-fannewscast/seo-with-fannewscast.php(156): add_option('fnc_social_temp...', '<div class="ent...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): init_plugin(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_seo-wi...', false)
+#9 /internal/eval.php(20): activate_plugin('seo-with-fannew...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_social_template', '<div class=\"entry_actions clr\">
+    <div class=\"clr\"></div>
+    <div class=\"left_actions rate_[%aggregatelikecount%]\">
+        <a href=\"#\" onclick=\"addClass(findParentNode(\'entry\',this),\'rate_detail\');return false;\" class=\"sotial_rate default\">[%aggregatelikecount%]</a>
+        <span class=\"close\" onclick=\"removeClass(findParentNode(\'entry\',this),\'rate_detail\');return false;\"> </span>
+    </div>
+    <div class=\"right_actions\">
+              <ul class=\"entrySocialActions\">
+                  <li class=\"facebook-root\">
+                  <a href=\"http://www.facebook.com/sharer.php?t=[%titleUrl%]&amp;u=[%url%]\" target=\"_blank\"> </a>
+                </li>
+                  <li class=\"linkedin-root\">
+                  <a href=\"http://www.linkedin.com/shareArticle?mini=true&amp;title=[%titleUrl%]&amp;url=[%url%]\" target=\"_blank\"> </a>
+                </li>
+                <li class=\"twitter-root\">
+                  <a href=\"http://twitter.com/share?text=[%titleUrl%]&amp;url=[%url%]&amp;count=none\" target=\"_blank\"> </a>
+                </li>
+                
+                
+              </ul>
+            </div>
+    <div class=\"rate_breakdown\">
+        <table style=\"width: 100%;\">
+            <tr>
+                <td class=\"fb_bd_text\">
+                    <span class=\"ds\">Social Rank Breakdown: [%aggregatelikecount%]</span>
+                    <span class=\"eqil\">=</span>
+                </td>
+                <td class=\"fb_db_num rate_[%totallikecount%]\">
+                    <span class=\"fb_rate\">[%totallikecount%]</span>
+                </td>
+                <td class=\"fb_db_num rate_[%retweetcount%]\">
+                    <span class=\"retweetcount_rate\">[%retweetcount%]</span>
+                </td>
+                <td class=\"fb_db_num rate_[%youtubelikecount%]\">
+                    <span class=\"youtube_rate\">[%youtubelikecount%]</span>
+                </td>
+                <td class=\"fb_db_num rate_[%linkedin%]\">
+                    <span class=\"linkedin_rate\">[%linkedin%]</span>
+                </td>
+                <td class=\"fb_db_num rate_[%google%]\">
+                    <span class=\"google_rate\">[%google%]</span>
+                </td>
+                <td class=\"fb_db_num rate_[%pinterest%]\">
+                    <span class=\"pinterest_rate\">[%pinterest%]</span>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    <div class=\"clr\"></div>
+</div>
+', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_seo-with-fannewscast/seo-with-fannewscast.php'), WP_Hook->do_action, WP_Hook->apply_filters, init_plugin, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shst_fps_capping_enabled', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_img_template', '<div class=\"image\"><a target=\"_blank\" href=\"[%url%]\"><img src=\"[%thumbnailImage%]\" /></a></div>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -404,7 +530,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shst_fps_capping_enabled' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fnc_img_template' , '&lt;div class=&quot;image&quot;&gt;&lt;a target=&quot;_blank&quot; href=&quot;[%url%]&quot;&gt;&lt;img src=&quot;[%thumbnailImage%]&quot; /&gt;&lt;/a&gt;&lt;/div&gt;' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -416,20 +542,24 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(99): add_option('shst_fps_cappin...', false)
-#5 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(346): Shortest_Monetization::set_options(Array)
-#6 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(252): Shortest_Monetization::single_activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Shortest_Monetization::activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shorte...', false)
-#11 /internal/eval.php(20): activate_plugin('shortest-websit...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shst_fps_capping_enabled', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_shortest-website-monetization/shortest-website-monetization.php'), WP_Hook->do_action, WP_Hook->apply_filters, Shortest_Monetization::activate, Shortest_Monetization::single_activate, Shortest_Monetization::set_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 05:34:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/seo-with-fannewscast/seo-with-fannewscast.php(157): add_option('fnc_img_templat...', '<div class="ima...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): init_plugin(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_seo-wi...', false)
+#9 /internal/eval.php(20): activate_plugin('seo-with-fannew...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_img_template', '<div class=\"image\"><a target=\"_blank\" href=\"[%url%]\"><img src=\"[%thumbnailImage%]\" /></a></div>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_seo-with-fannewscast/seo-with-fannewscast.php'), WP_Hook->do_action, WP_Hook->apply_filters, init_plugin, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shst_fps_capping_limit', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_yt_img_template', '<div class=\"youtube\">
+    <a target=\"_blank\" href=\"[%url%]\">
+    <img class=\"youtube_prew\" src=\"[%thumbnailImage%]\">
+    </a>
+    <img alt=\"\" src=\"[%plugin_path%]/images/yt_play_button_small.png\" class=\"yt-thumb-overlay\">
+</div>
+', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -441,7 +571,13 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shst_fps_capping_limit' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fnc_yt_img_template' , '&lt;div class=&quot;youtube&quot;&gt;
+    &lt;a target=&quot;_blank&quot; href=&quot;[%url%]&quot;&gt;
+    &lt;img class=&quot;youtube_prew&quot; src=&quot;[%thumbnailImage%]&quot;&gt;
+    &lt;/a&gt;
+    &lt;img alt=&quot;&quot; src=&quot;[%plugin_path%]/images/yt_play_button_small.png&quot; class=&quot;yt-thumb-overlay&quot;&gt;
+&lt;/div&gt;
+' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -453,20 +589,28 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(99): add_option('shst_fps_cappin...', 1)
-#5 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(346): Shortest_Monetization::set_options(Array)
-#6 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(252): Shortest_Monetization::single_activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Shortest_Monetization::activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shorte...', false)
-#11 /internal/eval.php(20): activate_plugin('shortest-websit...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shst_fps_capping_limit', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_shortest-website-monetization/shortest-website-monetization.php'), WP_Hook->do_action, WP_Hook->apply_filters, Shortest_Monetization::activate, Shortest_Monetization::single_activate, Shortest_Monetization::set_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 05:34:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/seo-with-fannewscast/seo-with-fannewscast.php(158): add_option('fnc_yt_img_temp...', '<div class="you...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): init_plugin(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_seo-wi...', false)
+#9 /internal/eval.php(20): activate_plugin('seo-with-fannew...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_yt_img_template', '<div class=\"youtube\">
+    <a target=\"_blank\" href=\"[%url%]\">
+    <img class=\"youtube_prew\" src=\"[%thumbnailImage%]\">
+    </a>
+    <img alt=\"\" src=\"[%plugin_path%]/images/yt_play_button_small.png\" class=\"yt-thumb-overlay\">
+</div>
+', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_seo-with-fannewscast/seo-with-fannewscast.php'), WP_Hook->do_action, WP_Hook->apply_filters, init_plugin, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shst_fps_capping_timeout', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_noitems_template', '<li class=\"entry\">
+    
+    <p>No entries found</p>
+    
+</li>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -478,7 +622,11 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shst_fps_capping_timeout' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fnc_noitems_template' , '&lt;li class=&quot;entry&quot;&gt;
+    
+    &lt;p&gt;No entries found&lt;/p&gt;
+    
+&lt;/li&gt;' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -490,20 +638,100 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(99): add_option('shst_fps_cappin...', 1)
-#5 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(346): Shortest_Monetization::set_options(Array)
-#6 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(252): Shortest_Monetization::single_activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Shortest_Monetization::activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shorte...', false)
-#11 /internal/eval.php(20): activate_plugin('shortest-websit...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shst_fps_capping_timeout', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_shortest-website-monetization/shortest-website-monetization.php'), WP_Hook->do_action, WP_Hook->apply_filters, Shortest_Monetization::activate, Shortest_Monetization::single_activate, Shortest_Monetization::set_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 05:34:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/seo-with-fannewscast/seo-with-fannewscast.php(159): add_option('fnc_noitems_tem...', '<li class="entr...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): init_plugin(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_seo-wi...', false)
+#9 /internal/eval.php(20): activate_plugin('seo-with-fannew...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_noitems_template', '<li class=\"entry\">
+    
+    <p>No entries found</p>
+    
+</li>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_seo-with-fannewscast/seo-with-fannewscast.php'), WP_Hook->do_action, WP_Hook->apply_filters, init_plugin, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shst_es_enabled', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_list_template', '<div id=\"[%varprefix%]_content\" class=\"fnc_content\">
+    [%tmplSearch%]
+    <div>
+      <table>
+        <tr>
+          <td>[%tmplSort%]</td>
+        </tr>
+      </table>
+    </div>
+    <div class=\"pagination\" [%paginationAttrs%]>
+        <table>
+            <tr>
+                <td><p>[%entriesSlice%] of [%totalEntries%]</p></td>
+                <td>
+                    <table class=\"pagination-inner\">
+                        <tr class=\"[%pagerStateClass%]\">
+                            <td class=\"pager-first\"><a href=\"[%firstPageUrl%]\">first</a></td>
+                            <td class=\"pager-previous-label\"><a href=\"[%prevPageUrl%]\">prev</a></td>
+                            <td class=\"pager-list-dots-left\">...</td>
+                            <td class=\"pager-current\"><span>[%curPage%]</span></td>
+                            <td class=\"pager-list-dots-right\">...</td>
+                            <td class=\"pager-next-label\"><a href=\"[%nextPageUrl%]\">next</a></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class=\"clr\"></div>
+    <div id=\"fnc_list\">
+        [%list%]
+    </div>
+    <div class=\"pagination\" [%paginationAttrs%]>
+        <table>
+            <tr>
+                <td><p>[%entriesSlice%] of [%totalEntries%]</p></td>
+                <td>
+                    <table class=\"pagination-inner\">
+                        <tr class=\"[%pagerStateClass%]\">
+                            <td class=\"pager-first\"><a href=\"[%firstPageUrl%]\">first</a></td>
+                            <td class=\"pager-previous-label\"><a href=\"[%prevPageUrl%]\">prev</a></td>
+                            <td class=\"pager-list-dots-left\">...</td>
+                            <td class=\"pager-current\"><span>[%curPage%]</span></td>
+                            <td class=\"pager-list-dots-right\">...</td>
+                            <td class=\"pager-next-label\"><a href=\"[%nextPageUrl%]\">next</a></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class=\"clr\"></div>
+  [%ajax%]
+<script type=\"text/javascript\">
+
+ function hasClass(ele,cls) {
+	return ele.className.match(new RegExp(\'(\\\\\\\\s|^)\'+cls+\'(\\\\\\\\s|$)\'));
+}
+function addClass(ele,cls) {
+	if (!this.hasClass(ele,cls)) ele.className += \" \"+cls;
+}
+function removeClass(ele,cls) {
+	if (hasClass(ele,cls)) {
+		var reg = new RegExp(\'(\\\\\\\\s|^)\'+cls+\'(\\\\\\\\s|$)\');
+		ele.className=ele.className.replace(reg,\' \');
+	}
+}
+function findParentNode(parentClass, childObj) {
+    var testObj = childObj.parentNode;
+    var count = 1;
+    while(!hasClass(testObj, parentClass)) {
+        testObj = testObj.parentNode;
+        count++;
+    }
+    return testObj;
+}
+</script>
+</div>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -515,7 +743,85 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shst_es_enabled' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fnc_list_template' , '&lt;div id=&quot;[%varprefix%]_content&quot; class=&quot;fnc_content&quot;&gt;
+    [%tmplSearch%]
+    &lt;div&gt;
+      &lt;table&gt;
+        &lt;tr&gt;
+          &lt;td&gt;[%tmplSort%]&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;pagination&quot; [%paginationAttrs%]&gt;
+        &lt;table&gt;
+            &lt;tr&gt;
+                &lt;td&gt;&lt;p&gt;[%entriesSlice%] of [%totalEntries%]&lt;/p&gt;&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;table class=&quot;pagination-inner&quot;&gt;
+                        &lt;tr class=&quot;[%pagerStateClass%]&quot;&gt;
+                            &lt;td class=&quot;pager-first&quot;&gt;&lt;a href=&quot;[%firstPageUrl%]&quot;&gt;first&lt;/a&gt;&lt;/td&gt;
+                            &lt;td class=&quot;pager-previous-label&quot;&gt;&lt;a href=&quot;[%prevPageUrl%]&quot;&gt;prev&lt;/a&gt;&lt;/td&gt;
+                            &lt;td class=&quot;pager-list-dots-left&quot;&gt;...&lt;/td&gt;
+                            &lt;td class=&quot;pager-current&quot;&gt;&lt;span&gt;[%curPage%]&lt;/span&gt;&lt;/td&gt;
+                            &lt;td class=&quot;pager-list-dots-right&quot;&gt;...&lt;/td&gt;
+                            &lt;td class=&quot;pager-next-label&quot;&gt;&lt;a href=&quot;[%nextPageUrl%]&quot;&gt;next&lt;/a&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                    &lt;/table&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;clr&quot;&gt;&lt;/div&gt;
+    &lt;div id=&quot;fnc_list&quot;&gt;
+        [%list%]
+    &lt;/div&gt;
+    &lt;div class=&quot;pagination&quot; [%paginationAttrs%]&gt;
+        &lt;table&gt;
+            &lt;tr&gt;
+                &lt;td&gt;&lt;p&gt;[%entriesSlice%] of [%totalEntries%]&lt;/p&gt;&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;table class=&quot;pagination-inner&quot;&gt;
+                        &lt;tr class=&quot;[%pagerStateClass%]&quot;&gt;
+                            &lt;td class=&quot;pager-first&quot;&gt;&lt;a href=&quot;[%firstPageUrl%]&quot;&gt;first&lt;/a&gt;&lt;/td&gt;
+                            &lt;td class=&quot;pager-previous-label&quot;&gt;&lt;a href=&quot;[%prevPageUrl%]&quot;&gt;prev&lt;/a&gt;&lt;/td&gt;
+                            &lt;td class=&quot;pager-list-dots-left&quot;&gt;...&lt;/td&gt;
+                            &lt;td class=&quot;pager-current&quot;&gt;&lt;span&gt;[%curPage%]&lt;/span&gt;&lt;/td&gt;
+                            &lt;td class=&quot;pager-list-dots-right&quot;&gt;...&lt;/td&gt;
+                            &lt;td class=&quot;pager-next-label&quot;&gt;&lt;a href=&quot;[%nextPageUrl%]&quot;&gt;next&lt;/a&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                    &lt;/table&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;clr&quot;&gt;&lt;/div&gt;
+  [%ajax%]
+&lt;script type=&quot;text/javascript&quot;&gt;
+
+ function hasClass(ele,cls) {
+	return ele.className.match(new RegExp(''(\\\\s|^)''+cls+''(\\\\s|$)''));
+}
+function addClass(ele,cls) {
+	if (!this.hasClass(ele,cls)) ele.className += &quot; &quot;+cls;
+}
+function removeClass(ele,cls) {
+	if (hasClass(ele,cls)) {
+		var reg = new RegExp(''(\\\\s|^)''+cls+''(\\\\s|$)'');
+		ele.className=ele.className.replace(reg,'' '');
+	}
+}
+function findParentNode(parentClass, childObj) {
+    var testObj = childObj.parentNode;
+    var count = 1;
+    while(!hasClass(testObj, parentClass)) {
+        testObj = testObj.parentNode;
+        count++;
+    }
+    return testObj;
+}
+&lt;/script&gt;
+&lt;/div&gt;' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -527,20 +833,113 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(99): add_option('shst_es_enabled', false)
-#5 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(346): Shortest_Monetization::set_options(Array)
-#6 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(252): Shortest_Monetization::single_activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Shortest_Monetization::activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shorte...', false)
-#11 /internal/eval.php(20): activate_plugin('shortest-websit...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shst_es_enabled', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_shortest-website-monetization/shortest-website-monetization.php'), WP_Hook->do_action, WP_Hook->apply_filters, Shortest_Monetization::activate, Shortest_Monetization::single_activate, Shortest_Monetization::set_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 05:34:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/seo-with-fannewscast/seo-with-fannewscast.php(160): add_option('fnc_list_templa...', '<div id="[%varp...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): init_plugin(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_seo-wi...', false)
+#9 /internal/eval.php(20): activate_plugin('seo-with-fannew...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_list_template', '<div id=\"[%varprefix%]_content\" class=\"fnc_content\">
+    [%tmplSearch%]
+    <div>
+      <table>
+        <tr>
+          <td>[%tmplSort%]</td>
+        </tr>
+      </table>
+    </div>
+    <div class=\"pagination\" [%paginationAttrs%]>
+        <table>
+            <tr>
+                <td><p>[%entriesSlice%] of [%totalEntries%]</p></td>
+                <td>
+                    <table class=\"pagination-inner\">
+                        <tr class=\"[%pagerStateClass%]\">
+                            <td class=\"pager-first\"><a href=\"[%firstPageUrl%]\">first</a></td>
+                            <td class=\"pager-previous-label\"><a href=\"[%prevPageUrl%]\">prev</a></td>
+                            <td class=\"pager-list-dots-left\">...</td>
+                            <td class=\"pager-current\"><span>[%curPage%]</span></td>
+                            <td class=\"pager-list-dots-right\">...</td>
+                            <td class=\"pager-next-label\"><a href=\"[%nextPageUrl%]\">next</a></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class=\"clr\"></div>
+    <div id=\"fnc_list\">
+        [%list%]
+    </div>
+    <div class=\"pagination\" [%paginationAttrs%]>
+        <table>
+            <tr>
+                <td><p>[%entriesSlice%] of [%totalEntries%]</p></td>
+                <td>
+                    <table class=\"pagination-inner\">
+                        <tr class=\"[%pagerStateClass%]\">
+                            <td class=\"pager-first\"><a href=\"[%firstPageUrl%]\">first</a></td>
+                            <td class=\"pager-previous-label\"><a href=\"[%prevPageUrl%]\">prev</a></td>
+                            <td class=\"pager-list-dots-left\">...</td>
+                            <td class=\"pager-current\"><span>[%curPage%]</span></td>
+                            <td class=\"pager-list-dots-right\">...</td>
+                            <td class=\"pager-next-label\"><a href=\"[%nextPageUrl%]\">next</a></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class=\"clr\"></div>
+  [%ajax%]
+<script type=\"text/javascript\">
+
+ function hasClass(ele,cls) {
+	return ele.className.match(new RegExp(\'(\\\\\\\\s|^)\'+cls+\'(\\\\\\\\s|$)\'));
+}
+function addClass(ele,cls) {
+	if (!this.hasClass(ele,cls)) ele.className += \" \"+cls;
+}
+function removeClass(ele,cls) {
+	if (hasClass(ele,cls)) {
+		var reg = new RegExp(\'(\\\\\\\\s|^)\'+cls+\'(\\\\\\\\s|$)\');
+		ele.className=ele.className.replace(reg,\' \');
+	}
+}
+function findParentNode(parentClass, childObj) {
+    var testObj = childObj.parentNode;
+    var count = 1;
+    while(!hasClass(testObj, parentClass)) {
+        testObj = testObj.parentNode;
+        count++;
+    }
+    return testObj;
+}
+</script>
+</div>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_seo-with-fannewscast/seo-with-fannewscast.php'), WP_Hook->do_action, WP_Hook->apply_filters, init_plugin, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shst_es_type', '2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fnc_searchbox_template', '<div id=\"search-bar\" class=\"search-bar\">
+    <form action=\"\" method=\"get\" >
+        <fieldset class=\"noborder\">
+            <input type=\"text\" style=\"width: 280px\" value=\"[%searchQuery%]\" id=\"q\"
+                   onblur=\"if(this.value ==\'\') this.value =\'Search\';\"
+                   onfocus=\"if(this.value ==\'Search\') this.value =\'\';\" name=\"[%varprefix%]_q\" class=\"text search_text\">
+            <input type=\"image\" src=\"[%plugin_path%]/images/search_grey.png\"
+                   name=\"sa\" value=\"Search\" id=\"searchButton\" class=\"image\">
+            [%hiddenParams%]
+            <div id=\"clearsearchid\">
+                <a href=\"[%clearQuery%]\" title=\"Clear Search\" class=\"clearsearchlink\" id=\"clearsearchlink\">
+                    X
+                </a>
+            </div>
+        </fieldset>
+    </form> 
+</div>
+', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -552,119 +951,14 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shst_es_type' , '2' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(99): add_option('shst_es_type', 2)
-#5 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(346): Shortest_Monetization::set_options(Array)
-#6 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(252): Shortest_Monetization::single_activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Shortest_Monetization::activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shorte...', false)
-#11 /internal/eval.php(20): activate_plugin('shortest-websit...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shst_es_type', '2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_shortest-website-monetization/shortest-website-monetization.php'), WP_Hook->do_action, WP_Hook->apply_filters, Shortest_Monetization::activate, Shortest_Monetization::single_activate, Shortest_Monetization::set_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 05:34:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shst_es_timeout', '3000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shst_es_timeout' , '3000' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(99): add_option('shst_es_timeout', 3000)
-#5 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(346): Shortest_Monetization::set_options(Array)
-#6 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(252): Shortest_Monetization::single_activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Shortest_Monetization::activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shorte...', false)
-#11 /internal/eval.php(20): activate_plugin('shortest-websit...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shst_es_timeout', '3000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_shortest-website-monetization/shortest-website-monetization.php'), WP_Hook->do_action, WP_Hook->apply_filters, Shortest_Monetization::activate, Shortest_Monetization::single_activate, Shortest_Monetization::set_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 05:34:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shst_es_capping_enabled', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shst_es_capping_enabled' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(99): add_option('shst_es_capping...', false)
-#5 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(346): Shortest_Monetization::set_options(Array)
-#6 /wordpress/wp-content/plugins/shortest-website-monetization/class-shortest-monetization.php(252): Shortest_Monetization::single_activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Shortest_Monetization::activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shorte...', false)
-#11 /internal/eval.php(20): activate_plugin('shortest-websit...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shst_es_capping_enabled', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_shortest-website-monetization/shortest-website-monetization.php'), WP_Hook->do_action, WP_Hook->apply_filters, Shortest_Monetization::activate, Shortest_Monetization::single_activate, Shortest_Monetization::set_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 05:34:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shst_es_capping_limit', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shst_es_capping_limit' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted b
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fnc_searchbox_template' , '&lt;div id=&quot;search-bar&quot; class=&quot;search-bar&quot;&gt;
+    &lt;form action=&quot;&quot; method=&quot;get&quot; &gt;
+        &lt;fieldset class=&quot;noborder&quot;&gt;
+            &lt;input type=&quot;text&quot; style=&quot;width: 280px&quot; value=&quot;[%searchQuery%]&quot; id=&quot;q&quot;
+                   onblur=&quot;if(this.value =='''') this.value =''Search'';&quot;
+                   onfocus=&quot;if(this.value ==''Search'') this.value ='''';&quot; name=&quot;[%varprefix%]_q&quot; class=&quot;text search_text&quot;&gt;
+            &lt;input type=&quot;image&quot; src=&quot;[%plugin_path%]/images/search_grey.png&quot;
+                   name=&quot;sa&quot; value=&quot;Search&quot; id=&quot;searchButton&quot; class=&quot;image&quot;&gt;
+            [%hiddenParams%]
+            &lt;div id=&quot;clearsearchid&quot;&gt;
+                &lt;a href=&quot;[%clearQuery%]&quot; title=&quot;Clear Search&
