@@ -2,206 +2,1270 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [06-Apr-2025 08:12:25 UTC] PHP Deprecated:  File class-http.php is <strong>deprecated</strong> since version 5.9.0! Use wp-includes/class-wp-http.php instead. in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 08:12:25 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 08:12:25 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 08:12:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 08:12:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 08:12:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 08:12:26 UTC] PHP Deprecated:  File class-http.php is <strong>deprecated</strong> since version 5.9.0! Use wp-includes/class-wp-http.php instead. in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 08:12:26 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 08:12:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 08:12:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 08:12:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 08:12:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [09-Apr-2025 01:48:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_onesky_widget_language_switcher', 'a:1:{i:1;a:1:{s:5:\"title\";s:16:\"SELECAT LANGUAGE\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT * FROM wp_wc_obs_settings ORDER BY id DESC LIMIT 1</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_onesky_widget_language_switcher' , 'a:1:{i:1;a:1:{s:5:&quot;title&quot;;s:16:&quot;SELECAT LANGUAGE&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_wc_obs_settings` ORDER BY `id` DESC LIMIT 1 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 no such table: wp_wc_obs_settings
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_onesky_w...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/onesky-translation/include/widget/language_switcher.php(55): update_option('widget_onesky_w...', Array)
-#6 /wordpress/wp-content/plugins/onesky-translation/include/widget/language_switcher.php(31): OneSky_Widget_Language_Switcher->_autoloader()
-#7 /wordpress/wp-includes/class-wp-widget-factory.php(62): OneSky_Widget_Language_Switcher->__construct()
-#8 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('OneSky_Widget_L...')
-#9 /wordpress/wp-content/plugins/onesky-translation/class/abstract.php(73): register_widget('OneSky_Widget_L...')
-#10 /wordpress/wp-includes/class-wp-hook.php(324): OneSky_Class_Abstract->language_switcher_init('')
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#14 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#15 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#16 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#17 /wordpress/wp-settings.php(704): do_action('init')
-#18 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#19 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#20 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#21 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_onesky_widget_language_switcher', 'a:1:{i:1;a:1:{s:5:\"title\";s:16:\"SELECAT LANGUAGE\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, OneSky_Class_Abstract->language_switcher_init, register_widget, WP_Widget_Factory->register, OneSky_Widget_Language_Switcher->__construct, OneSky_Widget_Language_Switcher->_autoloader, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 08:12:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/online-billing-service/admin/class-obs-admin-query.php(153): wpdb->get_results('SELECT * FROM w...', 'OBJECT')
+#5 /wordpress/wp-content/plugins/online-billing-service/includes/class-obs.php(154): OBS_Admin_Query::obs_wc_stripe_integration_workflow()
+#6 /wordpress/wp-content/plugins/online-billing-service/includes/class-obs.php(78): OBS->define_admin_hooks()
+#7 /wordpress/wp-content/plugins/online-billing-service/obs.php(216): OBS->__construct()
+#8 /wordpress/wp-content/plugins/online-billing-service/obs.php(225): fac_woo_obs_run_obs()
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('online-billing-...')
+#11 /internal/eval.php(20): activate_plugin('online-billing-...')
+#12 {main}</pre>
+ for query SELECT * FROM wp_wc_obs_settings ORDER BY id DESC LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/online-billing-service/obs.php'), fac_woo_obs_run_obs, OBS->__construct, OBS->define_admin_hooks, OBS_Admin_Query::obs_wc_stripe_integration_workflow, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:48:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_onesky_widget_language_switcher', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT * FROM wp_wc_obs_api_key ORDER BY id DESC LIMIT 1</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_onesky_widget_language_switcher' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_wc_obs_api_key` ORDER BY `id` DESC LIMIT 1 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 no such table: wp_wc_obs_api_key
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_onesky_w...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_onesky_w...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_onesky_widget_language_switcher', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 08:12:29 UTC] PHP Deprecated:  File class-http.php is <strong>deprecated</strong> since version 5.9.0! Use wp-includes/class-wp-http.php instead. in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 08:12:29 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 08:12:29 UTC] PHP Deprecated:  File class-http.php is <strong>deprecated</strong> since version 5.9.0! Use wp-includes/class-wp-http.php instead. in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 08:12:35 UTC] PHP Deprecated:  File class-http.php is <strong>deprecated</strong> since version 5.9.0! Use wp-includes/class-wp-http.php instead. in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 08:12:35 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 08:12:35 UTC] PHP Deprecated:  File class-http.php is <strong>deprecated</strong> since version 5.9.0! Use wp-includes/class-wp-http.php instead. in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 08:12:42 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 08:12:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 08:12:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 08:12:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 08:12:42 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 08:12:42 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 08:12:45 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 08:12:45 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 08:12:48 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 08:12:48 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 08:13:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/online-billing-service/admin/class-obs-admin-authentication.php(134): wpdb->get_results('SELECT * FROM w...', 'OBJECT')
+#5 /wordpress/wp-content/plugins/online-billing-service/includes/class-obs.php(158): OBS_Admin_Authentication::global_api_key()
+#6 /wordpress/wp-content/plugins/online-billing-service/includes/class-obs.php(78): OBS->define_admin_hooks()
+#7 /wordpress/wp-content/plugins/online-billing-service/obs.php(216): OBS->__construct()
+#8 /wordpress/wp-content/plugins/online-billing-service/obs.php(225): fac_woo_obs_run_obs()
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('online-billing-...')
+#11 /internal/eval.php(20): activate_plugin('online-billing-...')
+#12 {main}</pre>
+ for query SELECT * FROM wp_wc_obs_api_key ORDER BY id DESC LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/online-billing-service/obs.php'), fac_woo_obs_run_obs, OBS->__construct, OBS->define_admin_hooks, OBS_Admin_Authentication::global_api_key, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:48:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('online_db_version', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT * FROM REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW ORDER BY id ASC LIMIT 1</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'online_db_version' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT * FROM `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` ORDER BY `id` ASC LIMIT 1 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 no such table: REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/online-wp/online-wp.php(61): add_option('online_db_versi...', NULL)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): online_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_online...', false)
-#9 /internal/eval.php(20): activate_plugin('online-wp/onlin...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM R...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM R...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM R...')
+#4 /wordpress/wp-content/plugins/online-billing-service/obs.php(91): wpdb->get_results('SELECT * FROM R...', 'OBJECT')
+#5 /wordpress/wp-content/plugins/online-billing-service/obs.php(219): fac_woo_obs_db_secret()
+#6 /wordpress/wp-content/plugins/online-billing-service/obs.php(225): fac_woo_obs_run_obs()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('online-billing-...')
+#9 /internal/eval.php(20): activate_plugin('online-billing-...')
 #10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('online_db_version', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_online-wp/online-wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, online_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 08:13:08 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 08:13:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 08:13:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 08:13:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 08:13:08 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 08:13:11 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 08:13:13 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[06-Apr-2025 08:13:20 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 08:13:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 08:13:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 08:13:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 08:13:44 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 08:13:44 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 08:13:44 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 08:13:44 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 08:13:57 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 08:13:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 08:13:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 08:13:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 08:13:57 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 08:13:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 08:13:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 08:13:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 08:14:10 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 08:14:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 08:14:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 08:14:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"op-payment-service-for-woocommerce"},"options":{"activate":true}}) : Plugin /wordpress/wp-content/plugins/op-payment-service-for-woocommerce could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-    [cause]: Error: Plugin /wordpress/wp-content/plugins/op-payment-service-for-woocommerce could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
-        at vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:119:51)
-        at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
-        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
-        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
-        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159)
-  }
-}
-
-Node.js v20.15.0
+ for query SELECT * FROM REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW ORDER BY id ASC LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/online-billing-service/obs.php'), fac_woo_obs_run_obs, fac_woo_obs_db_secret, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:48:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` (`sk`, `s4`) VALUES ('1ddf97a2cf500647fb0280452a391d9e', 'd04a538019af1ef67007254d2d2fb9c9')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW</li>
+<li>Executing: INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` () SELECT  FROM (VALUES ( '1ddf97a2cf500647fb0280452a391d9e' , 'd04a538019af1ef67007254d2d2fb9c9' )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `RE...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `RE...')
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `RE...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('REWSAKSDNSFFQYU...', Array, NULL, 'INSERT')
+#5 /wordpress/wp-content/plugins/online-billing-service/obs.php(100): wpdb->insert('REWSAKSDNSFFQYU...', Array)
+#6 /wordpress/wp-content/plugins/online-billing-service/obs.php(219): fac_woo_obs_db_secret()
+#7 /wordpress/wp-content/plugins/online-billing-service/obs.php(225): fac_woo_obs_run_obs()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('online-billing-...')
+#10 /internal/eval.php(20): activate_plugin('online-billing-...')
+#11 {main}</pre>
+ for query INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` (`sk`, `s4`) VALUES ('1ddf97a2cf500647fb0280452a391d9e', 'd04a538019af1ef67007254d2d2fb9c9') made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/online-billing-service/obs.php'), fac_woo_obs_run_obs, fac_woo_obs_db_secret, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:48:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wc_obs_settings ORDER BY id DESC LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_wc_obs_settings ORDER BY id DESC LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wc_obs_settings.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/online-billing-service/admin/class-obs-admin-query.php(153): wpdb->get_results('SELECT * FROM w...', 'OBJECT')
+#3 /wordpress/wp-content/plugins/online-billing-service/includes/class-obs.php(154): OBS_Admin_Query::obs_wc_stripe_integration_workflow()
+#4 /wordpress/wp-content/plugins/online-billing-service/includes/class-obs.php(78): OBS->define_admin_hooks()
+#5 /wordpress/wp-content/plugins/online-billing-service/obs.php(216): OBS->__construct()
+#6 /wordpress/wp-content/plugins/online-billing-service/obs.php(225): fac_woo_obs_run_obs()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('online-billing-...')
+#9 /internal/eval.php(20): activate_plugin('online-billing-...')
+#10 {main}</pre>
+ for query SELECT * FROM wp_wc_obs_settings ORDER BY id DESC LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/online-billing-service/obs.php'), fac_woo_obs_run_obs, OBS->__construct, OBS->define_admin_hooks, OBS_Admin_Query::obs_wc_stripe_integration_workflow, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:48:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wc_obs_api_key ORDER BY id DESC LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_wc_obs_api_key ORDER BY id DESC LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wc_obs_api_key.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/online-billing-service/admin/class-obs-admin-authentication.php(134): wpdb->get_results('SELECT * FROM w...', 'OBJECT')
+#3 /wordpress/wp-content/plugins/online-billing-service/includes/class-obs.php(158): OBS_Admin_Authentication::global_api_key()
+#4 /wordpress/wp-content/plugins/online-billing-service/includes/class-obs.php(78): OBS->define_admin_hooks()
+#5 /wordpress/wp-content/plugins/online-billing-service/obs.php(216): OBS->__construct()
+#6 /wordpress/wp-content/plugins/online-billing-service/obs.php(225): fac_woo_obs_run_obs()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('online-billing-...')
+#9 /internal/eval.php(20): activate_plugin('online-billing-...')
+#10 {main}</pre>
+ for query SELECT * FROM wp_wc_obs_api_key ORDER BY id DESC LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/online-billing-service/obs.php'), fac_woo_obs_run_obs, OBS->__construct, OBS->define_admin_hooks, OBS_Admin_Authentication::global_api_key, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:48:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW ORDER BY id ASC LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW ORDER BY id ASC LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM R...')
+#2 /wordpress/wp-content/plugins/online-billing-service/obs.php(91): wpdb->get_results('SELECT * FROM R...', 'OBJECT')
+#3 /wordpress/wp-content/plugins/online-billing-service/obs.php(219): fac_woo_obs_db_secret()
+#4 /wordpress/wp-content/plugins/online-billing-service/obs.php(225): fac_woo_obs_run_obs()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('online-billing-...')
+#7 /internal/eval.php(20): activate_plugin('online-billing-...')
+#8 {main}</pre>
+ for query SELECT * FROM REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW ORDER BY id ASC LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/online-billing-service/obs.php'), fac_woo_obs_run_obs, fac_woo_obs_db_secret, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:48:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` (`sk`, `s4`) VALUES ('ef951d2b78a8daabe9c67001f6384218', '87966adfb1c3fba1e74089d50881e2a2')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` (`sk`, `s4`) VALUES (:param0 , :param1 ) | parameters: ef951d2b78a8daabe9c67001f6384218, 87966adfb1c3fba1e74089d50881e2a2</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `RE...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('REWSAKSDNSFFQYU...', Array, NULL, 'INSERT')
+#3 /wordpress/wp-content/plugins/online-billing-service/obs.php(100): wpdb->insert('REWSAKSDNSFFQYU...', Array)
+#4 /wordpress/wp-content/plugins/online-billing-service/obs.php(219): fac_woo_obs_db_secret()
+#5 /wordpress/wp-content/plugins/online-billing-service/obs.php(225): fac_woo_obs_run_obs()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('online-billing-...')
+#8 /internal/eval.php(20): activate_plugin('online-billing-...')
+#9 {main}</pre>
+ for query INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` (`sk`, `s4`) VALUES ('ef951d2b78a8daabe9c67001f6384218', '87966adfb1c3fba1e74089d50881e2a2') made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/online-billing-service/obs.php'), fac_woo_obs_run_obs, fac_woo_obs_db_secret, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:48:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wc_obs_settings ORDER BY id DESC LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_wc_obs_settings ORDER BY id DESC LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wc_obs_settings.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/online-billing-service/admin/class-obs-admin-query.php(153): wpdb->get_results('SELECT * FROM w...', 'OBJECT')
+#3 /wordpress/wp-content/plugins/online-billing-service/includes/class-obs.php(154): OBS_Admin_Query::obs_wc_stripe_integration_workflow()
+#4 /wordpress/wp-content/plugins/online-billing-service/includes/class-obs.php(78): OBS->define_admin_hooks()
+#5 /wordpress/wp-content/plugins/online-billing-service/obs.php(216): OBS->__construct()
+#6 /wordpress/wp-content/plugins/online-billing-service/obs.php(225): fac_woo_obs_run_obs()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('online-billing-...')
+#9 /internal/eval.php(20): activate_plugin('online-billing-...')
+#10 {main}</pre>
+ for query SELECT * FROM wp_wc_obs_settings ORDER BY id DESC LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/online-billing-service/obs.php'), fac_woo_obs_run_obs, OBS->__construct, OBS->define_admin_hooks, OBS_Admin_Query::obs_wc_stripe_integration_workflow, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:48:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wc_obs_api_key ORDER BY id DESC LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_wc_obs_api_key ORDER BY id DESC LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wc_obs_api_key.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/online-billing-service/admin/class-obs-admin-authentication.php(134): wpdb->get_results('SELECT * FROM w...', 'OBJECT')
+#3 /wordpress/wp-content/plugins/online-billing-service/includes/class-obs.php(158): OBS_Admin_Authentication::global_api_key()
+#4 /wordpress/wp-content/plugins/online-billing-service/includes/class-obs.php(78): OBS->define_admin_hooks()
+#5 /wordpress/wp-content/plugins/online-billing-service/obs.php(216): OBS->__construct()
+#6 /wordpress/wp-content/plugins/online-billing-service/obs.php(225): fac_woo_obs_run_obs()
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('online-billing-...')
+#9 /internal/eval.php(20): activate_plugin('online-billing-...')
+#10 {main}</pre>
+ for query SELECT * FROM wp_wc_obs_api_key ORDER BY id DESC LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/online-billing-service/obs.php'), fac_woo_obs_run_obs, OBS->__construct, OBS->define_admin_hooks, OBS_Admin_Authentication::global_api_key, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:48:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW ORDER BY id ASC LIMIT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW ORDER BY id ASC LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM R...')
+#2 /wordpress/wp-content/plugins/online-billing-service/obs.php(91): wpdb->get_results('SELECT * FROM R...', 'OBJECT')
+#3 /wordpress/wp-content/plugins/online-billing-service/obs.php(219): fac_woo_obs_db_secret()
+#4 /wordpress/wp-content/plugins/online-billing-service/obs.php(225): fac_woo_obs_run_obs()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('online-billing-...')
+#7 /internal/eval.php(20): activate_plugin('online-billing-...')
+#8 {main}</pre>
+ for query SELECT * FROM REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW ORDER BY id ASC LIMIT 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/online-billing-service/obs.php'), fac_woo_obs_run_obs, fac_woo_obs_db_secret, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:48:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` (`sk`, `s4`) VALUES ('ebce5be34c8d61fe1349b1416cdd7c7e', '3b117e5fb6e1c43ce19cd6b4ddc74ee8')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` (`sk`, `s4`) VALUES (:param0 , :param1 ) | parameters: ebce5be34c8d61fe1349b1416cdd7c7e, 3b117e5fb6e1c43ce19cd6b4ddc74ee8</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `RE...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('REWSAKSDNSFFQYU...', Array, NULL, 'INSERT')
+#3 /wordpress/wp-content/plugins/online-billing-service/obs.php(100): wpdb->insert('REWSAKSDNSFFQYU...', Array)
+#4 /wordpress/wp-content/plugins/online-billing-service/obs.php(219): fac_woo_obs_db_secret()
+#5 /wordpress/wp-content/plugins/online-billing-service/obs.php(225): fac_woo_obs_run_obs()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('online-billing-...')
+#8 /internal/eval.php(20): activate_plugin('online-billing-...')
+#9 {main}</pre>
+ for query INSERT INTO `REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW` (`sk`, `s4`) VALUES ('ebce5be34c8d61fe1349b1416cdd7c7e', '3b117e5fb6e1c43ce19cd6b4ddc74ee8') made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/online-billing-service/obs.php'), fac_woo_obs_run_obs, fac_woo_obs_db_secret, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:49:03 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 01:49:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 01:49:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 01:49:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 01:49:33 UTC] PHP Deprecated:  Required parameter $content follows optional parameter $closing in /wordpress/wp-content/plugins/opt-in-panda/bizpanda/includes/assets-manager.php on line 702
+[09-Apr-2025 01:49:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_site_transient_update_plugins', 'O:8:\"stdClass\":1:{s:8:\"response\";a:1:{s:27:\"opt-in-panda/optinpanda.php\";O:8:\"stdClass\":5:{s:4:\"slug\";s:10:\"optinpanda\";s:11:\"new_version\";s:15:\"[ migrate-to- ]\";s:6:\"plugin\";s:27:\"opt-in-panda/optinpanda.php\";s:7:\"package\";s:134:\"http://api.byonepress.com/1.1/GetPackage?plugin=optinpanda&site=http%3A%2F%2F127.0.0.1%3A9401&tracker=0ec2f14c9e007ba464c230b3ddd98384\";s:14:\"changeAssembly\";b:1;}}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_site_transient_update_plugins' , 'O:8:&quot;stdClass&quot;:1:{s:8:&quot;response&quot;;a:1:{s:27:&quot;opt-in-panda/optinpanda.php&quot;;O:8:&quot;stdClass&quot;:5:{s:4:&quot;slug&quot;;s:10:&quot;optinpanda&quot;;s:11:&quot;new_version&quot;;s:15:&quot;[ migrate-to- ]&quot;;s:6:&quot;plugin&quot;;s:27:&quot;opt-in-panda/optinpanda.php&quot;;s:7:&quot;package&quot;;s:134:&quot;http://api.byonepress.com/1.1/GetPackage?plugin=optinpanda&amp;site=http%3A%2F%2F127.0.0.1%3A9401&amp;tracker=0ec2f14c9e007ba464c230b3ddd98384&quot;;s:14:&quot;changeAssembly&quot;;b:1;}}}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('_site_transient...', Object(stdClass), '', 'off')
+#5 /wordpress/wp-includes/option.php(1928): add_network_option(1, '_site_transient...', Object(stdClass))
+#6 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/onepress/updates/includes/transient.functions.php(19): add_site_option('_site_transient...', Object(stdClass))
+#7 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/onepress/updates/updates.php(225): onp_updates_325_set_site_transient('_site_transient...', Object(stdClass))
+#8 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/onepress/updates/updates.php(65): OnpUpdates325_Manager->updatePluginTransient()
+#9 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/onepress/updates/updates.php(14): OnpUpdates325_Manager->__construct(Object(Factory325_Plugin))
+#10 /wordpress/wp-includes/class-wp-hook.php(324): onp_updates_325_plugin_created(Object(Factory325_Plugin))
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(159): do_action('onp_updates_325...', Object(Factory325_Plugin))
+#14 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(123): Factory325_Plugin->loadModule(Array)
+#15 /wordpress/wp-content/plugins/opt-in-panda/optinpanda.php(72): Factory325_Plugin->load(Array)
+#16 /wordpress/wp-includes/class-wp-hook.php(324): onp_op_init_bizpanda('')
+#17 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#18 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#19 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/connect.php(81): do_action('bizpanda_init')
+#20 /wordpress/wp-content/plugins/opt-in-panda/optinpanda.php(101): bizpanda_connect()
+#21 /wordpress/wp-includes/class-wp-hook.php(324): onp_op_activation(false)
+#22 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#23 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#24 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opt-in...', false)
+#25 /internal/eval.php(20): activate_plugin('opt-in-panda/op...')
+#26 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_site_transient_update_plugins', 'O:8:\"stdClass\":1:{s:8:\"response\";a:1:{s:27:\"opt-in-panda/optinpanda.php\";O:8:\"stdClass\":5:{s:4:\"slug\";s:10:\"optinpanda\";s:11:\"new_version\";s:15:\"[ migrate-to- ]\";s:6:\"plugin\";s:27:\"opt-in-panda/optinpanda.php\";s:7:\"package\";s:134:\"http://api.byonepress.com/1.1/GetPackage?plugin=optinpanda&site=http%3A%2F%2F127.0.0.1%3A9401&tracker=0ec2f14c9e007ba464c230b3ddd98384\";s:14:\"changeAssembly\";b:1;}}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_opt-in-panda/optinpanda.php'), WP_Hook->do_action, WP_Hook->apply_filters, onp_op_activation, bizpanda_connect, do_action('bizpanda_init'), WP_Hook->do_action, WP_Hook->apply_filters, onp_op_init_bizpanda, Factory325_Plugin->load, Factory325_Plugin->loadModule, do_action('onp_updates_325_plugin_created'), WP_Hook->do_action, WP_Hook->apply_filters, onp_updates_325_plugin_created, OnpUpdates325_Manager->__construct, OnpUpdates325_Manager->updatePluginTransient, onp_updates_325_set_site_transient, add_site_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:49:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'g0d:gA;ZnR957~%/P--2^,Ojng{2fO4yNq,._G*%byWe$f[i%M&fbnO7{l/bTrD4', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'g0d:gA;ZnR957~%/P--2^,Ojng{2fO4yNq,._G*%byWe$f[i%M&amp;fbnO7{l/bTrD4' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'g0d:gA;ZnR957~%...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'g0d:gA;ZnR957~%...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'g0d:gA;ZnR957~%...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'g0d:gA;ZnR957~%...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|hidelm|1|', 'nonce')
+#10 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/onepress/licensing/includes/license-manager.class.php(69): wp_create_nonce('hidelm')
+#11 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/pages/pages.php(25): OnpLicensing325_LicenseManagerPage->__construct(Object(Factory325_Plugin))
+#12 /wordpress/wp-content/plugins/opt-in-panda/plugin/admin/pages/license-manager.php(24): FactoryPages321::register(Object(Factory325_Plugin), 'OPanda_LicenseM...')
+#13 /wordpress/wp-content/plugins/opt-in-panda/plugin/admin/boot.php(986): require('/wordpress/wp-c...')
+#14 /wordpress/wp-content/plugins/opt-in-panda/plugin/boot.php(3): require('/wordpress/wp-c...')
+#15 /wordpress/wp-content/plugins/opt-in-panda/optinpanda.php(82): require('/wordpress/wp-c...')
+#16 /wordpress/wp-includes/class-wp-hook.php(324): onp_op_init_bizpanda('')
+#17 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#18 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#19 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/connect.php(81): do_action('bizpanda_init')
+#20 /wordpress/wp-content/plugins/opt-in-panda/optinpanda.php(101): bizpanda_connect()
+#21 /wordpress/wp-includes/class-wp-hook.php(324): onp_op_activation(false)
+#22 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#23 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#24 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opt-in...', false)
+#25 /internal/eval.php(20): activate_plugin('opt-in-panda/op...')
+#26 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'g0d:gA;ZnR957~%/P--2^,Ojng{2fO4yNq,._G*%byWe$f[i%M&fbnO7{l/bTrD4', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_opt-in-panda/optinpanda.php'), WP_Hook->do_action, WP_Hook->apply_filters, onp_op_activation, bizpanda_connect, do_action('bizpanda_init'), WP_Hook->do_action, WP_Hook->apply_filters, onp_op_init_bizpanda, require('/plugins/opt-in-panda/plugin/boot.php'), require('/plugins/opt-in-panda/plugin/admin/boot.php'), require('/plugins/opt-in-panda/plugin/admin/pages/license-manager.php'), FactoryPages321::register, OnpLicensing325_LicenseManagerPage->__construct, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:49:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '|D?N`HZL%yI#9Y8>nqx9c3b3=M{|I/>^M@!nv$4yf1b&dSkM4.|<@7S>:N>??M~O', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , '|D?N`HZL%yI#9Y8&gt;nqx9c3b3=M{|I/&gt;^M@!nv$4yf1b&amp;dSkM4.|&lt;@7S&gt;:N&gt;??M~O' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', '|D?N`HZL%yI#9Y8...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', '|D?N`HZL%yI#9Y8...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', '|D?N`HZL%yI#9Y8...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', '|D?N`HZL%yI#9Y8...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|hidelm|1|', 'nonce')
+#10 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/onepress/licensing/includes/license-manager.class.php(69): wp_create_nonce('hidelm')
+#11 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/pages/pages.php(25): OnpLicensing325_LicenseManagerPage->__construct(Object(Factory325_Plugin))
+#12 /wordpress/wp-content/plugins/opt-in-panda/plugin/admin/pages/license-manager.php(24): FactoryPages321::register(Object(Factory325_Plugin), 'OPanda_LicenseM...')
+#13 /wordpress/wp-content/plugins/opt-in-panda/plugin/admin/boot.php(986): require('/wordpress/wp-c...')
+#14 /wordpress/wp-content/plugins/opt-in-panda/plugin/boot.php(3): require('/wordpress/wp-c...')
+#15 /wordpress/wp-content/plugins/opt-in-panda/optinpanda.php(82): require('/wordpress/wp-c...')
+#16 /wordpress/wp-includes/class-wp-hook.php(324): onp_op_init_bizpanda('')
+#17 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#18 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#19 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/connect.php(81): do_action('bizpanda_init')
+#20 /wordpress/wp-content/plugins/opt-in-panda/optinpanda.php(101): bizpanda_connect()
+#21 /wordpress/wp-includes/class-wp-hook.php(324): onp_op_activation(false)
+#22 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#23 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#24 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opt-in...', false)
+#25 /internal/eval.php(20): activate_plugin('opt-in-panda/op...')
+#26 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '|D?N`HZL%yI#9Y8>nqx9c3b3=M{|I/>^M@!nv$4yf1b&dSkM4.|<@7S>:N>??M~O', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_opt-in-panda/optinpanda.php'), WP_Hook->do_action, WP_Hook->apply_filters, onp_op_activation, bizpanda_connect, do_action('bizpanda_init'), WP_Hook->do_action, WP_Hook->apply_filters, onp_op_init_bizpanda, require('/plugins/opt-in-panda/plugin/boot.php'), require('/plugins/opt-in-panda/plugin/admin/boot.php'), require('/plugins/opt-in-panda/plugin/admin/pages/license-manager.php'), FactoryPages321::register, OnpLicensing325_LicenseManagerPage->__construct, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:49:33 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 01:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 01:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 01:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 01:49:33 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 01:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 01:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 01:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 01:49:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_site_transient_update_plugins', 'O:8:\"stdClass\":1:{s:8:\"response\";a:0:{}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_site_transient_update_plugins' , 'O:8:&quot;stdClass&quot;:1:{s:8:&quot;response&quot;;a:0:{}}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('_site_transient...', Object(stdClass), '', 'off')
+#5 /wordpress/wp-includes/option.php(1928): add_network_option(1, '_site_transient...', Object(stdClass))
+#6 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/onepress/updates/includes/transient.functions.php(19): add_site_option('_site_transient...', Object(stdClass))
+#7 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/onepress/updates/updates.php(203): onp_updates_325_set_site_transient('_site_transient...', Object(stdClass))
+#8 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/onepress/updates/updates.php(141): OnpUpdates325_Manager->clearUpdates()
+#9 /wordpress/wp-includes/class-wp-hook.php(326): OnpUpdates325_Manager->activationOrUpdateHook(true)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(292): do_action('factory_plugin_...', true, NULL, Object(Factory325_Plugin))
+#13 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(268): Factory325_Plugin->activationOrUpdateHook(true)
+#14 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(254): Factory325_Plugin->forceActivationHook()
+#15 /wordpress/wp-content/plugins/opt-in-panda/optinpanda.php(104): Factory325_Plugin->activate()
+#16 /wordpress/wp-includes/class-wp-hook.php(324): onp_op_activation(false)
+#17 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#18 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#19 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opt-in...', false)
+#20 /internal/eval.php(20): activate_plugin('opt-in-panda/op...')
+#21 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_site_transient_update_plugins', 'O:8:\"stdClass\":1:{s:8:\"response\";a:0:{}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_opt-in-panda/optinpanda.php'), WP_Hook->do_action, WP_Hook->apply_filters, onp_op_activation, Factory325_Plugin->activate, Factory325_Plugin->forceActivationHook, Factory325_Plugin->activationOrUpdateHook, do_action('factory_plugin_activation_or_update_optinpanda'), WP_Hook->do_action, WP_Hook->apply_filters, OnpUpdates325_Manager->activationOrUpdateHook, OnpUpdates325_Manager->clearUpdates, onp_updates_325_set_site_transient, add_site_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:49:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('onp_default_license_optinpanda', 'a:5:{s:8:\"Category\";s:4:\"free\";s:5:\"Build\";s:4:\"free\";s:5:\"Title\";s:23:\"OnePress Public License\";s:11:\"Description\";s:407:\"Public License is a GPLv2 compatible license. 
+                                    It allows you to change this version of the plugin and to
+                                    use the plugin free. Please remember this license 
+                                    covers only free edition of the plugin. Premium versions are 
+                                    distributed with other type of a license.\";s:7:\"Expired\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'onp_default_license_optinpanda' , 'a:5:{s:8:&quot;Category&quot;;s:4:&quot;free&quot;;s:5:&quot;Build&quot;;s:4:&quot;free&quot;;s:5:&quot;Title&quot;;s:23:&quot;OnePress Public License&quot;;s:11:&quot;Description&quot;;s:407:&quot;Public License is a GPLv2 compatible license. 
+                                    It allows you to change this version of the plugin and to
+                                    use the plugin free. Please remember this license 
+                                    covers only free edition of the plugin. Premium versions are 
+                                    distributed with other type of a license.&quot;;s:7:&quot;Expired&quot;;i:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('onp_default_lic...', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/onepress/licensing/licensing.php(164): update_option('onp_default_lic...', Array)
+#6 /wordpress/wp-content/plugins/opt-in-panda/plugin/admin/activation.php(66): OnpLicensing325_Manager->setDefaultLicense(Array)
+#7 /wordpress/wp-content/plugins/opt-in-panda/plugin/admin/activation.php(42): OptinPanda_Activation->setupLicense()
+#8 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(344): OptinPanda_Activation->activate()
+#9 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(296): Factory325_Plugin->activationHook()
+#10 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(268): Factory325_Plugin->activationOrUpdateHook(true)
+#11 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(254): Factory325_Plugin->forceActivationHook()
+#12 /wordpress/wp-content/plugins/opt-in-panda/optinpanda.php(104): Factory325_Plugin->activate()
+#13 /wordpress/wp-includes/class-wp-hook.php(324): onp_op_activation(false)
+#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#16 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opt-in...', false)
+#17 /internal/eval.php(20): activate_plugin('opt-in-panda/op...')
+#18 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('onp_default_license_optinpanda', 'a:5:{s:8:\"Category\";s:4:\"free\";s:5:\"Build\";s:4:\"free\";s:5:\"Title\";s:23:\"OnePress Public License\";s:11:\"Description\";s:407:\"Public License is a GPLv2 compatible license. 
+                                    It allows you to change this version of the plugin and to
+                                    use the plugin free. Please remember this license 
+                                    covers only free edition of the plugin. Premium versions are 
+                                    distributed with other type of a license.\";s:7:\"Expired\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_opt-in-panda/optinpanda.php'), WP_Hook->do_action, WP_Hook->apply_filters, onp_op_activation, Factory325_Plugin->activate, Factory325_Plugin->forceActivationHook, Factory325_Plugin->activationOrUpdateHook, Factory325_Plugin->activationHook, OptinPanda_Activation->activate, OptinPanda_Activation->setupLicense, OnpLicensing325_Manager->setDefaultLicense, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:49:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('factory_lazy_redirect', 'http://127.0.0.1:9401/wp-admin/edit.php?post_type=opanda-item&onp_sl_page=usage-example-email-locker&page=how-to-use-bizpanda', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'factory_lazy_redirect' , 'http://127.0.0.1:9401/wp-admin/edit.php?post_type=opanda-item&amp;onp_sl_page=usage-example-email-locker&amp;page=how-to-use-bizpanda' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('factory_lazy_re...', 'http://127.0.0....', '', 'auto')
+#5 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/functions.php(261): update_option('factory_lazy_re...', 'http://127.0.0....')
+#6 /wordpress/wp-content/plugins/opt-in-panda/plugin/admin/activation.php(43): factory_325_set_lazy_redirect('http://127.0.0....')
+#7 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(344): OptinPanda_Activation->activate()
+#8 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(296): Factory325_Plugin->activationHook()
+#9 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(268): Factory325_Plugin->activationOrUpdateHook(true)
+#10 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(254): Factory325_Plugin->forceActivationHook()
+#11 /wordpress/wp-content/plugins/opt-in-panda/optinpanda.php(104): Factory325_Plugin->activate()
+#12 /wordpress/wp-includes/class-wp-hook.php(324): onp_op_activation(false)
+#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#15 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opt-in...', false)
+#16 /internal/eval.php(20): activate_plugin('opt-in-panda/op...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('factory_lazy_redirect', 'http://127.0.0.1:9401/wp-admin/edit.php?post_type=opanda-item&onp_sl_page=usage-example-email-locker&page=how-to-use-bizpanda', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_opt-in-panda/optinpanda.php'), WP_Hook->do_action, WP_Hook->apply_filters, onp_op_activation, Factory325_Plugin->activate, Factory325_Plugin->forceActivationHook, Factory325_Plugin->activationOrUpdateHook, Factory325_Plugin->activationHook, OptinPanda_Activation->activate, factory_325_set_lazy_redirect, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:49:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('factory_plugin_activated_optinpanda', '1744163373', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'factory_plugin_activated_optinpanda' , '1744163373' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('factory_plugin_...', 1744163373, '', 'auto')
+#5 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(353): update_option('factory_plugin_...', 1744163373)
+#6 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(296): Factory325_Plugin->activationHook()
+#7 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(268): Factory325_Plugin->activationOrUpdateHook(true)
+#8 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(254): Factory325_Plugin->forceActivationHook()
+#9 /wordpress/wp-content/plugins/opt-in-panda/optinpanda.php(104): Factory325_Plugin->activate()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): onp_op_activation(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opt-in...', false)
+#14 /internal/eval.php(20): activate_plugin('opt-in-panda/op...')
+#15 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('factory_plugin_activated_optinpanda', '1744163373', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_opt-in-panda/optinpanda.php'), WP_Hook->do_action, WP_Hook->apply_filters, onp_op_activation, Factory325_Plugin->activate, Factory325_Plugin->forceActivationHook, Factory325_Plugin->activationOrUpdateHook, Factory325_Plugin->activationHook, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:49:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('factory_plugin_versions', 'a:1:{s:10:\"optinpanda\";s:10:\"free-2.6.2\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'factory_plugin_versions' , 'a:1:{s:10:&quot;optinpanda&quot;;s:10:&quot;free-2.6.2&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('factory_plugin_...', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(237): update_option('factory_plugin_...', Array)
+#6 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(298): Factory325_Plugin->updatePluginVersionInDatabase()
+#7 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(268): Factory325_Plugin->activationOrUpdateHook(true)
+#8 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(254): Factory325_Plugin->forceActivationHook()
+#9 /wordpress/wp-content/plugins/opt-in-panda/optinpanda.php(104): Factory325_Plugin->activate()
+#10 /wordpress/wp-includes/class-wp-hook.php(324): onp_op_activation(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opt-in...', false)
+#14 /internal/eval.php(20): activate_plugin('opt-in-panda/op...')
+#15 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('factory_plugin_versions', 'a:1:{s:10:\"optinpanda\";s:10:\"free-2.6.2\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_opt-in-panda/optinpanda.php'), WP_Hook->do_action, WP_Hook->apply_filters, onp_op_activation, Factory325_Plugin->activate, Factory325_Plugin->forceActivationHook, Factory325_Plugin->activationOrUpdateHook, Factory325_Plugin->updatePluginVersionInDatabase, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:49:33 UTC] PHP Warning:  Undefined array key "option_name" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 01:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 01:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 01:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 01:49:33 UTC] PHP Warning:  Undefined array key "meta_key" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 01:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 01:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 01:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 01:49:33 UTC] PHP Warning:  Undefined array key "option_name" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 01:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 01:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 01:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 01:49:33 UTC] PHP Warning:  Undefined array key "meta_key" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 01:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 01:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 01:49:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 01:49:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opanda_facebook_app_id', '117100935120196', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'opanda_facebook_app_id' , '117100935120196' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/admin/activation.php(54): add_option('opanda_facebook...', '117100935120196')
+#5 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/admin/activation.php(22): OPanda_Activation->presetOptions()
+#6 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(344): OPanda_Activation->activate()
+#7 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(296): Factory325_Plugin->activationHook()
+#8 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(268): Factory325_Plugin->activationOrUpdateHook(true)
+#9 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(277): Factory325_Plugin->forceActivationHook()
+#10 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(254): Factory325_Plugin->forceActivationHook()
+#11 /wordpress/wp-content/plugins/opt-in-panda/optinpanda.php(104): Factory325_Plugin->activate()
+#12 /wordpress/wp-includes/class-wp-hook.php(324): onp_op_activation(false)
+#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#15 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opt-in...', false)
+#16 /internal/eval.php(20): activate_plugin('opt-in-panda/op...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opanda_facebook_app_id', '117100935120196', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_opt-in-panda/optinpanda.php'), WP_Hook->do_action, WP_Hook->apply_filters, onp_op_activation, Factory325_Plugin->activate, Factory325_Plugin->forceActivationHook, Factory325_Plugin->forceActivationHook, Factory325_Plugin->activationOrUpdateHook, Factory325_Plugin->activationHook, OPanda_Activation->activate, OPanda_Activation->presetOptions, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:49:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opanda_facebook_version', 'v7.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'opanda_facebook_version' , 'v7.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/admin/activation.php(55): add_option('opanda_facebook...', 'v7.0')
+#5 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/admin/activation.php(22): OPanda_Activation->presetOptions()
+#6 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(344): OPanda_Activation->activate()
+#7 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(296): Factory325_Plugin->activationHook()
+#8 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(268): Factory325_Plugin->activationOrUpdateHook(true)
+#9 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(277): Factory325_Plugin->forceActivationHook()
+#10 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(254): Factory325_Plugin->forceActivationHook()
+#11 /wordpress/wp-content/plugins/opt-in-panda/optinpanda.php(104): Factory325_Plugin->activate()
+#12 /wordpress/wp-includes/class-wp-hook.php(324): onp_op_activation(false)
+#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#15 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opt-in...', false)
+#16 /internal/eval.php(20): activate_plugin('opt-in-panda/op...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opanda_facebook_version', 'v7.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_opt-in-panda/optinpanda.php'), WP_Hook->do_action, WP_Hook->apply_filters, onp_op_activation, Factory325_Plugin->activate, Factory325_Plugin->forceActivationHook, Factory325_Plugin->forceActivationHook, Factory325_Plugin->activationOrUpdateHook, Factory325_Plugin->activationHook, OPanda_Activation->activate, OPanda_Activation->presetOptions, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:49:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opanda_lang', 'en_US', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'opanda_lang' , 'en_US' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/admin/activation.php(57): add_option('opanda_lang', 'en_US')
+#5 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/admin/activation.php(22): OPanda_Activation->presetOptions()
+#6 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(344): OPanda_Activation->activate()
+#7 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(296): Factory325_Plugin->activationHook()
+#8 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(268): Factory325_Plugin->activationOrUpdateHook(true)
+#9 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(277): Factory325_Plugin->forceActivationHook()
+#10 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(254): Factory325_Plugin->forceActivationHook()
+#11 /wordpress/wp-content/plugins/opt-in-panda/optinpanda.php(104): Factory325_Plugin->activate()
+#12 /wordpress/wp-includes/class-wp-hook.php(324): onp_op_activation(false)
+#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#15 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opt-in...', false)
+#16 /internal/eval.php(20): activate_plugin('opt-in-panda/op...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opanda_lang', 'en_US', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_opt-in-panda/optinpanda.php'), WP_Hook->do_action, WP_Hook->apply_filters, onp_op_activation, Factory325_Plugin->activate, Factory325_Plugin->forceActivationHook, Factory325_Plugin->forceActivationHook, Factory325_Plugin->activationOrUpdateHook, Factory325_Plugin->activationHook, OPanda_Activation->activate, OPanda_Activation->presetOptions, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:49:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opanda_short_lang', 'en', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'opanda_short_lang' , 'en' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/admin/activation.php(58): add_option('opanda_short_la...', 'en')
+#5 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/admin/activation.php(22): OPanda_Activation->presetOptions()
+#6 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(344): OPanda_Activation->activate()
+#7 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(296): Factory325_Plugin->activationHook()
+#8 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(268): Factory325_Plugin->activationOrUpdateHook(true)
+#9 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(277): Factory325_Plugin->forceActivationHook()
+#10 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(254): Factory325_Plugin->forceActivationHook()
+#11 /wordpress/wp-content/plugins/opt-in-panda/optinpanda.php(104): Factory325_Plugin->activate()
+#12 /wordpress/wp-includes/class-wp-hook.php(324): onp_op_activation(false)
+#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#15 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opt-in...', false)
+#16 /internal/eval.php(20): activate_plugin('opt-in-panda/op...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opanda_short_lang', 'en', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_opt-in-panda/optinpanda.php'), WP_Hook->do_action, WP_Hook->apply_filters, onp_op_activation, Factory325_Plugin->activate, Factory325_Plugin->forceActivationHook, Factory325_Plugin->forceActivationHook, Factory325_Plugin->activationOrUpdateHook, Factory325_Plugin->activationHook, OPanda_Activation->activate, OPanda_Activation->presetOptions, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:49:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opanda_tracking', 'true', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'opanda_tracking' , 'true' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/admin/activation.php(60): add_option('opanda_tracking', 'true')
+#5 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/admin/activation.php(22): OPanda_Activation->presetOptions()
+#6 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(344): OPanda_Activation->activate()
+#7 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(296): Factory325_Plugin->activationHook()
+#8 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(268): Factory325_Plugin->activationOrUpdateHook(true)
+#9 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(277): Factory325_Plugin->forceActivationHook()
+#10 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(254): Factory325_Plugin->forceActivationHook()
+#11 /wordpress/wp-content/plugins/opt-in-panda/optinpanda.php(104): Factory325_Plugin->activate()
+#12 /wordpress/wp-includes/class-wp-hook.php(324): onp_op_activation(false)
+#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#15 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opt-in...', false)
+#16 /internal/eval.php(20): activate_plugin('opt-in-panda/op...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opanda_tracking', 'true', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_opt-in-panda/optinpanda.php'), WP_Hook->do_action, WP_Hook->apply_filters, onp_op_activation, Factory325_Plugin->activate, Factory325_Plugin->forceActivationHook, Factory325_Plugin->forceActivationHook, Factory325_Plugin->activationOrUpdateHook, Factory325_Plugin->activationHook, OPanda_Activation->activate, OPanda_Activation->presetOptions, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:49:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opanda_subscription_service', 'database', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'opanda_subscription_service' , 'database' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/admin/activation.php(61): add_option('opanda_subscrip...', 'database')
+#5 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/admin/activation.php(22): OPanda_Activation->presetOptions()
+#6 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(344): OPanda_Activation->activate()
+#7 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(296): Factory325_Plugin->activationHook()
+#8 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(268): Factory325_Plugin->activationOrUpdateHook(true)
+#9 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(277): Factory325_Plugin->forceActivationHook()
+#10 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(254): Factory325_Plugin->forceActivationHook()
+#11 /wordpress/wp-content/plugins/opt-in-panda/optinpanda.php(104): Factory325_Plugin->activate()
+#12 /wordpress/wp-includes/class-wp-hook.php(324): onp_op_activation(false)
+#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#15 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opt-in...', false)
+#16 /internal/eval.php(20): activate_plugin('opt-in-panda/op...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opanda_subscription_service', 'database', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_opt-in-panda/optinpanda.php'), WP_Hook->do_action, WP_Hook->apply_filters, onp_op_activation, Factory325_Plugin->activate, Factory325_Plugin->forceActivationHook, Factory325_Plugin->forceActivationHook, Factory325_Plugin->activationOrUpdateHook, Factory325_Plugin->activationHook, OPanda_Activation->activate, OPanda_Activation->presetOptions, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:49:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opanda_terms_enabled', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'opanda_terms_enabled' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/admin/activation.php(71): add_option('opanda_terms_en...', 1)
+#5 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/admin/activation.php(24): OPanda_Activation->createPolicies()
+#6 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(344): OPanda_Activation->activate()
+#7 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(296): Factory325_Plugin->activationHook()
+#8 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(268): Factory325_Plugin->activationOrUpdateHook(true)
+#9 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(277): Factory325_Plugin->forceActivationHook()
+#10 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(254): Factory325_Plugin->forceActivationHook()
+#11 /wordpress/wp-content/plugins/opt-in-panda/optinpanda.php(104): Factory325_Plugin->activate()
+#12 /wordpress/wp-includes/class-wp-hook.php(324): onp_op_activation(false)
+#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#15 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opt-in...', false)
+#16 /internal/eval.php(20): activate_plugin('opt-in-panda/op...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opanda_terms_enabled', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_opt-in-panda/optinpanda.php'), WP_Hook->do_action, WP_Hook->apply_filters, onp_op_activation, Factory325_Plugin->activate, Factory325_Plugin->forceActivationHook, Factory325_Plugin->forceActivationHook, Factory325_Plugin->activationOrUpdateHook, Factory325_Plugin->activationHook, OPanda_Activation->activate, OPanda_Activation->createPolicies, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:49:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opanda_privacy_enabled', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'opanda_privacy_enabled' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/admin/activation.php(72): add_option('opanda_privacy_...', 1)
+#5 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/admin/activation.php(24): OPanda_Activation->createPolicies()
+#6 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(344): OPanda_Activation->activate()
+#7 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(296): Factory325_Plugin->activationHook()
+#8 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(268): Factory325_Plugin->activationOrUpdateHook(true)
+#9 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(277): Factory325_Plugin->forceActivationHook()
+#10 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(254): Factory325_Plugin->forceActivationHook()
+#11 /wordpress/wp-content/plugins/opt-in-panda/optinpanda.php(104): Factory325_Plugin->activate()
+#12 /wordpress/wp-includes/class-wp-hook.php(324): onp_op_activation(false)
+#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#15 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opt-in...', false)
+#16 /internal/eval.php(20): activate_plugin('opt-in-panda/op...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opanda_privacy_enabled', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_opt-in-panda/optinpanda.php'), WP_Hook->do_action, WP_Hook->apply_filters, onp_op_activation, Factory325_Plugin->activate, Factory325_Plugin->forceActivationHook, Factory325_Plugin->forceActivationHook, Factory325_Plugin->activationOrUpdateHook, Factory325_Plugin->activationHook, OPanda_Activation->activate, OPanda_Activation->createPolicies, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:49:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opanda_terms_use_pages', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'opanda_terms_use_pages' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/admin/activation.php(73): add_option('opanda_terms_us...', 0)
+#5 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/admin/activation.php(24): OPanda_Activation->createPolicies()
+#6 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(344): OPanda_Activation->activate()
+#7 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(296): Factory325_Plugin->activationHook()
+#8 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(268): Factory325_Plugin->activationOrUpdateHook(true)
+#9 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(277): Factory325_Plugin->forceActivationHook()
+#10 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(254): Factory325_Plugin->forceActivationHook()
+#11 /wordpress/wp-content/plugins/opt-in-panda/optinpanda.php(104): Factory325_Plugin->activate()
+#12 /wordpress/wp-includes/class-wp-hook.php(324): onp_op_activation(false)
+#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#15 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opt-in...', false)
+#16 /internal/eval.php(20): activate_plugin('opt-in-panda/op...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opanda_terms_use_pages', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_opt-in-panda/optinpanda.php'), WP_Hook->do_action, WP_Hook->apply_filters, onp_op_activation, Factory325_Plugin->activate, Factory325_Plugin->forceActivationHook, Factory325_Plugin->forceActivationHook, Factory325_Plugin->activationOrUpdateHook, Factory325_Plugin->activationHook, OPanda_Activation->activate, OPanda_Activation->createPolicies, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:49:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opanda_terms_of_use_text', '<h2>Terms of Use</h2>
+<p><em>This Terms of Use explains the operation principle of the Content Lockers placed on this website.</em></p>
+<p>On this website, you can encounter the Content Lockers which may ask<br /> you to sign in, subscribe, enter your name or perform other actions to get access to the locked content.</p>
+<h4>Using your email address</h4>
+<p>When you enter your email or sign in through social networks, you agree to that your email address will be added to the subscription list for sending target news and special offers.</p>
+<p>You can unsubscribe at any time by clicking on the link at the end of any of emails received from us.</p>
+<h4>Social Apps &amp; Permissions</h4>
+<p>When you sign in through social networks, the Content Locker may ask you to grant permissions to read or perform some social actions.</p>
+<p>The Content Locker retrieves only the following information (according the Privacy Policy of this website):</p>
+<ul>
+<li>Person name</li>
+<li>Email address</li>
+</ul>
+<p>Content Locker never collects other data and never publish anything in social networks from your behalf without your permissions.</p>
+<p>After unlocking the content the Content Locker removes all the access tokens received from you and never uses them again.</p>
+<p>If there are any questions regarding this Terms of Use you may contact us.</p>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'opanda_terms_of_use_text' , '&lt;h2&gt;Terms of Use&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;This Terms of Use explains the operation principle of the Content Lockers placed on this website.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;On this website, you can encounter the Content Lockers which may ask&lt;br /&gt; you to sign in, subscribe, enter your name or perform other actions to get access to the locked content.&lt;/p&gt;
+&lt;h4&gt;Using your email address&lt;/h4&gt;
+&lt;p&gt;When you enter your email or sign in through social networks, you agree to that your email address will be added to the subscription list for sending target news and special offers.&lt;/p&gt;
+&lt;p&gt;You can unsubscribe at any time by clicking on the link at the end of any of emails received from us.&lt;/p&gt;
+&lt;h4&gt;Social Apps &amp;amp; Permissions&lt;/h4&gt;
+&lt;p&gt;When you sign in through social networks, the Content Locker may ask you to grant permissions to read or perform some social actions.&lt;/p&gt;
+&lt;p&gt;The Content Locker retrieves only the following information (according the Privacy Policy of this website):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Person name&lt;/li&gt;
+&lt;li&gt;Email address&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Content Locker never collects other data and never publish anything in social networks from your behalf without your permissions.&lt;/p&gt;
+&lt;p&gt;After unlocking the content the Content Locker removes all the access tokens received from you and never uses them again.&lt;/p&gt;
+&lt;p&gt;If there are any questions regarding this Terms of Use you may contact us.&lt;/p&gt;' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/admin/activation.php(74): add_option('opanda_terms_of...', '<h2>Terms of Us...')
+#5 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/admin/activation.php(24): OPanda_Activation->createPolicies()
+#6 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(344): OPanda_Activation->activate()
+#7 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(296): Factory325_Plugin->activationHook()
+#8 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(268): Factory325_Plugin->activationOrUpdateHook(true)
+#9 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(277): Factory325_Plugin->forceActivationHook()
+#10 /wordpress/wp-content/plugins/opt-in-panda/bizpanda/libs/factory/core/includes/plugin.class.php(254): Factory325_Plugin->forceActivationHook()
+#11 /wordpress/wp-content/plugins/opt-in-panda/optinpanda.php(104): Factory325_Plugin->activate()
+#12 /wordpress/wp-includes/class-wp-hook.php(324): onp_op_activation(false)
+#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#15 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opt-in...', false)
+#16 /internal/eval.php(20): activate_plugin('opt-in-panda/op...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opanda_terms_of_use_text', '<h2>Terms of Use</h2>
+<p><em>This Terms of Use explains the operation principle of the Content Lockers placed on this website.</em></p>
+<p>On this website, you can encounter the Content Lockers which may ask<br /> you to sign in, subscribe, enter your name or perform other actions to get access to the locked content.</p>
+<h4>Using your email address</h4>
+<p>When you enter your email or sign in through social networks, you agree to that your email address will be added to the subscription list for sending target news and special offers.</p>
+<p>You can unsubscribe at any time by clicking on the link at the end of any of emails received from us.</p>
+<h4>Social Apps &amp; Permissions</h4>
+<p>When you sign in through social networks, the Content Locker may ask you to grant permissions to read or perform some social actions.</p>
+<p>The Content Locker retrieves only the following information (according the Privacy Policy of this website):</p>
+<ul>
+<li>Person name</li>
+<li>Email address</li>
+</ul>
+<p>Content Locker never collects other data and never publish anything in social networks from your behalf without your permissions.</p>
+<p>After unlocking the content the Content Locker removes all the access tokens received from you and never uses them again.</p>
+<p>If there are any questions regarding this Terms of Use you may contact us.</p>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_opt-in-panda/optinpanda.php'), WP_Hook->do_action, WP_Hook->apply_filters, onp_op_activation, Factory325_Plugin->activate, Factory325_Plugin->forceActivationHook, Factory325_Plugin->forceActivationHook, Factory325_Plugin->activationOrUpdateHook, Factory325_Plugin->activationHook, OPanda_Activation->activate, OPanda_Activation->createPolicies, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 01:49:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opanda_privacy_policy_text', '<h2>Privacy Policy</h2>
+<p><em>This privacy policy has been compiled to better serve those who are concerned with how their \'Personally identifiable information\' (PII) is being used online. PII, as used in US privacy law and information security, is information that can be used on its own or with other information to identify, contact, or locate a single person, or to identify an individual in context.</em></p>
+<p>Please read our privacy policy carefully to get a clear understanding of how we collect, use, protect or otherwise handle your Personally Identifiable Information in accordance with our website.</p>
+<h4>What personal information do we collect from the people that visit our blog, website or app?</h4>
+<p>When using our site, as appropriate, you may be asked to enter your name, email address or other details to help you with your experience.</p>
+<h4>How do we use your information?</h4>
+<p>We may use the information we collect from you when you register, make a purchase, sign up for our newsletter, unlock the content, respond to a survey or marketing communication, surf the website, or use certain other site features in the following ways:</p>
+<ul>
+<li>To personalize user\'s experience and to allow us to deliver the type of content and product offerings in which you are most interested</li>
+<li>To improve our website in order to better serve you.</li>
+<li>To allow us to better service you in responding to your customer service requests.</li>
+<li>To administer a contest, promotion, survey or other site feature.</li>
+<li>To send periodic emails regarding your order or other products and services.</li>
+</ul>
+<h4>Do we use \'cookies\'?</h4>
+<p>Yes. Cookies are small files that a site or its service provider transfers to your computer\'s hard drive through your Web browser (if you allow) that enables the site\'s or service provider\'s systems to recognize your browser and capture and remember certain information. For instance, we use cookies to help us remember and process the items in your shopping cart. They are also used to help us understand your preferences based on previous or current site activity, which enables us to provide you with improved services. We also use cookies to help us compile aggregate data about site traffic and site interaction so that we can offer better site experiences and tools in the future.</p>
+<p>We use cookies to:</p>
+<ul>
+<li>Understand and save user\'s preferences for future visits.</li>
+<li>Memorize the users who have unlocked access to premium content.</li>
+</ul>
+<p>If you disable cookies off, some features will be disabled. It will affect the users experience and some of our services will not function properly.</p>
+<h4>Third Party Disclosure</h4>
+<p>We do not sell, trade, or otherwise transfer to outside parties your personally identifiable information unless we provide you with advance notice. This does not include website hosting partners and other parties who assist us in operating our website, conducting our business, or servicing you, so long as those parties agree to keep this information confidential. We may also release your information when we believe release is appropriate to comply with the law, enforce our site policies, or protect ours or others\' rights, property, or safety.</p>
+<p>However, non-personally identifiable visitor information may be provided to other parties for marketing, advertising, or other uses.</p>
+<h4>Third party links</h4>
+<p>Occasionally, at our discretion, we may include or offer third party products or services on our website. These third party sites have separate and independent privacy policies. We therefore have no responsibility or liability for the content and activities of these linked sites. Nonetheless, we seek to protect the integrity of our site and welcome any feedback about these sites.</p>
+<p>If there are any questions regarding this privacy policy you may contact us.</p>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'opanda_privacy_policy_text' , '&lt;h2&gt;Privacy Policy&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;This privacy policy has been compiled to better serve those who are concerned with how their ''Personally identifiable information'' (PII) is being used online. PII, as used in US privacy law and information security, is information that can be used on its own or with other information to identify, contact, or locate a single person, or to identify an individual in context.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Please read our privacy policy carefully to get a clear understanding of how we collect, use, protect or otherwise handle your Personally Identifiable Information in accordance with our website.&lt;/p&gt;
+&lt;h4&gt;What personal information do we collect from the people that visit our blog, website or app?&lt;/h4&gt;
+&lt;p&gt;When using our site, as appropriate, you may be asked to enter your name, email address or other details to help you with your experience.&lt;/p&gt;
+&lt;h4&gt;How do we use your information?&lt;/h4&gt;
+&lt;p&gt;We may use the information we collect from you when you register, make a purchase, sign up for our newsletter, unlock the content, respond to a survey or marketing communication, surf the website, or use certain other site features in the following ways:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;To personalize user''s experience and to allow us to deliver the type of content and product offerings in which you are most interested&lt;/li&gt;
+&lt;li&gt;To improve our website in order to better serve you.&lt;/li&gt;
+&lt;li&gt;To allow us to better service you in responding to your customer service requests.&lt;/li&gt;
+&lt;li&gt;To administer a contest, promotion, survey or other site feature.&lt;/li&gt;
+&lt;li&gt;To send periodic emails regarding your order or other products and services.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Do we use ''cookies''?&lt;/h4&gt;
+&lt;p&gt;Yes. Cookies are small files that a site or its service provider transfers to your computer''s hard drive through your Web browser (if you allow) that enables the site''s or service provider''s systems to recognize your browser and capture and remember certain information. For instance, we use cookies to help us remember and process the items in your shopping cart. They are also used to help us understand your preferences based on previous or current site activity, which enables us to provide you with improved services. We also use cookies to help us compile aggregate data about site traffic and site interaction so that we can offer better site experiences and tools in the future.&lt;/p&gt;
+&lt;p&gt;We use cookies to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Understand and save user''s preferences for future visits.&lt;/li&gt;
+&lt;li&gt;Memorize the users who have unlocked access to premium content.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you disable cookies off, some features will be disabled. It will affect the users experience and some of our services will not function properly.&lt;/p&gt;
+&lt;h4&gt;Third Party Disclosure&lt;/h4&gt;
+&lt;p&gt;We do not sell, trade, or otherwise transfer to outside parties your personally identifia
