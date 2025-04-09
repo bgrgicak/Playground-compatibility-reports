@@ -2,18 +2,14 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [08-Apr-2025 22:25:25 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 22:25:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 22:25:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 22:25:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 22:26:31 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 22:26:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 22:26:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 22:26:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 22:26:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [09-Apr-2025 23:25:53 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 23:25:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 23:25:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 23:25:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 23:26:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_links', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('the-bug-genie-for-wp', 'a:1:{s:7:\"tbg_url\";s:27:\"http://example.com:443/bugs\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -25,7 +21,7 @@ Error: [08-Apr-2025 22:25:25 UTC] PHP Warning:  Undefined array key "option_valu
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_links' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'the-bug-genie-for-wp' , 'a:1:{s:7:&quot;tbg_url&quot;;s:27:&quot;http://example.com:443/bugs&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -37,134 +33,32 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_links', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_links', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_links', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:26:58 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 22:26:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 22:26:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 22:26:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 22:27:27 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 22:27:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 22:27:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 22:27:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 22:27:27 UTC] 
-[Zonify] sending request:
-https://app.zonifyapp.com/dashboard/woocommerce/activate
-[08-Apr-2025 22:27:27 UTC] 
-[Zonify] got response:
-https://app.zonifyapp.com/dashboard/woocommerce/activate
-[08-Apr-2025 22:27:27 UTC] 
-[Zonify] api key: hrSOS3Qf1c-KKbS4wuMdlBTk_bbyW390:
-http://127.0.0.1:9402
-[08-Apr-2025 22:27:27 UTC] 
-[Zonify] yes:
-http://127.0.0.1:9402
-[08-Apr-2025 22:27:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('zonify_api_key', 'hrSOS3Qf1c-KKbS4wuMdlBTk_bbyW390', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'zonify_api_key' , 'hrSOS3Qf1c-KKbS4wuMdlBTk_bbyW390' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/zonify/zonify.php(57): add_option('zonify_api_key', 'hrSOS3Qf1c-KKbS...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): zonify_activation_hook(false)
+#4 /wordpress/wp-content/plugins/the-bug-genie-for-wp/the-bug-genie-for-wp.php(76): add_option('the-bug-genie-f...', Array)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Tbg4Wp->activate(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_zonify...', false)
-#9 /internal/eval.php(20): activate_plugin('zonify/zonify.p...')
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_the-bu...', false)
+#9 /internal/eval.php(20): activate_plugin('the-bug-genie-f...')
 #10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('zonify_api_key', 'hrSOS3Qf1c-KKbS4wuMdlBTk_bbyW390', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_zonify/zonify.php'), WP_Hook->do_action, WP_Hook->apply_filters, zonify_activation_hook, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:27:27 UTC] 
-[Zonify] Zonify 42685 read_write:
-http://127.0.0.1:9402
-[08-Apr-2025 22:27:27 UTC] 
-[Zonify] after auth
-[08-Apr-2025 22:27:27 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 22:27:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 22:27:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 22:27:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 22:27:36 UTC] 
-[Zonify] sending request:
-https://app.zonifyapp.com/dashboard/woocommerce/activate
-[08-Apr-2025 22:27:37 UTC] 
-[Zonify] got response:
-https://app.zonifyapp.com/dashboard/woocommerce/activate
-[08-Apr-2025 22:27:37 UTC] 
-[Zonify] api key: hrSOS3Qf1c-KKbS4wuMdlBTk_bbyW390:
-http://127.0.0.1:9402
-[08-Apr-2025 22:27:37 UTC] 
-[Zonify] yes:
-http://127.0.0.1:9402
-[08-Apr-2025 22:27:37 UTC] 
-[Zonify] Zonify 42685 read_write:
-http://127.0.0.1:9402
-[08-Apr-2025 22:27:37 UTC] 
-[Zonify] after auth
-[08-Apr-2025 22:27:46 UTC] 
-[Zonify] sending request:
-https://app.zonifyapp.com/dashboard/woocommerce/activate
-[08-Apr-2025 22:27:46 UTC] 
-[Zonify] got response:
-https://app.zonifyapp.com/dashboard/woocommerce/activate
-[08-Apr-2025 22:27:46 UTC] 
-[Zonify] api key: hrSOS3Qf1c-KKbS4wuMdlBTk_bbyW390:
-http://127.0.0.1:9402
-[08-Apr-2025 22:27:46 UTC] 
-[Zonify] yes:
-http://127.0.0.1:9402
-[08-Apr-2025 22:27:46 UTC] 
-[Zonify] Zonify 42685 read_write:
-http://127.0.0.1:9402
-[08-Apr-2025 22:27:46 UTC] 
-[Zonify] after auth
-[08-Apr-2025 22:28:17 UTC] PHP Deprecated:  WP_SQLite_Driver::recreate_table_from_information_schema(): Implicitly marking parameter $column_map as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 2783
-[08-Apr-2025 22:28:17 UTC] PHP Deprecated:  WP_SQLite_Driver::set_result_from_affected_rows(): Implicitly marking parameter $override as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3541
-[08-Apr-2025 22:28:17 UTC] PHP Deprecated:  WP_SQLite_Driver::new_driver_exception(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3564
-[08-Apr-2025 22:28:17 UTC] PHP Deprecated:  WP_SQLite_Driver_Exception::__construct(): Implicitly marking parameter $previous as nullable is deprecated, the explicit nullable type must be used instead in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver-exception.php on line 19
-[08-Apr-2025 22:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('the-bug-genie-for-wp', 'a:1:{s:7:\"tbg_url\";s:27:\"http://example.com:443/bugs\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_the-bug-genie-for-wp/the-bug-genie-for-wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, Tbg4Wp->activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:26:20 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 23:26:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 23:26:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 23:26:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 23:26:55 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 23:26:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 23:26:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 23:26:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 23:27:33 UTC] PHP Deprecated:  File rss-functions.php is <strong>deprecated</strong> since version 2.1.0! Use wp-includes/rss.php instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 23:27:33 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 23:27:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:29:\"tablepress/libraries/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:6:\"2.11.0\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744151298;s:11:\"plugin_path\";s:25:\"tablepress/tablepress.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:25:\"tablepress/tablepress.php\";s:8:\"sdk_path\";s:29:\"tablepress/libraries/freemius\";s:7:\"version\";s:6:\"2.11.0\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744151298;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sociable_active_sites', 'a:7:{i:0;s:8:\"TimesURL\";i:1;s:10:\"Gatorpeeps\";i:2;s:4:\"Muti\";i:3;s:7:\"Twitter\";i:4;s:9:\"Posterous\";i:5;s:8:\"Facebook\";i:6;s:8:\"laaik.it\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
@@ -172,7 +66,7 @@ http://127.0.0.1:9402
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( &#039;fs_active_plugins&#039; , &#039;O:8:&quot;stdClass&quot;:3:{s:7:&quot;plugins&quot;;a:1:{s:29:&quot;tablepress/libraries/freemius&quot;;O:8:&quot;stdClass&quot;:4:{s:7:&quot;version&quot;;s:6:&quot;2.11.0&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:9:&quot;timestamp&quot;;i:1744151298;s:11:&quot;plugin_path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}}s:7:&quot;abspath&quot;;s:11:&quot;/wordpress/&quot;;s:6:&quot;newest&quot;;O:8:&quot;stdClass&quot;:5:{s:11:&quot;plugin_path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;s:8:&quot;sdk_path&quot;;s:29:&quot;tablepress/libraries/freemius&quot;;s:7:&quot;version&quot;;s:6:&quot;2.11.0&quot;;s:13:&quot;in_activation&quot;;b:1;s:9:&quot;timestamp&quot;;i:1744151298;}}&#039; , &#039;auto&#039; )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'sociable_active_sites' , 'a:7:{i:0;s:8:&quot;TimesURL&quot;;i:1;s:10:&quot;Gatorpeeps&quot;;i:2;s:4:&quot;Muti&quot;;i:3;s:7:&quot;Twitter&quot;;i:4;s:9:&quot;Posterous&quot;;i:5;s:8:&quot;Facebook&quot;;i:6;s:8:&quot;laaik.it&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -184,24 +78,24 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_active_plugi...', Object(stdClass), '', 'auto')
-#5 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/fs-essential-functions.php(279): update_option('fs_active_plugi...', Object(stdClass))
-#6 /wordpress/wp-content/plugins/tablepress/libraries/freemius/start.php(242): fs_update_sdk_newest_version('tablepress/libr...', 'tablepress/tabl...')
-#7 /wordpress/wp-content/plugins/tablepress/tablepress.php(62): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/tablepress/tablepress.php(92): tb_tp_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tablepress/tabl...')
-#11 /internal/eval.php(20): activate_plugin('tablepress/tabl...')
+#4 /wordpress/wp-includes/option.php(921): add_option('sociable_active...', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/timesurlat-sociable-plugin/sociable.php(274): update_option('sociable_active...', Array)
+#6 /wordpress/wp-content/plugins/timesurlat-sociable-plugin/sociable.php(258): sociable_restore_config(true)
+#7 /wordpress/wp-includes/class-wp-hook.php(324): sociable_activation_hook(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_timesu...', false)
+#11 /internal/eval.php(20): activate_plugin('timesurlat-soci...')
 #12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:29:\"tablepress/libraries/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:6:\"2.11.0\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744151298;s:11:\"plugin_path\";s:25:\"tablepress/tablepress.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:25:\"tablepress/tablepress.php\";s:8:\"sdk_path\";s:29:\"tablepress/libraries/freemius\";s:7:\"version\";s:6:\"2.11.0\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744151298;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/tablepress/tablepress.php'), tb_tp_fs, require_once('/plugins/tablepress/libraries/freemius/start.php'), fs_update_sdk_newest_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sociable_active_sites', 'a:7:{i:0;s:8:\"TimesURL\";i:1;s:10:\"Gatorpeeps\";i:2;s:4:\"Muti\";i:3;s:7:\"Twitter\";i:4;s:9:\"Posterous\";i:5;s:8:\"Facebook\";i:6;s:8:\"laaik.it\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_timesurlat-sociable-plugin/sociable.php'), WP_Hook->do_action, WP_Hook->apply_filters, sociable_activation_hook, sociable_restore_config, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:27:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sociable_tagline', '<strong>Share this post:</strong>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
@@ -209,7 +103,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( &#039;fs_debug_mode&#039; , &#039;&#039; , &#039;auto&#039; )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'sociable_tagline' , '&lt;strong&gt;Share this post:&lt;/strong&gt;' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -221,24 +115,24 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/tablepress/libraries/freemius/config.php(307): add_option('fs_debug_mode', false)
-#5 /wordpress/wp-content/plugins/tablepress/libraries/freemius/require.php(14): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-content/plugins/tablepress/libraries/freemius/start.php(576): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-content/plugins/tablepress/tablepress.php(62): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/tablepress/tablepress.php(92): tb_tp_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tablepress/tabl...')
-#11 /internal/eval.php(20): activate_plugin('tablepress/tabl...')
+#4 /wordpress/wp-includes/option.php(921): add_option('sociable_taglin...', '<strong>Share t...', '', 'auto')
+#5 /wordpress/wp-content/plugins/timesurlat-sociable-plugin/sociable.php(285): update_option('sociable_taglin...', '<strong>Share t...')
+#6 /wordpress/wp-content/plugins/timesurlat-sociable-plugin/sociable.php(258): sociable_restore_config(true)
+#7 /wordpress/wp-includes/class-wp-hook.php(324): sociable_activation_hook(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_timesu...', false)
+#11 /internal/eval.php(20): activate_plugin('timesurlat-soci...')
 #12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/tablepress/tablepress.php'), tb_tp_fs, require_once('/plugins/tablepress/libraries/freemius/start.php'), require_once('/plugins/tablepress/libraries/freemius/require.php'), require_once('/plugins/tablepress/libraries/freemius/config.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sociable_tagline', '<strong>Share this post:</strong>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_timesurlat-sociable-plugin/sociable.php'), WP_Hook->do_action, WP_Hook->apply_filters, sociable_activation_hook, sociable_restore_config, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:27:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sociable_conditionals', 'a:6:{s:7:\"is_home\";b:0;s:9:\"is_single\";b:1;s:7:\"is_page\";b:1;s:11:\"is_category\";b:0;s:7:\"is_date\";b:0;s:9:\"is_search\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
@@ -246,7 +140,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( &#039;fs_accounts&#039; , &#039;a:1:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10340;a:3:{s:4:&quot;slug&quot;;s:10:&quot;tablepress&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}}}&#039; , &#039;auto&#039; )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'sociable_conditionals' , 'a:6:{s:7:&quot;is_home&quot;;b:0;s:9:&quot;is_single&quot;;b:1;s:7:&quot;is_page&quot;;b:1;s:11:&quot;is_category&quot;;b:0;s:7:&quot;is_date&quot;;b:0;s:9:&quot;is_search&quot;;b:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -258,29 +152,99 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('id_slug_type_pa...', Array, true)
-#8 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(2209): FS_Options->set_option('id_slug_type_pa...', Array, true)
-#9 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(416): Freemius->store_id_slug_type_path_map('10340', 'tablepress')
-#10 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(2868): Freemius->__construct('10340', 'tablepress', true)
-#11 /wordpress/wp-content/plugins/tablepress/libraries/freemius/start.php(615): Freemius::instance('10340', 'tablepress', true)
-#12 /wordpress/wp-content/plugins/tablepress/tablepress.php(64): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/tablepress/tablepress.php(92): tb_tp_fs()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tablepress/tabl...')
-#16 /internal/eval.php(20): activate_plugin('tablepress/tabl...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/tablepress/tablepress.php'), tb_tp_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_id_slug_type_path_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('sociable_condit...', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/timesurlat-sociable-plugin/sociable.php(290): update_option('sociable_condit...', Array)
+#6 /wordpress/wp-content/plugins/timesurlat-sociable-plugin/sociable.php(258): sociable_restore_config(true)
+#7 /wordpress/wp-includes/class-wp-hook.php(324): sociable_activation_hook(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_timesu...', false)
+#11 /internal/eval.php(20): activate_plugin('timesurlat-soci...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sociable_conditionals', 'a:6:{s:7:\"is_home\";b:0;s:9:\"is_single\";b:1;s:7:\"is_page\";b:1;s:11:\"is_category\";b:0;s:7:\"is_date\";b:0;s:9:\"is_search\";b:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_timesurlat-sociable-plugin/sociable.php'), WP_Hook->do_action, WP_Hook->apply_filters, sociable_activation_hook, sociable_restore_config, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:27:33 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 23:27:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 23:27:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 23:27:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 23:27:34 UTC] PHP Deprecated:  File rss-functions.php is <strong>deprecated</strong> since version 2.1.0! Use wp-includes/rss.php instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 23:27:34 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 23:27:42 UTC] PHP Deprecated:  File rss-functions.php is <strong>deprecated</strong> since version 2.1.0! Use wp-includes/rss.php instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 23:27:42 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 23:27:43 UTC] PHP Deprecated:  File rss-functions.php is <strong>deprecated</strong> since version 2.1.0! Use wp-includes/rss.php instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 23:27:43 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 23:27:51 UTC] PHP Deprecated:  File rss-functions.php is <strong>deprecated</strong> since version 2.1.0! Use wp-includes/rss.php instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 23:27:51 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 23:27:51 UTC] PHP Deprecated:  File rss-functions.php is <strong>deprecated</strong> since version 2.1.0! Use wp-includes/rss.php instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 23:27:51 UTC] PHP Deprecated:  File rss.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/class-simplepie.php instead. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 23:28:00 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 23:28:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 23:28:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 23:28:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 23:28:27 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 23:28:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 23:28:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 23:28:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 23:28:54 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 23:28:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 23:28:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 23:28:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 23:29:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:1:{s:19:\"last_load_timestamp\";i:1744151298;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE wp_terms ADD `term_order` INT( 4 ) NULL DEFAULT '0'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_terms</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_terms</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_terms, term_order, 1, 0, YES, int, , , 10, 0, , , , int(4), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_terms</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Table 'wp_terms' doesn't exist
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Table 'wp_terms...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/tradies/includes/tradies-post-order/tradies-post-order.php(163): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/tradies/includes/tradies-post-order/tradies-post-order.php(47): TRADIESPO_Engine->scporder_install()
+#5 /wordpress/wp-content/plugins/tradies/includes/tradies-post-order/tradies-post-order.php(41): TRADIESPO_Engine->__construct()
+#6 /wordpress/wp-content/plugins/tradies/includes/index.php(11): require('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/tradies/tradies.php(61): require('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tradies/tradies...')
+#10 /internal/eval.php(20): activate_plugin('tradies/tradies...')
+#11 {main}</pre>
+ for query ALTER TABLE wp_terms ADD `term_order` INT( 4 ) NULL DEFAULT '0' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/tradies/tradies.php'), require('/plugins/tradies/includes/index.php'), require('/plugins/tradies/includes/tradies-post-order/tradies-post-order.php'), TRADIESPO_Engine->__construct, TRADIESPO_Engine->scporder_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:29:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('scporder_install', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
@@ -288,7 +252,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( &#039;fs_accounts&#039; , &#039;a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10340;a:3:{s:4:&quot;slug&quot;;s:10:&quot;tablepress&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:10:&quot;tablepress&quot;;a:1:{s:19:&quot;last_load_timestamp&quot;;i:1744151298;}}}&#039; , &#039;auto&#039; )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'scporder_install' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -300,30 +264,32 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('last_load_times...', 1744151298)
-#9 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('last_load_times...', 1744151298)
-#10 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(432): FS_Storage->__set('last_load_times...', 1744151298)
-#11 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(2868): Freemius->__construct('10340', 'tablepress', true)
-#12 /wordpress/wp-content/plugins/tablepress/libraries/freemius/start.php(615): Freemius::instance('10340', 'tablepress', true)
-#13 /wordpress/wp-content/plugins/tablepress/tablepress.php(64): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/tablepress/tablepress.php(92): tb_tp_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tablepress/tabl...')
-#17 /internal/eval.php(20): activate_plugin('tablepress/tabl...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:1:{s:19:\"last_load_timestamp\";i:1744151298;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/tablepress/tablepress.php'), tb_tp_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('scporder_instal...', 1, '', 'auto')
+#5 /wordpress/wp-content/plugins/tradies/includes/tradies-post-order/tradies-post-order.php(165): update_option('scporder_instal...', 1)
+#6 /wordpress/wp-content/plugins/tradies/includes/tradies-post-order/tradies-post-order.php(47): TRADIESPO_Engine->scporder_install()
+#7 /wordpress/wp-content/plugins/tradies/includes/tradies-post-order/tradies-post-order.php(41): TRADIESPO_Engine->__construct()
+#8 /wordpress/wp-content/plugins/tradies/includes/index.php(11): require('/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/tradies/tradies.php(61): require('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tradies/tradies...')
+#12 /internal/eval.php(20): activate_plugin('tradies/tradies...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('scporder_install', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/tradies/tradies.php'), require('/plugins/tradies/includes/index.php'), require('/plugins/tradies/includes/tradies-post-order/tradies-post-order.php'), TRADIESPO_Engine->__construct, TRADIESPO_Engine->scporder_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:29:25 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 23:29:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 23:29:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 23:29:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 23:29:25 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $post_id in /wordpress/wp-content/plugins/tradies/vendors/advanced-custom-fields/includes/acf-value-functions.php on line 57
+[09-Apr-2025 23:29:25 UTC] PHP Deprecated:  Required parameter $field follows optional parameter $value in /wordpress/wp-content/plugins/tradies/vendors/advanced-custom-fields/includes/acf-value-functions.php on line 169
+[09-Apr-2025 23:29:25 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $key in /wordpress/wp-content/plugins/tradies/vendors/advanced-custom-fields/includes/ajax/class-acf-ajax.php on line 76
+[09-Apr-2025 23:29:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:2:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_tradies_installed_check', 'locked', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
@@ -331,7 +297,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( &#039;fs_accounts&#039; , &#039;a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10340;a:3:{s:4:&quot;slug&quot;;s:10:&quot;tablepress&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:10:&quot;tablepress&quot;;a:2:{s:19:&quot;last_load_timestamp&quot;;i:1744151298;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}}}}&#039; , &#039;auto&#039; )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_tradies_installed_check' , 'locked' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -343,39 +309,32 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_main_fil...', Object(stdClass))
-#9 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('plugin_main_fil...', Object(stdClass))
-#10 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(2066): FS_Storage->__set('plugin_main_fil...', Object(stdClass))
-#11 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(439): Freemius->_find_caller_plugin_file(true, 'tablepress/tabl...')
-#12 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(2868): Freemius->__construct('10340', 'tablepress', true)
-#13 /wordpress/wp-content/plugins/tablepress/libraries/freemius/start.php(615): Freemius::instance('10340', 'tablepress', true)
-#14 /wordpress/wp-content/plugins/tablepress/tablepress.php(64): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/tablepress/tablepress.php(92): tb_tp_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tablepress/tabl...')
-#18 /internal/eval.php(20): activate_plugin('tablepress/tabl...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:2:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/tablepress/tablepress.php'), tb_tp_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_find_caller_plugin_file, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_trad...', 'locked', '', 'on')
+#5 /wordpress/wp-content/plugins/tradies/includes/core/tradies-activator.php(55): set_transient('tradies_install...', 'locked', 0)
+#6 /wordpress/wp-content/plugins/tradies/tradies.php(39): Tradies_Todo_Activator::activate()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_tradies(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tradie...', false)
+#11 /internal/eval.php(20): activate_plugin('tradies/tradies...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_tradies_installed_check', 'locked', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_tradies/tradies.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_tradies, Tradies_Todo_Activator::activate, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:29:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:3:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Sales - Opportunity', 'sales-opportunity', 0)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( &#039;fs_accounts&#039; , &#039;a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10340;a:3:{s:4:&quot;slug&quot;;s:10:&quot;tablepress&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:10:&quot;tablepress&quot;;a:3:{s:19:&quot;last_load_timestamp&quot;;i:1744151298;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}}&#039; , &#039;auto&#039; )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_terms</li>
+<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Sales - Opportunity' , 'sales-opportunity' , 0 )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -386,39 +345,34 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_network_acti...', false)
-#9 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('is_network_acti...', false)
-#10 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(467): FS_Storage->__set('is_network_acti...', false)
-#11 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(2868): Freemius->__construct('10340', 'tablepress', true)
-#12 /wordpress/wp-content/plugins/tablepress/libraries/freemius/start.php(615): Freemius::instance('10340', 'tablepress', true)
-#13 /wordpress/wp-content/plugins/tablepress/tablepress.php(64): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/tablepress/tablepress.php(92): tb_tp_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tablepress/tabl...')
-#17 /internal/eval.php(20): activate_plugin('tablepress/tabl...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:3:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/tablepress/tablepress.php'), tb_tp_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
+#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
+#6 /wordpress/wp-content/plugins/tradies/includes/core/tradies-activator.php(62): wp_insert_term('Sales - Opportu...', 'post_tag', Array)
+#7 /wordpress/wp-content/plugins/tradies/tradies.php(39): Tradies_Todo_Activator::activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): activate_tradies(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tradie...', false)
+#12 /internal/eval.php(20): activate_plugin('tradies/tradies...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Sales - Opportunity', 'sales-opportunity', 0) made by activate_plugin, do_action('activate_tradies/tradies.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_tradies, Tradies_Todo_Activator::activate, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:29:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:3:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:25:\"tablepress/tablepress.php\";s:10:\"tablepress\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Sales - Lead', 'sales-lead', 0)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( &#039;fs_accounts&#039; , &#039;a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10340;a:3:{s:4:&quot;slug&quot;;s:10:&quot;tablepress&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:10:&quot;tablepress&quot;;a:3:{s:19:&quot;last_load_timestamp&quot;;i:1744151298;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:25:&quot;tablepress/tablepress.php&quot;;s:10:&quot;tablepress&quot;;}}&#039; , &#039;auto&#039; )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_terms</li>
+<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Sales - Lead' , 'sales-lead' , 0 )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -429,38 +383,34 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('file_slug_map', Array, true)
-#8 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(10355): FS_Options->set_option('file_slug_map', Array, true)
-#9 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(514): Freemius->store_file_slug_map()
-#10 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(2868): Freemius->__construct('10340', 'tablepress', true)
-#11 /wordpress/wp-content/plugins/tablepress/libraries/freemius/start.php(615): Freemius::instance('10340', 'tablepress', true)
-#12 /wordpress/wp-content/plugins/tablepress/tablepress.php(64): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/tablepress/tablepress.php(92): tb_tp_fs()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tablepress/tabl...')
-#16 /internal/eval.php(20): activate_plugin('tablepress/tabl...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:3:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:25:\"tablepress/tablepress.php\";s:10:\"tablepress\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/tablepress/tablepress.php'), tb_tp_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_file_slug_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
+#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
+#6 /wordpress/wp-content/plugins/tradies/includes/core/tradies-activator.php(71): wp_insert_term('Sales - Lead', 'post_tag', Array)
+#7 /wordpress/wp-content/plugins/tradies/tradies.php(39): Tradies_Todo_Activator::activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): activate_tradies(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tradie...', false)
+#12 /internal/eval.php(20): activate_plugin('tradies/tradies...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Sales - Lead', 'sales-lead', 0) made by activate_plugin, do_action('activate_tradies/tradies.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_tradies, Tradies_Todo_Activator::activate, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:29:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:4:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744151298;}}s:13:\"file_slug_map\";a:1:{s:25:\"tablepress/tablepress.php\";s:10:\"tablepress\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Sales - Lost', 'sales-lost', 0)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( &#039;fs_accounts&#039; , &#039;a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10340;a:3:{s:4:&quot;slug&quot;;s:10:&quot;tablepress&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:10:&quot;tablepress&quot;;a:4:{s:19:&quot;last_load_timestamp&quot;;i:1744151298;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744151298;}}s:13:&quot;file_slug_map&quot;;a:1:{s:25:&quot;tablepress/tablepress.php&quot;;s:10:&quot;tablepress&quot;;}}&#039; , &#039;auto&#039; )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_terms</li>
+<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Sales - Lost' , 'sales-lost' , 0 )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -471,39 +421,34 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('install_timesta...', 1744151298)
-#9 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('install_timesta...', 1744151298)
-#10 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(518): FS_Storage->__set('install_timesta...', 1744151298)
-#11 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(2868): Freemius->__construct('10340', 'tablepress', true)
-#12 /wordpress/wp-content/plugins/tablepress/libraries/freemius/start.php(615): Freemius::instance('10340', 'tablepress', true)
-#13 /wordpress/wp-content/plugins/tablepress/tablepress.php(64): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/tablepress/tablepress.php(92): tb_tp_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tablepress/tabl...')
-#17 /internal/eval.php(20): activate_plugin('tablepress/tabl...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:4:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744151298;}}s:13:\"file_slug_map\";a:1:{s:25:\"tablepress/tablepress.php\";s:10:\"tablepress\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/tablepress/tablepress.php'), tb_tp_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
+#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
+#6 /wordpress/wp-content/plugins/tradies/includes/core/tradies-activator.php(80): wp_insert_term('Sales - Lost ', 'post_tag', Array)
+#7 /wordpress/wp-content/plugins/tradies/tradies.php(39): Tradies_Todo_Activator::activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): activate_tradies(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tradie...', false)
+#12 /internal/eval.php(20): activate_plugin('tradies/tradies...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Sales - Lost', 'sales-lost', 0) made by activate_plugin, do_action('activate_tradies/tradies.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_tradies, Tradies_Todo_Activator::activate, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:29:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:5:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744151298;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:25:\"tablepress/tablepress.php\";s:10:\"tablepress\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Sales - Closed', 'sales-lost', 0)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( &#039;fs_accounts&#039; , &#039;a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10340;a:3:{s:4:&quot;slug&quot;;s:10:&quot;tablepress&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:10:&quot;tablepress&quot;;a:5:{s:19:&quot;last_load_timestamp&quot;;i:1744151298;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744151298;s:17:&quot;was_plugin_loaded&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:25:&quot;tablepress/tablepress.php&quot;;s:10:&quot;tablepress&quot;;}}&#039; , &#039;auto&#039; )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_terms</li>
+<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Sales - Closed' , 'sales-lost' , 0 )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -514,41 +459,34 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('was_plugin_load...', true)
-#9 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('was_plugin_load...', true)
-#10 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(1337): FS_Storage->__set('was_plugin_load...', true)
-#11 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(1486): Freemius->_plugins_loaded()
-#12 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(548): Freemius->register_constructor_hooks()
-#13 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(2868): Freemius->__construct('10340', 'tablepress', true)
-#14 /wordpress/wp-content/plugins/tablepress/libraries/freemius/start.php(615): Freemius::instance('10340', 'tablepress', true)
-#15 /wordpress/wp-content/plugins/tablepress/tablepress.php(64): fs_dynamic_init(Array)
-#16 /wordpress/wp-content/plugins/tablepress/tablepress.php(92): tb_tp_fs()
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tablepress/tabl...')
-#19 /internal/eval.php(20): activate_plugin('tablepress/tabl...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:5:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744151298;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:25:\"tablepress/tablepress.php\";s:10:\"tablepress\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/tablepress/tablepress.php'), tb_tp_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->register_constructor_hooks, Freemius->_plugins_loaded, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
+#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
+#6 /wordpress/wp-content/plugins/tradies/includes/core/tradies-activator.php(89): wp_insert_term('Sales - Closed', 'post_tag', Array)
+#7 /wordpress/wp-content/plugins/tradies/tradies.php(39): Tradies_Todo_Activator::activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): activate_tradies(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tradie...', false)
+#12 /internal/eval.php(20): activate_plugin('tradies/tradies...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Sales - Closed', 'sales-lost', 0) made by activate_plugin, do_action('activate_tradies/tradies.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_tradies, Tradies_Todo_Activator::activate, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:29:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:6:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744151298;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;}}s:13:\"file_slug_map\";a:1:{s:25:\"tablepress/tablepress.php\";s:10:\"tablepress\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Process - Job', 'process-job', 0)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( &#039;fs_accounts&#039; , &#039;a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10340;a:3:{s:4:&quot;slug&quot;;s:10:&quot;tablepress&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:10:&quot;tablepress&quot;;a:6:{s:19:&quot;last_load_timestamp&quot;;i:1744151298;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744151298;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:25:&quot;tablepress/tablepress.php&quot;;s:10:&quot;tablepress&quot;;}}&#039; , &#039;auto&#039; )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_terms</li>
+<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Process - Job' , 'process-job' , 0 )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -559,41 +497,34 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_plugin_new_i...', true)
-#9 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('is_plugin_new_i...', true)
-#10 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(1351): FS_Storage->__set('is_plugin_new_i...', true)
-#11 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(1486): Freemius->_plugins_loaded()
-#12 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(548): Freemius->register_constructor_hooks()
-#13 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(2868): Freemius->__construct('10340', 'tablepress', true)
-#14 /wordpress/wp-content/plugins/tablepress/libraries/freemius/start.php(615): Freemius::instance('10340', 'tablepress', true)
-#15 /wordpress/wp-content/plugins/tablepress/tablepress.php(64): fs_dynamic_init(Array)
-#16 /wordpress/wp-content/plugins/tablepress/tablepress.php(92): tb_tp_fs()
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tablepress/tabl...')
-#19 /internal/eval.php(20): activate_plugin('tablepress/tabl...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:6:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744151298;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;}}s:13:\"file_slug_map\";a:1:{s:25:\"tablepress/tablepress.php\";s:10:\"tablepress\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/tablepress/tablepress.php'), tb_tp_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->register_constructor_hooks, Freemius->_plugins_loaded, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
+#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
+#6 /wordpress/wp-content/plugins/tradies/includes/core/tradies-activator.php(98): wp_insert_term('Process - Job', 'post_tag', Array)
+#7 /wordpress/wp-content/plugins/tradies/tradies.php(39): Tradies_Todo_Activator::activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): activate_tradies(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tradie...', false)
+#12 /internal/eval.php(20): activate_plugin('tradies/tradies...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Process - Job', 'process-job', 0) made by activate_plugin, do_action('activate_tradies/tradies.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_tradies, Tradies_Todo_Activator::activate, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:29:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:7:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744151298;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:25:\"tablepress/tablepress.php\";s:10:\"tablepress\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Accounts', 'accounts', 0)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( &#039;fs_accounts&#039; , &#039;a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10340;a:3:{s:4:&quot;slug&quot;;s:10:&quot;tablepress&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:10:&quot;tablepress&quot;;a:7:{s:19:&quot;last_load_timestamp&quot;;i:1744151298;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744151298;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;}}s:13:&quot;file_slug_map&quot;;a:1:{s:25:&quot;tablepress/tablepress.php&quot;;s:10:&quot;tablepress&quot;;}}&#039; , &#039;auto&#039; )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_terms</li>
+<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Accounts' , 'accounts' , 0 )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -604,40 +535,34 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_last_versio...', NULL)
-#9 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('sdk_last_versio...', NULL)
-#10 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(897): FS_Storage->__set('sdk_last_versio...', NULL)
-#11 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(561): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(2868): Freemius->__construct('10340', 'tablepress', true)
-#13 /wordpress/wp-content/plugins/tablepress/libraries/freemius/start.php(615): Freemius::instance('10340', 'tablepress', true)
-#14 /wordpress/wp-content/plugins/tablepress/tablepress.php(64): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/tablepress/tablepress.php(92): tb_tp_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tablepress/tabl...')
-#18 /internal/eval.php(20): activate_plugin('tablepress/tabl...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:7:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744151298;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:25:\"tablepress/tablepress.php\";s:10:\"tablepress\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/tablepress/tablepress.php'), tb_tp_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
+#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
+#6 /wordpress/wp-content/plugins/tradies/includes/core/tradies-activator.php(107): wp_insert_term('Accounts', 'post_tag', Array)
+#7 /wordpress/wp-content/plugins/tradies/tradies.php(39): Tradies_Todo_Activator::activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): activate_tradies(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tradie...', false)
+#12 /internal/eval.php(20): activate_plugin('tradies/tradies...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Accounts', 'accounts', 0) made by activate_plugin, do_action('activate_tradies/tradies.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_tradies, Tradies_Todo_Activator::activate, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:29:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:8:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744151298;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";}}s:13:\"file_slug_map\";a:1:{s:25:\"tablepress/tablepress.php\";s:10:\"tablepress\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Deliver', 'deliver', 0)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( &#039;fs_accounts&#039; , &#039;a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10340;a:3:{s:4:&quot;slug&quot;;s:10:&quot;tablepress&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:10:&quot;tablepress&quot;;a:8:{s:19:&quot;last_load_timestamp&quot;;i:1744151298;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744151298;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:6:&quot;2.11.0&quot;;}}s:13:&quot;file_slug_map&quot;;a:1:{s:25:&quot;tablepress/tablepress.php&quot;;s:10:&quot;tablepress&quot;;}}&#039; , &#039;auto&#039; )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_terms</li>
+<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Deliver' , 'deliver' , 0 )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -648,40 +573,34 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_version', '2.11.0')
-#9 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('sdk_version', '2.11.0')
-#10 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(898): FS_Storage->__set('sdk_version', '2.11.0')
-#11 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(561): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(2868): Freemius->__construct('10340', 'tablepress', true)
-#13 /wordpress/wp-content/plugins/tablepress/libraries/freemius/start.php(615): Freemius::instance('10340', 'tablepress', true)
-#14 /wordpress/wp-content/plugins/tablepress/tablepress.php(64): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/tablepress/tablepress.php(92): tb_tp_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tablepress/tabl...')
-#18 /internal/eval.php(20): activate_plugin('tablepress/tabl...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:8:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744151298;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";}}s:13:\"file_slug_map\";a:1:{s:25:\"tablepress/tablepress.php\";s:10:\"tablepress\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/tablepress/tablepress.php'), tb_tp_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
+#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
+#6 /wordpress/wp-content/plugins/tradies/includes/core/tradies-activator.php(116): wp_insert_term('Deliver', 'post_tag', Array)
+#7 /wordpress/wp-content/plugins/tradies/tradies.php(39): Tradies_Todo_Activator::activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): activate_tradies(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tradie...', false)
+#12 /internal/eval.php(20): activate_plugin('tradies/tradies...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Deliver', 'deliver', 0) made by activate_plugin, do_action('activate_tradies/tradies.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_tradies, Tradies_Todo_Activator::activate, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:29:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:9:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744151298;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:25:\"tablepress/tablepress.php\";s:10:\"tablepress\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Get feedback', 'get-feedback', 0)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( &#039;fs_accounts&#039; , &#039;a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10340;a:3:{s:4:&quot;slug&quot;;s:10:&quot;tablepress&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:10:&quot;tablepress&quot;;a:9:{s:19:&quot;last_load_timestamp&quot;;i:1744151298;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744151298;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:6:&quot;2.11.0&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:25:&quot;tablepress/tablepress.php&quot;;s:10:&quot;tablepress&quot;;}}&#039; , &#039;auto&#039; )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_terms</li>
+<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Get feedback' , 'get-feedback' , 0 )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -692,40 +611,34 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_upgrade_mod...', true)
-#9 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('sdk_upgrade_mod...', true)
-#10 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(903): FS_Storage->__set('sdk_upgrade_mod...', true)
-#11 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(561): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(2868): Freemius->__construct('10340', 'tablepress', true)
-#13 /wordpress/wp-content/plugins/tablepress/libraries/freemius/start.php(615): Freemius::instance('10340', 'tablepress', true)
-#14 /wordpress/wp-content/plugins/tablepress/tablepress.php(64): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/tablepress/tablepress.php(92): tb_tp_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tablepress/tabl...')
-#18 /internal/eval.php(20): activate_plugin('tablepress/tabl...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:9:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744151298;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:25:\"tablepress/tablepress.php\";s:10:\"tablepress\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/tablepress/tablepress.php'), tb_tp_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
+#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
+#6 /wordpress/wp-content/plugins/tradies/includes/core/tradies-activator.php(125): wp_insert_term('Get feedback', 'post_tag', Array)
+#7 /wordpress/wp-content/plugins/tradies/tradies.php(39): Tradies_Todo_Activator::activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): activate_tradies(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tradie...', false)
+#12 /internal/eval.php(20): activate_plugin('tradies/tradies...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Get feedback', 'get-feedback', 0) made by activate_plugin, do_action('activate_tradies/tradies.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_tradies, Tradies_Todo_Activator::activate, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:29:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:10:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744151298;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:25:\"tablepress/tablepress.php\";s:10:\"tablepress\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Portfolio/Social media', 'portfolio-social', 0)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( &#039;fs_accounts&#039; , &#039;a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10340;a:3:{s:4:&quot;slug&quot;;s:10:&quot;tablepress&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:10:&quot;tablepress&quot;;a:10:{s:19:&quot;last_load_timestamp&quot;;i:1744151298;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744151298;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:6:&quot;2.11.0&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:25:&quot;tablepress/tablepress.php&quot;;s:10:&quot;tablepress&quot;;}}&#039; , &#039;auto&#039; )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_terms</li>
+<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Portfolio/Social media' , 'portfolio-social' , 0 )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -736,40 +649,34 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_downgrade_m...', false)
-#9 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('sdk_downgrade_m...', false)
-#10 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(904): FS_Storage->__set('sdk_downgrade_m...', false)
-#11 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(561): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(2868): Freemius->__construct('10340', 'tablepress', true)
-#13 /wordpress/wp-content/plugins/tablepress/libraries/freemius/start.php(615): Freemius::instance('10340', 'tablepress', true)
-#14 /wordpress/wp-content/plugins/tablepress/tablepress.php(64): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/tablepress/tablepress.php(92): tb_tp_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tablepress/tabl...')
-#18 /internal/eval.php(20): activate_plugin('tablepress/tabl...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:10:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744151298;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:25:\"tablepress/tablepress.php\";s:10:\"tablepress\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/tablepress/tablepress.php'), tb_tp_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
+#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
+#6 /wordpress/wp-content/plugins/tradies/includes/core/tradies-activator.php(134): wp_insert_term('Portfolio/Socia...', 'post_tag', Array)
+#7 /wordpress/wp-content/plugins/tradies/tradies.php(39): Tradies_Todo_Activator::activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): activate_tradies(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tradie...', false)
+#12 /internal/eval.php(20): activate_plugin('tradies/tradies...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Portfolio/Social media', 'portfolio-social', 0) made by activate_plugin, do_action('activate_tradies/tradies.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_tradies, Tradies_Todo_Activator::activate, wp_insert_term, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:29:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:11:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744151298;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:25:\"tablepress/tablepress.php\";s:10:\"tablepress\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Reception', 'reception', 0)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( &#039;fs_accounts&#039; , &#039;a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10340;a:3:{s:4:&quot;slug&quot;;s:10:&quot;tablepress&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:10:&quot;tablepress&quot;;a:11:{s:19:&quot;last_load_timestamp&quot;;i:1744151298;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744151298;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:6:&quot;2.11.0&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;}}s:13:&quot;file_slug_map&quot;;a:1:{s:25:&quot;tablepress/tablepress.php&quot;;s:10:&quot;tablepress&quot;;}}&#039; , &#039;auto&#039; )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_terms</li>
+<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Reception' , 'reception' , 0 )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -780,169 +687,15 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_last_ver...', NULL)
-#9 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('plugin_last_ver...', NULL)
-#10 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(917): FS_Storage->__set('plugin_last_ver...', NULL)
-#11 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(561): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(2868): Freemius->__construct('10340', 'tablepress', true)
-#13 /wordpress/wp-content/plugins/tablepress/libraries/freemius/start.php(615): Freemius::instance('10340', 'tablepress', true)
-#14 /wordpress/wp-content/plugins/tablepress/tablepress.php(64): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/tablepress/tablepress.php(92): tb_tp_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tablepress/tabl...')
-#18 /internal/eval.php(20): activate_plugin('tablepress/tabl...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:11:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744151298;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:25:\"tablepress/tablepress.php\";s:10:\"tablepress\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/tablepress/tablepress.php'), tb_tp_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:12:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744151298;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:5:\"3.1.1\";}}s:13:\"file_slug_map\";a:1:{s:25:\"tablepress/tablepress.php\";s:10:\"tablepress\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( &#039;fs_accounts&#039; , &#039;a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10340;a:3:{s:4:&quot;slug&quot;;s:10:&quot;tablepress&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:10:&quot;tablepress&quot;;a:12:{s:19:&quot;last_load_timestamp&quot;;i:1744151298;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744151298;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:6:&quot;2.11.0&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;s:14:&quot;plugin_version&quot;;s:5:&quot;3.1.1&quot;;}}s:13:&quot;file_slug_map&quot;;a:1:{s:25:&quot;tablepress/tablepress.php&quot;;s:10:&quot;tablepress&quot;;}}&#039; , &#039;auto&#039; )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_version', '3.1.1')
-#9 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('plugin_version', '3.1.1')
-#10 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(918): FS_Storage->__set('plugin_version', '3.1.1')
-#11 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(561): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(2868): Freemius->__construct('10340', 'tablepress', true)
-#13 /wordpress/wp-content/plugins/tablepress/libraries/freemius/start.php(615): Freemius::instance('10340', 'tablepress', true)
-#14 /wordpress/wp-content/plugins/tablepress/tablepress.php(64): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/tablepress/tablepress.php(92): tb_tp_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tablepress/tabl...')
-#18 /internal/eval.php(20): activate_plugin('tablepress/tabl...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:12:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744151298;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:5:\"3.1.1\";}}s:13:\"file_slug_map\";a:1:{s:25:\"tablepress/tablepress.php\";s:10:\"tablepress\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/tablepress/tablepress.php'), tb_tp_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:13:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744151298;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:5:\"3.1.1\";s:19:\"plugin_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:25:\"tablepress/tablepress.php\";s:10:\"tablepress\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( &#039;fs_accounts&#039; , &#039;a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10340;a:3:{s:4:&quot;slug&quot;;s:10:&quot;tablepress&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:10:&quot;tablepress&quot;;a:13:{s:19:&quot;last_load_timestamp&quot;;i:1744151298;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744151298;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:6:&quot;2.11.0&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;s:14:&quot;plugin_version&quot;;s:5:&quot;3.1.1&quot;;s:19:&quot;plugin_upgrade_mode&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:25:&quot;tablepress/tablepress.php&quot;;s:10:&quot;tablepress&quot;;}}&#039; , &#039;auto&#039; )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_upgrade_...', true)
-#9 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('plugin_upgrade_...', true)
-#10 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(923): FS_Storage->__set('plugin_upgrade_...', true)
-#11 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(561): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(2868): Freemius->__construct('10340', 'tablepress', true)
-#13 /wordpress/wp-content/plugins/tablepress/libraries/freemius/start.php(615): Freemius::instance('10340', 'tablepress', true)
-#14 /wordpress/wp-content/plugins/tablepress/tablepress.php(64): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/tablepress/tablepress.php(92): tb_tp_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tablepress/tabl...')
-#18 /internal/eval.php(20): activate_plugin('tablepress/tabl...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:13:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744151298;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:5:\"3.1.1\";s:19:\"plugin_upgrade_mode\";b:1;}}s:13:\"file_slug_map\";a:1:{s:25:\"tablepress/tablepress.php\";s:10:\"tablepress\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/tablepress/tablepress.php'), tb_tp_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:14:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744151298;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:5:\"3.1.1\";s:19:\"plugin_upgrade_mode\";b:1;s:21:\"plugin_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:25:\"tablepress/tablepress.php\";s:10:\"tablepress\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( &#039;fs_accounts&#039; , &#039;a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10340;a:3:{s:4:&quot;slug&quot;;s:10:&quot;tablepress&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:10:&quot;tablepress&quot;;a:14:{s:19:&quot;last_load_timestamp&quot;;i:1744151298;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744151298;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:6:&quot;2.11.0&quot;;s:16:&quot;sdk_upgrade_mode&quot;;b:1;s:18:&quot;sdk_downgrade_mode&quot;;b:0;s:19:&quot;plugin_last_version&quot;;N;s:14:&quot;plugin_version&quot;;s:5:&quot;3.1.1&quot;;s:19:&quot;plugin_upgrade_mode&quot;;b:1;s:21:&quot;plugin_downgrade_mode&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:25:&quot;tablepress/tablepress.php&quot;;s:10:&quot;tablepress&quot;;}}&#039; , &#039;auto&#039; )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_downgrad...', false)
-#9 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('plugin_downgrad...', false)
-#10 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(924): FS_Storage->__set('plugin_downgrad...', false)
-#11 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(561): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/tablepress/libraries/freemius/includes/class-freemius.php(2868): Freemius->__construct('10340', 'tablepress', true)
-#13 /wordpress/wp-content/plugins/tablepress/libraries/freemius/start.php(615): Freemius::instance('10340', 'tablepress', true)
-#14 /wordpress/wp-content/plugins/tablepress/tablepress.php(64): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/tablepress/tablepress.php(92): tb_tp_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('tablepress/tabl...')
-#18 /internal/eval.php(20): activate_plugin('tablepress/tabl...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:14:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744151298;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:5:\"3.1.1\";s:19:\"plugin_upgrade_mode\";b:1;s:21:\"plugin_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:25:\"tablepress/tablepress.php\";s:10:\"tablepress\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/tablepress/tablepress.php'), tb_tp_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 22:28:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:4:{s:21:\"id_slug_type_path_map\";a:1:{i:10340;a:3:{s:4:\"slug\";s:10:\"tablepress\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"tablepress/tablepress.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"tablepress\";a:14:{s:19:\"last_load_timestamp\";i:1744151298;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"tablepress/tablepress.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744151298;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:6:\"2.11.0\";s:16:\"sdk_upgrade_mode\";b:1;s:18:\"sdk_downgrade_mode\";b:0;s:19:\"plugin_last_version\";N;s:14:\"plugin_version\";s:5:\"3.1.1\";s:19:\"plugin_upgrade_mode\";b:1;s:21:\"plugin_downgrade_mode\";b:0;}}s:13:\"file_slug_map\";a:1:{s:25:\"tablepress/tablepress.php\";s:10:\"tablepress\";}s:7:\"plugins\";a:1:{s:10:\"tablepress\";O:9:\"FS_Plugin\":24:{s:2:\"id\";s:5:\"10340\";s:7:\"updated\";N;s:7:\"created\";N;s:22:\"\0FS_Entity\0_is_updated\";b:1;s:10:\"public_key\";s:32:\"pk_b215ca1bb4041cf43ed137ae7665b\";s:10:\"secret_key\";N;s:16:\"parent_plugin_id\";N;s:5:\"title\";s:10:\"TablePress\";s:4:\"slug\";s:10:\"tablepress\";s:12:\"premium_slug\";s:18:\"tablepress-premium\";s:4:\"type\";s:6:\"plugin\";s:20:\"affiliate_moderation\";b:0;s:19:\"is_wp_org_compliant\";b:1;s:22:\"premium_releases_count\";N;s:4:\"file\";s:25:\"tablepress/tablepress.php\";s:7:\"version\";s:5:\"3.1.1\";s:11:\"auto_update\";N;s:4:\"info\";N;s:10:\"is_premium\";b:0;s:14:\"premium_suffix\";s:9:\"(Premium)\";s:7:\"is_live\";b:1;s:9:\"bundle_id\";N;s:17:\"bundle_public_key\";N;s:17:\"opt_in_moderation\";a:3:{s:3:\"new\";b:1;s:7:\"updates\";b:0;s:9:\"localhost\";b:0;}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( &#039;fs_accounts&#039; , (&#039;a:4:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10340;a:3:{s:4:&quot;slug&quot;;s:10:&quot;tablepress&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:10:&quot;tablepress&quot;;a:14:{s:19:&quot;last_load_timestamp&quot;;i:1744151298;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:25:&quot;tablepress/tablepress.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestam
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_terms', Array, NULL, 'INSERT')
+#5 /wordpress/wp-includes/taxonomy.php(2573): wpdb->insert('wp_terms', Array)
+#6 /wordpress/wp-content/plugins/tradies/includes/core/tradies-activator.php(142): wp_insert_term('Reception', 'post_tag', Array)
+#7 /wordpress/wp-content/plugins/tradies/tradies.php(39): Tradies_Todo_Activator::activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): activate_tradies(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tradie...', false)
+#12 /internal/eval.php(20): activate_plugin('tradies/tradies...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Reception', 'reception', 0) made by activate_plugin, do_action('ac
