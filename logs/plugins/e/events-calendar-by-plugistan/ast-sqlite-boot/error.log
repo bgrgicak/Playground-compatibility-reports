@@ -2,14 +2,10 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [07-Apr-2025 23:25:17 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 23:25:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 23:25:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 23:25:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 23:25:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [09-Apr-2025 23:45:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'M|HmrpSr~a5uzjG/ (&/->iPQ.HI@.%|4%rmlEvn.VnEZBG_FL=c>7I DU!M$m-=', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('EZD_TotalAmount', '0', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -21,7 +17,7 @@ Error: [07-Apr-2025 23:25:17 UTC] PHP Warning:  Undefined array key "option_valu
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'M|HmrpSr~a5uzjG/ (&amp;/-&gt;iPQ.HI@.%|4%rmlEvn.VnEZBG_FL=c&gt;7I DU!M$m-=' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'EZD_TotalAmount' , '0' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -33,34 +29,19 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'M|HmrpSr~a5uzjG...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'M|HmrpSr~a5uzjG...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'M|HmrpSr~a5uzjG...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'M|HmrpSr~a5uzjG...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40372|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(328): wp_scripts()
-#18 /wordpress/wp-content/plugins/enhancejs/enhancejs.php(12): wp_deregister_script('enhancejs')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): rw_enhancejs('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'M|HmrpSr~a5uzjG/ (&/->iPQ.HI@.%|4%rmlEvn.VnEZBG_FL=c>7I DU!M$m-=', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, rw_enhancejs, wp_deregister_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 23:25:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/erima-zarinpal-donate/ErimaZarinpalDonate.php(320): add_option('EZD_TotalAmount', 0, '', 'on')
+#5 /wordpress/wp-content/plugins/erima-zarinpal-donate/ErimaZarinpalDonate.php(298): EZD_CreateDatabaseTables()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): EriamZarinpalDonate_install(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_erima-...', false)
+#10 /internal/eval.php(20): activate_plugin('erima-zarinpal-...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('EZD_TotalAmount', '0', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_erima-zarinpal-donate/ErimaZarinpalDonate.php'), WP_Hook->do_action, WP_Hook->apply_filters, EriamZarinpalDonate_install, EZD_CreateDatabaseTables, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:45:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '(K$O<d?r,aUh})4_^5-C49O+$[+v%jRqeaha:)A&*GYV^C)7#GrPkp5P5Ii&E{ht', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('EZD_TotalPayment', '0', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -72,7 +53,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , '(K$O&lt;d?r,aUh})4_^5-C49O+$[+v%jRqeaha:)A&amp;*GYV^C)7#GrPkp5P5Ii&amp;E{ht' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'EZD_TotalPayment' , '0' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -84,52 +65,19 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', '(K$O<d?r,aUh})4...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', '(K$O<d?r,aUh})4...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', '(K$O<d?r,aUh})4...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', '(K$O<d?r,aUh})4...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40372|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(328): wp_scripts()
-#18 /wordpress/wp-content/plugins/enhancejs/enhancejs.php(12): wp_deregister_script('enhancejs')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): rw_enhancejs('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '(K$O<d?r,aUh})4_^5-C49O+$[+v%jRqeaha:)A&*GYV^C)7#GrPkp5P5Ii&E{ht', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, rw_enhancejs, wp_deregister_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 23:25:32 UTC] PHP Warning:  include(/wordpress/wp-content/plugins/enlight-pricer/assets/admin/edit-pricer.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/enlight-pricer/enlightpricer.php on line 19
-[07-Apr-2025 23:25:32 UTC] PHP Warning:  include(): Failed opening '/wordpress/wp-content/plugins/enlight-pricer/assets/admin/edit-pricer.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/enlight-pricer/enlightpricer.php on line 19
-[07-Apr-2025 23:25:32 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 23:25:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 23:25:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 23:25:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 23:25:32 UTC] PHP Warning:  include(/wordpress/wp-content/plugins/enlight-pricer/assets/admin/edit-pricer.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/enlight-pricer/enlightpricer.php on line 19
-[07-Apr-2025 23:25:32 UTC] PHP Warning:  include(): Failed opening '/wordpress/wp-content/plugins/enlight-pricer/assets/admin/edit-pricer.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/enlight-pricer/enlightpricer.php on line 19
-[07-Apr-2025 23:25:35 UTC] PHP Warning:  include(/wordpress/wp-content/plugins/enlight-pricer/assets/admin/edit-pricer.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/enlight-pricer/enlightpricer.php on line 19
-[07-Apr-2025 23:25:35 UTC] PHP Warning:  include(): Failed opening '/wordpress/wp-content/plugins/enlight-pricer/assets/admin/edit-pricer.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/enlight-pricer/enlightpricer.php on line 19
-[07-Apr-2025 23:25:35 UTC] PHP Warning:  include(/wordpress/wp-content/plugins/enlight-pricer/assets/admin/edit-pricer.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/enlight-pricer/enlightpricer.php on line 19
-[07-Apr-2025 23:25:35 UTC] PHP Warning:  include(): Failed opening '/wordpress/wp-content/plugins/enlight-pricer/assets/admin/edit-pricer.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/enlight-pricer/enlightpricer.php on line 19
-[07-Apr-2025 23:25:38 UTC] PHP Warning:  include(/wordpress/wp-content/plugins/enlight-pricer/assets/admin/edit-pricer.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/enlight-pricer/enlightpricer.php on line 19
-[07-Apr-2025 23:25:38 UTC] PHP Warning:  include(): Failed opening '/wordpress/wp-content/plugins/enlight-pricer/assets/admin/edit-pricer.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/enlight-pricer/enlightpricer.php on line 19
-[07-Apr-2025 23:25:38 UTC] PHP Warning:  include(/wordpress/wp-content/plugins/enlight-pricer/assets/admin/edit-pricer.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/enlight-pricer/enlightpricer.php on line 19
-[07-Apr-2025 23:25:38 UTC] PHP Warning:  include(): Failed opening '/wordpress/wp-content/plugins/enlight-pricer/assets/admin/edit-pricer.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/enlight-pricer/enlightpricer.php on line 19
-[07-Apr-2025 23:25:46 UTC] PHP Deprecated:  The behavior of unparenthesized expressions containing both '.' and '+'/'-' will change in PHP 8: '+'/'-' will take a higher precedence in /wordpress/wp-content/plugins/entourance/entourance-utils.php on line 839
-[07-Apr-2025 23:25:46 UTC] PHP Deprecated:  The behavior of unparenthesized expressions containing both '.' and '+'/'-' will change in PHP 8: '+'/'-' will take a higher precedence in /wordpress/wp-content/plugins/entourance/entourance-utils.php on line 853
-[07-Apr-2025 23:25:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/erima-zarinpal-donate/ErimaZarinpalDonate.php(321): add_option('EZD_TotalPaymen...', 0, '', 'on')
+#5 /wordpress/wp-content/plugins/erima-zarinpal-donate/ErimaZarinpalDonate.php(298): EZD_CreateDatabaseTables()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): EriamZarinpalDonate_install(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_erima-...', false)
+#10 /internal/eval.php(20): activate_plugin('erima-zarinpal-...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('EZD_TotalPayment', '0', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_erima-zarinpal-donate/ErimaZarinpalDonate.php'), WP_Hook->do_action, WP_Hook->apply_filters, EriamZarinpalDonate_install, EZD_CreateDatabaseTables, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:45:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'PFU<in^tGUu=v`M]TMLJ}^ee6?rl]fZ1Sq7nh.swWou8$xPA-1p3%Sq^1a$Xbse|', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('EZD_IsOK', 'با تشکر پرداخت شما به درستی انجام شد.', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -141,7 +89,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'PFU&lt;in^tGUu=v`M]TMLJ}^ee6?rl]fZ1Sq7nh.swWou8$xPA-1p3%Sq^1a$Xbse|' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'EZD_IsOK' , 'با تشکر پرداخت شما به درستی انجام شد.' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -153,32 +101,19 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'PFU<in^tGUu=v`M...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'PFU<in^tGUu=v`M...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'PFU<in^tGUu=v`M...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'PFU<in^tGUu=v`M...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40372|wp_rest|1...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/entourance/class-entouranceplugin.php(303): wp_register_script('get_settings_ic...', 'http://127.0.0....', '', NULL, Array)
-#19 /wordpress/wp-content/plugins/entourance/class-entouranceplugin.php(45): EntourancePlugin->register_settings()
-#20 /wordpress/wp-content/plugins/entourance/entourance.php(47): EntourancePlugin->register()
-#21 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#22 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('entourance/ento...')
-#23 /internal/eval.php(20): activate_plugin('entourance/ento...')
-#24 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'PFU<in^tGUu=v`M]TMLJ}^ee6?rl]fZ1Sq7nh.swWou8$xPA-1p3%Sq^1a$Xbse|', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/entourance/entourance.php'), EntourancePlugin->register, EntourancePlugin->register_settings, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 23:25:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/erima-zarinpal-donate/ErimaZarinpalDonate.php(322): add_option('EZD_IsOK', '\xD8\xA8\xD8\xA7 \xD8\xAA\xD8\xB4\xDA\xA9\xD8\xB1 \xD9...', '', 'on')
+#5 /wordpress/wp-content/plugins/erima-zarinpal-donate/ErimaZarinpalDonate.php(298): EZD_CreateDatabaseTables()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): EriamZarinpalDonate_install(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_erima-...', false)
+#10 /internal/eval.php(20): activate_plugin('erima-zarinpal-...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('EZD_IsOK', 'با تشکر پرداخت شما به درستی انجام شد.', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_erima-zarinpal-donate/ErimaZarinpalDonate.php'), WP_Hook->do_action, WP_Hook->apply_filters, EriamZarinpalDonate_install, EZD_CreateDatabaseTables, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:45:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '=PI)` @l[]V9GTkd^);?k!k(2MeUuctqDDrawbtZqDr{J4 x}YE!UwF(l_7:,+?t', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('EZD_IsError', 'متاسفانه پرداخت انجام نشد.', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -190,7 +125,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , '=PI)` @l[]V9GTkd^);?k!k(2MeUuctqDDrawbtZqDr{J4 x}YE!UwF(l_7:,+?t' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'EZD_IsError' , 'متاسفانه پرداخت انجام نشد.' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -202,48 +137,456 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', '=PI)` @l[]V9GTk...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', '=PI)` @l[]V9GTk...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', '=PI)` @l[]V9GTk...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', '=PI)` @l[]V9GTk...')
+#4 /wordpress/wp-content/plugins/erima-zarinpal-donate/ErimaZarinpalDonate.php(323): add_option('EZD_IsError', '\xD9\x85\xD8\xAA\xD8\xA7\xD8\xB3\xD9\x81\xD8\xA7\xD9\x86\xD9...', '', 'on')
+#5 /wordpress/wp-content/plugins/erima-zarinpal-donate/ErimaZarinpalDonate.php(298): EZD_CreateDatabaseTables()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): EriamZarinpalDonate_install(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_erima-...', false)
+#10 /internal/eval.php(20): activate_plugin('erima-zarinpal-...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('EZD_IsError', 'متاسفانه پرداخت انجام نشد.', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_erima-zarinpal-donate/ErimaZarinpalDonate.php'), WP_Hook->do_action, WP_Hook->apply_filters, EriamZarinpalDonate_install, EZD_CreateDatabaseTables, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:45:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('EZD_CustomStyle', '#EZD_MainForm {
+  width: 400px;
+  height: auto;
+  margin: 0 auto;
+  direction: rtl;
+}
+
+#EZD_Form {
+  width: 96%;
+  height: auto;
+  float: right;
+  padding: 10px 2%;
+}
+
+#EZD_Message,#EZD_Error {
+  width: 90%;
+  margin-top: 10px;
+  margin-right: 2%;
+  float: right;
+  padding: 5px 2%;
+  border-right: 2px solid #006704;
+  background-color: #e7ffc5;
+  color: #00581f;
+}
+
+#EZD_Error {
+  border-right: 2px solid #790000;
+  background-color: #ffc9c5;
+  color: #580a00;
+}
+
+.EZD_FormItem {
+  width: 90%;
+  margin-top: 10px;
+  margin-right: 2%;
+  float: right;
+  padding: 5px 2%;
+}
+
+.EZD_FormLabel {
+  width: 35%;
+  float: right;
+  padding: 3px 0;
+}
+
+.EZD_ItemInput {
+  width: 64%;
+  float: left;
+}
+
+.EZD_ItemInput input {
+  width: 90%;
+  float: right;
+  border-radius: 3px;
+  box-shadow: 0 0 2px #00c4ff;
+  border: 0px solid #c0fff0;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 3px 5px;
+}
+
+.EZD_ItemInput input:focus {
+  box-shadow: 0 0 4px #0099d1;
+}
+
+.EZD_ItemInput input.error {
+  box-shadow: 0 0 4px #ef0d1e;
+}
+
+input.EZD_Submit {
+  background: none repeat scroll 0 0 #2ea2cc;
+  border-color: #0074a2;
+  box-shadow: 0 1px 0 rgba(120, 200, 230, 0.5) inset, 0 1px 0 rgba(0, 0, 0, 0.15);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 13px;
+  line-height: 26px;
+  margin: 0;
+  padding: 0 10px 1px;
+  margin: 10px auto;
+  width: 50%;
+  font: inherit;
+  float: right;
+  margin-right: 24%;
+}', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'EZD_CustomStyle' , '#EZD_MainForm {
+  width: 400px;
+  height: auto;
+  margin: 0 auto;
+  direction: rtl;
+}
+
+#EZD_Form {
+  width: 96%;
+  height: auto;
+  float: right;
+  padding: 10px 2%;
+}
+
+#EZD_Message,#EZD_Error {
+  width: 90%;
+  margin-top: 10px;
+  margin-right: 2%;
+  float: right;
+  padding: 5px 2%;
+  border-right: 2px solid #006704;
+  background-color: #e7ffc5;
+  color: #00581f;
+}
+
+#EZD_Error {
+  border-right: 2px solid #790000;
+  background-color: #ffc9c5;
+  color: #580a00;
+}
+
+.EZD_FormItem {
+  width: 90%;
+  margin-top: 10px;
+  margin-right: 2%;
+  float: right;
+  padding: 5px 2%;
+}
+
+.EZD_FormLabel {
+  width: 35%;
+  float: right;
+  padding: 3px 0;
+}
+
+.EZD_ItemInput {
+  width: 64%;
+  float: left;
+}
+
+.EZD_ItemInput input {
+  width: 90%;
+  float: right;
+  border-radius: 3px;
+  box-shadow: 0 0 2px #00c4ff;
+  border: 0px solid #c0fff0;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 3px 5px;
+}
+
+.EZD_ItemInput input:focus {
+  box-shadow: 0 0 4px #0099d1;
+}
+
+.EZD_ItemInput input.error {
+  box-shadow: 0 0 4px #ef0d1e;
+}
+
+input.EZD_Submit {
+  background: none repeat scroll 0 0 #2ea2cc;
+  border-color: #0074a2;
+  box-shadow: 0 1px 0 rgba(120, 200, 230, 0.5) inset, 0 1px 0 rgba(0, 0, 0, 0.15);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 13px;
+  line-height: 26px;
+  margin: 0;
+  padding: 0 10px 1px;
+  margin: 10px auto;
+  width: 50%;
+  font: inherit;
+  float: right;
+  margin-right: 24%;
+}' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/erima-zarinpal-donate/ErimaZarinpalDonate.php(416): add_option('EZD_CustomStyle', '#EZD_MainForm {...', '', 'on')
+#5 /wordpress/wp-content/plugins/erima-zarinpal-donate/ErimaZarinpalDonate.php(298): EZD_CreateDatabaseTables()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): EriamZarinpalDonate_install(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_erima-...', false)
+#10 /internal/eval.php(20): activate_plugin('erima-zarinpal-...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('EZD_CustomStyle', '#EZD_MainForm {
+  width: 400px;
+  height: auto;
+  margin: 0 auto;
+  direction: rtl;
+}
+
+#EZD_Form {
+  width: 96%;
+  height: auto;
+  float: right;
+  padding: 10px 2%;
+}
+
+#EZD_Message,#EZD_Error {
+  width: 90%;
+  margin-top: 10px;
+  margin-right: 2%;
+  float: right;
+  padding: 5px 2%;
+  border-right: 2px solid #006704;
+  background-color: #e7ffc5;
+  color: #00581f;
+}
+
+#EZD_Error {
+  border-right: 2px solid #790000;
+  background-color: #ffc9c5;
+  color: #580a00;
+}
+
+.EZD_FormItem {
+  width: 90%;
+  margin-top: 10px;
+  margin-right: 2%;
+  float: right;
+  padding: 5px 2%;
+}
+
+.EZD_FormLabel {
+  width: 35%;
+  float: right;
+  padding: 3px 0;
+}
+
+.EZD_ItemInput {
+  width: 64%;
+  float: left;
+}
+
+.EZD_ItemInput input {
+  width: 90%;
+  float: right;
+  border-radius: 3px;
+  box-shadow: 0 0 2px #00c4ff;
+  border: 0px solid #c0fff0;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 3px 5px;
+}
+
+.EZD_ItemInput input:focus {
+  box-shadow: 0 0 4px #0099d1;
+}
+
+.EZD_ItemInput input.error {
+  box-shadow: 0 0 4px #ef0d1e;
+}
+
+input.EZD_Submit {
+  background: none repeat scroll 0 0 #2ea2cc;
+  border-color: #0074a2;
+  box-shadow: 0 1px 0 rgba(120, 200, 230, 0.5) inset, 0 1px 0 rgba(0, 0, 0, 0.15);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 13px;
+  line-height: 26px;
+  margin: 0;
+  padding: 0 10px 1px;
+  margin: 10px auto;
+  width: 50%;
+  font: inherit;
+  float: right;
+  margin-right: 24%;
+}', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_erima-zarinpal-donate/ErimaZarinpalDonate.php'), WP_Hook->do_action, WP_Hook->apply_filters, EriamZarinpalDonate_install, EZD_CreateDatabaseTables, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:45:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('EZD_UseCustomStyle', 'false', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'EZD_UseCustomStyle' , 'false' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/erima-zarinpal-donate/ErimaZarinpalDonate.php(417): add_option('EZD_UseCustomSt...', 'false', '', 'on')
+#5 /wordpress/wp-content/plugins/erima-zarinpal-donate/ErimaZarinpalDonate.php(298): EZD_CreateDatabaseTables()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): EriamZarinpalDonate_install(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_erima-...', false)
+#10 /internal/eval.php(20): activate_plugin('erima-zarinpal-...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('EZD_UseCustomStyle', 'false', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_erima-zarinpal-donate/ErimaZarinpalDonate.php'), WP_Hook->do_action, WP_Hook->apply_filters, EriamZarinpalDonate_install, EZD_CreateDatabaseTables, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:45:53 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 23:45:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 23:45:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 23:45:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 23:46:23 UTC] PHP Deprecated:  Required parameter $atts follows optional parameter $event_id in /wordpress/wp-content/plugins/event-espresso-free/includes/functions/main.php on line 1154
+[09-Apr-2025 23:46:23 UTC] PHP Deprecated:  Required parameter $event follows optional parameter $existing_question_groups in /wordpress/wp-content/plugins/event-espresso-free/includes/functions/admin.php on line 1653
+[09-Apr-2025 23:46:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('espresso_db_update', 'a:0:{}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'espresso_db_update' , 'a:0:{}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/event-espresso-free/espresso.php(1207): add_option('espresso_db_upd...', Array, '', 'off')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): espresso_check_data_tables(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_event-...', false)
+#9 /internal/eval.php(20): activate_plugin('event-espresso-...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('espresso_db_update', 'a:0:{}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_event-espresso-free/espresso.php'), WP_Hook->do_action, WP_Hook->apply_filters, espresso_check_data_tables, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:46:23 UTC] PHP Deprecated:  Required parameter $sql follows optional parameter $table_version in /wordpress/wp-content/plugins/event-espresso-free/includes/functions/database_install.php on line 6
+[09-Apr-2025 23:46:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'b?^{s9@q>fQ?/xE@^uqazmop-YL69L}<GCeZE=euSBE>)WYs=@rk)nTkX`rr~E]h', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'b?^{s9@q&gt;fQ?/xE@^uqazmop-YL69L}&lt;GCeZE=euSBE&gt;)WYs=@rk)nTkX`rr~E]h' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'b?^{s9@q>fQ?/xE...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'b?^{s9@q>fQ?/xE...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'b?^{s9@q>fQ?/xE...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'b?^{s9@q>fQ?/xE...')
 #8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40372|wp_rest|1...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|activate-...', 'nonce')
+#10 /wordpress/wp-content/plugins/event-espresso-free/espresso.php(1221): wp_create_nonce('activate-plugin...')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): espresso_check_data_tables(false)
 #12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/entourance/class-entouranceplugin.php(303): wp_register_script('get_settings_ic...', 'http://127.0.0....', '', NULL, Array)
-#19 /wordpress/wp-content/plugins/entourance/class-entouranceplugin.php(45): EntourancePlugin->register_settings()
-#20 /wordpress/wp-content/plugins/entourance/entourance.php(47): EntourancePlugin->register()
-#21 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#22 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('entourance/ento...')
-#23 /internal/eval.php(20): activate_plugin('entourance/ento...')
-#24 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '=PI)` @l[]V9GTkd^);?k!k(2MeUuctqDDrawbtZqDr{J4 x}YE!UwF(l_7:,+?t', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/entourance/entourance.php'), EntourancePlugin->register, EntourancePlugin->register_settings, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 23:25:46 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 23:25:46 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 23:25:46 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 23:25:46 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 23:25:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#14 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_event-...', false)
+#15 /internal/eval.php(20): activate_plugin('event-espresso-...')
+#16 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'b?^{s9@q>fQ?/xE@^uqazmop-YL69L}<GCeZE=euSBE>)WYs=@rk)nTkX`rr~E]h', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_event-espresso-free/espresso.php'), WP_Hook->do_action, WP_Hook->apply_filters, espresso_check_data_tables, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:46:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-07 23:25:46', '2025-04-07 23:25:46', '', '', 'experience-list', '', 'publish', 'page', 'closed', 'closed', '', 'experience-list', '', '', '2025-04-07 23:25:46', '2025-04-07 23:25:46', 0, 0, '', '')</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'ELS<z!vStE2QKU{WcCbeUV`l&!]>:M8.uG^;W:Je@EEOiM[yiZ}4ABj&*h7DymCj', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-07 23:25:46' , '2025-04-07 23:25:46' , '' , '' , 'experience-list' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'experience-list' , '' , '' , '2025-04-07 23:25:46' , '2025-04-07 23:25:46' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'ELS&lt;z!vStE2QKU{WcCbeUV`l&amp;!]&gt;:M8.uG^;W:Je@EEOiM[yiZ}4ABj&amp;*h7DymCj' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -254,35 +597,37 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/entourance/entourance-utils.php(1372): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/entourance/entourance-utils.php(1309): entourance_create_page_product('experience', true)
-#8 /wordpress/wp-content/plugins/entourance/class-entouranceplugin.php(138): entourance_create_pages()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): EntourancePlugin->activate(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_entour...', false)
-#13 /internal/eval.php(20): activate_plugin('entourance/ento...')
-#14 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-07 23:25:46', '2025-04-07 23:25:46', '', '', 'experience-list', '', 'publish', 'page', 'closed', 'closed', '', 'experience-list', '', '', '2025-04-07 23:25:46', '2025-04-07 23:25:46', 0, 0, '', '') made by activate_plugin, do_action('activate_entourance/entourance.php'), WP_Hook->do_action, WP_Hook->apply_filters, EntourancePlugin->activate, entourance_create_pages, entourance_create_page_product, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 23:25:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'ELS<z!vStE2QKU{...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'ELS<z!vStE2QKU{...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'ELS<z!vStE2QKU{...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'ELS<z!vStE2QKU{...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|activate-...', 'nonce')
+#10 /wordpress/wp-content/plugins/event-espresso-free/espresso.php(1221): wp_create_nonce('activate-plugin...')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): espresso_check_data_tables(false)
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#14 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_event-...', false)
+#15 /internal/eval.php(20): activate_plugin('event-espresso-...')
+#16 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'ELS<z!vStE2QKU{WcCbeUV`l&!]>:M8.uG^;W:Je@EEOiM[yiZ}4ABj&*h7DymCj', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_event-espresso-free/espresso.php'), WP_Hook->do_action, WP_Hook->apply_filters, espresso_check_data_tables, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:46:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-07 23:25:46', '2025-04-07 23:25:46', '', '', 'host-list', '', 'publish', 'page', 'closed', 'closed', '', 'host-list', '', '', '2025-04-07 23:25:46', '2025-04-07 23:25:46', 0, 0, '', '')</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('events_organization_settings', 'a:38:{s:12:\"organization\";s:20:\"My WordPress Website\";s:20:\"organization_street1\";s:18:\"123 West Somewhere\";s:20:\"organization_street2\";s:0:\"\";s:17:\"organization_city\";s:9:\"Some City\";s:18:\"organization_state\";s:2:\"AZ\";s:16:\"organization_zip\";s:5:\"84128\";s:13:\"contact_email\";s:19:\"admin@localhost.com\";s:12:\"default_mail\";s:1:\"Y\";s:9:\"paypal_id\";s:23:\"my_email@my_website.com\";s:15:\"payment_subject\";s:33:\"Payment Received for [event_name]\";s:15:\"payment_message\";s:218:\"<p>***This Is An Automated Response*** </p><p>Thank You [fname] [lname]</p>  <p>We have just  received a payment in the amount of [event_price] for your registration to [event_name].</p> <p>Transaction ID: [txn_id]</p>\";s:7:\"message\";s:648:\"<p>***This is an automated response - Do Not Reply***</p> <p>Thank you [fname] [lname] for registering for [event].</p><p>This event starts at [start_time] on [start_date] and runs until [end_time] on [end_date].</p><p>Location:<br>[location]</p><p>Phone: [location_phone]</p><p>Google Map: [google_map_link]</p><p> We hope that you will find this event both informative and enjoyable. Should you have any questions, please contact [contact].</p><p>If you have not done so already, please submit your payment in the amount of [cost].</p><p>Click here to review your payment information [payment_url].</p><p>[edit_attendee_link]</p><p>Thank You.</p>\";s:22:\"default_payment_status\";s:0:\"\";s:9:\"surcharge\";s:4:\"0.00\";s:10:\"country_id\";s:0:\"\";s:20:\"organization_country\";s:2:\"64\";s:15:\"currency_symbol\";s:1:\"$\";s:26:\"expire_on_registration_end\";s:1:\"Y\";s:20:\"email_before_payment\";s:1:\"N\";s:19:\"email_fancy_headers\";s:1:\"N\";s:20:\"enable_default_style\";s:1:\"N\";s:16:\"event_ssl_active\";s:1:\"N\";s:17:\"use_venue_manager\";s:1:\"Y\";s:14:\"selected_style\";s:24:\"event_espresso_style.css\";s:28:\"show_pending_payment_options\";s:1:\"Y\";s:15:\"show_reg_footer\";s:1:\"Y\";s:22:\"skip_confirmation_page\";s:1:\"N\";s:19:\"allow_mer_discounts\";s:1:\"N\";s:18:\"allow_mer_vouchers\";s:1:\"N\";s:39:\"display_short_description_in_event_list\";s:1:\"N\";s:37:\"display_description_on_multi_reg_page\";s:1:\"N\";s:29:\"display_address_in_event_list\";s:1:\"N\";s:26:\"display_address_in_regform\";s:1:\"Y\";s:21:\"use_custom_post_types\";s:1:\"N\";s:21:\"display_ical_download\";s:1:\"Y\";s:22:\"display_featured_image\";s:1:\"N\";s:11:\"themeroller\";a:1:{s:17:\"themeroller_style\";s:10:\"smoothness\";}s:14:\"style_settings\";a:3:{s:21:\"disable_legacy_styles\";s:1:\"Y\";s:20:\"enable_default_style\";s:1:\"Y\";s:8:\"css_name\";s:0:\"\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-07 23:25:46' , '2025-04-07 23:25:46' , '' , '' , 'host-list' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'host-list' , '' , '' , '2025-04-07 23:25:46' , '2025-04-07 23:25:46' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'events_organization_settings' , 'a:38:{s:12:&quot;organization&quot;;s:20:&quot;My WordPress Website&quot;;s:20:&quot;organization_street1&quot;;s:18:&quot;123 West Somewhere&quot;;s:20:&quot;organization_street2&quot;;s:0:&quot;&quot;;s:17:&quot;organization_city&quot;;s:9:&quot;Some City&quot;;s:18:&quot;organization_state&quot;;s:2:&quot;AZ&quot;;s:16:&quot;organization_zip&quot;;s:5:&quot;84128&quot;;s:13:&quot;contact_email&quot;;s:19:&quot;admin@localhost.com&quot;;s:12:&quot;default_mail&quot;;s:1:&quot;Y&quot;;s:9:&quot;paypal_id&quot;;s:23:&quot;my_email@my_website.com&quot;;s:15:&quot;payment_subject&quot;;s:33:&quot;Payment Received for [event_name]&quot;;s:15:&quot;payment_message&quot;;s:218:&quot;&lt;p&gt;***This Is An Automated Response*** &lt;/p&gt;&lt;p&gt;Thank You [fname] [lname]&lt;/p&gt;  &lt;p&gt;We have just  received a payment in the amount of [event_price] for your registration to [event_name].&lt;/p&gt; &lt;p&gt;Transaction ID: [txn_id]&lt;/p&gt;&quot;;s:7:&quot;message&quot;;s:648:&quot;&lt;p&gt;***This is an automated response - Do Not Reply***&lt;/p&gt; &lt;p&gt;Thank you [fname] [lname] for registering for [event].&lt;/p&gt;&lt;p&gt;This event starts at [start_time] on [start_date] and runs until [end_time] on [end_date].&lt;/p&gt;&lt;p&gt;Location:&lt;br&gt;[location]&lt;/p&gt;&lt;p&gt;Phone: [location_phone]&lt;/p&gt;&lt;p&gt;Google Map: [google_map_link]&lt;/p&gt;&lt;p&gt; We hope that you will find this event both informative and enjoyable. Should you have any questions, please contact [contact].&lt;/p&gt;&lt;p&gt;If you have not done so already, please submit your payment in the amount of [cost].&lt;/p&gt;&lt;p&gt;Click here to review your payment information [payment_url].&lt;/p&gt;&lt;p&gt;[edit_attendee_link]&lt;/p&gt;&lt;p&gt;Thank You.&lt;/p&gt;&quot;;s:22:&quot;default_payment_status&quot;;s:0:&quot;&quot;;s:9:&quot;surcharge&quot;;s:4:&quot;0.00&quot;;s:10:&quot;country_id&quot;;s:0:&quot;&quot;;s:20:&quot;organization_country&quot;;s:2:&quot;64&quot;;s:15:&quot;currency_symbol&quot;;s:1:&quot;$&quot;;s:26:&quot;expire_on_registration_end&quot;;s:1:&quot;Y&quot;;s:20:&quot;email_before_payment&quot;;s:1:&quot;N&quot;;s:19:&quot;email_fancy_headers&quot;;s:1:&quot;N&quot;;s:20:&quot;enable_default_style&quot;;s:1:&quot;N&quot;;s:16:&quot;event_ssl_active&quot;;s:1:&quot;N&quot;;s:17:&quot;use_venue_manager&quot;;s:1:&quot;Y&quot;;s:14:&quot;selected_style&quot;;s:24:&quot;event_espresso_style.css&quot;;s:28:&quot;show_pending_payment_options&quot;;s:1:&quot;Y&quot;;s:15:&quot;show_reg_footer&quot;;s:1:&quot;Y&quot;;s:22:&quot;skip_confirmation_page&quot;;s:1:&quot;N&quot;;s:19:&quot;allow_mer_discounts&quot;;s:1:&quot;N&quot;;s:18:&quot;allow_mer_vouchers&quot;;s:1:&quot;N&quot;;s:39:&quot;display_short_description_in_event_list&quot;;s:1:&quot;N&quot;;s:37:&quot;display_description_on_multi_reg_page&quot;;s:1:&quot;N&quot;;s:29:&quot;display_address_in_event_list&quot;;s:1:&quot;N&quot;;s:26:&quot;display_address_in_regform&quot;;s:1:&quot;Y&quot;;s:21:&quot;use_custom_post_types&quot;;s:1:&quot;N&quot;;s:21:&quot;display_ical_download&quot;;s:1:&quot;Y&quot;;s:22:&quot;display_featured_image&quot;;s:1:&quot;N&quot;;s:11:&quot;themeroller&quot;;a:1:{s:17:&quot;themeroller_style&quot;;s:10:&quot;smoothness&quot;;}s:14:&quot;style_settings&quot;;a:3:{s:21:&quot;disable_legacy_styles&quot;;s:1:&quot;Y&quot;;s:20:&quot;enable_default_style&quot;;s:1:&quot;Y&quot;;s:8:&quot;css_name&quot;;s:0:&quot;&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -293,35 +638,127 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/entourance/entourance-utils.php(1372): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/entourance/entourance-utils.php(1310): entourance_create_page_product('host', true)
-#8 /wordpress/wp-content/plugins/entourance/class-entouranceplugin.php(138): entourance_create_pages()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): EntourancePlugin->activate(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_entour...', false)
-#13 /internal/eval.php(20): activate_plugin('entourance/ento...')
-#14 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-07 23:25:46', '2025-04-07 23:25:46', '', '', 'host-list', '', 'publish', 'page', 'closed', 'closed', '', 'host-list', '', '', '2025-04-07 23:25:46', '2025-04-07 23:25:46', 0, 0, '', '') made by activate_plugin, do_action('activate_entourance/entourance.php'), WP_Hook->do_action, WP_Hook->apply_filters, EntourancePlugin->activate, entourance_create_pages, entourance_create_page_product, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 23:25:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/event-espresso-free/includes/functions/database_install.php(361): add_option('events_organiza...', Array)
+#5 /wordpress/wp-content/plugins/event-espresso-free/includes/functions/database_install.php(814): events_organization_tbl_install()
+#6 /wordpress/wp-content/plugins/event-espresso-free/espresso.php(1222): events_data_tables_install()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): espresso_check_data_tables(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_event-...', false)
+#11 /internal/eval.php(20): activate_plugin('event-espresso-...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('events_organization_settings', 'a:38:{s:12:\"organization\";s:20:\"My WordPress Website\";s:20:\"organization_street1\";s:18:\"123 West Somewhere\";s:20:\"organization_street2\";s:0:\"\";s:17:\"organization_city\";s:9:\"Some City\";s:18:\"organization_state\";s:2:\"AZ\";s:16:\"organization_zip\";s:5:\"84128\";s:13:\"contact_email\";s:19:\"admin@localhost.com\";s:12:\"default_mail\";s:1:\"Y\";s:9:\"paypal_id\";s:23:\"my_email@my_website.com\";s:15:\"payment_subject\";s:33:\"Payment Received for [event_name]\";s:15:\"payment_message\";s:218:\"<p>***This Is An Automated Response*** </p><p>Thank You [fname] [lname]</p>  <p>We have just  received a payment in the amount of [event_price] for your registration to [event_name].</p> <p>Transaction ID: [txn_id]</p>\";s:7:\"message\";s:648:\"<p>***This is an automated response - Do Not Reply***</p> <p>Thank you [fname] [lname] for registering for [event].</p><p>This event starts at [start_time] on [start_date] and runs until [end_time] on [end_date].</p><p>Location:<br>[location]</p><p>Phone: [location_phone]</p><p>Google Map: [google_map_link]</p><p> We hope that you will find this event both informative and enjoyable. Should you have any questions, please contact [contact].</p><p>If you have not done so already, please submit your payment in the amount of [cost].</p><p>Click here to review your payment information [payment_url].</p><p>[edit_attendee_link]</p><p>Thank You.</p>\";s:22:\"default_payment_status\";s:0:\"\";s:9:\"surcharge\";s:4:\"0.00\";s:10:\"country_id\";s:0:\"\";s:20:\"organization_country\";s:2:\"64\";s:15:\"currency_symbol\";s:1:\"$\";s:26:\"expire_on_registration_end\";s:1:\"Y\";s:20:\"email_before_payment\";s:1:\"N\";s:19:\"email_fancy_headers\";s:1:\"N\";s:20:\"enable_default_style\";s:1:\"N\";s:16:\"event_ssl_active\";s:1:\"N\";s:17:\"use_venue_manager\";s:1:\"Y\";s:14:\"selected_style\";s:24:\"event_espresso_style.css\";s:28:\"show_pending_payment_options\";s:1:\"Y\";s:15:\"show_reg_footer\";s:1:\"Y\";s:22:\"skip_confirmation_page\";s:1:\"N\";s:19:\"allow_mer_discounts\";s:1:\"N\";s:18:\"allow_mer_vouchers\";s:1:\"N\";s:39:\"display_short_description_in_event_list\";s:1:\"N\";s:37:\"display_description_on_multi_reg_page\";s:1:\"N\";s:29:\"display_address_in_event_list\";s:1:\"N\";s:26:\"display_address_in_regform\";s:1:\"Y\";s:21:\"use_custom_post_types\";s:1:\"N\";s:21:\"display_ical_download\";s:1:\"Y\";s:22:\"display_featured_image\";s:1:\"N\";s:11:\"themeroller\";a:1:{s:17:\"themeroller_style\";s:10:\"smoothness\";}s:14:\"style_settings\";a:3:{s:21:\"disable_legacy_styles\";s:1:\"Y\";s:20:\"enable_default_style\";s:1:\"Y\";s:8:\"css_name\";s:0:\"\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_event-espresso-free/espresso.php'), WP_Hook->do_action, WP_Hook->apply_filters, espresso_check_data_tables, events_data_tables_install, events_organization_tbl_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:46:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-07 23:25:46', '2025-04-07 23:25:46', '', '', 'eatery-list', '', 'publish', 'page', 'closed', 'closed', '', 'eatery-list', '', '', '2025-04-07 23:25:46', '2025-04-07 23:25:46', 0, 0, '', '')</p>
+<p>ALTER TABLE  wp_events_answer ADD  id INT( 11 ) unsigned NOT NULL AUTO_INCREMENT FIRST , ADD PRIMARY KEY (  id )</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_events_answer</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_events_answer</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_events_answer</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_events_answer</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_events_answer, id, 6, , NO, int, , , 10, 0, , , , int(11) unsigned, , auto_increment, select,insert,update,references, , , </li>
+<li>Executing: 
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM _wp_sqlite_mysql_information_schema_columns
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_events_answer, id</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_events_answer, 0, database_name_here, PRIMARY, 1, id, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_information_schema_statistics
+					WHERE table_schema = ?
+					AND table_name = ?
+					GROUP BY column_name
+				)
+				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
+				SET
+					column_key = s.column_key,
+					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
+			    FROM s
+			    WHERE c.table_schema = ?
+			    AND c.table_name = ?
+				AND s.column_name = c.column_name
+			 | parameters: database_name_here, wp_events_answer, database_name_here, wp_events_answer</li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_events_answer</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_events_answer</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_events_answer</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_events_answer_67f706d0bcf70` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `registration_id` TEXT COLLATE NOCASE NOT NULL,
+  `attendee_id` INTEGER NOT NULL DEFAULT '0',
+  `question_id` INTEGER NOT NULL DEFAULT '0',
+  `answer` TEXT COLLATE NOCASE NOT NULL,
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: id
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE  wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE  wp...')
+#3 /wordpress/wp-content/plugins/event-espresso-free/includes/functions/database_install.php(244): WP_SQLite_DB->query('ALTER TABLE  wp...')
+#4 /wordpress/wp-content/plugins/event-espresso-free/includes/functions/database_install.php(820): espresso_answer_fix()
+#5 /wordpress/wp-content/plugins/event-espresso-free/espresso.php(1222): events_data_tables_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): espresso_check_data_tables(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_event-...', false)
+#10 /internal/eval.php(20): activate_plugin('event-espresso-...')
+#11 {main}</pre>
+ for query ALTER TABLE  wp_events_answer ADD  id INT( 11 ) unsigned NOT NULL AUTO_INCREMENT FIRST , ADD PRIMARY KEY (  id ) made by activate_plugin, do_action('activate_event-espresso-free/espresso.php'), WP_Hook->do_action, WP_Hook->apply_filters, espresso_check_data_tables, events_data_tables_install, espresso_answer_fix, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:46:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('espresso_db_update', 'a:1:{i:0;s:11:\"3.1.37.15.L\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-07 23:25:46' , '2025-04-07 23:25:46' , '' , '' , 'eatery-list' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'eatery-list' , '' , '' , '2025-04-07 23:25:46' , '2025-04-07 23:25:46' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'espresso_db_update' , 'a:1:{i:0;s:11:&quot;3.1.37.15.L&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -332,35 +769,33 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/entourance/entourance-utils.php(1372): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/entourance/entourance-utils.php(1311): entourance_create_page_product('eatery', true)
-#8 /wordpress/wp-content/plugins/entourance/class-entouranceplugin.php(138): entourance_create_pages()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): EntourancePlugin->activate(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_entour...', false)
-#13 /internal/eval.php(20): activate_plugin('entourance/ento...')
-#14 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-07 23:25:46', '2025-04-07 23:25:46', '', '', 'eatery-list', '', 'publish', 'page', 'closed', 'closed', '', 'eatery-list', '', '', '2025-04-07 23:25:46', '2025-04-07 23:25:46', 0, 0, '', '') made by activate_plugin, do_action('activate_entourance/entourance.php'), WP_Hook->do_action, WP_Hook->apply_filters, EntourancePlugin->activate, entourance_create_pages, entourance_create_page_product, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 23:25:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('espresso_db_upd...', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/event-espresso-free/includes/functions/database_install.php(835): update_option('espresso_db_upd...', Array)
+#6 /wordpress/wp-content/plugins/event-espresso-free/espresso.php(1222): events_data_tables_install()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): espresso_check_data_tables(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_event-...', false)
+#11 /internal/eval.php(20): activate_plugin('event-espresso-...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('espresso_db_update', 'a:1:{i:0;s:11:\"3.1.37.15.L\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_event-espresso-free/espresso.php'), WP_Hook->do_action, WP_Hook->apply_filters, espresso_check_data_tables, events_data_tables_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:46:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-07 23:25:46', '2025-04-07 23:25:46', '', '', 'itinerary-list', '', 'publish', 'page', 'closed', 'closed', '', 'itinerary-list', '', '', '2025-04-07 23:25:46', '2025-04-07 23:25:46', 0, 0, '', '')</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('espresso_data_migrations', 'a:0:{}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-07 23:25:46' , '2025-04-07 23:25:46' , '' , '' , 'itinerary-list' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'itinerary-list' , '' , '' , '2025-04-07 23:25:46' , '2025-04-07 23:25:46' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'espresso_data_migrations' , 'a:0:{}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -371,219 +806,34 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/entourance/entourance-utils.php(1372): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/entourance/entourance-utils.php(1312): entourance_create_page_product('itinerary', true)
-#8 /wordpress/wp-content/plugins/entourance/class-entouranceplugin.php(138): entourance_create_pages()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): EntourancePlugin->activate(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_entour...', false)
-#13 /internal/eval.php(20): activate_plugin('entourance/ento...')
-#14 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-07 23:25:46', '2025-04-07 23:25:46', '', '', 'itinerary-list', '', 'publish', 'page', 'closed', 'closed', '', 'itinerary-list', '', '', '2025-04-07 23:25:46', '2025-04-07 23:25:46', 0, 0, '', '') made by activate_plugin, do_action('activate_entourance/entourance.php'), WP_Hook->do_action, WP_Hook->apply_filters, EntourancePlugin->activate, entourance_create_pages, entourance_create_page_product, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 23:25:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/event-espresso-free/espresso.php(1230): add_option('espresso_data_m...', Array, '', 'off')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): espresso_check_data_tables(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_event-...', false)
+#9 /internal/eval.php(20): activate_plugin('event-espresso-...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('espresso_data_migrations', 'a:0:{}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_event-espresso-free/espresso.php'), WP_Hook->do_action, WP_Hook->apply_filters, espresso_check_data_tables, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 23:46:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-07 23:25:46', '2025-04-07 23:25:46', '', '', 'experience-supplier-list', '', 'publish', 'page', 'closed', 'closed', '', 'experience-supplier-list', '', '', '2025-04-07 23:25:46', '2025-04-07 23:25:46', 0, 0, '', '')</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('espresso_data_migrations', 'a:2:{i:0;a:1:{s:30:\"attendee_cost_table_fix_3_1_28\";a:0:{}}s:11:\"3.1.37.15.L\";a:1:{s:43:\"espresso_copy_data_from_attendee_cost_table\";a:2:{i:0;s:58:\"espresso_copy_data_from_attendee_cost_table : line #108 : \";i:1;s:58:\"espresso_copy_data_from_attendee_cost_table : line #158 : \";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-07 23:25:46' , '2025-04-07 23:25:46' , '' , '' , 'experience-supplier-list' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'experience-supplier-list' , '' , '' , '2025-04-07 23:25:46' , '2025-04-07 23:25:46' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'espresso_data_migrations' , 'a:2:{i:0;a:1:{s:30:&quot;attendee_cost_table_fix_3_1_28&quot;;a:0:{}}s:11:&quot;3.1.37.15.L&quot;;a:1:{s:43:&quot;espresso_copy_data_from_attendee_cost_table&quot;;a:2:{i:0;s:58:&quot;espresso_copy_data_from_attendee_cost_table : line #108 : &quot;;i:1;s:58:&quot;espresso_copy_data_from_attendee_cost_table : line #158 : &quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/entourance/entourance-utils.php(1372): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/entourance/entourance-utils.php(1313): entourance_create_page_product('experience-supp...', true)
-#8 /wordpress/wp-content/plugins/entourance/class-entouranceplugin.php(138): entourance_create_pages()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): EntourancePlugin->activate(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_entour...', false)
-#13 /internal/eval.php(20): activate_plugin('entourance/ento...')
-#14 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-07 23:25:46', '2025-04-07 23:25:46', '', '', 'experience-supplier-list', '', 'publish', 'page', 'closed', 'closed', '', 'experience-supplier-list', '', '', '2025-04-07 23:25:46', '2025-04-07 23:25:46', 0, 0, '', '') made by activate_plugin, do_action('activate_entourance/entourance.php'), WP_Hook->do_action, WP_Hook->apply_filters, EntourancePlugin->activate, entourance_create_pages, entourance_create_page_product, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 23:25:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-07 23:25:46', '2025-04-07 23:25:46', '', '', 'poi-list', '', 'publish', 'page', 'closed', 'closed', '', 'poi-list', '', '', '2025-04-07 23:25:46', '2025-04-07 23:25:46', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-07 23:25:46' , '2025-04-07 23:25:46' , '' , '' , 'poi-list' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'poi-list' , '' , '' , '2025-04-07 23:25:46' , '2025-04-07 23:25:46' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/entourance/entourance-utils.php(1372): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/entourance/entourance-utils.php(1314): entourance_create_page_product('poi', true)
-#8 /wordpress/wp-content/plugins/entourance/class-entouranceplugin.php(138): entourance_create_pages()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): EntourancePlugin->activate(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_entour...', false)
-#13 /internal/eval.php(20): activate_plugin('entourance/ento...')
-#14 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-07 23:25:46', '2025-04-07 23:25:46', '', '', 'poi-list', '', 'publish', 'page', 'closed', 'closed', '', 'poi-list', '', '', '2025-04-07 23:25:46', '2025-04-07 23:25:46', 0, 0, '', '') made by activate_plugin, do_action('activate_entourance/entourance.php'), WP_Hook->do_action, WP_Hook->apply_filters, EntourancePlugin->activate, entourance_create_pages, entourance_create_page_product, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 23:25:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-07 23:25:46', '2025-04-07 23:25:46', '', '', 'event-list', '', 'publish', 'page', 'closed', 'closed', '', 'event-list', '', '', '2025-04-07 23:25:46', '2025-04-07 23:25:46', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-07 23:25:46' , '2025-04-07 23:25:46' , '' , '' , 'event-list' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'event-list' , '' , '' , '2025-04-07 23:25:46' , '2025-04-07 23:25:46' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/entourance/entourance-utils.php(1372): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/entourance/entourance-utils.php(1315): entourance_create_page_product('event', true)
-#8 /wordpress/wp-content/plugins/entourance/class-entouranceplugin.php(138): entourance_create_pages()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): EntourancePlugin->activate(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_entour...', false)
-#13 /internal/eval.php(20): activate_plugin('entourance/ento...')
-#14 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-07 23:25:46', '2025-04-07 23:25:46', '', '', 'event-list', '', 'publish', 'page', 'closed', 'closed', '', 'event-list', '', '', '2025-04-07 23:25:46', '2025-04-07 23:25:46', 0, 0, '', '') made by activate_plugin, do_action('activate_entourance/entourance.php'), WP_Hook->do_action, WP_Hook->apply_filters, EntourancePlugin->activate, entourance_create_pages, entourance_create_page_product, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 23:25:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-07 23:25:46', '2025-04-07 23:25:46', '', '', 'experience-event', '', 'publish', 'page', 'closed', 'closed', '', 'experience-event', '', '', '2025-04-07 23:25:46', '2025-04-07 23:25:46', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-07 23:25:46' , '2025-04-07 23:25:46' , '' , '' , 'experience-event' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'experience-event' , '' , '' , '2025-04-07 23:25:46' , '2025-04-07 23:25:46' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/entourance/entourance-utils.php(1372): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/entourance/entourance-utils.php(1317): entourance_create_page_product('experience-even...', false)
-#8 /wordpress/wp-content/plugins/entourance/class-entouranceplugin.php(138): entourance_create_pages()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): EntourancePlugin->activate(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_entour...', false)
-#13 /internal/eval.php(20): activate_plugin('entourance/ento...')
-#14 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-07 23:25:46', '2025-04-07 23:25:46', '', '', 'experience-event', '', 'publish', 'page', 'closed', 'closed', '', 'experience-event', '', '', '2025-04-07 23:25:46', '2025-04-07 23:25:46', 0, 0, '', '') made by activate_plugin, do_action('activate_entourance/entourance.php'), WP_Hook->do_action, WP_Hook->apply_filters, EntourancePlugin->activate, entourance_create_pages, entourance_create_page_product, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 23:25:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-07 23:25:46', '2025-04-07 23:25:46', '', '', 'event', '', 'publish', 'page', 'closed', 'closed', '', 'event', '', '', '2025-04-07 23:25:46', '2025-04-07 23:25:46', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-07 23:25:46' , '2025-04-07 23:25:46' , '' , '' , 'event' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'event' , '' , '' , '2025-04-07 23:25:46' , '2025-04-07 23:25:46' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/entourance/entourance-utils.php(1372): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/entourance/entourance-utils.php(1318): entourance_create_page_product('event', false)
-#8 /wordpress/wp-content/plugins/entourance/class-entouranceplugin.php(138): entourance_create_pages()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): EntourancePlugin->activate(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_entour...', false)
-#13 /internal/eval.php(20): activate_plugin('entourance/ento...')
-#14 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-07 23:25:46', '2025-04-07 23:25:46', '', '', 'event', '', 'publish', 'page', 'closed', 'closed', '', 'event', '', '', '2025-04-07 23:25:46', '2025-04-07 23:25:46', 0, 0, '', '') made by activate_plugin, do_action('activate_entourance/entourance.php'), WP_Hook->do_action, WP_Hook->apply_filters, EntourancePlugin->activate, entourance_create_pages, entourance_create_page_product, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 23:25:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-07 23:25:46', '2025-04-07 23:25:46', '', '', 'experience', '', 'publish', 'page', 'closed', 'closed', '', 'experience', '', '', '2025-04-07 23:25:46', '2025-04-07 23:25:46', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table'
+SQLSTATE[HY000]: General error: 1 near ")": s
+Node.js v23.11.0
