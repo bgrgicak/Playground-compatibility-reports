@@ -2,331 +2,7 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [05-Apr-2025 21:43:40 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 21:43:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 21:43:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 21:43:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 21:43:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_wpperformance_ds_tracking_id', '1743975820', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_wpperformance_ds_tracking_id' , '1743975820' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1743975820, '', 'off')
-#5 /wordpress/wp-content/plugins/wp-disable/lib/class-wpperformance.php(862): set_transient('wpperformance_d...', '', 86400)
-#6 /wordpress/wp-content/plugins/wp-disable/lib/class-wpperformance.php(177): WpPerformance->add_ga_header_script()
-#7 /wordpress/wp-content/plugins/wp-disable/lib/class-wpperformance.php(34): WpPerformance->apply_settings()
-#8 /wordpress/wp-content/plugins/wp-disable/lib/class-wpperformance.php(42): WpPerformance->__construct()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WpPerformance::get_instance('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_wpperformance_ds_tracking_id', '1743975820', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, WpPerformance::get_instance, WpPerformance->__construct, WpPerformance->apply_settings, WpPerformance->add_ga_header_script, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 21:43:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_wpperformance_ds_tracking_id', '', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_wpperformance_ds_tracking_id' , '' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_wppe...', '', '', 'off')
-#5 /wordpress/wp-content/plugins/wp-disable/lib/class-wpperformance.php(862): set_transient('wpperformance_d...', '', 86400)
-#6 /wordpress/wp-content/plugins/wp-disable/lib/class-wpperformance.php(177): WpPerformance->add_ga_header_script()
-#7 /wordpress/wp-content/plugins/wp-disable/lib/class-wpperformance.php(34): WpPerformance->apply_settings()
-#8 /wordpress/wp-content/plugins/wp-disable/lib/class-wpperformance.php(42): WpPerformance->__construct()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WpPerformance::get_instance('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_wpperformance_ds_tracking_id', '', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, WpPerformance::get_instance, WpPerformance->__construct, WpPerformance->apply_settings, WpPerformance->add_ga_header_script, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 21:43:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('flexible-map-options-status', 'inactive', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'flexible-map-options-status' , 'inactive' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-flexible-map-options/class.FlxMapOptions_Options.php(16): add_option('flexible-map-op...', 'inactive')
-#5 /wordpress/wp-content/plugins/wp-flexible-map-options/flexible-map-options.php(43): FlxMapOptions_Options->__construct()
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-flexible-map...')
-#8 /internal/eval.php(20): activate_plugin('wp-flexible-map...')
-#9 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('flexible-map-options-status', 'inactive', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-flexible-map-options/flexible-map-options.php'), FlxMapOptions_Options->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 21:43:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('flexible-map-options-status', 'active', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'flexible-map-options-status' , 'active' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('flexible-map-op...', 'active', '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-flexible-map-options/class.FlxMapOptions_Options.php(29): update_option('flexible-map-op...', 'active')
-#6 /wordpress/wp-content/plugins/wp-flexible-map-options/class.FlxMapOptions_Admin.php(44): FlxMapOptions_Options->setPluginStatus('active')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): FlxMapOptions_Admin->activatePlugin(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-fle...', false)
-#11 /internal/eval.php(20): activate_plugin('wp-flexible-map...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('flexible-map-options-status', 'active', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-flexible-map-options/flexible-map-options.php'), WP_Hook->do_action, WP_Hook->apply_filters, FlxMapOptions_Admin->activatePlugin, FlxMapOptions_Options->setPluginStatus, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 21:43:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('flexible-map-options', 'a:25:{s:5:\"width\";s:3:\"400\";s:6:\"height\";s:3:\"400\";s:4:\"zoom\";s:4:\"auto\";s:7:\"maptype\";s:7:\"roadmap\";s:11:\"hidemaptype\";s:5:\"false\";s:11:\"hidepanning\";s:4:\"true\";s:11:\"hidezooming\";s:5:\"false\";s:14:\"hidestreetview\";s:4:\"true\";s:9:\"zoomstyle\";s:5:\"small\";s:9:\"hidescale\";s:4:\"true\";s:11:\"scrollwheel\";s:5:\"false\";s:9:\"draggable\";s:4:\"true\";s:12:\"dblclickzoom\";s:4:\"true\";s:10:\"directions\";s:5:\"false\";s:12:\"dirdraggable\";s:5:\"false\";s:12:\"dirnomarkers\";s:5:\"false\";s:12:\"dirshowsteps\";s:4:\"true\";s:14:\"dirshowssearch\";s:4:\"true\";s:6:\"region\";s:0:\"\";s:6:\"locale\";s:0:\"\";s:4:\"icon\";s:0:\"\";s:14:\"showdirections\";s:5:\"false\";s:14:\"directionsfrom\";s:0:\"\";s:8:\"showinfo\";s:4:\"true\";s:9:\"targetfix\";s:4:\"true\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'flexible-map-options' , 'a:25:{s:5:&quot;width&quot;;s:3:&quot;400&quot;;s:6:&quot;height&quot;;s:3:&quot;400&quot;;s:4:&quot;zoom&quot;;s:4:&quot;auto&quot;;s:7:&quot;maptype&quot;;s:7:&quot;roadmap&quot;;s:11:&quot;hidemaptype&quot;;s:5:&quot;false&quot;;s:11:&quot;hidepanning&quot;;s:4:&quot;true&quot;;s:11:&quot;hidezooming&quot;;s:5:&quot;false&quot;;s:14:&quot;hidestreetview&quot;;s:4:&quot;true&quot;;s:9:&quot;zoomstyle&quot;;s:5:&quot;small&quot;;s:9:&quot;hidescale&quot;;s:4:&quot;true&quot;;s:11:&quot;scrollwheel&quot;;s:5:&quot;false&quot;;s:9:&quot;draggable&quot;;s:4:&quot;true&quot;;s:12:&quot;dblclickzoom&quot;;s:4:&quot;true&quot;;s:10:&quot;directions&quot;;s:5:&quot;false&quot;;s:12:&quot;dirdraggable&quot;;s:5:&quot;false&quot;;s:12:&quot;dirnomarkers&quot;;s:5:&quot;false&quot;;s:12:&quot;dirshowsteps&quot;;s:4:&quot;true&quot;;s:14:&quot;dirshowssearch&quot;;s:4:&quot;true&quot;;s:6:&quot;region&quot;;s:0:&quot;&quot;;s:6:&quot;locale&quot;;s:0:&quot;&quot;;s:4:&quot;icon&quot;;s:0:&quot;&quot;;s:14:&quot;showdirections&quot;;s:5:&quot;false&quot;;s:14:&quot;directionsfrom&quot;;s:0:&quot;&quot;;s:8:&quot;showinfo&quot;;s:4:&quot;true&quot;;s:9:&quot;targetfix&quot;;s:4:&quot;true&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-flexible-map-options/class.FlxMapOptions_Options.php(39): add_option('flexible-map-op...', Array)
-#5 /wordpress/wp-content/plugins/wp-flexible-map-options/class.FlxMapOptions_Admin.php(45): FlxMapOptions_Options->init()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): FlxMapOptions_Admin->activatePlugin(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-fle...', false)
-#10 /internal/eval.php(20): activate_plugin('wp-flexible-map...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('flexible-map-options', 'a:25:{s:5:\"width\";s:3:\"400\";s:6:\"height\";s:3:\"400\";s:4:\"zoom\";s:4:\"auto\";s:7:\"maptype\";s:7:\"roadmap\";s:11:\"hidemaptype\";s:5:\"false\";s:11:\"hidepanning\";s:4:\"true\";s:11:\"hidezooming\";s:5:\"false\";s:14:\"hidestreetview\";s:4:\"true\";s:9:\"zoomstyle\";s:5:\"small\";s:9:\"hidescale\";s:4:\"true\";s:11:\"scrollwheel\";s:5:\"false\";s:9:\"draggable\";s:4:\"true\";s:12:\"dblclickzoom\";s:4:\"true\";s:10:\"directions\";s:5:\"false\";s:12:\"dirdraggable\";s:5:\"false\";s:12:\"dirnomarkers\";s:5:\"false\";s:12:\"dirshowsteps\";s:4:\"true\";s:14:\"dirshowssearch\";s:4:\"true\";s:6:\"region\";s:0:\"\";s:6:\"locale\";s:0:\"\";s:4:\"icon\";s:0:\"\";s:14:\"showdirections\";s:5:\"false\";s:14:\"directionsfrom\";s:0:\"\";s:8:\"showinfo\";s:4:\"true\";s:9:\"targetfix\";s:4:\"true\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-flexible-map-options/flexible-map-options.php'), WP_Hook->do_action, WP_Hook->apply_filters, FlxMapOptions_Admin->activatePlugin, FlxMapOptions_Options->init, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 21:43:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('flexible-map-options', 'a:25:{s:5:\"width\";s:3:\"400\";s:6:\"height\";s:3:\"400\";s:4:\"zoom\";s:4:\"auto\";s:7:\"maptype\";s:7:\"roadmap\";s:11:\"hidemaptype\";s:5:\"false\";s:11:\"hidepanning\";s:4:\"true\";s:11:\"hidezooming\";s:5:\"false\";s:14:\"hidestreetview\";s:4:\"true\";s:9:\"zoomstyle\";s:5:\"small\";s:9:\"hidescale\";s:4:\"true\";s:11:\"scrollwheel\";s:5:\"false\";s:9:\"draggable\";s:4:\"true\";s:12:\"dblclickzoom\";s:4:\"true\";s:10:\"directions\";s:5:\"false\";s:12:\"dirdraggable\";s:5:\"false\";s:12:\"dirnomarkers\";s:5:\"false\";s:12:\"dirshowsteps\";s:4:\"true\";s:14:\"dirshowssearch\";s:4:\"true\";s:6:\"region\";s:0:\"\";s:6:\"locale\";s:0:\"\";s:4:\"icon\";s:0:\"\";s:14:\"showdirections\";s:5:\"false\";s:14:\"directionsfrom\";s:0:\"\";s:8:\"showinfo\";s:4:\"true\";s:9:\"targetfix\";s:4:\"true\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'flexible-map-options' , 'a:25:{s:5:&quot;width&quot;;s:3:&quot;400&quot;;s:6:&quot;height&quot;;s:3:&quot;400&quot;;s:4:&quot;zoom&quot;;s:4:&quot;auto&quot;;s:7:&quot;maptype&quot;;s:7:&quot;roadmap&quot;;s:11:&quot;hidemaptype&quot;;s:5:&quot;false&quot;;s:11:&quot;hidepanning&quot;;s:4:&quot;true&quot;;s:11:&quot;hidezooming&quot;;s:5:&quot;false&quot;;s:14:&quot;hidestreetview&quot;;s:4:&quot;true&quot;;s:9:&quot;zoomstyle&quot;;s:5:&quot;small&quot;;s:9:&quot;hidescale&quot;;s:4:&quot;true&quot;;s:11:&quot;scrollwheel&quot;;s:5:&quot;false&quot;;s:9:&quot;draggable&quot;;s:4:&quot;true&quot;;s:12:&quot;dblclickzoom&quot;;s:4:&quot;true&quot;;s:10:&quot;directions&quot;;s:5:&quot;false&quot;;s:12:&quot;dirdraggable&quot;;s:5:&quot;false&quot;;s:12:&quot;dirnomarkers&quot;;s:5:&quot;false&quot;;s:12:&quot;dirshowsteps&quot;;s:4:&quot;true&quot;;s:14:&quot;dirshowssearch&quot;;s:4:&quot;true&quot;;s:6:&quot;region&quot;;s:0:&quot;&quot;;s:6:&quot;locale&quot;;s:0:&quot;&quot;;s:4:&quot;icon&quot;;s:0:&quot;&quot;;s:14:&quot;showdirections&quot;;s:5:&quot;false&quot;;s:14:&quot;directionsfrom&quot;;s:0:&quot;&quot;;s:8:&quot;showinfo&quot;;s:4:&quot;true&quot;;s:9:&quot;targetfix&quot;;s:4:&quot;true&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('flexible-map-op...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-flexible-map-options/class.FlxMapOptions_Options.php(52): update_option('flexible-map-op...', Array)
-#6 /wordpress/wp-content/plugins/wp-flexible-map-options/class.FlxMapOptions_Options.php(42): FlxMapOptions_Options->saveAll()
-#7 /wordpress/wp-content/plugins/wp-flexible-map-options/class.FlxMapOptions_Admin.php(45): FlxMapOptions_Options->init()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): FlxMapOptions_Admin->activatePlugin(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-fle...', false)
-#12 /internal/eval.php(20): activate_plugin('wp-flexible-map...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('flexible-map-options', 'a:25:{s:5:\"width\";s:3:\"400\";s:6:\"height\";s:3:\"400\";s:4:\"zoom\";s:4:\"auto\";s:7:\"maptype\";s:7:\"roadmap\";s:11:\"hidemaptype\";s:5:\"false\";s:11:\"hidepanning\";s:4:\"true\";s:11:\"hidezooming\";s:5:\"false\";s:14:\"hidestreetview\";s:4:\"true\";s:9:\"zoomstyle\";s:5:\"small\";s:9:\"hidescale\";s:4:\"true\";s:11:\"scrollwheel\";s:5:\"false\";s:9:\"draggable\";s:4:\"true\";s:12:\"dblclickzoom\";s:4:\"true\";s:10:\"directions\";s:5:\"false\";s:12:\"dirdraggable\";s:5:\"false\";s:12:\"dirnomarkers\";s:5:\"false\";s:12:\"dirshowsteps\";s:4:\"true\";s:14:\"dirshowssearch\";s:4:\"true\";s:6:\"region\";s:0:\"\";s:6:\"locale\";s:0:\"\";s:4:\"icon\";s:0:\"\";s:14:\"showdirections\";s:5:\"false\";s:14:\"directionsfrom\";s:0:\"\";s:8:\"showinfo\";s:4:\"true\";s:9:\"targetfix\";s:4:\"true\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-flexible-map-options/flexible-map-options.php'), WP_Hook->do_action, WP_Hook->apply_filters, FlxMapOptions_Admin->activatePlugin, FlxMapOptions_Options->init, FlxMapOptions_Options->saveAll, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 21:43:53 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 21:43:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 21:43:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 21:43:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 21:43:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('flexible-map-options-status', 'inactive', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'flexible-map-options-status' , 'inactive' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-flexible-map-options/class.FlxMapOptions_Options.php(16): add_option('flexible-map-op...', 'inactive')
-#5 /wordpress/wp-content/plugins/wp-flexible-map-options/flexible-map-options.php(43): FlxMapOptions_Options->__construct()
-#6 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('flexible-map-options-status', 'inactive', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wp-flexible-map-options/flexible-map-options.php'), FlxMapOptions_Options->__construct, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 21:44:05 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 21:44:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 21:44:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 21:44:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 21:44:17 UTC] PHP Deprecated:  Required parameter $cnn follows optional parameter $op in /wordpress/wp-content/plugins/wp-idados-crud/assets/idados_functions.php on line 437
-[05-Apr-2025 21:44:17 UTC] PHP Deprecated:  Required parameter $cnn follows optional parameter $op in /wordpress/wp-content/plugins/wp-idados-crud/assets/idados_functions.php on line 440
-[05-Apr-2025 21:44:17 UTC] PHP Deprecated:  Required parameter $cnn follows optional parameter $values in /wordpress/wp-content/plugins/wp-idados-crud/assets/idados_crud.php on line 712
-[05-Apr-2025 21:44:17 UTC] PHP Warning:  mysqli::__construct(): (HY000/2002): Address family not supported by protocol in /wordpress/wp-content/plugins/wp-idados-crud/wp-idados-crud.php on line 253
-[05-Apr-2025 21:44:17 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /wordpress/wp-content/plugins/wp-idados-crud/wp-idados-crud.php:254
-Stack trace:
-#0 /wordpress/wp-content/plugins/wp-idados-crud/wp-idados-crud.php(254): mysqli->multi_query('\n  delete from ...')
-#1 /wordpress/wp-includes/class-wp-hook.php(324): idados_i0001_ativar(false)
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ida...', false)
-#5 /internal/eval.php(20): activate_plugin('wp-idados-crud/...')
-#6 {main}
-  thrown in /wordpress/wp-content/plugins/wp-idados-crud/wp-idados-crud.php on line 254
-[05-Apr-2025 21:44:19 UTC] PHP Deprecated:  Required parameter $cnn follows optional parameter $op in /wordpress/wp-content/plugins/wp-idados-crud/assets/idados_functions.php on line 437
-[05-Apr-2025 21:44:19 UTC] PHP Deprecated:  Required parameter $cnn follows optional parameter $op in /wordpress/wp-content/plugins/wp-idados-crud/assets/idados_functions.php on line 440
-[05-Apr-2025 21:44:19 UTC] PHP Deprecated:  Required parameter $cnn follows optional parameter $values in /wordpress/wp-content/plugins/wp-idados-crud/assets/idados_crud.php on line 712
-[05-Apr-2025 21:44:19 UTC] PHP Warning:  mysqli::__construct(): (HY000/2002): Address family not supported by protocol in /wordpress/wp-content/plugins/wp-idados-crud/wp-idados-crud.php on line 253
-[05-Apr-2025 21:44:19 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /wordpress/wp-content/plugins/wp-idados-crud/wp-idados-crud.php:254
-Stack trace:
-#0 /wordpress/wp-content/plugins/wp-idados-crud/wp-idados-crud.php(254): mysqli->multi_query('\n  delete from ...')
-#1 /wordpress/wp-includes/class-wp-hook.php(324): idados_i0001_ativar(false)
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ida...', false)
-#5 /internal/eval.php(20): activate_plugin('wp-idados-crud/...')
-#6 {main}
-  thrown in /wordpress/wp-content/plugins/wp-idados-crud/wp-idados-crud.php on line 254
-[05-Apr-2025 21:44:22 UTC] PHP Deprecated:  Required parameter $cnn follows optional parameter $op in /wordpress/wp-content/plugins/wp-idados-crud/assets/idados_functions.php on line 437
-[05-Apr-2025 21:44:22 UTC] PHP Deprecated:  Required parameter $cnn follows optional parameter $op in /wordpress/wp-content/plugins/wp-idados-crud/assets/idados_functions.php on line 440
-[05-Apr-2025 21:44:22 UTC] PHP Deprecated:  Required parameter $cnn follows optional parameter $values in /wordpress/wp-content/plugins/wp-idados-crud/assets/idados_crud.php on line 712
-[05-Apr-2025 21:44:22 UTC] PHP Warning:  mysqli::__construct(): (HY000/2002): Address family not supported by protocol in /wordpress/wp-content/plugins/wp-idados-crud/wp-idados-crud.php on line 253
-[05-Apr-2025 21:44:22 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /wordpress/wp-content/plugins/wp-idados-crud/wp-idados-crud.php:254
-Stack trace:
-#0 /wordpress/wp-content/plugins/wp-idados-crud/wp-idados-crud.php(254): mysqli->multi_query('\n  delete from ...')
-#1 /wordpress/wp-includes/class-wp-hook.php(324): idados_i0001_ativar(false)
-#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ida...', false)
-#5 /internal/eval.php(20): activate_plugin('wp-idados-crud/...')
-#6 {main}
-  thrown in /wordpress/wp-content/plugins/wp-idados-crud/wp-idados-crud.php on line 254
-[05-Apr-2025 21:44:28 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 21:44:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 21:44:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 21:44:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 21:44:40 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 21:44:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 21:44:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 21:44:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 21:44:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [09-Apr-2025 02:21:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('licorize_action', 'REMIND', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
@@ -361,7 +37,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #9 /internal/eval.php(20): activate_plugin('wp-licorize-it/...')
 #10 {main}</pre>
  for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('licorize_action', 'REMIND', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-licorize-it/wp-licorize-it.php'), WP_Hook->do_action, WP_Hook->apply_filters, LIC_IT_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 21:44:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[09-Apr-2025 02:21:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('licorize_button_size', 'NORMAL', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
@@ -396,18 +72,14 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #9 /internal/eval.php(20): activate_plugin('wp-licorize-it/...')
 #10 {main}</pre>
  for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('licorize_button_size', 'NORMAL', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-licorize-it/wp-licorize-it.php'), WP_Hook->do_action, WP_Hook->apply_filters, LIC_IT_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 21:44:52 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 21:44:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 21:44:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 21:44:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 21:45:03 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 21:45:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 21:45:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 21:45:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 21:45:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+[09-Apr-2025 02:21:06 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 02:21:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 02:21:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 02:21:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 02:21:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'I0c;bMs7$.H41a){c=;;e:@6_a0oq)m-iVGz<fX91z/(})cewQSgky~NP%a:Udnu', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('romaniachat_server', 'https://kiwi.romaniachat.eu:8443', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -419,7 +91,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'I0c;bMs7$.H41a){c=;;e:@6_a0oq)m-iVGz&lt;fX91z/(})cewQSgky~NP%a:Udnu' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'romaniachat_server' , 'https://kiwi.romaniachat.eu:8443' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -431,34 +103,19 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'I0c;bMs7$.H41a)...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'I0c;bMs7$.H41a)...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'I0c;bMs7$.H41a)...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'I0c;bMs7$.H41a)...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40368|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/wp-lightbox-image-gallery/wp-lightbox-image-gallery.php(879): wp_register_script('wp_lightbox-ima...', 'http://127.0.0....', Array, '1.3', Array)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): WP_Lightbox_Image_Gallery->cb_init('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'I0c;bMs7$.H41a){c=;;e:@6_a0oq)m-iVGz<fX91z/(})cewQSgky~NP%a:Udnu', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Lightbox_Image_Gallery->cb_init, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 21:45:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('romaniachat_ser...', 'https://kiwi.ro...', '', 'auto')
+#5 /wordpress/wp-content/plugins/wp-romaniachat/romaniachat.php(57): update_option('romaniachat_ser...', 'https://kiwi.ro...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): romaniachat_set_defaults(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-rom...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-romaniachat/...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('romaniachat_server', 'https://kiwi.romaniachat.eu:8443', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-romaniachat/romaniachat.php'), WP_Hook->do_action, WP_Hook->apply_filters, romaniachat_set_defaults, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 02:21:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'OA;+l)/6F8`?Tf)LN?7MRJM<0_]qoo#&Ly@I*praB,QE8Lx*B<&u~lvCzC>KRz:f', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('romaniachat_nick', 'RomaniaChat?', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -470,7 +127,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'OA;+l)/6F8`?Tf)LN?7MRJM&lt;0_]qoo#&amp;Ly@I*praB,QE8Lx*B&lt;&amp;u~lvCzC&gt;KRz:f' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'romaniachat_nick' , 'RomaniaChat?' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -482,34 +139,19 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'OA;+l)/6F8`?Tf)...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'OA;+l)/6F8`?Tf)...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'OA;+l)/6F8`?Tf)...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'OA;+l)/6F8`?Tf)...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40368|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/wp-lightbox-image-gallery/wp-lightbox-image-gallery.php(879): wp_register_script('wp_lightbox-ima...', 'http://127.0.0....', Array, '1.3', Array)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): WP_Lightbox_Image_Gallery->cb_init('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'OA;+l)/6F8`?Tf)LN?7MRJM<0_]qoo#&Ly@I*praB,QE8Lx*B<&u~lvCzC>KRz:f', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Lightbox_Image_Gallery->cb_init, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 21:45:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('romaniachat_nic...', 'RomaniaChat?', '', 'auto')
+#5 /wordpress/wp-content/plugins/wp-romaniachat/romaniachat.php(57): update_option('romaniachat_nic...', 'RomaniaChat?')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): romaniachat_set_defaults(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-rom...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-romaniachat/...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('romaniachat_nick', 'RomaniaChat?', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-romaniachat/romaniachat.php'), WP_Hook->do_action, WP_Hook->apply_filters, romaniachat_set_defaults, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 02:21:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_map_block_version', '2.0.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('romaniachat_style', 'osprey', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -521,7 +163,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_map_block_version' , '2.0.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'romaniachat_style' , 'osprey' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -533,23 +175,19 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wp_map_block_ve...', '2.0.0', '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-map-block/includes/Migration.php(14): update_option('wp_map_block_ve...', '2.0.0')
-#6 /wordpress/wp-content/plugins/wp-map-block/includes/Migration.php(9): WPMapBlock\Migration->run_migration()
-#7 /wordpress/wp-content/plugins/wp-map-block/wp-map-block.php(59): WPMapBlock\Migration::init()
-#8 /wordpress/wp-content/plugins/wp-map-block/wp-map-block.php(32): WPMapBlock->dispatch_hook()
-#9 /wordpress/wp-content/plugins/wp-map-block/wp-map-block.php(88): WPMapBlock->__construct()
-#10 /wordpress/wp-content/plugins/wp-map-block/wp-map-block.php(103): WPMapBlock::getInstance()
-#11 /wordpress/wp-content/plugins/wp-map-block/wp-map-block.php(108): WPMapBlock_Start()
-#12 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#13 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-map-block/wp...')
-#14 /internal/eval.php(20): activate_plugin('wp-map-block/wp...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_map_block_version', '2.0.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-map-block/wp-map-block.php'), WPMapBlock_Start, WPMapBlock::getInstance, WPMapBlock->__construct, WPMapBlock->dispatch_hook, WPMapBlock\Migration::init, WPMapBlock\Migration->run_migration, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 21:45:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('romaniachat_sty...', 'osprey', '', 'auto')
+#5 /wordpress/wp-content/plugins/wp-romaniachat/romaniachat.php(57): update_option('romaniachat_sty...', 'osprey')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): romaniachat_set_defaults(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-rom...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-romaniachat/...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('romaniachat_style', 'osprey', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-romaniachat/romaniachat.php'), WP_Hook->do_action, WP_Hook->apply_filters, romaniachat_set_defaults, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 02:21:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_map_block_first_install_time', '1743889526', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('romaniachat_chan', '#Romania,#RadioClick,#Trivia', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -561,7 +199,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_map_block_first_install_time' , '1743889526' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'romaniachat_chan' , '#Romania,#RadioClick,#Trivia' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -573,18 +211,242 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-map-block/includes/Migration.php(17): add_option('wp_map_block_fi...', 1743889526)
-#5 /wordpress/wp-content/plugins/wp-map-block/includes/Migration.php(9): WPMapBlock\Migration->run_migration()
-#6 /wordpress/wp-content/plugins/wp-map-block/wp-map-block.php(59): WPMapBlock\Migration::init()
-#7 /wordpress/wp-content/plugins/wp-map-block/wp-map-block.php(32): WPMapBlock->dispatch_hook()
-#8 /wordpress/wp-content/plugins/wp-map-block/wp-map-block.php(88): WPMapBlock->__construct()
-#9 /wordpress/wp-content/plugins/wp-map-block/wp-map-block.php(103): WPMapBlock::getInstance()
-#10 /wordpress/wp-content/plugins/wp-map-block/wp-map-block.php(108): WPMapBlock_Start()
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-map-block/wp...')
-#13 /internal/eval.php(20): activate_plugin('wp-map-block/wp...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_map_block_first_install_time', '1743889526', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-map-block/wp-map-block.php'), WPMapBlock_Start, WPMapBlock::getInstance, WPMapBlock->__construct, WPMapBlock->dispatch_hook, WPMapBlock\Migration::init, WPMapBlock\Migration->run_migration, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 21:45:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin
-Node.js v20.15.0
+#4 /wordpress/wp-includes/option.php(921): add_option('romaniachat_cha...', '#Romania,#Radio...', '', 'auto')
+#5 /wordpress/wp-content/plugins/wp-romaniachat/romaniachat.php(57): update_option('romaniachat_cha...', '#Romania,#Radio...')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): romaniachat_set_defaults(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-rom...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-romaniachat/...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('romaniachat_chan', '#Romania,#RadioClick,#Trivia', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-romaniachat/romaniachat.php'), WP_Hook->do_action, WP_Hook->apply_filters, romaniachat_set_defaults, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 02:21:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('romaniachat_height', '500', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'romaniachat_height' , '500' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('romaniachat_hei...', '500', '', 'auto')
+#5 /wordpress/wp-content/plugins/wp-romaniachat/romaniachat.php(57): update_option('romaniachat_hei...', '500')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): romaniachat_set_defaults(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-rom...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-romaniachat/...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('romaniachat_height', '500', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-romaniachat/romaniachat.php'), WP_Hook->do_action, WP_Hook->apply_filters, romaniachat_set_defaults, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 02:21:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('romaniachat_width', '100%', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'romaniachat_width' , '100%' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('romaniachat_wid...', '100%', '', 'auto')
+#5 /wordpress/wp-content/plugins/wp-romaniachat/romaniachat.php(57): update_option('romaniachat_wid...', '100%')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): romaniachat_set_defaults(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-rom...', false)
+#10 /internal/eval.php(20): activate_plugin('wp-romaniachat/...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('romaniachat_width', '100%', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-romaniachat/romaniachat.php'), WP_Hook->do_action, WP_Hook->apply_filters, romaniachat_set_defaults, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 02:21:36 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 02:21:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 02:21:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 02:21:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 02:22:06 UTC] PHP Deprecated:  Required parameter $namespace follows optional parameter $directories in /wordpress/wp-content/plugins/wp-ultimate-recipe/vendor/vafpress/autoload.php on line 163
+[09-Apr-2025 02:22:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp-ultimate-recipe_version', '3.13.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp-ultimate-recipe_version' , '3.13.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('wp-ultimate-rec...', '3.13.0', '', 'auto')
+#5 /wordpress/wp-content/plugins/wp-ultimate-recipe/wp-ultimate-recipe.php(136): update_option('wp-ultimate-rec...', '3.13.0')
+#6 /wordpress/wp-content/plugins/wp-ultimate-recipe/wp-ultimate-recipe.php(31): WPUltimateRecipe->init()
+#7 /wordpress/wp-content/plugins/wp-ultimate-recipe/wp-ultimate-recipe.php(318): WPUltimateRecipe::get()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-ultimate-rec...')
+#10 /internal/eval.php(20): activate_plugin('wp-ultimate-rec...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp-ultimate-recipe_version', '3.13.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-ultimate-recipe/wp-ultimate-recipe.php'), WPUltimateRecipe::get, WPUltimateRecipe->init, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 02:22:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpurp_taxonomies', 'a:4:{s:10:\"ingredient\";a:6:{s:6:\"labels\";a:14:{s:4:\"name\";s:11:\"Ingredients\";s:13:\"singular_name\";s:10:\"Ingredient\";s:12:\"search_items\";s:18:\"Search Ingredients\";s:13:\"popular_items\";s:19:\"Popular Ingredients\";s:9:\"all_items\";s:15:\"All Ingredients\";s:9:\"edit_item\";s:15:\"Edit Ingredient\";s:11:\"update_item\";s:17:\"Update Ingredient\";s:12:\"add_new_item\";s:18:\"Add New Ingredient\";s:13:\"new_item_name\";s:19:\"New Ingredient Name\";s:26:\"separate_items_with_commas\";s:32:\"Separate ingredients with commas\";s:19:\"add_or_remove_items\";s:25:\"Add or remove ingredients\";s:21:\"choose_from_most_used\";s:37:\"Choose from the most used ingredients\";s:9:\"not_found\";s:21:\"No ingredients found.\";s:9:\"menu_name\";s:11:\"Ingredients\";}s:7:\"show_ui\";b:1;s:13:\"show_tagcloud\";b:1;s:12:\"hierarchical\";b:1;s:7:\"rewrite\";a:1:{s:4:\"slug\";s:10:\"ingredient\";}s:12:\"show_in_rest\";b:1;}s:6:\"course\";a:7:{s:6:\"labels\";a:14:{s:4:\"name\";s:7:\"Courses\";s:13:\"singular_name\";s:6:\"Course\";s:12:\"search_items\";s:14:\"Search Courses\";s:13:\"popular_items\";s:15:\"Popular Courses\";s:9:\"all_items\";s:11:\"All Courses\";s:9:\"edit_item\";s:11:\"Edit Course\";s:11:\"update_item\";s:13:\"Update Course\";s:12:\"add_new_item\";s:14:\"Add New Course\";s:13:\"new_item_name\";s:15:\"New Course Name\";s:26:\"separate_items_with_commas\";s:28:\"Separate courses with commas\";s:19:\"add_or_remove_items\";s:21:\"Add or remove courses\";s:21:\"choose_from_most_used\";s:33:\"Choose from the most used courses\";s:9:\"not_found\";s:17:\"No courses found.\";s:9:\"menu_name\";s:7:\"Courses\";}s:7:\"show_ui\";b:1;s:13:\"show_tagcloud\";b:1;s:12:\"hierarchical\";b:1;s:7:\"rewrite\";a:1:{s:4:\"slug\";s:6:\"course\";}s:12:\"show_in_rest\";b:1;s:17:\"show_admin_column\";b:1;}s:7:\"cuisine\";a:7:{s:6:\"labels\";a:14:{s:4:\"name\";s:8:\"Cuisines\";s:13:\"singular_name\";s:7:\"Cuisine\";s:12:\"search_items\";s:15:\"Search Cuisines\";s:13:\"popular_items\";s:16:\"Popular Cuisines\";s:9:\"all_items\";s:12:\"All Cuisines\";s:9:\"edit_item\";s:12:\"Edit Cuisine\";s:11:\"update_item\";s:14:\"Update Cuisine\";s:12:\"add_new_item\";s:15:\"Add New Cuisine\";s:13:\"new_item_name\";s:16:\"New Cuisine Name\";s:26:\"separate_items_with_commas\";s:29:\"Separate cuisines with commas\";s:19:\"add_or_remove_items\";s:22:\"Add or remove cuisines\";s:21:\"choose_from_most_used\";s:34:\"Choose from the most used cuisines\";s:9:\"not_found\";s:18:\"No cuisines found.\";s:9:\"menu_name\";s:8:\"Cuisines\";}s:7:\"show_ui\";b:1;s:13:\"show_tagcloud\";b:1;s:12:\"hierarchical\";b:1;s:7:\"rewrite\";a:1:{s:4:\"slug\";s:7:\"cuisine\";}s:12:\"show_in_rest\";b:1;s:17:\"show_admin_column\";b:1;}s:13:\"wpurp_keyword\";a:7:{s:6:\"labels\";a:14:{s:4:\"name\";s:8:\"Keywords\";s:13:\"singular_name\";s:7:\"Keyword\";s:12:\"search_items\";s:15:\"Search Keywords\";s:13:\"popular_items\";s:16:\"Popular Keywords\";s:9:\"all_items\";s:12:\"All Keywords\";s:9:\"edit_item\";s:12:\"Edit Keyword\";s:11:\"update_item\";s:14:\"Update Keyword\";s:12:\"add_new_item\";s:15:\"Add New Keyword\";s:13:\"new_item_name\";s:16:\"New Keyword Name\";s:26:\"separate_items_with_commas\";s:29:\"Separate keywords with commas\";s:19:\"add_or_remove_items\";s:22:\"Add or remove keywords\";s:21:\"choose_from_most_used\";s:34:\"Choose from the most used keywords\";s:9:\"not_found\";s:18:\"No keywords found.\";s:9:\"menu_name\";s:8:\"Keywords\";}s:7:\"show_ui\";b:1;s:13:\"show_tagcloud\";b:1;s:12:\"hierarchical\";b:1;s:7:\"rewrite\";a:1:{s:4:\"slug\";s:7:\"keyword\";}s:12:\"show_in_rest\";b:1;s:17:\"show_admin_column\";b:1;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpurp_taxonomies' , 'a:4:{s:10:&quot;ingredient&quot;;a:6:{s:6:&quot;labels&quot;;a:14:{s:4:&quot;name&quot;;s:11:&quot;Ingredients&quot;;s:13:&quot;singular_name&quot;;s:10:&quot;Ingredient&quot;;s:12:&quot;search_items&quot;;s:18:&quot;Search Ingredients&quot;;s:13:&quot;popular_items&quot;;s:19:&quot;Popular Ingredients&quot;;s:9:&quot;all_items&quot;;s:15:&quot;All Ingredients&quot;;s:9:&quot;edit_item&quot;;s:15:&quot;Edit Ingredient&quot;;s:11:&quot;update_item&quot;;s:17:&quot;Update Ingredient&quot;;s:12:&quot;add_new_item&quot;;s:18:&quot;Add New Ingredient&quot;;s:13:&quot;new_item_name&quot;;s:19:&quot;New Ingredient Name&quot;;s:26:&quot;separate_items_with_commas&quot;;s:32:&quot;Separate ingredients with commas&quot;;s:19:&quot;add_or_remove_items&quot;;s:25:&quot;Add or remove ingredients&quot;;s:21:&quot;choose_from_most_used&quot;;s:37:&quot;Choose from the most used ingredients&quot;;s:9:&quot;not_found&quot;;s:21:&quot;No ingredients found.&quot;;s:9:&quot;menu_name&quot;;s:11:&quot;Ingredients&quot;;}s:7:&quot;show_ui&quot;;b:1;s:13:&quot;show_tagcloud&quot;;b:1;s:12:&quot;hierarchical&quot;;b:1;s:7:&quot;rewrite&quot;;a:1:{s:4:&quot;slug&quot;;s:10:&quot;ingredient&quot;;}s:12:&quot;show_in_rest&quot;;b:1;}s:6:&quot;course&quot;;a:7:{s:6:&quot;labels&quot;;a:14:{s:4:&quot;name&quot;;s:7:&quot;Courses&quot;;s:13:&quot;singular_name&quot;;s:6:&quot;Course&quot;;s:12:&quot;search_items&quot;;s:14:&quot;Search Courses&quot;;s:13:&quot;popular_items&quot;;s:15:&quot;Popular Courses&quot;;s:9:&quot;all_items&quot;;s:11:&quot;All Courses&quot;;s:9:&quot;edit_item&quot;;s:11:&quot;Edit Course&quot;;s:11:&quot;update_item&quot;;s:13:&quot;Update Course&quot;;s:12:&quot;add_new_item&quot;;s:14:&quot;Add New Course&quot;;s:13:&quot;new_item_name&quot;;s:15:&quot;New Course Name&quot;;s:26:&quot;separate_items_with_commas&quot;;s:28:&quot;Separate courses with commas&quot;;s:19:&quot;add_or_remove_items&quot;;s:21:&quot;Add or remove courses&quot;;s:21:&quot;choose_from_most_used&quot;;s:33:&quot;Choose from the most used courses&quot;;s:9:&quot;not_found&quot;;s:17:&quot;No courses found.&quot;;s:9:&quot;menu_name&quot;;s:7:&quot;Courses&quot;;}s:7:&quot;show_ui&quot;;b:1;s:13:&quot;show_tagcloud&quot;;b:1;s:12:&quot;hierarchical&quot;;b:1;s:7:&quot;rewrite&quot;;a:1:{s:4:&quot;slug&quot;;s:6:&quot;course&quot;;}s:12:&quot;show_in_rest&quot;;b:1;s:17:&quot;show_admin_column&quot;;b:1;}s:7:&quot;cuisine&quot;;a:7:{s:6:&quot;labels&quot;;a:14:{s:4:&quot;name&quot;;s:8:&quot;Cuisines&quot;;s:13:&quot;singular_name&quot;;s:7:&quot;Cuisine&quot;;s:12:&quot;search_items&quot;;s:15:&quot;Search Cuisines&quot;;s:13:&quot;popular_items&quot;;s:16:&quot;Popular Cuisines&quot;;s:9:&quot;all_items&quot;;s:12:&quot;All Cuisines&quot;;s:9:&quot;edit_item&quot;;s:12:&quot;Edit Cuisine&quot;;s:11:&quot;update_item&quot;;s:14:&quot;Update Cuisine&quot;;s:12:&quot;add_new_item&quot;;s:15:&quot;Add New Cuisine&quot;;s:13:&quot;new_item_name&quot;;s:16:&quot;New Cuisine Name&quot;;s:26:&quot;separate_items_with_commas&quot;;s:29:&quot;Separate cuisines with commas&quot;;s:19:&quot;add_or_remove_items&quot;;s:22:&quot;Add or remove cuisines&quot;;s:21:&quot;choose_from_most_used&quot;;s:34:&quot;Choose from the most used cuisines&quot;;s:9:&quot;not_found&quot;;s:18:&quot;No cuisines found.&quot;;s:9:&quot;menu_name&quot;;s:8:&quot;Cuisines&quot;;}s:7:&quot;show_ui&quot;;b:1;s:13:&quot;show_tagcloud&quot;;b:1;s:12:&quot;hierarchical&quot;;b:1;s:7:&quot;rewrite&quot;;a:1:{s:4:&quot;slug&quot;;s:7:&quot;cuisine&quot;;}s:12:&quot;show_in_rest&quot;;b:1;s:17:&quot;show_admin_column&quot;;b:1;}s:13:&quot;wpurp_keyword&quot;;a:7:{s:6:&quot;labels&quot;;a:14:{s:4:&quot;name&quot;;s:8:&quot;Keywords&quot;;s:13:&quot;singular_name&quot;;s:7:&quot;Keyword&quot;;s:12:&quot;search_items&quot;;s:15:&quot;Search Keywords&quot;;s:13:&quot;popular_items&quot;;s:16:&quot;Popular Keywords&quot;;s:9:&quot;all_items&quot;;s:12:&quot;All Keywords&quot;;s:9:&quot;edit_item&quot;;s:12:&quot;Edit Keyword&quot;;s:11:&quot;update_item&quot;;s:14:&quot;Update Keyword&quot;;s:12:&quot;add_new_item&quot;;s:15:&quot;Add New Keyword&quot;;s:13:&quot;new_item_name&quot;;s:16:&quot;New Keyword Name&quot;;s:26:&quot;separate_items_with_commas&quot;;s:29:&quot;Separate keywords with commas&quot;;s:19:&quot;add_or_remove_items&quot;;s:22:&quot;Add or remove keywords&quot;;s:21:&quot;choose_from_most_used&quot;;s:34:&quot;Choose from the most used keywords&quot;;s:9:&quot;not_found&quot;;s:18:&quot;No keywords found.&quot;;s:9:&quot;menu_name&quot;;s:8:&quot;Keywords&quot;;}s:7:&quot;show_ui&quot;;b:1;s:13:&quot;show_tagcloud&quot;;b:1;s:12:&quot;hierarchical&quot;;b:1;s:7:&quot;rewrite&quot;;a:1:{s:4:&quot;slug&quot;;s:7:&quot;keyword&quot;;}s:12:&quot;show_in_rest&quot;;b:1;s:17:&quot;show_admin_column&quot;;b:1;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('wpurp_taxonomie...', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/wp-ultimate-recipe/helpers/taxonomies.php(36): update_option('wpurp_taxonomie...', Array)
+#6 /wordpress/wp-content/plugins/wp-ultimate-recipe/helpers/taxonomies.php(87): WPURP_Taxonomies->update(Array)
+#7 /wordpress/wp-content/plugins/wp-ultimate-recipe/helpers/activate.php(13): WPURP_Taxonomies->check_recipe_taxonomies()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): WPURP_Activate->activate_plugin(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ult...', false)
+#12 /internal/eval.php(20): activate_plugin('wp-ultimate-rec...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpurp_taxonomies', 'a:4:{s:10:\"ingredient\";a:6:{s:6:\"labels\";a:14:{s:4:\"name\";s:11:\"Ingredients\";s:13:\"singular_name\";s:10:\"Ingredient\";s:12:\"search_items\";s:18:\"Search Ingredients\";s:13:\"popular_items\";s:19:\"Popular Ingredients\";s:9:\"all_items\";s:15:\"All Ingredients\";s:9:\"edit_item\";s:15:\"Edit Ingredient\";s:11:\"update_item\";s:17:\"Update Ingredient\";s:12:\"add_new_item\";s:18:\"Add New Ingredient\";s:13:\"new_item_name\";s:19:\"New Ingredient Name\";s:26:\"separate_items_with_commas\";s:32:\"Separate ingredients with commas\";s:19:\"add_or_remove_items\";s:25:\"Add or remove ingredients\";s:21:\"choose_from_most_used\";s:37:\"Choose from the most used ingredients\";s:9:\"not_found\";s:21:\"No ingredients found.\";s:9:\"menu_name\";s:11:\"Ingredients\";}s:7:\"show_ui\";b:1;s:13:\"show_tagcloud\";b:1;s:12:\"hierarchical\";b:1;s:7:\"rewrite\";a:1:{s:4:\"slug\";s:10:\"ingredient\";}s:12:\"show_in_rest\";b:1;}s:6:\"course\";a:7:{s:6:\"labels\";a:14:{s:4:\"name\";s:7:\"Courses\";s:13:\"singular_name\";s:6:\"Course\";s:12:\"search_items\";s:14:\"Search Courses\";s:13:\"popular_items\";s:15:\"Popular Courses\";s:9:\"all_items\";s:11:\"All Courses\";s:9:\"edit_item\";s:11:\"Edit Course\";s:11:\"update_item\";s:13:\"Update Course\";s:12:\"add_new_item\";s:14:\"Add New Course\";s:13:\"new_item_name\";s:15:\"New Course Name\";s:26:\"separate_items_with_commas\";s:28:\"Separate courses with commas\";s:19:\"add_or_remove_items\";s:21:\"Add or remove courses\";s:21:\"choose_from_most_used\";s:33:\"Choose from the most used courses\";s:9:\"not_found\";s:17:\"No courses found.\";s:9:\"menu_name\";s:7:\"Courses\";}s:7:\"show_ui\";b:1;s:13:\"show_tagcloud\";b:1;s:12:\"hierarchical\";b:1;s:7:\"rewrite\";a:1:{s:4:\"slug\";s:6:\"course\";}s:12:\"show_in_rest\";b:1;s:17:\"show_admin_column\";b:1;}s:7:\"cuisine\";a:7:{s:6:\"labels\";a:14:{s:4:\"name\";s:8:\"Cuisines\";s:13:\"singular_name\";s:7:\"Cuisine\";s:12:\"search_items\";s:15:\"Search Cuisines\";s:13:\"popular_items\";s:16:\"Popular Cuisines\";s:9:\"all_items\";s:12:\"All Cuisines\";s:9:\"edit_item\";s:12:\"Edit Cuisine\";s:11:\"update_item\";s:14:\"Update Cuisine\";s:12:\"add_new_item\";s:15:\"Add New Cuisine\";s:13:\"new_item_name\";s:16:\"New Cuisine Name\";s:26:\"separate_items_with_commas\";s:29:\"Separate cuisines with commas\";s:19:\"add_or_remove_items\";s:22:\"Add or remove cuisines\";s:21:\"choose_from_most_used\";s:34:\"Choose from the most used cuisines\";s:9:\"not_found\";s:18:\"No cuisines found.\";s:9:\"menu_name\";s:8:\"Cuisines\";}s:7:\"show_ui\";b:1;s:13:\"show_tagcloud\";b:1;s:12:\"hierarchical\";b:1;s:7:\"rewrite\";a:1:{s:4:\"slug\";s:7:\"cuisine\";}s:12:\"show_in_rest\";b:1;s:17:\"show_admin_column\";b:1;}s:13:\"wpurp_keyword\";a:7:{s:6:\"labels\";a:14:{s:4:\"name\";s:8:\"Keywords\";s:13:\"singular_name\";s:7:\"Keyword\";s:12:\"search_items\";s:15:\"Search Keywords\";s:13:\"popular_items\";s:16:\"Popular Keywords\";s:9:\"all_items\";s:12:\"All Keywords\";s:9:\"edit_item\";s:12:\"Edit Keyword\";s:11:\"update_item\";s:14:\"Update Keyword\";s:12:\"add_new_item\";s:15:\"Add New Keyword\";s:13:\"new_item_name\";s:16:\"New Keyword Name\";s:26:\"separate_items_with_commas\";s:29:\"Separate keywords with commas\";s:19:\"add_or_remove_items\";s:22:\"Add or remove keywords\";s:21:\"choose_from_most_used\";s:34:\"Choose from the most used keywords\";s:9:\"not_found\";s:18:\"No keywords found.\";s:9:\"menu_name\";s:8:\"Keywords\";}s:7:\"show_ui\";b:1;s:13:\"show_tagcloud\";b:1;s:12:\"hierarchical\";b:1;s:7:\"rewrite\";a:1:{s:4:\"slug\";s:7:\"keyword\";}s:12:\"show_in_rest\";b:1;s:17:\"show_admin_column\";b:1;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-ultimate-recipe/wp-ultimate-recipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPURP_Activate->activate_plugin, WPURP_Taxonomies->check_recipe_taxonomies, WPURP_Taxonomies->update, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 02:22:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpurp_flush', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpurp_flush' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('wpurp_flush', '1', '', 'auto')
+#5 /wordpress/wp-content/plugins/wp-ultimate-recipe/helpers/taxonomies.php(88): update_option('wpurp_flush', '1')
+#6 /wordpress/wp-content/plugins/wp-ultimate-recipe/helpers/activate.php(13): WPURP_Taxonomies->check_recipe_taxonomies()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): WPURP_Activate->activate_plugin(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ult...', false)
+#11 /internal/eval.php(20): activate_plugin('wp-ultimate-rec...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpurp_flush', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-ultimate-recipe/wp-ultimate-recipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPURP_Activate->activate_plugin, WPURP_Taxonomies->check_recipe_taxonomies, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 02:22:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpurp_flush', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpurp_flush' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('wpurp_flush', '1', '', 'auto')
+#5 /wordpress/wp-content/plugins/wp-ultimate-recipe/helpers/permalinks_flusher.php(16): update_option('wpurp_flush', '1')
+#6 /wordpress/wp-content/plugins/wp-ultimate-recipe/helpers/activate.php(15): WPURP_Permalinks_Flusher->set_flush_needed()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): WPURP_Activate->activate_plugin(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ult...', false)
+#11 /internal/eval.php(20): activate_plugin('wp-ultimate-rec...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpurp_flush', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-ultimate-recipe/wp-ultimate-recipe.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPURP_Activate->activate_plugin, WPURP_Permalinks_Flusher->set_flush_needed, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 02:22:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpurp_custom_template_0', 'O:14:\"WPURP_Template\":3:{s:6:\"blocks\";a:85:{i:0;O:24:\"WPURP_Template_Container\":24:{s:11:\"editorField\";s:9:\"container\";s:4:\"type\";s:9:\"container\";s:8:\"children\";a:1:{i:0;a:1:{i:0;a:1:{i:0;O:19:\"WPURP_Template_Rows\":26:{s:4:\"rows\";i:6;s:7:\"heights\";a:6:{i:0;s:4:\"auto\";i:1;s:4:\"auto\";i:2;s:4:\"auto\";i:3;s:4:\"auto\";i:4;s:4:\"auto\";i:5;s:4:\"auto\";}s:11:\"editorField\";s:4:\"rows\";s:4:\"type\";s:4:\"rows\";s:8:\"children\";a:6:{i:0;a:1:{i:0;a:1:{i:0;O:22:\"WPURP_Template_Columns\":28:{s:7:\"columns\";i:3;s:6:\"widths\";a:3:{i:0;s:5:\"150px\";i:1;s:4:\"20px\";i:2;s:4:\"auto\";}s:10:\"responsive\";b:1;s:14:\"mobile_reverse\";b:0;s:11:\"editorField\";s:7:\"columns\";s:4:\"type\";s:7:\"columns\";s:8:\"children\";a:1:{i:0;a:2:{i:2;a:1:{i:0;O:19:\"WPURP_Template_Rows\":26:{s:4:\"rows\";i:4;s:7:\"heights\";a:4:{i:0;s:4:\"auto\";i:1;s:4:\"auto\";i:2;s:4:\"auto\";i:3;s:4:\"auto\";}s:11:\"editorField\";s:4:\"rows\";s:4:\"type\";s:4:\"rows\";s:8:\"children\";a:4:{i:0;a:1:{i:0;a:2:{i:0;O:27:\"WPURP_Template_Recipe_Title\":25:{s:3:\"tag\";N;s:11:\"editorField\";s:11:\"recipeTitle\";s:4:\"type\";s:12:\"recipe-title\";s:8:\"children\";a:0:{}s:8:\"settings\";O:8:\"stdClass\":46:{s:4:\"type\";s:11:\"recipeTitle\";s:7:\"deleted\";b:0;s:5:\"order\";i:6;s:10:\"conditions\";a:0:{}s:5:\"float\";s:4:\"none\";s:6:\"center\";b:0;s:9:\"marginTop\";i:0;s:12:\"marginBottom\";s:2:\"10\";s:10:\"marginLeft\";i:0;s:11:\"marginRight\";i:0;s:9:\"widthType\";s:2:\"px\";s:10:\"heightType\";s:2:\"px\";s:12:\"minWidthType\";s:2:\"px\";s:13:\"minHeightType\";s:2:\"px\";s:12:\"maxWidthType\";s:2:\"px\";s:13:\"maxHeightType\";s:2:\"px\";s:11:\"borderColor\";s:0:\"\";s:11:\"borderStyle\";s:5:\"solid\";s:10:\"shadowType\";s:0:\"\";s:9:\"textAlign\";s:7:\"inherit\";s:8:\"fontBold\";b:1;s:13:\"fontSmallCaps\";b:0;s:8:\"fontSize\";s:3:\"1.4\";s:12:\"fontSizeUnit\";s:2:\"em\";s:10:\"lineHeight\";s:3:\"1.4\";s:14:\"lineHeightUnit\";s:2:\"em\";s:9:\"fontColor\";s:0:\"\";s:11:\"placeholder\";s:12:\"Recipe Title\";s:5:\"index\";i:4;s:6:\"parent\";s:1:\"5\";s:3:\"row\";s:1:\"0\";s:6:\"column\";s:1:\"0\";s:13:\"paddingBottom\";s:1:\"0\";s:8:\"position\";s:6:\"static\";s:14:\"fontFamilyType\";s:0:\"\";s:13:\"fontFamilyGWF\";s:9:\"Open+Sans\";s:11:\"customClass\";s:0:\"\";s:11:\"customStyle\";s:0:\"\";s:9:\"borderTop\";b:1;s:12:\"borderBottom\";b:1;s:10:\"borderLeft\";b:1;s:11:\"borderRight\";b:1;s:13:\"verticalAlign\";s:7:\"inherit\";s:11:\"shortenText\";s:4:\"none\";s:17:\"shortenTextNumber\";s:0:\"\";s:16:\"shortenTextAfter\";s:3:\"...\";}s:5:\"style\";a:2:{s:7:\"default\";a:8:{s:13:\"margin-bottom\";s:4:\"10px\";s:14:\"padding-bottom\";s:3:\"0px\";s:8:\"position\";s:6:\"static\";s:10:\"text-align\";s:7:\"inherit\";s:14:\"vertical-align\";s:7:\"inherit\";s:11:\"font-weight\";s:4:\"bold\";s:9:\"font-size\";s:5:\"1.4em\";s:11:\"line-height\";s:5:\"1.4em\";}s:2:\"td\";a:3:{s:14:\"padding-bottom\";s:3:\"0px\";s:10:\"text-align\";s:7:\"inherit\";s:11:\"font-weight\";s:4:\"bold\";}}s:10:\"conditions\";a:0:{}s:7:\"classes\";a:0:{}s:6:\"parent\";s:1:\"5\";s:3:\"row\";s:1:\"0\";s:6:\"column\";s:1:\"0\";s:5:\"order\";i:6;s:9:\"max_width\";N;s:10:\"max_height\";N;s:18:\"\0*\0show_on_desktop\";b:1;s:17:\"\0*\0show_on_mobile\";b:1;s:13:\"show_on_hover\";b:0;s:13:\"hide_on_hover\";b:0;s:19:\"hover_in_transition\";s:7:\"instant\";s:20:\"hover_out_transition\";s:7:\"instant\";s:13:\"hover_in_time\";i:0;s:14:\"hover_out_time\";i:0;s:13:\"\0*\0link_color\";b:0;s:20:\"\0*\0background_preset\";b:0;s:10:\"\0*\0cut_off\";b:0;}i:1;O:18:\"WPURP_Template_Box\":24:{s:11:\"editorField\";s:3:\"box\";s:4:\"type\";s:3:\"box\";s:8:\"children\";a:1:{i:0;a:1:{i:0;a:2:{i:0;O:19:\"WPURP_Template_Rows\":26:{s:4:\"rows\";i:3;s:7:\"heights\";a:3:{i:0;s:4:\"auto\";i:1;s:4:\"auto\";i:2;s:4:\"auto\";}s:11:\"editorField\";s:4:\"rows\";s:4:\"type\";s:4:\"rows\";s:8:\"children\";a:3:{i:0;a:1:{i:0;a:1:{i:0;O:27:\"WPURP_Template_Food_Fanatic\":24:{s:11:\"editorField\";s:11:\"foodFanatic\";s:4:\"type\";s:12:\"food-fanatic\";s:8:\"children\";a:0:{}s:8:\"settings\";O:8:\"stdClass\":45:{s:4:\"type\";s:11:\"foodFanatic\";s:7:\"deleted\";b:0;s:5:\"order\";i:125;s:10:\"conditions\";a:0:{}s:5:\"float\";s:4:\"none\";s:6:\"center\";b:0;s:9:\"marginTop\";i:0;s:12:\"marginBottom\";i:0;s:10:\"marginLeft\";i:0;s:11:\"marginRight\";s:1:\"0\";s:9:\"widthType\";s:2:\"px\";s:10:\"heightType\";s:2:\"px\";s:12:\"minWidthType\";s:2:\"px\";s:13:\"minHeightType\";s:2:\"px\";s:12:\"maxWidthType\";s:2:\"px\";s:13:\"maxHeightType\";s:2:\"px\";s:8:\"position\";s:6:\"static\";s:11:\"borderColor\";s:0:\"\";s:11:\"borderStyle\";s:5:\"solid\";s:9:\"borderTop\";b:1;s:12:\"borderBottom\";b:1;s:10:\"borderLeft\";b:1;s:11:\"borderRight\";b:1;s:10:\"shadowType\";s:0:\"\";s:9:\"textAlign\";s:7:\"inherit\";s:13:\"verticalAlign\";s:7:\"inherit\";s:8:\"fontBold\";b:0;s:13:\"fontSmallCaps\";b:0;s:8:\"fontSize\";s:0:\"\";s:12:\"fontSizeUnit\";s:2:\"px\";s:10:\"lineHeight\";s:0:\"\";s:14:\"lineHeightUnit\";s:2:\"px\";s:9:\"fontColor\";s:0:\"\";s:14:\"fontFamilyType\";s:0:\"\";s:13:\"fontFamilyGWF\";s:9:\"Open+Sans\";s:11:\"customClass\";s:0:\"\";s:11:\"customStyle\";s:0:\"\";s:11:\"placeholder\";s:12:\"Food Fanatic\";s:5:\"index\";i:80;s:6:\"parent\";s:2:\"78\";s:3:\"row\";s:1:\"0\";s:6:\"column\";s:1:\"0\";s:11:\"shortenText\";s:4:\"none\";s:17:\"shortenTextNumber\";s:0:\"\";s:16:\"shortenTextAfter\";s:3:\"...\";}s:5:\"style\";a:2:{s:7:\"default\";a:4:{s:12:\"margin-right\";s:3:\"0px\";s:8:\"position\";s:6:\"static\";s:10:\"text-align\";s:7:\"inherit\";s:14:\"vertical-align\";s:7:\"inherit\";}s:2:\"td\";a:1:{s:10:\"text-align\";s:7:\"inherit\";}}s:10:\"conditions\";a:0:{}s:7:\"classes\";a:0:{}s:6:\"parent\";s:2:\"78\";s:3:\"row\";s:1:\"0\";s:6:\"column\";s:1:\"0\";s:5:\"order\";i:125;s:9:\"max_width\";N;s:10:\"max_height\";N;s:18:\"\0*\0show_on_desktop\";b:1;s:17:\"\0*\0show_on_mobile\";b:1;s:13:\"show_on_hover\";b:0;s:13:\"hide_on_hover\";b:0;s:19:\"hover_in_transition\";s:7:\"instant\";s:20:\"hover_out_transition\";s:7:\"instant\";s:13:\"hover_in_time\";i:0;s:14:\"hover_out_time\";i:0;s:13:\"\0*\0link_color\";b:0;s:20:\"\0*\0background_preset\";b:0;s:10:\"\0*\0cut_off\";b:0;}}}i:1;a:1:{i:0;a:1:{i:0;O:22:\"WPURP_Template_Bigoven\":24:{s:11:\"editorField\";s:7:\"bigOven\";s:4:\"type\";s:7:\"bigoven\";s:8:\"children\";a:0:{}s:8:\"settings\";O:8:\"stdClass\":45:{s:4:\"type\";s:7:\"bigOven\";s:7:\"deleted\";b:0;s:5:\"order\";i:126;s:10:\"conditions\";a:0:{}s:5:\"float\";s:4:\"none\";s:6:\"center\";b:0;s:9:\"marginTop\";i:0;s:12:\"marginBottom\";i:0;s:10:\"marginLeft\";i:0;s:11:\"marginRight\";i:0;s:9:\"widthType\";s:2:\"px\";s:10:\"heightType\";s:2:\"px\";s:12:\"minWidthType\";s:2:\"px\";s:13:\"minHeightType\";s:2:\"px\";s:12:\"maxWidthType\";s:2:\"px\";s:13:\"maxHeightType\";s:2:\"px\";s:8:\"position\";s:6:\"static\";s:11:\"borderColor\";s:0:\"\";s:11:\"borderStyle\";s:5:\"solid\";s:9:\"borderTop\";b:1;s:12:\"borderBottom\";b:1;s:10:\"borderLeft\";b:1;s:11:\"borderRight\";b:1;s:10:\"shadowType\";s:0:\"\";s:9:\"textAlign\";s:7:\"inherit\";s:13:\"verticalAlign\";s:7:\"inherit\";s:8:\"fontBold\";b:0;s:13:\"fontSmallCaps\";b:0;s:8:\"fontSize\";s:0:\"\";s:12:\"fontSizeUnit\";s:2:\"px\";s:10:\"lineHeight\";s:0:\"\";s:14:\"lineHeightUnit\";s:2:\"px\";s:9:\"fontColor\";s:0:\"\";s:14:\"fontFamilyType\";s:0:\"\";s:13:\"fontFamilyGWF\";s:9:\"Open+Sans\";s:11:\"customClass\";s:0:\"\";s:11:\"customStyle\";s:0:\"\";s:11:\"placeholder\";s:8:\"Big Oven\";s:5:\"index\";i:79;s:6:\"parent\";s:2:\"78\";s:3:\"row\";s:1:\"1\";s:6:\"column\";s:1:\"0\";s:11:\"shortenText\";s:4:\"none\";s:17:\"shortenTextNumber\";s:0:\"\";s:16:\"shortenTextAfter\";s:3:\"...\";}s:5:\"style\";a:2:{s:7:\"default\";a:3:{s:8:\"position\";s:6:\"static\";s:10:\"text-align\";s:7:\"inherit\";s:14:\"vertical-align\";s:7:\"inherit\";}s:2:\"td\";a:1:{s:10:\"text-align\";s:7:\"inherit\";}}s:10:\"conditions\";a:0:{}s:7:\"classes\";a:0:{}s:6:\"parent\";s:2:\"78\";s:3:\"row\";s:1:\"1\";s:6:\"column\";s:1:\"0\";s:5:\"order\";i:126;s:9:\"max_width\";N;s:10:\"max_height\";N;s:18:\"\0*\0show_on_desktop\";b:1;s:17:\"\0*\0show_on_mobile\";b:1;s:13:\"show_on_hover\";b:0;s:13:\"hide_on_hover\";b:0;s:19:\"hover_in_transition\";s:7:\"instant\";s:20:\"hover_out_transition\";s:7:\"instant\";s:13:\"hover_in_time\";i:0;s:14:\"hover_out_time\";i:0;s:13:\"\0*\0link_color\";b:0;s:20:\"\0*\0background_preset\";b:0;s:10:\"\0*\0cut_off\";b:0;}}}i:2;a:1:{i:0;a:1:{i:0;O:21:\"WPURP_Template_Yummly\":24:{s:11:\"editorField\";s:6:\"yummly\";s:4:\"type\";s:6:\"yummly\";s:8:\"children\";a:0:{}s:8:\"settings\";O:8:\"stdClass\":45:{s:4:\"type\";s:6:\"yummly\";s:7:\"deleted\";b:0;s:5:\"order\";i:138;s:10:\"conditions\";a:0:{}s:5:\"float\";s:4:\"none\";s:6:\"center\";b:0;s:9:\"marginTop\";i:0;s:12:\"marginBottom\";i:0;s:10:\"marginLeft\";i:0;s:11:\"marginRight\";i:0;s:9:\"widthType\";s:2:\"px\";s:10:\"heightType\";s:2:\"px\";s:12:\"minWidthType\";s:2:\"px\";s:13:\"minHeightType\";s:2:\"px\";s:12:\"maxWidthType\";s:2:\"px\";s:13:\"maxHeightType\";s:2:\"px\";s:8:\"position\";s:6:\"static\";s:11:\"borderColor\";s:0:\"\";s:11:\"borderStyle\";s:5:\"solid\";s:9:\"borderTop\";b:1;s:12:\"borderBottom\";b:1;s:10:\"borderLeft\";b:1;s:11:\"borderRight\";b:1;s:10:\"shadowType\";s:0:\"\";s:9:\"textAlign\";s:7:\"inherit\";s:13:\"verticalAlign\";s:7:\"inherit\";s:8:\"fontBold\";b:0;s:13:\"fontSmallCaps\";b:0;s:8:\"fontSize\";s:0:\"\";s:12:\"fontSizeUnit\";s:2:\"px\";s:10:\"lineHeight\";s:0:\"\";s:14:\"lineHeightUnit\";s:2:\"px\";s:9:\"fontColor\";s:0:\"\";s:14:\"fontFamilyType\";s:0:\"\";s:13:\"fontFamilyGWF\";s:9:\"Open+Sans\";s:11:\"customClass\";s:0:\"\";s:11:\"customStyle\";s:0:\"\";s:11:\"placeholder\";s:6:\"Yummly\";s:5:\"index\";i:90;s:6:\"parent\";s:2:\"78\";s:3:\"row\";s:1:\"2\";s:6:\"column\";s:1:\"0\";s:11:\"shortenText\";s:4:\"none\";s:17:\"shortenTextNumber\";s:0:\"\";s:16:\"shortenTextAfter\";s:3:\"...\";}s:5:\"style\";a:2:{s:7:\"default\";a:3:{s:8:\"position\";s:6:\"static\";s:10:\"text-align\";s:7:\"inherit\";s:14:\"vertical-align\";s:7:\"inherit\";}s:2:\"td\";a:1:{s:10:\"text-align\";s:7:\"inherit\";}}s:10:\"conditions\";a:0:{}s:7:\"classes\";a:0:{}s:6:\"parent\";s:2:\"78\";s:3:\"row\";s:1:\"2\";s:6:\"column\";s:1:\"0\";s:5:\"order\";i:138;s:9:\"max_width\";N;s:10:\"max_height\";N;s:18:\"\0*\0show_on_desktop\";b:1;s:17:\"\0*\0show_on_mobile\";b:1;s:13:\"show_on_hover\";b:0;s:13:\"hide_on_hover\";b:0;s:19:\"hover_in_transition\";s:7:\"instant\";s:20:\"hover_out_transition\";s:7:\"instant\";s:13:\"hover_in_time\";i:0;s:14:\"hover_out_time\";i:0;s:13:\"\0*\0link_color\";b:0;s:20:\"\0*\0ba
+Node.js v23.11.0
