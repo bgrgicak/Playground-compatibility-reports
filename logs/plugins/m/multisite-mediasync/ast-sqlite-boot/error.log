@@ -2,43 +2,378 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [06-Apr-2025 17:21:25 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/mobile-app-banners/index.php:782
+Error: [09-Apr-2025 07:46:53 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 07:46:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 07:46:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 07:46:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 07:46:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mihanwp_notification_bar_width', '1200', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mihanwp_notification_bar_width' , '1200' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('mihanwp_notific...', 1200, '', 'auto')
+#5 /wordpress/wp-content/plugins/mihanwp-notification-bar/app/mihanwp_notification_bar_config.php(20): update_option('mihanwp_notific...', 1200)
+#6 /wordpress/wp-content/plugins/mihanwp-notification-bar/app/mihanwp_notification_bar_config.php(9): app\mihanwp_notification_bar_config::update_options()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): app\mihanwp_notification_bar_config::plugin_load_process('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mihanwp_notification_bar_width', '1200', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, app\mihanwp_notification_bar_config::plugin_load_process, app\mihanwp_notification_bar_config::update_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:46:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mw_mihanwp_notification_bar_db_version', '3.1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mw_mihanwp_notification_bar_db_version' , '3.1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('mw_mihanwp_noti...', 3.1, '', 'auto')
+#5 /wordpress/wp-content/plugins/mihanwp-notification-bar/app/mihanwp_notification_bar_config.php(21): update_option('mw_mihanwp_noti...', 3.1)
+#6 /wordpress/wp-content/plugins/mihanwp-notification-bar/app/mihanwp_notification_bar_config.php(9): app\mihanwp_notification_bar_config::update_options()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): app\mihanwp_notification_bar_config::plugin_load_process('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mw_mihanwp_notification_bar_db_version', '3.1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, app\mihanwp_notification_bar_config::plugin_load_process, app\mihanwp_notification_bar_config::update_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:47:21 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 07:47:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 07:47:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 07:47:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 07:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('qw_MTA_default_sub', 'T', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'qw_MTA_default_sub' , 'T' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/mail-to-all-comment/mail-to-all.php(17): add_option('qw_MTA_default_...', 'T')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): qw_MTA_act(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_mail-t...', false)
+#9 /internal/eval.php(20): activate_plugin('mail-to-all-com...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('qw_MTA_default_sub', 'T', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_mail-to-all-comment/mail-to-all.php'), WP_Hook->do_action, WP_Hook->apply_filters, qw_MTA_act, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('qw_MTA_subject', '我启用Mail-To-All插件了', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'qw_MTA_subject' , '我启用Mail-To-All插件了' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/mail-to-all-comment/mail-to-all.php(20): add_option('qw_MTA_subject', '\xE6\x88\x91\xE5\x90\xAF\xE7\x94\xA8Mail-T...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): qw_MTA_act(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_mail-t...', false)
+#9 /internal/eval.php(20): activate_plugin('mail-to-all-com...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('qw_MTA_subject', '我启用Mail-To-All插件了', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_mail-to-all-comment/mail-to-all.php'), WP_Hook->do_action, WP_Hook->apply_filters, qw_MTA_act, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('qw_MTA_mail', 'admin@localhost.com', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'qw_MTA_mail' , 'admin@localhost.com' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/mail-to-all-comment/mail-to-all.php(21): add_option('qw_MTA_mail', 'admin@localhost...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): qw_MTA_act(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_mail-t...', false)
+#9 /internal/eval.php(20): activate_plugin('mail-to-all-com...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('qw_MTA_mail', 'admin@localhost.com', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_mail-to-all-comment/mail-to-all.php'), WP_Hook->do_action, WP_Hook->apply_filters, qw_MTA_act, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('qw_MTA_list', 'm@leniy.org', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'qw_MTA_list' , 'm@leniy.org' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/mail-to-all-comment/mail-to-all.php(22): add_option('qw_MTA_list', 'm@leniy.org')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): qw_MTA_act(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_mail-t...', false)
+#9 /internal/eval.php(20): activate_plugin('mail-to-all-com...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('qw_MTA_list', 'm@leniy.org', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_mail-to-all-comment/mail-to-all.php'), WP_Hook->do_action, WP_Hook->apply_filters, qw_MTA_act, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('qw_MTA_content', '欢迎使用本插件', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'qw_MTA_content' , '欢迎使用本插件' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/mail-to-all-comment/mail-to-all.php(23): add_option('qw_MTA_content', '\xE6\xAC\xA2\xE8\xBF\x8E\xE4\xBD\xBF\xE7\x94\xA8\xE6\x9C\xAC...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): qw_MTA_act(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_mail-t...', false)
+#9 /internal/eval.php(20): activate_plugin('mail-to-all-com...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('qw_MTA_content', '欢迎使用本插件', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_mail-to-all-comment/mail-to-all.php'), WP_Hook->do_action, WP_Hook->apply_filters, qw_MTA_act, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:47:48 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 07:47:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 07:47:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 07:47:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 07:48:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jm_mut_mime_types', 'a:96:{s:12:\"jpg|jpeg|jpe\";s:10:\"image/jpeg\";s:3:\"gif\";s:9:\"image/gif\";s:3:\"png\";s:9:\"image/png\";s:3:\"bmp\";s:9:\"image/bmp\";s:8:\"tiff|tif\";s:10:\"image/tiff\";s:4:\"webp\";s:10:\"image/webp\";s:4:\"avif\";s:10:\"image/avif\";s:3:\"ico\";s:12:\"image/x-icon\";s:4:\"heic\";s:10:\"image/heic\";s:4:\"heif\";s:10:\"image/heif\";s:5:\"heics\";s:19:\"image/heic-sequence\";s:5:\"heifs\";s:19:\"image/heif-sequence\";s:7:\"asf|asx\";s:14:\"video/x-ms-asf\";s:3:\"wmv\";s:14:\"video/x-ms-wmv\";s:3:\"wmx\";s:14:\"video/x-ms-wmx\";s:2:\"wm\";s:13:\"video/x-ms-wm\";s:3:\"avi\";s:9:\"video/avi\";s:4:\"divx\";s:10:\"video/divx\";s:3:\"flv\";s:11:\"video/x-flv\";s:6:\"mov|qt\";s:15:\"video/quicktime\";s:12:\"mpeg|mpg|mpe\";s:10:\"video/mpeg\";s:7:\"mp4|m4v\";s:9:\"video/mp4\";s:3:\"ogv\";s:9:\"video/ogg\";s:4:\"webm\";s:10:\"video/webm\";s:3:\"mkv\";s:16:\"video/x-matroska\";s:8:\"3gp|3gpp\";s:10:\"video/3gpp\";s:8:\"3g2|3gp2\";s:11:\"video/3gpp2\";s:18:\"txt|asc|c|cc|h|srt\";s:10:\"text/plain\";s:3:\"csv\";s:8:\"text/csv\";s:3:\"tsv\";s:25:\"text/tab-separated-values\";s:3:\"ics\";s:13:\"text/calendar\";s:3:\"rtx\";s:13:\"text/richtext\";s:3:\"css\";s:8:\"text/css\";s:8:\"htm|html\";s:9:\"text/html\";s:3:\"vtt\";s:8:\"text/vtt\";s:4:\"dfxp\";s:20:\"application/ttaf+xml\";s:11:\"mp3|m4a|m4b\";s:10:\"audio/mpeg\";s:3:\"aac\";s:9:\"audio/aac\";s:6:\"ra|ram\";s:17:\"audio/x-realaudio\";s:3:\"wav\";s:9:\"audio/wav\";s:7:\"ogg|oga\";s:9:\"audio/ogg\";s:4:\"flac\";s:10:\"audio/flac\";s:8:\"mid|midi\";s:10:\"audio/midi\";s:3:\"wma\";s:14:\"audio/x-ms-wma\";s:3:\"wax\";s:14:\"audio/x-ms-wax\";s:3:\"mka\";s:16:\"audio/x-matroska\";s:3:\"rtf\";s:15:\"application/rtf\";s:2:\"js\";s:22:\"application/javascript\";s:3:\"pdf\";s:15:\"application/pdf\";s:5:\"class\";s:16:\"application/java\";s:3:\"tar\";s:17:\"application/x-tar\";s:3:\"zip\";s:15:\"application/zip\";s:7:\"gz|gzip\";s:18:\"application/x-gzip\";s:3:\"rar\";s:15:\"application/rar\";s:2:\"7z\";s:27:\"application/x-7z-compressed\";s:3:\"psd\";s:24:\"application/octet-stream\";s:3:\"xcf\";s:24:\"application/octet-stream\";s:3:\"doc\";s:18:\"application/msword\";s:11:\"pot|pps|ppt\";s:29:\"application/vnd.ms-powerpoint\";s:3:\"wri\";s:24:\"application/vnd.ms-write\";s:15:\"xla|xls|xlt|xlw\";s:24:\"application/vnd.ms-excel\";s:3:\"mdb\";s:25:\"application/vnd.ms-access\";s:3:\"mpp\";s:26:\"application/vnd.ms-project\";s:4:\"docx\";s:71:\"application/vnd.openxmlformats-officedocument.wordprocessingml.document\";s:4:\"docm\";s:48:\"application/vnd.ms-word.document.macroEnabled.12\";s:4:\"dotx\";s:71:\"application/vnd.openxmlformats-officedocument.wordprocessingml.template\";s:4:\"dotm\";s:48:\"application/vnd.ms-word.template.macroEnabled.12\";s:4:\"xlsx\";s:65:\"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\";s:4:\"xlsm\";s:46:\"application/vnd.ms-excel.sheet.macroEnabled.12\";s:4:\"xlsb\";s:53:\"application/vnd.ms-excel.sheet.binary.macroEnabled.12\";s:4:\"xltx\";s:68:\"application/vnd.openxmlformats-officedocument.spreadsheetml.template\";s:4:\"xltm\";s:49:\"application/vnd.ms-excel.template.macroEnabled.12\";s:4:\"xlam\";s:46:\"application/vnd.ms-excel.addin.macroEnabled.12\";s:4:\"pptx\";s:73:\"application/vnd.openxmlformats-officedocument.presentationml.presentation\";s:4:\"pptm\";s:58:\"application/vnd.ms-powerpoint.presentation.macroEnabled.12\";s:4:\"ppsx\";s:70:\"application/vnd.openxmlformats-officedocument.presentationml.slideshow\";s:4:\"ppsm\";s:55:\"application/vnd.ms-powerpoint.slideshow.macroEnabled.12\";s:4:\"potx\";s:69:\"application/vnd.openxmlformats-officedocument.presentationml.template\";s:4:\"potm\";s:54:\"application/vnd.ms-powerpoint.template.macroEnabled.12\";s:4:\"ppam\";s:51:\"application/vnd.ms-powerpoint.addin.macroEnabled.12\";s:4:\"sldx\";s:66:\"application/vnd.openxmlformats-officedocument.presentationml.slide\";s:4:\"sldm\";s:51:\"application/vnd.ms-powerpoint.slide.macroEnabled.12\";s:28:\"onetoc|onetoc2|onetmp|onepkg\";s:19:\"application/onenote\";s:4:\"oxps\";s:16:\"application/oxps\";s:3:\"xps\";s:30:\"application/vnd.ms-xpsdocument\";s:3:\"odt\";s:39:\"application/vnd.oasis.opendocument.text\";s:3:\"odp\";s:47:\"application/vnd.oasis.opendocument.presentation\";s:3:\"ods\";s:46:\"application/vnd.oasis.opendocument.spreadsheet\";s:3:\"odg\";s:43:\"application/vnd.oasis.opendocument.graphics\";s:3:\"odc\";s:40:\"application/vnd.oasis.opendocument.chart\";s:3:\"odb\";s:43:\"application/vnd.oasis.opendocument.database\";s:3:\"odf\";s:42:\"application/vnd.oasis.opendocument.formula\";s:6:\"wp|wpd\";s:23:\"application/wordperfect\";s:3:\"key\";s:29:\"application/vnd.apple.keynote\";s:7:\"numbers\";s:29:\"application/vnd.apple.numbers\";s:5:\"pages\";s:27:\"application/vnd.apple.pages\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'jm_mut_mime_types' , 'a:96:{s:12:&quot;jpg|jpeg|jpe&quot;;s:10:&quot;image/jpeg&quot;;s:3:&quot;gif&quot;;s:9:&quot;image/gif&quot;;s:3:&quot;png&quot;;s:9:&quot;image/png&quot;;s:3:&quot;bmp&quot;;s:9:&quot;image/bmp&quot;;s:8:&quot;tiff|tif&quot;;s:10:&quot;image/tiff&quot;;s:4:&quot;webp&quot;;s:10:&quot;image/webp&quot;;s:4:&quot;avif&quot;;s:10:&quot;image/avif&quot;;s:3:&quot;ico&quot;;s:12:&quot;image/x-icon&quot;;s:4:&quot;heic&quot;;s:10:&quot;image/heic&quot;;s:4:&quot;heif&quot;;s:10:&quot;image/heif&quot;;s:5:&quot;heics&quot;;s:19:&quot;image/heic-sequence&quot;;s:5:&quot;heifs&quot;;s:19:&quot;image/heif-sequence&quot;;s:7:&quot;asf|asx&quot;;s:14:&quot;video/x-ms-asf&quot;;s:3:&quot;wmv&quot;;s:14:&quot;video/x-ms-wmv&quot;;s:3:&quot;wmx&quot;;s:14:&quot;video/x-ms-wmx&quot;;s:2:&quot;wm&quot;;s:13:&quot;video/x-ms-wm&quot;;s:3:&quot;avi&quot;;s:9:&quot;video/avi&quot;;s:4:&quot;divx&quot;;s:10:&quot;video/divx&quot;;s:3:&quot;flv&quot;;s:11:&quot;video/x-flv&quot;;s:6:&quot;mov|qt&quot;;s:15:&quot;video/quicktime&quot;;s:12:&quot;mpeg|mpg|mpe&quot;;s:10:&quot;video/mpeg&quot;;s:7:&quot;mp4|m4v&quot;;s:9:&quot;video/mp4&quot;;s:3:&quot;ogv&quot;;s:9:&quot;video/ogg&quot;;s:4:&quot;webm&quot;;s:10:&quot;video/webm&quot;;s:3:&quot;mkv&quot;;s:16:&quot;video/x-matroska&quot;;s:8:&quot;3gp|3gpp&quot;;s:10:&quot;video/3gpp&quot;;s:8:&quot;3g2|3gp2&quot;;s:11:&quot;video/3gpp2&quot;;s:18:&quot;txt|asc|c|cc|h|srt&quot;;s:10:&quot;text/plain&quot;;s:3:&quot;csv&quot;;s:8:&quot;text/csv&quot;;s:3:&quot;tsv&quot;;s:25:&quot;text/tab-separated-values&quot;;s:3:&quot;ics&quot;;s:13:&quot;text/calendar&quot;;s:3:&quot;rtx&quot;;s:13:&quot;text/richtext&quot;;s:3:&quot;css&quot;;s:8:&quot;text/css&quot;;s:8:&quot;htm|html&quot;;s:9:&quot;text/html&quot;;s:3:&quot;vtt&quot;;s:8:&quot;text/vtt&quot;;s:4:&quot;dfxp&quot;;s:20:&quot;application/ttaf+xml&quot;;s:11:&quot;mp3|m4a|m4b&quot;;s:10:&quot;audio/mpeg&quot;;s:3:&quot;aac&quot;;s:9:&quot;audio/aac&quot;;s:6:&quot;ra|ram&quot;;s:17:&quot;audio/x-realaudio&quot;;s:3:&quot;wav&quot;;s:9:&quot;audio/wav&quot;;s:7:&quot;ogg|oga&quot;;s:9:&quot;audio/ogg&quot;;s:4:&quot;flac&quot;;s:10:&quot;audio/flac&quot;;s:8:&quot;mid|midi&quot;;s:10:&quot;audio/midi&quot;;s:3:&quot;wma&quot;;s:14:&quot;audio/x-ms-wma&quot;;s:3:&quot;wax&quot;;s:14:&quot;audio/x-ms-wax&quot;;s:3:&quot;mka&quot;;s:16:&quot;audio/x-matroska&quot;;s:3:&quot;rtf&quot;;s:15:&quot;application/rtf&quot;;s:2:&quot;js&quot;;s:22:&quot;application/javascript&quot;;s:3:&quot;pdf&quot;;s:15:&quot;application/pdf&quot;;s:5:&quot;class&quot;;s:16:&quot;application/java&quot;;s:3:&quot;tar&quot;;s:17:&quot;application/x-tar&quot;;s:3:&quot;zip&quot;;s:15:&quot;application/zip&quot;;s:7:&quot;gz|gzip&quot;;s:18:&quot;application/x-gzip&quot;;s:3:&quot;rar&quot;;s:15:&quot;application/rar&quot;;s:2:&quot;7z&quot;;s:27:&quot;application/x-7z-compressed&quot;;s:3:&quot;psd&quot;;s:24:&quot;application/octet-stream&quot;;s:3:&quot;xcf&quot;;s:24:&quot;application/octet-stream&quot;;s:3:&quot;doc&quot;;s:18:&quot;application/msword&quot;;s:11:&quot;pot|pps|ppt&quot;;s:29:&quot;application/vnd.ms-powerpoint&quot;;s:3:&quot;wri&quot;;s:24:&quot;application/vnd.ms-write&quot;;s:15:&quot;xla|xls|xlt|xlw&quot;;s:24:&quot;application/vnd.ms-excel&quot;;s:3:&quot;mdb&quot;;s:25:&quot;application/vnd.ms-access&quot;;s:3:&quot;mpp&quot;;s:26:&quot;application/vnd.ms-project&quot;;s:4:&quot;docx&quot;;s:71:&quot;application/vnd.openxmlformats-officedocument.wordprocessingml.document&quot;;s:4:&quot;docm&quot;;s:48:&quot;application/vnd.ms-word.document.macroEnabled.12&quot;;s:4:&quot;dotx&quot;;s:71:&quot;application/vnd.openxmlformats-officedocument.wordprocessingml.template&quot;;s:4:&quot;dotm&quot;;s:48:&quot;application/vnd.ms-word.template.macroEnabled.12&quot;;s:4:&quot;xlsx&quot;;s:65:&quot;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&quot;;s:4:&quot;xlsm&quot;;s:46:&quot;application/vnd.ms-excel.sheet.macroEnabled.12&quot;;s:4:&quot;xlsb&quot;;s:53:&quot;application/vnd.ms-excel.sheet.binary.macroEnabled.12&quot;;s:4:&quot;xltx&quot;;s:68:&quot;application/vnd.openxmlformats-officedocument.spreadsheetml.template&quot;;s:4:&quot;xltm&quot;;s:49:&quot;application/vnd.ms-excel.template.macroEnabled.12&quot;;s:4:&quot;xlam&quot;;s:46:&quot;application/vnd.ms-excel.addin.macroEnabled.12&quot;;s:4:&quot;pptx&quot;;s:73:&quot;application/vnd.openxmlformats-officedocument.presentationml.presentation&quot;;s:4:&quot;pptm&quot;;s:58:&quot;application/vnd.ms-powerpoint.presentation.macroEnabled.12&quot;;s:4:&quot;ppsx&quot;;s:70:&quot;application/vnd.openxmlformats-officedocument.presentationml.slideshow&quot;;s:4:&quot;ppsm&quot;;s:55:&quot;application/vnd.ms-powerpoint.slideshow.macroEnabled.12&quot;;s:4:&quot;potx&quot;;s:69:&quot;application/vnd.openxmlformats-officedocument.presentationml.template&quot;;s:4:&quot;potm&quot;;s:54:&quot;application/vnd.ms-powerpoint.template.macroEnabled.12&quot;;s:4:&quot;ppam&quot;;s:51:&quot;application/vnd.ms-powerpoint.addin.macroEnabled.12&quot;;s:4:&quot;sldx&quot;;s:66:&quot;application/vnd.openxmlformats-officedocument.presentationml.slide&quot;;s:4:&quot;sldm&quot;;s:51:&quot;application/vnd.ms-powerpoint.slide.macroEnabled.12&quot;;s:28:&quot;onetoc|onetoc2|onetmp|onepkg&quot;;s:19:&quot;application/onenote&quot;;s:4:&quot;oxps&quot;;s:16:&quot;application/oxps&quot;;s:3:&quot;xps&quot;;s:30:&quot;application/vnd.ms-xpsdocument&quot;;s:3:&quot;odt&quot;;s:39:&quot;application/vnd.oasis.opendocument.text&quot;;s:3:&quot;odp&quot;;s:47:&quot;application/vnd.oasis.opendocument.presentation&quot;;s:3:&quot;ods&quot;;s:46:&quot;application/vnd.oasis.opendocument.spreadsheet&quot;;s:3:&quot;odg&quot;;s:43:&quot;application/vnd.oasis.opendocument.graphics&quot;;s:3:&quot;odc&quot;;s:40:&quot;application/vnd.oasis.opendocument.chart&quot;;s:3:&quot;odb&quot;;s:43:&quot;application/vnd.oasis.opendocument.database&quot;;s:3:&quot;odf&quot;;s:42:&quot;application/vnd.oasis.opendocument.formula&quot;;s:6:&quot;wp|wpd&quot;;s:23:&quot;application/wordperfect&quot;;s:3:&quot;key&quot;;s:29:&quot;application/vnd.apple.keynote&quot;;s:7:&quot;numbers&quot;;s:29:&quot;application/vnd.apple.numbers&quot;;s:5:&quot;pages&quot;;s:27:&quot;application/vnd.apple.pages&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/manage-upload-types/manage-upload-types.php(57): add_option('jm_mut_mime_typ...', Array)
+#5 /wordpress/wp-includes/class-wp-hook.php(326): jm_mut_load_mime_types(Array)
+#6 /wordpress/wp-includes/plugin.php(205): WP_Hook->apply_filters(Array, Array)
+#7 /wordpress/wp-includes/functions.php(3653): apply_filters('upload_mimes', Array, NULL)
+#8 /wordpress/wp-content/plugins/manage-upload-types/manage-upload-types.php(42): get_allowed_mime_types()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): jm_mut_install(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_manage...', false)
+#13 /internal/eval.php(20): activate_plugin('manage-upload-t...')
+#14 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jm_mut_mime_types', 'a:96:{s:12:\"jpg|jpeg|jpe\";s:10:\"image/jpeg\";s:3:\"gif\";s:9:\"image/gif\";s:3:\"png\";s:9:\"image/png\";s:3:\"bmp\";s:9:\"image/bmp\";s:8:\"tiff|tif\";s:10:\"image/tiff\";s:4:\"webp\";s:10:\"image/webp\";s:4:\"avif\";s:10:\"image/avif\";s:3:\"ico\";s:12:\"image/x-icon\";s:4:\"heic\";s:10:\"image/heic\";s:4:\"heif\";s:10:\"image/heif\";s:5:\"heics\";s:19:\"image/heic-sequence\";s:5:\"heifs\";s:19:\"image/heif-sequence\";s:7:\"asf|asx\";s:14:\"video/x-ms-asf\";s:3:\"wmv\";s:14:\"video/x-ms-wmv\";s:3:\"wmx\";s:14:\"video/x-ms-wmx\";s:2:\"wm\";s:13:\"video/x-ms-wm\";s:3:\"avi\";s:9:\"video/avi\";s:4:\"divx\";s:10:\"video/divx\";s:3:\"flv\";s:11:\"video/x-flv\";s:6:\"mov|qt\";s:15:\"video/quicktime\";s:12:\"mpeg|mpg|mpe\";s:10:\"video/mpeg\";s:7:\"mp4|m4v\";s:9:\"video/mp4\";s:3:\"ogv\";s:9:\"video/ogg\";s:4:\"webm\";s:10:\"video/webm\";s:3:\"mkv\";s:16:\"video/x-matroska\";s:8:\"3gp|3gpp\";s:10:\"video/3gpp\";s:8:\"3g2|3gp2\";s:11:\"video/3gpp2\";s:18:\"txt|asc|c|cc|h|srt\";s:10:\"text/plain\";s:3:\"csv\";s:8:\"text/csv\";s:3:\"tsv\";s:25:\"text/tab-separated-values\";s:3:\"ics\";s:13:\"text/calendar\";s:3:\"rtx\";s:13:\"text/richtext\";s:3:\"css\";s:8:\"text/css\";s:8:\"htm|html\";s:9:\"text/html\";s:3:\"vtt\";s:8:\"text/vtt\";s:4:\"dfxp\";s:20:\"application/ttaf+xml\";s:11:\"mp3|m4a|m4b\";s:10:\"audio/mpeg\";s:3:\"aac\";s:9:\"audio/aac\";s:6:\"ra|ram\";s:17:\"audio/x-realaudio\";s:3:\"wav\";s:9:\"audio/wav\";s:7:\"ogg|oga\";s:9:\"audio/ogg\";s:4:\"flac\";s:10:\"audio/flac\";s:8:\"mid|midi\";s:10:\"audio/midi\";s:3:\"wma\";s:14:\"audio/x-ms-wma\";s:3:\"wax\";s:14:\"audio/x-ms-wax\";s:3:\"mka\";s:16:\"audio/x-matroska\";s:3:\"rtf\";s:15:\"application/rtf\";s:2:\"js\";s:22:\"application/javascript\";s:3:\"pdf\";s:15:\"application/pdf\";s:5:\"class\";s:16:\"application/java\";s:3:\"tar\";s:17:\"application/x-tar\";s:3:\"zip\";s:15:\"application/zip\";s:7:\"gz|gzip\";s:18:\"application/x-gzip\";s:3:\"rar\";s:15:\"application/rar\";s:2:\"7z\";s:27:\"application/x-7z-compressed\";s:3:\"psd\";s:24:\"application/octet-stream\";s:3:\"xcf\";s:24:\"application/octet-stream\";s:3:\"doc\";s:18:\"application/msword\";s:11:\"pot|pps|ppt\";s:29:\"application/vnd.ms-powerpoint\";s:3:\"wri\";s:24:\"application/vnd.ms-write\";s:15:\"xla|xls|xlt|xlw\";s:24:\"application/vnd.ms-excel\";s:3:\"mdb\";s:25:\"application/vnd.ms-access\";s:3:\"mpp\";s:26:\"application/vnd.ms-project\";s:4:\"docx\";s:71:\"application/vnd.openxmlformats-officedocument.wordprocessingml.document\";s:4:\"docm\";s:48:\"application/vnd.ms-word.document.macroEnabled.12\";s:4:\"dotx\";s:71:\"application/vnd.openxmlformats-officedocument.wordprocessingml.template\";s:4:\"dotm\";s:48:\"application/vnd.ms-word.template.macroEnabled.12\";s:4:\"xlsx\";s:65:\"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\";s:4:\"xlsm\";s:46:\"application/vnd.ms-excel.sheet.macroEnabled.12\";s:4:\"xlsb\";s:53:\"application/vnd.ms-excel.sheet.binary.macroEnabled.12\";s:4:\"xltx\";s:68:\"application/vnd.openxmlformats-officedocument.spreadsheetml.template\";s:4:\"xltm\";s:49:\"application/vnd.ms-excel.template.macroEnabled.12\";s:4:\"xlam\";s:46:\"application/vnd.ms-excel.addin.macroEnabled.12\";s:4:\"pptx\";s:73:\"application/vnd.openxmlformats-officedocument.presentationml.presentation\";s:4:\"pptm\";s:58:\"application/vnd.ms-powerpoint.presentation.macroEnabled.12\";s:4:\"ppsx\";s:70:\"application/vnd.openxmlformats-officedocument.presentationml.slideshow\";s:4:\"ppsm\";s:55:\"application/vnd.ms-powerpoint.slideshow.macroEnabled.12\";s:4:\"potx\";s:69:\"application/vnd.openxmlformats-officedocument.presentationml.template\";s:4:\"potm\";s:54:\"application/vnd.ms-powerpoint.template.macroEnabled.12\";s:4:\"ppam\";s:51:\"application/vnd.ms-powerpoint.addin.macroEnabled.12\";s:4:\"sldx\";s:66:\"application/vnd.openxmlformats-officedocument.presentationml.slide\";s:4:\"sldm\";s:51:\"application/vnd.ms-powerpoint.slide.macroEnabled.12\";s:28:\"onetoc|onetoc2|onetmp|onepkg\";s:19:\"application/onenote\";s:4:\"oxps\";s:16:\"application/oxps\";s:3:\"xps\";s:30:\"application/vnd.ms-xpsdocument\";s:3:\"odt\";s:39:\"application/vnd.oasis.opendocument.text\";s:3:\"odp\";s:47:\"application/vnd.oasis.opendocument.presentation\";s:3:\"ods\";s:46:\"application/vnd.oasis.opendocument.spreadsheet\";s:3:\"odg\";s:43:\"application/vnd.oasis.opendocument.graphics\";s:3:\"odc\";s:40:\"application/vnd.oasis.opendocument.chart\";s:3:\"odb\";s:43:\"application/vnd.oasis.opendocument.database\";s:3:\"odf\";s:42:\"application/vnd.oasis.opendocument.formula\";s:6:\"wp|wpd\";s:23:\"application/wordperfect\";s:3:\"key\";s:29:\"application/vnd.apple.keynote\";s:7:\"numbers\";s:29:\"application/vnd.apple.numbers\";s:5:\"pages\";s:27:\"application/vnd.apple.pages\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_manage-upload-types/manage-upload-types.php'), WP_Hook->do_action, WP_Hook->apply_filters, jm_mut_install, get_allowed_mime_types, apply_filters('upload_mimes'), WP_Hook->apply_filters, jm_mut_load_mime_types, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:48:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jm_mut_mime_types', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'jm_mut_mime_types' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/manage-upload-types/manage-upload-types.php(43): add_option('jm_mut_mime_typ...', false)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): jm_mut_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_manage...', false)
+#9 /internal/eval.php(20): activate_plugin('manage-upload-t...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jm_mut_mime_types', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_manage-upload-types/manage-upload-types.php'), WP_Hook->do_action, WP_Hook->apply_filters, jm_mut_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:48:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 07:48:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 07:48:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 07:48:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 07:49:03 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 07:49:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 07:49:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 07:49:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 07:49:31 UTC] PHP Fatal error:  Uncaught Error: Non-static method Menu_Manager::bootstrap() cannot be called statically in /wordpress/wp-content/plugins/menu-manager/menu-manager.php:33
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mobile-app-bann...')
-#2 /internal/eval.php(20): activate_plugin('mobile-app-bann...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('menu-manager/me...')
+#2 /internal/eval.php(20): activate_plugin('menu-manager/me...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/mobile-app-banners/index.php on line 782
-[06-Apr-2025 17:21:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/mobile-app-banners/index.php:782
+  thrown in /wordpress/wp-content/plugins/menu-manager/menu-manager.php on line 33
+[09-Apr-2025 07:49:39 UTC] PHP Fatal error:  Uncaught Error: Non-static method Menu_Manager::bootstrap() cannot be called statically in /wordpress/wp-content/plugins/menu-manager/menu-manager.php:33
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mobile-app-bann...')
-#2 /internal/eval.php(20): activate_plugin('mobile-app-bann...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('menu-manager/me...')
+#2 /internal/eval.php(20): activate_plugin('menu-manager/me...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/mobile-app-banners/index.php on line 782
-[06-Apr-2025 17:21:33 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/mobile-app-banners/index.php:782
+  thrown in /wordpress/wp-content/plugins/menu-manager/menu-manager.php on line 33
+[09-Apr-2025 07:49:47 UTC] PHP Fatal error:  Uncaught Error: Non-static method Menu_Manager::bootstrap() cannot be called statically in /wordpress/wp-content/plugins/menu-manager/menu-manager.php:33
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mobile-app-bann...')
-#2 /internal/eval.php(20): activate_plugin('mobile-app-bann...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('menu-manager/me...')
+#2 /internal/eval.php(20): activate_plugin('menu-manager/me...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/mobile-app-banners/index.php on line 782
-[06-Apr-2025 17:21:46 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 17:21:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 17:21:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 17:21:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 17:21:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 17:21:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 17:21:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 17:21:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 17:22:09 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 17:22:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 17:22:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 17:22:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 17:22:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+  thrown in /wordpress/wp-content/plugins/menu-manager/menu-manager.php on line 33
+[09-Apr-2025 07:49:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:28:\"moose-elementor-kit/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:6:\"2.11.0\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1743960153;s:11:\"plugin_path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";s:8:\"sdk_path\";s:28:\"moose-elementor-kit/freemius\";s:7:\"version\";s:6:\"2.11.0\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1743960153;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('MHS_TM_db_version', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -50,7 +385,7 @@ Stack trace:
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_active_plugins' , 'O:8:&quot;stdClass&quot;:3:{s:7:&quot;plugins&quot;;a:1:{s:28:&quot;moose-elementor-kit/freemius&quot;;O:8:&quot;stdClass&quot;:4:{s:7:&quot;version&quot;;s:6:&quot;2.11.0&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:9:&quot;timestamp&quot;;i:1743960153;s:11:&quot;plugin_path&quot;;s:43:&quot;moose-elementor-kit/moose-elementor-kit.php&quot;;}}s:7:&quot;abspath&quot;;s:11:&quot;/wordpress/&quot;;s:6:&quot;newest&quot;;O:8:&quot;stdClass&quot;:5:{s:11:&quot;plugin_path&quot;;s:43:&quot;moose-elementor-kit/moose-elementor-kit.php&quot;;s:8:&quot;sdk_path&quot;;s:28:&quot;moose-elementor-kit/freemius&quot;;s:7:&quot;version&quot;;s:6:&quot;2.11.0&quot;;s:13:&quot;in_activation&quot;;b:1;s:9:&quot;timestamp&quot;;i:1743960153;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'MHS_TM_db_version' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -62,20 +397,23 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_active_plugi...', Object(stdClass), '', 'auto')
-#5 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/fs-essential-functions.php(279): update_option('fs_active_plugi...', Object(stdClass))
-#6 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/start.php(242): fs_update_sdk_newest_version('moose-elementor...', 'moose-elementor...')
-#7 /wordpress/wp-content/plugins/moose-elementor-kit/moose-elementor-kit.php(42): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/moose-elementor-kit/moose-elementor-kit.php(62): mek_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('moose-elementor...')
-#11 /internal/eval.php(20): activate_plugin('moose-elementor...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:28:\"moose-elementor-kit/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:6:\"2.11.0\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1743960153;s:11:\"plugin_path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";s:8:\"sdk_path\";s:28:\"moose-elementor-kit/freemius\";s:7:\"version\";s:6:\"2.11.0\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1743960153;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/moose-elementor-kit/moose-elementor-kit.php'), mek_fs, require_once('/plugins/moose-elementor-kit/freemius/start.php'), fs_update_sdk_newest_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 17:22:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/mhs-travel-map/mhs-tm.php(294): add_option('MHS_TM_db_versi...', NULL)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): MHS_TM_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_mhs-tr...', false)
+#9 /internal/eval.php(20): activate_plugin('mhs-travel-map/...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('MHS_TM_db_version', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_mhs-travel-map/mhs-tm.php'), WP_Hook->do_action, WP_Hook->apply_filters, MHS_TM_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:49:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/mhs-travel-map/includes/class-mhs-tm-utilities.php on line 80
+[09-Apr-2025 07:49:56 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 07:49:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 07:49:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 07:49:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 07:49:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('MHS_TM_db_version', '1.1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -87,7 +425,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_debug_mode' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'MHS_TM_db_version' , '1.1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -99,376 +437,99 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/config.php(307): add_option('fs_debug_mode', false)
-#5 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/require.php(14): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/start.php(576): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-content/plugins/moose-elementor-kit/moose-elementor-kit.php(42): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/moose-elementor-kit/moose-elementor-kit.php(62): mek_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('moose-elementor...')
-#11 /internal/eval.php(20): activate_plugin('moose-elementor...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/moose-elementor-kit/moose-elementor-kit.php'), mek_fs, require_once('/plugins/moose-elementor-kit/freemius/start.php'), require_once('/plugins/moose-elementor-kit/freemius/require.php'), require_once('/plugins/moose-elementor-kit/freemius/config.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 17:22:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/mhs-travel-map/mhs-tm.php(294): add_option('MHS_TM_db_versi...', '1.1')
+#5 /wordpress/wp-content/plugins/mhs-travel-map/mhs-tm.php(379): MHS_TM_install()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): MHS_TM_update_db_check('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('MHS_TM_db_version', '1.1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, MHS_TM_update_db_check, MHS_TM_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:49:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/mhs-travel-map/includes/class-mhs-tm-utilities.php on line 80
+[09-Apr-2025 07:50:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:9846;a:3:{s:4:\"slug\";s:19:\"moose-elementor-kit\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TABLE wp_mhs_tm_maps (
+                        id int UNSIGNED NOT NULL AUTO_INCREMENT ,
+                        active BOOL NOT NULL DEFAULT true,
+                        create_date DATETIME NOT NULL DEFAULT 0 ,
+                        updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+                        route_ids LONGTEXT NOT NULL ,
+                        options LONGTEXT NOT NULL ,
+                        selected BOOL NOT NULL,
+                        PRIMARY KEY  (id)
+                );</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:1:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9846;a:3:{s:4:&quot;slug&quot;;s:19:&quot;moose-elementor-kit&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:43:&quot;moose-elementor-kit/moose-elementor-kit.php&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: active.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('id_slug_type_pa...', Array, true)
-#8 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-freemius.php(2209): FS_Options->set_option('id_slug_type_pa...', Array, true)
-#9 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-freemius.php(416): Freemius->store_id_slug_type_path_map('9846', 'moose-elementor...')
-#10 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-freemius.php(2868): Freemius->__construct('9846', 'moose-elementor...', true)
-#11 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/start.php(615): Freemius::instance('9846', 'moose-elementor...', true)
-#12 /wordpress/wp-content/plugins/moose-elementor-kit/moose-elementor-kit.php(44): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/moose-elementor-kit/moose-elementor-kit.php(62): mek_fs()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('moose-elementor...')
-#16 /internal/eval.php(20): activate_plugin('moose-elementor...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:9846;a:3:{s:4:\"slug\";s:19:\"moose-elementor-kit\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/moose-elementor-kit/moose-elementor-kit.php'), mek_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_id_slug_type_path_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 17:22:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/mhs-travel-map/mhs-tm.php(283): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): MHS_TM_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_mhs-tr...', false)
+#7 /internal/eval.php(20): activate_plugin('mhs-travel-map/...')
+#8 {main}</pre>
+ for query CREATE TABLE wp_mhs_tm_maps (
+                        id int UNSIGNED NOT NULL AUTO_INCREMENT ,
+                        active BOOL NOT NULL DEFAULT true,
+                        create_date DATETIME NOT NULL DEFAULT 0 ,
+                        updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+                        route_ids LONGTEXT NOT NULL ,
+                        options LONGTEXT NOT NULL ,
+                        selected BOOL NOT NULL,
+                        PRIMARY KEY  (id)
+                ); made by activate_plugin, do_action('activate_mhs-travel-map/mhs-tm.php'), WP_Hook->do_action, WP_Hook->apply_filters, MHS_TM_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:50:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:9846;a:3:{s:4:\"slug\";s:19:\"moose-elementor-kit\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"moose-elementor-kit\";a:1:{s:19:\"last_load_timestamp\";i:1743960153;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TABLE wp_mhs_tm_routes (
+                        id int UNSIGNED NOT NULL AUTO_INCREMENT ,
+                        active BOOL NOT NULL DEFAULT true,
+                        create_date DATETIME NOT NULL DEFAULT 0 ,
+                        updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+                        coordinates LONGTEXT NOT NULL ,
+                        options LONGTEXT NOT NULL ,
+                        PRIMARY KEY  (id)
+                );</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9846;a:3:{s:4:&quot;slug&quot;;s:19:&quot;moose-elementor-kit&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:43:&quot;moose-elementor-kit/moose-elementor-kit.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:19:&quot;moose-elementor-kit&quot;;a:1:{s:19:&quot;last_load_timestamp&quot;;i:1743960153;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unexpected token in MySQL query: active.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('last_load_times...', 1743960153)
-#9 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('last_load_times...', 1743960153)
-#10 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-freemius.php(432): FS_Storage->__set('last_load_times...', 1743960153)
-#11 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-freemius.php(2868): Freemius->__construct('9846', 'moose-elementor...', true)
-#12 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/start.php(615): Freemius::instance('9846', 'moose-elementor...', true)
-#13 /wordpress/wp-content/plugins/moose-elementor-kit/moose-elementor-kit.php(44): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/moose-elementor-kit/moose-elementor-kit.php(62): mek_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('moose-elementor...')
-#17 /internal/eval.php(20): activate_plugin('moose-elementor...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:9846;a:3:{s:4:\"slug\";s:19:\"moose-elementor-kit\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"moose-elementor-kit\";a:1:{s:19:\"last_load_timestamp\";i:1743960153;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/moose-elementor-kit/moose-elementor-kit.php'), mek_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 17:22:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:9846;a:3:{s:4:\"slug\";s:19:\"moose-elementor-kit\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"moose-elementor-kit\";a:2:{s:19:\"last_load_timestamp\";i:1743960153;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9846;a:3:{s:4:&quot;slug&quot;;s:19:&quot;moose-elementor-kit&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:43:&quot;moose-elementor-kit/moose-elementor-kit.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:19:&quot;moose-elementor-kit&quot;;a:2:{s:19:&quot;last_load_timestamp&quot;;i:1743960153;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:43:&quot;moose-elementor-kit/moose-elementor-kit.php&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_main_fil...', Object(stdClass))
-#9 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('plugin_main_fil...', Object(stdClass))
-#10 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-freemius.php(2066): FS_Storage->__set('plugin_main_fil...', Object(stdClass))
-#11 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-freemius.php(439): Freemius->_find_caller_plugin_file(true, 'moose-elementor...')
-#12 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-freemius.php(2868): Freemius->__construct('9846', 'moose-elementor...', true)
-#13 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/start.php(615): Freemius::instance('9846', 'moose-elementor...', true)
-#14 /wordpress/wp-content/plugins/moose-elementor-kit/moose-elementor-kit.php(44): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/moose-elementor-kit/moose-elementor-kit.php(62): mek_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('moose-elementor...')
-#18 /internal/eval.php(20): activate_plugin('moose-elementor...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:9846;a:3:{s:4:\"slug\";s:19:\"moose-elementor-kit\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"moose-elementor-kit\";a:2:{s:19:\"last_load_timestamp\";i:1743960153;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/moose-elementor-kit/moose-elementor-kit.php'), mek_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_find_caller_plugin_file, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 17:22:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:9846;a:3:{s:4:\"slug\";s:19:\"moose-elementor-kit\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"moose-elementor-kit\";a:3:{s:19:\"last_load_timestamp\";i:1743960153;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9846;a:3:{s:4:&quot;slug&quot;;s:19:&quot;moose-elementor-kit&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:43:&quot;moose-elementor-kit/moose-elementor-kit.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:19:&quot;moose-elementor-kit&quot;;a:3:{s:19:&quot;last_load_timestamp&quot;;i:1743960153;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:43:&quot;moose-elementor-kit/moose-elementor-kit.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_network_acti...', false)
-#9 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('is_network_acti...', false)
-#10 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-freemius.php(467): FS_Storage->__set('is_network_acti...', false)
-#11 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-freemius.php(2868): Freemius->__construct('9846', 'moose-elementor...', true)
-#12 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/start.php(615): Freemius::instance('9846', 'moose-elementor...', true)
-#13 /wordpress/wp-content/plugins/moose-elementor-kit/moose-elementor-kit.php(44): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/moose-elementor-kit/moose-elementor-kit.php(62): mek_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('moose-elementor...')
-#17 /internal/eval.php(20): activate_plugin('moose-elementor...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:9846;a:3:{s:4:\"slug\";s:19:\"moose-elementor-kit\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"moose-elementor-kit\";a:3:{s:19:\"last_load_timestamp\";i:1743960153;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/moose-elementor-kit/moose-elementor-kit.php'), mek_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 17:22:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9846;a:3:{s:4:\"slug\";s:19:\"moose-elementor-kit\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"moose-elementor-kit\";a:3:{s:19:\"last_load_timestamp\";i:1743960153;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:43:\"moose-elementor-kit/moose-elementor-kit.php\";s:19:\"moose-elementor-kit\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9846;a:3:{s:4:&quot;slug&quot;;s:19:&quot;moose-elementor-kit&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:43:&quot;moose-elementor-kit/moose-elementor-kit.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:19:&quot;moose-elementor-kit&quot;;a:3:{s:19:&quot;last_load_timestamp&quot;;i:1743960153;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:43:&quot;moose-elementor-kit/moose-elementor-kit.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:43:&quot;moose-elementor-kit/moose-elementor-kit.php&quot;;s:19:&quot;moose-elementor-kit&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('file_slug_map', Array, true)
-#8 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-freemius.php(10355): FS_Options->set_option('file_slug_map', Array, true)
-#9 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-freemius.php(514): Freemius->store_file_slug_map()
-#10 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-freemius.php(2868): Freemius->__construct('9846', 'moose-elementor...', true)
-#11 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/start.php(615): Freemius::instance('9846', 'moose-elementor...', true)
-#12 /wordpress/wp-content/plugins/moose-elementor-kit/moose-elementor-kit.php(44): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/moose-elementor-kit/moose-elementor-kit.php(62): mek_fs()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('moose-elementor...')
-#16 /internal/eval.php(20): activate_plugin('moose-elementor...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9846;a:3:{s:4:\"slug\";s:19:\"moose-elementor-kit\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"moose-elementor-kit\";a:3:{s:19:\"last_load_timestamp\";i:1743960153;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:43:\"moose-elementor-kit/moose-elementor-kit.php\";s:19:\"moose-elementor-kit\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/moose-elementor-kit/moose-elementor-kit.php'), mek_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_file_slug_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 17:22:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9846;a:3:{s:4:\"slug\";s:19:\"moose-elementor-kit\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"moose-elementor-kit\";a:4:{s:19:\"last_load_timestamp\";i:1743960153;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1743960153;}}s:13:\"file_slug_map\";a:1:{s:43:\"moose-elementor-kit/moose-elementor-kit.php\";s:19:\"moose-elementor-kit\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9846;a:3:{s:4:&quot;slug&quot;;s:19:&quot;moose-elementor-kit&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:43:&quot;moose-elementor-kit/moose-elementor-kit.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:19:&quot;moose-elementor-kit&quot;;a:4:{s:19:&quot;last_load_timestamp&quot;;i:1743960153;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:43:&quot;moose-elementor-kit/moose-elementor-kit.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1743960153;}}s:13:&quot;file_slug_map&quot;;a:1:{s:43:&quot;moose-elementor-kit/moose-elementor-kit.php&quot;;s:19:&quot;moose-elementor-kit&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('install_timesta...', 1743960153)
-#9 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('install_timesta...', 1743960153)
-#10 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-freemius.php(518): FS_Storage->__set('install_timesta...', 1743960153)
-#11 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-freemius.php(2868): Freemius->__construct('9846', 'moose-elementor...', true)
-#12 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/start.php(615): Freemius::instance('9846', 'moose-elementor...', true)
-#13 /wordpress/wp-content/plugins/moose-elementor-kit/moose-elementor-kit.php(44): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/moose-elementor-kit/moose-elementor-kit.php(62): mek_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('moose-elementor...')
-#17 /internal/eval.php(20): activate_plugin('moose-elementor...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9846;a:3:{s:4:\"slug\";s:19:\"moose-elementor-kit\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"moose-elementor-kit\";a:4:{s:19:\"last_load_timestamp\";i:1743960153;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1743960153;}}s:13:\"file_slug_map\";a:1:{s:43:\"moose-elementor-kit/moose-elementor-kit.php\";s:19:\"moose-elementor-kit\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/moose-elementor-kit/moose-elementor-kit.php'), mek_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 17:22:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9846;a:3:{s:4:\"slug\";s:19:\"moose-elementor-kit\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"moose-elementor-kit\";a:5:{s:19:\"last_load_timestamp\";i:1743960153;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1743960153;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:43:\"moose-elementor-kit/moose-elementor-kit.php\";s:19:\"moose-elementor-kit\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9846;a:3:{s:4:&quot;slug&quot;;s:19:&quot;moose-elementor-kit&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:43:&quot;moose-elementor-kit/moose-elementor-kit.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:19:&quot;moose-elementor-kit&quot;;a:5:{s:19:&quot;last_load_timestamp&quot;;i:1743960153;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:43:&quot;moose-elementor-kit/moose-elementor-kit.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1743960153;s:17:&quot;was_plugin_loaded&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:43:&quot;moose-elementor-kit/moose-elementor-kit.php&quot;;s:19:&quot;moose-elementor-kit&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('was_plugin_load...', true)
-#9 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('was_plugin_load...', true)
-#10 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-freemius.php(1337): FS_Storage->__set('was_plugin_load...', true)
-#11 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-freemius.php(1486): Freemius->_plugins_loaded()
-#12 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-freemius.php(548): Freemius->register_constructor_hooks()
-#13 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-freemius.php(2868): Freemius->__construct('9846', 'moose-elementor...', true)
-#14 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/start.php(615): Freemius::instance('9846', 'moose-elementor...', true)
-#15 /wordpress/wp-content/plugins/moose-elementor-kit/moose-elementor-kit.php(44): fs_dynamic_init(Array)
-#16 /wordpress/wp-content/plugins/moose-elementor-kit/moose-elementor-kit.php(62): mek_fs()
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('moose-elementor...')
-#19 /internal/eval.php(20): activate_plugin('moose-elementor...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9846;a:3:{s:4:\"slug\";s:19:\"moose-elementor-kit\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"moose-elementor-kit\";a:5:{s:19:\"last_load_timestamp\";i:1743960153;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1743960153;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:43:\"moose-elementor-kit/moose-elementor-kit.php\";s:19:\"moose-elementor-kit\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/moose-elementor-kit/moose-elementor-kit.php'), mek_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->register_constructor_hooks, Freemius->_plugins_loaded, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 17:22:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9846;a:3:{s:4:\"slug\";s:19:\"moose-elementor-kit\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"moose-elementor-kit\";a:6:{s:19:\"last_load_timestamp\";i:1743960153;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1743960153;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;}}s:13:\"file_slug_map\";a:1:{s:43:\"moose-elementor-kit/moose-elementor-kit.php\";s:19:\"moose-elementor-kit\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9846;a:3:{s:4:&quot;slug&quot;;s:19:&quot;moose-elementor-kit&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:43:&quot;moose-elementor-kit/moose-elementor-kit.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:19:&quot;moose-elementor-kit&quot;;a:6:{s:19:&quot;last_load_timestamp&quot;;i:1743960153;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:43:&quot;moose-elementor-kit/moose-elementor-kit.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1743960153;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:43:&quot;moose-elementor-kit/moose-elementor-kit.php&quot;;s:19:&quot;moose-elementor-kit&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_plugin_new_i...', true)
-#9 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('is_plugin_new_i...', true)
-#10 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-freemius.php(1351): FS_Storage->__set('is_plugin_new_i...', true)
-#11 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-freemius.php(1486): Freemius->_plugins_loaded()
-#12 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-freemius.php(548): Freemius->register_constructor_hooks()
-#13 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/includes/class-freemius.php(2868): Freemius->__construct('9846', 'moose-elementor...', true)
-#14 /wordpress/wp-content/plugins/moose-elementor-kit/freemius/start.php(615): Freemius::instance('9846', 'moose-elementor...', true)
-#15 /wordpress/wp-content/plugins/moose-elementor-kit/moose-elementor-kit.php(44): fs_dynamic_init(Array)
-#16 /wordpress/wp-content/plugins/moose-elementor-kit/moose-elementor-kit.php(62): mek_fs()
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('moose-elementor...')
-#19 /internal/eval.php(20): activate_plugin('moose-elementor...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9846;a:3:{s:4:\"slug\";s:19:\"moose-elementor-kit\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"moose-elementor-kit\";a:6:{s:19:\"last_load_timestamp\";i:1743960153;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1743960153;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;}}s:13:\"file_slug_map\";a:1:{s:43:\"moose-elementor-kit/moose-elementor-kit.php\";s:19:\"moose-elementor-kit\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/moose-elementor-kit/moose-elementor-kit.php'), mek_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->register_constructor_hooks, Freemius->_plugins_loaded, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 17:22:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:9846;a:3:{s:4:\"slug\";s:19:\"moose-elementor-kit\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}}s:11:\"plugin_data\";a:1:{s:19:\"moose-elementor-kit\";a:7:{s:19:\"last_load_timestamp\";i:1743960153;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:43:\"moose-elementor-kit/moose-elementor-kit.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1743960153;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:43:\"moose-elementor-kit/moose-elementor-kit.php\";s:19:\"moose-elementor-kit\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:9846;a:3:{s:4:&quot;slug&quot;;s:19:&quot;moose-elementor-kit&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:43:&quot;moose-elementor-kit/moose-elementor-kit.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:19:&quot;moose-elementor-kit&quot;;a:7:{s:19:&quot;last_load_timestamp&quot;;i:1743960153;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:43:&quot;moose-elementor-kit/moose-elementor-kit.
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/mhs-travel-map/mhs-tm.php(283): dbDelta(Array)
+#3 /wordpress/wp-includes/class-wp-hook.php(324): MHS_TM_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_mhs-tr...', false)
+#7 /internal/eval.php(20): activate_plugin('mhs-travel-map/...')
+#8 {main}</pre>
+ for query CREATE TABLE wp_mhs_tm_routes (
+                        id int UNSIGNED NOT NULL AUTO_INCREMENT ,
+                        active BOOL NOT NULL DEFAULT true,
+                        create_date DATETIME NOT NULL DEFAULT 0 ,
+                        updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+                        coordinates LONGTEXT NOT NULL ,
+                        options LONGTEXT NOT NULL ,
+                        PRIMARY KEY  (id)
+                ); made by activate_plugin, do_action('activate_mhs-travel-map/mhs-tm.php'), WP_Hook->do_action, WP_Hook->apply_filters, MHS_TM_install, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 07:50:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:r
