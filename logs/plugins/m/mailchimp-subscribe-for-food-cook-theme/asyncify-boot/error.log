@@ -2,10 +2,10 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [07-Apr-2025 18:34:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [09-Apr-2025 20:27:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:30:\"mrkwp-footer-for-divi/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:5:\"2.3.1\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744050862;s:11:\"plugin_path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";s:8:\"sdk_path\";s:30:\"mrkwp-footer-for-divi/freemius\";s:7:\"version\";s:5:\"2.3.1\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744050862;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('martkit-version', '1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -17,7 +17,7 @@ Error: [07-Apr-2025 18:34:22 UTC] WordPress database error <div style="clear:bot
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_active_plugins' , 'O:8:&quot;stdClass&quot;:3:{s:7:&quot;plugins&quot;;a:1:{s:30:&quot;mrkwp-footer-for-divi/freemius&quot;;O:8:&quot;stdClass&quot;:4:{s:7:&quot;version&quot;;s:5:&quot;2.3.1&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:9:&quot;timestamp&quot;;i:1744050862;s:11:&quot;plugin_path&quot;;s:47:&quot;mrkwp-footer-for-divi/mrkwp-footer-for-divi.php&quot;;}}s:7:&quot;abspath&quot;;s:11:&quot;/wordpress/&quot;;s:6:&quot;newest&quot;;O:8:&quot;stdClass&quot;:5:{s:11:&quot;plugin_path&quot;;s:47:&quot;mrkwp-footer-for-divi/mrkwp-footer-for-divi.php&quot;;s:8:&quot;sdk_path&quot;;s:30:&quot;mrkwp-footer-for-divi/freemius&quot;;s:7:&quot;version&quot;;s:5:&quot;2.3.1&quot;;s:13:&quot;in_activation&quot;;b:1;s:9:&quot;timestamp&quot;;i:1744050862;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'martkit-version' , '1.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -29,20 +29,28 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_active_plugi...', Object(stdClass), '', 'auto')
-#5 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/fs-essential-functions.php(362): update_option('fs_active_plugi...', Object(stdClass))
-#6 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/start.php(158): fs_update_sdk_newest_version('mrkwp-footer-fo...', 'mrkwp-footer-fo...')
-#7 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php(46): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php(75): dfgfi_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mrkwp-footer-fo...')
-#11 /internal/eval.php(20): activate_plugin('mrkwp-footer-fo...')
+#4 /wordpress/wp-includes/option.php(921): add_option('martkit-version', '1.0', '', 'auto')
+#5 /wordpress/wp-content/plugins/martkit/martkit.php(119): update_option('martkit-version', '1.0')
+#6 /wordpress/wp-content/plugins/martkit/martkit.php(114): MartkitOptimizer->log_plugin_version_number()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): MartkitOptimizer->install(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_martki...', false)
+#11 /internal/eval.php(20): activate_plugin('martkit/martkit...')
 #12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:30:\"mrkwp-footer-for-divi/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:5:\"2.3.1\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744050862;s:11:\"plugin_path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";s:8:\"sdk_path\";s:30:\"mrkwp-footer-for-divi/freemius\";s:7:\"version\";s:5:\"2.3.1\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744050862;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php'), dfgfi_fs, include_once('/plugins/mrkwp-footer-for-divi/freemius/start.php'), fs_update_sdk_newest_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 18:34:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('martkit-version', '1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_martkit/martkit.php'), WP_Hook->do_action, WP_Hook->apply_filters, MartkitOptimizer->install, MartkitOptimizer->log_plugin_version_number, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 20:27:41 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 20:27:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 20:27:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 20:27:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 20:28:29 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 20:28:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 20:28:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 20:28:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 20:29:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpmd_db_browsers', 'a:2:{i:0;a:75:{i:0;s:10:\"Opera Mini\";i:1;s:6:\"iPhone\";i:2;s:10:\"BlackBerry\";i:3;s:4:\"iPod\";i:4;s:7:\"Android\";i:5;s:4:\"Bolt\";i:6;s:8:\"IEMobile\";i:7;s:9:\"GoBrowser\";i:8;s:7:\"Skyfire\";i:9;s:8:\"TeaShark\";i:10;s:10:\"UC Browser\";i:11;s:10:\"Opera Mobi\";i:12;s:13:\"Mobile Safari\";i:13;s:12:\"SEMC-Browser\";i:14;s:6:\"Teleca\";i:15;s:8:\"Series60\";i:16;s:5:\"Doris\";i:17;s:7:\"2.0 MMP\";i:18;s:7:\"240x320\";i:19;s:7:\"400X240\";i:20;s:7:\"AvantGo\";i:21;s:6:\"Blazer\";i:22;s:9:\"Cellphone\";i:23;s:6:\"Danger\";i:24;s:6:\"DoCoMo\";i:25;s:10:\"Elaine 3.0\";i:26;s:9:\"EudoraWeb\";i:27;s:6:\"hiptop\";i:28;s:14:\"KYOCERA WX310K\";i:29;s:7:\"LG U990\";i:30;s:7:\"MIDP-2.\";i:31;s:6:\"MMEF20\";i:32;s:5:\"MOT-V\";i:33;s:8:\"NetFront\";i:34;s:4:\"Newt\";i:35;s:12:\"Nintendo Wii\";i:36;s:5:\"Nitro\";i:37;s:5:\"Nokia\";i:38;s:4:\"Palm\";i:39;s:20:\"PlayStation Portable\";i:40;s:8:\"ProxiNet\";i:41;s:13:\"SHARP-TQ-GX10\";i:42;s:8:\"SHG-i900\";i:43;s:5:\"Small\";i:44;s:12:\"SonyEricsson\";i:45;s:6:\"Fennec\";i:46;s:8:\"TS21i-10\";i:47;s:10:\"UP.Browser\";i:48;s:7:\"UP.Link\";i:49;s:10:\"Windows CE\";i:50;s:6:\"WinWAP\";i:51;s:14:\"LG-TU915 Obigo\";i:52;s:6:\"LGE VX\";i:53;s:4:\"Iris\";i:54;s:13:\"Maemo Browser\";i:55;s:16:\"Kindle Basic Web\";i:56;s:14:\"Myriad Browser\";i:57;s:13:\"Obigo Browser\";i:58;s:15:\"Polaris Browser\";i:59;s:8:\"uZardWeb\";i:60;s:5:\"WebOS\";i:61;s:8:\"Deepfish\";i:62;s:7:\"Dolphin\";i:63;s:14:\"Firefox Mobile\";i:64;s:11:\"ibisBrowser\";i:65;s:4:\"JOCA\";i:66;s:5:\"Links\";i:67;s:6:\"Minimo\";i:68;s:4:\"Pixo\";i:69;s:8:\"Skweezer\";i:70;s:5:\"Steel\";i:71;s:7:\"Tristit\";i:72;s:21:\"Vision Mobile Browser\";i:73;s:7:\"Dorothy\";i:74;s:11:\"Ovi Browser\";}i:1;a:1:{i:0;s:2:\"wp\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -54,7 +62,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_debug_mode' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpmd_db_browsers' , 'a:2:{i:0;a:75:{i:0;s:10:&quot;Opera Mini&quot;;i:1;s:6:&quot;iPhone&quot;;i:2;s:10:&quot;BlackBerry&quot;;i:3;s:4:&quot;iPod&quot;;i:4;s:7:&quot;Android&quot;;i:5;s:4:&quot;Bolt&quot;;i:6;s:8:&quot;IEMobile&quot;;i:7;s:9:&quot;GoBrowser&quot;;i:8;s:7:&quot;Skyfire&quot;;i:9;s:8:&quot;TeaShark&quot;;i:10;s:10:&quot;UC Browser&quot;;i:11;s:10:&quot;Opera Mobi&quot;;i:12;s:13:&quot;Mobile Safari&quot;;i:13;s:12:&quot;SEMC-Browser&quot;;i:14;s:6:&quot;Teleca&quot;;i:15;s:8:&quot;Series60&quot;;i:16;s:5:&quot;Doris&quot;;i:17;s:7:&quot;2.0 MMP&quot;;i:18;s:7:&quot;240x320&quot;;i:19;s:7:&quot;400X240&quot;;i:20;s:7:&quot;AvantGo&quot;;i:21;s:6:&quot;Blazer&quot;;i:22;s:9:&quot;Cellphone&quot;;i:23;s:6:&quot;Danger&quot;;i:24;s:6:&quot;DoCoMo&quot;;i:25;s:10:&quot;Elaine 3.0&quot;;i:26;s:9:&quot;EudoraWeb&quot;;i:27;s:6:&quot;hiptop&quot;;i:28;s:14:&quot;KYOCERA WX310K&quot;;i:29;s:7:&quot;LG U990&quot;;i:30;s:7:&quot;MIDP-2.&quot;;i:31;s:6:&quot;MMEF20&quot;;i:32;s:5:&quot;MOT-V&quot;;i:33;s:8:&quot;NetFront&quot;;i:34;s:4:&quot;Newt&quot;;i:35;s:12:&quot;Nintendo Wii&quot;;i:36;s:5:&quot;Nitro&quot;;i:37;s:5:&quot;Nokia&quot;;i:38;s:4:&quot;Palm&quot;;i:39;s:20:&quot;PlayStation Portable&quot;;i:40;s:8:&quot;ProxiNet&quot;;i:41;s:13:&quot;SHARP-TQ-GX10&quot;;i:42;s:8:&quot;SHG-i900&quot;;i:43;s:5:&quot;Small&quot;;i:44;s:12:&quot;SonyEricsson&quot;;i:45;s:6:&quot;Fennec&quot;;i:46;s:8:&quot;TS21i-10&quot;;i:47;s:10:&quot;UP.Browser&quot;;i:48;s:7:&quot;UP.Link&quot;;i:49;s:10:&quot;Windows CE&quot;;i:50;s:6:&quot;WinWAP&quot;;i:51;s:14:&quot;LG-TU915 Obigo&quot;;i:52;s:6:&quot;LGE VX&quot;;i:53;s:4:&quot;Iris&quot;;i:54;s:13:&quot;Maemo Browser&quot;;i:55;s:16:&quot;Kindle Basic Web&quot;;i:56;s:14:&quot;Myriad Browser&quot;;i:57;s:13:&quot;Obigo Browser&quot;;i:58;s:15:&quot;Polaris Browser&quot;;i:59;s:8:&quot;uZardWeb&quot;;i:60;s:5:&quot;WebOS&quot;;i:61;s:8:&quot;Deepfish&quot;;i:62;s:7:&quot;Dolphin&quot;;i:63;s:14:&quot;Firefox Mobile&quot;;i:64;s:11:&quot;ibisBrowser&quot;;i:65;s:4:&quot;JOCA&quot;;i:66;s:5:&quot;Links&quot;;i:67;s:6:&quot;Minimo&quot;;i:68;s:4:&quot;Pixo&quot;;i:69;s:8:&quot;Skweezer&quot;;i:70;s:5:&quot;Steel&quot;;i:71;s:7:&quot;Tristit&quot;;i:72;s:21:&quot;Vision Mobile Browser&quot;;i:73;s:7:&quot;Dorothy&quot;;i:74;s:11:&quot;Ovi Browser&quot;;}i:1;a:1:{i:0;s:2:&quot;wp&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -66,397 +74,80 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/config.php(307): add_option('fs_debug_mode', false)
-#5 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/require.php(10): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/start.php(474): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php(46): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php(75): dfgfi_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mrkwp-footer-fo...')
-#11 /internal/eval.php(20): activate_plugin('mrkwp-footer-fo...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php'), dfgfi_fs, include_once('/plugins/mrkwp-footer-for-divi/freemius/start.php'), require_once('/plugins/mrkwp-footer-for-divi/freemius/require.php'), require_once('/plugins/mrkwp-footer-for-divi/freemius/config.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 18:34:22 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-fs-logger.php on line 145
-[07-Apr-2025 18:34:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:3726;a:3:{s:4:\"slug\";s:21:\"mrkwp-footer-for-divi\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:1:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:3726;a:3:{s:4:&quot;slug&quot;;s:21:&quot;mrkwp-footer-for-divi&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:47:&quot;mrkwp-footer-for-divi/mrkwp-footer-for-divi.php&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('id_slug_type_pa...', Array, true)
-#8 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-freemius.php(2212): FS_Options->set_option('id_slug_type_pa...', Array, true)
-#9 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-freemius.php(389): Freemius->store_id_slug_type_path_map('3726', 'mrkwp-footer-fo...')
-#10 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-freemius.php(2783): Freemius->__construct('3726', 'mrkwp-footer-fo...', true)
-#11 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/start.php(513): Freemius::instance('3726', 'mrkwp-footer-fo...', true)
-#12 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php(48): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php(75): dfgfi_fs()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mrkwp-footer-fo...')
-#16 /internal/eval.php(20): activate_plugin('mrkwp-footer-fo...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:3726;a:3:{s:4:\"slug\";s:21:\"mrkwp-footer-for-divi\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php'), dfgfi_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_id_slug_type_path_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 18:34:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:3726;a:3:{s:4:\"slug\";s:21:\"mrkwp-footer-for-divi\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"mrkwp-footer-for-divi\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:3726;a:3:{s:4:&quot;slug&quot;;s:21:&quot;mrkwp-footer-for-divi&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:47:&quot;mrkwp-footer-for-divi/mrkwp-footer-for-divi.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:21:&quot;mrkwp-footer-for-divi&quot;;a:1:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:47:&quot;mrkwp-footer-for-divi/mrkwp-footer-for-divi.php&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_main_fil...', Object(stdClass))
-#9 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-fs-storage.php(505): FS_Key_Value_Storage->__set('plugin_main_fil...', Object(stdClass))
-#10 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-freemius.php(2109): FS_Storage->__set('plugin_main_fil...', Object(stdClass))
-#11 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-freemius.php(404): Freemius->_find_caller_plugin_file(true)
-#12 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-freemius.php(2783): Freemius->__construct('3726', 'mrkwp-footer-fo...', true)
-#13 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/start.php(513): Freemius::instance('3726', 'mrkwp-footer-fo...', true)
-#14 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php(48): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php(75): dfgfi_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mrkwp-footer-fo...')
-#18 /internal/eval.php(20): activate_plugin('mrkwp-footer-fo...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:3726;a:3:{s:4:\"slug\";s:21:\"mrkwp-footer-for-divi\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"mrkwp-footer-for-divi\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php'), dfgfi_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_find_caller_plugin_file, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 18:34:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:3726;a:3:{s:4:\"slug\";s:21:\"mrkwp-footer-for-divi\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"mrkwp-footer-for-divi\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:3726;a:3:{s:4:&quot;slug&quot;;s:21:&quot;mrkwp-footer-for-divi&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:47:&quot;mrkwp-footer-for-divi/mrkwp-footer-for-divi.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:21:&quot;mrkwp-footer-for-divi&quot;;a:2:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:47:&quot;mrkwp-footer-for-divi/mrkwp-footer-for-divi.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_network_acti...', false)
-#9 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-fs-storage.php(505): FS_Key_Value_Storage->__set('is_network_acti...', false)
-#10 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-freemius.php(432): FS_Storage->__set('is_network_acti...', false)
-#11 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-freemius.php(2783): Freemius->__construct('3726', 'mrkwp-footer-fo...', true)
-#12 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/start.php(513): Freemius::instance('3726', 'mrkwp-footer-fo...', true)
-#13 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php(48): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php(75): dfgfi_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mrkwp-footer-fo...')
-#17 /internal/eval.php(20): activate_plugin('mrkwp-footer-fo...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:3726;a:3:{s:4:\"slug\";s:21:\"mrkwp-footer-for-divi\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"mrkwp-footer-for-divi\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php'), dfgfi_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 18:34:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:3726;a:3:{s:4:\"slug\";s:21:\"mrkwp-footer-for-divi\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"mrkwp-footer-for-divi\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";s:21:\"mrkwp-footer-for-divi\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:3726;a:3:{s:4:&quot;slug&quot;;s:21:&quot;mrkwp-footer-for-divi&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:47:&quot;mrkwp-footer-for-divi/mrkwp-footer-for-divi.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:21:&quot;mrkwp-footer-for-divi&quot;;a:2:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:47:&quot;mrkwp-footer-for-divi/mrkwp-footer-for-divi.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:47:&quot;mrkwp-footer-for-divi/mrkwp-footer-for-divi.php&quot;;s:21:&quot;mrkwp-footer-for-divi&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('file_slug_map', Array, true)
-#8 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-freemius.php(9888): FS_Options->set_option('file_slug_map', Array, true)
-#9 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-freemius.php(479): Freemius->store_file_slug_map()
-#10 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-freemius.php(2783): Freemius->__construct('3726', 'mrkwp-footer-fo...', true)
-#11 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/start.php(513): Freemius::instance('3726', 'mrkwp-footer-fo...', true)
-#12 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php(48): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php(75): dfgfi_fs()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mrkwp-footer-fo...')
-#16 /internal/eval.php(20): activate_plugin('mrkwp-footer-fo...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:3726;a:3:{s:4:\"slug\";s:21:\"mrkwp-footer-for-divi\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"mrkwp-footer-for-divi\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";s:21:\"mrkwp-footer-for-divi\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php'), dfgfi_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_file_slug_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 18:34:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:3726;a:3:{s:4:\"slug\";s:21:\"mrkwp-footer-for-divi\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"mrkwp-footer-for-divi\";a:3:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744050862;}}s:13:\"file_slug_map\";a:1:{s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";s:21:\"mrkwp-footer-for-divi\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:3726;a:3:{s:4:&quot;slug&quot;;s:21:&quot;mrkwp-footer-for-divi&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:47:&quot;mrkwp-footer-for-divi/mrkwp-footer-for-divi.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:21:&quot;mrkwp-footer-for-divi&quot;;a:3:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:47:&quot;mrkwp-footer-for-divi/mrkwp-footer-for-divi.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744050862;}}s:13:&quot;file_slug_map&quot;;a:1:{s:47:&quot;mrkwp-footer-for-divi/mrkwp-footer-for-divi.php&quot;;s:21:&quot;mrkwp-footer-for-divi&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('install_timesta...', 1744050862)
-#9 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-fs-storage.php(505): FS_Key_Value_Storage->__set('install_timesta...', 1744050862)
-#10 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-freemius.php(483): FS_Storage->__set('install_timesta...', 1744050862)
-#11 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-freemius.php(2783): Freemius->__construct('3726', 'mrkwp-footer-fo...', true)
-#12 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/start.php(513): Freemius::instance('3726', 'mrkwp-footer-fo...', true)
-#13 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php(48): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php(75): dfgfi_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mrkwp-footer-fo...')
-#17 /internal/eval.php(20): activate_plugin('mrkwp-footer-fo...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:3726;a:3:{s:4:\"slug\";s:21:\"mrkwp-footer-for-divi\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"mrkwp-footer-for-divi\";a:3:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744050862;}}s:13:\"file_slug_map\";a:1:{s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";s:21:\"mrkwp-footer-for-divi\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php'), dfgfi_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 18:34:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:3726;a:3:{s:4:\"slug\";s:21:\"mrkwp-footer-for-divi\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"mrkwp-footer-for-divi\";a:4:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744050862;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";s:21:\"mrkwp-footer-for-divi\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:3726;a:3:{s:4:&quot;slug&quot;;s:21:&quot;mrkwp-footer-for-divi&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:47:&quot;mrkwp-footer-for-divi/mrkwp-footer-for-divi.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:21:&quot;mrkwp-footer-for-divi&quot;;a:4:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:47:&quot;mrkwp-footer-for-divi/mrkwp-footer-for-divi.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744050862;s:17:&quot;was_plugin_loaded&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:47:&quot;mrkwp-footer-for-divi/mrkwp-footer-for-divi.php&quot;;s:21:&quot;mrkwp-footer-for-divi&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('was_plugin_load...', true)
-#9 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-fs-storage.php(505): FS_Key_Value_Storage->__set('was_plugin_load...', true)
-#10 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-freemius.php(1446): FS_Storage->__set('was_plugin_load...', true)
-#11 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-freemius.php(1589): Freemius->_plugins_loaded()
-#12 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-freemius.php(510): Freemius->register_constructor_hooks()
-#13 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-freemius.php(2783): Freemius->__construct('3726', 'mrkwp-footer-fo...', true)
-#14 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/start.php(513): Freemius::instance('3726', 'mrkwp-footer-fo...', true)
-#15 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php(48): fs_dynamic_init(Array)
-#16 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php(75): dfgfi_fs()
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mrkwp-footer-fo...')
-#19 /internal/eval.php(20): activate_plugin('mrkwp-footer-fo...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:3726;a:3:{s:4:\"slug\";s:21:\"mrkwp-footer-for-divi\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"mrkwp-footer-for-divi\";a:4:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744050862;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";s:21:\"mrkwp-footer-for-divi\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php'), dfgfi_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->register_constructor_hooks, Freemius->_plugins_loaded, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 18:34:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:3726;a:3:{s:4:\"slug\";s:21:\"mrkwp-footer-for-divi\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"mrkwp-footer-for-divi\";a:5:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744050862;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;}}s:13:\"file_slug_map\";a:1:{s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";s:21:\"mrkwp-footer-for-divi\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:3726;a:3:{s:4:&quot;slug&quot;;s:21:&quot;mrkwp-footer-for-divi&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:47:&quot;mrkwp-footer-for-divi/mrkwp-footer-for-divi.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:21:&quot;mrkwp-footer-for-divi&quot;;a:5:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:47:&quot;mrkwp-footer-for-divi/mrkwp-footer-for-divi.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744050862;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:47:&quot;mrkwp-footer-for-divi/mrkwp-footer-for-divi.php&quot;;s:21:&quot;mrkwp-footer-for-divi&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_plugin_new_i...', false)
-#9 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-fs-storage.php(505): FS_Key_Value_Storage->__set('is_plugin_new_i...', false)
-#10 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-freemius.php(1460): FS_Storage->__set('is_plugin_new_i...', false)
-#11 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-freemius.php(1589): Freemius->_plugins_loaded()
-#12 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-freemius.php(510): Freemius->register_constructor_hooks()
-#13 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-freemius.php(2783): Freemius->__construct('3726', 'mrkwp-footer-fo...', true)
-#14 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/start.php(513): Freemius::instance('3726', 'mrkwp-footer-fo...', true)
-#15 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php(48): fs_dynamic_init(Array)
-#16 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php(75): dfgfi_fs()
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mrkwp-footer-fo...')
-#19 /internal/eval.php(20): activate_plugin('mrkwp-footer-fo...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:3726;a:3:{s:4:\"slug\";s:21:\"mrkwp-footer-for-divi\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"mrkwp-footer-for-divi\";a:5:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744050862;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;}}s:13:\"file_slug_map\";a:1:{s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";s:21:\"mrkwp-footer-for-divi\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php'), dfgfi_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->register_constructor_hooks, Freemius->_plugins_loaded, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 18:34:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:3726;a:3:{s:4:\"slug\";s:21:\"mrkwp-footer-for-divi\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"mrkwp-footer-for-divi\";a:6:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744050862;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";s:21:\"mrkwp-footer-for-divi\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:3726;a:3:{s:4:&quot;slug&quot;;s:21:&quot;mrkwp-footer-for-divi&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:47:&quot;mrkwp-footer-for-divi/mrkwp-footer-for-divi.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:21:&quot;mrkwp-footer-for-divi&quot;;a:6:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:47:&quot;mrkwp-footer-for-divi/mrkwp-footer-for-divi.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744050862;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:0;s:16:&quot;sdk_last_version&quot;;N;}}s:13:&quot;file_slug_map&quot;;a:1:{s:47:&quot;mrkwp-footer-for-divi/mrkwp-footer-for-divi.php&quot;;s:21:&quot;mrkwp-footer-for-divi&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_last_versio...', NULL)
-#9 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-fs-storage.php(505): FS_Key_Value_Storage->__set('sdk_last_versio...', NULL)
-#10 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-freemius.php(855): FS_Storage->__set('sdk_last_versio...', NULL)
-#11 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-freemius.php(523): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-freemius.php(2783): Freemius->__construct('3726', 'mrkwp-footer-fo...', true)
-#13 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/start.php(513): Freemius::instance('3726', 'mrkwp-footer-fo...', true)
-#14 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php(48): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php(75): dfgfi_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mrkwp-footer-fo...')
-#18 /internal/eval.php(20): activate_plugin('mrkwp-footer-fo...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:3726;a:3:{s:4:\"slug\";s:21:\"mrkwp-footer-for-divi\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"mrkwp-footer-for-divi\";a:6:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744050862;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";s:21:\"mrkwp-footer-for-divi\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/mrkwp-footer-for-divi/mrkwp-footer-for-divi.php'), dfgfi_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 18:34:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:3726;a:3:{s:4:\"slug\";s:21:\"mrkwp-footer-for-divi\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}}s:11:\"plugin_data\";a:1:{s:21:\"mrkwp-footer-for-divi\";a:7:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744050862;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:0;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.3.1\";}}s:13:\"file_slug_map\";a:1:{s:47:\"mrkwp-footer-for-divi/mrkwp-footer-for-divi.php\";s:21:\"mrkwp-footer-for-divi\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:3726;a:3:{s:4:&quot;slug&quot;;s:21:&quot;mrkwp-footer-for-divi&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:47:&quot;mrkwp-footer-for-divi/mrkwp-footer-for-divi.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:21:&quot;mrkwp-footer-for-divi&quot;;a:7:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:47:&quot;mrkwp-footer-for-divi/mrkwp-footer-for-divi.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744050862;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:0;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;2.3.1&quot;;}}s:13:&quot;file_slug_map&quot;;a:1:{s:47:&quot;mrkwp-footer-for-divi/mrkwp-footer-for-divi.php&quot;;s:21:&quot;mrkwp-footer-for-divi&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-option-manager.php(437): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-option-manager.php(380): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_version', '2.3.1')
-#9 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-fs-storage.php(505): FS_Key_Value_Storage->__set('sdk_version', '2.3.1')
-#10 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/includes/class-freemius.php(856): FS_Storage->__set('sdk_version', '2.3.1')
-#11 /wordpress/wp-content/plugins/mrkwp-footer-for-divi/freemius/inclu
+#4 /wordpress/wp-includes/option.php(921): add_option('wpmd_db_browser...', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/mobile-domain/mobile-domain.php(788): update_option('wpmd_db_browser...', Array)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): ywpmd_activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_mobile...', false)
+#10 /internal/eval.php(20): activate_plugin('mobile-domain/m...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpmd_db_browsers', 'a:2:{i:0;a:75:{i:0;s:10:\"Opera Mini\";i:1;s:6:\"iPhone\";i:2;s:10:\"BlackBerry\";i:3;s:4:\"iPod\";i:4;s:7:\"Android\";i:5;s:4:\"Bolt\";i:6;s:8:\"IEMobile\";i:7;s:9:\"GoBrowser\";i:8;s:7:\"Skyfire\";i:9;s:8:\"TeaShark\";i:10;s:10:\"UC Browser\";i:11;s:10:\"Opera Mobi\";i:12;s:13:\"Mobile Safari\";i:13;s:12:\"SEMC-Browser\";i:14;s:6:\"Teleca\";i:15;s:8:\"Series60\";i:16;s:5:\"Doris\";i:17;s:7:\"2.0 MMP\";i:18;s:7:\"240x320\";i:19;s:7:\"400X240\";i:20;s:7:\"AvantGo\";i:21;s:6:\"Blazer\";i:22;s:9:\"Cellphone\";i:23;s:6:\"Danger\";i:24;s:6:\"DoCoMo\";i:25;s:10:\"Elaine 3.0\";i:26;s:9:\"EudoraWeb\";i:27;s:6:\"hiptop\";i:28;s:14:\"KYOCERA WX310K\";i:29;s:7:\"LG U990\";i:30;s:7:\"MIDP-2.\";i:31;s:6:\"MMEF20\";i:32;s:5:\"MOT-V\";i:33;s:8:\"NetFront\";i:34;s:4:\"Newt\";i:35;s:12:\"Nintendo Wii\";i:36;s:5:\"Nitro\";i:37;s:5:\"Nokia\";i:38;s:4:\"Palm\";i:39;s:20:\"PlayStation Portable\";i:40;s:8:\"ProxiNet\";i:41;s:13:\"SHARP-TQ-GX10\";i:42;s:8:\"SHG-i900\";i:43;s:5:\"Small\";i:44;s:12:\"SonyEricsson\";i:45;s:6:\"Fennec\";i:46;s:8:\"TS21i-10\";i:47;s:10:\"UP.Browser\";i:48;s:7:\"UP.Link\";i:49;s:10:\"Windows CE\";i:50;s:6:\"WinWAP\";i:51;s:14:\"LG-TU915 Obigo\";i:52;s:6:\"LGE VX\";i:53;s:4:\"Iris\";i:54;s:13:\"Maemo Browser\";i:55;s:16:\"Kindle Basic Web\";i:56;s:14:\"Myriad Browser\";i:57;s:13:\"Obigo Browser\";i:58;s:15:\"Polaris Browser\";i:59;s:8:\"uZardWeb\";i:60;s:5:\"WebOS\";i:61;s:8:\"Deepfish\";i:62;s:7:\"Dolphin\";i:63;s:14:\"Firefox Mobile\";i:64;s:11:\"ibisBrowser\";i:65;s:4:\"JOCA\";i:66;s:5:\"Links\";i:67;s:6:\"Minimo\";i:68;s:4:\"Pixo\";i:69;s:8:\"Skweezer\";i:70;s:5:\"Steel\";i:71;s:7:\"Tristit\";i:72;s:21:\"Vision Mobile Browser\";i:73;s:7:\"Dorothy\";i:74;s:11:\"Ovi Browser\";}i:1;a:1:{i:0;s:2:\"wp\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_mobile-domain/mobile-domain.php'), WP_Hook->do_action, WP_Hook->apply_filters, ywpmd_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 20:29:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 20:29:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 20:29:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 20:29:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 20:29:16 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/mobile-domain/mobile-domain.php on line 125
+[09-Apr-2025 20:29:16 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /wordpress/wp-content/plugins/mobile-domain/mobile-domain.php on line 125
+[09-Apr-2025 20:29:16 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/mobile-domain/mobile-domain.php on line 129
+[09-Apr-2025 20:29:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/mobile-domain/mobile-domain.php on line 129
+[09-Apr-2025 20:29:16 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/mobile-domain/mobile-domain.php on line 141
+[09-Apr-2025 20:29:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/mobile-domain/mobile-domain.php on line 141
+[09-Apr-2025 20:29:16 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/mobile-domain/mobile-domain.php on line 153
+[09-Apr-2025 20:29:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/mobile-domain/mobile-domain.php on line 153
+[09-Apr-2025 20:29:24 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/mobile-domain/mobile-domain.php on line 126
+[09-Apr-2025 20:29:33 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/mobile-domain/mobile-domain.php on line 126
+[09-Apr-2025 20:30:38 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 20:30:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 20:30:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 20:30:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 20:31:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/mailchimp-subscribe-for-food-cook-theme/gfb_subscribe.php:256
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mailchimp-subsc...')
+#2 /internal/eval.php(20): activate_plugin('mailchimp-subsc...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/mailchimp-subscribe-for-food-cook-theme/gfb_subscribe.php on line 256
+[09-Apr-2025 20:31:12 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/mailchimp-subscribe-for-food-cook-theme/gfb_subscribe.php:256
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mailchimp-subsc...')
+#2 /internal/eval.php(20): activate_plugin('mailchimp-subsc...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/mailchimp-subscribe-for-food-cook-theme/gfb_subscribe.php on line 256
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"mailchimp-subscribe-for-food-cook-theme"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
