@@ -2,10 +2,14 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [08-Apr-2025 10:13:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [09-Apr-2025 16:56:20 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 16:56:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 16:56:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 16:56:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 16:56:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yss_settings', 'a:5:{s:15:\"user_first_name\";s:0:\"\";s:14:\"user_last_name\";s:0:\"\";s:10:\"user_email\";s:0:\"\";s:11:\"accessToken\";s:0:\"\";s:10:\"server_url\";s:67:\"http://widget.youappi.com/widget-server/youappi-smartapp-server.php\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yit_recently_activated', 'a:1:{i:0;s:39:\"yith-woocommerce-cart-messages/init.php\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -17,7 +21,7 @@ Error: [08-Apr-2025 10:13:08 UTC] WordPress database error <div style="clear:bot
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'yss_settings' , 'a:5:{s:15:&quot;user_first_name&quot;;s:0:&quot;&quot;;s:14:&quot;user_last_name&quot;;s:0:&quot;&quot;;s:10:&quot;user_email&quot;;s:0:&quot;&quot;;s:11:&quot;accessToken&quot;;s:0:&quot;&quot;;s:10:&quot;server_url&quot;;s:67:&quot;http://widget.youappi.com/widget-server/youappi-smartapp-server.php&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'yit_recently_activated' , 'a:1:{i:0;s:39:&quot;yith-woocommerce-cart-messages/init.php&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -29,168 +33,23 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('yss_settings', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/youappi-smartapp/yss-options.php(77): update_option('yss_settings', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): YSS_Options::init_plugin(false)
+#4 /wordpress/wp-includes/option.php(921): add_option('yit_recently_ac...', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/yith-woocommerce-cart-messages/plugin-fw/yit-plugin-registration-hook.php(21): update_option('yit_recently_ac...', Array)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): yith_plugin_registration_hook(false)
 #7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_youapp...', false)
-#10 /internal/eval.php(20): activate_plugin('youappi-smartap...')
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_yith-w...', false)
+#10 /internal/eval.php(20): activate_plugin('yith-woocommerc...')
 #11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yss_settings', 'a:5:{s:15:\"user_first_name\";s:0:\"\";s:14:\"user_last_name\";s:0:\"\";s:10:\"user_email\";s:0:\"\";s:11:\"accessToken\";s:0:\"\";s:10:\"server_url\";s:67:\"http://widget.youappi.com/widget-server/youappi-smartapp-server.php\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_youappi-smartapp/youappi-smartapp.php'), WP_Hook->do_action, WP_Hook->apply_filters, YSS_Options::init_plugin, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 10:13:08 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 10:13:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 10:13:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 10:13:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 10:13:20 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 10:13:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 10:13:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 10:13:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 10:13:49 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 10:13:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 10:13:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 10:13:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 10:13:49 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 10:13:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 10:13:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 10:13:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 10:14:21 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/youtube-channel-slider/youtube-channel-slider.php:44
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('youtube-channel...')
-#2 /internal/eval.php(20): activate_plugin('youtube-channel...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/youtube-channel-slider/youtube-channel-slider.php on line 44
-[08-Apr-2025 10:14:23 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/youtube-channel-slider/youtube-channel-slider.php:44
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('youtube-channel...')
-#2 /internal/eval.php(20): activate_plugin('youtube-channel...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/youtube-channel-slider/youtube-channel-slider.php on line 44
-[08-Apr-2025 10:14:26 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/youtube-channel-slider/youtube-channel-slider.php:44
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('youtube-channel...')
-#2 /internal/eval.php(20): activate_plugin('youtube-channel...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/youtube-channel-slider/youtube-channel-slider.php on line 44
-[08-Apr-2025 10:14:32 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 10:14:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 10:14:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 10:14:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 10:14:43 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 10:14:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 10:14:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 10:14:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 10:14:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yit_recently_activated', 'a:1:{i:0;s:39:\"yith-woocommerce-cart-messages/init.php\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_yith-woocommerce-cart-messages/init.php'), WP_Hook->do_action, WP_Hook->apply_filters, yith_plugin_registration_hook, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 16:56:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 16:56:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 16:56:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 16:56:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 16:57:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_post_vote_totals ADD COLUMN CONSTRAINT UNIQUE (`post_id`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/youtube-like-rating/YoutubeLikeRating.php(45): dbDelta(Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): YoutubeLikeRating->setup_plugin('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(704): do_action('init')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query ALTER TABLE wp_post_vote_totals ADD COLUMN CONSTRAINT UNIQUE (`post_id`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, YoutubeLikeRating->setup_plugin, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 10:14:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_post_votes ADD COLUMN CONSTRAINT UNIQUE (`post_id`, `voter_id`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/youtube-like-rating/YoutubeLikeRating.php(58): dbDelta(Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): YoutubeLikeRating->setup_plugin('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(704): do_action('init')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query ALTER TABLE wp_post_votes ADD COLUMN CONSTRAINT UNIQUE (`post_id`, `voter_id`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, YoutubeLikeRating->setup_plugin, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 10:14:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_comment_vote_totals ADD COLUMN CONSTRAINT UNIQUE (`comment_id`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/youtube-like-rating/YoutubeLikeRating.php(71): dbDelta(Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): YoutubeLikeRating->setup_plugin('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(704): do_action('init')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query ALTER TABLE wp_comment_vote_totals ADD COLUMN CONSTRAINT UNIQUE (`comment_id`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, YoutubeLikeRating->setup_plugin, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 10:14:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE wp_comment_votes ADD COLUMN CONSTRAINT UNIQUE (`comment_id`, `voter_id`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#3 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/youtube-like-rating/YoutubeLikeRating.php(87): dbDelta(Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): YoutubeLikeRating->setup_plugin('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(704): do_action('init')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query ALTER TABLE wp_comment_votes ADD COLUMN CONSTRAINT UNIQUE (`comment_id`, `voter_id`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, YoutubeLikeRating->setup_plugin, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 10:14:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '^#9(G$xn_vz{O/UY-zm`Lx@IFgVA bBa:{Tb>/lT21aRfOt9LBdng9M$kkNA Jy6', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yocaptcha_options', 'a:14:{s:10:\"public_key\";s:0:\"\";s:11:\"private_key\";s:0:\"\";s:16:\"show_in_comments\";i:1;s:20:\"show_in_registration\";i:1;s:27:\"bypass_for_registered_users\";i:1;s:20:\"minimum_bypass_level\";s:4:\"read\";s:14:\"comments_theme\";s:3:\"red\";s:18:\"registration_theme\";s:3:\"red\";s:18:\"yocaptcha_language\";s:2:\"en\";s:16:\"xhtml_compliance\";i:0;s:18:\"comments_tab_index\";i:5;s:22:\"registration_tab_index\";i:30;s:17:\"no_response_error\";s:58:\"<strong>ERROR</strong>: Please fill in the yoCAPTCHA form.\";s:24:\"incorrect_response_error\";s:62:\"<strong>ERROR</strong>: That yoCAPTCHA response was incorrect.\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -202,7 +61,7 @@ Failed to parse the MySQL query.
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , '^#9(G$xn_vz{O/UY-zm`Lx@IFgVA bBa:{Tb&gt;/lT21aRfOt9LBdng9M$kkNA Jy6' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'yocaptcha_options' , 'a:14:{s:10:&quot;public_key&quot;;s:0:&quot;&quot;;s:11:&quot;private_key&quot;;s:0:&quot;&quot;;s:16:&quot;show_in_comments&quot;;i:1;s:20:&quot;show_in_registration&quot;;i:1;s:27:&quot;bypass_for_registered_users&quot;;i:1;s:20:&quot;minimum_bypass_level&quot;;s:4:&quot;read&quot;;s:14:&quot;comments_theme&quot;;s:3:&quot;red&quot;;s:18:&quot;registration_theme&quot;;s:3:&quot;red&quot;;s:18:&quot;yocaptcha_language&quot;;s:2:&quot;en&quot;;s:16:&quot;xhtml_compliance&quot;;i:0;s:18:&quot;comments_tab_index&quot;;i:5;s:22:&quot;registration_tab_index&quot;;i:30;s:17:&quot;no_response_error&quot;;s:58:&quot;&lt;strong&gt;ERROR&lt;/strong&gt;: Please fill in the yoCAPTCHA form.&quot;;s:24:&quot;incorrect_response_error&quot;;s:62:&quot;&lt;strong&gt;ERROR&lt;/strong&gt;: That yoCAPTCHA response was incorrect.&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -214,34 +73,23 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', '^#9(G$xn_vz{O/U...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', '^#9(G$xn_vz{O/U...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', '^#9(G$xn_vz{O/U...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', '^#9(G$xn_vz{O/U...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40373|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/youtube-like-rating/YoutubeLikeRating.php(95): wp_enqueue_script('YoutubeLikeRati...', 'http://127.0.0....', Array, '1.0')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): YoutubeLikeRating->init_plugin('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '^#9(G$xn_vz{O/UY-zm`Lx@IFgVA bBa:{Tb>/lT21aRfOt9LBdng9M$kkNA Jy6', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, YoutubeLikeRating->init_plugin, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 10:14:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/wp-plugin.php(111): add_option('yocaptcha_optio...', Array)
+#5 /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/yocaptcha.php(154): WPPlugin::add_options('yocaptcha_optio...', Array)
+#6 /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/yocaptcha.php(20): yoCAPTCHA->register_default_options()
+#7 /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/wp-yocaptcha.php(19): yoCAPTCHA->__construct('yocaptcha_optio...')
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('yocaptcha-captc...')
+#10 /internal/eval.php(20): activate_plugin('yocaptcha-captc...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yocaptcha_options', 'a:14:{s:10:\"public_key\";s:0:\"\";s:11:\"private_key\";s:0:\"\";s:16:\"show_in_comments\";i:1;s:20:\"show_in_registration\";i:1;s:27:\"bypass_for_registered_users\";i:1;s:20:\"minimum_bypass_level\";s:4:\"read\";s:14:\"comments_theme\";s:3:\"red\";s:18:\"registration_theme\";s:3:\"red\";s:18:\"yocaptcha_language\";s:2:\"en\";s:16:\"xhtml_compliance\";i:0;s:18:\"comments_tab_index\";i:5;s:22:\"registration_tab_index\";i:30;s:17:\"no_response_error\";s:58:\"<strong>ERROR</strong>: Please fill in the yoCAPTCHA form.\";s:24:\"incorrect_response_error\";s:62:\"<strong>ERROR</strong>: That yoCAPTCHA response was incorrect.\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/yocaptcha-captcha-advertising/wp-yocaptcha.php'), yoCAPTCHA->__construct, yoCAPTCHA->register_default_options, WPPlugin::add_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 16:57:13 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/yocaptcha.php on line 38
+[09-Apr-2025 16:57:13 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/yocaptcha.php on line 46
+[09-Apr-2025 16:57:13 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/yocaptcha.php on line 55
+[09-Apr-2025 16:57:13 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/yocaptcha.php on line 76
+[09-Apr-2025 16:57:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'OX@SGK:.ek_6rjv5MV%oIDpxz-w}Z_=BubkY/r>Zy#=3fv(}r5#iK~2Z&#R2QkE(', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yocaptcha_options', 'a:14:{s:10:\"public_key\";s:0:\"\";s:11:\"private_key\";s:0:\"\";s:16:\"show_in_comments\";i:1;s:20:\"show_in_registration\";i:1;s:27:\"bypass_for_registered_users\";i:1;s:20:\"minimum_bypass_level\";s:4:\"read\";s:14:\"comments_theme\";s:3:\"red\";s:18:\"registration_theme\";s:3:\"red\";s:18:\"yocaptcha_language\";s:2:\"en\";s:16:\"xhtml_compliance\";i:0;s:18:\"comments_tab_index\";i:5;s:22:\"registration_tab_index\";i:30;s:17:\"no_response_error\";s:58:\"<strong>ERROR</strong>: Please fill in the yoCAPTCHA form.\";s:24:\"incorrect_response_error\";s:62:\"<strong>ERROR</strong>: That yoCAPTCHA response was incorrect.\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -253,7 +101,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'OX@SGK:.ek_6rjv5MV%oIDpxz-w}Z_=BubkY/r&gt;Zy#=3fv(}r5#iK~2Z&amp;#R2QkE(' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'yocaptcha_options' , 'a:14:{s:10:&quot;public_key&quot;;s:0:&quot;&quot;;s:11:&quot;private_key&quot;;s:0:&quot;&quot;;s:16:&quot;show_in_comments&quot;;i:1;s:20:&quot;show_in_registration&quot;;i:1;s:27:&quot;bypass_for_registered_users&quot;;i:1;s:20:&quot;minimum_bypass_level&quot;;s:4:&quot;read&quot;;s:14:&quot;comments_theme&quot;;s:3:&quot;red&quot;;s:18:&quot;registration_theme&quot;;s:3:&quot;red&quot;;s:18:&quot;yocaptcha_language&quot;;s:2:&quot;en&quot;;s:16:&quot;xhtml_compliance&quot;;i:0;s:18:&quot;comments_tab_index&quot;;i:5;s:22:&quot;registration_tab_index&quot;;i:30;s:17:&quot;no_response_error&quot;;s:58:&quot;&lt;strong&gt;ERROR&lt;/strong&gt;: Please fill in the yoCAPTCHA form.&quot;;s:24:&quot;incorrect_response_error&quot;;s:62:&quot;&lt;strong&gt;ERROR&lt;/strong&gt;: That yoCAPTCHA response was incorrect.&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -265,535 +113,435 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'OX@SGK:.ek_6rjv...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'OX@SGK:.ek_6rjv...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'OX@SGK:.ek_6rjv...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'OX@SGK:.ek_6rjv...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40373|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/youtube-like-rating/YoutubeLikeRating.php(95): wp_enqueue_script('YoutubeLikeRati...', 'http://127.0.0....', Array, '1.0')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): YoutubeLikeRating->init_plugin('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'OX@SGK:.ek_6rjv5MV%oIDpxz-w}Z_=BubkY/r>Zy#=3fv(}r5#iK~2Z&#R2QkE(', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, YoutubeLikeRating->init_plugin, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 10:14:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/wp-plugin.php(111): add_option('yocaptcha_optio...', Array)
+#5 /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/yocaptcha.php(154): WPPlugin::add_options('yocaptcha_optio...', Array)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): yoCAPTCHA->register_default_options(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_yocapt...', false)
+#10 /internal/eval.php(20): activate_plugin('yocaptcha-captc...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yocaptcha_options', 'a:14:{s:10:\"public_key\";s:0:\"\";s:11:\"private_key\";s:0:\"\";s:16:\"show_in_comments\";i:1;s:20:\"show_in_registration\";i:1;s:27:\"bypass_for_registered_users\";i:1;s:20:\"minimum_bypass_level\";s:4:\"read\";s:14:\"comments_theme\";s:3:\"red\";s:18:\"registration_theme\";s:3:\"red\";s:18:\"yocaptcha_language\";s:2:\"en\";s:16:\"xhtml_compliance\";i:0;s:18:\"comments_tab_index\";i:5;s:22:\"registration_tab_index\";i:30;s:17:\"no_response_error\";s:58:\"<strong>ERROR</strong>: Please fill in the yoCAPTCHA form.\";s:24:\"incorrect_response_error\";s:62:\"<strong>ERROR</strong>: That yoCAPTCHA response was incorrect.\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_yocaptcha-captcha-advertising/wp-yocaptcha.php'), WP_Hook->do_action, WP_Hook->apply_filters, yoCAPTCHA->register_default_options, WPPlugin::add_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 16:57:13 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 16:57:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 16:57:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 16:57:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 16:57:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_post_vote_totals (
-			`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-			`post_id` bigint(20) NOT NULL,
-			`vote_count_up` bigint(20) NOT NULL DEFAULT '0',
-			`vote_count_down` bigint(20) NOT NULL DEFAULT '0',
-			`date_time` datetime NOT NULL,
-			KEY `post_id` (`post_id`),
-			CONSTRAINT UNIQUE (`post_id`)
-		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yocaptcha_options', 'a:14:{s:10:\"public_key\";s:0:\"\";s:11:\"private_key\";s:0:\"\";s:16:\"show_in_comments\";i:1;s:20:\"show_in_registration\";i:1;s:27:\"bypass_for_registered_users\";i:1;s:20:\"minimum_bypass_level\";s:4:\"read\";s:14:\"comments_theme\";s:3:\"red\";s:18:\"registration_theme\";s:3:\"red\";s:18:\"yocaptcha_language\";s:2:\"en\";s:16:\"xhtml_compliance\";i:0;s:18:\"comments_tab_index\";i:5;s:22:\"registration_tab_index\";i:30;s:17:\"no_response_error\";s:58:\"<strong>ERROR</strong>: Please fill in the yoCAPTCHA form.\";s:24:\"incorrect_response_error\";s:62:\"<strong>ERROR</strong>: That yoCAPTCHA response was incorrect.\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_vote_totals, id, bigint(20) unsigned</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_vote_totals, post_id, bigint(20)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_vote_totals, vote_count_up, bigint(20)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_vote_totals, vote_count_down, bigint(20)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_vote_totals, date_time, datetime</li>
-<li>Executing: CREATE TABLE &quot;wp_post_vote_totals&quot; (
-&quot;id&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;post_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;vote_count_up&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT '0',
-&quot;vote_count_down&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT '0',
-&quot;date_time&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE) | (no parameters)</li>
-<li>Executing: CREATE  INDEX  &quot;wp_post_vote_totals__post_id&quot; ON &quot;wp_post_vote_totals&quot; (&quot;post_id&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_vote_totals, wp_post_vote_totals__post_id, KEY</li>
-<li>Executing: CREATE  INDEX  &quot;wp_post_vote_totals__&quot; ON &quot;wp_post_vote_totals&quot; (&quot;&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_vote_totals, wp_post_vote_totals__, </li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'yocaptcha_options' , 'a:14:{s:10:&quot;public_key&quot;;s:0:&quot;&quot;;s:11:&quot;private_key&quot;;s:0:&quot;&quot;;s:16:&quot;show_in_comments&quot;;i:1;s:20:&quot;show_in_registration&quot;;i:1;s:27:&quot;bypass_for_registered_users&quot;;i:1;s:20:&quot;minimum_bypass_level&quot;;s:4:&quot;read&quot;;s:14:&quot;comments_theme&quot;;s:3:&quot;red&quot;;s:18:&quot;registration_theme&quot;;s:3:&quot;red&quot;;s:18:&quot;yocaptcha_language&quot;;s:2:&quot;en&quot;;s:16:&quot;xhtml_compliance&quot;;i:0;s:18:&quot;comments_tab_index&quot;;i:5;s:22:&quot;registration_tab_index&quot;;i:30;s:17:&quot;no_response_error&quot;;s:58:&quot;&lt;strong&gt;ERROR&lt;/strong&gt;: Please fill in the yoCAPTCHA form.&quot;;s:24:&quot;incorrect_response_error&quot;;s:62:&quot;&lt;strong&gt;ERROR&lt;/strong&gt;: That yoCAPTCHA response was incorrect.&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/youtube-like-rating/YoutubeLikeRating.php(45): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): YoutubeLikeRating->setup_plugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_youtub...', false)
-#7 /internal/eval.php(20): activate_plugin('youtube-like-ra...')
-#8 {main}</pre>
- for query CREATE TABLE wp_post_vote_totals (
-			`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-			`post_id` bigint(20) NOT NULL,
-			`vote_count_up` bigint(20) NOT NULL DEFAULT '0',
-			`vote_count_down` bigint(20) NOT NULL DEFAULT '0',
-			`date_time` datetime NOT NULL,
-			KEY `post_id` (`post_id`),
-			CONSTRAINT UNIQUE (`post_id`)
-		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_youtube-like-rating/YoutubeLikeRating.php'), WP_Hook->do_action, WP_Hook->apply_filters, YoutubeLikeRating->setup_plugin, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 10:14:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/wp-plugin.php(111): add_option('yocaptcha_optio...', Array)
+#5 /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/yocaptcha.php(154): WPPlugin::add_options('yocaptcha_optio...', Array)
+#6 /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/yocaptcha.php(20): yoCAPTCHA->register_default_options()
+#7 /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/wp-yocaptcha.php(19): yoCAPTCHA->__construct('yocaptcha_optio...')
+#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yocaptcha_options', 'a:14:{s:10:\"public_key\";s:0:\"\";s:11:\"private_key\";s:0:\"\";s:16:\"show_in_comments\";i:1;s:20:\"show_in_registration\";i:1;s:27:\"bypass_for_registered_users\";i:1;s:20:\"minimum_bypass_level\";s:4:\"read\";s:14:\"comments_theme\";s:3:\"red\";s:18:\"registration_theme\";s:3:\"red\";s:18:\"yocaptcha_language\";s:2:\"en\";s:16:\"xhtml_compliance\";i:0;s:18:\"comments_tab_index\";i:5;s:22:\"registration_tab_index\";i:30;s:17:\"no_response_error\";s:58:\"<strong>ERROR</strong>: Please fill in the yoCAPTCHA form.\";s:24:\"incorrect_response_error\";s:62:\"<strong>ERROR</strong>: That yoCAPTCHA response was incorrect.\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/yocaptcha-captcha-advertising/wp-yocaptcha.php'), yoCAPTCHA->__construct, yoCAPTCHA->register_default_options, WPPlugin::add_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 16:57:14 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/yocaptcha.php on line 38
+[09-Apr-2025 16:57:14 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/yocaptcha.php on line 46
+[09-Apr-2025 16:57:14 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/yocaptcha.php on line 55
+[09-Apr-2025 16:57:14 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/yocaptcha.php on line 76
+[09-Apr-2025 16:57:22 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/yocaptcha.php on line 38
+[09-Apr-2025 16:57:22 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/yocaptcha.php on line 46
+[09-Apr-2025 16:57:22 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/yocaptcha.php on line 55
+[09-Apr-2025 16:57:22 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/yocaptcha.php on line 76
+[09-Apr-2025 16:57:30 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/yocaptcha.php on line 38
+[09-Apr-2025 16:57:30 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/yocaptcha.php on line 46
+[09-Apr-2025 16:57:30 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/yocaptcha.php on line 55
+[09-Apr-2025 16:57:30 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/yocaptcha-captcha-advertising/yocaptcha.php on line 76
+[09-Apr-2025 16:57:39 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 16:57:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 16:57:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 16:57:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 16:58:06 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 16:58:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 16:58:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 16:58:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 16:58:33 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 16:58:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 16:58:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 16:58:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 16:58:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_post_votes (
-			`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-			`post_id` bigint(20) unsigned NOT NULL,
-			`voter_id` varchar(32) NOT NULL DEFAULT '',
-			`vote_value` int(11) NOT NULL DEFAULT '0',
-			`date_time` datetime NOT NULL,
-			KEY `post_id` (`post_id`),
-			KEY `voter_id` (`voter_id`),
-			KEY `post_voter` (`post_id`, `voter_id`),
-			CONSTRAINT UNIQUE (`post_id`, `voter_id`)
-		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rl_enable', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_votes, id, bigint(20) unsigned</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_votes, post_id, bigint(20) unsigned</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_votes, voter_id, varchar(32)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_votes, vote_value, int(11)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_votes, date_time, datetime</li>
-<li>Executing: CREATE TABLE &quot;wp_post_votes&quot; (
-&quot;id&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;post_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;voter_id&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
-&quot;vote_value&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT '0',
-&quot;date_time&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE) | (no parameters)</li>
-<li>Executing: CREATE  INDEX  &quot;wp_post_votes__post_id&quot; ON &quot;wp_post_votes&quot; (&quot;post_id&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_votes, wp_post_votes__post_id, KEY</li>
-<li>Executing: CREATE  INDEX  &quot;wp_post_votes__voter_id&quot; ON &quot;wp_post_votes&quot; (&quot;voter_id&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_votes, wp_post_votes__voter_id, KEY</li>
-<li>Executing: CREATE  INDEX  &quot;wp_post_votes__post_voter&quot; ON &quot;wp_post_votes&quot; (&quot;post_id&quot;, &quot;voter_id&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_votes, wp_post_votes__post_voter, KEY</li>
-<li>Executing: CREATE  INDEX  &quot;wp_post_votes__&quot; ON &quot;wp_post_votes&quot; (&quot;&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_votes, wp_post_votes__, </li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'rl_enable' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/youtube-like-rating/YoutubeLikeRating.php(58): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): YoutubeLikeRating->setup_plugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_youtub...', false)
-#7 /internal/eval.php(20): activate_plugin('youtube-like-ra...')
-#8 {main}</pre>
- for query CREATE TABLE wp_post_votes (
-			`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-			`post_id` bigint(20) unsigned NOT NULL,
-			`voter_id` varchar(32) NOT NULL DEFAULT '',
-			`vote_value` int(11) NOT NULL DEFAULT '0',
-			`date_time` datetime NOT NULL,
-			KEY `post_id` (`post_id`),
-			KEY `voter_id` (`voter_id`),
-			KEY `post_voter` (`post_id`, `voter_id`),
-			CONSTRAINT UNIQUE (`post_id`, `voter_id`)
-		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_youtube-like-rating/YoutubeLikeRating.php'), WP_Hook->do_action, WP_Hook->apply_filters, YoutubeLikeRating->setup_plugin, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 10:14:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_comment_vote_totals (
-			`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-			`comment_id` bigint(20) unsigned NOT NULL,
-			`post_id` bigint(20) unsigned NOT NULL,
-			`vote_count_up` bigint(20) NOT NULL DEFAULT '0',
-			`vote_count_down` bigint(20) NOT NULL DEFAULT '0',
-			`date_time` datetime NOT NULL,
-			KEY `post_id` (`post_id`),
-			KEY `comment_id` (`comment_id`),
-			CONSTRAINT UNIQUE (`comment_id`)
-		) DEFAULT CHARACTER SET utf8mb4</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_comment_vote_totals, id, bigint(20) unsigned</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_comment_vote_totals, comment_id, bigint(20) unsigned</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_comment_vote_totals, post_id, bigint(20) unsigned</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_comment_vote_totals, vote_count_up, bigint(20)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_comment_vote_totals, vote_count_down, bigint(20)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_comment_vote_totals, date_time, datetime</li>
-<li>Executing: CREATE TABLE &quot;wp_comment_vote_totals&quot; (
-&quot;id&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;comment_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;post_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;vote_count_up&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT '0',
-&quot;vote_count_down&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT '0',
-&quot;date_time&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE) | (no parameters)</li>
-<li>Executing: CREATE  INDEX  &quot;wp_comment_vote_totals__post_id&quot; ON &quot;wp_comment_vote_totals&quot; (&quot;post_id&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_comment_vote_totals, wp_comment_vote_totals__post_id, KEY</li>
-<li>Executing: CREATE  INDEX  &quot;wp_comment_vote_totals__comment_id&quot; ON &quot;wp_comment_vote_totals&quot; (&quot;comment_id&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_comment_vote_totals, wp_comment_vote_totals__comment_id, KEY</li>
-<li>Executing: CREATE  INDEX  &quot;wp_comment_vote_totals__&quot; ON &quot;wp_comment_vote_totals&quot; (&quot;&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_comment_vote_totals, wp_comment_vote_totals__, </li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/youtube-like-rating/YoutubeLikeRating.php(71): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): YoutubeLikeRating->setup_plugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_youtub...', false)
-#7 /internal/eval.php(20): activate_plugin('youtube-like-ra...')
-#8 {main}</pre>
- for query CREATE TABLE wp_comment_vote_totals (
-			`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-			`comment_id` bigint(20) unsigned NOT NULL,
-			`post_id` bigint(20) unsigned NOT NULL,
-			`vote_count_up` bigint(20) NOT NULL DEFAULT '0',
-			`vote_count_down` bigint(20) NOT NULL DEFAULT '0',
-			`date_time` datetime NOT NULL,
-			KEY `post_id` (`post_id`),
-			KEY `comment_id` (`comment_id`),
-			CONSTRAINT UNIQUE (`comment_id`)
-		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_youtube-like-rating/YoutubeLikeRating.php'), WP_Hook->do_action, WP_Hook->apply_filters, YoutubeLikeRating->setup_plugin, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 10:14:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_comment_votes (
-			`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-			`comment_id` bigint(20) unsigned NOT NULL,
-			`post_id` bigint(20) unsigned NOT NULL,
-			`voter_id` varchar(32) NOT NULL DEFAULT '',
-			`vote_value` int(11) NOT NULL DEFAULT '0',
-			`date_time` datetime NOT NULL,
-			KEY `comment_id` (`comment_id`),
-			KEY `post_id` (`post_id`),
-			KEY `voter_id` (`voter_id`),
-			KEY `post_voter` (`post_id`, `voter_id`),
-			KEY `comment_voter` (`comment_id`, `voter_id`),
-			CONSTRAINT UNIQUE (`comment_id`, `voter_id`)
-		) DEFAULT CHARACTER SET utf8mb4</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_comment_votes, id, bigint(20) unsigned</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_comment_votes, comment_id, bigint(20) unsigned</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_comment_votes, post_id, bigint(20) unsigned</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_comment_votes, voter_id, varchar(32)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_comment_votes, vote_value, int(11)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_comment_votes, date_time, datetime</li>
-<li>Executing: CREATE TABLE &quot;wp_comment_votes&quot; (
-&quot;id&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;comment_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;post_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;voter_id&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
-&quot;vote_value&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT '0',
-&quot;date_time&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE) | (no parameters)</li>
-<li>Executing: CREATE  INDEX  &quot;wp_comment_votes__comment_id&quot; ON &quot;wp_comment_votes&quot; (&quot;comment_id&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_comment_votes, wp_comment_votes__comment_id, KEY</li>
-<li>Executing: CREATE  INDEX  &quot;wp_comment_votes__post_id&quot; ON &quot;wp_comment_votes&quot; (&quot;post_id&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_comment_votes, wp_comment_votes__post_id, KEY</li>
-<li>Executing: CREATE  INDEX  &quot;wp_comment_votes__voter_id&quot; ON &quot;wp_comment_votes&quot; (&quot;voter_id&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_comment_votes, wp_comment_votes__voter_id, KEY</li>
-<li>Executing: CREATE  INDEX  &quot;wp_comment_votes__post_voter&quot; ON &quot;wp_comment_votes&quot; (&quot;post_id&quot;, &quot;voter_id&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_comment_votes, wp_comment_votes__post_voter, KEY</li>
-<li>Executing: CREATE  INDEX  &quot;wp_comment_votes__comment_voter&quot; ON &quot;wp_comment_votes&quot; (&quot;comment_id&quot;, &quot;voter_id&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_comment_votes, wp_comment_votes__comment_voter, KEY</li>
-<li>Executing: CREATE  INDEX  &quot;wp_comment_votes__&quot; ON &quot;wp_comment_votes&quot; (&quot;&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_comment_votes, wp_comment_votes__, </li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/youtube-like-rating/YoutubeLikeRating.php(87): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): YoutubeLikeRating->setup_plugin(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_youtub...', false)
-#7 /internal/eval.php(20): activate_plugin('youtube-like-ra...')
-#8 {main}</pre>
- for query CREATE TABLE wp_comment_votes (
-			`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-			`comment_id` bigint(20) unsigned NOT NULL,
-			`post_id` bigint(20) unsigned NOT NULL,
-			`voter_id` varchar(32) NOT NULL DEFAULT '',
-			`vote_value` int(11) NOT NULL DEFAULT '0',
-			`date_time` datetime NOT NULL,
-			KEY `comment_id` (`comment_id`),
-			KEY `post_id` (`post_id`),
-			KEY `voter_id` (`voter_id`),
-			KEY `post_voter` (`post_id`, `voter_id`),
-			KEY `comment_voter` (`comment_id`, `voter_id`),
-			CONSTRAINT UNIQUE (`comment_id`, `voter_id`)
-		) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_youtube-like-rating/YoutubeLikeRating.php'), WP_Hook->do_action, WP_Hook->apply_filters, YoutubeLikeRating->setup_plugin, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 10:14:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE wp_post_vote_totals (
-			`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-			`post_id` bigint(20) NOT NULL,
-			`vote_count_up` bigint(20) NOT NULL DEFAULT '0',
-			`vote_count_down` bigint(20) NOT NULL DEFAULT '0',
-			`date_time` datetime NOT NULL,
-			KEY `post_id` (`post_id`),
-			CONSTRAINT UNIQUE (`post_id`)
-		) DEFAULT CHARACTER SET utf8mb4</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_vote_totals, id, bigint(20) unsigned</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_vote_totals, post_id, bigint(20)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_vote_totals, vote_count_up, bigint(20)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_vote_totals, vote_count_down, bigint(20)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_vote_totals, date_time, datetime</li>
-<li>Executing: CREATE TABLE &quot;wp_post_vote_totals&quot; (
-&quot;id&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;post_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;vote_count_up&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT '0',
-&quot;vote_count_down&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT '0',
-&quot;date_time&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE) | (no parameters)</li>
-<li>Executing: CREATE  INDEX  &quot;wp_post_vote_totals__post_id&quot; ON &quot;wp_post_vote_totals&quot; (&quot;post_id&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_vote_totals, wp_post_vote_totals__post_id, KEY</li>
-<li>Executing: CREATE  INDEX  &quot;wp_post_vote_totals__&quot; ON &quot;wp_post_vote_totals&quot; (&quot;&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_vote_totals, wp_post_vote_totals__, </li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
-#2 /wordpress/wp-content/plugins/youtube-like-rating/YoutubeLikeRating.php(45): dbDelta(Array)
-#3 /wordpress/wp-includes/class-wp-hook.php(324): YoutubeLikeRating->setup_plugin('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(704): do_action('init')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/yumjam-require-login/require_login.php(377): add_option('rl_enable', '1')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): YumJamRequireLogin->rl_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_yumjam...', false)
+#9 /internal/eval.php(20): activate_plugin('yumjam-require-...')
 #10 {main}</pre>
- for query CREATE TABLE wp_post_vote_totals (
-			`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-			`post_id` bigint(20) NOT NULL,
-			`vote_count_up` bigint(20) NOT NULL DEFAULT '0',
-			`vote_count_down` bigint(20) NOT NULL DEFAULT '0',
-			`date_time` datetime NOT NULL,
-			KEY `post_id` (`post_id`),
-			CONSTRAINT UNIQUE (`post_id`)
-		) DEFAULT CHARACTER SET utf8mb4 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, YoutubeLikeRating->setup_plugin, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 10:14:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rl_enable', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_yumjam-require-login/require_login.php'), WP_Hook->do_action, WP_Hook->apply_filters, YumJamRequireLogin->rl_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 16:58:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>CREATE TABLE wp_post_votes (
-			`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-			`post_id` bigint(20) unsigned NOT NULL,
-			`voter_id` varchar(32) NOT NULL DEFAULT '',
-			`vote_value` int(11) NOT NULL DEFAULT '0',
-			`date_time` datetime NOT NULL,
-			KEY `post_id` (`post_id`),
-			KEY `voter_id` (`voter_id`),
-			KEY `post_voter` (`post_id`, `voter_id`),
-			CONSTRAINT UNIQUE (`post_id`, `voter_id`)
-		) DEFAULT CHARACTER SET utf8mb4</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rl_red_aft_log', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_votes, id, bigint(20) unsigned</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_votes, post_id, bigint(20) unsigned</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_votes, voter_id, varchar(32)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_votes, vote_value, int(11)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_votes, date_time, datetime</li>
-<li>Executing: CREATE TABLE &quot;wp_post_votes&quot; (
-&quot;id&quot; integer PRIMARY KEY AUTOINCREMENT NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;post_id&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-&quot;voter_id&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
-&quot;vote_value&quot; integer NOT NULL ON CONFLICT REPLACE DEFAULT '0',
-&quot;date_time&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE) | (no parameters)</li>
-<li>Executing: CREATE  INDEX  &quot;wp_post_votes__post_id&quot; ON &quot;wp_post_votes&quot; (&quot;post_id&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_votes, wp_post_votes__post_id, KEY</li>
-<li>Executing: CREATE  INDEX  &quot;wp_post_votes__voter_id&quot; ON &quot;wp_post_votes&quot; (&quot;voter_id&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_votes, wp_post_votes__voter_id, KEY</li>
-<li>Executing: CREATE  INDEX  &quot;wp_post_votes__post_voter&quot; ON &quot;wp_post_votes&quot; (&quot;post_id&quot;, &quot;voter_id&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_votes, wp_post_votes__post_voter, KEY</li>
-<li>Executing: CREATE  INDEX  &quot;wp_post_votes__&quot; ON &quot;wp_post_votes&quot; (&quot;&quot;) | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_post_v
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'rl_red_aft_log' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/yumjam-require-login/require_login.php(378): add_option('rl_red_aft_log', '')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): YumJamRequireLogin->rl_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_yumjam...', false)
+#9 /internal/eval.php(20): activate_plugin('yumjam-require-...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rl_red_aft_log', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_yumjam-require-login/require_login.php'), WP_Hook->do_action, WP_Hook->apply_filters, YumJamRequireLogin->rl_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 16:58:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rl_red_aft_log_url', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'rl_red_aft_log_url' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/yumjam-require-login/require_login.php(379): add_option('rl_red_aft_log_...', '')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): YumJamRequireLogin->rl_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_yumjam...', false)
+#9 /internal/eval.php(20): activate_plugin('yumjam-require-...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rl_red_aft_log_url', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_yumjam-require-login/require_login.php'), WP_Hook->do_action, WP_Hook->apply_filters, YumJamRequireLogin->rl_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 16:58:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rl_cust_log_form', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'rl_cust_log_form' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/yumjam-require-login/require_login.php(380): add_option('rl_cust_log_for...', '')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): YumJamRequireLogin->rl_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_yumjam...', false)
+#9 /internal/eval.php(20): activate_plugin('yumjam-require-...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rl_cust_log_form', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_yumjam-require-login/require_login.php'), WP_Hook->do_action, WP_Hook->apply_filters, YumJamRequireLogin->rl_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 16:58:59 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 16:58:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 16:58:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 16:58:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 16:59:26 UTC] PHP Deprecated:  Required parameter $path follows optional parameter $type in /wordpress/wp-content/plugins/yuzo-related-post/admin/framework/pixel/classes/class-init.php on line 801
+[09-Apr-2025 16:59:26 UTC] PHP Warning:  Private methods cannot be final as they are never overridden by other classes in /wordpress/wp-content/plugins/yuzo-related-post/include/lib/SqlQueryBuilder.php on line 131
+[09-Apr-2025 16:59:26 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $id in /wordpress/wp-content/plugins/yuzo-related-post/include/functions/helper.php on line 32
+[09-Apr-2025 16:59:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'W4.4o*RBe+{kSo+-72g e*%iVLLuIs9%5kWE[;&4${a5H7)NG>oY`0U:yP>=PoJ8', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'W4.4o*RBe+{kSo+-72g e*%iVLLuIs9%5kWE[;&amp;4${a5H7)NG&gt;oY`0U:yP&gt;=PoJ8' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'W4.4o*RBe+{kSo+...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'W4.4o*RBe+{kSo+...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'W4.4o*RBe+{kSo+...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'W4.4o*RBe+{kSo+...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|revoke-th...', 'nonce')
+#10 /wordpress/wp-content/plugins/yuzo-related-post/admin/options/pages/dashboard.php(20): wp_create_nonce('revoke-this-lic...')
+#11 /wordpress/wp-content/plugins/yuzo-related-post/admin/options/init.php(20): require_once('/wordpress/wp-c...')
+#12 /wordpress/wp-content/plugins/yuzo-related-post/include/classes/class-init.php(223): require_once('/wordpress/wp-c...')
+#13 /wordpress/wp-content/plugins/yuzo-related-post/include/classes/class-init.php(210): YUZO\Core\YUZO_Core::load_file('/wordpress/wp-c...')
+#14 /wordpress/wp-content/plugins/yuzo-related-post/include/classes/class-init.php(153): YUZO\Core\YUZO_Core->load_files_core()
+#15 /wordpress/wp-content/plugins/yuzo-related-post/include/classes/class-init.php(136): YUZO\Core\YUZO_Core->init()
+#16 /wordpress/wp-content/plugins/yuzo-related-post/include/classes/class-init.php(500): YUZO\Core\YUZO_Core::instance()
+#17 /wordpress/wp-content/plugins/yuzo-related-post/yuzo.php(84): require_once('/wordpress/wp-c...')
+#18 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#19 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('yuzo-related-po...')
+#20 /internal/eval.php(20): activate_plugin('yuzo-related-po...')
+#21 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'W4.4o*RBe+{kSo+-72g e*%iVLLuIs9%5kWE[;&4${a5H7)NG>oY`0U:yP>=PoJ8', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/yuzo-related-post/yuzo.php'), require_once('/plugins/yuzo-related-post/include/classes/class-init.php'), YUZO\Core\YUZO_Core::instance, YUZO\Core\YUZO_Core->init, YUZO\Core\YUZO_Core->load_files_core, YUZO\Core\YUZO_Core::load_file, require_once('/plugins/yuzo-related-post/admin/options/init.php'), require_once('/plugins/yuzo-related-post/admin/options/pages/dashboard.php'), wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 16:59:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '3zAMa<_7smV@:&QAG-epI Ho1fM:1&}$~gF:nB=!R_pxm<E5X(M(H|_1J0EFXsNc', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , '3zAMa&lt;_7smV@:&amp;QAG-epI Ho1fM:1&amp;}$~gF:nB=!R_pxm&lt;E5X(M(H|_1J0EFXsNc' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', '3zAMa<_7smV@:&Q...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', '3zAMa<_7smV@:&Q...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', '3zAMa<_7smV@:&Q...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', '3zAMa<_7smV@:&Q...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|revoke-th...', 'nonce')
+#10 /wordpress/wp-content/plugins/yuzo-related-post/admin/options/pages/dashboard.php(20): wp_create_nonce('revoke-this-lic...')
+#11 /wordpress/wp-content/plugins/yuzo-related-post/admin/options/init.php(20): require_once('/wordpress/wp-c...')
+#12 /wordpress/wp-content/plugins/yuzo-related-post/include/classes/class-init.php(223): require_once('/wordpress/wp-c...')
+#13 /wordpress/wp-content/plugins/yuzo-related-post/include/classes/class-init.php(210): YUZO\Core\YUZO_Core::load_file('/wordpress/wp-c...')
+#14 /wordpress/wp-content/plugins/yuzo-related-post/include/classes/class-init.php(153): YUZO\Core\YUZO_Core->load_files_core()
+#15 /wordpress/wp-content/plugins/yuzo-related-post/include/classes/class-init.php(136): YUZO\Core\YUZO_Core->init()
+#16 /wordpress/wp-content/plugins/yuzo-related-post/include/classes/class-init.php(500): YUZO\Core\YUZO_Core::instance()
+#17 /wordpress/wp-content/plugins/yuzo-related-post/yuzo.php(84): require_once('/wordpress/wp-c...')
+#18 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#19 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('yuzo-related-po...')
+#20 /internal/eval.php(20): activate_plugin('yuzo-related-po...')
+#21 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '3zAMa<_7smV@:&QAG-epI Ho1fM:1&}$~gF:nB=!R_pxm<E5X(M(H|_1J0EFXsNc', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/yuzo-related-post/yuzo.php'), require_once('/plugins/yuzo-related-post/include/classes/class-init.php'), YUZO\Core\YUZO_Core::instance, YUZO\Core\YUZO_Core->init, YUZO\Core\YUZO_Core->load_files_core, YUZO\Core\YUZO_Core::load_file, require_once('/plugins/yuzo-related-post/admin/options/init.php'), require_once('/plugins/yuzo-related-post/admin/options/pages/dashboard.php'), wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 16:59:26 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 16:59:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 16:59:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 16:59:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 16:59:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yuzo-config', 'a:7:{s:16:\"date_last_update\";s:19:\"2025-04-09 16:59:26\";s:12:\"date_install\";s:19:\"2025-04-09 16:59:26\";s:12:\"update_count\";i:0;s:10:\"version_db\";s:0:\"\";s:9:\"nonce_api\";s:28:\"YWRtaW5AbG9jYWxob3N0LmNvbQ==\";s:7:\"version\";s:5:\"6.2.2\";s:2:\"id\";s:4:\"yuzo\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'yuzo-config' , 'a:7:{s:16:&quot;date_last_update&quot;;s:19:&quot;2025-04-09 16:59:26&quot;;s:12:&quot;date_install&quot;;s:19:&quot;2025-04-09 16:59:26&quot;;s:12:&quot;update_count&quot;;i:0;s:10:&quot;version_db&quot;;s:0:&quot;&quot;;s:9:&quot;nonce_api&quot;;s:28:&quot;YWRtaW5AbG9jYWxob3N0LmNvbQ==&quot;;s:7:&quot;version&quot;;s:5:&quot;6.2.2&quot;;s:2:&quot;id&quot;;s:4:&quot;yuzo&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('yuzo-config', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/yuzo-related-post/include/classes/class-activator.php(218): update_option('yuzo-config', Array)
+#6 /wordpress/wp-content/plugins/yuzo-related-post/include/classes/class-activator.php(28): YUZO\Core\Yuzo_Activator::register_config()
+#7 /wordpress/wp-content/plugins/yuzo-related-post/admin/classes/class-admin.php(180): YUZO\Core\Yuzo_Activator::activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(326): YUZO\Admin\Yuzo_Admin::admin_activated_plugin('yuzo-related-po...')
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'yuzo-related-po...', false)
+#12 /internal/eval.php(20): activate_plugin('yuzo-related-po...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yuzo-config', 'a:7:{s:16:\"date_last_update\";s:19:\"2025-04-09 16:59:26\";s:12:\"date_install\";s:19:\"2025-04-09 16:59:26\";s:12:\"update_count\";i:0;s:10:\"version_db\";s:0:\"\";s:9:\"nonce_api\";s:28:\"YWRtaW5AbG9jYWxob3N0LmNvbQ==\";s:7:\"version\";s:5:\"6.2.2\";s:2:\"id\";s:4:\"yuzo\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, YUZO\Admin\Yuzo_Admin::admin_activated_plugin, YUZO\Core\Yuzo_Activator::activate, YUZO\Core\Yuzo_Activator::register_config, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 16:59:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yuzo-config', 'a:1:{s:10:\"version_db\";s:6:\"6.1.43\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'yuzo-config' , 'a:1:{s:10:&quot;version_db&quot;;s:6:&quot;6.1.43&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('yuzo-config', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/yuzo-related-post/include/functions/helper.php(38): update_option('yuzo-config', Array)
+#6 /wordpress/wp-content/plugins/yuzo-related-post/include/classes/class-activator.php(171): yuzo_update_option('yuzo-config', '6.1.43', 'version_db')
+#7 /wordpress/wp-content/plugins/yuzo-related-post/include/classes/class-activator.php(30): YUZO\Core\Yuzo_Activator::create_tables()
+#8 /wordpress/wp-content/plugins/yuzo-related-post/admin/classes/class-admin.php(180): YUZO\Core\Yuzo_Activator::activate()
+#9 /wordpress/wp-includes/class-wp-hook.php(326): YUZO\Admin\Yuzo_Admin::admin_activated_plugin('yuzo-related-po...')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'yuzo-related-po...', false)
+#13 /internal/eval.php(20): activate_plugin('yuzo-related-po...')
+#14 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('yuzo-config', 'a:1:{s:10:\"version_db\";s:6:\"6.1.43\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, YUZO\Admin\Yuzo_Admin::admin_activated_plugin, YUZO\Core\Yuzo_Activator::activate, YUZO\Core\Yuzo_Activator::create_tables, yuzo_update_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 16:59:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO wp_posts ( ID, post_author, post_date, post_date_gmt, post_content, post_title,post_excerpt,post_status,comment_status,ping_status,post_password,post_name,to_ping,pinged,post_modified,post_modified_gmt,post_content_filtered,post_parent,guid,menu_order,post_type,post_mime_type,comment_count
+                    ) values (0,1,'2025-04-09 16:59:27','2025-04-09 16:59:27','','Related post based on Tags','','publish','closed','closed','','Related-post-based-on-Tags','','','2025-04-09 16:59:27','2025-04-09 16:59:27','',0,'',0,'yuzo','',0 )</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_posts</li>
+<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (values ( 0 , 1 , '2025-04-09 16:59:27' , '2025-04-09 16:59:27' , '' , 'Related post based on Tags' , '' , 'publish' , 'closed' , 'closed' , '' , 'Related-post-based-on-Tags' , '' , '' , '2025-04-09 16:59:27' , '2025-04-09 16:59:27' , '' , 0 , '' , 0 , 'yuzo' , '' , 0 )) WHERE true | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO wp_...')
+#3 /wordpress/wp-content/plugins/yuzo-related-post/include/classes/class-activator.php(286): WP_SQLite_DB->query('INSERT INTO wp_...')
+#4 /wordpress/wp-content/plugins/yuzo-related-post/include/classes/class-activator.php(32): YUZO\Core\Yuzo_Activator::register_default_post()
+#5 /wordpress/wp-content/plugins/yuzo-related-post/admin/classes/class-admin.php(180): YUZO\Core\Yuzo_Activator::activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(326): YUZO\Admin\Yuzo_Admin::admin_activated_plugin('yuzo-related-po...')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'yuzo-related-po...', false)
+#10 /internal/eval.php(20): activate_plugin('yuzo-related-po...')
+#11 {main}</pre>
+ for query INSERT INTO wp_posts ( ID, post_author, post_date, post_date_gmt, post_content, post_title,post_excerpt,post_status,comment_status,ping_status,post_password,post_name,to_ping,pinged,post_modified,post_modified_gmt,post_content_filtered,post_parent,guid,menu_order,post_type,post_mime_type,comment_count
+                    ) values (0,1,'2025-04-09 16:59:27','2025-04-09 16:59:27','','Related post based on Tags','','publish','
