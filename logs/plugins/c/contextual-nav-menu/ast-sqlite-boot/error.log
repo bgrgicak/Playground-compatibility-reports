@@ -2,14 +2,10 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [04-Apr-2025 16:51:48 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 16:51:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 16:51:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 16:51:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 16:51:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [09-Apr-2025 09:49:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_custom_taxonomy_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('stock_widget_version', '2.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -21,7 +17,7 @@ Error: [04-Apr-2025 16:51:48 UTC] PHP Warning:  Undefined array key "option_valu
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_custom_taxonomy_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'stock_widget_version' , '2.2' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -33,367 +29,18 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_custom_t...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_custom_t...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_custom_taxonomy_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 16:52:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>show tables like custom_category</p>
-<p>Queries made or created this session were:</p>
-<ol>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('show tables lik...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('show tables lik...')
-#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('show tables lik...')
-#4 /wordpress/wp-content/plugins/custom-upload/custom_upload.php(28): wpdb->get_var('show tables lik...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): custom_upload_create_table(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_custom...', false)
-#9 /internal/eval.php(20): activate_plugin('custom-upload/c...')
-#10 {main}</pre>
- for query show tables like custom_category made by activate_plugin, do_action('activate_custom-upload/custom_upload.php'), WP_Hook->do_action, WP_Hook->apply_filters, custom_upload_create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 16:52:03 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 16:52:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 16:52:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 16:52:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 16:52:25 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 16:52:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 16:52:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 16:52:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 16:52:37 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 16:52:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 16:52:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 16:52:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 16:52:48 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cyber-fundraiser-lite/includes/shortcodes/class.facebook.feeds.shortcode.php on line 6
-[04-Apr-2025 16:52:48 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cyber-fundraiser-lite/includes/shortcodes/class.facebook.feeds.shortcode.php on line 8
-[04-Apr-2025 16:52:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cyber_fundraising_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cyber_fundraising_activation_redirect' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/cyber-fundraiser-lite/cyber-fundraiser-lite.php(71): add_option('cyber_fundraisi...', true)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): cyberfundraising_lite_activation_hook(false)
+#4 /wordpress/wp-content/plugins/custom-stock-widget/stock_widget_admin.php(102): add_option('stock_widget_ve...', '2.2')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): stockWidget\stock_widget_activate(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cyber-...', false)
-#9 /internal/eval.php(20): activate_plugin('cyber-fundraise...')
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_custom...', false)
+#9 /internal/eval.php(20): activate_plugin('custom-stock-wi...')
 #10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cyber_fundraising_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_cyber-fundraiser-lite/cyber-fundraiser-lite.php'), WP_Hook->do_action, WP_Hook->apply_filters, cyberfundraising_lite_activation_hook, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 16:52:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('stock_widget_version', '2.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_custom-stock-widget/stock_widget.php'), WP_Hook->do_action, WP_Hook->apply_filters, stockWidget\stock_widget_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 09:49:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-04 16:52:48', '2025-04-04 16:52:48', '[cyber_checkout]', '', 'Cyber Fundraiser Checkout', '', 'publish', 'page', 'closed', 'closed', '', 'cyber-fundraiser-checkout', '', '', '2025-04-04 16:52:48', '2025-04-04 16:52:48', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-04 16:52:48' , '2025-04-04 16:52:48' , '[cyber_checkout]' , '' , 'Cyber Fundraiser Checkout' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'cyber-fundraiser-checkout' , '' , '' , '2025-04-04 16:52:48' , '2025-04-04 16:52:48' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/cyber-fundraiser-lite/cyber-fundraiser-lite.php(137): wp_insert_post(Array, false)
-#7 /wordpress/wp-content/plugins/cyber-fundraiser-lite/cyber-fundraiser-lite.php(73): cyber_frl_create_frontend_page()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): cyberfundraising_lite_activation_hook(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cyber-...', false)
-#12 /internal/eval.php(20): activate_plugin('cyber-fundraise...')
-#13 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-04 16:52:48', '2025-04-04 16:52:48', '[cyber_checkout]', '', 'Cyber Fundraiser Checkout', '', 'publish', 'page', 'closed', 'closed', '', 'cyber-fundraiser-checkout', '', '', '2025-04-04 16:52:48', '2025-04-04 16:52:48', 0, 0, '', '') made by activate_plugin, do_action('activate_cyber-fundraiser-lite/cyber-fundraiser-lite.php'), WP_Hook->do_action, WP_Hook->apply_filters, cyberfundraising_lite_activation_hook, cyber_frl_create_frontend_page, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 16:52:48 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-includes/plugin.php on line 1001
-[04-Apr-2025 16:52:48 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-includes/plugin.php on line 1004
-[04-Apr-2025 16:52:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-04 16:52:48', '2025-04-04 16:52:48', '[cyber_success_donation]', '', 'Cyber Fundraiser Success Donation', '', 'publish', 'page', 'closed', 'closed', '', 'cyber-fundraiser-success-donation', '', '', '2025-04-04 16:52:48', '2025-04-04 16:52:48', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-04 16:52:48' , '2025-04-04 16:52:48' , '[cyber_success_donation]' , '' , 'Cyber Fundraiser Success Donation' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'cyber-fundraiser-success-donation' , '' , '' , '2025-04-04 16:52:48' , '2025-04-04 16:52:48' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/cyber-fundraiser-lite/cyber-fundraiser-lite.php(161): wp_insert_post(Array, false)
-#7 /wordpress/wp-content/plugins/cyber-fundraiser-lite/cyber-fundraiser-lite.php(75): cyber_frl_create_success_page()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): cyberfundraising_lite_activation_hook(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cyber-...', false)
-#12 /internal/eval.php(20): activate_plugin('cyber-fundraise...')
-#13 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-04 16:52:48', '2025-04-04 16:52:48', '[cyber_success_donation]', '', 'Cyber Fundraiser Success Donation', '', 'publish', 'page', 'closed', 'closed', '', 'cyber-fundraiser-success-donation', '', '', '2025-04-04 16:52:48', '2025-04-04 16:52:48', 0, 0, '', '') made by activate_plugin, do_action('activate_cyber-fundraiser-lite/cyber-fundraiser-lite.php'), WP_Hook->do_action, WP_Hook->apply_filters, cyberfundraising_lite_activation_hook, cyber_frl_create_success_page, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 16:52:48 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-includes/plugin.php on line 1001
-[04-Apr-2025 16:52:48 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-includes/plugin.php on line 1004
-[04-Apr-2025 16:52:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-04 16:52:48', '2025-04-04 16:52:48', '[cyber_become_fundraiser]', '', 'Become A Fundraiser', '', 'publish', 'page', 'closed', 'closed', '', 'child-project', '', '', '2025-04-04 16:52:48', '2025-04-04 16:52:48', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-04 16:52:48' , '2025-04-04 16:52:48' , '[cyber_become_fundraiser]' , '' , 'Become A Fundraiser' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'child-project' , '' , '' , '2025-04-04 16:52:48' , '2025-04-04 16:52:48' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/cyber-fundraiser-lite/cyber-fundraiser-lite.php(185): wp_insert_post(Array, false)
-#7 /wordpress/wp-content/plugins/cyber-fundraiser-lite/cyber-fundraiser-lite.php(77): cyber_frl_create_become_fundraiser_page()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): cyberfundraising_lite_activation_hook(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cyber-...', false)
-#12 /internal/eval.php(20): activate_plugin('cyber-fundraise...')
-#13 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-04 16:52:48', '2025-04-04 16:52:48', '[cyber_become_fundraiser]', '', 'Become A Fundraiser', '', 'publish', 'page', 'closed', 'closed', '', 'child-project', '', '', '2025-04-04 16:52:48', '2025-04-04 16:52:48', 0, 0, '', '') made by activate_plugin, do_action('activate_cyber-fundraiser-lite/cyber-fundraiser-lite.php'), WP_Hook->do_action, WP_Hook->apply_filters, cyberfundraising_lite_activation_hook, cyber_frl_create_become_fundraiser_page, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 16:52:48 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-includes/plugin.php on line 1001
-[04-Apr-2025 16:52:48 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-includes/plugin.php on line 1004
-[04-Apr-2025 16:52:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-04 16:52:48', '2025-04-04 16:52:48', '[cyber-help]', '', 'Cyber Fundraiser Documentation', '', 'publish', 'page', 'closed', 'closed', '', 'cf-docs', '', '', '2025-04-04 16:52:48', '2025-04-04 16:52:48', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-04 16:52:48' , '2025-04-04 16:52:48' , '[cyber-help]' , '' , 'Cyber Fundraiser Documentation' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'cf-docs' , '' , '' , '2025-04-04 16:52:48' , '2025-04-04 16:52:48' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/cyber-fundraiser-lite/cyber-fundraiser-lite.php(209): wp_insert_post(Array, false)
-#7 /wordpress/wp-content/plugins/cyber-fundraiser-lite/cyber-fundraiser-lite.php(79): cyber_frl_create_docs_page()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): cyberfundraising_lite_activation_hook(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cyber-...', false)
-#12 /internal/eval.php(20): activate_plugin('cyber-fundraise...')
-#13 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-04 16:52:48', '2025-04-04 16:52:48', '[cyber-help]', '', 'Cyber Fundraiser Documentation', '', 'publish', 'page', 'closed', 'closed', '', 'cf-docs', '', '', '2025-04-04 16:52:48', '2025-04-04 16:52:48', 0, 0, '', '') made by activate_plugin, do_action('activate_cyber-fundraiser-lite/cyber-fundraiser-lite.php'), WP_Hook->do_action, WP_Hook->apply_filters, cyberfundraising_lite_activation_hook, cyber_frl_create_docs_page, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 16:52:48 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-includes/plugin.php on line 1001
-[04-Apr-2025 16:52:48 UTC] PHP Warning:  Undefined array key 0 in /wordpress/wp-includes/plugin.php on line 1004
-[04-Apr-2025 16:52:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SHOW TABLES LIKE wp_cyber_donations</p>
-<p>Queries made or created this session were:</p>
-<ol>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLES LIK...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLES LIK...')
-#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SHOW TABLES LIK...')
-#4 /wordpress/wp-content/plugins/cyber-fundraiser-lite/cyber-fundraiser-lite.php(237): wpdb->get_var('SHOW TABLES LIK...')
-#5 /wordpress/wp-content/plugins/cyber-fundraiser-lite/cyber-fundraiser-lite.php(83): cyber_frl_create_tables()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): cyberfundraising_lite_activation_hook(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cyber-...', false)
-#10 /internal/eval.php(20): activate_plugin('cyber-fundraise...')
-#11 {main}</pre>
- for query SHOW TABLES LIKE wp_cyber_donations made by activate_plugin, do_action('activate_cyber-fundraiser-lite/cyber-fundraiser-lite.php'), WP_Hook->do_action, WP_Hook->apply_filters, cyberfundraising_lite_activation_hook, cyber_frl_create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 16:52:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SHOW TABLES LIKE wp_cyber_guest_donations</p>
-<p>Queries made or created this session were:</p>
-<ol>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLES LIK...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLES LIK...')
-#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SHOW TABLES LIK...')
-#4 /wordpress/wp-content/plugins/cyber-fundraiser-lite/cyber-fundraiser-lite.php(255): wpdb->get_var('SHOW TABLES LIK...')
-#5 /wordpress/wp-content/plugins/cyber-fundraiser-lite/cyber-fundraiser-lite.php(83): cyber_frl_create_tables()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): cyberfundraising_lite_activation_hook(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cyber-...', false)
-#10 /internal/eval.php(20): activate_plugin('cyber-fundraise...')
-#11 {main}</pre>
- for query SHOW TABLES LIKE wp_cyber_guest_donations made by activate_plugin, do_action('activate_cyber-fundraiser-lite/cyber-fundraiser-lite.php'), WP_Hook->do_action, WP_Hook->apply_filters, cyberfundraising_lite_activation_hook, cyber_frl_create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 16:52:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SHOW TABLES LIKE wp_cyber_statistics_visitors</p>
-<p>Queries made or created this session were:</p>
-<ol>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLES LIK...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLES LIK...')
-#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SHOW TABLES LIK...')
-#4 /wordpress/wp-content/plugins/cyber-fundraiser-lite/cyber-fundraiser-lite.php(278): wpdb->get_var('SHOW TABLES LIK...')
-#5 /wordpress/wp-content/plugins/cyber-fundraiser-lite/cyber-fundraiser-lite.php(83): cyber_frl_create_tables()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): cyberfundraising_lite_activation_hook(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cyber-...', false)
-#10 /internal/eval.php(20): activate_plugin('cyber-fundraise...')
-#11 {main}</pre>
- for query SHOW TABLES LIKE wp_cyber_statistics_visitors made by activate_plugin, do_action('activate_cyber-fundraiser-lite/cyber-fundraiser-lite.php'), WP_Hook->do_action, WP_Hook->apply_filters, cyberfundraising_lite_activation_hook, cyber_frl_create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 16:52:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SHOW TABLES LIKE wp_cyber_statistics_visits</p>
-<p>Queries made or created this session were:</p>
-<ol>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Failed to parse the MySQL query.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLES LIK...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLES LIK...')
-#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SHOW TABLES LIK...')
-#4 /wordpress/wp-content/plugins/cyber-fundraiser-lite/cyber-fundraiser-lite.php(292): wpdb->get_var('SHOW TABLES LIK...')
-#5 /wordpress/wp-content/plugins/cyber-fundraiser-lite/cyber-fundraiser-lite.php(83): cyber_frl_create_tables()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): cyberfundraising_lite_activation_hook(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cyber-...', false)
-#10 /internal/eval.php(20): activate_plugin('cyber-fundraise...')
-#11 {main}</pre>
- for query SHOW TABLES LIKE wp_cyber_statistics_visits made by activate_plugin, do_action('activate_cyber-fundraiser-lite/cyber-fundraiser-lite.php'), WP_Hook->do_action, WP_Hook->apply_filters, cyberfundraising_lite_activation_hook, cyber_frl_create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 16:52:48 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[04-Apr-2025 16:52:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[04-Apr-2025 16:52:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[04-Apr-2025 16:52:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[04-Apr-2025 16:52:49 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cyber-fundraiser-lite/includes/shortcodes/class.facebook.feeds.shortcode.php on line 6
-[04-Apr-2025 16:52:49 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cyber-fundraiser-lite/includes/shortcodes/class.facebook.feeds.shortcode.php on line 8
-[04-Apr-2025 16:52:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_cyber_donation_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('stock_widget_notice_text', 'Stock Widget Installed v2.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -405,7 +52,7 @@ Failed to parse the MySQL query.
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_cyber_donation_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'stock_widget_notice_text' , 'Stock Widget Installed v2.2' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -417,243 +64,380 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_cyber_do...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_cyber_do...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_cyber_donation_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 16:52:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_cyber-twitterfeeds-widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_cyber-twitterfeeds-widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_cyber-tw...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_cyber-tw...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_cyber-twitterfeeds-widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 16:52:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_cyber-facebookfeeds-widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_cyber-facebookfeeds-widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_cyber-fa...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_cyber-fa...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_cyber-facebookfeeds-widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 16:52:49 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cyber-fundraiser-lite/includes/admin/class.register.post_types.php on line 99
-[04-Apr-2025 16:52:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/cyber-fundraiser-lite/includes/admin/class.register.post_types.php on line 99
-[04-Apr-2025 16:52:49 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/cyber-fundraiser-lite/includes/admin/class.cyber_statistics.php on line 50
-[04-Apr-2025 16:52:49 UTC] PHP Warning:  Undefined array key "QUERY_STRING" in /wordpress/wp-content/plugins/cyber-fundraiser-lite/includes/admin/class.cyber_statistics.php on line 74
-[04-Apr-2025 16:52:49 UTC] PHP Warning:  Undefined array key "QUERY_STRING" in /wordpress/wp-content/plugins/cyber-fundraiser-lite/includes/admin/class.cyber_statistics.php on line 80
-[04-Apr-2025 16:52:49 UTC] PHP Warning:  Undefined array key "HTTP_USER_AGENT" in /wordpress/wp-content/plugins/cyber-fundraiser-lite/includes/admin/class.cyber_statistics.php on line 208
-[04-Apr-2025 16:52:49 UTC] PHP Warning:  Undefined variable $ub in /wordpress/wp-content/plugins/cyber-fundraiser-lite/includes/admin/class.cyber_statistics.php on line 266
-[04-Apr-2025 16:52:49 UTC] PHP Warning:  Undefined variable $ub in /wordpress/wp-content/plugins/cyber-fundraiser-lite/includes/admin/class.cyber_statistics.php on line 283
-[04-Apr-2025 16:52:49 UTC] PHP Warning:  Undefined array key 1 in /wordpress/wp-content/plugins/cyber-fundraiser-lite/includes/admin/class.cyber_statistics.php on line 289
-[04-Apr-2025 16:52:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM `wp_cyber_statistics_visits` WHERE 
-					  ip = '' && 
-					  last_counter = '2025-04-04' && 
-					  page =''</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM `wp_cyber_statistics_visits` WHERE `ip` = '' &amp;&amp; `last_counter` = '2025-04-04' &amp;&amp; `page` = '' | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "&": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM `...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM `...')
-#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM `...')
-#4 /wordpress/wp-content/plugins/cyber-fundraiser-lite/includes/admin/class.cyber_statistics.php(103): wpdb->get_row('SELECT * FROM `...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): Cyber_frl_Site_Statistics->save_visitor_info('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-content/plugins/custom-stock-widget/stock_widget_admin.php(103): add_option('stock_widget_no...', 'Stock Widget In...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): stockWidget\stock_widget_activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(704): do_action('init')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query SELECT * FROM `wp_cyber_statistics_visits` WHERE 
-					  ip = '' && 
-					  last_counter = '2025-04-04' && 
-					  page ='' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Cyber_frl_Site_Statistics->save_visitor_info, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 16:52:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_custom...', false)
+#9 /internal/eval.php(20): activate_plugin('custom-stock-wi...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('stock_widget_notice_text', 'Stock Widget Installed v2.2', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_custom-stock-widget/stock_widget.php'), WP_Hook->do_action, WP_Hook->apply_filters, stockWidget\stock_widget_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 09:49:28 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:49:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:49:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:49:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:49:56 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:49:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:49:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:49:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:49:57 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('CatPostAjaxTree...')
+#2 /wordpress/wp-content/plugins/cat-post-tree-ajax/cat-post-tree-ajax.php(119): register_widget('CatPostAjaxTree...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): nice_ajax_load_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[09-Apr-2025 09:50:06 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('CatPostAjaxTree...')
+#2 /wordpress/wp-content/plugins/cat-post-tree-ajax/cat-post-tree-ajax.php(119): register_widget('CatPostAjaxTree...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): nice_ajax_load_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[09-Apr-2025 09:50:15 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('CatPostAjaxTree...')
+#2 /wordpress/wp-content/plugins/cat-post-tree-ajax/cat-post-tree-ajax.php(119): register_widget('CatPostAjaxTree...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): nice_ajax_load_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[09-Apr-2025 09:50:24 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:50:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:50:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:50:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:51:12 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:51:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:51:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:51:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:51:42 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:51:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:51:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:51:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:51:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>SELECT * FROM `wp_cyber_statistics_visitors` WHERE ip = ''&& last_counter = '2025-04-04'</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_vimeotheque_addons', '1744278703', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM `wp_cyber_statistics_visitors` WHERE `ip` = '' &amp;&amp; `last_counter` = '2025-04-04' | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_vimeotheque_addons' , '1744278703' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near "&": syntax error
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM `...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM `...')
-#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM `...')
-#4 /wordpress/wp-content/plugins/cyber-fundraiser-lite/includes/admin/class.cyber_statistics.php(151): wpdb->get_row('SELECT * FROM `...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): Cyber_frl_Site_Statistics->save_visitor_info('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(704): do_action('init')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query SELECT * FROM `wp_cyber_statistics_visitors` WHERE ip = ''&& last_counter = '2025-04-04' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Cyber_frl_Site_Statistics->save_visitor_info, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 16:52:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_cyber_statistics_visitors` (`last_counter`, `referred`, `ip`, `browser_info`, `location`) VALUES ('2025-04-04', '', NULL, 'N/A/?', 'United States')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cyber_statistics_visitors</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_cyber_statistics_visitors</li>
-<li>Executing: INSERT INTO `wp_cyber_statistics_visitors` (`ID`, `last_counter`, `referred`, `browser_info`, `ip`, `location`) SELECT NULL, `column1`, `column2`, `column4`, `column3`, `column5` FROM (VALUES ( '2025-04-04' , '' , NULL , 'N/A/?' , 'United States' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: wp_cyber_statistics_visitors.ip
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[23000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_cyber_statis...', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/cyber-fundraiser-lite/includes/admin/class.cyber_statistics.php(185): wpdb->insert('wp_cyber_statis...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Cyber_frl_Site_Statistics->save_visitor_info('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(704): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_cyber_statistics_visitors` (`last_counter`, `referred`, `ip`, `browser_info`, `location`) VALUES ('2025-04-04', '', NULL, 'N/A/?', 'United States') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Cyber_frl_Site_Statistics->save_visitor_info, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[04-Apr-2025 16:52:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1744278703, '', 'off')
+#5 /wordpress/wp-content/plugins/codeflavors-vimeo-video-post-lite/includes/libs/extensions/remote-loader.class.php(67): set_transient('vimeotheque_add...', Array, 86400)
+#6 /wordpress/wp-content/plugins/codeflavors-vimeo-video-post-lite/includes/libs/extensions/remote-loader.class.php(43): Vimeotheque\Extensions\Remote_Loader->get_addons()
+#7 /wordpress/wp-content/plugins/codeflavors-vimeo-video-post-lite/includes/libs/extensions/extensions.class.php(51): Vimeotheque\Extensions\Remote_Loader->__construct('https://vimeoth...', 2, Object(Vimeotheque\Extensions\Extensions))
+#8 /wordpress/wp-content/plugins/codeflavors-vimeo-video-post-lite/includes/libs/admin/admin.class.php(66): Vimeotheque\Extensions\Extensions->__construct()
+#9 /wordpress/wp-content/plugins/codeflavors-vimeo-video-post-lite/includes/libs/plugin.class.php(502): Vimeotheque\Admin\Admin->__construct(Object(Vimeotheque\Post\Post_Type))
+#10 /wordpress/wp-content/plugins/codeflavors-vimeo-video-post-lite/includes/libs/plugin.class.php(427): Vimeotheque\Plugin->add_admin()
+#11 /wordpress/wp-includes/class-wp-hook.php(324): Vimeotheque\Plugin->activation_hook(false)
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#14 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_codefl...', false)
+#15 /internal/eval.php(20): activate_plugin('codeflavors-vim...')
+#16 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_vimeotheque_addons', '1744278703', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_codeflavors-vimeo-video-post-lite/main.php'), WP_Hook->do_action, WP_Hook->apply_filters, Vimeotheque\Plugin->activation_hook, Vimeotheque\Plugin->add_admin, Vimeotheque\Admin\Admin->__construct, Vimeotheque\Extensions\Extensions->__construct, Vimeotheque\Extensions\Remote_Loader->__construct, Vimeotheque\Extensions\Remote_Loader->get_addons, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 09:51:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_cyber_statistics_visits` (`last_visit`, `last_counter`, `page`, `ip`, `visits`) VALUES ('2025-04-04 16:52:49', '2025-04-04', NULL, NULL, '1')</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_vimeotheque_addons', 'a:10:{i:0;O:8:\"stdClass\":11:{s:4:\"name\";s:15:\"Vimeotheque PRO\";s:11:\"description\";s:156:\"Vimeotheque PRO add-on, adds private videos imports, automatic imports and other extra functionality to better manage and automate the video import process.\";s:7:\"version\";s:5:\"2.1.6\";s:3:\"url\";s:24:\"https://vimeotheque.com/\";s:13:\"documentation\";s:50:\"https://vimeotheque.com/documents/getting-started/\";s:6:\"tested\";s:3:\"6.6\";s:8:\"requires\";s:3:\"5.2\";s:12:\"requires_php\";s:3:\"7.4\";s:4:\"file\";s:25:\"vimeo-video-post/main.php\";s:2:\"id\";s:1:\"2\";s:10:\"extensible\";b:1;}i:1;O:8:\"stdClass\":11:{s:4:\"name\";s:48:\"Vimeotheque PRO - WordPress Themes Compatibility\";s:11:\"description\";s:238:\"Add-on plugin for premium plugin Vimeotheque PRO, introduces import compatibility with the following WordPress themes: Aztec Progression(TV Series compatibility), Buddy Boss, Flatsome, Flycase, JNews, VideoPRO, VidoRev, Vlog and Vlogger. \";s:7:\"version\";s:5:\"1.1.2\";s:3:\"url\";s:23:\"https://vimeotheque.com\";s:13:\"documentation\";s:0:\"\";s:6:\"tested\";s:3:\"6.5\";s:8:\"requires\";s:3:\"5.2\";s:12:\"requires_php\";s:3:\"7.4\";s:4:\"file\";s:42:\"vimeotheque-themes-compatibility/index.php\";s:2:\"id\";s:1:\"4\";s:10:\"extensible\";b:0;}i:2;O:8:\"stdClass\":11:{s:4:\"name\";s:31:\"Vimeotheque PRO - Push to Vimeo\";s:11:\"description\";s:150:\"Add-on plugin for premium plugin Vimeotheque PRO, allows for local changes of video posts made in WordPress to be pushed to the attached Vimeo video. \";s:7:\"version\";s:3:\"1.0\";s:3:\"url\";s:23:\"https://vimeotheque.com\";s:13:\"documentation\";s:66:\"https://docs.vimeotheque.com/vimeotheque-pro-push-to-vimeo-add-on/\";s:6:\"tested\";s:3:\"6.5\";s:8:\"requires\";s:3:\"5.2\";s:12:\"requires_php\";s:3:\"7.4\";s:4:\"file\";s:35:\"vimeotheque-push-to-vimeo/index.php\";s:2:\"id\";s:1:\"5\";s:10:\"extensible\";b:0;}i:3;O:8:\"stdClass\":11:{s:4:\"name\";s:41:\"Vimeotheque PRO - Video subtitles manager\";s:11:\"description\";s:196:\"Vimeotheque PRO add-on plugin that will set a default subtitle file to be loaded when embedding Vimeo videos with Vimeotheque. The add-on provides functionality for both Classic and Block editor. \";s:7:\"version\";s:5:\"1.0.1\";s:3:\"url\";s:23:\"https://vimeotheque.com\";s:13:\"documentation\";s:71:\"https://docs.vimeotheque.com/vimeotheque-addon-video-subtitles-manager/\";s:6:\"tested\";s:3:\"6.5\";s:8:\"requires\";s:3:\"5.2\";s:12:\"requires_php\";s:3:\"7.4\";s:4:\"file\";s:33:\"vimeotheque-text-tracks/index.php\";s:2:\"id\";s:1:\"6\";s:10:\"extensible\";b:0;}i:4;O:8:\"stdClass\":11:{s:4:\"name\";s:45:\"Vimeotheque PRO - User permissions management\";s:11:\"description\";s:109:\"Vimeotheque PRO add-on plugin that allows access setup to plugin areas for Editors, Authors and Contributors.\";s:7:\"version\";s:3:\"1.0\";s:3:\"url\";s:23:\"https://vimeotheque.com\";s:13:\"documentation\";s:0:\"\";s:6:\"tested\";s:3:\"6.5\";s:8:\"requires\";s:3:\"5.2\";s:12:\"requires_php\";s:3:\"7.4\";s:4:\"file\";s:38:\"vimeotheque-user-permissions/index.php\";s:2:\"id\";s:1:\"7\";s:10:\"extensible\";b:0;}i:5;O:8:\"stdClass\":11:{s:4:\"name\";s:48:\"Vimeotheque PRO - LearnDash lesson compatibility\";s:11:\"description\";s:140:\"Vimeotheque PRO add-on that introduces the ability to import Vimeo videos as LearnDash lessons and set up lesson categories and lesson tags.\";s:7:\"version\";s:3:\"1.0\";s:3:\"url\";s:23:\"https://vimeotheque.com\";s:13:\"documentation\";s:0:\"\";s:6:\"tested\";s:3:\"6.5\";s:8:\"requires\";s:3:\"5.2\";s:12:\"requires_php\";s:3:\"7.4\";s:4:\"file\";s:36:\"vimeotheque-for-learn-dash/index.php\";s:2:\"id\";s:1:\"9\";s:10:\"extensible\";b:0;}i:6;O:8:\"stdClass\":11:{s:4:\"name\";s:50:\"Vimeotheque PRO - Membership plugins compatibility\";s:11:\"description\";s:250:\"Vimeotheque PRO add-on for compatibility with membership plugins: Memberful, Memberpress, Members, Paid Member Subscriptions, Paid Memberships Pro, Restrict Content PRO, Simple Membership, Ultimate Member, WooCommmerce Memberships and WP-Members.
+  \";s:7:\"version\";s:5:\"1.1.1\";s:3:\"url\";s:23:\"https://vimeotheque.com\";s:13:\"documentation\";s:0:\"\";s:6:\"tested\";s:3:\"6.5\";s:8:\"requires\";s:3:\"5.2\";s:12:\"requires_php\";s:3:\"7.4\";s:4:\"file\";s:32:\"vimeotheque-membership/index.php\";s:2:\"id\";s:2:\"10\";s:10:\"extensible\";b:0;}i:7;O:8:\"stdClass\":11:{s:4:\"name\";s:41:\"Vimeotheque PRO - Elementor compatibility\";s:11:\"description\";s:220:\"Vimeotheque PRO add-on that introduces compatibility with Elementor post templates by adding a video widget that can be incorporated in templates and will display the video embed for video posts created with Vimeotheque.\";s:7:\"version\";s:5:\"1.0.3\";s:3:\"url\";s:23:\"https://vimeotheque.com\";s:13:\"documentation\";s:0:\"\";s:6:\"tested\";s:3:\"6.5\";s:8:\"requires\";s:3:\"5.2\";s:12:\"requires_php\";s:3:\"7.4\";s:4:\"file\";s:35:\"vimeotheque-for-elementor/index.php\";s:2:\"id\";s:2:\"11\";s:10:\"extensible\";b:0;}i:8;O:8:\"stdClass\":11:{s:4:\"name\";s:37:\"Vimeotheque - Video details re-import\";s:11:\"description\";s:132:\"Vimeotheque add-on that re-imports the video data from the Vimeo API to solve the issue with missing images from playlist galleries.\";s:7:\"version\";s:5:\"1.0.2\";s:3:\"url\";s:23:\"https://vimeotheque.com\";s:13:\"documentation\";s:0:\"\";s:6:\"tested\";s:3:\"6.5\";s:8:\"requires\";s:3:\"5.2\";s:12:\"requires_php\";s:3:\"7.4\";s:4:\"file\";s:36:\"vimeotheque-video-reimport/index.php\";s:2:\"id\";s:2:\"14\";s:10:\"extensible\";b:0;}i:9;O:8:\"stdClass\":11:{s:4:\"name\";s:35:\"Vimeotheque PRO - Vimeo Me Importer\";s:11:\"description\";s:322:\"Vimeotheque PRO add-on that allows bulk importing of folders, showcases and portfolios created by the user who granted plugin access to his account. Displays lists of available folders/showcases/portfolios that can be imported into any available categories and allows customization of imports by providing various options.\";s:7:\"version\";s:5:\"1.0.4\";s:3:\"url\";s:23:\"https://vimeotheque.com\";s:13:\"documentation\";s:0:\"\";s:6:\"tested\";s:3:\"6.5\";s:8:\"requires\";s:1:\"6\";s:12:\"requires_php\";s:3:\"7.4\";s:4:\"file\";s:30:\"vimeotheque-vimeo-me/index.php\";s:2:\"id\";s:2:\"15\";s:10:\"extensible\";b:0;}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_cyber_statistics_visits</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_cyber_statistics_visits</li>
-<li>Executing: INSERT INTO `wp_cyber_statistics_visits` (`ID`, `last_visit`, `last_counter`, `page`, `ip`, `visits`) SELECT NULL, `column1`, `column2`, `column3`, `column4`, `column5` FROM (VALUES ( '2025-04-04 16:52:49' , '2025-04-04' , NULL , NULL , '1' )) WHERE true | (no parameters)</li>
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_vimeotheque_addons' , 'a:10:{i:0;O:8:&quot;stdClass&quot;:11:{s:4:&quot;name&quot;;s:15:&quot;Vimeotheque PRO&quot;;s:11:&quot;description&quot;;s:156:&quot;Vimeotheque PRO add-on, adds private videos imports, automatic imports and other extra functionality to better manage and automate the video import process.&quot;;s:7:&quot;version&quot;;s:5:&quot;2.1.6&quot;;s:3:&quot;url&quot;;s:24:&quot;https://vimeotheque.com/&quot;;s:13:&quot;documentation&quot;;s:50:&quot;https://vimeotheque.com/documents/getting-started/&quot;;s:6:&quot;tested&quot;;s:3:&quot;6.6&quot;;s:8:&quot;requires&quot;;s:3:&quot;5.2&quot;;s:12:&quot;requires_php&quot;;s:3:&quot;7.4&quot;;s:4:&quot;file&quot;;s:25:&quot;vimeo-video-post/main.php&quot;;s:2:&quot;id&quot;;s:1:&quot;2&quot;;s:10:&quot;extensible&quot;;b:1;}i:1;O:8:&quot;stdClass&quot;:11:{s:4:&quot;name&quot;;s:48:&quot;Vimeotheque PRO - WordPress Themes Compatibility&quot;;s:11:&quot;description&quot;;s:238:&quot;Add-on plugin for premium plugin Vimeotheque PRO, introduces import compatibility with the following WordPress themes: Aztec Progression(TV Series compatibility), Buddy Boss, Flatsome, Flycase, JNews, VideoPRO, VidoRev, Vlog and Vlogger. &quot;;s:7:&quot;version&quot;;s:5:&quot;1.1.2&quot;;s:3:&quot;url&quot;;s:23:&quot;https://vimeotheque.com&quot;;s:13:&quot;documentation&quot;;s:0:&quot;&quot;;s:6:&quot;tested&quot;;s:3:&quot;6.5&quot;;s:8:&quot;requires&quot;;s:3:&quot;5.2&quot;;s:12:&quot;requires_php&quot;;s:3:&quot;7.4&quot;;s:4:&quot;file&quot;;s:42:&quot;vimeotheque-themes-compatibility/index.php&quot;;s:2:&quot;id&quot;;s:1:&quot;4&quot;;s:10:&quot;extensible&quot;;b:0;}i:2;O:8:&quot;stdClass&quot;:11:{s:4:&quot;name&quot;;s:31:&quot;Vimeotheque PRO - Push to Vimeo&quot;;s:11:&quot;description&quot;;s:150:&quot;Add-on plugin for premium plugin Vimeotheque PRO, allows for local changes of video posts made in WordPress to be pushed to the attached Vimeo video. &quot;;s:7:&quot;version&quot;;s:3:&quot;1.0&quot;;s:3:&quot;url&quot;;s:23:&quot;https://vimeotheque.com&quot;;s:13:&quot;documentation&quot;;s:66:&quot;https://docs.vimeotheque.com/vimeotheque-pro-push-to-vimeo-add-on/&quot;;s:6:&quot;tested&quot;;s:3:&quot;6.5&quot;;s:8:&quot;requires&quot;;s:3:&quot;5.2&quot;;s:12:&quot;requires_php&quot;;s:3:&quot;7.4&quot;;s:4:&quot;file&quot;;s:35:&quot;vimeotheque-push-to-vimeo/index.php&quot;;s:2:&quot;id&quot;;s:1:&quot;5&quot;;s:10:&quot;extensible&quot;;b:0;}i:3;O:8:&quot;stdClass&quot;:11:{s:4:&quot;name&quot;;s:41:&quot;Vimeotheque PRO - Video subtitles manager&quot;;s:11:&quot;description&quot;;s:196:&quot;Vimeotheque PRO add-on plugin that will set a default subtitle file to be loaded when embedding Vimeo videos with Vimeotheque. The add-on provides functionality for both Classic and Block editor. &quot;;s:7:&quot;version&quot;;s:5:&quot;1.0.1&quot;;s:3:&quot;url&quot;;s:23:&quot;https://vimeotheque.com&quot;;s:13:&quot;documentation&quot;;s:71:&quot;https://docs.vimeotheque.com/vimeotheque-addon-video-subtitles-manager/&quot;;s:6:&quot;tested&quot;;s:3:&quot;6.5&quot;;s:8:&quot;requires&quot;;s:3:&quot;5.2&quot;;s:12:&quot;requires_php&quot;;s:3:&quot;7.4&quot;;s:4:&quot;file&quot;;s:33:&quot;vimeotheque-text-tracks/index.php&quot;;s:2:&quot;id&quot;;s:1:&quot;6&quot;;s:10:&quot;extensible&quot;;b:0;}i:4;O:8:&quot;stdClass&quot;:11:{s:4:&quot;name&quot;;s:45:&quot;Vimeotheque PRO - User permissions management&quot;;s:11:&quot;description&quot;;s:109:&quot;Vimeotheque PRO add-on plugin that allows access setup to plugin areas for Editors, Authors and Contributors.&quot;;s:7:&quot;version&quot;;s:3:&quot;1.0&quot;;s:3:&quot;url&quot;;s:23:&quot;https://vimeotheque.com&quot;;s:13:&quot;documentation&quot;;s:0:&quot;&quot;;s:6:&quot;tested&quot;;s:3:&quot;6.5&quot;;s:8:&quot;requires&quot;;s:3:&quot;5.2&quot;;s:12:&quot;requires_php&quot;;s:3:&quot;7.4&quot;;s:4:&quot;file&quot;;s:38:&quot;vimeotheque-user-permissions/index.php&quot;;s:2:&quot;id&quot;;s:1:&quot;7&quot;;s:10:&quot;extensible&quot;;b:0;}i:5;O:8:&quot;stdClass&quot;:11:{s:4:&quot;name&quot;;s:48:&quot;Vimeotheque PRO - LearnDash lesson compatibility&quot;;s:11:&quot;description&quot;;s:140:&quot;Vimeotheque PRO add-on that introduces the ability to import Vimeo videos as LearnDash lessons and set up lesson categories and lesson tags.&quot;;s:7:&quot;version&quot;;s:3:&quot;1.0&quot;;s:3:&quot;url&quot;;s:23:&quot;https://vimeotheque.com&quot;;s:13:&quot;documentation&quot;;s:0:&quot;&quot;;s:6:&quot;tested&quot;;s:3:&quot;6.5&quot;;s:8:&quot;requires&quot;;s:3:&quot;5.2&quot;;s:12:&quot;requires_php&quot;;s:3:&quot;7.4&quot;;s:4:&quot;file&quot;;s:36:&quot;vimeotheque-for-learn-dash/index.php&quot;;s:2:&quot;id&quot;;s:1:&quot;9&quot;;s:10:&quot;extensible&quot;;b:0;}i:6;O:8:&quot;stdClass&quot;:11:{s:4:&quot;name&quot;;s:50:&quot;Vimeotheque PRO - Membership plugins compatibility&quot;;s:11:&quot;description&quot;;s:250:&quot;Vimeotheque PRO add-on for compatibility with membership plugins: Memberful, Memberpress, Members, Paid Member Subscriptions, Paid Memberships Pro, Restrict Content PRO, Simple Membership, Ultimate Member, WooCommmerce Memberships and WP-Members.
+  &quot;;s:7:&quot;version&quot;;s:5:&quot;1.1.1&quot;;s:3:&quot;url&quot;;s:23:&quot;https://vimeotheque.com&quot;;s:13:&quot;documentation&quot;;s:0:&quot;&quot;;s:6:&quot;tested&quot;;s:3:&quot;6.5&quot;;s:8:&quot;requires&quot;;s:3:&quot;5.2&quot;;s:12:&quot;requires_php&quot;;s:3:&quot;7.4&quot;;s:4:&quot;file&quot;;s:32:&quot;vimeotheque-membership/index.php&quot;;s:2:&quot;id&quot;;s:2:&quot;10&quot;;s:10:&quot;extensible&quot;;b:0;}i:7;O:8:&quot;stdClass&quot;:11:{s:4:&quot;name&quot;;s:41:&quot;Vimeotheque PRO - Elementor compatibility&quot;;s:11:&quot;description&quot;;s:220:&quot;Vimeotheque PRO add-on that introduces compatibility with Elementor post templates by adding a video widget that can be incorporated in templates and will display the video embed for video posts created with Vimeotheque.&quot;;s:7:&quot;version&quot;;s:5:&quot;1.0.3&quot;;s:3:&quot;url&quot;;s:23:&quot;https://vimeotheque.com&quot;;s:13:&quot;documentation&quot;;s:0:&quot;&quot;;s:6:&quot;tested&quot;;s:3:&quot;6.5&quot;;s:8:&quot;requires&quot;;s:3:&quot;5.2&quot;;s:12:&quot;requires_php&quot;;s:3:&quot;7.4&quot;;s:4:&quot;file&quot;;s:35:&quot;vimeotheque-for-elementor/index.php&quot;;s:2:&quot;id&quot;;s:2:&quot;11&quot;;s:10:&quot;extensible&quot;;b:0;}i:8;O:8:&quot;stdClass&quot;:11:{s:4:&quot;name&quot;;s:37:&quot;Vimeotheque - Video details re-import&quot;;s:11:&quot;description&quot;;s:132:&quot;Vimeotheque add-on that re-imports the video data from the Vimeo API to solve the issue with missing images from playlist galleries.&quot;;s:7:&quot;version&quot;;s:5:&quot;1.0.2&quot;;s:3:&quot;url&quot;;s:23:&quot;https://vimeotheque.com&quot;;s:13:&quot;documentation&quot;;s:0:&quot;&quot;;s:6:&quot;tested&quot;;s:3:&quot;6.5&quot;;s:8:&quot;requires&quot;;s:3:&quot;5.2&quot;;s:12:&quot;requires_php&quot;;s:3:&quot;7.4&quot;;s:4:&quot;file&quot;;s:36:&quot;vimeotheque-video-reimport/index.php&quot;;s:2:&quot;id&quot;;s:2:&quot;14&quot;;s:10:&quot;extensible&quot;;b:0;}i:9;O:8:&quot;stdClass&quot;:11:{s:4:&quot;name&quot;;s:35:&quot;Vimeotheque PRO - Vimeo Me Importer&quot;;s:11:&quot;description&quot;;s:322:&quot;Vimeotheque PRO add-on that allows bulk importing of folders, showcases and portfolios created by the user who granted plugin access to his account. Displays lists of available folders/showcases/portfolios that can be imported into any available categories and allows customization of imports by providing various options.&quot;;s:7:&quot;version&quot;;s:5:&quot;1.0.4&quot;;s:3:&quot;url&quot;;s:23:&quot;https://vimeotheque.com&quot;;s:13:&quot;documentation&quot;;s:0:&quot;&quot;;s:6:&quot;tested&quot;;s:3:&quot;6.5&quot;;s:8:&quot;requires&quot;;s:1:&quot;6&quot;;s:12:&quot;requires_php&quot;;s:3:&quot;7.4&quot;;s:4:&quot;file&quot;;s:30:&quot;vimeotheque-vimeo-me/index.php&quot;;s:2:&quot;id&quot;;s:2:&quot;15&quot;;s:10:&quot;extensible&quot;;b:0;}}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQ
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_vime...', Array, '', 'off')
+#5 /wordpress/wp-content/plugins/codeflavors-vimeo-video-post-lite/includes/libs/extensions/remote-loader.class.php(67): set_transient('vimeotheque_add...', Array, 86400)
+#6 /wordpress/wp-content/plugins/codeflavors-vimeo-video-post-lite/includes/libs/extensions/remote-loader.class.php(43): Vimeotheque\Extensions\Remote_Loader->get_addons()
+#7 /wordpress/wp-content/plugins/codeflavors-vimeo-video-post-lite/includes/libs/extensions/extensions.class.php(51): Vimeotheque\Extensions\Remote_Loader->__construct('https://vimeoth...', 2, Object(Vimeotheque\Extensions\Extensions))
+#8 /wordpress/wp-content/plugins/codeflavors-vimeo-video-post-lite/includes/libs/admin/admin.class.php(66): Vimeotheque\Extensions\Extensions->__construct()
+#9 /wordpress/wp-content/plugins/codeflavors-vimeo-video-post-lite/includes/libs/plugin.class.php(502): Vimeotheque\Admin\Admin->__construct(Object(Vimeotheque\Post\Post_Type))
+#10 /wordpress/wp-content/plugins/codeflavors-vimeo-video-post-lite/includes/libs/plugin.class.php(427): Vimeotheque\Plugin->add_admin()
+#11 /wordpress/wp-includes/class-wp-hook.php(324): Vimeotheque\Plugin->activation_hook(false)
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#14 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_codefl...', false)
+#15 /internal/eval.php(20): activate_plugin('codeflavors-vim...')
+#16 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_vimeotheque_addons', 'a:10:{i:0;O:8:\"stdClass\":11:{s:4:\"name\";s:15:\"Vimeotheque PRO\";s:11:\"description\";s:156:\"Vimeotheque PRO add-on, adds private videos imports, automatic imports and other extra functionality to better manage and automate the video import process.\";s:7:\"version\";s:5:\"2.1.6\";s:3:\"url\";s:24:\"https://vimeotheque.com/\";s:13:\"documentation\";s:50:\"https://vimeotheque.com/documents/getting-started/\";s:6:\"tested\";s:3:\"6.6\";s:8:\"requires\";s:3:\"5.2\";s:12:\"requires_php\";s:3:\"7.4\";s:4:\"file\";s:25:\"vimeo-video-post/main.php\";s:2:\"id\";s:1:\"2\";s:10:\"extensible\";b:1;}i:1;O:8:\"stdClass\":11:{s:4:\"name\";s:48:\"Vimeotheque PRO - WordPress Themes Compatibility\";s:11:\"description\";s:238:\"Add-on plugin for premium plugin Vimeotheque PRO, introduces import compatibility with the following WordPress themes: Aztec Progression(TV Series compatibility), Buddy Boss, Flatsome, Flycase, JNews, VideoPRO, VidoRev, Vlog and Vlogger. \";s:7:\"version\";s:5:\"1.1.2\";s:3:\"url\";s:23:\"https://vimeotheque.com\";s:13:\"documentation\";s:0:\"\";s:6:\"tested\";s:3:\"6.5\";s:8:\"requires\";s:3:\"5.2\";s:12:\"requires_php\";s:3:\"7.4\";s:4:\"file\";s:42:\"vimeotheque-themes-compatibility/index.php\";s:2:\"id\";s:1:\"4\";s:10:\"extensible\";b:0;}i:2;O:8:\"stdClass\":11:{s:4:\"name\";s:31:\"Vimeotheque PRO - Push to Vimeo\";s:11:\"description\";s:150:\"Add-on plugin for premium plugin Vimeotheque PRO, allows for local changes of video posts made in WordPress to be pushed to the attached Vimeo video. \";s:7:\"version\";s:3:\"1.0\";s:3:\"url\";s:23:\"https://vimeotheque.com\";s:13:\"documentation\";s:66:\"https://docs.vimeotheque.com/vimeotheque-pro-push-to-vimeo-add-on/\";s:6:\"tested\";s:3:\"6.5\";s:8:\"requires\";s:3:\"5.2\";s:12:\"requires_php\";s:3:\"7.4\";s:4:\"file\";s:35:\"vimeotheque-push-to-vimeo/index.php\";s:2:\"id\";s:1:\"5\";s:10:\"extensible\";b:0;}i:3;O:8:\"stdClass\":11:{s:4:\"name\";s:41:\"Vimeotheque PRO - Video subtitles manager\";s:11:\"description\";s:196:\"Vimeotheque PRO add-on plugin that will set a default subtitle file to be loaded when embedding Vimeo videos with Vimeotheque. The add-on provides functionality for both Classic and Block editor. \";s:7:\"version\";s:5:\"1.0.1\";s:3:\"url\";s:23:\"https://vimeotheque.com\";s:13:\"documentation\";s:71:\"https://docs.vimeotheque.com/vimeotheque-addon-video-subtitles-manager/\";s:6:\"tested\";s:3:\"6.5\";s:8:\"requires\";s:3:\"5.2\";s:12:\"requires_php\";s:3:\"7.4\";s:4:\"file\";s:33:\"vimeotheque-text-tracks/index.php\";s:2:\"id\";s:1:\"6\";s:10:\"extensible\";b:0;}i:4;O:8:\"stdClass\":11:{s:4:\"name\";s:45:\"Vimeotheque PRO - User permissions management\";s:11:\"description\";s:109:\"Vimeotheque PRO add-on plugin that allows access setup to plugin areas for Editors, Authors and Contributors.\";s:7:\"version\";s:3:\"1.0\";s:3:\"url\";s:23:\"https://vimeotheque.com\";s:13:\"documentation\";s:0:\"\";s:6:\"tested\";s:3:\"6.5\";s:8:\"requires\";s:3:\"5.2\";s:12:\"requires_php\";s:3:\"7.4\";s:4:\"file\";s:38:\"vimeotheque-user-permissions/index.php\";s:2:\"id\";s:1:\"7\";s:10:\"extensible\";b:0;}i:5;O:8:\"stdClass\":11:{s:4:\"name\";s:48:\"Vimeotheque PRO - LearnDash lesson compatibility\";s:11:\"description\";s:140:\"Vimeotheque PRO add-on that introduces the ability to import Vimeo videos as LearnDash lessons and set up lesson categories and lesson tags.\";s:7:\"version\";s:3:\"1.0\";s:3:\"url\";s:23:\"https://vimeotheque.com\";s:13:\"documentation\";s:0:\"\";s:6:\"tested\";s:3:\"6.5\";s:8:\"requires\";s:3:\"5.2\";s:12:\"requires_php\";s:3:\"7.4\";s:4:\"file\";s:36:\"vimeotheque-for-learn-dash/index.php\";s:2:\"id\";s:1:\"9\";s:10:\"extensible\";b:0;}i:6;O:8:\"stdClass\":11:{s:4:\"name\";s:50:\"Vimeotheque PRO - Membership plugins compatibility\";s:11:\"description\";s:250:\"Vimeotheque PRO add-on for compatibility with membership plugins: Memberful, Memberpress, Members, Paid Member Subscriptions, Paid Memberships Pro, Restrict Content PRO, Simple Membership, Ultimate Member, WooCommmerce Memberships and WP-Members.
+  \";s:7:\"version\";s:5:\"1.1.1\";s:3:\"url\";s:23:\"https://vimeotheque.com\";s:13:\"documentation\";s:0:\"\";s:6:\"tested\";s:3:\"6.5\";s:8:\"requires\";s:3:\"5.2\";s:12:\"requires_php\";s:3:\"7.4\";s:4:\"file\";s:32:\"vimeotheque-membership/index.php\";s:2:\"id\";s:2:\"10\";s:10:\"extensible\";b:0;}i:7;O:8:\"stdClass\":11:{s:4:\"name\";s:41:\"Vimeotheque PRO - Elementor compatibility\";s:11:\"description\";s:220:\"Vimeotheque PRO add-on that introduces compatibility with Elementor post templates by adding a video widget that can be incorporated in templates and will display the video embed for video posts created with Vimeotheque.\";s:7:\"version\";s:5:\"1.0.3\";s:3:\"url\";s:23:\"https://vimeotheque.com\";s:13:\"documentation\";s:0:\"\";s:6:\"tested\";s:3:\"6.5\";s:8:\"requires\";s:3:\"5.2\";s:12:\"requires_php\";s:3:\"7.4\";s:4:\"file\";s:35:\"vimeotheque-for-elementor/index.php\";s:2:\"id\";s:2:\"11\";s:10:\"extensible\";b:0;}i:8;O:8:\"stdClass\":11:{s:4:\"name\";s:37:\"Vimeotheque - Video details re-import\";s:11:\"description\";s:132:\"Vimeotheque add-on that re-imports the video data from the Vimeo API to solve the issue with missing images from playlist galleries.\";s:7:\"version\";s:5:\"1.0.2\";s:3:\"url\";s:23:\"https://vimeotheque.com\";s:13:\"documentation\";s:0:\"\";s:6:\"tested\";s:3:\"6.5\";s:8:\"requires\";s:3:\"5.2\";s:12:\"requires_php\";s:3:\"7.4\";s:4:\"file\";s:36:\"vimeotheque-video-reimport/index.php\";s:2:\"id\";s:2:\"14\";s:10:\"extensible\";b:0;}i:9;O:8:\"stdClass\":11:{s:4:\"name\";s:35:\"Vimeotheque PRO - Vimeo Me Importer\";s:11:\"description\";s:322:\"Vimeotheque PRO add-on that allows bulk importing of folders, showcases and portfolios created by the user who granted plugin access to his account. Displays lists of available folders/showcases/portfolios that can be imported into any available categories and allows customization of imports by providing various options.\";s:7:\"version\";s:5:\"1.0.4\";s:3:\"url\";s:23:\"https://vimeotheque.com\";s:13:\"documentation\";s:0:\"\";s:6:\"tested\";s:3:\"6.5\";s:8:\"requires\";s:1:\"6\";s:12:\"requires_php\";s:3:\"7.4\";s:4:\"file\";s:30:\"vimeotheque-vimeo-me/index.php\";s:2:\"id\";s:2:\"15\";s:10:\"extensible\";b:0;}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_codeflavors-vimeo-video-post-lite/main.php'), WP_Hook->do_action, WP_Hook->apply_filters, Vimeotheque\Plugin->activation_hook, Vimeotheque\Plugin->add_admin, Vimeotheque\Admin\Admin->__construct, Vimeotheque\Extensions\Extensions->__construct, Vimeotheque\Extensions\Remote_Loader->__construct, Vimeotheque\Extensions\Remote_Loader->get_addons, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 09:51:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_vimeotheque_setup_activated', '1744192333', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_vimeotheque_setup_activated' , '1744192333' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1744192333, '', 'off')
+#5 /wordpress/wp-content/plugins/codeflavors-vimeo-video-post-lite/includes/libs/plugin.class.php(431): set_transient('vimeotheque_set...', 1744192303, 30)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): Vimeotheque\Plugin->activation_hook(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_codefl...', false)
+#10 /internal/eval.php(20): activate_plugin('codeflavors-vim...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_vimeotheque_setup_activated', '1744192333', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_codeflavors-vimeo-video-post-lite/main.php'), WP_Hook->do_action, WP_Hook->apply_filters, Vimeotheque\Plugin->activation_hook, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 09:51:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_vimeotheque_setup_activated', '1744192303', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_vimeotheque_setup_activated' , '1744192303' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_vime...', 1744192303, '', 'off')
+#5 /wordpress/wp-content/plugins/codeflavors-vimeo-video-post-lite/includes/libs/plugin.class.php(431): set_transient('vimeotheque_set...', 1744192303, 30)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): Vimeotheque\Plugin->activation_hook(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_codefl...', false)
+#10 /internal/eval.php(20): activate_plugin('codeflavors-vim...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_vimeotheque_setup_activated', '1744192303', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_codeflavors-vimeo-video-post-lite/main.php'), WP_Hook->do_action, WP_Hook->apply_filters, Vimeotheque\Plugin->activation_hook, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 09:51:43 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 09:51:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 09:51:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 09:51:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 09:51:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_cvm-video-categories-widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_cvm-video-categories-widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('widget_cvm-vide...', Array, '', 'auto')
+#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_cvm-vide...', Array)
+#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
+#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
+#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#16 /wordpress/wp-settings.php(704): do_action('init')
+#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#20 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_cvm-video-categories-widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 09:51:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_cvm-latest-videos-widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_cvm-latest-videos-widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('widget_cvm-late...', Array, '', 'auto')
+#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_cvm-late...', Array)
+#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
+#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
+#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#16 /wordpress/wp-settings.php(704): do_action('init')
+#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#20 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_cvm-latest-videos-widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 09:51:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'QB$37*u7@q:_33=HG|F=G;` %>Db#pCLZnEMn_vrLDvdmS5b^S^Qe#it(xIPYtB+', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'QB$37*u7@q:_33=HG|F=G;` %&gt;Db#pCLZnEMn_vrLDvdmS5b^S^Qe#it(xIPYtB+' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'QB$37*u7@q:_33=...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'QB$37*u7@q:_33=...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'QB$37*u7@q:_33=...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'QB$37*u7@q:_33=...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|0...', 'nonce')
+#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
+#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
+#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
+#17 /wordpress/wp-includes/functions.wp-scripts.php(419): wp_scripts()
+#18 /wordpress/wp-includes/blocks.php(234): wp_script_is('vimeotheque-ser...', 'registered')
+#19 /wordpress/wp-includes/blocks.php(585): register_block_script_handle(Array, 'editorScript')
+#20 /wordpress/wp-includes/blocks.php(736): register_block_type_from_metadata('/wordpress/wp-c...', A
