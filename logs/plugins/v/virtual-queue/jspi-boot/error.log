@@ -2,594 +2,684 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [07-Apr-2025 22:47:33 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "vlbr_filter_target" in /wordpress/wp-content/plugins/vacant-line-breaker/vacant-line-breaker.php:146
+Error: [09-Apr-2025 12:48:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 12:48:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 12:48:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 12:48:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 12:48:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_video_youtube_lightbox', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_video_youtube_lightbox' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('widget_video_yo...', Array, '', 'auto')
+#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_video_yo...', Array)
+#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
+#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
+#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#16 /wordpress/wp-settings.php(704): do_action('init')
+#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#20 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_video_youtube_lightbox', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:48:45 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/vimeo-channel-gallery/vimeo-channel-gallery.php:361
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('vacant-line-bre...')
-#2 /internal/eval.php(20): activate_plugin('vacant-line-bre...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('vimeo-channel-g...')
+#2 /internal/eval.php(20): activate_plugin('vimeo-channel-g...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/vacant-line-breaker/vacant-line-breaker.php on line 146
-[07-Apr-2025 22:47:36 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "vlbr_filter_target" in /wordpress/wp-content/plugins/vacant-line-breaker/vacant-line-breaker.php:146
+  thrown in /wordpress/wp-content/plugins/vimeo-channel-gallery/vimeo-channel-gallery.php on line 361
+[09-Apr-2025 12:48:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/vimeo-channel-gallery/vimeo-channel-gallery.php:361
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('vacant-line-bre...')
-#2 /internal/eval.php(20): activate_plugin('vacant-line-bre...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('vimeo-channel-g...')
+#2 /internal/eval.php(20): activate_plugin('vimeo-channel-g...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/vacant-line-breaker/vacant-line-breaker.php on line 146
-[07-Apr-2025 22:47:41 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "vlbr_filter_target" in /wordpress/wp-content/plugins/vacant-line-breaker/vacant-line-breaker.php:146
+  thrown in /wordpress/wp-content/plugins/vimeo-channel-gallery/vimeo-channel-gallery.php on line 361
+[09-Apr-2025 12:49:00 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/vimeo-channel-gallery/vimeo-channel-gallery.php:361
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('vacant-line-bre...')
-#2 /internal/eval.php(20): activate_plugin('vacant-line-bre...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('vimeo-channel-g...')
+#2 /internal/eval.php(20): activate_plugin('vimeo-channel-g...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/vacant-line-breaker/vacant-line-breaker.php on line 146
-[07-Apr-2025 22:48:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 22:48:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 22:48:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 22:48:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 22:48:16 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 22:48:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 22:48:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 22:48:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 22:48:29 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 22:48:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 22:48:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 22:48:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 22:48:41 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 22:48:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 22:48:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 22:48:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 22:48:52 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "VQRC_TEXTDOMAIN" in /wordpress/wp-content/plugins/vasaio-qr-code/vasaio-qr-code.php:15
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('vasaio-qr-code/...')
-#2 /internal/eval.php(20): activate_plugin('vasaio-qr-code/...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/vasaio-qr-code/vasaio-qr-code.php on line 15
-[07-Apr-2025 22:48:55 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "VQRC_TEXTDOMAIN" in /wordpress/wp-content/plugins/vasaio-qr-code/vasaio-qr-code.php:15
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('vasaio-qr-code/...')
-#2 /internal/eval.php(20): activate_plugin('vasaio-qr-code/...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/vasaio-qr-code/vasaio-qr-code.php on line 15
-[07-Apr-2025 22:48:57 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "VQRC_TEXTDOMAIN" in /wordpress/wp-content/plugins/vasaio-qr-code/vasaio-qr-code.php:15
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('vasaio-qr-code/...')
-#2 /internal/eval.php(20): activate_plugin('vasaio-qr-code/...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/vasaio-qr-code/vasaio-qr-code.php on line 15
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 22:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 22:49:04 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>vat_moss</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[07-Apr-2025 22:49:07 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>vat_moss</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[07-Apr-2025 22:49:09 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>vat_moss</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[07-Apr-2025 22:49:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function edd_get_option() in /wordpress/wp-content/plugins/vat-number-for-easy-digital-downloads/vat-number-for-easy-digital-downloads.php:244
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): pp_eddvat_activate(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vat-nu...', false)
-#4 /internal/eval.php(20): activate_plugin('vat-number-for-...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/vat-number-for-easy-digital-downloads/vat-number-for-easy-digital-downloads.php on line 244
-[07-Apr-2025 22:49:18 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function edd_get_option() in /wordpress/wp-content/plugins/vat-number-for-easy-digital-downloads/vat-number-for-easy-digital-downloads.php:244
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): pp_eddvat_activate(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vat-nu...', false)
-#4 /internal/eval.php(20): activate_plugin('vat-number-for-...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/vat-number-for-easy-digital-downloads/vat-number-for-easy-digital-downloads.php on line 244
-[07-Apr-2025 22:49:21 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function edd_get_option() in /wordpress/wp-content/plugins/vat-number-for-easy-digital-downloads/vat-number-for-easy-digital-downloads.php:244
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): pp_eddvat_activate(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vat-nu...', false)
-#4 /internal/eval.php(20): activate_plugin('vat-number-for-...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/vat-number-for-easy-digital-downloads/vat-number-for-easy-digital-downloads.php on line 244
-[07-Apr-2025 22:49:27 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 22:49:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 22:49:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 22:49:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 22:49:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+  thrown in /wordpress/wp-content/plugins/vimeo-channel-gallery/vimeo-channel-gallery.php on line 361
+[09-Apr-2025 12:49:09 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 12:49:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 12:49:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 12:49:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 12:49:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('VD_CACHE_TIME', '1744066179', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SET @virtual_queue_position := 0;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'VD_CACHE_TIME' , '1744066179' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+MySQL query not supported. Cause: SET statement: setStatement
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('VD_CACHE_TIME', 1744066179, '', 'on')
-#5 /wordpress/wp-content/plugins/vd-my-header-footer/lib/vd_editor.php(60): update_option('VD_CACHE_TIME', 1744066179, true)
-#6 /wordpress/wp-content/plugins/vd-my-header-footer/lib/vd_editor.php(1121): vD_Editor::initialise()
-#7 /wordpress/wp-content/plugins/vd-my-header-footer/lib/vd_loader.php(60): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/vd-my-header-footer/lib/vd_loader.php(29): vD_Loader::load_php('ADDON', '/wordpress/wp-c...')
-#9 /wordpress/wp-content/plugins/vd-my-header-footer/vd_my_header_footer.php(34): vD_Loader::load_dependencies('ADDON', 'RELEASE', '1.27', 'http://127.0.0....', '/wordpress/wp-c...', true, true)
-#10 /wordpress/wp-content/plugins/vd-my-header-footer/vd_my_header_footer.php(48): run_vd_mhf()
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('vd-my-header-fo...')
-#13 /internal/eval.php(20): activate_plugin('vd-my-header-fo...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('VD_CACHE_TIME', '1744066179', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/vd-my-header-footer/vd_my_header_footer.php'), run_vd_mhf, vD_Loader::load_dependencies, vD_Loader::load_php, require_once('/plugins/vd-my-header-footer/lib/vd_editor.php'), vD_Editor::initialise, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 22:49:39 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 22:49:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 22:49:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 22:49:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 22:49:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('VD_NOTIF_MHF_REMINDER', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'VD_NOTIF_MHF_REMINDER' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('VD_NOTIF_MHF_RE...', true, '', 'auto')
-#5 /wordpress/wp-content/plugins/vd-my-header-footer/includes/addon.php(120): update_option('VD_NOTIF_MHF_RE...', true)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): vD_My_Header_Footer::on_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vd-my-...', false)
-#10 /internal/eval.php(20): activate_plugin('vd-my-header-fo...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('VD_NOTIF_MHF_REMINDER', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_vd-my-header-footer/vd_my_header_footer.php'), WP_Hook->do_action, WP_Hook->apply_filters, vD_My_Header_Footer::on_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 22:49:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('VD_CACHE_TIME', '1744066179', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'VD_CACHE_TIME' , '1744066179' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('VD_CACHE_TIME', 1744066179, '', 'auto')
-#5 /wordpress/wp-content/plugins/vd-my-header-footer/includes/addon.php(121): update_option('VD_CACHE_TIME', 1744066179)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): vD_My_Header_Footer::on_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vd-my-...', false)
-#10 /internal/eval.php(20): activate_plugin('vd-my-header-fo...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('VD_CACHE_TIME', '1744066179', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_vd-my-header-footer/vd_my_header_footer.php'), WP_Hook->do_action, WP_Hook->apply_filters, vD_My_Header_Footer::on_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 22:49:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('VD_MHF_ACTIVATE_TIME', '1744066179', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'VD_MHF_ACTIVATE_TIME' , '1744066179' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('VD_MHF_ACTIVATE...', 1744066179, '', 'auto')
-#5 /wordpress/wp-content/plugins/vd-my-header-footer/includes/addon.php(122): update_option('VD_MHF_ACTIVATE...', 1744066179)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): vD_My_Header_Footer::on_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vd-my-...', false)
-#10 /internal/eval.php(20): activate_plugin('vd-my-header-fo...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('VD_MHF_ACTIVATE_TIME', '1744066179', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_vd-my-header-footer/vd_my_header_footer.php'), WP_Hook->do_action, WP_Hook->apply_filters, vD_My_Header_Footer::on_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 22:49:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('VD_MHF_RUNS', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'VD_MHF_RUNS' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('VD_MHF_RUNS', 0, '', 'auto')
-#5 /wordpress/wp-content/plugins/vd-my-header-footer/includes/addon.php(123): update_option('VD_MHF_RUNS', 0)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): vD_My_Header_Footer::on_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vd-my-...', false)
-#10 /internal/eval.php(20): activate_plugin('vd-my-header-fo...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('VD_MHF_RUNS', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_vd-my-header-footer/vd_my_header_footer.php'), WP_Hook->do_action, WP_Hook->apply_filters, vD_My_Header_Footer::on_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 22:49:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('VD_MHF_NAG_1_DISMISS_TIME', '1743066179', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'VD_MHF_NAG_1_DISMISS_TIME' , '1743066179' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('VD_MHF_NAG_1_DI...', 1743066179, '', 'auto')
-#5 /wordpress/wp-content/plugins/vd-my-header-footer/includes/addon.php(124): update_option('VD_MHF_NAG_1_DI...', 1743066179)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): vD_My_Header_Footer::on_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vd-my-...', false)
-#10 /internal/eval.php(20): activate_plugin('vd-my-header-fo...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('VD_MHF_NAG_1_DISMISS_TIME', '1743066179', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_vd-my-header-footer/vd_my_header_footer.php'), WP_Hook->do_action, WP_Hook->apply_filters, vD_My_Header_Footer::on_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 22:49:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('VD_MHF_NAG_2_DISMISS_TIME', '1743066179', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'VD_MHF_NAG_2_DISMISS_TIME' , '1743066179' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('VD_MHF_NAG_2_DI...', 1743066179, '', 'auto')
-#5 /wordpress/wp-content/plugins/vd-my-header-footer/includes/addon.php(125): update_option('VD_MHF_NAG_2_DI...', 1743066179)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): vD_My_Header_Footer::on_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vd-my-...', false)
-#10 /internal/eval.php(20): activate_plugin('vd-my-header-fo...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('VD_MHF_NAG_2_DISMISS_TIME', '1743066179', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_vd-my-header-footer/vd_my_header_footer.php'), WP_Hook->do_action, WP_Hook->apply_filters, vD_My_Header_Footer::on_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 22:49:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('VD_MHF_V_1_11', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'VD_MHF_V_1_11' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('VD_MHF_V_1_11', true, '', 'auto')
-#5 /wordpress/wp-content/plugins/vd-my-header-footer/includes/addon.php(572): update_option('VD_MHF_V_1_11', true)
-#6 /wordpress/wp-content/plugins/vd-my-header-footer/includes/addon.php(128): vD_My_Header_Footer::backwards_compat()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): vD_My_Header_Footer::on_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vd-my-...', false)
-#11 /internal/eval.php(20): activate_plugin('vd-my-header-fo...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SET @virtual_qu...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SET @virtual_qu...')
+#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(367): WP_SQLite_DB->query('SET @virtual_qu...')
+#4 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(203): Virtual_Queue_Public::set_queue_position()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('VD_MHF_V_1_11', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_vd-my-header-footer/vd_my_header_footer.php'), WP_Hook->do_action, WP_Hook->apply_filters, vD_My_Header_Footer::on_activate, vD_My_Header_Footer::backwards_compat, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 22:49:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SET @virtual_queue_position := 0; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::set_queue_position, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:49:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('VD_NOTIF_MHF_REMINDER', 'true', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>UPDATE wp_vq_sessions SET estimated_time = ( SELECT @virtual_queue_position := @virtual_queue_position + 1 ) where status=0 ORDER BY id ASC;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_vq_sessions</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
+				SELECT column_name, is_nullable, data_type, column_default
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'VD_NOTIF_MHF_REMINDER' , 'true' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_vq_sessions</li>
+<li>Executing: UPDATE `wp_vq_sessions` SET `estimated_time` = ( SELECT @virtual_queue_position := @virtual_queue_position + 1 ) WHERE rowid IN ( SELECT rowid FROM `wp_vq_sessions` where `status` = 0 ORDER BY `id` ASC ) | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 unrecognized token: ":"
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('VD_NOTIF_MHF_RE...', 'true', '', 'auto')
-#5 /wordpress/wp-content/plugins/vd-my-header-footer/includes/addon.php(533): update_option('VD_NOTIF_MHF_RE...', 'true')
-#6 /wordpress/wp-content/plugins/vd-my-header-footer/includes/addon.php(574): vD_My_Header_Footer::on_switch_theme('undefined')
-#7 /wordpress/wp-content/plugins/vd-my-header-footer/includes/addon.php(128): vD_My_Header_Footer::backwards_compat()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): vD_My_Header_Footer::on_activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vd-my-...', false)
-#12 /internal/eval.php(20): activate_plugin('vd-my-header-fo...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('UPDATE wp_vq_se...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('UPDATE wp_vq_se...')
+#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(368): WP_SQLite_DB->query('UPDATE wp_vq_se...')
+#4 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(203): Virtual_Queue_Public::set_queue_position()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query UPDATE wp_vq_sessions SET estimated_time = ( SELECT @virtual_queue_position := @virtual_queue_position + 1 ) where status=0 ORDER BY id ASC; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::set_queue_position, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:49:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_vq_sessions (
+			  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+			  `session_id` varchar(256) NOT NULL,
+			  `estimated_time` int(11) DEFAULT NULL,
+			  `registered_date` int(11) NOT NULL,
+			  `updated_date` int(11) NOT NULL,
+			  `status` TINYINT(2) NOT NULL DEFAULT '0',
+				PRIMARY KEY id (id)
+			) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/virtual-queue/includes/class-virtual-queue-activator.php(59): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/virtual-queue/virtual-queue.php(47): Virtual_Queue_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_virtual_queue(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_virtua...', false)
+#8 /internal/eval.php(20): activate_plugin('virtual-queue/v...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_vq_sessions (
+			  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+			  `session_id` varchar(256) NOT NULL,
+			  `estimated_time` int(11) DEFAULT NULL,
+			  `registered_date` int(11) NOT NULL,
+			  `updated_date` int(11) NOT NULL,
+			  `status` TINYINT(2) NOT NULL DEFAULT '0',
+				PRIMARY KEY id (id)
+			) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_virtual-queue/virtual-queue.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_virtual_queue, Virtual_Queue_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:49:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+			
+			CREATE TABLE wp_vq_status (
+			  `id` int(11) NOT NULL AUTO_INCREMENT,
+			  `active` bigint(11) NOT NULL,
+			  `pending` bigint(11) NOT NULL,
+				PRIMARY KEY id (id)
+			) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('\n\t\t\t\n\t\t\tCREATE ...')
+#2 /wordpress/wp-content/plugins/virtual-queue/includes/class-virtual-queue-activator.php(59): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/virtual-queue/virtual-queue.php(47): Virtual_Queue_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_virtual_queue(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_virtua...', false)
+#8 /internal/eval.php(20): activate_plugin('virtual-queue/v...')
+#9 {main}</pre>
+ for query 
+			
+			CREATE TABLE wp_vq_status (
+			  `id` int(11) NOT NULL AUTO_INCREMENT,
+			  `active` bigint(11) NOT NULL,
+			  `pending` bigint(11) NOT NULL,
+				PRIMARY KEY id (id)
+			) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_virtual-queue/virtual-queue.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_virtual_queue, Virtual_Queue_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:49:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+			
+			INSERT INTO wp_vq_status (`id`, `active`, `pending`) VALUES (1, 0, 0)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: 
+			
+			INSERT INTO wp_vq_status (`id`, `active`, `pending`) VALUES (1, 0, 0) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vq_status.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('\n\t\t\t\n\t\t\tINSERT ...')
+#2 /wordpress/wp-content/plugins/virtual-queue/includes/class-virtual-queue-activator.php(59): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/virtual-queue/virtual-queue.php(47): Virtual_Queue_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_virtual_queue(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_virtua...', false)
+#8 /internal/eval.php(20): activate_plugin('virtual-queue/v...')
+#9 {main}</pre>
+ for query 
+			
+			INSERT INTO wp_vq_status (`id`, `active`, `pending`) VALUES (1, 0, 0) made by activate_plugin, do_action('activate_virtual-queue/virtual-queue.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_virtual_queue, Virtual_Queue_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:49:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT `active`, `pending` FROM wp_vq_status where id='1'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `active`, `pending` FROM wp_vq_status where id=:param0  | parameters: 1</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vq_status.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT `active`...')
+#2 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(276): wpdb->get_row('SELECT `active`...')
+#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(144): Virtual_Queue_Public::vq_status(Object(WP_SQLite_DB), 'wp_vq_status')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query SELECT `active`, `pending` FROM wp_vq_status where id='1' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::vq_status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:49:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_vq_sessions` (`session_id`, `estimated_time`, `registered_date`, `updated_date`, `status`) VALUES ('67f66ccf30958-df59e7043189b0565b6d8b7951635a14', 0, 1744202959, 1744202959, 0)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_vq_sessions` (`session_id`, `estimated_time`, `registered_date`, `updated_date`, `status`) VALUES (:param0 , 0, 1744202959, 1744202959, 0) | parameters: 67f66ccf30958-df59e7043189b0565b6d8b7951635a14</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vq_sessions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_vq_sessions', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(247): wpdb->insert('wp_vq_sessions', Array, Array)
+#4 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(193): Virtual_Queue_Public::add_to_queue(Object(WP_SQLite_DB), 'wp_vq_sessions', '67f66ccf30958-d...', 0)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_vq_sessions` (`session_id`, `estimated_time`, `registered_date`, `updated_date`, `status`) VALUES ('67f66ccf30958-df59e7043189b0565b6d8b7951635a14', 0, 1744202959, 1744202959, 0) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::add_to_queue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:49:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT count(id) as counter FROM wp_vq_sessions where status='0'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT count(id) as counter FROM wp_vq_sessions where status=:param0  | parameters: 0</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vq_sessions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT count(id...')
+#2 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(420): wpdb->get_row('SELECT count(id...')
+#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(381): Virtual_Queue_Public::pendingCounter()
+#4 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(263): Virtual_Queue_Public::update_statistics()
+#5 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(193): Virtual_Queue_Public::add_to_queue(Object(WP_SQLite_DB), 'wp_vq_sessions', '67f66ccf30958-d...', 0)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('VD_NOTIF_MHF_REMINDER', 'true', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_vd-my-header-footer/vd_my_header_footer.php'), WP_Hook->do_action, WP_Hook->apply_filters, vD_My_Header_Footer::on_activate, vD_My_Header_Footer::backwards_compat, vD_My_Header_Footer::on_switch_theme, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 22:49:40 UTC] Pre 1.2 Setting: 
-[07-Apr-2025 22:49:40 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[07-Apr-2025 22:49:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[07-Apr-2025 22:49:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[07-Apr-2025 22:49:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[07-Apr-2025 22:49:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SELECT count(id) as counter FROM wp_vq_sessions where status='0' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::add_to_queue, Virtual_Queue_Public::update_statistics, Virtual_Queue_Public::pendingCounter, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:49:19 UTC] PHP Warning:  Attempt to read property "counter" on null in /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php on line 422
+[09-Apr-2025 12:49:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('VD_CACHE_TIME', '1744066180', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT count(id) as counter FROM wp_vq_sessions where status='1'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'VD_CACHE_TIME' , '1744066180' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT count(id) as counter FROM wp_vq_sessions where status=:param0  | parameters: 1</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vq_sessions.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('VD_CACHE_TIME', 1744066180, '', 'on')
-#5 /wordpress/wp-content/plugins/vd-my-header-footer/lib/vd_editor.php(60): update_option('VD_CACHE_TIME', 1744066180, true)
-#6 /wordpress/wp-content/plugins/vd-my-header-footer/lib/vd_editor.php(1121): vD_Editor::initialise()
-#7 /wordpress/wp-content/plugins/vd-my-header-footer/lib/vd_loader.php(60): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/vd-my-header-footer/lib/vd_loader.php(29): vD_Loader::load_php('ADDON', '/wordpress/wp-c...')
-#9 /wordpress/wp-content/plugins/vd-my-header-footer/vd_my_header_footer.php(34): vD_Loader::load_dependencies('ADDON', 'RELEASE', '1.27', 'http://127.0.0....', '/wordpress/wp-c...', true, true)
-#10 /wordpress/wp-content/plugins/vd-my-header-footer/vd_my_header_footer.php(48): run_vd_mhf()
-#11 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('VD_CACHE_TIME', '1744066180', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/vd-my-header-footer/vd_my_header_footer.php'), run_vd_mhf, vD_Loader::load_dependencies, vD_Loader::load_php, require_once('/plugins/vd-my-header-footer/lib/vd_editor.php'), vD_Editor::initialise, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[07-Apr-2025 22:49:40 UTC] no set
-[07-Apr-2025 22:49:40 UTC] no set
-[07-Apr-2025 22:49:40 UTC] no set
-[07-Apr-2025 22:49:40 UTC] Creating vd_header_post, draft
-[07-Apr-2025 22:49:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT count(id...')
+#2 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(401): wpdb->get_row('SELECT count(id...')
+#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(382): Virtual_Queue_Public::activeCounter()
+#4 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(263): Virtual_Queue_Public::update_statistics()
+#5 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(193): Virtual_Queue_Public::add_to_queue(Object(WP_SQLite_DB), 'wp_vq_sessions', '67f66ccf30958-d...', 0)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query SELECT count(id) as counter FROM wp_vq_sessions where status='1' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::add_to_queue, Virtual_Queue_Public::update_statistics, Virtual_Queue_Public::activeCounter, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:49:19 UTC] PHP Warning:  Attempt to read property "counter" on null in /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php on line 403
+[09-Apr-2025 12:49:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '2025-04-07 22:49:40', '0000-00-00 00:00:00', '<!-- VisualDesigner BEGIN --><div class=\"vd-release\">
-  
-    @media (max-width: 8900000px) {
-      #rvdid--1 {
-        box-sizing: border-box;
-        margin-bottom: 20px;
-      }
-      #rvdid--1-2 {
-        padding: 0px;
-      }
-    }
-    @media (max-width: 768px) {
-      #rvdid--1 {
-        box-sizing: border-box;
-      }
-    }
-    @media (max-width: 414px) {
-      #rvdid--1 {
-        box-sizing: border-box;
-        margin-bottom: 5px;
-      }
-    }
-  
-  <div data-type=\"visual-designer\" data-framework=\"wpmenuFramework\" class=\"vd-main vd-running-designer\" id=\"rvdid--1\">
-    <section class=\"vd-section-widget\" id=\"rvdid--1-3\">
-      <div class=\"vd-section-container\">
-        <div class=\"vd-row-widget\" id=\"rvdid--1-2\">
-          <div class=\"vd-column-widget vd-1 vd-sm-1 vd-xs-1\" id=\"rvdid--1-1\">
-            <div class=\"vd-nav-widget\" id=\"rvdid--1-4\">
-              <div class=\"vd-horz vd-c-stretch vd-nav-cnt-widget vd-c-left vd-c-middle vd-sm-horz vd-xs-horz vd-10 vd-sm-1 vd-xs-1\" id=\"rvdid--1-5\">
-                <a class=\"vd-nav-hamb-widget vd-desktop-hidden vd-abs-right\" id=\"rvdid--1-8\" href=\"#/\">
-                  <span class=\"vd-icontxt-widget fas fa-bars vd-drag-disabled\" id=\"rvdid--1-9\"></span><span class=\"\">MENU</span>
-                </a>
-                <a href=\'[vd_convert c=\"S_U\" attr=\"href\" ]\'>
-                  <img class=\"vd-img-widget\" id=\"rvdid--1-43\" src=\'[vd_convert c=\"S_L\" attr=\"src\" ]\' />
-                </a>
-                <a class=\"vd-btn-widget\" id=\"rvdid--1-44\" href=\'[vd_convert c=\"S_U\" attr=\"href\" ]\'>
-                  [vd_convert c=\"S_T\" attr=\"txt\" ]
-                </a>
-              </div>
-              <div class=\"vd-horz vd-c-stretch vd-nav-cnt-widget vd-collapsable v
+<p>UPDATE `wp_vq_status` SET `pending` = NULL, `active` = NULL WHERE `id` = '1'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: UPDATE `wp_vq_status` SET `pending` = NULL, `active` = NULL WHERE rowid IN (SELECT rowid FROM wp_vq_status WHERE `id` = :param0 ) | parameters: 1</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vq_status.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2716): WP_SQLite_DB->query('UPDATE `wp_vq_s...')
+#2 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(384): wpdb->update('wp_vq_status', Array, Array)
+#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(263): Virtual_Queue_Public::update_statistics()
+#4 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(193): Virtual_Queue_Public::add_to_queue(Object(WP_SQLite_DB), 'wp_vq_sessions', '67f66ccf30958-d...', 0)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query UPDATE `wp_vq_status` SET `pending` = NULL, `active` = NULL WHERE `id` = '1' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::add_to_queue, Virtual_Queue_Public::update_statistics, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:49:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE wp_vq_sessions (
+			  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+			  `session_id` varchar(256) NOT NULL,
+			  `estimated_time` int(11) DEFAULT NULL,
+			  `registered_date` int(11) NOT NULL,
+			  `updated_date` int(11) NOT NULL,
+			  `status` TINYINT(2) NOT NULL DEFAULT '0',
+				PRIMARY KEY id (id)
+			) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('CREATE TABLE wp...')
+#2 /wordpress/wp-content/plugins/virtual-queue/includes/class-virtual-queue-activator.php(59): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/virtual-queue/virtual-queue.php(47): Virtual_Queue_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_virtual_queue(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_virtua...', false)
+#8 /internal/eval.php(20): activate_plugin('virtual-queue/v...')
+#9 {main}</pre>
+ for query CREATE TABLE wp_vq_sessions (
+			  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+			  `session_id` varchar(256) NOT NULL,
+			  `estimated_time` int(11) DEFAULT NULL,
+			  `registered_date` int(11) NOT NULL,
+			  `updated_date` int(11) NOT NULL,
+			  `status` TINYINT(2) NOT NULL DEFAULT '0',
+				PRIMARY KEY id (id)
+			) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_virtual-queue/virtual-queue.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_virtual_queue, Virtual_Queue_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:49:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+			
+			CREATE TABLE wp_vq_status (
+			  `id` int(11) NOT NULL AUTO_INCREMENT,
+			  `active` bigint(11) NOT NULL,
+			  `pending` bigint(11) NOT NULL,
+				PRIMARY KEY id (id)
+			) DEFAULT CHARACTER SET utf8mb4</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Cannot combine AUTOINCREMENT and multiple primary keys in SQLite.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('\n\t\t\t\n\t\t\tCREATE ...')
+#2 /wordpress/wp-content/plugins/virtual-queue/includes/class-virtual-queue-activator.php(59): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/virtual-queue/virtual-queue.php(47): Virtual_Queue_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_virtual_queue(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_virtua...', false)
+#8 /internal/eval.php(20): activate_plugin('virtual-queue/v...')
+#9 {main}</pre>
+ for query 
+			
+			CREATE TABLE wp_vq_status (
+			  `id` int(11) NOT NULL AUTO_INCREMENT,
+			  `active` bigint(11) NOT NULL,
+			  `pending` bigint(11) NOT NULL,
+				PRIMARY KEY id (id)
+			) DEFAULT CHARACTER SET utf8mb4 made by activate_plugin, do_action('activate_virtual-queue/virtual-queue.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_virtual_queue, Virtual_Queue_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:49:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+			
+			INSERT INTO wp_vq_status (`id`, `active`, `pending`) VALUES (1, 0, 0)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: 
+			
+			INSERT INTO wp_vq_status (`id`, `active`, `pending`) VALUES (1, 0, 0) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vq_status.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('\n\t\t\t\n\t\t\tINSERT ...')
+#2 /wordpress/wp-content/plugins/virtual-queue/includes/class-virtual-queue-activator.php(59): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/virtual-queue/virtual-queue.php(47): Virtual_Queue_Activator::activate()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): activate_virtual_queue(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_virtua...', false)
+#8 /internal/eval.php(20): activate_plugin('virtual-queue/v...')
+#9 {main}</pre>
+ for query 
+			
+			INSERT INTO wp_vq_status (`id`, `active`, `pending`) VALUES (1, 0, 0) made by activate_plugin, do_action('activate_virtual-queue/virtual-queue.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_virtual_queue, Virtual_Queue_Activator::activate, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:49:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT `active`, `pending` FROM wp_vq_status where id='1'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `active`, `pending` FROM wp_vq_status where id=:param0  | parameters: 1</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vq_status.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT `active`...')
+#2 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(276): wpdb->get_row('SELECT `active`...')
+#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(144): Virtual_Queue_Public::vq_status(Object(WP_SQLite_DB), 'wp_vq_status')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query SELECT `active`, `pending` FROM wp_vq_status where id='1' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::vq_status, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:49:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_vq_sessions` (`session_id`, `estimated_time`, `registered_date`, `updated_date`, `status`) VALUES ('67f66cd8d9878-9a982dba08714664b2b4826b3acfe613', 0, 1744202968, 1744202968, 0)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_vq_sessions` (`session_id`, `estimated_time`, `registered_date`, `updated_date`, `status`) VALUES (:param0 , 0, 1744202968, 1744202968, 0) | parameters: 67f66cd8d9878-9a982dba08714664b2b4826b3acfe613</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vq_sessions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_vq_sessions', Array, Array, 'INSERT')
+#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(247): wpdb->insert('wp_vq_sessions', Array, Array)
+#4 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(193): Virtual_Queue_Public::add_to_queue(Object(WP_SQLite_DB), 'wp_vq_sessions', '67f66cd8d9878-9...', 0)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_vq_sessions` (`session_id`, `estimated_time`, `registered_date`, `updated_date`, `status`) VALUES ('67f66cd8d9878-9a982dba08714664b2b4826b3acfe613', 0, 1744202968, 1744202968, 0) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::add_to_queue, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:49:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT count(id) as counter FROM wp_vq_sessions where status='0'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT count(id) as counter FROM wp_vq_sessions where status=:param0  | parameters: 0</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vq_sessions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT count(id...')
+#2 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(420): wpdb->get_row('SELECT count(id...')
+#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(381): Virtual_Queue_Public::pendingCounter()
+#4 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(263): Virtual_Queue_Public::update_statistics()
+#5 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(193): Virtual_Queue_Public::add_to_queue(Object(WP_SQLite_DB), 'wp_vq_sessions', '67f66cd8d9878-9...', 0)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query SELECT count(id) as counter FROM wp_vq_sessions where status='0' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::add_to_queue, Virtual_Queue_Public::update_statistics, Virtual_Queue_Public::pendingCounter, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:49:28 UTC] PHP Warning:  Attempt to read property "counter" on null in /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php on line 422
+[09-Apr-2025 12:49:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT count(id) as counter FROM wp_vq_sessions where status='1'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT count(id) as counter FROM wp_vq_sessions where status=:param0  | parameters: 1</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vq_sessions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT count(id...')
+#2 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(401): wpdb->get_row('SELECT count(id...')
+#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(382): Virtual_Queue_Public::activeCounter()
+#4 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(263): Virtual_Queue_Public::update_statistics()
+#5 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(193): Virtual_Queue_Public::add_to_queue(Object(WP_SQLite_DB), 'wp_vq_sessions', '67f66cd8d9878-9...', 0)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query SELECT count(id) as counter FROM wp_vq_sessions where status='1' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::add_to_queue, Virtual_Queue_Public::update_statistics, Virtual_Queue_Public::activeCounter, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:49:28 UTC] PHP Warning:  Attempt to read property "counter" on null in /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php on line 403
+[09-Apr-2025 12:49:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE `wp_vq_status` SET `pending` = NULL, `active` = NULL WHERE `id` = '1'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: UPDATE `wp_vq_status` SET `pending` = NULL, `active` = NULL WHERE rowid IN (SELECT rowid FROM wp_vq_status WHERE `id` = :param0 ) | parameters: 1</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_vq_status.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2716): WP_SQLite_DB->query('UPDATE `wp_vq_s...')
+#2 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(384): wpdb->update('wp_vq_status', Array, Array)
+#3 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(263): Virtual_Queue_Public::update_statistics()
+#4 /wordpress/wp-content/plugins/virtual-queue/public/class-virtual-queue-public.php(193): Virtual_Queue_Public::add_to_queue(Object(WP_SQLite_DB), 'wp_vq_sessions', '67f66cd8d9878-9...', 0)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): Virtual_Queue_Public->virtual_queue_validation('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query UPDATE `wp_vq_status` SET `pending` = NULL, `active` = NULL WHERE `id` = '1' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, Virtual_Queue_Public->virtual_queue_validation, Virtual_Queue_Public::add_to_queue, Virtual_Queue_Public::update_statistics, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"virtual-queue"},"options":{"activate":true}}) : Plugin /wordpress/wp-content/plugins/virtual-queue could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: Error: Plugin /wordpress/wp-content/plugins/virtual-queue could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
+        at vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:119:51)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159)
+  }
+}
+
+Node.js v23.11.0

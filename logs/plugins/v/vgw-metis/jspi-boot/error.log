@@ -2,47 +2,315 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [05-Apr-2025 22:23:51 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 22:23:51 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 22:23:51 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 22:23:51 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 22:24:06 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 22:24:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 22:24:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 22:24:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 22:24:19 UTC] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /wordpress/wp-content/plugins/ventunos-videopub/VentunoMedia.php:813
+Error: [09-Apr-2025 12:48:07 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 12:48:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('videosearchpopncode_global', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'videosearchpopncode_global' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/video-search-pop-n-code/video-search-pop-n-code.php(388): add_option('videosearchpopn...', 0, 'Use global sett...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): poptube_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_video-...', false)
+#9 /internal/eval.php(20): activate_plugin('video-search-po...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('videosearchpopncode_global', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_video-search-pop-n-code/video-search-pop-n-code.php'), WP_Hook->do_action, WP_Hook->apply_filters, poptube_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:48:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('videosearchpopncode_size', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'videosearchpopncode_size' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/video-search-pop-n-code/video-search-pop-n-code.php(389): add_option('videosearchpopn...', 1, 'Defines video s...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): poptube_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_video-...', false)
+#9 /internal/eval.php(20): activate_plugin('video-search-po...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('videosearchpopncode_size', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_video-search-pop-n-code/video-search-pop-n-code.php'), WP_Hook->do_action, WP_Hook->apply_filters, poptube_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:48:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('videosearchpopncode_color', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'videosearchpopncode_color' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/video-search-pop-n-code/video-search-pop-n-code.php(390): add_option('videosearchpopn...', 1, 'Defines border ...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): poptube_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_video-...', false)
+#9 /internal/eval.php(20): activate_plugin('video-search-po...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('videosearchpopncode_color', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_video-search-pop-n-code/video-search-pop-n-code.php'), WP_Hook->do_action, WP_Hook->apply_filters, poptube_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:48:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('videosearchpopncode_border', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'videosearchpopncode_border' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/video-search-pop-n-code/video-search-pop-n-code.php(391): add_option('videosearchpopn...', 0, 'Defines if we u...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): poptube_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_video-...', false)
+#9 /internal/eval.php(20): activate_plugin('video-search-po...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('videosearchpopncode_border', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_video-search-pop-n-code/video-search-pop-n-code.php'), WP_Hook->do_action, WP_Hook->apply_filters, poptube_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:48:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('videosearchpopncode_rel', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'videosearchpopncode_rel' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/video-search-pop-n-code/video-search-pop-n-code.php(392): add_option('videosearchpopn...', 0, 'Show relevant v...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): poptube_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_video-...', false)
+#9 /internal/eval.php(20): activate_plugin('video-search-po...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('videosearchpopncode_rel', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_video-search-pop-n-code/video-search-pop-n-code.php'), WP_Hook->do_action, WP_Hook->apply_filters, poptube_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:48:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('videosearchpopncode_auto', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'videosearchpopncode_auto' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/video-search-pop-n-code/video-search-pop-n-code.php(393): add_option('videosearchpopn...', 0, 'Autoplay videos')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): poptube_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_video-...', false)
+#9 /internal/eval.php(20): activate_plugin('video-search-po...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('videosearchpopncode_auto', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_video-search-pop-n-code/video-search-pop-n-code.php'), WP_Hook->do_action, WP_Hook->apply_filters, poptube_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:48:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('videosearchpopncode_api', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'videosearchpopncode_api' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-content/plugins/video-search-pop-n-code/video-search-pop-n-code.php(394): add_option('videosearchpopn...', '', '')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): poptube_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_video-...', false)
+#9 /internal/eval.php(20): activate_plugin('video-search-po...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('videosearchpopncode_api', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_video-search-pop-n-code/video-search-pop-n-code.php'), WP_Hook->do_action, WP_Hook->apply_filters, poptube_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:48:07 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 12:48:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 12:48:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 12:48:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 12:48:16 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 12:48:26 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[09-Apr-2025 12:48:36 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 12:48:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 12:48:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 12:48:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 12:49:05 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 12:49:05 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 12:49:05 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 12:49:05 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 12:49:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 12:49:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 12:49:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 12:49:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 12:49:36 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/visual-editor-font-size/visual-editor-font-size.php:18
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ventunos-videop...')
-#2 /internal/eval.php(20): activate_plugin('ventunos-videop...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/ventunos-videopub/VentunoMedia.php on line 813
-[05-Apr-2025 22:24:22 UTC] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /wordpress/wp-content/plugins/ventunos-videopub/VentunoMedia.php:813
+#0 /wordpress/wp-includes/class-wp-hook.php(324): WriteFieldFontSize->init('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(704): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/visual-editor-font-size/visual-editor-font-size.php on line 18
+[09-Apr-2025 12:49:45 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/visual-editor-font-size/visual-editor-font-size.php:18
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ventunos-videop...')
-#2 /internal/eval.php(20): activate_plugin('ventunos-videop...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/ventunos-videopub/VentunoMedia.php on line 813
-[05-Apr-2025 22:24:25 UTC] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /wordpress/wp-content/plugins/ventunos-videopub/VentunoMedia.php:813
+#0 /wordpress/wp-includes/class-wp-hook.php(324): WriteFieldFontSize->init('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(704): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/visual-editor-font-size/visual-editor-font-size.php on line 18
+[09-Apr-2025 12:49:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/visual-editor-font-size/visual-editor-font-size.php:18
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ventunos-videop...')
-#2 /internal/eval.php(20): activate_plugin('ventunos-videop...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/ventunos-videopub/VentunoMedia.php on line 813
-[05-Apr-2025 22:24:31 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 22:24:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 22:24:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 22:24:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 22:24:45 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 22:24:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 22:24:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 22:24:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 22:24:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#0 /wordpress/wp-includes/class-wp-hook.php(324): WriteFieldFontSize->init('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(704): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/visual-editor-font-size/visual-editor-font-size.php on line 18
+[09-Apr-2025 12:50:03 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 12:50:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 12:50:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 12:50:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 12:50:49 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 12:50:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 12:50:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 12:50:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 12:51:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:21:\"verbalize-wp/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:5:\"2.5.3\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1743891899;s:11:\"plugin_path\";s:29:\"verbalize-wp/verbalize-wp.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:29:\"verbalize-wp/verbalize-wp.php\";s:8:\"sdk_path\";s:21:\"verbalize-wp/freemius\";s:7:\"version\";s:5:\"2.5.3\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1743891899;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('vdz_simple_css_code', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -54,7 +322,7 @@ Stack trace:
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_active_plugins' , 'O:8:&quot;stdClass&quot;:3:{s:7:&quot;plugins&quot;;a:1:{s:21:&quot;verbalize-wp/freemius&quot;;O:8:&quot;stdClass&quot;:4:{s:7:&quot;version&quot;;s:5:&quot;2.5.3&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:9:&quot;timestamp&quot;;i:1743891899;s:11:&quot;plugin_path&quot;;s:29:&quot;verbalize-wp/verbalize-wp.php&quot;;}}s:7:&quot;abspath&quot;;s:11:&quot;/wordpress/&quot;;s:6:&quot;newest&quot;;O:8:&quot;stdClass&quot;:5:{s:11:&quot;plugin_path&quot;;s:29:&quot;verbalize-wp/verbalize-wp.php&quot;;s:8:&quot;sdk_path&quot;;s:21:&quot;verbalize-wp/freemius&quot;;s:7:&quot;version&quot;;s:5:&quot;2.5.3&quot;;s:13:&quot;in_activation&quot;;b:1;s:9:&quot;timestamp&quot;;i:1743891899;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'vdz_simple_css_code' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -66,20 +334,18 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_active_plugi...', Object(stdClass), '', 'auto')
-#5 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/fs-essential-functions.php(276): update_option('fs_active_plugi...', Object(stdClass))
-#6 /wordpress/wp-content/plugins/verbalize-wp/freemius/start.php(170): fs_update_sdk_newest_version('verbalize-wp/fr...', 'verbalize-wp/ve...')
-#7 /wordpress/wp-content/plugins/verbalize-wp/verbalize-wp.php(32): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/verbalize-wp/verbalize-wp.php(61): verbwp_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('verbalize-wp/ve...')
-#11 /internal/eval.php(20): activate_plugin('verbalize-wp/ve...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:21:\"verbalize-wp/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:5:\"2.5.3\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1743891899;s:11:\"plugin_path\";s:29:\"verbalize-wp/verbalize-wp.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:29:\"verbalize-wp/verbalize-wp.php\";s:8:\"sdk_path\";s:21:\"verbalize-wp/freemius\";s:7:\"version\";s:5:\"2.5.3\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1743891899;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/verbalize-wp/verbalize-wp.php'), verbwp_fs, require_once('/plugins/verbalize-wp/freemius/start.php'), fs_update_sdk_newest_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 22:24:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/vdz-simple-css/vdz-simple-css.php(29): add_option('vdz_simple_css_...', '')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): vdz_scss_activate_plugin(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vdz-si...', false)
+#9 /internal/eval.php(20): activate_plugin('vdz-simple-css/...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('vdz_simple_css_code', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_vdz-simple-css/vdz-simple-css.php'), WP_Hook->do_action, WP_Hook->apply_filters, vdz_scss_activate_plugin, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:51:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_vdz_info_simple_css_activation_notice_text', '1744203137', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -91,7 +357,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_debug_mode' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_vdz_info_simple_css_activation_notice_text' , '1744203137' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -103,20 +369,23 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/verbalize-wp/freemius/config.php(307): add_option('fs_debug_mode', false)
-#5 /wordpress/wp-content/plugins/verbalize-wp/freemius/require.php(14): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-content/plugins/verbalize-wp/freemius/start.php(486): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-content/plugins/verbalize-wp/verbalize-wp.php(32): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/verbalize-wp/verbalize-wp.php(61): verbwp_fs()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('verbalize-wp/ve...')
-#11 /internal/eval.php(20): activate_plugin('verbalize-wp/ve...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/verbalize-wp/verbalize-wp.php'), verbwp_fs, require_once('/plugins/verbalize-wp/freemius/start.php'), require_once('/plugins/verbalize-wp/freemius/require.php'), require_once('/plugins/verbalize-wp/freemius/config.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 22:24:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1744203137, '', 'off')
+#5 /wordpress/wp-content/plugins/vdz-simple-css/api.php(20): set_transient('vdz_info_simple...', '{"\\/\\/wordpress...', 60)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): {closure}('on', 'vdz-simple-css')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-content/plugins/vdz-simple-css/vdz-simple-css.php(31): do_action('vdz_info_simple...', 'on', 'vdz-simple-css/...')
+#10 /wordpress/wp-includes/class-wp-hook.php(324): vdz_scss_activate_plugin(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vdz-si...', false)
+#14 /internal/eval.php(20): activate_plugin('vdz-simple-css/...')
+#15 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_vdz_info_simple_css_activation_notice_text', '1744203137', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_vdz-simple-css/vdz-simple-css.php'), WP_Hook->do_action, WP_Hook->apply_filters, vdz_scss_activate_plugin, do_action('vdz_info_simple_css'), WP_Hook->do_action, WP_Hook->apply_filters, {closure}, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:51:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:10289;a:3:{s:4:\"slug\";s:13:\"wp-sale-voice\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_vdz_info_simple_css_activation_notice_text', '{\"\\/\\/wordpress.org\\/plugins\\/vdz-call-back\\/\":\"VDZ CallBack Plugin\",\"\\/\\/wordpress.org\\/plugins\\/vdz-yandex-metrika\\/\":\"VDZ Yandex Metrika\",\"\\/\\/wordpress.org\\/plugins\\/vdz-google-analytics\\/\":\"VDZ Google Analytics\",\"\\/\\/wordpress.org\\/plugins\\/vdz-verification\\/\":\"VDZ VERIFICATION\",\"\\/\\/wordpress.org\\/plugins\\/vdz-support-svg\\/\":\"VDZ Support SVG\",\"\\/\\/wordpress.org\\/plugins\\/vdz-scroll-up\\/\":\"VDZ Scroll Up\",\"\\/\\/wordpress.org\\/plugins\\/vdz-contact-us\\/\":\"VDZ Contact Us\",\"\\/\\/wordpress.org\\/plugins\\/vdz-yandex-share\\/\":\"VDZ Yandex Share\",\"\\/\\/wordpress.org\\/plugins\\/vdz-translit\\/\":\"VDZ TRANSLIT\",\"\\/\\/wordpress.org\\/plugins\\/vdz-robotstxt\\/\":\"VDZ Robots.txt\",\"\\/\\/wordpress.org\\/plugins\\/vdz-monobank\\/\":\"VDZ Monobank\",\"\\/\\/wordpress.org\\/plugins\\/vdz-content-navigation\\/\":\"VDZ Content Navigation\",\"\\/\\/wordpress.org\\/plugins\\/vdz-show-more\\/\":\"VDZ SHOW MORE\",\"\\/\\/wordpress.org\\/plugins\\/vdz-ringostat-contacts\\/\":\"VDZ Ringostat Contacts\"}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -128,7 +397,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:1:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10289;a:3:{s:4:&quot;slug&quot;;s:13:&quot;wp-sale-voice&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:29:&quot;verbalize-wp/verbalize-wp.php&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_vdz_info_simple_css_activation_notice_text' , '{&quot;\/\/wordpress.org\/plugins\/vdz-call-back\/&quot;:&quot;VDZ CallBack Plugin&quot;,&quot;\/\/wordpress.org\/plugins\/vdz-yandex-metrika\/&quot;:&quot;VDZ Yandex Metrika&quot;,&quot;\/\/wordpress.org\/plugins\/vdz-google-analytics\/&quot;:&quot;VDZ Google Analytics&quot;,&quot;\/\/wordpress.org\/plugins\/vdz-verification\/&quot;:&quot;VDZ VERIFICATION&quot;,&quot;\/\/wordpress.org\/plugins\/vdz-support-svg\/&quot;:&quot;VDZ Support SVG&quot;,&quot;\/\/wordpress.org\/plugins\/vdz-scroll-up\/&quot;:&quot;VDZ Scroll Up&quot;,&quot;\/\/wordpress.org\/plugins\/vdz-contact-us\/&quot;:&quot;VDZ Contact Us&quot;,&quot;\/\/wordpress.org\/plugins\/vdz-yandex-share\/&quot;:&quot;VDZ Yandex Share&quot;,&quot;\/\/wordpress.org\/plugins\/vdz-translit\/&quot;:&quot;VDZ TRANSLIT&quot;,&quot;\/\/wordpress.org\/plugins\/vdz-robotstxt\/&quot;:&quot;VDZ Robots.txt&quot;,&quot;\/\/wordpress.org\/plugins\/vdz-monobank\/&quot;:&quot;VDZ Monobank&quot;,&quot;\/\/wordpress.org\/plugins\/vdz-content-navigation\/&quot;:&quot;VDZ Content Navigation&quot;,&quot;\/\/wordpress.org\/plugins\/vdz-show-more\/&quot;:&quot;VDZ SHOW MORE&quot;,&quot;\/\/wordpress.org\/plugins\/vdz-ringostat-contacts\/&quot;:&quot;VDZ Ringostat Contacts&quot;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -140,25 +409,31 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('id_slug_type_pa...', Array, true)
-#8 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-freemius.php(2132): FS_Options->set_option('id_slug_type_pa...', Array, true)
-#9 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-freemius.php(417): Freemius->store_id_slug_type_path_map('10289', 'wp-sale-voice')
-#10 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-freemius.php(2791): Freemius->__construct('10289', 'wp-sale-voice', true)
-#11 /wordpress/wp-content/plugins/verbalize-wp/freemius/start.php(525): Freemius::instance('10289', 'wp-sale-voice', true)
-#12 /wordpress/wp-content/plugins/verbalize-wp/verbalize-wp.php(36): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/verbalize-wp/verbalize-wp.php(61): verbwp_fs()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('verbalize-wp/ve...')
-#16 /internal/eval.php(20): activate_plugin('verbalize-wp/ve...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:10289;a:3:{s:4:\"slug\";s:13:\"wp-sale-voice\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/verbalize-wp/verbalize-wp.php'), verbwp_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_id_slug_type_path_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 22:24:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_vdz_...', '{"\\/\\/wordpress...', '', 'off')
+#5 /wordpress/wp-content/plugins/vdz-simple-css/api.php(20): set_transient('vdz_info_simple...', '{"\\/\\/wordpress...', 60)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): {closure}('on', 'vdz-simple-css')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-content/plugins/vdz-simple-css/vdz-simple-css.php(31): do_action('vdz_info_simple...', 'on', 'vdz-simple-css/...')
+#10 /wordpress/wp-includes/class-wp-hook.php(324): vdz_scss_activate_plugin(false)
+#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#13 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vdz-si...', false)
+#14 /internal/eval.php(20): activate_plugin('vdz-simple-css/...')
+#15 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_vdz_info_simple_css_activation_notice_text', '{\"\\/\\/wordpress.org\\/plugins\\/vdz-call-back\\/\":\"VDZ CallBack Plugin\",\"\\/\\/wordpress.org\\/plugins\\/vdz-yandex-metrika\\/\":\"VDZ Yandex Metrika\",\"\\/\\/wordpress.org\\/plugins\\/vdz-google-analytics\\/\":\"VDZ Google Analytics\",\"\\/\\/wordpress.org\\/plugins\\/vdz-verification\\/\":\"VDZ VERIFICATION\",\"\\/\\/wordpress.org\\/plugins\\/vdz-support-svg\\/\":\"VDZ Support SVG\",\"\\/\\/wordpress.org\\/plugins\\/vdz-scroll-up\\/\":\"VDZ Scroll Up\",\"\\/\\/wordpress.org\\/plugins\\/vdz-contact-us\\/\":\"VDZ Contact Us\",\"\\/\\/wordpress.org\\/plugins\\/vdz-yandex-share\\/\":\"VDZ Yandex Share\",\"\\/\\/wordpress.org\\/plugins\\/vdz-translit\\/\":\"VDZ TRANSLIT\",\"\\/\\/wordpress.org\\/plugins\\/vdz-robotstxt\\/\":\"VDZ Robots.txt\",\"\\/\\/wordpress.org\\/plugins\\/vdz-monobank\\/\":\"VDZ Monobank\",\"\\/\\/wordpress.org\\/plugins\\/vdz-content-navigation\\/\":\"VDZ Content Navigation\",\"\\/\\/wordpress.org\\/plugins\\/vdz-show-more\\/\":\"VDZ SHOW MORE\",\"\\/\\/wordpress.org\\/plugins\\/vdz-ringostat-contacts\\/\":\"VDZ Ringostat Contacts\"}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_vdz-simple-css/vdz-simple-css.php'), WP_Hook->do_action, WP_Hook->apply_filters, vdz_scss_activate_plugin, do_action('vdz_info_simple_css'), WP_Hook->do_action, WP_Hook->apply_filters, {closure}, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:51:17 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 12:51:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 12:51:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 12:51:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 12:51:46 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 12:51:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 12:51:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 12:51:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 12:52:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:10289;a:3:{s:4:\"slug\";s:13:\"wp-sale-voice\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"wp-sale-voice\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gVerticalscroll_rssfeed_title', 'RSS News', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -170,7 +445,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10289;a:3:{s:4:&quot;slug&quot;;s:13:&quot;wp-sale-voice&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:29:&quot;verbalize-wp/verbalize-wp.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:13:&quot;wp-sale-voice&quot;;a:1:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:29:&quot;verbalize-wp/verbalize-wp.php&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'gVerticalscroll_rssfeed_title' , 'RSS News' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -182,27 +457,18 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_main_fil...', Object(stdClass))
-#9 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-fs-storage.php(533): FS_Key_Value_Storage->__set('plugin_main_fil...', Object(stdClass))
-#10 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-freemius.php(1989): FS_Storage->__set('plugin_main_fil...', Object(stdClass))
-#11 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-freemius.php(432): Freemius->_find_caller_plugin_file(true, 'verbalize-wp/ve...')
-#12 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-freemius.php(2791): Freemius->__construct('10289', 'wp-sale-voice', true)
-#13 /wordpress/wp-content/plugins/verbalize-wp/freemius/start.php(525): Freemius::instance('10289', 'wp-sale-voice', true)
-#14 /wordpress/wp-content/plugins/verbalize-wp/verbalize-wp.php(36): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/verbalize-wp/verbalize-wp.php(61): verbwp_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('verbalize-wp/ve...')
-#18 /internal/eval.php(20): activate_plugin('verbalize-wp/ve...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:10289;a:3:{s:4:\"slug\";s:13:\"wp-sale-voice\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"wp-sale-voice\";a:1:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/verbalize-wp/verbalize-wp.php'), verbwp_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_find_caller_plugin_file, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 22:24:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/vertically-scroll-rss-feed/vertically-scroll-rss-feed.php(115): add_option('gVerticalscroll...', 'RSS News')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): gVerticalscroll_rssfeed_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vertic...', false)
+#9 /internal/eval.php(20): activate_plugin('vertically-scro...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gVerticalscroll_rssfeed_title', 'RSS News', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_vertically-scroll-rss-feed/vertically-scroll-rss-feed.php'), WP_Hook->do_action, WP_Hook->apply_filters, gVerticalscroll_rssfeed_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:52:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:10289;a:3:{s:4:\"slug\";s:13:\"wp-sale-voice\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"wp-sale-voice\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gVerticalscroll_rssfeed_font', 'verdana,arial,sans-serif', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -214,7 +480,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10289;a:3:{s:4:&quot;slug&quot;;s:13:&quot;wp-sale-voice&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:29:&quot;verbalize-wp/verbalize-wp.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:13:&quot;wp-sale-voice&quot;;a:2:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:29:&quot;verbalize-wp/verbalize-wp.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'gVerticalscroll_rssfeed_font' , 'verdana,arial,sans-serif' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -226,26 +492,18 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_network_acti...', false)
-#9 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-fs-storage.php(533): FS_Key_Value_Storage->__set('is_network_acti...', false)
-#10 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-freemius.php(460): FS_Storage->__set('is_network_acti...', false)
-#11 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-freemius.php(2791): Freemius->__construct('10289', 'wp-sale-voice', true)
-#12 /wordpress/wp-content/plugins/verbalize-wp/freemius/start.php(525): Freemius::instance('10289', 'wp-sale-voice', true)
-#13 /wordpress/wp-content/plugins/verbalize-wp/verbalize-wp.php(36): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/verbalize-wp/verbalize-wp.php(61): verbwp_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('verbalize-wp/ve...')
-#17 /internal/eval.php(20): activate_plugin('verbalize-wp/ve...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:10289;a:3:{s:4:\"slug\";s:13:\"wp-sale-voice\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"wp-sale-voice\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/verbalize-wp/verbalize-wp.php'), verbwp_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 22:24:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/vertically-scroll-rss-feed/vertically-scroll-rss-feed.php(116): add_option('gVerticalscroll...', 'verdana,arial,s...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): gVerticalscroll_rssfeed_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vertic...', false)
+#9 /internal/eval.php(20): activate_plugin('vertically-scro...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gVerticalscroll_rssfeed_font', 'verdana,arial,sans-serif', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_vertically-scroll-rss-feed/vertically-scroll-rss-feed.php'), WP_Hook->do_action, WP_Hook->apply_filters, gVerticalscroll_rssfeed_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:52:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10289;a:3:{s:4:\"slug\";s:13:\"wp-sale-voice\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"wp-sale-voice\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:29:\"verbalize-wp/verbalize-wp.php\";s:13:\"wp-sale-voice\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gVerticalscroll_rssfeed_fontsize', '11px', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -257,7 +515,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10289;a:3:{s:4:&quot;slug&quot;;s:13:&quot;wp-sale-voice&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:29:&quot;verbalize-wp/verbalize-wp.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:13:&quot;wp-sale-voice&quot;;a:2:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:29:&quot;verbalize-wp/verbalize-wp.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:29:&quot;verbalize-wp/verbalize-wp.php&quot;;s:13:&quot;wp-sale-voice&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'gVerticalscroll_rssfeed_fontsize' , '11px' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -269,25 +527,18 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('file_slug_map', Array, true)
-#8 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-freemius.php(10795): FS_Options->set_option('file_slug_map', Array, true)
-#9 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-freemius.php(507): Freemius->store_file_slug_map()
-#10 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-freemius.php(2791): Freemius->__construct('10289', 'wp-sale-voice', true)
-#11 /wordpress/wp-content/plugins/verbalize-wp/freemius/start.php(525): Freemius::instance('10289', 'wp-sale-voice', true)
-#12 /wordpress/wp-content/plugins/verbalize-wp/verbalize-wp.php(36): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/verbalize-wp/verbalize-wp.php(61): verbwp_fs()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('verbalize-wp/ve...')
-#16 /internal/eval.php(20): activate_plugin('verbalize-wp/ve...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10289;a:3:{s:4:\"slug\";s:13:\"wp-sale-voice\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"wp-sale-voice\";a:2:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:29:\"verbalize-wp/verbalize-wp.php\";s:13:\"wp-sale-voice\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/verbalize-wp/verbalize-wp.php'), verbwp_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_file_slug_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 22:24:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/vertically-scroll-rss-feed/vertically-scroll-rss-feed.php(117): add_option('gVerticalscroll...', '11px')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): gVerticalscroll_rssfeed_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vertic...', false)
+#9 /internal/eval.php(20): activate_plugin('vertically-scro...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gVerticalscroll_rssfeed_fontsize', '11px', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_vertically-scroll-rss-feed/vertically-scroll-rss-feed.php'), WP_Hook->do_action, WP_Hook->apply_filters, gVerticalscroll_rssfeed_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:52:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10289;a:3:{s:4:\"slug\";s:13:\"wp-sale-voice\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"wp-sale-voice\";a:3:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1743891899;}}s:13:\"file_slug_map\";a:1:{s:29:\"verbalize-wp/verbalize-wp.php\";s:13:\"wp-sale-voice\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gVerticalscroll_rssfeed_fontweight', 'normal', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -299,7 +550,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10289;a:3:{s:4:&quot;slug&quot;;s:13:&quot;wp-sale-voice&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:29:&quot;verbalize-wp/verbalize-wp.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:13:&quot;wp-sale-voice&quot;;a:3:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:29:&quot;verbalize-wp/verbalize-wp.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1743891899;}}s:13:&quot;file_slug_map&quot;;a:1:{s:29:&quot;verbalize-wp/verbalize-wp.php&quot;;s:13:&quot;wp-sale-voice&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'gVerticalscroll_rssfeed_fontweight' , 'normal' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -311,26 +562,18 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('install_timesta...', 1743891899)
-#9 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-fs-storage.php(533): FS_Key_Value_Storage->__set('install_timesta...', 1743891899)
-#10 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-freemius.php(511): FS_Storage->__set('install_timesta...', 1743891899)
-#11 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-freemius.php(2791): Freemius->__construct('10289', 'wp-sale-voice', true)
-#12 /wordpress/wp-content/plugins/verbalize-wp/freemius/start.php(525): Freemius::instance('10289', 'wp-sale-voice', true)
-#13 /wordpress/wp-content/plugins/verbalize-wp/verbalize-wp.php(36): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/verbalize-wp/verbalize-wp.php(61): verbwp_fs()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('verbalize-wp/ve...')
-#17 /internal/eval.php(20): activate_plugin('verbalize-wp/ve...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10289;a:3:{s:4:\"slug\";s:13:\"wp-sale-voice\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"wp-sale-voice\";a:3:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1743891899;}}s:13:\"file_slug_map\";a:1:{s:29:\"verbalize-wp/verbalize-wp.php\";s:13:\"wp-sale-voice\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/verbalize-wp/verbalize-wp.php'), verbwp_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 22:24:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/vertically-scroll-rss-feed/vertically-scroll-rss-feed.php(118): add_option('gVerticalscroll...', 'normal')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): gVerticalscroll_rssfeed_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vertic...', false)
+#9 /internal/eval.php(20): activate_plugin('vertically-scro...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gVerticalscroll_rssfeed_fontweight', 'normal', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_vertically-scroll-rss-feed/vertically-scroll-rss-feed.php'), WP_Hook->do_action, WP_Hook->apply_filters, gVerticalscroll_rssfeed_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:52:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10289;a:3:{s:4:\"slug\";s:13:\"wp-sale-voice\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"wp-sale-voice\";a:4:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1743891899;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:29:\"verbalize-wp/verbalize-wp.php\";s:13:\"wp-sale-voice\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gVerticalscroll_rssfeed_fontcolor', '#000000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -342,7 +585,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10289;a:3:{s:4:&quot;slug&quot;;s:13:&quot;wp-sale-voice&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:29:&quot;verbalize-wp/verbalize-wp.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:13:&quot;wp-sale-voice&quot;;a:4:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:29:&quot;verbalize-wp/verbalize-wp.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1743891899;s:17:&quot;was_plugin_loaded&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:29:&quot;verbalize-wp/verbalize-wp.php&quot;;s:13:&quot;wp-sale-voice&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'gVerticalscroll_rssfeed_fontcolor' , '#000000' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -354,28 +597,18 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('was_plugin_load...', true)
-#9 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-fs-storage.php(533): FS_Key_Value_Storage->__set('was_plugin_load...', true)
-#10 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-freemius.php(1330): FS_Storage->__set('was_plugin_load...', true)
-#11 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-freemius.php(1442): Freemius->_plugins_loaded()
-#12 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-freemius.php(541): Freemius->register_constructor_hooks()
-#13 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-freemius.php(2791): Freemius->__construct('10289', 'wp-sale-voice', true)
-#14 /wordpress/wp-content/plugins/verbalize-wp/freemius/start.php(525): Freemius::instance('10289', 'wp-sale-voice', true)
-#15 /wordpress/wp-content/plugins/verbalize-wp/verbalize-wp.php(36): fs_dynamic_init(Array)
-#16 /wordpress/wp-content/plugins/verbalize-wp/verbalize-wp.php(61): verbwp_fs()
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('verbalize-wp/ve...')
-#19 /internal/eval.php(20): activate_plugin('verbalize-wp/ve...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10289;a:3:{s:4:\"slug\";s:13:\"wp-sale-voice\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"wp-sale-voice\";a:4:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1743891899;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:29:\"verbalize-wp/verbalize-wp.php\";s:13:\"wp-sale-voice\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/verbalize-wp/verbalize-wp.php'), verbwp_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->register_constructor_hooks, Freemius->_plugins_loaded, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 22:24:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/vertically-scroll-rss-feed/vertically-scroll-rss-feed.php(119): add_option('gVerticalscroll...', '#000000')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): gVerticalscroll_rssfeed_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_vertic...', false)
+#9 /internal/eval.php(20): activate_plugin('vertically-scro...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gVerticalscroll_rssfeed_fontcolor', '#000000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_vertically-scroll-rss-feed/vertically-scroll-rss-feed.php'), WP_Hook->do_action, WP_Hook->apply_filters, gVerticalscroll_rssfeed_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 12:52:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10289;a:3:{s:4:\"slug\";s:13:\"wp-sale-voice\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"wp-sale-voice\";a:5:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1743891899;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;}}s:13:\"file_slug_map\";a:1:{s:29:\"verbalize-wp/verbalize-wp.php\";s:13:\"wp-sale-voice\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gVerticalscroll_rssfeed_width', '180', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -387,7 +620,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10289;a:3:{s:4:&quot;slug&quot;;s:13:&quot;wp-sale-voice&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:29:&quot;verbalize-wp/verbalize-wp.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:13:&quot;wp-sale-voice&quot;;a:5:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:29:&quot;verbalize-wp/verbalize-wp.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1743891899;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:29:&quot;verbalize-wp/verbalize-wp.php&quot;;s:13:&quot;wp-sale-voice&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'gVerticalscroll_rssfeed_width' , '180' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -399,90 +632,8 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_plugin_new_i...', true)
-#9 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-fs-storage.php(533): FS_Key_Value_Storage->__set('is_plugin_new_i...', true)
-#10 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-freemius.php(1344): FS_Storage->__set('is_plugin_new_i...', true)
-#11 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-freemius.php(1442): Freemius->_plugins_loaded()
-#12 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-freemius.php(541): Freemius->register_constructor_hooks()
-#13 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-freemius.php(2791): Freemius->__construct('10289', 'wp-sale-voice', true)
-#14 /wordpress/wp-content/plugins/verbalize-wp/freemius/start.php(525): Freemius::instance('10289', 'wp-sale-voice', true)
-#15 /wordpress/wp-content/plugins/verbalize-wp/verbalize-wp.php(36): fs_dynamic_init(Array)
-#16 /wordpress/wp-content/plugins/verbalize-wp/verbalize-wp.php(61): verbwp_fs()
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('verbalize-wp/ve...')
-#19 /internal/eval.php(20): activate_plugin('verbalize-wp/ve...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10289;a:3:{s:4:\"slug\";s:13:\"wp-sale-voice\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"wp-sale-voice\";a:5:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1743891899;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;}}s:13:\"file_slug_map\";a:1:{s:29:\"verbalize-wp/verbalize-wp.php\";s:13:\"wp-sale-voice\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/verbalize-wp/verbalize-wp.php'), verbwp_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->register_constructor_hooks, Freemius->_plugins_loaded, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 22:24:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10289;a:3:{s:4:\"slug\";s:13:\"wp-sale-voice\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"wp-sale-voice\";a:6:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1743891899;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:29:\"verbalize-wp/verbalize-wp.php\";s:13:\"wp-sale-voice\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10289;a:3:{s:4:&quot;slug&quot;;s:13:&quot;wp-sale-voice&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:29:&quot;verbalize-wp/verbalize-wp.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:13:&quot;wp-sale-voice&quot;;a:6:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:29:&quot;verbalize-wp/verbalize-wp.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1743891899;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;}}s:13:&quot;file_slug_map&quot;;a:1:{s:29:&quot;verbalize-wp/verbalize-wp.php&quot;;s:13:&quot;wp-sale-voice&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_last_versio...', NULL)
-#9 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-fs-storage.php(533): FS_Key_Value_Storage->__set('sdk_last_versio...', NULL)
-#10 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-freemius.php(890): FS_Storage->__set('sdk_last_versio...', NULL)
-#11 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-freemius.php(554): Freemius->_version_updates_handler()
-#12 /wordpress/wp-content/plugins/verbalize-wp/freemius/includes/class-freemius.php(2791): Freemius->__construct('10289', 'wp-sale-voice', true)
-#13 /wordpress/wp-content/plugins/verbalize-wp/freemius/start.php(525): Freemius::instance('10289', 'wp-sale-voice', true)
-#14 /wordpress/wp-content/plugins/verbalize-wp/verbalize-wp.php(36): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/verbalize-wp/verbalize-wp.php(61): verbwp_fs()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('verbalize-wp/ve...')
-#18 /internal/eval.php(20): activate_plugin('verbalize-wp/ve...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10289;a:3:{s:4:\"slug\";s:13:\"wp-sale-voice\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"wp-sale-voice\";a:6:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1743891899;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:29:\"verbalize-wp/verbalize-wp.php\";s:13:\"wp-sale-voice\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/verbalize-wp/verbalize-wp.php'), verbwp_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_version_updates_handler, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 22:24:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:10289;a:3:{s:4:\"slug\";s:13:\"wp-sale-voice\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}}s:11:\"plugin_data\";a:1:{s:13:\"wp-sale-voice\";a:7:{s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:29:\"verbalize-wp/verbalize-wp.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1743891899;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;s:11:\"sdk_version\";s:5:\"2.5.3\";}}s:13:\"file_slug_map\";a:1:{s:29:\"verbalize-wp/verbalize-wp.php\";s:13:\"wp-sale-voice\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:10289;a:3:{s:4:&quot;slug&quot;;s:13:&quot;wp-sale-voice&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:29:&quot;verbalize-wp/verbalize-wp.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:13:&quot;wp-sale-voice&quot;;a:7:{s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:29:&quot;verbalize-wp/verbalize-wp.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1743891899;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;s:11:&quot;sdk_version&quot;;s:5:&quot;2.5.3&quot;;}}s:13:&quot;file_slug_map&quot;;a:1:{s:29:&quot;verbalize-wp/verbalize-wp.php&quot;;s:13:&quot;wp-sale-voice&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db
+#4 /wordpress/wp-content/plugins/vertically-scroll-rss-feed/vertically-scroll-rss-feed.php(120): add_option('gVerticalscroll...', '180')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): gVerticalscroll_rssfeed_install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/include
