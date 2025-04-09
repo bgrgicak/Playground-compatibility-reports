@@ -2,10 +2,14 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [06-Apr-2025 21:44:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [09-Apr-2025 10:54:42 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[09-Apr-2025 10:54:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[09-Apr-2025 10:54:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[09-Apr-2025 10:54:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[09-Apr-2025 10:55:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mgjp_mv_version', '0.8.12', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:40:\"meetinghub/vendor/freemius/wordpress-sdk\";O:8:\"stdClass\":4:{s:7:\"version\";s:6:\"2.11.0\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744196110;s:11:\"plugin_path\";s:25:\"meetinghub/meetinghub.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:25:\"meetinghub/meetinghub.php\";s:8:\"sdk_path\";s:40:\"meetinghub/vendor/freemius/wordpress-sdk\";s:7:\"version\";s:6:\"2.11.0\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744196110;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -17,7 +21,7 @@ Error: [06-Apr-2025 21:44:34 UTC] WordPress database error <div style="clear:bot
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mgjp_mv_version' , '0.8.12' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_active_plugins' , 'O:8:&quot;stdClass&quot;:3:{s:7:&quot;plugins&quot;;a:1:{s:40:&quot;meetinghub/vendor/freemius/wordpress-sdk&quot;;O:8:&quot;stdClass&quot;:4:{s:7:&quot;version&quot;;s:6:&quot;2.11.0&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:9:&quot;timestamp&quot;;i:1744196110;s:11:&quot;plugin_path&quot;;s:25:&quot;meetinghub/meetinghub.php&quot;;}}s:7:&quot;abspath&quot;;s:11:&quot;/wordpress/&quot;;s:6:&quot;newest&quot;;O:8:&quot;stdClass&quot;:5:{s:11:&quot;plugin_path&quot;;s:25:&quot;meetinghub/meetinghub.php&quot;;s:8:&quot;sdk_path&quot;;s:40:&quot;meetinghub/vendor/freemius/wordpress-sdk&quot;;s:7:&quot;version&quot;;s:6:&quot;2.11.0&quot;;s:13:&quot;in_activation&quot;;b:1;s:9:&quot;timestamp&quot;;i:1744196110;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -29,212 +33,22 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('mgjp_mv_version', '0.8.12', '', 'off')
-#5 /wordpress/wp-includes/option.php(1928): add_network_option(1, 'mgjp_mv_version', '0.8.12')
-#6 /wordpress/wp-content/plugins/media-vault/_mediavault.php(195): add_site_option('mgjp_mv_version', '0.8.12', '', 'yes')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): mgjp_mv_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_media-...', false)
-#11 /internal/eval.php(20): activate_plugin('media-vault/_me...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mgjp_mv_version', '0.8.12', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_media-vault/_mediavault.php'), WP_Hook->do_action, WP_Hook->apply_filters, mgjp_mv_activate, add_site_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 21:44:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mgjp_mv_default_permission', 'logged-in', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mgjp_mv_default_permission' , 'logged-in' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/media-vault/_mediavault.php(680): add_option('mgjp_mv_default...', 'logged-in', '', 'on')
-#5 /wordpress/wp-content/plugins/media-vault/_mediavault.php(201): _mgjp_mv_activate_local()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): mgjp_mv_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_media-...', false)
-#10 /internal/eval.php(20): activate_plugin('media-vault/_me...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mgjp_mv_default_permission', 'logged-in', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_media-vault/_mediavault.php'), WP_Hook->do_action, WP_Hook->apply_filters, mgjp_mv_activate, _mgjp_mv_activate_local, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 21:44:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mgjp_mv_options', 'a:1:{s:25:\"default_upload_protection\";s:3:\"off\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mgjp_mv_options' , 'a:1:{s:25:&quot;default_upload_protection&quot;;s:3:&quot;off&quot;;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/media-vault/_mediavault.php(682): add_option('mgjp_mv_options', Array, '', 'off')
-#5 /wordpress/wp-content/plugins/media-vault/_mediavault.php(201): _mgjp_mv_activate_local()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): mgjp_mv_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_media-...', false)
-#10 /internal/eval.php(20): activate_plugin('media-vault/_me...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mgjp_mv_options', 'a:1:{s:25:\"default_upload_protection\";s:3:\"off\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_media-vault/_mediavault.php'), WP_Hook->do_action, WP_Hook->apply_filters, mgjp_mv_activate, _mgjp_mv_activate_local, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 21:44:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mgjp_mv_ir', 'a:1:{s:5:\"is_on\";b:1;}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mgjp_mv_ir' , 'a:1:{s:5:&quot;is_on&quot;;b:1;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/media-vault/_mediavault.php(683): add_option('mgjp_mv_ir', Array, '', 'off')
-#5 /wordpress/wp-content/plugins/media-vault/_mediavault.php(201): _mgjp_mv_activate_local()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): mgjp_mv_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_media-...', false)
-#10 /internal/eval.php(20): activate_plugin('media-vault/_me...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mgjp_mv_ir', 'a:1:{s:5:\"is_on\";b:1;}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_media-vault/_mediavault.php'), WP_Hook->do_action, WP_Hook->apply_filters, mgjp_mv_activate, _mgjp_mv_activate_local, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 21:44:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '1988-01-31 12:00:00', '1988-01-31 12:00:00', '', '', 'Do Not Delete, Media Vault Place-holder Image', '', 'inherit', 'attachment', 'open', 'closed', '', 'do-not-delete-media-vault-place-holder-image', '', '', '1988-01-31 12:00:00', '1988-01-31 12:00:00', 0, 0, 'image/jpeg', 'http://127.0.0.1:9400/wp-content/uploads/1988/01/media-vault-ir.jpg')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '1988-01-31 12:00:00' , '1988-01-31 12:00:00' , '' , '' , 'Do Not Delete, Media Vault Place-holder Image' , '' , 'inherit' , 'attachment' , 'open' , 'closed' , '' , 'do-not-delete-media-vault-place-holder-image' , '' , '' , '1988-01-31 12:00:00' , '1988-01-31 12:00:00' , 0 , 0 , 'image/jpeg' , 'http://127.0.0.1:9400/wp-content/uploads/1988/01/media-vault-ir.jpg' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-includes/post.php(6527): wp_insert_post(Array, true, true)
-#7 /wordpress/wp-admin/includes/media.php(514): wp_insert_attachment(Array, '/wordpress/wp-c...', 0, true)
-#8 /wordpress/wp-content/plugins/media-vault/_mediavault.php(929): media_handle_sideload(Array, 0, 'Do Not Delete, ...', Array)
-#9 /wordpress/wp-content/plugins/media-vault/_mediavault.php(685): mgjp_mv_load_placeholder_image()
-#10 /wordpress/wp-content/plugins/media-vault/_mediavault.php(201): _mgjp_mv_activate_local()
-#11 /wordpress/wp-includes/class-wp-hook.php(324): mgjp_mv_activate(false)
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#14 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_media-...', false)
-#15 /internal/eval.php(20): activate_plugin('media-vault/_me...')
-#16 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '1988-01-31 12:00:00', '1988-01-31 12:00:00', '', '', 'Do Not Delete, Media Vault Place-holder Image', '', 'inherit', 'attachment', 'open', 'closed', '', 'do-not-delete-media-vault-place-holder-image', '', '', '1988-01-31 12:00:00', '1988-01-31 12:00:00', 0, 0, 'image/jpeg', 'http://127.0.0.1:9400/wp-content/uploads/1988/01/media-vault-ir.jpg') made by activate_plugin, do_action('activate_media-vault/_mediavault.php'), WP_Hook->do_action, WP_Hook->apply_filters, mgjp_mv_activate, _mgjp_mv_activate_local, mgjp_mv_load_placeholder_image, media_handle_sideload, wp_insert_attachment, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 21:44:34 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[06-Apr-2025 21:44:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[06-Apr-2025 21:44:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[06-Apr-2025 21:44:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[06-Apr-2025 21:44:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mgjp_mv_default_permission', 'logged-in', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mgjp_mv_default_permission' , 'logged-in' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/media-vault/mv-class-update.php(120): add_option('mgjp_mv_default...', 'logged-in', '', 'on')
-#5 /wordpress/wp-content/plugins/media-vault/mv-class-update.php(85): MGJP_MV_Update->update_08()
-#6 /wordpress/wp-content/plugins/media-vault/_mediavault.php(295): MGJP_MV_Update->__construct('0', '0.8.12', 'mgjp_mv_version')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): mgjp_mv_check_version('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_active_plugi...', Object(stdClass), '', 'auto')
+#5 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/fs-essential-functions.php(279): update_option('fs_active_plugi...', Object(stdClass))
+#6 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/start.php(242): fs_update_sdk_newest_version('meetinghub/vend...', 'meetinghub/meet...')
+#7 /wordpress/wp-content/plugins/meetinghub/vendor/composer/autoload_real.php(41): require('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/meetinghub/vendor/composer/autoload_real.php(45): {closure}('8d50dc88e56bace...', '/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/meetinghub/vendor/autoload.php(25): ComposerAutoloaderInit872243de972020049b183ba417cd1884::getLoader()
+#10 /wordpress/wp-content/plugins/meetinghub/meetinghub.php(22): require_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('meetinghub/meet...')
+#13 /internal/eval.php(20): activate_plugin('meetinghub/meet...')
 #14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mgjp_mv_default_permission', 'logged-in', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, mgjp_mv_check_version, MGJP_MV_Update->__construct, MGJP_MV_Update->update_08, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 21:44:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:40:\"meetinghub/vendor/freemius/wordpress-sdk\";O:8:\"stdClass\":4:{s:7:\"version\";s:6:\"2.11.0\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744196110;s:11:\"plugin_path\";s:25:\"meetinghub/meetinghub.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:25:\"meetinghub/meetinghub.php\";s:8:\"sdk_path\";s:40:\"meetinghub/vendor/freemius/wordpress-sdk\";s:7:\"version\";s:6:\"2.11.0\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744196110;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/meetinghub/meetinghub.php'), require_once('/plugins/meetinghub/vendor/autoload.php'), ComposerAutoloaderInit872243de972020049b183ba417cd1884::getLoader, {closure}, require('/plugins/meetinghub/vendor/freemius/wordpress-sdk/start.php'), fs_update_sdk_newest_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 10:55:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mgjp_mv_ir', 'a:1:{s:5:\"is_on\";b:1;}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -246,7 +60,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mgjp_mv_ir' , 'a:1:{s:5:&quot;is_on&quot;;b:1;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_debug_mode' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -258,34 +72,34 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/media-vault/mv-class-update.php(123): add_option('mgjp_mv_ir', Array, '', 'off')
-#5 /wordpress/wp-content/plugins/media-vault/mv-class-update.php(85): MGJP_MV_Update->update_08()
-#6 /wordpress/wp-content/plugins/media-vault/_mediavault.php(295): MGJP_MV_Update->__construct('0', '0.8.12', 'mgjp_mv_version')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): mgjp_mv_check_version('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#4 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/config.php(307): add_option('fs_debug_mode', false)
+#5 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/require.php(14): require_once('/wordpress/wp-c...')
+#6 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/start.php(576): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-content/plugins/meetinghub/vendor/composer/autoload_real.php(41): require('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/meetinghub/vendor/composer/autoload_real.php(45): {closure}('8d50dc88e56bace...', '/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/meetinghub/vendor/autoload.php(25): ComposerAutoloaderInit872243de972020049b183ba417cd1884::getLoader()
+#10 /wordpress/wp-content/plugins/meetinghub/meetinghub.php(22): require_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('meetinghub/meet...')
+#13 /internal/eval.php(20): activate_plugin('meetinghub/meet...')
 #14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mgjp_mv_ir', 'a:1:{s:5:\"is_on\";b:1;}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, mgjp_mv_check_version, MGJP_MV_Update->__construct, MGJP_MV_Update->update_08, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 21:44:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/meetinghub/meetinghub.php'), require_once('/plugins/meetinghub/vendor/autoload.php'), ComposerAutoloaderInit872243de972020049b183ba417cd1884::getLoader, {closure}, require('/plugins/meetinghub/vendor/freemius/wordpress-sdk/start.php'), require_once('/plugins/meetinghub/vendor/freemius/wordpress-sdk/require.php'), require_once('/plugins/meetinghub/vendor/freemius/wordpress-sdk/config.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 10:55:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '1988-01-31 12:00:00', '1988-01-31 12:00:00', '', '', 'Do Not Delete, Media Vault Place-holder Image', '', 'inherit', 'attachment', 'open', 'closed', '', 'do-not-delete-media-vault-place-holder-image', '', '', '1988-01-31 12:00:00', '1988-01-31 12:00:00', 0, 0, 'image/jpeg', 'http://127.0.0.1:9400/wp-content/uploads/1988/01/media-vault-ir-1.jpg')</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:15716;a:3:{s:4:\"slug\";s:10:\"meetinghub\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 0 , '1988-01-31 12:00:00' , '1988-01-31 12:00:00' , '' , '' , 'Do Not Delete, Media Vault Place-holder Image' , '' , 'inherit' , 'attachment' , 'open' , 'closed' , '' , 'do-not-delete-media-vault-place-holder-image' , '' , '' , '1988-01-31 12:00:00' , '1988-01-31 12:00:00' , 0 , 0 , 'image/jpeg' , 'http://127.0.0.1:9400/wp-content/uploads/1988/01/media-vault-ir-1.jpg' )) WHERE true | (no parameters)</li>
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:1:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:15716;a:3:{s:4:&quot;slug&quot;;s:10:&quot;meetinghub&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;meetinghub/meetinghub.php&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -296,28 +110,113 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-includes/post.php(6527): wp_insert_post(Array, true, true)
-#7 /wordpress/wp-admin/includes/media.php(514): wp_insert_attachment(Array, '/wordpress/wp-c...', 0, true)
-#8 /wordpress/wp-content/plugins/media-vault/_mediavault.php(929): media_handle_sideload(Array, 0, 'Do Not Delete, ...', Array)
-#9 /wordpress/wp-content/plugins/media-vault/mv-class-update.php(126): mgjp_mv_load_placeholder_image()
-#10 /wordpress/wp-content/plugins/media-vault/mv-class-update.php(85): MGJP_MV_Update->update_08()
-#11 /wordpress/wp-content/plugins/media-vault/_mediavault.php(295): MGJP_MV_Update->__construct('0', '0.8.12', 'mgjp_mv_version')
-#12 /wordpress/wp-includes/class-wp-hook.php(324): mgjp_mv_check_version('')
-#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#15 /wordpress/wp-settings.php(704): do_action('init')
-#16 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#17 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#18 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-fs-options.php(140): FS_Option_Manager->set_option('id_slug_type_pa...', Array, true)
+#8 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(2209): FS_Options->set_option('id_slug_type_pa...', Array, true)
+#9 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(416): Freemius->store_id_slug_type_path_map('15716', 'meetinghub')
+#10 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(2868): Freemius->__construct('15716', 'meetinghub', true)
+#11 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/start.php(615): Freemius::instance('15716', 'meetinghub', true)
+#12 /wordpress/wp-content/plugins/meetinghub/meetinghub.php(40): fs_dynamic_init(Array)
+#13 /wordpress/wp-content/plugins/meetinghub/meetinghub.php(66): mhub_fs()
+#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('meetinghub/meet...')
+#16 /internal/eval.php(20): activate_plugin('meetinghub/meet...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:15716;a:3:{s:4:\"slug\";s:10:\"meetinghub\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/meetinghub/meetinghub.php'), mhub_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_id_slug_type_path_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 10:55:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:15716;a:3:{s:4:\"slug\";s:10:\"meetinghub\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"meetinghub\";a:1:{s:19:\"last_load_timestamp\";i:1744196111;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:15716;a:3:{s:4:&quot;slug&quot;;s:10:&quot;meetinghub&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;meetinghub/meetinghub.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:10:&quot;meetinghub&quot;;a:1:{s:19:&quot;last_load_timestamp&quot;;i:1744196111;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('last_load_times...', 1744196111)
+#9 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('last_load_times...', 1744196111)
+#10 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(432): FS_Storage->__set('last_load_times...', 1744196111)
+#11 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(2868): Freemius->__construct('15716', 'meetinghub', true)
+#12 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/start.php(615): Freemius::instance('15716', 'meetinghub', true)
+#13 /wordpress/wp-content/plugins/meetinghub/meetinghub.php(40): fs_dynamic_init(Array)
+#14 /wordpress/wp-content/plugins/meetinghub/meetinghub.php(66): mhub_fs()
+#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('meetinghub/meet...')
+#17 /internal/eval.php(20): activate_plugin('meetinghub/meet...')
+#18 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:15716;a:3:{s:4:\"slug\";s:10:\"meetinghub\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"meetinghub\";a:1:{s:19:\"last_load_timestamp\";i:1744196111;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/meetinghub/meetinghub.php'), mhub_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 10:55:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:15716;a:3:{s:4:\"slug\";s:10:\"meetinghub\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"meetinghub\";a:2:{s:19:\"last_load_timestamp\";i:1744196111;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:15716;a:3:{s:4:&quot;slug&quot;;s:10:&quot;meetinghub&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;meetinghub/meetinghub.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:10:&quot;meetinghub&quot;;a:2:{s:19:&quot;last_load_timestamp&quot;;i:1744196111;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:25:&quot;meetinghub/meetinghub.php&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_main_fil...', Object(stdClass))
+#9 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('plugin_main_fil...', Object(stdClass))
+#10 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(2066): FS_Storage->__set('plugin_main_fil...', Object(stdClass))
+#11 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(439): Freemius->_find_caller_plugin_file(true, 'meetinghub/meet...')
+#12 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(2868): Freemius->__construct('15716', 'meetinghub', true)
+#13 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/start.php(615): Freemius::instance('15716', 'meetinghub', true)
+#14 /wordpress/wp-content/plugins/meetinghub/meetinghub.php(40): fs_dynamic_init(Array)
+#15 /wordpress/wp-content/plugins/meetinghub/meetinghub.php(66): mhub_fs()
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('meetinghub/meet...')
+#18 /internal/eval.php(20): activate_plugin('meetinghub/meet...')
 #19 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '1988-01-31 12:00:00', '1988-01-31 12:00:00', '', '', 'Do Not Delete, Media Vault Place-holder Image', '', 'inherit', 'attachment', 'open', 'closed', '', 'do-not-delete-media-vault-place-holder-image', '', '', '1988-01-31 12:00:00', '1988-01-31 12:00:00', 0, 0, 'image/jpeg', 'http://127.0.0.1:9400/wp-content/uploads/1988/01/media-vault-ir-1.jpg') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, mgjp_mv_check_version, MGJP_MV_Update->__construct, MGJP_MV_Update->update_08, mgjp_mv_load_placeholder_image, media_handle_sideload, wp_insert_attachment, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 21:44:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:15716;a:3:{s:4:\"slug\";s:10:\"meetinghub\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"meetinghub\";a:2:{s:19:\"last_load_timestamp\";i:1744196111;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/meetinghub/meetinghub.php'), mhub_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_find_caller_plugin_file, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 10:55:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mgjp_mv_default_permission', 'logged-in', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:15716;a:3:{s:4:\"slug\";s:10:\"meetinghub\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"meetinghub\";a:3:{s:19:\"last_load_timestamp\";i:1744196111;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -329,7 +228,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mgjp_mv_default_permission' , 'logged-in' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:15716;a:3:{s:4:&quot;slug&quot;;s:10:&quot;meetinghub&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;meetinghub/meetinghub.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:10:&quot;meetinghub&quot;;a:3:{s:19:&quot;last_load_timestamp&quot;;i:1744196111;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:25:&quot;meetinghub/meetinghub.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -341,23 +240,26 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/media-vault/mv-class-update.php(120): add_option('mgjp_mv_default...', 'logged-in', '', 'on')
-#5 /wordpress/wp-content/plugins/media-vault/mv-class-update.php(85): MGJP_MV_Update->update_08()
-#6 /wordpress/wp-content/plugins/media-vault/_mediavault.php(295): MGJP_MV_Update->__construct('0', '0.8.12', 'mgjp_mv_version')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): mgjp_mv_check_version('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /wordpress/wp-blog-header.php(13): require_once('/wordpress/wp-l...')
-#14 /wordpress/index.php(17): require('/wordpress/wp-b...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mgjp_mv_default_permission', 'logged-in', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require('wp-blog-header.php'), require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, mgjp_mv_check_version, MGJP_MV_Update->__construct, MGJP_MV_Update->update_08, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 21:44:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_network_acti...', false)
+#9 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('is_network_acti...', false)
+#10 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(467): FS_Storage->__set('is_network_acti...', false)
+#11 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(2868): Freemius->__construct('15716', 'meetinghub', true)
+#12 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/start.php(615): Freemius::instance('15716', 'meetinghub', true)
+#13 /wordpress/wp-content/plugins/meetinghub/meetinghub.php(40): fs_dynamic_init(Array)
+#14 /wordpress/wp-content/plugins/meetinghub/meetinghub.php(66): mhub_fs()
+#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('meetinghub/meet...')
+#17 /internal/eval.php(20): activate_plugin('meetinghub/meet...')
+#18 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:15716;a:3:{s:4:\"slug\";s:10:\"meetinghub\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"meetinghub\";a:3:{s:19:\"last_load_timestamp\";i:1744196111;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/meetinghub/meetinghub.php'), mhub_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 10:55:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mgjp_mv_ir', 'a:1:{s:5:\"is_on\";b:1;}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:15716;a:3:{s:4:\"slug\";s:10:\"meetinghub\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"meetinghub\";a:3:{s:19:\"last_load_timestamp\";i:1744196111;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:25:\"meetinghub/meetinghub.php\";s:10:\"meetinghub\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -369,7 +271,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mgjp_mv_ir' , 'a:1:{s:5:&quot;is_on&quot;;b:1;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:15716;a:3:{s:4:&quot;slug&quot;;s:10:&quot;meetinghub&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;meetinghub/meetinghub.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:10:&quot;meetinghub&quot;;a:3:{s:19:&quot;last_load_timestamp&quot;;i:1744196111;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:25:&quot;meetinghub/meetinghub.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}s:13:&quot;file_slug_map&quot;;a:1:{s:25:&quot;meetinghub/meetinghub.php&quot;;s:10:&quot;meetinghub&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -381,35 +283,37 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/media-vault/mv-class-update.php(123): add_option('mgjp_mv_ir', Array, '', 'off')
-#5 /wordpress/wp-content/plugins/media-vault/mv-class-update.php(85): MGJP_MV_Update->update_08()
-#6 /wordpress/wp-content/plugins/media-vault/_mediavault.php(295): MGJP_MV_Update->__construct('0', '0.8.12', 'mgjp_mv_version')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): mgjp_mv_check_version('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /wordpress/wp-blog-header.php(13): require_once('/wordpress/wp-l...')
-#14 /wordpress/index.php(17): require('/wordpress/wp-b...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mgjp_mv_ir', 'a:1:{s:5:\"is_on\";b:1;}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require('wp-blog-header.php'), require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, mgjp_mv_check_version, MGJP_MV_Update->__construct, MGJP_MV_Update->update_08, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 21:44:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-fs-options.php(140): FS_Option_Manager->set_option('file_slug_map', Array, true)
+#8 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(10355): FS_Options->set_option('file_slug_map', Array, true)
+#9 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(514): Freemius->store_file_slug_map()
+#10 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(2868): Freemius->__construct('15716', 'meetinghub', true)
+#11 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/start.php(615): Freemius::instance('15716', 'meetinghub', true)
+#12 /wordpress/wp-content/plugins/meetinghub/meetinghub.php(40): fs_dynamic_init(Array)
+#13 /wordpress/wp-content/plugins/meetinghub/meetinghub.php(66): mhub_fs()
+#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('meetinghub/meet...')
+#16 /internal/eval.php(20): activate_plugin('meetinghub/meet...')
+#17 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:15716;a:3:{s:4:\"slug\";s:10:\"meetinghub\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"meetinghub\";a:3:{s:19:\"last_load_timestamp\";i:1744196111;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}s:20:\"is_network_activated\";b:0;}}s:13:\"file_slug_map\";a:1:{s:25:\"meetinghub/meetinghub.php\";s:10:\"meetinghub\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/meetinghub/meetinghub.php'), mhub_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_file_slug_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 10:55:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '1988-01-31 12:00:00', '1988-01-31 12:00:00', '', '', 'Do Not Delete, Media Vault Place-holder Image', '', 'inherit', 'attachment', 'open', 'closed', '', 'do-not-delete-media-vault-place-holder-image', '', '', '1988-01-31 12:00:00', '1988-01-31 12:00:00', 0, 0, 'image/jpeg', 'http://127.0.0.1:9400/wp-content/uploads/1988/01/media-vault-ir-2.jpg')</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:15716;a:3:{s:4:\"slug\";s:10:\"meetinghub\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"meetinghub\";a:4:{s:19:\"last_load_timestamp\";i:1744196111;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744196110;}}s:13:\"file_slug_map\";a:1:{s:25:\"meetinghub/meetinghub.php\";s:10:\"meetinghub\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 0 , '1988-01-31 12:00:00' , '1988-01-31 12:00:00' , '' , '' , 'Do Not Delete, Media Vault Place-holder Image' , '' , 'inherit' , 'attachment' , 'open' , 'closed' , '' , 'do-not-delete-media-vault-place-holder-image' , '' , '' , '1988-01-31 12:00:00' , '1988-01-31 12:00:00' , 0 , 0 , 'image/jpeg' , 'http://127.0.0.1:9400/wp-content/uploads/1988/01/media-vault-ir-2.jpg' )) WHERE true | (no parameters)</li>
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:15716;a:3:{s:4:&quot;slug&quot;;s:10:&quot;meetinghub&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;meetinghub/meetinghub.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:10:&quot;meetinghub&quot;;a:4:{s:19:&quot;last_load_timestamp&quot;;i:1744196111;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:25:&quot;meetinghub/meetinghub.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744196110;}}s:13:&quot;file_slug_map&quot;;a:1:{s:25:&quot;meetinghub/meetinghub.php&quot;;s:10:&quot;meetinghub&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -420,29 +324,72 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-includes/post.php(6527): wp_insert_post(Array, true, true)
-#7 /wordpress/wp-admin/includes/media.php(514): wp_insert_attachment(Array, '/wordpress/wp-c...', 0, true)
-#8 /wordpress/wp-content/plugins/media-vault/_mediavault.php(929): media_handle_sideload(Array, 0, 'Do Not Delete, ...', Array)
-#9 /wordpress/wp-content/plugins/media-vault/mv-class-update.php(126): mgjp_mv_load_placeholder_image()
-#10 /wordpress/wp-content/plugins/media-vault/mv-class-update.php(85): MGJP_MV_Update->update_08()
-#11 /wordpress/wp-content/plugins/media-vault/_mediavault.php(295): MGJP_MV_Update->__construct('0', '0.8.12', 'mgjp_mv_version')
-#12 /wordpress/wp-includes/class-wp-hook.php(324): mgjp_mv_check_version('')
-#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#15 /wordpress/wp-settings.php(704): do_action('init')
-#16 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#17 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#18 /wordpress/wp-blog-header.php(13): require_once('/wordpress/wp-l...')
-#19 /wordpress/index.php(17): require('/wordpress/wp-b...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('install_timesta...', 1744196110)
+#9 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('install_timesta...', 1744196110)
+#10 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(518): FS_Storage->__set('install_timesta...', 1744196110)
+#11 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(2868): Freemius->__construct('15716', 'meetinghub', true)
+#12 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/start.php(615): Freemius::instance('15716', 'meetinghub', true)
+#13 /wordpress/wp-content/plugins/meetinghub/meetinghub.php(40): fs_dynamic_init(Array)
+#14 /wordpress/wp-content/plugins/meetinghub/meetinghub.php(66): mhub_fs()
+#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('meetinghub/meet...')
+#17 /internal/eval.php(20): activate_plugin('meetinghub/meet...')
+#18 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:15716;a:3:{s:4:\"slug\";s:10:\"meetinghub\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"meetinghub\";a:4:{s:19:\"last_load_timestamp\";i:1744196111;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744196110;}}s:13:\"file_slug_map\";a:1:{s:25:\"meetinghub/meetinghub.php\";s:10:\"meetinghub\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/meetinghub/meetinghub.php'), mhub_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 10:55:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:15716;a:3:{s:4:\"slug\";s:10:\"meetinghub\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"meetinghub\";a:5:{s:19:\"last_load_timestamp\";i:1744196111;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744196110;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:25:\"meetinghub/meetinghub.php\";s:10:\"meetinghub\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:15716;a:3:{s:4:&quot;slug&quot;;s:10:&quot;meetinghub&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;meetinghub/meetinghub.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:10:&quot;meetinghub&quot;;a:5:{s:19:&quot;last_load_timestamp&quot;;i:1744196111;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:25:&quot;meetinghub/meetinghub.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744196110;s:17:&quot;was_plugin_loaded&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:25:&quot;meetinghub/meetinghub.php&quot;;s:10:&quot;meetinghub&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('was_plugin_load...', true)
+#9 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('was_plugin_load...', true)
+#10 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(1337): FS_Storage->__set('was_plugin_load...', true)
+#11 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(1486): Freemius->_plugins_loaded()
+#12 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(548): Freemius->register_constructor_hooks()
+#13 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(2868): Freemius->__construct('15716', 'meetinghub', true)
+#14 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/start.php(615): Freemius::instance('15716', 'meetinghub', true)
+#15 /wordpress/wp-content/plugins/meetinghub/meetinghub.php(40): fs_dynamic_init(Array)
+#16 /wordpress/wp-content/plugins/meetinghub/meetinghub.php(66): mhub_fs()
+#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('meetinghub/meet...')
+#19 /internal/eval.php(20): activate_plugin('meetinghub/meet...')
 #20 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '1988-01-31 12:00:00', '1988-01-31 12:00:00', '', '', 'Do Not Delete, Media Vault Place-holder Image', '', 'inherit', 'attachment', 'open', 'closed', '', 'do-not-delete-media-vault-place-holder-image', '', '', '1988-01-31 12:00:00', '1988-01-31 12:00:00', 0, 0, 'image/jpeg', 'http://127.0.0.1:9400/wp-content/uploads/1988/01/media-vault-ir-2.jpg') made by require('wp-blog-header.php'), require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, mgjp_mv_check_version, MGJP_MV_Update->__construct, MGJP_MV_Update->update_08, mgjp_mv_load_placeholder_image, media_handle_sideload, wp_insert_attachment, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 21:44:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:15716;a:3:{s:4:\"slug\";s:10:\"meetinghub\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"meetinghub\";a:5:{s:19:\"last_load_timestamp\";i:1744196111;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744196110;s:17:\"was_plugin_loaded\";b:1;}}s:13:\"file_slug_map\";a:1:{s:25:\"meetinghub/meetinghub.php\";s:10:\"meetinghub\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/meetinghub/meetinghub.php'), mhub_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->register_constructor_hooks, Freemius->_plugins_loaded, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 10:55:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mgjp_mv_default_permission', 'logged-in', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:15716;a:3:{s:4:\"slug\";s:10:\"meetinghub\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"meetinghub\";a:6:{s:19:\"last_load_timestamp\";i:1744196111;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744196110;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;}}s:13:\"file_slug_map\";a:1:{s:25:\"meetinghub/meetinghub.php\";s:10:\"meetinghub\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -454,7 +401,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mgjp_mv_default_permission' , 'logged-in' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:15716;a:3:{s:4:&quot;slug&quot;;s:10:&quot;meetinghub&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;meetinghub/meetinghub.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:10:&quot;meetinghub&quot;;a:6:{s:19:&quot;last_load_timestamp&quot;;i:1744196111;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:25:&quot;meetinghub/meetinghub.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744196110;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;}}s:13:&quot;file_slug_map&quot;;a:1:{s:25:&quot;meetinghub/meetinghub.php&quot;;s:10:&quot;meetinghub&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -466,108 +413,28 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/media-vault/mv-class-update.php(120): add_option('mgjp_mv_default...', 'logged-in', '', 'on')
-#5 /wordpress/wp-content/plugins/media-vault/mv-class-update.php(85): MGJP_MV_Update->update_08()
-#6 /wordpress/wp-content/plugins/media-vault/_mediavault.php(295): MGJP_MV_Update->__construct('0', '0.8.12', 'mgjp_mv_version')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): mgjp_mv_check_version('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /wordpress/wp-blog-header.php(13): require_once('/wordpress/wp-l...')
-#14 /wordpress/index.php(17): require('/wordpress/wp-b...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mgjp_mv_default_permission', 'logged-in', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require('wp-blog-header.php'), require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, mgjp_mv_check_version, MGJP_MV_Update->__construct, MGJP_MV_Update->update_08, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 21:44:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mgjp_mv_ir', 'a:1:{s:5:\"is_on\";b:1;}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mgjp_mv_ir' , 'a:1:{s:5:&quot;is_on&quot;;b:1;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/media-vault/mv-class-update.php(123): add_option('mgjp_mv_ir', Array, '', 'off')
-#5 /wordpress/wp-content/plugins/media-vault/mv-class-update.php(85): MGJP_MV_Update->update_08()
-#6 /wordpress/wp-content/plugins/media-vault/_mediavault.php(295): MGJP_MV_Update->__construct('0', '0.8.12', 'mgjp_mv_version')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): mgjp_mv_check_version('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /wordpress/wp-blog-header.php(13): require_once('/wordpress/wp-l...')
-#14 /wordpress/index.php(17): require('/wordpress/wp-b...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mgjp_mv_ir', 'a:1:{s:5:\"is_on\";b:1;}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require('wp-blog-header.php'), require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, mgjp_mv_check_version, MGJP_MV_Update->__construct, MGJP_MV_Update->update_08, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 21:44:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '1988-01-31 12:00:00', '1988-01-31 12:00:00', '', '', 'Do Not Delete, Media Vault Place-holder Image', '', 'inherit', 'attachment', 'open', 'closed', '', 'do-not-delete-media-vault-place-holder-image', '', '', '1988-01-31 12:00:00', '1988-01-31 12:00:00', 0, 0, 'image/jpeg', 'http://127.0.0.1:9400/wp-content/uploads/1988/01/media-vault-ir-3.jpg')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 0 , '1988-01-31 12:00:00' , '1988-01-31 12:00:00' , '' , '' , 'Do Not Delete, Media Vault Place-holder Image' , '' , 'inherit' , 'attachment' , 'open' , 'closed' , '' , 'do-not-delete-media-vault-place-holder-image' , '' , '' , '1988-01-31 12:00:00' , '1988-01-31 12:00:00' , 0 , 0 , 'image/jpeg' , 'http://127.0.0.1:9400/wp-content/uploads/1988/01/media-vault-ir-3.jpg' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-includes/post.php(6527): wp_insert_post(Array, true, true)
-#7 /wordpress/wp-admin/includes/media.php(514): wp_insert_attachment(Array, '/wordpress/wp-c...', 0, true)
-#8 /wordpress/wp-content/plugins/media-vault/_mediavault.php(929): media_handle_sideload(Array, 0, 'Do Not Delete, ...', Array)
-#9 /wordpress/wp-content/plugins/media-vault/mv-class-update.php(126): mgjp_mv_load_placeholder_image()
-#10 /wordpress/wp-content/plugins/media-vault/mv-class-update.php(85): MGJP_MV_Update->update_08()
-#11 /wordpress/wp-content/plugins/media-vault/_mediavault.php(295): MGJP_MV_Update->__construct('0', '0.8.12', 'mgjp_mv_version')
-#12 /wordpress/wp-includes/class-wp-hook.php(324): mgjp_mv_check_version('')
-#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#15 /wordpress/wp-settings.php(704): do_action('init')
-#16 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#17 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#18 /wordpress/wp-blog-header.php(13): require_once('/wordpress/wp-l...')
-#19 /wordpress/index.php(17): require('/wordpress/wp-b...')
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('is_plugin_new_i...', true)
+#9 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('is_plugin_new_i...', true)
+#10 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(1351): FS_Storage->__set('is_plugin_new_i...', true)
+#11 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(1486): Freemius->_plugins_loaded()
+#12 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(548): Freemius->register_constructor_hooks()
+#13 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(2868): Freemius->__construct('15716', 'meetinghub', true)
+#14 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/start.php(615): Freemius::instance('15716', 'meetinghub', true)
+#15 /wordpress/wp-content/plugins/meetinghub/meetinghub.php(40): fs_dynamic_init(Array)
+#16 /wordpress/wp-content/plugins/meetinghub/meetinghub.php(66): mhub_fs()
+#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('meetinghub/meet...')
+#19 /internal/eval.php(20): activate_plugin('meetinghub/meet...')
 #20 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '1988-01-31 12:00:00', '1988-01-31 12:00:00', '', '', 'Do Not Delete, Media Vault Place-holder Image', '', 'inherit', 'attachment', 'open', 'closed', '', 'do-not-delete-media-vault-place-holder-image', '', '', '1988-01-31 12:00:00', '1988-01-31 12:00:00', 0, 0, 'image/jpeg', 'http://127.0.0.1:9400/wp-content/uploads/1988/01/media-vault-ir-3.jpg') made by require('wp-blog-header.php'), require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, mgjp_mv_check_version, MGJP_MV_Update->__construct, MGJP_MV_Update->update_08, mgjp_mv_load_placeholder_image, media_handle_sideload, wp_insert_attachment, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 21:44:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:15716;a:3:{s:4:\"slug\";s:10:\"meetinghub\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"meetinghub\";a:6:{s:19:\"last_load_timestamp\";i:1744196111;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744196110;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;}}s:13:\"file_slug_map\";a:1:{s:25:\"meetinghub/meetinghub.php\";s:10:\"meetinghub\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/meetinghub/meetinghub.php'), mhub_fs, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->register_constructor_hooks, Freemius->_plugins_loaded, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[09-Apr-2025 10:55:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mgjp_mv_default_permission', 'logged-in', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:15716;a:3:{s:4:\"slug\";s:10:\"meetinghub\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}}s:11:\"plugin_data\";a:1:{s:10:\"meetinghub\";a:7:{s:19:\"last_load_timestamp\";i:1744196111;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:25:\"meetinghub/meetinghub.php\";}s:20:\"is_network_activated\";b:0;s:17:\"install_timestamp\";i:1744196110;s:17:\"was_plugin_loaded\";b:1;s:21:\"is_plugin_new_install\";b:1;s:16:\"sdk_last_version\";N;}}s:13:\"file_slug_map\";a:1:{s:25:\"meetinghub/meetinghub.php\";s:10:\"meetinghub\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -579,7 +446,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mgjp_mv_default_permission' , 'logged-in' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:3:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:15716;a:3:{s:4:&quot;slug&quot;;s:10:&quot;meetinghub&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:25:&quot;meetinghub/meetinghub.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:10:&quot;meetinghub&quot;;a:7:{s:19:&quot;last_load_timestamp&quot;;i:1744196111;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:25:&quot;meetinghub/meetinghub.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;s:17:&quot;install_timestamp&quot;;i:1744196110;s:17:&quot;was_plugin_loaded&quot;;b:1;s:21:&quot;is_plugin_new_install&quot;;b:1;s:16:&quot;sdk_last_version&quot;;N;}}s:13:&quot;file_slug_map&quot;;a:1:{s:25:&quot;meetinghub/meetinghub.php&quot;;s:10:&quot;meetinghub&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -591,60 +458,21 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/media-vault/mv-class-update.php(120): add_option('mgjp_mv_default...', 'logged-in', '', 'on')
-#5 /wordpress/wp-content/plugins/media-vault/mv-class-update.php(85): MGJP_MV_Update->update_08()
-#6 /wordpress/wp-content/plugins/media-vault/_mediavault.php(295): MGJP_MV_Update->__construct('0', '0.8.12', 'mgjp_mv_version')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): mgjp_mv_check_version('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /wordpress/wp-blog-header.php(13): require_once('/wordpress/wp-l...')
-#14 /wordpress/index.php(17): require('/wordpress/wp-b...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mgjp_mv_default_permission', 'logged-in', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require('wp-blog-header.php'), require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, mgjp_mv_check_version, MGJP_MV_Update->__construct, MGJP_MV_Update->update_08, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 21:44:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mgjp_mv_ir', 'a:1:{s:5:\"is_on\";b:1;}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mgjp_mv_ir' , 'a:1:{s:5:&quot;is_on&quot;;b:1;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/media-vault/mv-class-update.php(123): add_option('mgjp_mv_ir', Array, '', 'off')
-#5 /wordpress/wp-content/plugins/media-vault/mv-class-update.php(85): MGJP_MV_Update->update_08()
-#6 /wordpress/wp-content/plugins/media-vault/_mediavault.php(295): MGJP_MV_Update->__construct('0', '0.8.12', 'mgjp_mv_version')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): mgjp_mv_check_version('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /wordpress/wp-blog-header.php(13): require_once('/wordpress/wp-l...')
-#14 /wordpress/index.php(17): require('/wordpress/wp-b...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mgjp_mv_ir', 'a:1:{s:5:\"is_on\";b:1;}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require('wp-blog-header.php'), require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, mgjp_mv_check_version, MGJP_MV_Update->__construct, MGJP_MV_Update->update_08, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[06-Apr-2025 21:44:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '1988-01-31 12:00:00', '1988-01-31 12:00:00', '', '', 'Do Not Delete, Media Vault Pl
+#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
+#6 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
+#7 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
+#8 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('sdk_last_versio...', NULL)
+#9 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('sdk_last_versio...', NULL)
+#10 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(897): FS_Storage->__set('sdk_last_versio...', NULL)
+#11 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(561): Freemius->_version_updates_handler()
+#12 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/includes/class-freemius.php(2868): Freemius->__construct('15716', 'meetinghub', true)
+#13 /wordpress/wp-content/plugins/meetinghub/vendor/freemius/wordpress-sdk/start.php(615): Freemius::instance('15716', 'meetinghub', true)
+#14 /wordpress/wp-content/plugins/meetinghub/meetinghub.php(40): fs_dynamic_init(Array)
+#15 /wordpress/wp-content/plugins/meetinghub/meetinghub.php(66): mhub_fs()
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('meetinghub/meet...')
+#18 /internal/eval.php(20): activate_plugin('meetinghub/meet...')
+#19 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:3:{s:21:\"id_slug_type_path_map\";a:1:{i:15716;a:3:{s:4:\"slug\";s:10:\"meetinghub\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:25:\"meetinghub
+Node.js v23.11.0
