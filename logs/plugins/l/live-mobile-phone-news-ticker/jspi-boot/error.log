@@ -2,338 +2,97 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [08-Apr-2025 20:48:32 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:48:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:48:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:48:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:48:32 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/login-watchdog/lib/WatchdogIpService.php on line 27
-[08-Apr-2025 20:48:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM watchdog_blocked_ip ORDER BY time_attempt DESC LIMIT 30</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM `watchdog_blocked_ip` ORDER BY `time_attempt` DESC LIMIT 30 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: watchdog_blocked_ip
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
-#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
-#4 /wordpress/wp-content/plugins/login-watchdog/admin/WatchdogAdministration.php(148): wpdb->get_results('SELECT * FROM w...')
-#5 /wordpress/wp-content/plugins/login-watchdog/admin/WatchdogAdministration.php(76): WatchdogAdministration->__getData()
-#6 /wordpress/wp-content/plugins/login-watchdog/login-watchdog.php(72): WatchdogAdministration->__construct()
-#7 /wordpress/wp-content/plugins/login-watchdog/login-watchdog.php(75): WatchdogSetup::init()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('login-watchdog/...')
-#10 /internal/eval.php(20): activate_plugin('login-watchdog/...')
-#11 {main}</pre>
- for query SELECT * FROM watchdog_blocked_ip ORDER BY time_attempt DESC LIMIT 30 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/login-watchdog/login-watchdog.php'), WatchdogSetup::init, WatchdogAdministration->__construct, WatchdogAdministration->__getData, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:48:32 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 20:48:32 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (0) for the number of arguments passed (1). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 20:48:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT COUNT(*) FROM watchdog_blocked_ip</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT ( * ) FROM `watchdog_blocked_ip` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: watchdog_blocked_ip
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT COUNT(*)...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT COUNT(*)...')
-#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(*)...')
-#4 /wordpress/wp-content/plugins/login-watchdog/admin/WatchdogAdministration.php(154): wpdb->get_var('SELECT COUNT(*)...')
-#5 /wordpress/wp-content/plugins/login-watchdog/admin/WatchdogAdministration.php(76): WatchdogAdministration->__getData()
-#6 /wordpress/wp-content/plugins/login-watchdog/login-watchdog.php(72): WatchdogAdministration->__construct()
-#7 /wordpress/wp-content/plugins/login-watchdog/login-watchdog.php(75): WatchdogSetup::init()
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('login-watchdog/...')
-#10 /internal/eval.php(20): activate_plugin('login-watchdog/...')
-#11 {main}</pre>
- for query SELECT COUNT(*) FROM watchdog_blocked_ip made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/login-watchdog/login-watchdog.php'), WatchdogSetup::init, WatchdogAdministration->__construct, WatchdogAdministration->__getData, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:48:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('WATCHDOG_LOGIN_VERSION', '1.0.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'WATCHDOG_LOGIN_VERSION' , '1.0.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('WATCHDOG_LOGIN_...', '1.0.0', '', 'auto')
-#5 /wordpress/wp-content/plugins/login-watchdog/admin/WatchdogInstallation.php(43): update_option('WATCHDOG_LOGIN_...', '1.0.0')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): WatchdogInstallation::activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_login-...', false)
-#10 /internal/eval.php(20): activate_plugin('login-watchdog/...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('WATCHDOG_LOGIN_VERSION', '1.0.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_login-watchdog/login-watchdog.php'), WP_Hook->do_action, WP_Hook->apply_filters, WatchdogInstallation::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:48:32 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:48:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:48:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:48:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:48:33 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/login-watchdog/lib/WatchdogIpService.php on line 27
-[08-Apr-2025 20:48:42 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/login-watchdog/lib/WatchdogIpService.php on line 27
-[08-Apr-2025 20:48:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM watchdog_blocked_ip ORDER BY time_attempt DESC LIMIT 30</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM watchdog_blocked_ip ORDER BY time_attempt DESC LIMIT 30 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: watchdog_blocked_ip.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/login-watchdog/admin/WatchdogAdministration.php(148): wpdb->get_results('SELECT * FROM w...')
-#3 /wordpress/wp-content/plugins/login-watchdog/admin/WatchdogAdministration.php(76): WatchdogAdministration->__getData()
-#4 /wordpress/wp-content/plugins/login-watchdog/login-watchdog.php(72): WatchdogAdministration->__construct()
-#5 /wordpress/wp-content/plugins/login-watchdog/login-watchdog.php(75): WatchdogSetup::init()
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('login-watchdog/...')
-#8 /internal/eval.php(20): activate_plugin('login-watchdog/...')
-#9 {main}</pre>
- for query SELECT * FROM watchdog_blocked_ip ORDER BY time_attempt DESC LIMIT 30 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/login-watchdog/login-watchdog.php'), WatchdogSetup::init, WatchdogAdministration->__construct, WatchdogAdministration->__getData, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:48:42 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 20:48:42 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (0) for the number of arguments passed (1). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 20:48:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT COUNT(*) FROM watchdog_blocked_ip</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT(*) FROM watchdog_blocked_ip | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: watchdog_blocked_ip.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(*)...')
-#2 /wordpress/wp-content/plugins/login-watchdog/admin/WatchdogAdministration.php(154): wpdb->get_var('SELECT COUNT(*)...')
-#3 /wordpress/wp-content/plugins/login-watchdog/admin/WatchdogAdministration.php(76): WatchdogAdministration->__getData()
-#4 /wordpress/wp-content/plugins/login-watchdog/login-watchdog.php(72): WatchdogAdministration->__construct()
-#5 /wordpress/wp-content/plugins/login-watchdog/login-watchdog.php(75): WatchdogSetup::init()
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('login-watchdog/...')
-#8 /internal/eval.php(20): activate_plugin('login-watchdog/...')
-#9 {main}</pre>
- for query SELECT COUNT(*) FROM watchdog_blocked_ip made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/login-watchdog/login-watchdog.php'), WatchdogSetup::init, WatchdogAdministration->__construct, WatchdogAdministration->__getData, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:48:43 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/login-watchdog/lib/WatchdogIpService.php on line 27
-[08-Apr-2025 20:48:51 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/login-watchdog/lib/WatchdogIpService.php on line 27
-[08-Apr-2025 20:48:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT * FROM watchdog_blocked_ip ORDER BY time_attempt DESC LIMIT 30</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT * FROM watchdog_blocked_ip ORDER BY time_attempt DESC LIMIT 30 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: watchdog_blocked_ip.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM w...')
-#2 /wordpress/wp-content/plugins/login-watchdog/admin/WatchdogAdministration.php(148): wpdb->get_results('SELECT * FROM w...')
-#3 /wordpress/wp-content/plugins/login-watchdog/admin/WatchdogAdministration.php(76): WatchdogAdministration->__getData()
-#4 /wordpress/wp-content/plugins/login-watchdog/login-watchdog.php(72): WatchdogAdministration->__construct()
-#5 /wordpress/wp-content/plugins/login-watchdog/login-watchdog.php(75): WatchdogSetup::init()
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('login-watchdog/...')
-#8 /internal/eval.php(20): activate_plugin('login-watchdog/...')
-#9 {main}</pre>
- for query SELECT * FROM watchdog_blocked_ip ORDER BY time_attempt DESC LIMIT 30 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/login-watchdog/login-watchdog.php'), WatchdogSetup::init, WatchdogAdministration->__construct, WatchdogAdministration->__getData, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:48:51 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 20:48:51 UTC] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (0) for the number of arguments passed (1). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 20:48:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT COUNT(*) FROM watchdog_blocked_ip</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT(*) FROM watchdog_blocked_ip | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: watchdog_blocked_ip.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT COUNT(*)...')
-#2 /wordpress/wp-content/plugins/login-watchdog/admin/WatchdogAdministration.php(154): wpdb->get_var('SELECT COUNT(*)...')
-#3 /wordpress/wp-content/plugins/login-watchdog/admin/WatchdogAdministration.php(76): WatchdogAdministration->__getData()
-#4 /wordpress/wp-content/plugins/login-watchdog/login-watchdog.php(72): WatchdogAdministration->__construct()
-#5 /wordpress/wp-content/plugins/login-watchdog/login-watchdog.php(75): WatchdogSetup::init()
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('login-watchdog/...')
-#8 /internal/eval.php(20): activate_plugin('login-watchdog/...')
-#9 {main}</pre>
- for query SELECT COUNT(*) FROM watchdog_blocked_ip made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/login-watchdog/login-watchdog.php'), WatchdogSetup::init, WatchdogAdministration->__construct, WatchdogAdministration->__getData, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:48:52 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/login-watchdog/lib/WatchdogIpService.php on line 27
-[08-Apr-2025 20:49:00 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:49:00 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:49:00 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:49:00 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:49:28 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:49:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:49:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:49:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:49:57 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:49:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:49:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:49:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:50:26 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:50:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:50:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:50:26 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:50:55 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:50:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:50:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:50:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:51:23 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:51:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:51:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:51:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:51:49 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:51:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:51:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:51:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:51:49 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:51:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:51:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:51:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:51:49 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:51:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:51:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:51:49 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:52:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lightseop_options', 'a:28:{s:12:\"lightseo_can\";i:1;s:19:\"lightseo_home_title\";N;s:25:\"lightseo_home_description\";s:0:\"\";s:22:\"lightseo_home_keywords\";N;s:26:\"lightseo_max_words_excerpt\";s:9:\"something\";s:23:\"lightseo_rewrite_titles\";i:1;s:26:\"lightseo_post_title_format\";s:27:\"%post_title% | %blog_title%\";s:26:\"lightseo_page_title_format\";s:27:\"%page_title% | %blog_title%\";s:30:\"lightseo_category_title_format\";s:31:\"%category_title% | %blog_title%\";s:29:\"lightseo_archive_title_format\";s:21:\"%date% | %blog_title%\";s:25:\"lightseo_tag_title_format\";s:20:\"%tag% | %blog_title%\";s:28:\"lightseo_search_title_format\";s:23:\"%search% | %blog_title%\";s:27:\"lightseo_description_format\";s:13:\"%description%\";s:25:\"lightseo_404_title_format\";s:33:\"Nothing found for %request_words%\";s:21:\"lightseo_paged_format\";s:14:\" - Part %page%\";s:23:\"lightseo_use_categories\";i:0;s:35:\"lightseo_dynamic_postspage_keywords\";i:1;s:25:\"lightseo_category_noindex\";i:1;s:24:\"lightseo_archive_noindex\";i:1;s:21:\"lightseo_tags_noindex\";i:0;s:17:\"lightseo_cap_cats\";i:1;s:30:\"lightseo_generate_descriptions\";i:1;s:19:\"lightseo_debug_info\";N;s:23:\"lightseo_post_meta_tags\";s:0:\"\";s:23:\"lightseo_page_meta_tags\";s:0:\"\";s:23:\"lightseo_home_meta_tags\";s:0:\"\";s:47:\"lightseo_home_google_site_verification_meta_tag\";s:0:\"\";s:29:\"lightseo_use_tags_as_keywords\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'lightseop_options' , 'a:28:{s:12:&quot;lightseo_can&quot;;i:1;s:19:&quot;lightseo_home_title&quot;;N;s:25:&quot;lightseo_home_description&quot;;s:0:&quot;&quot;;s:22:&quot;lightseo_home_keywords&quot;;N;s:26:&quot;lightseo_max_words_excerpt&quot;;s:9:&quot;something&quot;;s:23:&quot;lightseo_rewrite_titles&quot;;i:1;s:26:&quot;lightseo_post_title_format&quot;;s:27:&quot;%post_title% | %blog_title%&quot;;s:26:&quot;lightseo_page_title_format&quot;;s:27:&quot;%page_title% | %blog_title%&quot;;s:30:&quot;lightseo_category_title_format&quot;;s:31:&quot;%category_title% | %blog_title%&quot;;s:29:&quot;lightseo_archive_title_format&quot;;s:21:&quot;%date% | %blog_title%&quot;;s:25:&quot;lightseo_tag_title_format&quot;;s:20:&quot;%tag% | %blog_title%&quot;;s:28:&quot;lightseo_search_title_format&quot;;s:23:&quot;%search% | %blog_title%&quot;;s:27:&quot;lightseo_description_format&quot;;s:13:&quot;%description%&quot;;s:25:&quot;lightseo_404_title_format&quot;;s:33:&quot;Nothing found for %request_words%&quot;;s:21:&quot;lightseo_paged_format&quot;;s:14:&quot; - Part %page%&quot;;s:23:&quot;lightseo_use_categories&quot;;i:0;s:35:&quot;lightseo_dynamic_postspage_keywords&quot;;i:1;s:25:&quot;lightseo_category_noindex&quot;;i:1;s:24:&quot;lightseo_archive_noindex&quot;;i:1;s:21:&quot;lightseo_tags_noindex&quot;;i:0;s:17:&quot;lightseo_cap_cats&quot;;i:1;s:30:&quot;lightseo_generate_descriptions&quot;;i:1;s:19:&quot;lightseo_debug_info&quot;;N;s:23:&quot;lightseo_post_meta_tags&quot;;s:0:&quot;&quot;;s:23:&quot;lightseo_page_meta_tags&quot;;s:0:&quot;&quot;;s:23:&quot;lightseo_home_meta_tags&quot;;s:0:&quot;&quot;;s:47:&quot;lightseo_home_google_site_verification_meta_tag&quot;;s:0:&quot;&quot;;s:29:&quot;lightseo_use_tags_as_keywords&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/light-seo/lightseo.php(1934): add_option('lightseop_optio...', Array)
-#5 /wordpress/wp-content/plugins/light-seo/lightseo.php(1879): lightseop_mrt_mkarry()
-#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('light-seo/light...')
-#8 /internal/eval.php(20): activate_plugin('light-seo/light...')
-#9 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lightseop_options', 'a:28:{s:12:\"lightseo_can\";i:1;s:19:\"lightseo_home_title\";N;s:25:\"lightseo_home_description\";s:0:\"\";s:22:\"lightseo_home_keywords\";N;s:26:\"lightseo_max_words_excerpt\";s:9:\"something\";s:23:\"lightseo_rewrite_titles\";i:1;s:26:\"lightseo_post_title_format\";s:27:\"%post_title% | %blog_title%\";s:26:\"lightseo_page_title_format\";s:27:\"%page_title% | %blog_title%\";s:30:\"lightseo_category_title_format\";s:31:\"%category_title% | %blog_title%\";s:29:\"lightseo_archive_title_format\";s:21:\"%date% | %blog_title%\";s:25:\"lightseo_tag_title_format\";s:20:\"%tag% | %blog_title%\";s:28:\"lightseo_search_title_format\";s:23:\"%search% | %blog_title%\";s:27:\"lightseo_description_format\";s:13:\"%description%\";s:25:\"lightseo_404_title_format\";s:33:\"Nothing found for %request_words%\";s:21:\"lightseo_paged_format\";s:14:\" - Part %page%\";s:23:\"lightseo_use_categories\";i:0;s:35:\"lightseo_dynamic_postspage_keywords\";i:1;s:25:\"lightseo_category_noindex\";i:1;s:24:\"lightseo_archive_noindex\";i:1;s:21:\"lightseo_tags_noindex\";i:0;s:17:\"lightseo_cap_cats\";i:1;s:30:\"lightseo_generate_descriptions\";i:1;s:19:\"lightseo_debug_info\";N;s:23:\"lightseo_post_meta_tags\";s:0:\"\";s:23:\"lightseo_page_meta_tags\";s:0:\"\";s:23:\"lightseo_home_meta_tags\";s:0:\"\";s:47:\"lightseo_home_google_site_verification_meta_tag\";s:0:\"\";s:29:\"lightseo_use_tags_as_keywords\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/light-seo/lightseo.php'), lightseop_mrt_mkarry, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:52:21 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/light-seo/lightseo.php on line 2069
-[08-Apr-2025 20:52:21 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:52:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:52:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:52:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:52:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lightseop_options', 'a:28:{s:12:\"lightseo_can\";i:1;s:19:\"lightseo_home_title\";N;s:25:\"lightseo_home_description\";s:0:\"\";s:22:\"lightseo_home_keywords\";N;s:26:\"lightseo_max_words_excerpt\";s:9:\"something\";s:23:\"lightseo_rewrite_titles\";i:1;s:26:\"lightseo_post_title_format\";s:27:\"%post_title% | %blog_title%\";s:26:\"lightseo_page_title_format\";s:27:\"%page_title% | %blog_title%\";s:30:\"lightseo_category_title_format\";s:31:\"%category_title% | %blog_title%\";s:29:\"lightseo_archive_title_format\";s:21:\"%date% | %blog_title%\";s:25:\"lightseo_tag_title_format\";s:20:\"%tag% | %blog_title%\";s:28:\"lightseo_search_title_format\";s:23:\"%search% | %blog_title%\";s:27:\"lightseo_description_format\";s:13:\"%description%\";s:25:\"lightseo_404_title_format\";s:33:\"Nothing found for %request_words%\";s:21:\"lightseo_paged_format\";s:14:\" - Part %page%\";s:23:\"lightseo_use_categories\";i:0;s:35:\"lightseo_dynamic_postspage_keywords\";i:1;s:25:\"lightseo_category_noindex\";i:1;s:24:\"lightseo_archive_noindex\";i:1;s:21:\"lightseo_tags_noindex\";i:0;s:17:\"lightseo_cap_cats\";i:1;s:30:\"lightseo_generate_descriptions\";i:1;s:19:\"lightseo_debug_info\";N;s:23:\"lightseo_post_meta_tags\";s:0:\"\";s:23:\"lightseo_page_meta_tags\";s:0:\"\";s:23:\"lightseo_home_meta_tags\";s:0:\"\";s:47:\"lightseo_home_google_site_verification_meta_tag\";s:0:\"\";s:29:\"lightseo_use_tags_as_keywords\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'lightseop_options' , 'a:28:{s:12:&quot;lightseo_can&quot;;i:1;s:19:&quot;lightseo_home_title&quot;;N;s:25:&quot;lightseo_home_description&quot;;s:0:&quot;&quot;;s:22:&quot;lightseo_home_keywords&quot;;N;s:26:&quot;lightseo_max_words_excerpt&quot;;s:9:&quot;something&quot;;s:23:&quot;lightseo_rewrite_titles&quot;;i:1;s:26:&quot;lightseo_post_title_format&quot;;s:27:&quot;%post_title% | %blog_title%&quot;;s:26:&quot;lightseo_page_title_format&quot;;s:27:&quot;%page_title% | %blog_title%&quot;;s:30:&quot;lightseo_category_title_format&quot;;s:31:&quot;%category_title% | %blog_title%&quot;;s:29:&quot;lightseo_archive_title_format&quot;;s:21:&quot;%date% | %blog_title%&quot;;s:25:&quot;lightseo_tag_title_format&quot;;s:20:&quot;%tag% | %blog_title%&quot;;s:28:&quot;lightseo_search_title_format&quot;;s:23:&quot;%search% | %blog_title%&quot;;s:27:&quot;lightseo_description_format&quot;;s:13:&quot;%description%&quot;;s:25:&quot;lightseo_404_title_format&quot;;s:33:&quot;Nothing found for %request_words%&quot;;s:21:&quot;lightseo_paged_format&quot;;s:14:&quot; - Part %page%&quot;;s:23:&quot;lightseo_use_categories&quot;;i:0;s:35:&quot;lightseo_dynamic_postspage_keywords&quot;;i:1;s:25:&quot;lightseo_category_noindex&quot;;i:1;s:24:&quot;lightseo_archive_noindex&quot;;i:1;s:21:&quot;lightseo_tags_noindex&quot;;i:0;s:17:&quot;lightseo_cap_cats&quot;;i:1;s:30:&quot;lightseo_generate_descriptions&quot;;i:1;s:19:&quot;lightseo_debug_info&quot;;N;s:23:&quot;lightseo_post_meta_tags&quot;;s:0:&quot;&quot;;s:23:&quot;lightseo_page_meta_tags&quot;;s:0:&quot;&quot;;s:23:&quot;lightseo_home_meta_tags&quot;;s:0:&quot;&quot;;s:47:&quot;lightseo_home_google_site_verification_meta_tag&quot;;s:0:&quot;&quot;;s:29:&quot;lightseo_use_tags_as_keywords&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/light-seo/lightseo.php(1934): add_option('lightseop_optio...', Array)
-#5 /wordpress/wp-content/plugins/light-seo/lightseo.php(1879): lightseop_mrt_mkarry()
-#6 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lightseop_options', 'a:28:{s:12:\"lightseo_can\";i:1;s:19:\"lightseo_home_title\";N;s:25:\"lightseo_home_description\";s:0:\"\";s:22:\"lightseo_home_keywords\";N;s:26:\"lightseo_max_words_excerpt\";s:9:\"something\";s:23:\"lightseo_rewrite_titles\";i:1;s:26:\"lightseo_post_title_format\";s:27:\"%post_title% | %blog_title%\";s:26:\"lightseo_page_title_format\";s:27:\"%page_title% | %blog_title%\";s:30:\"lightseo_category_title_format\";s:31:\"%category_title% | %blog_title%\";s:29:\"lightseo_archive_title_format\";s:21:\"%date% | %blog_title%\";s:25:\"lightseo_tag_title_format\";s:20:\"%tag% | %blog_title%\";s:28:\"lightseo_search_title_format\";s:23:\"%search% | %blog_title%\";s:27:\"lightseo_description_format\";s:13:\"%description%\";s:25:\"lightseo_404_title_format\";s:33:\"Nothing found for %request_words%\";s:21:\"lightseo_paged_format\";s:14:\" - Part %page%\";s:23:\"lightseo_use_categories\";i:0;s:35:\"lightseo_dynamic_postspage_keywords\";i:1;s:25:\"lightseo_category_noindex\";i:1;s:24:\"lightseo_archive_noindex\";i:1;s:21:\"lightseo_tags_noindex\";i:0;s:17:\"lightseo_cap_cats\";i:1;s:30:\"lightseo_generate_descriptions\";i:1;s:19:\"lightseo_debug_info\";N;s:23:\"lightseo_post_meta_tags\";s:0:\"\";s:23:\"lightseo_page_meta_tags\";s:0:\"\";s:23:\"lightseo_home_meta_tags\";s:0:\"\";s:47:\"lightseo_home_google_site_verification_meta_tag\";s:0:\"\";s:29:\"lightseo_use_tags_as_keywords\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/light-seo/lightseo.php'), lightseop_mrt_mkarry, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:52:22 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/light-seo/lightseo.php on line 2069
-[08-Apr-2025 20:53:08 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:53:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:53:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:53:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:53:35 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "PLUGIN_URL" in /wordpress/wp-content/plugins/live-mobile-phone-news-ticker/omio_news.php:84
+Error: [10-Apr-2025 09:29:28 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:29:38 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:29:48 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:29:59 UTC] PHP Deprecated:  Required parameter $selector follows optional parameter $categoryfilter in /wordpress/wp-content/plugins/locateandfilter/includes/class-locate-and-filter-tools.php on line 110
+[10-Apr-2025 09:29:59 UTC] PHP Deprecated:  Required parameter $filter_terms_orderby follows optional parameter $categoryfilter in /wordpress/wp-content/plugins/locateandfilter/includes/class-locate-and-filter-tools.php on line 110
+[10-Apr-2025 09:29:59 UTC] PHP Deprecated:  Required parameter $selector follows optional parameter $tokenize in /wordpress/wp-content/plugins/locateandfilter/includes/class-locate-and-filter-tools.php on line 189
+[10-Apr-2025 09:30:00 UTC] PHP Deprecated:  Required parameter $selector follows optional parameter $categoryfilter in /wordpress/wp-content/plugins/locateandfilter/includes/class-locate-and-filter-tools.php on line 110
+[10-Apr-2025 09:30:00 UTC] PHP Deprecated:  Required parameter $filter_terms_orderby follows optional parameter $categoryfilter in /wordpress/wp-content/plugins/locateandfilter/includes/class-locate-and-filter-tools.php on line 110
+[10-Apr-2025 09:30:00 UTC] PHP Deprecated:  Required parameter $selector follows optional parameter $tokenize in /wordpress/wp-content/plugins/locateandfilter/includes/class-locate-and-filter-tools.php on line 189
+[10-Apr-2025 09:30:09 UTC] PHP Deprecated:  Required parameter $selector follows optional parameter $categoryfilter in /wordpress/wp-content/plugins/locateandfilter/includes/class-locate-and-filter-tools.php on line 110
+[10-Apr-2025 09:30:09 UTC] PHP Deprecated:  Required parameter $filter_terms_orderby follows optional parameter $categoryfilter in /wordpress/wp-content/plugins/locateandfilter/includes/class-locate-and-filter-tools.php on line 110
+[10-Apr-2025 09:30:09 UTC] PHP Deprecated:  Required parameter $selector follows optional parameter $tokenize in /wordpress/wp-content/plugins/locateandfilter/includes/class-locate-and-filter-tools.php on line 189
+[10-Apr-2025 09:30:11 UTC] PHP Deprecated:  Required parameter $selector follows optional parameter $categoryfilter in /wordpress/wp-content/plugins/locateandfilter/includes/class-locate-and-filter-tools.php on line 110
+[10-Apr-2025 09:30:11 UTC] PHP Deprecated:  Required parameter $filter_terms_orderby follows optional parameter $categoryfilter in /wordpress/wp-content/plugins/locateandfilter/includes/class-locate-and-filter-tools.php on line 110
+[10-Apr-2025 09:30:11 UTC] PHP Deprecated:  Required parameter $selector follows optional parameter $tokenize in /wordpress/wp-content/plugins/locateandfilter/includes/class-locate-and-filter-tools.php on line 189
+[10-Apr-2025 09:30:20 UTC] PHP Deprecated:  Required parameter $selector follows optional parameter $categoryfilter in /wordpress/wp-content/plugins/locateandfilter/includes/class-locate-and-filter-tools.php on line 110
+[10-Apr-2025 09:30:20 UTC] PHP Deprecated:  Required parameter $filter_terms_orderby follows optional parameter $categoryfilter in /wordpress/wp-content/plugins/locateandfilter/includes/class-locate-and-filter-tools.php on line 110
+[10-Apr-2025 09:30:20 UTC] PHP Deprecated:  Required parameter $selector follows optional parameter $tokenize in /wordpress/wp-content/plugins/locateandfilter/includes/class-locate-and-filter-tools.php on line 189
+[10-Apr-2025 09:30:20 UTC] PHP Deprecated:  Required parameter $selector follows optional parameter $categoryfilter in /wordpress/wp-content/plugins/locateandfilter/includes/class-locate-and-filter-tools.php on line 110
+[10-Apr-2025 09:30:20 UTC] PHP Deprecated:  Required parameter $filter_terms_orderby follows optional parameter $categoryfilter in /wordpress/wp-content/plugins/locateandfilter/includes/class-locate-and-filter-tools.php on line 110
+[10-Apr-2025 09:30:20 UTC] PHP Deprecated:  Required parameter $selector follows optional parameter $tokenize in /wordpress/wp-content/plugins/locateandfilter/includes/class-locate-and-filter-tools.php on line 189
+[10-Apr-2025 09:30:31 UTC] PHP Deprecated:  Function get_bloginfo was called with an argument that is <strong>deprecated</strong> since version 2.2.0! The <code>siteurl</code> option is deprecated for the family of <code>bloginfo()</code> functions. Use the <code>url</code> option instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:30:32 UTC] PHP Deprecated:  Function get_bloginfo was called with an argument that is <strong>deprecated</strong> since version 2.2.0! The <code>siteurl</code> option is deprecated for the family of <code>bloginfo()</code> functions. Use the <code>url</code> option instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:30:32 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/lockerpress-wordpress-security/core.php on line 65
+[10-Apr-2025 09:30:40 UTC] PHP Deprecated:  Function get_bloginfo was called with an argument that is <strong>deprecated</strong> since version 2.2.0! The <code>siteurl</code> option is deprecated for the family of <code>bloginfo()</code> functions. Use the <code>url</code> option instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:30:41 UTC] PHP Deprecated:  Function get_bloginfo was called with an argument that is <strong>deprecated</strong> since version 2.2.0! The <code>siteurl</code> option is deprecated for the family of <code>bloginfo()</code> functions. Use the <code>url</code> option instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:30:41 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/lockerpress-wordpress-security/core.php on line 65
+[10-Apr-2025 09:30:50 UTC] PHP Deprecated:  Function get_bloginfo was called with an argument that is <strong>deprecated</strong> since version 2.2.0! The <code>siteurl</code> option is deprecated for the family of <code>bloginfo()</code> functions. Use the <code>url</code> option instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:30:51 UTC] PHP Deprecated:  Function get_bloginfo was called with an argument that is <strong>deprecated</strong> since version 2.2.0! The <code>siteurl</code> option is deprecated for the family of <code>bloginfo()</code> functions. Use the <code>url</code> option instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 09:30:51 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/lockerpress-wordpress-security/core.php on line 65
+[10-Apr-2025 09:32:01 UTC] PHP Warning:  Constant LOGO_AWESOME_NAME already defined in /wordpress/wp-content/plugins/logo-awesome/logo-awesome.php on line 48
+[10-Apr-2025 09:32:03 UTC] PHP Warning:  Constant LOGO_AWESOME_NAME already defined in /wordpress/wp-content/plugins/logo-awesome/logo-awesome.php on line 48
+[10-Apr-2025 09:32:14 UTC] PHP Warning:  Constant LOGO_AWESOME_NAME already defined in /wordpress/wp-content/plugins/logo-awesome/logo-awesome.php on line 48
+[10-Apr-2025 09:32:15 UTC] PHP Warning:  Constant LOGO_AWESOME_NAME already defined in /wordpress/wp-content/plugins/logo-awesome/logo-awesome.php on line 48
+[10-Apr-2025 09:32:26 UTC] PHP Warning:  Constant LOGO_AWESOME_NAME already defined in /wordpress/wp-content/plugins/logo-awesome/logo-awesome.php on line 48
+[10-Apr-2025 09:32:27 UTC] PHP Warning:  Constant LOGO_AWESOME_NAME already defined in /wordpress/wp-content/plugins/logo-awesome/logo-awesome.php on line 48
+[10-Apr-2025 09:35:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/legal-news-headlines/legal-news-headlines.php:350
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('legal-news-head...')
+#2 /internal/eval.php(20): activate_plugin('legal-news-head...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/legal-news-headlines/legal-news-headlines.php on line 350
+[10-Apr-2025 09:35:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/legal-news-headlines/legal-news-headlines.php:350
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('legal-news-head...')
+#2 /internal/eval.php(20): activate_plugin('legal-news-head...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/legal-news-headlines/legal-news-headlines.php on line 350
+[10-Apr-2025 09:36:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/legal-news-headlines/legal-news-headlines.php:350
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('legal-news-head...')
+#2 /internal/eval.php(20): activate_plugin('legal-news-head...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/legal-news-headlines/legal-news-headlines.php on line 350
+[10-Apr-2025 09:37:39 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "MYSQL_ASSOC" in /wordpress/wp-content/plugins/lime-export/lib/mysql-alias.php:6
+Stack trace:
+#0 /wordpress/wp-content/plugins/lime-export/lime-export.php(111): include_once()
+#1 /wordpress/wp-content/plugins/lime-export/lime-export.php(94): wple_load()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): wple_upgrade(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lime-e...', false)
+#6 /internal/eval.php(20): activate_plugin('lime-export/lim...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/lime-export/lib/mysql-alias.php on line 6
+[10-Apr-2025 09:37:47 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "MYSQL_ASSOC" in /wordpress/wp-content/plugins/lime-export/lib/mysql-alias.php:6
+Stack trace:
+#0 /wordpress/wp-content/plugins/lime-export/lime-export.php(111): include_once()
+#1 /wordpress/wp-content/plugins/lime-export/lime-export.php(94): wple_load()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): wple_upgrade(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lime-e...', false)
+#6 /internal/eval.php(20): activate_plugin('lime-export/lim...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/lime-export/lib/mysql-alias.php on line 6
+[10-Apr-2025 09:37:56 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "MYSQL_ASSOC" in /wordpress/wp-content/plugins/lime-export/lib/mysql-alias.php:6
+Stack trace:
+#0 /wordpress/wp-content/plugins/lime-export/lime-export.php(111): include_once()
+#1 /wordpress/wp-content/plugins/lime-export/lime-export.php(94): wple_load()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): wple_upgrade(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_lime-e...', false)
+#6 /internal/eval.php(20): activate_plugin('lime-export/lim...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/lime-export/lib/mysql-alias.php on line 6
+[10-Apr-2025 09:38:37 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "PLUGIN_URL" in /wordpress/wp-content/plugins/live-mobile-phone-news-ticker/omio_news.php:84
 Stack trace:
 #0 /wordpress/wp-content/plugins/live-mobile-phone-news-ticker/omio_news.php(389): OmioNews->__construct()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
@@ -341,7 +100,7 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('live-mobile-pho...')
 #4 {main}
   thrown in /wordpress/wp-content/plugins/live-mobile-phone-news-ticker/omio_news.php on line 84
-[08-Apr-2025 20:53:42 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "PLUGIN_URL" in /wordpress/wp-content/plugins/live-mobile-phone-news-ticker/omio_news.php:84
+[10-Apr-2025 09:38:45 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "PLUGIN_URL" in /wordpress/wp-content/plugins/live-mobile-phone-news-ticker/omio_news.php:84
 Stack trace:
 #0 /wordpress/wp-content/plugins/live-mobile-phone-news-ticker/omio_news.php(389): OmioNews->__construct()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
@@ -349,7 +108,7 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('live-mobile-pho...')
 #4 {main}
   thrown in /wordpress/wp-content/plugins/live-mobile-phone-news-ticker/omio_news.php on line 84
-[08-Apr-2025 20:53:50 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "PLUGIN_URL" in /wordpress/wp-content/plugins/live-mobile-phone-news-ticker/omio_news.php:84
+[10-Apr-2025 09:38:53 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "PLUGIN_URL" in /wordpress/wp-content/plugins/live-mobile-phone-news-ticker/omio_news.php:84
 Stack trace:
 #0 /wordpress/wp-content/plugins/live-mobile-phone-news-ticker/omio_news.php(389): OmioNews->__construct()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
