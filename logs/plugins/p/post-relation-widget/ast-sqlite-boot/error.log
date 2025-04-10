@@ -2,22 +2,33 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [08-Apr-2025 06:35:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [10-Apr-2025 02:19:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 02:19:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 02:19:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 02:19:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 02:19:43 UTC] PHP Deprecated:  Required parameter $taxonomy follows optional parameter $id in /wordpress/wp-content/plugins/pay2post/lib/framework/kernel/functions.php on line 780
+[10-Apr-2025 02:19:43 UTC] PHP Deprecated:  Required parameter $nonce follows optional parameter $formdata in /wordpress/wp-content/plugins/pay2post/lib/framework/scb/Forms.php on line 61
+[10-Apr-2025 02:19:43 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $file in /wordpress/wp-content/plugins/pay2post/lib/framework/scb/Cron.php on line 23
+[10-Apr-2025 02:19:43 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 02:19:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 02:19:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 02:19:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 02:19:43 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pbwp_plugin_activated', 'wpc-activate', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-10 02:19:43', '2025-04-10 02:19:43', '[pay_addpost]', '', 'Add Post', '', 'publish', 'page', 'closed', 'closed', '', 'add-post', '', '', '2025-04-10 02:19:43', '2025-04-10 02:19:43', 0, 0, '', '')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pbwp_plugin_activated' , 'wpc-activate' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_posts</li>
+<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-10 02:19:43' , '2025-04-10 02:19:43' , '[pay_addpost]' , '' , 'Add Post' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'add-post' , '' , '' , '2025-04-10 02:19:43' , '2025-04-10 02:19:43' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -28,56 +39,33 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/page-builder-wp/page-builder-wp.php(378): add_option('pbwp_plugin_act...', 'wpc-activate')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): PBWP_Composer->__wpc_go(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_page-b...', false)
-#9 /internal/eval.php(20): activate_plugin('page-builder-wp...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pbwp_plugin_activated', 'wpc-activate', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_page-builder-wp/page-builder-wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, PBWP_Composer->__wpc_go, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 06:35:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pbwp_globals', 'a:10:{s:11:\"stt_general\";a:15:{s:13:\"wpc_post_type\";s:10:\"post, page\";s:14:\"disable_plugin\";s:9:\"notactive\";s:21:\"disable_plugin_update\";s:9:\"notactive\";s:17:\"disable_gutenberg\";s:9:\"notactive\";s:18:\"disable_visualtext\";s:6:\"active\";s:24:\"disable_auto_open_editor\";s:6:\"active\";s:8:\"max_undo\";i:10;s:9:\"wpc_roles\";s:13:\"administrator\";s:15:\"wpc_maintenance\";s:9:\"notactive\";s:9:\"wpc_debug\";s:9:\"notactive\";s:19:\"wpc_maintenance_end\";s:0:\"\";s:9:\"gmaps_key\";s:0:\"\";s:10:\"gfonts_key\";s:0:\"\";s:11:\"local_fonts\";s:6:\"active\";s:18:\"local_fonts_format\";s:3:\"ttf\";}s:2:\"my\";a:0:{}s:3:\"hub\";a:1:{s:7:\"content\";a:1:{s:12:\"version_data\";a:3:{s:5:\"items\";a:3:{s:12:\"layout_packs\";a:1:{s:7:\"version\";s:5:\"1.0.0\";}s:9:\"templates\";a:1:{s:7:\"version\";s:5:\"1.0.0\";}s:7:\"presets\";a:1:{s:7:\"version\";s:5:\"1.0.0\";}}s:10:\"last_check\";i:1744094147;s:11:\"need_update\";a:1:{s:8:\"hub_info\";a:0:{}}}}}s:10:\"user_fonts\";a:0:{}s:12:\"user_presets\";a:0:{}s:14:\"user_templates\";a:0:{}s:14:\"user_interface\";a:1:{s:9:\"show_tour\";s:3:\"yes\";}s:14:\"user_wpc_pages\";a:0:{}s:19:\"user_item_favorites\";a:0:{}s:11:\"user_colors\";a:8:{i:0;s:16:\"rgba(0, 0, 0, 1)\";i:1;s:22:\"rgba(255, 255, 255, 1)\";i:2;s:20:\"rgba(224, 43, 32, 1)\";i:3;s:21:\"rgba(134, 40, 203, 1)\";i:4;s:20:\"rgba(224, 153, 0, 1)\";i:5;s:20:\"rgba(237, 240, 0, 1)\";i:6;s:21:\"rgba(124, 218, 36, 1)\";i:7;s:21:\"rgba(12, 113, 195, 1)\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pbwp_globals' , 'a:10:{s:11:&quot;stt_general&quot;;a:15:{s:13:&quot;wpc_post_type&quot;;s:10:&quot;post, page&quot;;s:14:&quot;disable_plugin&quot;;s:9:&quot;notactive&quot;;s:21:&quot;disable_plugin_update&quot;;s:9:&quot;notactive&quot;;s:17:&quot;disable_gutenberg&quot;;s:9:&quot;notactive&quot;;s:18:&quot;disable_visualtext&quot;;s:6:&quot;active&quot;;s:24:&quot;disable_auto_open_editor&quot;;s:6:&quot;active&quot;;s:8:&quot;max_undo&quot;;i:10;s:9:&quot;wpc_roles&quot;;s:13:&quot;administrator&quot;;s:15:&quot;wpc_maintenance&quot;;s:9:&quot;notactive&quot;;s:9:&quot;wpc_debug&quot;;s:9:&quot;notactive&quot;;s:19:&quot;wpc_maintenance_end&quot;;s:0:&quot;&quot;;s:9:&quot;gmaps_key&quot;;s:0:&quot;&quot;;s:10:&quot;gfonts_key&quot;;s:0:&quot;&quot;;s:11:&quot;local_fonts&quot;;s:6:&quot;active&quot;;s:18:&quot;local_fonts_format&quot;;s:3:&quot;ttf&quot;;}s:2:&quot;my&quot;;a:0:{}s:3:&quot;hub&quot;;a:1:{s:7:&quot;content&quot;;a:1:{s:12:&quot;version_data&quot;;a:3:{s:5:&quot;items&quot;;a:3:{s:12:&quot;layout_packs&quot;;a:1:{s:7:&quot;version&quot;;s:5:&quot;1.0.0&quot;;}s:9:&quot;templates&quot;;a:1:{s:7:&quot;version&quot;;s:5:&quot;1.0.0&quot;;}s:7:&quot;presets&quot;;a:1:{s:7:&quot;version&quot;;s:5:&quot;1.0.0&quot;;}}s:10:&quot;last_check&quot;;i:1744094147;s:11:&quot;need_update&quot;;a:1:{s:8:&quot;hub_info&quot;;a:0:{}}}}}s:10:&quot;user_fonts&quot;;a:0:{}s:12:&quot;user_presets&quot;;a:0:{}s:14:&quot;user_templates&quot;;a:0:{}s:14:&quot;user_interface&quot;;a:1:{s:9:&quot;show_tour&quot;;s:3:&quot;yes&quot;;}s:14:&quot;user_wpc_pages&quot;;a:0:{}s:19:&quot;user_item_favorites&quot;;a:0:{}s:11:&quot;user_colors&quot;;a:8:{i:0;s:16:&quot;rgba(0, 0, 0, 1)&quot;;i:1;s:22:&quot;rgba(255, 255, 255, 1)&quot;;i:2;s:20:&quot;rgba(224, 43, 32, 1)&quot;;i:3;s:21:&quot;rgba(134, 40, 203, 1)&quot;;i:4;s:20:&quot;rgba(224, 153, 0, 1)&quot;;i:5;s:20:&quot;rgba(237, 240, 0, 1)&quot;;i:6;s:21:&quot;rgba(124, 218, 36, 1)&quot;;i:7;s:21:&quot;rgba(12, 113, 195, 1)&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('pbwp_globals', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/page-builder-wp/inc/global/wpc-backwards-compatibility.php(66): update_option('pbwp_globals', Array)
-#6 /wordpress/wp-content/plugins/page-builder-wp/page-builder-wp.php(379): pbwp_upgrade_check()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): PBWP_Composer->__wpc_go(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
+#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
+#6 /wordpress/wp-content/plugins/pay2post/add-post.php(135): wp_insert_post(Array)
+#7 /wordpress/wp-includes/class-wp-hook.php(324): Pay_Add_Post->install('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_page-b...', false)
-#11 /internal/eval.php(20): activate_plugin('page-builder-wp...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pbwp_globals', 'a:10:{s:11:\"stt_general\";a:15:{s:13:\"wpc_post_type\";s:10:\"post, page\";s:14:\"disable_plugin\";s:9:\"notactive\";s:21:\"disable_plugin_update\";s:9:\"notactive\";s:17:\"disable_gutenberg\";s:9:\"notactive\";s:18:\"disable_visualtext\";s:6:\"active\";s:24:\"disable_auto_open_editor\";s:6:\"active\";s:8:\"max_undo\";i:10;s:9:\"wpc_roles\";s:13:\"administrator\";s:15:\"wpc_maintenance\";s:9:\"notactive\";s:9:\"wpc_debug\";s:9:\"notactive\";s:19:\"wpc_maintenance_end\";s:0:\"\";s:9:\"gmaps_key\";s:0:\"\";s:10:\"gfonts_key\";s:0:\"\";s:11:\"local_fonts\";s:6:\"active\";s:18:\"local_fonts_format\";s:3:\"ttf\";}s:2:\"my\";a:0:{}s:3:\"hub\";a:1:{s:7:\"content\";a:1:{s:12:\"version_data\";a:3:{s:5:\"items\";a:3:{s:12:\"layout_packs\";a:1:{s:7:\"version\";s:5:\"1.0.0\";}s:9:\"templates\";a:1:{s:7:\"version\";s:5:\"1.0.0\";}s:7:\"presets\";a:1:{s:7:\"version\";s:5:\"1.0.0\";}}s:10:\"last_check\";i:1744094147;s:11:\"need_update\";a:1:{s:8:\"hub_info\";a:0:{}}}}}s:10:\"user_fonts\";a:0:{}s:12:\"user_presets\";a:0:{}s:14:\"user_templates\";a:0:{}s:14:\"user_interface\";a:1:{s:9:\"show_tour\";s:3:\"yes\";}s:14:\"user_wpc_pages\";a:0:{}s:19:\"user_item_favorites\";a:0:{}s:11:\"user_colors\";a:8:{i:0;s:16:\"rgba(0, 0, 0, 1)\";i:1;s:22:\"rgba(255, 255, 255, 1)\";i:2;s:20:\"rgba(224, 43, 32, 1)\";i:3;s:21:\"rgba(134, 40, 203, 1)\";i:4;s:20:\"rgba(224, 153, 0, 1)\";i:5;s:20:\"rgba(237, 240, 0, 1)\";i:6;s:21:\"rgba(124, 218, 36, 1)\";i:7;s:21:\"rgba(12, 113, 195, 1)\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_page-builder-wp/page-builder-wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, PBWP_Composer->__wpc_go, pbwp_upgrade_check, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 06:35:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#10 /wordpress/wp-content/plugins/pay2post/pay-to-post.php(84): do_action('appthemes_first...')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): pay_install(false)
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#14 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pay2po...', false)
+#15 /internal/eval.php(20): activate_plugin('pay2post/pay-to...')
+#16 {main}</pre>
+ for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-10 02:19:43', '2025-04-10 02:19:43', '[pay_addpost]', '', 'Add Post', '', 'publish', 'page', 'closed', 'closed', '', 'add-post', '', '', '2025-04-10 02:19:43', '2025-04-10 02:19:43', 0, 0, '', '') made by activate_plugin, do_action('activate_pay2post/pay-to-post.php'), WP_Hook->do_action, WP_Hook->apply_filters, pay_install, do_action('appthemes_first_run'), WP_Hook->do_action, WP_Hook->apply_filters, Pay_Add_Post->install, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 02:19:43 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 02:19:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 02:19:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 02:19:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 02:19:45 UTC] PHP Deprecated:  Required parameter $taxonomy follows optional parameter $id in /wordpress/wp-content/plugins/pay2post/lib/framework/kernel/functions.php on line 780
+[10-Apr-2025 02:19:45 UTC] PHP Deprecated:  Required parameter $nonce follows optional parameter $formdata in /wordpress/wp-content/plugins/pay2post/lib/framework/scb/Forms.php on line 61
+[10-Apr-2025 02:19:45 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $file in /wordpress/wp-content/plugins/pay2post/lib/framework/scb/Cron.php on line 23
+[10-Apr-2025 02:19:45 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/pay2post/lib/framework/kernel/functions.php on line 1168
+[10-Apr-2025 02:19:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pbwp_globals', 'a:10:{s:11:\"stt_general\";a:15:{s:13:\"wpc_post_type\";s:10:\"post, page\";s:14:\"disable_plugin\";s:9:\"notactive\";s:21:\"disable_plugin_update\";s:9:\"notactive\";s:17:\"disable_gutenberg\";s:9:\"notactive\";s:18:\"disable_visualtext\";s:6:\"active\";s:24:\"disable_auto_open_editor\";s:6:\"active\";s:8:\"max_undo\";s:2:\"10\";s:9:\"wpc_roles\";s:13:\"administrator\";s:15:\"wpc_maintenance\";s:9:\"notactive\";s:9:\"wpc_debug\";s:9:\"notactive\";s:19:\"wpc_maintenance_end\";s:0:\"\";s:9:\"gmaps_key\";s:0:\"\";s:10:\"gfonts_key\";s:0:\"\";s:11:\"local_fonts\";s:6:\"active\";s:18:\"local_fonts_format\";s:3:\"ttf\";}s:2:\"my\";a:0:{}s:3:\"hub\";a:1:{s:7:\"content\";a:1:{s:12:\"version_data\";a:3:{s:5:\"items\";a:3:{s:12:\"layout_packs\";a:1:{s:7:\"version\";s:5:\"1.0.0\";}s:9:\"templates\";a:1:{s:7:\"version\";s:5:\"1.0.0\";}s:7:\"presets\";a:1:{s:7:\"version\";s:5:\"1.0.0\";}}s:10:\"last_check\";s:10:\"1744094147\";s:11:\"need_update\";a:1:{s:8:\"hub_info\";a:0:{}}}}}s:10:\"user_fonts\";a:0:{}s:12:\"user_presets\";a:0:{}s:14:\"user_templates\";a:0:{}s:14:\"user_interface\";a:1:{s:9:\"show_tour\";s:3:\"yes\";}s:14:\"user_wpc_pages\";a:0:{}s:19:\"user_item_favorites\";a:0:{}s:11:\"user_colors\";a:8:{i:0;s:16:\"rgba(0, 0, 0, 1)\";i:1;s:22:\"rgba(255, 255, 255, 1)\";i:2;s:20:\"rgba(224, 43, 32, 1)\";i:3;s:21:\"rgba(134, 40, 203, 1)\";i:4;s:20:\"rgba(224, 153, 0, 1)\";i:5;s:20:\"rgba(237, 240, 0, 1)\";i:6;s:21:\"rgba(124, 218, 36, 1)\";i:7;s:21:\"rgba(12, 113, 195, 1)\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_p2p', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -89,7 +77,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pbwp_globals' , 'a:10:{s:11:&quot;stt_general&quot;;a:15:{s:13:&quot;wpc_post_type&quot;;s:10:&quot;post, page&quot;;s:14:&quot;disable_plugin&quot;;s:9:&quot;notactive&quot;;s:21:&quot;disable_plugin_update&quot;;s:9:&quot;notactive&quot;;s:17:&quot;disable_gutenberg&quot;;s:9:&quot;notactive&quot;;s:18:&quot;disable_visualtext&quot;;s:6:&quot;active&quot;;s:24:&quot;disable_auto_open_editor&quot;;s:6:&quot;active&quot;;s:8:&quot;max_undo&quot;;s:2:&quot;10&quot;;s:9:&quot;wpc_roles&quot;;s:13:&quot;administrator&quot;;s:15:&quot;wpc_maintenance&quot;;s:9:&quot;notactive&quot;;s:9:&quot;wpc_debug&quot;;s:9:&quot;notactive&quot;;s:19:&quot;wpc_maintenance_end&quot;;s:0:&quot;&quot;;s:9:&quot;gmaps_key&quot;;s:0:&quot;&quot;;s:10:&quot;gfonts_key&quot;;s:0:&quot;&quot;;s:11:&quot;local_fonts&quot;;s:6:&quot;active&quot;;s:18:&quot;local_fonts_format&quot;;s:3:&quot;ttf&quot;;}s:2:&quot;my&quot;;a:0:{}s:3:&quot;hub&quot;;a:1:{s:7:&quot;content&quot;;a:1:{s:12:&quot;version_data&quot;;a:3:{s:5:&quot;items&quot;;a:3:{s:12:&quot;layout_packs&quot;;a:1:{s:7:&quot;version&quot;;s:5:&quot;1.0.0&quot;;}s:9:&quot;templates&quot;;a:1:{s:7:&quot;version&quot;;s:5:&quot;1.0.0&quot;;}s:7:&quot;presets&quot;;a:1:{s:7:&quot;version&quot;;s:5:&quot;1.0.0&quot;;}}s:10:&quot;last_check&quot;;s:10:&quot;1744094147&quot;;s:11:&quot;need_update&quot;;a:1:{s:8:&quot;hub_info&quot;;a:0:{}}}}}s:10:&quot;user_fonts&quot;;a:0:{}s:12:&quot;user_presets&quot;;a:0:{}s:14:&quot;user_templates&quot;;a:0:{}s:14:&quot;user_interface&quot;;a:1:{s:9:&quot;show_tour&quot;;s:3:&quot;yes&quot;;}s:14:&quot;user_wpc_pages&quot;;a:0:{}s:19:&quot;user_item_favorites&quot;;a:0:{}s:11:&quot;user_colors&quot;;a:8:{i:0;s:16:&quot;rgba(0, 0, 0, 1)&quot;;i:1;s:22:&quot;rgba(255, 255, 255, 1)&quot;;i:2;s:20:&quot;rgba(224, 43, 32, 1)&quot;;i:3;s:21:&quot;rgba(134, 40, 203, 1)&quot;;i:4;s:20:&quot;rgba(224, 153, 0, 1)&quot;;i:5;s:20:&quot;rgba(237, 240, 0, 1)&quot;;i:6;s:21:&quot;rgba(124, 218, 36, 1)&quot;;i:7;s:21:&quot;rgba(12, 113, 195, 1)&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_p2p' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -101,20 +89,53 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('pbwp_globals', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/page-builder-wp/inc/global/wpc-backwards-compatibility.php(89): update_option('pbwp_globals', Array)
-#6 /wordpress/wp-content/plugins/page-builder-wp/page-builder-wp.php(379): pbwp_upgrade_check()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): PBWP_Composer->__wpc_go(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_page-b...', false)
-#11 /internal/eval.php(20): activate_plugin('page-builder-wp...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pbwp_globals', 'a:10:{s:11:\"stt_general\";a:15:{s:13:\"wpc_post_type\";s:10:\"post, page\";s:14:\"disable_plugin\";s:9:\"notactive\";s:21:\"disable_plugin_update\";s:9:\"notactive\";s:17:\"disable_gutenberg\";s:9:\"notactive\";s:18:\"disable_visualtext\";s:6:\"active\";s:24:\"disable_auto_open_editor\";s:6:\"active\";s:8:\"max_undo\";s:2:\"10\";s:9:\"wpc_roles\";s:13:\"administrator\";s:15:\"wpc_maintenance\";s:9:\"notactive\";s:9:\"wpc_debug\";s:9:\"notactive\";s:19:\"wpc_maintenance_end\";s:0:\"\";s:9:\"gmaps_key\";s:0:\"\";s:10:\"gfonts_key\";s:0:\"\";s:11:\"local_fonts\";s:6:\"active\";s:18:\"local_fonts_format\";s:3:\"ttf\";}s:2:\"my\";a:0:{}s:3:\"hub\";a:1:{s:7:\"content\";a:1:{s:12:\"version_data\";a:3:{s:5:\"items\";a:3:{s:12:\"layout_packs\";a:1:{s:7:\"version\";s:5:\"1.0.0\";}s:9:\"templates\";a:1:{s:7:\"version\";s:5:\"1.0.0\";}s:7:\"presets\";a:1:{s:7:\"version\";s:5:\"1.0.0\";}}s:10:\"last_check\";s:10:\"1744094147\";s:11:\"need_update\";a:1:{s:8:\"hub_info\";a:0:{}}}}}s:10:\"user_fonts\";a:0:{}s:12:\"user_presets\";a:0:{}s:14:\"user_templates\";a:0:{}s:14:\"user_interface\";a:1:{s:9:\"show_tour\";s:3:\"yes\";}s:14:\"user_wpc_pages\";a:0:{}s:19:\"user_item_favorites\";a:0:{}s:11:\"user_colors\";a:8:{i:0;s:16:\"rgba(0, 0, 0, 1)\";i:1;s:22:\"rgba(255, 255, 255, 1)\";i:2;s:20:\"rgba(224, 43, 32, 1)\";i:3;s:21:\"rgba(134, 40, 203, 1)\";i:4;s:20:\"rgba(224, 153, 0, 1)\";i:5;s:20:\"rgba(237, 240, 0, 1)\";i:6;s:21:\"rgba(124, 218, 36, 1)\";i:7;s:21:\"rgba(12, 113, 195, 1)\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_page-builder-wp/page-builder-wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, PBWP_Composer->__wpc_go, pbwp_upgrade_check, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 06:35:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('widget_p2p', Array, '', 'auto')
+#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_p2p', Array)
+#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
+#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
+#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#16 /wordpress/wp-settings.php(704): do_action('init')
+#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#20 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_p2p', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 02:19:45 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 02:19:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 02:19:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 02:19:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 02:19:45 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 02:19:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 02:19:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 02:19:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 02:19:56 UTC] PHP Deprecated:  Required parameter $taxonomy follows optional parameter $id in /wordpress/wp-content/plugins/pay2post/lib/framework/kernel/functions.php on line 780
+[10-Apr-2025 02:19:56 UTC] PHP Deprecated:  Required parameter $nonce follows optional parameter $formdata in /wordpress/wp-content/plugins/pay2post/lib/framework/scb/Forms.php on line 61
+[10-Apr-2025 02:19:56 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $file in /wordpress/wp-content/plugins/pay2post/lib/framework/scb/Cron.php on line 23
+[10-Apr-2025 02:19:57 UTC] PHP Deprecated:  Required parameter $taxonomy follows optional parameter $id in /wordpress/wp-content/plugins/pay2post/lib/framework/kernel/functions.php on line 780
+[10-Apr-2025 02:19:57 UTC] PHP Deprecated:  Required parameter $nonce follows optional parameter $formdata in /wordpress/wp-content/plugins/pay2post/lib/framework/scb/Forms.php on line 61
+[10-Apr-2025 02:19:57 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $file in /wordpress/wp-content/plugins/pay2post/lib/framework/scb/Cron.php on line 23
+[10-Apr-2025 02:19:57 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/pay2post/lib/framework/kernel/functions.php on line 1168
+[10-Apr-2025 02:20:08 UTC] PHP Deprecated:  Required parameter $taxonomy follows optional parameter $id in /wordpress/wp-content/plugins/pay2post/lib/framework/kernel/functions.php on line 780
+[10-Apr-2025 02:20:08 UTC] PHP Deprecated:  Required parameter $nonce follows optional parameter $formdata in /wordpress/wp-content/plugins/pay2post/lib/framework/scb/Forms.php on line 61
+[10-Apr-2025 02:20:08 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $file in /wordpress/wp-content/plugins/pay2post/lib/framework/scb/Cron.php on line 23
+[10-Apr-2025 02:20:09 UTC] PHP Deprecated:  Required parameter $taxonomy follows optional parameter $id in /wordpress/wp-content/plugins/pay2post/lib/framework/kernel/functions.php on line 780
+[10-Apr-2025 02:20:10 UTC] PHP Deprecated:  Required parameter $nonce follows optional parameter $formdata in /wordpress/wp-content/plugins/pay2post/lib/framework/scb/Forms.php on line 61
+[10-Apr-2025 02:20:10 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $file in /wordpress/wp-content/plugins/pay2post/lib/framework/scb/Cron.php on line 23
+[10-Apr-2025 02:20:10 UTC] PHP Warning:  Undefined array key "REMOTE_ADDR" in /wordpress/wp-content/plugins/pay2post/lib/framework/kernel/functions.php on line 1168
+[10-Apr-2025 02:20:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpc_new_preset_data_format_check', 'upgraded', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pingfm_options', 'O:22:\"PingFmCustomUrlOptions\":16:{s:14:\"default_author\";i:1;s:16:\"default_category\";i:0;s:14:\"default_status\";s:7:\"publish\";s:12:\"default_tags\";s:35:\"pingfm, social, networking, alpacas\";s:13:\"inline_images\";b:1;s:12:\"need_upgrade\";b:0;s:14:\"plugin_version\";s:5:\"2.0.1\";s:15:\"title_structure\";s:33:\"Status update on {date} at {time}\";s:5:\"token\";s:32:\"bbe46c50f6b1b209444cfe2586da5d89\";s:13:\"upgrade_error\";b:0;s:15:\"upgrade_methods\";a:0:{}s:8:\"user_css\";s:240:\"#sidebar #wp-pingfm .updated-time { color: #999; }
+#sidebar #wp-pingfm ul { margin-left: 0; margin-right: 0; }
+#sidebar #wp-pingfm ul li { color: #333; margin: 0 0 10px 0; font-size: 11px; }
+#sidebar #wp-pingfm ul li:before { content: \"\"; }\";s:12:\"widget_limit\";i:10;s:12:\"widget_links\";b:1;s:13:\"widget_prefix\";s:13:\"From Ping.fm:\";s:12:\"widget_title\";s:14:\"Status Updates\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -126,7 +147,10 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpc_new_preset_data_format_check' , 'upgraded' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pingfm_options' , 'O:22:&quot;PingFmCustomUrlOptions&quot;:16:{s:14:&quot;default_author&quot;;i:1;s:16:&quot;default_category&quot;;i:0;s:14:&quot;default_status&quot;;s:7:&quot;publish&quot;;s:12:&quot;default_tags&quot;;s:35:&quot;pingfm, social, networking, alpacas&quot;;s:13:&quot;inline_images&quot;;b:1;s:12:&quot;need_upgrade&quot;;b:0;s:14:&quot;plugin_version&quot;;s:5:&quot;2.0.1&quot;;s:15:&quot;title_structure&quot;;s:33:&quot;Status update on {date} at {time}&quot;;s:5:&quot;token&quot;;s:32:&quot;bbe46c50f6b1b209444cfe2586da5d89&quot;;s:13:&quot;upgrade_error&quot;;b:0;s:15:&quot;upgrade_methods&quot;;a:0:{}s:8:&quot;user_css&quot;;s:240:&quot;#sidebar #wp-pingfm .updated-time { color: #999; }
+#sidebar #wp-pingfm ul { margin-left: 0; margin-right: 0; }
+#sidebar #wp-pingfm ul li { color: #333; margin: 0 0 10px 0; font-size: 11px; }
+#sidebar #wp-pingfm ul li:before { content: &quot;&quot;; }&quot;;s:12:&quot;widget_limit&quot;;i:10;s:12:&quot;widget_links&quot;;b:1;s:13:&quot;widget_prefix&quot;;s:13:&quot;From Ping.fm:&quot;;s:12:&quot;widget_title&quot;;s:14:&quot;Status Updates&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -138,35 +162,43 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wpc_new_preset_...', 'upgraded', '', 'auto')
-#5 /wordpress/wp-content/plugins/page-builder-wp/inc/global/wpc-backwards-compatibility.php(301): update_option('wpc_new_preset_...', 'upgraded')
-#6 /wordpress/wp-content/plugins/page-builder-wp/inc/global/wpc-backwards-compatibility.php(151): pbwp_upgrade_preset_data_format('wpc_new_preset_...')
-#7 /wordpress/wp-content/plugins/page-builder-wp/inc/global/wpc-backwards-compatibility.php(97): pbwp_upgrade_executes('wpc_new_preset_...')
-#8 /wordpress/wp-content/plugins/page-builder-wp/page-builder-wp.php(379): pbwp_upgrade_check()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): PBWP_Composer->__wpc_go(false)
+#4 /wordpress/wp-includes/option.php(921): add_option('pingfm_options', Object(PingFmCustomUrlOptions), '', 'auto')
+#5 /wordpress/wp-content/plugins/pingfm-custom-url-status-updates/classes/PingFmCustomUrlUtils.php(104): update_option('pingfm_options', Object(PingFmCustomUrlOptions))
+#6 /wordpress/wp-content/plugins/pingfm-custom-url-status-updates/classes/PingFmCustomUrlUtils.php(92): PingFmCustomUrlOptions->save()
+#7 /wordpress/wp-content/plugins/pingfm-custom-url-status-updates/classes/PingFmCustomUrlUpdater.php(17): PingFmCustomUrlOptions::factory()
+#8 /wordpress/wp-content/plugins/pingfm-custom-url-status-updates/classes/PingFmCustomUrlController.php(61): PingFmCustomUrlUpdater->check_need_upgrade()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): PingFmCustomUrlController->activate_plugin(false)
 #10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_page-b...', false)
-#13 /internal/eval.php(20): activate_plugin('page-builder-wp...')
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pingfm...', false)
+#13 /internal/eval.php(20): activate_plugin('pingfm-custom-u...')
 #14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpc_new_preset_data_format_check', 'upgraded', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_page-builder-wp/page-builder-wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, PBWP_Composer->__wpc_go, pbwp_upgrade_check, pbwp_upgrade_executes, pbwp_upgrade_preset_data_format, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 06:35:47 UTC] PHP Notice:  Undefined index: REMOTE_ADDR in /wordpress/wp-content/plugins/page-builder-wp/inc/global/wpc-helpers.php on line 2715
-[08-Apr-2025 06:35:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pingfm_options', 'O:22:\"PingFmCustomUrlOptions\":16:{s:14:\"default_author\";i:1;s:16:\"default_category\";i:0;s:14:\"default_status\";s:7:\"publish\";s:12:\"default_tags\";s:35:\"pingfm, social, networking, alpacas\";s:13:\"inline_images\";b:1;s:12:\"need_upgrade\";b:0;s:14:\"plugin_version\";s:5:\"2.0.1\";s:15:\"title_structure\";s:33:\"Status update on {date} at {time}\";s:5:\"token\";s:32:\"bbe46c50f6b1b209444cfe2586da5d89\";s:13:\"upgrade_error\";b:0;s:15:\"upgrade_methods\";a:0:{}s:8:\"user_css\";s:240:\"#sidebar #wp-pingfm .updated-time { color: #999; }
+#sidebar #wp-pingfm ul { margin-left: 0; margin-right: 0; }
+#sidebar #wp-pingfm ul li { color: #333; margin: 0 0 10px 0; font-size: 11px; }
+#sidebar #wp-pingfm ul li:before { content: \"\"; }\";s:12:\"widget_limit\";i:10;s:12:\"widget_links\";b:1;s:13:\"widget_prefix\";s:13:\"From Ping.fm:\";s:12:\"widget_title\";s:14:\"Status Updates\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_pingfm-custom-url-status-updates/bootstrap.php'), WP_Hook->do_action, WP_Hook->apply_filters, PingFmCustomUrlController->activate_plugin, PingFmCustomUrlUpdater->check_need_upgrade, PingFmCustomUrlOptions::factory, PingFmCustomUrlOptions->save, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 02:20:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-08 06:35:47', '2025-04-08 06:35:47', '', '', 'WP Composer Assets', '', 'inherit', 'attachment', 'open', 'closed', '', 'wp-composer-assets', '', '', '2025-04-08 06:35:47', '2025-04-08 06:35:47', 0, 0, 'image/jpeg', 'http://127.0.0.1:9400/wp-content/uploads/2025/04/wpc_dummy_image_1.jpg')</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pingfm_options', 'O:22:\"PingFmCustomUrlOptions\":16:{s:14:\"default_author\";i:1;s:16:\"default_category\";i:0;s:14:\"default_status\";s:7:\"publish\";s:12:\"default_tags\";s:35:\"pingfm, social, networking, alpacas\";s:13:\"inline_images\";b:1;s:12:\"need_upgrade\";b:0;s:14:\"plugin_version\";s:5:\"2.0.1\";s:15:\"title_structure\";s:33:\"Status update on {date} at {time}\";s:5:\"token\";s:32:\"bbe46c50f6b1b209444cfe2586da5d89\";s:13:\"upgrade_error\";b:0;s:15:\"upgrade_methods\";a:0:{}s:8:\"user_css\";s:240:\"#sidebar #wp-pingfm .updated-time { color: #999; }
+#sidebar #wp-pingfm ul { margin-left: 0; margin-right: 0; }
+#sidebar #wp-pingfm ul li { color: #333; margin: 0 0 10px 0; font-size: 11px; }
+#sidebar #wp-pingfm ul li:before { content: \"\"; }\";s:12:\"widget_limit\";i:10;s:12:\"widget_links\";b:1;s:13:\"widget_prefix\";s:13:\"From Ping.fm:\";s:12:\"widget_title\";s:14:\"Status Updates\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-08 06:35:47' , '2025-04-08 06:35:47' , '' , '' , 'WP Composer Assets' , '' , 'inherit' , 'attachment' , 'open' , 'closed' , '' , 'wp-composer-assets' , '' , '' , '2025-04-08 06:35:47' , '2025-04-08 06:35:47' , 0 , 0 , 'image/jpeg' , 'http://127.0.0.1:9400/wp-content/uploads/2025/04/wpc_dummy_image_1.jpg' )) WHERE true | (no parameters)</li>
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pingfm_options' , 'O:22:&quot;PingFmCustomUrlOptions&quot;:16:{s:14:&quot;default_author&quot;;i:1;s:16:&quot;default_category&quot;;i:0;s:14:&quot;default_status&quot;;s:7:&quot;publish&quot;;s:12:&quot;default_tags&quot;;s:35:&quot;pingfm, social, networking, alpacas&quot;;s:13:&quot;inline_images&quot;;b:1;s:12:&quot;need_upgrade&quot;;b:0;s:14:&quot;plugin_version&quot;;s:5:&quot;2.0.1&quot;;s:15:&quot;title_structure&quot;;s:33:&quot;Status update on {date} at {time}&quot;;s:5:&quot;token&quot;;s:32:&quot;bbe46c50f6b1b209444cfe2586da5d89&quot;;s:13:&quot;upgrade_error&quot;;b:0;s:15:&quot;upgrade_methods&quot;;a:0:{}s:8:&quot;user_css&quot;;s:240:&quot;#sidebar #wp-pingfm .updated-time { color: #999; }
+#sidebar #wp-pingfm ul { margin-left: 0; margin-right: 0; }
+#sidebar #wp-pingfm ul li { color: #333; margin: 0 0 10px 0; font-size: 11px; }
+#sidebar #wp-pingfm ul li:before { content: &quot;&quot;; }&quot;;s:12:&quot;widget_limit&quot;;i:10;s:12:&quot;widget_links&quot;;b:1;s:13:&quot;widget_prefix&quot;;s:13:&quot;From Ping.fm:&quot;;s:12:&quot;widget_title&quot;;s:14:&quot;Status Updates&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -177,39 +209,51 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-includes/post.php(6527): wp_insert_post(Array, true, true)
-#7 /wordpress/wp-admin/includes/media.php(514): wp_insert_attachment(Array, '/wordpress/wp-c...', NULL, true)
-#8 /wordpress/wp-admin/includes/media.php(1060): media_handle_sideload(Array, NULL, 'WP Composer Ass...')
-#9 /wordpress/wp-content/plugins/page-builder-wp/inc/backend/wpc-functions.php(311): media_sideload_image('http://127.0.0....', NULL, 'WP Composer Ass...', 'id')
-#10 /wordpress/wp-content/plugins/page-builder-wp/inc/backend/wpc-functions.php(205): pbwp_uploadRemoteImageAndAttach('http://127.0.0....', NULL)
-#11 /wordpress/wp-content/plugins/page-builder-wp/inc/global/wpc-backwards-compatibility.php(130): pbwp_download_multiple_images(Array, NULL, true)
-#12 /wordpress/wp-content/plugins/page-builder-wp/page-builder-wp.php(379): pbwp_upgrade_check()
-#13 /wordpress/wp-includes/class-wp-hook.php(324): PBWP_Composer->__wpc_go(false)
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_page-b...', false)
-#17 /internal/eval.php(20): activate_plugin('page-builder-wp...')
-#18 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-08 06:35:47', '2025-04-08 06:35:47', '', '', 'WP Composer Assets', '', 'inherit', 'attachment', 'open', 'closed', '', 'wp-composer-assets', '', '', '2025-04-08 06:35:47', '2025-04-08 06:35:47', 0, 0, 'image/jpeg', 'http://127.0.0.1:9400/wp-content/uploads/2025/04/wpc_dummy_image_1.jpg') made by activate_plugin, do_action('activate_page-builder-wp/page-builder-wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, PBWP_Composer->__wpc_go, pbwp_upgrade_check, pbwp_download_multiple_images, pbwp_uploadRemoteImageAndAttach, media_sideload_image, media_handle_sideload, wp_insert_attachment, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 06:35:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('pingfm_options', Object(PingFmCustomUrlOptions), '', 'auto')
+#5 /wordpress/wp-content/plugins/pingfm-custom-url-status-updates/classes/PingFmCustomUrlUtils.php(104): update_option('pingfm_options', Object(PingFmCustomUrlOptions))
+#6 /wordpress/wp-content/plugins/pingfm-custom-url-status-updates/classes/PingFmCustomUrlUpdater.php(51): PingFmCustomUrlOptions->save()
+#7 /wordpress/wp-content/plugins/pingfm-custom-url-status-updates/classes/PingFmCustomUrlController.php(61): PingFmCustomUrlUpdater->check_need_upgrade()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): PingFmCustomUrlController->activate_plugin(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pingfm...', false)
+#12 /internal/eval.php(20): activate_plugin('pingfm-custom-u...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pingfm_options', 'O:22:\"PingFmCustomUrlOptions\":16:{s:14:\"default_author\";i:1;s:16:\"default_category\";i:0;s:14:\"default_status\";s:7:\"publish\";s:12:\"default_tags\";s:35:\"pingfm, social, networking, alpacas\";s:13:\"inline_images\";b:1;s:12:\"need_upgrade\";b:0;s:14:\"plugin_version\";s:5:\"2.0.1\";s:15:\"title_structure\";s:33:\"Status update on {date} at {time}\";s:5:\"token\";s:32:\"bbe46c50f6b1b209444cfe2586da5d89\";s:13:\"upgrade_error\";b:0;s:15:\"upgrade_methods\";a:0:{}s:8:\"user_css\";s:240:\"#sidebar #wp-pingfm .updated-time { color: #999; }
+#sidebar #wp-pingfm ul { margin-left: 0; margin-right: 0; }
+#sidebar #wp-pingfm ul li { color: #333; margin: 0 0 10px 0; font-size: 11px; }
+#sidebar #wp-pingfm ul li:before { content: \"\"; }\";s:12:\"widget_limit\";i:10;s:12:\"widget_links\";b:1;s:13:\"widget_prefix\";s:13:\"From Ping.fm:\";s:12:\"widget_title\";s:14:\"Status Updates\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_pingfm-custom-url-status-updates/bootstrap.php'), WP_Hook->do_action, WP_Hook->apply_filters, PingFmCustomUrlController->activate_plugin, PingFmCustomUrlUpdater->check_need_upgrade, PingFmCustomUrlOptions->save, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 02:20:41 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 02:20:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 02:20:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 02:20:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 02:20:41 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 02:20:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 02:20:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 02:20:41 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 02:20:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-08 06:35:47', '2025-04-08 06:35:47', '', '', 'WP Composer Assets', '', 'inherit', 'attachment', 'open', 'closed', '', 'wp-composer-assets', '', '', '2025-04-08 06:35:47', '2025-04-08 06:35:47', 0, 0, 'image/jpeg', 'http://127.0.0.1:9400/wp-content/uploads/2025/04/wpc_dummy_image_2.jpg')</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pingfm_options', 'O:22:\"PingFmCustomUrlOptions\":16:{s:14:\"default_author\";i:1;s:16:\"default_category\";i:0;s:14:\"default_status\";s:7:\"publish\";s:12:\"default_tags\";s:35:\"pingfm, social, networking, alpacas\";s:13:\"inline_images\";b:1;s:12:\"need_upgrade\";b:0;s:14:\"plugin_version\";s:5:\"2.0.1\";s:15:\"title_structure\";s:33:\"Status update on {date} at {time}\";s:5:\"token\";s:32:\"2f69ac5563ac8dc2aa15a3a4c22babe6\";s:13:\"upgrade_error\";b:0;s:15:\"upgrade_methods\";a:0:{}s:8:\"user_css\";s:240:\"#sidebar #wp-pingfm .updated-time { color: #999; }
+#sidebar #wp-pingfm ul { margin-left: 0; margin-right: 0; }
+#sidebar #wp-pingfm ul li { color: #333; margin: 0 0 10px 0; font-size: 11px; }
+#sidebar #wp-pingfm ul li:before { content: \"\"; }\";s:12:\"widget_limit\";i:10;s:12:\"widget_links\";b:1;s:13:\"widget_prefix\";s:13:\"From Ping.fm:\";s:12:\"widget_title\";s:14:\"Status Updates\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-08 06:35:47' , '2025-04-08 06:35:47' , '' , '' , 'WP Composer Assets' , '' , 'inherit' , 'attachment' , 'open' , 'closed' , '' , 'wp-composer-assets' , '' , '' , '2025-04-08 06:35:47' , '2025-04-08 06:35:47' , 0 , 0 , 'image/jpeg' , 'http://127.0.0.1:9400/wp-content/uploads/2025/04/wpc_dummy_image_2.jpg' )) WHERE true | (no parameters)</li>
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pingfm_options' , 'O:22:&quot;PingFmCustomUrlOptions&quot;:16:{s:14:&quot;default_author&quot;;i:1;s:16:&quot;default_category&quot;;i:0;s:14:&quot;default_status&quot;;s:7:&quot;publish&quot;;s:12:&quot;default_tags&quot;;s:35:&quot;pingfm, social, networking, alpacas&quot;;s:13:&quot;inline_images&quot;;b:1;s:12:&quot;need_upgrade&quot;;b:0;s:14:&quot;plugin_version&quot;;s:5:&quot;2.0.1&quot;;s:15:&quot;title_structure&quot;;s:33:&quot;Status update on {date} at {time}&quot;;s:5:&quot;token&quot;;s:32:&quot;2f69ac5563ac8dc2aa15a3a4c22babe6&quot;;s:13:&quot;upgrade_error&quot;;b:0;s:15:&quot;upgrade_methods&quot;;a:0:{}s:8:&quot;user_css&quot;;s:240:&quot;#sidebar #wp-pingfm .updated-time { color: #999; }
+#sidebar #wp-pingfm ul { margin-left: 0; margin-right: 0; }
+#sidebar #wp-pingfm ul li { color: #333; margin: 0 0 10px 0; font-size: 11px; }
+#sidebar #wp-pingfm ul li:before { content: &quot;&quot;; }&quot;;s:12:&quot;widget_limit&quot;;i:10;s:12:&quot;widget_links&quot;;b:1;s:13:&quot;widget_prefix&quot;;s:13:&quot;From Ping.fm:&quot;;s:12:&quot;widget_title&quot;;s:14:&quot;Status Updates&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -220,278 +264,77 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-includes/post.php(6527): wp_insert_post(Array, true, true)
-#7 /wordpress/wp-admin/includes/media.php(514): wp_insert_attachment(Array, '/wordpress/wp-c...', NULL, true)
-#8 /wordpress/wp-admin/includes/media.php(1060): media_handle_sideload(Array, NULL, 'WP Composer Ass...')
-#9 /wordpress/wp-content/plugins/page-builder-wp/inc/backend/wpc-functions.php(311): media_sideload_image('http://127.0.0....', NULL, 'WP Composer Ass...', 'id')
-#10 /wordpress/wp-content/plugins/page-builder-wp/inc/backend/wpc-functions.php(205): pbwp_uploadRemoteImageAndAttach('http://127.0.0....', NULL)
-#11 /wordpress/wp-content/plugins/page-builder-wp/inc/global/wpc-backwards-compatibility.php(130): pbwp_download_multiple_images(Array, NULL, true)
-#12 /wordpress/wp-content/plugins/page-builder-wp/page-builder-wp.php(379): pbwp_upgrade_check()
-#13 /wordpress/wp-includes/class-wp-hook.php(324): PBWP_Composer->__wpc_go(false)
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_page-b...', false)
-#17 /internal/eval.php(20): activate_plugin('page-builder-wp...')
-#18 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-08 06:35:47', '2025-04-08 06:35:47', '', '', 'WP Composer Assets', '', 'inherit', 'attachment', 'open', 'closed', '', 'wp-composer-assets', '', '', '2025-04-08 06:35:47', '2025-04-08 06:35:47', 0, 0, 'image/jpeg', 'http://127.0.0.1:9400/wp-content/uploads/2025/04/wpc_dummy_image_2.jpg') made by activate_plugin, do_action('activate_page-builder-wp/page-builder-wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, PBWP_Composer->__wpc_go, pbwp_upgrade_check, pbwp_download_multiple_images, pbwp_uploadRemoteImageAndAttach, media_sideload_image, media_handle_sideload, wp_insert_attachment, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 06:35:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-08 06:35:47', '2025-04-08 06:35:47', '', '', 'WP Composer Assets', '', 'inherit', 'attachment', 'open', 'closed', '', 'wp-composer-assets', '', '', '2025-04-08 06:35:47', '2025-04-08 06:35:47', 0, 0, 'image/jpeg', 'http://127.0.0.1:9400/wp-content/uploads/2025/04/wpc_dummy_image_3.jpg')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-08 06:35:47' , '2025-04-08 06:35:47' , '' , '' , 'WP Composer Assets' , '' , 'inherit' , 'attachment' , 'open' , 'closed' , '' , 'wp-composer-assets' , '' , '' , '2025-04-08 06:35:47' , '2025-04-08 06:35:47' , 0 , 0 , 'image/jpeg' , 'http://127.0.0.1:9400/wp-content/uploads/2025/04/wpc_dummy_image_3.jpg' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-includes/post.php(6527): wp_insert_post(Array, true, true)
-#7 /wordpress/wp-admin/includes/media.php(514): wp_insert_attachment(Array, '/wordpress/wp-c...', NULL, true)
-#8 /wordpress/wp-admin/includes/media.php(1060): media_handle_sideload(Array, NULL, 'WP Composer Ass...')
-#9 /wordpress/wp-content/plugins/page-builder-wp/inc/backend/wpc-functions.php(311): media_sideload_image('http://127.0.0....', NULL, 'WP Composer Ass...', 'id')
-#10 /wordpress/wp-content/plugins/page-builder-wp/inc/backend/wpc-functions.php(205): pbwp_uploadRemoteImageAndAttach('http://127.0.0....', NULL)
-#11 /wordpress/wp-content/plugins/page-builder-wp/inc/global/wpc-backwards-compatibility.php(130): pbwp_download_multiple_images(Array, NULL, true)
-#12 /wordpress/wp-content/plugins/page-builder-wp/page-builder-wp.php(379): pbwp_upgrade_check()
-#13 /wordpress/wp-includes/class-wp-hook.php(324): PBWP_Composer->__wpc_go(false)
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_page-b...', false)
-#17 /internal/eval.php(20): activate_plugin('page-builder-wp...')
-#18 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-08 06:35:47', '2025-04-08 06:35:47', '', '', 'WP Composer Assets', '', 'inherit', 'attachment', 'open', 'closed', '', 'wp-composer-assets', '', '', '2025-04-08 06:35:47', '2025-04-08 06:35:47', 0, 0, 'image/jpeg', 'http://127.0.0.1:9400/wp-content/uploads/2025/04/wpc_dummy_image_3.jpg') made by activate_plugin, do_action('activate_page-builder-wp/page-builder-wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, PBWP_Composer->__wpc_go, pbwp_upgrade_check, pbwp_download_multiple_images, pbwp_uploadRemoteImageAndAttach, media_sideload_image, media_handle_sideload, wp_insert_attachment, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 06:35:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-08 06:35:47', '2025-04-08 06:35:47', '', '', 'WP Composer Assets', '', 'inherit', 'attachment', 'open', 'closed', '', 'wp-composer-assets', '', '', '2025-04-08 06:35:47', '2025-04-08 06:35:47', 0, 0, 'image/jpeg', 'http://127.0.0.1:9400/wp-content/uploads/2025/04/wpc_dummy_image_4.jpg')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-08 06:35:47' , '2025-04-08 06:35:47' , '' , '' , 'WP Composer Assets' , '' , 'inherit' , 'attachment' , 'open' , 'closed' , '' , 'wp-composer-assets' , '' , '' , '2025-04-08 06:35:47' , '2025-04-08 06:35:47' , 0 , 0 , 'image/jpeg' , 'http://127.0.0.1:9400/wp-content/uploads/2025/04/wpc_dummy_image_4.jpg' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-includes/post.php(6527): wp_insert_post(Array, true, true)
-#7 /wordpress/wp-admin/includes/media.php(514): wp_insert_attachment(Array, '/wordpress/wp-c...', NULL, true)
-#8 /wordpress/wp-admin/includes/media.php(1060): media_handle_sideload(Array, NULL, 'WP Composer Ass...')
-#9 /wordpress/wp-content/plugins/page-builder-wp/inc/backend/wpc-functions.php(311): media_sideload_image('http://127.0.0....', NULL, 'WP Composer Ass...', 'id')
-#10 /wordpress/wp-content/plugins/page-builder-wp/inc/backend/wpc-functions.php(205): pbwp_uploadRemoteImageAndAttach('http://127.0.0....', NULL)
-#11 /wordpress/wp-content/plugins/page-builder-wp/inc/global/wpc-backwards-compatibility.php(130): pbwp_download_multiple_images(Array, NULL, true)
-#12 /wordpress/wp-content/plugins/page-builder-wp/page-builder-wp.php(379): pbwp_upgrade_check()
-#13 /wordpress/wp-includes/class-wp-hook.php(324): PBWP_Composer->__wpc_go(false)
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_page-b...', false)
-#17 /internal/eval.php(20): activate_plugin('page-builder-wp...')
-#18 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-08 06:35:47', '2025-04-08 06:35:47', '', '', 'WP Composer Assets', '', 'inherit', 'attachment', 'open', 'closed', '', 'wp-composer-assets', '', '', '2025-04-08 06:35:47', '2025-04-08 06:35:47', 0, 0, 'image/jpeg', 'http://127.0.0.1:9400/wp-content/uploads/2025/04/wpc_dummy_image_4.jpg') made by activate_plugin, do_action('activate_page-builder-wp/page-builder-wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, PBWP_Composer->__wpc_go, pbwp_upgrade_check, pbwp_download_multiple_images, pbwp_uploadRemoteImageAndAttach, media_sideload_image, media_handle_sideload, wp_insert_attachment, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 06:35:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-08 06:35:47', '2025-04-08 06:35:47', '', '', 'WP Composer Assets', '', 'inherit', 'attachment', 'open', 'closed', '', 'wp-composer-assets', '', '', '2025-04-08 06:35:47', '2025-04-08 06:35:47', 0, 0, 'image/jpeg', 'http://127.0.0.1:9400/wp-content/uploads/2025/04/wpc_dummy_image_5.jpg')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-08 06:35:47' , '2025-04-08 06:35:47' , '' , '' , 'WP Composer Assets' , '' , 'inherit' , 'attachment' , 'open' , 'closed' , '' , 'wp-composer-assets' , '' , '' , '2025-04-08 06:35:47' , '2025-04-08 06:35:47' , 0 , 0 , 'image/jpeg' , 'http://127.0.0.1:9400/wp-content/uploads/2025/04/wpc_dummy_image_5.jpg' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-includes/post.php(6527): wp_insert_post(Array, true, true)
-#7 /wordpress/wp-admin/includes/media.php(514): wp_insert_attachment(Array, '/wordpress/wp-c...', NULL, true)
-#8 /wordpress/wp-admin/includes/media.php(1060): media_handle_sideload(Array, NULL, 'WP Composer Ass...')
-#9 /wordpress/wp-content/plugins/page-builder-wp/inc/backend/wpc-functions.php(311): media_sideload_image('http://127.0.0....', NULL, 'WP Composer Ass...', 'id')
-#10 /wordpress/wp-content/plugins/page-builder-wp/inc/backend/wpc-functions.php(205): pbwp_uploadRemoteImageAndAttach('http://127.0.0....', NULL)
-#11 /wordpress/wp-content/plugins/page-builder-wp/inc/global/wpc-backwards-compatibility.php(130): pbwp_download_multiple_images(Array, NULL, true)
-#12 /wordpress/wp-content/plugins/page-builder-wp/page-builder-wp.php(379): pbwp_upgrade_check()
-#13 /wordpress/wp-includes/class-wp-hook.php(324): PBWP_Composer->__wpc_go(false)
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_page-b...', false)
-#17 /internal/eval.php(20): activate_plugin('page-builder-wp...')
-#18 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-08 06:35:47', '2025-04-08 06:35:47', '', '', 'WP Composer Assets', '', 'inherit', 'attachment', 'open', 'closed', '', 'wp-composer-assets', '', '', '2025-04-08 06:35:47', '2025-04-08 06:35:47', 0, 0, 'image/jpeg', 'http://127.0.0.1:9400/wp-content/uploads/2025/04/wpc_dummy_image_5.jpg') made by activate_plugin, do_action('activate_page-builder-wp/page-builder-wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, PBWP_Composer->__wpc_go, pbwp_upgrade_check, pbwp_download_multiple_images, pbwp_uploadRemoteImageAndAttach, media_sideload_image, media_handle_sideload, wp_insert_attachment, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 06:35:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-08 06:35:47', '2025-04-08 06:35:47', '', '', 'WP Composer Assets', '', 'inherit', 'attachment', 'open', 'closed', '', 'wp-composer-assets', '', '', '2025-04-08 06:35:47', '2025-04-08 06:35:47', 0, 0, 'image/jpeg', 'http://127.0.0.1:9400/wp-content/uploads/2025/04/wpc_dummy_image_6.jpg')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-08 06:35:47' , '2025-04-08 06:35:47' , '' , '' , 'WP Composer Assets' , '' , 'inherit' , 'attachment' , 'open' , 'closed' , '' , 'wp-composer-assets' , '' , '' , '2025-04-08 06:35:47' , '2025-04-08 06:35:47' , 0 , 0 , 'image/jpeg' , 'http://127.0.0.1:9400/wp-content/uploads/2025/04/wpc_dummy_image_6.jpg' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-includes/post.php(6527): wp_insert_post(Array, true, true)
-#7 /wordpress/wp-admin/includes/media.php(514): wp_insert_attachment(Array, '/wordpress/wp-c...', NULL, true)
-#8 /wordpress/wp-admin/includes/media.php(1060): media_handle_sideload(Array, NULL, 'WP Composer Ass...')
-#9 /wordpress/wp-content/plugins/page-builder-wp/inc/backend/wpc-functions.php(311): media_sideload_image('http://127.0.0....', NULL, 'WP Composer Ass...', 'id')
-#10 /wordpress/wp-content/plugins/page-builder-wp/inc/backend/wpc-functions.php(205): pbwp_uploadRemoteImageAndAttach('http://127.0.0....', NULL)
-#11 /wordpress/wp-content/plugins/page-builder-wp/inc/global/wpc-backwards-compatibility.php(130): pbwp_download_multiple_images(Array, NULL, true)
-#12 /wordpress/wp-content/plugins/page-builder-wp/page-builder-wp.php(379): pbwp_upgrade_check()
-#13 /wordpress/wp-includes/class-wp-hook.php(324): PBWP_Composer->__wpc_go(false)
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_page-b...', false)
-#17 /internal/eval.php(20): activate_plugin('page-builder-wp...')
-#18 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-08 06:35:47', '2025-04-08 06:35:47', '', '', 'WP Composer Assets', '', 'inherit', 'attachment', 'open', 'closed', '', 'wp-composer-assets', '', '', '2025-04-08 06:35:47', '2025-04-08 06:35:47', 0, 0, 'image/jpeg', 'http://127.0.0.1:9400/wp-content/uploads/2025/04/wpc_dummy_image_6.jpg') made by activate_plugin, do_action('activate_page-builder-wp/page-builder-wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, PBWP_Composer->__wpc_go, pbwp_upgrade_check, pbwp_download_multiple_images, pbwp_uploadRemoteImageAndAttach, media_sideload_image, media_handle_sideload, wp_insert_attachment, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 06:35:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-08 06:35:47', '2025-04-08 06:35:47', '', '', 'WP Composer Assets', '', 'inherit', 'attachment', 'open', 'closed', '', 'wp-composer-assets', '', '', '2025-04-08 06:35:47', '2025-04-08 06:35:47', 0, 0, 'image/jpeg', 'http://127.0.0.1:9400/wp-content/uploads/2025/04/wpc_dummy_image_7.jpg')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-08 06:35:47' , '2025-04-08 06:35:47' , '' , '' , 'WP Composer Assets' , '' , 'inherit' , 'attachment' , 'open' , 'closed' , '' , 'wp-composer-assets' , '' , '' , '2025-04-08 06:35:47' , '2025-04-08 06:35:47' , 0 , 0 , 'image/jpeg' , 'http://127.0.0.1:9400/wp-content/uploads/2025/04/wpc_dummy_image_7.jpg' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-includes/post.php(6527): wp_insert_post(Array, true, true)
-#7 /wordpress/wp-admin/includes/media.php(514): wp_insert_attachment(Array, '/wordpress/wp-c...', NULL, true)
-#8 /wordpress/wp-admin/includes/media.php(1060): media_handle_sideload(Array, NULL, 'WP Composer Ass...')
-#9 /wordpress/wp-content/plugins/page-builder-wp/inc/backend/wpc-functions.php(311): media_sideload_image('http://127.0.0....', NULL, 'WP Composer Ass...', 'id')
-#10 /wordpress/wp-content/plugins/page-builder-wp/inc/backend/wpc-functions.php(205): pbwp_uploadRemoteImageAndAttach('http://127.0.0....', NULL)
-#11 /wordpress/wp-content/plugins/page-builder-wp/inc/global/wpc-backwards-compatibility.php(130): pbwp_download_multiple_images(Array, NULL, true)
-#12 /wordpress/wp-content/plugins/page-builder-wp/page-builder-wp.php(379): pbwp_upgrade_check()
-#13 /wordpress/wp-includes/class-wp-hook.php(324): PBWP_Composer->__wpc_go(false)
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_page-b...', false)
-#17 /internal/eval.php(20): activate_plugin('page-builder-wp...')
-#18 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-08 06:35:47', '2025-04-08 06:35:47', '', '', 'WP Composer Assets', '', 'inherit', 'attachment', 'open', 'closed', '', 'wp-composer-assets', '', '', '2025-04-08 06:35:47', '2025-04-08 06:35:47', 0, 0, 'image/jpeg', 'http://127.0.0.1:9400/wp-content/uploads/2025/04/wpc_dummy_image_7.jpg') made by activate_plugin, do_action('activate_page-builder-wp/page-builder-wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, PBWP_Composer->__wpc_go, pbwp_upgrade_check, pbwp_download_multiple_images, pbwp_uploadRemoteImageAndAttach, media_sideload_image, media_handle_sideload, wp_insert_attachment, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 06:35:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-08 06:35:47', '2025-04-08 06:35:47', '', '', 'WP Composer Assets', '', 'inherit', 'attachment', 'open', 'closed', '', 'wp-composer-assets', '', '', '2025-04-08 06:35:47', '2025-04-08 06:35:47', 0, 0, 'image/jpeg', 'http://127.0.0.1:9400/wp-content/uploads/2025/04/wpc_dummy_image_8.jpg')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-08 06:35:47' , '2025-04-08 06:35:47' , '' , '' , 'WP Composer Assets' , '' , 'inherit' , 'attachment' , 'open' , 'closed' , '' , 'wp-composer-assets' , '' , '' , '2025-04-08 06:35:47' , '2025-04-08 06:35:47' , 0 , 0 , 'image/jpeg' , 'http://127.0.0.1:9400/wp-content/uploads/2025/04/wpc_dummy_image_8.jpg' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-includes/post.php(6527): wp_insert_post(Array, true, true)
-#7 /wordpress/wp-admin/includes/media.php(514): wp_insert_attachment(Array, '/wordpress/wp-c...', NULL, true)
-#8 /wordpress/wp-admin/includes/media.php(1060): media_handle_sideload(Array, NULL, 'WP Composer Ass...')
-#9 /wordpress/wp-content/plugins/page-builder-wp/inc/backend/wpc-functions.php(311): media_sideload_image('http://127.0.0....', NULL, 'WP Composer Ass...', 'id')
-#10 /wordpress/wp-content/plugins/page-builder-wp/inc/backend/wpc-functions.php(205): pbwp_uploadRemoteImageAndAttach('http://127.0.0....', NULL)
-#11 /wordpress/wp-content/plugins/page-builder-wp/inc/global/wpc-backwards-compatibility.php(130): pbwp_download_multiple_images(Array, NULL, true)
-#12 /wordpress/wp-content/plugins/page-builder-wp/page-builder-wp.php(379): pbwp_upgrade_check()
-#13 /wordpress/wp-includes/class-wp-hook.php(324): PBWP_Composer->__wpc_go(false)
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_page-b...', false)
-#17 /internal/eval.php(20): activate_plugin('page-builder-wp...')
-#18 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-08 06:35:47', '2025-04-08 06:35:47', '', '', 'WP Composer Assets', '', 'inherit', 'attachment', 'open', 'closed', '', 'wp-composer-assets', '', '', '2025-04-08 06:35:47', '2025-
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('pingfm_options', Object(PingFmCustomUrlOptions), '', 'auto')
+#5 /wordpress/wp-content/plugins/pingfm-custom-url-status-updates/classes/PingFmCustomUrlUtils.php(104): update_option('pingfm_options', Object(PingFmCustomUrlOptions))
+#6 /wordpress/wp-content/plugins/pingfm-custom-url-status-updates/classes/PingFmCustomUrlUtils.php(92): PingFmCustomUrlOptions->save()
+#7 /wordpress/wp-content/plugins/pingfm-custom-url-status-updates/classes/PingFmCustomUrlController.php(30): PingFmCustomUrlOptions::factory()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): PingFmCustomUrlController->register_action_hooks('')
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#15 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pingfm_options', 'O:22:\"PingFmCustomUrlOptions\":16:{s:14:\"default_author\";i:1;s:16:\"default_category\";i:0;s:14:\"default_status\";s:7:\"publish\";s:12:\"default_tags\";s:35:\"pingfm, social, networking, alpacas\";s:13:\"inline_images\";b:1;s:12:\"need_upgrade\";b:0;s:14:\"plugin_version\";s:5:\"2.0.1\";s:15:\"title_structure\";s:33:\"Status update on {date} at {time}\";s:5:\"token\";s:32:\"2f69ac5563ac8dc2aa15a3a4c22babe6\";s:13:\"upgrade_error\";b:0;s:15:\"upgrade_methods\";a:0:{}s:8:\"user_css\";s:240:\"#sidebar #wp-pingfm .updated-time { color: #999; }
+#sidebar #wp-pingfm ul { margin-left: 0; margin-right: 0; }
+#sidebar #wp-pingfm ul li { color: #333; margin: 0 0 10px 0; font-size: 11px; }
+#sidebar #wp-pingfm ul li:before { content: \"\"; }\";s:12:\"widget_limit\";i:10;s:12:\"widget_links\";b:1;s:13:\"widget_prefix\";s:13:\"From Ping.fm:\";s:12:\"widget_title\";s:14:\"Status Updates\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, PingFmCustomUrlController->register_action_hooks, PingFmCustomUrlOptions::factory, PingFmCustomUrlOptions->save, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 02:21:08 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 02:21:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 02:21:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 02:21:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 02:21:35 UTC] PHP Warning:  Undefined array key "post" in /wordpress/wp-content/plugins/poll-professional/init.php on line 3
+[10-Apr-2025 02:21:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 02:21:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 02:21:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 02:21:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 02:21:36 UTC] PHP Warning:  Undefined array key "post" in /wordpress/wp-content/plugins/poll-professional/init.php on line 3
+[10-Apr-2025 02:21:43 UTC] PHP Warning:  Undefined array key "post" in /wordpress/wp-content/plugins/poll-professional/init.php on line 3
+[10-Apr-2025 02:21:44 UTC] PHP Warning:  Undefined array key "post" in /wordpress/wp-content/plugins/poll-professional/init.php on line 3
+[10-Apr-2025 02:21:53 UTC] PHP Warning:  Undefined array key "post" in /wordpress/wp-content/plugins/poll-professional/init.php on line 3
+[10-Apr-2025 02:21:54 UTC] PHP Warning:  Undefined array key "post" in /wordpress/wp-content/plugins/poll-professional/init.php on line 3
+[10-Apr-2025 02:22:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/post-relation-widget/post-relation-widget.php:537
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('post-relation-w...')
+#2 /internal/eval.php(20): activate_plugin('post-relation-w...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/post-relation-widget/post-relation-widget.php on line 537
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"post-relation-widget"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
