@@ -2,684 +2,155 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 08:55:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [10-Apr-2025 09:28:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method WP_SQLite_Driver::get_columns() in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php:505
+Stack trace:
+#0 /wordpress/wp-includes/class-wpdb.php(3879): WP_SQLite_DB->load_col_info()
+#1 /wordpress/wp-content/plugins/tf-faq/tf-faq.php(484): wpdb->get_col_info('wp_faq_question...', 4)
+#2 /wordpress/wp-content/plugins/tf-faq/tf-faq.php(439): _tffaq_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): tffaq_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tf-faq...', false)
+#7 /internal/eval.php(20): activate_plugin('tf-faq/tf-faq.p...')
+#8 {main}
+  thrown in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php on line 505
+[10-Apr-2025 09:29:03 UTC] PHP Warning:  Trying to access array offset on value of type int in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-translator.php on line 717
+[10-Apr-2025 09:29:03 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-translator.php on line 717
+[10-Apr-2025 09:29:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ThreeWP_Activity_Monitor_activities_limit', '100000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE wp_faq_questions ADD email VARCHAR(56) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ThreeWP_Activity_Monitor_activities_limit' , '100000' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_faq_questions, EMAIL, varchar(56)</li>
+<li>Executing: ALTER TABLE wp_faq_questions ADD email text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL; | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ThreeWP_Activit...', 100000, '', 'auto')
-#5 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(628): update_option('ThreeWP_Activit...', 100000)
-#6 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(162): SD_Activity_Monitor_Base->register_options()
-#7 /wordpress/wp-content/plugins/threewp-activity-monitor/ThreeWP_Activity_Monitor.php(91): SD_Activity_Monitor_Base->activate()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Activity_Monitor->activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#12 /internal/eval.php(20): activate_plugin('threewp-activit...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ThreeWP_Activity_Monitor_activities_limit', '100000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_threewp-activity-monitor/ThreeWP_Activity_Monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Activity_Monitor->activate, SD_Activity_Monitor_Base->activate, SD_Activity_Monitor_Base->register_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 08:55:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/tf-faq/tf-faq.php(488): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/tf-faq/tf-faq.php(439): _tffaq_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): tffaq_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tf-faq...', false)
+#7 /internal/eval.php(20): activate_plugin('tf-faq/tf-faq.p...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_faq_questions ADD email VARCHAR(56) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL; made by activate_plugin, do_action('activate_tf-faq/tf-faq.php'), WP_Hook->do_action, WP_Hook->apply_filters, tffaq_install, _tffaq_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 09:29:11 UTC] PHP Warning:  Trying to access array offset on value of type int in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-translator.php on line 717
+[10-Apr-2025 09:29:11 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-translator.php on line 717
+[10-Apr-2025 09:29:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ThreeWP_Activity_Monitor_activities_limit_view', '100', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE wp_faq_questions ADD email VARCHAR(56) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ThreeWP_Activity_Monitor_activities_limit_view' , '100' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_faq_questions, EMAIL, varchar(56)</li>
+<li>Executing: ALTER TABLE wp_faq_questions ADD email text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL; | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ThreeWP_Activit...', 100, '', 'auto')
-#5 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(628): update_option('ThreeWP_Activit...', 100)
-#6 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(162): SD_Activity_Monitor_Base->register_options()
-#7 /wordpress/wp-content/plugins/threewp-activity-monitor/ThreeWP_Activity_Monitor.php(91): SD_Activity_Monitor_Base->activate()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Activity_Monitor->activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#12 /internal/eval.php(20): activate_plugin('threewp-activit...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ThreeWP_Activity_Monitor_activities_limit_view', '100', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_threewp-activity-monitor/ThreeWP_Activity_Monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Activity_Monitor->activate, SD_Activity_Monitor_Base->activate, SD_Activity_Monitor_Base->register_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 08:55:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ThreeWP_Activity_Monitor_password_length', '99', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ThreeWP_Activity_Monitor_password_length' , '99' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ThreeWP_Activit...', 99, '', 'auto')
-#5 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(628): update_option('ThreeWP_Activit...', 99)
-#6 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(162): SD_Activity_Monitor_Base->register_options()
-#7 /wordpress/wp-content/plugins/threewp-activity-monitor/ThreeWP_Activity_Monitor.php(91): SD_Activity_Monitor_Base->activate()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Activity_Monitor->activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#12 /internal/eval.php(20): activate_plugin('threewp-activit...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ThreeWP_Activity_Monitor_password_length', '99', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_threewp-activity-monitor/ThreeWP_Activity_Monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Activity_Monitor->activate, SD_Activity_Monitor_Base->activate, SD_Activity_Monitor_Base->register_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 08:55:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ThreeWP_Activity_Monitor_post_types', 'a:2:{i:0;s:4:\"page\";i:1;s:4:\"post\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ThreeWP_Activity_Monitor_post_types' , 'a:2:{i:0;s:4:&quot;page&quot;;i:1;s:4:&quot;post&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ThreeWP_Activit...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(628): update_option('ThreeWP_Activit...', Array)
-#6 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(162): SD_Activity_Monitor_Base->register_options()
-#7 /wordpress/wp-content/plugins/threewp-activity-monitor/ThreeWP_Activity_Monitor.php(91): SD_Activity_Monitor_Base->activate()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Activity_Monitor->activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#12 /internal/eval.php(20): activate_plugin('threewp-activit...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ThreeWP_Activity_Monitor_post_types', 'a:2:{i:0;s:4:\"page\";i:1;s:4:\"post\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_threewp-activity-monitor/ThreeWP_Activity_Monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Activity_Monitor->activate, SD_Activity_Monitor_Base->activate, SD_Activity_Monitor_Base->register_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 08:55:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ThreeWP_Activity_Monitor_role_logins_view', 'administrator', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ThreeWP_Activity_Monitor_role_logins_view' , 'administrator' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ThreeWP_Activit...', 'administrator', '', 'auto')
-#5 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(628): update_option('ThreeWP_Activit...', 'administrator')
-#6 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(162): SD_Activity_Monitor_Base->register_options()
-#7 /wordpress/wp-content/plugins/threewp-activity-monitor/ThreeWP_Activity_Monitor.php(91): SD_Activity_Monitor_Base->activate()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Activity_Monitor->activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#12 /internal/eval.php(20): activate_plugin('threewp-activit...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ThreeWP_Activity_Monitor_role_logins_view', 'administrator', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_threewp-activity-monitor/ThreeWP_Activity_Monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Activity_Monitor->activate, SD_Activity_Monitor_Base->activate, SD_Activity_Monitor_Base->register_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 08:55:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ThreeWP_Activity_Monitor_role_logins_view_other', 'administrator', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ThreeWP_Activity_Monitor_role_logins_view_other' , 'administrator' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ThreeWP_Activit...', 'administrator', '', 'auto')
-#5 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(628): update_option('ThreeWP_Activit...', 'administrator')
-#6 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(162): SD_Activity_Monitor_Base->register_options()
-#7 /wordpress/wp-content/plugins/threewp-activity-monitor/ThreeWP_Activity_Monitor.php(91): SD_Activity_Monitor_Base->activate()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Activity_Monitor->activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#12 /internal/eval.php(20): activate_plugin('threewp-activit...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ThreeWP_Activity_Monitor_role_logins_view_other', 'administrator', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_threewp-activity-monitor/ThreeWP_Activity_Monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Activity_Monitor->activate, SD_Activity_Monitor_Base->activate, SD_Activity_Monitor_Base->register_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 08:55:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ThreeWP_Activity_Monitor_role_logins_delete', 'administrator', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ThreeWP_Activity_Monitor_role_logins_delete' , 'administrator' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ThreeWP_Activit...', 'administrator', '', 'auto')
-#5 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(628): update_option('ThreeWP_Activit...', 'administrator')
-#6 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(162): SD_Activity_Monitor_Base->register_options()
-#7 /wordpress/wp-content/plugins/threewp-activity-monitor/ThreeWP_Activity_Monitor.php(91): SD_Activity_Monitor_Base->activate()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Activity_Monitor->activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#12 /internal/eval.php(20): activate_plugin('threewp-activit...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ThreeWP_Activity_Monitor_role_logins_delete', 'administrator', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_threewp-activity-monitor/ThreeWP_Activity_Monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Activity_Monitor->activate, SD_Activity_Monitor_Base->activate, SD_Activity_Monitor_Base->register_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 08:55:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ThreeWP_Activity_Monitor_role_logins_delete_other', 'administrator', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ThreeWP_Activity_Monitor_role_logins_delete_other' , 'administrator' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ThreeWP_Activit...', 'administrator', '', 'auto')
-#5 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(628): update_option('ThreeWP_Activit...', 'administrator')
-#6 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(162): SD_Activity_Monitor_Base->register_options()
-#7 /wordpress/wp-content/plugins/threewp-activity-monitor/ThreeWP_Activity_Monitor.php(91): SD_Activity_Monitor_Base->activate()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Activity_Monitor->activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#12 /internal/eval.php(20): activate_plugin('threewp-activit...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ThreeWP_Activity_Monitor_role_logins_delete_other', 'administrator', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_threewp-activity-monitor/ThreeWP_Activity_Monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Activity_Monitor->activate, SD_Activity_Monitor_Base->activate, SD_Activity_Monitor_Base->register_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 08:55:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ThreeWP_Activity_Monitor_database_version', '200', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ThreeWP_Activity_Monitor_database_version' , '200' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ThreeWP_Activit...', 200, '', 'auto')
-#5 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(628): update_option('ThreeWP_Activit...', 200)
-#6 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(162): SD_Activity_Monitor_Base->register_options()
-#7 /wordpress/wp-content/plugins/threewp-activity-monitor/ThreeWP_Activity_Monitor.php(91): SD_Activity_Monitor_Base->activate()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Activity_Monitor->activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#12 /internal/eval.php(20): activate_plugin('threewp-activit...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ThreeWP_Activity_Monitor_database_version', '200', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_threewp-activity-monitor/ThreeWP_Activity_Monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Activity_Monitor->activate, SD_Activity_Monitor_Base->activate, SD_Activity_Monitor_Base->register_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 08:55:33 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 08:55:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 08:55:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 08:55:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 08:55:33 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 08:55:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 08:55:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 08:55:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 08:55:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ThreeWP_Activity_Monitor_database_version', '120', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ThreeWP_Activity_Monitor_database_version' , '120' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('ThreeWP_Activit...', 120, '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'ThreeWP_Activit...', 120)
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'ThreeWP_Activit...', 120)
-#7 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(671): update_site_option('ThreeWP_Activit...', 120)
-#8 /wordpress/wp-content/plugins/threewp-activity-monitor/ThreeWP_Activity_Monitor.php(131): SD_Activity_Monitor_Base->update_site_option('ThreeWP_Activit...', 120)
-#9 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Activity_Monitor->activate(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#13 /internal/eval.php(20): activate_plugin('threewp-activit...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ThreeWP_Activity_Monitor_database_version', '120', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_threewp-activity-monitor/ThreeWP_Activity_Monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Activity_Monitor->activate, SD_Activity_Monitor_Base->update_site_option, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 08:55:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>DROP TABLE `wp__3wp_activity_monitor_index`</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp__3wp_activity_monitor_index</li>
-<li>Executing: 
-				DELETE FROM _wp_sqlite_mysql_information_schema_tables
-				WHERE table_schema = ? AND table_name = ?
-			 | parameters: database_name_here, wp__3wp_activity_monitor_index</li>
-<li>Executing: 
-				DELETE FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ? AND table_name = ?
-			 | parameters: database_name_here, wp__3wp_activity_monitor_index</li>
-<li>Executing: 
-				DELETE FROM _wp_sqlite_mysql_information_schema_statistics
-				WHERE table_schema = ? AND table_name = ?
-			 | parameters: database_name_here, wp__3wp_activity_monitor_index</li>
-<li>Executing: DROP TABLE `wp__3wp_activity_monitor_index` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp__3wp_activity_monitor_index
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('DROP TABLE `wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('DROP TABLE `wp_...')
-#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('DROP TABLE `wp_...')
-#4 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(327): wpdb->get_results('DROP TABLE `wp_...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/threewp-activity-monitor/ThreeWP_Activity_Monitor.php(137): SD_Activity_Monitor_Base->query('DROP TABLE `wp_...')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Activity_Monitor->activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/tf-faq/tf-faq.php(488): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/tf-faq/tf-faq.php(439): _tffaq_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): tffaq_install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_tf-faq...', false)
+#7 /internal/eval.php(20): activate_plugin('tf-faq/tf-faq.p...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_faq_questions ADD email VARCHAR(56) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL; made by activate_plugin, do_action('activate_tf-faq/tf-faq.php'), WP_Hook->do_action, WP_Hook->apply_filters, tffaq_install, _tffaq_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 09:29:53 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744277391.522)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#10 /internal/eval.php(20): activate_plugin('threewp-activit...')
-#11 {main}</pre>
- for query DROP TABLE `wp__3wp_activity_monitor_index` made by activate_plugin, do_action('activate_threewp-activity-monitor/ThreeWP_Activity_Monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Activity_Monitor->activate, SD_Activity_Monitor_Base->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 08:55:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>DROP TABLE `wp__3wp_activity_monitor_logins`</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp__3wp_activity_monitor_logins</li>
-<li>Executing: 
-				DELETE FROM _wp_sqlite_mysql_information_schema_tables
-				WHERE table_schema = ? AND table_name = ?
-			 | parameters: database_name_here, wp__3wp_activity_monitor_logins</li>
-<li>Executing: 
-				DELETE FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ? AND table_name = ?
-			 | parameters: database_name_here, wp__3wp_activity_monitor_logins</li>
-<li>Executing: 
-				DELETE FROM _wp_sqlite_mysql_information_schema_statistics
-				WHERE table_schema = ? AND table_name = ?
-			 | parameters: database_name_here, wp__3wp_activity_monitor_logins</li>
-<li>Executing: DROP TABLE `wp__3wp_activity_monitor_logins` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp__3wp_activity_monitor_logins
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('DROP TABLE `wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('DROP TABLE `wp_...')
-#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('DROP TABLE `wp_...')
-#4 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(327): wpdb->get_results('DROP TABLE `wp_...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/threewp-activity-monitor/ThreeWP_Activity_Monitor.php(138): SD_Activity_Monitor_Base->query('DROP TABLE `wp_...')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Activity_Monitor->activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 09:32:01 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744277518.88)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#10 /internal/eval.php(20): activate_plugin('threewp-activit...')
-#11 {main}</pre>
- for query DROP TABLE `wp__3wp_activity_monitor_logins` made by activate_plugin, do_action('activate_threewp-activity-monitor/ThreeWP_Activity_Monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Activity_Monitor->activate, SD_Activity_Monitor_Base->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 08:55:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>DROP TABLE `wp__3wp_activity_monitor_posts`</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp__3wp_activity_monitor_posts</li>
-<li>Executing: 
-				DELETE FROM _wp_sqlite_mysql_information_schema_tables
-				WHERE table_schema = ? AND table_name = ?
-			 | parameters: database_name_here, wp__3wp_activity_monitor_posts</li>
-<li>Executing: 
-				DELETE FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ? AND table_name = ?
-			 | parameters: database_name_here, wp__3wp_activity_monitor_posts</li>
-<li>Executing: 
-				DELETE FROM _wp_sqlite_mysql_information_schema_statistics
-				WHERE table_schema = ? AND table_name = ?
-			 | parameters: database_name_here, wp__3wp_activity_monitor_posts</li>
-<li>Executing: DROP TABLE `wp__3wp_activity_monitor_posts` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp__3wp_activity_monitor_posts
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('DROP TABLE `wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('DROP TABLE `wp_...')
-#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('DROP TABLE `wp_...')
-#4 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(327): wpdb->get_results('DROP TABLE `wp_...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/threewp-activity-monitor/ThreeWP_Activity_Monitor.php(139): SD_Activity_Monitor_Base->query('DROP TABLE `wp_...')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Activity_Monitor->activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#10 /internal/eval.php(20): activate_plugin('threewp-activit...')
-#11 {main}</pre>
- for query DROP TABLE `wp__3wp_activity_monitor_posts` made by activate_plugin, do_action('activate_threewp-activity-monitor/ThreeWP_Activity_Monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Activity_Monitor->activate, SD_Activity_Monitor_Base->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 08:55:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>RENAME TABLE `wp__3wp_activity_monitor_user_statistics` TO `wp_3wp_activity_monitor_user_statistics` </p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-MySQL query not supported. Cause: statement type: "renameTableStatement"
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('RENAME TABLE `w...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('RENAME TABLE `w...')
-#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('RENAME TABLE `w...')
-#4 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(327): wpdb->get_results('RENAME TABLE `w...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/threewp-activity-monitor/ThreeWP_Activity_Monitor.php(144): SD_Activity_Monitor_Base->query('RENAME TABLE `w...')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Activity_Monitor->activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#10 /internal/eval.php(20): activate_plugin('threewp-activit...')
-#11 {main}</pre>
- for query RENAME TABLE `wp__3wp_activity_monitor_user_statistics` TO `wp_3wp_activity_monitor_user_statistics`  made by activate_plugin, do_action('activate_threewp-activity-monitor/ThreeWP_Activity_Monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Activity_Monitor->activate, SD_Activity_Monitor_Base->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 08:55:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_3wp_activity_monitor_index` ADD `user_id` INT NULL COMMENT 'User''s ID' AFTER `activity_id`</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_3wp_activity_monitor_index</li>
-<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_3wp_activity_monitor_index</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_3wp_activity_monitor_index</li>
-<li>Executing: 
-				SELECT MAX(ordinal_position)
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_3wp_activity_monitor_index</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_3wp_activity_monitor_index, user_id, 7, , YES, int, , , 10, 0, , , , int, , , select,insert,update,references, User''s ID, , </li>
-<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
-<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
-<li>Executing: 
-				SELECT *
-				FROM _wp_sqlite_mysql_information_schema_tables
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_3wp_activity_monitor_index</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_3wp_activity_monitor_index</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_3wp_activity_monitor_index</li>
-<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_3wp_activity_monitor_index_67f6360536b00` (
-  `i_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `activity_id` TEXT COLLATE NOCASE NOT NULL,
-  `user_id` INTEGER,
-  `blog_id` INTEGER,
-  `i_datetime` TEXT COLLATE NOCASE NOT NULL,
-  `data` TEXT COLLATE NOCASE,
-  `user_id` INTEGER
-) STRICT | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 duplicate column name: user_id
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#4 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(327): wpdb->get_results('ALTER TABLE `wp...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/threewp-activity-monitor/ThreeWP_Activity_Monitor.php(147): SD_Activity_Monitor_Base->query('ALTER TABLE `wp...')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Activity_Monitor->activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#10 /internal/eval.php(20): activate_plugin('threewp-activit...')
-#11 {main}</pre>
- for query ALTER TABLE `wp_3wp_activity_monitor_index` ADD `user_id` INT NULL COMMENT 'User''s ID' AFTER `activity_id` made by activate_plugin, do_action('activate_threewp-activity-monitor/ThreeWP_Activity_Monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Activity_Monitor->activate, SD_Activity_Monitor_Base->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 08:55:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ThreeWP_Activity_Monitor_database_version', '200', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ThreeWP_Activity_Monitor_database_version' , '200' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('ThreeWP_Activit...', 200, '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'ThreeWP_Activit...', 200)
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'ThreeWP_Activit...', 200)
-#7 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(671): update_site_option('ThreeWP_Activit...', 200)
-#8 /wordpress/wp-content/plugins/threewp-activity-monitor/ThreeWP_Activity_Monitor.php(149): SD_Activity_Monitor_Base->update_site_option('ThreeWP_Activit...', 200)
-#9 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Activity_Monitor->activate(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#13 /internal/eval.php(20): activate_plugin('threewp-activit...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ThreeWP_Activity_Monitor_database_version', '200', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_threewp-activity-monitor/ThreeWP_Activity_Monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Activity_Monitor->activate, SD_Activity_Monitor_Base->update_site_option, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 08:55:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ThreeWP_Activity_Monitor_database_version', '210', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ThreeWP_Activity_Monitor_database_version' , '210' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('ThreeWP_Activit...', 210, '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'ThreeWP_Activit...', 210)
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'ThreeWP_Activit...', 210)
-#7 /wordpress/wp-content/plugins/threewp-activity-monitor/SD_Activity_Monitor_Base.php(671): update_site_option('ThreeWP_Activit...', 210)
-#8 /wordpress/wp-content/plugins/threewp-activity-monitor/ThreeWP_Activity_Monitor.php(157): SD_Activity_Monitor_Base->update_site_option('ThreeWP_Activit...', 210)
-#9 /wordpress/wp-includes/class-wp-hook.php(324): ThreeWP_Activity_Monitor->activate(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_threew...', false)
-#13 /internal/eval.php(20): activate_plugin('threewp-activit...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ThreeWP_Activity_Monitor_database_version', '210', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_threewp-activity-monitor/ThreeWP_Activity_Monitor.php'), WP_Hook->do_action, WP_Hook->apply_filters, ThreeWP_Activity_Monitor->activate, SD_Activity_Monitor_Base->update_site_option, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 08:55:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ThreeWP_Activity_Monitor_logged_activities', 'a:21:{s:9:\"comment_0\";s:9:\"comment_0\";s:9:\"comment_1\";s:9:\"comment_1\";s:15:\"comment_approve\";s:15:\"comment_approve\";s:14:\"comment_delete\";s:14:\"comment_delete\";s:12:\"comment_hold\";s:12:\"comment_hold\";s:12:\"comment_spam\";s:12:\"comment_spam\";s:13:\"comment_trash\";s:13:\"comment_trash\";s:11:\"delete_user\";s:11:\"delete_user\";s:12:\"deleted_post\";s:12:\"deleted_post\";s:14:\"password_reset\";s:14:\"password_reset\";s:12:\"post_publish\";s:12:\"post_publish\";s:12:\"post_updated\";s:12:\"post_updated\";s:14:\"profile_update\";s:14:\"profile_update\";s:17:\"retrieve_password\";s:17:\"retrieve_password\";s:12:\"trashed_post\";s:12:\"trashed_post\";s:14:\"untrashed_post\";s:14:\"untrashed_post\";s:13:\"user_register\";s:13:\"user_register\";s:8:\"wp_login\";s:8:\"wp_login\";s:15:\"wp_login_failed\";s:15:\"wp_login_failed\";s:9:\"wp_logout\";s:9:\"wp_logout\";s:16:\"wpmu_delete_user\";s:16:\"wpmu_delete_user\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` =
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /wordp in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 09:32:10 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/tourmix/inc/TourmixOrdersTableHandler.php on line 248
+[10-Apr-2025 09:32:18 UTC] PHP Parse error:  syntax error, unexpected ')' in /wordpress/wp-content/plugins/tourmix/inc/TourmixOrdersTableHandler.php on line 248
+[10-Apr-2025 09:33:31 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twfeed/twFeed.php:136
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('twfeed/twFeed.p...')
+#2 /internal/eval.php(20): activate_plugin('twfeed/twFeed.p...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/twfeed/twFeed.php on line 136
+[10-Apr-2025 09:33:39 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/twfeed/twFeed.php:136
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('twfeed/twFeed.p...')
+#2 /internal/eval.php(20): activate_plugin('twfeed/twFeed.p...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/twfeed/twFeed.php on line 136
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"twfeed"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
