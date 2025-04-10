@@ -2,990 +2,362 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 11:45:17 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:45:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:45:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:45:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:45:50 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:45:50 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:45:50 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:45:50 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:45:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [10-Apr-2025 22:27:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('action_scheduler_hybrid_store_demarkation', '4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>DROP FUNCTION IF EXISTS fnStripTags</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'action_scheduler_hybrid_store_demarkation' , '4' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: DROP FUNCTION IF EXISTS `fnStripTags` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 near "FUNCTION": syntax error
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('action_schedule...', 4, '', 'auto')
-#5 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/classes/data-stores/ActionScheduler_HybridStore.php(157): update_option('action_schedule...', 4)
-#6 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/classes/data-stores/ActionScheduler_HybridStore.php(95): ActionScheduler_HybridStore->set_demarkation_id()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): ActionScheduler_HybridStore->set_autoincrement('wp_actionschedu...', 'actionscheduler...')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(146): do_action('action_schedule...', 'wp_actionschedu...', 'actionscheduler...')
-#11 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(69): ActionScheduler_Abstract_Schema->update_table('actionscheduler...')
-#12 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php(55): ActionScheduler_Abstract_Schema->register_tables()
-#13 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/classes/data-stores/ActionScheduler_HybridStore.php(76): ActionScheduler_DBStore->init()
-#14 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler.php(223): ActionScheduler_HybridStore->init()
-#15 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/action-scheduler.php(60): ActionScheduler::init('/wordpress/wp-c...')
-#16 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/action-scheduler.php(66): action_scheduler_initialize_3_dot_9_dot_1()
-#17 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/shopMagic.php(57): require('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#19 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('shopmagic-for-w...')
-#20 /internal/eval.php(20): activate_plugin('shopmagic-for-w...')
-#21 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('action_scheduler_hybrid_store_demarkation', '4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/shopmagic-for-woocommerce/shopMagic.php'), require('/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/action-scheduler.php'), action_scheduler_initialize_3_dot_9_dot_1, ActionScheduler::init, ActionScheduler_HybridStore->init, ActionScheduler_DBStore->init, ActionScheduler_Abstract_Schema->register_tables, ActionScheduler_Abstract_Schema->update_table, do_action('action_scheduler/created_table'), WP_Hook->do_action, WP_Hook->apply_filters, ActionScheduler_HybridStore->set_autoincrement, ActionScheduler_HybridStore->set_demarkation_id, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('DROP FUNCTION I...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('DROP FUNCTION I...')
+#3 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(51): WP_SQLite_DB->query('DROP FUNCTION I...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#8 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#9 {main}</pre>
+ for query DROP FUNCTION IF EXISTS fnStripTags made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 22:27:59 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('schema-ActionScheduler_StoreSchema', '7.0.1744199151', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'schema-ActionScheduler_StoreSchema' , '7.0.1744199151' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+MySQL query not supported. Cause: statement type: "createStatement" > "createFunction"
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('schema-ActionSc...', '7.0.1744199151', '', 'auto')
-#5 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(129): update_option('schema-ActionSc...', '7.0.1744199151')
-#6 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(71): ActionScheduler_Abstract_Schema->mark_schema_update_complete()
-#7 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php(55): ActionScheduler_Abstract_Schema->register_tables()
-#8 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/classes/data-stores/ActionScheduler_HybridStore.php(76): ActionScheduler_DBStore->init()
-#9 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler.php(223): ActionScheduler_HybridStore->init()
-#10 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/action-scheduler.php(60): ActionScheduler::init('/wordpress/wp-c...')
-#11 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/action-scheduler.php(66): action_scheduler_initialize_3_dot_9_dot_1()
-#12 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/shopMagic.php(57): require('/wordpress/wp-c...')
-#13 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#14 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('shopmagic-for-w...')
-#15 /internal/eval.php(20): activate_plugin('shopmagic-for-w...')
-#16 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('schema-ActionScheduler_StoreSchema', '7.0.1744199151', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/shopmagic-for-woocommerce/shopMagic.php'), require('/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/action-scheduler.php'), action_scheduler_initialize_3_dot_9_dot_1, ActionScheduler::init, ActionScheduler_HybridStore->init, ActionScheduler_DBStore->init, ActionScheduler_Abstract_Schema->register_tables, ActionScheduler_Abstract_Schema->mark_schema_update_complete, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('MySQL query not...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE FUNCTION...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE FUNCTION...')
+#3 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(52): WP_SQLite_DB->query('CREATE FUNCTION...')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#8 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#9 {main}</pre>
+ for query CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END; made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 22:28:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('schema-ActionScheduler_LoggerSchema', '3.0.1744199151', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>DROP FUNCTION IF EXISTS fnStripTags</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'schema-ActionScheduler_LoggerSchema' , '3.0.1744199151' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown drop type: FUNCTION.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('schema-ActionSc...', '3.0.1744199151', '', 'auto')
-#5 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(129): update_option('schema-ActionSc...', '3.0.1744199151')
-#6 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(71): ActionScheduler_Abstract_Schema->mark_schema_update_complete()
-#7 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/classes/data-stores/ActionScheduler_DBLogger.php(108): ActionScheduler_Abstract_Schema->register_tables()
-#8 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/classes/abstracts/ActionScheduler.php(224): ActionScheduler_DBLogger->init()
-#9 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/action-scheduler.php(60): ActionScheduler::init('/wordpress/wp-c...')
-#10 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/action-scheduler.php(66): action_scheduler_initialize_3_dot_9_dot_1()
-#11 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/shopMagic.php(57): require('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#13 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('shopmagic-for-w...')
-#14 /internal/eval.php(20): activate_plugin('shopmagic-for-w...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('schema-ActionScheduler_LoggerSchema', '3.0.1744199151', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/shopmagic-for-woocommerce/shopMagic.php'), require('/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/action-scheduler.php'), action_scheduler_initialize_3_dot_9_dot_1, ActionScheduler::init, ActionScheduler_DBLogger->init, ActionScheduler_Abstract_Schema->register_tables, ActionScheduler_Abstract_Schema->mark_schema_update_complete, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:51 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:45:51 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:45:51 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:45:51 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:45:51 UTC] PHP Notice:  Undefined index: autoload in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:45:51 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:45:51 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:45:51 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:45:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(51): WP_SQLite_DB->query('DROP FUNCTION I...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#6 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#7 {main}</pre>
+ for query DROP FUNCTION IF EXISTS fnStripTags made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 22:28:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout__welcome_redirect_shopmagic', '1744199211', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout__welcome_redirect_shopmagic' , '1744199211' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FUNCTION.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1744199211, '', 'off')
-#5 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/src/Admin/Welcome/Welcome.php(54): set_transient('_welcome_redire...', true, 60)
-#6 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/src/Plugin.php(398): WPDesk\ShopMagic\Admin\Welcome\Welcome->welcome_activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): WPDesk\ShopMagic\Plugin->activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shopma...', false)
-#11 /internal/eval.php(20): activate_plugin('shopmagic-for-w...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout__welcome_redirect_shopmagic', '1744199211', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_shopmagic-for-woocommerce/shopMagic.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPDesk\ShopMagic\Plugin->activate, WPDesk\ShopMagic\Admin\Welcome\Welcome->welcome_activate, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(52): WP_SQLite_DB->query('CREATE FUNCTION...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#6 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#7 {main}</pre>
+ for query CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END; made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 22:28:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient__welcome_redirect_shopmagic', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>DROP FUNCTION IF EXISTS fnStripTags</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient__welcome_redirect_shopmagic' , '1' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown drop type: FUNCTION.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient__wel...', true, '', 'off')
-#5 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/src/Admin/Welcome/Welcome.php(54): set_transient('_welcome_redire...', true, 60)
-#6 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/src/Plugin.php(398): WPDesk\ShopMagic\Admin\Welcome\Welcome->welcome_activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): WPDesk\ShopMagic\Plugin->activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_shopma...', false)
-#11 /internal/eval.php(20): activate_plugin('shopmagic-for-w...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient__welcome_redirect_shopmagic', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_shopmagic-for-woocommerce/shopMagic.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPDesk\ShopMagic\Plugin->activate, WPDesk\ShopMagic\Admin\Welcome\Welcome->welcome_activate, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:51 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:45:51 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:45:51 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:45:51 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:45:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(51): WP_SQLite_DB->query('DROP FUNCTION I...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#6 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#7 {main}</pre>
+ for query DROP FUNCTION IF EXISTS fnStripTags made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 22:28:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('plugin_activation_shopmagic-for-woocommerce/shopMagic.php', '2025-04-09 11:45:51', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'plugin_activation_shopmagic-for-woocommerce/shopMagic.php' , '2025-04-09 11:45:51' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown create type: FUNCTION.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('plugin_activati...', '2025-04-09 11:4...', '', 'auto')
-#5 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/PluginBootstrap.php(108): update_option('plugin_activati...', '2025-04-09 11:4...')
-#6 /wordpress/wp-includes/class-wp-hook.php(326): ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}('shopmagic-for-w...')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/search-exclude-html-tags/search-exclude-html-tags.php(52): WP_SQLite_DB->query('CREATE FUNCTION...')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): super_search_exclude_activate(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_search...', false)
+#6 /internal/eval.php(20): activate_plugin('search-exclude-...')
+#7 {main}</pre>
+ for query CREATE FUNCTION fnStripTags( Dirty longtext )
+	RETURNS longtext
+	DETERMINISTIC 
+	BEGIN
+	  DECLARE iStart, iEnd, iLength int;
+		WHILE Locate( '<', Dirty ) > 0 And Locate( '>', Dirty, Locate( '<', Dirty )) > 0 DO
+		  BEGIN
+			SET iStart = Locate( '<', Dirty ), iEnd = Locate( '>', Dirty, Locate('<', Dirty ));
+			SET iLength = ( iEnd - iStart) + 1;
+			IF iLength > 0 THEN
+			  BEGIN
+				SET Dirty = Insert( Dirty, iStart, iLength, '');
+			  END;
+			END IF;
+		  END;
+		END WHILE;
+		RETURN Dirty;
+	END; made by activate_plugin, do_action('activate_search-exclude-html-tags/search-exclude-html-tags.php'), WP_Hook->do_action, WP_Hook->apply_filters, super_search_exclude_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 22:28:58 UTC] PHP Fatal error:  Uncaught TypeError: define(): Argument #2 ($value) cannot be an object, CurlHandle given in /wordpress/wp-content/plugins/shoptalk/shoptalk-plugin.php:22
+Stack trace:
+#0 /wordpress/wp-content/plugins/shoptalk/shoptalk-plugin.php(22): define('ch', Object(CurlHandle))
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('shoptalk/shopta...')
+#3 /internal/eval.php(20): activate_plugin('shoptalk/shopta...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/shoptalk/shoptalk-plugin.php on line 22
+[10-Apr-2025 22:29:05 UTC] PHP Fatal error:  Uncaught TypeError: define(): Argument #2 ($value) cannot be an object, CurlHandle given in /wordpress/wp-content/plugins/shoptalk/shoptalk-plugin.php:22
+Stack trace:
+#0 /wordpress/wp-content/plugins/shoptalk/shoptalk-plugin.php(22): define('ch', Object(CurlHandle))
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('shoptalk/shopta...')
+#3 /internal/eval.php(20): activate_plugin('shoptalk/shopta...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/shoptalk/shoptalk-plugin.php on line 22
+[10-Apr-2025 22:29:13 UTC] PHP Fatal error:  Uncaught TypeError: define(): Argument #2 ($value) cannot be an object, CurlHandle given in /wordpress/wp-content/plugins/shoptalk/shoptalk-plugin.php:22
+Stack trace:
+#0 /wordpress/wp-content/plugins/shoptalk/shoptalk-plugin.php(22): define('ch', Object(CurlHandle))
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('shoptalk/shopta...')
+#3 /internal/eval.php(20): activate_plugin('shoptalk/shopta...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/shoptalk/shoptalk-plugin.php on line 22
+[10-Apr-2025 22:29:55 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744324192.14)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(730): do_action('activated_plugi...', 'shopmagic-for-w...', false)
-#10 /internal/eval.php(20): activate_plugin('shopmagic-for-w...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('plugin_activation_shopmagic-for-woocommerce/shopMagic.php', '2025-04-09 11:45:51', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activated_plugin'), WP_Hook->do_action, WP_Hook->apply_filters, ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('action_scheduler_lock_async-request-runner', '67f65def4e5e88.35949994|1744199211', 'no')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'action_scheduler_lock_async-request-runner' , '67f65def4e5e88.35949994|1744199211' , 'no' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_options', Array, NULL, 'INSERT')
-#5 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/classes/ActionScheduler_OptionLock.php(41): wpdb->insert('wp_options', Array)
-#6 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor/woocommerce/action-scheduler/classes/ActionScheduler_QueueRunner.php(128): ActionScheduler_OptionLock->set('async-request-r...')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): ActionScheduler_QueueRunner->maybe_dispatch_async_request('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-includes/load.php(1279): do_action('shutdown')
-#11 [internal function]: shutdown_action_hook()
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('action_scheduler_lock_async-request-runner', '67f65def4e5e88.35949994|1744199211', 'no') made by shutdown_action_hook, do_action('shutdown'), WP_Hook->do_action, WP_Hook->apply_filters, ActionScheduler_QueueRunner->maybe_dispatch_async_request, ActionScheduler_OptionLock->set, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db_log', '[\"2025-04-09 11:45:53: DB update start\"]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shopmagic_db_log' , '[&quot;2025-04-09 11:45:53: DB update start&quot;]' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('shopmagic_db_lo...', '["2025-04-09 11...', '', 'off')
-#5 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbLogger.php(28): update_option('shopmagic_db_lo...', '["2025-04-09 11...', false)
-#6 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/psr/log/Psr/Log/LoggerTrait.php(108): ShopMagicVendor\WPDesk\Migrations\WpdbLogger->log('info', 'DB update start', Array)
-#7 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(68): ShopMagicVendor\WPDesk\Migrations\WpdbLogger->info('DB update start')
-#8 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/src/Plugin.php(185): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate()
-#9 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/BuilderTrait.php(66): WPDesk\ShopMagic\Plugin->init()
-#10 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/Simple/SimpleFreeStrategy.php(51): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin(Object(WPDesk\ShopMagic\Plugin))
-#11 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/PluginBootstrap.php(83): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init(Object(ShopMagicVendor\WPDesk_Plugin_Info))
-#12 /wordpress/wp-includes/class-wp-hook.php(324): ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}('')
-#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#15 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#16 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#17 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#18 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db_log', '[\"2025-04-09 11:45:53: DB update start\"]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin, WPDesk\ShopMagic\Plugin->init, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate, ShopMagicVendor\WPDesk\Migrations\WpdbLogger->info, ShopMagicVendor\WPDesk\Migrations\WpdbLogger->log, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db_log', '[\"2025-04-09 11:45:53: DB update start\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37\"]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shopmagic_db_log' , '[&quot;2025-04-09 11:45:53: DB update start&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_37&quot;]' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('shopmagic_db_lo...', '["2025-04-09 11...', '', 'off')
-#5 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbLogger.php(28): update_option('shopmagic_db_lo...', '["2025-04-09 11...', false)
-#6 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/psr/log/Psr/Log/LoggerTrait.php(108): ShopMagicVendor\WPDesk\Migrations\WpdbLogger->log('info', 'DB update :WPDe...', Array)
-#7 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(85): ShopMagicVendor\WPDesk\Migrations\WpdbLogger->info('DB update :WPDe...')
-#8 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(70): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate()
-#9 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/src/Plugin.php(185): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate()
-#10 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/BuilderTrait.php(66): WPDesk\ShopMagic\Plugin->init()
-#11 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/Simple/SimpleFreeStrategy.php(51): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin(Object(WPDesk\ShopMagic\Plugin))
-#12 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/PluginBootstrap.php(83): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init(Object(ShopMagicVendor\WPDesk_Plugin_Info))
-#13 /wordpress/wp-includes/class-wp-hook.php(324): ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db_log', '[\"2025-04-09 11:45:53: DB update start\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37\"]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin, WPDesk\ShopMagic\Plugin->init, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate, ShopMagicVendor\WPDesk\Migrations\WpdbLogger->info, ShopMagicVendor\WPDesk\Migrations\WpdbLogger->log, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db_log', '[\"2025-04-09 11:45:53: DB update start\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37 -> OK\"]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shopmagic_db_log' , '[&quot;2025-04-09 11:45:53: DB update start&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_37&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_37 -&gt; OK&quot;]' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('shopmagic_db_lo...', '["2025-04-09 11...', '', 'off')
-#5 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbLogger.php(28): update_option('shopmagic_db_lo...', '["2025-04-09 11...', false)
-#6 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/psr/log/Psr/Log/LoggerTrait.php(108): ShopMagicVendor\WPDesk\Migrations\WpdbLogger->log('info', 'DB update :WPDe...', Array)
-#7 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(93): ShopMagicVendor\WPDesk\Migrations\WpdbLogger->info('DB update :WPDe...')
-#8 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(70): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate()
-#9 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/src/Plugin.php(185): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate()
-#10 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/BuilderTrait.php(66): WPDesk\ShopMagic\Plugin->init()
-#11 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/Simple/SimpleFreeStrategy.php(51): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin(Object(WPDesk\ShopMagic\Plugin))
-#12 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/PluginBootstrap.php(83): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init(Object(ShopMagicVendor\WPDesk_Plugin_Info))
-#13 /wordpress/wp-includes/class-wp-hook.php(324): ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db_log', '[\"2025-04-09 11:45:53: DB update start\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37 -> OK\"]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin, WPDesk\ShopMagic\Plugin->init, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate, ShopMagicVendor\WPDesk\Migrations\WpdbLogger->info, ShopMagicVendor\WPDesk\Migrations\WpdbLogger->log, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db', 'WPDesk\\ShopMagic\\migrations\\Version_37', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shopmagic_db' , 'WPDesk\ShopMagic\migrations\Version_37' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('shopmagic_db', 'WPDesk\\ShopMagi...', '', 'on')
-#5 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(94): update_option('shopmagic_db', 'WPDesk\\ShopMagi...', true)
-#6 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(70): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate()
-#7 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/src/Plugin.php(185): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate()
-#8 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/BuilderTrait.php(66): WPDesk\ShopMagic\Plugin->init()
-#9 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/Simple/SimpleFreeStrategy.php(51): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin(Object(WPDesk\ShopMagic\Plugin))
-#10 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/PluginBootstrap.php(83): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init(Object(ShopMagicVendor\WPDesk_Plugin_Info))
-#11 /wordpress/wp-includes/class-wp-hook.php(324): ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}('')
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#14 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#15 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#16 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#17 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db', 'WPDesk\\ShopMagic\\migrations\\Version_37', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin, WPDesk\ShopMagic\Plugin->init, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db_log', '[\"2025-04-09 11:45:53: DB update start\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38\"]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shopmagic_db_log' , '[&quot;2025-04-09 11:45:53: DB update start&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_37&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_37 -&gt; OK&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_38&quot;]' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('shopmagic_db_lo...', '["2025-04-09 11...', '', 'off')
-#5 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbLogger.php(28): update_option('shopmagic_db_lo...', '["2025-04-09 11...', false)
-#6 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/psr/log/Psr/Log/LoggerTrait.php(108): ShopMagicVendor\WPDesk\Migrations\WpdbLogger->log('info', 'DB update :WPDe...', Array)
-#7 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(85): ShopMagicVendor\WPDesk\Migrations\WpdbLogger->info('DB update :WPDe...')
-#8 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(70): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate()
-#9 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/src/Plugin.php(185): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate()
-#10 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/BuilderTrait.php(66): WPDesk\ShopMagic\Plugin->init()
-#11 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/Simple/SimpleFreeStrategy.php(51): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin(Object(WPDesk\ShopMagic\Plugin))
-#12 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/PluginBootstrap.php(83): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init(Object(ShopMagicVendor\WPDesk_Plugin_Info))
-#13 /wordpress/wp-includes/class-wp-hook.php(324): ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db_log', '[\"2025-04-09 11:45:53: DB update start\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38\"]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin, WPDesk\ShopMagic\Plugin->init, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate, ShopMagicVendor\WPDesk\Migrations\WpdbLogger->info, ShopMagicVendor\WPDesk\Migrations\WpdbLogger->log, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db_log', '[\"2025-04-09 11:45:53: DB update start\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38 -> OK\"]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shopmagic_db_log' , '[&quot;2025-04-09 11:45:53: DB update start&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_37&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_37 -&gt; OK&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_38&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_38 -&gt; OK&quot;]' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('shopmagic_db_lo...', '["2025-04-09 11...', '', 'off')
-#5 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbLogger.php(28): update_option('shopmagic_db_lo...', '["2025-04-09 11...', false)
-#6 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/psr/log/Psr/Log/LoggerTrait.php(108): ShopMagicVendor\WPDesk\Migrations\WpdbLogger->log('info', 'DB update :WPDe...', Array)
-#7 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(93): ShopMagicVendor\WPDesk\Migrations\WpdbLogger->info('DB update :WPDe...')
-#8 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(70): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate()
-#9 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/src/Plugin.php(185): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate()
-#10 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/BuilderTrait.php(66): WPDesk\ShopMagic\Plugin->init()
-#11 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/Simple/SimpleFreeStrategy.php(51): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin(Object(WPDesk\ShopMagic\Plugin))
-#12 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/PluginBootstrap.php(83): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init(Object(ShopMagicVendor\WPDesk_Plugin_Info))
-#13 /wordpress/wp-includes/class-wp-hook.php(324): ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db_log', '[\"2025-04-09 11:45:53: DB update start\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38 -> OK\"]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin, WPDesk\ShopMagic\Plugin->init, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate, ShopMagicVendor\WPDesk\Migrations\WpdbLogger->info, ShopMagicVendor\WPDesk\Migrations\WpdbLogger->log, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db', 'WPDesk\\ShopMagic\\migrations\\Version_38', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shopmagic_db' , 'WPDesk\ShopMagic\migrations\Version_38' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('shopmagic_db', 'WPDesk\\ShopMagi...', '', 'on')
-#5 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(94): update_option('shopmagic_db', 'WPDesk\\ShopMagi...', true)
-#6 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(70): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate()
-#7 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/src/Plugin.php(185): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate()
-#8 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/BuilderTrait.php(66): WPDesk\ShopMagic\Plugin->init()
-#9 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/Simple/SimpleFreeStrategy.php(51): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin(Object(WPDesk\ShopMagic\Plugin))
-#10 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/PluginBootstrap.php(83): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init(Object(ShopMagicVendor\WPDesk_Plugin_Info))
-#11 /wordpress/wp-includes/class-wp-hook.php(324): ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}('')
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#14 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#15 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#16 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#17 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db', 'WPDesk\\ShopMagic\\migrations\\Version_38', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin, WPDesk\ShopMagic\Plugin->init, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db_log', '[\"2025-04-09 11:45:53: DB update start\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_39\"]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shopmagic_db_log' , '[&quot;2025-04-09 11:45:53: DB update start&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_37&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_37 -&gt; OK&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_38&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_38 -&gt; OK&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_39&quot;]' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('shopmagic_db_lo...', '["2025-04-09 11...', '', 'off')
-#5 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbLogger.php(28): update_option('shopmagic_db_lo...', '["2025-04-09 11...', false)
-#6 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/psr/log/Psr/Log/LoggerTrait.php(108): ShopMagicVendor\WPDesk\Migrations\WpdbLogger->log('info', 'DB update :WPDe...', Array)
-#7 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(85): ShopMagicVendor\WPDesk\Migrations\WpdbLogger->info('DB update :WPDe...')
-#8 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(70): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate()
-#9 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/src/Plugin.php(185): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate()
-#10 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/BuilderTrait.php(66): WPDesk\ShopMagic\Plugin->init()
-#11 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/Simple/SimpleFreeStrategy.php(51): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin(Object(WPDesk\ShopMagic\Plugin))
-#12 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/PluginBootstrap.php(83): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init(Object(ShopMagicVendor\WPDesk_Plugin_Info))
-#13 /wordpress/wp-includes/class-wp-hook.php(324): ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db_log', '[\"2025-04-09 11:45:53: DB update start\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_39\"]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin, WPDesk\ShopMagic\Plugin->init, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate, ShopMagicVendor\WPDesk\Migrations\WpdbLogger->info, ShopMagicVendor\WPDesk\Migrations\WpdbLogger->log, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db_log', '[\"2025-04-09 11:45:53: DB update start\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_39\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_39 -> OK\"]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shopmagic_db_log' , '[&quot;2025-04-09 11:45:53: DB update start&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_37&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_37 -&gt; OK&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_38&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_38 -&gt; OK&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_39&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_39 -&gt; OK&quot;]' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('shopmagic_db_lo...', '["2025-04-09 11...', '', 'off')
-#5 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbLogger.php(28): update_option('shopmagic_db_lo...', '["2025-04-09 11...', false)
-#6 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/psr/log/Psr/Log/LoggerTrait.php(108): ShopMagicVendor\WPDesk\Migrations\WpdbLogger->log('info', 'DB update :WPDe...', Array)
-#7 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(93): ShopMagicVendor\WPDesk\Migrations\WpdbLogger->info('DB update :WPDe...')
-#8 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(70): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate()
-#9 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/src/Plugin.php(185): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate()
-#10 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/BuilderTrait.php(66): WPDesk\ShopMagic\Plugin->init()
-#11 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/Simple/SimpleFreeStrategy.php(51): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin(Object(WPDesk\ShopMagic\Plugin))
-#12 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/PluginBootstrap.php(83): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init(Object(ShopMagicVendor\WPDesk_Plugin_Info))
-#13 /wordpress/wp-includes/class-wp-hook.php(324): ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db_log', '[\"2025-04-09 11:45:53: DB update start\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_39\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_39 -> OK\"]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin, WPDesk\ShopMagic\Plugin->init, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate, ShopMagicVendor\WPDesk\Migrations\WpdbLogger->info, ShopMagicVendor\WPDesk\Migrations\WpdbLogger->log, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db', 'WPDesk\\ShopMagic\\migrations\\Version_39', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shopmagic_db' , 'WPDesk\ShopMagic\migrations\Version_39' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('shopmagic_db', 'WPDesk\\ShopMagi...', '', 'on')
-#5 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(94): update_option('shopmagic_db', 'WPDesk\\ShopMagi...', true)
-#6 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(70): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate()
-#7 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/src/Plugin.php(185): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate()
-#8 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/BuilderTrait.php(66): WPDesk\ShopMagic\Plugin->init()
-#9 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/Simple/SimpleFreeStrategy.php(51): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin(Object(WPDesk\ShopMagic\Plugin))
-#10 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/PluginBootstrap.php(83): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init(Object(ShopMagicVendor\WPDesk_Plugin_Info))
-#11 /wordpress/wp-includes/class-wp-hook.php(324): ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}('')
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#14 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#15 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#16 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#17 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db', 'WPDesk\\ShopMagic\\migrations\\Version_39', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin, WPDesk\ShopMagic\Plugin->init, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db_log', '[\"2025-04-09 11:45:53: DB update start\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_39\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_39 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_40\"]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shopmagic_db_log' , '[&quot;2025-04-09 11:45:53: DB update start&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_37&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_37 -&gt; OK&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_38&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_38 -&gt; OK&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_39&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_39 -&gt; OK&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_40&quot;]' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('shopmagic_db_lo...', '["2025-04-09 11...', '', 'off')
-#5 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbLogger.php(28): update_option('shopmagic_db_lo...', '["2025-04-09 11...', false)
-#6 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/psr/log/Psr/Log/LoggerTrait.php(108): ShopMagicVendor\WPDesk\Migrations\WpdbLogger->log('info', 'DB update :WPDe...', Array)
-#7 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(85): ShopMagicVendor\WPDesk\Migrations\WpdbLogger->info('DB update :WPDe...')
-#8 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(70): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate()
-#9 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/src/Plugin.php(185): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate()
-#10 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/BuilderTrait.php(66): WPDesk\ShopMagic\Plugin->init()
-#11 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/Simple/SimpleFreeStrategy.php(51): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin(Object(WPDesk\ShopMagic\Plugin))
-#12 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/PluginBootstrap.php(83): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init(Object(ShopMagicVendor\WPDesk_Plugin_Info))
-#13 /wordpress/wp-includes/class-wp-hook.php(324): ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db_log', '[\"2025-04-09 11:45:53: DB update start\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_39\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_39 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_40\"]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin, WPDesk\ShopMagic\Plugin->init, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate, ShopMagicVendor\WPDesk\Migrations\WpdbLogger->info, ShopMagicVendor\WPDesk\Migrations\WpdbLogger->log, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SHOW FULL COLUMNS FROM wp_users WHERE Field = 'user_email'</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_users</li>
-<li>Executing: SELECT 1 FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_users</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Table 'database_name_here.wp_users' doesn't exist
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Table 'database...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW FULL COLUM...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW FULL COLUM...')
-#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SHOW FULL COLUM...')
-#4 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/migrations/Version_40.php(36): wpdb->get_row('SHOW FULL COLUM...', 'ARRAY_A')
-#5 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/migrations/Version_40.php(11): WPDesk\ShopMagic\migrations\Version_40->get_collation_statement_from_existing_table()
-#6 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(88): WPDesk\ShopMagic\migrations\Version_40->up()
-#7 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(70): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate()
-#8 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/src/Plugin.php(185): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate()
-#9 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/BuilderTrait.php(66): WPDesk\ShopMagic\Plugin->init()
-#10 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/Simple/SimpleFreeStrategy.php(51): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin(Object(WPDesk\ShopMagic\Plugin))
-#11 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/PluginBootstrap.php(83): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init(Object(ShopMagicVendor\WPDesk_Plugin_Info))
-#12 /wordpress/wp-includes/class-wp-hook.php(324): ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}('')
-#13 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#14 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#15 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#16 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#17 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#18 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#19 {main}</pre>
- for query SHOW FULL COLUMNS FROM wp_users WHERE Field = 'user_email' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin, WPDesk\ShopMagic\Plugin->init, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate, WPDesk\ShopMagic\migrations\Version_40->up, WPDesk\ShopMagic\migrations\Version_40->get_collation_statement_from_existing_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db_log', '[\"2025-04-09 11:45:53: DB update start\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_39\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_39 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_40\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_40 -> OK\"]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shopmagic_db_log' , '[&quot;2025-04-09 11:45:53: DB update start&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_37&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_37 -&gt; OK&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_38&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_38 -&gt; OK&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_39&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_39 -&gt; OK&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_40&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_40 -&gt; OK&quot;]' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('shopmagic_db_lo...', '["2025-04-09 11...', '', 'off')
-#5 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbLogger.php(28): update_option('shopmagic_db_lo...', '["2025-04-09 11...', false)
-#6 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/psr/log/Psr/Log/LoggerTrait.php(108): ShopMagicVendor\WPDesk\Migrations\WpdbLogger->log('info', 'DB update :WPDe...', Array)
-#7 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(93): ShopMagicVendor\WPDesk\Migrations\WpdbLogger->info('DB update :WPDe...')
-#8 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(70): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate()
-#9 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/src/Plugin.php(185): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate()
-#10 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/BuilderTrait.php(66): WPDesk\ShopMagic\Plugin->init()
-#11 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/Simple/SimpleFreeStrategy.php(51): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin(Object(WPDesk\ShopMagic\Plugin))
-#12 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/PluginBootstrap.php(83): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init(Object(ShopMagicVendor\WPDesk_Plugin_Info))
-#13 /wordpress/wp-includes/class-wp-hook.php(324): ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db_log', '[\"2025-04-09 11:45:53: DB update start\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_39\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_39 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_40\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_40 -> OK\"]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin, WPDesk\ShopMagic\Plugin->init, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate, ShopMagicVendor\WPDesk\Migrations\WpdbLogger->info, ShopMagicVendor\WPDesk\Migrations\WpdbLogger->log, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db', 'WPDesk\\ShopMagic\\migrations\\Version_40', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shopmagic_db' , 'WPDesk\ShopMagic\migrations\Version_40' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('shopmagic_db', 'WPDesk\\ShopMagi...', '', 'on')
-#5 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(94): update_option('shopmagic_db', 'WPDesk\\ShopMagi...', true)
-#6 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(70): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate()
-#7 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/src/Plugin.php(185): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate()
-#8 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/BuilderTrait.php(66): WPDesk\ShopMagic\Plugin->init()
-#9 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/Simple/SimpleFreeStrategy.php(51): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin(Object(WPDesk\ShopMagic\Plugin))
-#10 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/PluginBootstrap.php(83): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init(Object(ShopMagicVendor\WPDesk_Plugin_Info))
-#11 /wordpress/wp-includes/class-wp-hook.php(324): ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}('')
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#14 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#15 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#16 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#17 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db', 'WPDesk\\ShopMagic\\migrations\\Version_40', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin, WPDesk\ShopMagic\Plugin->init, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db_log', '[\"2025-04-09 11:45:53: DB update start\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_39\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_39 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_40\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_40 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_41\"]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shopmagic_db_log' , '[&quot;2025-04-09 11:45:53: DB update start&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_37&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_37 -&gt; OK&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_38&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_38 -&gt; OK&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_39&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_39 -&gt; OK&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_40&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_40 -&gt; OK&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_41&quot;]' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('shopmagic_db_lo...', '["2025-04-09 11...', '', 'off')
-#5 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbLogger.php(28): update_option('shopmagic_db_lo...', '["2025-04-09 11...', false)
-#6 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/psr/log/Psr/Log/LoggerTrait.php(108): ShopMagicVendor\WPDesk\Migrations\WpdbLogger->log('info', 'DB update :WPDe...', Array)
-#7 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(85): ShopMagicVendor\WPDesk\Migrations\WpdbLogger->info('DB update :WPDe...')
-#8 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(70): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate()
-#9 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/src/Plugin.php(185): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate()
-#10 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/BuilderTrait.php(66): WPDesk\ShopMagic\Plugin->init()
-#11 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/Simple/SimpleFreeStrategy.php(51): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin(Object(WPDesk\ShopMagic\Plugin))
-#12 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/PluginBootstrap.php(83): ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init(Object(ShopMagicVendor\WPDesk_Plugin_Info))
-#13 /wordpress/wp-includes/class-wp-hook.php(324): ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db_log', '[\"2025-04-09 11:45:53: DB update start\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_39\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_39 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_40\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_40 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_41\"]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, ShopMagicVendor\WPDesk\Plugin\Flow\PluginBootstrap::ShopMagicVendor\WPDesk\Plugin\Flow\{closure}, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->run_init, ShopMagicVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFreeStrategy->init_plugin, WPDesk\ShopMagic\Plugin->init, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate, ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate, ShopMagicVendor\WPDesk\Migrations\WpdbLogger->info, ShopMagicVendor\WPDesk\Migrations\WpdbLogger->log, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shopmagic_db_log', '[\"2025-04-09 11:45:53: DB update start\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_37 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_38 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_39\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_39 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_40\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_40 -> OK\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_41\",\"2025-04-09 11:45:53: DB update :WPDesk\\\\ShopMagic\\\\migrations\\\\Version_41 -> OK\"]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shopmagic_db_log' , '[&quot;2025-04-09 11:45:53: DB update start&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_37&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_37 -&gt; OK&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_38&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_38 -&gt; OK&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_39&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_39 -&gt; OK&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_40&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_40 -&gt; OK&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_41&quot;,&quot;2025-04-09 11:45:53: DB update :WPDesk\\ShopMagic\\migrations\\Version_41 -&gt; OK&quot;]' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('shopmagic_db_lo...', '["2025-04-09 11...', '', 'off')
-#5 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbLogger.php(28): update_option('shopmagic_db_lo...', '["2025-04-09 11...', false)
-#6 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/psr/log/Psr/Log/LoggerTrait.php(108): ShopMagicVendor\WPDesk\Migrations\WpdbLogger->log('info', 'DB update :WPDe...', Array)
-#7 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(93): ShopMagicVendor\WPDesk\Migrations\WpdbLogger->info('DB update :WPDe...')
-#8 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-migrations/src/WpdbMigrator.php(70): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->do_migrate()
-#9 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/src/Plugin.php(185): ShopMagicVendor\WPDesk\Migrations\WpdbMigrator->migrate()
-#10 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow-common/src/Initialization/BuilderTrait.php(66): WPDesk\ShopMagic\Plugin->init()
-#11 /wordpress/wp-content/plugins/shopmagic-for-woocommerce/vendor_prefixed/wpdesk/wp-plugin-flow
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /wordp in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 22:30:43 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744324242.041)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 22:31:45 UTC] PHP Warning:  Undefined array key "space_checker" in /wordpress/wp-content/plugins/space-checker/space-checker.php on line 177
+[10-Apr-2025 22:31:45 UTC] PHP Warning:  Undefined array key "space_checker" in /wordpress/wp-content/plugins/space-checker/space-checker.php on line 180
+[10-Apr-2025 22:31:54 UTC] PHP Warning:  Undefined array key "space_checker" in /wordpress/wp-content/plugins/space-checker/space-checker.php on line 177
+[10-Apr-2025 22:31:54 UTC] PHP Warning:  Undefined array key "space_checker" in /wordpress/wp-content/plugins/space-checker/space-checker.php on line 180
+[10-Apr-2025 22:32:03 UTC] PHP Warning:  Undefined array key "space_checker" in /wordpress/wp-content/plugins/space-checker/space-checker.php on line 177
+[10-Apr-2025 22:32:03 UTC] PHP Warning:  Undefined array key "space_checker" in /wordpress/wp-content/plugins/space-checker/space-checker.php on line 180
+[10-Apr-2025 22:32:13 UTC] PHP Deprecated:  Required parameter $str follows optional parameter $first in /wordpress/wp-content/plugins/step-by-step-social-count-cache/sbs-social-count-cache.php on line 392
+[10-Apr-2025 22:32:14 UTC] PHP Deprecated:  Required parameter $str follows optional parameter $first in /wordpress/wp-content/plugins/step-by-step-social-count-cache/sbs-social-count-cache.php on line 392
+[10-Apr-2025 22:32:23 UTC] PHP Deprecated:  Required parameter $str follows optional parameter $first in /wordpress/wp-content/plugins/step-by-step-social-count-cache/sbs-social-count-cache.php on line 392
+[10-Apr-2025 22:32:24 UTC] PHP Deprecated:  Required parameter $str follows optional parameter $first in /wordpress/wp-content/plugins/step-by-step-social-count-cache/sbs-social-count-cache.php on line 392
+[10-Apr-2025 22:32:31 UTC] PHP Deprecated:  Required parameter $str follows optional parameter $first in /wordpress/wp-content/plugins/step-by-step-social-count-cache/sbs-social-count-cache.php on line 392
+[10-Apr-2025 22:32:33 UTC] PHP Deprecated:  Required parameter $str follows optional parameter $first in /wordpress/wp-content/plugins/step-by-step-social-count-cache/sbs-social-count-cache.php on line 392
+[10-Apr-2025 22:34:21 UTC] PHP Warning:  Undefined variable $sharepost in /wordpress/wp-content/plugins/sharepost/sharepost.php on line 787
+[10-Apr-2025 22:34:21 UTC] PHP Fatal error:  Uncaught TypeError: Unsupported operand types: null & sharepost_plugin in /wordpress/wp-content/plugins/sharepost/sharepost.php:787
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('sharepost/share...')
+#2 /internal/eval.php(20): activate_plugin('sharepost/share...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/sharepost/sharepost.php on line 787
+[10-Apr-2025 22:34:29 UTC] PHP Warning:  Undefined variable $sharepost in /wordpress/wp-content/plugins/sharepost/sharepost.php on line 787
+[10-Apr-2025 22:34:29 UTC] PHP Fatal error:  Uncaught TypeError: Unsupported operand types: null & sharepost_plugin in /wordpress/wp-content/plugins/sharepost/sharepost.php:787
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('sharepost/share...')
+#2 /internal/eval.php(20): activate_plugin('sharepost/share...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/sharepost/sharepost.php on line 787
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"sharepost"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
