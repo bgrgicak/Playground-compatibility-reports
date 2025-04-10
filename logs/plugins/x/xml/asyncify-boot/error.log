@@ -2,390 +2,298 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 15:32:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 15:32:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 15:32:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 15:32:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 15:32:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'b&Hbz$pw|!]8MLT{YPDj 1kyIM}NXJQE|/+A!6nJy`QJZeSP2/rk:g.KEQf#koAk', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'b&amp;Hbz$pw|!]8MLT{YPDj 1kyIM}NXJQE|/+A!6nJy`QJZeSP2/rk:g.KEQf#koAk' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'b&Hbz$pw|!]8MLT...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'b&Hbz$pw|!]8MLT...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'b&Hbz$pw|!]8MLT...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'b&Hbz$pw|!]8MLT...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/xl-logo-carousel/lib/xl-logo-scripts.php(7): wp_enqueue_script('xl_logo_owl_js', 'http://127.0.0....', Array, '2.0.0', true)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): xl_logo_carousel('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'b&Hbz$pw|!]8MLT{YPDj 1kyIM}NXJQE|/+A!6nJy`QJZeSP2/rk:g.KEQf#koAk', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, xl_logo_carousel, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:32:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'dTAOgO0!!Q!/Kg7R5l=}1Ze+O8b6q%M~r!7n2iK;:S@SEFJ#!L;I<EW8WF)n~6](', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'dTAOgO0!!Q!/Kg7R5l=}1Ze+O8b6q%M~r!7n2iK;:S@SEFJ#!L;I&lt;EW8WF)n~6](' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'dTAOgO0!!Q!/Kg7...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'dTAOgO0!!Q!/Kg7...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'dTAOgO0!!Q!/Kg7...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'dTAOgO0!!Q!/Kg7...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/xl-logo-carousel/lib/xl-logo-scripts.php(7): wp_enqueue_script('xl_logo_owl_js', 'http://127.0.0....', Array, '2.0.0', true)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): xl_logo_carousel('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'dTAOgO0!!Q!/Kg7R5l=}1Ze+O8b6q%M~r!7n2iK;:S@SEFJ#!L;I<EW8WF)n~6](', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, xl_logo_carousel, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:32:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('apgmxs_news_active', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'apgmxs_news_active' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/xml/xml.php(30): add_option('apgmxs_news_act...', true)
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('xml/xml.php')
-#7 /internal/eval.php(20): activate_plugin('xml/xml.php')
-#8 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('apgmxs_news_active', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/xml/xml.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:32:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('apgmxs_tags', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'apgmxs_tags' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/xml/xml.php(31): add_option('apgmxs_tags', true)
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('xml/xml.php')
-#7 /internal/eval.php(20): activate_plugin('xml/xml.php')
-#8 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('apgmxs_tags', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/xml/xml.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:32:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('apgmxs_path', '/wordpress/wp-content/uploads/ap-sitemap', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'apgmxs_path' , '/wordpress/wp-content/uploads/ap-sitemap' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/xml/xml.php(32): add_option('apgmxs_path', '/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('xml/xml.php')
-#7 /internal/eval.php(20): activate_plugin('xml/xml.php')
-#8 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('apgmxs_path', '/wordpress/wp-content/uploads/ap-sitemap', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/xml/xml.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:32:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('apgmxs_urls', 'http://127.0.0.1:9405/wp-content/uploads/ap-sitemap', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'apgmxs_urls' , 'http://127.0.0.1:9405/wp-content/uploads/ap-sitemap' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/xml/xml.php(33): add_option('apgmxs_urls', 'http://127.0.0....')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('xml/xml.php')
-#7 /internal/eval.php(20): activate_plugin('xml/xml.php')
-#8 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('apgmxs_urls', 'http://127.0.0.1:9405/wp-content/uploads/ap-sitemap', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/xml/xml.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:32:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('apgmxs_last_ping', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'apgmxs_last_ping' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/xml/xml.php(34): add_option('apgmxs_last_pin...', 0)
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('xml/xml.php')
-#7 /internal/eval.php(20): activate_plugin('xml/xml.php')
-#8 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('apgmxs_last_ping', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/xml/xml.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:32:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('apgmxs_excludecatlist', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'apgmxs_excludecatlist' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/xml/xml.php(35): add_option('apgmxs_excludec...', '')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('xml/xml.php')
-#7 /internal/eval.php(20): activate_plugin('xml/xml.php')
-#8 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('apgmxs_excludecatlist', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/xml/xml.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:32:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('apgmxs_excludepostlist', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'apgmxs_excludepostlist' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/xml/xml.php(36): add_option('apgmxs_excludep...', '')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('xml/xml.php')
-#7 /internal/eval.php(20): activate_plugin('xml/xml.php')
-#8 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('apgmxs_excludepostlist', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/xml/xml.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:32:30 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "apgmxs_autobuild" in /wordpress/wp-content/plugins/xml/xml.php:38
+Error: [10-Apr-2025 15:29:26 UTC] PHP Warning:  Undefined variable $args in /wordpress/wp-content/plugins/xhtml-easy-validator/easy_validator.php on line 48
+[10-Apr-2025 15:29:26 UTC] PHP Warning:  Undefined variable $args in /wordpress/wp-content/plugins/xhtml-easy-validator/easy_validator.php on line 54
+[10-Apr-2025 15:29:35 UTC] PHP Warning:  Undefined variable $args in /wordpress/wp-content/plugins/xhtml-easy-validator/easy_validator.php on line 48
+[10-Apr-2025 15:29:35 UTC] PHP Warning:  Undefined variable $args in /wordpress/wp-content/plugins/xhtml-easy-validator/easy_validator.php on line 54
+[10-Apr-2025 15:29:44 UTC] PHP Warning:  Undefined variable $args in /wordpress/wp-content/plugins/xhtml-easy-validator/easy_validator.php on line 48
+[10-Apr-2025 15:29:44 UTC] PHP Warning:  Undefined variable $args in /wordpress/wp-content/plugins/xhtml-easy-validator/easy_validator.php on line 54
+[10-Apr-2025 15:29:56 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/x-social-sharing/socialsharingbox.php on line 24
+[10-Apr-2025 15:29:56 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/x-social-sharing/socialsharingbox.php on line 33
+[10-Apr-2025 15:29:56 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/x-social-sharing/socialsharingbox.php on line 34
+[10-Apr-2025 15:29:56 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/x-social-sharing/socialsharingbox.php on line 35
+[10-Apr-2025 15:29:56 UTC] PHP Fatal error:  Uncaught Error: Non-static method wdshare_AdminPages::serve() cannot be called statically in /wordpress/wp-content/plugins/x-social-sharing/socialsharingbox.php:52
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('xml/xml.php')
-#2 /internal/eval.php(20): activate_plugin('xml/xml.php')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('x-social-sharin...')
+#2 /internal/eval.php(20): activate_plugin('x-social-sharin...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/xml/xml.php on line 38
-[09-Apr-2025 15:32:38 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "apgmxs_autobuild" in /wordpress/wp-content/plugins/xml/xml.php:38
+  thrown in /wordpress/wp-content/plugins/x-social-sharing/socialsharingbox.php on line 52
+[10-Apr-2025 15:30:05 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/x-social-sharing/socialsharingbox.php on line 24
+[10-Apr-2025 15:30:05 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/x-social-sharing/socialsharingbox.php on line 33
+[10-Apr-2025 15:30:05 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/x-social-sharing/socialsharingbox.php on line 34
+[10-Apr-2025 15:30:05 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/x-social-sharing/socialsharingbox.php on line 35
+[10-Apr-2025 15:30:05 UTC] PHP Fatal error:  Uncaught Error: Non-static method wdshare_AdminPages::serve() cannot be called statically in /wordpress/wp-content/plugins/x-social-sharing/socialsharingbox.php:52
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('xml/xml.php')
-#2 /internal/eval.php(20): activate_plugin('xml/xml.php')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('x-social-sharin...')
+#2 /internal/eval.php(20): activate_plugin('x-social-sharin...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/xml/xml.php on line 38
-
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"xml"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
-        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
-        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
-        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
-        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
-        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-      response: PHPResponse {
-        httpStatusCode: 500,
-        headers: {
-          'x-powered-by': [ 'PHP/8.0.30-dev' ],
-          'content-type': [ 'text/html; charset=UTF-8' ]
-        },
-        bytes: Uint8Array(0) [],
-        exitCode: 255,
-        errors: ''
-      },
-      source: 'request'
-    }
-  }
-}
-
-Node.js v23.11.0
+  thrown in /wordpress/wp-content/plugins/x-social-sharing/socialsharingbox.php on line 52
+[10-Apr-2025 15:30:13 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/x-social-sharing/socialsharingbox.php on line 24
+[10-Apr-2025 15:30:13 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/x-social-sharing/socialsharingbox.php on line 33
+[10-Apr-2025 15:30:13 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/x-social-sharing/socialsharingbox.php on line 34
+[10-Apr-2025 15:30:13 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/x-social-sharing/socialsharingbox.php on line 35
+[10-Apr-2025 15:30:13 UTC] PHP Fatal error:  Uncaught Error: Non-static method wdshare_AdminPages::serve() cannot be called statically in /wordpress/wp-content/plugins/x-social-sharing/socialsharingbox.php:52
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('x-social-sharin...')
+#2 /internal/eval.php(20): activate_plugin('x-social-sharin...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/x-social-sharing/socialsharingbox.php on line 52
+[10-Apr-2025 15:31:54 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/xcake-ads-lite/xc_ad.php on line 19
+[10-Apr-2025 15:31:54 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/xcake-ads-lite/xc_ad.php on line 19
+[10-Apr-2025 15:32:04 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/xcake-ads-lite/xc_ad.php on line 19
+[10-Apr-2025 15:32:04 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/xcake-ads-lite/xc_ad.php on line 19
+[10-Apr-2025 15:32:12 UTC] PHP Warning:  Undefined variable $wpdb in /wordpress/wp-content/plugins/xcake-ads-lite/xc_ad.php on line 19
+[10-Apr-2025 15:32:12 UTC] PHP Warning:  Attempt to read property "prefix" on null in /wordpress/wp-content/plugins/xcake-ads-lite/xc_ad.php on line 19
+[10-Apr-2025 15:34:06 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744299244.959)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 15:34:35 UTC] PHP Warning:  require_once(importCSV-en.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/xml-and-csv-import-in-article-content/importCSV.php on line 13
+[10-Apr-2025 15:34:35 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'importCSV-en.php' (include_path='.:') in /wordpress/wp-content/plugins/xml-and-csv-import-in-article-content/importCSV.php:13
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('xml-and-csv-imp...')
+#2 /internal/eval.php(20): activate_plugin('xml-and-csv-imp...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/xml-and-csv-import-in-article-content/importCSV.php on line 13
+[10-Apr-2025 15:34:43 UTC] PHP Warning:  require_once(importCSV-en.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/xml-and-csv-import-in-article-content/importCSV.php on line 13
+[10-Apr-2025 15:34:43 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'importCSV-en.php' (include_path='.:') in /wordpress/wp-content/plugins/xml-and-csv-import-in-article-content/importCSV.php:13
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('xml-and-csv-imp...')
+#2 /internal/eval.php(20): activate_plugin('xml-and-csv-imp...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/xml-and-csv-import-in-article-content/importCSV.php on line 13
+[10-Apr-2025 15:34:50 UTC] PHP Warning:  require_once(importCSV-en.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/xml-and-csv-import-in-article-content/importCSV.php on line 13
+[10-Apr-2025 15:34:50 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'importCSV-en.php' (include_path='.:') in /wordpress/wp-content/plugins/xml-and-csv-import-in-article-content/importCSV.php:13
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('xml-and-csv-imp...')
+#2 /internal/eval.php(20): activate_plugin('xml-and-csv-imp...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/xml-and-csv-import-in-article-content/importCSV.php on line 13
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps.php on line 13
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps.php on line 14
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  Undefined variable $table_prefix in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps.php on line 17
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  Undefined variable $table_prefix in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps.php on line 18
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  Undefined variable $table_prefix in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps.php on line 19
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  Undefined variable $table_prefix in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps.php on line 20
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 7
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 8
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 9
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 10
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 11
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 12
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 13
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 14
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 15
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 16
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 17
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 18
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 19
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 20
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 21
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 22
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 23
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 24
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 25
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 26
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 27
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 28
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 29
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 30
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 31
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 32
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 33
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 34
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 35
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 36
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 37
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 38
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 39
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 40
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 41
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 42
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 43
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 44
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 45
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 46
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 47
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 48
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 49
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 50
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 51
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 52
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 53
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 54
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 55
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 56
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 57
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 58
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 59
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 60
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 63
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 64
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 67
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 68
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 69
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 70
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 71
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 72
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 73
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 74
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 75
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 76
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 77
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 78
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 79
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 80
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 81
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 82
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 85
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 86
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 87
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 88
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 89
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 90
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 91
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 92
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 93
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 94
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 97
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 98
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 99
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 100
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 101
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 102
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 103
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 104
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 105
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 106
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 109
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 110
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 111
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 112
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 113
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 114
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 115
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 116
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 117
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 118
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 121
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 122
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 123
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 124
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 125
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 126
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 129
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 130
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 131
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 132
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 133
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 134
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 135
+[10-Apr-2025 15:35:01 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 136
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps.php on line 13
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps.php on line 14
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 7
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 8
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 9
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 10
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 11
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 12
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 13
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 14
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 15
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 16
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 17
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 18
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 19
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 20
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 21
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 22
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 23
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 24
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 25
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 26
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 27
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 28
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 29
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 30
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 31
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 32
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 33
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 34
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 35
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 36
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 37
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 38
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 39
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 40
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 41
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 42
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 43
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 44
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 45
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 46
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 47
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 48
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 49
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 50
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 51
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 52
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 53
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 54
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 55
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 56
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 57
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 58
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 59
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 60
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 63
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 64
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 67
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 68
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 69
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 70
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 71
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 72
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 73
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 74
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 75
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 76
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 77
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 78
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 79
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 80
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 81
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 82
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 85
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 86
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 87
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 88
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 89
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 90
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 91
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 92
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 93
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 94
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 97
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 98
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 99
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 100
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 101
+[10-Apr-2025 15:35:03 UTC] PHP Warning:  define(): Argument #3 ($case_insensitive) is ignored since declaration of case-insensitive constants is no longer supported in /wordpress/wp-content/plugins/xml-google-maps/xmlgooglemaps_optionsinit.php on line 102
+[10-Apr-2025 15:35
