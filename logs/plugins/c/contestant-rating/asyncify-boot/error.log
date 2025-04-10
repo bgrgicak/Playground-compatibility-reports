@@ -2,724 +2,383 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 14:28:00 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/custom-fields/inc/class.admin.posttype.php on line 65
-[09-Apr-2025 14:28:08 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/custom-fields/inc/class.admin.posttype.php on line 65
-[09-Apr-2025 14:28:16 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/custom-fields/inc/class.admin.posttype.php on line 65
-[09-Apr-2025 14:28:24 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 14:28:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 14:28:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 14:28:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 14:28:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '9D]S&]>V)@H}7jr YmhFl8n,MLa2ZE0)m,::</BGsYNM_C,~2QJE:7w=:Da%23Q{', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , '9D]S&amp;]&gt;V)@H}7jr YmhFl8n,MLa2ZE0)m,::&lt;/BGsYNM_C,~2QJE:7w=:Da%23Q{' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', '9D]S&]>V)@H}7jr...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', '9D]S&]>V)@H}7jr...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', '9D]S&]>V)@H}7jr...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', '9D]S&]>V)@H}7jr...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/captcha-novami/captcha-novami.php(42): wp_register_script('captcha_novami_...', 'http://127.0.0....', Array)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): CaptchaNovami->loadJs('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '9D]S&]>V)@H}7jr YmhFl8n,MLa2ZE0)m,::</BGsYNM_C,~2QJE:7w=:Da%23Q{', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, CaptchaNovami->loadJs, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 14:28:25 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '}/TKvcc3;~kMNA5qdHI&fmH,vVHjSYCx9S}>V[:gR8?{Nns>i|kQ-TTt0tVT{S#7', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , '}/TKvcc3;~kMNA5qdHI&amp;fmH,vVHjSYCx9S}&gt;V[:gR8?{Nns&gt;i|kQ-TTt0tVT{S#7' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', '}/TKvcc3;~kMNA5...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', '}/TKvcc3;~kMNA5...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', '}/TKvcc3;~kMNA5...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', '}/TKvcc3;~kMNA5...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40376|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/captcha-novami/captcha-novami.php(42): wp_register_script('captcha_novami_...', 'http://127.0.0....', Array)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): CaptchaNovami->loadJs('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '}/TKvcc3;~kMNA5qdHI&fmH,vVHjSYCx9S}>V[:gR8?{Nns>i|kQ-TTt0tVT{S#7', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, CaptchaNovami->loadJs, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 14:28:50 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 14:28:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 14:28:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 14:28:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 14:28:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_ccr_feature_post', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_ccr_feature_post' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_ccr_feat...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_ccr_feat...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_ccr_feature_post', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 14:29:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 14:29:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 14:29:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 14:29:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 14:29:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('flizcpr_savefix', 'on', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'flizcpr_savefix' , 'on' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('flizcpr_savefix', 'on', '', 'auto')
-#5 /wordpress/wp-content/plugins/clarify-password-reset/clarify-password-reset.php(78): update_option('flizcpr_savefix', 'on')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Clarify_Password_Reset::activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clarif...', false)
-#10 /internal/eval.php(20): activate_plugin('clarify-passwor...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('flizcpr_savefix', 'on', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_clarify-password-reset/clarify-password-reset.php'), WP_Hook->do_action, WP_Hook->apply_filters, Clarify_Password_Reset::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 14:29:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('flizcpr_warn', 'on', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'flizcpr_warn' , 'on' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('flizcpr_warn', 'on', '', 'auto')
-#5 /wordpress/wp-content/plugins/clarify-password-reset/clarify-password-reset.php(81): update_option('flizcpr_warn', 'on')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Clarify_Password_Reset::activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clarif...', false)
-#10 /internal/eval.php(20): activate_plugin('clarify-passwor...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('flizcpr_warn', 'on', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_clarify-password-reset/clarify-password-reset.php'), WP_Hook->do_action, WP_Hook->apply_filters, Clarify_Password_Reset::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 14:29:40 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 14:29:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 14:29:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 14:29:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 14:30:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>CREATE TABLE IF NOT EXISTS `wp_termmeta` (
-        `meta_id` bigint(20) unsigned NOT NULL auto_increment,
-        `term_id` bigint(20) unsigned NOT NULL default '0',
-        `meta_key` varchar(255) default NULL,
-        `meta_value` longtext,
-        PRIMARY KEY  (`meta_id`),
-        KEY `term_id` (`term_id`),
-        KEY `meta_key` (`meta_key`)
-    )</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_termmeta</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_tables (table_schema, table_name, table_type, engine, row_format, table_collation)
-				VALUES (?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_termmeta, BASE TABLE, InnoDB, Dynamic, utf8mb4_general_ci</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_termmeta, meta_id, 1, , NO, bigint, , , 20, 0, , , , bigint(20) unsigned, , auto_increment, select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_termmeta, term_id, 2, 0, NO, bigint, , , 20, 0, , , , bigint(20) unsigned, , , select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_termmeta, meta_key, 3, , YES, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_termmeta, meta_value, 4, , YES, longtext, 4294967295, 4294967295, , , , utf8mb4, utf8mb4_general_ci, longtext, , , select,insert,update,references, , , </li>
-<li>Executing: 
-					SELECT column_name, data_type, is_nullable, character_maximum_length
-					FROM _wp_sqlite_mysql_information_schema_columns
-					WHERE table_schema = ?
-					AND table_name = ?
-					AND column_name IN (?)
-				 | parameters: database_name_here, wp_termmeta, meta_id</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_termmeta, 0, database_name_here, PRIMARY, 1, meta_id, A, 0, , , , BTREE, , , YES, </li>
-<li>Executing: 
-				WITH s AS (
-					SELECT
-						column_name,
-						CASE
-							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
-							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
-							WHEN MAX(seq_in_index = 1) THEN 'MUL'
-							ELSE ''
-						END AS column_key
-					FROM _wp_sqlite_mysql_information_schema_statistics
-					WHERE table_schema = ?
-					AND table_name = ?
-					GROUP BY column_name
-				)
-				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
-				SET
-					column_key = s.column_key,
-					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
-			    FROM s
-			    WHERE c.table_schema = ?
-			    AND c.table_name = ?
-				AND s.column_name = c.column_name
-			 | parameters: database_name_here, wp_termmeta, database_name_here, wp_termmeta</li>
-<li>Executing: 
-					SELECT column_name, data_type, is_nullable, character_maximum_length
-					FROM _wp_sqlite_mysql_information_schema_columns
-					WHERE table_schema = ?
-					AND table_name = ?
-					AND column_name IN (?)
-				 | parameters: database_name_here, wp_termmeta, term_id</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_termmeta, 1, database_name_here, term_id, 1, term_id, A, 0, , , , BTREE, , , YES, </li>
-<li>Executing: 
-				WITH s AS (
-					SELECT
-						column_name,
-						CASE
-							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
-							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
-							WHEN MAX(seq_in_index = 1) THEN 'MUL'
-							ELSE ''
-						END AS column_key
-					FROM _wp_sqlite_mysql_information_schema_statistics
-					WHERE table_schema = ?
-					AND table_name = ?
-					GROUP BY column_name
-				)
-				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
-				SET
-					column_key = s.column_key,
-					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
-			    FROM s
-			    WHERE c.table_schema = ?
-			    AND c.table_name = ?
-				AND s.column_name = c.column_name
-			 | parameters: database_name_here, wp_termmeta, database_name_here, wp_termmeta</li>
-<li>Executing: 
-					SELECT column_name, data_type, is_nullable, character_maximum_length
-					FROM _wp_sqlite_mysql_information_schema_columns
-					WHERE table_schema = ?
-					AND table_name = ?
-					AND column_name IN (?)
-				 | parameters: database_name_here, wp_termmeta, meta_key</li>
-<li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_termmeta, 1, database_name_here, meta_key, 1, meta_key, A, 0, , , YES, BTREE, , , YES, </li>
-<li>Executing: 
-				WITH s AS (
-					SELECT
-						column_name,
-						CASE
-							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
-							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
-							WHEN MAX(seq_in_index = 1) THEN 'MUL'
-							ELSE ''
-						END AS column_key
-					FROM _wp_sqlite_mysql_information_schema_statistics
-					WHERE table_schema = ?
-					AND table_name = ?
-					GROUP BY column_name
-				)
-				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
-				SET
-					column_key = s.column_key,
-					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
-			    FROM s
-			    WHERE c.table_schema = ?
-			    AND c.table_name = ?
-				AND s.column_name = c.column_name
-			 | parameters: database_name_here, wp_termmeta, database_name_here, wp_termmeta</li>
-<li>Executing: 
-				SELECT *
-				FROM _wp_sqlite_mysql_information_schema_tables
-				WHERE table_type = 'BASE TABLE'
-				AND table_schema = ?
-				AND table_name = ?
-			 | parameters: database_name_here, wp_termmeta</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_termmeta</li>
-<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_termmeta</li>
-<li>Executing: CREATE TABLE `wp_termmeta` (
-  `meta_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `term_id` INTEGER NOT NULL DEFAULT '0',
-  `meta_key` TEXT COLLATE NOCASE,
-  `meta_value` TEXT COLLATE NOCASE
-) STRICT | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 table `wp_termmeta` already exists
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE TABLE IF...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE TABLE IF...')
-#3 /wordpress/wp-content/plugins/cmb2-taxonomy/plugin.php(20): WP_SQLite_DB->query('CREATE TABLE IF...')
-#4 /wordpress/wp-includes/class-wp-hook.php(324): cmb2_taxonomy_register_activation_hook(false)
-#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cmb2-t...', false)
-#8 /internal/eval.php(20): activate_plugin('cmb2-taxonomy/p...')
-#9 {main}</pre>
- for query CREATE TABLE IF NOT EXISTS `wp_termmeta` (
-        `meta_id` bigint(20) unsigned NOT NULL auto_increment,
-        `term_id` bigint(20) unsigned NOT NULL default '0',
-        `meta_key` varchar(255) default NULL,
-        `meta_value` longtext,
-        PRIMARY KEY  (`meta_id`),
-        KEY `term_id` (`term_id`),
-        KEY `meta_key` (`meta_key`)
-    ) made by activate_plugin, do_action('activate_cmb2-taxonomy/plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, cmb2_taxonomy_register_activation_hook, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 14:30:06 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 14:30:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 14:30:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 14:30:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 14:30:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 14:30:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 14:30:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 14:30:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 14:30:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('csmm_current_version', '1.0.9', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'csmm_current_version' , '1.0.9' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('csmm_current_ve...', '1.0.9', '', 'auto')
-#5 /wordpress/wp-content/plugins/coming-soon-maintenance-mode/coming-soon-maintenance-mode.php(48): update_option('csmm_current_ve...', '1.0.9')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): csmm_activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_coming...', false)
-#10 /internal/eval.php(20): activate_plugin('coming-soon-mai...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('csmm_current_version', '1.0.9', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_coming-soon-maintenance-mode/coming-soon-maintenance-mode.php'), WP_Hook->do_action, WP_Hook->apply_filters, csmm_activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 14:30:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 14:30:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 14:30:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 14:30:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 14:31:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cfws_db_version', '1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cfws_db_version' , '1.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/contact-form-with-square/contact-form-with-square.php(59): add_option('cfws_db_version', '1.0')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): cfws_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_contac...', false)
-#9 /internal/eval.php(20): activate_plugin('contact-form-wi...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cfws_db_version', '1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_contact-form-with-square/contact-form-with-square.php'), WP_Hook->do_action, WP_Hook->apply_filters, cfws_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 14:31:06 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 14:31:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 14:31:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 14:31:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 14:31:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cool-free-timeline-v', '3.0.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cool-free-timeline-v' , '3.0.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('cool-free-timel...', '3.0.0', '', 'auto')
-#5 /wordpress/wp-content/plugins/cool-timeline/cooltimeline.php(299): update_option('cool-free-timel...', '3.0.0')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): CoolTimeline->ctl_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cool-t...', false)
-#10 /internal/eval.php(20): activate_plugin('cool-timeline/c...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cool-free-timeline-v', '3.0.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_cool-timeline/cooltimeline.php'), WP_Hook->do_action, WP_Hook->apply_filters, CoolTimeline->ctl_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 14:31:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cool-timelne-plugin-type', 'FREE', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cool-timelne-plugin-type' , 'FREE' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('cool-timelne-pl...', 'FREE', '', 'auto')
-#5 /wordpress/wp-content/plugins/cool-timeline/cooltimeline.php(300): update_option('cool-timelne-pl...', 'FREE')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): CoolTimeline->ctl_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cool-t...', false)
-#10 /internal/eval.php(20): activate_plugin('cool-timeline/c...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cool-timelne-plugin-type', 'FREE', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_cool-timeline/cooltimeline.php'), WP_Hook->do_action, WP_Hook->apply_filters, CoolTimeline->ctl_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 14:31:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cool-timelne-installDate', '2025-04-09 02:31:38', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cool-timelne-installDate' , '2025-04-09 02:31:38' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('cool-timelne-in...', '2025-04-09 02:3...', '', 'auto')
-#5 /wordpress/wp-content/plugins/cool-timeline/cooltimeline.php(301): update_option('cool-timelne-in...', '2025-04-09 02:3...')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): CoolTimeline->ctl_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cool-t...', false)
-#10 /internal/eval.php(20): activate_plugin('cool-timeline/c...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cool-timelne-installDate', '2025-04-09 02:31:38', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_cool-timeline/cooltimeline.php'), WP_Hook->do_action, WP_Hook->apply_filters, CoolTimeline->ctl_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 14:31:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cool-timeline-already-rated', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cool-timeline-already-rated' , 'no' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('cool-timeline-a...', 'no', '', 'auto')
-#5 /wordpress/wp-content/plugins/cool-timeline/cooltimeline.php(302): update_option('cool-timeline-a...', 'no')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): CoolTimeline->ctl_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cool-t...', false)
-#10 /internal/eval.php(20): activate_plugin('cool-timeline/c...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cool-timeline-already-rated', 'no', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_cool-timeline/cooltimeline.php'), WP_Hook->do_action, WP_Hook->apply_filters, CoolTimeline->ctl_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 14:31:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ctl_flush_rewrite_rules_flag', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ctl_flush_rewrite_rules_flag' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ctl_flush_rewri...', true, '', 'auto')
-#5 /wordpress/wp-content/plugins/cool-timeline/cooltimeline.php(303): update_option('ctl_flush_rewri...', true)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): CoolTimeline->ctl_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cool-t...', false)
-#10 /internal/eval.php(20): activate_plugin('cool-timeline/c...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ctl_flush_rewrite_rules_flag', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_cool-timeline/cooltimeline.php'), WP_Hook->do_action, WP_Hook->apply_filters, CoolTimeline->ctl_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 14:31:39 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 14:31:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 14:31:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 14:31:39 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 14:31:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ctl-upgraded', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ctl-upgraded' , 'yes' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ctl-upgraded', 'yes', '', 'auto')
-#5 /wordpress/wp-content/plugins/cool-timeline/includes/class-stories-migration.php(37): update_option('ctl-upgraded', 'yes')
-#6 /wordpr
+Error: [10-Apr-2025 20:49:46 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ciusan_admin__head" in /wordpress/wp-content/plugins/ciusan-notification-bar/ciusan-notification-bar.php:55
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): cnb_admin_init('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(704): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/ciusan-notification-bar/ciusan-notification-bar.php on line 55
+[10-Apr-2025 20:49:54 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ciusan_admin__head" in /wordpress/wp-content/plugins/ciusan-notification-bar/ciusan-notification-bar.php:55
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): cnb_admin_init('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(704): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/ciusan-notification-bar/ciusan-notification-bar.php on line 55
+[10-Apr-2025 20:50:03 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ciusan_admin__head" in /wordpress/wp-content/plugins/ciusan-notification-bar/ciusan-notification-bar.php:55
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): cnb_admin_init('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(704): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/ciusan-notification-bar/ciusan-notification-bar.php on line 55
+[10-Apr-2025 20:50:22 UTC] PHP Parse error:  syntax error, unexpected token "\" in /wordpress/wp-content/plugins/custom-amp-accelerated-mobile-pages/custom-amp.php on line 194
+[10-Apr-2025 20:50:30 UTC] PHP Parse error:  syntax error, unexpected token "\" in /wordpress/wp-content/plugins/custom-amp-accelerated-mobile-pages/custom-amp.php on line 194
+[10-Apr-2025 20:50:39 UTC] PHP Parse error:  syntax error, unexpected token "\" in /wordpress/wp-content/plugins/custom-amp-accelerated-mobile-pages/custom-amp.php on line 194
+[10-Apr-2025 20:51:01 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/capture-and-convert/index.php on line 135
+[10-Apr-2025 20:51:01 UTC] PHP Warning:  Undefined array key "SERVER_ADDR" in /wordpress/wp-content/plugins/capture-and-convert/index.php on line 135
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/capture-and-convert/index.php on line 135
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Undefined array key "SERVER_ADDR" in /wordpress/wp-content/plugins/capture-and-convert/index.php on line 135
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Undefined variable $return in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 237
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 419
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 546
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 476
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 477
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 478
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 479
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 480
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1126
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1128
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1140
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1151
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1156
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1164
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1177
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1188
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1193
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 546
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 476
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 477
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 478
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 479
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 480
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1029
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1039
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1041
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1053
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1059
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1065
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1080
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1089
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1093
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1094
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1112
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1203
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1214
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1218
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1219
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1237
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 546
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 476
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 477
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 478
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 479
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 480
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1254
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1267
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1278
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1283
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1287
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1295
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1299
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1300
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1309
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1322
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1333
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1338
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1342
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1350
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1354
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1355
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Undefined variable $return in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 237
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 546
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 476
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 477
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 478
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 479
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 480
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1477
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1479
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1492
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1503
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1508
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1516
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1529
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1540
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1545
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 546
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 476
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 477
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 478
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 479
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 480
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1384
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1391
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1393
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1405
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1411
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1417
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1429
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1441
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1445
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1446
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1463
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1555
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1566
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1570
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1571
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1589
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 546
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 476
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 477
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 478
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 479
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 480
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1627
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1640
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1651
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1656
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1660
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1668
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1672
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1673
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1682
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1695
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1706
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1711
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1715
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1723
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1727
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1728
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1737
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1749
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1759
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1764
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1768
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1776
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1780
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1781
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 419
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Undefined variable $return in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 237
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 419
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 546
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 476
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 477
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 478
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 479
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 480
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 718
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 720
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 733
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 744
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 749
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 757
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 770
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 781
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 786
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 546
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 476
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 477
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 478
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 479
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 480
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 623
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 631
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 633
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 645
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 651
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 657
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 669
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 681
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 685
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 686
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 704
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 796
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 808
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 812
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 813
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 831
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 546
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 476
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 477
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 478
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 479
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 480
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 954
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 967
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 978
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 983
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 987
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 995
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 999
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1000
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 546
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 476
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 477
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 478
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 479
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 480
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 869
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 882
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 892
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 898
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 902
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 910
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 914
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 915
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 925
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 931
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 933
+[10-Apr-2025 20:51:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 942
+[10-Apr-2025 20:51:13 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/capture-and-convert/index.php on line 135
+[10-Apr-2025 20:51:13 UTC] PHP Warning:  Undefined array key "SERVER_ADDR" in /wordpress/wp-content/plugins/capture-and-convert/index.php on line 135
+[10-Apr-2025 20:51:14 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/capture-and-convert/index.php on line 135
+[10-Apr-2025 20:51:14 UTC] PHP Warning:  Undefined array key "SERVER_ADDR" in /wordpress/wp-content/plugins/capture-and-convert/index.php on line 135
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Undefined variable $return in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 237
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 419
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 546
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 476
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 477
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 478
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 479
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 480
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1126
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1128
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1140
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1151
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1156
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1164
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1177
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1188
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1193
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 546
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 476
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 477
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 478
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 479
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 480
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1029
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1039
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1041
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1053
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1059
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1065
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1080
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1089
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1093
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1094
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1112
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1203
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1214
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1218
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1219
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1237
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 546
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 476
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 477
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 478
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 479
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 480
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1254
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1267
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1278
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1283
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1287
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1295
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1299
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1300
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1309
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1322
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1333
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1338
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1342
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1350
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1354
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1355
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Undefined variable $return in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 237
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 546
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 476
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 477
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 478
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 479
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 480
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1477
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1479
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1492
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1503
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1508
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1516
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1529
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1540
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1545
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 546
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 476
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 477
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 478
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 479
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 480
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1384
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1391
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1393
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1405
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1411
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1417
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1429
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1441
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1445
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1446
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1463
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1555
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1566
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1570
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1571
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1589
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 546
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 476
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 477
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 478
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 479
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 480
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1627
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1640
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1651
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1656
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1660
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1668
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1672
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1673
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1682
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1695
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1706
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1711
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1715
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1723
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1727
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1728
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1737
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1749
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1759
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1764
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1768
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1776
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1780
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 1781
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 419
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Undefined variable $return in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 237
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 419
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 546
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/capture-and-convert/libs/functions.php on line 476
+[10-Apr-2025 20:51:15 UTC] PHP Warning:  Trying to 
