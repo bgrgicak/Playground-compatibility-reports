@@ -2,708 +2,315 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 03:28:23 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:28:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:28:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:28:23 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:28:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'FCmlt63^3 $C[bq::S[&{wXM9HEM]T_MKyyEl0f.n6QoxenQ)2JsrNuuMv*w{w=j', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'FCmlt63^3 $C[bq::S[&amp;{wXM9HEM]T_MKyyEl0f.n6QoxenQ)2JsrNuuMv*w{w=j' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'FCmlt63^3 $C[bq...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'FCmlt63^3 $C[bq...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'FCmlt63^3 $C[bq...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'FCmlt63^3 $C[bq...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/image-scrolling-gallery-fx/image-scrolling-gallery-fx.php(79): wp_enqueue_script('swfobject')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): imagescrollinggalleryfx_load_swfobject_lib('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'FCmlt63^3 $C[bq::S[&{wXM9HEM]T_MKyyEl0f.n6QoxenQ)2JsrNuuMv*w{w=j', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, imagescrollinggalleryfx_load_swfobject_lib, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'De=(-<;@8t)UyQ|.}pO?{E%+CIOKbe^IuqeB]sI#RhQRhOM@M@/k`a<fgEyk+X,W', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'De=(-&lt;;@8t)UyQ|.}pO?{E%+CIOKbe^IuqeB]sI#RhQRhOM@M@/k`a&lt;fgEyk+X,W' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'De=(-<;@8t)UyQ|...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'De=(-<;@8t)UyQ|...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'De=(-<;@8t)UyQ|...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'De=(-<;@8t)UyQ|...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/image-scrolling-gallery-fx/image-scrolling-gallery-fx.php(79): wp_enqueue_script('swfobject')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): imagescrollinggalleryfx_load_swfobject_lib('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'De=(-<;@8t)UyQ|.}pO?{E%+CIOKbe^IuqeB]sI#RhQRhOM@M@/k`a<fgEyk+X,W', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, imagescrollinggalleryfx_load_swfobject_lib, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:51 UTC] PHP Deprecated:  File upgrade-functions.php is <strong>deprecated</strong> since version 2.5.0! Use wp-admin/includes/upgrade.php instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 03:28:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_width', '500px', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ieme_rx_width' , '500px' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ieme_rx_width', '500px', '', 'auto')
-#5 /wordpress/wp-content/plugins/imdb-easy-movie-embed-ieme/wp-ieme.php(68): update_option('ieme_rx_width', '500px')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): wp_ieme_install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+Error: [10-Apr-2025 14:28:09 UTC] PHP Deprecated:  Required parameter $data_to_save follows optional parameter $object_id in /wordpress/wp-content/plugins/icons-for-font-awesome/cmb2/includes/CMB2.php on line 360
+[10-Apr-2025 14:28:19 UTC] PHP Deprecated:  Required parameter $data_to_save follows optional parameter $object_id in /wordpress/wp-content/plugins/icons-for-font-awesome/cmb2/includes/CMB2.php on line 360
+[10-Apr-2025 14:28:29 UTC] PHP Deprecated:  Required parameter $data_to_save follows optional parameter $object_id in /wordpress/wp-content/plugins/icons-for-font-awesome/cmb2/includes/CMB2.php on line 360
+[10-Apr-2025 14:29:13 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>admin_3</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 14:29:22 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>admin_3</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 14:29:32 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>admin_3</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 14:32:20 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744295537.952)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_imdb-e...', false)
-#10 /internal/eval.php(20): activate_plugin('imdb-easy-movie...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_width', '500px', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_imdb-easy-movie-embed-ieme/wp-ieme.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_ieme_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_height', '180px', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ieme_rx_height' , '180px' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ieme_rx_height', '180px', '', 'auto')
-#5 /wordpress/wp-content/plugins/imdb-easy-movie-embed-ieme/wp-ieme.php(69): update_option('ieme_rx_height', '180px')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): wp_ieme_install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 14:32:54 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744295571.397)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_imdb-e...', false)
-#10 /internal/eval.php(20): activate_plugin('imdb-easy-movie...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_height', '180px', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_imdb-easy-movie-embed-ieme/wp-ieme.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_ieme_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_theme', 'simple', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ieme_rx_theme' , 'simple' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ieme_rx_theme', 'simple', '', 'auto')
-#5 /wordpress/wp-content/plugins/imdb-easy-movie-embed-ieme/wp-ieme.php(70): update_option('ieme_rx_theme', 'simple')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): wp_ieme_install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_imdb-e...', false)
-#10 /internal/eval.php(20): activate_plugin('imdb-easy-movie...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_theme', 'simple', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_imdb-easy-movie-embed-ieme/wp-ieme.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_ieme_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_background', 'FFFFFF', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ieme_rx_background' , 'FFFFFF' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ieme_rx_backgro...', 'FFFFFF', '', 'auto')
-#5 /wordpress/wp-content/plugins/imdb-easy-movie-embed-ieme/wp-ieme.php(71): update_option('ieme_rx_backgro...', 'FFFFFF')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): wp_ieme_install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_imdb-e...', false)
-#10 /internal/eval.php(20): activate_plugin('imdb-easy-movie...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_background', 'FFFFFF', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_imdb-easy-movie-embed-ieme/wp-ieme.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_ieme_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_fontfamily', 'Arial,Verdana,Tahoma,sans-serif', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ieme_rx_fontfamily' , 'Arial,Verdana,Tahoma,sans-serif' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ieme_rx_fontfam...', 'Arial,Verdana,T...', '', 'auto')
-#5 /wordpress/wp-content/plugins/imdb-easy-movie-embed-ieme/wp-ieme.php(72): update_option('ieme_rx_fontfam...', 'Arial,Verdana,T...')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): wp_ieme_install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_imdb-e...', false)
-#10 /internal/eval.php(20): activate_plugin('imdb-easy-movie...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_fontfamily', 'Arial,Verdana,Tahoma,sans-serif', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_imdb-easy-movie-embed-ieme/wp-ieme.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_ieme_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_fontsize', '13px', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ieme_rx_fontsize' , '13px' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ieme_rx_fontsiz...', '13px', '', 'auto')
-#5 /wordpress/wp-content/plugins/imdb-easy-movie-embed-ieme/wp-ieme.php(73): update_option('ieme_rx_fontsiz...', '13px')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): wp_ieme_install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_imdb-e...', false)
-#10 /internal/eval.php(20): activate_plugin('imdb-easy-movie...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_fontsize', '13px', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_imdb-easy-movie-embed-ieme/wp-ieme.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_ieme_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_description_length', '200', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ieme_rx_description_length' , '200' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ieme_rx_descrip...', '200', '', 'auto')
-#5 /wordpress/wp-content/plugins/imdb-easy-movie-embed-ieme/wp-ieme.php(74): update_option('ieme_rx_descrip...', '200')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): wp_ieme_install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_imdb-e...', false)
-#10 /internal/eval.php(20): activate_plugin('imdb-easy-movie...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_description_length', '200', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_imdb-easy-movie-embed-ieme/wp-ieme.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_ieme_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_language', 'english', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ieme_rx_language' , 'english' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ieme_rx_languag...', 'english', '', 'auto')
-#5 /wordpress/wp-content/plugins/imdb-easy-movie-embed-ieme/wp-ieme.php(75): update_option('ieme_rx_languag...', 'english')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): wp_ieme_install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_imdb-e...', false)
-#10 /internal/eval.php(20): activate_plugin('imdb-easy-movie...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_language', 'english', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_imdb-easy-movie-embed-ieme/wp-ieme.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_ieme_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_source', 'IMDb', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ieme_rx_source' , 'IMDb' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ieme_rx_source', 'IMDb', '', 'auto')
-#5 /wordpress/wp-content/plugins/imdb-easy-movie-embed-ieme/wp-ieme.php(76): update_option('ieme_rx_source', 'IMDb')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): wp_ieme_install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_imdb-e...', false)
-#10 /internal/eval.php(20): activate_plugin('imdb-easy-movie...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_source', 'IMDb', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_imdb-easy-movie-embed-ieme/wp-ieme.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_ieme_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_width[simple]', '500px', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ieme_rx_width[simple]' , '500px' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ieme_rx_width[s...', '500px', '', 'auto')
-#5 /wordpress/wp-content/plugins/imdb-easy-movie-embed-ieme/wp-ieme.php(157): update_option('ieme_rx_width[s...', '500px')
-#6 /wordpress/wp-content/plugins/imdb-easy-movie-embed-ieme/wp-ieme.php(78): activate_ieme_options()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_ieme_install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_imdb-e...', false)
-#11 /internal/eval.php(20): activate_plugin('imdb-easy-movie...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_width[simple]', '500px', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_imdb-easy-movie-embed-ieme/wp-ieme.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_ieme_install, activate_ieme_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_height[simple]', '180px', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ieme_rx_height[simple]' , '180px' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ieme_rx_height[...', '180px', '', 'auto')
-#5 /wordpress/wp-content/plugins/imdb-easy-movie-embed-ieme/wp-ieme.php(158): update_option('ieme_rx_height[...', '180px')
-#6 /wordpress/wp-content/plugins/imdb-easy-movie-embed-ieme/wp-ieme.php(78): activate_ieme_options()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_ieme_install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_imdb-e...', false)
-#11 /internal/eval.php(20): activate_plugin('imdb-easy-movie...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_height[simple]', '180px', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_imdb-easy-movie-embed-ieme/wp-ieme.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_ieme_install, activate_ieme_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_background[simple]', 'FFFFFF', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ieme_rx_background[simple]' , 'FFFFFF' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ieme_rx_backgro...', 'FFFFFF', '', 'auto')
-#5 /wordpress/wp-content/plugins/imdb-easy-movie-embed-ieme/wp-ieme.php(159): update_option('ieme_rx_backgro...', 'FFFFFF')
-#6 /wordpress/wp-content/plugins/imdb-easy-movie-embed-ieme/wp-ieme.php(78): activate_ieme_options()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_ieme_install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_imdb-e...', false)
-#11 /internal/eval.php(20): activate_plugin('imdb-easy-movie...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_background[simple]', 'FFFFFF', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_imdb-easy-movie-embed-ieme/wp-ieme.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_ieme_install, activate_ieme_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_fontfamily[simple]', 'Arial,Verdana,Tahoma,sans-serif', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ieme_rx_fontfamily[simple]' , 'Arial,Verdana,Tahoma,sans-serif' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ieme_rx_fontfam...', 'Arial,Verdana,T...', '', 'auto')
-#5 /wordpress/wp-content/plugins/imdb-easy-movie-embed-ieme/wp-ieme.php(160): update_option('ieme_rx_fontfam...', 'Arial,Verdana,T...')
-#6 /wordpress/wp-content/plugins/imdb-easy-movie-embed-ieme/wp-ieme.php(78): activate_ieme_options()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_ieme_install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_imdb-e...', false)
-#11 /internal/eval.php(20): activate_plugin('imdb-easy-movie...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_fontfamily[simple]', 'Arial,Verdana,Tahoma,sans-serif', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_imdb-easy-movie-embed-ieme/wp-ieme.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_ieme_install, activate_ieme_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_fontsize[simple]', '13px', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ieme_rx_fontsize[simple]' , '13px' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ieme_rx_fontsiz...', '13px', '', 'auto')
-#5 /wordpress/wp-content/plugins/imdb-easy-movie-embed-ieme/wp-ieme.php(161): update_option('ieme_rx_fontsiz...', '13px')
-#6 /wordpress/wp-content/plugins/imdb-easy-movie-embed-ieme/wp-ieme.php(78): activate_ieme_options()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_ieme_install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_imdb-e...', false)
-#11 /internal/eval.php(20): activate_plugin('imdb-easy-movie...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_fontsize[simple]', '13px', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_imdb-easy-movie-embed-ieme/wp-ieme.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_ieme_install, activate_ieme_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_description_length[simple]', '200', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ieme_rx_description_length[simple]' , '200' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ieme_rx_descrip...', '200', '', 'auto')
-#5 /wordpress/wp-content/plugins/imdb-easy-movie-embed-ieme/wp-ieme.php(162): update_option('ieme_rx_descrip...', '200')
-#6 /wordpress/wp-content/plugins/imdb-easy-movie-embed-ieme/wp-ieme.php(78): activate_ieme_options()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_ieme_install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_imdb-e...', false)
-#11 /internal/eval.php(20): activate_plugin('imdb-easy-movie...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_description_length[simple]', '200', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_imdb-easy-movie-embed-ieme/wp-ieme.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_ieme_install, activate_ieme_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_width[advanced]', '500px', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ieme_rx_width[advanced]' , '500px' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ieme_rx_width[a...', '500px', '', 'auto')
-#5 /wordpress/wp-content/plugins/imdb-easy-movie-embed-ieme/wp-ieme.php(157): update_option('ieme_rx_width[a...', '500px')
-#6 /wordpress/wp-content/plugins/imdb-easy-movie-embed-ieme/wp-ieme.php(78): activate_ieme_options()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_ieme_install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_imdb-e...', false)
-#11 /internal/eval.php(20): activate_plugin('imdb-easy-movie...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_width[advanced]', '500px', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_imdb-easy-movie-embed-ieme/wp-ieme.php'), WP_Hook->do_action, WP_Hook->apply_filters, wp_ieme_install, activate_ieme_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ieme_rx_height[advanced]', '180px', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: data
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 14:33:03 UTC] irefer_send_log: "I-Refer" cannot be activated, some requirements are not met
+[10-Apr-2025 14:33:06 UTC] irefer_send_log: "I-Refer" cannot be activated, some requirements are not met
+[10-Apr-2025 14:33:16 UTC] irefer_send_log: "I-Refer" cannot be activated, some requirements are not met
+[10-Apr-2025 14:33:18 UTC] irefer_send_log: "I-Refer" cannot be activated, some requirements are not met
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $show_in_page follows optional parameter $parentid in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 457
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $page_name follows optional parameter $parentid in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 457
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $display_in_cat follows optional parameter $parentid in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 498
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $cat_page_name follows optional parameter $parentid in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 498
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $sidebar_bgcolor follows optional parameter $title in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 1040
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $sidebar_imageRePosition follows optional parameter $title in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 1040
+[10-Apr-2025 14:36:40 UTC] PHP Warning:  Constant ELBPRO_ROWS_PER_SEGMENT already defined in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 31
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $ddwnID follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $responseBkSpan follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $arpSplitName follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $arpOnlyName follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $arpOnlyEmail follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $arpTrackingCode follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $clickCountID follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $DontShowMeAfterSubCOOKIE follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $blockDays follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $setcookieInfo follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $emailFldIDname follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $clickCountType follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1230
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $clickCountID follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1230
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $emailFldIDname follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1230
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $blockDays follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1230
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 2016
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 2016
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 2088
+[10-Apr-2025 14:36:40 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 2088
+[10-Apr-2025 14:36:40 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 1051
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $show_in_page follows optional parameter $parentid in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 457
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $page_name follows optional parameter $parentid in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 457
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $display_in_cat follows optional parameter $parentid in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 498
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $cat_page_name follows optional parameter $parentid in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 498
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $sidebar_bgcolor follows optional parameter $title in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 1040
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $sidebar_imageRePosition follows optional parameter $title in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 1040
+[10-Apr-2025 14:36:41 UTC] PHP Warning:  Constant ELBPRO_ROWS_PER_SEGMENT already defined in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 31
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $ddwnID follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $responseBkSpan follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $arpSplitName follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $arpOnlyName follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $arpOnlyEmail follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $arpTrackingCode follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $clickCountID follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $DontShowMeAfterSubCOOKIE follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $blockDays follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $setcookieInfo follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $emailFldIDname follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $clickCountType follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1230
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $clickCountID follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1230
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $emailFldIDname follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1230
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $blockDays follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1230
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 2016
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 2016
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 2088
+[10-Apr-2025 14:36:41 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 2088
+[10-Apr-2025 14:36:41 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php:1117
+Stack trace:
+#0 /wordpress/wp-settings.php(526): include_once()
+#1 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#2 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#3 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 1117
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $show_in_page follows optional parameter $parentid in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 457
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $page_name follows optional parameter $parentid in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 457
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $display_in_cat follows optional parameter $parentid in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 498
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $cat_page_name follows optional parameter $parentid in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 498
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $sidebar_bgcolor follows optional parameter $title in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 1040
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $sidebar_imageRePosition follows optional parameter $title in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 1040
+[10-Apr-2025 14:36:50 UTC] PHP Warning:  Constant ELBPRO_ROWS_PER_SEGMENT already defined in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 31
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $ddwnID follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $responseBkSpan follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $arpSplitName follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $arpOnlyName follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $arpOnlyEmail follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $arpTrackingCode follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $clickCountID follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $DontShowMeAfterSubCOOKIE follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $blockDays follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $setcookieInfo follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $emailFldIDname follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $clickCountType follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1230
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $clickCountID follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1230
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $emailFldIDname follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1230
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $blockDays follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1230
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 2016
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 2016
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 2088
+[10-Apr-2025 14:36:50 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 2088
+[10-Apr-2025 14:36:50 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 1051
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $show_in_page follows optional parameter $parentid in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 457
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $page_name follows optional parameter $parentid in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 457
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $display_in_cat follows optional parameter $parentid in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 498
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $cat_page_name follows optional parameter $parentid in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 498
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $sidebar_bgcolor follows optional parameter $title in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 1040
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $sidebar_imageRePosition follows optional parameter $title in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 1040
+[10-Apr-2025 14:36:51 UTC] PHP Warning:  Constant ELBPRO_ROWS_PER_SEGMENT already defined in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 31
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $ddwnID follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $responseBkSpan follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $arpSplitName follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $arpOnlyName follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $arpOnlyEmail follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $arpTrackingCode follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $clickCountID follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $DontShowMeAfterSubCOOKIE follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $blockDays follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $setcookieInfo follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $emailFldIDname follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $clickCountType follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1230
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $clickCountID follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1230
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $emailFldIDname follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1230
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $blockDays follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1230
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 2016
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 2016
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 2088
+[10-Apr-2025 14:36:51 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 2088
+[10-Apr-2025 14:36:51 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php:1117
+Stack trace:
+#0 /wordpress/wp-settings.php(526): include_once()
+#1 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#2 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#3 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 1117
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $show_in_page follows optional parameter $parentid in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 457
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $page_name follows optional parameter $parentid in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 457
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $display_in_cat follows optional parameter $parentid in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 498
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $cat_page_name follows optional parameter $parentid in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 498
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $sidebar_bgcolor follows optional parameter $title in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 1040
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $sidebar_imageRePosition follows optional parameter $title in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 1040
+[10-Apr-2025 14:37:00 UTC] PHP Warning:  Constant ELBPRO_ROWS_PER_SEGMENT already defined in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 31
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $ddwnID follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $responseBkSpan follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $arpSplitName follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $arpOnlyName follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $arpOnlyEmail follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $arpTrackingCode follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $clickCountID follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $DontShowMeAfterSubCOOKIE follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $blockDays follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $setcookieInfo follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $emailFldIDname follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $clickCountType follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1230
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $clickCountID follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1230
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $emailFldIDname follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1230
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $blockDays follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1230
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 2016
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 2016
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 2088
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 2088
+[10-Apr-2025 14:37:00 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 1051
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $show_in_page follows optional parameter $parentid in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 457
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $page_name follows optional parameter $parentid in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 457
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $display_in_cat follows optional parameter $parentid in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 498
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $cat_page_name follows optional parameter $parentid in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 498
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $sidebar_bgcolor follows optional parameter $title in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 1040
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $sidebar_imageRePosition follows optional parameter $title in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 1040
+[10-Apr-2025 14:37:00 UTC] PHP Warning:  Constant ELBPRO_ROWS_PER_SEGMENT already defined in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 31
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $ddwnID follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $responseBkSpan follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $arpSplitName follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $arpOnlyName follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $arpOnlyEmail follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $arpTrackingCode follows optional parameter $initSel in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 613
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $type follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $clickCountID follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $DontShowMeAfterSubCOOKIE follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $blockDays follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $setcookieInfo follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $emailFldIDname follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1163
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $clickCountType follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1230
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $clickCountID follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1230
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $emailFldIDname follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1230
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $blockDays follows optional parameter $fldClassName in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 1230
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 2016
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 2016
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 2088
+[10-Apr-2025 14:37:00 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/lib/immediate-list-building-pro.cls.php on line 2088
+[10-Apr-2025 14:37:00 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php:1117
+Stack trace:
+#0 /wordpress/wp-settings.php(526): include_once()
+#1 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#2 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#3 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/immediate-list-building-pro-lite/immediate-list-building-pro.php on line 1117
+[10-Apr-2025 14:37:12 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/import-social-statistics/freemius/includes/class-fs-logger.php on line 97
+[10-Apr-2025 14:37:13 UTC] Automatic updates starting...
+[10-Apr-2025 14:37:14 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/import-social-statistics/freemius/includes/class-fs-logger.php on line 97
+[10-Apr-2025 14:37:15 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>import-social-statistics</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 14:37:23 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/import-social-statistics/freemius/includes/class-fs-logger.php on line 97
+[10-Apr-2025 14:37:25 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/import-social-statistics/freemius/includes/class-fs-logger.php on line 97
+[10-Apr-2025 14:37:25 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>import-social-statistics</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 14:37:34 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/import-social-statistics/freemius/includes/class-fs-logger.php on line 97
+[10-Apr-2025 14:37:36 UTC] PHP Deprecated:  Required parameter $wrapper follows optional parameter $type in /wordpress/wp-content/plugins/import-social-statistics/freemius/includes/class-fs-logger.php on line 97
+[10-Apr-2025 14:37:36 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>import-social-statistics</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 14:37:58 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('XLII_IWA_Widget...')
+#2 /wordpress/wp-content/plugins/improved-widget-area/xlii_widget.php(92): register_widget('XLII_IWA_Widget...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): xlii_iwa_register_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(634): do_action('setup_theme')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 14:38:08 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('XLII_IWA_Widget...')
+#2 /wordpress/wp-content/plugins/improved-widget-area/xlii_widget.php(92): register_widget('XLII_IWA_Widget...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): xlii_iwa_register_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(634): do_action('setup_theme')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"improved-widget-area"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:73:13)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ],
+          expires: [ 'Wed, 11 Jan 1984 05:00:00 GMT' ],
+          'cache-control': [ 'no-cache, must-revalidate, max-age=0' ]
+        },
+        bytes: Uint8Array(2653) [
+           60,  33,  68,  79,  67,  84,  89,  80,  69,  32, 104, 116,
+          109, 108,  62,  10,  60, 104, 116, 109, 108,  32, 108,  97,
+          110, 103,  61,  34, 101, 110,  45,  85,  83,  34,  62,  10,
+           60, 104, 101,  97, 100,  62,  10,   9,  60, 109, 101, 116,
+           97,  32, 104, 116, 116, 112,  45, 101, 113, 117, 105, 118,
+           61,  34,  67, 111, 110, 116, 101, 110, 116,  45,  84, 121,
+          112, 101,  34,  32,  99, 111, 110, 116, 101, 110, 116,  61,
+           34, 116, 101, 120, 116,  47, 104, 116, 109, 108,  59,  32,
+           99, 104,  97, 114,
+          ... 2553 more items
+        ],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
