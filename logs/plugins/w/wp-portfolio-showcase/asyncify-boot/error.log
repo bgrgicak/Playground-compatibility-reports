@@ -2,184 +2,762 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 03:57:33 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:57:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:57:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:57:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:58:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:58:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:58:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:58:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:58:02 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:58:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:58:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:58:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:58:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp-autosharepost-fb-postingtype', 'link', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp-autosharepost-fb-postingtype' , 'link' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wp-autosharepos...', 'link', '', 'auto')
-#5 /wordpress/wp-content/plugins/wordpress-autosharepost/wp-autosharepost.php(141): update_option('wp-autosharepos...', 'link')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): WordpressAutoSharePost->activatePlugin(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+Error: [10-Apr-2025 17:47:05 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744307222.646)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wordpr...', false)
-#10 /internal/eval.php(20): activate_plugin('wordpress-autos...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp-autosharepost-fb-postingtype', 'link', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wordpress-autosharepost/wp-autosharepost.php'), WP_Hook->do_action, WP_Hook->apply_filters, WordpressAutoSharePost->activatePlugin, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:58:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 17:48:03 UTC] PHP Deprecated:  Required parameter $product follows optional parameter $price in /wordpress/wp-content/plugins/woo-returnado/inc/rtnd.php on line 209
+[10-Apr-2025 17:48:03 UTC] PHP Deprecated:  Required parameter $order follows optional parameter $vat_rate in /wordpress/wp-content/plugins/woo-returnado/inc/api/rtnd-post-process.php on line 330
+[10-Apr-2025 17:48:03 UTC] PHP Deprecated:  Required parameter $coupon_info follows optional parameter $discount in /wordpress/wp-content/plugins/woo-returnado/inc/api/rtnd-post-process.php on line 1551
+[10-Apr-2025 17:48:03 UTC] PHP Deprecated:  Required parameter $useCredit follows optional parameter $discount in /wordpress/wp-content/plugins/woo-returnado/inc/api/rtnd-post-process.php on line 1551
+[10-Apr-2025 17:48:03 UTC] PHP Deprecated:  Required parameter $new_currency follows optional parameter $items in /wordpress/wp-content/plugins/woo-returnado/inc/api/rtnd-post-process.php on line 1676
+[10-Apr-2025 17:48:03 UTC] PHP Deprecated:  Required parameter $log follows optional parameter $args in /wordpress/wp-content/plugins/woo-returnado/inc/api/rtnd-api-error-handler.php on line 40
+[10-Apr-2025 17:48:03 UTC] PHP Deprecated:  Required parameter $log follows optional parameter $args in /wordpress/wp-content/plugins/woo-returnado/inc/api/rtnd-api-error-handler.php on line 90
+[10-Apr-2025 17:48:12 UTC] PHP Deprecated:  Required parameter $product follows optional parameter $price in /wordpress/wp-content/plugins/woo-returnado/inc/rtnd.php on line 209
+[10-Apr-2025 17:48:12 UTC] PHP Deprecated:  Required parameter $order follows optional parameter $vat_rate in /wordpress/wp-content/plugins/woo-returnado/inc/api/rtnd-post-process.php on line 330
+[10-Apr-2025 17:48:12 UTC] PHP Deprecated:  Required parameter $coupon_info follows optional parameter $discount in /wordpress/wp-content/plugins/woo-returnado/inc/api/rtnd-post-process.php on line 1551
+[10-Apr-2025 17:48:12 UTC] PHP Deprecated:  Required parameter $useCredit follows optional parameter $discount in /wordpress/wp-content/plugins/woo-returnado/inc/api/rtnd-post-process.php on line 1551
+[10-Apr-2025 17:48:12 UTC] PHP Deprecated:  Required parameter $new_currency follows optional parameter $items in /wordpress/wp-content/plugins/woo-returnado/inc/api/rtnd-post-process.php on line 1676
+[10-Apr-2025 17:48:12 UTC] PHP Deprecated:  Required parameter $log follows optional parameter $args in /wordpress/wp-content/plugins/woo-returnado/inc/api/rtnd-api-error-handler.php on line 40
+[10-Apr-2025 17:48:12 UTC] PHP Deprecated:  Required parameter $log follows optional parameter $args in /wordpress/wp-content/plugins/woo-returnado/inc/api/rtnd-api-error-handler.php on line 90
+[10-Apr-2025 17:48:21 UTC] PHP Deprecated:  Required parameter $product follows optional parameter $price in /wordpress/wp-content/plugins/woo-returnado/inc/rtnd.php on line 209
+[10-Apr-2025 17:48:21 UTC] PHP Deprecated:  Required parameter $order follows optional parameter $vat_rate in /wordpress/wp-content/plugins/woo-returnado/inc/api/rtnd-post-process.php on line 330
+[10-Apr-2025 17:48:21 UTC] PHP Deprecated:  Required parameter $coupon_info follows optional parameter $discount in /wordpress/wp-content/plugins/woo-returnado/inc/api/rtnd-post-process.php on line 1551
+[10-Apr-2025 17:48:21 UTC] PHP Deprecated:  Required parameter $useCredit follows optional parameter $discount in /wordpress/wp-content/plugins/woo-returnado/inc/api/rtnd-post-process.php on line 1551
+[10-Apr-2025 17:48:21 UTC] PHP Deprecated:  Required parameter $new_currency follows optional parameter $items in /wordpress/wp-content/plugins/woo-returnado/inc/api/rtnd-post-process.php on line 1676
+[10-Apr-2025 17:48:21 UTC] PHP Deprecated:  Required parameter $log follows optional parameter $args in /wordpress/wp-content/plugins/woo-returnado/inc/api/rtnd-api-error-handler.php on line 40
+[10-Apr-2025 17:48:21 UTC] PHP Deprecated:  Required parameter $log follows optional parameter $args in /wordpress/wp-content/plugins/woo-returnado/inc/api/rtnd-api-error-handler.php on line 90
+[10-Apr-2025 17:48:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp-autosharepost-fb-description', '40', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT * FROM wp_wordable</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp-autosharepost-fb-description' , '40' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_wordable` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 no such table: wp_wordable
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wp-autosharepos...', 40, '', 'auto')
-#5 /wordpress/wp-content/plugins/wordpress-autosharepost/wp-autosharepost.php(141): update_option('wp-autosharepos...', 40)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): WordpressAutoSharePost->activatePlugin(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php(261): wpdb->get_row('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/wordable/includes/activator.php(58): WordablePlugin->get_wordable_row()
+#6 /wordpress/wp-content/plugins/wordable/includes/activator.php(5): WordablePluginActivator->migrate()
+#7 /wordpress/wp-content/plugins/wordable/includes/activator.php(91): WordablePluginActivator::install()
+#8 /wordpress/wp-content/plugins/wordable/wordable.php(20): include('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordable/wordab...')
+#11 /internal/eval.php(20): activate_plugin('wordable/wordab...')
+#12 {main}</pre>
+ for query SELECT * FROM wp_wordable made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordable/wordable.php'), include('/plugins/wordable/includes/activator.php'), WordablePluginActivator::install, WordablePluginActivator->migrate, WordablePlugin->get_wordable_row, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 17:48:34 UTC] PHP Warning:  Attempt to read property "cache_updated_at" on null in /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php on line 263
+[10-Apr-2025 17:48:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wordable ADD plugin_version TEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wordable</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wordable</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wordable</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wordable</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_wordable, plugin_version, 1, , YES, text, 65535, 65535, , , , utf8mb4, utf8mb4_general_ci, text, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wordable</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Table 'wp_wordable' doesn't exist
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Table 'wp_worda...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wordable/includes/activator.php(74): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wordable/includes/activator.php(5): WordablePluginActivator->migrate()
+#5 /wordpress/wp-content/plugins/wordable/includes/activator.php(91): WordablePluginActivator::install()
+#6 /wordpress/wp-content/plugins/wordable/wordable.php(20): include('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordable/wordab...')
+#9 /internal/eval.php(20): activate_plugin('wordable/wordab...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_wordable ADD plugin_version TEXT made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordable/wordable.php'), include('/plugins/wordable/includes/activator.php'), WordablePluginActivator::install, WordablePluginActivator->migrate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 17:48:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wordable ADD cache TEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wordable</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wordable</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wordable</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wordable</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_wordable, cache, 1, , YES, text, 65535, 65535, , , , utf8mb4, utf8mb4_general_ci, text, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wordable</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Table 'wp_wordable' doesn't exist
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Table 'wp_worda...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wordable/includes/activator.php(74): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wordable/includes/activator.php(5): WordablePluginActivator->migrate()
+#5 /wordpress/wp-content/plugins/wordable/includes/activator.php(91): WordablePluginActivator::install()
+#6 /wordpress/wp-content/plugins/wordable/wordable.php(20): include('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordable/wordab...')
+#9 /internal/eval.php(20): activate_plugin('wordable/wordab...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_wordable ADD cache TEXT made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordable/wordable.php'), include('/plugins/wordable/includes/activator.php'), WordablePluginActivator::install, WordablePluginActivator->migrate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 17:48:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wordable ADD cache_updated_at DATETIME</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wordable</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wordable</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wordable</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wordable</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_wordable, cache_updated_at, 1, , YES, datetime, , , , , 0, , , datetime, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wordable</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Table 'wp_wordable' doesn't exist
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Table 'wp_worda...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wordable/includes/activator.php(74): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wordable/includes/activator.php(5): WordablePluginActivator->migrate()
+#5 /wordpress/wp-content/plugins/wordable/includes/activator.php(91): WordablePluginActivator::install()
+#6 /wordpress/wp-content/plugins/wordable/wordable.php(20): include('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordable/wordab...')
+#9 /internal/eval.php(20): activate_plugin('wordable/wordab...')
+#10 {main}</pre>
+ for query ALTER TABLE wp_wordable ADD cache_updated_at DATETIME made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordable/wordable.php'), include('/plugins/wordable/includes/activator.php'), WordablePluginActivator::install, WordablePluginActivator->migrate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 17:48:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wordable</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_wordable` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_wordable
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php(261): wpdb->get_row('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php(101): WordablePlugin->get_wordable_row()
+#6 /wordpress/wp-content/plugins/wordable/includes/activator.php(79): WordablePlugin->update_wordable_row(Array)
+#7 /wordpress/wp-content/plugins/wordable/includes/activator.php(5): WordablePluginActivator->migrate()
+#8 /wordpress/wp-content/plugins/wordable/includes/activator.php(91): WordablePluginActivator::install()
+#9 /wordpress/wp-content/plugins/wordable/wordable.php(20): include('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordable/wordab...')
+#12 /internal/eval.php(20): activate_plugin('wordable/wordab...')
+#13 {main}</pre>
+ for query SELECT * FROM wp_wordable made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordable/wordable.php'), include('/plugins/wordable/includes/activator.php'), WordablePluginActivator::install, WordablePluginActivator->migrate, WordablePlugin->update_wordable_row, WordablePlugin->get_wordable_row, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 17:48:34 UTC] PHP Warning:  Attempt to read property "id" on null in /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php on line 105
+[10-Apr-2025 17:48:34 UTC] PHP Warning:  Undefined array key "plugin_version" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 17:48:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 17:48:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 17:48:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 17:48:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE `wp_wordable` SET `plugin_version` = '8.2.10' WHERE `id` IS NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wordable</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, data_type, column_default
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wordable</li>
+<li>Executing: UPDATE `wp_wordable` SET `plugin_version` = '8.2.10' WHERE `id` IS NULL | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_wordable
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('UPDATE `wp_word...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('UPDATE `wp_word...')
+#3 /wordpress/wp-includes/class-wpdb.php(2716): WP_SQLite_DB->query('UPDATE `wp_word...')
+#4 /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php(105): wpdb->update('wp_wordable', Array, Array)
+#5 /wordpress/wp-content/plugins/wordable/includes/activator.php(79): WordablePlugin->update_wordable_row(Array)
+#6 /wordpress/wp-content/plugins/wordable/includes/activator.php(5): WordablePluginActivator->migrate()
+#7 /wordpress/wp-content/plugins/wordable/includes/activator.php(91): WordablePluginActivator::install()
+#8 /wordpress/wp-content/plugins/wordable/wordable.php(20): include('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordable/wordab...')
+#11 /internal/eval.php(20): activate_plugin('wordable/wordab...')
+#12 {main}</pre>
+ for query UPDATE `wp_wordable` SET `plugin_version` = '8.2.10' WHERE `id` IS NULL made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordable/wordable.php'), include('/plugins/wordable/includes/activator.php'), WordablePluginActivator::install, WordablePluginActivator->migrate, WordablePlugin->update_wordable_row, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 17:48:34 UTC] PHP Warning:  Attempt to read property "cache_updated_at" on null in /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php on line 263
+[10-Apr-2025 17:48:34 UTC] PHP Warning:  Attempt to read property "secret" on null in /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php on line 253
+[10-Apr-2025 17:48:34 UTC] PHP Warning:  Undefined property: stdClass::$cache_updated_at in /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php on line 263
+[10-Apr-2025 17:48:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wordable</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_wordable | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wordable.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php(261): wpdb->get_row('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/wordable/includes/activator.php(58): WordablePlugin->get_wordable_row()
+#4 /wordpress/wp-content/plugins/wordable/includes/activator.php(5): WordablePluginActivator->migrate()
+#5 /wordpress/wp-content/plugins/wordable/includes/activator.php(91): WordablePluginActivator::install()
+#6 /wordpress/wp-content/plugins/wordable/wordable.php(20): include('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordable/wordab...')
+#9 /internal/eval.php(20): activate_plugin('wordable/wordab...')
+#10 {main}</pre>
+ for query SELECT * FROM wp_wordable made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordable/wordable.php'), include('/plugins/wordable/includes/activator.php'), WordablePluginActivator::install, WordablePluginActivator->migrate, WordablePlugin->get_wordable_row, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 17:48:42 UTC] PHP Warning:  Attempt to read property "cache_updated_at" on null in /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php on line 263
+[10-Apr-2025 17:48:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wordable ADD plugin_version TEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wordable, PLUGIN_VERSION, text</li>
+<li>Executing: ALTER TABLE wp_wordable ADD plugin_version text | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wordable.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wordable/includes/activator.php(74): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wordable/includes/activator.php(5): WordablePluginActivator->migrate()
+#3 /wordpress/wp-content/plugins/wordable/includes/activator.php(91): WordablePluginActivator::install()
+#4 /wordpress/wp-content/plugins/wordable/wordable.php(20): include('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordable/wordab...')
+#7 /internal/eval.php(20): activate_plugin('wordable/wordab...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_wordable ADD plugin_version TEXT made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordable/wordable.php'), include('/plugins/wordable/includes/activator.php'), WordablePluginActivator::install, WordablePluginActivator->migrate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 17:48:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wordable ADD cache TEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wordable, CACHE, text</li>
+<li>Executing: ALTER TABLE wp_wordable ADD cache text | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wordable.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wordable/includes/activator.php(74): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wordable/includes/activator.php(5): WordablePluginActivator->migrate()
+#3 /wordpress/wp-content/plugins/wordable/includes/activator.php(91): WordablePluginActivator::install()
+#4 /wordpress/wp-content/plugins/wordable/wordable.php(20): include('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordable/wordab...')
+#7 /internal/eval.php(20): activate_plugin('wordable/wordab...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_wordable ADD cache TEXT made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordable/wordable.php'), include('/plugins/wordable/includes/activator.php'), WordablePluginActivator::install, WordablePluginActivator->migrate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 17:48:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wordable ADD cache_updated_at DATETIME</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wordable, CACHE_UPDATED_AT, datetime</li>
+<li>Executing: ALTER TABLE wp_wordable ADD cache_updated_at text | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wordable.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wordable/includes/activator.php(74): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wordable/includes/activator.php(5): WordablePluginActivator->migrate()
+#3 /wordpress/wp-content/plugins/wordable/includes/activator.php(91): WordablePluginActivator::install()
+#4 /wordpress/wp-content/plugins/wordable/wordable.php(20): include('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordable/wordab...')
+#7 /internal/eval.php(20): activate_plugin('wordable/wordab...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_wordable ADD cache_updated_at DATETIME made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordable/wordable.php'), include('/plugins/wordable/includes/activator.php'), WordablePluginActivator::install, WordablePluginActivator->migrate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 17:48:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wordable</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_wordable | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wordable.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php(261): wpdb->get_row('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php(101): WordablePlugin->get_wordable_row()
+#4 /wordpress/wp-content/plugins/wordable/includes/activator.php(79): WordablePlugin->update_wordable_row(Array)
+#5 /wordpress/wp-content/plugins/wordable/includes/activator.php(5): WordablePluginActivator->migrate()
+#6 /wordpress/wp-content/plugins/wordable/includes/activator.php(91): WordablePluginActivator::install()
+#7 /wordpress/wp-content/plugins/wordable/wordable.php(20): include('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordable/wordab...')
+#10 /internal/eval.php(20): activate_plugin('wordable/wordab...')
+#11 {main}</pre>
+ for query SELECT * FROM wp_wordable made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordable/wordable.php'), include('/plugins/wordable/includes/activator.php'), WordablePluginActivator::install, WordablePluginActivator->migrate, WordablePlugin->update_wordable_row, WordablePlugin->get_wordable_row, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 17:48:42 UTC] PHP Warning:  Attempt to read property "id" on null in /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php on line 105
+[10-Apr-2025 17:48:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE `wp_wordable` SET `plugin_version` = '8.2.10' WHERE `id` IS NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: UPDATE `wp_wordable` SET `plugin_version` = :param0  WHERE rowid IN (SELECT rowid FROM wp_wordable WHERE `id` IS NULL) | parameters: 8.2.10</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wordable.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2716): WP_SQLite_DB->query('UPDATE `wp_word...')
+#2 /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php(105): wpdb->update('wp_wordable', Array, Array)
+#3 /wordpress/wp-content/plugins/wordable/includes/activator.php(79): WordablePlugin->update_wordable_row(Array)
+#4 /wordpress/wp-content/plugins/wordable/includes/activator.php(5): WordablePluginActivator->migrate()
+#5 /wordpress/wp-content/plugins/wordable/includes/activator.php(91): WordablePluginActivator::install()
+#6 /wordpress/wp-content/plugins/wordable/wordable.php(20): include('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordable/wordab...')
+#9 /internal/eval.php(20): activate_plugin('wordable/wordab...')
+#10 {main}</pre>
+ for query UPDATE `wp_wordable` SET `plugin_version` = '8.2.10' WHERE `id` IS NULL made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordable/wordable.php'), include('/plugins/wordable/includes/activator.php'), WordablePluginActivator::install, WordablePluginActivator->migrate, WordablePlugin->update_wordable_row, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 17:48:43 UTC] PHP Warning:  Attempt to read property "cache_updated_at" on null in /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php on line 263
+[10-Apr-2025 17:48:43 UTC] PHP Warning:  Attempt to read property "secret" on null in /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php on line 253
+[10-Apr-2025 17:48:43 UTC] PHP Warning:  Undefined property: stdClass::$cache_updated_at in /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php on line 263
+[10-Apr-2025 17:48:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wordable</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_wordable | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wordable.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php(261): wpdb->get_row('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/wordable/includes/activator.php(58): WordablePlugin->get_wordable_row()
+#4 /wordpress/wp-content/plugins/wordable/includes/activator.php(5): WordablePluginActivator->migrate()
+#5 /wordpress/wp-content/plugins/wordable/includes/activator.php(91): WordablePluginActivator::install()
+#6 /wordpress/wp-content/plugins/wordable/wordable.php(20): include('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordable/wordab...')
+#9 /internal/eval.php(20): activate_plugin('wordable/wordab...')
+#10 {main}</pre>
+ for query SELECT * FROM wp_wordable made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordable/wordable.php'), include('/plugins/wordable/includes/activator.php'), WordablePluginActivator::install, WordablePluginActivator->migrate, WordablePlugin->get_wordable_row, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 17:48:51 UTC] PHP Warning:  Attempt to read property "cache_updated_at" on null in /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php on line 263
+[10-Apr-2025 17:48:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wordable ADD plugin_version TEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wordable, PLUGIN_VERSION, text</li>
+<li>Executing: ALTER TABLE wp_wordable ADD plugin_version text | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wordable.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wordable/includes/activator.php(74): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wordable/includes/activator.php(5): WordablePluginActivator->migrate()
+#3 /wordpress/wp-content/plugins/wordable/includes/activator.php(91): WordablePluginActivator::install()
+#4 /wordpress/wp-content/plugins/wordable/wordable.php(20): include('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordable/wordab...')
+#7 /internal/eval.php(20): activate_plugin('wordable/wordab...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_wordable ADD plugin_version TEXT made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordable/wordable.php'), include('/plugins/wordable/includes/activator.php'), WordablePluginActivator::install, WordablePluginActivator->migrate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 17:48:51 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wordable ADD cache TEXT</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wordable, CACHE, text</li>
+<li>Executing: ALTER TABLE wp_wordable ADD cache text | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wordable.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wordable/includes/activator.php(74): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wordable/includes/activator.php(5): WordablePluginActivator->migrate()
+#3 /wordpress/wp-content/plugins/wordable/includes/activator.php(91): WordablePluginActivator::install()
+#4 /wordpress/wp-content/plugins/wordable/wordable.php(20): include('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordable/wordab...')
+#7 /internal/eval.php(20): activate_plugin('wordable/wordab...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_wordable ADD cache TEXT made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordable/wordable.php'), include('/plugins/wordable/includes/activator.php'), WordablePluginActivator::install, WordablePluginActivator->migrate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 17:48:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wordable ADD cache_updated_at DATETIME</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_wordable, CACHE_UPDATED_AT, datetime</li>
+<li>Executing: ALTER TABLE wp_wordable ADD cache_updated_at text | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wordable.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wordable/includes/activator.php(74): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/wordable/includes/activator.php(5): WordablePluginActivator->migrate()
+#3 /wordpress/wp-content/plugins/wordable/includes/activator.php(91): WordablePluginActivator::install()
+#4 /wordpress/wp-content/plugins/wordable/wordable.php(20): include('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordable/wordab...')
+#7 /internal/eval.php(20): activate_plugin('wordable/wordab...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_wordable ADD cache_updated_at DATETIME made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordable/wordable.php'), include('/plugins/wordable/includes/activator.php'), WordablePluginActivator::install, WordablePluginActivator->migrate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 17:48:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_wordable</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_wordable | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wordable.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php(261): wpdb->get_row('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php(101): WordablePlugin->get_wordable_row()
+#4 /wordpress/wp-content/plugins/wordable/includes/activator.php(79): WordablePlugin->update_wordable_row(Array)
+#5 /wordpress/wp-content/plugins/wordable/includes/activator.php(5): WordablePluginActivator->migrate()
+#6 /wordpress/wp-content/plugins/wordable/includes/activator.php(91): WordablePluginActivator::install()
+#7 /wordpress/wp-content/plugins/wordable/wordable.php(20): include('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordable/wordab...')
+#10 /internal/eval.php(20): activate_plugin('wordable/wordab...')
+#11 {main}</pre>
+ for query SELECT * FROM wp_wordable made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordable/wordable.php'), include('/plugins/wordable/includes/activator.php'), WordablePluginActivator::install, WordablePluginActivator->migrate, WordablePlugin->update_wordable_row, WordablePlugin->get_wordable_row, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 17:48:52 UTC] PHP Warning:  Attempt to read property "id" on null in /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php on line 105
+[10-Apr-2025 17:48:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>UPDATE `wp_wordable` SET `plugin_version` = '8.2.10' WHERE `id` IS NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: UPDATE `wp_wordable` SET `plugin_version` = :param0  WHERE rowid IN (SELECT rowid FROM wp_wordable WHERE `id` IS NULL) | parameters: 8.2.10</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_wordable.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2716): WP_SQLite_DB->query('UPDATE `wp_word...')
+#2 /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php(105): wpdb->update('wp_wordable', Array, Array)
+#3 /wordpress/wp-content/plugins/wordable/includes/activator.php(79): WordablePlugin->update_wordable_row(Array)
+#4 /wordpress/wp-content/plugins/wordable/includes/activator.php(5): WordablePluginActivator->migrate()
+#5 /wordpress/wp-content/plugins/wordable/includes/activator.php(91): WordablePluginActivator::install()
+#6 /wordpress/wp-content/plugins/wordable/wordable.php(20): include('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wordable/wordab...')
+#9 /internal/eval.php(20): activate_plugin('wordable/wordab...')
+#10 {main}</pre>
+ for query UPDATE `wp_wordable` SET `plugin_version` = '8.2.10' WHERE `id` IS NULL made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wordable/wordable.php'), include('/plugins/wordable/includes/activator.php'), WordablePluginActivator::install, WordablePluginActivator->migrate, WordablePlugin->update_wordable_row, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 17:48:52 UTC] PHP Warning:  Attempt to read property "cache_updated_at" on null in /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php on line 263
+[10-Apr-2025 17:48:52 UTC] PHP Warning:  Attempt to read property "secret" on null in /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php on line 253
+[10-Apr-2025 17:48:52 UTC] PHP Warning:  Undefined property: stdClass::$cache_updated_at in /wordpress/wp-content/plugins/wordable/includes/wordable_plugin.php on line 263
+[10-Apr-2025 17:53:28 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/wc-qpaypro/admin/helpers/wp-qpaypro-woocommerce-admin.php:5
+Stack trace:
+#0 /wordpress/wp-content/plugins/wc-qpaypro/admin/wp-actions.php(6): include_once()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): qpaypro_woocommerce\Admin\dl_qpp_gateway_init('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/wc-qpaypro/admin/helpers/wp-qpaypro-woocommerce-admin.php on line 5
+[10-Apr-2025 17:53:37 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/wc-qpaypro/admin/helpers/wp-qpaypro-woocommerce-admin.php:5
+Stack trace:
+#0 /wordpress/wp-content/plugins/wc-qpaypro/admin/wp-actions.php(6): include_once()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): qpaypro_woocommerce\Admin\dl_qpp_gateway_init('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/wc-qpaypro/admin/helpers/wp-qpaypro-woocommerce-admin.php on line 5
+[10-Apr-2025 17:53:46 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/wc-qpaypro/admin/helpers/wp-qpaypro-woocommerce-admin.php:5
+Stack trace:
+#0 /wordpress/wp-content/plugins/wc-qpaypro/admin/wp-actions.php(6): include_once()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): qpaypro_woocommerce\Admin\dl_qpp_gateway_init('')
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/wc-qpaypro/admin/helpers/wp-qpaypro-woocommerce-admin.php on line 5
+[10-Apr-2025 17:54:27 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744307665.069)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wordpr...', false)
-#10 /internal/eval.php(20): activate_plugin('wordpress-autos...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp-autosharepost-fb-description', '40', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wordpress-autosharepost/wp-autosharepost.php'), WP_Hook->do_action, WP_Hook->apply_filters, WordpressAutoSharePost->activatePlugin, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:58:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:58:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:58:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:58:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:58:03 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:58:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:58:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:58:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:58:30 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:58:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:58:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:58:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:58:57 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 12
-[09-Apr-2025 03:58:57 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 14
-[09-Apr-2025 03:58:57 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:58:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:58:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:58:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:58:58 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 12
-[09-Apr-2025 03:58:58 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 14
-[09-Apr-2025 03:59:06 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 12
-[09-Apr-2025 03:59:06 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 14
-[09-Apr-2025 03:59:07 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 12
-[09-Apr-2025 03:59:07 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 14
-[09-Apr-2025 03:59:15 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 12
-[09-Apr-2025 03:59:15 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 14
-[09-Apr-2025 03:59:16 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 12
-[09-Apr-2025 03:59:16 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-export-users-plus/wp_export_users_plus.php on line 14
-[09-Apr-2025 03:59:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rewrite_rules', 'a:123:{s:11:\"^wp-json/?$\";s:22:\"index.php?rest_route=/\";s:14:\"^wp-json/(.*)?\";s:33:\"index.php?rest_route=/$matches[1]\";s:21:\"^index.php/wp-json/?$\";s:22:\"index.php?rest_route=/\";s:24:\"^index.php/wp-json/(.*)?\";s:33:\"index.php?rest_route=/$matches[1]\";s:17:\"^wp-sitemap\\.xml$\";s:23:\"index.php?sitemap=index\";s:17:\"^wp-sitemap\\.xsl$\";s:36:\"index.php?sitemap-stylesheet=sitemap\";s:23:\"^wp-sitemap-index\\.xsl$\";s:34:\"index.php?sitemap-stylesheet=index\";s:48:\"^wp-sitemap-([a-z]+?)-([a-z\\d_-]+?)-(\\d+?)\\.xml$\";s:75:\"index.php?sitemap=$matches[1]&sitemap-subtype=$matches[2]&paged=$matches[3]\";s:34:\"^wp-sitemap-([a-z]+?)-(\\d+?)\\.xml$\";s:47:\"index.php?sitemap=$matches[1]&paged=$matches[2]\";s:29:\"api/ldp/v1/%ldp_container%/?$\";s:36:\"index.php?%ldp_container%$matches[1]\";s:59:\"api/ldp/v1/%ldp_container%/feed/(feed|rdf|rss|rss2|atom)/?$\";s:53:\"index.php?%ldp_container%$matches[1]&feed=$matches[2]\";s:54:\"api/ldp/v1/%ldp_container%/(feed|rdf|rss|rss2|atom)/?$\";s:53:\"index.php?%ldp_container%$matches[1]&feed=$matches[2]\";s:46:\"api/ldp/v1/%ldp_container%/page/([0-9]{1,})/?$\";s:50:\"index.php?post_type=ldp_resource&paged=$matches[1]\";s:47:\"category/(.+?)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:52:\"index.php?category_name=$matches[1]&feed=$matches[2]\";s:42:\"category/(.+?)/(feed|rdf|rss|rss2|atom)/?$\";s:52:\"index.php?category_name=$matches[1]&feed=$matches[2]\";s:23:\"category/(.+?)/embed/?$\";s:46:\"index.php?category_name=$matches[1]&embed=true\";s:35:\"category/(.+?)/page/?([0-9]{1,})/?$\";s:53:\"index.php?category_name=$matches[1]&paged=$matches[2]\";s:17:\"category/(.+?)/?$\";s:35:\"index.php?category_name=$matches[1]\";s:44:\"tag/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:42:\"index.php?tag=$matches[1]&feed=$matches[2]\";s:39:\"tag/([^/]+)/(feed|rdf|rss|rss2|atom)/?$\";s:42:\"index.php?tag=$matches[1]&feed=$matches[2]\";s:20:\"tag/([^/]+)/embed/?$\";s:36:\"index.php?tag=$matches[1]&embed=true\";s:32:\"tag/([^/]+)/page/?([0-9]{1,})/?$\";s:43:\"index.php?tag=$matches[1]&paged=$matches[2]\";s:14:\"tag/([^/]+)/?$\";s:25:\"index.php?tag=$matches[1]\";s:45:\"type/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:50:\"index.php?post_format=$matches[1]&feed=$matches[2]\";s:40:\"type/([^/]+)/(feed|rdf|rss|rss2|atom)/?$\";s:50:\"index.php?post_format=$matches[1]&feed=$matches[2]\";s:21:\"type/([^/]+)/embed/?$\";s:44:\"index.php?post_format=$matches[1]&embed=true\";s:33:\"type/([^/]+)/page/?([0-9]{1,})/?$\";s:51:\"index.php?post_format=$matches[1]&paged=$matches[2]\";s:15:\"type/([^/]+)/?$\";s:33:\"index.php?post_format=$matches[1]\";s:54:\"api/ldp/v1/%ldp_container%/[^/]+/attachment/([^/]+)/?$\";s:32:\"index.php?attachment=$matches[1]\";s:64:\"api/ldp/v1/%ldp_container%/[^/]+/attachment/([^/]+)/trackback/?$\";s:37:\"index.php?attachment=$matches[1]&tb=1\";s:84:\"api/ldp/v1/%ldp_container%/[^/]+/attachment/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:49:\"index.php?attachment=$matches[1]&feed=$matches[2]\";s:79:\"api/ldp/v1/%ldp_container%/[^/]+/attachment/([^/]+)/(feed|rdf|rss|rss2|atom)/?$\";s:49:\"index.php?attachment=$matches[1]&feed=$matches[2]\";s:79:\"api/ldp/v1/%ldp_container%/[^/]+/attachment/([^/]+)/comment-page-([0-9]{1,})/?$\";s:50:\"index.php?attachment=$matches[1]&cpage=$matches[2]\";s:60:\"api/ldp/v1/%ldp_container%/[^/]+/attachment/([^/]+)/embed/?$\";s:43:\"index.php?attachment=$matches[1]&embed=true\";s:43:\"api/ldp/v1/%ldp_container%/([^/]+)/embed/?$\";s:72:\"index.php?%ldp_container%$matches[1]&ldp_resource=$matches[2]&embed=true\";s:47:\"api/ldp/v1/%ldp_container%/([^/]+)/trackback/?$\";s:66:\"index.php?%ldp_container%$matches[1]&ldp_resource=$matches[2]&tb=1\";s:67:\"api/ldp/v1/%ldp_container%/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:78:\"index.php?%ldp_container%$matches[1]&ldp_resource=$matches[2]&feed=$matches[3]\";s:62:\"api/ldp/v1/%ldp_container%/([^/]+)/(feed|rdf|rss|rss2|atom)/?$\";s:78:\"index.php?%ldp_container%$matches[1]&ldp_resource=$matches[2]&feed=$matches[3]\";s:55:\"api/ldp/v1/%ldp_container%/([^/]+)/page/?([0-9]{1,})/?$\";s:79:\"index.php?%ldp_container%$matches[1]&ldp_resource=$matches[2]&paged=$matches[3]\";s:62:\"api/ldp/v1/%ldp_container%/([^/]+)/comment-page-([0-9]{1,})/?$\";s:79:\"index.php?%ldp_container%$matches[1]&ldp_resource=$matches[2]&cpage=$matches[3]\";s:51:\"api/ldp/v1/%ldp_container%/([^/]+)(?:/([0-9]+))?/?$\";s:78:\"index.php?%ldp_container%$matches[1]&ldp_resource=$matches[2]&page=$matches[3]\";s:43:\"api/ldp/v1/%ldp_container%/[^/]+/([^/]+)/?$\";s:32:\"index.php?attachment=$matches[1]\";s:53:\"api/ldp/v1/%ldp_container%/[^/]+/([^/]+)/trackback/?$\";s:37:\"index.php?attachment=$matches[1]&tb=1\";s:73:\"api/ldp/v1/%ldp_container%/[^/]+/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:49:\"index.php?attachment=$matches[1]&feed=$matches[2]\";s:68:\"api/ldp/v1/%ldp_container%/[^/]+/([^/]+)/(feed|rdf|rss|rss2|atom)/?$\";s:49:\"index.php?attachment=$matches[1]&feed=$matches[2]\";s:68:\"api/ldp/v1/%ldp_container%/[^/]+/([^/]+)/comment-page-([0-9]{1,})/?$\";s:50:\"index.php?attachment=$matches[1]&cpage=$matches[2]\";s:49:\"api/ldp/v1/%ldp_container%/[^/]+/([^/]+)/embed/?$\";s:43:\"index.php?attachment=$matches[1]&embed=true\";s:35:\"api/ldp/v1/%ldp_container%/embed/?$\";s:47:\"index.php?%ldp_container%$matches[1]&embed=true\";s:47:\"api/ldp/v1/%ldp_container%/page/?([0-9]{1,})/?$\";s:54:\"index.php?%ldp_container%$matches[1]&paged=$matches[2]\";s:54:\"api/ldp/v1/%ldp_container%/comment-page-([0-9]{1,})/?$\";s:54:\"index.php?%ldp_container%$matches[1]&cpage=$matches[2]\";s:12:\"robots\\.txt$\";s:18:\"index.php?robots=1\";s:13:\"favicon\\.ico$\";s:19:\"index.php?favicon=1\";s:12:\"sitemap\\.xml\";s:24:\"index.php??sitemap=index\";s:48:\".*wp-(atom|rdf|rss|rss2|feed|commentsrss2)\\.php$\";s:18:\"index.php?feed=old\";s:20:\".*wp-app\\.php(/.*)?$\";s:19:\"index.php?error=403\";s:18:\".*wp-register.php$\";s:23:\"index.php?register=true\";s:32:\"feed/(feed|rdf|rss|rss2|atom)/?$\";s:27:\"index.php?&feed=$matches[1]\";s:27:\"(feed|rdf|rss|rss2|atom)/?$\";s:27:\"index.php?&feed=$matches[1]\";s:8:\"embed/?$\";s:21:\"index.php?&embed=true\";s:20:\"page/?([0-9]{1,})/?$\";s:28:\"index.php?&paged=$matches[1]\";s:41:\"comments/feed/(feed|rdf|rss|rss2|atom)/?$\";s:42:\"index.php?&feed=$matches[1]&withcomments=1\";s:36:\"comments/(feed|rdf|rss|rss2|atom)/?$\";s:42:\"index.php?&feed=$matches[1]&withcomments=1\";s:17:\"comments/embed/?$\";s:21:\"index.php?&embed=true\";s:44:\"search/(.+)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:40:\"index.php?s=$matches[1]&feed=$matches[2]\";s:39:\"search/(.+)/(feed|rdf|rss|rss2|atom)/?$\";s:40:\"index.php?s=$matches[1]&feed=$matches[2]\";s:20:\"search/(.+)/embed/?$\";s:34:\"index.php?s=$matches[1]&embed=true\";s:32:\"search/(.+)/page/?([0-9]{1,})/?$\";s:41:\"index.php?s=$matches[1]&paged=$matches[2]\";s:14:\"search/(.+)/?$\";s:23:\"index.php?s=$matches[1]\";s:47:\"author/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:50:\"index.php?author_name=$matches[1]&feed=$matches[2]\";s:42:\"author/([^/]+)/(feed|rdf|rss|rss2|atom)/?$\";s:50:\"index.php?author_name=$matches[1]&feed=$matches[2]\";s:23:\"author/([^/]+)/embed/?$\";s:44:\"index.php?author_name=$matches[1]&embed=true\";s:35:\"author/([^/]+)/page/?([0-9]{1,})/?$\";s:51:\"index.php?author_name=$matches[1]&paged=$matches[2]\";s:17:\"author/([^/]+)/?$\";s:33:\"index.php?author_name=$matches[1]\";s:69:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/feed/(feed|rdf|rss|rss2|atom)/?$\";s:80:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]&feed=$matches[4]\";s:64:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/(feed|rdf|rss|rss2|atom)/?$\";s:80:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]&feed=$matches[4]\";s:45:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/embed/?$\";s:74:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]&embed=true\";s:57:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/page/?([0-9]{1,})/?$\";s:81:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]&paged=$matches[4]\";s:39:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/?$\";s:63:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]\";s:56:\"([0-9]{4})/([0-9]{1,2})/feed/(feed|rdf|rss|rss2|atom)/?$\";s:64:\"index.php?year=$matches[1]&monthnum=$matches[2]&feed=$matches[3]\";s:51:\"([0-9]{4})/([0-9]{1,2})/(feed|rdf|rss|rss2|atom)/?$\";s:64:\"index.php?year=$matches[1]&monthnum=$matches[2]&feed=$matches[3]\";s:32:\"([0-9]{4})/([0-9]{1,2})/embed/?$\";s:58:\"index.php?year=$matches[1]&monthnum=$matches[2]&embed=true\";s:44:\"([0-9]{4})/([0-9]{1,2})/page/?([0-9]{1,})/?$\";s:65:\"index.php?year=$matches[1]&monthnum=$matches[2]&paged=$matches[3]\";s:26:\"([0-9]{4})/([0-9]{1,2})/?$\";s:47:\"index.php?year=$matches[1]&monthnum=$matches[2]\";s:43:\"([0-9]{4})/feed/(feed|rdf|rss|rss2|atom)/?$\";s:43:\"index.php?year=$matches[1]&feed=$matches[2]\";s:38:\"([0-9]{4})/(feed|rdf|rss|rss2|atom)/?$\";s:43:\"index.php?year=$matches[1]&feed=$matches[2]\";s:19:\"([0-9]{4})/embed/?$\";s:37:\"index.php?year=$matches[1]&embed=true\";s:31:\"([0-9]{4})/page/?([0-9]{1,})/?$\";s:44:\"index.php?year=$matches[1]&paged=$matches[2]\";s:13:\"([0-9]{4})/?$\";s:26:\"index.php?year=$matches[1]\";s:58:\"[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/attachment/([^/]+)/?$\";s:32:\"index.php?attachment=$matches[1]\";s:68:\"[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/attachment/([^/]+)/trackback/?$\";s:37:\"index.php?attachment=$matches[1]&tb=1\";s:88:\"[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/attachment/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:49:\"index.php?attachment=$matches[1]&feed=$matches[2]\";s:83:\"[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/attachment/([^/]+)/(feed|rdf|rss|rss2|atom)/?$\";s:49:\"index.php?attachment=$matches[1]&feed=$matches[2]\";s:83:\"[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/attachment/([^/]+)/comment-page-([0-9]{1,})/?$\";s:50:\"index.php?attachment=$matches[1]&cpage=$matches[2]\";s:64:\"[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/attachment/([^/]+)/embed/?$\";s:43:\"index.php?attachment=$matches[1]&embed=true\";s:53:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([^/]+)/embed/?$\";s:91:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]&name=$matches[4]&embed=true\";s:57:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([^/]+)/trackback/?$\";s:85:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]&name=$matches[4]&tb=1\";s:77:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:97:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]&name=$matches[4]&feed=$matches[5]\";s:72:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([^/]+)/(feed|rdf|rss|rss2|atom)/?$\";s:97:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]&name=$matches[4]&feed=$matches[5]\";s:65:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([^/]+)/page/?([0-9]{1,})/?$\";s:98:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]&name=$matches[4]&paged=$matches[5]\";s:72:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([^/]+)/comment-page-([0-9]{1,})/?$\";s:98:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]&name=$matches[4]&cpage=$matches[5]\";s:61:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([^/]+)(?:/([0-9]+))?/?$\";s:97:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]&name=$matches[4]&page=$matches[5]\";s:47:\"[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/([^/]+)/?$\";s:32:\"index.php?attachment=$matches[1]\";s:57:\"[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/([^/]+)/trackback/?$\";s:37:\"index.php?attachment=$matches[1]&tb=1\";s:77:\"[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:49:\"index.php?attachment=$matches[1]&feed=$matches[2]\";s:72:\"[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/([^/]+)/(feed|rdf|rss|rss2|atom)/?$\";s:49:\"index.php?attachment=$matches[1]&feed=$matches[2]\";s:72:\"[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/([^/]+)/comment-page-([0-9]{1,})/?$\";s:50:\"index.php?attachment=$matches[1]&cpage=$matches[2]\";s:53:\"[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/([^/]+)/embed/?$\";s:43:\"index.php?attachment=$matches[1]&embed=true\";s:64:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/comment-page-([0-9]{1,})/?$\";s:81:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]&cpage=$matches[4]\";s:51:\"([0-9]{4})/([0-9]{1,2})/comment-page-([0-9]{1,})/?$\";s:65:\"index.php?year=$matches[1]&monthnum=$matches[2]&cpage=$matches[3]\";s:38:\"([0-9]{4})/comment-page-([0-9]{1,})/?$\";s:44:\"index.php?year=$matches[1]&cpage=$matches[2]\";s:27:\".?.+?/attachment/([^/]+)/?$\";s:32:\"index.php?attachment=$matches[1]\";s:37:\".?.+?/attachment/([^/]+)/trackback/?$\";s:37:\"index.php?attachment=$matches[1]&tb=1\";s:57:\".?.+?/attachment/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:49:\"index.php?attachment=$matches[1]&feed=$matches[2]\";s:52:\".?.+?/attachment/([^/]+)/(feed|rdf|rss|rss2|atom)/?$\";s:49:\"index.php?attachment=$matches[1]&feed=$matches[2]\";s:52:\".?.+?/attachment/([^/]+)/comment-page-([0-9]{1,})/?$\";s:50:\"index.php?attachment=$matches[1]&cpage=$matches[2]\";s:33:\".?.+?/attachment/([^/]+)/embed/?$\";s:43:\"index.php?attachment=$matches[1]&embed=true\";s:16:\"(.?.+?)/embed/?$\";s:41:\"index.php?pagename=$matches[1]&embed=true\";s:20:\"(.?.+?)/trackback/?$\";s:35:\"index.php?pagename=$matches[1]&tb=1\";s:40:\"(.?.+?)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:47:\"index.php?pagename=$matches[1]&feed=$matches[2]\";s:35:\"(.?.+?)/(feed|rdf|rss|rss2|atom)/?$\";s:47:\"index.php?pagename=$matches[1]&feed=$matches[2]\";s:28:\"(.?.+?)/page/?([0-9]{1,})/?$\";s:48:\"index.php?pagename=$matches[1]&paged=$matches[2]\";s:35:\"(.?.+?)/comment-page-([0-9]{1,})/?$\";s:48:\"index.php?pagename=$matches[1]&cpage=$matches[2]\";s:24:\"(.?.+?)(?:/([0-9]+))?/?$\";s:47:\"index.php?pagename=$matches[1]&page=$matches[2]\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'rewrite_rules' , 'a:123:{s:11:&quot;^wp-json/?$&quot;;s:22:&quot;index.php?rest_route=/&quot;;s:14:&quot;^wp-json/(.*)?&quot;;s:33:&quot;index.php?rest_route=/$matches[1]&quot;;s:21:&quot;^index.php/wp-json/?$&quot;;s:22:&quot;index.php?rest_route=/&quot;;s:24:&quot;^index.php/wp-json/(.*)?&quot;;s:33:&quot;index.php?rest_route=/$matches[1]&quot;;s:17:&quot;^wp-sitemap\.xml$&quot;;s:23:&quot;index.php?sitemap=index&quot;;s:17:&quot;^wp-sitemap\.xsl$&quot;;s:36:&quot;index.php?sitemap-stylesheet=sitemap&quot;;s:23:&quot;^wp-sitemap-index\.xsl$&quot;;s:34:&quot;index.php?sitemap-stylesheet=index&quot;;s:48:&quot;^wp-sitemap-([a-z]+?)-([a-z\d_-]+?)-(\d+?)\.xml$&quot;;s:75:&quot;index.php?sitemap=$matches[1]&amp;sitemap-subtype=$matches[2]&amp;paged=$matches[3]&quot;;s:34:&quot;^wp-sitemap-([a-z]+?)-(\d+?)\.xml$&quot;;s:47:&quot;index.php?sitemap=$matches[1]&amp;paged=$matches[2]&quot;;s:29:&quot;api/ldp/v1/%ldp_container%/?$&quot;;s:36:&quot;index.php?%ldp_container%$matches[1]&quot;;s:59:&quot;api/ldp/v1/%ldp_container%/feed/(feed|rdf|rss|rss2|atom)/?$&quot;;s:53:&quot;index.php?%ldp_container%$matches[1]&amp;feed=$matches[2]&quot;;s:54:&quot;api/ldp/v1/%ldp_container%/(feed|rdf|rss|rss2|atom)/?$&quot;;s:53:&quot;index.php?%ldp_container%$matches[1]&amp;feed=$matches[2]&quot;;s:46:&quot;api/ldp/v1/%ldp_container%/page/([0-9]{1,})/?$&quot;;s:50:&quot;index.php?post_type=ldp_resource&amp;paged=$matches[1]&quot;;s:47:&quot;category/(.+?)/feed/(feed|rdf|rss|rss2|atom)/?$&quot;;s:52:&quot;index.php?category_name=$matches[1]&amp;feed=$matches[2]&quot;;s:42:&quot;category/(.+?)/(feed|rdf|rss|rss2|atom)/?$&quot;;s:52:&quot;index.php?category_name=$matches[1]&amp;feed=$matches[2]&quot;;s:23:&quot;category/(.+?)/embed/?$&quot;;s:46:&quot;index.php?category_name=$matches[1]&amp;embed=true&quot;;s:35:&quot;category/(.+?)/page/?([0-9]{1,})/?$&quot;;s:53:&quot;index.php?category_name=$matches[1]&amp;paged=$matches[2]&quot;;s:17:&quot;category/(.+?)/?$&quot;;s:35:&quot;index.php?category_name=$matches[1]&quot;;s:44:&quot;tag/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$&quot;;s:42:&quot;index.php?tag=$matches[1]&amp;feed=$matches[2]&quot;;s:39:&quot;tag/([^/]+)/(feed|rdf|rss|rss2|atom)/?$&quot;;s:42:&quot;index.php?tag=$matches[1]&amp;feed=$matches[2]&quot;;s:20:&quot;tag/([^/]+)/embed/?$&quot;;s:36:&quot;index.php?tag=$matches[1]&amp;embed=true&quot;;s:32:&quot;tag/([^/]+)/page/?([0-9]{1,})/?$&quot;;s:43:&quot;index.php?tag=$matches[1]&amp;paged=$matches[2]&quot;;s:14:&quot;tag/([^/]+)/?$&quot;;s:25:&quot;index.php?tag=$matches[1]&quot;;s:45:&quot;type/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$&quot;;s:50:&quot;index.php?post_format=$matches[1]&amp;feed=$matches[2]&quot;;s:40:&quot;type/([^/]+)/(feed|rdf|rss|rss2|atom)/?$&quot;;s:50:&quot;index.php?post_format=$matches[1]&amp;feed=$matches[2]&quot;;s:21:&quot;type/([^/]+)/embed/?$&quot;;s:44:&quot;index.php?post_format=$matches[1]&amp;embed=true&quot;;s:33:&quot;type/([^/]+)/page/?([0-9]{1,})/?$&quot;;s:51:&quot;index.php?post_format=$matches[1]&amp;paged=$matches[2]&quot;;s:15:&quot;type/([^/]+)/?$&quot;;s:33:&quot;index.php?post_format=$matches[1]&quot;;s:54:&quot;api/ldp/v1/%ldp_container%/[^/]+/attachment/([^/]+)/?$&quot;;s:32:&quot;index.php?attachment=$matches[1]&quot;;s:64:&quot;api/ldp/v1/%ldp_container%/[^/]+/attachment/([^/]+)/trackback/?$&quot;;s:37:&quot;index.php?attachment=$matches[1]&amp;tb=1&quot;;s:84:&quot;api/ldp/v1/%ldp_container%/[^/]+/attachment/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$&quot;;s:49:&quot;index.php?attachment=$matches[1]&amp;feed=$matches[2]&quot;;s:79:&quot;api/ldp/v1/%ldp_container%/[^/]+/attachment/([^/]+)/(feed|rdf|rss|rss2|atom)/?$&quot;;s:49:&quot;index.php?attachment=$matches[1]&amp;feed=$matches[2]&quot;;s:79:&quot;api/ldp/v1/%ldp_container%/[^/]+/attachment/([^/]+)/comment-page-([0-9]{1,})/?$&quot;;s:50:&quot;index.php?attachment=$matches[1]&amp;cpage=$matches[2]&quot;;s:60:&quot;api/ldp/v1/%ldp_container%/[^/]+/attachment/([^/]+)/embed/?$&quot;;s:43:&quot;index.php?attachment=$matches[1]&amp;embed=true&quot;;s:43:&quot;api/ldp/v1/%ldp_container%/([^/]+)/embed/?$&quot;;s:72:&quot;index.php?%ldp_container%$matches[1]&amp;ldp_resource=$matches[2]&amp;embed=true&quot;;s:47:&quot;api/ldp/v1/%ldp_container%/([^/]+)/trackback/?$&quot;;s:66:&quot;index.php?%ldp_container%$matches[1]&amp;ldp_resource=$matches[2]&amp;tb=1&quot;;s:67:&quot;api/ldp/v1/%ldp_container%/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$&quot;;s:78:&quot;index.php?%ldp_container%$matches[1]&amp;ldp_resource=$matches[2]&amp;feed=$matches[3]&quot;;s:62:&quot;api/ldp/v1/%ldp_container%/([^/]+)/(feed|rdf|rss|rss2|atom)/?$&quot;;s:78:&quot;index.php?%ldp_container%$matches[1]&amp;ldp_resource=$matches[2]&amp;feed=$matches[3]&quot;;s:55:&quot;api/ldp/v1/%ldp_container%/([^/]+)/page/?([0-9]{1,})/?$&quot;;s:79:&quot;index.php?%ldp_container%$matches[1]&amp;ldp_resource=$matches[2]&amp;paged=$matches[3]&quot;;s:62:&quot;api/ldp/v1/%ldp_container%/([^/]+)/comment-page-([0-9]{1,})/?$&quot;;s:79:&quot;index.php?%ldp_container%$matches[1]&amp;ldp_resource=$matches[2]&amp;cpage=$matches[3]&quot;;s:51:&quot;api/ldp/v1/%ldp_container%/([^/]+)(?:/([0-9]+))?/?$&quot;;s:78:&quot;index.php?%ldp_container%$matches[1]&amp;ldp_resource=$matches[2]&amp;page=$matches[3]&quot;;s:43:&quot;api/ldp/v1/%ldp_container%/[^/]+/([^/]+)/?$&quot;;s:32:&quot;index.php?attachment=$matches[1]&quot;;s:53:&quot;api/ldp/v1/%ldp_container%/[^/]+/([^/]+)/trackback/?$&quot;;s:37:&quot;index.php?attachment=$matches[1]&amp;tb=1&quot;;s:73:&quot;api/ldp/v1/%ldp_container%/[^/]+/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$&quot;;s:49:&quot;index.php?attachment=$matches[1]&amp;feed=$matches[2]&quot;;s:68:&quot;api/ldp/v1/%ldp_container%/[^/]+/([^/]+)/(feed|rdf|rss|rss2|atom)/?$&quot;;s:49:&quot;index.php?attachment=$matches[1]&amp;feed=$matches[2]&quot;;s:68:&quot;api/ldp/v1/%ldp_container%/[^/]+/([^/]+)/comment-page-([0-9]{1,})/?$&quot;;s:50:&quot;index.php?attachment=$matches[1]&amp;cpage=$matches[2]&quot;;s:49:&quot;api/ldp/v1/%ldp_container%/[^/]+/([^/]+)/embed/?$&quot;;s:43:&quot;index.php?attachment=$matches[1]&amp;embed=true&quot;;s:35:&quot;api/ldp/v1/%ldp_container%/embed/?$&quot;;s:47:&quot;index.php?%ldp_container%$matches[1]&amp;embed=true&quot;;s:47:&quot;api/ldp/v1/%ldp_container%/page/?([0-9]{1,})/?$&quot;;s:54:&quot;index.php?%ldp_container%$matches[1]&amp;paged=$matches[2]&quot;;s:54:&quot;api/ldp/v1/%ldp_container%/comment-page-([0-9]{1,})/?$&quot;;s:54:&quot;index.php?%ldp_container%$matches[1]&amp;cpage=$matches[2]&quot;;s:12:&quot;robots\.txt$&quot;;s:18:&quot;index.php?robots=1&quot;;s:13:&quot;favicon\.ico$&quot;;s:19:&quot;index.php?favicon=1&quot;;s:12:&quot;sitemap\.xml&quot;;s:24:&quot;index.php??sitemap=index&quot;;s:48:&quot;.*wp-(atom|rdf|rss|rss2|feed|commentsrss2)\.php$&quot;;s:18:&quot;index.php?feed=old&quot;;s:20:&quot;.*wp-app\.php(/.*)?$&quot;;s:19:&quot;index.php?error=403&quot;;s:18:&quot;.*wp-register.php$&quot;;s:23:&quot;index.php?register=true&quot;;s:32:&quot;feed/(feed|rdf|rss|rss2|atom)/?$&quot;;s:27:&quot;index.php?&amp;feed=$matches[1]&quot;;s:27:&quot;(feed|rdf|rss|rss2|atom)/?$&quot;;s:27:&quot;index.php?&amp;feed=$matches[1]&quot;;s:8:&quot;embed/?$&quot;;s:21:&quot;index.php?&amp;embed=true&quot;;s:20:&quot;page/?([0-9]{1,})/?$&quot;;s:28:&quot;index.php?&amp;paged=$matches[1]&quot;;s:41:&quot;comments/feed/(feed|rdf|rss|rss2|atom)/?$&quot;;s:42:&quot;index.php?&amp;feed=$matches[1]&amp;withcomments=1&quot;;s:36:&quot;comments/(feed|rdf|rss|rss2|atom)/?$&quot;;s:42:&quot;index.php?&amp;feed=$matches[1]&amp;withcomments=1&quot;;s:17:&quot;comments/embed/?$&quot;;s:21:&quot;index.php?&amp;embed=true&quot;;s:44:&quot;search/(.+)/feed/(feed|rdf|rss|rss2|atom)/?$&quot;;s:40:&quot;index.php?s=$matches[1]&amp;feed=$matches[2]&quot;;s:39:&quot;search/(.+)/(feed|rdf|rss|rss2|atom)/?$&quot;;s:40:&quot;index.php?s=$matches[1]&amp;feed=$matches[2]&quot;;s:20:&quot;search/(.+)/embed/?$&quot;;s:34:&quot;index.php?s=$matches[1]&amp;embed=true&quot;;s:32:&quot;search/(.+)/page/?([0-9]{1,})/?$&quot;;s:41:&quot;index.php?s=$matches[1]&amp;paged=$matches[2]&quot;;s:14:&quot;search/(.+)/?$&quot;;s:23:&quot;index.php?s=$matches[1]&quot;;s:47:&quot;author/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$&quot;;s:50:&quot;index.php?author_name=$matches[1]&amp;feed=$matches[2]&quot;;s:42:&quot;author/([^/]+)/(feed|rdf|rss|rss2|atom)/?$&quot;;s:50:&quot;index.php?author_name=$matches[1]&amp;feed=$matches[2]&quot;;s:23:&quot;author/([^/]+)/embed/?$&quot;;s:44:&quot;index.php?author_name=$matches[1]&amp;embed=true&quot;;s:35:&quot;author/([^/]+)/page/?([0-9]{1,})/?$&quot;;s:51:&quot;index.php?author_name=$matches[1]&amp;paged=$matches[2]&quot;;s:17:&quot;author/([^/]+)/?$&quot;;s:33:&quot;index.php?author_name=$matches[1]&quot;;s:69:&quot;([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/feed/(feed|rdf|rss|rss2|atom)/?$&quot;;s:80:&quot;index.php?year=$matches[1]&amp;monthnum=$matches[2]&amp;day=$matches[3]&amp;feed=$matches[4]&quot;;s:64:&quot;([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/(feed|rdf|rss|rss2|atom)/?$&quot;;s:80:&quot;index.php?year=$matches[1]&amp;monthnum=$matches[2]&amp;day=$matches[3]&amp;feed=$matches[4]&quot;;s:45:&quot;([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/embed/?$&quot;;s:74:&quot;index.php?year=$matches[1]&amp;monthnum=$matches[2]&amp;day=$matches[3]&amp;embed=true&quot;;s:57:&quot;([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/page/?([0-9]{1,})/?$&quot;;s:81:&quot;index.php?year=$matches[1]&amp;monthnum=$matches[2]&amp;day=$matches[3]&amp;paged=$matches[4]&quot;;s:39:&quot;([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/?$&quot;;s:63:&quot;index.php?year=$matches[1]&amp;monthnum=$matches[2]&amp;day=$matches[3]&quot;;s:56:&quot;([0-9]{4})/([0-9]{1,2})/feed/(feed|rdf|rss|rss2|atom)/?$&quot;;s:64:&quot;index.php?year=$matches[1]&amp;monthnum=$matches[2]&amp;feed=$matches[3]&quot;;s:51:&quot;([0-9]{4})/([0-9]{1,2})/(feed|rdf|rss|rss2|atom)/?$&quot;;s:64:&quot;index.php?year=$matches[1]&amp;monthnum=$matches[2]&amp;feed=$matches[3]&quot;;s:32:&quot;([0-9]{4})/([0-9]{1,2})/embed/?$&quot;;s:58:&quot;index.php?year=$matches[1]&amp;monthnum=$matches[2]&amp;embed=true&quot;;s:44:&quot;([0-9]{4})/([0-9]{1,2})/page/?([0-9]{1,})/?$&quot;;s:65:&quot;index.php?year=$matches[1]&amp;monthnum=$matches[2]&amp;paged=$matches[3]&quot;;s:26:&quot;([0-9]{4})/([0-9]{1,2})/?$&quot;;s:47:&quot;index.php?year=$matches[1]&amp;monthnum=$matches[2]&quot;;s:43:&quot;([0-9]{4})/feed/(feed|rdf|rss|rss2|atom)/?$&quot;;s:43:&quot;index.php?year=$matches[1]&amp;feed=$matches[2]&quot;;s:38:&quot;([0-9]{4})/(feed|rdf|rss|rss2|atom)/?$&quot;;s:43:&quot;index.php?year=$matches[1]&amp;feed=$matches[2]&quot;;s:19:&quot;([0-9]{4})/embed/?$&quot;;s:37:&quot;index.php?year=$matches[1]&amp;embed=true&quot;;s:31:&quot;([0-9]{4})/page/?([0-9]{1,})/?$&quot;;s:44:&quot;index.php?year=$matches[1]&amp;paged=$matches[2]&quot;;s:13:&quot;([0-9]{4})/?$&quot;;s:26:&quot;index.php?year=$matches[1]&quot;;s:58:&quot;[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/attachment/([^/]+)/?$&quot;;s:32:&quot;index.php?attachment=$matches[1]&quot;;s:68:&quot;[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/attachment/([^/]+)/trackback/?$&quot;;s:37:&quot;index.php?attachment=$matches[1]&amp;tb=1&quot;;s:88:&quot;[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/attachment/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$&quot;;s:49:&quot;index.php?attachment=$matches[1]&amp;feed=$matches[2]&quot;;s:83:&quot;[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/attachment/([^/]+)/(feed|rdf|rss|rss2|atom)/?$&quot;;s:49:&quot;index.php?attachment=$matches[1]&amp;feed=$matches[2]&quot;;s:83:&quot;[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/attachment/([^/]+)/comment-page-([0-9]{1,})/?$&quot;;s:50:&quot;index.php?attachment=$matches[1]&amp;cpage=$matches[2]&quot;;s:64:&quot;[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/attachment/([^/]+)/embed/?$&quot;;s:43:&quot;index.php?attachment=$matches[1]&amp;embed=true&quot;;s:53:&quot;([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([^/]+)/embed/?$&quot;;s:91:&quot;index.php?year=$matches[1]&amp;monthnum=$matches[2]&amp;day=$matches[3]&amp;name=$matches[4]&amp;embed=true&quot;;s:57:&quot;([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([^/]+)/trackback/?$&quot;;s:85:&quot;index.php?year=$matches[1]&amp;monthnum=$matches[2]&amp;day=$matches[3]&amp;name=$matches[4]&amp;tb=1&quot;;s:77:&quot;([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$&quot;;s:97:&quot;index.php?year=$matches[1]&amp;monthnum=$matches[2]&amp;day=$matches[3]&amp;name=$matches[4]&amp;feed=$matches[5]&quot;;s:72:&quot;([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([^/]+)/(feed|rdf|rss|rss2|atom)/?$&quot;;s:97:&quot;index.php?year=$matches[1]&amp;monthnum=$matches[2]&amp;day=$matches[3]&amp;name=$matches[4]&amp;feed=$matches[5]&quot;;s:65:&quot;([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([^/]+)/page/?([0-9]{1,})/?$&quot;;s:98:&quot;index.php?year=$matches[1]&amp;monthnum=$matches[2]&amp;day=$matches[3]&amp;name=$matches[4]&amp;paged=$matches[5]&quot;;s:72:&quot;([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([^/]+)/comment-page-([0-9]{1,})/?$&quot;;s:98:&quot;index.php?year=$matches[1]&amp;monthnum=$matches[2]&amp;day=$matches[3]&amp;name=$matches[4]&amp;cpage=$matches[5]&quot;;s:61:&quot;([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([^/]+)(?:/([0-9]+))?/?$&quot;;s:97:&quot;index.php?year=$matches[1]&amp;monthnum=$matches[2]&amp;day=$matches[3]&amp;name=$matches[4]&amp;page=$matches[5]&quot;;s:47:&quot;[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/([^/]+)/?$&quot;;s:32:&quot;index.php?attachment=$matches[1]&quot;;s:57:&quot;[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/([^/]+)/trackback/?$&quot;;s:37:&quot;index.php?attachment=$matches[1]&amp;tb=1&quot;;s:77:&quot;[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$&quot;;s:49:&quot;index.php?attachment=$matches[1]&amp;feed=$matches[2]&quot;;s:72:&quot;[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/([^/]+)/(feed|rdf|rss|rss2|atom)/?$&quot;;s:49:&quot;index.php?attachment=$matches[1]&amp;feed=$matches[2]&quot;;s:72:&quot;[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/([^/]+)/comment-page-([0-9]{1,})/?$&quot;;s:50:&quot;index.php?attachment=$matches[1]&amp;cpage=$matches[2]&quot;;s:53:&quot;[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/([^/]+)/embed/?$&quot;;s:43:&quot;index.php?attachment=$matches[1]&amp;embed=true&quot;;s:64:&quot;([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/comment-page-([0-9]{1,})/?$&quot;;s:81:&quot;index.php?year=$matches[1]&amp;monthnum=$matches[2]&amp;day=$matches[3]&amp;cpage=$matches[4]&quot;;s:51:&quot;([0-9]{4})/([0-9]{1,2})/comment-page-([0-9]{1,})/?$&quot;;s:65:&quot;index.php?year=$matches[1]&amp;monthnum=$matches[2]&amp;cpage=$matches[3]&quot;;s:38:&quot;([0-9]{4})/comment-page-([0-9]{1,})/?$&quot;;s:44:&quot;index.php?year=$matches[1]&amp;cpage=$matches[2]&quot;;s:27:&quot;.?.+?/attachment/([^/]+)/?$&quot;;s:32:&quot;index.php?attachment=$matches[1]&quot;;s:37:&quot;.?.+?/attachment/([^/]+)/trackback/?$&quot;;s:37:&quot;index.php?attachment=$matches[1]&amp;tb=1&quot;;s:57:&quot;.?.+?/attachment/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$&quot;;s:49:&quot;index.php?attachment=$matches[1]&amp;feed=$matches[2]&quot;;s:52:&quot;.?.+?/attachment/([^/]+)/(feed|rdf|rss|rss2|atom)/?$&quot;;s:49:&quot;index.php?attachment=$matches[1]&amp;feed=$matches[2]&quot;;s:52:&quot;.?.+?/attachment/([^/]+)/comment-page-([0-9]{1,})/?$&quot;;s:50:&quot;index.php?attachment=$matches[1]&amp;cpage=$matches[2]&quot;;s:33:&quot;.?.+?/attachment/([^/]+)/embed/?$&quot;;s:43:&quot;index.php?attachment=$matches[1]&amp;embed=true&quot;;s:16:&quot;(.?.+?)/embed/?$&quot;;s:41:&quot;index.php?pagename=$matches[1]&amp;embed=true&quot;;s:20:&quot;(.?.+?)/trackback/?$&quot;;s:35:&quot;index.php?pagename=$matches[1]&amp;tb=1&quot;;s:40:&quot;(.?.+?)/feed/(feed|rdf|rss|rss2|atom)/?$&quot;;s:47:&quot;index.php?pagename=$matches[1]&amp;feed=$matches[2]&quot;;s:35:&quot;(.?.+?)/(feed|rdf|rss|rss2|atom)/?$&quot;;s:47:&quot;index.php?pagename=$matches[1]&amp;feed=$matches[2]&quot;;s:28:&quot;(.?.+?)/page/?([0-9]{1,})/?$&quot;;s:48:&quot;index.php?pagename=$matches[1]&amp;paged=$matches[2]&quot;;s:35:&quot;(.?.+?)/comment-page-([0-9]{1,})/?$&quot;;s:48:&quot;index.php?pagename=$matches[1]&amp;cpage=$matches[2]&quot;;s:24:&quot;(.?.+?)(?:/([0-9]+))?/?$&quot;;s:47:&quot;index.php?pagename=$matches[1]&amp;page=$matches[2]&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('rewrite_rules', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-rewrite.php(1522): update_option('rewrite_rules', Array)
-#6 /wordpress/wp-includes/class-wp-rewrite.php(1888): WP_Rewrite->refresh_rewrite_rules()
-#7 /wordpress/wp-includes/rewrite.php(282): WP_Rewrite->flush_rules(true)
-#8 /wordpress/wp-content/plugins/wp-ldp/wp-ldp.php(740): flush_rewrite_rules(true)
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WpLdp\WpLdp->wpldp_rewrite_flush(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ldp...', false)
-#13 /internal/eval.php(20): activate_plugin('wp-ldp/wp-ldp.p...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rewrite_rules', 'a:123:{s:11:\"^wp-json/?$\";s:22:\"index.php?rest_route=/\";s:14:\"^wp-json/(.*)?\";s:33:\"index.php?rest_route=/$matches[1]\";s:21:\"^index.php/wp-json/?$\";s:22:\"index.php?rest_route=/\";s:24:\"^index.php/wp-json/(.*)?\";s:33:\"index.php?rest_route=/$matches[1]\";s:17:\"^wp-sitemap\\.xml$\";s:23:\"index.php?sitemap=index\";s:17:\"^wp-sitemap\\.xsl$\";s:36:\"index.php?sitemap-stylesheet=sitemap\";s:23:\"^wp-sitemap-index\\.xsl$\";s:34:\"index.php?sitemap-stylesheet=index\";s:48:\"^wp-sitemap-([a-z]+?)-([a-z\\d_-]+?)-(\\d+?)\\.xml$\";s:75:\"index.php?sitemap=$matches[1]&sitemap-subtype=$matches[2]&paged=$matches[3]\";s:34:\"^wp-sitemap-([a-z]+?)-(\\d+?)\\.xml$\";s:47:\"index.php?sitemap=$matches[1]&paged=$matches[2]\";s:29:\"api/ldp/v1/%ldp_container%/?$\";s:36:\"index.php?%ldp_container%$matches[1]\";s:59:\"api/ldp/v1/%ldp_container%/feed/(feed|rdf|rss|rss2|atom)/?$\";s:53:\"index.php?%ldp_container%$matches[1]&feed=$matches[2]\";s:54:\"api/ldp/v1/%ldp_container%/(feed|rdf|rss|rss2|atom)/?$\";s:53:\"index.php?%ldp_container%$matches[1]&feed=$matches[2]\";s:46:\"api/ldp/v1/%ldp_container%/page/([0-9]{1,})/?$\";s:50:\"index.php?post_type=ldp_resource&paged=$matches[1]\";s:47:\"category/(.+?)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:52:\"index.php?category_name=$matches[1]&feed=$matches[2]\";s:42:\"category/(.+?)/(feed|rdf|rss|rss2|atom)/?$\";s:52:\"index.php?category_name=$matches[1]&feed=$matches[2]\";s:23:\"category/(.+?)/embed/?$\";s:46:\"index.php?category_name=$matches[1]&embed=true\";s:35:\"category/(.+?)/page/?([0-9]{1,})/?$\";s:53:\"index.php?category_name=$matches[1]&paged=$matches[2]\";s:17:\"category/(.+?)/?$\";s:35:\"index.php?category_name=$matches[1]\";s:44:\"tag/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:42:\"index.php?tag=$matches[1]&feed=$matches[2]\";s:39:\"tag/([^/]+)/(feed|rdf|rss|rss2|atom)/?$\";s:42:\"index.php?tag=$matches[1]&feed=$matches[2]\";s:20:\"tag/([^/]+)/embed/?$\";s:36:\"index.php?tag=$matches[1]&embed=true\";s:32:\"tag/([^/]+)/page/?([0-9]{1,})/?$\";s:43:\"index.php?tag=$matches[1]&paged=$matches[2]\";s:14:\"tag/([^/]+)/?$\";s:25:\"index.php?tag=$matches[1]\";s:45:\"type/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:50:\"index.php?post_format=$matches[1]&feed=$matches[2]\";s:40:\"type/([^/]+)/(feed|rdf|rss|rss2|atom)/?$\";s:50:\"index.php?post_format=$matches[1]&feed=$matches[2]\";s:21:\"type/([^/]+)/embed/?$\";s:44:\"index.php?post_format=$matches[1]&embed=true\";s:33:\"type/([^/]+)/page/?([0-9]{1,})/?$\";s:51:\"index.php?post_format=$matches[1]&paged=$matches[2]\";s:15:\"type/([^/]+)/?$\";s:33:\"index.php?post_format=$matches[1]\";s:54:\"api/ldp/v1/%ldp_container%/[^/]+/attachment/([^/]+)/?$\";s:32:\"index.php?attachment=$matches[1]\";s:64:\"api/ldp/v1/%ldp_container%/[^/]+/attachment/([^/]+)/trackback/?$\";s:37:\"index.php?attachment=$matches[1]&tb=1\";s:84:\"api/ldp/v1/%ldp_container%/[^/]+/attachment/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:49:\"index.php?attachment=$matches[1]&feed=$matches[2]\";s:79:\"api/ldp/v1/%ldp_container%/[^/]+/attachment/([^/]+)/(feed|rdf|rss|rss2|atom)/?$\";s:49:\"index.php?attachment=$matches[1]&feed=$matches[2]\";s:79:\"api/ldp/v1/%ldp_container%/[^/]+/attachment/([^/]+)/comment-page-([0-9]{1,})/?$\";s:50:\"index.php?attachment=$matches[1]&cpage=$matches[2]\";s:60:\"api/ldp/v1/%ldp_container%/[^/]+/attachment/([^/]+)/embed/?$\";s:43:\"index.php?attachment=$matches[1]&embed=true\";s:43:\"api/ldp/v1/%ldp_container%/([^/]+)/embed/?$\";s:72:\"index.php?%ldp_container%$matches[1]&ldp_resource=$matches[2]&embed=true\";s:47:\"api/ldp/v1/%ldp_container%/([^/]+)/trackback/?$\";s:66:\"index.php?%ldp_container%$matches[1]&ldp_resource=$matches[2]&tb=1\";s:67:\"api/ldp/v1/%ldp_container%/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:78:\"index.php?%ldp_container%$matches[1]&ldp_resource=$matches[2]&feed=$matches[3]\";s:62:\"api/ldp/v1/%ldp_container%/([^/]+)/(feed|rdf|rss|rss2|atom)/?$\";s:78:\"index.php?%ldp_container%$matches[1]&ldp_resource=$matches[2]&feed=$matches[3]\";s:55:\"api/ldp/v1/%ldp_container%/([^/]+)/page/?([0-9]{1,})/?$\";s:79:\"index.php?%ldp_container%$matches[1]&ldp_resource=$matches[2]&paged=$matches[3]\";s:62:\"api/ldp/v1/%ldp_container%/([^/]+)/comment-page-([0-9]{1,})/?$\";s:79:\"index.php?%ldp_container%$matches[1]&ldp_resource=$matches[2]&cpage=$matches[3]\";s:51:\"api/ldp/v1/%ldp_container%/([^/]+)(?:/([0-9]+))?/?$\";s:78:\"index.php?%ldp_container%$matches[1]&ldp_resource=$matches[2]&page=$matches[3]\";s:43:\"api/ldp/v1/%ldp_container%/[^/]+/([^/]+)/?$\";s:32:\"index.php?attachment=$matches[1]\";s:53:\"api/ldp/v1/%ldp_container%/[^/]+/([^/]+)/trackback/?$\";s:37:\"index.php?attachment=$matches[1]&tb=1\";s:73:\"api/ldp/v1/%ldp_container%/[^/]+/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:49:\"index.php?attachment=$matches[1]&feed=$matches[2]\";s:68:\"api/ldp/v1/%ldp_container%/[^/]+/([^/]+)/(feed|rdf|rss|rss2|atom)/?$\";s:49:\"index.php?attachment=$matches[1]&feed=$matches[2]\";s:68:\"api/ldp/v1/%ldp_container%/[^/]+/([^/]+)/comment-page-([0-9]{1,})/?$\";s:50:\"index.php?attachment=$matches[1]&cpage=$matches[2]\";s:49:\"api/ldp/v1/%ldp_container%/[^/]+/([^/]+)/embed/?$\";s:43:\"index.php?attachment=$matches[1]&embed=true\";s:35:\"api/ldp/v1/%ldp_container%/embed/?$\";s:47:\"index.php?%ldp_container%$matches[1]&embed=true\";s:47:\"api/ldp/v1/%ldp_container%/page/?([0-9]{1,})/?$\";s:54:\"index.php?%ldp_container%$matches[1]&paged=$matches[2]\";s:54:\"api/ldp/v1/%ldp_container%/comment-page-([0-9]{1,})/?$\";s:54:\"index.php?%ldp_container%$matches[1]&cpage=$matches[2]\";s:12:\"robots\\.txt$\";s:18:\"index.php?robots=1\";s:13:\"favicon\\.ico$\";s:19:\"index.php?favicon=1\";s:12:\"sitemap\\.xml\";s:24:\"index.php??sitemap=index\";s:48:\".*wp-(atom|rdf|rss|rss2|feed|commentsrss2)\\.php$\";s:18:\"index.php?feed=old\";s:20:\".*wp-app\\.php(/.*)?$\";s:19:\"index.php?error=403\";s:18:\".*wp-register.php$\";s:23:\"index.php?register=true\";s:32:\"feed/(feed|rdf|rss|rss2|atom)/?$\";s:27:\"index.php?&feed=$matches[1]\";s:27:\"(feed|rdf|rss|rss2|atom)/?$\";s:27:\"index.php?&feed=$matches[1]\";s:8:\"embed/?$\";s:21:\"index.php?&embed=true\";s:20:\"page/?([0-9]{1,})/?$\";s:28:\"index.php?&paged=$matches[1]\";s:41:\"comments/feed/(feed|rdf|rss|rss2|atom)/?$\";s:42:\"index.php?&feed=$matches[1]&withcomments=1\";s:36:\"comments/(feed|rdf|rss|rss2|atom)/?$\";s:42:\"index.php?&feed=$matches[1]&withcomments=1\";s:17:\"comments/embed/?$\";s:21:\"index.php?&embed=true\";s:44:\"search/(.+)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:40:\"index.php?s=$matches[1]&feed=$matches[2]\";s:39:\"search/(.+)/(feed|rdf|rss|rss2|atom)/?$\";s:40:\"index.php?s=$matches[1]&feed=$matches[2]\";s:20:\"search/(.+)/embed/?$\";s:34:\"index.php?s=$matches[1]&embed=true\";s:32:\"search/(.+)/page/?([0-9]{1,})/?$\";s:41:\"index.php?s=$matches[1]&paged=$matches[2]\";s:14:\"search/(.+)/?$\";s:23:\"index.php?s=$matches[1]\";s:47:\"author/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:50:\"index.php?author_name=$matches[1]&feed=$matches[2]\";s:42:\"author/([^/]+)/(feed|rdf|rss|rss2|atom)/?$\";s:50:\"index.php?author_name=$matches[1]&feed=$matches[2]\";s:23:\"author/([^/]+)/embed/?$\";s:44:\"index.php?author_name=$matches[1]&embed=true\";s:35:\"author/([^/]+)/page/?([0-9]{1,})/?$\";s:51:\"index.php?author_name=$matches[1]&paged=$matches[2]\";s:17:\"author/([^/]+)/?$\";s:33:\"index.php?author_name=$matches[1]\";s:69:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/feed/(feed|rdf|rss|rss2|atom)/?$\";s:80:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]&feed=$matches[4]\";s:64:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/(feed|rdf|rss|rss2|atom)/?$\";s:80:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]&feed=$matches[4]\";s:45:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/embed/?$\";s:74:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]&embed=true\";s:57:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/page/?([0-9]{1,})/?$\";s:81:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]&paged=$matches[4]\";s:39:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/?$\";s:63:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]\";s:56:\"([0-9]{4})/([0-9]{1,2})/feed/(feed|rdf|rss|rss2|atom)/?$\";s:64:\"index.php?year=$matches[1]&monthnum=$matches[2]&feed=$matches[3]\";s:51:\"([0-9]{4})/([0-9]{1,2})/(feed|rdf|rss|rss2|atom)/?$\";s:64:\"index.php?year=$matches[1]&monthnum=$matches[2]&feed=$matches[3]\";s:32:\"([0-9]{4})/([0-9]{1,2})/embed/?$\";s:58:\"index.php?year=$matches[1]&monthnum=$matches[2]&embed=true\";s:44:\"([0-9]{4})/([0-9]{1,2})/page/?([0-9]{1,})/?$\";s:65:\"index.php?year=$matches[1]&monthnum=$matches[2]&paged=$matches[3]\";s:26:\"([0-9]{4})/([0-9]{1,2})/?$\";s:47:\"index.php?year=$matches[1]&monthnum=$matches[2]\";s:43:\"([0-9]{4})/feed/(feed|rdf|rss|rss2|atom)/?$\";s:43:\"index.php?year=$matches[1]&feed=$matches[2]\";s:38:\"([0-9]{4})/(feed|rdf|rss|rss2|atom)/?$\";s:43:\"index.php?year=$matches[1]&feed=$matches[2]\";s:19:\"([0-9]{4})/embed/?$\";s:37:\"index.php?year=$matches[1]&embed=true\";s:31:\"([0-9]{4})/page/?([0-9]{1,})/?$\";s:44:\"index.php?year=$matches[1]&paged=$matches[2]\";s:13:\"([0-9]{4})/?$\";s:26:\"index.php?year=$matches[1]\";s:58:\"[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/attachment/([^/]+)/?$\";s:32:\"index.php?attachment=$matches[1]\";s:68:\"[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/attachment/([^/]+)/trackback/?$\";s:37:\"index.php?attachment=$matches[1]&tb=1\";s:88:\"[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/attachment/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:49:\"index.php?attachment=$matches[1]&feed=$matches[2]\";s:83:\"[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/attachment/([^/]+)/(feed|rdf|rss|rss2|atom)/?$\";s:49:\"index.php?attachment=$matches[1]&feed=$matches[2]\";s:83:\"[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/attachment/([^/]+)/comment-page-([0-9]{1,})/?$\";s:50:\"index.php?attachment=$matches[1]&cpage=$matches[2]\";s:64:\"[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/attachment/([^/]+)/embed/?$\";s:43:\"index.php?attachment=$matches[1]&embed=true\";s:53:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([^/]+)/embed/?$\";s:91:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]&name=$matches[4]&embed=true\";s:57:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([^/]+)/trackback/?$\";s:85:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]&name=$matches[4]&tb=1\";s:77:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:97:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]&name=$matches[4]&feed=$matches[5]\";s:72:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([^/]+)/(feed|rdf|rss|rss2|atom)/?$\";s:97:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]&name=$matches[4]&feed=$matches[5]\";s:65:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([^/]+)/page/?([0-9]{1,})/?$\";s:98:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]&name=$matches[4]&paged=$matches[5]\";s:72:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([^/]+)/comment-page-([0-9]{1,})/?$\";s:98:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]&name=$matches[4]&cpage=$matches[5]\";s:61:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/([^/]+)(?:/([0-9]+))?/?$\";s:97:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]&name=$matches[4]&page=$matches[5]\";s:47:\"[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/([^/]+)/?$\";s:32:\"index.php?attachment=$matches[1]\";s:57:\"[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/([^/]+)/trackback/?$\";s:37:\"index.php?attachment=$matches[1]&tb=1\";s:77:\"[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:49:\"index.php?attachment=$matches[1]&feed=$matches[2]\";s:72:\"[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/([^/]+)/(feed|rdf|rss|rss2|atom)/?$\";s:49:\"index.php?attachment=$matches[1]&feed=$matches[2]\";s:72:\"[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/([^/]+)/comment-page-([0-9]{1,})/?$\";s:50:\"index.php?attachment=$matches[1]&cpage=$matches[2]\";s:53:\"[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}/[^/]+/([^/]+)/embed/?$\";s:43:\"index.php?attachment=$matches[1]&embed=true\";s:64:\"([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/comment-page-([0-9]{1,})/?$\";s:81:\"index.php?year=$matches[1]&monthnum=$matches[2]&day=$matches[3]&cpage=$matches[4]\";s:51:\"([0-9]{4})/([0-9]{1,2})/comment-page-([0-9]{1,})/?$\";s:65:\"index.php?year=$matches[1]&monthnum=$matches[2]&cpage=$matches[3]\";s:38:\"([0-9]{4})/comment-page-([0-9]{1,})/?$\";s:44:\"index.php?year=$matches[1]&cpage=$matches[2]\";s:27:\".?.+?/attachment/([^/]+)/?$\";s:32:\"index.php?attachment=$matches[1]\";s:37:\".?.+?/attachment/([^/]+)/trackback/?$\";s:37:\"index.php?attachment=$matches[1]&tb=1\";s:57:\".?.+?/attachment/([^/]+)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:49:\"index.php?attachment=$matches[1]&feed=$matches[2]\";s:52:\".?.+?/attachment/([^/]+)/(feed|rdf|rss|rss2|atom)/?$\";s:49:\"index.php?attachment=$matches[1]&feed=$matches[2]\";s:52:\".?.+?/attachment/([^/]+)/comment-page-([0-9]{1,})/?$\";s:50:\"index.php?attachment=$matches[1]&cpage=$matches[2]\";s:33:\".?.+?/attachment/([^/]+)/embed/?$\";s:43:\"index.php?attachment=$matches[1]&embed=true\";s:16:\"(.?.+?)/embed/?$\";s:41:\"index.php?pagename=$matches[1]&embed=true\";s:20:\"(.?.+?)/trackback/?$\";s:35:\"index.php?pagename=$matches[1]&tb=1\";s:40:\"(.?.+?)/feed/(feed|rdf|rss|rss2|atom)/?$\";s:47:\"index.php?pagename=$matches[1]&feed=$matches[2]\";s:35:\"(.?.+?)/(feed|rdf|rss|rss2|atom)/?$\";s:47:\"index.php?pagename=$matches[1]&feed=$matches[2]\";s:28:\"(.?.+?)/page/?([0-9]{1,})/?$\";s:48:\"index.php?pagename=$matches[1]&paged=$matches[2]\";s:35:\"(.?.+?)/comment-page-([0-9]{1,})/?$\";s:48:\"index.php?pagename=$matches[1]&cpage=$matches[2]\";s:24:\"(.?.+?)(?:/([0-9]+))?/?$\";s:47:\"index.php?pagename=$matches[1]&page=$matches[2]\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-ldp/wp-ldp.php'), WP_Hook->do_action, WP_Hook->apply_filters, WpLdp\WpLdp->wpldp_rewrite_flush, flush_rewrite_rules, WP_Rewrite->flush_rules, WP_Rewrite->refresh_rewrite_rules, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:59:50 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:59:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:59:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:59:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:59:52 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Initiative', 'initiative', 0)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_terms</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_terms</li>
-<li>Executing: INSERT INTO `wp_terms` () SELECT  FROM (VALUES ( 'Initiative' , 'initiative' , 0 )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(41
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 17:55:56 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/wp-delete-tags-tagassassin/wp-delete-tags-tagassassin.php on line 269
+[10-Apr-2025 17:56:05 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/wp-delete-tags-tagassassin/wp-delete-tags-tagassassin.php on line 269
+[10-Apr-2025 17:56:13 UTC] PHP Parse error:  syntax error, unexpected token "new" in /wordpress/wp-content/plugins/wp-delete-tags-tagassassin/wp-delete-tags-tagassassin.php on line 269
+[10-Apr-2025 17:56:54 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:56:55 UTC] PHP Fatal error:  Uncaught ValueError: Missing format specifier at end of string in /wordpress/wp-content/plugins/wp-portfolio-showcase/includes/class-cpt.php:128
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-portfolio-showcase/includes/class-cpt.php(128): sprintf('Search %', 'Categories')
+#1 /wordpress/wp-content/plugins/wp-portfolio-showcase/includes/class-cpt.php(61): WP_Portfolio_Showcase_CPT::get_taxonomy_label('Portfolio Categ...', 'Category', 'Categories')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): WP_Portfolio_Showcase_CPT->register_taxonomies('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(704): do_action('init')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/wp-portfolio-showcase/includes/class-cpt.php on line 128
+[10-Apr-2025 17:57:03 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:57:04 UTC] PHP Fatal error:  Uncaught ValueError: Missing format specifier at end of string in /wordpress/wp-content/plugins/wp-portfolio-showcase/includes/class-cpt.php:128
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-portfolio-showcase/includes/class-cpt.php(128): sprintf('Search %', 'Categories')
+#1 /wordpress/wp-content/plugins/wp-portfolio-showcase/includes/class-cpt.php(61): WP_Portfolio_Showcase_CPT::get_taxonomy_label('Portfolio Categ...', 'Category', 'Categories')
+#2 /wordpress/wp-includes/class-wp-hook.php(324): WP_Portfolio_Showcase_CPT->register_taxonomies('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(704): do_action('init')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/wp-portfolio-showcase/includes/class-cpt.php on line 128
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"wp-portfolio-showcase"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:73:13)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ],
+          expires: [ 'Wed, 11 Jan 1984 05:00:00 GMT' ],
+          'cache-control': [ 'no-cache, must-revalidate, max-age=0' ]
+        },
+        bytes: Uint8Array(2653) [
+           60,  33,  68,  79,  67,  84,  89,  80,  69,  32, 104, 116,
+          109, 108,  62,  10,  60, 104, 116, 109, 108,  32, 108,  97,
+          110, 103,  61,  34, 101, 110,  45,  85,  83,  34,  62,  10,
+           60, 104, 101,  97, 100,  62,  10,   9,  60, 109, 101, 116,
+           97,  32, 104, 116, 116, 112,  45, 101, 113, 117, 105, 118,
+           61,  34,  67, 111, 110, 116, 101, 110, 116,  45,  84, 121,
+          112, 101,  34,  32,  99, 111, 110, 116, 101, 110, 116,  61,
+           34, 116, 101, 120, 116,  47, 104, 116, 109, 108,  59,  32,
+           99, 104,  97, 114,
+          ... 2553 more items
+        ],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
