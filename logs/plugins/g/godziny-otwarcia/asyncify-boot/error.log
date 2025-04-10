@@ -2,14 +2,11 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [05-Apr-2025 10:46:54 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 10:46:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 10:46:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 10:46:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 10:46:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [10-Apr-2025 07:26:56 UTC] PHP Warning:  Undefined variable $charset_collate in /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php on line 51
+[10-Apr-2025 07:26:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '6xBHZ x8y<Rt& k~=G$b+IKmlI8a5YGw!;bT%4{PzDdH[hAgP6$ytMeT5+c8n*6h', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gmb-enabled', 'no', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -21,7 +18,7 @@ Error: [05-Apr-2025 10:46:54 UTC] PHP Warning:  Undefined array key "option_valu
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , '6xBHZ x8y&lt;Rt&amp; k~=G$b+IKmlI8a5YGw!;bT%4{PzDdH[hAgP6$ytMeT5+c8n*6h' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'gmb-enabled' , 'no' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -33,34 +30,17 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', '6xBHZ x8y<Rt& k...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', '6xBHZ x8y<Rt& k...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', '6xBHZ x8y<Rt& k...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', '6xBHZ x8y<Rt& k...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40367|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/gosign-contact-person-box-block/src/init.php(45): wp_register_script('contact_person_...', 'http://127.0.0....', Array, NULL, Array)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): contact_person_box_block_cgb_block_assets('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '6xBHZ x8y<Rt& k~=G$b+IKmlI8a5YGw!;bT%4{PzDdH[hAgP6$ytMeT5+c8n*6h', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, contact_person_box_block_cgb_block_assets, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 10:46:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(92): add_option('gmb-enabled', 'no', '', 'on')
+#5 /wordpress/wp-content/plugins/geek-mail-blacklist/geek-mail-blacklist.php(45): GMB::install()
+#6 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('geek-mail-black...')
+#8 /internal/eval.php(20): activate_plugin('geek-mail-black...')
+#9 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gmb-enabled', 'no', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/geek-mail-blacklist/geek-mail-blacklist.php'), GMB::install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:26:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', ']0.i$g[rNP|e@G?`b&L/~pjX1@h|0bSa`q[M_n9qV0rmny|L9r6$ud&[+Z[]CI{%', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gmb-enabled', 'no', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -72,7 +52,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , ']0.i$g[rNP|e@G?`b&amp;L/~pjX1@h|0bSa`q[M_n9qV0rmny|L9r6$ud&amp;[+Z[]CI{%' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'gmb-enabled' , 'no' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -84,54 +64,661 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', ']0.i$g[rNP|e@G?...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', ']0.i$g[rNP|e@G?...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', ']0.i$g[rNP|e@G?...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', ']0.i$g[rNP|e@G?...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40367|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/gosign-contact-person-box-block/src/init.php(45): wp_register_script('contact_person_...', 'http://127.0.0....', Array, NULL, Array)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): contact_person_box_block_cgb_block_assets('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', ']0.i$g[rNP|e@G?`b&L/~pjX1@h|0bSa`q[M_n9qV0rmny|L9r6$ud&[+Z[]CI{%', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, contact_person_box_block_cgb_block_assets, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 10:47:06 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 10:47:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 10:47:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 10:47:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 10:47:17 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 10:47:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 10:47:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 10:47:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 10:47:29 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 10:47:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 10:47:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 10:47:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 10:47:50 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 10:47:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 10:47:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 10:47:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 10:48:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 10:48:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 10:48:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 10:48:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 10:48:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(92): add_option('gmb-enabled', 'no', '', 'on')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): GMB::install(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_geek-m...', false)
+#9 /internal/eval.php(20): activate_plugin('geek-mail-black...')
+#10 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gmb-enabled', 'no', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_geek-mail-blacklist/geek-mail-blacklist.php'), WP_Hook->do_action, WP_Hook->apply_filters, GMB::install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:26:56 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 07:26:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 07:26:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 07:26:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 07:27:05 UTC] PHP Warning:  Undefined variable $charset_collate in /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php on line 51
+[10-Apr-2025 07:27:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gp_db_version', '980', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`username`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `username`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): GMB::install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_geek-m...', false)
+#8 /internal/eval.php(20): activate_plugin('geek-mail-black...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`username`) made by activate_plugin, do_action('activate_geek-mail-blacklist/geek-mail-blacklist.php'), WP_Hook->do_action, WP_Hook->apply_filters, GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:27:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`userid`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `userid`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): GMB::install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_geek-m...', false)
+#8 /internal/eval.php(20): activate_plugin('geek-mail-black...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`userid`) made by activate_plugin, do_action('activate_geek-mail-blacklist/geek-mail-blacklist.php'), WP_Hook->do_action, WP_Hook->apply_filters, GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:27:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`time`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `time`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): GMB::install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_geek-m...', false)
+#8 /internal/eval.php(20): activate_plugin('geek-mail-black...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`time`) made by activate_plugin, do_action('activate_geek-mail-blacklist/geek-mail-blacklist.php'), WP_Hook->do_action, WP_Hook->apply_filters, GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:27:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`result`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `result`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): GMB::install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_geek-m...', false)
+#8 /internal/eval.php(20): activate_plugin('geek-mail-black...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`result`) made by activate_plugin, do_action('activate_geek-mail-blacklist/geek-mail-blacklist.php'), WP_Hook->do_action, WP_Hook->apply_filters, GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:27:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`ip`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `ip`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): GMB::install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_geek-m...', false)
+#8 /internal/eval.php(20): activate_plugin('geek-mail-black...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`ip`) made by activate_plugin, do_action('activate_geek-mail-blacklist/geek-mail-blacklist.php'), WP_Hook->do_action, WP_Hook->apply_filters, GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:27:06 UTC] PHP Warning:  Undefined variable $charset_collate in /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php on line 51
+[10-Apr-2025 07:27:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`username`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `username`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
+#4 /wordpress/wp-content/plugins/geek-mail-blacklist/geek-mail-blacklist.php(45): GMB::install()
+#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`username`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/geek-mail-blacklist/geek-mail-blacklist.php'), GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:27:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`userid`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `userid`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
+#4 /wordpress/wp-content/plugins/geek-mail-blacklist/geek-mail-blacklist.php(45): GMB::install()
+#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`userid`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/geek-mail-blacklist/geek-mail-blacklist.php'), GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:27:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`time`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `time`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
+#4 /wordpress/wp-content/plugins/geek-mail-blacklist/geek-mail-blacklist.php(45): GMB::install()
+#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`time`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/geek-mail-blacklist/geek-mail-blacklist.php'), GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:27:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`result`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `result`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
+#4 /wordpress/wp-content/plugins/geek-mail-blacklist/geek-mail-blacklist.php(45): GMB::install()
+#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`result`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/geek-mail-blacklist/geek-mail-blacklist.php'), GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:27:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`ip`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `ip`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
+#4 /wordpress/wp-content/plugins/geek-mail-blacklist/geek-mail-blacklist.php(45): GMB::install()
+#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`ip`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/geek-mail-blacklist/geek-mail-blacklist.php'), GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:27:15 UTC] PHP Warning:  Undefined variable $charset_collate in /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php on line 51
+[10-Apr-2025 07:27:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`username`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `username`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): GMB::install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_geek-m...', false)
+#8 /internal/eval.php(20): activate_plugin('geek-mail-black...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`username`) made by activate_plugin, do_action('activate_geek-mail-blacklist/geek-mail-blacklist.php'), WP_Hook->do_action, WP_Hook->apply_filters, GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:27:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`userid`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `userid`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): GMB::install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_geek-m...', false)
+#8 /internal/eval.php(20): activate_plugin('geek-mail-black...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`userid`) made by activate_plugin, do_action('activate_geek-mail-blacklist/geek-mail-blacklist.php'), WP_Hook->do_action, WP_Hook->apply_filters, GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:27:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`time`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `time`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): GMB::install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_geek-m...', false)
+#8 /internal/eval.php(20): activate_plugin('geek-mail-black...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`time`) made by activate_plugin, do_action('activate_geek-mail-blacklist/geek-mail-blacklist.php'), WP_Hook->do_action, WP_Hook->apply_filters, GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:27:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`result`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `result`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): GMB::install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_geek-m...', false)
+#8 /internal/eval.php(20): activate_plugin('geek-mail-black...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`result`) made by activate_plugin, do_action('activate_geek-mail-blacklist/geek-mail-blacklist.php'), WP_Hook->do_action, WP_Hook->apply_filters, GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:27:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`ip`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `ip`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): GMB::install(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_geek-m...', false)
+#8 /internal/eval.php(20): activate_plugin('geek-mail-black...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`ip`) made by activate_plugin, do_action('activate_geek-mail-blacklist/geek-mail-blacklist.php'), WP_Hook->do_action, WP_Hook->apply_filters, GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:27:16 UTC] PHP Warning:  Undefined variable $charset_collate in /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php on line 51
+[10-Apr-2025 07:27:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`username`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `username`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
+#4 /wordpress/wp-content/plugins/geek-mail-blacklist/geek-mail-blacklist.php(45): GMB::install()
+#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`username`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/geek-mail-blacklist/geek-mail-blacklist.php'), GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:27:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`userid`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `userid`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
+#4 /wordpress/wp-content/plugins/geek-mail-blacklist/geek-mail-blacklist.php(45): GMB::install()
+#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`userid`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/geek-mail-blacklist/geek-mail-blacklist.php'), GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:27:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`time`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `time`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
+#4 /wordpress/wp-content/plugins/geek-mail-blacklist/geek-mail-blacklist.php(45): GMB::install()
+#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`time`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/geek-mail-blacklist/geek-mail-blacklist.php'), GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:27:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`result`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `result`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
+#4 /wordpress/wp-content/plugins/geek-mail-blacklist/geek-mail-blacklist.php(45): GMB::install()
+#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`result`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/geek-mail-blacklist/geek-mail-blacklist.php'), GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:27:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_gmb_monitor ADD KEY `` (`ip`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_gmb_monitor, wp_gmb_monitor__, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_gmb_monitor__&quot; ON &quot;wp_gmb_monitor&quot; ( `ip`) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 index wp_gmb_monitor__ already exists.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(3271): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(56): dbDelta(Array)
+#3 /wordpress/wp-content/plugins/geek-mail-blacklist/lib/GMB.php(88): GMB::create_database('CREATE TABLE wp...', 'gmb_monitor')
+#4 /wordpress/wp-content/plugins/geek-mail-blacklist/geek-mail-blacklist.php(45): GMB::install()
+#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_gmb_monitor ADD KEY `` (`ip`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/geek-mail-blacklist/geek-mail-blacklist.php'), GMB::install, GMB::create_database, dbDelta, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:27:25 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 07:27:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 07:27:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 07:27:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 07:27:52 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/get-satisfaction-for-wordpress/classes/HTTP_Request_Oauth.php on line 9
+[10-Apr-2025 07:28:00 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/get-satisfaction-for-wordpress/classes/HTTP_Request_Oauth.php on line 9
+[10-Apr-2025 07:28:08 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /wordpress/wp-content/plugins/get-satisfaction-for-wordpress/classes/HTTP_Request_Oauth.php on line 9
+[10-Apr-2025 07:28:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 07:28:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 07:28:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 07:28:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 07:28:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-voice-plugin/widget.php:128
+Stack trace:
+#0 /wordpress/wp-content/plugins/google-voice-plugin/google-voice-callme.php(11): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('google-voice-pl...')
+#3 /internal/eval.php(20): activate_plugin('google-voice-pl...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/google-voice-plugin/widget.php on line 128
+[10-Apr-2025 07:28:55 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-voice-plugin/widget.php:128
+Stack trace:
+#0 /wordpress/wp-content/plugins/google-voice-plugin/google-voice-callme.php(11): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('google-voice-pl...')
+#3 /internal/eval.php(20): activate_plugin('google-voice-pl...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/google-voice-plugin/widget.php on line 128
+[10-Apr-2025 07:29:03 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/google-voice-plugin/widget.php:128
+Stack trace:
+#0 /wordpress/wp-content/plugins/google-voice-plugin/google-voice-callme.php(11): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('google-voice-pl...')
+#3 /internal/eval.php(20): activate_plugin('google-voice-pl...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/google-voice-plugin/widget.php on line 128
+[10-Apr-2025 07:29:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('um_options', 'a:2:{s:19:\"profile_tab_gallery\";i:1;s:27:\"profile_tab_gallery_privacy\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -143,7 +730,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'gp_db_version' , '980' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'um_options' , 'a:2:{s:19:&quot;profile_tab_gallery&quot;;i:1;s:27:&quot;profile_tab_gallery_privacy&quot;;i:0;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -155,205 +742,20 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('gp_db_version', '980', '', 'auto')
-#5 /wordpress/wp-content/plugins/glotpress/gp-includes/install-upgrade.php(31): update_option('gp_db_version', '980')
-#6 /wordpress/wp-content/plugins/glotpress/gp-settings.php(141): gp_upgrade_db()
-#7 /wordpress/wp-content/plugins/glotpress/glotpress.php(165): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('glotpress/glotp...')
-#10 /internal/eval.php(20): activate_plugin('glotpress/glotp...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gp_db_version', '980', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/glotpress/glotpress.php'), require_once('/plugins/glotpress/gp-settings.php'), gp_upgrade_db, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 10:48:14 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 10:48:14 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 10:48:14 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 10:48:14 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 10:48:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'X_/0p0DT/M^;BkIze,de*.o%;AUx#$V`z>n#ypy`X6<jD}NCP*IS_9pg]AiLlkd3', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'X_/0p0DT/M^;BkIze,de*.o%;AUx#$V`z&gt;n#ypy`X6&lt;jD}NCP*IS_9pg]AiLlkd3' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'X_/0p0DT/M^;BkI...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'X_/0p0DT/M^;BkI...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'X_/0p0DT/M^;BkI...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'X_/0p0DT/M^;BkI...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40367|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/glotpress/gp-includes/assets-loader.php(32): wp_register_script('tablesorter', 'http://127.0.0....', Array, 1743850093)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): gp_register_default_scripts('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'X_/0p0DT/M^;BkIze,de*.o%;AUx#$V`z>n#ypy`X6<jD}NCP*IS_9pg]AiLlkd3', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, gp_register_default_scripts, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 10:48:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'qd2F}o)bvq:u9k:Z?%J)[`>t}e; 2OXH=wVqstOzzL*+1l=_uQ={9yIADAOw)7o+', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'qd2F}o)bvq:u9k:Z?%J)[`&gt;t}e; 2OXH=wVqstOzzL*+1l=_uQ={9yIADAOw)7o+' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'qd2F}o)bvq:u9k:...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'qd2F}o)bvq:u9k:...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'qd2F}o)bvq:u9k:...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'qd2F}o)bvq:u9k:...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40367|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/glotpress/gp-includes/assets-loader.php(32): wp_register_script('tablesorter', 'http://127.0.0....', Array, 1743850093)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): gp_register_default_scripts('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'qd2F}o)bvq:u9k:Z?%J)[`>t}e; 2OXH=wVqstOzzL*+1l=_uQ={9yIADAOw)7o+', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, gp_register_default_scripts, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 10:48:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gp_rewrite_rule', 'a:2:{s:11:\"^glotpress$\";s:18:\"index.php?gp_route\";s:18:\"^glotpress\\/+(.*)$\";s:30:\"index.php?gp_route=$matches[1]\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'gp_rewrite_rule' , 'a:2:{s:11:&quot;^glotpress$&quot;;s:18:&quot;index.php?gp_route&quot;;s:18:&quot;^glotpress\/+(.*)$&quot;;s:30:&quot;index.php?gp_route=$matches[1]&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('gp_rewrite_rule', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/glotpress/gp-includes/rewrite.php(55): update_option('gp_rewrite_rule', Array)
-#6 /wordpress/wp-content/plugins/glotpress/gp-includes/system.php(18): gp_rewrite_rules()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): gp_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/option.php(921): add_option('um_options', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/gallery-for-ultimate-member/gallery-for-ultimate-member.php(831): update_option('um_options', Array)
+#6 /wordpress/wp-content/plugins/gallery-for-ultimate-member/gallery-for-ultimate-member.php(715): um_gallery_pro_db_setup()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): _um_gallery_pro_activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gp_rewrite_rule', 'a:2:{s:11:\"^glotpress$\";s:18:\"index.php?gp_route\";s:18:\"^glotpress\\/+(.*)$\";s:30:\"index.php?gp_route=$matches[1]\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, gp_init, gp_rewrite_rules, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 10:48:14 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 10:48:14 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 10:48:14 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 10:48:14 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 10:48:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gp_db_version', '980', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'gp_db_version' , '980' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('gp_db_version', '980', '', 'auto')
-#5 /wordpress/wp-content/plugins/glotpress/gp-includes/install-upgrade.php(31): update_option('gp_db_version', '980')
-#6 /wordpress/wp-content/plugins/glotpress/gp-settings.php(141): gp_upgrade_db()
-#7 /wordpress/wp-content/plugins/glotpress/glotpress.php(165): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_galler...', false)
+#11 /internal/eval.php(20): activate_plugin('gallery-for-ult...')
 #12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gp_db_version', '980', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/glotpress/glotpress.php'), require_once('/plugins/glotpress/gp-settings.php'), gp_upgrade_db, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 10:48:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('um_options', 'a:2:{s:19:\"profile_tab_gallery\";i:1;s:27:\"profile_tab_gallery_privacy\";i:0;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_gallery-for-ultimate-member/gallery-for-ultimate-member.php'), WP_Hook->do_action, WP_Hook->apply_filters, _um_gallery_pro_activate, um_gallery_pro_db_setup, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:29:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'GCTPg6qw&bAT(Z|%Ou:&aJv2j;5j$tX,B%{z)3b&t`iug$XUl1]*rZSEW[X(w7^R', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('um_gallery_version', '1.0.5.7', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -365,7 +767,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'GCTPg6qw&amp;bAT(Z|%Ou:&amp;aJv2j;5j$tX,B%{z)3b&amp;t`iug$XUl1]*rZSEW[X(w7^R' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'um_gallery_version' , '1.0.5.7' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -377,34 +779,23 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'GCTPg6qw&bAT(Z|...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'GCTPg6qw&bAT(Z|...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'GCTPg6qw&bAT(Z|...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'GCTPg6qw&bAT(Z|...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40367|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/glotpress/gp-includes/assets-loader.php(32): wp_register_script('tablesorter', 'http://127.0.0....', Array, 1743850093)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): gp_register_default_scripts('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'GCTPg6qw&bAT(Z|%Ou:&aJv2j;5j$tX,B%{z)3b&t`iug$XUl1]*rZSEW[X(w7^R', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, gp_register_default_scripts, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 10:48:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('um_gallery_vers...', '1.0.5.7', '', 'auto')
+#5 /wordpress/wp-content/plugins/gallery-for-ultimate-member/gallery-for-ultimate-member.php(719): update_option('um_gallery_vers...', '1.0.5.7')
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _um_gallery_pro_activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_galler...', false)
+#10 /internal/eval.php(20): activate_plugin('gallery-for-ult...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('um_gallery_version', '1.0.5.7', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_gallery-for-ultimate-member/gallery-for-ultimate-member.php'), WP_Hook->do_action, WP_Hook->apply_filters, _um_gallery_pro_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:29:16 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 07:29:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 07:29:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 07:29:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 07:29:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'qT!uS@Y}K$)r(SI|_H,j3X6Tn0VLpqa<y3CiuZcJeBEJaGP[Hkh@a&`W>]N)n;u}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_widget_recent_photos', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -416,7 +807,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'qT!uS@Y}K$)r(SI|_H,j3X6Tn0VLpqa&lt;y3CiuZcJeBEJaGP[Hkh@a&amp;`W&gt;]N)n;u}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_widget_recent_photos' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -428,211 +819,764 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'qT!uS@Y}K$)r(SI...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'qT!uS@Y}K$)r(SI...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'qT!uS@Y}K$)r(SI...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'qT!uS@Y}K$)r(SI...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40367|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/glotpress/gp-includes/assets-loader.php(32): wp_register_script('tablesorter', 'http://127.0.0....', Array, 1743850093)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): gp_register_default_scripts('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'qT!uS@Y}K$)r(SI|_H,j3X6Tn0VLpqa<y3CiuZcJeBEJaGP[Hkh@a&`W>]N)n;u}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, gp_register_default_scripts, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 10:48:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(921): add_option('widget_widget_r...', Array, '', 'auto')
+#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_widget_r...', Array)
+#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
+#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
+#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#16 /wordpress/wp-settings.php(704): do_action('init')
+#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#20 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_widget_recent_photos', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:30:31 UTC] PHP Deprecated:  Required parameter $args follows optional parameter $redirect_to in /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php on line 1229
+[10-Apr-2025 07:30:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gp_rewrite_rule', 'a:2:{s:11:\"^glotpress$\";s:18:\"index.php?gp_route\";s:18:\"^glotpress\\/+(.*)$\";s:30:\"index.php?gp_route=$matches[1]\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SHOW columns from wp_getbwp_bookings where field="booking_qty" </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'gp_rewrite_rule' , 'a:2:{s:11:&quot;^glotpress$&quot;;s:18:&quot;index.php?gp_route&quot;;s:18:&quot;^glotpress\/+(.*)$&quot;;s:30:&quot;index.php?gp_route=$matches[1]&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? AND `field` = 'booking_qty' | parameters: database_name_here, wp_getbwp_bookings</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 no such column: field
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('gp_rewrite_rule', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/glotpress/gp-includes/rewrite.php(55): update_option('gp_rewrite_rule', Array)
-#6 /wordpress/wp-content/plugins/glotpress/gp-includes/system.php(18): gp_rewrite_rules()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): gp_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW columns fr...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW columns fr...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW columns fr...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(102): wpdb->get_results('SHOW columns fr...')
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#10 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#13 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
 #14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gp_rewrite_rule', 'a:2:{s:11:\"^glotpress$\";s:18:\"index.php?gp_route\";s:18:\"^glotpress\\/+(.*)$\";s:30:\"index.php?gp_route=$matches[1]\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, gp_init, gp_rewrite_rules, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 10:48:14 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 10:48:14 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 10:48:14 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 10:48:14 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 10:48:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SHOW columns from wp_getbwp_bookings where field="booking_qty"  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:30:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'I/9:GL/yj.bCdCfh?J2l@[c.Pd&90iArL|6M:Ri0Gx(S&~w{w+4&?hTDMp8WjDyD', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Alter table  wp_getbwp_bookings add column booking_qty int (11) default 1 ; </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
+				SELECT MAX(ordinal_position)
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'I/9:GL/yj.bCdCfh?J2l@[c.Pd&amp;90iArL|6M:Ri0Gx(S&amp;~w{w+4&amp;?hTDMp8WjDyD' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_getbwp_bookings, booking_qty, 20, 1, YES, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_getbwp_bookings_67f7739813498` (
+  `booking_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `booking_user_id` INTEGER NOT NULL,
+  `booking_service_id` INTEGER NOT NULL,
+  `booking_reservation_id` INTEGER NOT NULL,
+  `booking_staff_id` INTEGER NOT NULL,
+  `booking_cart_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_item_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_order_id` INTEGER,
+  `booking_template_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_date` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_from` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_to` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_offset` INTEGER NOT NULL DEFAULT '0',
+  `booking_status` INTEGER NOT NULL DEFAULT '0',
+  `booking_qty` INTEGER NOT NULL DEFAULT '1',
+  `booking_qty_2` INTEGER NOT NULL DEFAULT '0',
+  `booking_zoom_meetings` INTEGER NOT NULL DEFAULT '0',
+  `booking_amount` REAL NOT NULL,
+  `booking_key` TEXT COLLATE NOCASE NOT NULL,
+  `booking_qty` INTEGER DEFAULT '1'
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 duplicate column name: booking_qty
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'I/9:GL/yj.bCdCf...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'I/9:GL/yj.bCdCf...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'I/9:GL/yj.bCdCf...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'I/9:GL/yj.bCdCf...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40367|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/glotpress/gp-includes/assets-loader.php(32): wp_register_script('tablesorter', 'http://127.0.0....', Array, 1743850093)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): gp_register_default_scripts('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'I/9:GL/yj.bCdCfh?J2l@[c.Pd&90iArL|6M:Ri0Gx(S&~w{w+4&?hTDMp8WjDyD', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, gp_register_default_scripts, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 10:48:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('Alter table  wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('Alter table  wp...')
+#3 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(106): WP_SQLite_DB->query('Alter table  wp...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#9 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#12 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
+#13 {main}</pre>
+ for query Alter table  wp_getbwp_bookings add column booking_qty int (11) default 1 ;  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:30:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '=,Tdx>.X&M=:yQ &V4NO3F]pQ4$7&u&?=]t&&*Q2Sk~vq6D)VdaR%s0f@?@3!;06', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SHOW columns from wp_getbwp_bookings where field="booking_woo_commerce_item_id" </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , '=,Tdx&gt;.X&amp;M=:yQ &amp;V4NO3F]pQ4$7&amp;u&amp;?=]t&amp;&amp;*Q2Sk~vq6D)VdaR%s0f@?@3!;06' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? AND `field` = 'booking_woo_commerce_item_id' | parameters: database_name_here, wp_getbwp_bookings</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 no such column: field
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', '=,Tdx>.X&M=:yQ ...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', '=,Tdx>.X&M=:yQ ...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', '=,Tdx>.X&M=:yQ ...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', '=,Tdx>.X&M=:yQ ...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40367|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/glotpress/gp-includes/assets-loader.php(32): wp_register_script('tablesorter', 'http://127.0.0....', Array, 1743850093)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): gp_register_default_scripts('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '=,Tdx>.X&M=:yQ &V4NO3F]pQ4$7&u&?=]t&&*Q2Sk~vq6D)VdaR%s0f@?@3!;06', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, gp_register_default_scripts, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 10:48:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gp_rewrite_rule', 'a:2:{s:11:\"^glotpress$\";s:18:\"index.php?gp_route\";s:18:\"^glotpress\\/+(.*)$\";s:30:\"index.php?gp_route=$matches[1]\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'gp_rewrite_rule' , 'a:2:{s:11:&quot;^glotpress$&quot;;s:18:&quot;index.php?gp_route&quot;;s:18:&quot;^glotpress\/+(.*)$&quot;;s:30:&quot;index.php?gp_route=$matches[1]&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('gp_rewrite_rule', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/glotpress/gp-includes/rewrite.php(55): update_option('gp_rewrite_rule', Array)
-#6 /wordpress/wp-content/plugins/glotpress/gp-includes/system.php(18): gp_rewrite_rules()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): gp_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW columns fr...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW columns fr...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW columns fr...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(110): wpdb->get_results('SHOW columns fr...')
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#10 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#13 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
 #14 {main}</pre>
- for query IN
+ for query SHOW columns from wp_getbwp_bookings where field="booking_woo_commerce_item_id"  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:30:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>Alter table  wp_getbwp_bookings add column booking_woo_commerce_item_id int (11) default 0 ; </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_getbwp_bookings, booking_woo_commerce_item_id, 20, 0, YES, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_getbwp_bookings_67f7739817700` (
+  `booking_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `booking_user_id` INTEGER NOT NULL,
+  `booking_service_id` INTEGER NOT NULL,
+  `booking_reservation_id` INTEGER NOT NULL,
+  `booking_staff_id` INTEGER NOT NULL,
+  `booking_cart_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_item_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_order_id` INTEGER,
+  `booking_template_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_date` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_from` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_to` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_offset` INTEGER NOT NULL DEFAULT '0',
+  `booking_status` INTEGER NOT NULL DEFAULT '0',
+  `booking_qty` INTEGER NOT NULL DEFAULT '1',
+  `booking_qty_2` INTEGER NOT NULL DEFAULT '0',
+  `booking_zoom_meetings` INTEGER NOT NULL DEFAULT '0',
+  `booking_amount` REAL NOT NULL,
+  `booking_key` TEXT COLLATE NOCASE NOT NULL,
+  `booking_woo_commerce_item_id` INTEGER DEFAULT '0'
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: booking_woo_commerce_item_id
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('Alter table  wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('Alter table  wp...')
+#3 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(113): WP_SQLite_DB->query('Alter table  wp...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#9 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#12 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
+#13 {main}</pre>
+ for query Alter table  wp_getbwp_bookings add column booking_woo_commerce_item_id int (11) default 0 ;  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:30:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW columns from wp_getbwp_bookings where field="booking_woo_commerce_order_id" </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? AND `field` = 'booking_woo_commerce_order_id' | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: field
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW columns fr...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW columns fr...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW columns fr...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(117): wpdb->get_results('SHOW columns fr...')
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#10 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#13 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
+#14 {main}</pre>
+ for query SHOW columns from wp_getbwp_bookings where field="booking_woo_commerce_order_id"  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:30:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>Alter table  wp_getbwp_bookings add column booking_woo_commerce_order_id int (11) default NULL ; </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_getbwp_bookings, booking_woo_commerce_order_id, 20, , YES, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_getbwp_bookings_67f773981ccf0` (
+  `booking_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `booking_user_id` INTEGER NOT NULL,
+  `booking_service_id` INTEGER NOT NULL,
+  `booking_reservation_id` INTEGER NOT NULL,
+  `booking_staff_id` INTEGER NOT NULL,
+  `booking_cart_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_item_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_order_id` INTEGER,
+  `booking_template_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_date` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_from` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_to` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_offset` INTEGER NOT NULL DEFAULT '0',
+  `booking_status` INTEGER NOT NULL DEFAULT '0',
+  `booking_qty` INTEGER NOT NULL DEFAULT '1',
+  `booking_qty_2` INTEGER NOT NULL DEFAULT '0',
+  `booking_zoom_meetings` INTEGER NOT NULL DEFAULT '0',
+  `booking_amount` REAL NOT NULL,
+  `booking_key` TEXT COLLATE NOCASE NOT NULL,
+  `booking_woo_commerce_order_id` INTEGER
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: booking_woo_commerce_order_id
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('Alter table  wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('Alter table  wp...')
+#3 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(120): WP_SQLite_DB->query('Alter table  wp...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#9 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#12 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
+#13 {main}</pre>
+ for query Alter table  wp_getbwp_bookings add column booking_woo_commerce_order_id int (11) default NULL ;  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:30:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW columns from wp_getbwp_bookings where field="booking_reservation_id" </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? AND `field` = 'booking_reservation_id' | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: field
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW columns fr...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW columns fr...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW columns fr...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(128): wpdb->get_results('SHOW columns fr...')
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#10 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#13 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
+#14 {main}</pre>
+ for query SHOW columns from wp_getbwp_bookings where field="booking_reservation_id"  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:30:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>Alter table  wp_getbwp_bookings add column booking_reservation_id int (11) default NULL ; </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_getbwp_bookings, booking_reservation_id, 20, , YES, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_getbwp_bookings_67f77398226c8` (
+  `booking_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `booking_user_id` INTEGER NOT NULL,
+  `booking_service_id` INTEGER NOT NULL,
+  `booking_reservation_id` INTEGER NOT NULL,
+  `booking_staff_id` INTEGER NOT NULL,
+  `booking_cart_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_item_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_order_id` INTEGER,
+  `booking_template_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_date` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_from` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_to` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_offset` INTEGER NOT NULL DEFAULT '0',
+  `booking_status` INTEGER NOT NULL DEFAULT '0',
+  `booking_qty` INTEGER NOT NULL DEFAULT '1',
+  `booking_qty_2` INTEGER NOT NULL DEFAULT '0',
+  `booking_zoom_meetings` INTEGER NOT NULL DEFAULT '0',
+  `booking_amount` REAL NOT NULL,
+  `booking_key` TEXT COLLATE NOCASE NOT NULL,
+  `booking_reservation_id` INTEGER
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: booking_reservation_id
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('Alter table  wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('Alter table  wp...')
+#3 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(132): WP_SQLite_DB->query('Alter table  wp...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#9 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#12 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
+#13 {main}</pre>
+ for query Alter table  wp_getbwp_bookings add column booking_reservation_id int (11) default NULL ;  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:30:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW columns from wp_getbwp_bookings where field="booking_zoom_meetings" </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? AND `field` = 'booking_zoom_meetings' | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: field
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW columns fr...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW columns fr...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW columns fr...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(136): wpdb->get_results('SHOW columns fr...')
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#10 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#13 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
+#14 {main}</pre>
+ for query SHOW columns from wp_getbwp_bookings where field="booking_zoom_meetings"  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:30:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>Alter table  wp_getbwp_bookings add column booking_zoom_meetings int (1) default 0 ; </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_getbwp_bookings, booking_zoom_meetings, 20, 0, YES, int, , , 10, 0, , , , int(1), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_getbwp_bookings_67f7739829040` (
+  `booking_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `booking_user_id` INTEGER NOT NULL,
+  `booking_service_id` INTEGER NOT NULL,
+  `booking_reservation_id` INTEGER NOT NULL,
+  `booking_staff_id` INTEGER NOT NULL,
+  `booking_cart_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_item_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_order_id` INTEGER,
+  `booking_template_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_date` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_from` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_to` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_offset` INTEGER NOT NULL DEFAULT '0',
+  `booking_status` INTEGER NOT NULL DEFAULT '0',
+  `booking_qty` INTEGER NOT NULL DEFAULT '1',
+  `booking_qty_2` INTEGER NOT NULL DEFAULT '0',
+  `booking_zoom_meetings` INTEGER NOT NULL DEFAULT '0',
+  `booking_amount` REAL NOT NULL,
+  `booking_key` TEXT COLLATE NOCASE NOT NULL,
+  `booking_zoom_meetings` INTEGER DEFAULT '0'
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: booking_zoom_meetings
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('Alter table  wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('Alter table  wp...')
+#3 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(140): WP_SQLite_DB->query('Alter table  wp...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#9 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#12 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
+#13 {main}</pre>
+ for query Alter table  wp_getbwp_bookings add column booking_zoom_meetings int (1) default 0 ;  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:30:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW columns from wp_getbwp_bookings where field="booking_qty_2" </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? AND `field` = 'booking_qty_2' | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: field
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW columns fr...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW columns fr...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW columns fr...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(144): wpdb->get_results('SHOW columns fr...')
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#10 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#13 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
+#14 {main}</pre>
+ for query SHOW columns from wp_getbwp_bookings where field="booking_qty_2"  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:30:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>Alter table  wp_getbwp_bookings add column booking_qty_2 int (11) default 0 ; </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_getbwp_bookings, booking_qty_2, 20, 0, YES, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_getbwp_bookings_67f7739833838` (
+  `booking_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `booking_user_id` INTEGER NOT NULL,
+  `booking_service_id` INTEGER NOT NULL,
+  `booking_reservation_id` INTEGER NOT NULL,
+  `booking_staff_id` INTEGER NOT NULL,
+  `booking_cart_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_item_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_order_id` INTEGER,
+  `booking_template_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_date` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_from` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_to` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_offset` INTEGER NOT NULL DEFAULT '0',
+  `booking_status` INTEGER NOT NULL DEFAULT '0',
+  `booking_qty` INTEGER NOT NULL DEFAULT '1',
+  `booking_qty_2` INTEGER NOT NULL DEFAULT '0',
+  `booking_zoom_meetings` INTEGER NOT NULL DEFAULT '0',
+  `booking_amount` REAL NOT NULL,
+  `booking_key` TEXT COLLATE NOCASE NOT NULL,
+  `booking_qty_2` INTEGER DEFAULT '0'
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: booking_qty_2
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('Alter table  wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('Alter table  wp...')
+#3 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(148): WP_SQLite_DB->query('Alter table  wp...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#9 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#12 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
+#13 {main}</pre>
+ for query Alter table  wp_getbwp_bookings add column booking_qty_2 int (11) default 0 ;  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:30:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW columns from wp_getbwp_bookings where field="booking_time_offset" </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM _wp_sqlite_mysql_information_schema_tables WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? AND `field` = 'booking_time_offset' | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such column: field
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW columns fr...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW columns fr...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW columns fr...')
+#4 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(152): wpdb->get_results('SHOW columns fr...')
+#5 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(93): GetBookingsWPOrder->update_table()
+#6 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(8): GetBookingsWPOrder->ini_db()
+#7 /wordpress/wp-content/plugins/get-bookings-wp/classes/order.php(898): GetBookingsWPOrder->__construct()
+#8 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(925): require_once('/wordpress/wp-c...')
+#9 /wordpress/wp-content/plugins/get-bookings-wp/classes/getbookingswp.class.php(27): GetBookingsWP->load_classes()
+#10 /wordpress/wp-content/plugins/get-bookings-wp/index.php(71): GetBookingsWP->plugin_init()
+#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('get-bookings-wp...')
+#13 /internal/eval.php(20): activate_plugin('get-bookings-wp...')
+#14 {main}</pre>
+ for query SHOW columns from wp_getbwp_bookings where field="booking_time_offset"  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/get-bookings-wp/index.php'), GetBookingsWP->plugin_init, GetBookingsWP->load_classes, require_once('/plugins/get-bookings-wp/classes/order.php'), GetBookingsWPOrder->__construct, GetBookingsWPOrder->ini_db, GetBookingsWPOrder->update_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:30:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>Alter table  wp_getbwp_bookings add column booking_time_offset int (11) default 0 ; </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_getbwp_bookings</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_getbwp_bookings, booking_time_offset, 20, 0, YES, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_getbwp_bookings</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_getbwp_bookings_67f773983d478` (
+  `booking_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `booking_user_id` INTEGER NOT NULL,
+  `booking_service_id` INTEGER NOT NULL,
+  `booking_reservation_id` INTEGER NOT NULL,
+  `booking_staff_id` INTEGER NOT NULL,
+  `booking_cart_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_item_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_woo_commerce_order_id` INTEGER,
+  `booking_template_id` INTEGER NOT NULL DEFAULT '0',
+  `booking_date` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_from` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_to` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_offset` INTEGER NOT NULL DEFAULT '0',
+  `booking_status` INTEGER NOT NULL DEFAULT '0',
+  `booking_qty` INTEGER NOT NULL DEFAULT '1',
+  `booking_qty_2` INTEGER NOT NULL DEFAULT '0',
+  `booking_zoom_meetings` INTEGER NOT NULL DEFAULT '0',
+  `booking_amount` REAL NOT NULL,
+  `booking_key` TEXT COLLATE NOCASE NOT NULL,
+  `booking_time_offset` INTEGER DEFAULT '0'
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: booking_time_offset
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new
