@@ -1,1 +1,1924 @@
+(node:22331) TimeoutNegativeWarning: -1 is a negative number.
+Timeout duration was set to 1.
+(Use `node --trace-warnings ...` to show where the warning was created)
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21
+`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
 
+Error: [10-Apr-2025 20:49:22 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 20:49:23 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 20:49:31 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 20:49:33 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 20:49:41 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 20:49:42 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 20:49:53 UTC] PHP Warning:  Undefined variable $test_db_version in /wordpress/wp-content/plugins/woo-live-sale-notify/index.php on line 54
+[10-Apr-2025 20:50:01 UTC] PHP Warning:  Undefined variable $test_db_version in /wordpress/wp-content/plugins/woo-live-sale-notify/index.php on line 54
+[10-Apr-2025 20:50:11 UTC] PHP Warning:  Undefined variable $test_db_version in /wordpress/wp-content/plugins/woo-live-sale-notify/index.php on line 54
+[10-Apr-2025 20:50:54 UTC] PHP Deprecated:  Function is_staging_site is <strong>deprecated</strong> since version 3.3.0! Use in_safe_mode instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 20:50:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+				SELECT
+					gateway, currency, SUM(total) AS totals, COUNT(order_id) AS counts
+				FROM (
+					SELECT
+						orders.id AS order_id,
+						MAX(CASE WHEN meta_key = '_payment_method' THEN meta_value END) gateway,
+						MAX(CASE WHEN meta_key = '_order_total' THEN meta_value END) total,
+						MAX(CASE WHEN meta_key = '_order_currency' THEN meta_value END) currency
+					FROM
+						wp_posts orders
+					LEFT JOIN
+						wp_postmeta order_meta ON order_meta.post_id = orders.id
+					WHERE orders.post_type = 'shop_order'
+                        AND orders.post_date_gmt >= 2025-01-10 20:50:55
+						AND orders.post_status in ( 'wc-completed', 'wc-processing', 'wc-refunded' )
+						AND meta_key in( '_payment_method','_order_total','_order_currency')
+					GROUP BY orders.id
+				) order_gateways
+				GROUP BY gateway, currency
+				</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('\n\t\t\t\tSELECT\n\t\t\t...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('\n\t\t\t\tSELECT\n\t\t\t...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('\n\t\t\t\tSELECT\n\t\t\t...')
+#4 /wordpress/wp-content/plugins/woocommerce-for-japan/includes/class-jp4wc-usage-tracking.php(828): wpdb->get_results('\n\t\t\t\tSELECT\n\t\t\t...')
+#5 /wordpress/wp-content/plugins/woocommerce-for-japan/includes/class-jp4wc-usage-tracking.php(431): JP4WC_Usage_Tracking::get_orders_by_gateway()
+#6 /wordpress/wp-content/plugins/woocommerce-for-japan/includes/class-jp4wc-usage-tracking.php(165): JP4WC_Usage_Tracking::get_orders()
+#7 /wordpress/wp-content/plugins/woocommerce-for-japan/includes/class-jp4wc-usage-tracking.php(75): JP4WC_Usage_Tracking::get_tracking_data()
+#8 /wordpress/wp-content/plugins/woocommerce-for-japan/includes/class-jp4wc-install.php(91): JP4WC_Usage_Tracking::jp4wc_send_tracking_data(true)
+#9 /wordpress/wp-content/plugins/woocommerce-for-japan/includes/class-jp4wc-install.php(59): JP4WC_Install::update_jp4wc_version()
+#10 /wordpress/wp-content/plugins/woocommerce-for-japan/includes/class-jp4wc-install.php(31): JP4WC_Install::install()
+#11 /wordpress/wp-includes/class-wp-hook.php(324): JP4WC_Install::check_version('')
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#14 /wordpress/wp-settings.php(704): do_action('init')
+#15 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#16 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#17 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#18 {main}</pre>
+ for query 
+				SELECT
+					gateway, currency, SUM(total) AS totals, COUNT(order_id) AS counts
+				FROM (
+					SELECT
+						orders.id AS order_id,
+						MAX(CASE WHEN meta_key = '_payment_method' THEN meta_value END) gateway,
+						MAX(CASE WHEN meta_key = '_order_total' THEN meta_value END) total,
+						MAX(CASE WHEN meta_key = '_order_currency' THEN meta_value END) currency
+					FROM
+						wp_posts orders
+					LEFT JOIN
+						wp_postmeta order_meta ON order_meta.post_id = orders.id
+					WHERE orders.post_type = 'shop_order'
+                        AND orders.post_date_gmt >= 2025-01-10 20:50:55
+						AND orders.post_status in ( 'wc-completed', 'wc-processing', 'wc-refunded' )
+						AND meta_key in( '_payment_method','_order_total','_order_currency')
+					GROUP BY orders.id
+				) order_gateways
+				GROUP BY gateway, currency
+				 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, JP4WC_Install::check_version, JP4WC_Install::install, JP4WC_Install::update_jp4wc_version, JP4WC_Usage_Tracking::jp4wc_send_tracking_data, JP4WC_Usage_Tracking::get_tracking_data, JP4WC_Usage_Tracking::get_orders, JP4WC_Usage_Tracking::get_orders_by_gateway, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 20:51:40 UTC] PHP Deprecated:  Function is_staging_site is <strong>deprecated</strong> since version 3.3.0! Use in_safe_mode instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 20:51:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+				SELECT
+					gateway, currency, SUM(total) AS totals, COUNT(order_id) AS counts
+				FROM (
+					SELECT
+						orders.id AS order_id,
+						MAX(CASE WHEN meta_key = '_payment_method' THEN meta_value END) gateway,
+						MAX(CASE WHEN meta_key = '_order_total' THEN meta_value END) total,
+						MAX(CASE WHEN meta_key = '_order_currency' THEN meta_value END) currency
+					FROM
+						wp_posts orders
+					LEFT JOIN
+						wp_postmeta order_meta ON order_meta.post_id = orders.id
+					WHERE orders.post_type = 'shop_order'
+                        AND orders.post_date_gmt >= 2025-01-10 20:51:40
+						AND orders.post_status in ( 'wc-completed', 'wc-processing', 'wc-refunded' )
+						AND meta_key in( '_payment_method','_order_total','_order_currency')
+					GROUP BY orders.id
+				) order_gateways
+				GROUP BY gateway, currency
+				</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: 
+				SELECT
+					gateway, currency, SUM(total) AS totals, COUNT(order_id) AS counts
+				FROM (
+					SELECT
+						orders.id AS order_id,
+						MAX(CASE WHEN meta_key = :param0  THEN meta_value END) gateway,
+						MAX(CASE WHEN meta_key = :param1  THEN meta_value END) total,
+						MAX(CASE WHEN meta_key = :param2  THEN meta_value END) currency
+					FROM
+						wp_posts orders
+					LEFT JOIN
+						wp_postmeta order_meta ON order_meta.post_id = orders.id
+					WHERE orders.post_type = :param3 
+                        AND orders.post_date_gmt &gt;= 2025-01-10 20:51:40
+						AND orders.post_status in ( :param4 , :param5 , :param6  )
+						AND meta_key in( :param7 ,:param8 ,:param9 )
+					GROUP BY orders.id
+				) order_gateways
+				GROUP BY gateway, currency
+				 | parameters: _payment_method, _order_total, _order_currency, shop_order, wc-completed, wc-processing, wc-refunded, _payment_method, _order_total, _order_currency</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "20": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('\n\t\t\t\tSELECT\n\t\t\t...')
+#2 /wordpress/wp-content/plugins/woocommerce-for-japan/includes/class-jp4wc-usage-tracking.php(828): wpdb->get_results('\n\t\t\t\tSELECT\n\t\t\t...')
+#3 /wordpress/wp-content/plugins/woocommerce-for-japan/includes/class-jp4wc-usage-tracking.php(431): JP4WC_Usage_Tracking::get_orders_by_gateway()
+#4 /wordpress/wp-content/plugins/woocommerce-for-japan/includes/class-jp4wc-usage-tracking.php(165): JP4WC_Usage_Tracking::get_orders()
+#5 /wordpress/wp-content/plugins/woocommerce-for-japan/includes/class-jp4wc-usage-tracking.php(75): JP4WC_Usage_Tracking::get_tracking_data()
+#6 /wordpress/wp-content/plugins/woocommerce-for-japan/includes/class-jp4wc-install.php(91): JP4WC_Usage_Tracking::jp4wc_send_tracking_data(true)
+#7 /wordpress/wp-content/plugins/woocommerce-for-japan/includes/class-jp4wc-install.php(59): JP4WC_Install::update_jp4wc_version()
+#8 /wordpress/wp-content/plugins/woocommerce-for-japan/includes/class-jp4wc-install.php(31): JP4WC_Install::install()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): JP4WC_Install::check_version('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-settings.php(704): do_action('init')
+#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#16 {main}</pre>
+ for query 
+				SELECT
+					gateway, currency, SUM(total) AS totals, COUNT(order_id) AS counts
+				FROM (
+					SELECT
+						orders.id AS order_id,
+						MAX(CASE WHEN meta_key = '_payment_method' THEN meta_value END) gateway,
+						MAX(CASE WHEN meta_key = '_order_total' THEN meta_value END) total,
+						MAX(CASE WHEN meta_key = '_order_currency' THEN meta_value END) currency
+					FROM
+						wp_posts orders
+					LEFT JOIN
+						wp_postmeta order_meta ON order_meta.post_id = orders.id
+					WHERE orders.post_type = 'shop_order'
+                        AND orders.post_date_gmt >= 2025-01-10 20:51:40
+						AND orders.post_status in ( 'wc-completed', 'wc-processing', 'wc-refunded' )
+						AND meta_key in( '_payment_method','_order_total','_order_currency')
+					GROUP BY orders.id
+				) order_gateways
+				GROUP BY gateway, currency
+				 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, JP4WC_Install::check_version, JP4WC_Install::install, JP4WC_Install::update_jp4wc_version, JP4WC_Usage_Tracking::jp4wc_send_tracking_data, JP4WC_Usage_Tracking::get_tracking_data, JP4WC_Usage_Tracking::get_orders, JP4WC_Usage_Tracking::get_orders_by_gateway, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 20:52:21 UTC] PHP Deprecated:  Function is_staging_site is <strong>deprecated</strong> since version 3.3.0! Use in_safe_mode instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 20:52:22 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>
+				SELECT
+					gateway, currency, SUM(total) AS totals, COUNT(order_id) AS counts
+				FROM (
+					SELECT
+						orders.id AS order_id,
+						MAX(CASE WHEN meta_key = '_payment_method' THEN meta_value END) gateway,
+						MAX(CASE WHEN meta_key = '_order_total' THEN meta_value END) total,
+						MAX(CASE WHEN meta_key = '_order_currency' THEN meta_value END) currency
+					FROM
+						wp_posts orders
+					LEFT JOIN
+						wp_postmeta order_meta ON order_meta.post_id = orders.id
+					WHERE orders.post_type = 'shop_order'
+                        AND orders.post_date_gmt >= 2025-01-10 20:52:22
+						AND orders.post_status in ( 'wc-completed', 'wc-processing', 'wc-refunded' )
+						AND meta_key in( '_payment_method','_order_total','_order_currency')
+					GROUP BY orders.id
+				) order_gateways
+				GROUP BY gateway, currency
+				</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: 
+				SELECT
+					gateway, currency, SUM(total) AS totals, COUNT(order_id) AS counts
+				FROM (
+					SELECT
+						orders.id AS order_id,
+						MAX(CASE WHEN meta_key = :param0  THEN meta_value END) gateway,
+						MAX(CASE WHEN meta_key = :param1  THEN meta_value END) total,
+						MAX(CASE WHEN meta_key = :param2  THEN meta_value END) currency
+					FROM
+						wp_posts orders
+					LEFT JOIN
+						wp_postmeta order_meta ON order_meta.post_id = orders.id
+					WHERE orders.post_type = :param3 
+                        AND orders.post_date_gmt &gt;= 2025-01-10 20:52:22
+						AND orders.post_status in ( :param4 , :param5 , :param6  )
+						AND meta_key in( :param7 ,:param8 ,:param9 )
+					GROUP BY orders.id
+				) order_gateways
+				GROUP BY gateway, currency
+				 | parameters: _payment_method, _order_total, _order_currency, shop_order, wc-completed, wc-processing, wc-refunded, _payment_method, _order_total, _order_currency</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "20": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('\n\t\t\t\tSELECT\n\t\t\t...')
+#2 /wordpress/wp-content/plugins/woocommerce-for-japan/includes/class-jp4wc-usage-tracking.php(828): wpdb->get_results('\n\t\t\t\tSELECT\n\t\t\t...')
+#3 /wordpress/wp-content/plugins/woocommerce-for-japan/includes/class-jp4wc-usage-tracking.php(431): JP4WC_Usage_Tracking::get_orders_by_gateway()
+#4 /wordpress/wp-content/plugins/woocommerce-for-japan/includes/class-jp4wc-usage-tracking.php(165): JP4WC_Usage_Tracking::get_orders()
+#5 /wordpress/wp-content/plugins/woocommerce-for-japan/includes/class-jp4wc-usage-tracking.php(75): JP4WC_Usage_Tracking::get_tracking_data()
+#6 /wordpress/wp-content/plugins/woocommerce-for-japan/includes/class-jp4wc-install.php(91): JP4WC_Usage_Tracking::jp4wc_send_tracking_data(true)
+#7 /wordpress/wp-content/plugins/woocommerce-for-japan/includes/class-jp4wc-install.php(59): JP4WC_Install::update_jp4wc_version()
+#8 /wordpress/wp-content/plugins/woocommerce-for-japan/includes/class-jp4wc-install.php(31): JP4WC_Install::install()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): JP4WC_Install::check_version('')
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-settings.php(704): do_action('init')
+#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#16 {main}</pre>
+ for query 
+				SELECT
+					gateway, currency, SUM(total) AS totals, COUNT(order_id) AS counts
+				FROM (
+					SELECT
+						orders.id AS order_id,
+						MAX(CASE WHEN meta_key = '_payment_method' THEN meta_value END) gateway,
+						MAX(CASE WHEN meta_key = '_order_total' THEN meta_value END) total,
+						MAX(CASE WHEN meta_key = '_order_currency' THEN meta_value END) currency
+					FROM
+						wp_posts orders
+					LEFT JOIN
+						wp_postmeta order_meta ON order_meta.post_id = orders.id
+					WHERE orders.post_type = 'shop_order'
+                        AND orders.post_date_gmt >= 2025-01-10 20:52:22
+						AND orders.post_status in ( 'wc-completed', 'wc-processing', 'wc-refunded' )
+						AND meta_key in( '_payment_method','_order_total','_order_currency')
+					GROUP BY orders.id
+				) order_gateways
+				GROUP BY gateway, currency
+				 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, JP4WC_Install::check_version, JP4WC_Install::install, JP4WC_Install::update_jp4wc_version, JP4WC_Usage_Tracking::jp4wc_send_tracking_data, JP4WC_Usage_Tracking::get_tracking_data, JP4WC_Usage_Tracking::get_orders, JP4WC_Usage_Tracking::get_orders_by_gateway, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 20:52:36 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744318353.47)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /wordp in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 20:52:46 UTC] PHP Deprecated:  Array and string offset access syntax with curly braces is deprecated in /wordpress/wp-content/plugins/wp-donate/includes/donate-function.php on line 201
+[10-Apr-2025 20:52:47 UTC] PHP Deprecated:  Array and string offset access syntax with curly braces is deprecated in /wordpress/wp-content/plugins/wp-donate/includes/donate-function.php on line 201
+[10-Apr-2025 20:52:56 UTC] PHP Deprecated:  Array and string offset access syntax with curly braces is deprecated in /wordpress/wp-content/plugins/wp-donate/includes/donate-function.php on line 201
+[10-Apr-2025 20:52:57 UTC] PHP Deprecated:  Array and string offset access syntax with curly braces is deprecated in /wordpress/wp-content/plugins/wp-donate/includes/donate-function.php on line 201
+[10-Apr-2025 20:53:09 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Gitlab_Widget_P...')
+#2 /wordpress/wp-content/plugins/wp-gitlab/wp-gitlab.php(71): register_widget('Gitlab_Widget_P...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): register_gitlab_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 20:53:18 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Gitlab_Widget_P...')
+#2 /wordpress/wp-content/plugins/wp-gitlab/wp-gitlab.php(71): register_widget('Gitlab_Widget_P...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): register_gitlab_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 20:53:27 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Gitlab_Widget_P...')
+#2 /wordpress/wp-content/plugins/wp-gitlab/wp-gitlab.php(71): register_widget('Gitlab_Widget_P...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): register_gitlab_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 20:53:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p> SELECT ID FROM wp_posts WHERE ( ( post_date > 0 && post_date <= '2025-04-10 20:53:58' ) ) AND post_status = 'future' LIMIT 0,10 </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `ID` FROM `wp_posts` WHERE ( ( `post_date` &gt; 0 &amp;&amp; `post_date` &lt;= '2025-04-10 20:53:58' ) ) AND `post_status` = 'future' LIMIT 0 , 10 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near "&": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query(' SELECT ID FROM...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query(' SELECT ID FROM...')
+#3 /wordpress/wp-includes/class-wpdb.php(3103): WP_SQLite_DB->query(' SELECT ID FROM...')
+#4 /wordpress/wp-content/plugins/wp-missed-schedule/wp-missed-schedule.php(304): wpdb->get_col(' SELECT ID FROM...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): wpms_init('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(704): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query  SELECT ID FROM wp_posts WHERE ( ( post_date > 0 && post_date <= '2025-04-10 20:53:58' ) ) AND post_status = 'future' LIMIT 0,10  made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wpms_init, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 20:54:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p> SELECT ID FROM wp_posts WHERE ( ( post_date > 0 && post_date <= '2025-04-10 20:54:07' ) ) AND post_status = 'future' LIMIT 0,10 </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing:  SELECT ID FROM wp_posts WHERE ( ( post_date &gt; 0 &amp;&amp; post_date &lt;= :param0  ) ) AND post_status = :param1  LIMIT 0,10  | parameters: 2025-04-10 20:54:07, future</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "&": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3103): WP_SQLite_DB->query(' SELECT ID FROM...')
+#2 /wordpress/wp-content/plugins/wp-missed-schedule/wp-missed-schedule.php(304): wpdb->get_col(' SELECT ID FROM...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpms_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query  SELECT ID FROM wp_posts WHERE ( ( post_date > 0 && post_date <= '2025-04-10 20:54:07' ) ) AND post_status = 'future' LIMIT 0,10  made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wpms_init, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 20:54:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p> SELECT ID FROM wp_posts WHERE ( ( post_date > 0 && post_date <= '2025-04-10 20:54:15' ) ) AND post_status = 'future' LIMIT 0,10 </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing:  SELECT ID FROM wp_posts WHERE ( ( post_date &gt; 0 &amp;&amp; post_date &lt;= :param0  ) ) AND post_status = :param1  LIMIT 0,10  | parameters: 2025-04-10 20:54:15, future</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "&": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3103): WP_SQLite_DB->query(' SELECT ID FROM...')
+#2 /wordpress/wp-content/plugins/wp-missed-schedule/wp-missed-schedule.php(304): wpdb->get_col(' SELECT ID FROM...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpms_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query  SELECT ID FROM wp_posts WHERE ( ( post_date > 0 && post_date <= '2025-04-10 20:54:15' ) ) AND post_status = 'future' LIMIT 0,10  made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wpms_init, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 20:54:57 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 20:54:58 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 20:55:06 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 20:55:07 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 20:55:15 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 20:55:16 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 20:55:27 UTC] PHP Warning:  Undefined property: WPBookList_General_Functions::$date in /wordpress/wp-content/plugins/wpbooklist/includes/class-wpbooklist-general-functions.php on line 1083
+[10-Apr-2025 20:55:29 UTC] Automatic updates starting...
+[10-Apr-2025 20:55:31 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wpbooklist</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 20:55:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wpbooklist_jre_user_options ADD activeposttemplate varchar( 255 ) NOT NULL DEFAULT 'default'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpbooklist_jre_user_options</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options, activeposttemplate, 96, default, NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_wpbooklist_jre_user_options_67f83043d2348` (
+  `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `username` TEXT COLLATE NOCASE,
+  `version` TEXT COLLATE NOCASE NOT NULL DEFAULT '3.3',
+  `amazonaff` TEXT COLLATE NOCASE NOT NULL DEFAULT 'wpbooklisti0e-21',
+  `amazonauth` TEXT COLLATE NOCASE,
+  `itunesaff` TEXT COLLATE NOCASE NOT NULL DEFAULT '1010lnPx',
+  `enablepurchase` INTEGER,
+  `amazonapipublic` TEXT COLLATE NOCASE,
+  `amazonapisecret` TEXT COLLATE NOCASE,
+  `googleapi` TEXT COLLATE NOCASE,
+  `appleapi` TEXT COLLATE NOCASE,
+  `openlibraryapi` TEXT COLLATE NOCASE,
+  `hidestats` INTEGER,
+  `hidesortby` INTEGER,
+  `hidesearch` INTEGER,
+  `hidefilter` INTEGER,
+  `hidebooktitle` INTEGER,
+  `hidebookimage` INTEGER,
+  `hidefinished` INTEGER,
+  `hidelibrarytitle` INTEGER,
+  `hideauthor` INTEGER,
+  `hidecategory` INTEGER,
+  `hidepages` INTEGER,
+  `hidebookpage` INTEGER,
+  `hidebookpost` INTEGER,
+  `hidepublisher` INTEGER,
+  `hidepubdate` INTEGER,
+  `hidesigned` INTEGER,
+  `hidesubject` INTEGER,
+  `hidecountry` INTEGER,
+  `hidefirstedition` INTEGER,
+  `hidefinishedsort` INTEGER,
+  `hidesignedsort` INTEGER,
+  `hidefirstsort` INTEGER,
+  `hidesubjectsort` INTEGER,
+  `hidefacebook` INTEGER,
+  `hidemessenger` INTEGER,
+  `hidetwitter` INTEGER,
+  `hidegoogleplus` INTEGER,
+  `hidepinterest` INTEGER,
+  `hideemail` INTEGER,
+  `hidefrontendbuyimg` INTEGER,
+  `hidefrontendbuyprice` INTEGER,
+  `hidecolorboxbuyimg` INTEGER,
+  `hidecolorboxbuyprice` INTEGER,
+  `hidegoodreadswidget` INTEGER,
+  `hidedescription` INTEGER,
+  `hidesimilar` INTEGER,
+  `hideamazonreview` INTEGER,
+  `hidenotes` INTEGER,
+  `hidebottompurchase` INTEGER,
+  `hidegooglepurchase` INTEGER,
+  `hidefeaturedtitles` INTEGER,
+  `hidebnpurchase` INTEGER,
+  `hideitunespurchase` INTEGER,
+  `hideamazonpurchase` INTEGER,
+  `hiderating` INTEGER,
+  `hideratingbook` INTEGER,
+  `hidequote` INTEGER,
+  `hidequotebook` INTEGER,
+  `sortoption` TEXT COLLATE NOCASE,
+  `booksonpage` INTEGER NOT NULL DEFAULT '12',
+  `amazoncountryinfo` TEXT COLLATE NOCASE NOT NULL DEFAULT 'US',
+  `stylepak` TEXT COLLATE NOCASE NOT NULL DEFAULT 'Default',
+  `admindismiss` INTEGER NOT NULL DEFAULT '1',
+  `activeposttemplate` TEXT COLLATE NOCASE,
+  `activepagetemplate` TEXT COLLATE NOCASE,
+  `hidekindleprev` INTEGER,
+  `hidegoogleprev` INTEGER,
+  `hidebampurchase` INTEGER,
+  `hidekobopurchase` INTEGER,
+  `hideasin` INTEGER,
+  `hidegenres` INTEGER,
+  `hideisbn10` INTEGER,
+  `hideisbn13` INTEGER,
+  `hidekeywords` INTEGER,
+  `hideothereditions` INTEGER,
+  `hideoutofprint` INTEGER,
+  `hidecallnumber` INTEGER,
+  `hideformat` INTEGER,
+  `hideillustrator` INTEGER,
+  `hidelanguage` INTEGER,
+  `hidenumberinseries` INTEGER,
+  `hideorigpubyear` INTEGER,
+  `hideorigtitle` INTEGER,
+  `hideseries` INTEGER,
+  `hideshortdesc` INTEGER,
+  `hidesubgenre` INTEGER,
+  `patreonaccess` TEXT COLLATE NOCASE,
+  `patreonrefresh` TEXT COLLATE NOCASE,
+  `patreonack` TEXT COLLATE NOCASE,
+  `extensionversions` TEXT COLLATE NOCASE,
+  `adminmessage` TEXT COLLATE NOCASE NOT NULL DEFAULT 'aladivaholeidanequaladqwpbooklistdashnoticedashholderadqaraalaparaBeaholesureaholetoaholecheckaholeoutaholetheaholealaspanaholestyleanequaladqfontdashweightacoboldascaholefontdashsizeacoahole15pxascaholefontdashstyleacoitalicascadqaraalaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashextensionsaslashadqaraWPBookListaholeExtensionsaholeampersandaholeStylePaksanemalaaslashaaraalaparaalaaslashparaalaaslashspanaraaholeInstantlyaholechangeaholetheaholelookaholeandaholefeelaholeofaholeyouraholealaspanaholeclassanequaladqwpbooklistdashcolordashorangedashitalicadqaraalaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashstylepaksdash2aslashadqaraWPBookListaholeLibrariesalaaslashaaraalaaslashspanaraakommaaholeaddaholeyouraholeownaholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashaffiliatedashextensionaslashadqaraaffiliateaholeIDsalaaslashaaraakommaaholeimportaholeyouraholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashgoodreadsdashextensionaslashadqaraGoodreadsaholelibraryalaaslashaaraakommaaholeuploadaholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashbulkdashuploaddashextensionaslashadqarabooksaholeinaholebulkalaaslashaaraaholebyaholeISBNaslashASINaholenumbersakommaaholeandaholemoreanemalaaslashparaaladivaholeidanequaladqwpbooklistdashmydashnoticedashdismissdashforeveradqaraDismissaholeForeveralaaslashdivaraalaparaalaaslashparaalaparaalaaslashparaaholeaholeaholeaholealabuttonaholetypeanequaladqbuttonadqaholeclassanequaladqnoticedashdismissadqaraalaspanaholeclassanequaladqscreendashreaderdashtextadqaraDismissaholethisaholenoticealaaslashspanaraalaaslashbuttonaraalaaslashdivara',
+  `customfields` TEXT COLLATE NOCASE,
+  `hideadditionalimgs` INTEGER,
+  `activeposttemplate` TEXT COLLATE NOCASE NOT NULL DEFAULT 'default'
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: activeposttemplate
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wpbooklist/includes/classes/compat/class-wpbooklist-compat-functions.php(73): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wpbooklist/includes/classes/compat/class-wpbooklist-compat-functions.php(40): WPBookList_Compat_Functions->wpbooklist_upgrade_modify_user_options_table()
+#5 /wordpress/wp-content/plugins/wpbooklist/includes/class-wpbooklist-general-functions.php(2040): WPBookList_Compat_Functions->__construct()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WPBookList_General_Functions->wpbooklist_update_upgrade_function('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query ALTER TABLE wp_wpbooklist_jre_user_options ADD activeposttemplate varchar( 255 ) NOT NULL DEFAULT 'default' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, WPBookList_General_Functions->wpbooklist_update_upgrade_function, WPBookList_Compat_Functions->__construct, WPBookList_Compat_Functions->wpbooklist_upgrade_modify_user_options_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 20:55:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wpbooklist_jre_user_options ADD activepagetemplate varchar( 255 ) NOT NULL DEFAULT 'default'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpbooklist_jre_user_options</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options, activepagetemplate, 96, default, NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_wpbooklist_jre_user_options_67f83043d6998` (
+  `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `username` TEXT COLLATE NOCASE,
+  `version` TEXT COLLATE NOCASE NOT NULL DEFAULT '3.3',
+  `amazonaff` TEXT COLLATE NOCASE NOT NULL DEFAULT 'wpbooklisti0e-21',
+  `amazonauth` TEXT COLLATE NOCASE,
+  `itunesaff` TEXT COLLATE NOCASE NOT NULL DEFAULT '1010lnPx',
+  `enablepurchase` INTEGER,
+  `amazonapipublic` TEXT COLLATE NOCASE,
+  `amazonapisecret` TEXT COLLATE NOCASE,
+  `googleapi` TEXT COLLATE NOCASE,
+  `appleapi` TEXT COLLATE NOCASE,
+  `openlibraryapi` TEXT COLLATE NOCASE,
+  `hidestats` INTEGER,
+  `hidesortby` INTEGER,
+  `hidesearch` INTEGER,
+  `hidefilter` INTEGER,
+  `hidebooktitle` INTEGER,
+  `hidebookimage` INTEGER,
+  `hidefinished` INTEGER,
+  `hidelibrarytitle` INTEGER,
+  `hideauthor` INTEGER,
+  `hidecategory` INTEGER,
+  `hidepages` INTEGER,
+  `hidebookpage` INTEGER,
+  `hidebookpost` INTEGER,
+  `hidepublisher` INTEGER,
+  `hidepubdate` INTEGER,
+  `hidesigned` INTEGER,
+  `hidesubject` INTEGER,
+  `hidecountry` INTEGER,
+  `hidefirstedition` INTEGER,
+  `hidefinishedsort` INTEGER,
+  `hidesignedsort` INTEGER,
+  `hidefirstsort` INTEGER,
+  `hidesubjectsort` INTEGER,
+  `hidefacebook` INTEGER,
+  `hidemessenger` INTEGER,
+  `hidetwitter` INTEGER,
+  `hidegoogleplus` INTEGER,
+  `hidepinterest` INTEGER,
+  `hideemail` INTEGER,
+  `hidefrontendbuyimg` INTEGER,
+  `hidefrontendbuyprice` INTEGER,
+  `hidecolorboxbuyimg` INTEGER,
+  `hidecolorboxbuyprice` INTEGER,
+  `hidegoodreadswidget` INTEGER,
+  `hidedescription` INTEGER,
+  `hidesimilar` INTEGER,
+  `hideamazonreview` INTEGER,
+  `hidenotes` INTEGER,
+  `hidebottompurchase` INTEGER,
+  `hidegooglepurchase` INTEGER,
+  `hidefeaturedtitles` INTEGER,
+  `hidebnpurchase` INTEGER,
+  `hideitunespurchase` INTEGER,
+  `hideamazonpurchase` INTEGER,
+  `hiderating` INTEGER,
+  `hideratingbook` INTEGER,
+  `hidequote` INTEGER,
+  `hidequotebook` INTEGER,
+  `sortoption` TEXT COLLATE NOCASE,
+  `booksonpage` INTEGER NOT NULL DEFAULT '12',
+  `amazoncountryinfo` TEXT COLLATE NOCASE NOT NULL DEFAULT 'US',
+  `stylepak` TEXT COLLATE NOCASE NOT NULL DEFAULT 'Default',
+  `admindismiss` INTEGER NOT NULL DEFAULT '1',
+  `activeposttemplate` TEXT COLLATE NOCASE,
+  `activepagetemplate` TEXT COLLATE NOCASE,
+  `hidekindleprev` INTEGER,
+  `hidegoogleprev` INTEGER,
+  `hidebampurchase` INTEGER,
+  `hidekobopurchase` INTEGER,
+  `hideasin` INTEGER,
+  `hidegenres` INTEGER,
+  `hideisbn10` INTEGER,
+  `hideisbn13` INTEGER,
+  `hidekeywords` INTEGER,
+  `hideothereditions` INTEGER,
+  `hideoutofprint` INTEGER,
+  `hidecallnumber` INTEGER,
+  `hideformat` INTEGER,
+  `hideillustrator` INTEGER,
+  `hidelanguage` INTEGER,
+  `hidenumberinseries` INTEGER,
+  `hideorigpubyear` INTEGER,
+  `hideorigtitle` INTEGER,
+  `hideseries` INTEGER,
+  `hideshortdesc` INTEGER,
+  `hidesubgenre` INTEGER,
+  `patreonaccess` TEXT COLLATE NOCASE,
+  `patreonrefresh` TEXT COLLATE NOCASE,
+  `patreonack` TEXT COLLATE NOCASE,
+  `extensionversions` TEXT COLLATE NOCASE,
+  `adminmessage` TEXT COLLATE NOCASE NOT NULL DEFAULT 'aladivaholeidanequaladqwpbooklistdashnoticedashholderadqaraalaparaBeaholesureaholetoaholecheckaholeoutaholetheaholealaspanaholestyleanequaladqfontdashweightacoboldascaholefontdashsizeacoahole15pxascaholefontdashstyleacoitalicascadqaraalaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashextensionsaslashadqaraWPBookListaholeExtensionsaholeampersandaholeStylePaksanemalaaslashaaraalaparaalaaslashparaalaaslashspanaraaholeInstantlyaholechangeaholetheaholelookaholeandaholefeelaholeofaholeyouraholealaspanaholeclassanequaladqwpbooklistdashcolordashorangedashitalicadqaraalaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashstylepaksdash2aslashadqaraWPBookListaholeLibrariesalaaslashaaraalaaslashspanaraakommaaholeaddaholeyouraholeownaholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashaffiliatedashextensionaslashadqaraaffiliateaholeIDsalaaslashaaraakommaaholeimportaholeyouraholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashgoodreadsdashextensionaslashadqaraGoodreadsaholelibraryalaaslashaaraakommaaholeuploadaholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashbulkdashuploaddashextensionaslashadqarabooksaholeinaholebulkalaaslashaaraaholebyaholeISBNaslashASINaholenumbersakommaaholeandaholemoreanemalaaslashparaaladivaholeidanequaladqwpbooklistdashmydashnoticedashdismissdashforeveradqaraDismissaholeForeveralaaslashdivaraalaparaalaaslashparaalaparaalaaslashparaaholeaholeaholeaholealabuttonaholetypeanequaladqbuttonadqaholeclassanequaladqnoticedashdismissadqaraalaspanaholeclassanequaladqscreendashreaderdashtextadqaraDismissaholethisaholenoticealaaslashspanaraalaaslashbuttonaraalaaslashdivara',
+  `customfields` TEXT COLLATE NOCASE,
+  `hideadditionalimgs` INTEGER,
+  `activepagetemplate` TEXT COLLATE NOCASE NOT NULL DEFAULT 'default'
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: activepagetemplate
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wpbooklist/includes/classes/compat/class-wpbooklist-compat-functions.php(76): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wpbooklist/includes/classes/compat/class-wpbooklist-compat-functions.php(40): WPBookList_Compat_Functions->wpbooklist_upgrade_modify_user_options_table()
+#5 /wordpress/wp-content/plugins/wpbooklist/includes/class-wpbooklist-general-functions.php(2040): WPBookList_Compat_Functions->__construct()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WPBookList_General_Functions->wpbooklist_update_upgrade_function('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query ALTER TABLE wp_wpbooklist_jre_user_options ADD activepagetemplate varchar( 255 ) NOT NULL DEFAULT 'default' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, WPBookList_General_Functions->wpbooklist_update_upgrade_function, WPBookList_Compat_Functions->__construct, WPBookList_Compat_Functions->wpbooklist_upgrade_modify_user_options_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 20:55:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wpbooklist_jre_user_options ADD hidekindleprev bigint(255)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpbooklist_jre_user_options</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options, hidekindleprev, 96, , YES, bigint, , , 19, 0, , , , bigint(255), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_wpbooklist_jre_user_options_67f83043dafe8` (
+  `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `username` TEXT COLLATE NOCASE,
+  `version` TEXT COLLATE NOCASE NOT NULL DEFAULT '3.3',
+  `amazonaff` TEXT COLLATE NOCASE NOT NULL DEFAULT 'wpbooklisti0e-21',
+  `amazonauth` TEXT COLLATE NOCASE,
+  `itunesaff` TEXT COLLATE NOCASE NOT NULL DEFAULT '1010lnPx',
+  `enablepurchase` INTEGER,
+  `amazonapipublic` TEXT COLLATE NOCASE,
+  `amazonapisecret` TEXT COLLATE NOCASE,
+  `googleapi` TEXT COLLATE NOCASE,
+  `appleapi` TEXT COLLATE NOCASE,
+  `openlibraryapi` TEXT COLLATE NOCASE,
+  `hidestats` INTEGER,
+  `hidesortby` INTEGER,
+  `hidesearch` INTEGER,
+  `hidefilter` INTEGER,
+  `hidebooktitle` INTEGER,
+  `hidebookimage` INTEGER,
+  `hidefinished` INTEGER,
+  `hidelibrarytitle` INTEGER,
+  `hideauthor` INTEGER,
+  `hidecategory` INTEGER,
+  `hidepages` INTEGER,
+  `hidebookpage` INTEGER,
+  `hidebookpost` INTEGER,
+  `hidepublisher` INTEGER,
+  `hidepubdate` INTEGER,
+  `hidesigned` INTEGER,
+  `hidesubject` INTEGER,
+  `hidecountry` INTEGER,
+  `hidefirstedition` INTEGER,
+  `hidefinishedsort` INTEGER,
+  `hidesignedsort` INTEGER,
+  `hidefirstsort` INTEGER,
+  `hidesubjectsort` INTEGER,
+  `hidefacebook` INTEGER,
+  `hidemessenger` INTEGER,
+  `hidetwitter` INTEGER,
+  `hidegoogleplus` INTEGER,
+  `hidepinterest` INTEGER,
+  `hideemail` INTEGER,
+  `hidefrontendbuyimg` INTEGER,
+  `hidefrontendbuyprice` INTEGER,
+  `hidecolorboxbuyimg` INTEGER,
+  `hidecolorboxbuyprice` INTEGER,
+  `hidegoodreadswidget` INTEGER,
+  `hidedescription` INTEGER,
+  `hidesimilar` INTEGER,
+  `hideamazonreview` INTEGER,
+  `hidenotes` INTEGER,
+  `hidebottompurchase` INTEGER,
+  `hidegooglepurchase` INTEGER,
+  `hidefeaturedtitles` INTEGER,
+  `hidebnpurchase` INTEGER,
+  `hideitunespurchase` INTEGER,
+  `hideamazonpurchase` INTEGER,
+  `hiderating` INTEGER,
+  `hideratingbook` INTEGER,
+  `hidequote` INTEGER,
+  `hidequotebook` INTEGER,
+  `sortoption` TEXT COLLATE NOCASE,
+  `booksonpage` INTEGER NOT NULL DEFAULT '12',
+  `amazoncountryinfo` TEXT COLLATE NOCASE NOT NULL DEFAULT 'US',
+  `stylepak` TEXT COLLATE NOCASE NOT NULL DEFAULT 'Default',
+  `admindismiss` INTEGER NOT NULL DEFAULT '1',
+  `activeposttemplate` TEXT COLLATE NOCASE,
+  `activepagetemplate` TEXT COLLATE NOCASE,
+  `hidekindleprev` INTEGER,
+  `hidegoogleprev` INTEGER,
+  `hidebampurchase` INTEGER,
+  `hidekobopurchase` INTEGER,
+  `hideasin` INTEGER,
+  `hidegenres` INTEGER,
+  `hideisbn10` INTEGER,
+  `hideisbn13` INTEGER,
+  `hidekeywords` INTEGER,
+  `hideothereditions` INTEGER,
+  `hideoutofprint` INTEGER,
+  `hidecallnumber` INTEGER,
+  `hideformat` INTEGER,
+  `hideillustrator` INTEGER,
+  `hidelanguage` INTEGER,
+  `hidenumberinseries` INTEGER,
+  `hideorigpubyear` INTEGER,
+  `hideorigtitle` INTEGER,
+  `hideseries` INTEGER,
+  `hideshortdesc` INTEGER,
+  `hidesubgenre` INTEGER,
+  `patreonaccess` TEXT COLLATE NOCASE,
+  `patreonrefresh` TEXT COLLATE NOCASE,
+  `patreonack` TEXT COLLATE NOCASE,
+  `extensionversions` TEXT COLLATE NOCASE,
+  `adminmessage` TEXT COLLATE NOCASE NOT NULL DEFAULT 'aladivaholeidanequaladqwpbooklistdashnoticedashholderadqaraalaparaBeaholesureaholetoaholecheckaholeoutaholetheaholealaspanaholestyleanequaladqfontdashweightacoboldascaholefontdashsizeacoahole15pxascaholefontdashstyleacoitalicascadqaraalaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashextensionsaslashadqaraWPBookListaholeExtensionsaholeampersandaholeStylePaksanemalaaslashaaraalaparaalaaslashparaalaaslashspanaraaholeInstantlyaholechangeaholetheaholelookaholeandaholefeelaholeofaholeyouraholealaspanaholeclassanequaladqwpbooklistdashcolordashorangedashitalicadqaraalaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashstylepaksdash2aslashadqaraWPBookListaholeLibrariesalaaslashaaraalaaslashspanaraakommaaholeaddaholeyouraholeownaholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashaffiliatedashextensionaslashadqaraaffiliateaholeIDsalaaslashaaraakommaaholeimportaholeyouraholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashgoodreadsdashextensionaslashadqaraGoodreadsaholelibraryalaaslashaaraakommaaholeuploadaholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashbulkdashuploaddashextensionaslashadqarabooksaholeinaholebulkalaaslashaaraaholebyaholeISBNaslashASINaholenumbersakommaaholeandaholemoreanemalaaslashparaaladivaholeidanequaladqwpbooklistdashmydashnoticedashdismissdashforeveradqaraDismissaholeForeveralaaslashdivaraalaparaalaaslashparaalaparaalaaslashparaaholeaholeaholeaholealabuttonaholetypeanequaladqbuttonadqaholeclassanequaladqnoticedashdismissadqaraalaspanaholeclassanequaladqscreendashreaderdashtextadqaraDismissaholethisaholenoticealaaslashspanaraalaaslashbuttonaraalaaslashdivara',
+  `customfields` TEXT COLLATE NOCASE,
+  `hideadditionalimgs` INTEGER,
+  `hidekindleprev` INTEGER
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: hidekindleprev
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wpbooklist/includes/classes/compat/class-wpbooklist-compat-functions.php(79): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wpbooklist/includes/classes/compat/class-wpbooklist-compat-functions.php(40): WPBookList_Compat_Functions->wpbooklist_upgrade_modify_user_options_table()
+#5 /wordpress/wp-content/plugins/wpbooklist/includes/class-wpbooklist-general-functions.php(2040): WPBookList_Compat_Functions->__construct()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WPBookList_General_Functions->wpbooklist_update_upgrade_function('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query ALTER TABLE wp_wpbooklist_jre_user_options ADD hidekindleprev bigint(255) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, WPBookList_General_Functions->wpbooklist_update_upgrade_function, WPBookList_Compat_Functions->__construct, WPBookList_Compat_Functions->wpbooklist_upgrade_modify_user_options_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 20:55:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wpbooklist_jre_user_options ADD hidegoogleprev bigint(255)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpbooklist_jre_user_options</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options, hidegoogleprev, 96, , YES, bigint, , , 19, 0, , , , bigint(255), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_wpbooklist_jre_user_options_67f83043de698` (
+  `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `username` TEXT COLLATE NOCASE,
+  `version` TEXT COLLATE NOCASE NOT NULL DEFAULT '3.3',
+  `amazonaff` TEXT COLLATE NOCASE NOT NULL DEFAULT 'wpbooklisti0e-21',
+  `amazonauth` TEXT COLLATE NOCASE,
+  `itunesaff` TEXT COLLATE NOCASE NOT NULL DEFAULT '1010lnPx',
+  `enablepurchase` INTEGER,
+  `amazonapipublic` TEXT COLLATE NOCASE,
+  `amazonapisecret` TEXT COLLATE NOCASE,
+  `googleapi` TEXT COLLATE NOCASE,
+  `appleapi` TEXT COLLATE NOCASE,
+  `openlibraryapi` TEXT COLLATE NOCASE,
+  `hidestats` INTEGER,
+  `hidesortby` INTEGER,
+  `hidesearch` INTEGER,
+  `hidefilter` INTEGER,
+  `hidebooktitle` INTEGER,
+  `hidebookimage` INTEGER,
+  `hidefinished` INTEGER,
+  `hidelibrarytitle` INTEGER,
+  `hideauthor` INTEGER,
+  `hidecategory` INTEGER,
+  `hidepages` INTEGER,
+  `hidebookpage` INTEGER,
+  `hidebookpost` INTEGER,
+  `hidepublisher` INTEGER,
+  `hidepubdate` INTEGER,
+  `hidesigned` INTEGER,
+  `hidesubject` INTEGER,
+  `hidecountry` INTEGER,
+  `hidefirstedition` INTEGER,
+  `hidefinishedsort` INTEGER,
+  `hidesignedsort` INTEGER,
+  `hidefirstsort` INTEGER,
+  `hidesubjectsort` INTEGER,
+  `hidefacebook` INTEGER,
+  `hidemessenger` INTEGER,
+  `hidetwitter` INTEGER,
+  `hidegoogleplus` INTEGER,
+  `hidepinterest` INTEGER,
+  `hideemail` INTEGER,
+  `hidefrontendbuyimg` INTEGER,
+  `hidefrontendbuyprice` INTEGER,
+  `hidecolorboxbuyimg` INTEGER,
+  `hidecolorboxbuyprice` INTEGER,
+  `hidegoodreadswidget` INTEGER,
+  `hidedescription` INTEGER,
+  `hidesimilar` INTEGER,
+  `hideamazonreview` INTEGER,
+  `hidenotes` INTEGER,
+  `hidebottompurchase` INTEGER,
+  `hidegooglepurchase` INTEGER,
+  `hidefeaturedtitles` INTEGER,
+  `hidebnpurchase` INTEGER,
+  `hideitunespurchase` INTEGER,
+  `hideamazonpurchase` INTEGER,
+  `hiderating` INTEGER,
+  `hideratingbook` INTEGER,
+  `hidequote` INTEGER,
+  `hidequotebook` INTEGER,
+  `sortoption` TEXT COLLATE NOCASE,
+  `booksonpage` INTEGER NOT NULL DEFAULT '12',
+  `amazoncountryinfo` TEXT COLLATE NOCASE NOT NULL DEFAULT 'US',
+  `stylepak` TEXT COLLATE NOCASE NOT NULL DEFAULT 'Default',
+  `admindismiss` INTEGER NOT NULL DEFAULT '1',
+  `activeposttemplate` TEXT COLLATE NOCASE,
+  `activepagetemplate` TEXT COLLATE NOCASE,
+  `hidekindleprev` INTEGER,
+  `hidegoogleprev` INTEGER,
+  `hidebampurchase` INTEGER,
+  `hidekobopurchase` INTEGER,
+  `hideasin` INTEGER,
+  `hidegenres` INTEGER,
+  `hideisbn10` INTEGER,
+  `hideisbn13` INTEGER,
+  `hidekeywords` INTEGER,
+  `hideothereditions` INTEGER,
+  `hideoutofprint` INTEGER,
+  `hidecallnumber` INTEGER,
+  `hideformat` INTEGER,
+  `hideillustrator` INTEGER,
+  `hidelanguage` INTEGER,
+  `hidenumberinseries` INTEGER,
+  `hideorigpubyear` INTEGER,
+  `hideorigtitle` INTEGER,
+  `hideseries` INTEGER,
+  `hideshortdesc` INTEGER,
+  `hidesubgenre` INTEGER,
+  `patreonaccess` TEXT COLLATE NOCASE,
+  `patreonrefresh` TEXT COLLATE NOCASE,
+  `patreonack` TEXT COLLATE NOCASE,
+  `extensionversions` TEXT COLLATE NOCASE,
+  `adminmessage` TEXT COLLATE NOCASE NOT NULL DEFAULT 'aladivaholeidanequaladqwpbooklistdashnoticedashholderadqaraalaparaBeaholesureaholetoaholecheckaholeoutaholetheaholealaspanaholestyleanequaladqfontdashweightacoboldascaholefontdashsizeacoahole15pxascaholefontdashstyleacoitalicascadqaraalaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashextensionsaslashadqaraWPBookListaholeExtensionsaholeampersandaholeStylePaksanemalaaslashaaraalaparaalaaslashparaalaaslashspanaraaholeInstantlyaholechangeaholetheaholelookaholeandaholefeelaholeofaholeyouraholealaspanaholeclassanequaladqwpbooklistdashcolordashorangedashitalicadqaraalaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashstylepaksdash2aslashadqaraWPBookListaholeLibrariesalaaslashaaraalaaslashspanaraakommaaholeaddaholeyouraholeownaholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashaffiliatedashextensionaslashadqaraaffiliateaholeIDsalaaslashaaraakommaaholeimportaholeyouraholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashgoodreadsdashextensionaslashadqaraGoodreadsaholelibraryalaaslashaaraakommaaholeuploadaholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashbulkdashuploaddashextensionaslashadqarabooksaholeinaholebulkalaaslashaaraaholebyaholeISBNaslashASINaholenumbersakommaaholeandaholemoreanemalaaslashparaaladivaholeidanequaladqwpbooklistdashmydashnoticedashdismissdashforeveradqaraDismissaholeForeveralaaslashdivaraalaparaalaaslashparaalaparaalaaslashparaaholeaholeaholeaholealabuttonaholetypeanequaladqbuttonadqaholeclassanequaladqnoticedashdismissadqaraalaspanaholeclassanequaladqscreendashreaderdashtextadqaraDismissaholethisaholenoticealaaslashspanaraalaaslashbuttonaraalaaslashdivara',
+  `customfields` TEXT COLLATE NOCASE,
+  `hideadditionalimgs` INTEGER,
+  `hidegoogleprev` INTEGER
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: hidegoogleprev
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wpbooklist/includes/classes/compat/class-wpbooklist-compat-functions.php(82): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wpbooklist/includes/classes/compat/class-wpbooklist-compat-functions.php(40): WPBookList_Compat_Functions->wpbooklist_upgrade_modify_user_options_table()
+#5 /wordpress/wp-content/plugins/wpbooklist/includes/class-wpbooklist-general-functions.php(2040): WPBookList_Compat_Functions->__construct()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WPBookList_General_Functions->wpbooklist_update_upgrade_function('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query ALTER TABLE wp_wpbooklist_jre_user_options ADD hidegoogleprev bigint(255) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, WPBookList_General_Functions->wpbooklist_update_upgrade_function, WPBookList_Compat_Functions->__construct, WPBookList_Compat_Functions->wpbooklist_upgrade_modify_user_options_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 20:55:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wpbooklist_jre_user_options ADD hidekobopurchase bigint(255)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpbooklist_jre_user_options</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options, hidekobopurchase, 96, , YES, bigint, , , 19, 0, , , , bigint(255), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_wpbooklist_jre_user_options_67f83043df638` (
+  `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `username` TEXT COLLATE NOCASE,
+  `version` TEXT COLLATE NOCASE NOT NULL DEFAULT '3.3',
+  `amazonaff` TEXT COLLATE NOCASE NOT NULL DEFAULT 'wpbooklisti0e-21',
+  `amazonauth` TEXT COLLATE NOCASE,
+  `itunesaff` TEXT COLLATE NOCASE NOT NULL DEFAULT '1010lnPx',
+  `enablepurchase` INTEGER,
+  `amazonapipublic` TEXT COLLATE NOCASE,
+  `amazonapisecret` TEXT COLLATE NOCASE,
+  `googleapi` TEXT COLLATE NOCASE,
+  `appleapi` TEXT COLLATE NOCASE,
+  `openlibraryapi` TEXT COLLATE NOCASE,
+  `hidestats` INTEGER,
+  `hidesortby` INTEGER,
+  `hidesearch` INTEGER,
+  `hidefilter` INTEGER,
+  `hidebooktitle` INTEGER,
+  `hidebookimage` INTEGER,
+  `hidefinished` INTEGER,
+  `hidelibrarytitle` INTEGER,
+  `hideauthor` INTEGER,
+  `hidecategory` INTEGER,
+  `hidepages` INTEGER,
+  `hidebookpage` INTEGER,
+  `hidebookpost` INTEGER,
+  `hidepublisher` INTEGER,
+  `hidepubdate` INTEGER,
+  `hidesigned` INTEGER,
+  `hidesubject` INTEGER,
+  `hidecountry` INTEGER,
+  `hidefirstedition` INTEGER,
+  `hidefinishedsort` INTEGER,
+  `hidesignedsort` INTEGER,
+  `hidefirstsort` INTEGER,
+  `hidesubjectsort` INTEGER,
+  `hidefacebook` INTEGER,
+  `hidemessenger` INTEGER,
+  `hidetwitter` INTEGER,
+  `hidegoogleplus` INTEGER,
+  `hidepinterest` INTEGER,
+  `hideemail` INTEGER,
+  `hidefrontendbuyimg` INTEGER,
+  `hidefrontendbuyprice` INTEGER,
+  `hidecolorboxbuyimg` INTEGER,
+  `hidecolorboxbuyprice` INTEGER,
+  `hidegoodreadswidget` INTEGER,
+  `hidedescription` INTEGER,
+  `hidesimilar` INTEGER,
+  `hideamazonreview` INTEGER,
+  `hidenotes` INTEGER,
+  `hidebottompurchase` INTEGER,
+  `hidegooglepurchase` INTEGER,
+  `hidefeaturedtitles` INTEGER,
+  `hidebnpurchase` INTEGER,
+  `hideitunespurchase` INTEGER,
+  `hideamazonpurchase` INTEGER,
+  `hiderating` INTEGER,
+  `hideratingbook` INTEGER,
+  `hidequote` INTEGER,
+  `hidequotebook` INTEGER,
+  `sortoption` TEXT COLLATE NOCASE,
+  `booksonpage` INTEGER NOT NULL DEFAULT '12',
+  `amazoncountryinfo` TEXT COLLATE NOCASE NOT NULL DEFAULT 'US',
+  `stylepak` TEXT COLLATE NOCASE NOT NULL DEFAULT 'Default',
+  `admindismiss` INTEGER NOT NULL DEFAULT '1',
+  `activeposttemplate` TEXT COLLATE NOCASE,
+  `activepagetemplate` TEXT COLLATE NOCASE,
+  `hidekindleprev` INTEGER,
+  `hidegoogleprev` INTEGER,
+  `hidebampurchase` INTEGER,
+  `hidekobopurchase` INTEGER,
+  `hideasin` INTEGER,
+  `hidegenres` INTEGER,
+  `hideisbn10` INTEGER,
+  `hideisbn13` INTEGER,
+  `hidekeywords` INTEGER,
+  `hideothereditions` INTEGER,
+  `hideoutofprint` INTEGER,
+  `hidecallnumber` INTEGER,
+  `hideformat` INTEGER,
+  `hideillustrator` INTEGER,
+  `hidelanguage` INTEGER,
+  `hidenumberinseries` INTEGER,
+  `hideorigpubyear` INTEGER,
+  `hideorigtitle` INTEGER,
+  `hideseries` INTEGER,
+  `hideshortdesc` INTEGER,
+  `hidesubgenre` INTEGER,
+  `patreonaccess` TEXT COLLATE NOCASE,
+  `patreonrefresh` TEXT COLLATE NOCASE,
+  `patreonack` TEXT COLLATE NOCASE,
+  `extensionversions` TEXT COLLATE NOCASE,
+  `adminmessage` TEXT COLLATE NOCASE NOT NULL DEFAULT 'aladivaholeidanequaladqwpbooklistdashnoticedashholderadqaraalaparaBeaholesureaholetoaholecheckaholeoutaholetheaholealaspanaholestyleanequaladqfontdashweightacoboldascaholefontdashsizeacoahole15pxascaholefontdashstyleacoitalicascadqaraalaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashextensionsaslashadqaraWPBookListaholeExtensionsaholeampersandaholeStylePaksanemalaaslashaaraalaparaalaaslashparaalaaslashspanaraaholeInstantlyaholechangeaholetheaholelookaholeandaholefeelaholeofaholeyouraholealaspanaholeclassanequaladqwpbooklistdashcolordashorangedashitalicadqaraalaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashstylepaksdash2aslashadqaraWPBookListaholeLibrariesalaaslashaaraalaaslashspanaraakommaaholeaddaholeyouraholeownaholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashaffiliatedashextensionaslashadqaraaffiliateaholeIDsalaaslashaaraakommaaholeimportaholeyouraholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashgoodreadsdashextensionaslashadqaraGoodreadsaholelibraryalaaslashaaraakommaaholeuploadaholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashbulkdashuploaddashextensionaslashadqarabooksaholeinaholebulkalaaslashaaraaholebyaholeISBNaslashASINaholenumbersakommaaholeandaholemoreanemalaaslashparaaladivaholeidanequaladqwpbooklistdashmydashnoticedashdismissdashforeveradqaraDismissaholeForeveralaaslashdivaraalaparaalaaslashparaalaparaalaaslashparaaholeaholeaholeaholealabuttonaholetypeanequaladqbuttonadqaholeclassanequaladqnoticedashdismissadqaraalaspanaholeclassanequaladqscreendashreaderdashtextadqaraDismissaholethisaholenoticealaaslashspanaraalaaslashbuttonaraalaaslashdivara',
+  `customfields` TEXT COLLATE NOCASE,
+  `hideadditionalimgs` INTEGER,
+  `hidekobopurchase` INTEGER
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: hidekobopurchase
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wpbooklist/includes/classes/compat/class-wpbooklist-compat-functions.php(85): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wpbooklist/includes/classes/compat/class-wpbooklist-compat-functions.php(40): WPBookList_Compat_Functions->wpbooklist_upgrade_modify_user_options_table()
+#5 /wordpress/wp-content/plugins/wpbooklist/includes/class-wpbooklist-general-functions.php(2040): WPBookList_Compat_Functions->__construct()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WPBookList_General_Functions->wpbooklist_update_upgrade_function('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query ALTER TABLE wp_wpbooklist_jre_user_options ADD hidekobopurchase bigint(255) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, WPBookList_General_Functions->wpbooklist_update_upgrade_function, WPBookList_Compat_Functions->__construct, WPBookList_Compat_Functions->wpbooklist_upgrade_modify_user_options_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 20:55:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wpbooklist_jre_user_options ADD hidebampurchase bigint(255)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpbooklist_jre_user_options</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options, hidebampurchase, 96, , YES, bigint, , , 19, 0, , , , bigint(255), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_wpbooklist_jre_user_options_67f83043e34b8` (
+  `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `username` TEXT COLLATE NOCASE,
+  `version` TEXT COLLATE NOCASE NOT NULL DEFAULT '3.3',
+  `amazonaff` TEXT COLLATE NOCASE NOT NULL DEFAULT 'wpbooklisti0e-21',
+  `amazonauth` TEXT COLLATE NOCASE,
+  `itunesaff` TEXT COLLATE NOCASE NOT NULL DEFAULT '1010lnPx',
+  `enablepurchase` INTEGER,
+  `amazonapipublic` TEXT COLLATE NOCASE,
+  `amazonapisecret` TEXT COLLATE NOCASE,
+  `googleapi` TEXT COLLATE NOCASE,
+  `appleapi` TEXT COLLATE NOCASE,
+  `openlibraryapi` TEXT COLLATE NOCASE,
+  `hidestats` INTEGER,
+  `hidesortby` INTEGER,
+  `hidesearch` INTEGER,
+  `hidefilter` INTEGER,
+  `hidebooktitle` INTEGER,
+  `hidebookimage` INTEGER,
+  `hidefinished` INTEGER,
+  `hidelibrarytitle` INTEGER,
+  `hideauthor` INTEGER,
+  `hidecategory` INTEGER,
+  `hidepages` INTEGER,
+  `hidebookpage` INTEGER,
+  `hidebookpost` INTEGER,
+  `hidepublisher` INTEGER,
+  `hidepubdate` INTEGER,
+  `hidesigned` INTEGER,
+  `hidesubject` INTEGER,
+  `hidecountry` INTEGER,
+  `hidefirstedition` INTEGER,
+  `hidefinishedsort` INTEGER,
+  `hidesignedsort` INTEGER,
+  `hidefirstsort` INTEGER,
+  `hidesubjectsort` INTEGER,
+  `hidefacebook` INTEGER,
+  `hidemessenger` INTEGER,
+  `hidetwitter` INTEGER,
+  `hidegoogleplus` INTEGER,
+  `hidepinterest` INTEGER,
+  `hideemail` INTEGER,
+  `hidefrontendbuyimg` INTEGER,
+  `hidefrontendbuyprice` INTEGER,
+  `hidecolorboxbuyimg` INTEGER,
+  `hidecolorboxbuyprice` INTEGER,
+  `hidegoodreadswidget` INTEGER,
+  `hidedescription` INTEGER,
+  `hidesimilar` INTEGER,
+  `hideamazonreview` INTEGER,
+  `hidenotes` INTEGER,
+  `hidebottompurchase` INTEGER,
+  `hidegooglepurchase` INTEGER,
+  `hidefeaturedtitles` INTEGER,
+  `hidebnpurchase` INTEGER,
+  `hideitunespurchase` INTEGER,
+  `hideamazonpurchase` INTEGER,
+  `hiderating` INTEGER,
+  `hideratingbook` INTEGER,
+  `hidequote` INTEGER,
+  `hidequotebook` INTEGER,
+  `sortoption` TEXT COLLATE NOCASE,
+  `booksonpage` INTEGER NOT NULL DEFAULT '12',
+  `amazoncountryinfo` TEXT COLLATE NOCASE NOT NULL DEFAULT 'US',
+  `stylepak` TEXT COLLATE NOCASE NOT NULL DEFAULT 'Default',
+  `admindismiss` INTEGER NOT NULL DEFAULT '1',
+  `activeposttemplate` TEXT COLLATE NOCASE,
+  `activepagetemplate` TEXT COLLATE NOCASE,
+  `hidekindleprev` INTEGER,
+  `hidegoogleprev` INTEGER,
+  `hidebampurchase` INTEGER,
+  `hidekobopurchase` INTEGER,
+  `hideasin` INTEGER,
+  `hidegenres` INTEGER,
+  `hideisbn10` INTEGER,
+  `hideisbn13` INTEGER,
+  `hidekeywords` INTEGER,
+  `hideothereditions` INTEGER,
+  `hideoutofprint` INTEGER,
+  `hidecallnumber` INTEGER,
+  `hideformat` INTEGER,
+  `hideillustrator` INTEGER,
+  `hidelanguage` INTEGER,
+  `hidenumberinseries` INTEGER,
+  `hideorigpubyear` INTEGER,
+  `hideorigtitle` INTEGER,
+  `hideseries` INTEGER,
+  `hideshortdesc` INTEGER,
+  `hidesubgenre` INTEGER,
+  `patreonaccess` TEXT COLLATE NOCASE,
+  `patreonrefresh` TEXT COLLATE NOCASE,
+  `patreonack` TEXT COLLATE NOCASE,
+  `extensionversions` TEXT COLLATE NOCASE,
+  `adminmessage` TEXT COLLATE NOCASE NOT NULL DEFAULT 'aladivaholeidanequaladqwpbooklistdashnoticedashholderadqaraalaparaBeaholesureaholetoaholecheckaholeoutaholetheaholealaspanaholestyleanequaladqfontdashweightacoboldascaholefontdashsizeacoahole15pxascaholefontdashstyleacoitalicascadqaraalaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashextensionsaslashadqaraWPBookListaholeExtensionsaholeampersandaholeStylePaksanemalaaslashaaraalaparaalaaslashparaalaaslashspanaraaholeInstantlyaholechangeaholetheaholelookaholeandaholefeelaholeofaholeyouraholealaspanaholeclassanequaladqwpbooklistdashcolordashorangedashitalicadqaraalaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashstylepaksdash2aslashadqaraWPBookListaholeLibrariesalaaslashaaraalaaslashspanaraakommaaholeaddaholeyouraholeownaholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashaffiliatedashextensionaslashadqaraaffiliateaholeIDsalaaslashaaraakommaaholeimportaholeyouraholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashgoodreadsdashextensionaslashadqaraGoodreadsaholelibraryalaaslashaaraakommaaholeuploadaholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashbulkdashuploaddashextensionaslashadqarabooksaholeinaholebulkalaaslashaaraaholebyaholeISBNaslashASINaholenumbersakommaaholeandaholemoreanemalaaslashparaaladivaholeidanequaladqwpbooklistdashmydashnoticedashdismissdashforeveradqaraDismissaholeForeveralaaslashdivaraalaparaalaaslashparaalaparaalaaslashparaaholeaholeaholeaholealabuttonaholetypeanequaladqbuttonadqaholeclassanequaladqnoticedashdismissadqaraalaspanaholeclassanequaladqscreendashreaderdashtextadqaraDismissaholethisaholenoticealaaslashspanaraalaaslashbuttonaraalaaslashdivara',
+  `customfields` TEXT COLLATE NOCASE,
+  `hideadditionalimgs` INTEGER,
+  `hidebampurchase` INTEGER
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: hidebampurchase
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wpbooklist/includes/classes/compat/class-wpbooklist-compat-functions.php(88): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wpbooklist/includes/classes/compat/class-wpbooklist-compat-functions.php(40): WPBookList_Compat_Functions->wpbooklist_upgrade_modify_user_options_table()
+#5 /wordpress/wp-content/plugins/wpbooklist/includes/class-wpbooklist-general-functions.php(2040): WPBookList_Compat_Functions->__construct()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WPBookList_General_Functions->wpbooklist_update_upgrade_function('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query ALTER TABLE wp_wpbooklist_jre_user_options ADD hidebampurchase bigint(255) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, WPBookList_General_Functions->wpbooklist_update_upgrade_function, WPBookList_Compat_Functions->__construct, WPBookList_Compat_Functions->wpbooklist_upgrade_modify_user_options_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 20:55:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wpbooklist_jre_user_options ADD hidesubject bigint(255)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpbooklist_jre_user_options</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options, hidesubject, 96, , YES, bigint, , , 19, 0, , , , bigint(255), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_wpbooklist_jre_user_options_67f83043e7338` (
+  `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `username` TEXT COLLATE NOCASE,
+  `version` TEXT COLLATE NOCASE NOT NULL DEFAULT '3.3',
+  `amazonaff` TEXT COLLATE NOCASE NOT NULL DEFAULT 'wpbooklisti0e-21',
+  `amazonauth` TEXT COLLATE NOCASE,
+  `itunesaff` TEXT COLLATE NOCASE NOT NULL DEFAULT '1010lnPx',
+  `enablepurchase` INTEGER,
+  `amazonapipublic` TEXT COLLATE NOCASE,
+  `amazonapisecret` TEXT COLLATE NOCASE,
+  `googleapi` TEXT COLLATE NOCASE,
+  `appleapi` TEXT COLLATE NOCASE,
+  `openlibraryapi` TEXT COLLATE NOCASE,
+  `hidestats` INTEGER,
+  `hidesortby` INTEGER,
+  `hidesearch` INTEGER,
+  `hidefilter` INTEGER,
+  `hidebooktitle` INTEGER,
+  `hidebookimage` INTEGER,
+  `hidefinished` INTEGER,
+  `hidelibrarytitle` INTEGER,
+  `hideauthor` INTEGER,
+  `hidecategory` INTEGER,
+  `hidepages` INTEGER,
+  `hidebookpage` INTEGER,
+  `hidebookpost` INTEGER,
+  `hidepublisher` INTEGER,
+  `hidepubdate` INTEGER,
+  `hidesigned` INTEGER,
+  `hidesubject` INTEGER,
+  `hidecountry` INTEGER,
+  `hidefirstedition` INTEGER,
+  `hidefinishedsort` INTEGER,
+  `hidesignedsort` INTEGER,
+  `hidefirstsort` INTEGER,
+  `hidesubjectsort` INTEGER,
+  `hidefacebook` INTEGER,
+  `hidemessenger` INTEGER,
+  `hidetwitter` INTEGER,
+  `hidegoogleplus` INTEGER,
+  `hidepinterest` INTEGER,
+  `hideemail` INTEGER,
+  `hidefrontendbuyimg` INTEGER,
+  `hidefrontendbuyprice` INTEGER,
+  `hidecolorboxbuyimg` INTEGER,
+  `hidecolorboxbuyprice` INTEGER,
+  `hidegoodreadswidget` INTEGER,
+  `hidedescription` INTEGER,
+  `hidesimilar` INTEGER,
+  `hideamazonreview` INTEGER,
+  `hidenotes` INTEGER,
+  `hidebottompurchase` INTEGER,
+  `hidegooglepurchase` INTEGER,
+  `hidefeaturedtitles` INTEGER,
+  `hidebnpurchase` INTEGER,
+  `hideitunespurchase` INTEGER,
+  `hideamazonpurchase` INTEGER,
+  `hiderating` INTEGER,
+  `hideratingbook` INTEGER,
+  `hidequote` INTEGER,
+  `hidequotebook` INTEGER,
+  `sortoption` TEXT COLLATE NOCASE,
+  `booksonpage` INTEGER NOT NULL DEFAULT '12',
+  `amazoncountryinfo` TEXT COLLATE NOCASE NOT NULL DEFAULT 'US',
+  `stylepak` TEXT COLLATE NOCASE NOT NULL DEFAULT 'Default',
+  `admindismiss` INTEGER NOT NULL DEFAULT '1',
+  `activeposttemplate` TEXT COLLATE NOCASE,
+  `activepagetemplate` TEXT COLLATE NOCASE,
+  `hidekindleprev` INTEGER,
+  `hidegoogleprev` INTEGER,
+  `hidebampurchase` INTEGER,
+  `hidekobopurchase` INTEGER,
+  `hideasin` INTEGER,
+  `hidegenres` INTEGER,
+  `hideisbn10` INTEGER,
+  `hideisbn13` INTEGER,
+  `hidekeywords` INTEGER,
+  `hideothereditions` INTEGER,
+  `hideoutofprint` INTEGER,
+  `hidecallnumber` INTEGER,
+  `hideformat` INTEGER,
+  `hideillustrator` INTEGER,
+  `hidelanguage` INTEGER,
+  `hidenumberinseries` INTEGER,
+  `hideorigpubyear` INTEGER,
+  `hideorigtitle` INTEGER,
+  `hideseries` INTEGER,
+  `hideshortdesc` INTEGER,
+  `hidesubgenre` INTEGER,
+  `patreonaccess` TEXT COLLATE NOCASE,
+  `patreonrefresh` TEXT COLLATE NOCASE,
+  `patreonack` TEXT COLLATE NOCASE,
+  `extensionversions` TEXT COLLATE NOCASE,
+  `adminmessage` TEXT COLLATE NOCASE NOT NULL DEFAULT 'aladivaholeidanequaladqwpbooklistdashnoticedashholderadqaraalaparaBeaholesureaholetoaholecheckaholeoutaholetheaholealaspanaholestyleanequaladqfontdashweightacoboldascaholefontdashsizeacoahole15pxascaholefontdashstyleacoitalicascadqaraalaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashextensionsaslashadqaraWPBookListaholeExtensionsaholeampersandaholeStylePaksanemalaaslashaaraalaparaalaaslashparaalaaslashspanaraaholeInstantlyaholechangeaholetheaholelookaholeandaholefeelaholeofaholeyouraholealaspanaholeclassanequaladqwpbooklistdashcolordashorangedashitalicadqaraalaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashstylepaksdash2aslashadqaraWPBookListaholeLibrariesalaaslashaaraalaaslashspanaraakommaaholeaddaholeyouraholeownaholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashaffiliatedashextensionaslashadqaraaffiliateaholeIDsalaaslashaaraakommaaholeimportaholeyouraholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashgoodreadsdashextensionaslashadqaraGoodreadsaholelibraryalaaslashaaraakommaaholeuploadaholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashbulkdashuploaddashextensionaslashadqarabooksaholeinaholebulkalaaslashaaraaholebyaholeISBNaslashASINaholenumbersakommaaholeandaholemoreanemalaaslashparaaladivaholeidanequaladqwpbooklistdashmydashnoticedashdismissdashforeveradqaraDismissaholeForeveralaaslashdivaraalaparaalaaslashparaalaparaalaaslashparaaholeaholeaholeaholealabuttonaholetypeanequaladqbuttonadqaholeclassanequaladqnoticedashdismissadqaraalaspanaholeclassanequaladqscreendashreaderdashtextadqaraDismissaholethisaholenoticealaaslashspanaraalaaslashbuttonaraalaaslashdivara',
+  `customfields` TEXT COLLATE NOCASE,
+  `hideadditionalimgs` INTEGER,
+  `hidesubject` INTEGER
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: hidesubject
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wpbooklist/includes/classes/compat/class-wpbooklist-compat-functions.php(91): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wpbooklist/includes/classes/compat/class-wpbooklist-compat-functions.php(40): WPBookList_Compat_Functions->wpbooklist_upgrade_modify_user_options_table()
+#5 /wordpress/wp-content/plugins/wpbooklist/includes/class-wpbooklist-general-functions.php(2040): WPBookList_Compat_Functions->__construct()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WPBookList_General_Functions->wpbooklist_update_upgrade_function('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query ALTER TABLE wp_wpbooklist_jre_user_options ADD hidesubject bigint(255) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, WPBookList_General_Functions->wpbooklist_update_upgrade_function, WPBookList_Compat_Functions->__construct, WPBookList_Compat_Functions->wpbooklist_upgrade_modify_user_options_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 20:55:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wpbooklist_jre_user_options ADD hidecountry bigint(255)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpbooklist_jre_user_options</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options, hidecountry, 96, , YES, bigint, , , 19, 0, , , , bigint(255), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_wpbooklist_jre_user_options_67f83043e9e30` (
+  `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `username` TEXT COLLATE NOCASE,
+  `version` TEXT COLLATE NOCASE NOT NULL DEFAULT '3.3',
+  `amazonaff` TEXT COLLATE NOCASE NOT NULL DEFAULT 'wpbooklisti0e-21',
+  `amazonauth` TEXT COLLATE NOCASE,
+  `itunesaff` TEXT COLLATE NOCASE NOT NULL DEFAULT '1010lnPx',
+  `enablepurchase` INTEGER,
+  `amazonapipublic` TEXT COLLATE NOCASE,
+  `amazonapisecret` TEXT COLLATE NOCASE,
+  `googleapi` TEXT COLLATE NOCASE,
+  `appleapi` TEXT COLLATE NOCASE,
+  `openlibraryapi` TEXT COLLATE NOCASE,
+  `hidestats` INTEGER,
+  `hidesortby` INTEGER,
+  `hidesearch` INTEGER,
+  `hidefilter` INTEGER,
+  `hidebooktitle` INTEGER,
+  `hidebookimage` INTEGER,
+  `hidefinished` INTEGER,
+  `hidelibrarytitle` INTEGER,
+  `hideauthor` INTEGER,
+  `hidecategory` INTEGER,
+  `hidepages` INTEGER,
+  `hidebookpage` INTEGER,
+  `hidebookpost` INTEGER,
+  `hidepublisher` INTEGER,
+  `hidepubdate` INTEGER,
+  `hidesigned` INTEGER,
+  `hidesubject` INTEGER,
+  `hidecountry` INTEGER,
+  `hidefirstedition` INTEGER,
+  `hidefinishedsort` INTEGER,
+  `hidesignedsort` INTEGER,
+  `hidefirstsort` INTEGER,
+  `hidesubjectsort` INTEGER,
+  `hidefacebook` INTEGER,
+  `hidemessenger` INTEGER,
+  `hidetwitter` INTEGER,
+  `hidegoogleplus` INTEGER,
+  `hidepinterest` INTEGER,
+  `hideemail` INTEGER,
+  `hidefrontendbuyimg` INTEGER,
+  `hidefrontendbuyprice` INTEGER,
+  `hidecolorboxbuyimg` INTEGER,
+  `hidecolorboxbuyprice` INTEGER,
+  `hidegoodreadswidget` INTEGER,
+  `hidedescription` INTEGER,
+  `hidesimilar` INTEGER,
+  `hideamazonreview` INTEGER,
+  `hidenotes` INTEGER,
+  `hidebottompurchase` INTEGER,
+  `hidegooglepurchase` INTEGER,
+  `hidefeaturedtitles` INTEGER,
+  `hidebnpurchase` INTEGER,
+  `hideitunespurchase` INTEGER,
+  `hideamazonpurchase` INTEGER,
+  `hiderating` INTEGER,
+  `hideratingbook` INTEGER,
+  `hidequote` INTEGER,
+  `hidequotebook` INTEGER,
+  `sortoption` TEXT COLLATE NOCASE,
+  `booksonpage` INTEGER NOT NULL DEFAULT '12',
+  `amazoncountryinfo` TEXT COLLATE NOCASE NOT NULL DEFAULT 'US',
+  `stylepak` TEXT COLLATE NOCASE NOT NULL DEFAULT 'Default',
+  `admindismiss` INTEGER NOT NULL DEFAULT '1',
+  `activeposttemplate` TEXT COLLATE NOCASE,
+  `activepagetemplate` TEXT COLLATE NOCASE,
+  `hidekindleprev` INTEGER,
+  `hidegoogleprev` INTEGER,
+  `hidebampurchase` INTEGER,
+  `hidekobopurchase` INTEGER,
+  `hideasin` INTEGER,
+  `hidegenres` INTEGER,
+  `hideisbn10` INTEGER,
+  `hideisbn13` INTEGER,
+  `hidekeywords` INTEGER,
+  `hideothereditions` INTEGER,
+  `hideoutofprint` INTEGER,
+  `hidecallnumber` INTEGER,
+  `hideformat` INTEGER,
+  `hideillustrator` INTEGER,
+  `hidelanguage` INTEGER,
+  `hidenumberinseries` INTEGER,
+  `hideorigpubyear` INTEGER,
+  `hideorigtitle` INTEGER,
+  `hideseries` INTEGER,
+  `hideshortdesc` INTEGER,
+  `hidesubgenre` INTEGER,
+  `patreonaccess` TEXT COLLATE NOCASE,
+  `patreonrefresh` TEXT COLLATE NOCASE,
+  `patreonack` TEXT COLLATE NOCASE,
+  `extensionversions` TEXT COLLATE NOCASE,
+  `adminmessage` TEXT COLLATE NOCASE NOT NULL DEFAULT 'aladivaholeidanequaladqwpbooklistdashnoticedashholderadqaraalaparaBeaholesureaholetoaholecheckaholeoutaholetheaholealaspanaholestyleanequaladqfontdashweightacoboldascaholefontdashsizeacoahole15pxascaholefontdashstyleacoitalicascadqaraalaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashextensionsaslashadqaraWPBookListaholeExtensionsaholeampersandaholeStylePaksanemalaaslashaaraalaparaalaaslashparaalaaslashspanaraaholeInstantlyaholechangeaholetheaholelookaholeandaholefeelaholeofaholeyouraholealaspanaholeclassanequaladqwpbooklistdashcolordashorangedashitalicadqaraalaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashstylepaksdash2aslashadqaraWPBookListaholeLibrariesalaaslashaaraalaaslashspanaraakommaaholeaddaholeyouraholeownaholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashaffiliatedashextensionaslashadqaraaffiliateaholeIDsalaaslashaaraakommaaholeimportaholeyouraholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashgoodreadsdashextensionaslashadqaraGoodreadsaholelibraryalaaslashaaraakommaaholeuploadaholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashbulkdashuploaddashextensionaslashadqarabooksaholeinaholebulkalaaslashaaraaholebyaholeISBNaslashASINaholenumbersakommaaholeandaholemoreanemalaaslashparaaladivaholeidanequaladqwpbooklistdashmydashnoticedashdismissdashforeveradqaraDismissaholeForeveralaaslashdivaraalaparaalaaslashparaalaparaalaaslashparaaholeaholeaholeaholealabuttonaholetypeanequaladqbuttonadqaholeclassanequaladqnoticedashdismissadqaraalaspanaholeclassanequaladqscreendashreaderdashtextadqaraDismissaholethisaholenoticealaaslashspanaraalaaslashbuttonaraalaaslashdivara',
+  `customfields` TEXT COLLATE NOCASE,
+  `hideadditionalimgs` INTEGER,
+  `hidecountry` INTEGER
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: hidecountry
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wpbooklist/includes/classes/compat/class-wpbooklist-compat-functions.php(94): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wpbooklist/includes/classes/compat/class-wpbooklist-compat-functions.php(40): WPBookList_Compat_Functions->wpbooklist_upgrade_modify_user_options_table()
+#5 /wordpress/wp-content/plugins/wpbooklist/includes/class-wpbooklist-general-functions.php(2040): WPBookList_Compat_Functions->__construct()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WPBookList_General_Functions->wpbooklist_update_upgrade_function('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query ALTER TABLE wp_wpbooklist_jre_user_options ADD hidecountry bigint(255) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, WPBookList_General_Functions->wpbooklist_update_upgrade_function, WPBookList_Compat_Functions->__construct, WPBookList_Compat_Functions->wpbooklist_upgrade_modify_user_options_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 20:55:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wpbooklist_jre_user_options ADD hidefilter bigint(255)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpbooklist_jre_user_options</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options, hidefilter, 96, , YES, bigint, , , 19, 0, , , , bigint(255), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_wpbooklist_jre_user_options_67f83043ed0f8` (
+  `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `username` TEXT COLLATE NOCASE,
+  `version` TEXT COLLATE NOCASE NOT NULL DEFAULT '3.3',
+  `amazonaff` TEXT COLLATE NOCASE NOT NULL DEFAULT 'wpbooklisti0e-21',
+  `amazonauth` TEXT COLLATE NOCASE,
+  `itunesaff` TEXT COLLATE NOCASE NOT NULL DEFAULT '1010lnPx',
+  `enablepurchase` INTEGER,
+  `amazonapipublic` TEXT COLLATE NOCASE,
+  `amazonapisecret` TEXT COLLATE NOCASE,
+  `googleapi` TEXT COLLATE NOCASE,
+  `appleapi` TEXT COLLATE NOCASE,
+  `openlibraryapi` TEXT COLLATE NOCASE,
+  `hidestats` INTEGER,
+  `hidesortby` INTEGER,
+  `hidesearch` INTEGER,
+  `hidefilter` INTEGER,
+  `hidebooktitle` INTEGER,
+  `hidebookimage` INTEGER,
+  `hidefinished` INTEGER,
+  `hidelibrarytitle` INTEGER,
+  `hideauthor` INTEGER,
+  `hidecategory` INTEGER,
+  `hidepages` INTEGER,
+  `hidebookpage` INTEGER,
+  `hidebookpost` INTEGER,
+  `hidepublisher` INTEGER,
+  `hidepubdate` INTEGER,
+  `hidesigned` INTEGER,
+  `hidesubject` INTEGER,
+  `hidecountry` INTEGER,
+  `hidefirstedition` INTEGER,
+  `hidefinishedsort` INTEGER,
+  `hidesignedsort` INTEGER,
+  `hidefirstsort` INTEGER,
+  `hidesubjectsort` INTEGER,
+  `hidefacebook` INTEGER,
+  `hidemessenger` INTEGER,
+  `hidetwitter` INTEGER,
+  `hidegoogleplus` INTEGER,
+  `hidepinterest` INTEGER,
+  `hideemail` INTEGER,
+  `hidefrontendbuyimg` INTEGER,
+  `hidefrontendbuyprice` INTEGER,
+  `hidecolorboxbuyimg` INTEGER,
+  `hidecolorboxbuyprice` INTEGER,
+  `hidegoodreadswidget` INTEGER,
+  `hidedescription` INTEGER,
+  `hidesimilar` INTEGER,
+  `hideamazonreview` INTEGER,
+  `hidenotes` INTEGER,
+  `hidebottompurchase` INTEGER,
+  `hidegooglepurchase` INTEGER,
+  `hidefeaturedtitles` INTEGER,
+  `hidebnpurchase` INTEGER,
+  `hideitunespurchase` INTEGER,
+  `hideamazonpurchase` INTEGER,
+  `hiderating` INTEGER,
+  `hideratingbook` INTEGER,
+  `hidequote` INTEGER,
+  `hidequotebook` INTEGER,
+  `sortoption` TEXT COLLATE NOCASE,
+  `booksonpage` INTEGER NOT NULL DEFAULT '12',
+  `amazoncountryinfo` TEXT COLLATE NOCASE NOT NULL DEFAULT 'US',
+  `stylepak` TEXT COLLATE NOCASE NOT NULL DEFAULT 'Default',
+  `admindismiss` INTEGER NOT NULL DEFAULT '1',
+  `activeposttemplate` TEXT COLLATE NOCASE,
+  `activepagetemplate` TEXT COLLATE NOCASE,
+  `hidekindleprev` INTEGER,
+  `hidegoogleprev` INTEGER,
+  `hidebampurchase` INTEGER,
+  `hidekobopurchase` INTEGER,
+  `hideasin` INTEGER,
+  `hidegenres` INTEGER,
+  `hideisbn10` INTEGER,
+  `hideisbn13` INTEGER,
+  `hidekeywords` INTEGER,
+  `hideothereditions` INTEGER,
+  `hideoutofprint` INTEGER,
+  `hidecallnumber` INTEGER,
+  `hideformat` INTEGER,
+  `hideillustrator` INTEGER,
+  `hidelanguage` INTEGER,
+  `hidenumberinseries` INTEGER,
+  `hideorigpubyear` INTEGER,
+  `hideorigtitle` INTEGER,
+  `hideseries` INTEGER,
+  `hideshortdesc` INTEGER,
+  `hidesubgenre` INTEGER,
+  `patreonaccess` TEXT COLLATE NOCASE,
+  `patreonrefresh` TEXT COLLATE NOCASE,
+  `patreonack` TEXT COLLATE NOCASE,
+  `extensionversions` TEXT COLLATE NOCASE,
+  `adminmessage` TEXT COLLATE NOCASE NOT NULL DEFAULT 'aladivaholeidanequaladqwpbooklistdashnoticedashholderadqaraalaparaBeaholesureaholetoaholecheckaholeoutaholetheaholealaspanaholestyleanequaladqfontdashweightacoboldascaholefontdashsizeacoahole15pxascaholefontdashstyleacoitalicascadqaraalaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashextensionsaslashadqaraWPBookListaholeExtensionsaholeampersandaholeStylePaksanemalaaslashaaraalaparaalaaslashparaalaaslashspanaraaholeInstantlyaholechangeaholetheaholelookaholeandaholefeelaholeofaholeyouraholealaspanaholeclassanequaladqwpbooklistdashcolordashorangedashitalicadqaraalaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashstylepaksdash2aslashadqaraWPBookListaholeLibrariesalaaslashaaraalaaslashspanaraakommaaholeaddaholeyouraholeownaholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashaffiliatedashextensionaslashadqaraaffiliateaholeIDsalaaslashaaraakommaaholeimportaholeyouraholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashgoodreadsdashextensionaslashadqaraGoodreadsaholelibraryalaaslashaaraakommaaholeuploadaholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashbulkdashuploaddashextensionaslashadqarabooksaholeinaholebulkalaaslashaaraaholebyaholeISBNaslashASINaholenumbersakommaaholeandaholemoreanemalaaslashparaaladivaholeidanequaladqwpbooklistdashmydashnoticedashdismissdashforeveradqaraDismissaholeForeveralaaslashdivaraalaparaalaaslashparaalaparaalaaslashparaaholeaholeaholeaholealabuttonaholetypeanequaladqbuttonadqaholeclassanequaladqnoticedashdismissadqaraalaspanaholeclassanequaladqscreendashreaderdashtextadqaraDismissaholethisaholenoticealaaslashspanaraalaaslashbuttonaraalaaslashdivara',
+  `customfields` TEXT COLLATE NOCASE,
+  `hideadditionalimgs` INTEGER,
+  `hidefilter` INTEGER
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: hidefilter
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/wpbooklist/includes/classes/compat/class-wpbooklist-compat-functions.php(97): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/wpbooklist/includes/classes/compat/class-wpbooklist-compat-functions.php(40): WPBookList_Compat_Functions->wpbooklist_upgrade_modify_user_options_table()
+#5 /wordpress/wp-content/plugins/wpbooklist/includes/class-wpbooklist-general-functions.php(2040): WPBookList_Compat_Functions->__construct()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WPBookList_General_Functions->wpbooklist_update_upgrade_function('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query ALTER TABLE wp_wpbooklist_jre_user_options ADD hidefilter bigint(255) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, WPBookList_General_Functions->wpbooklist_update_upgrade_function, WPBookList_Compat_Functions->__construct, WPBookList_Compat_Functions->wpbooklist_upgrade_modify_user_options_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 20:55:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_wpbooklist_jre_user_options ADD hidefinishedsort bigint(255)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_wpbooklist_jre_user_options</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options, hidefinishedsort, 96, , YES, bigint, , , 19, 0, , , , bigint(255), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_wpbooklist_jre_user_options</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_wpbooklist_jre_user_options_67f83043efbf0` (
+  `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `username` TEXT COLLATE NOCASE,
+  `version` TEXT COLLATE NOCASE NOT NULL DEFAULT '3.3',
+  `amazonaff` TEXT COLLATE NOCASE NOT NULL DEFAULT 'wpbooklisti0e-21',
+  `amazonauth` TEXT COLLATE NOCASE,
+  `itunesaff` TEXT COLLATE NOCASE NOT NULL DEFAULT '1010lnPx',
+  `enablepurchase` INTEGER,
+  `amazonapipublic` TEXT COLLATE NOCASE,
+  `amazonapisecret` TEXT COLLATE NOCASE,
+  `googleapi` TEXT COLLATE NOCASE,
+  `appleapi` TEXT COLLATE NOCASE,
+  `openlibraryapi` TEXT COLLATE NOCASE,
+  `hidestats` INTEGER,
+  `hidesortby` INTEGER,
+  `hidesearch` INTEGER,
+  `hidefilter` INTEGER,
+  `hidebooktitle` INTEGER,
+  `hidebookimage` INTEGER,
+  `hidefinished` INTEGER,
+  `hidelibrarytitle` INTEGER,
+  `hideauthor` INTEGER,
+  `hidecategory` INTEGER,
+  `hidepages` INTEGER,
+  `hidebookpage` INTEGER,
+  `hidebookpost` INTEGER,
+  `hidepublisher` INTEGER,
+  `hidepubdate` INTEGER,
+  `hidesigned` INTEGER,
+  `hidesubject` INTEGER,
+  `hidecountry` INTEGER,
+  `hidefirstedition` INTEGER,
+  `hidefinishedsort` INTEGER,
+  `hidesignedsort` INTEGER,
+  `hidefirstsort` INTEGER,
+  `hidesubjectsort` INTEGER,
+  `hidefacebook` INTEGER,
+  `hidemessenger` INTEGER,
+  `hidetwitter` INTEGER,
+  `hidegoogleplus` INTEGER,
+  `hidepinterest` INTEGER,
+  `hideemail` INTEGER,
+  `hidefrontendbuyimg` INTEGER,
+  `hidefrontendbuyprice` INTEGER,
+  `hidecolorboxbuyimg` INTEGER,
+  `hidecolorboxbuyprice` INTEGER,
+  `hidegoodreadswidget` INTEGER,
+  `hidedescription` INTEGER,
+  `hidesimilar` INTEGER,
+  `hideamazonreview` INTEGER,
+  `hidenotes` INTEGER,
+  `hidebottompurchase` INTEGER,
+  `hidegooglepurchase` INTEGER,
+  `hidefeaturedtitles` INTEGER,
+  `hidebnpurchase` INTEGER,
+  `hideitunespurchase` INTEGER,
+  `hideamazonpurchase` INTEGER,
+  `hiderating` INTEGER,
+  `hideratingbook` INTEGER,
+  `hidequote` INTEGER,
+  `hidequotebook` INTEGER,
+  `sortoption` TEXT COLLATE NOCASE,
+  `booksonpage` INTEGER NOT NULL DEFAULT '12',
+  `amazoncountryinfo` TEXT COLLATE NOCASE NOT NULL DEFAULT 'US',
+  `stylepak` TEXT COLLATE NOCASE NOT NULL DEFAULT 'Default',
+  `admindismiss` INTEGER NOT NULL DEFAULT '1',
+  `activeposttemplate` TEXT COLLATE NOCASE,
+  `activepagetemplate` TEXT COLLATE NOCASE,
+  `hidekindleprev` INTEGER,
+  `hidegoogleprev` INTEGER,
+  `hidebampurchase` INTEGER,
+  `hidekobopurchase` INTEGER,
+  `hideasin` INTEGER,
+  `hidegenres` INTEGER,
+  `hideisbn10` INTEGER,
+  `hideisbn13` INTEGER,
+  `hidekeywords` INTEGER,
+  `hideothereditions` INTEGER,
+  `hideoutofprint` INTEGER,
+  `hidecallnumber` INTEGER,
+  `hideformat` INTEGER,
+  `hideillustrator` INTEGER,
+  `hidelanguage` INTEGER,
+  `hidenumberinseries` INTEGER,
+  `hideorigpubyear` INTEGER,
+  `hideorigtitle` INTEGER,
+  `hideseries` INTEGER,
+  `hideshortdesc` INTEGER,
+  `hidesubgenre` INTEGER,
+  `patreonaccess` TEXT COLLATE NOCASE,
+  `patreonrefresh` TEXT COLLATE NOCASE,
+  `patreonack` TEXT COLLATE NOCASE,
+  `extensionversions` TEXT COLLATE NOCASE,
+  `adminmessage` TEXT COLLATE NOCASE NOT NULL DEFAULT 'aladivaholeidanequaladqwpbooklistdashnoticedashholderadqaraalaparaBeaholesureaholetoaholecheckaholeoutaholetheaholealaspanaholestyleanequaladqfontdashweightacoboldascaholefontdashsizeacoahole15pxascaholefontdashstyleacoitalicascadqaraalaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashextensionsaslashadqaraWPBookListaholeExtensionsaholeampersandaholeStylePaksanemalaaslashaaraalaparaalaaslashparaalaaslashspanaraaholeInstantlyaholechangeaholetheaholelookaholeandaholefeelaholeofaholeyouraholealaspanaholeclassanequaladqwpbooklistdashcolordashorangedashitalicadqaraalaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashstylepaksdash2aslashadqaraWPBookListaholeLibrariesalaaslashaaraalaaslashspanaraakommaaholeaddaholeyouraholeownaholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashindexdotphpaslashdownloadsaslashaffiliatedashextensionaslashadqaraaffiliateaholeIDsalaaslashaaraakommaaholeimportaholeyouraholealaaaholehrefanequaladqhttpsacoaslashaslashwpbooklistdotcomaslashin
