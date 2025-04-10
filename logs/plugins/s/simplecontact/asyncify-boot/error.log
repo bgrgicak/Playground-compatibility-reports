@@ -2,152 +2,41 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 11:23:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('storefront-homepage-contact-section-version', '1.0.5', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'storefront-homepage-contact-section-version' , '1.0.5' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('storefront-home...', '1.0.5', '', 'auto')
-#5 /wordpress/wp-content/plugins/storefront-homepage-contact-section/storefront-homepage-contact-section.php(170): update_option('storefront-home...', '1.0.5')
-#6 /wordpress/wp-content/plugins/storefront-homepage-contact-section/storefront-homepage-contact-section.php(148): Storefront_Homepage_Contact_Section->_log_version_number()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): Storefront_Homepage_Contact_Section->install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_storef...', false)
-#11 /internal/eval.php(20): activate_plugin('storefront-home...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('storefront-homepage-contact-section-version', '1.0.5', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_storefront-homepage-contact-section/storefront-homepage-contact-section.php'), WP_Hook->do_action, WP_Hook->apply_filters, Storefront_Homepage_Contact_Section->install, Storefront_Homepage_Contact_Section->_log_version_number, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:23:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shcs_activation_notice', 'a:1:{i:0;s:620:\"<p>Thanks for installing the Storefront Homepage Contact Section extension. To get started, visit the <a href=\"http://127.0.0.1:9408/wp-admin/customize.php?url=http%3A%2F%2F127.0.0.1%3A9408%3Fstorefront-customizer%3Dtrue&#038;return=http%3A%2F%2F127.0.0.1%3A9408%2Fwp-admin%2Fplugins.php&#038;storefront-customizer=true\">Customizer</a>.</p> <p><a href=\"http://127.0.0.1:9408/wp-admin/customize.php?url=http%3A%2F%2F127.0.0.1%3A9408%3Fstorefront-customizer%3Dtrue&#038;return=http%3A%2F%2F127.0.0.1%3A9408%2Fwp-admin%2Fplugins.php&#038;storefront-customizer=true\" class=\"button button-primary\">Open the Customizer</a></p>\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'shcs_activation_notice' , 'a:1:{i:0;s:620:&quot;&lt;p&gt;Thanks for installing the Storefront Homepage Contact Section extension. To get started, visit the &lt;a href=&quot;http://127.0.0.1:9408/wp-admin/customize.php?url=http%3A%2F%2F127.0.0.1%3A9408%3Fstorefront-customizer%3Dtrue&amp;#038;return=http%3A%2F%2F127.0.0.1%3A9408%2Fwp-admin%2Fplugins.php&amp;#038;storefront-customizer=true&quot;&gt;Customizer&lt;/a&gt;.&lt;/p&gt; &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:9408/wp-admin/customize.php?url=http%3A%2F%2F127.0.0.1%3A9408%3Fstorefront-customizer%3Dtrue&amp;#038;return=http%3A%2F%2F127.0.0.1%3A9408%2Fwp-admin%2Fplugins.php&amp;#038;storefront-customizer=true&quot; class=&quot;button button-primary&quot;&gt;Open the Customizer&lt;/a&gt;&lt;/p&gt;&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('shcs_activation...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/storefront-homepage-contact-section/storefront-homepage-contact-section.php(159): update_option('shcs_activation...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Storefront_Homepage_Contact_Section->install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_storef...', false)
-#10 /internal/eval.php(20): activate_plugin('storefront-home...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('shcs_activation_notice', 'a:1:{i:0;s:620:\"<p>Thanks for installing the Storefront Homepage Contact Section extension. To get started, visit the <a href=\"http://127.0.0.1:9408/wp-admin/customize.php?url=http%3A%2F%2F127.0.0.1%3A9408%3Fstorefront-customizer%3Dtrue&#038;return=http%3A%2F%2F127.0.0.1%3A9408%2Fwp-admin%2Fplugins.php&#038;storefront-customizer=true\">Customizer</a>.</p> <p><a href=\"http://127.0.0.1:9408/wp-admin/customize.php?url=http%3A%2F%2F127.0.0.1%3A9408%3Fstorefront-customizer%3Dtrue&#038;return=http%3A%2F%2F127.0.0.1%3A9408%2Fwp-admin%2Fplugins.php&#038;storefront-customizer=true\" class=\"button button-primary\">Open the Customizer</a></p>\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_storefront-homepage-contact-section/storefront-homepage-contact-section.php'), WP_Hook->do_action, WP_Hook->apply_filters, Storefront_Homepage_Contact_Section->install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:23:14 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:23:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:23:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:23:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:23:42 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:23:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:23:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:23:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:24:08 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:24:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:24:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:24:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:24:34 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/scs-support/scs-support.php on line 40
-[09-Apr-2025 11:24:34 UTC] PHP Deprecated:  Function attribute_escape is <strong>deprecated</strong> since version 2.8.0! Use esc_attr() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:24:34 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/scs-support/scs-support.php on line 41
-[09-Apr-2025 11:24:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('scs_options', 'a:4:{s:6:\"bucket\";s:0:\"\";s:2:\"ak\";s:0:\"\";s:2:\"sk\";s:0:\"\";s:6:\"hiPath\";s:0:\"\";}', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'scs_options' , 'a:4:{s:6:&quot;bucket&quot;;s:0:&quot;&quot;;s:2:&quot;ak&quot;;s:0:&quot;&quot;;s:2:&quot;sk&quot;;s:0:&quot;&quot;;s:6:&quot;hiPath&quot;;s:0:&quot;&quot;;}' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/scs-support/scs-support.php(35): add_option('scs_options', Array, '', 'on')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): scs_set_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_scs-su...', false)
-#9 /internal/eval.php(20): activate_plugin('scs-support/scs...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('scs_options', 'a:4:{s:6:\"bucket\";s:0:\"\";s:2:\"ak\";s:0:\"\";s:2:\"sk\";s:0:\"\";s:6:\"hiPath\";s:0:\"\";}', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_scs-support/scs-support.php'), WP_Hook->do_action, WP_Hook->apply_filters, scs_set_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:24:34 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:24:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:24:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:24:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:24:35 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/scs-support/scs-support.php on line 40
-[09-Apr-2025 11:24:35 UTC] PHP Deprecated:  Function attribute_escape is <strong>deprecated</strong> since version 2.8.0! Use esc_attr() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:24:35 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/scs-support/scs-support.php on line 41
-[09-Apr-2025 11:24:43 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/scs-support/scs-support.php on line 40
-[09-Apr-2025 11:24:43 UTC] PHP Deprecated:  Function attribute_escape is <strong>deprecated</strong> since version 2.8.0! Use esc_attr() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:24:43 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/scs-support/scs-support.php on line 41
-[09-Apr-2025 11:24:43 UTC] PHP Deprecated:  Function attribute_escape is <strong>deprecated</strong> since version 2.8.0! Use esc_attr() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:24:51 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/scs-support/scs-support.php on line 40
-[09-Apr-2025 11:24:51 UTC] PHP Deprecated:  Function attribute_escape is <strong>deprecated</strong> since version 2.8.0! Use esc_attr() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:24:51 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/scs-support/scs-support.php on line 41
-[09-Apr-2025 11:24:52 UTC] PHP Deprecated:  Function attribute_escape is <strong>deprecated</strong> since version 2.8.0! Use esc_attr() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:25:01 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ASSERT_QUIET_EVAL" in /wordpress/wp-content/plugins/simplecontact/simpleContact.php:56
+Error: [10-Apr-2025 21:45:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_home_path() in /wordpress/wp-content/plugins/seahorse-gdpr-data-manager/classes/shgdprdm_gdprdatamanager.class.php:1821
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): SHGdprdm_GdprDataManager->shgdprdm_activate(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_seahor...', false)
+#4 /internal/eval.php(20): activate_plugin('seahorse-gdpr-d...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/seahorse-gdpr-data-manager/classes/shgdprdm_gdprdatamanager.class.php on line 1821
+[10-Apr-2025 21:46:07 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_home_path() in /wordpress/wp-content/plugins/seahorse-gdpr-data-manager/classes/shgdprdm_gdprdatamanager.class.php:1821
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): SHGdprdm_GdprDataManager->shgdprdm_activate(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_seahor...', false)
+#4 /internal/eval.php(20): activate_plugin('seahorse-gdpr-d...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/seahorse-gdpr-data-manager/classes/shgdprdm_gdprdatamanager.class.php on line 1821
+[10-Apr-2025 21:46:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_home_path() in /wordpress/wp-content/plugins/seahorse-gdpr-data-manager/classes/shgdprdm_gdprdatamanager.class.php:1821
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): SHGdprdm_GdprDataManager->shgdprdm_activate(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_seahor...', false)
+#4 /internal/eval.php(20): activate_plugin('seahorse-gdpr-d...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/seahorse-gdpr-data-manager/classes/shgdprdm_gdprdatamanager.class.php on line 1821
+[10-Apr-2025 21:46:27 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ASSERT_QUIET_EVAL" in /wordpress/wp-content/plugins/simplecontact/simpleContact.php:56
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('simplecontact/s...')
 #2 /internal/eval.php(20): activate_plugin('simplecontact/s...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/simplecontact/simpleContact.php on line 56
-[09-Apr-2025 11:25:09 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ASSERT_QUIET_EVAL" in /wordpress/wp-content/plugins/simplecontact/simpleContact.php:56
+[10-Apr-2025 21:46:34 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "ASSERT_QUIET_EVAL" in /wordpress/wp-content/plugins/simplecontact/simpleContact.php:56
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('simplecontact/s...')
