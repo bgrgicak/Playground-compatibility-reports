@@ -1,1 +1,216 @@
+(node:20345) TimeoutNegativeWarning: -1 is a negative number.
+Timeout duration was set to 1.
+(Use `node --trace-warnings ...` to show where the warning was created)
+file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21
+`)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
 
+Error: [10-Apr-2025 11:44:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_smartpay_products ADD settings LONGTEXT DEFAULT NULL AFTER status</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_smartpay_products</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_smartpay_products</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_smartpay_products</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_smartpay_products</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_smartpay_products, settings, 1, , YES, longtext, 4294967295, 4294967295, , , , utf8mb4, utf8mb4_general_ci, longtext, , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = &#039;BASE TABLE&#039;
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_smartpay_products</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Table 'wp_smartpay_products' doesn't exist
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Table 'wp_smart...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/smartpay/database/migrations/add_settings_column_on_products_table.php(33): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/smartpay/app/Updater.php(29): AddSettingsColumnOnProductTable::up()
+#5 /wordpress/wp-content/plugins/smartpay/app/Updater.php(11): SmartPay\Updater->_update_database_if_available()
+#6 /wordpress/wp-content/plugins/smartpay/app/Updater.php(20): SmartPay\Updater->__construct()
+#7 /wordpress/wp-content/plugins/smartpay/bootstrap.php(22): SmartPay\Updater::boot()
+#8 /wordpress/wp-content/plugins/smartpay/smartpay.php(40): require('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('smartpay/smartp...')
+#11 /internal/eval.php(20): activate_plugin('smartpay/smartp...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_smartpay_products ADD settings LONGTEXT DEFAULT NULL AFTER status made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/smartpay/smartpay.php'), require('/plugins/smartpay/bootstrap.php'), SmartPay\Updater::boot, SmartPay\Updater->__construct, SmartPay\Updater->_update_database_if_available, AddSettingsColumnOnProductTable::up, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:44:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_smartpay_payments ADD uuid VARCHAR(255) DEFAULT NULL AFTER id</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_smartpay_payments</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_smartpay_payments</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = &#039;table&#039; AND name = ? | parameters: wp_smartpay_payments</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_smartpay_payments</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_smartpay_payments, uuid, 1, , YES, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = &#039;BASE TABLE&#039;
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_smartpay_payments</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Table 'wp_smartpay_payments' doesn't exist
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Table 'wp_smart...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
+#3 /wordpress/wp-content/plugins/smartpay/database/migrations/add_uuid_column_on_payments_table.php(33): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#4 /wordpress/wp-content/plugins/smartpay/app/Updater.php(30): AddUuidColumnOnPaymentTable::up()
+#5 /wordpress/wp-content/plugins/smartpay/app/Updater.php(11): SmartPay\Updater->_update_database_if_available()
+#6 /wordpress/wp-content/plugins/smartpay/app/Updater.php(20): SmartPay\Updater->__construct()
+#7 /wordpress/wp-content/plugins/smartpay/bootstrap.php(22): SmartPay\Updater::boot()
+#8 /wordpress/wp-content/plugins/smartpay/smartpay.php(40): require('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('smartpay/smartp...')
+#11 /internal/eval.php(20): activate_plugin('smartpay/smartp...')
+#12 {main}</pre>
+ for query ALTER TABLE wp_smartpay_payments ADD uuid VARCHAR(255) DEFAULT NULL AFTER id made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/smartpay/smartpay.php'), require('/plugins/smartpay/bootstrap.php'), SmartPay\Updater::boot, SmartPay\Updater->__construct, SmartPay\Updater->_update_database_if_available, AddUuidColumnOnPaymentTable::up, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:46:04 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/spectacula-page-widget/spec-page-widget.php on line 272
+[10-Apr-2025 11:46:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/spectacula-page-widget/spec-page-widget.php:273
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('spectacula-page...')
+#2 /internal/eval.php(20): activate_plugin('spectacula-page...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/spectacula-page-widget/spec-page-widget.php on line 273
+[10-Apr-2025 11:46:12 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/spectacula-page-widget/spec-page-widget.php on line 272
+[10-Apr-2025 11:46:12 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/spectacula-page-widget/spec-page-widget.php:273
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('spectacula-page...')
+#2 /internal/eval.php(20): activate_plugin('spectacula-page...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/spectacula-page-widget/spec-page-widget.php on line 273
+[10-Apr-2025 11:46:20 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/spectacula-page-widget/spec-page-widget.php on line 272
+[10-Apr-2025 11:46:20 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/spectacula-page-widget/spec-page-widget.php:273
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('spectacula-page...')
+#2 /internal/eval.php(20): activate_plugin('spectacula-page...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/spectacula-page-widget/spec-page-widget.php on line 273
+[10-Apr-2025 11:49:33 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $setting in /wordpress/wp-content/plugins/shopp-category-shipping-filters/vendor/objectivco/wordpress-simple-settings/src/wordpress-simple-settings.php on line 46
+[10-Apr-2025 11:49:33 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $setting in /wordpress/wp-content/plugins/shopp-category-shipping-filters/vendor/objectivco/wordpress-simple-settings/src/wordpress-simple-settings.php on line 64
+[10-Apr-2025 11:49:34 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $setting in /wordpress/wp-content/plugins/shopp-category-shipping-filters/vendor/objectivco/wordpress-simple-settings/src/wordpress-simple-settings.php on line 46
+[10-Apr-2025 11:49:34 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $setting in /wordpress/wp-content/plugins/shopp-category-shipping-filters/vendor/objectivco/wordpress-simple-settings/src/wordpress-simple-settings.php on line 64
+[10-Apr-2025 11:49:43 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $setting in /wordpress/wp-content/plugins/shopp-category-shipping-filters/vendor/objectivco/wordpress-simple-settings/src/wordpress-simple-settings.php on line 46
+[10-Apr-2025 11:49:43 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $setting in /wordpress/wp-content/plugins/shopp-category-shipping-filters/vendor/objectivco/wordpress-simple-settings/src/wordpress-simple-settings.php on line 64
+[10-Apr-2025 11:49:44 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $setting in /wordpress/wp-content/plugins/shopp-category-shipping-filters/vendor/objectivco/wordpress-simple-settings/src/wordpress-simple-settings.php on line 46
+[10-Apr-2025 11:49:44 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $setting in /wordpress/wp-content/plugins/shopp-category-shipping-filters/vendor/objectivco/wordpress-simple-settings/src/wordpress-simple-settings.php on line 64
+[10-Apr-2025 11:49:53 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $setting in /wordpress/wp-content/plugins/shopp-category-shipping-filters/vendor/objectivco/wordpress-simple-settings/src/wordpress-simple-settings.php on line 46
+[10-Apr-2025 11:49:53 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $setting in /wordpress/wp-content/plugins/shopp-category-shipping-filters/vendor/objectivco/wordpress-simple-settings/src/wordpress-simple-settings.php on line 64
+[10-Apr-2025 11:49:54 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $setting in /wordpress/wp-content/plugins/shopp-category-shipping-filters/vendor/objectivco/wordpress-simple-settings/src/wordpress-simple-settings.php on line 46
+[10-Apr-2025 11:49:54 UTC] PHP Deprecated:  Required parameter $value follows optional parameter $setting in /wordpress/wp-content/plugins/shopp-category-shipping-filters/vendor/objectivco/wordpress-simple-settings/src/wordpress-simple-settings.php on line 64
+[10-Apr-2025 11:51:31 UTC] PHP Warning:  Undefined array key "SkysaApps" in /wordpress/wp-content/plugins/skysa-youtube-videos-app/skysa-required/index.php on line 56
+[10-Apr-2025 11:51:32 UTC] PHP Warning:  Undefined array key "SkysaApps" in /wordpress/wp-content/plugins/skysa-youtube-videos-app/skysa-required/index.php on line 56
+[10-Apr-2025 11:51:39 UTC] PHP Warning:  Undefined array key "SkysaApps" in /wordpress/wp-content/plugins/skysa-youtube-videos-app/skysa-required/index.php on line 56
+[10-Apr-2025 11:51:40 UTC] PHP Warning:  Undefined array key "SkysaApps" in /wordpress/wp-content/plugins/skysa-youtube-videos-app/skysa-required/index.php on line 56
+[10-Apr-2025 11:51:48 UTC] PHP Warning:  Undefined array key "SkysaApps" in /wordpress/wp-content/plugins/skysa-youtube-videos-app/skysa-required/index.php on line 56
+[10-Apr-2025 11:51:49 UTC] PHP Warning:  Undefined array key "SkysaApps" in /wordpress/wp-content/plugins/skysa-youtube-videos-app/skysa-required/index.php on line 56
+[10-Apr-2025 11:51:59 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744285917.743)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:569:9)
+    at process.processTimers (node:internal/timers:543:7)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"redaction-io"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at runNextTicks (node:internal/process/task_queues:65:5)
+      at listOnTimeout (node:internal/timers:569:9)
+      at process.processTimers (node:internal/timers:543:7)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at runNextTicks (node:internal/process/task_queues:65:5)
+        at listOnTimeout (node:internal/timers:569:9)
+        at process.processTimers (node:internal/timers:543:7)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/7.4.31-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ],
+          expires: [ 'Wed, 11 Jan 1984 05:00:00 GMT' ],
+          'cache-control': [ 'no-cache, must-revalidate, max-age=0' ]
+        },
+        bytes: Uint8Array(2829) [
+           60,  33,  68,  79,  67,  84,  89,  80,  69,  32, 104, 116,
+          109, 108,  62,  10,  60, 104, 116, 109, 108,  32, 108,  97,
+          110, 103,  61,  34, 101, 110,  45,  85,  83,  34,  62,  10,
+           60, 104, 101,  97, 100,  62,  10,   9,  60, 109, 101, 116,
+           97,  32, 104, 116, 116, 112,  45, 101, 113, 117, 105, 118,
+           61,  34,  67, 111, 110, 116, 101, 110, 116,  45,  84, 121,
+          112, 101,  34,  32,  99, 111, 110, 116, 101, 110, 116,  61,
+           34, 116, 101, 120, 116,  47, 104, 116, 109, 108,  59,  32,
+           99, 104,  97, 114,
+          ... 2729 more items
+        ],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
