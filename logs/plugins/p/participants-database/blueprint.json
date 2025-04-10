@@ -1,18 +1,1 @@
-{
-  "preferredVersions": {
-    "php": "7.4",
-    "wp": "latest"
-  },
-  "steps": [
-    {
-      "step": "installPlugin",
-      "pluginData": {
-        "resource": "wordpress.org/plugins",
-        "slug": "participants-database"
-      },
-      "options": {
-        "activate": true
-      }
-    }
-  ]
-}
+{"landingPage":"\/","features":{"networking":true},"plugins":[],"steps":[{"step":"setSiteOptions","options":{"blogname":"Participants Database Demo","blogdescription":"","admin_email":"webdesign@xnau.com","page_on_front":""}},{"step":"writeFile","path":"\/wordpress\/wp-content\/mu-plugins\/pdb-sqlite-fix.php","data":"<?php class pdb_sqlite_query_fix{private $db_tables=['wp_participants_database'];private $keywords=['default','order','group'];private $escape_pattern;public function __construct(){add_filter('query',[$this,'fix_queries']);$this->set_escape_pattern();}public function fix_queries($query){if($this->is_target_query($query)){$query=$this->fix_quotes($query);$query=$this->escape_sqlite_keywords($query);$query=$this->catch_show_columns_query($query);}return $query;}private function is_target_query($query){foreach($this->db_tables as $table){if(strpos($query,$table)!==false){return true;}}return false;}private function fix_quotes($query){$query=preg_replace('\/\"\/',\"'\",$query);return $query;}private function escape_sqlite_keywords($query){$query=preg_replace($this->escape_pattern,'.`$1`',$query);return $query;}private function set_escape_pattern(){$this->escape_pattern='\/(?:\\.)('.implode('|',$this->keywords).')\/';}private function catch_show_columns_query($query){if(strpos($query,'SHOW COLUMNS')===false){return $query;}switch(true){case strpos($query,'last_update_user')!==false:$query=\"SELECT 1 FROM PRAGMA_TABLE_INFO('wp_participants_database') WHERE name='last_update_user';\";break;}return $query;}}new pdb_sqlite_query_fix();"},{"step":"importWxr","file":{"resource":"url","url":"https:\/\/out.xnau.com\/participants-database-demo.xml"}},{"step":"installPlugin","pluginData":{"resource":"wordpress.org\/plugins","slug":"participants-database"}},{"step":"installPlugin","pluginData":{"resource":"url","url":"https:\/\/out.xnau.com\/pdb-demo-content.zip"},"options":{"activate":true}},{"step":"login","username":"admin","password":"password"},{"step":"installPlugin","pluginZipFile":{"resource":"wordpress.org\/plugins","slug":"participants-database"},"options":{"activate":true}}]}
