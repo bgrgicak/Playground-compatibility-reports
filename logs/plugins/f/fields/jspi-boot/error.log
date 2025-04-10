@@ -2,567 +2,724 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 10:54:04 UTC] PHP Warning:  Undefined variable $data in /wordpress/wp-content/plugins/flash-zoom/flash-zoom.php on line 33
-[09-Apr-2025 10:54:04 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:54:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('flashzoom_settings', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'flashzoom_settings' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/flash-zoom/flash-zoom.php(33): add_option('flashzoom_setti...', NULL, 'FlashZoom Optio...')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('flash-zoom/flas...')
-#7 /internal/eval.php(20): activate_plugin('flash-zoom/flas...')
-#8 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('flashzoom_settings', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/flash-zoom/flash-zoom.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 10:54:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 10:54:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 10:54:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 10:54:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 10:54:04 UTC] PHP Warning:  Undefined variable $data in /wordpress/wp-content/plugins/flash-zoom/flash-zoom.php on line 33
-[09-Apr-2025 10:54:04 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:54:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('flashzoom_settings', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'flashzoom_settings' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/flash-zoom/flash-zoom.php(33): add_option('flashzoom_setti...', NULL, 'FlashZoom Optio...')
-#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('flashzoom_settings', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/flash-zoom/flash-zoom.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 10:54:12 UTC] PHP Warning:  Undefined variable $data in /wordpress/wp-content/plugins/flash-zoom/flash-zoom.php on line 33
-[09-Apr-2025 10:54:12 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:54:14 UTC] PHP Warning:  Undefined variable $data in /wordpress/wp-content/plugins/flash-zoom/flash-zoom.php on line 33
-[09-Apr-2025 10:54:14 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:54:21 UTC] PHP Warning:  Undefined variable $data in /wordpress/wp-content/plugins/flash-zoom/flash-zoom.php on line 33
-[09-Apr-2025 10:54:21 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:54:22 UTC] PHP Warning:  Undefined variable $data in /wordpress/wp-content/plugins/flash-zoom/flash-zoom.php on line 33
-[09-Apr-2025 10:54:22 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 10:54:33 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 10:54:33 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 10:54:33 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 10:54:33 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 10:54:34 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 10:54:34 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 10:54:34 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 10:54:34 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 10:56:00 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 10:56:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 10:56:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 10:56:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 10:56:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('WP_ESignature__Forminator_Digital_Signature_documentation', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'WP_ESignature__Forminator_Digital_Signature_documentation' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/forms-digital-signature-forminator-add-on/includes/esig-forminator.php(142): add_option('WP_ESignature__...', '')
-#5 /wordpress/wp-content/plugins/forms-digital-signature-forminator-add-on/includes/esig-forminator.php(108): ESIG_FORMINATOR::singleActivate()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ESIG_FORMINATOR::activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+Error: [10-Apr-2025 23:26:30 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744327588.206)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_forms-...', false)
-#10 /internal/eval.php(20): activate_plugin('forms-digital-s...')
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 23:26:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT `params` FROM `wp_extensions` WHERE `type`='component' AND `element`='com_fwfoodmenu'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `params` FROM `wp_extensions` WHERE `type`=:param0  AND `element`=:param1  | parameters: component, com_fwfoodmenu</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_extensions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT `params`...')
+#2 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(111): wpdb->get_var('SELECT `params`...', 0, 0)
+#3 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(2251): fwfmDB->loadResult()
+#4 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(391): fwfmComponentHelper::getParams('com_fwfoodmenu')
+#5 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(953): fwfmApplication->__construct()
+#6 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(3202): fwfmFactory::getApplication()
+#7 /wordpress/wp-content/plugins/fw-food-menu/fw-food-menu.php(16): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('fw-food-menu/fw...')
+#10 /internal/eval.php(20): activate_plugin('fw-food-menu/fw...')
 #11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('WP_ESignature__Forminator_Digital_Signature_documentation', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_forms-digital-signature-forminator-add-on/forminator-signature-add-on.php'), WP_Hook->do_action, WP_Hook->apply_filters, ESIG_FORMINATOR::activate, ESIG_FORMINATOR::singleActivate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 10:56:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SELECT `params` FROM `wp_extensions` WHERE `type`='component' AND `element`='com_fwfoodmenu' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/fw-food-menu/fw-food-menu.php'), require_once('/plugins/fw-food-menu/helpers/connector.php'), fwfmFactory::getApplication, fwfmApplication->__construct, fwfmComponentHelper::getParams, fwfmDB->loadResult, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:26:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout__esign_forminator_redirect', '1744196228', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>
+	SELECT
+		extension_id,
+		name,
+		`folder`,
+		`element`,
+		params,
+		CASE WHEN `element` = 'columns' THEN 1 ELSE 0 END AS _ordering
+	FROM
+		`wp_extensions`
+	WHERE
+		`type` = 'plugin'
+		AND
+		`enabled` = 1
+	ORDER BY
+		_ordering</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout__esign_forminator_redirect' , '1744196228' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+	SELECT
+		extension_id,
+		name,
+		`folder`,
+		`element`,
+		params,
+		CASE WHEN `element` = :param0  THEN 1 ELSE 0 END AS _ordering
+	FROM
+		`wp_extensions`
+	WHERE
+		`type` = :param1 
+		AND
+		`enabled` = 1
+	ORDER BY
+		_ordering | parameters: columns, plugin</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_extensions.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1744196228, '', 'off')
-#5 /wordpress/wp-content/plugins/forms-digital-signature-forminator-add-on/includes/esig-forminator.php(109): set_transient('_esign_forminat...', true, 30)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ESIG_FORMINATOR::activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_forms-...', false)
-#10 /internal/eval.php(20): activate_plugin('forms-digital-s...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('\n\tSELECT\n\t\texte...')
+#2 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(161): wpdb->get_results('\n\tSELECT\n\t\texte...', 'OBJECT')
+#3 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(2599): fwfmDB->loadObjectList()
+#4 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(2604): fwfmPluginHelper::load()
+#5 /wordpress/wp-content/plugins/fw-food-menu/site/helpers/helper.php(36): fwfmPluginHelper::importPlugin('fwfoodmenu')
+#6 /wordpress/wp-content/plugins/fw-food-menu/fw-food-menu.php(17): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('fw-food-menu/fw...')
+#9 /internal/eval.php(20): activate_plugin('fw-food-menu/fw...')
+#10 {main}</pre>
+ for query 
+	SELECT
+		extension_id,
+		name,
+		`folder`,
+		`element`,
+		params,
+		CASE WHEN `element` = 'columns' THEN 1 ELSE 0 END AS _ordering
+	FROM
+		`wp_extensions`
+	WHERE
+		`type` = 'plugin'
+		AND
+		`enabled` = 1
+	ORDER BY
+		_ordering made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/fw-food-menu/fw-food-menu.php'), require_once('/plugins/fw-food-menu/site/helpers/helper.php'), fwfmPluginHelper::importPlugin, fwfmPluginHelper::load, fwfmDB->loadObjectList, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:26:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW FIELDS FROM wp_fwfoodmenu_category</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3103): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(121): wpdb->get_col('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/fw-food-menu/admin/install.script.php(304): fwfmDB->loadColumn()
+#4 /wordpress/wp-content/plugins/fw-food-menu/fw-food-menu.php(47): com_fwfoodmenuInstallerScript->update(NULL)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): fw_plugin_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fw-foo...', false)
+#9 /internal/eval.php(20): activate_plugin('fw-food-menu/fw...')
+#10 {main}</pre>
+ for query SHOW FIELDS FROM wp_fwfoodmenu_category made by activate_plugin, do_action('activate_fw-food-menu/fw-food-menu.php'), WP_Hook->do_action, WP_Hook->apply_filters, fw_plugin_activation, com_fwfoodmenuInstallerScript->update, fwfmDB->loadColumn, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:26:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_fwfoodmenu_category` ADD COLUMN `lang` CHAR(5)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_fwfoodmenu_category, lang, char(5)</li>
+<li>Executing: ALTER TABLE wp_fwfoodmenu_category ADD COLUMN `lang` text | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: lang.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(97): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(107): fwfmDB->query()
+#3 /wordpress/wp-content/plugins/fw-food-menu/admin/install.script.php(308): fwfmDB->execute()
+#4 /wordpress/wp-content/plugins/fw-food-menu/fw-food-menu.php(47): com_fwfoodmenuInstallerScript->update(NULL)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): fw_plugin_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fw-foo...', false)
+#9 /internal/eval.php(20): activate_plugin('fw-food-menu/fw...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_fwfoodmenu_category` ADD COLUMN `lang` CHAR(5) made by activate_plugin, do_action('activate_fw-food-menu/fw-food-menu.php'), WP_Hook->do_action, WP_Hook->apply_filters, fw_plugin_activation, com_fwfoodmenuInstallerScript->update, fwfmDB->execute, fwfmDB->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:26:41 UTC] WordPress database error i for query ALTER TABLE `wp_fwfoodmenu_category` ADD COLUMN `lang` CHAR(5) made by activate_plugin, do_action('activate_fw-food-menu/fw-food-menu.php'), WP_Hook->do_action, WP_Hook->apply_filters, fw_plugin_activation, com_fwfoodmenuInstallerScript->update, fwfmDB->execute, fwfmDB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:26:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_fwfoodmenu_category` ADD COLUMN parent int unsigned not null default 0, add index(parent)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_fwfoodmenu_category, parent, int unsigned</li>
+<li>Executing: ALTER TABLE wp_fwfoodmenu_category ADD COLUMN parent  integer not null default 0 | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_fwfoodmenu_category, wp_fwfoodmenu_category__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_fwfoodmenu_category__(&quot; ON &quot;wp_fwfoodmenu_category&quot; () | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(97): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(107): fwfmDB->query()
+#3 /wordpress/wp-content/plugins/fw-food-menu/admin/install.script.php(320): fwfmDB->execute()
+#4 /wordpress/wp-content/plugins/fw-food-menu/fw-food-menu.php(47): com_fwfoodmenuInstallerScript->update(NULL)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): fw_plugin_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fw-foo...', false)
+#9 /internal/eval.php(20): activate_plugin('fw-food-menu/fw...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_fwfoodmenu_category` ADD COLUMN parent int unsigned not null default 0, add index(parent) made by activate_plugin, do_action('activate_fw-food-menu/fw-food-menu.php'), WP_Hook->do_action, WP_Hook->apply_filters, fw_plugin_activation, com_fwfoodmenuInstallerScript->update, fwfmDB->execute, fwfmDB->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:26:41 UTC] WordPress database error i for query ALTER TABLE `wp_fwfoodmenu_category` ADD COLUMN parent int unsigned not null default 0, add index(parent) made by activate_plugin, do_action('activate_fw-food-menu/fw-food-menu.php'), WP_Hook->do_action, WP_Hook->apply_filters, fw_plugin_activation, com_fwfoodmenuInstallerScript->update, fwfmDB->execute, fwfmDB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:26:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW FIELDS FROM wp_fwfoodmenu_menu</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3103): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(121): wpdb->get_col('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/fw-food-menu/admin/install.script.php(358): fwfmDB->loadColumn()
+#4 /wordpress/wp-content/plugins/fw-food-menu/fw-food-menu.php(47): com_fwfoodmenuInstallerScript->update(NULL)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): fw_plugin_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fw-foo...', false)
+#9 /internal/eval.php(20): activate_plugin('fw-food-menu/fw...')
+#10 {main}</pre>
+ for query SHOW FIELDS FROM wp_fwfoodmenu_menu made by activate_plugin, do_action('activate_fw-food-menu/fw-food-menu.php'), WP_Hook->do_action, WP_Hook->apply_filters, fw_plugin_activation, com_fwfoodmenuInstallerScript->update, fwfmDB->loadColumn, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:26:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_fwfoodmenu_menu` ADD COLUMN `lang` CHAR(5)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_fwfoodmenu_menu, lang, char(5)</li>
+<li>Executing: ALTER TABLE wp_fwfoodmenu_menu ADD COLUMN `lang` text | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: lang.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(97): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(107): fwfmDB->query()
+#3 /wordpress/wp-content/plugins/fw-food-menu/admin/install.script.php(362): fwfmDB->execute()
+#4 /wordpress/wp-content/plugins/fw-food-menu/fw-food-menu.php(47): com_fwfoodmenuInstallerScript->update(NULL)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): fw_plugin_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fw-foo...', false)
+#9 /internal/eval.php(20): activate_plugin('fw-food-menu/fw...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_fwfoodmenu_menu` ADD COLUMN `lang` CHAR(5) made by activate_plugin, do_action('activate_fw-food-menu/fw-food-menu.php'), WP_Hook->do_action, WP_Hook->apply_filters, fw_plugin_activation, com_fwfoodmenuInstallerScript->update, fwfmDB->execute, fwfmDB->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:26:41 UTC] WordPress database error i for query ALTER TABLE `wp_fwfoodmenu_menu` ADD COLUMN `lang` CHAR(5) made by activate_plugin, do_action('activate_fw-food-menu/fw-food-menu.php'), WP_Hook->do_action, WP_Hook->apply_filters, fw_plugin_activation, com_fwfoodmenuInstallerScript->update, fwfmDB->execute, fwfmDB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:26:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_fwfoodmenu_menu` ADD COLUMN is_new tinyint unsigned default NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_fwfoodmenu_menu, is_new, tinyint unsigned</li>
+<li>Executing: ALTER TABLE wp_fwfoodmenu_menu ADD COLUMN is_new  integer default NULL | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: is_new.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(97): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(107): fwfmDB->query()
+#3 /wordpress/wp-content/plugins/fw-food-menu/admin/install.script.php(370): fwfmDB->execute()
+#4 /wordpress/wp-content/plugins/fw-food-menu/fw-food-menu.php(47): com_fwfoodmenuInstallerScript->update(NULL)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): fw_plugin_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fw-foo...', false)
+#9 /internal/eval.php(20): activate_plugin('fw-food-menu/fw...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_fwfoodmenu_menu` ADD COLUMN is_new tinyint unsigned default NULL made by activate_plugin, do_action('activate_fw-food-menu/fw-food-menu.php'), WP_Hook->do_action, WP_Hook->apply_filters, fw_plugin_activation, com_fwfoodmenuInstallerScript->update, fwfmDB->execute, fwfmDB->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:26:41 UTC] WordPress database error i for query ALTER TABLE `wp_fwfoodmenu_menu` ADD COLUMN is_new tinyint unsigned default NULL made by activate_plugin, do_action('activate_fw-food-menu/fw-food-menu.php'), WP_Hook->do_action, WP_Hook->apply_filters, fw_plugin_activation, com_fwfoodmenuInstallerScript->update, fwfmDB->execute, fwfmDB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:26:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW FIELDS FROM `wp_extensions` WHERE Field = 'params'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(141): wpdb->get_row('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/fw-food-menu/admin/install.script.php(426): fwfmDB->loadObject()
+#4 /wordpress/wp-content/plugins/fw-food-menu/fw-food-menu.php(47): com_fwfoodmenuInstallerScript->update(NULL)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): fw_plugin_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fw-foo...', false)
+#9 /internal/eval.php(20): activate_plugin('fw-food-menu/fw...')
+#10 {main}</pre>
+ for query SHOW FIELDS FROM `wp_extensions` WHERE Field = 'params' made by activate_plugin, do_action('activate_fw-food-menu/fw-food-menu.php'), WP_Hook->do_action, WP_Hook->apply_filters, fw_plugin_activation, com_fwfoodmenuInstallerScript->update, fwfmDB->loadObject, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT `params` FROM `wp_extensions` WHERE `type`='component' AND `element`='com_fwfoodmenu'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `params` FROM `wp_extensions` WHERE `type`=:param0  AND `element`=:param1  | parameters: component, com_fwfoodmenu</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_extensions.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SELECT `params`...')
+#2 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(111): wpdb->get_var('SELECT `params`...', 0, 0)
+#3 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(2251): fwfmDB->loadResult()
+#4 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(391): fwfmComponentHelper::getParams('com_fwfoodmenu')
+#5 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(953): fwfmApplication->__construct()
+#6 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(3202): fwfmFactory::getApplication()
+#7 /wordpress/wp-content/plugins/fw-food-menu/fw-food-menu.php(16): require_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('fw-food-menu/fw...')
+#10 /internal/eval.php(20): activate_plugin('fw-food-menu/fw...')
 #11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout__esign_forminator_redirect', '1744196228', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_forms-digital-signature-forminator-add-on/forminator-signature-add-on.php'), WP_Hook->do_action, WP_Hook->apply_filters, ESIG_FORMINATOR::activate, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 10:56:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SELECT `params` FROM `wp_extensions` WHERE `type`='component' AND `element`='com_fwfoodmenu' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/fw-food-menu/fw-food-menu.php'), require_once('/plugins/fw-food-menu/helpers/connector.php'), fwfmFactory::getApplication, fwfmApplication->__construct, fwfmComponentHelper::getParams, fwfmDB->loadResult, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient__esign_forminator_redirect', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>
+	SELECT
+		extension_id,
+		name,
+		`folder`,
+		`element`,
+		params,
+		CASE WHEN `element` = 'columns' THEN 1 ELSE 0 END AS _ordering
+	FROM
+		`wp_extensions`
+	WHERE
+		`type` = 'plugin'
+		AND
+		`enabled` = 1
+	ORDER BY
+		_ordering</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient__esign_forminator_redirect' , '1' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+	SELECT
+		extension_id,
+		name,
+		`folder`,
+		`element`,
+		params,
+		CASE WHEN `element` = :param0  THEN 1 ELSE 0 END AS _ordering
+	FROM
+		`wp_extensions`
+	WHERE
+		`type` = :param1 
+		AND
+		`enabled` = 1
+	ORDER BY
+		_ordering | parameters: columns, plugin</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_extensions.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient__esi...', true, '', 'off')
-#5 /wordpress/wp-content/plugins/forms-digital-signature-forminator-add-on/includes/esig-forminator.php(109): set_transient('_esign_forminat...', true, 30)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ESIG_FORMINATOR::activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_forms-...', false)
-#10 /internal/eval.php(20): activate_plugin('forms-digital-s...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient__esign_forminator_redirect', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_forms-digital-signature-forminator-add-on/forminator-signature-add-on.php'), WP_Hook->do_action, WP_Hook->apply_filters, ESIG_FORMINATOR::activate, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 10:56:38 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 10:56:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 10:56:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 10:56:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 10:57:07 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 10:57:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 10:57:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 10:57:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 10:57:43 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 10:57:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 10:57:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 10:57:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 10:58:12 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 10:58:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 10:58:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 10:58:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 10:58:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('\n\tSELECT\n\t\texte...')
+#2 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(161): wpdb->get_results('\n\tSELECT\n\t\texte...', 'OBJECT')
+#3 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(2599): fwfmDB->loadObjectList()
+#4 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(2604): fwfmPluginHelper::load()
+#5 /wordpress/wp-content/plugins/fw-food-menu/site/helpers/helper.php(36): fwfmPluginHelper::importPlugin('fwfoodmenu')
+#6 /wordpress/wp-content/plugins/fw-food-menu/fw-food-menu.php(17): require_once('/wordpress/wp-c...')
+#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('fw-food-menu/fw...')
+#9 /internal/eval.php(20): activate_plugin('fw-food-menu/fw...')
+#10 {main}</pre>
+ for query 
+	SELECT
+		extension_id,
+		name,
+		`folder`,
+		`element`,
+		params,
+		CASE WHEN `element` = 'columns' THEN 1 ELSE 0 END AS _ordering
+	FROM
+		`wp_extensions`
+	WHERE
+		`type` = 'plugin'
+		AND
+		`enabled` = 1
+	ORDER BY
+		_ordering made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/fw-food-menu/fw-food-menu.php'), require_once('/plugins/fw-food-menu/site/helpers/helper.php'), fwfmPluginHelper::importPlugin, fwfmPluginHelper::load, fwfmDB->loadObjectList, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sw_fb_page_plugin_slider_options', 'a:9:{s:12:\"sidebarImage\";s:17:\"facebook-icon.png\";s:9:\"marginTop\";i:100;s:7:\"pageURL\";s:32:\"http://www.facebook.com/facebook\";s:5:\"width\";s:3:\"292\";s:6:\"height\";s:3:\"400\";s:5:\"posts\";s:5:\"false\";s:9:\"data_hide\";s:5:\"light\";s:10:\"show_faces\";s:4:\"true\";s:9:\"alignment\";s:4:\"left\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SHOW FIELDS FROM wp_fwfoodmenu_category</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'sw_fb_page_plugin_slider_options' , 'a:9:{s:12:&quot;sidebarImage&quot;;s:17:&quot;facebook-icon.png&quot;;s:9:&quot;marginTop&quot;;i:100;s:7:&quot;pageURL&quot;;s:32:&quot;http://www.facebook.com/facebook&quot;;s:5:&quot;width&quot;;s:3:&quot;292&quot;;s:6:&quot;height&quot;;s:3:&quot;400&quot;;s:5:&quot;posts&quot;;s:5:&quot;false&quot;;s:9:&quot;data_hide&quot;;s:5:&quot;light&quot;;s:10:&quot;show_faces&quot;;s:4:&quot;true&quot;;s:9:&quot;alignment&quot;;s:4:&quot;left&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/facebook-page-widget-slider/facebook-page-widget-slider.php(257): add_option('sw_fb_page_plug...', Array)
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('facebook-page-w...')
-#7 /internal/eval.php(20): activate_plugin('facebook-page-w...')
-#8 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sw_fb_page_plugin_slider_options', 'a:9:{s:12:\"sidebarImage\";s:17:\"facebook-icon.png\";s:9:\"marginTop\";i:100;s:7:\"pageURL\";s:32:\"http://www.facebook.com/facebook\";s:5:\"width\";s:3:\"292\";s:6:\"height\";s:3:\"400\";s:5:\"posts\";s:5:\"false\";s:9:\"data_hide\";s:5:\"light\";s:10:\"show_faces\";s:4:\"true\";s:9:\"alignment\";s:4:\"left\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/facebook-page-widget-slider/facebook-page-widget-slider.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 10:58:40 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 10:58:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 10:58:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 10:58:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 10:58:41 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3103): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(121): wpdb->get_col('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/fw-food-menu/admin/install.script.php(304): fwfmDB->loadColumn()
+#4 /wordpress/wp-content/plugins/fw-food-menu/fw-food-menu.php(47): com_fwfoodmenuInstallerScript->update(NULL)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): fw_plugin_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fw-foo...', false)
+#9 /internal/eval.php(20): activate_plugin('fw-food-menu/fw...')
+#10 {main}</pre>
+ for query SHOW FIELDS FROM wp_fwfoodmenu_category made by activate_plugin, do_action('activate_fw-food-menu/fw-food-menu.php'), WP_Hook->do_action, WP_Hook->apply_filters, fw_plugin_activation, com_fwfoodmenuInstallerScript->update, fwfmDB->loadColumn, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sw_fb_page_plugin_slider_options', 'a:9:{s:12:\"sidebarImage\";s:17:\"facebook-icon.png\";s:9:\"marginTop\";i:100;s:7:\"pageURL\";s:32:\"http://www.facebook.com/facebook\";s:5:\"width\";s:3:\"292\";s:6:\"height\";s:3:\"400\";s:5:\"posts\";s:5:\"false\";s:9:\"data_hide\";s:5:\"light\";s:10:\"show_faces\";s:4:\"true\";s:9:\"alignment\";s:4:\"left\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE `wp_fwfoodmenu_category` ADD COLUMN `lang` CHAR(5)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'sw_fb_page_plugin_slider_options' , 'a:9:{s:12:&quot;sidebarImage&quot;;s:17:&quot;facebook-icon.png&quot;;s:9:&quot;marginTop&quot;;i:100;s:7:&quot;pageURL&quot;;s:32:&quot;http://www.facebook.com/facebook&quot;;s:5:&quot;width&quot;;s:3:&quot;292&quot;;s:6:&quot;height&quot;;s:3:&quot;400&quot;;s:5:&quot;posts&quot;;s:5:&quot;false&quot;;s:9:&quot;data_hide&quot;;s:5:&quot;light&quot;;s:10:&quot;show_faces&quot;;s:4:&quot;true&quot;;s:9:&quot;alignment&quot;;s:4:&quot;left&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_fwfoodmenu_category, lang, char(5)</li>
+<li>Executing: ALTER TABLE wp_fwfoodmenu_category ADD COLUMN `lang` text | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: lang.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/facebook-page-widget-slider/facebook-page-widget-slider.php(257): add_option('sw_fb_page_plug...', Array)
-#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('sw_fb_page_plugin_slider_options', 'a:9:{s:12:\"sidebarImage\";s:17:\"facebook-icon.png\";s:9:\"marginTop\";i:100;s:7:\"pageURL\";s:32:\"http://www.facebook.com/facebook\";s:5:\"width\";s:3:\"292\";s:6:\"height\";s:3:\"400\";s:5:\"posts\";s:5:\"false\";s:9:\"data_hide\";s:5:\"light\";s:10:\"show_faces\";s:4:\"true\";s:9:\"alignment\";s:4:\"left\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/facebook-page-widget-slider/facebook-page-widget-slider.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 10:59:08 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 10:59:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 10:59:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 10:59:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 10:59:36 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 10:59:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 10:59:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 10:59:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:00:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(97): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(107): fwfmDB->query()
+#3 /wordpress/wp-content/plugins/fw-food-menu/admin/install.script.php(308): fwfmDB->execute()
+#4 /wordpress/wp-content/plugins/fw-food-menu/fw-food-menu.php(47): com_fwfoodmenuInstallerScript->update(NULL)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): fw_plugin_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fw-foo...', false)
+#9 /internal/eval.php(20): activate_plugin('fw-food-menu/fw...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_fwfoodmenu_category` ADD COLUMN `lang` CHAR(5) made by activate_plugin, do_action('activate_fw-food-menu/fw-food-menu.php'), WP_Hook->do_action, WP_Hook->apply_filters, fw_plugin_activation, com_fwfoodmenuInstallerScript->update, fwfmDB->execute, fwfmDB->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:26:53 UTC] WordPress database error i for query ALTER TABLE `wp_fwfoodmenu_category` ADD COLUMN `lang` CHAR(5) made by activate_plugin, do_action('activate_fw-food-menu/fw-food-menu.php'), WP_Hook->do_action, WP_Hook->apply_filters, fw_plugin_activation, com_fwfoodmenuInstallerScript->update, fwfmDB->execute, fwfmDB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fastcomments_token', '67f653348b6781.49438327', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE `wp_fwfoodmenu_category` ADD COLUMN parent int unsigned not null default 0, add index(parent)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fastcomments_token' , '67f653348b6781.49438327' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_fwfoodmenu_category, parent, int unsigned</li>
+<li>Executing: ALTER TABLE wp_fwfoodmenu_category ADD COLUMN parent  integer not null default 0 | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_fwfoodmenu_category, wp_fwfoodmenu_category__(, KEY</li>
+<li>Executing: CREATE INDEX &quot;wp_fwfoodmenu_category__(&quot; ON &quot;wp_fwfoodmenu_category&quot; () | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ")": syntax error.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fastcomments_to...', '67f653348b6781....', '', 'auto')
-#5 /wordpress/wp-content/plugins/fastcomments/core/FastCommentsWordPressIntegration.php(166): update_option('fastcomments_to...', '67f653348b6781....')
-#6 /wordpress/wp-content/plugins/fastcomments/core/FastCommentsIntegrationCore.php(158): FastCommentsWordPressIntegration->setSettingValue('fastcomments_to...', '67f653348b6781....')
-#7 /wordpress/wp-content/plugins/fastcomments/admin/fastcomments-admin.php(8): FastCommentsIntegrationCore->integrationStateCreateToken()
-#8 /wordpress/wp-content/plugins/fastcomments/fastcomments-wordpress-plugin.php(18): require_once('/wordpress/wp-c...')
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('fastcomments/fa...')
-#11 /internal/eval.php(20): activate_plugin('fastcomments/fa...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fastcomments_token', '67f653348b6781.49438327', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/fastcomments/fastcomments-wordpress-plugin.php'), require_once('/plugins/fastcomments/admin/fastcomments-admin.php'), FastCommentsIntegrationCore->integrationStateCreateToken, FastCommentsWordPressIntegration->setSettingValue, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:00:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(97): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(107): fwfmDB->query()
+#3 /wordpress/wp-content/plugins/fw-food-menu/admin/install.script.php(320): fwfmDB->execute()
+#4 /wordpress/wp-content/plugins/fw-food-menu/fw-food-menu.php(47): com_fwfoodmenuInstallerScript->update(NULL)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): fw_plugin_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fw-foo...', false)
+#9 /internal/eval.php(20): activate_plugin('fw-food-menu/fw...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_fwfoodmenu_category` ADD COLUMN parent int unsigned not null default 0, add index(parent) made by activate_plugin, do_action('activate_fw-food-menu/fw-food-menu.php'), WP_Hook->do_action, WP_Hook->apply_filters, fw_plugin_activation, com_fwfoodmenuInstallerScript->update, fwfmDB->execute, fwfmDB->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:26:53 UTC] WordPress database error i for query ALTER TABLE `wp_fwfoodmenu_category` ADD COLUMN parent int unsigned not null default 0, add index(parent) made by activate_plugin, do_action('activate_fw-food-menu/fw-food-menu.php'), WP_Hook->do_action, WP_Hook->apply_filters, fw_plugin_activation, com_fwfoodmenuInstallerScript->update, fwfmDB->execute, fwfmDB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fc_fastcomments_comment_ids_version', '2.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SHOW FIELDS FROM wp_fwfoodmenu_menu</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fc_fastcomments_comment_ids_version' , '2.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fc_fastcomments...', '2.0', '', 'auto')
-#5 /wordpress/wp-content/plugins/fastcomments/core/FastCommentsWordPressIntegration.php(38): update_option('fc_fastcomments...', '2.0')
-#6 /wordpress/wp-content/plugins/fastcomments/core/FastCommentsWordPressIntegration.php(54): FastCommentsWordPressIntegration->ensure_plugin_dependencies()
-#7 /wordpress/wp-content/plugins/fastcomments/fastcomments-wordpress-plugin.php(111): FastCommentsWordPressIntegration->activate()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): fastcomments_activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fastco...', false)
-#12 /internal/eval.php(20): activate_plugin('fastcomments/fa...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fc_fastcomments_comment_ids_version', '2.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_fastcomments/fastcomments-wordpress-plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, fastcomments_activate, FastCommentsWordPressIntegration->activate, FastCommentsWordPressIntegration->ensure_plugin_dependencies, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:00:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:00:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:00:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:00:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:00:04 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:00:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:00:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:00:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:00:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3103): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(121): wpdb->get_col('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/fw-food-menu/admin/install.script.php(358): fwfmDB->loadColumn()
+#4 /wordpress/wp-content/plugins/fw-food-menu/fw-food-menu.php(47): com_fwfoodmenuInstallerScript->update(NULL)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): fw_plugin_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fw-foo...', false)
+#9 /internal/eval.php(20): activate_plugin('fw-food-menu/fw...')
+#10 {main}</pre>
+ for query SHOW FIELDS FROM wp_fwfoodmenu_menu made by activate_plugin, do_action('activate_fw-food-menu/fw-food-menu.php'), WP_Hook->do_action, WP_Hook->apply_filters, fw_plugin_activation, com_fwfoodmenuInstallerScript->update, fwfmDB->loadColumn, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fastcomments_log_level', 'warn', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE `wp_fwfoodmenu_menu` ADD COLUMN `lang` CHAR(5)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fastcomments_log_level' , 'warn' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_fwfoodmenu_menu, lang, char(5)</li>
+<li>Executing: ALTER TABLE wp_fwfoodmenu_menu ADD COLUMN `lang` text | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: lang.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fastcomments_lo...', 'warn', '', 'auto')
-#5 /wordpress/wp-content/plugins/fastcomments/core/FastCommentsWordPressIntegration.php(49): update_option('fastcomments_lo...', 'warn')
-#6 /wordpress/wp-content/plugins/fastcomments/core/FastCommentsWordPressIntegration.php(54): FastCommentsWordPressIntegration->ensure_plugin_dependencies()
-#7 /wordpress/wp-content/plugins/fastcomments/fastcomments-wordpress-plugin.php(111): FastCommentsWordPressIntegration->activate()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): fastcomments_activate(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fastco...', false)
-#12 /internal/eval.php(20): activate_plugin('fastcomments/fa...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fastcomments_log_level', 'warn', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_fastcomments/fastcomments-wordpress-plugin.php'), WP_Hook->do_action, WP_Hook->apply_filters, fastcomments_activate, FastCommentsWordPressIntegration->activate, FastCommentsWordPressIntegration->ensure_plugin_dependencies, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:00:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:00:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:00:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:00:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:00:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(97): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(107): fwfmDB->query()
+#3 /wordpress/wp-content/plugins/fw-food-menu/admin/install.script.php(362): fwfmDB->execute()
+#4 /wordpress/wp-content/plugins/fw-food-menu/fw-food-menu.php(47): com_fwfoodmenuInstallerScript->update(NULL)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): fw_plugin_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fw-foo...', false)
+#9 /internal/eval.php(20): activate_plugin('fw-food-menu/fw...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_fwfoodmenu_menu` ADD COLUMN `lang` CHAR(5) made by activate_plugin, do_action('activate_fw-food-menu/fw-food-menu.php'), WP_Hook->do_action, WP_Hook->apply_filters, fw_plugin_activation, com_fwfoodmenuInstallerScript->update, fwfmDB->execute, fwfmDB->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:26:53 UTC] WordPress database error i for query ALTER TABLE `wp_fwfoodmenu_menu` ADD COLUMN `lang` CHAR(5) made by activate_plugin, do_action('activate_fw-food-menu/fw-food-menu.php'), WP_Hook->do_action, WP_Hook->apply_filters, fw_plugin_activation, com_fwfoodmenuInstallerScript->update, fwfmDB->execute, fwfmDB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fastcomments_token', '67f65335c06207.26807378', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE `wp_fwfoodmenu_menu` ADD COLUMN is_new tinyint unsigned default NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fastcomments_token' , '67f65335c06207.26807378' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_fwfoodmenu_menu, is_new, tinyint unsigned</li>
+<li>Executing: ALTER TABLE wp_fwfoodmenu_menu ADD COLUMN is_new  integer default NULL | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: is_new.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fastcomments_to...', '67f65335c06207....', '', 'auto')
-#5 /wordpress/wp-content/plugins/fastcomments/core/FastCommentsWordPressIntegration.php(166): update_option('fastcomments_to...', '67f65335c06207....')
-#6 /wordpress/wp-content/plugins/fastcomments/core/FastCommentsIntegrationCore.php(158): FastCommentsWordPressIntegration->setSettingValue('fastcomments_to...', '67f65335c06207....')
-#7 /wordpress/wp-content/plugins/fastcomments/admin/fastcomments-admin.php(8): FastCommentsIntegrationCore->integrationStateCreateToken()
-#8 /wordpress/wp-content/plugins/fastcomments/fastcomments-wordpress-plugin.php(18): require_once('/wordpress/wp-c...')
-#9 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fastcomments_token', '67f65335c06207.26807378', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/fastcomments/fastcomments-wordpress-plugin.php'), require_once('/plugins/fastcomments/admin/fastcomments-admin.php'), FastCommentsIntegrationCore->integrationStateCreateToken, FastCommentsWordPressIntegration->setSettingValue, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:00:05 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:00:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:00:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:00:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:00:05 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:00:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:00:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:00:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:00:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(97): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(107): fwfmDB->query()
+#3 /wordpress/wp-content/plugins/fw-food-menu/admin/install.script.php(370): fwfmDB->execute()
+#4 /wordpress/wp-content/plugins/fw-food-menu/fw-food-menu.php(47): com_fwfoodmenuInstallerScript->update(NULL)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): fw_plugin_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fw-foo...', false)
+#9 /internal/eval.php(20): activate_plugin('fw-food-menu/fw...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_fwfoodmenu_menu` ADD COLUMN is_new tinyint unsigned default NULL made by activate_plugin, do_action('activate_fw-food-menu/fw-food-menu.php'), WP_Hook->do_action, WP_Hook->apply_filters, fw_plugin_activation, com_fwfoodmenuInstallerScript->update, fwfmDB->execute, fwfmDB->query, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:26:53 UTC] WordPress database error i for query ALTER TABLE `wp_fwfoodmenu_menu` ADD COLUMN is_new tinyint unsigned default NULL made by activate_plugin, do_action('activate_fw-food-menu/fw-food-menu.php'), WP_Hook->do_action, WP_Hook->apply_filters, fw_plugin_activation, com_fwfoodmenuInstallerScript->update, fwfmDB->execute, fwfmDB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:26:53 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fc_fastcomments_comment_ids_version', '2.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SHOW FIELDS FROM `wp_extensions` WHERE Field = 'params'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fc_fastcomments_comment_ids_version' , '2.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown show type: FIELDS FROM.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fc_fastcomments...', '2.0', '', 'auto')
-#5 /wordpress/wp-content/plugins/fastcomments/core/FastCommentsWordPressIntegration.php(38): update_option('fc_fastcomments...', '2.0')
-#6 /wordpress/wp-content/plugins/fastcomments/core/FastCommentsWordPressIntegration.php(70): FastCommentsWordPressIntegration->ensure_plugin_dependencies()
-#7 /wordpress/wp-content/plugins/fastcomments/fastcomments-wordpress-plugin.php(125): FastCommentsWordPressIntegration->update()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): fastcomments_update('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fc_fastcomments_comment_ids_version', '2.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, fastcomments_update, FastCommentsWordPressIntegration->update, FastCommentsWordPressIntegration->ensure_plugin_dependencies, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:00:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fastcomments_version', '3.16', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fastcomments_version' , '3.16' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fastcomments_ve...', 3.16, '', 'auto')
-#5 /wordpress/wp-content/plugins/fastcomments/core/FastCommentsWordPressIntegration.php(166): update_option('fastcomments_ve...', 3.16)
-#6 /wordpress/wp-content/plugins/fastcomments/core/FastCommentsWordPressIntegration.php(41): FastCommentsWordPressIntegration->setSettingValue('fastcomments_ve...', 3.16)
-#7 /wordpress/wp-content/plugins/fastcomments/core/FastCommentsWordPressIntegration.php(70): FastCommentsWordPressIntegration->ensure_plugin_dependencies()
-#8 /wordpress/wp-content/plugins/fastcomments/fastcomments-wordpress-plugin.php(125): FastCommentsWordPressIntegration->update()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): fastcomments_update('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#16 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fastcomments_version', '3.16', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, fastcomments_update, FastCommentsWordPressIntegration->update, FastCommentsWordPressIntegration->ensure_plugin_dependencies, FastCommentsWordPressIntegration->setSettingValue, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:00:06 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:00:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:00:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:00:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:00:06 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:00:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:00:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:00:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:00:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fastcomments_log_level', 'warn', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session we
-Node.js v23.11.0
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SHOW FIELDS FRO...')
+#2 /wordpress/wp-content/plugins/fw-food-menu/helpers/connector.php(141): wpdb->get_row('SHOW FIELDS FRO...')
+#3 /wordpress/wp-content/plugins/fw-food-menu/admin/install.script.php(426): fwfmDB->loadObject()
+#4 /wordpress/wp-content/plugins/fw-food-menu/fw-food-menu.php(47): com_fwfoodmenuInstallerScript->update(NULL)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): fw_plugin_activation(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_fw-foo...', false)
+#9 /internal/eval.php(20): activate_plugin('fw-food-menu/fw...')
+#10 {main}</pre>
+ for query SHOW FIELDS FROM `wp_extensions` WHERE Field = 'params' made by activate_plugin, do_action('activate_fw-food-menu/fw-food-menu.php'), WP_Hook->do_action, WP_Hook->apply_filters, fw_plugin_activation, com_fwfoodmenuInstallerScript->update, fwfmDB->loadObject, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 23:27:44 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/fl3r-randavatar/randavatar.php on line 809
+[10-Apr-2025 23:27:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/fl3r-randavatar/randavatar.php on line 809
+[10-Apr-2025 23:27:44 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:27:44 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:27:52 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/fl3r-randavatar/randavatar.php on line 809
+[10-Apr-2025 23:27:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/fl3r-randavatar/randavatar.php on line 809
+[10-Apr-2025 23:27:53 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:27:53 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:28:01 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/fl3r-randavatar/randavatar.php on line 809
+[10-Apr-2025 23:28:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/fl3r-randavatar/randavatar.php on line 809
+[10-Apr-2025 23:28:02 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:28:02 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:28:13 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "﻿" in /wordpress/wp-content/plugins/flex-e-panel/flex-e-panel.php:29
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('flex-e-panel/fl...')
+#2 /internal/eval.php(20): activate_plugin('flex-e-panel/fl...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/flex-e-panel/flex-e-panel.php on line 29
+[10-Apr-2025 23:28:21 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "﻿" in /wordpress/wp-content/plugins/flex-e-panel/flex-e-panel.php:29
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('flex-e-panel/fl...')
+#2 /internal/eval.php(20): activate_plugin('flex-e-panel/fl...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/flex-e-panel/flex-e-panel.php on line 29
+[10-Apr-2025 23:28:29 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "﻿" in /wordpress/wp-content/plugins/flex-e-panel/flex-e-panel.php:29
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('flex-e-panel/fl...')
+#2 /internal/eval.php(20): activate_plugin('flex-e-panel/fl...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/flex-e-panel/flex-e-panel.php on line 29
+[10-Apr-2025 23:30:57 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:30:58 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:31:05 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:31:07 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:31:14 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:31:15 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:31:27 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:31:36 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:31:45 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:31:57 UTC] PHP Deprecated:  Required parameter $position follows optional parameter $args in /wordpress/wp-content/plugins/facebook-fanbox-with-css-support/facebook-fanbox-with-css-support.php on line 187
+[10-Apr-2025 23:31:57 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/facebook-fanbox-with-css-support/facebook-fanbox-with-css-support.php:341
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('facebook-fanbox...')
+#2 /internal/eval.php(20): activate_plugin('facebook-fanbox...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/facebook-fanbox-with-css-support/facebook-fanbox-with-css-support.php on line 341
+[10-Apr-2025 23:32:05 UTC] PHP Deprecated:  Required parameter $position follows optional parameter $args in /wordpress/wp-content/plugins/facebook-fanbox-with-css-support/facebook-fanbox-with-css-support.php on line 187
+[10-Apr-2025 23:32:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/facebook-fanbox-with-css-support/facebook-fanbox-with-css-support.php:341
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('facebook-fanbox...')
+#2 /internal/eval.php(20): activate_plugin('facebook-fanbox...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/facebook-fanbox-with-css-support/facebook-fanbox-with-css-support.php on line 341
+[10-Apr-2025 23:32:13 UTC] PHP Deprecated:  Required parameter $position follows optional parameter $args in /wordpress/wp-content/plugins/facebook-fanbox-with-css-support/facebook-fanbox-with-css-support.php on line 187
+[10-Apr-2025 23:32:13 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/facebook-fanbox-with-css-support/facebook-fanbox-with-css-support.php:341
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('facebook-fanbox...')
+#2 /internal/eval.php(20): activate_plugin('facebook-fanbox...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/facebook-fanbox-with-css-support/facebook-fanbox-with-css-support.php on line 341
+[10-Apr-2025 23:32:55 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>FB-Loader</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:32:55 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>FB-Share</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:33:03 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>FB-Loader</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:33:03 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>FB-Share</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:33:12 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>FB-Loader</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:33:12 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>FB-Share</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:35:16 UTC] PHP Deprecated:  Required parameter $id_or_email follows optional parameter $avatar in /wordpress/wp-content/plugins/fatpanda-singly/plugin.php on line 101
+[10-Apr-2025 23:35:17 UTC] PHP Deprecated:  Required parameter $id_or_email follows optional parameter $avatar in /wordpress/wp-content/plugins/fatpanda-singly/plugin.php on line 101
+[10-Apr-2025 23:35:25 UTC] PHP Deprecated:  Required parameter $id_or_email follows optional parameter $avatar in /wordpress/wp-content/plugins/fatpanda-singly/plugin.php on line 101
+[10-Apr-2025 23:35:25 UTC] PHP Deprecated:  Required parameter $id_or_email follows optional parameter $avatar in /wordpress/wp-content/plugins/fatpanda-singly/plugin.php on line 101
+[10-Apr-2025 23:35:33 UTC] PHP Deprecated:  Required parameter $id_or_email follows optional parameter $avatar in /wordpress/wp-content/plugins/fatpanda-singly/plugin.php on line 101
+[10-Apr-2025 23:35:34 UTC] PHP Deprecated:  Required parameter $id_or_email follows optional parameter $avatar in /wordpress/wp-content/plugins/fatpanda-singly/plugin.php on line 101
+[10-Apr-2025 23:35:47 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>media-upload</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:35:47 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>thickbox</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:35:47 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>thickbox</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:35:47 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:35:47 UTC] PHP Notice:  Function wp_register_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery.minicolors</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:35:47 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery.minicolors</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:35:47 UTC] PHP Notice:  Function wp_register_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>plugin-style</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:35:47 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles shoul
