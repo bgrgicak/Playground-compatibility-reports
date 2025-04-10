@@ -2,14 +2,124 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 12:48:53 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 12:48:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 12:48:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 12:48:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 12:49:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 12:49:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 12:49:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 12:49:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+Error: [10-Apr-2025 18:53:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT id, 
+					   name, 
+					   data
+				FROM   wp_calendarista_settings 
+				WHERE  name = 'General settings'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT `id` , `name` , `data` FROM `wp_calendarista_settings` WHERE `name` = 'General settings' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT id, \r\n\t\t...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT id, \r\n\t\t...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT id, \r\n\t\t...')
+#4 /wordpress/wp-content/plugins/calendarista-basic-edition/lib/domainmodel/base/SettingsRepositoryBase.php(19): wpdb->get_results('SELECT id, \r\n\t\t...')
+#5 /wordpress/wp-content/plugins/calendarista-basic-edition/lib/domainmodel/repository/GeneralSettingsRepository.php(10): Calendarista_SettingsRepositoryBase->read()
+#6 /wordpress/wp-content/plugins/calendarista-basic-edition/lib/infrastructure/utils/GeneralSettingHelper.php(8): Calendarista_GeneralSettingsRepository->read()
+#7 /wordpress/wp-content/plugins/calendarista-basic-edition/lib/infrastructure/core/RegisterHandlers.php(7): Calendarista_GeneralSettingHelper::get()
+#8 /wordpress/wp-content/plugins/calendarista-basic-edition/lib/Initialize.php(10): Calendarista_RegisterHandlers->__construct()
+#9 /wordpress/wp-content/plugins/calendarista-basic-edition/CalendaristaBasic.php(66): Calendarista_Initialize->__construct()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('calendarista-ba...')
+#12 /internal/eval.php(20): activate_plugin('calendarista-ba...')
+#13 {main}</pre>
+ for query SELECT id, 
+					   name, 
+					   data
+				FROM   wp_calendarista_settings 
+				WHERE  name = 'General settings' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/calendarista-basic-edition/CalendaristaBasic.php'), Calendarista_Initialize->__construct, Calendarista_RegisterHandlers->__construct, Calendarista_GeneralSettingHelper::get, Calendarista_GeneralSettingsRepository->read, Calendarista_SettingsRepositoryBase->read, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 18:53:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT id, 
+					   name, 
+					   data
+				FROM   wp_calendarista_settings 
+				WHERE  name = 'General settings'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT id, 
+					   name, 
+					   data
+				FROM   wp_calendarista_settings 
+				WHERE  name = :param0  | parameters: General settings</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT id, \r\n\t\t...')
+#2 /wordpress/wp-content/plugins/calendarista-basic-edition/lib/domainmodel/base/SettingsRepositoryBase.php(19): wpdb->get_results('SELECT id, \r\n\t\t...')
+#3 /wordpress/wp-content/plugins/calendarista-basic-edition/lib/domainmodel/repository/GeneralSettingsRepository.php(10): Calendarista_SettingsRepositoryBase->read()
+#4 /wordpress/wp-content/plugins/calendarista-basic-edition/lib/infrastructure/utils/GeneralSettingHelper.php(8): Calendarista_GeneralSettingsRepository->read()
+#5 /wordpress/wp-content/plugins/calendarista-basic-edition/lib/infrastructure/core/RegisterHandlers.php(7): Calendarista_GeneralSettingHelper::get()
+#6 /wordpress/wp-content/plugins/calendarista-basic-edition/lib/Initialize.php(10): Calendarista_RegisterHandlers->__construct()
+#7 /wordpress/wp-content/plugins/calendarista-basic-edition/CalendaristaBasic.php(66): Calendarista_Initialize->__construct()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('calendarista-ba...')
+#10 /internal/eval.php(20): activate_plugin('calendarista-ba...')
+#11 {main}</pre>
+ for query SELECT id, 
+					   name, 
+					   data
+				FROM   wp_calendarista_settings 
+				WHERE  name = 'General settings' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/calendarista-basic-edition/CalendaristaBasic.php'), Calendarista_Initialize->__construct, Calendarista_RegisterHandlers->__construct, Calendarista_GeneralSettingHelper::get, Calendarista_GeneralSettingsRepository->read, Calendarista_SettingsRepositoryBase->read, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 18:53:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT id, 
+					   name, 
+					   data
+				FROM   wp_calendarista_settings 
+				WHERE  name = 'General settings'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT id, 
+					   name, 
+					   data
+				FROM   wp_calendarista_settings 
+				WHERE  name = :param0  | parameters: General settings</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT id, \r\n\t\t...')
+#2 /wordpress/wp-content/plugins/calendarista-basic-edition/lib/domainmodel/base/SettingsRepositoryBase.php(19): wpdb->get_results('SELECT id, \r\n\t\t...')
+#3 /wordpress/wp-content/plugins/calendarista-basic-edition/lib/domainmodel/repository/GeneralSettingsRepository.php(10): Calendarista_SettingsRepositoryBase->read()
+#4 /wordpress/wp-content/plugins/calendarista-basic-edition/lib/infrastructure/utils/GeneralSettingHelper.php(8): Calendarista_GeneralSettingsRepository->read()
+#5 /wordpress/wp-content/plugins/calendarista-basic-edition/lib/infrastructure/core/RegisterHandlers.php(7): Calendarista_GeneralSettingHelper::get()
+#6 /wordpress/wp-content/plugins/calendarista-basic-edition/lib/Initialize.php(10): Calendarista_RegisterHandlers->__construct()
+#7 /wordpress/wp-content/plugins/calendarista-basic-edition/CalendaristaBasic.php(66): Calendarista_Initialize->__construct()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('calendarista-ba...')
+#10 /internal/eval.php(20): activate_plugin('calendarista-ba...')
+#11 {main}</pre>
+ for query SELECT id, 
+					   name, 
+					   data
+				FROM   wp_calendarista_settings 
+				WHERE  name = 'General settings' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/calendarista-basic-edition/CalendaristaBasic.php'), Calendarista_Initialize->__construct, Calendarista_RegisterHandlers->__construct, Calendarista_GeneralSettingHelper::get, Calendarista_GeneralSettingsRepository->read, Calendarista_SettingsRepositoryBase->read, WP_SQLite_DB->query, WP_SQLite_DB->print_error
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
