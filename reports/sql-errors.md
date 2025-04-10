@@ -40,9 +40,6 @@
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | 404editor | [View logs](/logs/plugins/4/404editor/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "isnull": syntax error. | ast-sqlite-boot | 7h-publishing | [View logs](/logs/plugins/7/7h-publishing/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "isnull": syntax error. | asyncify-boot | 7h-publishing | [View logs](/logs/plugins/7/7h-publishing/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_bwadminpages. | ast-sqlite-boot | addons-for-elementor-builder | [View logs](/logs/plugins/a/addons-for-elementor-builder/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_bwadminpages. | asyncify-boot | addons-for-elementor-builder | [View logs](/logs/plugins/a/addons-for-elementor-builder/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_bwadminpages. | jspi-boot | addons-for-elementor-builder | [View logs](/logs/plugins/a/addons-for-elementor-builder/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_ayg_videos__ayg_unique_video_id already exists. | ast-sqlite-boot | ai-for-wp | [View logs](/logs/plugins/a/ai-for-wp/error.json) |
 | Unknown show type: KEYS FROM. | ast-sqlite-boot | ai-for-wp | [View logs](/logs/plugins/a/ai-for-wp/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_abd_shortcodes. | ast-sqlite-boot | autoclose | [View logs](/logs/plugins/a/autoclose/error.json) |
@@ -73,6 +70,15 @@
 | Unknown query type: DESC. | ast-sqlite-boot | advanced-notifications-lite | [View logs](/logs/plugins/a/advanced-notifications-lite/error.json) |
 | Unknown query type: DESC. | asyncify-boot | advanced-notifications-lite | [View logs](/logs/plugins/a/advanced-notifications-lite/error.json) |
 | Unknown query type: DESC. | jspi-boot | advanced-notifications-lite | [View logs](/logs/plugins/a/advanced-notifications-lite/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: brand. | ast-sqlite-boot | ar-model-viewer-for-woocommerce | [View logs](/logs/plugins/a/ar-model-viewer-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: is_exec. | ast-sqlite-boot | ar-model-viewer-for-woocommerce | [View logs](/logs/plugins/a/ar-model-viewer-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: ordr. | ast-sqlite-boot | ar-model-viewer-for-woocommerce | [View logs](/logs/plugins/a/ar-model-viewer-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: parent_id. | ast-sqlite-boot | ar-model-viewer-for-woocommerce | [View logs](/logs/plugins/a/ar-model-viewer-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | ast-sqlite-boot | ar-model-viewer-for-woocommerce | [View logs](/logs/plugins/a/ar-model-viewer-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_asl_brands. | ast-sqlite-boot | ar-model-viewer-for-woocommerce | [View logs](/logs/plugins/a/ar-model-viewer-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_asl_configs. | ast-sqlite-boot | ar-model-viewer-for-woocommerce | [View logs](/logs/plugins/a/ar-model-viewer-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_asl_settings. | ast-sqlite-boot | ar-model-viewer-for-woocommerce | [View logs](/logs/plugins/a/ar-model-viewer-for-woocommerce/error.json) |
+| Unknown operation: CHARACTER SET. | ast-sqlite-boot | ar-model-viewer-for-woocommerce | [View logs](/logs/plugins/a/ar-model-viewer-for-woocommerce/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | acpt-lite | [View logs](/logs/plugins/a/acpt-lite/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: "`title`". | ast-sqlite-boot | acymailing-automation-export | [View logs](/logs/plugins/a/acymailing-automation-export/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: "`title`". | asyncify-boot | acymailing-automation-export | [View logs](/logs/plugins/a/acymailing-automation-export/error.json) |
@@ -94,6 +100,10 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_msg. | jspi-boot | admins-debug-tool | [View logs](/logs/plugins/a/admins-debug-tool/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "13": syntax error. | ast-sqlite-boot | ai-muse | [View logs](/logs/plugins/a/ai-muse/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_affilipus_linkfilter. | ast-sqlite-boot | autoshare-for-twitter | [View logs](/logs/plugins/a/autoshare-for-twitter/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_bwadminpages. | ast-sqlite-boot | astro-booking-engine | [View logs](/logs/plugins/a/astro-booking-engine/error.json) |
+| MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | ad-box-widtget-for-az-invest-affiliate-program | [View logs](/logs/plugins/a/ad-box-widtget-for-az-invest-affiliate-program/error.json) |
+| MySQL field type cannot be translated to SQLite: json. | asyncify-boot | ad-box-widtget-for-az-invest-affiliate-program | [View logs](/logs/plugins/a/ad-box-widtget-for-az-invest-affiliate-program/error.json) |
+| MySQL field type cannot be translated to SQLite: json. | jspi-boot | ad-box-widtget-for-az-invest-affiliate-program | [View logs](/logs/plugins/a/ad-box-widtget-for-az-invest-affiliate-program/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | appmysite | [View logs](/logs/plugins/a/appmysite/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | ast-sqlite-boot | admin-custom-description | [View logs](/logs/plugins/a/admin-custom-description/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | all-category-seo-updater | [View logs](/logs/plugins/a/all-category-seo-updater/error.json) |
@@ -142,15 +152,21 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_admanager. | ast-sqlite-boot | admin-notices-for-woocommerce | [View logs](/logs/plugins/a/admin-notices-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_admanager. | asyncify-boot | admin-notices-for-woocommerce | [View logs](/logs/plugins/a/admin-notices-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_admanager. | jspi-boot | admin-notices-for-woocommerce | [View logs](/logs/plugins/a/admin-notices-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | ast-sqlite-boot | alakmalak-barclay-epdq-payment-gateway | [View logs](/logs/plugins/a/alakmalak-barclay-epdq-payment-gateway/error.json) |
 | Table not found. | ast-sqlite-boot | ad-code-manager | [View logs](/logs/plugins/a/ad-code-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: is_pending. | ast-sqlite-boot | ai-block | [View logs](/logs/plugins/a/ai-block/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | ast-sqlite-boot | ai-block | [View logs](/logs/plugins/a/ai-block/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | ayar-unicode-toolbar | [View logs](/logs/plugins/a/ayar-unicode-toolbar/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | ayar-unicode-toolbar | [View logs](/logs/plugins/a/ayar-unicode-toolbar/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | ayar-unicode-toolbar | [View logs](/logs/plugins/a/ayar-unicode-toolbar/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_bwadminpages. | ast-sqlite-boot | ai-engine | [View logs](/logs/plugins/a/ai-engine/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "LIMIT": syntax error. | ast-sqlite-boot | admin-graphic-password | [View logs](/logs/plugins/a/admin-graphic-password/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "LIMIT": syntax error. | asyncify-boot | admin-graphic-password | [View logs](/logs/plugins/a/admin-graphic-password/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "LIMIT": syntax error. | jspi-boot | admin-graphic-password | [View logs](/logs/plugins/a/admin-graphic-password/error.json) |
 | Unknown show type: TABLE LINK. | ast-sqlite-boot | affiliates-for-woocommerce | [View logs](/logs/plugins/a/affiliates-for-woocommerce/error.json) |
 | Unknown show type: TABLE LINK. | asyncify-boot | affiliates-for-woocommerce | [View logs](/logs/plugins/a/affiliates-for-woocommerce/error.json) |
 | Unknown show type: TABLE LINK. | jspi-boot | affiliates-for-woocommerce | [View logs](/logs/plugins/a/affiliates-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | ast-sqlite-boot | anti-spam-url-blocker-for-contact-form | [View logs](/logs/plugins/a/anti-spam-url-blocker-for-contact-form/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | ast-sqlite-boot | ambrosite-post-formats-widget | [View logs](/logs/plugins/a/ambrosite-post-formats-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | asyncify-boot | ambrosite-post-formats-widget | [View logs](/logs/plugins/a/ambrosite-post-formats-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | jspi-boot | ambrosite-post-formats-widget | [View logs](/logs/plugins/a/ambrosite-post-formats-widget/error.json) |
@@ -160,13 +176,10 @@
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | ambrosite-post-formats-widget | [View logs](/logs/plugins/a/ambrosite-post-formats-widget/error.json) |
 | Unknown show type: FIELDS FROM. | asyncify-boot | ambrosite-post-formats-widget | [View logs](/logs/plugins/a/ambrosite-post-formats-widget/error.json) |
 | Unknown show type: FIELDS FROM. | jspi-boot | ambrosite-post-formats-widget | [View logs](/logs/plugins/a/ambrosite-post-formats-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | ast-sqlite-boot | auto-syntaxhighlighter | [View logs](/logs/plugins/a/auto-syntaxhighlighter/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | asyncify-boot | auto-syntaxhighlighter | [View logs](/logs/plugins/a/auto-syntaxhighlighter/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | jspi-boot | auto-syntaxhighlighter | [View logs](/logs/plugins/a/auto-syntaxhighlighter/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | ast-sqlite-boot | amty-thumb-recent-post | [View logs](/logs/plugins/a/amty-thumb-recent-post/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | asyncify-boot | amty-thumb-recent-post | [View logs](/logs/plugins/a/amty-thumb-recent-post/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | jspi-boot | amty-thumb-recent-post | [View logs](/logs/plugins/a/amty-thumb-recent-post/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_cso_post_snippets. | ast-sqlite-boot | alpha-single-product-for-elementor | [View logs](/logs/plugins/a/alpha-single-product-for-elementor/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | altstats | [View logs](/logs/plugins/a/altstats/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | altstats | [View logs](/logs/plugins/a/altstats/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | altstats | [View logs](/logs/plugins/a/altstats/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_bmd_options. | ast-sqlite-boot | add-infos-to-the-events-calendar | [View logs](/logs/plugins/a/add-infos-to-the-events-calendar/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_bmd_options. | ast-sqlite-boot | ameliabooking | [View logs](/logs/plugins/a/ameliabooking/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_bmd_options. | asyncify-boot | ameliabooking | [View logs](/logs/plugins/a/ameliabooking/error.json) |
@@ -195,6 +208,9 @@
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | all-in-one-widget | [View logs](/logs/plugins/a/all-in-one-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | all-in-one-widget | [View logs](/logs/plugins/a/all-in-one-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | all-in-one-widget | [View logs](/logs/plugins/a/all-in-one-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_bwadminpages. | ast-sqlite-boot | automatic-affiliate-for-amazon | [View logs](/logs/plugins/a/automatic-affiliate-for-amazon/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_bwadminpages. | asyncify-boot | automatic-affiliate-for-amazon | [View logs](/logs/plugins/a/automatic-affiliate-for-amazon/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_bwadminpages. | jspi-boot | automatic-affiliate-for-amazon | [View logs](/logs/plugins/a/automatic-affiliate-for-amazon/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_bwadminpages. | ast-sqlite-boot | asset-helper | [View logs](/logs/plugins/a/asset-helper/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_bwadminpages. | asyncify-boot | asset-helper | [View logs](/logs/plugins/a/asset-helper/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_bwadminpages. | jspi-boot | asset-helper | [View logs](/logs/plugins/a/asset-helper/error.json) |
@@ -243,9 +259,6 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | agent-virtuel-by-askom | [View logs](/logs/plugins/a/agent-virtuel-by-askom/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | agent-virtuel-by-askom | [View logs](/logs/plugins/a/agent-virtuel-by-askom/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | agent-virtuel-by-askom | [View logs](/logs/plugins/a/agent-virtuel-by-askom/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | ast-sqlite-boot | asteroids-widget | [View logs](/logs/plugins/a/asteroids-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | asyncify-boot | asteroids-widget | [View logs](/logs/plugins/a/asteroids-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | jspi-boot | asteroids-widget | [View logs](/logs/plugins/a/asteroids-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "isnull": syntax error. | asyncify-boot | a-year-before | [View logs](/logs/plugins/a/a-year-before/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | ast-sqlite-boot | archiiv | [View logs](/logs/plugins/a/archiiv/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | asyncify-boot | archiiv | [View logs](/logs/plugins/a/archiiv/error.json) |
@@ -277,6 +290,7 @@
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | ast-sqlite-boot | asd-123-456-widget | [View logs](/logs/plugins/a/asd-123-456-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | asyncify-boot | asd-123-456-widget | [View logs](/logs/plugins/a/asd-123-456-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | jspi-boot | asd-123-456-widget | [View logs](/logs/plugins/a/asd-123-456-widget/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | automatic-email-testing-with-telegram-alerts | [View logs](/logs/plugins/a/automatic-email-testing-with-telegram-alerts/error.json) |
 | Unknown operation: AUTO_INCREMENT. | ast-sqlite-boot | advanced-custom-fields-taxonomy-field-add-on | [View logs](/logs/plugins/a/advanced-custom-fields-taxonomy-field-add-on/error.json) |
 | Unknown operation: AUTO_INCREMENT. | asyncify-boot | advanced-custom-fields-taxonomy-field-add-on | [View logs](/logs/plugins/a/advanced-custom-fields-taxonomy-field-add-on/error.json) |
 | Unknown operation: AUTO_INCREMENT. | jspi-boot | advanced-custom-fields-taxonomy-field-add-on | [View logs](/logs/plugins/a/advanced-custom-fields-taxonomy-field-add-on/error.json) |
@@ -284,10 +298,8 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_announcement. | ast-sqlite-boot | author-details | [View logs](/logs/plugins/a/author-details/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_announceuser. | ast-sqlite-boot | author-details | [View logs](/logs/plugins/a/author-details/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | autoship-cloud | [View logs](/logs/plugins/a/autoship-cloud/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_bwadminpages. | ast-sqlite-boot | az-one | [View logs](/logs/plugins/a/az-one/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_bwadminpages. | asyncify-boot | az-one | [View logs](/logs/plugins/a/az-one/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_bwadminpages. | jspi-boot | az-one | [View logs](/logs/plugins/a/az-one/error.json) |
 | Unknown operation: CONVERT. | ast-sqlite-boot | apoyl-aicomments | [View logs](/logs/plugins/a/apoyl-aicomments/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_bwadminpages. | ast-sqlite-boot | ai-services | [View logs](/logs/plugins/a/ai-services/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | archive-nbp | [View logs](/logs/plugins/a/archive-nbp/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | anti-wpscan | [View logs](/logs/plugins/a/anti-wpscan/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | anti-wpscan | [View logs](/logs/plugins/a/anti-wpscan/error.json) |
@@ -299,9 +311,9 @@
 | SQLSTATE[HY000]: General error: 1 near "'1'": syntax error. | asyncify-boot | audioboo-advanced | [View logs](/logs/plugins/a/audioboo-advanced/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "'1'": syntax error. | jspi-boot | audioboo-advanced | [View logs](/logs/plugins/a/audioboo-advanced/error.json) |
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | api-reviews-and-testimonials-for-elementor | [View logs](/logs/plugins/a/api-reviews-and-testimonials-for-elementor/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | author-complete-post-list | [View logs](/logs/plugins/a/author-complete-post-list/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | asyncify-boot | author-complete-post-list | [View logs](/logs/plugins/a/author-complete-post-list/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | jspi-boot | author-complete-post-list | [View logs](/logs/plugins/a/author-complete-post-list/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | author-complete-post-list | [View logs](/logs/plugins/a/author-complete-post-list/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | author-complete-post-list | [View logs](/logs/plugins/a/author-complete-post-list/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | author-complete-post-list | [View logs](/logs/plugins/a/author-complete-post-list/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_anti_haxtool. | asyncify-boot | agilepress | [View logs](/logs/plugins/a/agilepress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_anti_haxtool. | jspi-boot | agilepress | [View logs](/logs/plugins/a/agilepress/error.json) |
 | Unknown show type: TABLE LINK. | ast-sqlite-boot | awsa-quick-buy | [View logs](/logs/plugins/a/awsa-quick-buy/error.json) |
@@ -358,12 +370,10 @@
 | SQLSTATE[HY000]: General error: 1 table wp_posts has no column named post_category. | ast-sqlite-boot | acepress-blocks | [View logs](/logs/plugins/a/acepress-blocks/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_posts has no column named post_category. | asyncify-boot | acepress-blocks | [View logs](/logs/plugins/a/acepress-blocks/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_posts has no column named post_category. | jspi-boot | acepress-blocks | [View logs](/logs/plugins/a/acepress-blocks/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | avivid-signal | [View logs](/logs/plugins/a/avivid-signal/error.json) |
 | Unknown show type: TABLE LINK. | ast-sqlite-boot | adminyo-lite | [View logs](/logs/plugins/a/adminyo-lite/error.json) |
 | Unknown show type: TABLE LINK. | asyncify-boot | adminyo-lite | [View logs](/logs/plugins/a/adminyo-lite/error.json) |
 | Unknown show type: TABLE LINK. | jspi-boot | adminyo-lite | [View logs](/logs/plugins/a/adminyo-lite/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | ads-ez | [View logs](/logs/plugins/a/ads-ez/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | ads-ez | [View logs](/logs/plugins/a/ads-ez/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | ads-ez | [View logs](/logs/plugins/a/ads-ez/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: gagal. | ast-sqlite-boot | av-csv-2-posts | [View logs](/logs/plugins/a/av-csv-2-posts/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: gagal. | asyncify-boot | av-csv-2-posts | [View logs](/logs/plugins/a/av-csv-2-posts/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: gagal. | jspi-boot | av-csv-2-posts | [View logs](/logs/plugins/a/av-csv-2-posts/error.json) |
@@ -385,6 +395,7 @@
 | SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | ast-sqlite-boot | advanced-navigation-menus | [View logs](/logs/plugins/a/advanced-navigation-menus/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | asyncify-boot | advanced-navigation-menus | [View logs](/logs/plugins/a/advanced-navigation-menus/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: user_id. | jspi-boot | advanced-navigation-menus | [View logs](/logs/plugins/a/advanced-navigation-menus/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "LIMIT": syntax error. | ast-sqlite-boot | always-edit-in-html | [View logs](/logs/plugins/a/always-edit-in-html/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_leads. | ast-sqlite-boot | aws-glacier | [View logs](/logs/plugins/a/aws-glacier/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_leads. | asyncify-boot | aws-glacier | [View logs](/logs/plugins/a/aws-glacier/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_leads. | jspi-boot | aws-glacier | [View logs](/logs/plugins/a/aws-glacier/error.json) |
@@ -461,8 +472,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | asyncify-boot | accessqontrol | [View logs](/logs/plugins/a/accessqontrol/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | jspi-boot | accessqontrol | [View logs](/logs/plugins/a/accessqontrol/error.json) |
 | Unknown show type: FIELDS FROM. | ast-sqlite-boot | animated-mouse-cursor-trail | [View logs](/logs/plugins/a/animated-mouse-cursor-trail/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | asyncify-boot | azan | [View logs](/logs/plugins/a/azan/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | jspi-boot | azan | [View logs](/logs/plugins/a/azan/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_leads. | asyncify-boot | autoresponder-gwa | [View logs](/logs/plugins/a/autoresponder-gwa/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_leads. | jspi-boot | autoresponder-gwa | [View logs](/logs/plugins/a/autoresponder-gwa/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_ar_gwa_msg. | asyncify-boot | autoresponder-gwa | [View logs](/logs/plugins/a/autoresponder-gwa/error.json) |
@@ -508,6 +517,9 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_aicp_transactions. | asyncify-boot | autoptimize-admin-bar-fix | [View logs](/logs/plugins/a/autoptimize-admin-bar-fix/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_aicp_transactions. | jspi-boot | autoptimize-admin-bar-fix | [View logs](/logs/plugins/a/autoptimize-admin-bar-fix/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | awesome-widgets | [View logs](/logs/plugins/a/awesome-widgets/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "LIMIT": syntax error. | ast-sqlite-boot | air-quality-data-from-foobot | [View logs](/logs/plugins/a/air-quality-data-from-foobot/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "LIMIT": syntax error. | asyncify-boot | air-quality-data-from-foobot | [View logs](/logs/plugins/a/air-quality-data-from-foobot/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "LIMIT": syntax error. | jspi-boot | air-quality-data-from-foobot | [View logs](/logs/plugins/a/air-quality-data-from-foobot/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | application-cache-plugin | [View logs](/logs/plugins/a/application-cache-plugin/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | application-cache-plugin | [View logs](/logs/plugins/a/application-cache-plugin/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | application-cache-plugin | [View logs](/logs/plugins/a/application-cache-plugin/error.json) |
@@ -536,15 +548,13 @@
 | SQLSTATE[HY000]: General error: 1 trigger "__wp_ax8_accounts_updated_at_on_update__" already exists. | asyncify-boot | assign-user-files | [View logs](/logs/plugins/a/assign-user-files/error.json) |
 | SQLSTATE[HY000]: General error: 1 trigger "__wp_ax8_accounts_updated_at_on_update__" already exists. | jspi-boot | assign-user-files | [View logs](/logs/plugins/a/assign-user-files/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "INNER": syntax error. | ast-sqlite-boot | atarim-visual-collaboration | [View logs](/logs/plugins/a/atarim-visual-collaboration/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | ad-manager-wd | [View logs](/logs/plugins/a/ad-manager-wd/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | ad-manager-wd | [View logs](/logs/plugins/a/ad-manager-wd/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | ad-manager-wd | [View logs](/logs/plugins/a/ad-manager-wd/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: product_backup. | ast-sqlite-boot | ad-commander-tools | [View logs](/logs/plugins/a/ad-commander-tools/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | automated-visual-tester | [View logs](/logs/plugins/a/automated-visual-tester/error.json) |
 | Unknown create type: FULLTEXT INDEX. | asyncify-boot | ajax-live-search | [View logs](/logs/plugins/a/ajax-live-search/error.json) |
 | Unknown create type: FULLTEXT INDEX. | jspi-boot | ajax-live-search | [View logs](/logs/plugins/a/ajax-live-search/error.json) |
 | Unknown operation: ENGINE. | asyncify-boot | ajax-live-search | [View logs](/logs/plugins/a/ajax-live-search/error.json) |
 | Unknown operation: ENGINE. | jspi-boot | ajax-live-search | [View logs](/logs/plugins/a/ajax-live-search/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | annytab-photoswipe | [View logs](/logs/plugins/a/annytab-photoswipe/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | ast-sqlite-boot | article-forge | [View logs](/logs/plugins/a/article-forge/error.json) |
 | Unknown query type: DESC. | ast-sqlite-boot | article-forge | [View logs](/logs/plugins/a/article-forge/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: cat_sorting. | ast-sqlite-boot | amazon-search | [View logs](/logs/plugins/a/amazon-search/error.json) |
@@ -599,9 +609,13 @@
 | SQLSTATE[HY000]: General error: 1 near "set": syntax error. | ast-sqlite-boot | addfeed-widget | [View logs](/logs/plugins/a/addfeed-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "set": syntax error. | asyncify-boot | addfeed-widget | [View logs](/logs/plugins/a/addfeed-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "set": syntax error. | jspi-boot | addfeed-widget | [View logs](/logs/plugins/a/addfeed-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | ast-sqlite-boot | addonify-quick-view | [View logs](/logs/plugins/a/addonify-quick-view/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | admium | [View logs](/logs/plugins/a/admium/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | asyncify-boot | admium | [View logs](/logs/plugins/a/admium/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | jspi-boot | admium | [View logs](/logs/plugins/a/admium/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | article-forecast | [View logs](/logs/plugins/a/article-forecast/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | article-forecast | [View logs](/logs/plugins/a/article-forecast/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | article-forecast | [View logs](/logs/plugins/a/article-forecast/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: product_backup. | ast-sqlite-boot | antispam-for-all-fields | [View logs](/logs/plugins/a/antispam-for-all-fields/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: product_backup. | asyncify-boot | antispam-for-all-fields | [View logs](/logs/plugins/a/antispam-for-all-fields/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: product_backup. | jspi-boot | antispam-for-all-fields | [View logs](/logs/plugins/a/antispam-for-all-fields/error.json) |
@@ -656,6 +670,7 @@
 | Unknown create type: table. | asyncify-boot | acymailing-universal-filter | [View logs](/logs/plugins/a/acymailing-universal-filter/error.json) |
 | Unknown create type: table. | jspi-boot | acymailing-universal-filter | [View logs](/logs/plugins/a/acymailing-universal-filter/error.json) |
 | Unexpected token in MySQL query: active. | ast-sqlite-boot | adenergizer | [View logs](/logs/plugins/a/adenergizer/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "LIMIT": syntax error. | ast-sqlite-boot | advance-block-extend | [View logs](/logs/plugins/a/advance-block-extend/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | ast-sqlite-boot | ai-mojo | [View logs](/logs/plugins/a/ai-mojo/error.json) |
 | Unknown create type: INDEX. | ast-sqlite-boot | ai-mojo | [View logs](/logs/plugins/a/ai-mojo/error.json) |
 | Unknown query type: DESC. | ast-sqlite-boot | ai-mojo | [View logs](/logs/plugins/a/ai-mojo/error.json) |
@@ -879,6 +894,9 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_widgets_table. | ast-sqlite-boot | all-in-one-login-pack | [View logs](/logs/plugins/a/all-in-one-login-pack/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_widgets_table. | asyncify-boot | all-in-one-login-pack | [View logs](/logs/plugins/a/all-in-one-login-pack/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_widgets_table. | jspi-boot | all-in-one-login-pack | [View logs](/logs/plugins/a/all-in-one-login-pack/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | ast-sqlite-boot | as-heard-on | [View logs](/logs/plugins/a/as-heard-on/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | asyncify-boot | as-heard-on | [View logs](/logs/plugins/a/as-heard-on/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_accessqontrol. | jspi-boot | as-heard-on | [View logs](/logs/plugins/a/as-heard-on/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "13": syntax error. | ast-sqlite-boot | aruba-fatturazione-elettronica | [View logs](/logs/plugins/a/aruba-fatturazione-elettronica/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | auto-update-image-attributes-from-filename | [View logs](/logs/plugins/a/auto-update-image-attributes-from-filename/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_announcement. | ast-sqlite-boot | auto-update-image-attributes-from-filename | [View logs](/logs/plugins/a/auto-update-image-attributes-from-filename/error.json) |
@@ -1273,6 +1291,12 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_blogpig_log. | ast-sqlite-boot | cart2cart-ubercart-to-woocommerce-migration | [View logs](/logs/plugins/c/cart2cart-ubercart-to-woocommerce-migration/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_blogpig_log. | asyncify-boot | cart2cart-ubercart-to-woocommerce-migration | [View logs](/logs/plugins/c/cart2cart-ubercart-to-woocommerce-migration/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_blogpig_log. | jspi-boot | cart2cart-ubercart-to-woocommerce-migration | [View logs](/logs/plugins/c/cart2cart-ubercart-to-woocommerce-migration/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_project_crossword. | ast-sqlite-boot | csv-importer-plus-for-acf | [View logs](/logs/plugins/c/csv-importer-plus-for-acf/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_project_crossword. | asyncify-boot | csv-importer-plus-for-acf | [View logs](/logs/plugins/c/csv-importer-plus-for-acf/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_project_crossword. | jspi-boot | csv-importer-plus-for-acf | [View logs](/logs/plugins/c/csv-importer-plus-for-acf/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_project_editors. | ast-sqlite-boot | csv-importer-plus-for-acf | [View logs](/logs/plugins/c/csv-importer-plus-for-acf/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_project_editors. | asyncify-boot | csv-importer-plus-for-acf | [View logs](/logs/plugins/c/csv-importer-plus-for-acf/error.json) |
+| Data type expected in MySQL query, unknown token received: wp_project_editors. | jspi-boot | csv-importer-plus-for-acf | [View logs](/logs/plugins/c/csv-importer-plus-for-acf/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_channel_engine_entity. | ast-sqlite-boot | corona-vat-germany | [View logs](/logs/plugins/c/corona-vat-germany/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_channel_engine_entity. | asyncify-boot | corona-vat-germany | [View logs](/logs/plugins/c/corona-vat-germany/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_channel_engine_entity. | jspi-boot | corona-vat-germany | [View logs](/logs/plugins/c/corona-vat-germany/error.json) |
@@ -1294,7 +1318,36 @@
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | cligs-and-tweet | [View logs](/logs/plugins/c/cligs-and-tweet/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | cligs-and-tweet | [View logs](/logs/plugins/c/cligs-and-tweet/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | cligs-and-tweet | [View logs](/logs/plugins/c/cligs-and-tweet/error.json) |
+				INDEX(carrier),
+				INDEX(first_sync)
+				INDEX(id_order),
+				INDEX(last_status),
+				INDEX(last_sync),
+				UNIQUE(id_order, carrier),
+				`carrier` VARCHAR(100) NOT NULL,
+				`first_sync` DATETIME NOT NULL,
+				`id_order` INT(11) NOT NULL,
+				`id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+				`last_status_detail` TEXT DEFAULT NULL,
+				`last_status` VARCHAR(128) DEFAULT NULL,
+				`last_sync` DATETIME NOT NULL DEFAULT \'2010-01-01 00:00:00\',
+			) DEFAULT CHARACTER SET utf8mb4
+    [code] => 0
+    [message] => Unexpected character.
+    [position] => 300
+    [query] => CREATE TABLE wp_kshippingargentina_report  (
+    [str] => \
+(
+)
+. | ast-sqlite-boot | conversioncow | [View logs](/logs/plugins/c/conversioncow/error.json) |
+| Array
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | checkout-fields-for-blocks | [View logs](/logs/plugins/c/checkout-fields-for-blocks/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | custom-field-taxonomies | [View logs](/logs/plugins/c/custom-field-taxonomies/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | custom-field-taxonomies | [View logs](/logs/plugins/c/custom-field-taxonomies/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | custom-field-taxonomies | [View logs](/logs/plugins/c/custom-field-taxonomies/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | custom-field-taxonomies | [View logs](/logs/plugins/c/custom-field-taxonomies/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | custom-field-taxonomies | [View logs](/logs/plugins/c/custom-field-taxonomies/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | custom-field-taxonomies | [View logs](/logs/plugins/c/custom-field-taxonomies/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | ast-sqlite-boot | comprobante-de-pago-peru | [View logs](/logs/plugins/c/comprobante-de-pago-peru/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_cbms_books. | ast-sqlite-boot | comprobante-de-pago-peru | [View logs](/logs/plugins/c/comprobante-de-pago-peru/error.json) |
 | Unexpected token in MySQL query: opened. | ast-sqlite-boot | comprobante-de-pago-peru | [View logs](/logs/plugins/c/comprobante-de-pago-peru/error.json) |
@@ -1304,11 +1357,31 @@
 | Unknown create type: table. | ast-sqlite-boot | cool-like-dislike | [View logs](/logs/plugins/c/cool-like-dislike/error.json) |
 | Unknown create type: table. | asyncify-boot | cool-like-dislike | [View logs](/logs/plugins/c/cool-like-dislike/error.json) |
 | Unknown create type: table. | jspi-boot | cool-like-dislike | [View logs](/logs/plugins/c/cool-like-dislike/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: category. | ast-sqlite-boot | custom-wishlist | [View logs](/logs/plugins/c/custom-wishlist/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: category. | asyncify-boot | custom-wishlist | [View logs](/logs/plugins/c/custom-wishlist/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: category. | jspi-boot | custom-wishlist | [View logs](/logs/plugins/c/custom-wishlist/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cu_user_email_bcc_field. | ast-sqlite-boot | custom-wishlist | [View logs](/logs/plugins/c/custom-wishlist/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cu_user_email_bcc_field. | asyncify-boot | custom-wishlist | [View logs](/logs/plugins/c/custom-wishlist/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cu_user_email_bcc_field. | jspi-boot | custom-wishlist | [View logs](/logs/plugins/c/custom-wishlist/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: extra. | ast-sqlite-boot | custom-wishlist | [View logs](/logs/plugins/c/custom-wishlist/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: extra. | asyncify-boot | custom-wishlist | [View logs](/logs/plugins/c/custom-wishlist/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: extra. | jspi-boot | custom-wishlist | [View logs](/logs/plugins/c/custom-wishlist/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: fp_inc_attachments. | ast-sqlite-boot | custom-wishlist | [View logs](/logs/plugins/c/custom-wishlist/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: fp_inc_attachments. | asyncify-boot | custom-wishlist | [View logs](/logs/plugins/c/custom-wishlist/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: fp_inc_attachments. | jspi-boot | custom-wishlist | [View logs](/logs/plugins/c/custom-wishlist/error.json) |
+| Syntax error: Unexpected token name in query SHOW TABLE STATUS FROM  WHERE name='wp_cp_calculated_fields_form_settings';. | ast-sqlite-boot | custom-wishlist | [View logs](/logs/plugins/c/custom-wishlist/error.json) |
+| Syntax error: Unexpected token name in query SHOW TABLE STATUS FROM  WHERE name='wp_cp_calculated_fields_form_settings';. | asyncify-boot | custom-wishlist | [View logs](/logs/plugins/c/custom-wishlist/error.json) |
+| Syntax error: Unexpected token name in query SHOW TABLE STATUS FROM  WHERE name='wp_cp_calculated_fields_form_settings';. | jspi-boot | custom-wishlist | [View logs](/logs/plugins/c/custom-wishlist/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | clarity-toolkit | [View logs](/logs/plugins/c/clarity-toolkit/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | clarity-toolkit | [View logs](/logs/plugins/c/clarity-toolkit/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | clarity-toolkit | [View logs](/logs/plugins/c/clarity-toolkit/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_create_image_shortcode. | ast-sqlite-boot | curated-query-loop | [View logs](/logs/plugins/c/curated-query-loop/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_create_own_shortcode. | ast-sqlite-boot | curated-query-loop | [View logs](/logs/plugins/c/curated-query-loop/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: category. | ast-sqlite-boot | cozy-addons | [View logs](/logs/plugins/c/cozy-addons/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cu_user_email_bcc_field. | ast-sqlite-boot | cozy-addons | [View logs](/logs/plugins/c/cozy-addons/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: extra. | ast-sqlite-boot | cozy-addons | [View logs](/logs/plugins/c/cozy-addons/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: fp_inc_attachments. | ast-sqlite-boot | cozy-addons | [View logs](/logs/plugins/c/cozy-addons/error.json) |
+| Syntax error: Unexpected token name in query SHOW TABLE STATUS FROM  WHERE name='wp_cp_calculated_fields_form_settings';. | ast-sqlite-boot | cozy-addons | [View logs](/logs/plugins/c/cozy-addons/error.json) |
 | MySQL field type cannot be translated to SQLite: serial. | ast-sqlite-boot | color-widgets | [View logs](/logs/plugins/c/color-widgets/error.json) |
 | MySQL field type cannot be translated to SQLite: serial. | asyncify-boot | color-widgets | [View logs](/logs/plugins/c/color-widgets/error.json) |
 | MySQL field type cannot be translated to SQLite: serial. | jspi-boot | color-widgets | [View logs](/logs/plugins/c/color-widgets/error.json) |
@@ -1362,6 +1435,7 @@
 | Unknown create type: table. | ast-sqlite-boot | contact-ajax-form | [View logs](/logs/plugins/c/contact-ajax-form/error.json) |
 | Unknown create type: table. | asyncify-boot | contact-ajax-form | [View logs](/logs/plugins/c/contact-ajax-form/error.json) |
 | Unknown create type: table. | jspi-boot | contact-ajax-form | [View logs](/logs/plugins/c/contact-ajax-form/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | ast-sqlite-boot | create-members | [View logs](/logs/plugins/c/create-members/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | ast-sqlite-boot | clover-payments-for-woocommerce | [View logs](/logs/plugins/c/clover-payments-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | asyncify-boot | clover-payments-for-woocommerce | [View logs](/logs/plugins/c/clover-payments-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | jspi-boot | clover-payments-for-woocommerce | [View logs](/logs/plugins/c/clover-payments-for-woocommerce/error.json) |
@@ -1374,6 +1448,12 @@
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | css-js-booster | [View logs](/logs/plugins/c/css-js-booster/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: seriahglobevars. | ast-sqlite-boot | customer-export-csv-for-woo | [View logs](/logs/plugins/c/customer-export-csv-for-woo/error.json) |
 | Unexpected token in MySQL query: active. | ast-sqlite-boot | cs3lider | [View logs](/logs/plugins/c/cs3lider/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | cooksnaps | [View logs](/logs/plugins/c/cooksnaps/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | cooksnaps | [View logs](/logs/plugins/c/cooksnaps/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | cooksnaps | [View logs](/logs/plugins/c/cooksnaps/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | cooksnaps | [View logs](/logs/plugins/c/cooksnaps/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | cooksnaps | [View logs](/logs/plugins/c/cooksnaps/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | cooksnaps | [View logs](/logs/plugins/c/cooksnaps/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | cart-lift | [View logs](/logs/plugins/c/cart-lift/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | cart-lift | [View logs](/logs/plugins/c/cart-lift/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | cart-lift | [View logs](/logs/plugins/c/cart-lift/error.json) |
@@ -1408,9 +1488,6 @@
 | Unknown operation: MODIFY. | ast-sqlite-boot | ci-mobile-web | [View logs](/logs/plugins/c/ci-mobile-web/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | ci-mobile-web | [View logs](/logs/plugins/c/ci-mobile-web/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | ci-mobile-web | [View logs](/logs/plugins/c/ci-mobile-web/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | ast-sqlite-boot | custom-css-editor | [View logs](/logs/plugins/c/custom-css-editor/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | asyncify-boot | custom-css-editor | [View logs](/logs/plugins/c/custom-css-editor/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | jspi-boot | custom-css-editor | [View logs](/logs/plugins/c/custom-css-editor/error.json) |
 | Unknown query type: DESC. | ast-sqlite-boot | cforms | [View logs](/logs/plugins/c/cforms/error.json) |
 | Unknown query type: DESC. | asyncify-boot | cforms | [View logs](/logs/plugins/c/cforms/error.json) |
 | Unknown query type: DESC. | jspi-boot | cforms | [View logs](/logs/plugins/c/cforms/error.json) |
@@ -1441,39 +1518,15 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | connections-business-directory-anniversary-and-birthday-emails | [View logs](/logs/plugins/c/connections-business-directory-anniversary-and-birthday-emails/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | connections-business-directory-anniversary-and-birthday-emails | [View logs](/logs/plugins/c/connections-business-directory-anniversary-and-birthday-emails/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | connections-business-directory-anniversary-and-birthday-emails | [View logs](/logs/plugins/c/connections-business-directory-anniversary-and-birthday-emails/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | ast-sqlite-boot | collision-testimonials | [View logs](/logs/plugins/c/collision-testimonials/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | asyncify-boot | collision-testimonials | [View logs](/logs/plugins/c/collision-testimonials/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | jspi-boot | collision-testimonials | [View logs](/logs/plugins/c/collision-testimonials/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | ast-sqlite-boot | combined-search | [View logs](/logs/plugins/c/combined-search/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | asyncify-boot | combined-search | [View logs](/logs/plugins/c/combined-search/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | jspi-boot | combined-search | [View logs](/logs/plugins/c/combined-search/error.json) |
 | Unexpected token in MySQL query: active. | ast-sqlite-boot | cpt-woo-integration | [View logs](/logs/plugins/c/cpt-woo-integration/error.json) |
 | Unknown query type: DESC. | ast-sqlite-boot | coupon-creator | [View logs](/logs/plugins/c/coupon-creator/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | content-headings-tree | [View logs](/logs/plugins/c/content-headings-tree/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | content-headings-tree | [View logs](/logs/plugins/c/content-headings-tree/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | content-headings-tree | [View logs](/logs/plugins/c/content-headings-tree/error.json) |
-				INDEX(carrier),
-				INDEX(first_sync)
-				INDEX(id_order),
-				INDEX(last_status),
-				INDEX(last_sync),
-				UNIQUE(id_order, carrier),
-				`carrier` VARCHAR(100) NOT NULL,
-				`first_sync` DATETIME NOT NULL,
-				`id_order` INT(11) NOT NULL,
-				`id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-				`last_status_detail` TEXT DEFAULT NULL,
-				`last_status` VARCHAR(128) DEFAULT NULL,
-				`last_sync` DATETIME NOT NULL DEFAULT \'2010-01-01 00:00:00\',
-			) DEFAULT CHARACTER SET utf8mb4
-    [code] => 0
-    [message] => Unexpected character.
-    [position] => 300
-    [query] => CREATE TABLE wp_kshippingargentina_report  (
-    [str] => \
-(
-)
-. | ast-sqlite-boot | connect-cf7-to-pipedrive | [View logs](/logs/plugins/c/connect-cf7-to-pipedrive/error.json) |
-. | asyncify-boot | connect-cf7-to-pipedrive | [View logs](/logs/plugins/c/connect-cf7-to-pipedrive/error.json) |
-. | jspi-boot | connect-cf7-to-pipedrive | [View logs](/logs/plugins/c/connect-cf7-to-pipedrive/error.json) |
-| Array
+| SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | ast-sqlite-boot | creative-mail-by-constant-contact | [View logs](/logs/plugins/c/creative-mail-by-constant-contact/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_content_restriction_rules. | asyncify-boot | conditional-logic-for-woo-product-add-ons | [View logs](/logs/plugins/c/conditional-logic-for-woo-product-add-ons/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_content_restriction_rules. | jspi-boot | conditional-logic-for-woo-product-add-ons | [View logs](/logs/plugins/c/conditional-logic-for-woo-product-add-ons/error.json) |
 | Unexpected token in MySQL query: status. | asyncify-boot | conditional-logic-for-woo-product-add-ons | [View logs](/logs/plugins/c/conditional-logic-for-woo-product-add-ons/error.json) |
@@ -1508,9 +1561,15 @@
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | cart2cart-mijoshop-to-woocommerce-migration | [View logs](/logs/plugins/c/cart2cart-mijoshop-to-woocommerce-migration/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | cart2cart-mijoshop-to-woocommerce-migration | [View logs](/logs/plugins/c/cart2cart-mijoshop-to-woocommerce-migration/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | cart2cart-mijoshop-to-woocommerce-migration | [View logs](/logs/plugins/c/cart2cart-mijoshop-to-woocommerce-migration/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | ast-sqlite-boot | contact-form-7-wooorders | [View logs](/logs/plugins/c/contact-form-7-wooorders/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | asyncify-boot | contact-form-7-wooorders | [View logs](/logs/plugins/c/contact-form-7-wooorders/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | jspi-boot | contact-form-7-wooorders | [View logs](/logs/plugins/c/contact-form-7-wooorders/error.json) |
 | SQLSTATE[HY000]: General error: 1 too many SQL variables. | ast-sqlite-boot | custom-taxonomies-filters-columns | [View logs](/logs/plugins/c/custom-taxonomies-filters-columns/error.json) |
 | SQLSTATE[HY000]: General error: 1 too many SQL variables. | asyncify-boot | custom-taxonomies-filters-columns | [View logs](/logs/plugins/c/custom-taxonomies-filters-columns/error.json) |
 | SQLSTATE[HY000]: General error: 1 too many SQL variables. | jspi-boot | custom-taxonomies-filters-columns | [View logs](/logs/plugins/c/custom-taxonomies-filters-columns/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | corona-virus-covid-19-banner | [View logs](/logs/plugins/c/corona-virus-covid-19-banner/error.json) |
+| MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | corona-virus-covid-19-banner | [View logs](/logs/plugins/c/corona-virus-covid-19-banner/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_rtcl_sessions. | ast-sqlite-boot | corona-virus-covid-19-banner | [View logs](/logs/plugins/c/corona-virus-covid-19-banner/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | ast-sqlite-boot | content-republish | [View logs](/logs/plugins/c/content-republish/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | asyncify-boot | content-republish | [View logs](/logs/plugins/c/content-republish/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | jspi-boot | content-republish | [View logs](/logs/plugins/c/content-republish/error.json) |
@@ -1520,6 +1579,12 @@
 | Unexpected token in MySQL query: opened. | ast-sqlite-boot | content-republish | [View logs](/logs/plugins/c/content-republish/error.json) |
 | Unexpected token in MySQL query: opened. | asyncify-boot | content-republish | [View logs](/logs/plugins/c/content-republish/error.json) |
 | Unexpected token in MySQL query: opened. | jspi-boot | content-republish | [View logs](/logs/plugins/c/content-republish/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_cpvg_list_views. | ast-sqlite-boot | custom-wp-database-error | [View logs](/logs/plugins/c/custom-wp-database-error/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_cpvg_list_views. | asyncify-boot | custom-wp-database-error | [View logs](/logs/plugins/c/custom-wp-database-error/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_cpvg_list_views. | jspi-boot | custom-wp-database-error | [View logs](/logs/plugins/c/custom-wp-database-error/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_cpvg_post_views. | ast-sqlite-boot | custom-wp-database-error | [View logs](/logs/plugins/c/custom-wp-database-error/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_cpvg_post_views. | asyncify-boot | custom-wp-database-error | [View logs](/logs/plugins/c/custom-wp-database-error/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_cpvg_post_views. | jspi-boot | custom-wp-database-error | [View logs](/logs/plugins/c/custom-wp-database-error/error.json) |
 | Data type expected in MySQL query, unknown token received: settings. | ast-sqlite-boot | cheetahmail | [View logs](/logs/plugins/c/cheetahmail/error.json) |
 | Data type expected in MySQL query, unknown token received: settings. | asyncify-boot | cheetahmail | [View logs](/logs/plugins/c/cheetahmail/error.json) |
 | Data type expected in MySQL query, unknown token received: settings. | jspi-boot | cheetahmail | [View logs](/logs/plugins/c/cheetahmail/error.json) |
@@ -1538,20 +1603,17 @@
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | culqi-full-integration | [View logs](/logs/plugins/c/culqi-full-integration/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | colors-swatches-woo-by-preeti-palsra | [View logs](/logs/plugins/c/colors-swatches-woo-by-preeti-palsra/error.json) |
 | Unknown operation: CONVERT. | ast-sqlite-boot | colors-swatches-woo-by-preeti-palsra | [View logs](/logs/plugins/c/colors-swatches-woo-by-preeti-palsra/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error. | ast-sqlite-boot | cross-promotion-content-recommendations | [View logs](/logs/plugins/c/cross-promotion-content-recommendations/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error. | asyncify-boot | cross-promotion-content-recommendations | [View logs](/logs/plugins/c/cross-promotion-content-recommendations/error.json) |
-| Unexpected token in MySQL query: complete. | ast-sqlite-boot | cross-promotion-content-recommendations | [View logs](/logs/plugins/c/cross-promotion-content-recommendations/error.json) |
-| Unexpected token in MySQL query: complete. | asyncify-boot | cross-promotion-content-recommendations | [View logs](/logs/plugins/c/cross-promotion-content-recommendations/error.json) |
-| Unexpected token in MySQL query: gameReset. | ast-sqlite-boot | cross-promotion-content-recommendations | [View logs](/logs/plugins/c/cross-promotion-content-recommendations/error.json) |
-| Unexpected token in MySQL query: gameReset. | asyncify-boot | cross-promotion-content-recommendations | [View logs](/logs/plugins/c/cross-promotion-content-recommendations/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_cpvg_list_views. | ast-sqlite-boot | countdown-timer-abt | [View logs](/logs/plugins/c/countdown-timer-abt/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_cpvg_list_views. | asyncify-boot | countdown-timer-abt | [View logs](/logs/plugins/c/countdown-timer-abt/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_cpvg_list_views. | jspi-boot | countdown-timer-abt | [View logs](/logs/plugins/c/countdown-timer-abt/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_cpvg_post_views. | ast-sqlite-boot | countdown-timer-abt | [View logs](/logs/plugins/c/countdown-timer-abt/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_cpvg_post_views. | asyncify-boot | countdown-timer-abt | [View logs](/logs/plugins/c/countdown-timer-abt/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_cpvg_post_views. | jspi-boot | countdown-timer-abt | [View logs](/logs/plugins/c/countdown-timer-abt/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | clickbank-storefront | [View logs](/logs/plugins/c/clickbank-storefront/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | clickbank-storefront | [View logs](/logs/plugins/c/clickbank-storefront/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | clickbank-storefront | [View logs](/logs/plugins/c/clickbank-storefront/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | ast-sqlite-boot | child-theme-configurator | [View logs](/logs/plugins/c/child-theme-configurator/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: contactFormKeys. | ast-sqlite-boot | child-theme-configurator | [View logs](/logs/plugins/c/child-theme-configurator/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | cf7-4dem-it-extension | [View logs](/logs/plugins/c/cf7-4dem-it-extension/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | cf7-4dem-it-extension | [View logs](/logs/plugins/c/cf7-4dem-it-extension/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | cf7-4dem-it-extension | [View logs](/logs/plugins/c/cf7-4dem-it-extension/error.json) |
 | Unexpected token in MySQL query: active. | ast-sqlite-boot | cta-builder | [View logs](/logs/plugins/c/cta-builder/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | countdown-clock-timer | [View logs](/logs/plugins/c/countdown-clock-timer/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | countdown-clock-timer | [View logs](/logs/plugins/c/countdown-clock-timer/error.json) |
@@ -1606,6 +1668,15 @@
 | Unknown show type: CHARACTER SET ;. | ast-sqlite-boot | copyright-for-wp | [View logs](/logs/plugins/c/copyright-for-wp/error.json) |
 | Unknown show type: CHARACTER SET ;. | asyncify-boot | copyright-for-wp | [View logs](/logs/plugins/c/copyright-for-wp/error.json) |
 | Unknown show type: CHARACTER SET ;. | jspi-boot | copyright-for-wp | [View logs](/logs/plugins/c/copyright-for-wp/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | changeorg | [View logs](/logs/plugins/c/changeorg/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | changeorg | [View logs](/logs/plugins/c/changeorg/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | changeorg | [View logs](/logs/plugins/c/changeorg/error.json) |
+| MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | changeorg | [View logs](/logs/plugins/c/changeorg/error.json) |
+| MySQL field type cannot be translated to SQLite: json. | asyncify-boot | changeorg | [View logs](/logs/plugins/c/changeorg/error.json) |
+| MySQL field type cannot be translated to SQLite: json. | jspi-boot | changeorg | [View logs](/logs/plugins/c/changeorg/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_rtcl_sessions. | ast-sqlite-boot | changeorg | [View logs](/logs/plugins/c/changeorg/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_rtcl_sessions. | asyncify-boot | changeorg | [View logs](/logs/plugins/c/changeorg/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_rtcl_sessions. | jspi-boot | changeorg | [View logs](/logs/plugins/c/changeorg/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | cvi-widgets | [View logs](/logs/plugins/c/cvi-widgets/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | cvi-widgets | [View logs](/logs/plugins/c/cvi-widgets/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | cvi-widgets | [View logs](/logs/plugins/c/cvi-widgets/error.json) |
@@ -1629,11 +1700,33 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | contact-form-73 | [View logs](/logs/plugins/c/contact-form-73/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | clearsale-total | [View logs](/logs/plugins/c/clearsale-total/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | clearsale-total | [View logs](/logs/plugins/c/clearsale-total/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | cw-show-on-selected-pages-sosp | [View logs](/logs/plugins/c/cw-show-on-selected-pages-sosp/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_content_restriction_rules. | asyncify-boot | curlest | [View logs](/logs/plugins/c/curlest/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_content_restriction_rules. | jspi-boot | curlest | [View logs](/logs/plugins/c/curlest/error.json) |
 | Unexpected token in MySQL query: status. | asyncify-boot | curlest | [View logs](/logs/plugins/c/curlest/error.json) |
 | Unexpected token in MySQL query: status. | jspi-boot | curlest | [View logs](/logs/plugins/c/curlest/error.json) |
+				INDEX(carrier),
+				INDEX(first_sync)
+				INDEX(id_order),
+				INDEX(last_status),
+				INDEX(last_sync),
+				UNIQUE(id_order, carrier),
+				`carrier` VARCHAR(100) NOT NULL,
+				`first_sync` DATETIME NOT NULL,
+				`id_order` INT(11) NOT NULL,
+				`id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+				`last_status_detail` TEXT DEFAULT NULL,
+				`last_status` VARCHAR(128) DEFAULT NULL,
+				`last_sync` DATETIME NOT NULL DEFAULT \'2010-01-01 00:00:00\',
+			) DEFAULT CHARACTER SET utf8mb4
+    [code] => 0
+    [message] => Unexpected character.
+    [position] => 300
+    [query] => CREATE TABLE wp_kshippingargentina_report  (
+    [str] => \
+(
+)
+. | ast-sqlite-boot | conditional-hide-block-by-gutenmate | [View logs](/logs/plugins/c/conditional-hide-block-by-gutenmate/error.json) |
+| Array
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | cms-pack | [View logs](/logs/plugins/c/cms-pack/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | cms-pack | [View logs](/logs/plugins/c/cms-pack/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | cms-pack | [View logs](/logs/plugins/c/cms-pack/error.json) |
@@ -1693,9 +1786,34 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_canalplan_options. | ast-sqlite-boot | checkout-guard | [View logs](/logs/plugins/c/checkout-guard/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | currently-active-visitors | [View logs](/logs/plugins/c/currently-active-visitors/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | currently-active-visitors | [View logs](/logs/plugins/c/currently-active-visitors/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: category. | ast-sqlite-boot | cyklodev-wp-paypal-integration | [View logs](/logs/plugins/c/cyklodev-wp-paypal-integration/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: category. | asyncify-boot | cyklodev-wp-paypal-integration | [View logs](/logs/plugins/c/cyklodev-wp-paypal-integration/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: category. | jspi-boot | cyklodev-wp-paypal-integration | [View logs](/logs/plugins/c/cyklodev-wp-paypal-integration/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cu_user_email_bcc_field. | ast-sqlite-boot | cyklodev-wp-paypal-integration | [View logs](/logs/plugins/c/cyklodev-wp-paypal-integration/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cu_user_email_bcc_field. | asyncify-boot | cyklodev-wp-paypal-integration | [View logs](/logs/plugins/c/cyklodev-wp-paypal-integration/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cu_user_email_bcc_field. | jspi-boot | cyklodev-wp-paypal-integration | [View logs](/logs/plugins/c/cyklodev-wp-paypal-integration/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: extra. | ast-sqlite-boot | cyklodev-wp-paypal-integration | [View logs](/logs/plugins/c/cyklodev-wp-paypal-integration/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: extra. | asyncify-boot | cyklodev-wp-paypal-integration | [View logs](/logs/plugins/c/cyklodev-wp-paypal-integration/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: extra. | jspi-boot | cyklodev-wp-paypal-integration | [View logs](/logs/plugins/c/cyklodev-wp-paypal-integration/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: fp_inc_attachments. | ast-sqlite-boot | cyklodev-wp-paypal-integration | [View logs](/logs/plugins/c/cyklodev-wp-paypal-integration/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: fp_inc_attachments. | asyncify-boot | cyklodev-wp-paypal-integration | [View logs](/logs/plugins/c/cyklodev-wp-paypal-integration/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: fp_inc_attachments. | jspi-boot | cyklodev-wp-paypal-integration | [View logs](/logs/plugins/c/cyklodev-wp-paypal-integration/error.json) |
+| Syntax error: Unexpected token name in query SHOW TABLE STATUS FROM  WHERE name='wp_cp_calculated_fields_form_settings';. | ast-sqlite-boot | cyklodev-wp-paypal-integration | [View logs](/logs/plugins/c/cyklodev-wp-paypal-integration/error.json) |
+| Syntax error: Unexpected token name in query SHOW TABLE STATUS FROM  WHERE name='wp_cp_calculated_fields_form_settings';. | asyncify-boot | cyklodev-wp-paypal-integration | [View logs](/logs/plugins/c/cyklodev-wp-paypal-integration/error.json) |
+| Syntax error: Unexpected token name in query SHOW TABLE STATUS FROM  WHERE name='wp_cp_calculated_fields_form_settings';. | jspi-boot | cyklodev-wp-paypal-integration | [View logs](/logs/plugins/c/cyklodev-wp-paypal-integration/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | content-update-scheduler | [View logs](/logs/plugins/c/content-update-scheduler/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | conversion-de-moneda | [View logs](/logs/plugins/c/conversion-de-moneda/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | conversion-de-moneda | [View logs](/logs/plugins/c/conversion-de-moneda/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | conversion-de-moneda | [View logs](/logs/plugins/c/conversion-de-moneda/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | custom-price-for-woocommerce | [View logs](/logs/plugins/c/custom-price-for-woocommerce/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | custom-price-for-woocommerce | [View logs](/logs/plugins/c/custom-price-for-woocommerce/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | custom-price-for-woocommerce | [View logs](/logs/plugins/c/custom-price-for-woocommerce/error.json) |
+| MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | custom-price-for-woocommerce | [View logs](/logs/plugins/c/custom-price-for-woocommerce/error.json) |
+| MySQL field type cannot be translated to SQLite: json. | asyncify-boot | custom-price-for-woocommerce | [View logs](/logs/plugins/c/custom-price-for-woocommerce/error.json) |
+| MySQL field type cannot be translated to SQLite: json. | jspi-boot | custom-price-for-woocommerce | [View logs](/logs/plugins/c/custom-price-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_rtcl_sessions. | ast-sqlite-boot | custom-price-for-woocommerce | [View logs](/logs/plugins/c/custom-price-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_rtcl_sessions. | asyncify-boot | custom-price-for-woocommerce | [View logs](/logs/plugins/c/custom-price-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_rtcl_sessions. | jspi-boot | custom-price-for-woocommerce | [View logs](/logs/plugins/c/custom-price-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_cart66_account_subscriptions. | ast-sqlite-boot | catfolders | [View logs](/logs/plugins/c/catfolders/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_cart66_accounts. | ast-sqlite-boot | catfolders | [View logs](/logs/plugins/c/catfolders/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_cart66_downloads. | ast-sqlite-boot | catfolders | [View logs](/logs/plugins/c/catfolders/error.json) |
@@ -1704,8 +1822,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_cart66_promotions. | ast-sqlite-boot | catfolders | [View logs](/logs/plugins/c/catfolders/error.json) |
 | Unknown create type: table. | ast-sqlite-boot | catfolders | [View logs](/logs/plugins/c/catfolders/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | catfolders | [View logs](/logs/plugins/c/catfolders/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | asyncify-boot | cf7-repeatable-fields | [View logs](/logs/plugins/c/cf7-repeatable-fields/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | jspi-boot | cf7-repeatable-fields | [View logs](/logs/plugins/c/cf7-repeatable-fields/error.json) |
 | Unknown query type: DESC. | ast-sqlite-boot | content-holders | [View logs](/logs/plugins/c/content-holders/error.json) |
 | Unknown query type: DESC. | asyncify-boot | content-holders | [View logs](/logs/plugins/c/content-holders/error.json) |
 | Unknown query type: DESC. | jspi-boot | content-holders | [View logs](/logs/plugins/c/content-holders/error.json) |
@@ -1714,6 +1830,9 @@
 | Unknown operation: MODIFY. | jspi-boot | content-randomizer | [View logs](/logs/plugins/c/content-randomizer/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ",": syntax error. | ast-sqlite-boot | colormeshop | [View logs](/logs/plugins/c/colormeshop/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: contactFormKeys. | ast-sqlite-boot | colormeshop | [View logs](/logs/plugins/c/colormeshop/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | ast-sqlite-boot | cf7-submission-dom-tracking | [View logs](/logs/plugins/c/cf7-submission-dom-tracking/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | asyncify-boot | cf7-submission-dom-tracking | [View logs](/logs/plugins/c/cf7-submission-dom-tracking/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | jspi-boot | cf7-submission-dom-tracking | [View logs](/logs/plugins/c/cf7-submission-dom-tracking/error.json) |
 | Unexpected token in MySQL query: commission_amount. | ast-sqlite-boot | cross-references-plugin | [View logs](/logs/plugins/c/cross-references-plugin/error.json) |
 | Unexpected token in MySQL query: commission_amount. | asyncify-boot | cross-references-plugin | [View logs](/logs/plugins/c/cross-references-plugin/error.json) |
 | Unexpected token in MySQL query: commission_amount. | jspi-boot | cross-references-plugin | [View logs](/logs/plugins/c/cross-references-plugin/error.json) |
@@ -1741,14 +1860,58 @@
 | Unknown show type: KEYS FROM. | ast-sqlite-boot | conversejs-wp | [View logs](/logs/plugins/c/conversejs-wp/error.json) |
 | Unknown show type: KEYS FROM. | asyncify-boot | conversejs-wp | [View logs](/logs/plugins/c/conversejs-wp/error.json) |
 | Unknown show type: KEYS FROM. | jspi-boot | conversejs-wp | [View logs](/logs/plugins/c/conversejs-wp/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error. | ast-sqlite-boot | consolari-debug-logger | [View logs](/logs/plugins/c/consolari-debug-logger/error.json) |
+| Unexpected token in MySQL query: complete. | ast-sqlite-boot | consolari-debug-logger | [View logs](/logs/plugins/c/consolari-debug-logger/error.json) |
+| Unexpected token in MySQL query: gameReset. | ast-sqlite-boot | consolari-debug-logger | [View logs](/logs/plugins/c/consolari-debug-logger/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: category. | ast-sqlite-boot | content-by-country | [View logs](/logs/plugins/c/content-by-country/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: category. | asyncify-boot | content-by-country | [View logs](/logs/plugins/c/content-by-country/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: category. | jspi-boot | content-by-country | [View logs](/logs/plugins/c/content-by-country/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cu_user_email_bcc_field. | ast-sqlite-boot | content-by-country | [View logs](/logs/plugins/c/content-by-country/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cu_user_email_bcc_field. | asyncify-boot | content-by-country | [View logs](/logs/plugins/c/content-by-country/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cu_user_email_bcc_field. | jspi-boot | content-by-country | [View logs](/logs/plugins/c/content-by-country/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: extra. | ast-sqlite-boot | content-by-country | [View logs](/logs/plugins/c/content-by-country/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: extra. | asyncify-boot | content-by-country | [View logs](/logs/plugins/c/content-by-country/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: extra. | jspi-boot | content-by-country | [View logs](/logs/plugins/c/content-by-country/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: fp_inc_attachments. | ast-sqlite-boot | content-by-country | [View logs](/logs/plugins/c/content-by-country/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: fp_inc_attachments. | asyncify-boot | content-by-country | [View logs](/logs/plugins/c/content-by-country/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: fp_inc_attachments. | jspi-boot | content-by-country | [View logs](/logs/plugins/c/content-by-country/error.json) |
+| Syntax error: Unexpected token name in query SHOW TABLE STATUS FROM  WHERE name='wp_cp_calculated_fields_form_settings';. | ast-sqlite-boot | content-by-country | [View logs](/logs/plugins/c/content-by-country/error.json) |
+| Syntax error: Unexpected token name in query SHOW TABLE STATUS FROM  WHERE name='wp_cp_calculated_fields_form_settings';. | asyncify-boot | content-by-country | [View logs](/logs/plugins/c/content-by-country/error.json) |
+| Syntax error: Unexpected token name in query SHOW TABLE STATUS FROM  WHERE name='wp_cp_calculated_fields_form_settings';. | jspi-boot | content-by-country | [View logs](/logs/plugins/c/content-by-country/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such function: STR_TO_DATE. | ast-sqlite-boot | codestyling-localization | [View logs](/logs/plugins/c/codestyling-localization/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such function: STR_TO_DATE. | asyncify-boot | codestyling-localization | [View logs](/logs/plugins/c/codestyling-localization/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such function: STR_TO_DATE. | jspi-boot | codestyling-localization | [View logs](/logs/plugins/c/codestyling-localization/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | ast-sqlite-boot | coastal-factoid | [View logs](/logs/plugins/c/coastal-factoid/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | asyncify-boot | coastal-factoid | [View logs](/logs/plugins/c/coastal-factoid/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_cart_analytics__id already exists. | jspi-boot | coastal-factoid | [View logs](/logs/plugins/c/coastal-factoid/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_cpvg_list_views. | asyncify-boot | common-ninja-info-labels-for-woocommerce | [View logs](/logs/plugins/c/common-ninja-info-labels-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_cpvg_post_views. | asyncify-boot | common-ninja-info-labels-for-woocommerce | [View logs](/logs/plugins/c/common-ninja-info-labels-for-woocommerce/error.json) |
+				INDEX(carrier),
+				INDEX(first_sync)
+				INDEX(id_order),
+				INDEX(last_status),
+				INDEX(last_sync),
+				UNIQUE(id_order, carrier),
+				`carrier` VARCHAR(100) NOT NULL,
+				`first_sync` DATETIME NOT NULL,
+				`id_order` INT(11) NOT NULL,
+				`id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+				`last_status_detail` TEXT DEFAULT NULL,
+				`last_status` VARCHAR(128) DEFAULT NULL,
+				`last_sync` DATETIME NOT NULL DEFAULT \'2010-01-01 00:00:00\',
+			) DEFAULT CHARACTER SET utf8mb4
+    [code] => 0
+    [message] => Unexpected character.
+    [position] => 300
+    [query] => CREATE TABLE wp_kshippingargentina_report  (
+    [str] => \
+(
+)
+. | ast-sqlite-boot | comicnerdcom-comic-shop-finder-widget | [View logs](/logs/plugins/c/comicnerdcom-comic-shop-finder-widget/error.json) |
+. | asyncify-boot | comicnerdcom-comic-shop-finder-widget | [View logs](/logs/plugins/c/comicnerdcom-comic-shop-finder-widget/error.json) |
+. | jspi-boot | comicnerdcom-comic-shop-finder-widget | [View logs](/logs/plugins/c/comicnerdcom-comic-shop-finder-widget/error.json) |
+| Array
+| Unknown operation: MODIFY. | ast-sqlite-boot | common-ninja-info-labels-for-woocommerce | [View logs](/logs/plugins/c/common-ninja-info-labels-for-woocommerce/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | common-ninja-info-labels-for-woocommerce | [View logs](/logs/plugins/c/common-ninja-info-labels-for-woocommerce/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | common-ninja-info-labels-for-woocommerce | [View logs](/logs/plugins/c/common-ninja-info-labels-for-woocommerce/error.json) |
 | Unknown query type: DESC. | ast-sqlite-boot | cookiescan | [View logs](/logs/plugins/c/cookiescan/error.json) |
 | Data type expected in MySQL query, unknown token received: settings. | ast-sqlite-boot | cf7-getresponse | [View logs](/logs/plugins/c/cf7-getresponse/error.json) |
 | Data type expected in MySQL query, unknown token received: settings. | asyncify-boot | cf7-getresponse | [View logs](/logs/plugins/c/cf7-getresponse/error.json) |
@@ -1771,6 +1934,9 @@
 | Unknown query type: DESC. | ast-sqlite-boot | curs-bnr | [View logs](/logs/plugins/c/curs-bnr/error.json) |
 | Unknown query type: DESC. | asyncify-boot | curs-bnr | [View logs](/logs/plugins/c/curs-bnr/error.json) |
 | Unknown query type: DESC. | jspi-boot | curs-bnr | [View logs](/logs/plugins/c/curs-bnr/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | custom-field-images | [View logs](/logs/plugins/c/custom-field-images/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | custom-field-images | [View logs](/logs/plugins/c/custom-field-images/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | custom-field-images | [View logs](/logs/plugins/c/custom-field-images/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "p": syntax error. | ast-sqlite-boot | cpt-list | [View logs](/logs/plugins/c/cpt-list/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "p": syntax error. | asyncify-boot | cpt-list | [View logs](/logs/plugins/c/cpt-list/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "p": syntax error. | jspi-boot | cpt-list | [View logs](/logs/plugins/c/cpt-list/error.json) |
@@ -1789,6 +1955,9 @@
 | SQLSTATE[HY000]: General error: 1 no such table: contactFormKeys. | ast-sqlite-boot | custom-tables | [View logs](/logs/plugins/c/custom-tables/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: contactFormKeys. | asyncify-boot | custom-tables | [View logs](/logs/plugins/c/custom-tables/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: contactFormKeys. | jspi-boot | custom-tables | [View logs](/logs/plugins/c/custom-tables/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | circupress | [View logs](/logs/plugins/c/circupress/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | circupress | [View logs](/logs/plugins/c/circupress/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | circupress | [View logs](/logs/plugins/c/circupress/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | ast-sqlite-boot | customizer-login-page-wp | [View logs](/logs/plugins/c/customizer-login-page-wp/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "p": syntax error. | ast-sqlite-boot | comment-warning | [View logs](/logs/plugins/c/comment-warning/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "p": syntax error. | asyncify-boot | comment-warning | [View logs](/logs/plugins/c/comment-warning/error.json) |
@@ -1825,9 +1994,6 @@
 | Unknown create type: table. | jspi-boot | cleeng | [View logs](/logs/plugins/c/cleeng/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | classic-plus | [View logs](/logs/plugins/c/classic-plus/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_cartsguru_carts. | ast-sqlite-boot | classic-plus | [View logs](/logs/plugins/c/classic-plus/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | contentquote | [View logs](/logs/plugins/c/contentquote/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | contentquote | [View logs](/logs/plugins/c/contentquote/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | contentquote | [View logs](/logs/plugins/c/contentquote/error.json) |
 				INDEX(carrier),
 				INDEX(first_sync)
 				INDEX(id_order),
@@ -1853,45 +2019,9 @@
 . | asyncify-boot | cleaner-tags | [View logs](/logs/plugins/c/cleaner-tags/error.json) |
 . | jspi-boot | cleaner-tags | [View logs](/logs/plugins/c/cleaner-tags/error.json) |
 | Array
-| SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | ast-sqlite-boot | custom-wp-login-widget | [View logs](/logs/plugins/c/custom-wp-login-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | asyncify-boot | custom-wp-login-widget | [View logs](/logs/plugins/c/custom-wp-login-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_calendarista_settings. | jspi-boot | custom-wp-login-widget | [View logs](/logs/plugins/c/custom-wp-login-widget/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | custom-faq | [View logs](/logs/plugins/c/custom-faq/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | custom-faq | [View logs](/logs/plugins/c/custom-faq/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | custom-faq | [View logs](/logs/plugins/c/custom-faq/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | chatimity-chat-rooms | [View logs](/logs/plugins/c/chatimity-chat-rooms/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | chatimity-chat-rooms | [View logs](/logs/plugins/c/chatimity-chat-rooms/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | chatimity-chat-rooms | [View logs](/logs/plugins/c/chatimity-chat-rooms/error.json) |
-| MySQL field type cannot be translated to SQLite: point. | ast-sqlite-boot | convert-data | [View logs](/logs/plugins/c/convert-data/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_canalplan_options. | ast-sqlite-boot | convert-data | [View logs](/logs/plugins/c/convert-data/error.json) |
-| Unexpected token in MySQL query: ). | ast-sqlite-boot | convert-data | [View logs](/logs/plugins/c/convert-data/error.json) |
-| Unknown show type: CHARACTER SET ;. | ast-sqlite-boot | convert-data | [View logs](/logs/plugins/c/convert-data/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | calcurates-for-woocommerce | [View logs](/logs/plugins/c/calcurates-for-woocommerce/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | calcurates-for-woocommerce | [View logs](/logs/plugins/c/calcurates-for-woocommerce/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | calcurates-for-woocommerce | [View logs](/logs/plugins/c/calcurates-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | cpt-widget | [View logs](/logs/plugins/c/cpt-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | cpt-widget | [View logs](/logs/plugins/c/cpt-widget/error.json) |
-| Unknown operation: CONVERT. | asyncify-boot | cpt-widget | [View logs](/logs/plugins/c/cpt-widget/error.json) |
-| Unknown operation: CONVERT. | jspi-boot | cpt-widget | [View logs](/logs/plugins/c/cpt-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_content_restriction_rules. | ast-sqlite-boot | coinwaypay-gateway-for-woocommerce | [View logs](/logs/plugins/c/coinwaypay-gateway-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_content_restriction_rules. | asyncify-boot | coinwaypay-gateway-for-woocommerce | [View logs](/logs/plugins/c/coinwaypay-gateway-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_content_restriction_rules. | jspi-boot | coinwaypay-gateway-for-woocommerce | [View logs](/logs/plugins/c/coinwaypay-gateway-for-woocommerce/error.json) |
-| Unexpected token in MySQL query: status. | ast-sqlite-boot | coinwaypay-gateway-for-woocommerce | [View logs](/logs/plugins/c/coinwaypay-gateway-for-woocommerce/error.json) |
-| Unexpected token in MySQL query: status. | asyncify-boot | coinwaypay-gateway-for-woocommerce | [View logs](/logs/plugins/c/coinwaypay-gateway-for-woocommerce/error.json) |
-| Unexpected token in MySQL query: status. | jspi-boot | coinwaypay-gateway-for-woocommerce | [View logs](/logs/plugins/c/coinwaypay-gateway-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 too many SQL variables. | ast-sqlite-boot | catalogueflow-for-woocommerce | [View logs](/logs/plugins/c/catalogueflow-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | clickmeter-link-shortener-and-analytics | [View logs](/logs/plugins/c/clickmeter-link-shortener-and-analytics/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | comment-highlighter | [View logs](/logs/plugins/c/comment-highlighter/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | comment-highlighter | [View logs](/logs/plugins/c/comment-highlighter/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | comment-highlighter | [View logs](/logs/plugins/c/comment-highlighter/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | convertcalculator | [View logs](/logs/plugins/c/convertcalculator/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_cartsguru_carts. | ast-sqlite-boot | convertcalculator | [View logs](/logs/plugins/c/convertcalculator/error.json) |
-| SQLSTATE[HY000]: General error: 1 table wp_captcha_god has 6 columns but 5 values were supplied. | ast-sqlite-boot | cart2cart-3dcart-to-woocommerce-migration | [View logs](/logs/plugins/c/cart2cart-3dcart-to-woocommerce-migration/error.json) |
-| SQLSTATE[HY000]: General error: 1 table wp_captcha_god has 6 columns but 5 values were supplied. | asyncify-boot | cart2cart-3dcart-to-woocommerce-migration | [View logs](/logs/plugins/c/cart2cart-3dcart-to-woocommerce-migration/error.json) |
-| SQLSTATE[HY000]: General error: 1 table wp_captcha_god has 6 columns but 5 values were supplied. | jspi-boot | cart2cart-3dcart-to-woocommerce-migration | [View logs](/logs/plugins/c/cart2cart-3dcart-to-woocommerce-migration/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | cart2cart-3dcart-to-woocommerce-migration | [View logs](/logs/plugins/c/cart2cart-3dcart-to-woocommerce-migration/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | cart2cart-3dcart-to-woocommerce-migration | [View logs](/logs/plugins/c/cart2cart-3dcart-to-woocommerce-migration/error.json) |
-| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | cart2cart-3dcart-to-woocommerce-migration | [View logs](/logs/plugins/c/cart2cart-3dcart-to-woocommerce-migration/error.json) |
 				INDEX(carrier),
 				INDEX(first_sync)
 				INDEX(id_order),
@@ -1913,10 +2043,83 @@
     [str] => \
 (
 )
-. | ast-sqlite-boot | custom-post-display | [View logs](/logs/plugins/c/custom-post-display/error.json) |
-. | asyncify-boot | custom-post-display | [View logs](/logs/plugins/c/custom-post-display/error.json) |
-. | jspi-boot | custom-post-display | [View logs](/logs/plugins/c/custom-post-display/error.json) |
+. | ast-sqlite-boot | clutter-free | [View logs](/logs/plugins/c/clutter-free/error.json) |
+. | asyncify-boot | clutter-free | [View logs](/logs/plugins/c/clutter-free/error.json) |
+. | jspi-boot | clutter-free | [View logs](/logs/plugins/c/clutter-free/error.json) |
 | Array
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | chatimity-chat-rooms | [View logs](/logs/plugins/c/chatimity-chat-rooms/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | chatimity-chat-rooms | [View logs](/logs/plugins/c/chatimity-chat-rooms/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | chatimity-chat-rooms | [View logs](/logs/plugins/c/chatimity-chat-rooms/error.json) |
+| MySQL field type cannot be translated to SQLite: point. | ast-sqlite-boot | convert-data | [View logs](/logs/plugins/c/convert-data/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_canalplan_options. | ast-sqlite-boot | convert-data | [View logs](/logs/plugins/c/convert-data/error.json) |
+| Unexpected token in MySQL query: ). | ast-sqlite-boot | convert-data | [View logs](/logs/plugins/c/convert-data/error.json) |
+| Unknown show type: CHARACTER SET ;. | ast-sqlite-boot | convert-data | [View logs](/logs/plugins/c/convert-data/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | calcurates-for-woocommerce | [View logs](/logs/plugins/c/calcurates-for-woocommerce/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | calcurates-for-woocommerce | [View logs](/logs/plugins/c/calcurates-for-woocommerce/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | calcurates-for-woocommerce | [View logs](/logs/plugins/c/calcurates-for-woocommerce/error.json) |
+				INDEX(carrier),
+				INDEX(first_sync)
+				INDEX(id_order),
+				INDEX(last_status),
+				INDEX(last_sync),
+				UNIQUE(id_order, carrier),
+				`carrier` VARCHAR(100) NOT NULL,
+				`first_sync` DATETIME NOT NULL,
+				`id_order` INT(11) NOT NULL,
+				`id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+				`last_status_detail` TEXT DEFAULT NULL,
+				`last_status` VARCHAR(128) DEFAULT NULL,
+				`last_sync` DATETIME NOT NULL DEFAULT \'2010-01-01 00:00:00\',
+			) DEFAULT CHARACTER SET utf8mb4
+    [code] => 0
+    [message] => Unexpected character.
+    [position] => 300
+    [query] => CREATE TABLE wp_kshippingargentina_report  (
+    [str] => \
+(
+)
+. | ast-sqlite-boot | codigo-no-registro | [View logs](/logs/plugins/c/codigo-no-registro/error.json) |
+. | asyncify-boot | codigo-no-registro | [View logs](/logs/plugins/c/codigo-no-registro/error.json) |
+. | jspi-boot | codigo-no-registro | [View logs](/logs/plugins/c/codigo-no-registro/error.json) |
+| Array
+| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | cpt-widget | [View logs](/logs/plugins/c/cpt-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | cpt-widget | [View logs](/logs/plugins/c/cpt-widget/error.json) |
+| Unknown operation: CONVERT. | asyncify-boot | cpt-widget | [View logs](/logs/plugins/c/cpt-widget/error.json) |
+| Unknown operation: CONVERT. | jspi-boot | cpt-widget | [View logs](/logs/plugins/c/cpt-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_content_restriction_rules. | ast-sqlite-boot | coinwaypay-gateway-for-woocommerce | [View logs](/logs/plugins/c/coinwaypay-gateway-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_content_restriction_rules. | asyncify-boot | coinwaypay-gateway-for-woocommerce | [View logs](/logs/plugins/c/coinwaypay-gateway-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_content_restriction_rules. | jspi-boot | coinwaypay-gateway-for-woocommerce | [View logs](/logs/plugins/c/coinwaypay-gateway-for-woocommerce/error.json) |
+| Unexpected token in MySQL query: status. | ast-sqlite-boot | coinwaypay-gateway-for-woocommerce | [View logs](/logs/plugins/c/coinwaypay-gateway-for-woocommerce/error.json) |
+| Unexpected token in MySQL query: status. | asyncify-boot | coinwaypay-gateway-for-woocommerce | [View logs](/logs/plugins/c/coinwaypay-gateway-for-woocommerce/error.json) |
+| Unexpected token in MySQL query: status. | jspi-boot | coinwaypay-gateway-for-woocommerce | [View logs](/logs/plugins/c/coinwaypay-gateway-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 too many SQL variables. | ast-sqlite-boot | catalogueflow-for-woocommerce | [View logs](/logs/plugins/c/catalogueflow-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | clickmeter-link-shortener-and-analytics | [View logs](/logs/plugins/c/clickmeter-link-shortener-and-analytics/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: category. | ast-sqlite-boot | comments-limit | [View logs](/logs/plugins/c/comments-limit/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: category. | asyncify-boot | comments-limit | [View logs](/logs/plugins/c/comments-limit/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: category. | jspi-boot | comments-limit | [View logs](/logs/plugins/c/comments-limit/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cu_user_email_bcc_field. | ast-sqlite-boot | comments-limit | [View logs](/logs/plugins/c/comments-limit/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cu_user_email_bcc_field. | asyncify-boot | comments-limit | [View logs](/logs/plugins/c/comments-limit/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cu_user_email_bcc_field. | jspi-boot | comments-limit | [View logs](/logs/plugins/c/comments-limit/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: extra. | ast-sqlite-boot | comments-limit | [View logs](/logs/plugins/c/comments-limit/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: extra. | asyncify-boot | comments-limit | [View logs](/logs/plugins/c/comments-limit/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: extra. | jspi-boot | comments-limit | [View logs](/logs/plugins/c/comments-limit/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: fp_inc_attachments. | ast-sqlite-boot | comments-limit | [View logs](/logs/plugins/c/comments-limit/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: fp_inc_attachments. | asyncify-boot | comments-limit | [View logs](/logs/plugins/c/comments-limit/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: fp_inc_attachments. | jspi-boot | comments-limit | [View logs](/logs/plugins/c/comments-limit/error.json) |
+| Syntax error: Unexpected token name in query SHOW TABLE STATUS FROM  WHERE name='wp_cp_calculated_fields_form_settings';. | ast-sqlite-boot | comments-limit | [View logs](/logs/plugins/c/comments-limit/error.json) |
+| Syntax error: Unexpected token name in query SHOW TABLE STATUS FROM  WHERE name='wp_cp_calculated_fields_form_settings';. | asyncify-boot | comments-limit | [View logs](/logs/plugins/c/comments-limit/error.json) |
+| Syntax error: Unexpected token name in query SHOW TABLE STATUS FROM  WHERE name='wp_cp_calculated_fields_form_settings';. | jspi-boot | comments-limit | [View logs](/logs/plugins/c/comments-limit/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | comment-highlighter | [View logs](/logs/plugins/c/comment-highlighter/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | comment-highlighter | [View logs](/logs/plugins/c/comment-highlighter/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | comment-highlighter | [View logs](/logs/plugins/c/comment-highlighter/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | convertcalculator | [View logs](/logs/plugins/c/convertcalculator/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_cartsguru_carts. | ast-sqlite-boot | convertcalculator | [View logs](/logs/plugins/c/convertcalculator/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_captcha_god has 6 columns but 5 values were supplied. | ast-sqlite-boot | cart2cart-3dcart-to-woocommerce-migration | [View logs](/logs/plugins/c/cart2cart-3dcart-to-woocommerce-migration/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_captcha_god has 6 columns but 5 values were supplied. | asyncify-boot | cart2cart-3dcart-to-woocommerce-migration | [View logs](/logs/plugins/c/cart2cart-3dcart-to-woocommerce-migration/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_captcha_god has 6 columns but 5 values were supplied. | jspi-boot | cart2cart-3dcart-to-woocommerce-migration | [View logs](/logs/plugins/c/cart2cart-3dcart-to-woocommerce-migration/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | cart2cart-3dcart-to-woocommerce-migration | [View logs](/logs/plugins/c/cart2cart-3dcart-to-woocommerce-migration/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | cart2cart-3dcart-to-woocommerce-migration | [View logs](/logs/plugins/c/cart2cart-3dcart-to-woocommerce-migration/error.json) |
+| SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | cart2cart-3dcart-to-woocommerce-migration | [View logs](/logs/plugins/c/cart2cart-3dcart-to-woocommerce-migration/error.json) |
 | Unexpected token in MySQL query: opened. | ast-sqlite-boot | cwis-antivirus-malware-detected | [View logs](/logs/plugins/c/cwis-antivirus-malware-detected/error.json) |
 | Unexpected token in MySQL query: opened. | asyncify-boot | cwis-antivirus-malware-detected | [View logs](/logs/plugins/c/cwis-antivirus-malware-detected/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: seriahglobevars. | ast-sqlite-boot | custom-category-widget | [View logs](/logs/plugins/c/custom-category-widget/error.json) |
@@ -1929,15 +2132,6 @@
 | SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | ast-sqlite-boot | ci-eventspot | [View logs](/logs/plugins/c/ci-eventspot/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | asyncify-boot | ci-eventspot | [View logs](/logs/plugins/c/ci-eventspot/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | jspi-boot | ci-eventspot | [View logs](/logs/plugins/c/ci-eventspot/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error. | ast-sqlite-boot | cpcast-canalpiloto | [View logs](/logs/plugins/c/cpcast-canalpiloto/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error. | asyncify-boot | cpcast-canalpiloto | [View logs](/logs/plugins/c/cpcast-canalpiloto/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "ActivationCount": syntax error. | jspi-boot | cpcast-canalpiloto | [View logs](/logs/plugins/c/cpcast-canalpiloto/error.json) |
-| Unexpected token in MySQL query: complete. | ast-sqlite-boot | cpcast-canalpiloto | [View logs](/logs/plugins/c/cpcast-canalpiloto/error.json) |
-| Unexpected token in MySQL query: complete. | asyncify-boot | cpcast-canalpiloto | [View logs](/logs/plugins/c/cpcast-canalpiloto/error.json) |
-| Unexpected token in MySQL query: complete. | jspi-boot | cpcast-canalpiloto | [View logs](/logs/plugins/c/cpcast-canalpiloto/error.json) |
-| Unexpected token in MySQL query: gameReset. | ast-sqlite-boot | cpcast-canalpiloto | [View logs](/logs/plugins/c/cpcast-canalpiloto/error.json) |
-| Unexpected token in MySQL query: gameReset. | asyncify-boot | cpcast-canalpiloto | [View logs](/logs/plugins/c/cpcast-canalpiloto/error.json) |
-| Unexpected token in MySQL query: gameReset. | jspi-boot | cpcast-canalpiloto | [View logs](/logs/plugins/c/cpcast-canalpiloto/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | completionist | [View logs](/logs/plugins/c/completionist/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | completionist | [View logs](/logs/plugins/c/completionist/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | completionist | [View logs](/logs/plugins/c/completionist/error.json) |
@@ -1964,6 +2158,15 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_canalplan_options. | ast-sqlite-boot | cf7-coder | [View logs](/logs/plugins/c/cf7-coder/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_canalplan_options. | asyncify-boot | cf7-coder | [View logs](/logs/plugins/c/cf7-coder/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_canalplan_options. | jspi-boot | cf7-coder | [View logs](/logs/plugins/c/cf7-coder/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | contact-popup | [View logs](/logs/plugins/c/contact-popup/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | contact-popup | [View logs](/logs/plugins/c/contact-popup/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | contact-popup | [View logs](/logs/plugins/c/contact-popup/error.json) |
+| MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | contact-popup | [View logs](/logs/plugins/c/contact-popup/error.json) |
+| MySQL field type cannot be translated to SQLite: json. | asyncify-boot | contact-popup | [View logs](/logs/plugins/c/contact-popup/error.json) |
+| MySQL field type cannot be translated to SQLite: json. | jspi-boot | contact-popup | [View logs](/logs/plugins/c/contact-popup/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_rtcl_sessions. | ast-sqlite-boot | contact-popup | [View logs](/logs/plugins/c/contact-popup/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_rtcl_sessions. | asyncify-boot | contact-popup | [View logs](/logs/plugins/c/contact-popup/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_rtcl_sessions. | jspi-boot | contact-popup | [View logs](/logs/plugins/c/contact-popup/error.json) |
 | MySQL field type cannot be translated to SQLite: serial. | ast-sqlite-boot | craftwork-utilities-for-woocommerce | [View logs](/logs/plugins/c/craftwork-utilities-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | craftwork-utilities-for-woocommerce | [View logs](/logs/plugins/c/craftwork-utilities-for-woocommerce/error.json) |
 | Unknown operation: AUTO_INCREMENT. | ast-sqlite-boot | craftwork-utilities-for-woocommerce | [View logs](/logs/plugins/c/craftwork-utilities-for-woocommerce/error.json) |
@@ -2005,11 +2208,37 @@
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | compassion-sponsored-child | [View logs](/logs/plugins/c/compassion-sponsored-child/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | compassion-sponsored-child | [View logs](/logs/plugins/c/compassion-sponsored-child/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | jspi-boot | compassion-sponsored-child | [View logs](/logs/plugins/c/compassion-sponsored-child/error.json) |
+				INDEX(carrier),
+				INDEX(first_sync)
+				INDEX(id_order),
+				INDEX(last_status),
+				INDEX(last_sync),
+				UNIQUE(id_order, carrier),
+				`carrier` VARCHAR(100) NOT NULL,
+				`first_sync` DATETIME NOT NULL,
+				`id_order` INT(11) NOT NULL,
+				`id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+				`last_status_detail` TEXT DEFAULT NULL,
+				`last_status` VARCHAR(128) DEFAULT NULL,
+				`last_sync` DATETIME NOT NULL DEFAULT \'2010-01-01 00:00:00\',
+			) DEFAULT CHARACTER SET utf8mb4
+    [code] => 0
+    [message] => Unexpected character.
+    [position] => 300
+    [query] => CREATE TABLE wp_kshippingargentina_report  (
+    [str] => \
+(
+)
+. | ast-sqlite-boot | count-characters | [View logs](/logs/plugins/c/count-characters/error.json) |
+. | asyncify-boot | count-characters | [View logs](/logs/plugins/c/count-characters/error.json) |
+. | jspi-boot | count-characters | [View logs](/logs/plugins/c/count-characters/error.json) |
+| Array
 | SQLSTATE[HY000]: General error: 1 too many SQL variables. | asyncify-boot | cab-fare-calculator | [View logs](/logs/plugins/c/cab-fare-calculator/error.json) |
 | SQLSTATE[HY000]: General error: 1 too many SQL variables. | jspi-boot | cab-fare-calculator | [View logs](/logs/plugins/c/cab-fare-calculator/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | cr3ativ-staff | [View logs](/logs/plugins/c/cr3ativ-staff/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | cr3ativ-staff | [View logs](/logs/plugins/c/cr3ativ-staff/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | cr3ativ-staff | [View logs](/logs/plugins/c/cr3ativ-staff/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | capability-manager-enhanced | [View logs](/logs/plugins/c/capability-manager-enhanced/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_image_3d. | ast-sqlite-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
 | Unknown create type: table. | ast-sqlite-boot | convoworks-wp | [View logs](/logs/plugins/c/convoworks-wp/error.json) |
 | Unknown operation: AUTO_INCREMENT. | ast-sqlite-boot | cbnet-twitter-search-display | [View logs](/logs/plugins/c/cbnet-twitter-search-display/error.json) |
@@ -2478,13 +2707,24 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | ast-sqlite-boot | fancytweet | [View logs](/logs/plugins/f/fancytweet/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | asyncify-boot | fancytweet | [View logs](/logs/plugins/f/fancytweet/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | jspi-boot | fancytweet | [View logs](/logs/plugins/f/fancytweet/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_fullbackslider has no column named folder. | ast-sqlite-boot | football-leagues | [View logs](/logs/plugins/f/football-leagues/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_fullbackslider has no column named folder. | asyncify-boot | football-leagues | [View logs](/logs/plugins/f/football-leagues/error.json) |
+| SQLSTATE[HY000]: General error: 1 table wp_fullbackslider has no column named folder. | jspi-boot | football-leagues | [View logs](/logs/plugins/f/football-leagues/error.json) |
+| MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | floating-social-sharing-buttons | [View logs](/logs/plugins/f/floating-social-sharing-buttons/error.json) |
+| MySQL field type cannot be translated to SQLite: json. | asyncify-boot | floating-social-sharing-buttons | [View logs](/logs/plugins/f/floating-social-sharing-buttons/error.json) |
+| MySQL field type cannot be translated to SQLite: json. | jspi-boot | floating-social-sharing-buttons | [View logs](/logs/plugins/f/floating-social-sharing-buttons/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: name_field_id. | ast-sqlite-boot | floating-social-sharing-buttons | [View logs](/logs/plugins/f/floating-social-sharing-buttons/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: name_field_id. | asyncify-boot | floating-social-sharing-buttons | [View logs](/logs/plugins/f/floating-social-sharing-buttons/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: name_field_id. | jspi-boot | floating-social-sharing-buttons | [View logs](/logs/plugins/f/floating-social-sharing-buttons/error.json) |
+| Unknown operation: AUTO_INCREMENT. | ast-sqlite-boot | fat-rat-collect | [View logs](/logs/plugins/f/fat-rat-collect/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_fullbackslider has no column named folder. | ast-sqlite-boot | foursquare-map | [View logs](/logs/plugins/f/foursquare-map/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_fullbackslider has no column named folder. | asyncify-boot | foursquare-map | [View logs](/logs/plugins/f/foursquare-map/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_fullbackslider has no column named folder. | jspi-boot | foursquare-map | [View logs](/logs/plugins/f/foursquare-map/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_fm_forms. | ast-sqlite-boot | facethumb | [View logs](/logs/plugins/f/facethumb/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_fm_mails. | ast-sqlite-boot | facethumb | [View logs](/logs/plugins/f/facethumb/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | flash-notification | [View logs](/logs/plugins/f/flash-notification/error.json) |
 | Unexpected token in MySQL query: is_result. | asyncify-boot | flags-widget | [View logs](/logs/plugins/f/flags-widget/error.json) |
+| Unknown operation: AUTO_INCREMENT. | ast-sqlite-boot | fudge-lite-core | [View logs](/logs/plugins/f/fudge-lite-core/error.json) |
+| Unknown operation: AUTO_INCREMENT. | asyncify-boot | fudge-lite-core | [View logs](/logs/plugins/f/fudge-lite-core/error.json) |
+| Unknown operation: AUTO_INCREMENT. | jspi-boot | fudge-lite-core | [View logs](/logs/plugins/f/fudge-lite-core/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | find-us | [View logs](/logs/plugins/f/find-us/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | find-us | [View logs](/logs/plugins/f/find-us/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | find-us | [View logs](/logs/plugins/f/find-us/error.json) |
@@ -2501,12 +2741,6 @@
 | Unknown operation: MODIFY. | ast-sqlite-boot | formarketer | [View logs](/logs/plugins/f/formarketer/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | formarketer | [View logs](/logs/plugins/f/formarketer/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | formarketer | [View logs](/logs/plugins/f/formarketer/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | flexible-navigation | [View logs](/logs/plugins/f/flexible-navigation/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | asyncify-boot | flexible-navigation | [View logs](/logs/plugins/f/flexible-navigation/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | jspi-boot | flexible-navigation | [View logs](/logs/plugins/f/flexible-navigation/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: name_field_id. | ast-sqlite-boot | flexible-navigation | [View logs](/logs/plugins/f/flexible-navigation/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: name_field_id. | asyncify-boot | flexible-navigation | [View logs](/logs/plugins/f/flexible-navigation/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: name_field_id. | jspi-boot | flexible-navigation | [View logs](/logs/plugins/f/flexible-navigation/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | filmtied | [View logs](/logs/plugins/f/filmtied/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | filmtied | [View logs](/logs/plugins/f/filmtied/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | filmtied | [View logs](/logs/plugins/f/filmtied/error.json) |
@@ -2538,7 +2772,6 @@
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | flexible-quote-rotator-plus | [View logs](/logs/plugins/f/flexible-quote-rotator-plus/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | flexible-quote-rotator-plus | [View logs](/logs/plugins/f/flexible-quote-rotator-plus/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | flexible-quote-rotator-plus | [View logs](/logs/plugins/f/flexible-quote-rotator-plus/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | fp-responsive-slider | [View logs](/logs/plugins/f/fp-responsive-slider/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | flickr-viewer | [View logs](/logs/plugins/f/flickr-viewer/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | flickr-viewer | [View logs](/logs/plugins/f/flickr-viewer/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | flickr-viewer | [View logs](/logs/plugins/f/flickr-viewer/error.json) |
@@ -2556,6 +2789,12 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | full-width-responsive-portfolio | [View logs](/logs/plugins/f/full-width-responsive-portfolio/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | full-width-responsive-portfolio | [View logs](/logs/plugins/f/full-width-responsive-portfolio/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | full-width-responsive-portfolio | [View logs](/logs/plugins/f/full-width-responsive-portfolio/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW. | asyncify-boot | factureaza | [View logs](/logs/plugins/f/factureaza/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: REWSAKSDNSFFQYUFHALNOMKNEPZIOPLW. | jspi-boot | factureaza | [View logs](/logs/plugins/f/factureaza/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wc_f4_api_key. | asyncify-boot | factureaza | [View logs](/logs/plugins/f/factureaza/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wc_f4_api_key. | jspi-boot | factureaza | [View logs](/logs/plugins/f/factureaza/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wc_f4_settings. | asyncify-boot | factureaza | [View logs](/logs/plugins/f/factureaza/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_wc_f4_settings. | jspi-boot | factureaza | [View logs](/logs/plugins/f/factureaza/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "1": syntax error. | ast-sqlite-boot | file-groups | [View logs](/logs/plugins/f/file-groups/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "1": syntax error. | asyncify-boot | file-groups | [View logs](/logs/plugins/f/file-groups/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "1": syntax error. | jspi-boot | file-groups | [View logs](/logs/plugins/f/file-groups/error.json) |
@@ -2565,22 +2804,23 @@
 | Unknown query type: DESC. | ast-sqlite-boot | feed-link-widget | [View logs](/logs/plugins/f/feed-link-widget/error.json) |
 | Unknown query type: DESC. | asyncify-boot | feed-link-widget | [View logs](/logs/plugins/f/feed-link-widget/error.json) |
 | Unknown query type: DESC. | jspi-boot | feed-link-widget | [View logs](/logs/plugins/f/feed-link-widget/error.json) |
+| Unknown operation: AUTO_INCREMENT. | ast-sqlite-boot | factolex-glossary | [View logs](/logs/plugins/f/factolex-glossary/error.json) |
+| Unknown operation: AUTO_INCREMENT. | asyncify-boot | factolex-glossary | [View logs](/logs/plugins/f/factolex-glossary/error.json) |
+| Unknown operation: AUTO_INCREMENT. | jspi-boot | factolex-glossary | [View logs](/logs/plugins/f/factolex-glossary/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: oml_facto_log. | ast-sqlite-boot | force-apply-terms-and-conditions | [View logs](/logs/plugins/f/force-apply-terms-and-conditions/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: oml_facto_log. | asyncify-boot | force-apply-terms-and-conditions | [View logs](/logs/plugins/f/force-apply-terms-and-conditions/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: oml_facto_log. | jspi-boot | force-apply-terms-and-conditions | [View logs](/logs/plugins/f/force-apply-terms-and-conditions/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_fastflow_settings. | ast-sqlite-boot | feed-subscriber-stats | [View logs](/logs/plugins/f/feed-subscriber-stats/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_fastflow_settings. | asyncify-boot | feed-subscriber-stats | [View logs](/logs/plugins/f/feed-subscriber-stats/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_fastflow_settings. | jspi-boot | feed-subscriber-stats | [View logs](/logs/plugins/f/feed-subscriber-stats/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | fitcash | [View logs](/logs/plugins/f/fitcash/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | asyncify-boot | fitcash | [View logs](/logs/plugins/f/fitcash/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | jspi-boot | fitcash | [View logs](/logs/plugins/f/fitcash/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: name_field_id. | ast-sqlite-boot | fitcash | [View logs](/logs/plugins/f/fitcash/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: name_field_id. | asyncify-boot | fitcash | [View logs](/logs/plugins/f/fitcash/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: name_field_id. | jspi-boot | fitcash | [View logs](/logs/plugins/f/fitcash/error.json) |
+| Unknown operation: AUTO_INCREMENT. | ast-sqlite-boot | fitcash | [View logs](/logs/plugins/f/fitcash/error.json) |
+| Unknown operation: AUTO_INCREMENT. | asyncify-boot | fitcash | [View logs](/logs/plugins/f/fitcash/error.json) |
+| Unknown operation: AUTO_INCREMENT. | jspi-boot | fitcash | [View logs](/logs/plugins/f/fitcash/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | ast-sqlite-boot | flipgorilla-embed | [View logs](/logs/plugins/f/flipgorilla-embed/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | asyncify-boot | flipgorilla-embed | [View logs](/logs/plugins/f/flipgorilla-embed/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_frm_forms. | jspi-boot | flipgorilla-embed | [View logs](/logs/plugins/f/flipgorilla-embed/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_fastflow_settings. | ast-sqlite-boot | fluent-smtp | [View logs](/logs/plugins/f/fluent-smtp/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | font-resize-accessibility-compliance | [View logs](/logs/plugins/f/font-resize-accessibility-compliance/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | ast-sqlite-boot | flickrphotogallery | [View logs](/logs/plugins/f/flickrphotogallery/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | asyncify-boot | flickrphotogallery | [View logs](/logs/plugins/f/flickrphotogallery/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | jspi-boot | flickrphotogallery | [View logs](/logs/plugins/f/flickrphotogallery/error.json) |
@@ -2605,9 +2845,12 @@
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | fast-secure-recaptcha | [View logs](/logs/plugins/f/fast-secure-recaptcha/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | fast-secure-recaptcha | [View logs](/logs/plugins/f/fast-secure-recaptcha/error.json) |
 | Unknown query type: RENAME. | ast-sqlite-boot | fast-secure-recaptcha | [View logs](/logs/plugins/f/fast-secure-recaptcha/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_flopress_feature. | ast-sqlite-boot | force-download-wordpress-video-plugin | [View logs](/logs/plugins/f/force-download-wordpress-video-plugin/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_flopress_feature. | asyncify-boot | force-download-wordpress-video-plugin | [View logs](/logs/plugins/f/force-download-wordpress-video-plugin/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_flopress_feature. | jspi-boot | force-download-wordpress-video-plugin | [View logs](/logs/plugins/f/force-download-wordpress-video-plugin/error.json) |
+| MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | force-download-wordpress-video-plugin | [View logs](/logs/plugins/f/force-download-wordpress-video-plugin/error.json) |
+| MySQL field type cannot be translated to SQLite: json. | asyncify-boot | force-download-wordpress-video-plugin | [View logs](/logs/plugins/f/force-download-wordpress-video-plugin/error.json) |
+| MySQL field type cannot be translated to SQLite: json. | jspi-boot | force-download-wordpress-video-plugin | [View logs](/logs/plugins/f/force-download-wordpress-video-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: name_field_id. | ast-sqlite-boot | force-download-wordpress-video-plugin | [View logs](/logs/plugins/f/force-download-wordpress-video-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: name_field_id. | asyncify-boot | force-download-wordpress-video-plugin | [View logs](/logs/plugins/f/force-download-wordpress-video-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: name_field_id. | jspi-boot | force-download-wordpress-video-plugin | [View logs](/logs/plugins/f/force-download-wordpress-video-plugin/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | funny-demotivators | [View logs](/logs/plugins/f/funny-demotivators/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | funny-demotivators | [View logs](/logs/plugins/f/funny-demotivators/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | funny-demotivators | [View logs](/logs/plugins/f/funny-demotivators/error.json) |
@@ -2644,10 +2887,15 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_madeit_forms. | ast-sqlite-boot | fb-events-in-city | [View logs](/logs/plugins/f/fb-events-in-city/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_madeit_forms. | asyncify-boot | fb-events-in-city | [View logs](/logs/plugins/f/fb-events-in-city/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_madeit_forms. | jspi-boot | fb-events-in-city | [View logs](/logs/plugins/f/fb-events-in-city/error.json) |
+| MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | fancy-gallery | [View logs](/logs/plugins/f/fancy-gallery/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: name_field_id. | ast-sqlite-boot | fancy-gallery | [View logs](/logs/plugins/f/fancy-gallery/error.json) |
 | Unknown create type: TRIGGER. | asyncify-boot | fakturace | [View logs](/logs/plugins/f/fakturace/error.json) |
 | Unknown create type: TRIGGER. | jspi-boot | fakturace | [View logs](/logs/plugins/f/fakturace/error.json) |
 | Unknown drop type: TRIGGER. | asyncify-boot | fakturace | [View logs](/logs/plugins/f/fakturace/error.json) |
 | Unknown drop type: TRIGGER. | jspi-boot | fakturace | [View logs](/logs/plugins/f/fakturace/error.json) |
+| Unknown operation: AUTO_INCREMENT. | ast-sqlite-boot | follow-me-twitter | [View logs](/logs/plugins/f/follow-me-twitter/error.json) |
+| Unknown operation: AUTO_INCREMENT. | asyncify-boot | follow-me-twitter | [View logs](/logs/plugins/f/follow-me-twitter/error.json) |
+| Unknown operation: AUTO_INCREMENT. | jspi-boot | follow-me-twitter | [View logs](/logs/plugins/f/follow-me-twitter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_blogs. | asyncify-boot | frontend-signup-site-clone | [View logs](/logs/plugins/f/frontend-signup-site-clone/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_blogs. | jspi-boot | frontend-signup-site-clone | [View logs](/logs/plugins/f/frontend-signup-site-clone/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_dfp_group. | ast-sqlite-boot | free-post-mail | [View logs](/logs/plugins/f/free-post-mail/error.json) |
@@ -2675,6 +2923,15 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_shipping_zone_methods. | ast-sqlite-boot | formatting-correcter | [View logs](/logs/plugins/f/formatting-correcter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_shipping_zone_methods. | asyncify-boot | formatting-correcter | [View logs](/logs/plugins/f/formatting-correcter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_shipping_zone_methods. | jspi-boot | formatting-correcter | [View logs](/logs/plugins/f/formatting-correcter/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: id. | ast-sqlite-boot | fs-real-estate-plugin | [View logs](/logs/plugins/f/fs-real-estate-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: id. | asyncify-boot | fs-real-estate-plugin | [View logs](/logs/plugins/f/fs-real-estate-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: id. | jspi-boot | fs-real-estate-plugin | [View logs](/logs/plugins/f/fs-real-estate-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter. | ast-sqlite-boot | fs-real-estate-plugin | [View logs](/logs/plugins/f/fs-real-estate-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter. | asyncify-boot | fs-real-estate-plugin | [View logs](/logs/plugins/f/fs-real-estate-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_newsletter. | jspi-boot | fs-real-estate-plugin | [View logs](/logs/plugins/f/fs-real-estate-plugin/error.json) |
+| Unknown create type: table. | ast-sqlite-boot | fs-real-estate-plugin | [View logs](/logs/plugins/f/fs-real-estate-plugin/error.json) |
+| Unknown create type: table. | asyncify-boot | fs-real-estate-plugin | [View logs](/logs/plugins/f/fs-real-estate-plugin/error.json) |
+| Unknown create type: table. | jspi-boot | fs-real-estate-plugin | [View logs](/logs/plugins/f/fs-real-estate-plugin/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | feature-me | [View logs](/logs/plugins/f/feature-me/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | feature-me | [View logs](/logs/plugins/f/feature-me/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | feature-me | [View logs](/logs/plugins/f/feature-me/error.json) |
@@ -2693,18 +2950,16 @@
 | Unknown create type: table. | ast-sqlite-boot | fairplayer-sms-gateway | [View logs](/logs/plugins/f/fairplayer-sms-gateway/error.json) |
 | Unknown create type: table. | asyncify-boot | fairplayer-sms-gateway | [View logs](/logs/plugins/f/fairplayer-sms-gateway/error.json) |
 | Unknown create type: table. | jspi-boot | fairplayer-sms-gateway | [View logs](/logs/plugins/f/fairplayer-sms-gateway/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | facebook-share-button | [View logs](/logs/plugins/f/facebook-share-button/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | asyncify-boot | facebook-share-button | [View logs](/logs/plugins/f/facebook-share-button/error.json) |
-| MySQL field type cannot be translated to SQLite: json. | jspi-boot | facebook-share-button | [View logs](/logs/plugins/f/facebook-share-button/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: name_field_id. | ast-sqlite-boot | facebook-share-button | [View logs](/logs/plugins/f/facebook-share-button/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: name_field_id. | asyncify-boot | facebook-share-button | [View logs](/logs/plugins/f/facebook-share-button/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: name_field_id. | jspi-boot | facebook-share-button | [View logs](/logs/plugins/f/facebook-share-button/error.json) |
+| Unknown operation: AUTO_INCREMENT. | ast-sqlite-boot | facebook-share-button | [View logs](/logs/plugins/f/facebook-share-button/error.json) |
+| Unknown operation: AUTO_INCREMENT. | asyncify-boot | facebook-share-button | [View logs](/logs/plugins/f/facebook-share-button/error.json) |
+| Unknown operation: AUTO_INCREMENT. | jspi-boot | facebook-share-button | [View logs](/logs/plugins/f/facebook-share-button/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | facebook-debug-links | [View logs](/logs/plugins/f/facebook-debug-links/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | facebook-debug-links | [View logs](/logs/plugins/f/facebook-debug-links/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | facebook-debug-links | [View logs](/logs/plugins/f/facebook-debug-links/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | flickrcube-widget | [View logs](/logs/plugins/f/flickrcube-widget/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | flickrcube-widget | [View logs](/logs/plugins/f/flickrcube-widget/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | flickrcube-widget | [View logs](/logs/plugins/f/flickrcube-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_blogs. | ast-sqlite-boot | floating-circles | [View logs](/logs/plugins/f/floating-circles/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | ast-sqlite-boot | features-by-woothemes | [View logs](/logs/plugins/f/features-by-woothemes/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | asyncify-boot | features-by-woothemes | [View logs](/logs/plugins/f/features-by-woothemes/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | jspi-boot | features-by-woothemes | [View logs](/logs/plugins/f/features-by-woothemes/error.json) |
@@ -2718,9 +2973,6 @@
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | features-by-woothemes | [View logs](/logs/plugins/f/features-by-woothemes/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | features-by-woothemes | [View logs](/logs/plugins/f/features-by-woothemes/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SEPARATOR": syntax error. | ast-sqlite-boot | falang | [View logs](/logs/plugins/f/falang/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_blogs. | ast-sqlite-boot | fixon-cadastro-de-clientes | [View logs](/logs/plugins/f/fixon-cadastro-de-clientes/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_blogs. | asyncify-boot | fixon-cadastro-de-clientes | [View logs](/logs/plugins/f/fixon-cadastro-de-clientes/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_blogs. | jspi-boot | fixon-cadastro-de-clientes | [View logs](/logs/plugins/f/fixon-cadastro-de-clientes/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_fullbackslider has no column named folder. | ast-sqlite-boot | fusionspan-impexium-single-sign-on | [View logs](/logs/plugins/f/fusionspan-impexium-single-sign-on/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_fullbackslider has no column named folder. | asyncify-boot | fusionspan-impexium-single-sign-on | [View logs](/logs/plugins/f/fusionspan-impexium-single-sign-on/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_fullbackslider has no column named folder. | jspi-boot | fusionspan-impexium-single-sign-on | [View logs](/logs/plugins/f/fusionspan-impexium-single-sign-on/error.json) |
@@ -2746,6 +2998,7 @@
 | SQLSTATE[HY000]: General error: 1 no such table: flora_config. | ast-sqlite-boot | flopay-checkout-woocommerce | [View logs](/logs/plugins/f/flopay-checkout-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: flora_config. | asyncify-boot | flopay-checkout-woocommerce | [View logs](/logs/plugins/f/flopay-checkout-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: flora_config. | jspi-boot | flopay-checkout-woocommerce | [View logs](/logs/plugins/f/flopay-checkout-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_flopress_feature. | ast-sqlite-boot | foloosi-for-woocommerce | [View logs](/logs/plugins/f/foloosi-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: is_new. | jspi-boot | findery-notes | [View logs](/logs/plugins/f/findery-notes/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: lang. | jspi-boot | findery-notes | [View logs](/logs/plugins/f/findery-notes/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ")": syntax error. | jspi-boot | findery-notes | [View logs](/logs/plugins/f/findery-notes/error.json) |
@@ -2782,11 +3035,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_fastflow_settings. | ast-sqlite-boot | flexy-seo | [View logs](/logs/plugins/f/flexy-seo/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_fastflow_settings. | asyncify-boot | flexy-seo | [View logs](/logs/plugins/f/flexy-seo/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_fastflow_settings. | jspi-boot | flexy-seo | [View logs](/logs/plugins/f/flexy-seo/error.json) |
-| SQLSTATE[HY000]: General error: 1 table wp_fullbackslider has no column named folder. | ast-sqlite-boot | flexo-archives-widget | [View logs](/logs/plugins/f/flexo-archives-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 table wp_fullbackslider has no column named folder. | asyncify-boot | flexo-archives-widget | [View logs](/logs/plugins/f/flexo-archives-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 table wp_fullbackslider has no column named folder. | jspi-boot | flexo-archives-widget | [View logs](/logs/plugins/f/flexo-archives-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_fm_forms. | asyncify-boot | fifa-world-cup-south-africa-scoreboard | [View logs](/logs/plugins/f/fifa-world-cup-south-africa-scoreboard/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_fm_mails. | asyncify-boot | fifa-world-cup-south-africa-scoreboard | [View logs](/logs/plugins/f/fifa-world-cup-south-africa-scoreboard/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wc_customer_lookup. | ast-sqlite-boot | fast-mailchimp | [View logs](/logs/plugins/f/fast-mailchimp/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: blog_id. | ast-sqlite-boot | featured-podcast-widget | [View logs](/logs/plugins/f/featured-podcast-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: blog_id. | asyncify-boot | featured-podcast-widget | [View logs](/logs/plugins/f/featured-podcast-widget/error.json) |
@@ -2807,9 +3055,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: flora_config. | ast-sqlite-boot | football-match-tracker | [View logs](/logs/plugins/f/football-match-tracker/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: flora_config. | asyncify-boot | football-match-tracker | [View logs](/logs/plugins/f/football-match-tracker/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: flora_config. | jspi-boot | football-match-tracker | [View logs](/logs/plugins/f/football-match-tracker/error.json) |
-| SQLSTATE[HY000]: General error: 1 table wp_fullbackslider has no column named folder. | ast-sqlite-boot | favorite-post | [View logs](/logs/plugins/f/favorite-post/error.json) |
-| SQLSTATE[HY000]: General error: 1 table wp_fullbackslider has no column named folder. | asyncify-boot | favorite-post | [View logs](/logs/plugins/f/favorite-post/error.json) |
-| SQLSTATE[HY000]: General error: 1 table wp_fullbackslider has no column named folder. | jspi-boot | favorite-post | [View logs](/logs/plugins/f/favorite-post/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SEPARATOR": syntax error. | jspi-boot | free-tell-a-friend | [View logs](/logs/plugins/f/free-tell-a-friend/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | foodle-for-democracy-poll | [View logs](/logs/plugins/f/foodle-for-democracy-poll/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | foodle-for-democracy-poll | [View logs](/logs/plugins/f/foodle-for-democracy-poll/error.json) |
@@ -2828,9 +3073,8 @@
 | Unknown create type: table. | jspi-boot | fbf-facebook-page-feed-widget | [View logs](/logs/plugins/f/fbf-facebook-page-feed-widget/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | flex-qr-code-generator | [View logs](/logs/plugins/f/flex-qr-code-generator/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | flex-qr-code-generator | [View logs](/logs/plugins/f/flex-qr-code-generator/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_blogs. | ast-sqlite-boot | fruit-wp-functions | [View logs](/logs/plugins/f/fruit-wp-functions/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_blogs. | asyncify-boot | fruit-wp-functions | [View logs](/logs/plugins/f/fruit-wp-functions/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_blogs. | jspi-boot | fruit-wp-functions | [View logs](/logs/plugins/f/fruit-wp-functions/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | flexitype-lite | [View logs](/logs/plugins/f/flexitype-lite/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_FFDS_states. | ast-sqlite-boot | flexitype-lite | [View logs](/logs/plugins/f/flexitype-lite/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | ast-sqlite-boot | fluent-booking | [View logs](/logs/plugins/f/fluent-booking/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | asyncify-boot | fluent-booking | [View logs](/logs/plugins/f/fluent-booking/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ADD": syntax error. | jspi-boot | fluent-booking | [View logs](/logs/plugins/f/fluent-booking/error.json) |
@@ -3391,12 +3635,6 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | igit-new-twitter-tweet-share-button-with-counter | [View logs](/logs/plugins/i/igit-new-twitter-tweet-share-button-with-counter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imk_apps. | asyncify-boot | imk-services | [View logs](/logs/plugins/i/imk-services/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imk_apps. | jspi-boot | imk-services | [View logs](/logs/plugins/i/imk-services/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_searchtweets_configuration. | ast-sqlite-boot | invoice | [View logs](/logs/plugins/i/invoice/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_searchtweets_configuration. | asyncify-boot | invoice | [View logs](/logs/plugins/i/invoice/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_searchtweets_configuration. | jspi-boot | invoice | [View logs](/logs/plugins/i/invoice/error.json) |
-| Unknown query type: . | ast-sqlite-boot | invoice | [View logs](/logs/plugins/i/invoice/error.json) |
-| Unknown query type: . | asyncify-boot | invoice | [View logs](/logs/plugins/i/invoice/error.json) |
-| Unknown query type: . | jspi-boot | invoice | [View logs](/logs/plugins/i/invoice/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | inn-style-widget | [View logs](/logs/plugins/i/inn-style-widget/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | inn-style-widget | [View logs](/logs/plugins/i/inn-style-widget/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | inn-style-widget | [View logs](/logs/plugins/i/inn-style-widget/error.json) |
@@ -3413,9 +3651,6 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | image-upload-http-error-fix | [View logs](/logs/plugins/i/image-upload-http-error-fix/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | image-upload-http-error-fix | [View logs](/logs/plugins/i/image-upload-http-error-fix/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | image-upload-http-error-fix | [View logs](/logs/plugins/i/image-upload-http-error-fix/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_URLKeywordsMapping. | ast-sqlite-boot | item-reservation | [View logs](/logs/plugins/i/item-reservation/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_URLKeywordsMapping. | asyncify-boot | item-reservation | [View logs](/logs/plugins/i/item-reservation/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_URLKeywordsMapping. | jspi-boot | item-reservation | [View logs](/logs/plugins/i/item-reservation/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | ast-sqlite-boot | iq-testimonials | [View logs](/logs/plugins/i/iq-testimonials/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | asyncify-boot | iq-testimonials | [View logs](/logs/plugins/i/iq-testimonials/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | jspi-boot | iq-testimonials | [View logs](/logs/plugins/i/iq-testimonials/error.json) |
@@ -3425,6 +3660,9 @@
 | MySQL field type cannot be translated to SQLite: point. | ast-sqlite-boot | immerstat | [View logs](/logs/plugins/i/immerstat/error.json) |
 | MySQL field type cannot be translated to SQLite: point. | asyncify-boot | immerstat | [View logs](/logs/plugins/i/immerstat/error.json) |
 | MySQL field type cannot be translated to SQLite: point. | jspi-boot | immerstat | [View logs](/logs/plugins/i/immerstat/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_URLKeywordsMapping. | ast-sqlite-boot | iota-pay-per-content | [View logs](/logs/plugins/i/iota-pay-per-content/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_URLKeywordsMapping. | asyncify-boot | iota-pay-per-content | [View logs](/logs/plugins/i/iota-pay-per-content/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_URLKeywordsMapping. | jspi-boot | iota-pay-per-content | [View logs](/logs/plugins/i/iota-pay-per-content/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | instagrabber | [View logs](/logs/plugins/i/instagrabber/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | instagrabber | [View logs](/logs/plugins/i/instagrabber/error.json) |
 | Unknown query type: . | ast-sqlite-boot | iosec-anti-flood-security-gateway-module | [View logs](/logs/plugins/i/iosec-anti-flood-security-gateway-module/error.json) |
@@ -3455,6 +3693,9 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_itman_page_speed_insights. | ast-sqlite-boot | inhouse-tutorials-rss-feed-dashboard-widget | [View logs](/logs/plugins/i/inhouse-tutorials-rss-feed-dashboard-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_itman_page_speed_insights. | asyncify-boot | inhouse-tutorials-rss-feed-dashboard-widget | [View logs](/logs/plugins/i/inhouse-tutorials-rss-feed-dashboard-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_itman_page_speed_insights. | jspi-boot | inhouse-tutorials-rss-feed-dashboard-widget | [View logs](/logs/plugins/i/inhouse-tutorials-rss-feed-dashboard-widget/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | innozilla-table-rate-shipping-for-woocommerce | [View logs](/logs/plugins/i/innozilla-table-rate-shipping-for-woocommerce/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | innozilla-table-rate-shipping-for-woocommerce | [View logs](/logs/plugins/i/innozilla-table-rate-shipping-for-woocommerce/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | innozilla-table-rate-shipping-for-woocommerce | [View logs](/logs/plugins/i/innozilla-table-rate-shipping-for-woocommerce/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | images-to-webp | [View logs](/logs/plugins/i/images-to-webp/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | images-to-webp | [View logs](/logs/plugins/i/images-to-webp/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | images-to-webp | [View logs](/logs/plugins/i/images-to-webp/error.json) |
@@ -3493,9 +3734,6 @@
 | MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | ilike-social-media-optimization | [View logs](/logs/plugins/i/ilike-social-media-optimization/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | asyncify-boot | ilike-social-media-optimization | [View logs](/logs/plugins/i/ilike-social-media-optimization/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | jspi-boot | ilike-social-media-optimization | [View logs](/logs/plugins/i/ilike-social-media-optimization/error.json) |
-| Unknown query type: . | ast-sqlite-boot | image-snippet | [View logs](/logs/plugins/i/image-snippet/error.json) |
-| Unknown query type: . | asyncify-boot | image-snippet | [View logs](/logs/plugins/i/image-snippet/error.json) |
-| Unknown query type: . | jspi-boot | image-snippet | [View logs](/logs/plugins/i/image-snippet/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | infogeniuz-form-analytics-for-contact-form-7 | [View logs](/logs/plugins/i/infogeniuz-form-analytics-for-contact-form-7/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | infogeniuz-form-analytics-for-contact-form-7 | [View logs](/logs/plugins/i/infogeniuz-form-analytics-for-contact-form-7/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | infogeniuz-form-analytics-for-contact-form-7 | [View logs](/logs/plugins/i/infogeniuz-form-analytics-for-contact-form-7/error.json) |
@@ -3515,9 +3753,6 @@
 | Unknown operation: MODIFY. | asyncify-boot | indianic-testimonial | [View logs](/logs/plugins/i/indianic-testimonial/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | indianic-testimonial | [View logs](/logs/plugins/i/indianic-testimonial/error.json) |
 | Unknown create type: INDEX. | ast-sqlite-boot | irandargah-payment-gateway-for-woocommerce | [View logs](/logs/plugins/i/irandargah-payment-gateway-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_URLKeywordsMapping. | ast-sqlite-boot | inwebo-login | [View logs](/logs/plugins/i/inwebo-login/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_URLKeywordsMapping. | asyncify-boot | inwebo-login | [View logs](/logs/plugins/i/inwebo-login/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_URLKeywordsMapping. | jspi-boot | inwebo-login | [View logs](/logs/plugins/i/inwebo-login/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | itunes-affiliate-link-maker | [View logs](/logs/plugins/i/itunes-affiliate-link-maker/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | itunes-affiliate-link-maker | [View logs](/logs/plugins/i/itunes-affiliate-link-maker/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | itunes-affiliate-link-maker | [View logs](/logs/plugins/i/itunes-affiliate-link-maker/error.json) |
@@ -3555,9 +3790,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_searchtweets_configuration. | ast-sqlite-boot | instawidget | [View logs](/logs/plugins/i/instawidget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_searchtweets_configuration. | asyncify-boot | instawidget | [View logs](/logs/plugins/i/instawidget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_searchtweets_configuration. | jspi-boot | instawidget | [View logs](/logs/plugins/i/instawidget/error.json) |
-| Unknown query type: . | ast-sqlite-boot | instawidget | [View logs](/logs/plugins/i/instawidget/error.json) |
-| Unknown query type: . | asyncify-boot | instawidget | [View logs](/logs/plugins/i/instawidget/error.json) |
-| Unknown query type: . | jspi-boot | instawidget | [View logs](/logs/plugins/i/instawidget/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | ip-guard | [View logs](/logs/plugins/i/ip-guard/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | ast-sqlite-boot | infoxicate | [View logs](/logs/plugins/i/infoxicate/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_xyz_ips_short_code. | asyncify-boot | infoxicate | [View logs](/logs/plugins/i/infoxicate/error.json) |
@@ -3572,12 +3804,6 @@
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | ip2content | [View logs](/logs/plugins/i/ip2content/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wmip2c_fields. | asyncify-boot | ip2content | [View logs](/logs/plugins/i/ip2content/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wmip2c_fields. | jspi-boot | ip2content | [View logs](/logs/plugins/i/ip2content/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_searchtweets_configuration. | ast-sqlite-boot | itunes-appstore-charts | [View logs](/logs/plugins/i/itunes-appstore-charts/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_searchtweets_configuration. | asyncify-boot | itunes-appstore-charts | [View logs](/logs/plugins/i/itunes-appstore-charts/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_searchtweets_configuration. | jspi-boot | itunes-appstore-charts | [View logs](/logs/plugins/i/itunes-appstore-charts/error.json) |
-| Unknown query type: . | ast-sqlite-boot | itunes-appstore-charts | [View logs](/logs/plugins/i/itunes-appstore-charts/error.json) |
-| Unknown query type: . | asyncify-boot | itunes-appstore-charts | [View logs](/logs/plugins/i/itunes-appstore-charts/error.json) |
-| Unknown query type: . | jspi-boot | itunes-appstore-charts | [View logs](/logs/plugins/i/itunes-appstore-charts/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_idnich_imported_translation. | ast-sqlite-boot | imager | [View logs](/logs/plugins/i/imager/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_itman_page_speed_insights. | ast-sqlite-boot | inbox-forms | [View logs](/logs/plugins/i/inbox-forms/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | inkmember-build-your-membership-site-easily | [View logs](/logs/plugins/i/inkmember-build-your-membership-site-easily/error.json) |
@@ -3587,9 +3813,12 @@
 | MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | integration-between-groovehq-and-cf7 | [View logs](/logs/plugins/i/integration-between-groovehq-and-cf7/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | asyncify-boot | integration-between-groovehq-and-cf7 | [View logs](/logs/plugins/i/integration-between-groovehq-and-cf7/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | jspi-boot | integration-between-groovehq-and-cf7 | [View logs](/logs/plugins/i/integration-between-groovehq-and-cf7/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_URLKeywordsMapping. | ast-sqlite-boot | integration-adyen-woocommerce | [View logs](/logs/plugins/i/integration-adyen-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_URLKeywordsMapping. | asyncify-boot | integration-adyen-woocommerce | [View logs](/logs/plugins/i/integration-adyen-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_URLKeywordsMapping. | jspi-boot | integration-adyen-woocommerce | [View logs](/logs/plugins/i/integration-adyen-woocommerce/error.json) |
+| Unknown query type: . | ast-sqlite-boot | infocom-alert-state-indicator | [View logs](/logs/plugins/i/infocom-alert-state-indicator/error.json) |
+| Unknown query type: . | asyncify-boot | infocom-alert-state-indicator | [View logs](/logs/plugins/i/infocom-alert-state-indicator/error.json) |
+| Unknown query type: . | jspi-boot | infocom-alert-state-indicator | [View logs](/logs/plugins/i/infocom-alert-state-indicator/error.json) |
+| Unknown query type: . | ast-sqlite-boot | integration-adyen-woocommerce | [View logs](/logs/plugins/i/integration-adyen-woocommerce/error.json) |
+| Unknown query type: . | asyncify-boot | integration-adyen-woocommerce | [View logs](/logs/plugins/i/integration-adyen-woocommerce/error.json) |
+| Unknown query type: . | jspi-boot | integration-adyen-woocommerce | [View logs](/logs/plugins/i/integration-adyen-woocommerce/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | ie-theme | [View logs](/logs/plugins/i/ie-theme/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | ie-theme | [View logs](/logs/plugins/i/ie-theme/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | ie-theme | [View logs](/logs/plugins/i/ie-theme/error.json) |
@@ -3627,6 +3856,7 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_IPBLC_blacklist. | ast-sqlite-boot | inline-spoilers | [View logs](/logs/plugins/i/inline-spoilers/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_IPBLC_login_failed. | ast-sqlite-boot | inline-spoilers | [View logs](/logs/plugins/i/inline-spoilers/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_IPBLC_usernames. | ast-sqlite-boot | inline-spoilers | [View logs](/logs/plugins/i/inline-spoilers/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_URLKeywordsMapping. | ast-sqlite-boot | ismartframe | [View logs](/logs/plugins/i/ismartframe/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_idnich_imported_translation. | ast-sqlite-boot | islamic-content-archive | [View logs](/logs/plugins/i/islamic-content-archive/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_rniotg_settings.setting_id. | ast-sqlite-boot | irisnet-api | [View logs](/logs/plugins/i/irisnet-api/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | iloveimg | [View logs](/logs/plugins/i/iloveimg/error.json) |
@@ -3644,9 +3874,6 @@
 | Unknown create type: INDEX. | ast-sqlite-boot | isibia-dashboard-messages | [View logs](/logs/plugins/i/isibia-dashboard-messages/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_rniotg_settings.setting_id. | ast-sqlite-boot | include-matomo | [View logs](/logs/plugins/i/include-matomo/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | its-jewellery-price | [View logs](/logs/plugins/i/its-jewellery-price/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_URLKeywordsMapping. | ast-sqlite-boot | instagram-for-wordpress | [View logs](/logs/plugins/i/instagram-for-wordpress/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_URLKeywordsMapping. | asyncify-boot | instagram-for-wordpress | [View logs](/logs/plugins/i/instagram-for-wordpress/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_URLKeywordsMapping. | jspi-boot | instagram-for-wordpress | [View logs](/logs/plugins/i/instagram-for-wordpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imbachat_hooks. | ast-sqlite-boot | instant-translate-widget | [View logs](/logs/plugins/i/instant-translate-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imbachat_hooks. | asyncify-boot | instant-translate-widget | [View logs](/logs/plugins/i/instant-translate-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_imbachat_hooks. | jspi-boot | instant-translate-widget | [View logs](/logs/plugins/i/instant-translate-widget/error.json) |
@@ -3659,6 +3886,7 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_lmd_config. | ast-sqlite-boot | imasters-wp-adserver | [View logs](/logs/plugins/i/imasters-wp-adserver/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_lmd_config. | asyncify-boot | imasters-wp-adserver | [View logs](/logs/plugins/i/imasters-wp-adserver/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_lmd_config. | jspi-boot | imasters-wp-adserver | [View logs](/logs/plugins/i/imasters-wp-adserver/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_searchtweets_configuration. | ast-sqlite-boot | integration-of-icecat-live | [View logs](/logs/plugins/i/integration-of-icecat-live/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | i-recommend-this | [View logs](/logs/plugins/i/i-recommend-this/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | inlinemanual | [View logs](/logs/plugins/i/inlinemanual/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | inlinemanual | [View logs](/logs/plugins/i/inlinemanual/error.json) |
@@ -3666,9 +3894,6 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | image-licenser | [View logs](/logs/plugins/i/image-licenser/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | image-licenser | [View logs](/logs/plugins/i/image-licenser/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | image-licenser | [View logs](/logs/plugins/i/image-licenser/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_URLKeywordsMapping. | ast-sqlite-boot | internet-connection-test | [View logs](/logs/plugins/i/internet-connection-test/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_URLKeywordsMapping. | asyncify-boot | internet-connection-test | [View logs](/logs/plugins/i/internet-connection-test/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_URLKeywordsMapping. | jspi-boot | internet-connection-test | [View logs](/logs/plugins/i/internet-connection-test/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sbi_feeds. | ast-sqlite-boot | integrate-woocommerce-with-vend | [View logs](/logs/plugins/i/integrate-woocommerce-with-vend/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sbi_feeds. | asyncify-boot | integrate-woocommerce-with-vend | [View logs](/logs/plugins/i/integrate-woocommerce-with-vend/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_sbi_feeds. | jspi-boot | integrate-woocommerce-with-vend | [View logs](/logs/plugins/i/integrate-woocommerce-with-vend/error.json) |
@@ -4319,9 +4544,21 @@
 | Unknown create type: table. | asyncify-boot | modulates-advertiser-integration | [View logs](/logs/plugins/m/modulates-advertiser-integration/error.json) |
 | Unknown create type: table. | jspi-boot | modulates-advertiser-integration | [View logs](/logs/plugins/m/modulates-advertiser-integration/error.json) |
 | Unknown query type: 1. | ast-sqlite-boot | myloyal | [View logs](/logs/plugins/m/myloyal/error.json) |
+| SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | ast-sqlite-boot | mystique-extra-nav-icons | [View logs](/logs/plugins/m/mystique-extra-nav-icons/error.json) |
+| SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | asyncify-boot | mystique-extra-nav-icons | [View logs](/logs/plugins/m/mystique-extra-nav-icons/error.json) |
+| SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | jspi-boot | mystique-extra-nav-icons | [View logs](/logs/plugins/m/mystique-extra-nav-icons/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_mo_product_listing_shortcode. | ast-sqlite-boot | microdata-manager | [View logs](/logs/plugins/m/microdata-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_mo_product_listing_shortcode. | asyncify-boot | microdata-manager | [View logs](/logs/plugins/m/microdata-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_mo_product_listing_shortcode. | jspi-boot | microdata-manager | [View logs](/logs/plugins/m/microdata-manager/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_melipayamak_members__mobile already exists. | ast-sqlite-boot | motive-commerce-search | [View logs](/logs/plugins/m/motive-commerce-search/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_melipayamak_members__mobile already exists. | asyncify-boot | motive-commerce-search | [View logs](/logs/plugins/m/motive-commerce-search/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_melipayamak_members__mobile already exists. | jspi-boot | motive-commerce-search | [View logs](/logs/plugins/m/motive-commerce-search/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_melipayamak_members. | ast-sqlite-boot | motive-commerce-search | [View logs](/logs/plugins/m/motive-commerce-search/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_melipayamak_members. | asyncify-boot | motive-commerce-search | [View logs](/logs/plugins/m/motive-commerce-search/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_melipayamak_members. | jspi-boot | motive-commerce-search | [View logs](/logs/plugins/m/motive-commerce-search/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | motive-commerce-search | [View logs](/logs/plugins/m/motive-commerce-search/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | motive-commerce-search | [View logs](/logs/plugins/m/motive-commerce-search/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | motive-commerce-search | [View logs](/logs/plugins/m/motive-commerce-search/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | membership-for-woocommerce | [View logs](/logs/plugins/m/membership-for-woocommerce/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | membership-for-woocommerce | [View logs](/logs/plugins/m/membership-for-woocommerce/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | membership-for-woocommerce | [View logs](/logs/plugins/m/membership-for-woocommerce/error.json) |
@@ -4334,28 +4571,22 @@
 | SQLSTATE[HY000]: General error: 1 duplicate column name: paycode. | ast-sqlite-boot | meta-auth | [View logs](/logs/plugins/m/meta-auth/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: paycode. | asyncify-boot | meta-auth | [View logs](/logs/plugins/m/meta-auth/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: paycode. | jspi-boot | meta-auth | [View logs](/logs/plugins/m/meta-auth/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | manual-payment-gateway-paypal | [View logs](/logs/plugins/m/manual-payment-gateway-paypal/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "check": syntax error. | ast-sqlite-boot | monk | [View logs](/logs/plugins/m/monk/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_mh_dpt_daily_times. | jspi-boot | mh-display-prayer-times | [View logs](/logs/plugins/m/mh-display-prayer-times/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_mh_dpt_friday_times. | jspi-boot | mh-display-prayer-times | [View logs](/logs/plugins/m/mh-display-prayer-times/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies. | ast-sqlite-boot | muv-hide-preview | [View logs](/logs/plugins/m/muv-hide-preview/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | mybookings-search-and-book | [View logs](/logs/plugins/m/mybookings-search-and-book/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | mybookings-search-and-book | [View logs](/logs/plugins/m/mybookings-search-and-book/error.json) |
+| SQLSTATE[HY000]: General error: 1 table "database_name_here" already exists. | ast-sqlite-boot | mensagem-seguir-twitter-no-final-do-post | [View logs](/logs/plugins/m/mensagem-seguir-twitter-no-final-do-post/error.json) |
+| Unknown operation: COLLATE. | ast-sqlite-boot | mensagem-seguir-twitter-no-final-do-post | [View logs](/logs/plugins/m/mensagem-seguir-twitter-no-final-do-post/error.json) |
+| Unknown operation: ENGINE. | ast-sqlite-boot | mensagem-seguir-twitter-no-final-do-post | [View logs](/logs/plugins/m/mensagem-seguir-twitter-no-final-do-post/error.json) |
 | SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | ast-sqlite-boot | magic-thumb | [View logs](/logs/plugins/m/magic-thumb/error.json) |
 | SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | asyncify-boot | magic-thumb | [View logs](/logs/plugins/m/magic-thumb/error.json) |
 | SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | jspi-boot | magic-thumb | [View logs](/logs/plugins/m/magic-thumb/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | most-popular-posts | [View logs](/logs/plugins/m/most-popular-posts/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | most-popular-posts | [View logs](/logs/plugins/m/most-popular-posts/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | most-popular-posts | [View logs](/logs/plugins/m/most-popular-posts/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: cancel_date. | ast-sqlite-boot | mini-shopping-cart | [View logs](/logs/plugins/m/mini-shopping-cart/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: currency. | ast-sqlite-boot | mini-shopping-cart | [View logs](/logs/plugins/m/mini-shopping-cart/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: drip_day_exp. | ast-sqlite-boot | mini-shopping-cart | [View logs](/logs/plugins/m/mini-shopping-cart/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: is_active. | ast-sqlite-boot | mini-shopping-cart | [View logs](/logs/plugins/m/mini-shopping-cart/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: sub_exp_date. | ast-sqlite-boot | mini-shopping-cart | [View logs](/logs/plugins/m/mini-shopping-cart/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: thrive_product_id. | ast-sqlite-boot | mini-shopping-cart | [View logs](/logs/plugins/m/mini-shopping-cart/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: thrive_product_type. | ast-sqlite-boot | mini-shopping-cart | [View logs](/logs/plugins/m/mini-shopping-cart/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | mini-shopping-cart | [View logs](/logs/plugins/m/mini-shopping-cart/error.json) |
-| SQLSTATE[HY000]: General error: 1 trigger "__wp_77_sm_login_limit_created_date_on_update__" already exists. | ast-sqlite-boot | mini-shopping-cart | [View logs](/logs/plugins/m/mini-shopping-cart/error.json) |
-| SQLSTATE[HY000]: General error: 1 trigger "__wp_77_sm_membership_transaction_created_date_on_update__" already exists. | ast-sqlite-boot | mini-shopping-cart | [View logs](/logs/plugins/m/mini-shopping-cart/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | ast-sqlite-boot | move-site-icon-to-settings | [View logs](/logs/plugins/m/move-site-icon-to-settings/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | asyncify-boot | move-site-icon-to-settings | [View logs](/logs/plugins/m/move-site-icon-to-settings/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | jspi-boot | move-site-icon-to-settings | [View logs](/logs/plugins/m/move-site-icon-to-settings/error.json) |
@@ -4373,24 +4604,22 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | mz-mobilize-america-interface | [View logs](/logs/plugins/m/mz-mobilize-america-interface/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | mz-mobilize-america-interface | [View logs](/logs/plugins/m/mz-mobilize-america-interface/error.json) |
 | Unknown create type: INDEX. | jspi-boot | mediarss-with-post-thumbnail | [View logs](/logs/plugins/m/mediarss-with-post-thumbnail/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_mca_common. | asyncify-boot | minecraft-admin | [View logs](/logs/plugins/m/minecraft-admin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_mca_common. | jspi-boot | minecraft-admin | [View logs](/logs/plugins/m/minecraft-admin/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | masqclases | [View logs](/logs/plugins/m/masqclases/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | masqclases | [View logs](/logs/plugins/m/masqclases/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_mowplayer_settings. | ast-sqlite-boot | mcstatus | [View logs](/logs/plugins/m/mcstatus/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_mowplayer_settings. | asyncify-boot | mcstatus | [View logs](/logs/plugins/m/mcstatus/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_mowplayer_settings. | jspi-boot | mcstatus | [View logs](/logs/plugins/m/mcstatus/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | my-favorite-cars | [View logs](/logs/plugins/m/my-favorite-cars/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | my-favorite-cars | [View logs](/logs/plugins/m/my-favorite-cars/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | my-favorite-cars | [View logs](/logs/plugins/m/my-favorite-cars/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: cancel_date. | ast-sqlite-boot | medialink | [View logs](/logs/plugins/m/medialink/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: currency. | ast-sqlite-boot | medialink | [View logs](/logs/plugins/m/medialink/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: drip_day_exp. | ast-sqlite-boot | medialink | [View logs](/logs/plugins/m/medialink/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: is_active. | ast-sqlite-boot | medialink | [View logs](/logs/plugins/m/medialink/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: sub_exp_date. | ast-sqlite-boot | medialink | [View logs](/logs/plugins/m/medialink/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: thrive_product_id. | ast-sqlite-boot | medialink | [View logs](/logs/plugins/m/medialink/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: thrive_product_type. | ast-sqlite-boot | medialink | [View logs](/logs/plugins/m/medialink/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | medialink | [View logs](/logs/plugins/m/medialink/error.json) |
-| SQLSTATE[HY000]: General error: 1 trigger "__wp_77_sm_login_limit_created_date_on_update__" already exists. | ast-sqlite-boot | medialink | [View logs](/logs/plugins/m/medialink/error.json) |
-| SQLSTATE[HY000]: General error: 1 trigger "__wp_77_sm_membership_transaction_created_date_on_update__" already exists. | ast-sqlite-boot | medialink | [View logs](/logs/plugins/m/medialink/error.json) |
+| SQLSTATE[HY000]: General error: 1 table "database_name_here" already exists. | ast-sqlite-boot | medialink | [View logs](/logs/plugins/m/medialink/error.json) |
+| SQLSTATE[HY000]: General error: 1 table "database_name_here" already exists. | asyncify-boot | medialink | [View logs](/logs/plugins/m/medialink/error.json) |
+| SQLSTATE[HY000]: General error: 1 table "database_name_here" already exists. | jspi-boot | medialink | [View logs](/logs/plugins/m/medialink/error.json) |
+| Unknown operation: COLLATE. | ast-sqlite-boot | medialink | [View logs](/logs/plugins/m/medialink/error.json) |
+| Unknown operation: COLLATE. | asyncify-boot | medialink | [View logs](/logs/plugins/m/medialink/error.json) |
+| Unknown operation: COLLATE. | jspi-boot | medialink | [View logs](/logs/plugins/m/medialink/error.json) |
+| Unknown operation: ENGINE. | ast-sqlite-boot | medialink | [View logs](/logs/plugins/m/medialink/error.json) |
+| Unknown operation: ENGINE. | asyncify-boot | medialink | [View logs](/logs/plugins/m/medialink/error.json) |
+| Unknown operation: ENGINE. | jspi-boot | medialink | [View logs](/logs/plugins/m/medialink/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | makenewsmail-widget | [View logs](/logs/plugins/m/makenewsmail-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | makenewsmail-widget | [View logs](/logs/plugins/m/makenewsmail-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | makenewsmail-widget | [View logs](/logs/plugins/m/makenewsmail-widget/error.json) |
@@ -4403,9 +4632,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_miragetCon_options. | ast-sqlite-boot | mega-taxonomy-menu | [View logs](/logs/plugins/m/mega-taxonomy-menu/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_miragetCon_options. | asyncify-boot | mega-taxonomy-menu | [View logs](/logs/plugins/m/mega-taxonomy-menu/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_miragetCon_options. | jspi-boot | mega-taxonomy-menu | [View logs](/logs/plugins/m/mega-taxonomy-menu/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | mbla | [View logs](/logs/plugins/m/mbla/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | mbla | [View logs](/logs/plugins/m/mbla/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | mbla | [View logs](/logs/plugins/m/mbla/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | mfloormap | [View logs](/logs/plugins/m/mfloormap/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | mfloormap | [View logs](/logs/plugins/m/mfloormap/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | mfloormap | [View logs](/logs/plugins/m/mfloormap/error.json) |
@@ -4416,6 +4642,9 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | myjour-widget | [View logs](/logs/plugins/m/myjour-widget/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | myjour-widget | [View logs](/logs/plugins/m/myjour-widget/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | myjour-widget | [View logs](/logs/plugins/m/myjour-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 table "database_name_here" already exists. | ast-sqlite-boot | meteosales | [View logs](/logs/plugins/m/meteosales/error.json) |
+| Unknown operation: COLLATE. | ast-sqlite-boot | meteosales | [View logs](/logs/plugins/m/meteosales/error.json) |
+| Unknown operation: ENGINE. | ast-sqlite-boot | meteosales | [View logs](/logs/plugins/m/meteosales/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | manara-business-locator | [View logs](/logs/plugins/m/manara-business-locator/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_akpk_mpg_setting. | ast-sqlite-boot | multisite-posts | [View logs](/logs/plugins/m/multisite-posts/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_akpk_mpg_setting. | asyncify-boot | multisite-posts | [View logs](/logs/plugins/m/multisite-posts/error.json) |
@@ -4433,9 +4662,6 @@
 | Data type expected in MySQL query, unknown token received: wp_mactrak_markertype_fkey. | ast-sqlite-boot | minecraft-server-info | [View logs](/logs/plugins/m/minecraft-server-info/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_mactrak_markertype_fkey. | asyncify-boot | minecraft-server-info | [View logs](/logs/plugins/m/minecraft-server-info/error.json) |
 | Data type expected in MySQL query, unknown token received: wp_mactrak_markertype_fkey. | jspi-boot | minecraft-server-info | [View logs](/logs/plugins/m/minecraft-server-info/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | minify | [View logs](/logs/plugins/m/minify/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | minify | [View logs](/logs/plugins/m/minify/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | minify | [View logs](/logs/plugins/m/minify/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | mmyyoutubehq | [View logs](/logs/plugins/m/mmyyoutubehq/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | mmyyoutubehq | [View logs](/logs/plugins/m/mmyyoutubehq/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | mmyyoutubehq | [View logs](/logs/plugins/m/mmyyoutubehq/error.json) |
@@ -4450,21 +4676,32 @@
 | SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | ast-sqlite-boot | monetizecomments | [View logs](/logs/plugins/m/monetizecomments/error.json) |
 | SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | asyncify-boot | monetizecomments | [View logs](/logs/plugins/m/monetizecomments/error.json) |
 | SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | jspi-boot | monetizecomments | [View logs](/logs/plugins/m/monetizecomments/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | missing-menu-items | [View logs](/logs/plugins/m/missing-menu-items/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | mo-widgets | [View logs](/logs/plugins/m/mo-widgets/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | mo-widgets | [View logs](/logs/plugins/m/mo-widgets/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | mo-widgets | [View logs](/logs/plugins/m/mo-widgets/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: SECOND. | ast-sqlite-boot | mo-widgets | [View logs](/logs/plugins/m/mo-widgets/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: SECOND. | asyncify-boot | mo-widgets | [View logs](/logs/plugins/m/mo-widgets/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: SECOND. | jspi-boot | mo-widgets | [View logs](/logs/plugins/m/mo-widgets/error.json) |
+| SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | ast-sqlite-boot | mainwp-child | [View logs](/logs/plugins/m/mainwp-child/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | mydigipasscom-secure-login | [View logs](/logs/plugins/m/mydigipasscom-secure-login/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | mydigipasscom-secure-login | [View logs](/logs/plugins/m/mydigipasscom-secure-login/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | mydigipasscom-secure-login | [View logs](/logs/plugins/m/mydigipasscom-secure-login/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_melipayamak_members__mobile already exists. | asyncify-boot | melipayamak | [View logs](/logs/plugins/m/melipayamak/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_melipayamak_members__mobile already exists. | jspi-boot | melipayamak | [View logs](/logs/plugins/m/melipayamak/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_melipayamak_members. | asyncify-boot | melipayamak | [View logs](/logs/plugins/m/melipayamak/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_melipayamak_members. | jspi-boot | melipayamak | [View logs](/logs/plugins/m/melipayamak/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | melipayamak | [View logs](/logs/plugins/m/melipayamak/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | melipayamak | [View logs](/logs/plugins/m/melipayamak/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_miragetgen_op. | ast-sqlite-boot | multiple-customer-addresses-for-woocommerce | [View logs](/logs/plugins/m/multiple-customer-addresses-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_miragetgen_op. | asyncify-boot | multiple-customer-addresses-for-woocommerce | [View logs](/logs/plugins/m/multiple-customer-addresses-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_miragetgen_op. | jspi-boot | multiple-customer-addresses-for-woocommerce | [View logs](/logs/plugins/m/multiple-customer-addresses-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | ast-sqlite-boot | microstock-photo-powersearch-plugin | [View logs](/logs/plugins/m/microstock-photo-powersearch-plugin/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | asyncify-boot | microstock-photo-powersearch-plugin | [View logs](/logs/plugins/m/microstock-photo-powersearch-plugin/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | jspi-boot | microstock-photo-powersearch-plugin | [View logs](/logs/plugins/m/microstock-photo-powersearch-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | ast-sqlite-boot | micropayments-paywall | [View logs](/logs/plugins/m/micropayments-paywall/error.json) |
+| SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | asyncify-boot | micropayments-paywall | [View logs](/logs/plugins/m/micropayments-paywall/error.json) |
+| SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | jspi-boot | micropayments-paywall | [View logs](/logs/plugins/m/micropayments-paywall/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | menu-by-user-role | [View logs](/logs/plugins/m/menu-by-user-role/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | menu-by-user-role | [View logs](/logs/plugins/m/menu-by-user-role/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | menu-by-user-role | [View logs](/logs/plugins/m/menu-by-user-role/error.json) |
@@ -4478,6 +4715,9 @@
 | Unknown query type: 1. | ast-sqlite-boot | mailchimp-widget | [View logs](/logs/plugins/m/mailchimp-widget/error.json) |
 | Unknown query type: 1. | asyncify-boot | mailchimp-widget | [View logs](/logs/plugins/m/mailchimp-widget/error.json) |
 | Unknown query type: 1. | jspi-boot | mailchimp-widget | [View logs](/logs/plugins/m/mailchimp-widget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | multiple-gift-product | [View logs](/logs/plugins/m/multiple-gift-product/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | multiple-gift-product | [View logs](/logs/plugins/m/multiple-gift-product/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | multiple-gift-product | [View logs](/logs/plugins/m/multiple-gift-product/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_akpk_mpg_setting. | ast-sqlite-boot | malware-scanner | [View logs](/logs/plugins/m/malware-scanner/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_akpk_mpg_setting. | asyncify-boot | malware-scanner | [View logs](/logs/plugins/m/malware-scanner/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_akpk_mpg_setting. | jspi-boot | malware-scanner | [View logs](/logs/plugins/m/malware-scanner/error.json) |
@@ -4494,9 +4734,6 @@
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | mouseover-gallery | [View logs](/logs/plugins/m/mouseover-gallery/error.json) |
 | SQLSTATE[HY000]: General error: 1 trigger "__wp_77_sm_login_limit_created_date_on_update__" already exists. | ast-sqlite-boot | mouseover-gallery | [View logs](/logs/plugins/m/mouseover-gallery/error.json) |
 | SQLSTATE[HY000]: General error: 1 trigger "__wp_77_sm_membership_transaction_created_date_on_update__" already exists. | ast-sqlite-boot | mouseover-gallery | [View logs](/logs/plugins/m/mouseover-gallery/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | multimedial-images | [View logs](/logs/plugins/m/multimedial-images/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | multimedial-images | [View logs](/logs/plugins/m/multimedial-images/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | multimedial-images | [View logs](/logs/plugins/m/multimedial-images/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | mail-newsletter | [View logs](/logs/plugins/m/mail-newsletter/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | mysitesmanagercom-updates-checker | [View logs](/logs/plugins/m/mysitesmanagercom-updates-checker/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | mysitesmanagercom-updates-checker | [View logs](/logs/plugins/m/mysitesmanagercom-updates-checker/error.json) |
@@ -4504,16 +4741,6 @@
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | marketeer | [View logs](/logs/plugins/m/marketeer/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | marketeer | [View logs](/logs/plugins/m/marketeer/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | marketeer | [View logs](/logs/plugins/m/marketeer/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: cancel_date. | asyncify-boot | millvi-wp | [View logs](/logs/plugins/m/millvi-wp/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: currency. | asyncify-boot | millvi-wp | [View logs](/logs/plugins/m/millvi-wp/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: drip_day_exp. | asyncify-boot | millvi-wp | [View logs](/logs/plugins/m/millvi-wp/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: is_active. | asyncify-boot | millvi-wp | [View logs](/logs/plugins/m/millvi-wp/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: sub_exp_date. | asyncify-boot | millvi-wp | [View logs](/logs/plugins/m/millvi-wp/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: thrive_product_id. | asyncify-boot | millvi-wp | [View logs](/logs/plugins/m/millvi-wp/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: thrive_product_type. | asyncify-boot | millvi-wp | [View logs](/logs/plugins/m/millvi-wp/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | millvi-wp | [View logs](/logs/plugins/m/millvi-wp/error.json) |
-| SQLSTATE[HY000]: General error: 1 trigger "__wp_77_sm_login_limit_created_date_on_update__" already exists. | asyncify-boot | millvi-wp | [View logs](/logs/plugins/m/millvi-wp/error.json) |
-| SQLSTATE[HY000]: General error: 1 trigger "__wp_77_sm_membership_transaction_created_date_on_update__" already exists. | asyncify-boot | millvi-wp | [View logs](/logs/plugins/m/millvi-wp/error.json) |
 | SQLSTATE[HY000]: General error: 1 near ")": syntax error. | ast-sqlite-boot | multipress-content | [View logs](/logs/plugins/m/multipress-content/error.json) |
 | Unknown query type: DESC. | ast-sqlite-boot | multipress-content | [View logs](/logs/plugins/m/multipress-content/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: paycode. | ast-sqlite-boot | mvno-portin | [View logs](/logs/plugins/m/mvno-portin/error.json) |
@@ -4522,20 +4749,15 @@
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | mark-it-down-wp | [View logs](/logs/plugins/m/mark-it-down-wp/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | mark-it-down-wp | [View logs](/logs/plugins/m/mark-it-down-wp/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | mark-it-down-wp | [View logs](/logs/plugins/m/mark-it-down-wp/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_URLKeywordsMapping. | ast-sqlite-boot | manuall-dofollow | [View logs](/logs/plugins/m/manuall-dofollow/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_URLKeywordsMapping. | asyncify-boot | manuall-dofollow | [View logs](/logs/plugins/m/manuall-dofollow/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_URLKeywordsMapping. | jspi-boot | manuall-dofollow | [View logs](/logs/plugins/m/manuall-dofollow/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_order_items. | ast-sqlite-boot | mojtv | [View logs](/logs/plugins/m/mojtv/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_order_items. | asyncify-boot | mojtv | [View logs](/logs/plugins/m/mojtv/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_order_items. | jspi-boot | mojtv | [View logs](/logs/plugins/m/mojtv/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | manage-issue-based-magazine | [View logs](/logs/plugins/m/manage-issue-based-magazine/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | manage-issue-based-magazine | [View logs](/logs/plugins/m/manage-issue-based-magazine/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | manage-issue-based-magazine | [View logs](/logs/plugins/m/manage-issue-based-magazine/error.json) |
-| Unexpected token in MySQL query: active. | ast-sqlite-boot | multisite-mediasync | [View logs](/logs/plugins/m/multisite-mediasync/error.json) |
-| Unexpected token in MySQL query: active. | asyncify-boot | multisite-mediasync | [View logs](/logs/plugins/m/multisite-mediasync/error.json) |
-| Unexpected token in MySQL query: active. | jspi-boot | multisite-mediasync | [View logs](/logs/plugins/m/multisite-mediasync/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_miragetgen_op. | asyncify-boot | monei | [View logs](/logs/plugins/m/monei/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_miragetgen_op. | jspi-boot | monei | [View logs](/logs/plugins/m/monei/error.json) |
+| SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | ast-sqlite-boot | meenews | [View logs](/logs/plugins/m/meenews/error.json) |
+| SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | asyncify-boot | meenews | [View logs](/logs/plugins/m/meenews/error.json) |
+| SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | jspi-boot | meenews | [View logs](/logs/plugins/m/meenews/error.json) |
+| SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | ast-sqlite-boot | monitor-login | [View logs](/logs/plugins/m/monitor-login/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: post_excerpt. | asyncify-boot | marvinerp-api | [View logs](/logs/plugins/m/marvinerp-api/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: post_excerpt. | jspi-boot | marvinerp-api | [View logs](/logs/plugins/m/marvinerp-api/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_mo_product_listing_shortcode. | ast-sqlite-boot | mwhp-for-woocommerce | [View logs](/logs/plugins/m/mwhp-for-woocommerce/error.json) |
@@ -4544,6 +4766,7 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_miragetgen_op. | ast-sqlite-boot | mygooglepluswidget | [View logs](/logs/plugins/m/mygooglepluswidget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_miragetgen_op. | asyncify-boot | mygooglepluswidget | [View logs](/logs/plugins/m/mygooglepluswidget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_miragetgen_op. | jspi-boot | mygooglepluswidget | [View logs](/logs/plugins/m/mygooglepluswidget/error.json) |
+| SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | ast-sqlite-boot | minify-html-jesus | [View logs](/logs/plugins/m/minify-html-jesus/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "check": syntax error. | ast-sqlite-boot | my-video-uploads | [View logs](/logs/plugins/m/my-video-uploads/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "check": syntax error. | asyncify-boot | my-video-uploads | [View logs](/logs/plugins/m/my-video-uploads/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "check": syntax error. | jspi-boot | my-video-uploads | [View logs](/logs/plugins/m/my-video-uploads/error.json) |
@@ -5026,9 +5249,26 @@
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | product-options-for-woocommerce | [View logs](/logs/plugins/p/product-options-for-woocommerce/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | product-options-for-woocommerce | [View logs](/logs/plugins/p/product-options-for-woocommerce/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | product-options-for-woocommerce | [View logs](/logs/plugins/p/product-options-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: admin_can_reedit. | ast-sqlite-boot | prospect | [View logs](/logs/plugins/p/prospect/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: admin_can_reedit. | jspi-boot | prospect | [View logs](/logs/plugins/p/prospect/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cart_item_key. | ast-sqlite-boot | prospect | [View logs](/logs/plugins/p/prospect/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: cart_item_key. | jspi-boot | prospect | [View logs](/logs/plugins/p/prospect/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: date_added. | ast-sqlite-boot | prospect | [View logs](/logs/plugins/p/prospect/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: date_added. | jspi-boot | prospect | [View logs](/logs/plugins/p/prospect/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: pdfUrl. | ast-sqlite-boot | prospect | [View logs](/logs/plugins/p/prospect/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: pdfUrl. | jspi-boot | prospect | [View logs](/logs/plugins/p/prospect/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: saved_projects_page. | ast-sqlite-boot | prospect | [View logs](/logs/plugins/p/prospect/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: saved_projects_page. | jspi-boot | prospect | [View logs](/logs/plugins/p/prospect/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: sessionKey. | ast-sqlite-boot | prospect | [View logs](/logs/plugins/p/prospect/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: sessionKey. | jspi-boot | prospect | [View logs](/logs/plugins/p/prospect/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: show_pdf. | ast-sqlite-boot | prospect | [View logs](/logs/plugins/p/prospect/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: show_pdf. | jspi-boot | prospect | [View logs](/logs/plugins/p/prospect/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pluginbear_popup. | ast-sqlite-boot | post-author-comment-notification | [View logs](/logs/plugins/p/post-author-comment-notification/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pluginbear_popup. | asyncify-boot | post-author-comment-notification | [View logs](/logs/plugins/p/post-author-comment-notification/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pluginbear_popup. | jspi-boot | post-author-comment-notification | [View logs](/logs/plugins/p/post-author-comment-notification/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | protected-wp-login | [View logs](/logs/plugins/p/protected-wp-login/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | protected-wp-login | [View logs](/logs/plugins/p/protected-wp-login/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | protected-wp-login | [View logs](/logs/plugins/p/protected-wp-login/error.json) |
 | MySQL field type cannot be translated to SQLite: serial. | ast-sqlite-boot | post-navigation-widget | [View logs](/logs/plugins/p/post-navigation-widget/error.json) |
 | MySQL field type cannot be translated to SQLite: serial. | asyncify-boot | post-navigation-widget | [View logs](/logs/plugins/p/post-navigation-widget/error.json) |
 | MySQL field type cannot be translated to SQLite: serial. | jspi-boot | post-navigation-widget | [View logs](/logs/plugins/p/post-navigation-widget/error.json) |
@@ -5072,12 +5312,6 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | pofw-option-description | [View logs](/logs/plugins/p/pofw-option-description/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | pofw-option-description | [View logs](/logs/plugins/p/pofw-option-description/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | pixxpay | [View logs](/logs/plugins/p/pixxpay/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | ast-sqlite-boot | post-upload-and-paste | [View logs](/logs/plugins/p/post-upload-and-paste/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | asyncify-boot | post-upload-and-paste | [View logs](/logs/plugins/p/post-upload-and-paste/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | jspi-boot | post-upload-and-paste | [View logs](/logs/plugins/p/post-upload-and-paste/error.json) |
-| Unknown query type: DESC. | ast-sqlite-boot | post-upload-and-paste | [View logs](/logs/plugins/p/post-upload-and-paste/error.json) |
-| Unknown query type: DESC. | asyncify-boot | post-upload-and-paste | [View logs](/logs/plugins/p/post-upload-and-paste/error.json) |
-| Unknown query type: DESC. | jspi-boot | post-upload-and-paste | [View logs](/logs/plugins/p/post-upload-and-paste/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | proxymis-shoutbox-com | [View logs](/logs/plugins/p/proxymis-shoutbox-com/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | proxymis-shoutbox-com | [View logs](/logs/plugins/p/proxymis-shoutbox-com/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | proxymis-shoutbox-com | [View logs](/logs/plugins/p/proxymis-shoutbox-com/error.json) |
@@ -5133,10 +5367,14 @@
 | SQLSTATE[HY000]: General error: 1 duplicate column name: openPlaylistAtStart. | ast-sqlite-boot | product-widget-glopart | [View logs](/logs/plugins/p/product-widget-glopart/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: openPlaylistAtStart. | asyncify-boot | product-widget-glopart | [View logs](/logs/plugins/p/product-widget-glopart/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: openPlaylistAtStart. | jspi-boot | product-widget-glopart | [View logs](/logs/plugins/p/product-widget-glopart/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_psp_web_directories. | ast-sqlite-boot | pro-sitemaps-connect | [View logs](/logs/plugins/p/pro-sitemaps-connect/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | pro-sitemaps-connect | [View logs](/logs/plugins/p/pro-sitemaps-connect/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_plicenses_setting. | ast-sqlite-boot | pmpro-email-templates-addon | [View logs](/logs/plugins/p/pmpro-email-templates-addon/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_plicenses_setting. | asyncify-boot | pmpro-email-templates-addon | [View logs](/logs/plugins/p/pmpro-email-templates-addon/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_plicenses_setting. | jspi-boot | pmpro-email-templates-addon | [View logs](/logs/plugins/p/pmpro-email-templates-addon/error.json) |
 | Unexpected token in MySQL query: show_colours. | ast-sqlite-boot | published-post-shortcut | [View logs](/logs/plugins/p/published-post-shortcut/error.json) |
+| Unexpected token in MySQL query: show_colours. | asyncify-boot | published-post-shortcut | [View logs](/logs/plugins/p/published-post-shortcut/error.json) |
+| Unexpected token in MySQL query: show_colours. | jspi-boot | published-post-shortcut | [View logs](/logs/plugins/p/published-post-shortcut/error.json) |
 | SQLSTATE[HY000]: General error: 1 Cannot add a column with non-constant default. | ast-sqlite-boot | post-from-site | [View logs](/logs/plugins/p/post-from-site/error.json) |
 | SQLSTATE[HY000]: General error: 1 Cannot add a column with non-constant default. | asyncify-boot | post-from-site | [View logs](/logs/plugins/p/post-from-site/error.json) |
 | SQLSTATE[HY000]: General error: 1 Cannot add a column with non-constant default. | jspi-boot | post-from-site | [View logs](/logs/plugins/p/post-from-site/error.json) |
@@ -5149,9 +5387,6 @@
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | populqrnocom-buttons | [View logs](/logs/plugins/p/populqrnocom-buttons/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | populqrnocom-buttons | [View logs](/logs/plugins/p/populqrnocom-buttons/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | populqrnocom-buttons | [View logs](/logs/plugins/p/populqrnocom-buttons/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | pdc-active-hazards-widget | [View logs](/logs/plugins/p/pdc-active-hazards-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | pdc-active-hazards-widget | [View logs](/logs/plugins/p/pdc-active-hazards-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | pdc-active-hazards-widget | [View logs](/logs/plugins/p/pdc-active-hazards-widget/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | postcard-social | [View logs](/logs/plugins/p/postcard-social/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | ast-sqlite-boot | post2pdf | [View logs](/logs/plugins/p/post2pdf/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | asyncify-boot | post2pdf | [View logs](/logs/plugins/p/post2pdf/error.json) |
@@ -5250,9 +5485,9 @@
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | protwitter | [View logs](/logs/plugins/p/protwitter/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | protwitter | [View logs](/logs/plugins/p/protwitter/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | protwitter | [View logs](/logs/plugins/p/protwitter/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | ast-sqlite-boot | poll-lite | [View logs](/logs/plugins/p/poll-lite/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | asyncify-boot | poll-lite | [View logs](/logs/plugins/p/poll-lite/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | jspi-boot | poll-lite | [View logs](/logs/plugins/p/poll-lite/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | plugrush | [View logs](/logs/plugins/p/plugrush/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | plugrush | [View logs](/logs/plugins/p/plugrush/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | plugrush | [View logs](/logs/plugins/p/plugrush/error.json) |
 | Unknown create type: table. | ast-sqlite-boot | pulsemaps | [View logs](/logs/plugins/p/pulsemaps/error.json) |
 | Unknown create type: table. | asyncify-boot | pulsemaps | [View logs](/logs/plugins/p/pulsemaps/error.json) |
 | Unknown create type: table. | jspi-boot | pulsemaps | [View logs](/logs/plugins/p/pulsemaps/error.json) |
@@ -5295,12 +5530,6 @@
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | pinterest-pin-it-button | [View logs](/logs/plugins/p/pinterest-pin-it-button/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | pinterest-pin-it-button | [View logs](/logs/plugins/p/pinterest-pin-it-button/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | pinterest-pin-it-button | [View logs](/logs/plugins/p/pinterest-pin-it-button/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | ast-sqlite-boot | plato-gallery | [View logs](/logs/plugins/p/plato-gallery/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | asyncify-boot | plato-gallery | [View logs](/logs/plugins/p/plato-gallery/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | jspi-boot | plato-gallery | [View logs](/logs/plugins/p/plato-gallery/error.json) |
-| Unknown query type: DESC. | ast-sqlite-boot | plato-gallery | [View logs](/logs/plugins/p/plato-gallery/error.json) |
-| Unknown query type: DESC. | asyncify-boot | plato-gallery | [View logs](/logs/plugins/p/plato-gallery/error.json) |
-| Unknown query type: DESC. | jspi-boot | plato-gallery | [View logs](/logs/plugins/p/plato-gallery/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | phpcodezcategories | [View logs](/logs/plugins/p/phpcodezcategories/error.json) |
 | Unknown show type: KEYS FROM. | jspi-boot | phpcodezcategories | [View logs](/logs/plugins/p/phpcodezcategories/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | pixi-contact-form-for-elementor | [View logs](/logs/plugins/p/pixi-contact-form-for-elementor/error.json) |
@@ -5313,30 +5542,20 @@
 | Unknown operation: AUTO_INCREMENT. | ast-sqlite-boot | pcf-thanksgiving-countdown | [View logs](/logs/plugins/p/pcf-thanksgiving-countdown/error.json) |
 | Unknown operation: AUTO_INCREMENT. | asyncify-boot | pcf-thanksgiving-countdown | [View logs](/logs/plugins/p/pcf-thanksgiving-countdown/error.json) |
 | Unknown operation: AUTO_INCREMENT. | jspi-boot | pcf-thanksgiving-countdown | [View logs](/logs/plugins/p/pcf-thanksgiving-countdown/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | ast-sqlite-boot | pinterest-widgets | [View logs](/logs/plugins/p/pinterest-widgets/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | asyncify-boot | pinterest-widgets | [View logs](/logs/plugins/p/pinterest-widgets/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | jspi-boot | pinterest-widgets | [View logs](/logs/plugins/p/pinterest-widgets/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_charts_js_library. | ast-sqlite-boot | post-ender | [View logs](/logs/plugins/p/post-ender/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_charts_js_library. | asyncify-boot | post-ender | [View logs](/logs/plugins/p/post-ender/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_charts_js_library. | jspi-boot | post-ender | [View logs](/logs/plugins/p/post-ender/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_hchart_names. | ast-sqlite-boot | post-ender | [View logs](/logs/plugins/p/post-ender/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_hchart_names. | asyncify-boot | post-ender | [View logs](/logs/plugins/p/post-ender/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_hchart_names. | jspi-boot | post-ender | [View logs](/logs/plugins/p/post-ender/error.json) |
-| SQLSTATE[HY000]: General error: 1 table "database_name_here" already exists. | ast-sqlite-boot | post-ender | [View logs](/logs/plugins/p/post-ender/error.json) |
-| SQLSTATE[HY000]: General error: 1 table "database_name_here" already exists. | asyncify-boot | post-ender | [View logs](/logs/plugins/p/post-ender/error.json) |
-| SQLSTATE[HY000]: General error: 1 table "database_name_here" already exists. | jspi-boot | post-ender | [View logs](/logs/plugins/p/post-ender/error.json) |
-| Unknown operation: .. | ast-sqlite-boot | post-ender | [View logs](/logs/plugins/p/post-ender/error.json) |
-| Unknown operation: .. | asyncify-boot | post-ender | [View logs](/logs/plugins/p/post-ender/error.json) |
-| Unknown operation: .. | jspi-boot | post-ender | [View logs](/logs/plugins/p/post-ender/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_post_clean. | ast-sqlite-boot | premise-settings-transporter | [View logs](/logs/plugins/p/premise-settings-transporter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_post_clean. | asyncify-boot | premise-settings-transporter | [View logs](/logs/plugins/p/premise-settings-transporter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_post_clean. | jspi-boot | premise-settings-transporter | [View logs](/logs/plugins/p/premise-settings-transporter/error.json) |
+| Unknown drop type: table. | asyncify-boot | plugin-manager | [View logs](/logs/plugins/p/plugin-manager/error.json) |
+| Unknown drop type: table. | jspi-boot | plugin-manager | [View logs](/logs/plugins/p/plugin-manager/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | pre-orders-wc | [View logs](/logs/plugins/p/pre-orders-wc/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | pre-orders-wc | [View logs](/logs/plugins/p/pre-orders-wc/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | pre-orders-wc | [View logs](/logs/plugins/p/pre-orders-wc/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | pre-orders-wc | [View logs](/logs/plugins/p/pre-orders-wc/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | pre-orders-wc | [View logs](/logs/plugins/p/pre-orders-wc/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | pre-orders-wc | [View logs](/logs/plugins/p/pre-orders-wc/error.json) |
+| Unknown drop type: table. | ast-sqlite-boot | puntuarte-reviews-woo-commerce | [View logs](/logs/plugins/p/puntuarte-reviews-woo-commerce/error.json) |
+| Unknown drop type: table. | asyncify-boot | puntuarte-reviews-woo-commerce | [View logs](/logs/plugins/p/puntuarte-reviews-woo-commerce/error.json) |
+| Unknown drop type: table. | jspi-boot | puntuarte-reviews-woo-commerce | [View logs](/logs/plugins/p/puntuarte-reviews-woo-commerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 Cannot add a column with non-constant default. | ast-sqlite-boot | post-slider-lite | [View logs](/logs/plugins/p/post-slider-lite/error.json) |
 | SQLSTATE[HY000]: General error: 1 Cannot add a column with non-constant default. | asyncify-boot | post-slider-lite | [View logs](/logs/plugins/p/post-slider-lite/error.json) |
 | SQLSTATE[HY000]: General error: 1 Cannot add a column with non-constant default. | jspi-boot | post-slider-lite | [View logs](/logs/plugins/p/post-slider-lite/error.json) |
@@ -5351,6 +5570,9 @@
 | Unknown operation: AUTO_INCREMENT. | ast-sqlite-boot | p5-embedder | [View logs](/logs/plugins/p/p5-embedder/error.json) |
 | Unknown operation: AUTO_INCREMENT. | asyncify-boot | p5-embedder | [View logs](/logs/plugins/p/p5-embedder/error.json) |
 | Unknown operation: AUTO_INCREMENT. | jspi-boot | p5-embedder | [View logs](/logs/plugins/p/p5-embedder/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | ast-sqlite-boot | popular-posts-plugin | [View logs](/logs/plugins/p/popular-posts-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | asyncify-boot | popular-posts-plugin | [View logs](/logs/plugins/p/popular-posts-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | jspi-boot | popular-posts-plugin | [View logs](/logs/plugins/p/popular-posts-plugin/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | ast-sqlite-boot | profile-pic | [View logs](/logs/plugins/p/profile-pic/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | asyncify-boot | profile-pic | [View logs](/logs/plugins/p/profile-pic/error.json) |
 | MySQL field type cannot be translated to SQLite: json. | jspi-boot | profile-pic | [View logs](/logs/plugins/p/profile-pic/error.json) |
@@ -5440,18 +5662,9 @@
 | Unknown operation: AUTO_INCREMENT. | asyncify-boot | paydog-payments | [View logs](/logs/plugins/p/paydog-payments/error.json) |
 | Unknown operation: AUTO_INCREMENT. | jspi-boot | paydog-payments | [View logs](/logs/plugins/p/paydog-payments/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | postcode-redirect | [View logs](/logs/plugins/p/postcode-redirect/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_charts_js_library. | ast-sqlite-boot | parspal | [View logs](/logs/plugins/p/parspal/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_charts_js_library. | asyncify-boot | parspal | [View logs](/logs/plugins/p/parspal/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_charts_js_library. | jspi-boot | parspal | [View logs](/logs/plugins/p/parspal/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_hchart_names. | ast-sqlite-boot | parspal | [View logs](/logs/plugins/p/parspal/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_hchart_names. | asyncify-boot | parspal | [View logs](/logs/plugins/p/parspal/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_hchart_names. | jspi-boot | parspal | [View logs](/logs/plugins/p/parspal/error.json) |
-| SQLSTATE[HY000]: General error: 1 table "database_name_here" already exists. | ast-sqlite-boot | parspal | [View logs](/logs/plugins/p/parspal/error.json) |
-| SQLSTATE[HY000]: General error: 1 table "database_name_here" already exists. | asyncify-boot | parspal | [View logs](/logs/plugins/p/parspal/error.json) |
-| SQLSTATE[HY000]: General error: 1 table "database_name_here" already exists. | jspi-boot | parspal | [View logs](/logs/plugins/p/parspal/error.json) |
-| Unknown operation: .. | ast-sqlite-boot | parspal | [View logs](/logs/plugins/p/parspal/error.json) |
-| Unknown operation: .. | asyncify-boot | parspal | [View logs](/logs/plugins/p/parspal/error.json) |
-| Unknown operation: .. | jspi-boot | parspal | [View logs](/logs/plugins/p/parspal/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: points. | ast-sqlite-boot | quote-rotator | [View logs](/logs/plugins/q/quote-rotator/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: points. | asyncify-boot | quote-rotator | [View logs](/logs/plugins/q/quote-rotator/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: points. | jspi-boot | quote-rotator | [View logs](/logs/plugins/q/quote-rotator/error.json) |
@@ -5504,6 +5717,9 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_orbtrping_settings. | ast-sqlite-boot | qodys-buttoner | [View logs](/logs/plugins/q/qodys-buttoner/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_orbtrping_settings. | asyncify-boot | qodys-buttoner | [View logs](/logs/plugins/q/qodys-buttoner/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_orbtrping_settings. | jspi-boot | qodys-buttoner | [View logs](/logs/plugins/q/qodys-buttoner/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | realty-portal-agent-profile | [View logs](/logs/plugins/r/realty-portal-agent-profile/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | realty-portal-agent-profile | [View logs](/logs/plugins/r/realty-portal-agent-profile/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | realty-portal-agent-profile | [View logs](/logs/plugins/r/realty-portal-agent-profile/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | routee-contact-gathering | [View logs](/logs/plugins/r/routee-contact-gathering/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | routee-contact-gathering | [View logs](/logs/plugins/r/routee-contact-gathering/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | routee-contact-gathering | [View logs](/logs/plugins/r/routee-contact-gathering/error.json) |
@@ -5544,9 +5760,6 @@
 | Unknown query type: post_rating. | ast-sqlite-boot | remote-database-api | [View logs](/logs/plugins/r/remote-database-api/error.json) |
 | Unknown query type: post_rating. | asyncify-boot | remote-database-api | [View logs](/logs/plugins/r/remote-database-api/error.json) |
 | Unknown query type: post_rating. | jspi-boot | remote-database-api | [View logs](/logs/plugins/r/remote-database-api/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: read_status. | ast-sqlite-boot | rest-api-for-relevanssi | [View logs](/logs/plugins/r/rest-api-for-relevanssi/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: read_status. | asyncify-boot | rest-api-for-relevanssi | [View logs](/logs/plugins/r/rest-api-for-relevanssi/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: read_status. | jspi-boot | rest-api-for-relevanssi | [View logs](/logs/plugins/r/rest-api-for-relevanssi/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: botblocked. | ast-sqlite-boot | rentpress-amenities-manager-add-on | [View logs](/logs/plugins/r/rentpress-amenities-manager-add-on/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: botcountry. | ast-sqlite-boot | rentpress-amenities-manager-add-on | [View logs](/logs/plugins/r/rentpress-amenities-manager-add-on/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: deny. | ast-sqlite-boot | rentpress-amenities-manager-add-on | [View logs](/logs/plugins/r/rentpress-amenities-manager-add-on/error.json) |
@@ -5562,7 +5775,16 @@
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | ranking-and-competitor-tracking | [View logs](/logs/plugins/r/ranking-and-competitor-tracking/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | ranking-and-competitor-tracking | [View logs](/logs/plugins/r/ranking-and-competitor-tracking/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | ranking-and-competitor-tracking | [View logs](/logs/plugins/r/ranking-and-competitor-tracking/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | ast-sqlite-boot | rur-currency-sign | [View logs](/logs/plugins/r/rur-currency-sign/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | asyncify-boot | rur-currency-sign | [View logs](/logs/plugins/r/rur-currency-sign/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | jspi-boot | rur-currency-sign | [View logs](/logs/plugins/r/rur-currency-sign/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | random-youtube-video | [View logs](/logs/plugins/r/random-youtube-video/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | rawcode-plugin | [View logs](/logs/plugins/r/rawcode-plugin/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | rawcode-plugin | [View logs](/logs/plugins/r/rawcode-plugin/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | rawcode-plugin | [View logs](/logs/plugins/r/rawcode-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "CONTAINS": syntax error. | ast-sqlite-boot | rawcode-plugin | [View logs](/logs/plugins/r/rawcode-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "CONTAINS": syntax error. | asyncify-boot | rawcode-plugin | [View logs](/logs/plugins/r/rawcode-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "CONTAINS": syntax error. | jspi-boot | rawcode-plugin | [View logs](/logs/plugins/r/rawcode-plugin/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | routeapp | [View logs](/logs/plugins/r/routeapp/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | routeapp | [View logs](/logs/plugins/r/routeapp/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | routeapp | [View logs](/logs/plugins/r/routeapp/error.json) |
@@ -5583,6 +5805,9 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_real_shortcodes. | jspi-boot | rehashs-twitter-widget | [View logs](/logs/plugins/r/rehashs-twitter-widget/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | recent-news-updates | [View logs](/logs/plugins/r/recent-news-updates/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_gdgalleryimages. | jspi-boot | recent-news-updates | [View logs](/logs/plugins/r/recent-news-updates/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | rss-atom-avatar | [View logs](/logs/plugins/r/rss-atom-avatar/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | rss-atom-avatar | [View logs](/logs/plugins/r/rss-atom-avatar/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | rss-atom-avatar | [View logs](/logs/plugins/r/rss-atom-avatar/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | asyncify-boot | review-widgets-for-arukereso | [View logs](/logs/plugins/r/review-widgets-for-arukereso/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | jspi-boot | review-widgets-for-arukereso | [View logs](/logs/plugins/r/review-widgets-for-arukereso/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: highlight. | asyncify-boot | review-widgets-for-arukereso | [View logs](/logs/plugins/r/review-widgets-for-arukereso/error.json) |
@@ -5594,9 +5819,15 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_tax_rates. | ast-sqlite-boot | remove-color-widget | [View logs](/logs/plugins/r/remove-color-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_tax_rates. | asyncify-boot | remove-color-widget | [View logs](/logs/plugins/r/remove-color-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_tax_rates. | jspi-boot | remove-color-widget | [View logs](/logs/plugins/r/remove-color-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | ast-sqlite-boot | rocket-lazy-load | [View logs](/logs/plugins/r/rocket-lazy-load/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: highlight. | ast-sqlite-boot | rocket-lazy-load | [View logs](/logs/plugins/r/rocket-lazy-load/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: reviewId. | ast-sqlite-boot | rocket-lazy-load | [View logs](/logs/plugins/r/rocket-lazy-load/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: st_unsubscribe. | ast-sqlite-boot | rocket-lazy-load | [View logs](/logs/plugins/r/rocket-lazy-load/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | rocket-lazy-load | [View logs](/logs/plugins/r/rocket-lazy-load/error.json) |
 | Unknown query type: post_rating. | ast-sqlite-boot | real-time-twitter | [View logs](/logs/plugins/r/real-time-twitter/error.json) |
 | Unknown query type: post_rating. | asyncify-boot | real-time-twitter | [View logs](/logs/plugins/r/real-time-twitter/error.json) |
 | Unknown query type: post_rating. | jspi-boot | real-time-twitter | [View logs](/logs/plugins/r/real-time-twitter/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | reviews-feed | [View logs](/logs/plugins/r/reviews-feed/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_tax_rates. | ast-sqlite-boot | responsive-twitter-widget | [View logs](/logs/plugins/r/responsive-twitter-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_tax_rates. | asyncify-boot | responsive-twitter-widget | [View logs](/logs/plugins/r/responsive-twitter-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_tax_rates. | jspi-boot | responsive-twitter-widget | [View logs](/logs/plugins/r/responsive-twitter-widget/error.json) |
@@ -5612,6 +5843,15 @@
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | rrwd-single-google-map | [View logs](/logs/plugins/r/rrwd-single-google-map/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | rrwd-single-google-map | [View logs](/logs/plugins/r/rrwd-single-google-map/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | rrwd-single-google-map | [View logs](/logs/plugins/r/rrwd-single-google-map/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: lang. | ast-sqlite-boot | romania-libera-rss-feed | [View logs](/logs/plugins/r/romania-libera-rss-feed/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: lang. | asyncify-boot | romania-libera-rss-feed | [View logs](/logs/plugins/r/romania-libera-rss-feed/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: lang. | jspi-boot | romania-libera-rss-feed | [View logs](/logs/plugins/r/romania-libera-rss-feed/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | romania-libera-rss-feed | [View logs](/logs/plugins/r/romania-libera-rss-feed/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | romania-libera-rss-feed | [View logs](/logs/plugins/r/romania-libera-rss-feed/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | romania-libera-rss-feed | [View logs](/logs/plugins/r/romania-libera-rss-feed/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_sbr_reviews_posts__provider_lang already exists. | ast-sqlite-boot | romania-libera-rss-feed | [View logs](/logs/plugins/r/romania-libera-rss-feed/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_sbr_reviews_posts__provider_lang already exists. | asyncify-boot | romania-libera-rss-feed | [View logs](/logs/plugins/r/romania-libera-rss-feed/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_sbr_reviews_posts__provider_lang already exists. | jspi-boot | romania-libera-rss-feed | [View logs](/logs/plugins/r/romania-libera-rss-feed/error.json) |
 | Unknown query type: post_rating. | ast-sqlite-boot | retainly | [View logs](/logs/plugins/r/retainly/error.json) |
 | Unknown query type: post_rating. | asyncify-boot | retainly | [View logs](/logs/plugins/r/retainly/error.json) |
 | Unknown query type: post_rating. | jspi-boot | retainly | [View logs](/logs/plugins/r/retainly/error.json) |
@@ -5633,6 +5873,8 @@
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | recover-abandoned-cart-for-woocommerce | [View logs](/logs/plugins/r/recover-abandoned-cart-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | recover-abandoned-cart-for-woocommerce | [View logs](/logs/plugins/r/recover-abandoned-cart-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | recover-abandoned-cart-for-woocommerce | [View logs](/logs/plugins/r/recover-abandoned-cart-for-woocommerce/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | ast-sqlite-boot | reactpress | [View logs](/logs/plugins/r/reactpress/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | reactpress | [View logs](/logs/plugins/r/reactpress/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | ast-sqlite-boot | riotschedule | [View logs](/logs/plugins/r/riotschedule/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | asyncify-boot | riotschedule | [View logs](/logs/plugins/r/riotschedule/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | jspi-boot | riotschedule | [View logs](/logs/plugins/r/riotschedule/error.json) |
@@ -5697,6 +5939,15 @@
 | SQLSTATE[HY000]: General error: 1 duplicate column name: reviewId. | jspi-boot | reviews-widgets | [View logs](/logs/plugins/r/reviews-widgets/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | reviews-widgets | [View logs](/logs/plugins/r/reviews-widgets/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | reviews-widgets | [View logs](/logs/plugins/r/reviews-widgets/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | roots-hide-wp | [View logs](/logs/plugins/r/roots-hide-wp/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | roots-hide-wp | [View logs](/logs/plugins/r/roots-hide-wp/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | roots-hide-wp | [View logs](/logs/plugins/r/roots-hide-wp/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: read_status. | ast-sqlite-boot | roots-hide-wp | [View logs](/logs/plugins/r/roots-hide-wp/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: read_status. | asyncify-boot | roots-hide-wp | [View logs](/logs/plugins/r/roots-hide-wp/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: read_status. | jspi-boot | roots-hide-wp | [View logs](/logs/plugins/r/roots-hide-wp/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "CONTAINS": syntax error. | ast-sqlite-boot | roots-hide-wp | [View logs](/logs/plugins/r/roots-hide-wp/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "CONTAINS": syntax error. | asyncify-boot | roots-hide-wp | [View logs](/logs/plugins/r/roots-hide-wp/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "CONTAINS": syntax error. | jspi-boot | roots-hide-wp | [View logs](/logs/plugins/r/roots-hide-wp/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | restaurant-manager | [View logs](/logs/plugins/r/restaurant-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | restaurant-manager | [View logs](/logs/plugins/r/restaurant-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | restaurant-manager | [View logs](/logs/plugins/r/restaurant-manager/error.json) |
@@ -5708,6 +5959,7 @@
 | SQLSTATE[HY000]: General error: 1 duplicate column name: reviewId. | jspi-boot | reviews-widgets-for-yelp | [View logs](/logs/plugins/r/reviews-widgets-for-yelp/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | reviews-widgets-for-yelp | [View logs](/logs/plugins/r/reviews-widgets-for-yelp/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | reviews-widgets-for-yelp | [View logs](/logs/plugins/r/reviews-widgets-for-yelp/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | raek-real-time-identification | [View logs](/logs/plugins/r/raek-real-time-identification/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | responsive-styled-google-maps | [View logs](/logs/plugins/r/responsive-styled-google-maps/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | responsive-styled-google-maps | [View logs](/logs/plugins/r/responsive-styled-google-maps/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | responsive-styled-google-maps | [View logs](/logs/plugins/r/responsive-styled-google-maps/error.json) |
@@ -5731,6 +5983,19 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_tax_rates. | ast-sqlite-boot | r12themes-quotes | [View logs](/logs/plugins/r/r12themes-quotes/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_tax_rates. | asyncify-boot | r12themes-quotes | [View logs](/logs/plugins/r/r12themes-quotes/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_tax_rates. | jspi-boot | r12themes-quotes | [View logs](/logs/plugins/r/r12themes-quotes/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: read_status. | ast-sqlite-boot | restrict-content | [View logs](/logs/plugins/r/restrict-content/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: lang. | ast-sqlite-boot | recent-visited | [View logs](/logs/plugins/r/recent-visited/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: lang. | asyncify-boot | recent-visited | [View logs](/logs/plugins/r/recent-visited/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: lang. | jspi-boot | recent-visited | [View logs](/logs/plugins/r/recent-visited/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | recent-visited | [View logs](/logs/plugins/r/recent-visited/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | recent-visited | [View logs](/logs/plugins/r/recent-visited/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | recent-visited | [View logs](/logs/plugins/r/recent-visited/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_sbr_reviews_posts__provider_lang already exists. | ast-sqlite-boot | recent-visited | [View logs](/logs/plugins/r/recent-visited/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_sbr_reviews_posts__provider_lang already exists. | asyncify-boot | recent-visited | [View logs](/logs/plugins/r/recent-visited/error.json) |
+| SQLSTATE[HY000]: General error: 1 index wp_sbr_reviews_posts__provider_lang already exists. | jspi-boot | recent-visited | [View logs](/logs/plugins/r/recent-visited/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | robo-maps | [View logs](/logs/plugins/r/robo-maps/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | robo-maps | [View logs](/logs/plugins/r/robo-maps/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | robo-maps | [View logs](/logs/plugins/r/robo-maps/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | restricted-media | [View logs](/logs/plugins/r/restricted-media/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | restricted-media | [View logs](/logs/plugins/r/restricted-media/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | restricted-media | [View logs](/logs/plugins/r/restricted-media/error.json) |
@@ -5767,6 +6032,19 @@
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | ast-sqlite-boot | random-aphorism | [View logs](/logs/plugins/r/random-aphorism/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | asyncify-boot | random-aphorism | [View logs](/logs/plugins/r/random-aphorism/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ORDER": syntax error. | jspi-boot | random-aphorism | [View logs](/logs/plugins/r/random-aphorism/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | reet-pe-tweet | [View logs](/logs/plugins/r/reet-pe-tweet/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | reet-pe-tweet | [View logs](/logs/plugins/r/reet-pe-tweet/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | reet-pe-tweet | [View logs](/logs/plugins/r/reet-pe-tweet/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | asyncify-boot | review-widgets-for-tripadvisor | [View logs](/logs/plugins/r/review-widgets-for-tripadvisor/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | jspi-boot | review-widgets-for-tripadvisor | [View logs](/logs/plugins/r/review-widgets-for-tripadvisor/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: highlight. | asyncify-boot | review-widgets-for-tripadvisor | [View logs](/logs/plugins/r/review-widgets-for-tripadvisor/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: highlight. | jspi-boot | review-widgets-for-tripadvisor | [View logs](/logs/plugins/r/review-widgets-for-tripadvisor/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: reviewId. | asyncify-boot | review-widgets-for-tripadvisor | [View logs](/logs/plugins/r/review-widgets-for-tripadvisor/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: reviewId. | jspi-boot | review-widgets-for-tripadvisor | [View logs](/logs/plugins/r/review-widgets-for-tripadvisor/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: st_unsubscribe. | asyncify-boot | review-widgets-for-tripadvisor | [View logs](/logs/plugins/r/review-widgets-for-tripadvisor/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: st_unsubscribe. | jspi-boot | review-widgets-for-tripadvisor | [View logs](/logs/plugins/r/review-widgets-for-tripadvisor/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | review-widgets-for-tripadvisor | [View logs](/logs/plugins/r/review-widgets-for-tripadvisor/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | review-widgets-for-tripadvisor | [View logs](/logs/plugins/r/review-widgets-for-tripadvisor/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | rapid-secure-login | [View logs](/logs/plugins/r/rapid-secure-login/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | ast-sqlite-boot | rich-text-widget | [View logs](/logs/plugins/r/rich-text-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | asyncify-boot | rich-text-widget | [View logs](/logs/plugins/r/rich-text-widget/error.json) |
@@ -5783,18 +6061,6 @@
 | Unknown operation: MODIFY. | ast-sqlite-boot | random-post-link | [View logs](/logs/plugins/r/random-post-link/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | random-post-link | [View logs](/logs/plugins/r/random-post-link/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | random-post-link | [View logs](/logs/plugins/r/random-post-link/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_charts_js_library. | ast-sqlite-boot | replace-anchor-target | [View logs](/logs/plugins/r/replace-anchor-target/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_charts_js_library. | asyncify-boot | replace-anchor-target | [View logs](/logs/plugins/r/replace-anchor-target/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_charts_js_library. | jspi-boot | replace-anchor-target | [View logs](/logs/plugins/r/replace-anchor-target/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_hchart_names. | ast-sqlite-boot | replace-anchor-target | [View logs](/logs/plugins/r/replace-anchor-target/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_hchart_names. | asyncify-boot | replace-anchor-target | [View logs](/logs/plugins/r/replace-anchor-target/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_hchart_names. | jspi-boot | replace-anchor-target | [View logs](/logs/plugins/r/replace-anchor-target/error.json) |
-| SQLSTATE[HY000]: General error: 1 table "database_name_here" already exists. | ast-sqlite-boot | replace-anchor-target | [View logs](/logs/plugins/r/replace-anchor-target/error.json) |
-| SQLSTATE[HY000]: General error: 1 table "database_name_here" already exists. | asyncify-boot | replace-anchor-target | [View logs](/logs/plugins/r/replace-anchor-target/error.json) |
-| SQLSTATE[HY000]: General error: 1 table "database_name_here" already exists. | jspi-boot | replace-anchor-target | [View logs](/logs/plugins/r/replace-anchor-target/error.json) |
-| Unknown operation: .. | ast-sqlite-boot | replace-anchor-target | [View logs](/logs/plugins/r/replace-anchor-target/error.json) |
-| Unknown operation: .. | asyncify-boot | replace-anchor-target | [View logs](/logs/plugins/r/replace-anchor-target/error.json) |
-| Unknown operation: .. | jspi-boot | replace-anchor-target | [View logs](/logs/plugins/r/replace-anchor-target/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | redlink-widget | [View logs](/logs/plugins/r/redlink-widget/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | redlink-widget | [View logs](/logs/plugins/r/redlink-widget/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | redlink-widget | [View logs](/logs/plugins/r/redlink-widget/error.json) |
@@ -5835,12 +6101,10 @@
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | recent-posts-plus | [View logs](/logs/plugins/r/recent-posts-plus/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_tax_rates. | asyncify-boot | resurs-bank-payment-gateway-for-woocommerce | [View logs](/logs/plugins/r/resurs-bank-payment-gateway-for-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_tax_rates. | jspi-boot | resurs-bank-payment-gateway-for-woocommerce | [View logs](/logs/plugins/r/resurs-bank-payment-gateway-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | ast-sqlite-boot | restposts | [View logs](/logs/plugins/r/restposts/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | asyncify-boot | restposts | [View logs](/logs/plugins/r/restposts/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | jspi-boot | restposts | [View logs](/logs/plugins/r/restposts/error.json) |
-| Unknown query type: DESC. | ast-sqlite-boot | restposts | [View logs](/logs/plugins/r/restposts/error.json) |
-| Unknown query type: DESC. | asyncify-boot | restposts | [View logs](/logs/plugins/r/restposts/error.json) |
-| Unknown query type: DESC. | jspi-boot | restposts | [View logs](/logs/plugins/r/restposts/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | referrer-analytics | [View logs](/logs/plugins/r/referrer-analytics/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_wpl_extensions.id. | ast-sqlite-boot | referrer-analytics | [View logs](/logs/plugins/r/referrer-analytics/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ",": syntax error. | ast-sqlite-boot | referrer-analytics | [View logs](/logs/plugins/r/referrer-analytics/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "CONTAINS": syntax error. | ast-sqlite-boot | referrer-analytics | [View logs](/logs/plugins/r/referrer-analytics/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | ast-sqlite-boot | rohoz-easy-captcha | [View logs](/logs/plugins/r/rohoz-easy-captcha/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | asyncify-boot | rohoz-easy-captcha | [View logs](/logs/plugins/r/rohoz-easy-captcha/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | jspi-boot | rohoz-easy-captcha | [View logs](/logs/plugins/r/rohoz-easy-captcha/error.json) |
@@ -5853,6 +6117,7 @@
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | rohoz-easy-captcha | [View logs](/logs/plugins/r/rohoz-easy-captcha/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | rohoz-easy-captcha | [View logs](/logs/plugins/r/rohoz-easy-captcha/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | rohoz-easy-captcha | [View logs](/logs/plugins/r/rohoz-easy-captcha/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | recently-viewed-products-woocommerce | [View logs](/logs/plugins/r/recently-viewed-products-woocommerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: mail_status. | ast-sqlite-boot | really-simple-e-commerce | [View logs](/logs/plugins/r/really-simple-e-commerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: mail_status. | asyncify-boot | really-simple-e-commerce | [View logs](/logs/plugins/r/really-simple-e-commerce/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: mail_status. | jspi-boot | really-simple-e-commerce | [View logs](/logs/plugins/r/really-simple-e-commerce/error.json) |
@@ -5865,8 +6130,18 @@
 | Unknown query type: post_rating. | ast-sqlite-boot | rz-bkash-pay-for-woocommerce | [View logs](/logs/plugins/r/rz-bkash-pay-for-woocommerce/error.json) |
 | Unknown query type: post_rating. | asyncify-boot | rz-bkash-pay-for-woocommerce | [View logs](/logs/plugins/r/rz-bkash-pay-for-woocommerce/error.json) |
 | Unknown query type: post_rating. | jspi-boot | rz-bkash-pay-for-woocommerce | [View logs](/logs/plugins/r/rz-bkash-pay-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | replace-default-words | [View logs](/logs/plugins/r/replace-default-words/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | replace-default-words | [View logs](/logs/plugins/r/replace-default-words/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | ast-sqlite-boot | replace-default-words | [View logs](/logs/plugins/r/replace-default-words/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | asyncify-boot | replace-default-words | [View logs](/logs/plugins/r/replace-default-words/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ":param0": syntax error. | jspi-boot | replace-default-words | [View logs](/logs/plugins/r/replace-default-words/error.json) |
+| Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/rur-currency-sign/rur.php:50 | ast-sqlite-boot | replace-default-words | [View logs](/logs/plugins/r/replace-default-words/error.json) |
+| Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method mandegarweb_default_words::mandegarweb_localization_init() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | ast-sqlite-boot | replace-default-words | [View logs](/logs/plugins/r/replace-default-words/error.json) |
+| Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method mandegarweb_default_words::mandegarweb_localization_init() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | asyncify-boot | replace-default-words | [View logs](/logs/plugins/r/replace-default-words/error.json) |
+| Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method mandegarweb_default_words::mandegarweb_localization_init() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324 | jspi-boot | replace-default-words | [View logs](/logs/plugins/r/replace-default-words/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | real-estate-listing-realtyna-wpl | [View logs](/logs/plugins/r/real-estate-listing-realtyna-wpl/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "CONTAINS": syntax error. | ast-sqlite-boot | real-estate-listing-realtyna-wpl | [View logs](/logs/plugins/r/real-estate-listing-realtyna-wpl/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | runphp | [View logs](/logs/plugins/r/runphp/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | runphp | [View logs](/logs/plugins/r/runphp/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | runphp | [View logs](/logs/plugins/r/runphp/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | ast-sqlite-boot | realtyphp | [View logs](/logs/plugins/r/realtyphp/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | asyncify-boot | realtyphp | [View logs](/logs/plugins/r/realtyphp/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | jspi-boot | realtyphp | [View logs](/logs/plugins/r/realtyphp/error.json) |
@@ -5879,12 +6154,24 @@
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | realtyphp | [View logs](/logs/plugins/r/realtyphp/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | realtyphp | [View logs](/logs/plugins/r/realtyphp/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | realtyphp | [View logs](/logs/plugins/r/realtyphp/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | ast-sqlite-boot | rp-news-ticker | [View logs](/logs/plugins/r/rp-news-ticker/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | asyncify-boot | rp-news-ticker | [View logs](/logs/plugins/r/rp-news-ticker/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | jspi-boot | rp-news-ticker | [View logs](/logs/plugins/r/rp-news-ticker/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: highlight. | ast-sqlite-boot | rp-news-ticker | [View logs](/logs/plugins/r/rp-news-ticker/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: highlight. | asyncify-boot | rp-news-ticker | [View logs](/logs/plugins/r/rp-news-ticker/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: highlight. | jspi-boot | rp-news-ticker | [View logs](/logs/plugins/r/rp-news-ticker/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: reviewId. | ast-sqlite-boot | rp-news-ticker | [View logs](/logs/plugins/r/rp-news-ticker/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: reviewId. | asyncify-boot | rp-news-ticker | [View logs](/logs/plugins/r/rp-news-ticker/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: reviewId. | jspi-boot | rp-news-ticker | [View logs](/logs/plugins/r/rp-news-ticker/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: st_unsubscribe. | ast-sqlite-boot | rp-news-ticker | [View logs](/logs/plugins/r/rp-news-ticker/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: st_unsubscribe. | asyncify-boot | rp-news-ticker | [View logs](/logs/plugins/r/rp-news-ticker/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: st_unsubscribe. | jspi-boot | rp-news-ticker | [View logs](/logs/plugins/r/rp-news-ticker/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | rp-news-ticker | [View logs](/logs/plugins/r/rp-news-ticker/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | rp-news-ticker | [View logs](/logs/plugins/r/rp-news-ticker/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | rp-news-ticker | [View logs](/logs/plugins/r/rp-news-ticker/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | random-blog-article | [View logs](/logs/plugins/r/random-blog-article/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | random-blog-article | [View logs](/logs/plugins/r/random-blog-article/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | random-blog-article | [View logs](/logs/plugins/r/random-blog-article/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | ast-sqlite-boot | rich-widget | [View logs](/logs/plugins/r/rich-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | asyncify-boot | rich-widget | [View logs](/logs/plugins/r/rich-widget/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_ravpage_urls. | jspi-boot | rich-widget | [View logs](/logs/plugins/r/rich-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | ast-sqlite-boot | rootspress | [View logs](/logs/plugins/r/rootspress/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | asyncify-boot | rootspress | [View logs](/logs/plugins/r/rootspress/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | jspi-boot | rootspress | [View logs](/logs/plugins/r/rootspress/error.json) |
@@ -5904,6 +6191,12 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_slick_builder. | ast-sqlite-boot | safari-push | [View logs](/logs/plugins/s/safari-push/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_slick_builder. | asyncify-boot | safari-push | [View logs](/logs/plugins/s/safari-push/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_slick_builder. | jspi-boot | safari-push | [View logs](/logs/plugins/s/safari-push/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | safe-php-code-widget | [View logs](/logs/plugins/s/safe-php-code-widget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | safe-php-code-widget | [View logs](/logs/plugins/s/safe-php-code-widget/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | safe-php-code-widget | [View logs](/logs/plugins/s/safe-php-code-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_sc_platforms. | ast-sqlite-boot | safe-php-code-widget | [View logs](/logs/plugins/s/safe-php-code-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_sc_platforms. | asyncify-boot | safe-php-code-widget | [View logs](/logs/plugins/s/safe-php-code-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_sc_platforms. | jspi-boot | safe-php-code-widget | [View logs](/logs/plugins/s/safe-php-code-widget/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | safetag | [View logs](/logs/plugins/s/safetag/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | safetag | [View logs](/logs/plugins/s/safetag/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_iqamahTimes. | asyncify-boot | salah-world-prayer-iqamah-timings-for-your-masjids | [View logs](/logs/plugins/s/salah-world-prayer-iqamah-timings-for-your-masjids/error.json) |
@@ -5926,16 +6219,25 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | sasongsmat | [View logs](/logs/plugins/s/sasongsmat/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | sasongsmat | [View logs](/logs/plugins/s/sasongsmat/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ASC": syntax error. | ast-sqlite-boot | save-cf7-entry | [View logs](/logs/plugins/s/save-cf7-entry/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | save-to-google-drive-by-forum-gt | [View logs](/logs/plugins/s/save-to-google-drive-by-forum-gt/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | save-to-google-drive-by-forum-gt | [View logs](/logs/plugins/s/save-to-google-drive-by-forum-gt/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | save-to-google-drive-by-forum-gt | [View logs](/logs/plugins/s/save-to-google-drive-by-forum-gt/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_sc_platforms. | ast-sqlite-boot | save-to-google-drive-by-forum-gt | [View logs](/logs/plugins/s/save-to-google-drive-by-forum-gt/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_sc_platforms. | asyncify-boot | save-to-google-drive-by-forum-gt | [View logs](/logs/plugins/s/save-to-google-drive-by-forum-gt/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_sc_platforms. | jspi-boot | save-to-google-drive-by-forum-gt | [View logs](/logs/plugins/s/save-to-google-drive-by-forum-gt/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | ast-sqlite-boot | sb-login | [View logs](/logs/plugins/s/sb-login/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | asyncify-boot | sb-login | [View logs](/logs/plugins/s/sb-login/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | jspi-boot | sb-login | [View logs](/logs/plugins/s/sb-login/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "AS": syntax error. | ast-sqlite-boot | sb-login | [View logs](/logs/plugins/s/sb-login/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "AS": syntax error. | asyncify-boot | sb-login | [View logs](/logs/plugins/s/sb-login/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "AS": syntax error. | jspi-boot | sb-login | [View logs](/logs/plugins/s/sb-login/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | sb-login | [View logs](/logs/plugins/s/sb-login/error.json) |
+| Unknown query type: DESC. | asyncify-boot | sb-login | [View logs](/logs/plugins/s/sb-login/error.json) |
+| Unknown query type: DESC. | jspi-boot | sb-login | [View logs](/logs/plugins/s/sb-login/error.json) |
 | Unexpected token in MySQL query: allow_password_login. | ast-sqlite-boot | schemafeed | [View logs](/logs/plugins/s/schemafeed/error.json) |
 | Unexpected token in MySQL query: allow_password_login. | asyncify-boot | schemafeed | [View logs](/logs/plugins/s/schemafeed/error.json) |
 | Unexpected token in MySQL query: allow_password_login. | jspi-boot | schemafeed | [View logs](/logs/plugins/s/schemafeed/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | scholar-publications | [View logs](/logs/plugins/s/scholar-publications/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | ast-sqlite-boot | scroll-to-top-plugin | [View logs](/logs/plugins/s/scroll-to-top-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | asyncify-boot | scroll-to-top-plugin | [View logs](/logs/plugins/s/scroll-to-top-plugin/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | jspi-boot | scroll-to-top-plugin | [View logs](/logs/plugins/s/scroll-to-top-plugin/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | scroll-to-top-plugin | [View logs](/logs/plugins/s/scroll-to-top-plugin/error.json) |
+| Unknown query type: DESC. | asyncify-boot | scroll-to-top-plugin | [View logs](/logs/plugins/s/scroll-to-top-plugin/error.json) |
+| Unknown query type: DESC. | jspi-boot | scroll-to-top-plugin | [View logs](/logs/plugins/s/scroll-to-top-plugin/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | scrolling-notice-board | [View logs](/logs/plugins/s/scrolling-notice-board/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | scrolling-notice-board | [View logs](/logs/plugins/s/scrolling-notice-board/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | scrolling-notice-board | [View logs](/logs/plugins/s/scrolling-notice-board/error.json) |
@@ -5950,6 +6252,9 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_social_networks. | ast-sqlite-boot | search-autocomplete | [View logs](/logs/plugins/s/search-autocomplete/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_social_networks. | asyncify-boot | search-autocomplete | [View logs](/logs/plugins/s/search-autocomplete/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_social_networks. | jspi-boot | search-autocomplete | [View logs](/logs/plugins/s/search-autocomplete/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_bsp_robo_settings. | ast-sqlite-boot | search-booking-comfor-wpbakery-page-builder | [View logs](/logs/plugins/s/search-booking-comfor-wpbakery-page-builder/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_bsp_robo_settings. | asyncify-boot | search-booking-comfor-wpbakery-page-builder | [View logs](/logs/plugins/s/search-booking-comfor-wpbakery-page-builder/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_bsp_robo_settings. | jspi-boot | search-booking-comfor-wpbakery-page-builder | [View logs](/logs/plugins/s/search-booking-comfor-wpbakery-page-builder/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | search-everything | [View logs](/logs/plugins/s/search-everything/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | search-in-html | [View logs](/logs/plugins/s/search-in-html/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_RFG. | ast-sqlite-boot | search-terms-cloud | [View logs](/logs/plugins/s/search-terms-cloud/error.json) |
@@ -5986,12 +6291,6 @@
 | Unknown create type: FUNCTION. | jspi-boot | seguroso | [View logs](/logs/plugins/s/seguroso/error.json) |
 | Unknown drop type: FUNCTION. | jspi-boot | seguroso | [View logs](/logs/plugins/s/seguroso/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | selection-lite | [View logs](/logs/plugins/s/selection-lite/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | selective-posts | [View logs](/logs/plugins/s/selective-posts/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | selective-posts | [View logs](/logs/plugins/s/selective-posts/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | selective-posts | [View logs](/logs/plugins/s/selective-posts/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_sc_platforms. | ast-sqlite-boot | selective-posts | [View logs](/logs/plugins/s/selective-posts/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_sc_platforms. | asyncify-boot | selective-posts | [View logs](/logs/plugins/s/selective-posts/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_sc_platforms. | jspi-boot | selective-posts | [View logs](/logs/plugins/s/selective-posts/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | sell-esim | [View logs](/logs/plugins/s/sell-esim/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: brand. | ast-sqlite-boot | sell-my-plugin | [View logs](/logs/plugins/s/sell-my-plugin/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: brand. | asyncify-boot | sell-my-plugin | [View logs](/logs/plugins/s/sell-my-plugin/error.json) |
@@ -6023,6 +6322,7 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_mtr_selected_tags_rss_settings. | ast-sqlite-boot | sementes-cas-gcrs | [View logs](/logs/plugins/s/sementes-cas-gcrs/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_mtr_selected_tags_rss_settings. | asyncify-boot | sementes-cas-gcrs | [View logs](/logs/plugins/s/sementes-cas-gcrs/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_mtr_selected_tags_rss_settings. | jspi-boot | sementes-cas-gcrs | [View logs](/logs/plugins/s/sementes-cas-gcrs/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_bsp_robo_settings. | ast-sqlite-boot | semonto-website-monitor | [View logs](/logs/plugins/s/semonto-website-monitor/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_RFG. | ast-sqlite-boot | sendsms-dashboard | [View logs](/logs/plugins/s/sendsms-dashboard/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_RFG. | asyncify-boot | sendsms-dashboard | [View logs](/logs/plugins/s/sendsms-dashboard/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_RFG. | jspi-boot | sendsms-dashboard | [View logs](/logs/plugins/s/sendsms-dashboard/error.json) |
@@ -6160,6 +6460,8 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_preloader_table. | jspi-boot | shared-article-repository | [View logs](/logs/plugins/s/shared-article-repository/error.json) |
 | Unknown create type: INDEX. | asyncify-boot | shared-article-repository | [View logs](/logs/plugins/s/shared-article-repository/error.json) |
 | Unknown create type: INDEX. | jspi-boot | shared-article-repository | [View logs](/logs/plugins/s/shared-article-repository/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | shashin | [View logs](/logs/plugins/s/shashin/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | shashin | [View logs](/logs/plugins/s/shashin/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_samo_post_formularios. | ast-sqlite-boot | sheets-to-wp-table-live-sync | [View logs](/logs/plugins/s/sheets-to-wp-table-live-sync/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_samo_post_respostas. | ast-sqlite-boot | sheets-to-wp-table-live-sync | [View logs](/logs/plugins/s/sheets-to-wp-table-live-sync/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_RFG. | ast-sqlite-boot | shelf-planner | [View logs](/logs/plugins/s/shelf-planner/error.json) |
@@ -6176,6 +6478,12 @@
 | Unknown query type: DESC. | ast-sqlite-boot | shiptime-discount-shipping | [View logs](/logs/plugins/s/shiptime-discount-shipping/error.json) |
 | Unknown query type: DESC. | asyncify-boot | shiptime-discount-shipping | [View logs](/logs/plugins/s/shiptime-discount-shipping/error.json) |
 | Unknown query type: DESC. | jspi-boot | shiptime-discount-shipping | [View logs](/logs/plugins/s/shiptime-discount-shipping/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | shogun-followers-lite | [View logs](/logs/plugins/s/shogun-followers-lite/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | shogun-followers-lite | [View logs](/logs/plugins/s/shogun-followers-lite/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | shogun-followers-lite | [View logs](/logs/plugins/s/shogun-followers-lite/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_sc_platforms. | ast-sqlite-boot | shogun-followers-lite | [View logs](/logs/plugins/s/shogun-followers-lite/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_sc_platforms. | asyncify-boot | shogun-followers-lite | [View logs](/logs/plugins/s/shogun-followers-lite/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_sc_platforms. | jspi-boot | shogun-followers-lite | [View logs](/logs/plugins/s/shogun-followers-lite/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_RFG. | ast-sqlite-boot | shop-2-api | [View logs](/logs/plugins/s/shop-2-api/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_RFG. | asyncify-boot | shop-2-api | [View logs](/logs/plugins/s/shop-2-api/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_RFG. | jspi-boot | shop-2-api | [View logs](/logs/plugins/s/shop-2-api/error.json) |
@@ -6430,8 +6738,15 @@
 | SQLSTATE[HY000]: General error: 1 no such function: DATABASE. | ast-sqlite-boot | simpleshop | [View logs](/logs/plugins/s/simpleshop/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such function: DATABASE. | asyncify-boot | simpleshop | [View logs](/logs/plugins/s/simpleshop/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such function: DATABASE. | jspi-boot | simpleshop | [View logs](/logs/plugins/s/simpleshop/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_bsp_robo_settings. | ast-sqlite-boot | simplesitemap | [View logs](/logs/plugins/s/simplesitemap/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | simplest-contact-form | [View logs](/logs/plugins/s/simplest-contact-form/error.json) |
 | SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | simplest-contact-form | [View logs](/logs/plugins/s/simplest-contact-form/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: visited_referral. | ast-sqlite-boot | simplicy-random-post | [View logs](/logs/plugins/s/simplicy-random-post/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: visited_referral. | asyncify-boot | simplicy-random-post | [View logs](/logs/plugins/s/simplicy-random-post/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: visited_referral. | jspi-boot | simplicy-random-post | [View logs](/logs/plugins/s/simplicy-random-post/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | ast-sqlite-boot | simplicy-random-post | [View logs](/logs/plugins/s/simplicy-random-post/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | asyncify-boot | simplicy-random-post | [View logs](/logs/plugins/s/simplicy-random-post/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | jspi-boot | simplicy-random-post | [View logs](/logs/plugins/s/simplicy-random-post/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | simplify-admin-panel | [View logs](/logs/plugins/s/simplify-admin-panel/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | simplify-admin-panel | [View logs](/logs/plugins/s/simplify-admin-panel/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | simplify-admin-panel | [View logs](/logs/plugins/s/simplify-admin-panel/error.json) |
@@ -6505,6 +6820,9 @@
 | MySQL field type cannot be translated to SQLite: real. | ast-sqlite-boot | slick-contact-forms | [View logs](/logs/plugins/s/slick-contact-forms/error.json) |
 | MySQL field type cannot be translated to SQLite: real. | asyncify-boot | slick-contact-forms | [View logs](/logs/plugins/s/slick-contact-forms/error.json) |
 | MySQL field type cannot be translated to SQLite: real. | jspi-boot | slick-contact-forms | [View logs](/logs/plugins/s/slick-contact-forms/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | slick-google-map | [View logs](/logs/plugins/s/slick-google-map/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | slick-google-map | [View logs](/logs/plugins/s/slick-google-map/error.json) |
+| SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | slick-google-map | [View logs](/logs/plugins/s/slick-google-map/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | ast-sqlite-boot | slickr-gallery | [View logs](/logs/plugins/s/slickr-gallery/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | asyncify-boot | slickr-gallery | [View logs](/logs/plugins/s/slickr-gallery/error.json) |
 | Data type expected in MySQL query, unknown token received: (. | jspi-boot | slickr-gallery | [View logs](/logs/plugins/s/slickr-gallery/error.json) |
@@ -6635,6 +6953,15 @@
 | Unknown query type: DESC. | ast-sqlite-boot | social-media-metrics | [View logs](/logs/plugins/s/social-media-metrics/error.json) |
 | Unknown query type: DESC. | asyncify-boot | social-media-metrics | [View logs](/logs/plugins/s/social-media-metrics/error.json) |
 | Unknown query type: DESC. | jspi-boot | social-media-metrics | [View logs](/logs/plugins/s/social-media-metrics/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | ast-sqlite-boot | social-media-monitoring | [View logs](/logs/plugins/s/social-media-monitoring/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | asyncify-boot | social-media-monitoring | [View logs](/logs/plugins/s/social-media-monitoring/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: function_name. | jspi-boot | social-media-monitoring | [View logs](/logs/plugins/s/social-media-monitoring/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "AS": syntax error. | ast-sqlite-boot | social-media-monitoring | [View logs](/logs/plugins/s/social-media-monitoring/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "AS": syntax error. | asyncify-boot | social-media-monitoring | [View logs](/logs/plugins/s/social-media-monitoring/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "AS": syntax error. | jspi-boot | social-media-monitoring | [View logs](/logs/plugins/s/social-media-monitoring/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | social-media-monitoring | [View logs](/logs/plugins/s/social-media-monitoring/error.json) |
+| Unknown query type: DESC. | asyncify-boot | social-media-monitoring | [View logs](/logs/plugins/s/social-media-monitoring/error.json) |
+| Unknown query type: DESC. | jspi-boot | social-media-monitoring | [View logs](/logs/plugins/s/social-media-monitoring/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | social-media-share-widget | [View logs](/logs/plugins/s/social-media-share-widget/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | social-media-share-widget | [View logs](/logs/plugins/s/social-media-share-widget/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | social-media-share-widget | [View logs](/logs/plugins/s/social-media-share-widget/error.json) |
@@ -6865,12 +7192,6 @@
 | SQLSTATE[HY000]: General error: 1 no such index: wp_statpress__spider_nation. | ast-sqlite-boot | super-product-filter | [View logs](/logs/plugins/s/super-product-filter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such index: wp_statpress__spiders. | ast-sqlite-boot | super-product-filter | [View logs](/logs/plugins/s/super-product-filter/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such index: wp_statpress__time_hour. | ast-sqlite-boot | super-product-filter | [View logs](/logs/plugins/s/super-product-filter/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | super-refer-a-friend | [View logs](/logs/plugins/s/super-refer-a-friend/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | super-refer-a-friend | [View logs](/logs/plugins/s/super-refer-a-friend/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | super-refer-a-friend | [View logs](/logs/plugins/s/super-refer-a-friend/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_sc_platforms. | ast-sqlite-boot | super-refer-a-friend | [View logs](/logs/plugins/s/super-refer-a-friend/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_sc_platforms. | asyncify-boot | super-refer-a-friend | [View logs](/logs/plugins/s/super-refer-a-friend/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_sc_platforms. | jspi-boot | super-refer-a-friend | [View logs](/logs/plugins/s/super-refer-a-friend/error.json) |
 | Unknown operation: ALTER. | ast-sqlite-boot | superlinks-ads | [View logs](/logs/plugins/s/superlinks-ads/error.json) |
 | Unknown operation: ALTER. | asyncify-boot | superlinks-ads | [View logs](/logs/plugins/s/superlinks-ads/error.json) |
 | Unknown operation: ALTER. | jspi-boot | superlinks-ads | [View logs](/logs/plugins/s/superlinks-ads/error.json) |
@@ -6892,12 +7213,6 @@
 | MySQL field type cannot be translated to SQLite: real. | ast-sqlite-boot | sweet-custom-menu | [View logs](/logs/plugins/s/sweet-custom-menu/error.json) |
 | MySQL field type cannot be translated to SQLite: real. | asyncify-boot | sweet-custom-menu | [View logs](/logs/plugins/s/sweet-custom-menu/error.json) |
 | MySQL field type cannot be translated to SQLite: real. | jspi-boot | sweet-custom-menu | [View logs](/logs/plugins/s/sweet-custom-menu/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | swift-callouts | [View logs](/logs/plugins/s/swift-callouts/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | swift-callouts | [View logs](/logs/plugins/s/swift-callouts/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | swift-callouts | [View logs](/logs/plugins/s/swift-callouts/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_sc_platforms. | ast-sqlite-boot | swift-callouts | [View logs](/logs/plugins/s/swift-callouts/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_sc_platforms. | asyncify-boot | swift-callouts | [View logs](/logs/plugins/s/swift-callouts/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_sc_platforms. | jspi-boot | swift-callouts | [View logs](/logs/plugins/s/swift-callouts/error.json) |
 | MySQL field type cannot be translated to SQLite: serial. | jspi-boot | swift-smtp | [View logs](/logs/plugins/s/swift-smtp/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_melibu_sss. | ast-sqlite-boot | swift-smtp | [View logs](/logs/plugins/s/swift-smtp/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_melibu_sss. | asyncify-boot | swift-smtp | [View logs](/logs/plugins/s/swift-smtp/error.json) |
@@ -7289,33 +7604,15 @@
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | the-city-login | [View logs](/logs/plugins/t/the-city-login/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | the-city-login | [View logs](/logs/plugins/t/the-city-login/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | the-city-login | [View logs](/logs/plugins/t/the-city-login/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_bmp_country. | ast-sqlite-boot | ultimate-live-cricket-lite | [View logs](/logs/plugins/u/ultimate-live-cricket-lite/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_bmp_country. | asyncify-boot | ultimate-live-cricket-lite | [View logs](/logs/plugins/u/ultimate-live-cricket-lite/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_bmp_country. | jspi-boot | ultimate-live-cricket-lite | [View logs](/logs/plugins/u/ultimate-live-cricket-lite/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_bmp_currency. | ast-sqlite-boot | ultimate-live-cricket-lite | [View logs](/logs/plugins/u/ultimate-live-cricket-lite/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_bmp_currency. | asyncify-boot | ultimate-live-cricket-lite | [View logs](/logs/plugins/u/ultimate-live-cricket-lite/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_bmp_currency. | jspi-boot | ultimate-live-cricket-lite | [View logs](/logs/plugins/u/ultimate-live-cricket-lite/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | u-buddypress-forum-attachment | [View logs](/logs/plugins/u/u-buddypress-forum-attachment/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | u-buddypress-forum-attachment | [View logs](/logs/plugins/u/u-buddypress-forum-attachment/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | u-buddypress-forum-attachment | [View logs](/logs/plugins/u/u-buddypress-forum-attachment/error.json) |
 | Unknown operation: AUTO_INCREMENT. | ast-sqlite-boot | u-buddypress-forum-attachment | [View logs](/logs/plugins/u/u-buddypress-forum-attachment/error.json) |
 | Unknown operation: AUTO_INCREMENT. | asyncify-boot | u-buddypress-forum-attachment | [View logs](/logs/plugins/u/u-buddypress-forum-attachment/error.json) |
 | Unknown operation: AUTO_INCREMENT. | jspi-boot | u-buddypress-forum-attachment | [View logs](/logs/plugins/u/u-buddypress-forum-attachment/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | upcloo | [View logs](/logs/plugins/u/upcloo/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | upcloo | [View logs](/logs/plugins/u/upcloo/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | upcloo | [View logs](/logs/plugins/u/upcloo/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | umba-payment-gateway-free-for-woocommerce | [View logs](/logs/plugins/u/umba-payment-gateway-free-for-woocommerce/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | umba-payment-gateway-free-for-woocommerce | [View logs](/logs/plugins/u/umba-payment-gateway-free-for-woocommerce/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | umba-payment-gateway-free-for-woocommerce | [View logs](/logs/plugins/u/umba-payment-gateway-free-for-woocommerce/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | ast-sqlite-boot | ultimate-rotator | [View logs](/logs/plugins/u/ultimate-rotator/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | asyncify-boot | ultimate-rotator | [View logs](/logs/plugins/u/ultimate-rotator/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | jspi-boot | ultimate-rotator | [View logs](/logs/plugins/u/ultimate-rotator/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: field_order. | ast-sqlite-boot | ultimate-rotator | [View logs](/logs/plugins/u/ultimate-rotator/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: field_order. | asyncify-boot | ultimate-rotator | [View logs](/logs/plugins/u/ultimate-rotator/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: field_order. | jspi-boot | ultimate-rotator | [View logs](/logs/plugins/u/ultimate-rotator/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_upicrm_fields. | ast-sqlite-boot | ultimate-rotator | [View logs](/logs/plugins/u/ultimate-rotator/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_upicrm_fields. | asyncify-boot | ultimate-rotator | [View logs](/logs/plugins/u/ultimate-rotator/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_upicrm_fields. | jspi-boot | ultimate-rotator | [View logs](/logs/plugins/u/ultimate-rotator/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | ultimate-follow-me | [View logs](/logs/plugins/u/ultimate-follow-me/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | ultimate-follow-me | [View logs](/logs/plugins/u/ultimate-follow-me/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | ultimate-follow-me | [View logs](/logs/plugins/u/ultimate-follow-me/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "0": syntax error. | ast-sqlite-boot | ultimate-post-type-manager | [View logs](/logs/plugins/u/ultimate-post-type-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "0": syntax error. | asyncify-boot | ultimate-post-type-manager | [View logs](/logs/plugins/u/ultimate-post-type-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "0": syntax error. | jspi-boot | ultimate-post-type-manager | [View logs](/logs/plugins/u/ultimate-post-type-manager/error.json) |
@@ -7373,12 +7670,10 @@
 | SQLSTATE[HY000]: General error: 1 unrecognized token: "\". | ast-sqlite-boot | ultimate-post-type-manager | [View logs](/logs/plugins/u/ultimate-post-type-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 unrecognized token: "\". | asyncify-boot | ultimate-post-type-manager | [View logs](/logs/plugins/u/ultimate-post-type-manager/error.json) |
 | SQLSTATE[HY000]: General error: 1 unrecognized token: "\". | jspi-boot | ultimate-post-type-manager | [View logs](/logs/plugins/u/ultimate-post-type-manager/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_bmp_country. | ast-sqlite-boot | uploadify-integration | [View logs](/logs/plugins/u/uploadify-integration/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_bmp_country. | asyncify-boot | uploadify-integration | [View logs](/logs/plugins/u/uploadify-integration/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_bmp_country. | jspi-boot | uploadify-integration | [View logs](/logs/plugins/u/uploadify-integration/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_bmp_currency. | ast-sqlite-boot | uploadify-integration | [View logs](/logs/plugins/u/uploadify-integration/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_bmp_currency. | asyncify-boot | uploadify-integration | [View logs](/logs/plugins/u/uploadify-integration/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_bmp_currency. | jspi-boot | uploadify-integration | [View logs](/logs/plugins/u/uploadify-integration/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | user-recent-search-history | [View logs](/logs/plugins/u/user-recent-search-history/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | user-recent-search-history | [View logs](/logs/plugins/u/user-recent-search-history/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: admin_notice. | ast-sqlite-boot | ultimakit-for-wp | [View logs](/logs/plugins/u/ultimakit-for-wp/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | unbounce | [View logs](/logs/plugins/u/unbounce/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "0": syntax error. | ast-sqlite-boot | ultimate-crypto-widget | [View logs](/logs/plugins/u/ultimate-crypto-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "0": syntax error. | asyncify-boot | ultimate-crypto-widget | [View logs](/logs/plugins/u/ultimate-crypto-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "0": syntax error. | jspi-boot | ultimate-crypto-widget | [View logs](/logs/plugins/u/ultimate-crypto-widget/error.json) |
@@ -7493,123 +7788,118 @@
 | SQLSTATE[HY000]: General error: 1 unrecognized token: "\". | ast-sqlite-boot | user-data | [View logs](/logs/plugins/u/user-data/error.json) |
 | SQLSTATE[HY000]: General error: 1 unrecognized token: "\". | asyncify-boot | user-data | [View logs](/logs/plugins/u/user-data/error.json) |
 | SQLSTATE[HY000]: General error: 1 unrecognized token: "\". | jspi-boot | user-data | [View logs](/logs/plugins/u/user-data/error.json) |
+    [code] => 0
+    [message] => Unexpected character.
+    [position] => 34
+    [query] => CREATE TABLE 'wp_udk_user_data' ( \n'id int(11) NOT NULL AUTO_INCREMENT,
+    [str] => \
+(
+)
+. | asyncify-boot | up-user-datakeeper | [View logs](/logs/plugins/u/up-user-datakeeper/error.json) |
+. | jspi-boot | up-user-datakeeper | [View logs](/logs/plugins/u/up-user-datakeeper/error.json) |
+PRIMARY KEY (id)'\n ) $charsetCollate
+_key text NOT NULL,
+_value text NOT NULL,
+user_id int(11) NOT NULL,
+| Array
+| SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | ast-sqlite-boot | up-user-datakeeper | [View logs](/logs/plugins/u/up-user-datakeeper/error.json) |
+| SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | asyncify-boot | up-user-datakeeper | [View logs](/logs/plugins/u/up-user-datakeeper/error.json) |
+| SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | jspi-boot | up-user-datakeeper | [View logs](/logs/plugins/u/up-user-datakeeper/error.json) |
 | Unknown operation: ENGINE. | ast-sqlite-boot | uktw | [View logs](/logs/plugins/u/uktw/error.json) |
 | Unknown operation: ENGINE. | asyncify-boot | uktw | [View logs](/logs/plugins/u/uktw/error.json) |
 | Unknown operation: ENGINE. | jspi-boot | uktw | [View logs](/logs/plugins/u/uktw/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "0": syntax error. | ast-sqlite-boot | user-registration-using-contact-form-7 | [View logs](/logs/plugins/u/user-registration-using-contact-form-7/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "M13": syntax error. | ast-sqlite-boot | user-registration-using-contact-form-7 | [View logs](/logs/plugins/u/user-registration-using-contact-form-7/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "M2": syntax error. | ast-sqlite-boot | user-registration-using-contact-form-7 | [View logs](/logs/plugins/u/user-registration-using-contact-form-7/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "M3": syntax error. | ast-sqlite-boot | user-registration-using-contact-form-7 | [View logs](/logs/plugins/u/user-registration-using-contact-form-7/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "M4": syntax error. | ast-sqlite-boot | user-registration-using-contact-form-7 | [View logs](/logs/plugins/u/user-registration-using-contact-form-7/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "M7": syntax error. | ast-sqlite-boot | user-registration-using-contact-form-7 | [View logs](/logs/plugins/u/user-registration-using-contact-form-7/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "M9": syntax error. | ast-sqlite-boot | user-registration-using-contact-form-7 | [View logs](/logs/plugins/u/user-registration-using-contact-form-7/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "es": syntax error. | ast-sqlite-boot | user-registration-using-contact-form-7 | [View logs](/logs/plugins/u/user-registration-using-contact-form-7/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "frappe": syntax error. | ast-sqlite-boot | user-registration-using-contact-form-7 | [View logs](/logs/plugins/u/user-registration-using-contact-form-7/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "generator": syntax error. | ast-sqlite-boot | user-registration-using-contact-form-7 | [View logs](/logs/plugins/u/user-registration-using-contact-form-7/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "image": syntax error. | ast-sqlite-boot | user-registration-using-contact-form-7 | [View logs](/logs/plugins/u/user-registration-using-contact-form-7/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "logged": syntax error. | ast-sqlite-boot | user-registration-using-contact-form-7 | [View logs](/logs/plugins/u/user-registration-using-contact-form-7/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "shortcut": syntax error. | ast-sqlite-boot | user-registration-using-contact-form-7 | [View logs](/logs/plugins/u/user-registration-using-contact-form-7/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "text": syntax error. | ast-sqlite-boot | user-registration-using-contact-form-7 | [View logs](/logs/plugins/u/user-registration-using-contact-form-7/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "title": syntax error. | ast-sqlite-boot | user-registration-using-contact-form-7 | [View logs](/logs/plugins/u/user-registration-using-contact-form-7/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "utf": syntax error. | ast-sqlite-boot | user-registration-using-contact-form-7 | [View logs](/logs/plugins/u/user-registration-using-contact-form-7/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "viewport": syntax error. | ast-sqlite-boot | user-registration-using-contact-form-7 | [View logs](/logs/plugins/u/user-registration-using-contact-form-7/error.json) |
-| SQLSTATE[HY000]: General error: 1 unrecognized token: "\". | ast-sqlite-boot | user-registration-using-contact-form-7 | [View logs](/logs/plugins/u/user-registration-using-contact-form-7/error.json) |
-| Unknown query type: RENAME. | ast-sqlite-boot | user-registration-using-contact-form-7 | [View logs](/logs/plugins/u/user-registration-using-contact-form-7/error.json) |
+    [code] => 0
+    [message] => Unexpected character.
+    [position] => 34
+    [query] => CREATE TABLE 'wp_udk_user_data' ( \n'id int(11) NOT NULL AUTO_INCREMENT,
+    [str] => \
+(
+)
+. | ast-sqlite-boot | user-registration-using-contact-form-7 | [View logs](/logs/plugins/u/user-registration-using-contact-form-7/error.json) |
+. | asyncify-boot | user-registration-using-contact-form-7 | [View logs](/logs/plugins/u/user-registration-using-contact-form-7/error.json) |
+. | jspi-boot | user-registration-using-contact-form-7 | [View logs](/logs/plugins/u/user-registration-using-contact-form-7/error.json) |
+PRIMARY KEY (id)'\n ) $charsetCollate
+_key text NOT NULL,
+_value text NOT NULL,
+user_id int(11) NOT NULL,
+| Array
+| SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | ast-sqlite-boot | user-registration-using-contact-form-7 | [View logs](/logs/plugins/u/user-registration-using-contact-form-7/error.json) |
+| SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | asyncify-boot | user-registration-using-contact-form-7 | [View logs](/logs/plugins/u/user-registration-using-contact-form-7/error.json) |
+| SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | jspi-boot | user-registration-using-contact-form-7 | [View logs](/logs/plugins/u/user-registration-using-contact-form-7/error.json) |
 | Unknown operation: ENGINE. | ast-sqlite-boot | uwebic-wordpress-framework | [View logs](/logs/plugins/u/uwebic-wordpress-framework/error.json) |
 | Unknown operation: ENGINE. | asyncify-boot | uwebic-wordpress-framework | [View logs](/logs/plugins/u/uwebic-wordpress-framework/error.json) |
 | Unknown operation: ENGINE. | jspi-boot | uwebic-wordpress-framework | [View logs](/logs/plugins/u/uwebic-wordpress-framework/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | un-official-fiverr-plugin | [View logs](/logs/plugins/u/un-official-fiverr-plugin/error.json) |
-| Unknown query type: (. | ast-sqlite-boot | un-official-fiverr-plugin | [View logs](/logs/plugins/u/un-official-fiverr-plugin/error.json) |
-| Unknown query type: (. | asyncify-boot | un-official-fiverr-plugin | [View logs](/logs/plugins/u/un-official-fiverr-plugin/error.json) |
-| Unknown query type: (. | jspi-boot | un-official-fiverr-plugin | [View logs](/logs/plugins/u/un-official-fiverr-plugin/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | ast-sqlite-boot | ubb-master | [View logs](/logs/plugins/u/ubb-master/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | asyncify-boot | ubb-master | [View logs](/logs/plugins/u/ubb-master/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | jspi-boot | ubb-master | [View logs](/logs/plugins/u/ubb-master/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: field_order. | ast-sqlite-boot | ubb-master | [View logs](/logs/plugins/u/ubb-master/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: field_order. | asyncify-boot | ubb-master | [View logs](/logs/plugins/u/ubb-master/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: field_order. | jspi-boot | ubb-master | [View logs](/logs/plugins/u/ubb-master/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_upicrm_fields. | ast-sqlite-boot | ubb-master | [View logs](/logs/plugins/u/ubb-master/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_upicrm_fields. | asyncify-boot | ubb-master | [View logs](/logs/plugins/u/ubb-master/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_upicrm_fields. | jspi-boot | ubb-master | [View logs](/logs/plugins/u/ubb-master/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | users-list | [View logs](/logs/plugins/u/users-list/error.json) |
-| Unknown query type: (. | ast-sqlite-boot | users-list | [View logs](/logs/plugins/u/users-list/error.json) |
-| Unknown query type: (. | asyncify-boot | users-list | [View logs](/logs/plugins/u/users-list/error.json) |
-| Unknown query type: (. | jspi-boot | users-list | [View logs](/logs/plugins/u/users-list/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: referrer. | ast-sqlite-boot | umatter2us | [View logs](/logs/plugins/u/umatter2us/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: referrer. | asyncify-boot | umatter2us | [View logs](/logs/plugins/u/umatter2us/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: referrer. | jspi-boot | umatter2us | [View logs](/logs/plugins/u/umatter2us/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: title. | ast-sqlite-boot | umatter2us | [View logs](/logs/plugins/u/umatter2us/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: title. | asyncify-boot | umatter2us | [View logs](/logs/plugins/u/umatter2us/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: title. | jspi-boot | umatter2us | [View logs](/logs/plugins/u/umatter2us/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | umatter2us | [View logs](/logs/plugins/u/umatter2us/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | umatter2us | [View logs](/logs/plugins/u/umatter2us/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | umatter2us | [View logs](/logs/plugins/u/umatter2us/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | umatter2us | [View logs](/logs/plugins/u/umatter2us/error.json) |
+| Unknown query type: DESC. | asyncify-boot | umatter2us | [View logs](/logs/plugins/u/umatter2us/error.json) |
+| Unknown query type: DESC. | jspi-boot | umatter2us | [View logs](/logs/plugins/u/umatter2us/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_restricted. | asyncify-boot | user-restrictor | [View logs](/logs/plugins/u/user-restrictor/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_restricted. | jspi-boot | user-restrictor | [View logs](/logs/plugins/u/user-restrictor/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: referrer. | ast-sqlite-boot | ultimo-woocommerce-multi-pay | [View logs](/logs/plugins/u/ultimo-woocommerce-multi-pay/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: referrer. | asyncify-boot | ultimo-woocommerce-multi-pay | [View logs](/logs/plugins/u/ultimo-woocommerce-multi-pay/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: referrer. | jspi-boot | ultimo-woocommerce-multi-pay | [View logs](/logs/plugins/u/ultimo-woocommerce-multi-pay/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: title. | ast-sqlite-boot | ultimo-woocommerce-multi-pay | [View logs](/logs/plugins/u/ultimo-woocommerce-multi-pay/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: title. | asyncify-boot | ultimo-woocommerce-multi-pay | [View logs](/logs/plugins/u/ultimo-woocommerce-multi-pay/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: title. | jspi-boot | ultimo-woocommerce-multi-pay | [View logs](/logs/plugins/u/ultimo-woocommerce-multi-pay/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | ultimo-woocommerce-multi-pay | [View logs](/logs/plugins/u/ultimo-woocommerce-multi-pay/error.json) |
+| Unknown operation: MODIFY. | asyncify-boot | ultimo-woocommerce-multi-pay | [View logs](/logs/plugins/u/ultimo-woocommerce-multi-pay/error.json) |
+| Unknown operation: MODIFY. | jspi-boot | ultimo-woocommerce-multi-pay | [View logs](/logs/plugins/u/ultimo-woocommerce-multi-pay/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | ultimo-woocommerce-multi-pay | [View logs](/logs/plugins/u/ultimo-woocommerce-multi-pay/error.json) |
+| Unknown query type: DESC. | asyncify-boot | ultimo-woocommerce-multi-pay | [View logs](/logs/plugins/u/ultimo-woocommerce-multi-pay/error.json) |
+| Unknown query type: DESC. | jspi-boot | ultimo-woocommerce-multi-pay | [View logs](/logs/plugins/u/ultimo-woocommerce-multi-pay/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | u-post-it | [View logs](/logs/plugins/u/u-post-it/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | u-post-it | [View logs](/logs/plugins/u/u-post-it/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | u-post-it | [View logs](/logs/plugins/u/u-post-it/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | usercentrics-consent-management-platform | [View logs](/logs/plugins/u/usercentrics-consent-management-platform/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_restricted. | ast-sqlite-boot | user-role-management | [View logs](/logs/plugins/u/user-role-management/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | usernamer | [View logs](/logs/plugins/u/usernamer/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | usernamer | [View logs](/logs/plugins/u/usernamer/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | usernamer | [View logs](/logs/plugins/u/usernamer/error.json) |
+| Unknown query type: 1. | ast-sqlite-boot | usernamer | [View logs](/logs/plugins/u/usernamer/error.json) |
+| Unknown query type: 1. | asyncify-boot | usernamer | [View logs](/logs/plugins/u/usernamer/error.json) |
+| Unknown query type: 1. | jspi-boot | usernamer | [View logs](/logs/plugins/u/usernamer/error.json) |
 | Unknown operation: AUTO_INCREMENT. | asyncify-boot | uninstall-yoast-seo | [View logs](/logs/plugins/u/uninstall-yoast-seo/error.json) |
 | Unknown operation: AUTO_INCREMENT. | jspi-boot | uninstall-yoast-seo | [View logs](/logs/plugins/u/uninstall-yoast-seo/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | ast-sqlite-boot | ucul | [View logs](/logs/plugins/u/ucul/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | asyncify-boot | ucul | [View logs](/logs/plugins/u/ucul/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | jspi-boot | ucul | [View logs](/logs/plugins/u/ucul/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: field_order. | ast-sqlite-boot | ucul | [View logs](/logs/plugins/u/ucul/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: field_order. | asyncify-boot | ucul | [View logs](/logs/plugins/u/ucul/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: field_order. | jspi-boot | ucul | [View logs](/logs/plugins/u/ucul/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_upicrm_fields. | ast-sqlite-boot | ucul | [View logs](/logs/plugins/u/ucul/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_upicrm_fields. | asyncify-boot | ucul | [View logs](/logs/plugins/u/ucul/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_upicrm_fields. | jspi-boot | ucul | [View logs](/logs/plugins/u/ucul/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | ast-sqlite-boot | urqui | [View logs](/logs/plugins/u/urqui/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | asyncify-boot | urqui | [View logs](/logs/plugins/u/urqui/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | jspi-boot | urqui | [View logs](/logs/plugins/u/urqui/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: field_order. | ast-sqlite-boot | urqui | [View logs](/logs/plugins/u/urqui/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: field_order. | asyncify-boot | urqui | [View logs](/logs/plugins/u/urqui/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: field_order. | jspi-boot | urqui | [View logs](/logs/plugins/u/urqui/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_upicrm_fields. | ast-sqlite-boot | urqui | [View logs](/logs/plugins/u/urqui/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_upicrm_fields. | asyncify-boot | urqui | [View logs](/logs/plugins/u/urqui/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_upicrm_fields. | jspi-boot | urqui | [View logs](/logs/plugins/u/urqui/error.json) |
 | Unknown operation: ENGINE. | ast-sqlite-boot | undasecure | [View logs](/logs/plugins/u/undasecure/error.json) |
 | Unknown operation: ENGINE. | asyncify-boot | undasecure | [View logs](/logs/plugins/u/undasecure/error.json) |
 | Unknown operation: ENGINE. | jspi-boot | undasecure | [View logs](/logs/plugins/u/undasecure/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: admin_notice. | ast-sqlite-boot | uncopy | [View logs](/logs/plugins/u/uncopy/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | up-posts | [View logs](/logs/plugins/u/up-posts/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | up-posts | [View logs](/logs/plugins/u/up-posts/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | up-posts | [View logs](/logs/plugins/u/up-posts/error.json) |
-| Unknown query type: (. | ast-sqlite-boot | uploader-anywhere | [View logs](/logs/plugins/u/uploader-anywhere/error.json) |
-| Unknown query type: (. | asyncify-boot | uploader-anywhere | [View logs](/logs/plugins/u/uploader-anywhere/error.json) |
-| Unknown query type: (. | jspi-boot | uploader-anywhere | [View logs](/logs/plugins/u/uploader-anywhere/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | ast-sqlite-boot | uploads | [View logs](/logs/plugins/u/uploads/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | asyncify-boot | uploads | [View logs](/logs/plugins/u/uploads/error.json) |
-| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | jspi-boot | uploads | [View logs](/logs/plugins/u/uploads/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: field_order. | ast-sqlite-boot | uploads | [View logs](/logs/plugins/u/uploads/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: field_order. | asyncify-boot | uploads | [View logs](/logs/plugins/u/uploads/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such column: field_order. | jspi-boot | uploads | [View logs](/logs/plugins/u/uploads/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_upicrm_fields. | ast-sqlite-boot | uploads | [View logs](/logs/plugins/u/uploads/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_upicrm_fields. | asyncify-boot | uploads | [View logs](/logs/plugins/u/uploads/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_upicrm_fields. | jspi-boot | uploads | [View logs](/logs/plugins/u/uploads/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | us-cars | [View logs](/logs/plugins/u/us-cars/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | us-cars | [View logs](/logs/plugins/u/us-cars/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | us-cars | [View logs](/logs/plugins/u/us-cars/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | updated-today-plugin | [View logs](/logs/plugins/u/updated-today-plugin/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | updated-today-plugin | [View logs](/logs/plugins/u/updated-today-plugin/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | updated-today-plugin | [View logs](/logs/plugins/u/updated-today-plugin/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | uae-aed-currency-symbol-changer-by-ingenidev | [View logs](/logs/plugins/u/uae-aed-currency-symbol-changer-by-ingenidev/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | uae-aed-currency-symbol-changer-by-ingenidev | [View logs](/logs/plugins/u/uae-aed-currency-symbol-changer-by-ingenidev/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | uae-aed-currency-symbol-changer-by-ingenidev | [View logs](/logs/plugins/u/uae-aed-currency-symbol-changer-by-ingenidev/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_restricted. | ast-sqlite-boot | ultimate-product-options-for-woocommerce | [View logs](/logs/plugins/u/ultimate-product-options-for-woocommerce/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | userlast | [View logs](/logs/plugins/u/userlast/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: admin_notice. | ast-sqlite-boot | upcasted-s3-offload | [View logs](/logs/plugins/u/upcasted-s3-offload/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: referrer. | ast-sqlite-boot | ultimate-cursor | [View logs](/logs/plugins/u/ultimate-cursor/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: title. | ast-sqlite-boot | ultimate-cursor | [View logs](/logs/plugins/u/ultimate-cursor/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | ultimate-cursor | [View logs](/logs/plugins/u/ultimate-cursor/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | ultimate-cursor | [View logs](/logs/plugins/u/ultimate-cursor/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | user-time-zone | [View logs](/logs/plugins/u/user-time-zone/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | user-time-zone | [View logs](/logs/plugins/u/user-time-zone/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | user-time-zone | [View logs](/logs/plugins/u/user-time-zone/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | ubiquity-search | [View logs](/logs/plugins/u/ubiquity-search/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | ubiquity-search | [View logs](/logs/plugins/u/ubiquity-search/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | ubiquity-search | [View logs](/logs/plugins/u/ubiquity-search/error.json) |
 | Unknown operation: ENGINE. | ast-sqlite-boot | uniplace-client | [View logs](/logs/plugins/u/uniplace-client/error.json) |
 | Unknown operation: ENGINE. | asyncify-boot | uniplace-client | [View logs](/logs/plugins/u/uniplace-client/error.json) |
 | Unknown operation: ENGINE. | jspi-boot | uniplace-client | [View logs](/logs/plugins/u/uniplace-client/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | user-language-switch | [View logs](/logs/plugins/u/user-language-switch/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "0": syntax error. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "10": syntax error. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "M1": syntax error. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "M10": syntax error. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "M12": syntax error. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "M13": syntax error. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "M18": syntax error. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "M2": syntax error. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "M3": syntax error. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "M4": syntax error. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "M6": syntax error. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "M7": syntax error. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "M8": syntax error. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "M9": syntax error. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "es": syntax error. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "frappe": syntax error. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "generator": syntax error. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "image": syntax error. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "logged": syntax error. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "none": syntax error. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "shortcut": syntax error. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "text": syntax error. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "title": syntax error. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "utf": syntax error. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| SQLSTATE[HY000]: General error: 1 near "viewport": syntax error. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| SQLSTATE[HY000]: General error: 1 unrecognized token: "\". | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
-| Unknown query type: RENAME. | asyncify-boot | um-wp-user-frontend | [View logs](/logs/plugins/u/um-wp-user-frontend/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | ultimate-faq-solution | [View logs](/logs/plugins/u/ultimate-faq-solution/error.json) |
+| Unknown query type: 1. | ast-sqlite-boot | ultimate-faq-solution | [View logs](/logs/plugins/u/ultimate-faq-solution/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | u-loader | [View logs](/logs/plugins/u/u-loader/error.json) |
 | Unknown operation: ENGINE. | ast-sqlite-boot | userlog | [View logs](/logs/plugins/u/userlog/error.json) |
 | Unknown operation: ENGINE. | asyncify-boot | userlog | [View logs](/logs/plugins/u/userlog/error.json) |
@@ -7617,27 +7907,58 @@
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | ultimate-cms | [View logs](/logs/plugins/u/ultimate-cms/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | ultimate-cms | [View logs](/logs/plugins/u/ultimate-cms/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | ultimate-cms | [View logs](/logs/plugins/u/ultimate-cms/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: admin_notice. | ast-sqlite-boot | ultimate-video-gallery | [View logs](/logs/plugins/u/ultimate-video-gallery/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: admin_notice. | asyncify-boot | ultimate-video-gallery | [View logs](/logs/plugins/u/ultimate-video-gallery/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: admin_notice. | jspi-boot | ultimate-video-gallery | [View logs](/logs/plugins/u/ultimate-video-gallery/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ultimakit_module_settings. | ast-sqlite-boot | ultimate-video-gallery | [View logs](/logs/plugins/u/ultimate-video-gallery/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ultimakit_module_settings. | asyncify-boot | ultimate-video-gallery | [View logs](/logs/plugins/u/ultimate-video-gallery/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_ultimakit_module_settings. | jspi-boot | ultimate-video-gallery | [View logs](/logs/plugins/u/ultimate-video-gallery/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | u-paragraph-margin-remover | [View logs](/logs/plugins/u/u-paragraph-margin-remover/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | u-paragraph-margin-remover | [View logs](/logs/plugins/u/u-paragraph-margin-remover/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | u-paragraph-margin-remover | [View logs](/logs/plugins/u/u-paragraph-margin-remover/error.json) |
+| Unknown query type: 1. | ast-sqlite-boot | u-paragraph-margin-remover | [View logs](/logs/plugins/u/u-paragraph-margin-remover/error.json) |
+| Unknown query type: 1. | asyncify-boot | u-paragraph-margin-remover | [View logs](/logs/plugins/u/u-paragraph-margin-remover/error.json) |
+| Unknown query type: 1. | jspi-boot | u-paragraph-margin-remover | [View logs](/logs/plugins/u/u-paragraph-margin-remover/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | ultimo-woocommerce-email | [View logs](/logs/plugins/u/ultimo-woocommerce-email/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | ultimo-woocommerce-email | [View logs](/logs/plugins/u/ultimo-woocommerce-email/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | ultimo-woocommerce-email | [View logs](/logs/plugins/u/ultimo-woocommerce-email/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | ast-sqlite-boot | ups-israel-domestic-print-orders | [View logs](/logs/plugins/u/ups-israel-domestic-print-orders/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | asyncify-boot | ups-israel-domestic-print-orders | [View logs](/logs/plugins/u/ups-israel-domestic-print-orders/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | jspi-boot | ups-israel-domestic-print-orders | [View logs](/logs/plugins/u/ups-israel-domestic-print-orders/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: field_order. | ast-sqlite-boot | ups-israel-domestic-print-orders | [View logs](/logs/plugins/u/ups-israel-domestic-print-orders/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: field_order. | asyncify-boot | ups-israel-domestic-print-orders | [View logs](/logs/plugins/u/ups-israel-domestic-print-orders/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: field_order. | jspi-boot | ups-israel-domestic-print-orders | [View logs](/logs/plugins/u/ups-israel-domestic-print-orders/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_upicrm_fields. | ast-sqlite-boot | ups-israel-domestic-print-orders | [View logs](/logs/plugins/u/ups-israel-domestic-print-orders/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_upicrm_fields. | asyncify-boot | ups-israel-domestic-print-orders | [View logs](/logs/plugins/u/ups-israel-domestic-print-orders/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_upicrm_fields. | jspi-boot | ups-israel-domestic-print-orders | [View logs](/logs/plugins/u/ups-israel-domestic-print-orders/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: leumundc_reader.b2bwp_usercloud24. | asyncify-boot | upstream | [View logs](/logs/plugins/u/upstream/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: leumundc_reader.b2bwp_usercloud24. | jspi-boot | upstream | [View logs](/logs/plugins/u/upstream/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_bmp_country. | ast-sqlite-boot | usgs-river-data | [View logs](/logs/plugins/u/usgs-river-data/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_bmp_country. | asyncify-boot | usgs-river-data | [View logs](/logs/plugins/u/usgs-river-data/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_bmp_country. | jspi-boot | usgs-river-data | [View logs](/logs/plugins/u/usgs-river-data/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_bmp_currency. | ast-sqlite-boot | usgs-river-data | [View logs](/logs/plugins/u/usgs-river-data/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_bmp_currency. | asyncify-boot | usgs-river-data | [View logs](/logs/plugins/u/usgs-river-data/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_bmp_currency. | jspi-boot | usgs-river-data | [View logs](/logs/plugins/u/usgs-river-data/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | useful-comments | [View logs](/logs/plugins/u/useful-comments/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | useful-comments | [View logs](/logs/plugins/u/useful-comments/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | useful-comments | [View logs](/logs/plugins/u/useful-comments/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | user-role-widget-areas | [View logs](/logs/plugins/u/user-role-widget-areas/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | user-role-widget-areas | [View logs](/logs/plugins/u/user-role-widget-areas/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | user-role-widget-areas | [View logs](/logs/plugins/u/user-role-widget-areas/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | usernoise | [View logs](/logs/plugins/u/usernoise/error.json) |
+| Unknown query type: (. | ast-sqlite-boot | url-based-login | [View logs](/logs/plugins/u/url-based-login/error.json) |
+| Unknown query type: (. | asyncify-boot | url-based-login | [View logs](/logs/plugins/u/url-based-login/error.json) |
+| Unknown query type: (. | jspi-boot | url-based-login | [View logs](/logs/plugins/u/url-based-login/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | ast-sqlite-boot | ultimate-testimonials-rotator | [View logs](/logs/plugins/u/ultimate-testimonials-rotator/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: field_order. | ast-sqlite-boot | ultimate-testimonials-rotator | [View logs](/logs/plugins/u/ultimate-testimonials-rotator/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_upicrm_fields. | ast-sqlite-boot | ultimate-testimonials-rotator | [View logs](/logs/plugins/u/ultimate-testimonials-rotator/error.json) |
+| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | ultimate-searchable-accordion-lite-wpbakery-page-builder-addon | [View logs](/logs/plugins/u/ultimate-searchable-accordion-lite-wpbakery-page-builder-addon/error.json) |
+| Unknown query type: 1. | ast-sqlite-boot | ultimate-searchable-accordion-lite-wpbakery-page-builder-addon | [View logs](/logs/plugins/u/ultimate-searchable-accordion-lite-wpbakery-page-builder-addon/error.json) |
+| SQLSTATE[HY000]: General error: 1 near ")": syntax error. | ast-sqlite-boot | user-access-manager | [View logs](/logs/plugins/u/user-access-manager/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: field_order. | ast-sqlite-boot | user-access-manager | [View logs](/logs/plugins/u/user-access-manager/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_upicrm_fields. | ast-sqlite-boot | user-access-manager | [View logs](/logs/plugins/u/user-access-manager/error.json) |
 | Unknown operation: ENGINE. | ast-sqlite-boot | ultimatewoo | [View logs](/logs/plugins/u/ultimatewoo/error.json) |
 | Unknown operation: ENGINE. | asyncify-boot | ultimatewoo | [View logs](/logs/plugins/u/ultimatewoo/error.json) |
 | Unknown operation: ENGINE. | jspi-boot | ultimatewoo | [View logs](/logs/plugins/u/ultimatewoo/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | uk-lottery-results-widget | [View logs](/logs/plugins/u/uk-lottery-results-widget/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | uk-lottery-results-widget | [View logs](/logs/plugins/u/uk-lottery-results-widget/error.json) |
-| SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | uk-lottery-results-widget | [View logs](/logs/plugins/u/uk-lottery-results-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: referrer. | ast-sqlite-boot | utm-builder-ads-fox | [View logs](/logs/plugins/u/utm-builder-ads-fox/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: title. | ast-sqlite-boot | utm-builder-ads-fox | [View logs](/logs/plugins/u/utm-builder-ads-fox/error.json) |
+| Unknown operation: MODIFY. | ast-sqlite-boot | utm-builder-ads-fox | [View logs](/logs/plugins/u/utm-builder-ads-fox/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | utm-builder-ads-fox | [View logs](/logs/plugins/u/utm-builder-ads-fox/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | user-switching | [View logs](/logs/plugins/u/user-switching/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | user-switching | [View logs](/logs/plugins/u/user-switching/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_bmp_country. | ast-sqlite-boot | universam-demo | [View logs](/logs/plugins/u/universam-demo/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_bmp_currency. | ast-sqlite-boot | universam-demo | [View logs](/logs/plugins/u/universam-demo/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: main.wp_visitor_maps_wo. | ast-sqlite-boot | vegas-fullscreen-background-slider | [View logs](/logs/plugins/v/vegas-fullscreen-background-slider/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: main.wp_visitor_maps_wo. | asyncify-boot | vegas-fullscreen-background-slider | [View logs](/logs/plugins/v/vegas-fullscreen-background-slider/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: main.wp_visitor_maps_wo. | jspi-boot | vegas-fullscreen-background-slider | [View logs](/logs/plugins/v/vegas-fullscreen-background-slider/error.json) |
@@ -7965,16 +8286,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wfs_configure. | ast-sqlite-boot | wa-form-builder | [View logs](/logs/plugins/w/wa-form-builder/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wfs_configure. | asyncify-boot | wa-form-builder | [View logs](/logs/plugins/w/wa-form-builder/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wfs_configure. | jspi-boot | wa-form-builder | [View logs](/logs/plugins/w/wa-form-builder/error.json) |
-    [code] => 0
-    [message] => Ending quote ' was expected.
-    [position] => 35
-    [query] => show tables like 'wp_access_codes''
-    [str] => 
-(
-)
-. | asyncify-boot | wallets | [View logs](/logs/plugins/w/wallets/error.json) |
-. | jspi-boot | wallets | [View logs](/logs/plugins/w/wallets/error.json) |
-| Array
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | walup | [View logs](/logs/plugins/w/walup/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | walup | [View logs](/logs/plugins/w/walup/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | walup | [View logs](/logs/plugins/w/walup/error.json) |
@@ -8014,6 +8325,8 @@
 | Unexpected token in MySQL query: isValid. | ast-sqlite-boot | watchtowerhq | [View logs](/logs/plugins/w/watchtowerhq/error.json) |
 | Unexpected token in MySQL query: willAttend. | ast-sqlite-boot | watchtowerhq | [View logs](/logs/plugins/w/watchtowerhq/error.json) |
 | Unexpected token in MySQL query: withAttendance. | ast-sqlite-boot | watchtowerhq | [View logs](/logs/plugins/w/watchtowerhq/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | waterwoo-pdf | [View logs](/logs/plugins/w/waterwoo-pdf/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_weallopass_prod. | ast-sqlite-boot | waterwoo-pdf | [View logs](/logs/plugins/w/waterwoo-pdf/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | ast-sqlite-boot | wave-ya-flag | [View logs](/logs/plugins/w/wave-ya-flag/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | asyncify-boot | wave-ya-flag | [View logs](/logs/plugins/w/wave-ya-flag/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | jspi-boot | wave-ya-flag | [View logs](/logs/plugins/w/wave-ya-flag/error.json) |
@@ -8083,6 +8396,12 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wordable. | ast-sqlite-boot | wc-qpaypro | [View logs](/logs/plugins/w/wc-qpaypro/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wordable. | asyncify-boot | wc-qpaypro | [View logs](/logs/plugins/w/wc-qpaypro/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wordable. | jspi-boot | wc-qpaypro | [View logs](/logs/plugins/w/wc-qpaypro/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | wc-securionpay | [View logs](/logs/plugins/w/wc-securionpay/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | wc-securionpay | [View logs](/logs/plugins/w/wc-securionpay/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | wc-securionpay | [View logs](/logs/plugins/w/wc-securionpay/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_weallopass_prod. | ast-sqlite-boot | wc-securionpay | [View logs](/logs/plugins/w/wc-securionpay/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_weallopass_prod. | asyncify-boot | wc-securionpay | [View logs](/logs/plugins/w/wc-securionpay/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_weallopass_prod. | jspi-boot | wc-securionpay | [View logs](/logs/plugins/w/wc-securionpay/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | wc-stripe-checkout-payment-gateway | [View logs](/logs/plugins/w/wc-stripe-checkout-payment-gateway/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wtipress_languages. | ast-sqlite-boot | wc-stripe-checkout-payment-gateway | [View logs](/logs/plugins/w/wc-stripe-checkout-payment-gateway/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | ast-sqlite-boot | wc-transbank-webpay-plus-rest | [View logs](/logs/plugins/w/wc-transbank-webpay-plus-rest/error.json) |
@@ -8140,6 +8459,7 @@
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | webo-site-insight | [View logs](/logs/plugins/w/webo-site-insight/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | webo-site-insight | [View logs](/logs/plugins/w/webo-site-insight/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | webo-site-insight | [View logs](/logs/plugins/w/webo-site-insight/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | webp-format-permission | [View logs](/logs/plugins/w/webp-format-permission/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | website-legal-info | [View logs](/logs/plugins/w/website-legal-info/error.json) |
 | Unknown operation: MODIFY. | asyncify-boot | website-legal-info | [View logs](/logs/plugins/w/website-legal-info/error.json) |
 | Unknown operation: MODIFY. | jspi-boot | website-legal-info | [View logs](/logs/plugins/w/website-legal-info/error.json) |
@@ -8157,6 +8477,9 @@
 | SQLSTATE[HY000]: General error: 1 duplicate column name: uid. | jspi-boot | wechat-social-login | [View logs](/logs/plugins/w/wechat-social-login/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_xh_social_channel_wechat__uid_unique already exists. | asyncify-boot | wechat-social-login | [View logs](/logs/plugins/w/wechat-social-login/error.json) |
 | SQLSTATE[HY000]: General error: 1 index wp_xh_social_channel_wechat__uid_unique already exists. | jspi-boot | wechat-social-login | [View logs](/logs/plugins/w/wechat-social-login/error.json) |
+| Unexpected token in MySQL query: shown. | ast-sqlite-boot | weeconnectpay | [View logs](/logs/plugins/w/weeconnectpay/error.json) |
+| Unexpected token in MySQL query: shown. | asyncify-boot | weeconnectpay | [View logs](/logs/plugins/w/weeconnectpay/error.json) |
+| Unexpected token in MySQL query: shown. | jspi-boot | weeconnectpay | [View logs](/logs/plugins/w/weeconnectpay/error.json) |
 | Unknown query type: HELP. | ast-sqlite-boot | weeotv | [View logs](/logs/plugins/w/weeotv/error.json) |
 | Unknown query type: HELP. | asyncify-boot | weeotv | [View logs](/logs/plugins/w/weeotv/error.json) |
 | Unknown query type: HELP. | jspi-boot | weeotv | [View logs](/logs/plugins/w/weeotv/error.json) |
@@ -8176,13 +8499,28 @@
 | MySQL field type cannot be translated to SQLite: set. | ast-sqlite-boot | what-did-they-say | [View logs](/logs/plugins/w/what-did-they-say/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | asyncify-boot | what-did-they-say | [View logs](/logs/plugins/w/what-did-they-say/error.json) |
 | MySQL field type cannot be translated to SQLite: set. | jspi-boot | what-did-they-say | [View logs](/logs/plugins/w/what-did-they-say/error.json) |
+| Data type expected in MySQL query, unknown token received: WPBlast_Sitemap_Hash. | ast-sqlite-boot | whisperfollow | [View logs](/logs/plugins/w/whisperfollow/error.json) |
+| Data type expected in MySQL query, unknown token received: WPBlast_Sitemap_Hash. | asyncify-boot | whisperfollow | [View logs](/logs/plugins/w/whisperfollow/error.json) |
+| Data type expected in MySQL query, unknown token received: WPBlast_Sitemap_Hash. | jspi-boot | whisperfollow | [View logs](/logs/plugins/w/whisperfollow/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | whisperfollow | [View logs](/logs/plugins/w/whisperfollow/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | whisperfollow | [View logs](/logs/plugins/w/whisperfollow/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | whisperfollow | [View logs](/logs/plugins/w/whisperfollow/error.json) |
+| Unknown show type: INDEXES FROM. | ast-sqlite-boot | whisperfollow | [View logs](/logs/plugins/w/whisperfollow/error.json) |
+| Unknown show type: INDEXES FROM. | asyncify-boot | whisperfollow | [View logs](/logs/plugins/w/whisperfollow/error.json) |
+| Unknown show type: INDEXES FROM. | jspi-boot | whisperfollow | [View logs](/logs/plugins/w/whisperfollow/error.json) |
 | Unknown operation: MODIFY. | ast-sqlite-boot | who-delete-my-posts | [View logs](/logs/plugins/w/who-delete-my-posts/error.json) |
+| Unexpected token in MySQL query: shown. | ast-sqlite-boot | wholesalex | [View logs](/logs/plugins/w/wholesalex/error.json) |
+| Unexpected token in MySQL query: shown. | asyncify-boot | wholesalex | [View logs](/logs/plugins/w/wholesalex/error.json) |
+| Unexpected token in MySQL query: shown. | jspi-boot | wholesalex | [View logs](/logs/plugins/w/wholesalex/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_menuitems. | ast-sqlite-boot | wideo | [View logs](/logs/plugins/w/wideo/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_menuitems. | asyncify-boot | wideo | [View logs](/logs/plugins/w/wideo/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_menuitems. | jspi-boot | wideo | [View logs](/logs/plugins/w/wideo/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | widget-bumbablog-adserver | [View logs](/logs/plugins/w/widget-bumbablog-adserver/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | asyncify-boot | widget-bumbablog-adserver | [View logs](/logs/plugins/w/widget-bumbablog-adserver/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | widget-bumbablog-adserver | [View logs](/logs/plugins/w/widget-bumbablog-adserver/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies. | ast-sqlite-boot | widget-contact-form-7 | [View logs](/logs/plugins/w/widget-contact-form-7/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies. | asyncify-boot | widget-contact-form-7 | [View logs](/logs/plugins/w/widget-contact-form-7/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies. | jspi-boot | widget-contact-form-7 | [View logs](/logs/plugins/w/widget-contact-form-7/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_epayouts. | ast-sqlite-boot | widget-kategorieartikel | [View logs](/logs/plugins/w/widget-kategorieartikel/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_epayouts. | asyncify-boot | widget-kategorieartikel | [View logs](/logs/plugins/w/widget-kategorieartikel/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_epayouts. | jspi-boot | widget-kategorieartikel | [View logs](/logs/plugins/w/widget-kategorieartikel/error.json) |
@@ -8368,10 +8706,19 @@
 | SQLSTATE[HY000]: General error: 1 no such function: DATABASE. | ast-sqlite-boot | woo-wallee-subscription | [View logs](/logs/plugins/w/woo-wallee-subscription/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such function: DATABASE. | asyncify-boot | woo-wallee-subscription | [View logs](/logs/plugins/w/woo-wallee-subscription/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such function: DATABASE. | jspi-boot | woo-wallee-subscription | [View logs](/logs/plugins/w/woo-wallee-subscription/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: name. | ast-sqlite-boot | woo-wallee | [View logs](/logs/plugins/w/woo-wallee/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: name. | asyncify-boot | woo-wallee | [View logs](/logs/plugins/w/woo-wallee/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: name. | jspi-boot | woo-wallee | [View logs](/logs/plugins/w/woo-wallee/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | woo-wallee | [View logs](/logs/plugins/w/woo-wallee/error.json) |
+| Unknown query type: DESC. | asyncify-boot | woo-wallee | [View logs](/logs/plugins/w/woo-wallee/error.json) |
+| Unknown query type: DESC. | jspi-boot | woo-wallee | [View logs](/logs/plugins/w/woo-wallee/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wpsc_purchase_logs. | ast-sqlite-boot | woo-wallet | [View logs](/logs/plugins/w/woo-wallet/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wpstorecart_alerts. | ast-sqlite-boot | woo-xem-gateway-luxtag-fork | [View logs](/logs/plugins/w/woo-xem-gateway-luxtag-fork/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wpstorecart_alerts. | asyncify-boot | woo-xem-gateway-luxtag-fork | [View logs](/logs/plugins/w/woo-xem-gateway-luxtag-fork/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wpstorecart_alerts. | jspi-boot | woo-xem-gateway-luxtag-fork | [View logs](/logs/plugins/w/woo-xem-gateway-luxtag-fork/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | woocom-add-multiple-products | [View logs](/logs/plugins/w/woocom-add-multiple-products/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | woocom-add-multiple-products | [View logs](/logs/plugins/w/woocom-add-multiple-products/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | woocom-add-multiple-products | [View logs](/logs/plugins/w/woocom-add-multiple-products/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | woocommerce-amazon-affiliates-light-version | [View logs](/logs/plugins/w/woocommerce-amazon-affiliates-light-version/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | woocommerce-amazon-affiliates-light-version | [View logs](/logs/plugins/w/woocommerce-amazon-affiliates-light-version/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | ast-sqlite-boot | woocommerce-bulk-percentage-pricing | [View logs](/logs/plugins/w/woocommerce-bulk-percentage-pricing/error.json) |
@@ -8386,6 +8733,7 @@
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | woocommerce-bulk-percentage-pricing | [View logs](/logs/plugins/w/woocommerce-bulk-percentage-pricing/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | woocommerce-bulk-percentage-pricing | [View logs](/logs/plugins/w/woocommerce-bulk-percentage-pricing/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | woocommerce-bulk-percentage-pricing | [View logs](/logs/plugins/w/woocommerce-bulk-percentage-pricing/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | woocommerce-delivery-notes | [View logs](/logs/plugins/w/woocommerce-delivery-notes/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wpstorecart_alerts. | ast-sqlite-boot | woocommerce-extra-product-sorting-options | [View logs](/logs/plugins/w/woocommerce-extra-product-sorting-options/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | ast-sqlite-boot | woocommerce-for-japan | [View logs](/logs/plugins/w/woocommerce-for-japan/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | ast-sqlite-boot | woocommerce-fortnox-integration | [View logs](/logs/plugins/w/woocommerce-fortnox-integration/error.json) |
@@ -8439,16 +8787,11 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_user_countries. | ast-sqlite-boot | woocommere-product-import-add-on-for-wp-all-import | [View logs](/logs/plugins/w/woocommere-product-import-add-on-for-wp-all-import/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_user_countries. | asyncify-boot | woocommere-product-import-add-on-for-wp-all-import | [View logs](/logs/plugins/w/woocommere-product-import-add-on-for-wp-all-import/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_user_countries. | jspi-boot | woocommere-product-import-add-on-for-wp-all-import | [View logs](/logs/plugins/w/woocommere-product-import-add-on-for-wp-all-import/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: name. | ast-sqlite-boot | woominecraft | [View logs](/logs/plugins/w/woominecraft/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | woominecraft | [View logs](/logs/plugins/w/woominecraft/error.json) |
 | Unknown query type: HELP. | ast-sqlite-boot | woopaymu-woocommerce-ipaymu-gateway | [View logs](/logs/plugins/w/woopaymu-woocommerce-ipaymu-gateway/error.json) |
 | Unknown query type: HELP. | asyncify-boot | woopaymu-woocommerce-ipaymu-gateway | [View logs](/logs/plugins/w/woopaymu-woocommerce-ipaymu-gateway/error.json) |
 | Unknown query type: HELP. | jspi-boot | woopaymu-woocommerce-ipaymu-gateway | [View logs](/logs/plugins/w/woopaymu-woocommerce-ipaymu-gateway/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | woorocks-magic-content | [View logs](/logs/plugins/w/woorocks-magic-content/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | woorocks-magic-content | [View logs](/logs/plugins/w/woorocks-magic-content/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | woorocks-magic-content | [View logs](/logs/plugins/w/woorocks-magic-content/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_eacraccountingregion. | asyncify-boot | woorocks-magic-content | [View logs](/logs/plugins/w/woorocks-magic-content/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_weallopass_prod. | ast-sqlite-boot | woorocks-magic-content | [View logs](/logs/plugins/w/woorocks-magic-content/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_weallopass_prod. | asyncify-boot | woorocks-magic-content | [View logs](/logs/plugins/w/woorocks-magic-content/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_weallopass_prod. | jspi-boot | woorocks-magic-content | [View logs](/logs/plugins/w/woorocks-magic-content/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | ast-sqlite-boot | woosearch | [View logs](/logs/plugins/w/woosearch/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | asyncify-boot | woosearch | [View logs](/logs/plugins/w/woosearch/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | jspi-boot | woosearch | [View logs](/logs/plugins/w/woosearch/error.json) |
@@ -8483,9 +8826,6 @@
 | SQLSTATE[HY000]: General error: 1 no such table: oryx_options. | ast-sqlite-boot | wordcamp-belo-horizonte-badges | [View logs](/logs/plugins/w/wordcamp-belo-horizonte-badges/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: oryx_options. | asyncify-boot | wordcamp-belo-horizonte-badges | [View logs](/logs/plugins/w/wordcamp-belo-horizonte-badges/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: oryx_options. | jspi-boot | wordcamp-belo-horizonte-badges | [View logs](/logs/plugins/w/wordcamp-belo-horizonte-badges/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | wordcents | [View logs](/logs/plugins/w/wordcents/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | wordcents | [View logs](/logs/plugins/w/wordcents/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | wordcents | [View logs](/logs/plugins/w/wordcents/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | wordgallery-glossary | [View logs](/logs/plugins/w/wordgallery-glossary/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | wordgallery-glossary | [View logs](/logs/plugins/w/wordgallery-glossary/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | wordgallery-glossary | [View logs](/logs/plugins/w/wordgallery-glossary/error.json) |
@@ -8646,6 +8986,9 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woo_flow_analysis. | ast-sqlite-boot | wp-antivirus-website-protection-and-firewall | [View logs](/logs/plugins/w/wp-antivirus-website-protection-and-firewall/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woo_flow_analysis. | asyncify-boot | wp-antivirus-website-protection-and-firewall | [View logs](/logs/plugins/w/wp-antivirus-website-protection-and-firewall/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woo_flow_analysis. | jspi-boot | wp-antivirus-website-protection-and-firewall | [View logs](/logs/plugins/w/wp-antivirus-website-protection-and-firewall/error.json) |
+| Unexpected token in MySQL query: shown. | ast-sqlite-boot | wp-any-form | [View logs](/logs/plugins/w/wp-any-form/error.json) |
+| Unexpected token in MySQL query: shown. | asyncify-boot | wp-any-form | [View logs](/logs/plugins/w/wp-any-form/error.json) |
+| Unexpected token in MySQL query: shown. | jspi-boot | wp-any-form | [View logs](/logs/plugins/w/wp-any-form/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | jspi-boot | wp-appcache | [View logs](/logs/plugins/w/wp-appcache/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: highlight. | ast-sqlite-boot | wp-appcache | [View logs](/logs/plugins/w/wp-appcache/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: highlight. | asyncify-boot | wp-appcache | [View logs](/logs/plugins/w/wp-appcache/error.json) |
@@ -8658,9 +9001,6 @@
 | SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | wp-appcache | [View logs](/logs/plugins/w/wp-appcache/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wpsc_product_list. | ast-sqlite-boot | wp-author-security | [View logs](/logs/plugins/w/wp-author-security/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whtp_hitinfo. | ast-sqlite-boot | wp-auto-republish | [View logs](/logs/plugins/w/wp-auto-republish/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: file_last_downloaded_date. | ast-sqlite-boot | wp-auto-tag | [View logs](/logs/plugins/w/wp-auto-tag/error.json) |
-| SQLSTATE[HY000]: General error: 1 duplicate column name: file_updated_date. | ast-sqlite-boot | wp-auto-tag | [View logs](/logs/plugins/w/wp-auto-tag/error.json) |
-| Unknown query type: DESC. | ast-sqlite-boot | wp-auto-tag | [View logs](/logs/plugins/w/wp-auto-tag/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | ast-sqlite-boot | wp-automedia | [View logs](/logs/plugins/w/wp-automedia/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | asyncify-boot | wp-automedia | [View logs](/logs/plugins/w/wp-automedia/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: hidden. | jspi-boot | wp-automedia | [View logs](/logs/plugins/w/wp-automedia/error.json) |
@@ -8688,9 +9028,6 @@
 | SQLSTATE[HY000]: General error: 1 no such column: priority. | jspi-boot | wp-beautifier | [View logs](/logs/plugins/w/wp-beautifier/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: show_in_advanced. | jspi-boot | wp-beautifier | [View logs](/logs/plugins/w/wp-beautifier/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: unavailable_dates. | jspi-boot | wp-beautifier | [View logs](/logs/plugins/w/wp-beautifier/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_weallopass_prod. | ast-sqlite-boot | wp-before-after-slider | [View logs](/logs/plugins/w/wp-before-after-slider/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_weallopass_prod. | asyncify-boot | wp-before-after-slider | [View logs](/logs/plugins/w/wp-before-after-slider/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_weallopass_prod. | jspi-boot | wp-before-after-slider | [View logs](/logs/plugins/w/wp-before-after-slider/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | wp-bemoove | [View logs](/logs/plugins/w/wp-bemoove/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | wp-bemoove | [View logs](/logs/plugins/w/wp-bemoove/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | wp-bemoove | [View logs](/logs/plugins/w/wp-bemoove/error.json) |
@@ -8712,6 +9049,9 @@
 | Unexpected token in MySQL query: withAttendance. | asyncify-boot | wp-breach-protect | [View logs](/logs/plugins/w/wp-breach-protect/error.json) |
 | Unexpected token in MySQL query: withAttendance. | jspi-boot | wp-breach-protect | [View logs](/logs/plugins/w/wp-breach-protect/error.json) |
 | Data type expected in MySQL query, unknown token received: wi_post_post. | ast-sqlite-boot | wp-cafe | [View logs](/logs/plugins/w/wp-cafe/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies. | ast-sqlite-boot | wp-carousel | [View logs](/logs/plugins/w/wp-carousel/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies. | asyncify-boot | wp-carousel | [View logs](/logs/plugins/w/wp-carousel/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies. | jspi-boot | wp-carousel | [View logs](/logs/plugins/w/wp-carousel/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | wp-cfm | [View logs](/logs/plugins/w/wp-cfm/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | ast-sqlite-boot | wp-clean-characters | [View logs](/logs/plugins/w/wp-clean-characters/error.json) |
 | SQLSTATE[HY000]: General error: 20 datatype mismatch. | asyncify-boot | wp-clean-characters | [View logs](/logs/plugins/w/wp-clean-characters/error.json) |
@@ -8721,12 +9061,18 @@
 | SQLSTATE[HY000]: General error: 1 near "&": syntax error. | jspi-boot | wp-clickbank-ad-display | [View logs](/logs/plugins/w/wp-clickbank-ad-display/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wb_video_VY. | ast-sqlite-boot | wp-collectiveaccess | [View logs](/logs/plugins/w/wp-collectiveaccess/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wb_video_galleries. | ast-sqlite-boot | wp-collectiveaccess | [View logs](/logs/plugins/w/wp-collectiveaccess/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies. | ast-sqlite-boot | wp-comment-warrior | [View logs](/logs/plugins/w/wp-comment-warrior/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies. | asyncify-boot | wp-comment-warrior | [View logs](/logs/plugins/w/wp-comment-warrior/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies. | jspi-boot | wp-comment-warrior | [View logs](/logs/plugins/w/wp-comment-warrior/error.json) |
 | Unknown drop type: procedure. | ast-sqlite-boot | wp-content-index | [View logs](/logs/plugins/w/wp-content-index/error.json) |
 | Unknown drop type: procedure. | asyncify-boot | wp-content-index | [View logs](/logs/plugins/w/wp-content-index/error.json) |
 | Unknown drop type: procedure. | jspi-boot | wp-content-index | [View logs](/logs/plugins/w/wp-content-index/error.json) |
+| Data type expected in MySQL query, unknown token received: WPBlast_Sitemap_Hash. | ast-sqlite-boot | wp-convore | [View logs](/logs/plugins/w/wp-convore/error.json) |
+| Data type expected in MySQL query, unknown token received: WPBlast_Sitemap_Hash. | asyncify-boot | wp-convore | [View logs](/logs/plugins/w/wp-convore/error.json) |
+| Data type expected in MySQL query, unknown token received: WPBlast_Sitemap_Hash. | jspi-boot | wp-convore | [View logs](/logs/plugins/w/wp-convore/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | wp-convore | [View logs](/logs/plugins/w/wp-convore/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | wp-convore | [View logs](/logs/plugins/w/wp-convore/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | wp-convore | [View logs](/logs/plugins/w/wp-convore/error.json) |
+| Unknown show type: INDEXES FROM. | ast-sqlite-boot | wp-convore | [View logs](/logs/plugins/w/wp-convore/error.json) |
+| Unknown show type: INDEXES FROM. | asyncify-boot | wp-convore | [View logs](/logs/plugins/w/wp-convore/error.json) |
+| Unknown show type: INDEXES FROM. | jspi-boot | wp-convore | [View logs](/logs/plugins/w/wp-convore/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | wp-crawlforme | [View logs](/logs/plugins/w/wp-crawlforme/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | wp-crawlforme | [View logs](/logs/plugins/w/wp-crawlforme/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | wp-crawlforme | [View logs](/logs/plugins/w/wp-crawlforme/error.json) |
@@ -8736,6 +9082,9 @@
 | Table not found. | ast-sqlite-boot | wp-crawlforme | [View logs](/logs/plugins/w/wp-crawlforme/error.json) |
 | Table not found. | asyncify-boot | wp-crawlforme | [View logs](/logs/plugins/w/wp-crawlforme/error.json) |
 | Table not found. | jspi-boot | wp-crawlforme | [View logs](/logs/plugins/w/wp-crawlforme/error.json) |
+| Unexpected token in MySQL query: shown. | ast-sqlite-boot | wp-custom-title-colour-plugin | [View logs](/logs/plugins/w/wp-custom-title-colour-plugin/error.json) |
+| Unexpected token in MySQL query: shown. | asyncify-boot | wp-custom-title-colour-plugin | [View logs](/logs/plugins/w/wp-custom-title-colour-plugin/error.json) |
+| Unexpected token in MySQL query: shown. | jspi-boot | wp-custom-title-colour-plugin | [View logs](/logs/plugins/w/wp-custom-title-colour-plugin/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wordable. | ast-sqlite-boot | wp-delete-tags-tagassassin | [View logs](/logs/plugins/w/wp-delete-tags-tagassassin/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wordable. | asyncify-boot | wp-delete-tags-tagassassin | [View logs](/logs/plugins/w/wp-delete-tags-tagassassin/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wordable. | jspi-boot | wp-delete-tags-tagassassin | [View logs](/logs/plugins/w/wp-delete-tags-tagassassin/error.json) |
@@ -8745,6 +9094,8 @@
 | Unexpected token in MySQL query: symbol. | ast-sqlite-boot | wp-deliciouspost | [View logs](/logs/plugins/w/wp-deliciouspost/error.json) |
 | Unexpected token in MySQL query: symbol. | asyncify-boot | wp-deliciouspost | [View logs](/logs/plugins/w/wp-deliciouspost/error.json) |
 | Unexpected token in MySQL query: symbol. | jspi-boot | wp-deliciouspost | [View logs](/logs/plugins/w/wp-deliciouspost/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: one_click_demo. | asyncify-boot | wp-demo-buddy | [View logs](/logs/plugins/w/wp-demo-buddy/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: one_click_demo. | jspi-boot | wp-demo-buddy | [View logs](/logs/plugins/w/wp-demo-buddy/error.json) |
 | Unexpected token in MySQL query: isValid. | ast-sqlite-boot | wp-digg-this | [View logs](/logs/plugins/w/wp-digg-this/error.json) |
 | Unexpected token in MySQL query: isValid. | asyncify-boot | wp-digg-this | [View logs](/logs/plugins/w/wp-digg-this/error.json) |
 | Unexpected token in MySQL query: isValid. | jspi-boot | wp-digg-this | [View logs](/logs/plugins/w/wp-digg-this/error.json) |
@@ -8754,6 +9105,9 @@
 | Unexpected token in MySQL query: withAttendance. | ast-sqlite-boot | wp-digg-this | [View logs](/logs/plugins/w/wp-digg-this/error.json) |
 | Unexpected token in MySQL query: withAttendance. | asyncify-boot | wp-digg-this | [View logs](/logs/plugins/w/wp-digg-this/error.json) |
 | Unexpected token in MySQL query: withAttendance. | jspi-boot | wp-digg-this | [View logs](/logs/plugins/w/wp-digg-this/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies. | ast-sqlite-boot | wp-directadmin | [View logs](/logs/plugins/w/wp-directadmin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies. | asyncify-boot | wp-directadmin | [View logs](/logs/plugins/w/wp-directadmin/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies. | jspi-boot | wp-directadmin | [View logs](/logs/plugins/w/wp-directadmin/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_invitations. | ast-sqlite-boot | wp-dokuwiki | [View logs](/logs/plugins/w/wp-dokuwiki/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_invitations. | asyncify-boot | wp-dokuwiki | [View logs](/logs/plugins/w/wp-dokuwiki/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_invitations. | jspi-boot | wp-dokuwiki | [View logs](/logs/plugins/w/wp-dokuwiki/error.json) |
@@ -8773,6 +9127,9 @@
 | SQLSTATE[HY000]: General error: 1 near "default": syntax error. | ast-sqlite-boot | wp-e-commerce-mercadopago-argentina | [View logs](/logs/plugins/w/wp-e-commerce-mercadopago-argentina/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "default": syntax error. | asyncify-boot | wp-e-commerce-mercadopago-argentina | [View logs](/logs/plugins/w/wp-e-commerce-mercadopago-argentina/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "default": syntax error. | jspi-boot | wp-e-commerce-mercadopago-argentina | [View logs](/logs/plugins/w/wp-e-commerce-mercadopago-argentina/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | wp-e-commerce-popular-products | [View logs](/logs/plugins/w/wp-e-commerce-popular-products/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | wp-e-commerce-popular-products | [View logs](/logs/plugins/w/wp-e-commerce-popular-products/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | wp-e-commerce-popular-products | [View logs](/logs/plugins/w/wp-e-commerce-popular-products/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: cs_users. | ast-sqlite-boot | wp-easy-embed | [View logs](/logs/plugins/w/wp-easy-embed/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: cs_users. | asyncify-boot | wp-easy-embed | [View logs](/logs/plugins/w/wp-easy-embed/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: cs_users. | jspi-boot | wp-easy-embed | [View logs](/logs/plugins/w/wp-easy-embed/error.json) |
@@ -8822,21 +9179,24 @@
 | Unknown create type: table. | ast-sqlite-boot | wp-felica-auth | [View logs](/logs/plugins/w/wp-felica-auth/error.json) |
 | Unknown create type: table. | asyncify-boot | wp-felica-auth | [View logs](/logs/plugins/w/wp-felica-auth/error.json) |
 | Unknown create type: table. | jspi-boot | wp-felica-auth | [View logs](/logs/plugins/w/wp-felica-auth/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: one_click_demo. | ast-sqlite-boot | wp-firewall | [View logs](/logs/plugins/w/wp-firewall/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: one_click_demo. | asyncify-boot | wp-firewall | [View logs](/logs/plugins/w/wp-firewall/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: one_click_demo. | jspi-boot | wp-firewall | [View logs](/logs/plugins/w/wp-firewall/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wpairbnb_post_templates. | ast-sqlite-boot | wp-fitness-tracker | [View logs](/logs/plugins/w/wp-fitness-tracker/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wpairbnb_post_templates. | asyncify-boot | wp-fitness-tracker | [View logs](/logs/plugins/w/wp-fitness-tracker/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wpairbnb_post_templates. | jspi-boot | wp-fitness-tracker | [View logs](/logs/plugins/w/wp-fitness-tracker/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | wp-flickr-widget | [View logs](/logs/plugins/w/wp-flickr-widget/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | wp-flickr-widget | [View logs](/logs/plugins/w/wp-flickr-widget/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | wp-flickr-widget | [View logs](/logs/plugins/w/wp-flickr-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_weallopass_prod. | ast-sqlite-boot | wp-flickr-widget | [View logs](/logs/plugins/w/wp-flickr-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_weallopass_prod. | asyncify-boot | wp-flickr-widget | [View logs](/logs/plugins/w/wp-flickr-widget/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_weallopass_prod. | jspi-boot | wp-flickr-widget | [View logs](/logs/plugins/w/wp-flickr-widget/error.json) |
 | Unexpected token in MySQL query: active. | ast-sqlite-boot | wp-football | [View logs](/logs/plugins/w/wp-football/error.json) |
 | Unexpected token in MySQL query: active. | asyncify-boot | wp-football | [View logs](/logs/plugins/w/wp-football/error.json) |
 | Unexpected token in MySQL query: active. | jspi-boot | wp-football | [View logs](/logs/plugins/w/wp-football/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ASC": syntax error. | ast-sqlite-boot | wp-freestyle-wiki | [View logs](/logs/plugins/w/wp-freestyle-wiki/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ASC": syntax error. | asyncify-boot | wp-freestyle-wiki | [View logs](/logs/plugins/w/wp-freestyle-wiki/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "ASC": syntax error. | jspi-boot | wp-freestyle-wiki | [View logs](/logs/plugins/w/wp-freestyle-wiki/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | wp-gallery-extra | [View logs](/logs/plugins/w/wp-gallery-extra/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | wp-gallery-extra | [View logs](/logs/plugins/w/wp-gallery-extra/error.json) |
-| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | wp-gallery-extra | [View logs](/logs/plugins/w/wp-gallery-extra/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_weallopass_prod. | ast-sqlite-boot | wp-gallery-extra | [View logs](/logs/plugins/w/wp-gallery-extra/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_weallopass_prod. | asyncify-boot | wp-gallery-extra | [View logs](/logs/plugins/w/wp-gallery-extra/error.json) |
-| SQLSTATE[HY000]: General error: 1 no such table: wp_weallopass_prod. | jspi-boot | wp-gallery-extra | [View logs](/logs/plugins/w/wp-gallery-extra/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "slide1new": syntax error. | ast-sqlite-boot | wp-gallery2-image-block | [View logs](/logs/plugins/w/wp-gallery2-image-block/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "slide1new": syntax error. | asyncify-boot | wp-gallery2-image-block | [View logs](/logs/plugins/w/wp-gallery2-image-block/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "slide1new": syntax error. | jspi-boot | wp-gallery2-image-block | [View logs](/logs/plugins/w/wp-gallery2-image-block/error.json) |
@@ -8880,6 +9240,15 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wprw_wizard. | ast-sqlite-boot | wp-hide-security-enhancer | [View logs](/logs/plugins/w/wp-hide-security-enhancer/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wprw_wizard. | asyncify-boot | wp-hide-security-enhancer | [View logs](/logs/plugins/w/wp-hide-security-enhancer/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wprw_wizard. | jspi-boot | wp-hide-security-enhancer | [View logs](/logs/plugins/w/wp-hide-security-enhancer/error.json) |
+| Data type expected in MySQL query, unknown token received: WPBlast_Sitemap_Hash. | ast-sqlite-boot | wp-honeypot | [View logs](/logs/plugins/w/wp-honeypot/error.json) |
+| Data type expected in MySQL query, unknown token received: WPBlast_Sitemap_Hash. | asyncify-boot | wp-honeypot | [View logs](/logs/plugins/w/wp-honeypot/error.json) |
+| Data type expected in MySQL query, unknown token received: WPBlast_Sitemap_Hash. | jspi-boot | wp-honeypot | [View logs](/logs/plugins/w/wp-honeypot/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | wp-honeypot | [View logs](/logs/plugins/w/wp-honeypot/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | wp-honeypot | [View logs](/logs/plugins/w/wp-honeypot/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | wp-honeypot | [View logs](/logs/plugins/w/wp-honeypot/error.json) |
+| Unknown show type: INDEXES FROM. | ast-sqlite-boot | wp-honeypot | [View logs](/logs/plugins/w/wp-honeypot/error.json) |
+| Unknown show type: INDEXES FROM. | asyncify-boot | wp-honeypot | [View logs](/logs/plugins/w/wp-honeypot/error.json) |
+| Unknown show type: INDEXES FROM. | jspi-boot | wp-honeypot | [View logs](/logs/plugins/w/wp-honeypot/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | wp-horoscop-widget | [View logs](/logs/plugins/w/wp-horoscop-widget/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | wp-horoscop-widget | [View logs](/logs/plugins/w/wp-horoscop-widget/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | wp-horoscop-widget | [View logs](/logs/plugins/w/wp-horoscop-widget/error.json) |
@@ -8920,6 +9289,9 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_api_keys. | ast-sqlite-boot | wp-inline-comment-errors | [View logs](/logs/plugins/w/wp-inline-comment-errors/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_api_keys. | asyncify-boot | wp-inline-comment-errors | [View logs](/logs/plugins/w/wp-inline-comment-errors/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_api_keys. | jspi-boot | wp-inline-comment-errors | [View logs](/logs/plugins/w/wp-inline-comment-errors/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | wp-jalapeno | [View logs](/logs/plugins/w/wp-jalapeno/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | asyncify-boot | wp-jalapeno | [View logs](/logs/plugins/w/wp-jalapeno/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | jspi-boot | wp-jalapeno | [View logs](/logs/plugins/w/wp-jalapeno/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | ast-sqlite-boot | wp-janesguide | [View logs](/logs/plugins/w/wp-janesguide/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | asyncify-boot | wp-janesguide | [View logs](/logs/plugins/w/wp-janesguide/error.json) |
 | SQLSTATE[HY000]: General error: 1 table wp_wpbdf_emailer has no column named _page_ids. | jspi-boot | wp-janesguide | [View logs](/logs/plugins/w/wp-janesguide/error.json) |
@@ -8964,6 +9336,15 @@
 | Data type expected in MySQL query, unknown token received: wpvf_vf_uid. | ast-sqlite-boot | wp-main-menu | [View logs](/logs/plugins/w/wp-main-menu/error.json) |
 | Data type expected in MySQL query, unknown token received: wpvf_vf_uid. | asyncify-boot | wp-main-menu | [View logs](/logs/plugins/w/wp-main-menu/error.json) |
 | Data type expected in MySQL query, unknown token received: wpvf_vf_uid. | jspi-boot | wp-main-menu | [View logs](/logs/plugins/w/wp-main-menu/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: file_permissions. | ast-sqlite-boot | wp-markerboard | [View logs](/logs/plugins/w/wp-markerboard/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: file_permissions. | asyncify-boot | wp-markerboard | [View logs](/logs/plugins/w/wp-markerboard/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: file_permissions. | jspi-boot | wp-markerboard | [View logs](/logs/plugins/w/wp-markerboard/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: permissions. | ast-sqlite-boot | wp-markerboard | [View logs](/logs/plugins/w/wp-markerboard/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: permissions. | asyncify-boot | wp-markerboard | [View logs](/logs/plugins/w/wp-markerboard/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: permissions. | jspi-boot | wp-markerboard | [View logs](/logs/plugins/w/wp-markerboard/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | wp-markerboard | [View logs](/logs/plugins/w/wp-markerboard/error.json) |
+| Unknown query type: DESC. | asyncify-boot | wp-markerboard | [View logs](/logs/plugins/w/wp-markerboard/error.json) |
+| Unknown query type: DESC. | jspi-boot | wp-markerboard | [View logs](/logs/plugins/w/wp-markerboard/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | wp-markupcollection | [View logs](/logs/plugins/w/wp-markupcollection/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | wp-markupcollection | [View logs](/logs/plugins/w/wp-markupcollection/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | wp-markupcollection | [View logs](/logs/plugins/w/wp-markupcollection/error.json) |
@@ -9143,6 +9524,9 @@
 | Unexpected token in MySQL query: active. | ast-sqlite-boot | wp-property | [View logs](/logs/plugins/w/wp-property/error.json) |
 | Unexpected token in MySQL query: active. | asyncify-boot | wp-property | [View logs](/logs/plugins/w/wp-property/error.json) |
 | Unexpected token in MySQL query: active. | jspi-boot | wp-property | [View logs](/logs/plugins/w/wp-property/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies. | ast-sqlite-boot | wp-reading-time | [View logs](/logs/plugins/w/wp-reading-time/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies. | asyncify-boot | wp-reading-time | [View logs](/logs/plugins/w/wp-reading-time/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies. | jspi-boot | wp-reading-time | [View logs](/logs/plugins/w/wp-reading-time/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | wp-recaptcha-appsaur | [View logs](/logs/plugins/w/wp-recaptcha-appsaur/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | wp-recaptcha-appsaur | [View logs](/logs/plugins/w/wp-recaptcha-appsaur/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | wp-recaptcha-appsaur | [View logs](/logs/plugins/w/wp-recaptcha-appsaur/error.json) |
@@ -9169,6 +9553,9 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wfs_configure. | ast-sqlite-boot | wp-sale-property | [View logs](/logs/plugins/w/wp-sale-property/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wfs_configure. | asyncify-boot | wp-sale-property | [View logs](/logs/plugins/w/wp-sale-property/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wfs_configure. | jspi-boot | wp-sale-property | [View logs](/logs/plugins/w/wp-sale-property/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies. | ast-sqlite-boot | wp-sbm-info | [View logs](/logs/plugins/w/wp-sbm-info/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies. | asyncify-boot | wp-sbm-info | [View logs](/logs/plugins/w/wp-sbm-info/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies. | jspi-boot | wp-sbm-info | [View logs](/logs/plugins/w/wp-sbm-info/error.json) |
 | Unexpected token in MySQL query: isValid. | ast-sqlite-boot | wp-scheduled-posts | [View logs](/logs/plugins/w/wp-scheduled-posts/error.json) |
 | Unexpected token in MySQL query: willAttend. | ast-sqlite-boot | wp-scheduled-posts | [View logs](/logs/plugins/w/wp-scheduled-posts/error.json) |
 | Unexpected token in MySQL query: withAttendance. | ast-sqlite-boot | wp-scheduled-posts | [View logs](/logs/plugins/w/wp-scheduled-posts/error.json) |
@@ -9225,6 +9612,21 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wiw_locals. | ast-sqlite-boot | wp-smart-paypal-payment-or-donation-accept | [View logs](/logs/plugins/w/wp-smart-paypal-payment-or-donation-accept/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wiw_locals. | asyncify-boot | wp-smart-paypal-payment-or-donation-accept | [View logs](/logs/plugins/w/wp-smart-paypal-payment-or-donation-accept/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wiw_locals. | jspi-boot | wp-smart-paypal-payment-or-donation-accept | [View logs](/logs/plugins/w/wp-smart-paypal-payment-or-donation-accept/error.json) |
+| Data type expected in MySQL query, unknown token received: WPBlast_Sitemap_Hash. | ast-sqlite-boot | wp-smf-a-simplemachines-bridge | [View logs](/logs/plugins/w/wp-smf-a-simplemachines-bridge/error.json) |
+| Data type expected in MySQL query, unknown token received: WPBlast_Sitemap_Hash. | asyncify-boot | wp-smf-a-simplemachines-bridge | [View logs](/logs/plugins/w/wp-smf-a-simplemachines-bridge/error.json) |
+| Data type expected in MySQL query, unknown token received: WPBlast_Sitemap_Hash. | jspi-boot | wp-smf-a-simplemachines-bridge | [View logs](/logs/plugins/w/wp-smf-a-simplemachines-bridge/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | wp-smf-a-simplemachines-bridge | [View logs](/logs/plugins/w/wp-smf-a-simplemachines-bridge/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | wp-smf-a-simplemachines-bridge | [View logs](/logs/plugins/w/wp-smf-a-simplemachines-bridge/error.json) |
+| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | wp-smf-a-simplemachines-bridge | [View logs](/logs/plugins/w/wp-smf-a-simplemachines-bridge/error.json) |
+| Unknown show type: INDEXES FROM. | ast-sqlite-boot | wp-smf-a-simplemachines-bridge | [View logs](/logs/plugins/w/wp-smf-a-simplemachines-bridge/error.json) |
+| Unknown show type: INDEXES FROM. | asyncify-boot | wp-smf-a-simplemachines-bridge | [View logs](/logs/plugins/w/wp-smf-a-simplemachines-bridge/error.json) |
+| Unknown show type: INDEXES FROM. | jspi-boot | wp-smf-a-simplemachines-bridge | [View logs](/logs/plugins/w/wp-smf-a-simplemachines-bridge/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: name. | ast-sqlite-boot | wp-smtp-contact-form | [View logs](/logs/plugins/w/wp-smtp-contact-form/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: name. | asyncify-boot | wp-smtp-contact-form | [View logs](/logs/plugins/w/wp-smtp-contact-form/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: name. | jspi-boot | wp-smtp-contact-form | [View logs](/logs/plugins/w/wp-smtp-contact-form/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | wp-smtp-contact-form | [View logs](/logs/plugins/w/wp-smtp-contact-form/error.json) |
+| Unknown query type: DESC. | asyncify-boot | wp-smtp-contact-form | [View logs](/logs/plugins/w/wp-smtp-contact-form/error.json) |
+| Unknown query type: DESC. | jspi-boot | wp-smtp-contact-form | [View logs](/logs/plugins/w/wp-smtp-contact-form/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: wp_options.option_name. | ast-sqlite-boot | wp-smtp | [View logs](/logs/plugins/w/wp-smtp/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: sfimgurl. | ast-sqlite-boot | wp-smtp | [View logs](/logs/plugins/w/wp-smtp/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: storder. | ast-sqlite-boot | wp-smtp | [View logs](/logs/plugins/w/wp-smtp/error.json) |
@@ -9269,9 +9671,9 @@
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | wp-superb-slideshow | [View logs](/logs/plugins/w/wp-superb-slideshow/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | wp-superb-slideshow | [View logs](/logs/plugins/w/wp-superb-slideshow/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | wp-superb-slideshow | [View logs](/logs/plugins/w/wp-superb-slideshow/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | wp-switch-user | [View logs](/logs/plugins/w/wp-switch-user/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | wp-switch-user | [View logs](/logs/plugins/w/wp-switch-user/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | wp-switch-user | [View logs](/logs/plugins/w/wp-switch-user/error.json) |
+| Unknown operation: ENGINE. | ast-sqlite-boot | wp-switch-user | [View logs](/logs/plugins/w/wp-switch-user/error.json) |
+| Unknown operation: ENGINE. | asyncify-boot | wp-switch-user | [View logs](/logs/plugins/w/wp-switch-user/error.json) |
+| Unknown operation: ENGINE. | jspi-boot | wp-switch-user | [View logs](/logs/plugins/w/wp-switch-user/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wpie_template. | ast-sqlite-boot | wp-table | [View logs](/logs/plugins/w/wp-table/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wpie_template. | asyncify-boot | wp-table | [View logs](/logs/plugins/w/wp-table/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wpie_template. | jspi-boot | wp-table | [View logs](/logs/plugins/w/wp-table/error.json) |
@@ -9342,6 +9744,7 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | wp-twitterpitch | [View logs](/logs/plugins/w/wp-twitterpitch/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | wp-twitterpitch | [View logs](/logs/plugins/w/wp-twitterpitch/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | wp-twitterpitch | [View logs](/logs/plugins/w/wp-twitterpitch/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: one_click_demo. | ast-sqlite-boot | wp-typography | [View logs](/logs/plugins/w/wp-typography/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: deletelog. | asyncify-boot | wp-ultimate-csv-importer | [View logs](/logs/plugins/w/wp-ultimate-csv-importer/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: deletelog. | jspi-boot | wp-ultimate-csv-importer | [View logs](/logs/plugins/w/wp-ultimate-csv-importer/error.json) |
 | SQLSTATE[HY000]: General error: 1 duplicate column name: failed. | asyncify-boot | wp-ultimate-csv-importer | [View logs](/logs/plugins/w/wp-ultimate-csv-importer/error.json) |
@@ -9362,6 +9765,7 @@
 | SQLSTATE[HY000]: General error: 1 duplicate column name: templatekey. | jspi-boot | wp-ultimate-csv-importer | [View logs](/logs/plugins/w/wp-ultimate-csv-importer/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: "templatekey". | asyncify-boot | wp-ultimate-csv-importer | [View logs](/logs/plugins/w/wp-ultimate-csv-importer/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such column: "templatekey". | jspi-boot | wp-ultimate-csv-importer | [View logs](/logs/plugins/w/wp-ultimate-csv-importer/error.json) |
+| SQLSTATE[HY000]: General error: 1 near "SET": syntax error. | ast-sqlite-boot | wp-ultimate-exporter | [View logs](/logs/plugins/w/wp-ultimate-exporter/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | wp-ultimate-menu-maker-lite | [View logs](/logs/plugins/w/wp-ultimate-menu-maker-lite/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | wp-ultimate-menu-maker-lite | [View logs](/logs/plugins/w/wp-ultimate-menu-maker-lite/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | wp-ultimate-menu-maker-lite | [View logs](/logs/plugins/w/wp-ultimate-menu-maker-lite/error.json) |
@@ -9428,6 +9832,9 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pincode_zipcode_setting_free. | ast-sqlite-boot | wp-xapi-lrs | [View logs](/logs/plugins/w/wp-xapi-lrs/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pincode_zipcode_setting_free. | asyncify-boot | wp-xapi-lrs | [View logs](/logs/plugins/w/wp-xapi-lrs/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_pincode_zipcode_setting_free. | jspi-boot | wp-xapi-lrs | [View logs](/logs/plugins/w/wp-xapi-lrs/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies. | ast-sqlite-boot | wp-youtube | [View logs](/logs/plugins/w/wp-youtube/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies. | asyncify-boot | wp-youtube | [View logs](/logs/plugins/w/wp-youtube/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies. | jspi-boot | wp-youtube | [View logs](/logs/plugins/w/wp-youtube/error.json) |
 | SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL. | ast-sqlite-boot | wp2syslog | [View logs](/logs/plugins/w/wp2syslog/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies. | ast-sqlite-boot | wp2syslog | [View logs](/logs/plugins/w/wp2syslog/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_whereivebeen_countries. | ast-sqlite-boot | wpantiddos | [View logs](/logs/plugins/w/wpantiddos/error.json) |
@@ -9507,6 +9914,15 @@
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | wpfeed-news | [View logs](/logs/plugins/w/wpfeed-news/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | wpfeed-news | [View logs](/logs/plugins/w/wpfeed-news/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | wpfeed-news | [View logs](/logs/plugins/w/wpfeed-news/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: one_click_demo. | ast-sqlite-boot | wpgcal | [View logs](/logs/plugins/w/wpgcal/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: one_click_demo. | asyncify-boot | wpgcal | [View logs](/logs/plugins/w/wpgcal/error.json) |
+| SQLSTATE[HY000]: General error: 1 duplicate column name: one_click_demo. | jspi-boot | wpgcal | [View logs](/logs/plugins/w/wpgcal/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: name. | ast-sqlite-boot | wpgform | [View logs](/logs/plugins/w/wpgform/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: name. | asyncify-boot | wpgform | [View logs](/logs/plugins/w/wpgform/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such column: name. | jspi-boot | wpgform | [View logs](/logs/plugins/w/wpgform/error.json) |
+| Unknown query type: DESC. | ast-sqlite-boot | wpgform | [View logs](/logs/plugins/w/wpgform/error.json) |
+| Unknown query type: DESC. | asyncify-boot | wpgform | [View logs](/logs/plugins/w/wpgform/error.json) |
+| Unknown query type: DESC. | jspi-boot | wpgform | [View logs](/logs/plugins/w/wpgform/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | ast-sqlite-boot | wpgreeks-cpt | [View logs](/logs/plugins/w/wpgreeks-cpt/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | asyncify-boot | wpgreeks-cpt | [View logs](/logs/plugins/w/wpgreeks-cpt/error.json) |
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | wpgreeks-cpt | [View logs](/logs/plugins/w/wpgreeks-cpt/error.json) |
@@ -9519,9 +9935,9 @@
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | wplg-subscription | [View logs](/logs/plugins/w/wplg-subscription/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | wplg-subscription | [View logs](/logs/plugins/w/wplg-subscription/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | wplg-subscription | [View logs](/logs/plugins/w/wplg-subscription/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | ast-sqlite-boot | wplimit-woo-buy-a-product-for-future-dates | [View logs](/logs/plugins/w/wplimit-woo-buy-a-product-for-future-dates/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | asyncify-boot | wplimit-woo-buy-a-product-for-future-dates | [View logs](/logs/plugins/w/wplimit-woo-buy-a-product-for-future-dates/error.json) |
-| SQLSTATE[HY000]: General error: 1 expressions prohibited in PRIMARY KEY and UNIQUE constraints. | jspi-boot | wplimit-woo-buy-a-product-for-future-dates | [View logs](/logs/plugins/w/wplimit-woo-buy-a-product-for-future-dates/error.json) |
+| Unknown operation: ENGINE. | ast-sqlite-boot | wplimit-woo-buy-a-product-for-future-dates | [View logs](/logs/plugins/w/wplimit-woo-buy-a-product-for-future-dates/error.json) |
+| Unknown operation: ENGINE. | asyncify-boot | wplimit-woo-buy-a-product-for-future-dates | [View logs](/logs/plugins/w/wplimit-woo-buy-a-product-for-future-dates/error.json) |
+| Unknown operation: ENGINE. | jspi-boot | wplimit-woo-buy-a-product-for-future-dates | [View logs](/logs/plugins/w/wplimit-woo-buy-a-product-for-future-dates/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp__auto_link. | asyncify-boot | wpmarketer | [View logs](/logs/plugins/w/wpmarketer/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp__auto_link. | jspi-boot | wpmarketer | [View logs](/logs/plugins/w/wpmarketer/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_scheduledstyles. | ast-sqlite-boot | wpmarketer | [View logs](/logs/plugins/w/wpmarketer/error.json) |
@@ -9530,6 +9946,9 @@
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wordable. | ast-sqlite-boot | wpmktgengine-extension-buddypress | [View logs](/logs/plugins/w/wpmktgengine-extension-buddypress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wordable. | asyncify-boot | wpmktgengine-extension-buddypress | [View logs](/logs/plugins/w/wpmktgengine-extension-buddypress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wordable. | jspi-boot | wpmktgengine-extension-buddypress | [View logs](/logs/plugins/w/wpmktgengine-extension-buddypress/error.json) |
+| Unknown operation: ENGINE. | ast-sqlite-boot | wpmu-featured-blog-tag-cloud | [View logs](/logs/plugins/w/wpmu-featured-blog-tag-cloud/error.json) |
+| Unknown operation: ENGINE. | asyncify-boot | wpmu-featured-blog-tag-cloud | [View logs](/logs/plugins/w/wpmu-featured-blog-tag-cloud/error.json) |
+| Unknown operation: ENGINE. | jspi-boot | wpmu-featured-blog-tag-cloud | [View logs](/logs/plugins/w/wpmu-featured-blog-tag-cloud/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "slide1new": syntax error. | ast-sqlite-boot | wpmu-featured-blog-widget | [View logs](/logs/plugins/w/wpmu-featured-blog-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "slide1new": syntax error. | asyncify-boot | wpmu-featured-blog-widget | [View logs](/logs/plugins/w/wpmu-featured-blog-widget/error.json) |
 | SQLSTATE[HY000]: General error: 1 near "slide1new": syntax error. | jspi-boot | wpmu-featured-blog-widget | [View logs](/logs/plugins/w/wpmu-featured-blog-widget/error.json) |
@@ -9550,17 +9969,12 @@
 | SQLSTATE[HY000]: General error: 1 no such table: oryx_options. | jspi-boot | wpmu-related-blogs-and-posts | [View logs](/logs/plugins/w/wpmu-related-blogs-and-posts/error.json) |
 | Unknown query type: truncate. | asyncify-boot | wpnewsman-newsletters | [View logs](/logs/plugins/w/wpnewsman-newsletters/error.json) |
 | Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | wporlogin | [View logs](/logs/plugins/w/wporlogin/error.json) |
-    [code] => 0
-    [message] => Ending quote ' was expected.
-    [position] => 35
-    [query] => show tables like 'wp_access_codes''
-    [str] => 
-(
-)
-. | ast-sqlite-boot | wppageflip | [View logs](/logs/plugins/w/wppageflip/error.json) |
-. | asyncify-boot | wppageflip | [View logs](/logs/plugins/w/wppageflip/error.json) |
-. | jspi-boot | wppageflip | [View logs](/logs/plugins/w/wppageflip/error.json) |
-| Array
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | ast-sqlite-boot | wppageflip | [View logs](/logs/plugins/w/wppageflip/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | asyncify-boot | wppageflip | [View logs](/logs/plugins/w/wppageflip/error.json) |
+| Cannot combine AUTOINCREMENT and multiple primary keys in SQLite. | jspi-boot | wppageflip | [View logs](/logs/plugins/w/wppageflip/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_weallopass_prod. | ast-sqlite-boot | wppageflip | [View logs](/logs/plugins/w/wppageflip/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_weallopass_prod. | asyncify-boot | wppageflip | [View logs](/logs/plugins/w/wppageflip/error.json) |
+| SQLSTATE[HY000]: General error: 1 no such table: wp_weallopass_prod. | jspi-boot | wppageflip | [View logs](/logs/plugins/w/wppageflip/error.json) |
 | Unknown query type: 1. | ast-sqlite-boot | wppygments | [View logs](/logs/plugins/w/wppygments/error.json) |
 | Unknown query type: 1. | jspi-boot | wppygments | [View logs](/logs/plugins/w/wppygments/error.json) |
 | Unexpected token in MySQL query: is_result. | ast-sqlite-boot | wprestashop | [View logs](/logs/plugins/w/wprestashop/error.json) |
@@ -9648,17 +10062,6 @@
 | SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: _mysql_data_types_cache.mysql_type. | jspi-boot | wtipress | [View logs](/logs/plugins/w/wtipress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wtipress_languages. | asyncify-boot | wtipress | [View logs](/logs/plugins/w/wtipress/error.json) |
 | SQLSTATE[HY000]: General error: 1 no such table: wp_wtipress_languages. | jspi-boot | wtipress | [View logs](/logs/plugins/w/wtipress/error.json) |
-    [code] => 0
-    [message] => Ending quote ' was expected.
-    [position] => 35
-    [query] => show tables like 'wp_access_codes''
-    [str] => 
-(
-)
-. | ast-sqlite-boot | wunsch-indexde-wishlists | [View logs](/logs/plugins/w/wunsch-indexde-wishlists/error.json) |
-. | asyncify-boot | wunsch-indexde-wishlists | [View logs](/logs/plugins/w/wunsch-indexde-wishlists/error.json) |
-. | jspi-boot | wunsch-indexde-wishlists | [View logs](/logs/plugins/w/wunsch-indexde-wishlists/error.json) |
-| Array
 | SQLSTATE[HY000]: General error: 1 incomplete input. | ast-sqlite-boot | wurdey | [View logs](/logs/plugins/w/wurdey/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | asyncify-boot | wurdey | [View logs](/logs/plugins/w/wurdey/error.json) |
 | SQLSTATE[HY000]: General error: 1 incomplete input. | jspi-boot | wurdey | [View logs](/logs/plugins/w/wurdey/error.json) |
