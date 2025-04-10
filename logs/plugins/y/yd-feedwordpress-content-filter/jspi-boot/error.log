@@ -2,319 +2,126 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 15:51:56 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 15:51:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 15:51:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 15:51:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 15:52:37 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 15:52:37 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 15:52:37 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 15:52:37 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 15:52:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('action_scheduler_hybrid_store_demarkation', '4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'action_scheduler_hybrid_store_demarkation' , '4' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('action_schedule...', 4, '', 'auto')
-#5 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/data-stores/ActionScheduler_HybridStore.php(157): update_option('action_schedule...', 4)
-#6 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/data-stores/ActionScheduler_HybridStore.php(95): ActionScheduler_HybridStore->set_demarkation_id()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): ActionScheduler_HybridStore->set_autoincrement('wp_actionschedu...', 'actionscheduler...')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+Error: [10-Apr-2025 15:53:58 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('XPandable_Autho...')
+#2 /wordpress/wp-content/plugins/xpandable-author-tab/xpandable-author-tab-widget.php(18): register_widget('XPandable_Autho...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): xpandable_author_tab_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(146): do_action('action_schedule...', 'wp_actionschedu...', 'actionscheduler...')
-#11 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(69): ActionScheduler_Abstract_Schema->update_table('actionscheduler...')
-#12 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php(55): ActionScheduler_Abstract_Schema->register_tables()
-#13 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/data-stores/ActionScheduler_HybridStore.php(76): ActionScheduler_DBStore->init()
-#14 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/abstracts/ActionScheduler.php(223): ActionScheduler_HybridStore->init()
-#15 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/action-scheduler.php(60): ActionScheduler::init('/wordpress/wp-c...')
-#16 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/action-scheduler.php(66): action_scheduler_initialize_3_dot_9_dot_0()
-#17 /wordpress/wp-content/plugins/woocommerce/includes/class-woocommerce.php(725): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-content/plugins/woocommerce/includes/class-woocommerce.php(236): WooCommerce->includes()
-#19 /wordpress/wp-content/plugins/woocommerce/includes/class-woocommerce.php(155): WooCommerce->__construct()
-#20 /wordpress/wp-content/plugins/woocommerce/woocommerce.php(47): WooCommerce::instance()
-#21 /wordpress/wp-content/plugins/woocommerce/woocommerce.php(62): WC()
-#22 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#23 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woocommerce/woo...')
-#24 /internal/eval.php(20): activate_plugin('woocommerce/woo...')
-#25 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('action_scheduler_hybrid_store_demarkation', '4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woocommerce/woocommerce.php'), WC, WooCommerce::instance, WooCommerce->__construct, WooCommerce->includes, include_once('/plugins/woocommerce/packages/action-scheduler/action-scheduler.php'), action_scheduler_initialize_3_dot_9_dot_0, ActionScheduler::init, ActionScheduler_HybridStore->init, ActionScheduler_DBStore->init, ActionScheduler_Abstract_Schema->register_tables, ActionScheduler_Abstract_Schema->update_table, do_action('action_scheduler/created_table'), WP_Hook->do_action, WP_Hook->apply_filters, ActionScheduler_HybridStore->set_autoincrement, ActionScheduler_HybridStore->set_demarkation_id, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:52:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('schema-ActionScheduler_StoreSchema', '7.0.1744213958', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'schema-ActionScheduler_StoreSchema' , '7.0.1744213958' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('schema-ActionSc...', '7.0.1744213958', '', 'auto')
-#5 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(129): update_option('schema-ActionSc...', '7.0.1744213958')
-#6 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(71): ActionScheduler_Abstract_Schema->mark_schema_update_complete()
-#7 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php(55): ActionScheduler_Abstract_Schema->register_tables()
-#8 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/data-stores/ActionScheduler_HybridStore.php(76): ActionScheduler_DBStore->init()
-#9 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/abstracts/ActionScheduler.php(223): ActionScheduler_HybridStore->init()
-#10 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/action-scheduler.php(60): ActionScheduler::init('/wordpress/wp-c...')
-#11 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/action-scheduler.php(66): action_scheduler_initialize_3_dot_9_dot_0()
-#12 /wordpress/wp-content/plugins/woocommerce/includes/class-woocommerce.php(725): include_once('/wordpress/wp-c...')
-#13 /wordpress/wp-content/plugins/woocommerce/includes/class-woocommerce.php(236): WooCommerce->includes()
-#14 /wordpress/wp-content/plugins/woocommerce/includes/class-woocommerce.php(155): WooCommerce->__construct()
-#15 /wordpress/wp-content/plugins/woocommerce/woocommerce.php(47): WooCommerce::instance()
-#16 /wordpress/wp-content/plugins/woocommerce/woocommerce.php(62): WC()
-#17 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woocommerce/woo...')
-#19 /internal/eval.php(20): activate_plugin('woocommerce/woo...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('schema-ActionScheduler_StoreSchema', '7.0.1744213958', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woocommerce/woocommerce.php'), WC, WooCommerce::instance, WooCommerce->__construct, WooCommerce->includes, include_once('/plugins/woocommerce/packages/action-scheduler/action-scheduler.php'), action_scheduler_initialize_3_dot_9_dot_0, ActionScheduler::init, ActionScheduler_HybridStore->init, ActionScheduler_DBStore->init, ActionScheduler_Abstract_Schema->register_tables, ActionScheduler_Abstract_Schema->mark_schema_update_complete, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:52:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('schema-ActionScheduler_LoggerSchema', '3.0.1744213958', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'schema-ActionScheduler_LoggerSchema' , '3.0.1744213958' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('schema-ActionSc...', '3.0.1744213958', '', 'auto')
-#5 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(129): update_option('schema-ActionSc...', '3.0.1744213958')
-#6 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(71): ActionScheduler_Abstract_Schema->mark_schema_update_complete()
-#7 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/data-stores/ActionScheduler_DBLogger.php(108): ActionScheduler_Abstract_Schema->register_tables()
-#8 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/abstracts/ActionScheduler.php(224): ActionScheduler_DBLogger->init()
-#9 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/action-scheduler.php(60): ActionScheduler::init('/wordpress/wp-c...')
-#10 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/action-scheduler.php(66): action_scheduler_initialize_3_dot_9_dot_0()
-#11 /wordpress/wp-content/plugins/woocommerce/includes/class-woocommerce.php(725): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-content/plugins/woocommerce/includes/class-woocommerce.php(236): WooCommerce->includes()
-#13 /wordpress/wp-content/plugins/woocommerce/includes/class-woocommerce.php(155): WooCommerce->__construct()
-#14 /wordpress/wp-content/plugins/woocommerce/woocommerce.php(47): WooCommerce::instance()
-#15 /wordpress/wp-content/plugins/woocommerce/woocommerce.php(62): WC()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woocommerce/woo...')
-#18 /internal/eval.php(20): activate_plugin('woocommerce/woo...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('schema-ActionScheduler_LoggerSchema', '3.0.1744213958', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woocommerce/woocommerce.php'), WC, WooCommerce::instance, WooCommerce->__construct, WooCommerce->includes, include_once('/plugins/woocommerce/packages/action-scheduler/action-scheduler.php'), action_scheduler_initialize_3_dot_9_dot_0, ActionScheduler::init, ActionScheduler_DBLogger->init, ActionScheduler_Abstract_Schema->register_tables, ActionScheduler_Abstract_Schema->mark_schema_update_complete, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:52:38 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 15:52:38 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 15:52:38 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 15:52:38 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 15:52:38 UTC] PHP Notice:  Undefined index: autoload in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 15:52:38 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 15:52:38 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 15:52:38 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 15:52:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_wc_installing', '1744214559', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_wc_installing' , '1744214559' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1744214559, '', 'off')
-#5 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(481): set_transient('wc_installing', 'yes', 600)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): WC_Install::install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woocom...', false)
-#10 /internal/eval.php(20): activate_plugin('woocommerce/woo...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_wc_installing', '1744214559', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_woocommerce/woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Install::install, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:52:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_wc_installing', 'yes', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_wc_installing' , 'yes' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_wc_i...', 'yes', '', 'off')
-#5 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(481): set_transient('wc_installing', 'yes', 600)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): WC_Install::install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woocom...', false)
-#10 /internal/eval.php(20): activate_plugin('woocommerce/woo...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_wc_installing', 'yes', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_woocommerce/woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Install::install, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:52:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_newly_installed', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'woocommerce_newly_installed' , 'yes' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('woocommerce_new...', 'yes', '', 'auto')
-#5 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(524): update_option('woocommerce_new...', 'yes')
-#6 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(485): WC_Install::install_core()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): WC_Install::install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 15:54:07 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('XPandable_Autho...')
+#2 /wordpress/wp-content/plugins/xpandable-author-tab/xpandable-author-tab-widget.php(18): register_widget('XPandable_Autho...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): xpandable_author_tab_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woocom...', false)
-#11 /internal/eval.php(20): activate_plugin('woocommerce/woo...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_newly_installed', 'yes', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_woocommerce/woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Install::install, WC_Install::install_core, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:52:40 UTC] PHP Notice:  Undefined index: comment_type in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 932
-[09-Apr-2025 15:52:40 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 932
-[09-Apr-2025 15:52:40 UTC] PHP Notice:  Undefined index: comment_type in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 941
-[09-Apr-2025 15:52:40 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-information-schema-builder.php on line 941
-[09-Apr-2025 15:52:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 15:54:16 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('XPandable_Autho...')
+#2 /wordpress/wp-content/plugins/xpandable-author-tab/xpandable-author-tab-widget.php(18): register_widget('XPandable_Autho...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): xpandable_author_tab_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 15:54:39 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744300477.482)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 15:56:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function edd_get_option() in /wordpress/wp-content/plugins/xunhu-alipay-payment-for-easy-digital-downloads/class-xh-alipay-edd-api.php:88
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): XH_Alipay_Payment_EDD_Api->register_activation_hook(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_xunhu-...', false)
+#4 /internal/eval.php(20): activate_plugin('xunhu-alipay-pa...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/xunhu-alipay-payment-for-easy-digital-downloads/class-xh-alipay-edd-api.php on line 88
+[10-Apr-2025 15:56:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function edd_get_option() in /wordpress/wp-content/plugins/xunhu-alipay-payment-for-easy-digital-downloads/class-xh-alipay-edd-api.php:88
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): XH_Alipay_Payment_EDD_Api->register_activation_hook(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_xunhu-...', false)
+#4 /internal/eval.php(20): activate_plugin('xunhu-alipay-pa...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/xunhu-alipay-payment-for-easy-digital-downloads/class-xh-alipay-edd-api.php on line 88
+[10-Apr-2025 15:57:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function edd_get_option() in /wordpress/wp-content/plugins/xunhu-alipay-payment-for-easy-digital-downloads/class-xh-alipay-edd-api.php:88
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): XH_Alipay_Payment_EDD_Api->register_activation_hook(false)
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_xunhu-...', false)
+#4 /internal/eval.php(20): activate_plugin('xunhu-alipay-pa...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/xunhu-alipay-payment-for-easy-digital-downloads/class-xh-alipay-edd-api.php on line 88
+[10-Apr-2025 15:58:18 UTC] PHP Deprecated:  Required parameter $totalpage follows optional parameter $showpages in /wordpress/wp-content/plugins/yabp/yabp.php on line 274
+[10-Apr-2025 15:58:18 UTC] PHP Deprecated:  Required parameter $curpage follows optional parameter $showpages in /wordpress/wp-content/plugins/yabp/yabp.php on line 274
+[10-Apr-2025 15:58:18 UTC] PHP Deprecated:  Required parameter $item_ids_array follows optional parameter $test in /wordpress/wp-content/plugins/yabp/yabp.php on line 323
+[10-Apr-2025 15:58:19 UTC] PHP Deprecated:  Required parameter $totalpage follows optional parameter $showpages in /wordpress/wp-content/plugins/yabp/yabp.php on line 274
+[10-Apr-2025 15:58:19 UTC] PHP Deprecated:  Required parameter $curpage follows optional parameter $showpages in /wordpress/wp-content/plugins/yabp/yabp.php on line 274
+[10-Apr-2025 15:58:19 UTC] PHP Deprecated:  Required parameter $item_ids_array follows optional parameter $test in /wordpress/wp-content/plugins/yabp/yabp.php on line 323
+[10-Apr-2025 15:58:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>ALTER TABLE wp_comments ADD INDEX woo_idx_comment_type (comment_type)</p>
+<p>ALTER TABLE `wp_yabp` ADD `entry_expired_notification_sent` INT(1) NOT NULL DEFAULT '0'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_comments</li>
-<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_comments</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_comments</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_yabp</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_yabp</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_yabp</li>
 <li>Executing: 
-					SELECT column_name, data_type, is_nullable, character_maximum_length
-					FROM _wp_sqlite_mysql_information_schema_columns
-					WHERE table_schema = ?
-					AND table_name = ?
-					AND column_name IN (?)
-				 | parameters: database_name_here, wp_comments, comment_type</li>
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_yabp</li>
 <li>Executing: 
-				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-			 | parameters: database_name_here, wp_comments, 1, database_name_here, woo_idx_comment_type, 1, comment_type, A, 0, , , YES, BTREE, , , YES, </li>
-<li>Executing: 
-				WITH s AS (
-					SELECT
-						column_name,
-						CASE
-							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
-							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
-							WHEN MAX(seq_in_index = 1) THEN 'MUL'
-							ELSE ''
-						END AS column_key
-					FROM _wp_sqlite_mysql_information_schema_statistics
-					WHERE table_schema = ?
-					AND table_name = ?
-					GROUP BY column_name
-				)
-				UPDATE _wp_sqlite_mysql_information_schema_columns AS c
-				SET
-					column_key = s.column_key,
-					is_nullable = IIF(s.column_key = 'PRI', 'NO', c.is_nullable)
-			    FROM s
-			    WHERE c.table_schema = ?
-			    AND c.table_name = ?
-				AND s.column_name = c.column_name
-			 | parameters: database_name_here, wp_comments, database_name_here, wp_comments</li>
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_yabp, entry_expired_notification_sent, 22, 0, NO, int, , , 10, 0, , , , int(1), , , select,insert,update,references, , , </li>
 <li>Executing: PRAGMA foreign_keys | (no parameters)</li>
 <li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
 <li>Executing: 
@@ -323,358 +130,705 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				WHERE table_type = 'BASE TABLE'
 				AND table_schema = ?
 				AND table_name = ?
-			 | parameters: database_name_here, wp_comments</li>
+			 | parameters: database_name_here, wp_yabp</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_yabp</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_yabp</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_yabp_67f7ea9c75ad0` (
+  `entry_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `entry_bolid` INTEGER NOT NULL,
+  `entry_thumb` INTEGER NOT NULL,
+  `entry_showthumb` INTEGER NOT NULL,
+  `entry_showprice` INTEGER NOT NULL,
+  `entry_showlistprice` INTEGER NOT NULL,
+  `entry_showtitle` INTEGER NOT NULL,
+  `entry_showsubtitle` INTEGER NOT NULL,
+  `entry_showavailability` INTEGER NOT NULL,
+  `entry_showfreeshipping` INTEGER NOT NULL,
+  `entry_showrating` INTEGER NOT NULL,
+  `entry_showbutton` INTEGER NOT NULL,
+  `entry_updateinterval` INTEGER NOT NULL,
+  `entry_buttontype` INTEGER NOT NULL DEFAULT '1',
+  `entry_putincart` INTEGER NOT NULL,
+  `entry_recordimpressions` INTEGER NOT NULL,
+  `entry_openinnewtab` INTEGER NOT NULL,
+  `entry_style` INTEGER NOT NULL,
+  `entry_imgontop` INTEGER NOT NULL,
+  `entry_country` INTEGER NOT NULL DEFAULT '1',
+  `entry_expired_notification_sent` INTEGER NOT NULL DEFAULT '0',
+  `entry_expired_notification_sent` INTEGER NOT NULL DEFAULT '0'
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Table 'wp_comments' doesn't exist
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Table 'wp_comme...', 0, Object(WP_SQLite_Driver_Exception))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE wp_...')
-#3 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(1465): WP_SQLite_DB->query('ALTER TABLE wp_...')
-#4 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(529): WC_Install::create_tables()
-#5 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(485): WC_Install::install_core()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): WC_Install::install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woocom...', false)
-#10 /internal/eval.php(20): activate_plugin('woocommerce/woo...')
-#11 {main}</pre>
- for query ALTER TABLE wp_comments ADD INDEX woo_idx_comment_type (comment_type) made by activate_plugin, do_action('activate_woocommerce/woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Install::install, WC_Install::install_core, WC_Install::create_tables, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:52:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_schema_version', '920', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'woocommerce_schema_version' , '920' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 duplicate column name: entry_expired_notification_sent
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('woocommerce_sch...', '920', '', 'auto')
-#5 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(602): update_option('woocommerce_sch...', '920')
-#6 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(530): WC_Install::verify_base_tables()
-#7 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(485): WC_Install::install_core()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): WC_Install::install(false)
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woocom...', false)
-#12 /internal/eval.php(20): activate_plugin('woocommerce/woo...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_schema_version', '920', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_woocommerce/woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Install::install, WC_Install::install_core, WC_Install::verify_base_tables, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:52:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_store_address', '', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'woocommerce_store_address' , '' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(970): add_option('woocommerce_sto...', '', '', 'on')
-#5 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(531): WC_Install::create_options()
-#6 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(485): WC_Install::install_core()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): WC_Install::install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woocom...', false)
-#11 /internal/eval.php(20): activate_plugin('woocommerce/woo...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/yabp/yabp.php(193): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/yabp/yabp.php(113): yabp_install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): yabp_init('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(704): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_store_address', '', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_woocommerce/woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Install::install, WC_Install::install_core, WC_Install::create_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:52:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE `wp_yabp` ADD `entry_expired_notification_sent` INT(1) NOT NULL DEFAULT '0' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, yabp_init, yabp_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 15:58:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_store_address_2', '', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE `wp_yabp` ADD `entry_country` INT(1) NOT NULL DEFAULT '1'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_yabp</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_yabp</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_yabp</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
+				SELECT MAX(ordinal_position)
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'woocommerce_store_address_2' , '' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_yabp</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_yabp, entry_country, 22, 1, NO, int, , , 10, 0, , , , int(1), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_yabp</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_yabp</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_yabp</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_yabp_67f7ea9c78d98` (
+  `entry_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `entry_bolid` INTEGER NOT NULL,
+  `entry_thumb` INTEGER NOT NULL,
+  `entry_showthumb` INTEGER NOT NULL,
+  `entry_showprice` INTEGER NOT NULL,
+  `entry_showlistprice` INTEGER NOT NULL,
+  `entry_showtitle` INTEGER NOT NULL,
+  `entry_showsubtitle` INTEGER NOT NULL,
+  `entry_showavailability` INTEGER NOT NULL,
+  `entry_showfreeshipping` INTEGER NOT NULL,
+  `entry_showrating` INTEGER NOT NULL,
+  `entry_showbutton` INTEGER NOT NULL,
+  `entry_updateinterval` INTEGER NOT NULL,
+  `entry_buttontype` INTEGER NOT NULL DEFAULT '1',
+  `entry_putincart` INTEGER NOT NULL,
+  `entry_recordimpressions` INTEGER NOT NULL,
+  `entry_openinnewtab` INTEGER NOT NULL,
+  `entry_style` INTEGER NOT NULL,
+  `entry_imgontop` INTEGER NOT NULL,
+  `entry_country` INTEGER NOT NULL DEFAULT '1',
+  `entry_expired_notification_sent` INTEGER NOT NULL DEFAULT '0',
+  `entry_country` INTEGER NOT NULL DEFAULT '1'
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 duplicate column name: entry_country
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(970): add_option('woocommerce_sto...', '', '', 'on')
-#5 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(531): WC_Install::create_options()
-#6 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(485): WC_Install::install_core()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): WC_Install::install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woocom...', false)
-#11 /internal/eval.php(20): activate_plugin('woocommerce/woo...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/yabp/yabp.php(197): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/yabp/yabp.php(113): yabp_install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): yabp_init('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(704): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_store_address_2', '', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_woocommerce/woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Install::install, WC_Install::install_core, WC_Install::create_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:52:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE `wp_yabp` ADD `entry_country` INT(1) NOT NULL DEFAULT '1' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, yabp_init, yabp_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 15:58:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_store_city', '', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE `wp_yabp` ADD `entry_showfreeshipping` INT(1) NOT NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_yabp</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_yabp</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_yabp</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
+				SELECT MAX(ordinal_position)
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'woocommerce_store_city' , '' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_yabp</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_yabp, entry_showfreeshipping, 22, , NO, int, , , 10, 0, , , , int(1), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_yabp</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_yabp</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_yabp</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_yabp_67f7ea9c79d38` (
+  `entry_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `entry_bolid` INTEGER NOT NULL,
+  `entry_thumb` INTEGER NOT NULL,
+  `entry_showthumb` INTEGER NOT NULL,
+  `entry_showprice` INTEGER NOT NULL,
+  `entry_showlistprice` INTEGER NOT NULL,
+  `entry_showtitle` INTEGER NOT NULL,
+  `entry_showsubtitle` INTEGER NOT NULL,
+  `entry_showavailability` INTEGER NOT NULL,
+  `entry_showfreeshipping` INTEGER NOT NULL,
+  `entry_showrating` INTEGER NOT NULL,
+  `entry_showbutton` INTEGER NOT NULL,
+  `entry_updateinterval` INTEGER NOT NULL,
+  `entry_buttontype` INTEGER NOT NULL DEFAULT '1',
+  `entry_putincart` INTEGER NOT NULL,
+  `entry_recordimpressions` INTEGER NOT NULL,
+  `entry_openinnewtab` INTEGER NOT NULL,
+  `entry_style` INTEGER NOT NULL,
+  `entry_imgontop` INTEGER NOT NULL,
+  `entry_country` INTEGER NOT NULL DEFAULT '1',
+  `entry_expired_notification_sent` INTEGER NOT NULL DEFAULT '0',
+  `entry_showfreeshipping` INTEGER NOT NULL
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 duplicate column name: entry_showfreeshipping
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(970): add_option('woocommerce_sto...', '', '', 'on')
-#5 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(531): WC_Install::create_options()
-#6 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(485): WC_Install::install_core()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): WC_Install::install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woocom...', false)
-#11 /internal/eval.php(20): activate_plugin('woocommerce/woo...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/yabp/yabp.php(198): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/yabp/yabp.php(113): yabp_install()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): yabp_init('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(704): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_store_city', '', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_woocommerce/woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Install::install, WC_Install::install_core, WC_Install::create_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:52:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE `wp_yabp` ADD `entry_showfreeshipping` INT(1) NOT NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, yabp_init, yabp_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 15:58:20 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method WP_SQLite_Driver::get_columns() in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php:505
+Stack trace:
+#0 /wordpress/wp-includes/class-wpdb.php(3879): WP_SQLite_DB->load_col_info()
+#1 /wordpress/wp-content/plugins/yabp/yabp.php(201): wpdb->get_col_info('max_length', 0)
+#2 /wordpress/wp-content/plugins/yabp/yabp.php(113): yabp_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): yabp_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}
+  thrown in /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php on line 505
+[10-Apr-2025 15:58:29 UTC] PHP Deprecated:  Required parameter $totalpage follows optional parameter $showpages in /wordpress/wp-content/plugins/yabp/yabp.php on line 274
+[10-Apr-2025 15:58:29 UTC] PHP Deprecated:  Required parameter $curpage follows optional parameter $showpages in /wordpress/wp-content/plugins/yabp/yabp.php on line 274
+[10-Apr-2025 15:58:29 UTC] PHP Deprecated:  Required parameter $item_ids_array follows optional parameter $test in /wordpress/wp-content/plugins/yabp/yabp.php on line 323
+[10-Apr-2025 15:58:29 UTC] PHP Deprecated:  Required parameter $totalpage follows optional parameter $showpages in /wordpress/wp-content/plugins/yabp/yabp.php on line 274
+[10-Apr-2025 15:58:29 UTC] PHP Deprecated:  Required parameter $curpage follows optional parameter $showpages in /wordpress/wp-content/plugins/yabp/yabp.php on line 274
+[10-Apr-2025 15:58:29 UTC] PHP Deprecated:  Required parameter $item_ids_array follows optional parameter $test in /wordpress/wp-content/plugins/yabp/yabp.php on line 323
+[10-Apr-2025 15:58:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_default_country', 'US:CA', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE `wp_yabp` ADD `entry_expired_notification_sent` INT(1) NOT NULL DEFAULT '0'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'woocommerce_default_country' , 'US:CA' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_yabp, `ENTRY_EXPIRED_NOTIFICATION_SENT`, int(1)</li>
+<li>Executing: ALTER TABLE wp_yabp ADD `entry_expired_notification_sent` integer NOT NULL DEFAULT '0' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: entry_expired_notification_sent.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(970): add_option('woocommerce_def...', 'US:CA', '', 'on')
-#5 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(531): WC_Install::create_options()
-#6 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(485): WC_Install::install_core()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): WC_Install::install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woocom...', false)
-#11 /internal/eval.php(20): activate_plugin('woocommerce/woo...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_default_country', 'US:CA', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_woocommerce/woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Install::install, WC_Install::install_core, WC_Install::create_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:52:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/yabp/yabp.php(193): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/yabp/yabp.php(113): yabp_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): yabp_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_yabp` ADD `entry_expired_notification_sent` INT(1) NOT NULL DEFAULT '0' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, yabp_init, yabp_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 15:58:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_store_postcode', '', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE `wp_yabp` ADD `entry_country` INT(1) NOT NULL DEFAULT '1'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'woocommerce_store_postcode' , '' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_yabp, `ENTRY_COUNTRY`, int(1)</li>
+<li>Executing: ALTER TABLE wp_yabp ADD `entry_country` integer NOT NULL DEFAULT '1' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: entry_country.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(970): add_option('woocommerce_sto...', '', '', 'on')
-#5 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(531): WC_Install::create_options()
-#6 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(485): WC_Install::install_core()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): WC_Install::install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woocom...', false)
-#11 /internal/eval.php(20): activate_plugin('woocommerce/woo...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_store_postcode', '', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_woocommerce/woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Install::install, WC_Install::install_core, WC_Install::create_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:52:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/yabp/yabp.php(197): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/yabp/yabp.php(113): yabp_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): yabp_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_yabp` ADD `entry_country` INT(1) NOT NULL DEFAULT '1' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, yabp_init, yabp_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 15:58:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_allowed_countries', 'all', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE `wp_yabp` ADD `entry_showfreeshipping` INT(1) NOT NULL</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'woocommerce_allowed_countries' , 'all' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_yabp, `ENTRY_SHOWFREESHIPPING`, int(1)</li>
+<li>Executing: ALTER TABLE wp_yabp ADD `entry_showfreeshipping` integer NOT NULL | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: entry_showfreeshipping.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(970): add_option('woocommerce_all...', 'all', '', 'on')
-#5 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(531): WC_Install::create_options()
-#6 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(485): WC_Install::install_core()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): WC_Install::install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woocom...', false)
-#11 /internal/eval.php(20): activate_plugin('woocommerce/woo...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_allowed_countries', 'all', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_woocommerce/woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Install::install, WC_Install::install_core, WC_Install::create_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:52:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/yabp/yabp.php(198): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/yabp/yabp.php(113): yabp_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): yabp_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_yabp` ADD `entry_showfreeshipping` INT(1) NOT NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, yabp_init, yabp_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 15:58:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_all_except_countries', '', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE `wp_yabp_items` MODIFY item_title VARCHAR(500)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'woocommerce_all_except_countries' , '' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(970): add_option('woocommerce_all...', '', '', 'on')
-#5 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(531): WC_Install::create_options()
-#6 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(485): WC_Install::install_core()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): WC_Install::install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woocom...', false)
-#11 /internal/eval.php(20): activate_plugin('woocommerce/woo...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_all_except_countries', '', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_woocommerce/woocommerce.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Install::install, WC_Install::install_core, WC_Install::create_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:52:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/yabp/yabp.php(203): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/yabp/yabp.php(113): yabp_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): yabp_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_yabp_items` MODIFY item_title VARCHAR(500) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, yabp_init, yabp_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 15:58:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('woocommerce_specific_allowed_countries', '', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE `wp_yabp_items` MODIFY item_subtitle VARCHAR(500)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'woocommerce_specific_allowed_countries' , '' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(970): add_option('woocommerce_spe...', '', '', 'on')
-#5 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(531): WC_Install::create_options()
-#6 /wordpress/wp-content/plugins/woocommerce/includes/class-wc-install.php(485): WC_Install::install_core()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): WC_Install::install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woocom...', false)
-#11 /internal/eval.php(20): activate_plugin('woocommerce/woo...')
-#12 {main}</pre>
- for query
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/yabp/yabp.php(204): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/yabp/yabp.php(113): yabp_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): yabp_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_yabp_items` MODIFY item_subtitle VARCHAR(500) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, yabp_init, yabp_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 15:58:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_yabp` ADD `entry_buttontype` INT(1) NOT NULL DEFAULT '1', ADD `entry_putincart` INT(1) NOT NULL, ADD `entry_recordimpressions` INT(1) NOT NULL, ADD `entry_openinnewtab` INT(1) NOT NULL, ADD `entry_style` INT(1) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_yabp, `ENTRY_BUTTONTYPE`, int(1)</li>
+<li>Executing: ALTER TABLE wp_yabp ADD `entry_buttontype` integer NOT NULL DEFAULT '1' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: entry_buttontype.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/yabp/yabp.php(208): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/yabp/yabp.php(113): yabp_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): yabp_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_yabp` ADD `entry_buttontype` INT(1) NOT NULL DEFAULT '1', ADD `entry_putincart` INT(1) NOT NULL, ADD `entry_recordimpressions` INT(1) NOT NULL, ADD `entry_openinnewtab` INT(1) NOT NULL, ADD `entry_style` INT(1) NOT NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, yabp_init, yabp_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 15:58:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_yabp` ADD `entry_imgontop` INT(1) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_yabp, `ENTRY_IMGONTOP`, int(1)</li>
+<li>Executing: ALTER TABLE wp_yabp ADD `entry_imgontop` integer NOT NULL | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: entry_imgontop.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/yabp/yabp.php(215): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/yabp/yabp.php(113): yabp_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): yabp_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_yabp` ADD `entry_imgontop` INT(1) NOT NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, yabp_init, yabp_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 15:58:30 UTC] PHP Warning:  Undefined variable $yabp_dealslist_count in /wordpress/wp-content/plugins/yabp/yabp.php on line 221
+[10-Apr-2025 15:58:38 UTC] PHP Deprecated:  Required parameter $totalpage follows optional parameter $showpages in /wordpress/wp-content/plugins/yabp/yabp.php on line 274
+[10-Apr-2025 15:58:38 UTC] PHP Deprecated:  Required parameter $curpage follows optional parameter $showpages in /wordpress/wp-content/plugins/yabp/yabp.php on line 274
+[10-Apr-2025 15:58:38 UTC] PHP Deprecated:  Required parameter $item_ids_array follows optional parameter $test in /wordpress/wp-content/plugins/yabp/yabp.php on line 323
+[10-Apr-2025 15:58:39 UTC] PHP Deprecated:  Required parameter $totalpage follows optional parameter $showpages in /wordpress/wp-content/plugins/yabp/yabp.php on line 274
+[10-Apr-2025 15:58:39 UTC] PHP Deprecated:  Required parameter $curpage follows optional parameter $showpages in /wordpress/wp-content/plugins/yabp/yabp.php on line 274
+[10-Apr-2025 15:58:39 UTC] PHP Deprecated:  Required parameter $item_ids_array follows optional parameter $test in /wordpress/wp-content/plugins/yabp/yabp.php on line 323
+[10-Apr-2025 15:58:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_yabp` ADD `entry_expired_notification_sent` INT(1) NOT NULL DEFAULT '0'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_yabp, `ENTRY_EXPIRED_NOTIFICATION_SENT`, int(1)</li>
+<li>Executing: ALTER TABLE wp_yabp ADD `entry_expired_notification_sent` integer NOT NULL DEFAULT '0' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: entry_expired_notification_sent.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/yabp/yabp.php(193): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/yabp/yabp.php(113): yabp_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): yabp_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_yabp` ADD `entry_expired_notification_sent` INT(1) NOT NULL DEFAULT '0' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, yabp_init, yabp_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 15:58:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_yabp` ADD `entry_country` INT(1) NOT NULL DEFAULT '1'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_yabp, `ENTRY_COUNTRY`, int(1)</li>
+<li>Executing: ALTER TABLE wp_yabp ADD `entry_country` integer NOT NULL DEFAULT '1' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: entry_country.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/yabp/yabp.php(197): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/yabp/yabp.php(113): yabp_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): yabp_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_yabp` ADD `entry_country` INT(1) NOT NULL DEFAULT '1' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, yabp_init, yabp_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 15:58:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_yabp` ADD `entry_showfreeshipping` INT(1) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_yabp, `ENTRY_SHOWFREESHIPPING`, int(1)</li>
+<li>Executing: ALTER TABLE wp_yabp ADD `entry_showfreeshipping` integer NOT NULL | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: entry_showfreeshipping.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/yabp/yabp.php(198): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/yabp/yabp.php(113): yabp_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): yabp_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_yabp` ADD `entry_showfreeshipping` INT(1) NOT NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, yabp_init, yabp_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 15:58:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_yabp_items` MODIFY item_title VARCHAR(500)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/yabp/yabp.php(203): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/yabp/yabp.php(113): yabp_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): yabp_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_yabp_items` MODIFY item_title VARCHAR(500) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, yabp_init, yabp_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 15:58:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_yabp_items` MODIFY item_subtitle VARCHAR(500)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/yabp/yabp.php(204): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/yabp/yabp.php(113): yabp_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): yabp_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_yabp_items` MODIFY item_subtitle VARCHAR(500) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, yabp_init, yabp_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 15:58:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_yabp` ADD `entry_buttontype` INT(1) NOT NULL DEFAULT '1', ADD `entry_putincart` INT(1) NOT NULL, ADD `entry_recordimpressions` INT(1) NOT NULL, ADD `entry_openinnewtab` INT(1) NOT NULL, ADD `entry_style` INT(1) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_yabp, `ENTRY_BUTTONTYPE`, int(1)</li>
+<li>Executing: ALTER TABLE wp_yabp ADD `entry_buttontype` integer NOT NULL DEFAULT '1' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: entry_buttontype.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/yabp/yabp.php(208): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/yabp/yabp.php(113): yabp_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): yabp_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_yabp` ADD `entry_buttontype` INT(1) NOT NULL DEFAULT '1', ADD `entry_putincart` INT(1) NOT NULL, ADD `entry_recordimpressions` INT(1) NOT NULL, ADD `entry_openinnewtab` INT(1) NOT NULL, ADD `entry_style` INT(1) NOT NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, yabp_init, yabp_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 15:58:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_yabp` ADD `entry_imgontop` INT(1) NOT NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_yabp, `ENTRY_IMGONTOP`, int(1)</li>
+<li>Executing: ALTER TABLE wp_yabp ADD `entry_imgontop` integer NOT NULL | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: entry_imgontop.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/yabp/yabp.php(215): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#2 /wordpress/wp-content/plugins/yabp/yabp.php(113): yabp_install()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): yabp_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#10 {main}</pre>
+ for query ALTER TABLE `wp_yabp` ADD `entry_imgontop` INT(1) NOT NULL made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, yabp_init, yabp_install, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 15:58:40 UTC] PHP Warning:  Undefined variable $yabp_dealslist_count in /wordpress/wp-content/plugins/yabp/yabp.php on line 221
+[10-Apr-2025 15:59:21 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/yamuslim-prayer-time-wordpress-widget/yamuslimwordpress.php:115
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('yamuslim-prayer...')
+#2 /internal/eval.php(20): activate_plugin('yamuslim-prayer...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/yamuslim-prayer-time-wordpress-widget/yamuslimwordpress.php on line 115
+[10-Apr-2025 15:59:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/yamuslim-prayer-time-wordpress-widget/yamuslimwordpress.php:115
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('yamuslim-prayer...')
+#2 /internal/eval.php(20): activate_plugin('yamuslim-prayer...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/yamuslim-prayer-time-wordpress-widget/yamuslimwordpress.php on line 115
+[10-Apr-2025 15:59:37 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/yamuslim-prayer-time-wordpress-widget/yamuslimwordpress.php:115
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('yamuslim-prayer...')
+#2 /internal/eval.php(20): activate_plugin('yamuslim-prayer...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/yamuslim-prayer-time-wordpress-widget/yamuslimwordpress.php on line 115
+[10-Apr-2025 16:02:37 UTC] PHP Parse error:  syntax error, unexpected token "&" in /wordpress/wp-content/plugins/yd-feedwordpress-content-filter/inc/yd-widget-framework.inc.php on line 156
+[10-Apr-2025 16:02:45 UTC] PHP Parse error:  syntax error, unexpected token "&" in /wordpress/wp-content/plugins/yd-feedwordpress-content-filter/inc/yd-widget-framework.inc.php on line 156
+[10-Apr-2025 16:02:53 UTC] PHP Parse error:  syntax error, unexpected token "&" in /wordpress/wp-content/plugins/yd-feedwordpress-content-filter/inc/yd-widget-framework.inc.php on line 156
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"yd-feedwordpress-content-filter"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
