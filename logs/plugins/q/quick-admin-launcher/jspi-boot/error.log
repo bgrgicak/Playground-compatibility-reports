@@ -2,640 +2,103 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 04:31:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('custom_dash_setting_information', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'custom_dash_setting_information' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/quickboard/quickboard.php(35): add_option('custom_dash_set...', '')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('quickboard/quic...')
-#7 /internal/eval.php(20): activate_plugin('quickboard/quic...')
-#8 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('custom_dash_setting_information', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/quickboard/quickboard.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 04:31:10 UTC] PHP Warning:  Attempt to read property "capabilities" on null in /wordpress/wp-content/plugins/quickboard/quickboard.php on line 210
-[09-Apr-2025 04:31:10 UTC] PHP Fatal error:  Uncaught TypeError: array_key_exists(): Argument #2 ($array) must be of type array, null given in /wordpress/wp-content/plugins/quickboard/quickboard.php:259
+Error: [10-Apr-2025 14:49:37 UTC] PHP Warning:  Attempt to read property "capabilities" on null in /wordpress/wp-content/plugins/quickboard/quickboard.php on line 210
+[10-Apr-2025 14:49:37 UTC] PHP Fatal error:  Uncaught TypeError: array_key_exists(): Argument #2 ($array) must be of type array, null given in /wordpress/wp-content/plugins/quickboard/quickboard.php:259
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('quickboard/quic...')
 #2 /internal/eval.php(20): activate_plugin('quickboard/quic...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/quickboard/quickboard.php on line 259
-[09-Apr-2025 04:31:19 UTC] PHP Warning:  Attempt to read property "capabilities" on null in /wordpress/wp-content/plugins/quickboard/quickboard.php on line 210
-[09-Apr-2025 04:31:19 UTC] PHP Fatal error:  Uncaught TypeError: array_key_exists(): Argument #2 ($array) must be of type array, null given in /wordpress/wp-content/plugins/quickboard/quickboard.php:259
+[10-Apr-2025 14:49:45 UTC] PHP Warning:  Attempt to read property "capabilities" on null in /wordpress/wp-content/plugins/quickboard/quickboard.php on line 210
+[10-Apr-2025 14:49:45 UTC] PHP Fatal error:  Uncaught TypeError: array_key_exists(): Argument #2 ($array) must be of type array, null given in /wordpress/wp-content/plugins/quickboard/quickboard.php:259
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('quickboard/quic...')
 #2 /internal/eval.php(20): activate_plugin('quickboard/quic...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/quickboard/quickboard.php on line 259
-[09-Apr-2025 04:31:26 UTC] PHP Warning:  Attempt to read property "capabilities" on null in /wordpress/wp-content/plugins/quickboard/quickboard.php on line 210
-[09-Apr-2025 04:31:26 UTC] PHP Fatal error:  Uncaught TypeError: array_key_exists(): Argument #2 ($array) must be of type array, null given in /wordpress/wp-content/plugins/quickboard/quickboard.php:259
+[10-Apr-2025 14:49:53 UTC] PHP Warning:  Attempt to read property "capabilities" on null in /wordpress/wp-content/plugins/quickboard/quickboard.php on line 210
+[10-Apr-2025 14:49:53 UTC] PHP Fatal error:  Uncaught TypeError: array_key_exists(): Argument #2 ($array) must be of type array, null given in /wordpress/wp-content/plugins/quickboard/quickboard.php:259
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('quickboard/quic...')
 #2 /internal/eval.php(20): activate_plugin('quickboard/quic...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/quickboard/quickboard.php on line 259
-[09-Apr-2025 04:31:35 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 04:31:35 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 04:31:35 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 04:31:35 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 04:31:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_quickcreator_installing', '1744173695', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout_quickcreator_installing' , '1744173695' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1744173695, '', 'off')
-#5 /wordpress/wp-content/plugins/quickcreator/includes/class-quickcreator-installer.php(40): set_transient('quickcreator_in...', 'yes', 600)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): QuickcreatorBlog\Quickcreator_Installer->install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+[10-Apr-2025 14:51:19 UTC] PHP Deprecated:  Required parameter $qq_t_userid follows optional parameter $status in /wordpress/wp-content/plugins/qq-connect/qq-connect.php on line 294
+[10-Apr-2025 14:51:20 UTC] PHP Deprecated:  Required parameter $qq_t_userid follows optional parameter $status in /wordpress/wp-content/plugins/qq-connect/qq-connect.php on line 294
+[10-Apr-2025 14:51:27 UTC] PHP Deprecated:  Required parameter $qq_t_userid follows optional parameter $status in /wordpress/wp-content/plugins/qq-connect/qq-connect.php on line 294
+[10-Apr-2025 14:51:28 UTC] PHP Deprecated:  Required parameter $qq_t_userid follows optional parameter $status in /wordpress/wp-content/plugins/qq-connect/qq-connect.php on line 294
+[10-Apr-2025 14:51:36 UTC] PHP Deprecated:  Required parameter $qq_t_userid follows optional parameter $status in /wordpress/wp-content/plugins/qq-connect/qq-connect.php on line 294
+[10-Apr-2025 14:51:36 UTC] PHP Deprecated:  Required parameter $qq_t_userid follows optional parameter $status in /wordpress/wp-content/plugins/qq-connect/qq-connect.php on line 294
+[10-Apr-2025 14:53:48 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744296826.042)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quickc...', false)
-#10 /internal/eval.php(20): activate_plugin('quickcreator/qu...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout_quickcreator_installing', '1744173695', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_quickcreator/quickcreator.php'), WP_Hook->do_action, WP_Hook->apply_filters, QuickcreatorBlog\Quickcreator_Installer->install, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 04:31:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_quickcreator_installing', 'yes', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_quickcreator_installing' , 'yes' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient_quic...', 'yes', '', 'off')
-#5 /wordpress/wp-content/plugins/quickcreator/includes/class-quickcreator-installer.php(40): set_transient('quickcreator_in...', 'yes', 600)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): QuickcreatorBlog\Quickcreator_Installer->install(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quickc...', false)
-#10 /internal/eval.php(20): activate_plugin('quickcreator/qu...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_quickcreator_installing', 'yes', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_quickcreator/quickcreator.php'), WP_Hook->do_action, WP_Hook->apply_filters, QuickcreatorBlog\Quickcreator_Installer->install, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 04:31:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout__quickcreator_activation_redirect', '1744173125', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient_timeout__quickcreator_activation_redirect' , '1744173125' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1543): add_option('_transient_time...', 1744173125, '', 'off')
-#5 /wordpress/wp-content/plugins/quickcreator/includes/class-quickcreator-installer.php(64): set_transient('_quickcreator_a...', 1, 30)
-#6 /wordpress/wp-content/plugins/quickcreator/includes/class-quickcreator-installer.php(42): QuickcreatorBlog\Quickcreator_Installer::set_activation_transients()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): QuickcreatorBlog\Quickcreator_Installer->install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quickc...', false)
-#11 /internal/eval.php(20): activate_plugin('quickcreator/qu...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient_timeout__quickcreator_activation_redirect', '1744173125', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_quickcreator/quickcreator.php'), WP_Hook->do_action, WP_Hook->apply_filters, QuickcreatorBlog\Quickcreator_Installer->install, QuickcreatorBlog\Quickcreator_Installer::set_activation_transients, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 04:31:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient__quickcreator_activation_redirect', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_transient__quickcreator_activation_redirect' , '1' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(1545): add_option('_transient__qui...', 1, '', 'off')
-#5 /wordpress/wp-content/plugins/quickcreator/includes/class-quickcreator-installer.php(64): set_transient('_quickcreator_a...', 1, 30)
-#6 /wordpress/wp-content/plugins/quickcreator/includes/class-quickcreator-installer.php(42): QuickcreatorBlog\Quickcreator_Installer::set_activation_transients()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): QuickcreatorBlog\Quickcreator_Installer->install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quickc...', false)
-#11 /internal/eval.php(20): activate_plugin('quickcreator/qu...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_transient__quickcreator_activation_redirect', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_quickcreator/quickcreator.php'), WP_Hook->do_action, WP_Hook->apply_filters, QuickcreatorBlog\Quickcreator_Installer->install, QuickcreatorBlog\Quickcreator_Installer::set_activation_transients, set_transient, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 04:31:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('quickcreator_version', '0.1.13', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'quickcreator_version' , '0.1.13' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('quickcreator_ve...', '0.1.13', '', 'auto')
-#5 /wordpress/wp-content/plugins/quickcreator/includes/class-quickcreator-installer.php(85): update_option('quickcreator_ve...', '0.1.13')
-#6 /wordpress/wp-content/plugins/quickcreator/includes/class-quickcreator-installer.php(43): QuickcreatorBlog\Quickcreator_Installer::update_quickcreator_version()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): QuickcreatorBlog\Quickcreator_Installer->install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quickc...', false)
-#11 /internal/eval.php(20): activate_plugin('quickcreator/qu...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('quickcreator_version', '0.1.13', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_quickcreator/quickcreator.php'), WP_Hook->do_action, WP_Hook->apply_filters, QuickcreatorBlog\Quickcreator_Installer->install, QuickcreatorBlog\Quickcreator_Installer::update_quickcreator_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 04:31:35 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 04:31:35 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 04:31:35 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 04:31:35 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 04:32:05 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Countries" not found in /wordpress/wp-content/plugins/qenta-checkout-seamless/classes/includes/form_fields.php:43
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 14:54:57 UTC] PHP Fatal error:  Uncaught Error: Class "QUICKAL\QuickAL" not found in /wordpress/wp-content/plugins/quick-admin-launcher/quick-admin-launcher.php:55
 Stack trace:
-#0 /wordpress/wp-content/plugins/qenta-checkout-seamless/woocommerce-qenta-checkout-seamless.php(209): require_once()
-#1 /wordpress/wp-content/plugins/qenta-checkout-seamless/woocommerce-qenta-checkout-seamless.php(145): init_config_values()
-#2 /wordpress/wp-includes/class-wp-hook.php(324): woocommerce_install_qenta_checkout_seamless(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_qenta-...', false)
-#6 /internal/eval.php(20): activate_plugin('qenta-checkout-...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/qenta-checkout-seamless/classes/includes/form_fields.php on line 43
-[09-Apr-2025 04:32:14 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Countries" not found in /wordpress/wp-content/plugins/qenta-checkout-seamless/classes/includes/form_fields.php:43
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('quick-admin-lau...')
+#2 /internal/eval.php(20): activate_plugin('quick-admin-lau...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/quick-admin-launcher/quick-admin-launcher.php on line 55
+[10-Apr-2025 14:55:04 UTC] PHP Fatal error:  Uncaught Error: Class "QUICKAL\QuickAL" not found in /wordpress/wp-content/plugins/quick-admin-launcher/quick-admin-launcher.php:55
 Stack trace:
-#0 /wordpress/wp-content/plugins/qenta-checkout-seamless/woocommerce-qenta-checkout-seamless.php(209): require_once()
-#1 /wordpress/wp-content/plugins/qenta-checkout-seamless/woocommerce-qenta-checkout-seamless.php(145): init_config_values()
-#2 /wordpress/wp-includes/class-wp-hook.php(324): woocommerce_install_qenta_checkout_seamless(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_qenta-...', false)
-#6 /internal/eval.php(20): activate_plugin('qenta-checkout-...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/qenta-checkout-seamless/classes/includes/form_fields.php on line 43
-[09-Apr-2025 04:32:23 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Countries" not found in /wordpress/wp-content/plugins/qenta-checkout-seamless/classes/includes/form_fields.php:43
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('quick-admin-lau...')
+#2 /internal/eval.php(20): activate_plugin('quick-admin-lau...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/quick-admin-launcher/quick-admin-launcher.php on line 55
+[10-Apr-2025 14:55:12 UTC] PHP Fatal error:  Uncaught Error: Class "QUICKAL\QuickAL" not found in /wordpress/wp-content/plugins/quick-admin-launcher/quick-admin-launcher.php:55
 Stack trace:
-#0 /wordpress/wp-content/plugins/qenta-checkout-seamless/woocommerce-qenta-checkout-seamless.php(209): require_once()
-#1 /wordpress/wp-content/plugins/qenta-checkout-seamless/woocommerce-qenta-checkout-seamless.php(145): init_config_values()
-#2 /wordpress/wp-includes/class-wp-hook.php(324): woocommerce_install_qenta_checkout_seamless(false)
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_qenta-...', false)
-#6 /internal/eval.php(20): activate_plugin('qenta-checkout-...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/qenta-checkout-seamless/classes/includes/form_fields.php on line 43
-[09-Apr-2025 04:32:32 UTC] PHP Deprecated:  Required parameter $qq_t_userid follows optional parameter $status in /wordpress/wp-content/plugins/qq-connect/qq-connect.php on line 294
-[09-Apr-2025 04:32:32 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 04:32:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 04:32:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 04:32:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 04:32:32 UTC] PHP Deprecated:  Required parameter $qq_t_userid follows optional parameter $status in /wordpress/wp-content/plugins/qq-connect/qq-connect.php on line 294
-[09-Apr-2025 04:32:40 UTC] PHP Deprecated:  Required parameter $qq_t_userid follows optional parameter $status in /wordpress/wp-content/plugins/qq-connect/qq-connect.php on line 294
-[09-Apr-2025 04:32:41 UTC] PHP Deprecated:  Required parameter $qq_t_userid follows optional parameter $status in /wordpress/wp-content/plugins/qq-connect/qq-connect.php on line 294
-[09-Apr-2025 04:32:49 UTC] PHP Deprecated:  Required parameter $qq_t_userid follows optional parameter $status in /wordpress/wp-content/plugins/qq-connect/qq-connect.php on line 294
-[09-Apr-2025 04:32:50 UTC] PHP Deprecated:  Required parameter $qq_t_userid follows optional parameter $status in /wordpress/wp-content/plugins/qq-connect/qq-connect.php on line 294
-[09-Apr-2025 04:33:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/qsandbox/lib/widgets.php:3
-Stack trace:
-#0 /wordpress/wp-content/plugins/qsandbox/qsandbox.php(31): require_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('qsandbox/qsandb...')
-#3 /internal/eval.php(20): activate_plugin('qsandbox/qsandb...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/qsandbox/lib/widgets.php on line 3
-[09-Apr-2025 04:33:15 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/qsandbox/lib/widgets.php:3
-Stack trace:
-#0 /wordpress/wp-content/plugins/qsandbox/qsandbox.php(31): require_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('qsandbox/qsandb...')
-#3 /internal/eval.php(20): activate_plugin('qsandbox/qsandb...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/qsandbox/lib/widgets.php on line 3
-[09-Apr-2025 04:33:22 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/qsandbox/lib/widgets.php:3
-Stack trace:
-#0 /wordpress/wp-content/plugins/qsandbox/qsandbox.php(31): require_once()
-#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('qsandbox/qsandb...')
-#3 /internal/eval.php(20): activate_plugin('qsandbox/qsandb...')
-#4 {main}
-  thrown in /wordpress/wp-content/plugins/qsandbox/lib/widgets.php on line 3
-[09-Apr-2025 04:33:32 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 04:33:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 04:33:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 04:33:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 04:33:32 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 04:33:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 04:33:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 04:33:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 04:33:32 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 04:33:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 04:33:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 04:33:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 04:33:32 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 04:33:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 04:33:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 04:33:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 04:33:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 04:33:32', '2025-04-09 04:33:32', '<h4>Free Membership</h4>Unlimited access to free content. <a href=\'?quickr-register=1\'>Register </a>For paid membership level signup,
-                     {insert payment button here}', '', 'Signup', '', 'publish', 'page', 'closed', 'closed', '', 'quickr-signup', '', '', '2025-04-09 04:33:32', '2025-04-09 04:33:32', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 04:33:32' , '2025-04-09 04:33:32' , '&lt;h4&gt;Free Membership&lt;/h4&gt;Unlimited access to free content. &lt;a href=''?quickr-register=1''&gt;Register &lt;/a&gt;For paid membership level signup,
-                     {insert payment button here}' , '' , 'Signup' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'quickr-signup' , '' , '' , '2025-04-09 04:33:32' , '2025-04-09 04:33:32' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/quickr-membership/classes/admin/class-quickr-configurator.php(189): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/quickr-membership/classes/admin/class-quickr-configurator.php(135): Quickr_Configurator::create_or_update_page('quickr-signup', 'Signup', '<h4>Free Member...')
-#8 /wordpress/wp-content/plugins/quickr-membership/classes/admin/class-quickr-configurator.php(53): Quickr_Configurator->setup_sign_up_page()
-#9 /wordpress/wp-content/plugins/quickr-membership/classes/admin/class-quickr-configurator.php(21): Quickr_Configurator->setup_pages()
-#10 /wordpress/wp-content/plugins/quickr-membership/classes/common/class-quickr-installer.php(37): Quickr_Configurator->setup()
-#11 /wordpress/wp-content/plugins/quickr-membership/classes/common/class-quickr-installer.php(19): Quickr_Installer::init_settings()
-#12 /wordpress/wp-content/plugins/quickr-membership/quickr-membership.php(29): Quickr_Installer::activate()
-#13 /wordpress/wp-includes/class-wp-hook.php(324): quickr_activate_membership(false)
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quickr...', false)
-#17 /internal/eval.php(20): activate_plugin('quickr-membersh...')
-#18 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 04:33:32', '2025-04-09 04:33:32', '<h4>Free Membership</h4>Unlimited access to free content. <a href=\'?quickr-register=1\'>Register </a>For paid membership level signup,
-                     {insert payment button here}', '', 'Signup', '', 'publish', 'page', 'closed', 'closed', '', 'quickr-signup', '', '', '2025-04-09 04:33:32', '2025-04-09 04:33:32', 0, 0, '', '') made by activate_plugin, do_action('activate_quickr-membership/quickr-membership.php'), WP_Hook->do_action, WP_Hook->apply_filters, quickr_activate_membership, Quickr_Installer::activate, Quickr_Installer::init_settings, Quickr_Configurator->setup, Quickr_Configurator->setup_pages, Quickr_Configurator->setup_sign_up_page, Quickr_Configurator::create_or_update_page, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 04:33:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 04:33:32', '2025-04-09 04:33:32', '[quickr_login_form]', '', 'Login', '', 'publish', 'page', 'closed', 'closed', '', 'quickr-login', '', '', '2025-04-09 04:33:32', '2025-04-09 04:33:32', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 04:33:32' , '2025-04-09 04:33:32' , '[quickr_login_form]' , '' , 'Login' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'quickr-login' , '' , '' , '2025-04-09 04:33:32' , '2025-04-09 04:33:32' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/quickr-membership/classes/admin/class-quickr-configurator.php(189): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/quickr-membership/classes/admin/class-quickr-configurator.php(145): Quickr_Configurator::create_or_update_page('quickr-login', 'Login', '[quickr_login_f...')
-#8 /wordpress/wp-content/plugins/quickr-membership/classes/admin/class-quickr-configurator.php(54): Quickr_Configurator->setup_login_page()
-#9 /wordpress/wp-content/plugins/quickr-membership/classes/admin/class-quickr-configurator.php(21): Quickr_Configurator->setup_pages()
-#10 /wordpress/wp-content/plugins/quickr-membership/classes/common/class-quickr-installer.php(37): Quickr_Configurator->setup()
-#11 /wordpress/wp-content/plugins/quickr-membership/classes/common/class-quickr-installer.php(19): Quickr_Installer::init_settings()
-#12 /wordpress/wp-content/plugins/quickr-membership/quickr-membership.php(29): Quickr_Installer::activate()
-#13 /wordpress/wp-includes/class-wp-hook.php(324): quickr_activate_membership(false)
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quickr...', false)
-#17 /internal/eval.php(20): activate_plugin('quickr-membersh...')
-#18 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 04:33:32', '2025-04-09 04:33:32', '[quickr_login_form]', '', 'Login', '', 'publish', 'page', 'closed', 'closed', '', 'quickr-login', '', '', '2025-04-09 04:33:32', '2025-04-09 04:33:32', 0, 0, '', '') made by activate_plugin, do_action('activate_quickr-membership/quickr-membership.php'), WP_Hook->do_action, WP_Hook->apply_filters, quickr_activate_membership, Quickr_Installer::activate, Quickr_Installer::init_settings, Quickr_Configurator->setup, Quickr_Configurator->setup_pages, Quickr_Configurator->setup_login_page, Quickr_Configurator::create_or_update_page, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 04:33:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 04:33:32', '2025-04-09 04:33:32', '[quickr_password_reset_form]', '', 'Reset Password', '', 'publish', 'page', 'closed', 'closed', '', 'quickr-reset-password', '', '', '2025-04-09 04:33:32', '2025-04-09 04:33:32', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 04:33:32' , '2025-04-09 04:33:32' , '[quickr_password_reset_form]' , '' , 'Reset Password' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'quickr-reset-password' , '' , '' , '2025-04-09 04:33:32' , '2025-04-09 04:33:32' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/quickr-membership/classes/admin/class-quickr-configurator.php(189): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/quickr-membership/classes/admin/class-quickr-configurator.php(154): Quickr_Configurator::create_or_update_page('quickr-reset-pa...', 'Reset Password', '[quickr_passwor...')
-#8 /wordpress/wp-content/plugins/quickr-membership/classes/admin/class-quickr-configurator.php(55): Quickr_Configurator->setup_reset_password_page()
-#9 /wordpress/wp-content/plugins/quickr-membership/classes/admin/class-quickr-configurator.php(21): Quickr_Configurator->setup_pages()
-#10 /wordpress/wp-content/plugins/quickr-membership/classes/common/class-quickr-installer.php(37): Quickr_Configurator->setup()
-#11 /wordpress/wp-content/plugins/quickr-membership/classes/common/class-quickr-installer.php(19): Quickr_Installer::init_settings()
-#12 /wordpress/wp-content/plugins/quickr-membership/quickr-membership.php(29): Quickr_Installer::activate()
-#13 /wordpress/wp-includes/class-wp-hook.php(324): quickr_activate_membership(false)
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quickr...', false)
-#17 /internal/eval.php(20): activate_plugin('quickr-membersh...')
-#18 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 04:33:32', '2025-04-09 04:33:32', '[quickr_password_reset_form]', '', 'Reset Password', '', 'publish', 'page', 'closed', 'closed', '', 'quickr-reset-password', '', '', '2025-04-09 04:33:32', '2025-04-09 04:33:32', 0, 0, '', '') made by activate_plugin, do_action('activate_quickr-membership/quickr-membership.php'), WP_Hook->do_action, WP_Hook->apply_filters, quickr_activate_membership, Quickr_Installer::activate, Quickr_Installer::init_settings, Quickr_Configurator->setup, Quickr_Configurator->setup_pages, Quickr_Configurator->setup_reset_password_page, Quickr_Configurator::create_or_update_page, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 04:33:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 04:33:33', '2025-04-09 04:33:33', '[quickr_profile_form]', '', 'Profile', '', 'publish', 'page', 'closed', 'closed', '', 'quickr-profile', '', '', '2025-04-09 04:33:33', '2025-04-09 04:33:33', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 04:33:33' , '2025-04-09 04:33:33' , '[quickr_profile_form]' , '' , 'Profile' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'quickr-profile' , '' , '' , '2025-04-09 04:33:33' , '2025-04-09 04:33:33' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/quickr-membership/classes/admin/class-quickr-configurator.php(189): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/quickr-membership/classes/admin/class-quickr-configurator.php(163): Quickr_Configurator::create_or_update_page('quickr-profile', 'Profile', '[quickr_profile...')
-#8 /wordpress/wp-content/plugins/quickr-membership/classes/admin/class-quickr-configurator.php(56): Quickr_Configurator->setup_profile_page()
-#9 /wordpress/wp-content/plugins/quickr-membership/classes/admin/class-quickr-configurator.php(21): Quickr_Configurator->setup_pages()
-#10 /wordpress/wp-content/plugins/quickr-membership/classes/common/class-quickr-installer.php(37): Quickr_Configurator->setup()
-#11 /wordpress/wp-content/plugins/quickr-membership/classes/common/class-quickr-installer.php(19): Quickr_Installer::init_settings()
-#12 /wordpress/wp-content/plugins/quickr-membership/quickr-membership.php(29): Quickr_Installer::activate()
-#13 /wordpress/wp-includes/class-wp-hook.php(324): quickr_activate_membership(false)
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quickr...', false)
-#17 /internal/eval.php(20): activate_plugin('quickr-membersh...')
-#18 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 04:33:33', '2025-04-09 04:33:33', '[quickr_profile_form]', '', 'Profile', '', 'publish', 'page', 'closed', 'closed', '', 'quickr-profile', '', '', '2025-04-09 04:33:33', '2025-04-09 04:33:33', 0, 0, '', '') made by activate_plugin, do_action('activate_quickr-membership/quickr-membership.php'), WP_Hook->do_action, WP_Hook->apply_filters, quickr_activate_membership, Quickr_Installer::activate, Quickr_Installer::init_settings, Quickr_Configurator->setup, Quickr_Configurator->setup_pages, Quickr_Configurator->setup_profile_page, Quickr_Configurator::create_or_update_page, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 04:33:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 04:33:33', '2025-04-09 04:33:33', '[quickr_registration_form]', '', 'Registration', '', 'publish', 'page', 'closed', 'closed', '', 'quickr-registration', '', '', '2025-04-09 04:33:33', '2025-04-09 04:33:33', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 04:33:33' , '2025-04-09 04:33:33' , '[quickr_registration_form]' , '' , 'Registration' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'quickr-registration' , '' , '' , '2025-04-09 04:33:33' , '2025-04-09 04:33:33' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/quickr-membership/classes/admin/class-quickr-configurator.php(189): wp_insert_post(Array)
-#7 /wordpress/wp-content/plugins/quickr-membership/classes/admin/class-quickr-configurator.php(172): Quickr_Configurator::create_or_update_page('quickr-registra...', 'Registration', '[quickr_registr...')
-#8 /wordpress/wp-content/plugins/quickr-membership/classes/admin/class-quickr-configurator.php(57): Quickr_Configurator->setup_registration_page()
-#9 /wordpress/wp-content/plugins/quickr-membership/classes/admin/class-quickr-configurator.php(21): Quickr_Configurator->setup_pages()
-#10 /wordpress/wp-content/plugins/quickr-membership/classes/common/class-quickr-installer.php(37): Quickr_Configurator->setup()
-#11 /wordpress/wp-content/plugins/quickr-membership/classes/common/class-quickr-installer.php(19): Quickr_Installer::init_settings()
-#12 /wordpress/wp-content/plugins/quickr-membership/quickr-membership.php(29): Quickr_Installer::activate()
-#13 /wordpress/wp-includes/class-wp-hook.php(324): quickr_activate_membership(false)
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_quickr...', false)
-#17 /internal/eval.php(20): activate_plugin('quickr-membersh...')
-#18 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 04:33:33', '2025-04-09 04:33:33', '[quickr_registration_form]', '', 'Registration', '', 'publish', 'page', 'closed', 'closed', '', 'quickr-registration', '', '', '2025-04-09 04:33:33', '2025-04-09 04:33:33', 0, 0, '', '') made by activate_plugin, do_action('activate_quickr-membership/quickr-membership.php'), WP_Hook->do_action, WP_Hook->apply_filters, quickr_activate_membership, Quickr_Installer::activate, Quickr_Installer::init_settings, Quickr_Configurator->setup, Quickr_Configurator->setup_pages, Quickr_Configurator->setup_registration_page, Quickr_Configurator::create_or_update_page, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 04:33:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('quickr-settings', 'a:17:{s:15:\"email-misc-from\";s:19:\"admin@localhost.com\";s:32:\"reg-prompt-complete-mail-subject\";s:26:\"Complete your registration\";s:29:\"reg-prompt-complete-mail-body\";s:134:\"Dear {user_login}
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('quick-admin-lau...')
+#2 /internal/eval.php(20): activate_plugin('quick-admin-lau...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/quick-admin-launcher/quick-admin-launcher.php on line 55
 
-Thank you for joining us!
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"quick-admin-launcher"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
 
-Please complete your registration by visiting the following link:
-
-{reg_link}
-
-Thank You\";s:25:\"reg-complete-mail-subject\";s:29:\"Your registration is complete\";s:22:\"reg-complete-mail-body\";s:230:\"Dear {user_login} 
-
-Your registration is now complete!
-
-Registration details:
-Username: {user_login}
-Password: [password will be sent in another mail]
-
-Please login to the member area at the following URL:
-
-{login_link}
-
-Thank You\";s:29:\"upgrade-complete-mail-subject\";s:44:\"Subject for email sent after account upgrade\";s:26:\"upgrade-complete-mail-body\";s:73:\"Dear {first_name} {last_name}
-
-Your Account Has Been Upgraded.
-
-Thank You\";s:28:\"account-change-email-subject\";s:16:\"Account Updated!\";s:25:\"account-change-email-body\";s:149:\"Dear {first_name} {last_name},
-
-Your account status has been updated! Please login to the member area at the following URL:
-
- {login_link}
-
-Thank You\";s:33:\"bulk-activate-notify-mail-subject\";s:18:\"Account Activated!\";s:30:\"bulk-activate-notify-mail-body\";s:87:\"Hi,
-
-Your account has been activated!
-
-You can now login to the member area.
-
-Thank You\";s:15:\"signup-page-url\";b:0;s:14:\"login-page-url\";b:0;s:23:\"password-reset-page-url\";b:0;s:16:\"profile-page-url\";b:0;s:21:\"registration-page-url\";b:0;s:19:\"swpm-active-version\";s:5:\"1.0.0\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'quickr-settings' , 'a:17:{s:15:&quot;email-misc-from&quot;;s:19:&quot;admin@localhost.com&quot;;s:32:&quot;reg-prompt-complete-mail-subject&quot;;s:26:&quot;Complete your registration&quot;;s:29:&quot;reg-prompt-complete-mail-body&quot;;s:134:&quot;Dear {user_login}
-
-Thank you for joining us!
-
-Please complete your registration by visiting the following link:
-
-{reg_link}
-
-Thank You&quot;;s:25:&quot;reg-complete-mail-subject&quot;;s:29:&quot;Your registration is complete&quot;;s:22:&quot;reg-complete-mail-body&quot;;s:230:&quot;Dear {user_login} 
-
-Your registration is now complete!
-
-Registration details:
-Username: {user_login}
-Password: [password will be sent in another mail]
-
-Please login to the member area at the following URL:
-
-{login_link}
-
-Thank You&quot;;s:29:&quot;upgrade-complete-mail-subject&quot;;s:44:&quot;Subject for email sent after account upgrade&quot;;s:26:&quot;upgrade-complete-mail-body&quot;;s:73:&quot;Dear {first_name} {last_name}
-
-Your Account Has Been Upgraded.
-
-Thank You&quot;;s:28:&quot;account-change-email-subject&quot;;s:16:&quot;Account Updated!&quot;;s:25:&quot;account-change-email-body&quot;;s:149:&quot;Dear {first_name} {last_name},
-
-Your account status has been updated! Please login to the member area at the following URL:
-
- {login_link}
-
-Thank You&quot;;s:33:&quot;bulk-activate-notify-mail-subject&quot;;s:18:&quot;Account Activated!&quot;;s:30:&quot;bulk-activate-notify-mail-body&quot;;s:87:&quot;Hi,
-
-Your account has been activated!
-
-You can now login to the member area.
-
-Thank You&quot;;s:15:&quot;signup-page-url&quot;;b:0;s:14:&quot;login-page-url&quot;;b:0;s:23:&quot;password-reset-page-url&quot;;b:0;s:16:&quot;profile-page-url&quot;;b:0;s:21:&quot;registration-page-url&quot;;b:0;s:19:&quot;swpm-active-version&quot;;s:5:&quot;1
+Node.js v23.11.0
