@@ -2,686 +2,510 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 05:48:13 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 05:48:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 05:48:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 05:48:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 05:48:14 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_wp_editor_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_wp_editor_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_wp_edito...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_wp_edito...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_wp_editor_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:48:46 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 05:48:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 05:48:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 05:48:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 05:48:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mpdf_theme', 'default', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mpdf_theme' , 'default' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-mpdf/wp-mpdf.php(47): add_option('mpdf_theme', 'default')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): mpdf_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-mpd...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-mpdf/wp-mpdf...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mpdf_theme', 'default', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-mpdf/wp-mpdf.php'), WP_Hook->do_action, WP_Hook->apply_filters, mpdf_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:48:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mpdf_geshi', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mpdf_geshi' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-mpdf/wp-mpdf.php(48): add_option('mpdf_geshi', false)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): mpdf_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-mpd...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-mpdf/wp-mpdf...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mpdf_geshi', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-mpdf/wp-mpdf.php'), WP_Hook->do_action, WP_Hook->apply_filters, mpdf_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:48:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mpdf_geshi_linenumbers', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mpdf_geshi_linenumbers' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-mpdf/wp-mpdf.php(49): add_option('mpdf_geshi_line...', true)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): mpdf_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-mpd...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-mpdf/wp-mpdf...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mpdf_geshi_linenumbers', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-mpdf/wp-mpdf.php'), WP_Hook->do_action, WP_Hook->apply_filters, mpdf_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:48:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mpdf_caching', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mpdf_caching' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-mpdf/wp-mpdf.php(50): add_option('mpdf_caching', true)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): mpdf_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-mpd...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-mpdf/wp-mpdf...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mpdf_caching', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-mpdf/wp-mpdf.php'), WP_Hook->do_action, WP_Hook->apply_filters, mpdf_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:48:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mpdf_allow_all', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mpdf_allow_all' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-mpdf/wp-mpdf.php(51): add_option('mpdf_allow_all', true)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): mpdf_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-mpd...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-mpdf/wp-mpdf...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mpdf_allow_all', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-mpdf/wp-mpdf.php'), WP_Hook->do_action, WP_Hook->apply_filters, mpdf_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:48:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mpdf_need_login', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mpdf_need_login' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-mpdf/wp-mpdf.php(52): add_option('mpdf_need_login', false)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): mpdf_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-mpd...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-mpdf/wp-mpdf...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mpdf_need_login', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-mpdf/wp-mpdf.php'), WP_Hook->do_action, WP_Hook->apply_filters, mpdf_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:48:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mpdf_stats', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mpdf_stats' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-mpdf/wp-mpdf.php(53): add_option('mpdf_stats', false)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): mpdf_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-mpd...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-mpdf/wp-mpdf...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mpdf_stats', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-mpdf/wp-mpdf.php'), WP_Hook->do_action, WP_Hook->apply_filters, mpdf_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:48:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mpdf_debug', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mpdf_debug' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-mpdf/wp-mpdf.php(54): add_option('mpdf_debug', false)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): mpdf_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-mpd...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-mpdf/wp-mpdf...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mpdf_debug', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-mpdf/wp-mpdf.php'), WP_Hook->do_action, WP_Hook->apply_filters, mpdf_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:48:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mpdf_cron_user', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mpdf_cron_user' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-mpdf/wp-mpdf.php(55): add_option('mpdf_cron_user', '')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): mpdf_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-mpd...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-mpdf/wp-mpdf...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mpdf_cron_user', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-mpdf/wp-mpdf.php'), WP_Hook->do_action, WP_Hook->apply_filters, mpdf_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:48:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mpdf_code_page', 'utf-8', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mpdf_code_page' , 'utf-8' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-mpdf/wp-mpdf.php(56): add_option('mpdf_code_page', 'utf-8')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): mpdf_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-mpd...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-mpdf/wp-mpdf...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mpdf_code_page', 'utf-8', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-mpdf/wp-mpdf.php'), WP_Hook->do_action, WP_Hook->apply_filters, mpdf_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:48:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 05:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 05:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 05:48:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 05:49:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpt5ss_rotate', 'on', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpt5ss_rotate' , 'on' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wpt5ss_rotate', 'on', '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-top-5-social-sharing/wp-top-5-social-sharing.php(58): update_option('wpt5ss_rotate', 'on')
-#6 /wordpress/wp-content/plugins/wp-top-5-social-sharing/wp-top-5-social-sharing.php(70): wpt5ss_defaults()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wpt5ss_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+Error: [10-Apr-2025 19:44:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wwwfap-disable-search/wwwfap-disable-search.php:36
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wwwfap-disable-...')
+#2 /internal/eval.php(20): activate_plugin('wwwfap-disable-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wwwfap-disable-search/wwwfap-disable-search.php on line 36
+[10-Apr-2025 19:45:03 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wwwfap-disable-search/wwwfap-disable-search.php:36
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wwwfap-disable-...')
+#2 /internal/eval.php(20): activate_plugin('wwwfap-disable-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wwwfap-disable-search/wwwfap-disable-search.php on line 36
+[10-Apr-2025 19:45:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wwwfap-disable-search/wwwfap-disable-search.php:36
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wwwfap-disable-...')
+#2 /internal/eval.php(20): activate_plugin('wwwfap-disable-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wwwfap-disable-search/wwwfap-disable-search.php on line 36
+[10-Apr-2025 19:45:48 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('wetterinfoGadge...')
+#2 /wordpress/wp-content/plugins/wetterinfo-wetter/wetterinfo.php(21): register_widget('wetterinfoGadge...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wetterinfo_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-top...', false)
-#11 /internal/eval.php(20): activate_plugin('wp-top-5-social...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpt5ss_rotate', 'on', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-top-5-social-sharing/wp-top-5-social-sharing.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpt5ss_activate, wpt5ss_defaults, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:49:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 19:45:55 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('wetterinfoGadge...')
+#2 /wordpress/wp-content/plugins/wetterinfo-wetter/wetterinfo.php(21): register_widget('wetterinfoGadge...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wetterinfo_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 19:46:03 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('wetterinfoGadge...')
+#2 /wordpress/wp-content/plugins/wetterinfo-wetter/wetterinfo.php(21): register_widget('wetterinfoGadge...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wetterinfo_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 19:49:39 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $vals in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 188
+[10-Apr-2025 19:49:39 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $vals in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 205
+[10-Apr-2025 19:49:39 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 353
+[10-Apr-2025 19:49:39 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 368
+[10-Apr-2025 19:49:39 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 379
+[10-Apr-2025 19:49:39 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 391
+[10-Apr-2025 19:49:39 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 404
+[10-Apr-2025 19:49:39 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 411
+[10-Apr-2025 19:49:39 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 462
+[10-Apr-2025 19:49:39 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 470
+[10-Apr-2025 19:49:39 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 478
+[10-Apr-2025 19:49:39 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 485
+[10-Apr-2025 19:49:39 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 494
+[10-Apr-2025 19:49:40 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $vals in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 188
+[10-Apr-2025 19:49:40 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $vals in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 205
+[10-Apr-2025 19:49:40 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 353
+[10-Apr-2025 19:49:40 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 368
+[10-Apr-2025 19:49:40 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 379
+[10-Apr-2025 19:49:40 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 391
+[10-Apr-2025 19:49:40 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 404
+[10-Apr-2025 19:49:40 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 411
+[10-Apr-2025 19:49:40 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 462
+[10-Apr-2025 19:49:40 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 470
+[10-Apr-2025 19:49:40 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 478
+[10-Apr-2025 19:49:40 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 485
+[10-Apr-2025 19:49:40 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 494
+[10-Apr-2025 19:49:47 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $vals in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 188
+[10-Apr-2025 19:49:47 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $vals in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 205
+[10-Apr-2025 19:49:47 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 353
+[10-Apr-2025 19:49:47 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 368
+[10-Apr-2025 19:49:47 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 379
+[10-Apr-2025 19:49:47 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 391
+[10-Apr-2025 19:49:47 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 404
+[10-Apr-2025 19:49:47 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 411
+[10-Apr-2025 19:49:47 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 462
+[10-Apr-2025 19:49:47 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 470
+[10-Apr-2025 19:49:47 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 478
+[10-Apr-2025 19:49:47 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 485
+[10-Apr-2025 19:49:47 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 494
+[10-Apr-2025 19:49:48 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $vals in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 188
+[10-Apr-2025 19:49:48 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $vals in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 205
+[10-Apr-2025 19:49:48 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 353
+[10-Apr-2025 19:49:48 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 368
+[10-Apr-2025 19:49:48 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 379
+[10-Apr-2025 19:49:48 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 391
+[10-Apr-2025 19:49:48 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 404
+[10-Apr-2025 19:49:48 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 411
+[10-Apr-2025 19:49:48 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 462
+[10-Apr-2025 19:49:48 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 470
+[10-Apr-2025 19:49:48 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 478
+[10-Apr-2025 19:49:48 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 485
+[10-Apr-2025 19:49:48 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 494
+[10-Apr-2025 19:49:56 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $vals in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 188
+[10-Apr-2025 19:49:56 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $vals in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 205
+[10-Apr-2025 19:49:56 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 353
+[10-Apr-2025 19:49:56 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 368
+[10-Apr-2025 19:49:56 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 379
+[10-Apr-2025 19:49:56 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 391
+[10-Apr-2025 19:49:56 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 404
+[10-Apr-2025 19:49:56 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 411
+[10-Apr-2025 19:49:56 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 462
+[10-Apr-2025 19:49:56 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 470
+[10-Apr-2025 19:49:56 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 478
+[10-Apr-2025 19:49:56 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 485
+[10-Apr-2025 19:49:56 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 494
+[10-Apr-2025 19:49:57 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $vals in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 188
+[10-Apr-2025 19:49:57 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $vals in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 205
+[10-Apr-2025 19:49:57 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 353
+[10-Apr-2025 19:49:57 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 368
+[10-Apr-2025 19:49:57 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 379
+[10-Apr-2025 19:49:57 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 391
+[10-Apr-2025 19:49:57 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 404
+[10-Apr-2025 19:49:57 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 411
+[10-Apr-2025 19:49:57 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 462
+[10-Apr-2025 19:49:57 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 470
+[10-Apr-2025 19:49:57 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 478
+[10-Apr-2025 19:49:57 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 485
+[10-Apr-2025 19:49:57 UTC] PHP Deprecated:  Required parameter $text follows optional parameter $args in /wordpress/wp-content/plugins/weaver-themes-shortcode-compatibility/weaver-themes-compatibility.php on line 494
+[10-Apr-2025 19:51:04 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/woo-orange-money-payment-gateway-by-rc/rc_ombf-gateway.php:59
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): rc_ombf_init_gateway_class('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/woo-orange-money-payment-gateway-by-rc/rc_ombf-gateway.php on line 59
+[10-Apr-2025 19:51:12 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/woo-orange-money-payment-gateway-by-rc/rc_ombf-gateway.php:59
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): rc_ombf_init_gateway_class('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/woo-orange-money-payment-gateway-by-rc/rc_ombf-gateway.php on line 59
+[10-Apr-2025 19:51:21 UTC] PHP Fatal error:  Uncaught Error: Class "WC_Payment_Gateway" not found in /wordpress/wp-content/plugins/woo-orange-money-payment-gateway-by-rc/rc_ombf-gateway.php:59
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): rc_ombf_init_gateway_class('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/woo-orange-money-payment-gateway-by-rc/rc_ombf-gateway.php on line 59
+[10-Apr-2025 19:52:48 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 19:52:48 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 19:52:57 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 19:52:57 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 19:53:06 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 19:53:06 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 19:53:17 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744314795.012)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 19:53:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpt5ss_zoom', 'off', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE  wp_demobuddy_products 
+                    ADD  one_click_demo INT( 1 ) NULL DEFAULT  '0' AFTER  ad_code ;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_demobuddy_products</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_demobuddy_products</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_demobuddy_products</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
+				SELECT MAX(ordinal_position)
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpt5ss_zoom' , 'off' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_demobuddy_products</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_demobuddy_products, one_click_demo, 17, 0, YES, int, , , 10, 0, , , , int(1), , , select,insert,update,references, , , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_demobuddy_products</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_demobuddy_products</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_demobuddy_products</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_demobuddy_products_67f821c975eb8` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `name` TEXT COLLATE NOCASE NOT NULL,
+  `lang` TEXT COLLATE NOCASE,
+  `state` INTEGER NOT NULL DEFAULT '0',
+  `plugin_url` TEXT COLLATE NOCASE,
+  `plugin_url_o` TEXT COLLATE NOCASE,
+  `theme_url` TEXT COLLATE NOCASE,
+  `theme_url_o` TEXT COLLATE NOCASE,
+  `del_after` INTEGER,
+  `ar_code` TEXT COLLATE NOCASE,
+  `form_style` TEXT COLLATE NOCASE,
+  `ad_code` TEXT COLLATE NOCASE,
+  `one_click_demo` INTEGER DEFAULT '0',
+  `dis_menus` TEXT COLLATE NOCASE,
+  `dis_access` TEXT COLLATE NOCASE,
+  `date` TEXT COLLATE NOCASE NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `one_click_demo` INTEGER DEFAULT '0'
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 duplicate column name: one_click_demo
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wpt5ss_zoom', 'off', '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-top-5-social-sharing/wp-top-5-social-sharing.php(58): update_option('wpt5ss_zoom', 'off')
-#6 /wordpress/wp-content/plugins/wp-top-5-social-sharing/wp-top-5-social-sharing.php(70): wpt5ss_defaults()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wpt5ss_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-top...', false)
-#11 /internal/eval.php(20): activate_plugin('wp-top-5-social...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpt5ss_zoom', 'off', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-top-5-social-sharing/wp-top-5-social-sharing.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpt5ss_activate, wpt5ss_defaults, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:49:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE  wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE  wp...')
+#3 /wordpress/wp-content/plugins/wp-demo-buddy/admin/model/db.php(55): WP_SQLite_DB->query('ALTER TABLE  wp...')
+#4 /wordpress/wp-content/plugins/wp-demo-buddy/DemoBuddy.php(21): DemoBuddy_db_model->create_table()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-demo-buddy/D...')
+#7 /internal/eval.php(20): activate_plugin('wp-demo-buddy/D...')
+#8 {main}</pre>
+ for query ALTER TABLE  wp_demobuddy_products 
+                    ADD  one_click_demo INT( 1 ) NULL DEFAULT  '0' AFTER  ad_code ; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-demo-buddy/DemoBuddy.php'), DemoBuddy_db_model->create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 19:53:45 UTC] PHP Fatal error:  Uncaught Error: Non-static method DemoBuddy::get_instance() cannot be called statically in /wordpress/wp-content/plugins/wp-demo-buddy/DemoBuddy.php:28
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-demo-buddy/D...')
+#2 /internal/eval.php(20): activate_plugin('wp-demo-buddy/D...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-demo-buddy/DemoBuddy.php on line 28
+[10-Apr-2025 19:53:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpt5ss_loc', 'right', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE  wp_demobuddy_products 
+                    ADD  one_click_demo INT( 1 ) NULL DEFAULT  '0' AFTER  ad_code ;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpt5ss_loc' , 'right' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_demobuddy_products, ONE_CLICK_DEMO, int(1)</li>
+<li>Executing: ALTER TABLE wp_demobuddy_products 
+                    ADD  one_click_demo   integer NULL DEFAULT  '0'    ; | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: one_click_demo.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wpt5ss_loc', 'right', '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-top-5-social-sharing/wp-top-5-social-sharing.php(58): update_option('wpt5ss_loc', 'right')
-#6 /wordpress/wp-content/plugins/wp-top-5-social-sharing/wp-top-5-social-sharing.php(70): wpt5ss_defaults()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wpt5ss_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-top...', false)
-#11 /internal/eval.php(20): activate_plugin('wp-top-5-social...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpt5ss_loc', 'right', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-top-5-social-sharing/wp-top-5-social-sharing.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpt5ss_activate, wpt5ss_defaults, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:49:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-demo-buddy/admin/model/db.php(55): WP_SQLite_DB->query('ALTER TABLE  wp...')
+#2 /wordpress/wp-content/plugins/wp-demo-buddy/DemoBuddy.php(21): DemoBuddy_db_model->create_table()
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-demo-buddy/D...')
+#5 /internal/eval.php(20): activate_plugin('wp-demo-buddy/D...')
+#6 {main}</pre>
+ for query ALTER TABLE  wp_demobuddy_products 
+                    ADD  one_click_demo INT( 1 ) NULL DEFAULT  '0' AFTER  ad_code ; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-demo-buddy/DemoBuddy.php'), DemoBuddy_db_model->create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 19:53:54 UTC] PHP Fatal error:  Uncaught Error: Non-static method DemoBuddy::get_instance() cannot be called statically in /wordpress/wp-content/plugins/wp-demo-buddy/DemoBuddy.php:28
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-demo-buddy/D...')
+#2 /internal/eval.php(20): activate_plugin('wp-demo-buddy/D...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-demo-buddy/DemoBuddy.php on line 28
+[10-Apr-2025 19:54:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpt5ss_dev1', '<a href=\"http://www.ahsanulkabir.com/\" title=\"Web Design Bangladesh\" class=\"cr_fix\" rel=\"dofollow\">Web Design Bangladesh</a>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE  wp_demobuddy_products 
+                    ADD  one_click_demo INT( 1 ) NULL DEFAULT  '0' AFTER  ad_code ;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpt5ss_dev1' , '&lt;a href=&quot;http://www.ahsanulkabir.com/&quot; title=&quot;Web Design Bangladesh&quot; class=&quot;cr_fix&quot; rel=&quot;dofollow&quot;&gt;Web Design Bangladesh&lt;/a&gt;' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: wp_demobuddy_products, ONE_CLICK_DEMO, int(1)</li>
+<li>Executing: ALTER TABLE wp_demobuddy_products 
+                    ADD  one_click_demo   integer NULL DEFAULT  '0'    ; | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: one_click_demo.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wpt5ss_dev1', '<a href="http:/...', '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-top-5-social-sharing/wp-top-5-social-sharing.php(58): update_option('wpt5ss_dev1', '<a href="http:/...')
-#6 /wordpress/wp-content/plugins/wp-top-5-social-sharing/wp-top-5-social-sharing.php(70): wpt5ss_defaults()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wpt5ss_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/wp-demo-buddy/admin/model/db.php(55): WP_SQLite_DB->query('ALTER TABLE  wp...')
+#2 /wordpress/wp-content/plugins/wp-demo-buddy/DemoBuddy.php(21): DemoBuddy_db_model->create_table()
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-demo-buddy/D...')
+#5 /internal/eval.php(20): activate_plugin('wp-demo-buddy/D...')
+#6 {main}</pre>
+ for query ALTER TABLE  wp_demobuddy_products 
+                    ADD  one_click_demo INT( 1 ) NULL DEFAULT  '0' AFTER  ad_code ; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-demo-buddy/DemoBuddy.php'), DemoBuddy_db_model->create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 19:54:02 UTC] PHP Fatal error:  Uncaught Error: Non-static method DemoBuddy::get_instance() cannot be called statically in /wordpress/wp-content/plugins/wp-demo-buddy/DemoBuddy.php:28
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-demo-buddy/D...')
+#2 /internal/eval.php(20): activate_plugin('wp-demo-buddy/D...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-demo-buddy/DemoBuddy.php on line 28
+[10-Apr-2025 19:54:14 UTC] PHP Warning:  file(/wordpress/.htaccess): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/wp-firewall/wp-firewall.php on line 245
+[10-Apr-2025 19:54:14 UTC] PHP Fatal error:  Uncaught TypeError: implode(): Argument #2 ($array) must be of type ?array, bool given in /wordpress/wp-content/plugins/wp-firewall/wp-firewall.php:245
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-firewall/wp-firewall.php(245): implode('', false)
+#1 /wordpress/wp-content/plugins/wp-firewall/wp-firewall.php(157): wp_firewall->remove_rules()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): wp_firewall->plugin_reset(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-fir...', false)
+#6 /internal/eval.php(20): activate_plugin('wp-firewall/wp-...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/wp-firewall/wp-firewall.php on line 245
+[10-Apr-2025 19:54:21 UTC] PHP Warning:  file(/wordpress/.htaccess): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/wp-firewall/wp-firewall.php on line 245
+[10-Apr-2025 19:54:21 UTC] PHP Fatal error:  Uncaught TypeError: implode(): Argument #2 ($array) must be of type ?array, bool given in /wordpress/wp-content/plugins/wp-firewall/wp-firewall.php:245
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-firewall/wp-firewall.php(245): implode('', false)
+#1 /wordpress/wp-content/plugins/wp-firewall/wp-firewall.php(157): wp_firewall->remove_rules()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): wp_firewall->plugin_reset(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-fir...', false)
+#6 /internal/eval.php(20): activate_plugin('wp-firewall/wp-...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/wp-firewall/wp-firewall.php on line 245
+[10-Apr-2025 19:54:30 UTC] PHP Warning:  file(/wordpress/.htaccess): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/wp-firewall/wp-firewall.php on line 245
+[10-Apr-2025 19:54:30 UTC] PHP Fatal error:  Uncaught TypeError: implode(): Argument #2 ($array) must be of type ?array, bool given in /wordpress/wp-content/plugins/wp-firewall/wp-firewall.php:245
+Stack trace:
+#0 /wordpress/wp-content/plugins/wp-firewall/wp-firewall.php(245): implode('', false)
+#1 /wordpress/wp-content/plugins/wp-firewall/wp-firewall.php(157): wp_firewall->remove_rules()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): wp_firewall->plugin_reset(false)
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-fir...', false)
+#6 /internal/eval.php(20): activate_plugin('wp-firewall/wp-...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/wp-firewall/wp-firewall.php on line 245
+[10-Apr-2025 19:56:12 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744314970.094)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 19:57:49 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WPgcal_Widget')
+#2 /wordpress/wp-content/plugins/wpgcal/wpgcal.php(76): register_widget('WPgcal_Widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpgcal_widgets_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-top...', false)
-#11 /internal/eval.php(20): activate_plugin('wp-top-5-social...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpt5ss_dev1', '<a href=\"http://www.ahsanulkabir.com/\" title=\"Web Design Bangladesh\" class=\"cr_fix\" rel=\"dofollow\">Web Design Bangladesh</a>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-top-5-social-sharing/wp-top-5-social-sharing.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpt5ss_activate, wpt5ss_defaults, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:49:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpt5ss_dev2', '<a href=\"http://www.a1netsolutions.com/\" title=\"Web Design Bangladesh\" class=\"cr_fix\" rel=\"dofollow\">Web Design Bangladesh</a>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpt5ss_dev2' , '&lt;a href=&quot;http://www.a1netsolutions.com/&quot; title=&quot;Web Design Bangladesh&quot; class=&quot;cr_fix&quot; rel=&quot;dofollow&quot;&gt;Web Design Bangladesh&lt;/a&gt;' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wpt5ss_dev2', '<a href="http:/...', '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-top-5-social-sharing/wp-top-5-social-sharing.php(58): update_option('wpt5ss_dev2', '<a href="http:/...')
-#6 /wordpress/wp-content/plugins/wp-top-5-social-sharing/wp-top-5-social-sharing.php(70): wpt5ss_defaults()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wpt5ss_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 19:57:58 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WPgcal_Widget')
+#2 /wordpress/wp-content/plugins/wpgcal/wpgcal.php(76): register_widget('WPgcal_Widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpgcal_widgets_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-top...', false)
-#11 /internal/eval.php(20): activate_plugin('wp-top-5-social...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpt5ss_dev2', '<a href=\"http://www.a1netsolutions.com/\" title=\"Web Design Bangladesh\" class=\"cr_fix\" rel=\"dofollow\">Web Design Bangladesh</a>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-top-5-social-sharing/wp-top-5-social-sharing.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpt5ss_activate, wpt5ss_defaults, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:49:29 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpt5ss_dev3', '<a href=\"http://www.ourmymensingh.com/\" title=\"Mymensingh\" class=\"cr_fix\" rel=\"dofollow\">Mymensingh</a>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpt5ss_dev3' , '&lt;a href=&quot;http://www.ourmymensingh.com/&quot; title=&quot;Mymensingh&quot; class=&quot;cr_fix&quot; rel=&quot;dofollow&quot;&gt;Mymensingh&lt;/a&gt;' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wpt5ss_dev3', '<a href="http:/...', '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-top-5-social-sharing/wp-top-5-social-sharing.php(58): update_option('wpt5ss_dev3', '<a href="http:/...')
-#6 /wordpress/wp-content/plugins/wp-top-5-social-sharing/wp-top-5-social-sharing.php(70): wpt5ss_defaults()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wpt5ss_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 19:58:07 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('WPgcal_Widget')
+#2 /wordpress/wp-content/plugins/wpgcal/wpgcal.php(76): register_widget('WPgcal_Widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): wpgcal_widgets_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-top...', false)
-#11 /internal/eval.php(20): activate_plugin('wp-top-5-social...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpt5ss_dev3', '<a href=\"http://www.ourmymensingh.com/\" title=\"Mymensingh\" class=\"cr_fix\" rel=\"dofollow\">Mymensingh</a>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-top-5-social-sharing/wp-top-5-social-sharing.php'), WP_Hook->do_action, WP_Hook->apply_filters, wpt5ss_activate, wpt5ss_defaults, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:49:29 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 05:49:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 05:49:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 05:49:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 05:50:26 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('action_scheduler_hybrid_store_demarkation', '4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'action_scheduler_hybrid_store_demarkation' , '4' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('action_schedule...', 4, '', 'auto')
-#5 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/data-stores/ActionScheduler_HybridStore.php(157): update_option('action_schedule...', 4)
-#6 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/data-stores/ActionScheduler_HybridStore.php(95): ActionScheduler_HybridStore->set_demarkation_id()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): ActionScheduler_HybridStore->set_autoincrement('wp_actionschedu...', 'actionscheduler...')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(146): do_action('action_schedule...', 'wp_actionschedu...', 'actionscheduler...')
-#11 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/abstracts/ActionScheduler_Abstract_Schema.php(69): ActionScheduler_Abstract_Schema->update_table('actionscheduler...')
-#12 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/data-stores/ActionScheduler_DBStore.php(55): ActionScheduler_Abstract_Schema->register_tables()
-#13 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/data-stores/ActionScheduler_HybridStore.php(76): ActionScheduler_DBStore->init()
-#14 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes/abstracts/ActionScheduler.php(223): ActionScheduler_HybridStore->init()
-#15 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/action-scheduler.php(60): ActionScheduler::init('/wordpress/wp-c...')
-#16 /wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/action-scheduler.php(66): action_scheduler_initialize_3_dot_9_dot_0()
-#17 /wordpress/wp-content/plugins/woocommerce/includes/class-woocommerce.php(725): include_once('/wordpress/wp-c...')
-#18 /wordpress/wp-content/plugins/woocommerce/includes/class-woocommerce.php(236): WooCommerce->includes()
-#19 /wordpress/wp-content/plugins/woocommerce/includes/class-woocommerce.php(155): WooCommerce->__construct()
-#20 /wordpress/wp-content/plugins/woocommerce/woocommerce.php(47): WooCommerce::instance()
-#21 /wordpress/wp-content/plugins/woocommerce/woocommerce.php(62): WC()
-#22 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#23 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('woocommerce/woo...')
-#24 /internal/eval.php(20): activate_plugin('woocommerce/woo...')
-#25 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('action_scheduler_hybrid_store_demarkation', '4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/woocommerce/woocommerce.php'), WC, WooCommerce::instance, WooCommerce->__construct, WooCommerce->includes, include_once('/plugins/woocommerce/packages/action-scheduler/action-scheduler.php'), action_scheduler_initialize_3_dot_9_dot_0, ActionScheduler::init, ActionScheduler_HybridStore->init, ActionScheduler_DBStore->init, ActionScheduler_Abstract_Schema->register_
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"wpgcal"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:73:13)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ],
+          expires: [ 'Wed, 11 Jan 1984 05:00:00 GMT' ],
+          'cache-control': [ 'no-cache, must-revalidate, max-age=0' ]
+        },
+        bytes: Uint8Array(2653) [
+           60,  33,  68,  79,  67,  84,  89,  80,  69,  32, 104, 116,
+          109, 108,  62,  10,  60, 104, 116, 109, 108,  32, 108,  97,
+          110, 103,  61,  34, 101, 110,  45,  85,  83,  34,  62,  10,
+           60, 104, 101,  97, 100,  62,  10,   9,  60, 109, 101, 116,
+           97,  32, 104, 116, 116, 112,  45, 101, 113, 117, 105, 118,
+           61,  34,  67, 111, 110, 116, 101, 110, 116,  45,  84, 121,
+          112, 101,  34,  32,  99, 111, 110, 116, 101, 110, 116,  61,
+           34, 116, 101, 120, 116,  47, 104, 116, 109, 108,  59,  32,
+           99, 104,  97, 114,
+          ... 2553 more items
+        ],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
