@@ -2,58 +2,70 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [10-Apr-2025 20:37:52 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/random-image/random-image.php on line 501
-[10-Apr-2025 20:37:52 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/random-image/random-image.php on line 501
-[10-Apr-2025 20:37:52 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/random-image/random-image.php on line 567
-[10-Apr-2025 20:37:52 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/random-image/random-image.php on line 567
-[10-Apr-2025 20:37:52 UTC] PHP Deprecated:  Required parameter $userdata follows optional parameter $form_name in /wordpress/wp-content/plugins/random-image/random-image.php on line 633
-[10-Apr-2025 20:37:52 UTC] PHP Warning:  Undefined variable $mban_path in /wordpress/wp-content/plugins/random-image/random-image.php on line 33
-[10-Apr-2025 20:37:52 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/random-image/random-image.php on line 417
-[10-Apr-2025 20:37:52 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/random-image/random-image.php on line 463
-[10-Apr-2025 20:37:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/random-image/random-image.php:55
+Error: [10-Apr-2025 20:31:10 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): MBP_ri_active(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_random...', false)
-#4 /internal/eval.php(20): activate_plugin('random-image/ra...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/random-image/random-image.php on line 55
-[10-Apr-2025 20:38:01 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/random-image/random-image.php on line 501
-[10-Apr-2025 20:38:01 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/random-image/random-image.php on line 501
-[10-Apr-2025 20:38:01 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/random-image/random-image.php on line 567
-[10-Apr-2025 20:38:01 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/random-image/random-image.php on line 567
-[10-Apr-2025 20:38:01 UTC] PHP Deprecated:  Required parameter $userdata follows optional parameter $form_name in /wordpress/wp-content/plugins/random-image/random-image.php on line 633
-[10-Apr-2025 20:38:01 UTC] PHP Warning:  Undefined variable $mban_path in /wordpress/wp-content/plugins/random-image/random-image.php on line 33
-[10-Apr-2025 20:38:01 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/random-image/random-image.php on line 417
-[10-Apr-2025 20:38:01 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/random-image/random-image.php on line 463
-[10-Apr-2025 20:38:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/random-image/random-image.php:55
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744317067.826)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 20:31:41 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): MBP_ri_active(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_random...', false)
-#4 /internal/eval.php(20): activate_plugin('random-image/ra...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/random-image/random-image.php on line 55
-[10-Apr-2025 20:38:09 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/random-image/random-image.php on line 501
-[10-Apr-2025 20:38:09 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $submit_btn_txt in /wordpress/wp-content/plugins/random-image/random-image.php on line 501
-[10-Apr-2025 20:38:09 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $form_name in /wordpress/wp-content/plugins/random-image/random-image.php on line 567
-[10-Apr-2025 20:38:09 UTC] PHP Deprecated:  Required parameter $email follows optional parameter $form_name in /wordpress/wp-content/plugins/random-image/random-image.php on line 567
-[10-Apr-2025 20:38:09 UTC] PHP Deprecated:  Required parameter $userdata follows optional parameter $form_name in /wordpress/wp-content/plugins/random-image/random-image.php on line 633
-[10-Apr-2025 20:38:09 UTC] PHP Warning:  Undefined variable $mban_path in /wordpress/wp-content/plugins/random-image/random-image.php on line 33
-[10-Apr-2025 20:38:09 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/random-image/random-image.php on line 417
-[10-Apr-2025 20:38:09 UTC] PHP Warning:  Undefined variable $wp_version in /wordpress/wp-content/plugins/random-image/random-image.php on line 463
-[10-Apr-2025 20:38:09 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/random-image/random-image.php:55
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744317098.809)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 20:32:12 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method KnowKwote::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
 Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): MBP_ri_active(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_random...', false)
-#4 /internal/eval.php(20): activate_plugin('random-image/ra...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/random-image/random-image.php on line 55
-[10-Apr-2025 20:38:54 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "REALTY_PORTAL" in /wordpress/wp-content/plugins/realty-portal-package/realty-portal-package.php:132
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_random...', false)
+#3 /internal/eval.php(20): activate_plugin('random-quote-fr...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[10-Apr-2025 20:32:20 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method KnowKwote::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_random...', false)
+#3 /internal/eval.php(20): activate_plugin('random-quote-fr...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[10-Apr-2025 20:32:29 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method KnowKwote::activate() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_random...', false)
+#3 /internal/eval.php(20): activate_plugin('random-quote-fr...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[10-Apr-2025 20:32:41 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744317158.912)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 20:33:11 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "REALTY_PORTAL" in /wordpress/wp-content/plugins/realty-portal-package/realty-portal-package.php:132
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): RP_AddOn_Package::activation(false)
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
@@ -62,7 +74,7 @@ Stack trace:
 #4 /internal/eval.php(20): activate_plugin('realty-portal-p...')
 #5 {main}
   thrown in /wordpress/wp-content/plugins/realty-portal-package/realty-portal-package.php on line 132
-[10-Apr-2025 20:39:03 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "REALTY_PORTAL" in /wordpress/wp-content/plugins/realty-portal-package/realty-portal-package.php:132
+[10-Apr-2025 20:33:19 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "REALTY_PORTAL" in /wordpress/wp-content/plugins/realty-portal-package/realty-portal-package.php:132
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): RP_AddOn_Package::activation(false)
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
@@ -71,7 +83,7 @@ Stack trace:
 #4 /internal/eval.php(20): activate_plugin('realty-portal-p...')
 #5 {main}
   thrown in /wordpress/wp-content/plugins/realty-portal-package/realty-portal-package.php on line 132
-[10-Apr-2025 20:39:11 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "REALTY_PORTAL" in /wordpress/wp-content/plugins/realty-portal-package/realty-portal-package.php:132
+[10-Apr-2025 20:33:28 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "REALTY_PORTAL" in /wordpress/wp-content/plugins/realty-portal-package/realty-portal-package.php:132
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): RP_AddOn_Package::activation(false)
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
