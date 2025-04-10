@@ -2,585 +2,226 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 06:35:48 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 06:35:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 06:35:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 06:35:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 06:35:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_ipt_address_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_ipt_address_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_ipt_addr...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_ipt_addr...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_ipt_address_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:36:17 UTC] PHP Warning:  The magic method Itinerary_Controller::__wakeup() must have public visibility in /wordpress/wp-content/plugins/itinerary/inc/lib/controller/Itinerary_Controller.php on line 80
-[09-Apr-2025 06:36:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('show_position', 'auto', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'show_position' , 'auto' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/itinerary/inc/lib/model/Itinerary_Model.php(152): add_option('show_position', 'auto')
-#5 /wordpress/wp-content/plugins/itinerary/inc/lib/controller/Itinerary_Controller.php(116): Itinerary_Model::install()
-#6 /wordpress/wp-content/plugins/itinerary/functions.php(120): Itinerary_Controller::install()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): itinerary_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_itiner...', false)
-#11 /internal/eval.php(20): activate_plugin('itinerary/itine...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('show_position', 'auto', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_itinerary/itinerary.php'), WP_Hook->do_action, WP_Hook->apply_filters, itinerary_activate, Itinerary_Controller::install, Itinerary_Model::install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:36:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('itinerary_garage_auto_display', 'before-content', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'itinerary_garage_auto_display' , 'before-content' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/itinerary/inc/lib/model/Itinerary_Model.php(153): add_option('itinerary_garag...', 'before-content')
-#5 /wordpress/wp-content/plugins/itinerary/inc/lib/controller/Itinerary_Controller.php(116): Itinerary_Model::install()
-#6 /wordpress/wp-content/plugins/itinerary/functions.php(120): Itinerary_Controller::install()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): itinerary_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_itiner...', false)
-#11 /internal/eval.php(20): activate_plugin('itinerary/itine...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('itinerary_garage_auto_display', 'before-content', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_itinerary/itinerary.php'), WP_Hook->do_action, WP_Hook->apply_filters, itinerary_activate, Itinerary_Controller::install, Itinerary_Model::install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:36:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('itinerary_garage_auto_display', 'before-content', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'itinerary_garage_auto_display' , 'before-content' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/itinerary/inc/lib/model/Itinerary_Model.php(154): add_option('itinerary_garag...', 'before-content')
-#5 /wordpress/wp-content/plugins/itinerary/inc/lib/controller/Itinerary_Controller.php(116): Itinerary_Model::install()
-#6 /wordpress/wp-content/plugins/itinerary/functions.php(120): Itinerary_Controller::install()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): itinerary_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_itiner...', false)
-#11 /internal/eval.php(20): activate_plugin('itinerary/itine...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('itinerary_garage_auto_display', 'before-content', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_itinerary/itinerary.php'), WP_Hook->do_action, WP_Hook->apply_filters, itinerary_activate, Itinerary_Controller::install, Itinerary_Model::install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:36:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('itinerary_pdf_title', 'Itinerary', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'itinerary_pdf_title' , 'Itinerary' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/itinerary/inc/lib/model/Itinerary_Model.php(155): add_option('itinerary_pdf_t...', 'Itinerary')
-#5 /wordpress/wp-content/plugins/itinerary/inc/lib/controller/Itinerary_Controller.php(116): Itinerary_Model::install()
-#6 /wordpress/wp-content/plugins/itinerary/functions.php(120): Itinerary_Controller::install()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): itinerary_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_itiner...', false)
-#11 /internal/eval.php(20): activate_plugin('itinerary/itine...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('itinerary_pdf_title', 'Itinerary', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_itinerary/itinerary.php'), WP_Hook->do_action, WP_Hook->apply_filters, itinerary_activate, Itinerary_Controller::install, Itinerary_Model::install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:36:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('itinerary_garage_title', 'Itinerary', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'itinerary_garage_title' , 'Itinerary' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/itinerary/inc/lib/model/Itinerary_Model.php(156): add_option('itinerary_garag...', 'Itinerary')
-#5 /wordpress/wp-content/plugins/itinerary/inc/lib/controller/Itinerary_Controller.php(116): Itinerary_Model::install()
-#6 /wordpress/wp-content/plugins/itinerary/functions.php(120): Itinerary_Controller::install()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): itinerary_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_itiner...', false)
-#11 /internal/eval.php(20): activate_plugin('itinerary/itine...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('itinerary_garage_title', 'Itinerary', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_itinerary/itinerary.php'), WP_Hook->do_action, WP_Hook->apply_filters, itinerary_activate, Itinerary_Controller::install, Itinerary_Model::install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:36:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('itinerary_view_text', 'View Itinerary', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'itinerary_view_text' , 'View Itinerary' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/itinerary/inc/lib/model/Itinerary_Model.php(157): add_option('itinerary_view_...', 'View Itinerary')
-#5 /wordpress/wp-content/plugins/itinerary/inc/lib/controller/Itinerary_Controller.php(116): Itinerary_Model::install()
-#6 /wordpress/wp-content/plugins/itinerary/functions.php(120): Itinerary_Controller::install()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): itinerary_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_itiner...', false)
-#11 /internal/eval.php(20): activate_plugin('itinerary/itine...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('itinerary_view_text', 'View Itinerary', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_itinerary/itinerary.php'), WP_Hook->do_action, WP_Hook->apply_filters, itinerary_activate, Itinerary_Controller::install, Itinerary_Model::install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:36:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('itinerary_empty_text', 'You don\'t have any stops in your itinerary. you can add stops by clicking the [button_example] icon.', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'itinerary_empty_text' , 'You don''t have any stops in your itinerary. you can add stops by clicking the [button_example] icon.' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/itinerary/inc/lib/model/Itinerary_Model.php(158): add_option('itinerary_empty...', 'You don't have ...')
-#5 /wordpress/wp-content/plugins/itinerary/inc/lib/controller/Itinerary_Controller.php(116): Itinerary_Model::install()
-#6 /wordpress/wp-content/plugins/itinerary/functions.php(120): Itinerary_Controller::install()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): itinerary_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_itiner...', false)
-#11 /internal/eval.php(20): activate_plugin('itinerary/itine...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('itinerary_empty_text', 'You don\'t have any stops in your itinerary. you can add stops by clicking the [button_example] icon.', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_itinerary/itinerary.php'), WP_Hook->do_action, WP_Hook->apply_filters, itinerary_activate, Itinerary_Controller::install, Itinerary_Model::install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:36:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('itinerary_add_item_text', 'Add', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'itinerary_add_item_text' , 'Add' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/itinerary/inc/lib/model/Itinerary_Model.php(159): add_option('itinerary_add_i...', 'Add')
-#5 /wordpress/wp-content/plugins/itinerary/inc/lib/controller/Itinerary_Controller.php(116): Itinerary_Model::install()
-#6 /wordpress/wp-content/plugins/itinerary/functions.php(120): Itinerary_Controller::install()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): itinerary_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_itiner...', false)
-#11 /internal/eval.php(20): activate_plugin('itinerary/itine...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('itinerary_add_item_text', 'Add', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_itinerary/itinerary.php'), WP_Hook->do_action, WP_Hook->apply_filters, itinerary_activate, Itinerary_Controller::install, Itinerary_Model::install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:36:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('itinerary_remove_item_text', 'Remove', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'itinerary_remove_item_text' , 'Remove' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/itinerary/inc/lib/model/Itinerary_Model.php(160): add_option('itinerary_remov...', 'Remove')
-#5 /wordpress/wp-content/plugins/itinerary/inc/lib/controller/Itinerary_Controller.php(116): Itinerary_Model::install()
-#6 /wordpress/wp-content/plugins/itinerary/functions.php(120): Itinerary_Controller::install()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): itinerary_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_itiner...', false)
-#11 /internal/eval.php(20): activate_plugin('itinerary/itine...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('itinerary_remove_item_text', 'Remove', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_itinerary/itinerary.php'), WP_Hook->do_action, WP_Hook->apply_filters, itinerary_activate, Itinerary_Controller::install, Itinerary_Model::install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:36:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('itinerary_show_print', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'itinerary_show_print' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/itinerary/inc/lib/model/Itinerary_Model.php(161): add_option('itinerary_show_...', false)
-#5 /wordpress/wp-content/plugins/itinerary/inc/lib/controller/Itinerary_Controller.php(116): Itinerary_Model::install()
-#6 /wordpress/wp-content/plugins/itinerary/functions.php(120): Itinerary_Controller::install()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): itinerary_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_itiner...', false)
-#11 /internal/eval.php(20): activate_plugin('itinerary/itine...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('itinerary_show_print', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_itinerary/itinerary.php'), WP_Hook->do_action, WP_Hook->apply_filters, itinerary_activate, Itinerary_Controller::install, Itinerary_Model::install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:36:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('itinerary_dkpdf_support', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'itinerary_dkpdf_support' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/itinerary/inc/lib/model/Itinerary_Model.php(162): add_option('itinerary_dkpdf...', false)
-#5 /wordpress/wp-content/plugins/itinerary/inc/lib/controller/Itinerary_Controller.php(116): Itinerary_Model::install()
-#6 /wordpress/wp-content/plugins/itinerary/functions.php(120): Itinerary_Controller::install()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): itinerary_activate(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_itiner...', false)
-#11 /internal/eval.php(20): activate_plugin('itinerary/itine...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('itinerary_dkpdf_support', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_itinerary/itinerary.php'), WP_Hook->do_action, WP_Hook->apply_filters, itinerary_activate, Itinerary_Controller::install, Itinerary_Model::install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:36:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 06:36:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 06:36:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 06:36:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 06:36:18 UTC] PHP Warning:  The magic method Itinerary_Controller::__wakeup() must have public visibility in /wordpress/wp-content/plugins/itinerary/inc/lib/controller/Itinerary_Controller.php on line 80
-[09-Apr-2025 06:36:27 UTC] PHP Warning:  The magic method Itinerary_Controller::__wakeup() must have public visibility in /wordpress/wp-content/plugins/itinerary/inc/lib/controller/Itinerary_Controller.php on line 80
-[09-Apr-2025 06:36:28 UTC] PHP Warning:  The magic method Itinerary_Controller::__wakeup() must have public visibility in /wordpress/wp-content/plugins/itinerary/inc/lib/controller/Itinerary_Controller.php on line 80
-[09-Apr-2025 06:36:37 UTC] PHP Warning:  The magic method Itinerary_Controller::__wakeup() must have public visibility in /wordpress/wp-content/plugins/itinerary/inc/lib/controller/Itinerary_Controller.php on line 80
-[09-Apr-2025 06:36:38 UTC] PHP Warning:  The magic method Itinerary_Controller::__wakeup() must have public visibility in /wordpress/wp-content/plugins/itinerary/inc/lib/controller/Itinerary_Controller.php on line 80
-[09-Apr-2025 06:36:47 UTC] PHP Warning:  include_once(/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/funcs.inc.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 51
-[09-Apr-2025 06:36:47 UTC] PHP Warning:  include_once(): Failed opening '/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/funcs.inc.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 51
-[09-Apr-2025 06:36:47 UTC] PHP Warning:  include_once(/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/syscon.inc.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 55
-[09-Apr-2025 06:36:47 UTC] PHP Warning:  include_once(): Failed opening '/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/syscon.inc.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 55
-[09-Apr-2025 06:36:47 UTC] PHP Warning:  include_once(/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/hooks.inc.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 59
-[09-Apr-2025 06:36:47 UTC] PHP Warning:  include_once(): Failed opening '/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/hooks.inc.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 59
-[09-Apr-2025 06:36:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 06:36:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 06:36:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 06:36:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 06:36:48 UTC] PHP Warning:  include_once(/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/funcs.inc.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 51
-[09-Apr-2025 06:36:48 UTC] PHP Warning:  include_once(): Failed opening '/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/funcs.inc.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 51
-[09-Apr-2025 06:36:48 UTC] PHP Warning:  include_once(/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/syscon.inc.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 55
-[09-Apr-2025 06:36:48 UTC] PHP Warning:  include_once(): Failed opening '/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/syscon.inc.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 55
-[09-Apr-2025 06:36:48 UTC] PHP Warning:  include_once(/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/hooks.inc.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 59
-[09-Apr-2025 06:36:48 UTC] PHP Warning:  include_once(): Failed opening '/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/hooks.inc.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 59
-[09-Apr-2025 06:36:56 UTC] PHP Warning:  include_once(/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/funcs.inc.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 51
-[09-Apr-2025 06:36:56 UTC] PHP Warning:  include_once(): Failed opening '/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/funcs.inc.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 51
-[09-Apr-2025 06:36:56 UTC] PHP Warning:  include_once(/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/syscon.inc.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 55
-[09-Apr-2025 06:36:56 UTC] PHP Warning:  include_once(): Failed opening '/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/syscon.inc.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 55
-[09-Apr-2025 06:36:56 UTC] PHP Warning:  include_once(/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/hooks.inc.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 59
-[09-Apr-2025 06:36:56 UTC] PHP Warning:  include_once(): Failed opening '/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/hooks.inc.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 59
-[09-Apr-2025 06:36:57 UTC] PHP Warning:  include_once(/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/funcs.inc.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 51
-[09-Apr-2025 06:36:57 UTC] PHP Warning:  include_once(): Failed opening '/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/funcs.inc.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 51
-[09-Apr-2025 06:36:57 UTC] PHP Warning:  include_once(/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/syscon.inc.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 55
-[09-Apr-2025 06:36:57 UTC] PHP Warning:  include_once(): Failed opening '/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/syscon.inc.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 55
-[09-Apr-2025 06:36:57 UTC] PHP Warning:  include_once(/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/hooks.inc.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 59
-[09-Apr-2025 06:36:57 UTC] PHP Warning:  include_once(): Failed opening '/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/hooks.inc.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 59
-[09-Apr-2025 06:37:04 UTC] PHP Warning:  include_once(/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/funcs.inc.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 51
-[09-Apr-2025 06:37:04 UTC] PHP Warning:  include_once(): Failed opening '/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/funcs.inc.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 51
-[09-Apr-2025 06:37:04 UTC] PHP Warning:  include_once(/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/syscon.inc.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 55
-[09-Apr-2025 06:37:04 UTC] PHP Warning:  include_once(): Failed opening '/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/syscon.inc.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 55
-[09-Apr-2025 06:37:04 UTC] PHP Warning:  include_once(/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/hooks.inc.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 59
-[09-Apr-2025 06:37:04 UTC] PHP Warning:  include_once(): Failed opening '/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/hooks.inc.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 59
-[09-Apr-2025 06:37:05 UTC] PHP Warning:  include_once(/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/funcs.inc.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 51
-[09-Apr-2025 06:37:05 UTC] PHP Warning:  include_once(): Failed opening '/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/funcs.inc.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 51
-[09-Apr-2025 06:37:05 UTC] PHP Warning:  include_once(/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/syscon.inc.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 55
-[09-Apr-2025 06:37:05 UTC] PHP Warning:  include_once(): Failed opening '/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/syscon.inc.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 55
-[09-Apr-2025 06:37:06 UTC] PHP Warning:  include_once(/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/hooks.inc.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 59
-[09-Apr-2025 06:37:06 UTC] PHP Warning:  include_once(): Failed opening '/wordpress/wp-content/plugins/icaughtsanta-falling-snow/includes/hooks.inc.php' for inclusion (include_path='.:') in /wordpress/wp-content/plugins/icaughtsanta-falling-snow/ics-snow.php on line 59
-[09-Apr-2025 06:37:14 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 06:37:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 06:37:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 06:37:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 06:37:40 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 06:37:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 06:37:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 06:37:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 06:37:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_ignation_iot', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_ignation_iot' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_ignation...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_ignation...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_ignation_iot', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 06:38:08 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 06:38:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 06:38:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 06:38:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 06:38:34 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 06:38:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 06:38:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 06:38:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 06:39:00 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 06:39:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 06:39:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 06:39:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 06:39:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('iiam-options', 'a:2:{s:15:\"iiam_db_version\";s:3:\"1.0\";s:12:\"iiam_version\";s:3:\"1.1\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_i
+Error: [10-Apr-2025 17:48:25 UTC] PHP Warning:  The magic method GElement::__toString() must have public visibility in /wordpress/wp-content/plugins/inline-google-docs/inc/gelement.php on line 129
+[10-Apr-2025 17:48:25 UTC] PHP Fatal error:  Access level to GElement::__toString() must be public (as in class Stringable) in /wordpress/wp-content/plugins/inline-google-docs/inc/gelement.php on line 129
+[10-Apr-2025 17:48:34 UTC] PHP Warning:  The magic method GElement::__toString() must have public visibility in /wordpress/wp-content/plugins/inline-google-docs/inc/gelement.php on line 129
+[10-Apr-2025 17:48:34 UTC] PHP Fatal error:  Access level to GElement::__toString() must be public (as in class Stringable) in /wordpress/wp-content/plugins/inline-google-docs/inc/gelement.php on line 129
+[10-Apr-2025 17:48:42 UTC] PHP Warning:  The magic method GElement::__toString() must have public visibility in /wordpress/wp-content/plugins/inline-google-docs/inc/gelement.php on line 129
+[10-Apr-2025 17:48:42 UTC] PHP Fatal error:  Access level to GElement::__toString() must be public (as in class Stringable) in /wordpress/wp-content/plugins/inline-google-docs/inc/gelement.php on line 129
+[10-Apr-2025 17:50:10 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:50:17 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:50:26 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:50:37 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:50:45 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:50:54 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:51:06 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744307464.696)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 17:51:15 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:51:24 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:51:36 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:51:36 UTC] PHP Warning:  Undefined array key "HTTP_X_TLS_CLIENT_SERIAL" in /wordpress/wp-content/plugins/identity-plus/lib/initialize.php on line 21
+[10-Apr-2025 17:51:37 UTC] PHP Warning:  Undefined array key "HTTP_X_TLS_CLIENT_SERIAL" in /wordpress/wp-content/plugins/identity-plus/lib/initialize.php on line 21
+[10-Apr-2025 17:51:37 UTC] PHP Warning:  Undefined array key "identity-plus-register-challenge" in /wordpress/wp-content/plugins/identity-plus/lib/initialize.php on line 96
+[10-Apr-2025 17:51:37 UTC] PHP Warning:  Undefined array key "identity-plus-register-intent" in /wordpress/wp-content/plugins/identity-plus/lib/initialize.php on line 108
+[10-Apr-2025 17:51:37 UTC] PHP Warning:  Undefined array key "identity-plus-notified-of-errors" in /wordpress/wp-content/plugins/identity-plus/lib/initialize.php on line 193
+[10-Apr-2025 17:51:45 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:51:45 UTC] PHP Warning:  Undefined array key "HTTP_X_TLS_CLIENT_SERIAL" in /wordpress/wp-content/plugins/identity-plus/lib/initialize.php on line 21
+[10-Apr-2025 17:51:46 UTC] PHP Warning:  Undefined array key "HTTP_X_TLS_CLIENT_SERIAL" in /wordpress/wp-content/plugins/identity-plus/lib/initialize.php on line 21
+[10-Apr-2025 17:51:46 UTC] PHP Warning:  Undefined array key "identity-plus-register-challenge" in /wordpress/wp-content/plugins/identity-plus/lib/initialize.php on line 96
+[10-Apr-2025 17:51:46 UTC] PHP Warning:  Undefined array key "identity-plus-register-intent" in /wordpress/wp-content/plugins/identity-plus/lib/initialize.php on line 108
+[10-Apr-2025 17:51:46 UTC] PHP Warning:  Undefined array key "identity-plus-notified-of-errors" in /wordpress/wp-content/plugins/identity-plus/lib/initialize.php on line 193
+[10-Apr-2025 17:51:54 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:51:54 UTC] PHP Warning:  Undefined array key "HTTP_X_TLS_CLIENT_SERIAL" in /wordpress/wp-content/plugins/identity-plus/lib/initialize.php on line 21
+[10-Apr-2025 17:51:55 UTC] PHP Warning:  Undefined array key "HTTP_X_TLS_CLIENT_SERIAL" in /wordpress/wp-content/plugins/identity-plus/lib/initialize.php on line 21
+[10-Apr-2025 17:51:55 UTC] PHP Warning:  Undefined array key "identity-plus-register-challenge" in /wordpress/wp-content/plugins/identity-plus/lib/initialize.php on line 96
+[10-Apr-2025 17:51:55 UTC] PHP Warning:  Undefined array key "identity-plus-register-intent" in /wordpress/wp-content/plugins/identity-plus/lib/initialize.php on line 108
+[10-Apr-2025 17:51:55 UTC] PHP Warning:  Undefined array key "identity-plus-notified-of-errors" in /wordpress/wp-content/plugins/identity-plus/lib/initialize.php on line 193
+[10-Apr-2025 17:52:06 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:52:15 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:52:24 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:52:36 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:52:45 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:52:53 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:53:24 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:53:32 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:53:42 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:53:51 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:54:00 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:54:08 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:54:21 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:54:21 UTC] PHP Warning:  The magic method imcplus_taxcat_image::__wakeup() must have public visibility in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-taxcategory.php on line 217
+[10-Apr-2025 17:54:21 UTC] PHP Deprecated:  Required parameter $parent_post_id follows optional parameter $file in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 136
+[10-Apr-2025 17:54:21 UTC] PHP Deprecated:  Required parameter $issue_title follows optional parameter $file in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 136
+[10-Apr-2025 17:54:21 UTC] PHP Deprecated:  Required parameter $my_paged follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:21 UTC] PHP Deprecated:  Required parameter $page follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:21 UTC] PHP Deprecated:  Required parameter $order follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:21 UTC] PHP Deprecated:  Required parameter $view follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:21 UTC] PHP Deprecated:  Required parameter $status follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:21 UTC] PHP Deprecated:  Required parameter $category follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:21 UTC] PHP Deprecated:  Required parameter $keyword follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:22 UTC] PHP Warning:  The magic method imcplus_taxcat_image::__wakeup() must have public visibility in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-taxcategory.php on line 217
+[10-Apr-2025 17:54:22 UTC] PHP Deprecated:  Required parameter $parent_post_id follows optional parameter $file in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 136
+[10-Apr-2025 17:54:22 UTC] PHP Deprecated:  Required parameter $issue_title follows optional parameter $file in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 136
+[10-Apr-2025 17:54:22 UTC] PHP Deprecated:  Required parameter $my_paged follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:22 UTC] PHP Deprecated:  Required parameter $page follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:22 UTC] PHP Deprecated:  Required parameter $order follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:22 UTC] PHP Deprecated:  Required parameter $view follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:22 UTC] PHP Deprecated:  Required parameter $status follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:22 UTC] PHP Deprecated:  Required parameter $category follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:22 UTC] PHP Deprecated:  Required parameter $keyword follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:23 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-issues.php on line 66
+[10-Apr-2025 17:54:32 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:54:32 UTC] PHP Warning:  The magic method imcplus_taxcat_image::__wakeup() must have public visibility in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-taxcategory.php on line 217
+[10-Apr-2025 17:54:32 UTC] PHP Deprecated:  Required parameter $parent_post_id follows optional parameter $file in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 136
+[10-Apr-2025 17:54:32 UTC] PHP Deprecated:  Required parameter $issue_title follows optional parameter $file in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 136
+[10-Apr-2025 17:54:32 UTC] PHP Deprecated:  Required parameter $my_paged follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:32 UTC] PHP Deprecated:  Required parameter $page follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:32 UTC] PHP Deprecated:  Required parameter $order follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:32 UTC] PHP Deprecated:  Required parameter $view follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:32 UTC] PHP Deprecated:  Required parameter $status follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:32 UTC] PHP Deprecated:  Required parameter $category follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:32 UTC] PHP Deprecated:  Required parameter $keyword follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:33 UTC] PHP Warning:  The magic method imcplus_taxcat_image::__wakeup() must have public visibility in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-taxcategory.php on line 217
+[10-Apr-2025 17:54:33 UTC] PHP Deprecated:  Required parameter $parent_post_id follows optional parameter $file in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 136
+[10-Apr-2025 17:54:33 UTC] PHP Deprecated:  Required parameter $issue_title follows optional parameter $file in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 136
+[10-Apr-2025 17:54:33 UTC] PHP Deprecated:  Required parameter $my_paged follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:33 UTC] PHP Deprecated:  Required parameter $page follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:33 UTC] PHP Deprecated:  Required parameter $order follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:33 UTC] PHP Deprecated:  Required parameter $view follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:33 UTC] PHP Deprecated:  Required parameter $status follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:33 UTC] PHP Deprecated:  Required parameter $category follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:33 UTC] PHP Deprecated:  Required parameter $keyword follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:33 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-issues.php on line 66
+[10-Apr-2025 17:54:44 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:54:44 UTC] PHP Warning:  The magic method imcplus_taxcat_image::__wakeup() must have public visibility in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-taxcategory.php on line 217
+[10-Apr-2025 17:54:44 UTC] PHP Deprecated:  Required parameter $parent_post_id follows optional parameter $file in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 136
+[10-Apr-2025 17:54:44 UTC] PHP Deprecated:  Required parameter $issue_title follows optional parameter $file in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 136
+[10-Apr-2025 17:54:44 UTC] PHP Deprecated:  Required parameter $my_paged follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:44 UTC] PHP Deprecated:  Required parameter $page follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:44 UTC] PHP Deprecated:  Required parameter $order follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:44 UTC] PHP Deprecated:  Required parameter $view follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:44 UTC] PHP Deprecated:  Required parameter $status follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:44 UTC] PHP Deprecated:  Required parameter $category follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:44 UTC] PHP Deprecated:  Required parameter $keyword follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:45 UTC] PHP Warning:  The magic method imcplus_taxcat_image::__wakeup() must have public visibility in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-taxcategory.php on line 217
+[10-Apr-2025 17:54:45 UTC] PHP Deprecated:  Required parameter $parent_post_id follows optional parameter $file in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 136
+[10-Apr-2025 17:54:45 UTC] PHP Deprecated:  Required parameter $issue_title follows optional parameter $file in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 136
+[10-Apr-2025 17:54:45 UTC] PHP Deprecated:  Required parameter $my_paged follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:45 UTC] PHP Deprecated:  Required parameter $page follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:45 UTC] PHP Deprecated:  Required parameter $order follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:45 UTC] PHP Deprecated:  Required parameter $view follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:45 UTC] PHP Deprecated:  Required parameter $status follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:45 UTC] PHP Deprecated:  Required parameter $category follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:45 UTC] PHP Deprecated:  Required parameter $keyword follows optional parameter $cb_qry in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-functions.php on line 283
+[10-Apr-2025 17:54:46 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/improve-my-city/functions/imc-core-issues.php on line 66
+[10-Apr-2025 17:54:59 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:54:59 UTC] PHP Warning:  Undefined array key "reset" in /wordpress/wp-content/plugins/ink-coming-soon-page/database_insert.php on line 44
+[10-Apr-2025 17:54:59 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/ink-coming-soon-page/index.php on line 52
+[10-Apr-2025 17:54:59 UTC] PHP Warning:  Undefined array key "reset" in /wordpress/wp-content/plugins/ink-coming-soon-page/database_insert.php on line 44
+[10-Apr-2025 17:54:59 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/ink-coming-soon-page/index.php on line 52
+[10-Apr-2025 17:55:08 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:55:08 UTC] PHP Warning:  Undefined array key "reset" in /wordpress/wp-content/plugins/ink-coming-soon-page/database_insert.php on line 44
+[10-Apr-2025 17:55:08 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/ink-coming-soon-page/index.php on line 52
+[10-Apr-2025 17:55:09 UTC] PHP Warning:  Undefined array key "reset" in /wordpress/wp-content/plugins/ink-coming-soon-page/database_insert.php on line 44
+[10-Apr-2025 17:55:09 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/ink-coming-soon-page/index.php on line 52
+[10-Apr-2025 17:55:18 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:55:18 UTC] PHP Warning:  Undefined array key "reset" in /wordpress/wp-content/plugins/ink-coming-soon-page/database_insert.php on line 44
+[10-Apr-2025 17:55:18 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/ink-coming-soon-page/index.php on line 52
+[10-Apr-2025 17:55:19 UTC] PHP Warning:  Undefined array key "reset" in /wordpress/wp-content/plugins/ink-coming-soon-page/database_insert.php on line 44
+[10-Apr-2025 17:55:19 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/ink-coming-soon-page/index.php on line 52
+[10-Apr-2025 17:55:38 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:55:47 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:55:56 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:56:38 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:56:48 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:56:57 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:57:09 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:57:17 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:57:27 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:57:39 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:57:39 UTC] PHP Fatal error:  Uncaught Error: Non-static method iProjectWebDB::wptn() cannot be called statically in /wordpress/wp-content/plugins/iprojectweb/iprojectweb.install.php:19
+Stack trace:
+#0 /wordpress/wp-content/plugins/iprojectweb/iprojectweb.php(20): iprojectweb_install()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): iProjectWeb::install(false)
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_iproje...', false)
+#5 /internal/eval.php(20): activate_plugin('iprojectweb/ipr...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/iprojectweb/iprojectweb.install.php on line 19
+[10-Apr-2025 17:57:49 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:57:49 UTC] PHP Fatal error:  Uncaught Error: Non-static method iProjectWebDB::wptn() cannot be called statically in /wordpress/wp-content/plugins/iprojectweb/iprojectweb.install.php:19
+Stack trace:
+#0 /wordpress/wp-content/plugins/iprojectweb/iprojectweb.php(20): iprojectweb_install()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): iProjectWeb::install(false)
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_iproje...', false)
+#5 /internal/eval.php(20): activate_plugin('iprojectweb/ipr...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/iprojectweb/iprojectweb.install.php on line 19
+[10-Apr-2025 17:57:59 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:57:59 UTC] PHP Fatal error:  Uncaught Error: Non-static method iProjectWebDB::wptn() cannot be called statically in /wordpress/wp-content/plugins/iprojectweb/iprojectweb.install.php:19
+Stack trace:
+#0 /wordpress/wp-content/plugins/iprojectweb/iprojectweb.php(20): iprojectweb_install()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): iProjectWeb::install(false)
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_iproje...', false)
+#5 /internal/eval.php(20): activate_plugin('iprojectweb/ipr...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/iprojectweb/iprojectweb.install.php on line 19
+[10-Apr-2025 17:58:09 UTC] PHP Deprecated:  Function get_plugin_data was called with an argument that is <strong>deprecated</strong> since version 3.0.0! The <code>Site Wide Only: true</code> plugin header is deprecated. Use <code>Network: true</code> instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:58:09 UTC] PHP Fatal error:  Cannot redeclare hex2bin() in /wordpress/wp-content/plugins/iso-2-utf-data-converter/index.php on line 29
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:569:9)
+    at process.processTimers (node:internal/timers:543:7)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"iso-2-utf-data-converter"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at runNextTicks (node:internal/process/task_queues:65:5)
+      at listOnTimeout (node:internal/timers:569:9)
+      at process.processTimers (node:internal/timers:543:7)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at runNextTicks (node:internal/process/task_queues:65:5)
+        at listOnTimeout (node:internal/timers:569:9)
+        at process.processTimers (node:internal/timers:543:7)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
