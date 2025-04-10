@@ -2,567 +2,751 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 03:42:57 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:42:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:42:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:42:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:43:27 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:43:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:43:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:43:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:43:27 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:43:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:43:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:43:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:43:27 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:43:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:43:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:43:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:43:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [10-Apr-2025 11:45:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gmb_rating_api_key', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT * FROM wp_bmd_options where option_name = 'extensions_load' AND user_id = 0</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'gmb_rating_api_key' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_bmd_options` where `option_name` = 'extensions_load' AND `user_id` = 0 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 no such table: wp_bmd_options
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/automatic-update-google-business-profile-reviews/google-my-business-rating.php(37): add_option('gmb_rating_api_...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): gmb_rating_plugin_activation(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_automa...', false)
-#9 /internal/eval.php(20): activate_plugin('automatic-updat...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gmb_rating_api_key', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_automatic-update-google-business-profile-reviews/google-my-business-rating.php'), WP_Hook->do_action, WP_Hook->apply_filters, gmb_rating_plugin_activation, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:43:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/a-booking-system/cms/option.php(22): wpdb->get_row('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(130): ABookingSystemOption->get('extensions_load')
+#6 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(20): ABookingSystemExtensions->activatedAndInstalled()
+#7 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(7): ABookingSystemExtensions->load()
+#8 /wordpress/wp-content/plugins/a-booking-system/cms/load.php(64): ABookingSystemExtensions->__construct()
+#9 /wordpress/wp-content/plugins/a-booking-system/a-booking-system.php(66): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('a-booking-syste...')
+#12 /internal/eval.php(20): activate_plugin('a-booking-syste...')
+#13 {main}</pre>
+ for query SELECT * FROM wp_bmd_options where option_name = 'extensions_load' AND user_id = 0 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/a-booking-system/a-booking-system.php'), include_once('/plugins/a-booking-system/cms/load.php'), ABookingSystemExtensions->__construct, ABookingSystemExtensions->load, ABookingSystemExtensions->activatedAndInstalled, ABookingSystemOption->get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:45:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gmb_rating_place_id', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT * FROM wp_bmd_options where option_name = 'extensions_load' AND user_id = 0</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'gmb_rating_place_id' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_bmd_options` where `option_name` = 'extensions_load' AND `user_id` = 0 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 no such table: wp_bmd_options
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/automatic-update-google-business-profile-reviews/google-my-business-rating.php(37): add_option('gmb_rating_plac...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): gmb_rating_plugin_activation(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_automa...', false)
-#9 /internal/eval.php(20): activate_plugin('automatic-updat...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gmb_rating_place_id', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_automatic-update-google-business-profile-reviews/google-my-business-rating.php'), WP_Hook->do_action, WP_Hook->apply_filters, gmb_rating_plugin_activation, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:43:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/a-booking-system/cms/option.php(22): wpdb->get_row('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(69): ABookingSystemOption->get('extensions_load')
+#6 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(53): ABookingSystemExtensions->loadFromDB()
+#7 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(7): ABookingSystemExtensions->load()
+#8 /wordpress/wp-content/plugins/a-booking-system/cms/load.php(64): ABookingSystemExtensions->__construct()
+#9 /wordpress/wp-content/plugins/a-booking-system/a-booking-system.php(66): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('a-booking-syste...')
+#12 /internal/eval.php(20): activate_plugin('a-booking-syste...')
+#13 {main}</pre>
+ for query SELECT * FROM wp_bmd_options where option_name = 'extensions_load' AND user_id = 0 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/a-booking-system/a-booking-system.php'), include_once('/plugins/a-booking-system/cms/load.php'), ABookingSystemExtensions->__construct, ABookingSystemExtensions->load, ABookingSystemExtensions->loadFromDB, ABookingSystemOption->get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:45:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gmb_rating_url', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT * FROM wp_bmd_options where option_name = 'extensions_load' AND user_id = 0</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'gmb_rating_url' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_bmd_options` where `option_name` = 'extensions_load' AND `user_id` = 0 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 no such table: wp_bmd_options
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/automatic-update-google-business-profile-reviews/google-my-business-rating.php(37): add_option('gmb_rating_url')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): gmb_rating_plugin_activation(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_automa...', false)
-#9 /internal/eval.php(20): activate_plugin('automatic-updat...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gmb_rating_url', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_automatic-update-google-business-profile-reviews/google-my-business-rating.php'), WP_Hook->do_action, WP_Hook->apply_filters, gmb_rating_plugin_activation, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:43:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gmb_rating_average', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'gmb_rating_average' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/automatic-update-google-business-profile-reviews/google-my-business-rating.php(37): add_option('gmb_rating_aver...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): gmb_rating_plugin_activation(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_automa...', false)
-#9 /internal/eval.php(20): activate_plugin('automatic-updat...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gmb_rating_average', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_automatic-update-google-business-profile-reviews/google-my-business-rating.php'), WP_Hook->do_action, WP_Hook->apply_filters, gmb_rating_plugin_activation, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:43:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gmb_ratings_total', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'gmb_ratings_total' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/automatic-update-google-business-profile-reviews/google-my-business-rating.php(37): add_option('gmb_ratings_tot...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): gmb_rating_plugin_activation(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_automa...', false)
-#9 /internal/eval.php(20): activate_plugin('automatic-updat...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gmb_ratings_total', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_automatic-update-google-business-profile-reviews/google-my-business-rating.php'), WP_Hook->do_action, WP_Hook->apply_filters, gmb_rating_plugin_activation, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:43:27 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gmb_rating_api_error', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'gmb_rating_api_error' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/automatic-update-google-business-profile-reviews/google-my-business-rating.php(37): add_option('gmb_rating_api_...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): gmb_rating_plugin_activation(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_automa...', false)
-#9 /internal/eval.php(20): activate_plugin('automatic-updat...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('gmb_rating_api_error', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_automatic-update-google-business-profile-reviews/google-my-business-rating.php'), WP_Hook->do_action, WP_Hook->apply_filters, gmb_rating_plugin_activation, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:43:27 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:43:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:43:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:43:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:43:54 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:43:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:43:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:43:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:44:21 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:44:21 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:44:21 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:44:21 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:44:21 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:44:21 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:44:21 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:44:21 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:44:48 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:44:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:44:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:44:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:44:50 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('adsense_extreme...')
-#2 /wordpress/wp-content/plugins/adsense-extreme/adsensextreme.php(59): register_widget('adsense_extreme...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): ae_load_widgets('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/a-booking-system/cms/option.php(22): wpdb->get_row('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(130): ABookingSystemOption->get('extensions_load')
+#6 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(20): ABookingSystemExtensions->activatedAndInstalled()
+#7 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(7): ABookingSystemExtensions->load()
+#8 /wordpress/wp-content/plugins/a-booking-system/cms/load.php(64): ABookingSystemExtensions->__construct()
+#9 /wordpress/wp-content/plugins/a-booking-system/a-booking-system.php(66): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
 #11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
 #12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 03:44:59 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('adsense_extreme...')
-#2 /wordpress/wp-content/plugins/adsense-extreme/adsensextreme.php(59): register_widget('adsense_extreme...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): ae_load_widgets('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 03:45:08 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('adsense_extreme...')
-#2 /wordpress/wp-content/plugins/adsense-extreme/adsensextreme.php(59): register_widget('adsense_extreme...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): ae_load_widgets('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 03:45:16 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:45:16 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:45:16 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:45:16 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:45:46 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_home_path() in /wordpress/wp-content/plugins/actus-deep-schema/actus-deep-schema.php:335
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): acsc_activation(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_actus-...', false)
-#4 /internal/eval.php(20): activate_plugin('actus-deep-sche...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/actus-deep-schema/actus-deep-schema.php on line 335
-[09-Apr-2025 03:45:55 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_home_path() in /wordpress/wp-content/plugins/actus-deep-schema/actus-deep-schema.php:335
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): acsc_activation(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_actus-...', false)
-#4 /internal/eval.php(20): activate_plugin('actus-deep-sche...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/actus-deep-schema/actus-deep-schema.php on line 335
-[09-Apr-2025 03:46:03 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_home_path() in /wordpress/wp-content/plugins/actus-deep-schema/actus-deep-schema.php:335
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(324): acsc_activation(false)
-#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#3 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_actus-...', false)
-#4 /internal/eval.php(20): activate_plugin('actus-deep-sche...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/actus-deep-schema/actus-deep-schema.php on line 335
-[09-Apr-2025 03:46:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#14 {main}</pre>
+ for query SELECT * FROM wp_bmd_options where option_name = 'extensions_load' AND user_id = 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/a-booking-system/a-booking-system.php'), include_once('/plugins/a-booking-system/cms/load.php'), ABookingSystemExtensions->__construct, ABookingSystemExtensions->load, ABookingSystemExtensions->activatedAndInstalled, ABookingSystemOption->get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:45:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:48:\"add-fields-to-checkout-page-woocommerce/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:6:\"2.10.1\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744170371;s:11:\"plugin_path\";s:64:\"add-fields-to-checkout-page-woocommerce/checkout-form-editor.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:64:\"add-fields-to-checkout-page-woocommerce/checkout-form-editor.php\";s:8:\"sdk_path\";s:48:\"add-fields-to-checkout-page-woocommerce/freemius\";s:7:\"version\";s:6:\"2.10.1\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744170371;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT * FROM wp_bmd_options where option_name = 'extensions_load' AND user_id = 0</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_active_plugins' , 'O:8:&quot;stdClass&quot;:3:{s:7:&quot;plugins&quot;;a:1:{s:48:&quot;add-fields-to-checkout-page-woocommerce/freemius&quot;;O:8:&quot;stdClass&quot;:4:{s:7:&quot;version&quot;;s:6:&quot;2.10.1&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:9:&quot;timestamp&quot;;i:1744170371;s:11:&quot;plugin_path&quot;;s:64:&quot;add-fields-to-checkout-page-woocommerce/checkout-form-editor.php&quot;;}}s:7:&quot;abspath&quot;;s:11:&quot;/wordpress/&quot;;s:6:&quot;newest&quot;;O:8:&quot;stdClass&quot;:5:{s:11:&quot;plugin_path&quot;;s:64:&quot;add-fields-to-checkout-page-woocommerce/checkout-form-editor.php&quot;;s:8:&quot;sdk_path&quot;;s:48:&quot;add-fields-to-checkout-page-woocommerce/freemius&quot;;s:7:&quot;version&quot;;s:6:&quot;2.10.1&quot;;s:13:&quot;in_activation&quot;;b:1;s:9:&quot;timestamp&quot;;i:1744170371;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_bmd_options` where `option_name` = 'extensions_load' AND `user_id` = 0 | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 no such table: wp_bmd_options
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_active_plugi...', Object(stdClass), '', 'auto')
-#5 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/includes/fs-essential-functions.php(279): update_option('fs_active_plugi...', Object(stdClass))
-#6 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/start.php(242): fs_update_sdk_newest_version('add-fields-to-c...', 'add-fields-to-c...')
-#7 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/checkout-form-editor.php(32): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/checkout-form-editor.php(57): tl_fields()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('add-fields-to-c...')
-#11 /internal/eval.php(20): activate_plugin('add-fields-to-c...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/a-booking-system/cms/option.php(22): wpdb->get_row('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(69): ABookingSystemOption->get('extensions_load')
+#6 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(53): ABookingSystemExtensions->loadFromDB()
+#7 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(7): ABookingSystemExtensions->load()
+#8 /wordpress/wp-content/plugins/a-booking-system/cms/load.php(64): ABookingSystemExtensions->__construct()
+#9 /wordpress/wp-content/plugins/a-booking-system/a-booking-system.php(66): include_once('/wordpress/wp-c...')
+#10 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}</pre>
+ for query SELECT * FROM wp_bmd_options where option_name = 'extensions_load' AND user_id = 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/a-booking-system/a-booking-system.php'), include_once('/plugins/a-booking-system/cms/load.php'), ABookingSystemExtensions->__construct, ABookingSystemExtensions->load, ABookingSystemExtensions->loadFromDB, ABookingSystemOption->get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:45:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_bmd_options where option_name = 'language' AND user_id = 0</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_bmd_options` where `option_name` = 'language' AND `user_id` = 0 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_bmd_options
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/a-booking-system/cms/option.php(22): wpdb->get_row('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/a-booking-system/cms/language.php(38): ABookingSystemOption->get('language', 0)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): ABookingSystemLanguage->load('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(704): do_action('init')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query SELECT * FROM wp_bmd_options where option_name = 'language' AND user_id = 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ABookingSystemLanguage->load, ABookingSystemOption->get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:45:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_bmd_options where option_name = 'token' AND user_id = 0</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM `wp_bmd_options` where `option_name` = 'token' AND `user_id` = 0 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_bmd_options
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/a-booking-system/cms/option.php(22): wpdb->get_row('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/a-booking-system/cms/main.php(481): ABookingSystemOption->get('token', 0)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): ABookingSystemMain->wpStart('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(704): do_action('init')
+#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#13 {main}</pre>
+ for query SELECT * FROM wp_bmd_options where option_name = 'token' AND user_id = 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ABookingSystemMain->wpStart, ABookingSystemOption->get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:45:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_bmd_options where option_name = 'extensions_load' AND user_id = 0</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_bmd_options where option_name = :param0  AND user_id = 0 | parameters: extensions_load</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_bmd_options.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/a-booking-system/cms/option.php(22): wpdb->get_row('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(130): ABookingSystemOption->get('extensions_load')
+#4 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(20): ABookingSystemExtensions->activatedAndInstalled()
+#5 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(7): ABookingSystemExtensions->load()
+#6 /wordpress/wp-content/plugins/a-booking-system/cms/load.php(64): ABookingSystemExtensions->__construct()
+#7 /wordpress/wp-content/plugins/a-booking-system/a-booking-system.php(66): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('a-booking-syste...')
+#10 /internal/eval.php(20): activate_plugin('a-booking-syste...')
+#11 {main}</pre>
+ for query SELECT * FROM wp_bmd_options where option_name = 'extensions_load' AND user_id = 0 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/a-booking-system/a-booking-system.php'), include_once('/plugins/a-booking-system/cms/load.php'), ABookingSystemExtensions->__construct, ABookingSystemExtensions->load, ABookingSystemExtensions->activatedAndInstalled, ABookingSystemOption->get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:45:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_bmd_options where option_name = 'extensions_load' AND user_id = 0</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_bmd_options where option_name = :param0  AND user_id = 0 | parameters: extensions_load</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_bmd_options.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/a-booking-system/cms/option.php(22): wpdb->get_row('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(69): ABookingSystemOption->get('extensions_load')
+#4 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(53): ABookingSystemExtensions->loadFromDB()
+#5 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(7): ABookingSystemExtensions->load()
+#6 /wordpress/wp-content/plugins/a-booking-system/cms/load.php(64): ABookingSystemExtensions->__construct()
+#7 /wordpress/wp-content/plugins/a-booking-system/a-booking-system.php(66): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('a-booking-syste...')
+#10 /internal/eval.php(20): activate_plugin('a-booking-syste...')
+#11 {main}</pre>
+ for query SELECT * FROM wp_bmd_options where option_name = 'extensions_load' AND user_id = 0 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/a-booking-system/a-booking-system.php'), include_once('/plugins/a-booking-system/cms/load.php'), ABookingSystemExtensions->__construct, ABookingSystemExtensions->load, ABookingSystemExtensions->loadFromDB, ABookingSystemOption->get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:45:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_bmd_options where option_name = 'extensions_load' AND user_id = 0</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_bmd_options where option_name = :param0  AND user_id = 0 | parameters: extensions_load</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_bmd_options.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/a-booking-system/cms/option.php(22): wpdb->get_row('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(130): ABookingSystemOption->get('extensions_load')
+#4 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(20): ABookingSystemExtensions->activatedAndInstalled()
+#5 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(7): ABookingSystemExtensions->load()
+#6 /wordpress/wp-content/plugins/a-booking-system/cms/load.php(64): ABookingSystemExtensions->__construct()
+#7 /wordpress/wp-content/plugins/a-booking-system/a-booking-system.php(66): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_active_plugins', 'O:8:\"stdClass\":3:{s:7:\"plugins\";a:1:{s:48:\"add-fields-to-checkout-page-woocommerce/freemius\";O:8:\"stdClass\":4:{s:7:\"version\";s:6:\"2.10.1\";s:4:\"type\";s:6:\"plugin\";s:9:\"timestamp\";i:1744170371;s:11:\"plugin_path\";s:64:\"add-fields-to-checkout-page-woocommerce/checkout-form-editor.php\";}}s:7:\"abspath\";s:11:\"/wordpress/\";s:6:\"newest\";O:8:\"stdClass\":5:{s:11:\"plugin_path\";s:64:\"add-fields-to-checkout-page-woocommerce/checkout-form-editor.php\";s:8:\"sdk_path\";s:48:\"add-fields-to-checkout-page-woocommerce/freemius\";s:7:\"version\";s:6:\"2.10.1\";s:13:\"in_activation\";b:1;s:9:\"timestamp\";i:1744170371;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/add-fields-to-checkout-page-woocommerce/checkout-form-editor.php'), tl_fields, require_once('/plugins/add-fields-to-checkout-page-woocommerce/freemius/start.php'), fs_update_sdk_newest_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:46:11 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SELECT * FROM wp_bmd_options where option_name = 'extensions_load' AND user_id = 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/a-booking-system/a-booking-system.php'), include_once('/plugins/a-booking-system/cms/load.php'), ABookingSystemExtensions->__construct, ABookingSystemExtensions->load, ABookingSystemExtensions->activatedAndInstalled, ABookingSystemOption->get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:45:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT * FROM wp_bmd_options where option_name = 'extensions_load' AND user_id = 0</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_debug_mode' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_bmd_options where option_name = :param0  AND user_id = 0 | parameters: extensions_load</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_bmd_options.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/config.php(307): add_option('fs_debug_mode', false)
-#5 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/require.php(14): require_once('/wordpress/wp-c...')
-#6 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/start.php(576): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/checkout-form-editor.php(32): require_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/checkout-form-editor.php(57): tl_fields()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('add-fields-to-c...')
-#11 /internal/eval.php(20): activate_plugin('add-fields-to-c...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/a-booking-system/cms/option.php(22): wpdb->get_row('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(69): ABookingSystemOption->get('extensions_load')
+#4 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(53): ABookingSystemExtensions->loadFromDB()
+#5 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(7): ABookingSystemExtensions->load()
+#6 /wordpress/wp-content/plugins/a-booking-system/cms/load.php(64): ABookingSystemExtensions->__construct()
+#7 /wordpress/wp-content/plugins/a-booking-system/a-booking-system.php(66): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/add-fields-to-checkout-page-woocommerce/checkout-form-editor.php'), tl_fields, require_once('/plugins/add-fields-to-checkout-page-woocommerce/freemius/start.php'), require_once('/plugins/add-fields-to-checkout-page-woocommerce/freemius/require.php'), require_once('/plugins/add-fields-to-checkout-page-woocommerce/freemius/config.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:46:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SELECT * FROM wp_bmd_options where option_name = 'extensions_load' AND user_id = 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/a-booking-system/a-booking-system.php'), include_once('/plugins/a-booking-system/cms/load.php'), ABookingSystemExtensions->__construct, ABookingSystemExtensions->load, ABookingSystemExtensions->loadFromDB, ABookingSystemOption->get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:45:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:1707;a:3:{s:4:\"slug\";s:39:\"add-fields-to-checkout-page-woocommerce\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:64:\"add-fields-to-checkout-page-woocommerce/checkout-form-editor.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT * FROM wp_bmd_options where option_name = 'language' AND user_id = 0</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:1:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:1707;a:3:{s:4:&quot;slug&quot;;s:39:&quot;add-fields-to-checkout-page-woocommerce&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:64:&quot;add-fields-to-checkout-page-woocommerce/checkout-form-editor.php&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_bmd_options where option_name = :param0  AND user_id = 0 | parameters: language</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_bmd_options.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/includes/class-fs-options.php(140): FS_Option_Manager->set_option('id_slug_type_pa...', Array, true)
-#8 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/includes/class-freemius.php(2209): FS_Options->set_option('id_slug_type_pa...', Array, true)
-#9 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/includes/class-freemius.php(416): Freemius->store_id_slug_type_path_map('1707', 'add-fields-to-c...')
-#10 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/includes/class-freemius.php(2868): Freemius->__construct('1707', 'add-fields-to-c...', true)
-#11 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/start.php(615): Freemius::instance('1707', 'add-fields-to-c...', true)
-#12 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/checkout-form-editor.php(35): fs_dynamic_init(Array)
-#13 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/checkout-form-editor.php(57): tl_fields()
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('add-fields-to-c...')
-#16 /internal/eval.php(20): activate_plugin('add-fields-to-c...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:1:{s:21:\"id_slug_type_path_map\";a:1:{i:1707;a:3:{s:4:\"slug\";s:39:\"add-fields-to-checkout-page-woocommerce\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:64:\"add-fields-to-checkout-page-woocommerce/checkout-form-editor.php\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/add-fields-to-checkout-page-woocommerce/checkout-form-editor.php'), tl_fields, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->store_id_slug_type_path_map, FS_Options->set_option, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:46:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/a-booking-system/cms/option.php(22): wpdb->get_row('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/a-booking-system/cms/language.php(38): ABookingSystemOption->get('language', 0)
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ABookingSystemLanguage->load('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(704): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query SELECT * FROM wp_bmd_options where option_name = 'language' AND user_id = 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ABookingSystemLanguage->load, ABookingSystemOption->get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:45:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:1707;a:3:{s:4:\"slug\";s:39:\"add-fields-to-checkout-page-woocommerce\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:64:\"add-fields-to-checkout-page-woocommerce/checkout-form-editor.php\";}}s:11:\"plugin_data\";a:1:{s:39:\"add-fields-to-checkout-page-woocommerce\";a:1:{s:19:\"last_load_timestamp\";i:1744170372;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT * FROM wp_bmd_options where option_name = 'token' AND user_id = 0</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:1707;a:3:{s:4:&quot;slug&quot;;s:39:&quot;add-fields-to-checkout-page-woocommerce&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:64:&quot;add-fields-to-checkout-page-woocommerce/checkout-form-editor.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:39:&quot;add-fields-to-checkout-page-woocommerce&quot;;a:1:{s:19:&quot;last_load_timestamp&quot;;i:1744170372;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_bmd_options where option_name = :param0  AND user_id = 0 | parameters: token</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_bmd_options.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('last_load_times...', 1744170372)
-#9 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('last_load_times...', 1744170372)
-#10 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/includes/class-freemius.php(432): FS_Storage->__set('last_load_times...', 1744170372)
-#11 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/includes/class-freemius.php(2868): Freemius->__construct('1707', 'add-fields-to-c...', true)
-#12 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/start.php(615): Freemius::instance('1707', 'add-fields-to-c...', true)
-#13 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/checkout-form-editor.php(35): fs_dynamic_init(Array)
-#14 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/checkout-form-editor.php(57): tl_fields()
-#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('add-fields-to-c...')
-#17 /internal/eval.php(20): activate_plugin('add-fields-to-c...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:1707;a:3:{s:4:\"slug\";s:39:\"add-fields-to-checkout-page-woocommerce\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:64:\"add-fields-to-checkout-page-woocommerce/checkout-form-editor.php\";}}s:11:\"plugin_data\";a:1:{s:39:\"add-fields-to-checkout-page-woocommerce\";a:1:{s:19:\"last_load_timestamp\";i:1744170372;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/add-fields-to-checkout-page-woocommerce/checkout-form-editor.php'), tl_fields, fs_dynamic_init, Freemius::instance, Freemius->__construct, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:46:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/a-booking-system/cms/option.php(22): wpdb->get_row('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/a-booking-system/cms/main.php(481): ABookingSystemOption->get('token', 0)
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ABookingSystemMain->wpStart('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(704): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query SELECT * FROM wp_bmd_options where option_name = 'token' AND user_id = 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ABookingSystemMain->wpStart, ABookingSystemOption->get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:45:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:1707;a:3:{s:4:\"slug\";s:39:\"add-fields-to-checkout-page-woocommerce\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:64:\"add-fields-to-checkout-page-woocommerce/checkout-form-editor.php\";}}s:11:\"plugin_data\";a:1:{s:39:\"add-fields-to-checkout-page-woocommerce\";a:2:{s:19:\"last_load_timestamp\";i:1744170372;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:64:\"add-fields-to-checkout-page-woocommerce/checkout-form-editor.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT * FROM wp_bmd_options where option_name = 'extensions_load' AND user_id = 0</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:1707;a:3:{s:4:&quot;slug&quot;;s:39:&quot;add-fields-to-checkout-page-woocommerce&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:64:&quot;add-fields-to-checkout-page-woocommerce/checkout-form-editor.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:39:&quot;add-fields-to-checkout-page-woocommerce&quot;;a:2:{s:19:&quot;last_load_timestamp&quot;;i:1744170372;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:64:&quot;add-fields-to-checkout-page-woocommerce/checkout-form-editor.php&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_bmd_options where option_name = :param0  AND user_id = 0 | parameters: extensions_load</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_bmd_options.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/includes/managers/class-fs-option-manager.php(414): update_option('fs_accounts', Array, NULL)
-#6 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/includes/managers/class-fs-option-manager.php(357): FS_Option_Manager->store()
-#7 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/includes/managers/class-fs-key-value-storage.php(184): FS_Option_Manager->set_option('plugin_data', Array, true)
-#8 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/includes/managers/class-fs-key-value-storage.php(286): FS_Key_Value_Storage->store('plugin_main_fil...', Object(stdClass))
-#9 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/includes/class-fs-storage.php(535): FS_Key_Value_Storage->__set('plugin_main_fil...', Object(stdClass))
-#10 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/includes/class-freemius.php(2066): FS_Storage->__set('plugin_main_fil...', Object(stdClass))
-#11 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/includes/class-freemius.php(439): Freemius->_find_caller_plugin_file(true, 'add-fields-to-c...')
-#12 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/includes/class-freemius.php(2868): Freemius->__construct('1707', 'add-fields-to-c...', true)
-#13 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/start.php(615): Freemius::instance('1707', 'add-fields-to-c...', true)
-#14 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/checkout-form-editor.php(35): fs_dynamic_init(Array)
-#15 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/checkout-form-editor.php(57): tl_fields()
-#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('add-fields-to-c...')
-#18 /internal/eval.php(20): activate_plugin('add-fields-to-c...')
-#19 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:1707;a:3:{s:4:\"slug\";s:39:\"add-fields-to-checkout-page-woocommerce\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:64:\"add-fields-to-checkout-page-woocommerce/checkout-form-editor.php\";}}s:11:\"plugin_data\";a:1:{s:39:\"add-fields-to-checkout-page-woocommerce\";a:2:{s:19:\"last_load_timestamp\";i:1744170372;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:64:\"add-fields-to-checkout-page-woocommerce/checkout-form-editor.php\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/add-fields-to-checkout-page-woocommerce/checkout-form-editor.php'), tl_fields, fs_dynamic_init, Freemius::instance, Freemius->__construct, Freemius->_find_caller_plugin_file, FS_Storage->__set, FS_Key_Value_Storage->__set, FS_Key_Value_Storage->store, FS_Option_Manager->set_option, FS_Option_Manager->store, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:46:12 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/a-booking-system/cms/option.php(22): wpdb->get_row('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(130): ABookingSystemOption->get('extensions_load')
+#4 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(20): ABookingSystemExtensions->activatedAndInstalled()
+#5 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(7): ABookingSystemExtensions->load()
+#6 /wordpress/wp-content/plugins/a-booking-system/cms/load.php(64): ABookingSystemExtensions->__construct()
+#7 /wordpress/wp-content/plugins/a-booking-system/a-booking-system.php(66): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('a-booking-syste...')
+#10 /internal/eval.php(20): activate_plugin('a-booking-syste...')
+#11 {main}</pre>
+ for query SELECT * FROM wp_bmd_options where option_name = 'extensions_load' AND user_id = 0 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/a-booking-system/a-booking-system.php'), include_once('/plugins/a-booking-system/cms/load.php'), ABookingSystemExtensions->__construct, ABookingSystemExtensions->load, ABookingSystemExtensions->activatedAndInstalled, ABookingSystemOption->get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:45:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fs_accounts', 'a:2:{s:21:\"id_slug_type_path_map\";a:1:{i:1707;a:3:{s:4:\"slug\";s:39:\"add-fields-to-checkout-page-woocommerce\";s:4:\"type\";s:6:\"plugin\";s:4:\"path\";s:64:\"add-fields-to-checkout-page-woocommerce/checkout-form-editor.php\";}}s:11:\"plugin_data\";a:1:{s:39:\"add-fields-to-checkout-page-woocommerce\";a:3:{s:19:\"last_load_timestamp\";i:1744170372;s:16:\"plugin_main_file\";O:8:\"stdClass\":1:{s:4:\"path\";s:64:\"add-fields-to-checkout-page-woocommerce/checkout-form-editor.php\";}s:20:\"is_network_activated\";b:0;}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT * FROM wp_bmd_options where option_name = 'extensions_load' AND user_id = 0</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'fs_accounts' , 'a:2:{s:21:&quot;id_slug_type_path_map&quot;;a:1:{i:1707;a:3:{s:4:&quot;slug&quot;;s:39:&quot;add-fields-to-checkout-page-woocommerce&quot;;s:4:&quot;type&quot;;s:6:&quot;plugin&quot;;s:4:&quot;path&quot;;s:64:&quot;add-fields-to-checkout-page-woocommerce/checkout-form-editor.php&quot;;}}s:11:&quot;plugin_data&quot;;a:1:{s:39:&quot;add-fields-to-checkout-page-woocommerce&quot;;a:3:{s:19:&quot;last_load_timestamp&quot;;i:1744170372;s:16:&quot;plugin_main_file&quot;;O:8:&quot;stdClass&quot;:1:{s:4:&quot;path&quot;;s:64:&quot;add-fields-to-checkout-page-woocommerce/checkout-form-editor.php&quot;;}s:20:&quot;is_network_activated&quot;;b:0;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_bmd_options where option_name = :param0  AND user_id = 0 | parameters: extensions_load</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_bmd_options.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('fs_accounts', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/add-fields-to-checkout-page-woocommerce/freemius/include
-Node.js v23.11.0
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/a-booking-system/cms/option.php(22): wpdb->get_row('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(69): ABookingSystemOption->get('extensions_load')
+#4 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(53): ABookingSystemExtensions->loadFromDB()
+#5 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(7): ABookingSystemExtensions->load()
+#6 /wordpress/wp-content/plugins/a-booking-system/cms/load.php(64): ABookingSystemExtensions->__construct()
+#7 /wordpress/wp-content/plugins/a-booking-system/a-booking-system.php(66): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('a-booking-syste...')
+#10 /internal/eval.php(20): activate_plugin('a-booking-syste...')
+#11 {main}</pre>
+ for query SELECT * FROM wp_bmd_options where option_name = 'extensions_load' AND user_id = 0 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/a-booking-system/a-booking-system.php'), include_once('/plugins/a-booking-system/cms/load.php'), ABookingSystemExtensions->__construct, ABookingSystemExtensions->load, ABookingSystemExtensions->loadFromDB, ABookingSystemOption->get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:45:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_bmd_options where option_name = 'extensions_load' AND user_id = 0</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_bmd_options where option_name = :param0  AND user_id = 0 | parameters: extensions_load</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_bmd_options.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/a-booking-system/cms/option.php(22): wpdb->get_row('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(130): ABookingSystemOption->get('extensions_load')
+#4 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(20): ABookingSystemExtensions->activatedAndInstalled()
+#5 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(7): ABookingSystemExtensions->load()
+#6 /wordpress/wp-content/plugins/a-booking-system/cms/load.php(64): ABookingSystemExtensions->__construct()
+#7 /wordpress/wp-content/plugins/a-booking-system/a-booking-system.php(66): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query SELECT * FROM wp_bmd_options where option_name = 'extensions_load' AND user_id = 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/a-booking-system/a-booking-system.php'), include_once('/plugins/a-booking-system/cms/load.php'), ABookingSystemExtensions->__construct, ABookingSystemExtensions->load, ABookingSystemExtensions->activatedAndInstalled, ABookingSystemOption->get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:45:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_bmd_options where option_name = 'extensions_load' AND user_id = 0</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_bmd_options where option_name = :param0  AND user_id = 0 | parameters: extensions_load</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_bmd_options.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/a-booking-system/cms/option.php(22): wpdb->get_row('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(69): ABookingSystemOption->get('extensions_load')
+#4 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(53): ABookingSystemExtensions->loadFromDB()
+#5 /wordpress/wp-content/plugins/a-booking-system/cms/extensions.php(7): ABookingSystemExtensions->load()
+#6 /wordpress/wp-content/plugins/a-booking-system/cms/load.php(64): ABookingSystemExtensions->__construct()
+#7 /wordpress/wp-content/plugins/a-booking-system/a-booking-system.php(66): include_once('/wordpress/wp-c...')
+#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query SELECT * FROM wp_bmd_options where option_name = 'extensions_load' AND user_id = 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/a-booking-system/a-booking-system.php'), include_once('/plugins/a-booking-system/cms/load.php'), ABookingSystemExtensions->__construct, ABookingSystemExtensions->load, ABookingSystemExtensions->loadFromDB, ABookingSystemOption->get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:45:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_bmd_options where option_name = 'language' AND user_id = 0</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_bmd_options where option_name = :param0  AND user_id = 0 | parameters: language</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_bmd_options.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/a-booking-system/cms/option.php(22): wpdb->get_row('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/a-booking-system/cms/language.php(38): ABookingSystemOption->get('language', 0)
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ABookingSystemLanguage->load('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(704): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query SELECT * FROM wp_bmd_options where option_name = 'language' AND user_id = 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ABookingSystemLanguage->load, ABookingSystemOption->get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:45:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM wp_bmd_options where option_name = 'token' AND user_id = 0</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_bmd_options where option_name = :param0  AND user_id = 0 | parameters: token</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_bmd_options.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/a-booking-system/cms/option.php(22): wpdb->get_row('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/a-booking-system/cms/main.php(481): ABookingSystemOption->get('token', 0)
+#4 /wordpress/wp-includes/class-wp-hook.php(324): ABookingSystemMain->wpStart('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(704): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}</pre>
+ for query SELECT * FROM wp_bmd_options where option_name = 'token' AND user_id = 0 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ABookingSystemMain->wpStart, ABookingSystemOption->get, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:46:36 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ada-plugin/wp-ada.php:90
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): adafunc_setup('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(704): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/ada-plugin/wp-ada.php on line 90
+[10-Apr-2025 11:46:45 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ada-plugin/wp-ada.php:90
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): adafunc_setup('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(704): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/ada-plugin/wp-ada.php on line 90
+[10-Apr-2025 11:46:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/ada-plugin/wp-ada.php:90
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): adafunc_setup('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-settings.php(704): do_action('init')
+#4 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#5 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#6 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#7 {main}
+  thrown in /wordpress/wp-content/plugins/ada-plugin/wp-ada.php on line 90
+[10-Apr-2025 11:47:04 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744285622.635)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 11:47:35 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744285652.826)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 11:48:32 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744285710.63)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /wordp in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 11:49:53 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744285790.929)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 11:50:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_amelia_events MODIFY recurringInterval int(11) DEFAULT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/ameliabooking/src/Infrastructure/WP/InstallActions/DB/AbstractDatabaseTable.php(45): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/ameliabooking/src/Infrastructure/WP/InstallActions/ActivationDatabaseHook.php(150): AmeliaBooking\Infrastructure\WP\InstallActions\DB\AbstractDatabaseTable::init()
+#3 /wordpress/wp-content/plugins/ameliabooking/ameliabooking.php(426): AmeliaBooking\Infrastructure\WP\InstallActions\ActivationDatabaseHook::init()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): AmeliaBooking\Plugin::activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_amelia...', false)
+#8 /internal/eval.php(20): activate_plugin('ameliabooking/a...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_amelia_events MODIFY recurringInterval int(11) DEFAULT 1 made by activate_plugin, do_action('activate_ameliabooking/ameliabooking.php'), WP_Hook->do_action, WP_Hook->apply_filters, AmeliaBooking\Plugin::activation, AmeliaBooking\Infrastructure\WP\InstallActions\ActivationDatabaseHook::init, AmeliaBooking\Infrastructure\WP\InstallActions\DB\AbstractDatabaseTable::init, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:50:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_amelia_customer_bookings MODIFY appointmentId INT(11) NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/ameliabooking/src/Infrastructure/WP/InstallActions/DB/AbstractDatabaseTable.php(45): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/ameliabooking/src/Infrastructure/WP/InstallActions/ActivationDatabaseHook.php(164): AmeliaBooking\Infrastructure\WP\InstallActions\DB\AbstractDatabaseTable::init()
+#3 /wordpress/wp-content/plugins/ameliabooking/ameliabooking.php(426): AmeliaBooking\Infrastructure\WP\InstallActions\ActivationDatabaseHook::init()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): AmeliaBooking\Plugin::activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_amelia...', false)
+#8 /internal/eval.php(20): activate_plugin('ameliabooking/a...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_amelia_customer_bookings MODIFY appointmentId INT(11) NULL made by activate_plugin, do_action('activate_ameliabooking/ameliabooking.php'), WP_Hook->do_action, WP_Hook->apply_filters, AmeliaBooking\Plugin::activation, AmeliaBooking\Infrastructure\WP\InstallActions\ActivationDatabaseHook::init, AmeliaBooking\Infrastructure\WP\InstallActions\DB\AbstractDatabaseTable::init, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:50:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_amelia_payments MODIFY customerBookingId INT(11) NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/ameliabooking/src/Infrastructure/WP/InstallActions/DB/AbstractDatabaseTable.php(45): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/ameliabooking/src/Infrastructure/WP/InstallActions/ActivationDatabaseHook.php(172): AmeliaBooking\Infrastructure\WP\InstallActions\DB\AbstractDatabaseTable::init()
+#3 /wordpress/wp-content/plugins/ameliabooking/ameliabooking.php(426): AmeliaBooking\Infrastructure\WP\InstallActions\ActivationDatabaseHook::init()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): AmeliaBooking\Plugin::activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_amelia...', false)
+#8 /internal/eval.php(20): activate_plugin('ameliabooking/a...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_amelia_payments MODIFY customerBookingId INT(11) NULL made by activate_plugin, do_action('activate_ameliabooking/ameliabooking.php'), WP_Hook->do_action, WP_Hook->apply_filters, AmeliaBooking\Plugin::activation, AmeliaBooking\Infrastructure\WP\InstallActions\ActivationDatabaseHook::init, AmeliaBooking\Infrastructure\WP\InstallActions\DB\AbstractDatabaseTable::init, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:50:28 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_amelia_notifications_log MODIFY userId INT(11) NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/ameliabooking/src/Infrastructure/WP/InstallActions/DB/AbstractDatabaseTable.php(45): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/ameliabooking/src/Infrastructure/WP/InstallActions/ActivationDatabaseHook.php(178): AmeliaBooking\Infrastructure\WP\InstallActions\DB\AbstractDatabaseTable::init()
+#3 /wordpress/wp-content/plugins/ameliabooking/ameliabooking.php(426): AmeliaBooking\Infrastructure\WP\InstallActions\ActivationDatabaseHook::init()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): AmeliaBooking\Plugin::activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_amelia...', false)
+#8 /internal/eval.php(20): activate_plugin('ameliabooking/a...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_amelia_notifications_log MODIFY userId INT(11) NULL made by activate_plugin, do_action('activate_ameliabooking/ameliabooking.php'), WP_Hook->do_action, WP_Hook->apply_filters, AmeliaBooking\Plugin::activation, AmeliaBooking\Infrastructure\WP\InstallActions\ActivationDatabaseHook::init, AmeliaBooking\Infrastructure\WP\InstallActions\DB\AbstractDatabaseTable::init, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:51:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_amelia_events MODIFY recurringInterval int(11) DEFAULT 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/ameliabooking/src/Infrastructure/WP/InstallActions/DB/AbstractDatabaseTable.php(45): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/ameliabooking/src/Infrastructure/WP/InstallActions/ActivationDatabaseHook.php(150): AmeliaBooking\Infrastructure\WP\InstallActions\DB\AbstractDatabaseTable::init()
+#3 /wordpress/wp-content/plugins/ameliabooking/ameliabooking.php(426): AmeliaBooking\Infrastructure\WP\InstallActions\ActivationDatabaseHook::init()
+#4 /wordpress/wp-includes/class-wp-hook.php(324): AmeliaBooking\Plugin::activation(false)
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_amelia...', false)
+#8 /internal/eval.php(20): activate_plugin('ameliabooking/a...')
+#9 {main}</pre>
+ for query ALTER TABLE wp_amelia_events MODIFY recurringInterval int(11) DEFAULT 1 made by activate_plugin, do_action('activate_ameliabooking/ameliabooking.php'), WP_Hook->do_action, WP_Hook->apply_filters, AmeliaBooking\Plugin::activation, AmeliaBooking\Infrastructure\WP\InstallActions\ActivationDatabaseHook::init, AmeliaBooking\Infrastructure\WP\InstallActions\DB\AbstractDatabaseTable::init, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 11:51:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_amelia_customer_bookings MODIFY appointmentId INT(11) NULL</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/ameliabooking/src/Infrastructure/WP/InstallActions/DB/AbstractDatabaseTable.php(45): WP_SQLite_DB->query('ALTER TAB
