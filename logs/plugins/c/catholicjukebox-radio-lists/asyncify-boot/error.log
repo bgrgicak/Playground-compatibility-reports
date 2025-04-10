@@ -2,18 +2,10 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [08-Apr-2025 20:48:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:48:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:48:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:48:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:48:42 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:48:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:48:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:48:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:48:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [10-Apr-2025 04:33:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ctanalytics_options', 'a:1:{s:14:\"ctanalytics_id\";s:10:\"UA-XXXXX-X\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'IQ--ylp@3T?/aT!XjD97?`qb/7L8 =+ae~a6l@]B=la}*/!2_{m+R(=p]O^[6LaL', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -25,7 +17,7 @@ Error: [08-Apr-2025 20:48:15 UTC] PHP Warning:  Undefined array key "option_valu
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ctanalytics_options' , 'a:1:{s:14:&quot;ctanalytics_id&quot;;s:10:&quot;UA-XXXXX-X&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'IQ--ylp@3T?/aT!XjD97?`qb/7L8 =+ae~a6l@]B=la}*/!2_{m+R(=p]O^[6LaL' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -37,39 +29,344 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ctanalytics_opt...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/captain-analytics/captain-analytics.php(70): update_option('ctanalytics_opt...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ctanalytics_add_defaults(false)
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'IQ--ylp@3T?/aT!...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'IQ--ylp@3T?/aT!...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'IQ--ylp@3T?/aT!...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'IQ--ylp@3T?/aT!...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40377|wp_rest|1...', 'nonce')
+#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
+#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
+#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
+#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
+#18 /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php(247): wp_enqueue_script('jquery')
+#19 /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php(77): CalcFusionSettingsPage->__construct()
+#20 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#21 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('calcfusion-for-...')
+#22 /internal/eval.php(20): activate_plugin('calcfusion-for-...')
+#23 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'IQ--ylp@3T?/aT!XjD97?`qb/7L8 =+ae~a6l@]B=la}*/!2_{m+R(=p]O^[6LaL', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/calcfusion-for-wp/calcfusion-for-wp.php'), CalcFusionSettingsPage->__construct, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 04:33:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'K#QKV!m+5pTyDeHRbTz:1)tdf%!oo:NDn+^%Y5+J*kpvOmc/BrI0w/OimD.jfq/F', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'K#QKV!m+5pTyDeHRbTz:1)tdf%!oo:NDn+^%Y5+J*kpvOmc/BrI0w/OimD.jfq/F' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'K#QKV!m+5pTyDeH...', '', 'off')
+#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'K#QKV!m+5pTyDeH...')
+#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'K#QKV!m+5pTyDeH...')
+#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'K#QKV!m+5pTyDeH...')
+#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
+#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40377|wp_rest|1...', 'nonce')
+#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
+#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
+#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
+#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
+#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
+#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
+#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
+#18 /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php(247): wp_enqueue_script('jquery')
+#19 /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php(77): CalcFusionSettingsPage->__construct()
+#20 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#21 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('calcfusion-for-...')
+#22 /internal/eval.php(20): activate_plugin('calcfusion-for-...')
+#23 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'K#QKV!m+5pTyDeHRbTz:1)tdf%!oo:NDn+^%Y5+J*kpvOmc/BrI0w/OimD.jfq/F', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/calcfusion-for-wp/calcfusion-for-wp.php'), CalcFusionSettingsPage->__construct, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:04 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('calcfusion_wp_admin_notices', 'a:1:{i:0;s:307:\"<div class=\"updated\"><p>PHP version (<b>8.0</b>)<br>CURL Support: <b>enabled</b><br>AsyncDNS enabled: <b>No</b><br>Only synchronous service calls can be used with the current server settings.<br>To enable asynchronous service calls, the CURL AsynchDNS setting must be set to Yes.</p></div><!-- /.updated -->\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'calcfusion_wp_admin_notices' , 'a:1:{i:0;s:307:&quot;&lt;div class=&quot;updated&quot;&gt;&lt;p&gt;PHP version (&lt;b&gt;8.0&lt;/b&gt;)&lt;br&gt;CURL Support: &lt;b&gt;enabled&lt;/b&gt;&lt;br&gt;AsyncDNS enabled: &lt;b&gt;No&lt;/b&gt;&lt;br&gt;Only synchronous service calls can be used with the current server settings.&lt;br&gt;To enable asynchronous service calls, the CURL AsynchDNS setting must be set to Yes.&lt;/p&gt;&lt;/div&gt;&lt;!-- /.updated --&gt;&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('calcfusion_wp_a...', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php(158): update_option('calcfusion_wp_a...', Array)
+#6 /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php(56): checkVersionRequired()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): calcfusion_handle_activation(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_calcfu...', false)
+#11 /internal/eval.php(20): activate_plugin('calcfusion-for-...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('calcfusion_wp_admin_notices', 'a:1:{i:0;s:307:\"<div class=\"updated\"><p>PHP version (<b>8.0</b>)<br>CURL Support: <b>enabled</b><br>AsyncDNS enabled: <b>No</b><br>Only synchronous service calls can be used with the current server settings.<br>To enable asynchronous service calls, the CURL AsynchDNS setting must be set to Yes.</p></div><!-- /.updated -->\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_calcfusion-for-wp/calcfusion-for-wp.php'), WP_Hook->do_action, WP_Hook->apply_filters, calcfusion_handle_activation, checkVersionRequired, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 04:33:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 04:33:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 04:33:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 04:33:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:14 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 191
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 193
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 174
+[10-Apr-2025 04:33:24 UTC] PHP Notice:  Only variables should be passed by reference in /wordpress/wp-content/plugins/calcfusion-for-wp/calcfusion-for-wp.php on line 176
+[10-Apr-2025 04:33:33 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 04:33:33 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 04:33:33 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 04:33:33 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 04:34:46 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 04:34:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 04:34:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 04:34:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 04:35:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lnjcm_medias_in_content_index', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'lnjcm_medias_in_content_index' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('lnjcm_medias_in...', 0, '', 'auto')
+#5 /wordpress/wp-content/plugins/clean-unused-medias/library/install.php(10): update_option('lnjcm_medias_in...', 0)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): lnjcm_install(false)
 #7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_captai...', false)
-#10 /internal/eval.php(20): activate_plugin('captain-analyti...')
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clean-...', false)
+#10 /internal/eval.php(20): activate_plugin('clean-unused-me...')
 #11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ctanalytics_options', 'a:1:{s:14:\"ctanalytics_id\";s:10:\"UA-XXXXX-X\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_captain-analytics/captain-analytics.php'), WP_Hook->do_action, WP_Hook->apply_filters, ctanalytics_add_defaults, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:48:42 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:48:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:48:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:48:42 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:49:09 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:49:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:49:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:49:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:49:35 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:49:35 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:49:35 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:49:35 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:50:03 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:50:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:50:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:50:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:50:30 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:50:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:50:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:50:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:50:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lnjcm_medias_in_content_index', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_clean-unused-medias/clean-unused-medias.php'), WP_Hook->do_action, WP_Hook->apply_filters, lnjcm_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 04:35:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('civist', 'a:3:{s:7:\"version\";s:5:\"7.7.0\";s:16:\"registration_url\";s:34:\"https://registration.civist.cloud/\";s:9:\"geoip_url\";s:27:\"https://geoip.civist.cloud/\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lnjcm_medias_in_content_ids', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -81,7 +378,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'civist' , 'a:3:{s:7:&quot;version&quot;;s:5:&quot;7.7.0&quot;;s:16:&quot;registration_url&quot;;s:34:&quot;https://registration.civist.cloud/&quot;;s:9:&quot;geoip_url&quot;;s:27:&quot;https://geoip.civist.cloud/&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'lnjcm_medias_in_content_ids' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -93,254 +390,131 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('civist', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/civist/class-civist-settings-manager.php(199): update_option('civist', Array)
-#6 /wordpress/wp-content/plugins/civist/class-civist-settings-manager.php(122): Civist_Settings_Manager->set(Array)
-#7 /wordpress/wp-content/plugins/civist/class-civist.php(104): Civist_Settings_Manager->initialize_plugin_options(Array)
-#8 /wordpress/wp-content/plugins/civist/civist.php(48): Civist->run()
-#9 /wordpress/wp-content/plugins/civist/civist.php(50): run_civist()
-#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('civist/civist.p...')
-#12 /internal/eval.php(20): activate_plugin('civist/civist.p...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('civist', 'a:3:{s:7:\"version\";s:5:\"7.7.0\";s:16:\"registration_url\";s:34:\"https://registration.civist.cloud/\";s:9:\"geoip_url\";s:27:\"https://geoip.civist.cloud/\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/civist/civist.php'), run_civist, Civist->run, Civist_Settings_Manager->initialize_plugin_options, Civist_Settings_Manager->set, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:50:30 UTC] PHP Fatal error:  Uncaught TypeError: array_key_exists(): Argument #2 ($array) must be of type array, bool given in /wordpress/wp-content/plugins/civist/class-civist-settings-manager.php:180
-Stack trace:
-#0 /wordpress/wp-content/plugins/civist/class-civist.php(123): Civist_Settings_Manager->get_option_by_name('version')
-#1 /wordpress/wp-content/plugins/civist/class-civist.php(114): Civist->handle_version_change()
-#2 /wordpress/wp-content/plugins/civist/civist.php(48): Civist->run()
-#3 /wordpress/wp-content/plugins/civist/civist.php(50): run_civist()
-#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('civist/civist.p...')
-#6 /internal/eval.php(20): activate_plugin('civist/civist.p...')
-#7 {main}
-  thrown in /wordpress/wp-content/plugins/civist/class-civist-settings-manager.php on line 180
-[08-Apr-2025 20:50:56 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 20:50:56 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:50:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:50:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:50:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:50:58 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 20:51:05 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 20:51:06 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 20:51:13 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 20:51:14 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 20:51:50 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cookingrush_matisweb_jafar_comment_db_version', '1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cookingrush_matisweb_jafar_comment_db_version' , '1.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/cookingrush-emoji-inside-comment/index.php(76): add_option('cookingrush_mat...', '1.0')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): cookingrush_matisweb_jafar_comment_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cookin...', false)
-#9 /internal/eval.php(20): activate_plugin('cookingrush-emo...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cookingrush_matisweb_jafar_comment_db_version', '1.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_cookingrush-emoji-inside-comment/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, cookingrush_matisweb_jafar_comment_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:51:50 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:51:50 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:51:50 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:51:50 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:52:17 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:52:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:52:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:52:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:52:17 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:52:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:52:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:52:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:52:17 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:52:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:52:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:52:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:52:17 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:52:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:52:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:52:17 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:52:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cropnote_settings', 'a:11:{s:8:\"selector\";s:12:\"#pp_full_res\";s:7:\"enabled\";b:1;s:8:\"gravatar\";b:0;s:6:\"author\";b:0;s:12:\"automatic_id\";b:1;s:17:\"automatic_post_id\";b:1;s:6:\"clicks\";s:6:\"mobile\";s:14:\"action_message\";s:20:\"Click to load notes.\";s:18:\"use_action_message\";s:6:\"mobile\";s:21:\"anonymous_permissions\";a:6:{s:13:\"cropnote_read\";b:1;s:12:\"cropnote_add\";b:0;s:17:\"cropnote_add_html\";b:0;s:24:\"cropnote_add_autoapprove\";b:0;s:17:\"cropnote_edit_all\";b:0;s:17:\"cropnote_edit_own\";b:0;}s:11:\"prettyPhoto\";a:3:{s:3:\"rel\";s:8:\"lightbox\";s:5:\"theme\";s:12:\"light_square\";s:6:\"custom\";s:60:\"social_tools: false, showTitle: true, overlay_gallery: false\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cropnote_settings' , 'a:11:{s:8:&quot;selector&quot;;s:12:&quot;#pp_full_res&quot;;s:7:&quot;enabled&quot;;b:1;s:8:&quot;gravatar&quot;;b:0;s:6:&quot;author&quot;;b:0;s:12:&quot;automatic_id&quot;;b:1;s:17:&quot;automatic_post_id&quot;;b:1;s:6:&quot;clicks&quot;;s:6:&quot;mobile&quot;;s:14:&quot;action_message&quot;;s:20:&quot;Click to load notes.&quot;;s:18:&quot;use_action_message&quot;;s:6:&quot;mobile&quot;;s:21:&quot;anonymous_permissions&quot;;a:6:{s:13:&quot;cropnote_read&quot;;b:1;s:12:&quot;cropnote_add&quot;;b:0;s:17:&quot;cropnote_add_html&quot;;b:0;s:24:&quot;cropnote_add_autoapprove&quot;;b:0;s:17:&quot;cropnote_edit_all&quot;;b:0;s:17:&quot;cropnote_edit_own&quot;;b:0;}s:11:&quot;prettyPhoto&quot;;a:3:{s:3:&quot;rel&quot;;s:8:&quot;lightbox&quot;;s:5:&quot;theme&quot;;s:12:&quot;light_square&quot;;s:6:&quot;custom&quot;;s:60:&quot;social_tools: false, showTitle: true, overlay_gallery: false&quot;;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('cropnote_settin...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/cropnote/cropnote.php(478): update_option('cropnote_settin...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): cropnote_activate(false)
+#4 /wordpress/wp-includes/option.php(921): add_option('lnjcm_medias_in...', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/clean-unused-medias/library/install.php(11): update_option('lnjcm_medias_in...', Array)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): lnjcm_install(false)
 #7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_cropno...', false)
-#10 /internal/eval.php(20): activate_plugin('cropnote/cropno...')
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clean-...', false)
+#10 /internal/eval.php(20): activate_plugin('clean-unused-me...')
 #11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cropnote_settings', 'a:11:{s:8:\"selector\";s:12:\"#pp_full_res\";s:7:\"enabled\";b:1;s:8:\"gravatar\";b:0;s:6:\"author\";b:0;s:12:\"automatic_id\";b:1;s:17:\"automatic_post_id\";b:1;s:6:\"clicks\";s:6:\"mobile\";s:14:\"action_message\";s:20:\"Click to load notes.\";s:18:\"use_action_message\";s:6:\"mobile\";s:21:\"anonymous_permissions\";a:6:{s:13:\"cropnote_read\";b:1;s:12:\"cropnote_add\";b:0;s:17:\"cropnote_add_html\";b:0;s:24:\"cropnote_add_autoapprove\";b:0;s:17:\"cropnote_edit_all\";b:0;s:17:\"cropnote_edit_own\";b:0;}s:11:\"prettyPhoto\";a:3:{s:3:\"rel\";s:8:\"lightbox\";s:5:\"theme\";s:12:\"light_square\";s:6:\"custom\";s:60:\"social_tools: false, showTitle: true, overlay_gallery: false\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_cropnote/cropnote.php'), WP_Hook->do_action, WP_Hook->apply_filters, cropnote_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:52:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:53:07 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/custom-styling-for-developers/defines.php on line 5
-[08-Apr-2025 20:53:07 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:53:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:53:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:53:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:53:07 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:53:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:53:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:53:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:53:08 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/custom-styling-for-developers/defines.php on line 5
-[08-Apr-2025 20:53:15 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/custom-styling-for-developers/defines.php on line 5
-[08-Apr-2025 20:53:16 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/custom-styling-for-developers/defines.php on line 5
-[08-Apr-2025 20:53:24 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/custom-styling-for-developers/defines.php on line 5
-[08-Apr-2025 20:53:25 UTC] PHP Warning:  Undefined array key "DOCUMENT_ROOT" in /wordpress/wp-content/plugins/custom-styling-for-developers/defines.php on line 5
-[08-Apr-2025 20:53:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/catholicjukebox-radio-lists/cjbw.php:116
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('catholicjukebox...')
-#2 /internal/eval.php(20): activate_plugin('catholicjukebox...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/catholicjukebox-radio-lists/cjbw.php on line 116
-[08-Apr-2025 20:54:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/catholicjukebox-radio-lists/cjbw.php:116
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('catholicjukebox...')
-#2 /internal/eval.php(20): activate_plugin('catholicjukebox...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/catholicjukebox-radio-lists/cjbw.php on line 116
-
-    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"catholicjukebox-radio-lists"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
-      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
-        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
-        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
-        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
-        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
-        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
-      response: PHPResponse {
-        httpStatusCode: 500,
-        headers: {
-          'x-powered-by': [ 'PHP/8.0.30-dev' ],
-          'content-type': [ 'text/html; charset=UTF-8' ]
-        },
-        bytes: Uint8Array(0) [],
-        exitCode: 255,
-        errors: ''
-      },
-      source: 'request'
-    }
-  }
-}
-
-Node.js v23.11.0
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lnjcm_medias_in_content_ids', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_clean-unused-medias/clean-unused-medias.php'), WP_Hook->do_action, WP_Hook->apply_filters, lnjcm_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 04:35:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lnjcm_medias_in_postmeta_ids', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'lnjcm_medias_in_postmeta_ids' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('lnjcm_medias_in...', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/clean-unused-medias/library/install.php(12): update_option('lnjcm_medias_in...', Array)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): lnjcm_install(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clean-...', false)
+#10 /internal/eval.php(20): activate_plugin('clean-unused-me...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lnjcm_medias_in_postmeta_ids', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_clean-unused-medias/clean-unused-medias.php'), WP_Hook->do_action, WP_Hook->apply_filters, lnjcm_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 04:35:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lnjcm_medias_in_usermeta_ids', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'lnjcm_medias_in_usermeta_ids' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('lnjcm_medias_in...', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/clean-unused-medias/library/install.php(13): update_option('lnjcm_medias_in...', Array)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): lnjcm_install(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clean-...', false)
+#10 /internal/eval.php(20): activate_plugin('clean-unused-me...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lnjcm_medias_in_usermeta_ids', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_clean-unused-medias/clean-unused-medias.php'), WP_Hook->do_action, WP_Hook->apply_filters, lnjcm_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 04:35:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lnjcm_medias_in_option_ids', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'lnjcm_medias_in_option_ids' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('lnjcm_medias_in...', Array, '', 'auto')
+#5 /wordpress/wp-content/plugins/clean-unused-medias/library/install.php(14): update_option('lnjcm_medias_in...', Array)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): lnjcm_install(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clean-...', false)
+#10 /internal/eval.php(20): activate_plugin('clean-unused-me...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lnjcm_medias_in_option_ids', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_clean-unused-medias/clean-unused-medias.php'), WP_Hook->do_action, WP_Hook->apply_filters, lnjcm_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 04:35:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('lnjcm_medias_in_content_last_check', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_
