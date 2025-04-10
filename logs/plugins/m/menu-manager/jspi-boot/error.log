@@ -2,368 +2,111 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 07:46:53 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:46:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:46:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:46:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:46:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mihanwp_notification_bar_width', '1200', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mihanwp_notification_bar_width' , '1200' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('mihanwp_notific...', 1200, '', 'auto')
-#5 /wordpress/wp-content/plugins/mihanwp-notification-bar/app/mihanwp_notification_bar_config.php(20): update_option('mihanwp_notific...', 1200)
-#6 /wordpress/wp-content/plugins/mihanwp-notification-bar/app/mihanwp_notification_bar_config.php(9): app\mihanwp_notification_bar_config::update_options()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): app\mihanwp_notification_bar_config::plugin_load_process('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mihanwp_notification_bar_width', '1200', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, app\mihanwp_notification_bar_config::plugin_load_process, app\mihanwp_notification_bar_config::update_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:46:54 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mw_mihanwp_notification_bar_db_version', '3.1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mw_mihanwp_notification_bar_db_version' , '3.1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('mw_mihanwp_noti...', 3.1, '', 'auto')
-#5 /wordpress/wp-content/plugins/mihanwp-notification-bar/app/mihanwp_notification_bar_config.php(21): update_option('mw_mihanwp_noti...', 3.1)
-#6 /wordpress/wp-content/plugins/mihanwp-notification-bar/app/mihanwp_notification_bar_config.php(9): app\mihanwp_notification_bar_config::update_options()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): app\mihanwp_notification_bar_config::plugin_load_process('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mw_mihanwp_notification_bar_db_version', '3.1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, app\mihanwp_notification_bar_config::plugin_load_process, app\mihanwp_notification_bar_config::update_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:47:21 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:47:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:47:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:47:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('qw_MTA_default_sub', 'T', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'qw_MTA_default_sub' , 'T' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/mail-to-all-comment/mail-to-all.php(17): add_option('qw_MTA_default_...', 'T')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): qw_MTA_act(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_mail-t...', false)
-#9 /internal/eval.php(20): activate_plugin('mail-to-all-com...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('qw_MTA_default_sub', 'T', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_mail-to-all-comment/mail-to-all.php'), WP_Hook->do_action, WP_Hook->apply_filters, qw_MTA_act, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('qw_MTA_subject', '我启用Mail-To-All插件了', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'qw_MTA_subject' , '我启用Mail-To-All插件了' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/mail-to-all-comment/mail-to-all.php(20): add_option('qw_MTA_subject', '\xE6\x88\x91\xE5\x90\xAF\xE7\x94\xA8Mail-T...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): qw_MTA_act(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_mail-t...', false)
-#9 /internal/eval.php(20): activate_plugin('mail-to-all-com...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('qw_MTA_subject', '我启用Mail-To-All插件了', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_mail-to-all-comment/mail-to-all.php'), WP_Hook->do_action, WP_Hook->apply_filters, qw_MTA_act, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('qw_MTA_mail', 'admin@localhost.com', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'qw_MTA_mail' , 'admin@localhost.com' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/mail-to-all-comment/mail-to-all.php(21): add_option('qw_MTA_mail', 'admin@localhost...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): qw_MTA_act(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_mail-t...', false)
-#9 /internal/eval.php(20): activate_plugin('mail-to-all-com...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('qw_MTA_mail', 'admin@localhost.com', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_mail-to-all-comment/mail-to-all.php'), WP_Hook->do_action, WP_Hook->apply_filters, qw_MTA_act, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('qw_MTA_list', 'm@leniy.org', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'qw_MTA_list' , 'm@leniy.org' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/mail-to-all-comment/mail-to-all.php(22): add_option('qw_MTA_list', 'm@leniy.org')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): qw_MTA_act(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_mail-t...', false)
-#9 /internal/eval.php(20): activate_plugin('mail-to-all-com...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('qw_MTA_list', 'm@leniy.org', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_mail-to-all-comment/mail-to-all.php'), WP_Hook->do_action, WP_Hook->apply_filters, qw_MTA_act, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:47:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('qw_MTA_content', '欢迎使用本插件', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'qw_MTA_content' , '欢迎使用本插件' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/mail-to-all-comment/mail-to-all.php(23): add_option('qw_MTA_content', '\xE6\xAC\xA2\xE8\xBF\x8E\xE4\xBD\xBF\xE7\x94\xA8\xE6\x9C\xAC...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): qw_MTA_act(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_mail-t...', false)
-#9 /internal/eval.php(20): activate_plugin('mail-to-all-com...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('qw_MTA_content', '欢迎使用本插件', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_mail-to-all-comment/mail-to-all.php'), WP_Hook->do_action, WP_Hook->apply_filters, qw_MTA_act, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:47:48 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:47:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:47:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:47:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:48:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jm_mut_mime_types', 'a:96:{s:12:\"jpg|jpeg|jpe\";s:10:\"image/jpeg\";s:3:\"gif\";s:9:\"image/gif\";s:3:\"png\";s:9:\"image/png\";s:3:\"bmp\";s:9:\"image/bmp\";s:8:\"tiff|tif\";s:10:\"image/tiff\";s:4:\"webp\";s:10:\"image/webp\";s:4:\"avif\";s:10:\"image/avif\";s:3:\"ico\";s:12:\"image/x-icon\";s:4:\"heic\";s:10:\"image/heic\";s:4:\"heif\";s:10:\"image/heif\";s:5:\"heics\";s:19:\"image/heic-sequence\";s:5:\"heifs\";s:19:\"image/heif-sequence\";s:7:\"asf|asx\";s:14:\"video/x-ms-asf\";s:3:\"wmv\";s:14:\"video/x-ms-wmv\";s:3:\"wmx\";s:14:\"video/x-ms-wmx\";s:2:\"wm\";s:13:\"video/x-ms-wm\";s:3:\"avi\";s:9:\"video/avi\";s:4:\"divx\";s:10:\"video/divx\";s:3:\"flv\";s:11:\"video/x-flv\";s:6:\"mov|qt\";s:15:\"video/quicktime\";s:12:\"mpeg|mpg|mpe\";s:10:\"video/mpeg\";s:7:\"mp4|m4v\";s:9:\"video/mp4\";s:3:\"ogv\";s:9:\"video/ogg\";s:4:\"webm\";s:10:\"video/webm\";s:3:\"mkv\";s:16:\"video/x-matroska\";s:8:\"3gp|3gpp\";s:10:\"video/3gpp\";s:8:\"3g2|3gp2\";s:11:\"video/3gpp2\";s:18:\"txt|asc|c|cc|h|srt\";s:10:\"text/plain\";s:3:\"csv\";s:8:\"text/csv\";s:3:\"tsv\";s:25:\"text/tab-separated-values\";s:3:\"ics\";s:13:\"text/calendar\";s:3:\"rtx\";s:13:\"text/richtext\";s:3:\"css\";s:8:\"text/css\";s:8:\"htm|html\";s:9:\"text/html\";s:3:\"vtt\";s:8:\"text/vtt\";s:4:\"dfxp\";s:20:\"application/ttaf+xml\";s:11:\"mp3|m4a|m4b\";s:10:\"audio/mpeg\";s:3:\"aac\";s:9:\"audio/aac\";s:6:\"ra|ram\";s:17:\"audio/x-realaudio\";s:3:\"wav\";s:9:\"audio/wav\";s:7:\"ogg|oga\";s:9:\"audio/ogg\";s:4:\"flac\";s:10:\"audio/flac\";s:8:\"mid|midi\";s:10:\"audio/midi\";s:3:\"wma\";s:14:\"audio/x-ms-wma\";s:3:\"wax\";s:14:\"audio/x-ms-wax\";s:3:\"mka\";s:16:\"audio/x-matroska\";s:3:\"rtf\";s:15:\"application/rtf\";s:2:\"js\";s:22:\"application/javascript\";s:3:\"pdf\";s:15:\"application/pdf\";s:5:\"class\";s:16:\"application/java\";s:3:\"tar\";s:17:\"application/x-tar\";s:3:\"zip\";s:15:\"application/zip\";s:7:\"gz|gzip\";s:18:\"application/x-gzip\";s:3:\"rar\";s:15:\"application/rar\";s:2:\"7z\";s:27:\"application/x-7z-compressed\";s:3:\"psd\";s:24:\"application/octet-stream\";s:3:\"xcf\";s:24:\"application/octet-stream\";s:3:\"doc\";s:18:\"application/msword\";s:11:\"pot|pps|ppt\";s:29:\"application/vnd.ms-powerpoint\";s:3:\"wri\";s:24:\"application/vnd.ms-write\";s:15:\"xla|xls|xlt|xlw\";s:24:\"application/vnd.ms-excel\";s:3:\"mdb\";s:25:\"application/vnd.ms-access\";s:3:\"mpp\";s:26:\"application/vnd.ms-project\";s:4:\"docx\";s:71:\"application/vnd.openxmlformats-officedocument.wordprocessingml.document\";s:4:\"docm\";s:48:\"application/vnd.ms-word.document.macroEnabled.12\";s:4:\"dotx\";s:71:\"application/vnd.openxmlformats-officedocument.wordprocessingml.template\";s:4:\"dotm\";s:48:\"application/vnd.ms-word.template.macroEnabled.12\";s:4:\"xlsx\";s:65:\"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\";s:4:\"xlsm\";s:46:\"application/vnd.ms-excel.sheet.macroEnabled.12\";s:4:\"xlsb\";s:53:\"application/vnd.ms-excel.sheet.binary.macroEnabled.12\";s:4:\"xltx\";s:68:\"application/vnd.openxmlformats-officedocument.spreadsheetml.template\";s:4:\"xltm\";s:49:\"application/vnd.ms-excel.template.macroEnabled.12\";s:4:\"xlam\";s:46:\"application/vnd.ms-excel.addin.macroEnabled.12\";s:4:\"pptx\";s:73:\"application/vnd.openxmlformats-officedocument.presentationml.presentation\";s:4:\"pptm\";s:58:\"application/vnd.ms-powerpoint.presentation.macroEnabled.12\";s:4:\"ppsx\";s:70:\"application/vnd.openxmlformats-officedocument.presentationml.slideshow\";s:4:\"ppsm\";s:55:\"application/vnd.ms-powerpoint.slideshow.macroEnabled.12\";s:4:\"potx\";s:69:\"application/vnd.openxmlformats-officedocument.presentationml.template\";s:4:\"potm\";s:54:\"application/vnd.ms-powerpoint.template.macroEnabled.12\";s:4:\"ppam\";s:51:\"application/vnd.ms-powerpoint.addin.macroEnabled.12\";s:4:\"sldx\";s:66:\"application/vnd.openxmlformats-officedocument.presentationml.slide\";s:4:\"sldm\";s:51:\"application/vnd.ms-powerpoint.slide.macroEnabled.12\";s:28:\"onetoc|onetoc2|onetmp|onepkg\";s:19:\"application/onenote\";s:4:\"oxps\";s:16:\"application/oxps\";s:3:\"xps\";s:30:\"application/vnd.ms-xpsdocument\";s:3:\"odt\";s:39:\"application/vnd.oasis.opendocument.text\";s:3:\"odp\";s:47:\"application/vnd.oasis.opendocument.presentation\";s:3:\"ods\";s:46:\"application/vnd.oasis.opendocument.spreadsheet\";s:3:\"odg\";s:43:\"application/vnd.oasis.opendocument.graphics\";s:3:\"odc\";s:40:\"application/vnd.oasis.opendocument.chart\";s:3:\"odb\";s:43:\"application/vnd.oasis.opendocument.database\";s:3:\"odf\";s:42:\"application/vnd.oasis.opendocument.formula\";s:6:\"wp|wpd\";s:23:\"application/wordperfect\";s:3:\"key\";s:29:\"application/vnd.apple.keynote\";s:7:\"numbers\";s:29:\"application/vnd.apple.numbers\";s:5:\"pages\";s:27:\"application/vnd.apple.pages\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'jm_mut_mime_types' , 'a:96:{s:12:&quot;jpg|jpeg|jpe&quot;;s:10:&quot;image/jpeg&quot;;s:3:&quot;gif&quot;;s:9:&quot;image/gif&quot;;s:3:&quot;png&quot;;s:9:&quot;image/png&quot;;s:3:&quot;bmp&quot;;s:9:&quot;image/bmp&quot;;s:8:&quot;tiff|tif&quot;;s:10:&quot;image/tiff&quot;;s:4:&quot;webp&quot;;s:10:&quot;image/webp&quot;;s:4:&quot;avif&quot;;s:10:&quot;image/avif&quot;;s:3:&quot;ico&quot;;s:12:&quot;image/x-icon&quot;;s:4:&quot;heic&quot;;s:10:&quot;image/heic&quot;;s:4:&quot;heif&quot;;s:10:&quot;image/heif&quot;;s:5:&quot;heics&quot;;s:19:&quot;image/heic-sequence&quot;;s:5:&quot;heifs&quot;;s:19:&quot;image/heif-sequence&quot;;s:7:&quot;asf|asx&quot;;s:14:&quot;video/x-ms-asf&quot;;s:3:&quot;wmv&quot;;s:14:&quot;video/x-ms-wmv&quot;;s:3:&quot;wmx&quot;;s:14:&quot;video/x-ms-wmx&quot;;s:2:&quot;wm&quot;;s:13:&quot;video/x-ms-wm&quot;;s:3:&quot;avi&quot;;s:9:&quot;video/avi&quot;;s:4:&quot;divx&quot;;s:10:&quot;video/divx&quot;;s:3:&quot;flv&quot;;s:11:&quot;video/x-flv&quot;;s:6:&quot;mov|qt&quot;;s:15:&quot;video/quicktime&quot;;s:12:&quot;mpeg|mpg|mpe&quot;;s:10:&quot;video/mpeg&quot;;s:7:&quot;mp4|m4v&quot;;s:9:&quot;video/mp4&quot;;s:3:&quot;ogv&quot;;s:9:&quot;video/ogg&quot;;s:4:&quot;webm&quot;;s:10:&quot;video/webm&quot;;s:3:&quot;mkv&quot;;s:16:&quot;video/x-matroska&quot;;s:8:&quot;3gp|3gpp&quot;;s:10:&quot;video/3gpp&quot;;s:8:&quot;3g2|3gp2&quot;;s:11:&quot;video/3gpp2&quot;;s:18:&quot;txt|asc|c|cc|h|srt&quot;;s:10:&quot;text/plain&quot;;s:3:&quot;csv&quot;;s:8:&quot;text/csv&quot;;s:3:&quot;tsv&quot;;s:25:&quot;text/tab-separated-values&quot;;s:3:&quot;ics&quot;;s:13:&quot;text/calendar&quot;;s:3:&quot;rtx&quot;;s:13:&quot;text/richtext&quot;;s:3:&quot;css&quot;;s:8:&quot;text/css&quot;;s:8:&quot;htm|html&quot;;s:9:&quot;text/html&quot;;s:3:&quot;vtt&quot;;s:8:&quot;text/vtt&quot;;s:4:&quot;dfxp&quot;;s:20:&quot;application/ttaf+xml&quot;;s:11:&quot;mp3|m4a|m4b&quot;;s:10:&quot;audio/mpeg&quot;;s:3:&quot;aac&quot;;s:9:&quot;audio/aac&quot;;s:6:&quot;ra|ram&quot;;s:17:&quot;audio/x-realaudio&quot;;s:3:&quot;wav&quot;;s:9:&quot;audio/wav&quot;;s:7:&quot;ogg|oga&quot;;s:9:&quot;audio/ogg&quot;;s:4:&quot;flac&quot;;s:10:&quot;audio/flac&quot;;s:8:&quot;mid|midi&quot;;s:10:&quot;audio/midi&quot;;s:3:&quot;wma&quot;;s:14:&quot;audio/x-ms-wma&quot;;s:3:&quot;wax&quot;;s:14:&quot;audio/x-ms-wax&quot;;s:3:&quot;mka&quot;;s:16:&quot;audio/x-matroska&quot;;s:3:&quot;rtf&quot;;s:15:&quot;application/rtf&quot;;s:2:&quot;js&quot;;s:22:&quot;application/javascript&quot;;s:3:&quot;pdf&quot;;s:15:&quot;application/pdf&quot;;s:5:&quot;class&quot;;s:16:&quot;application/java&quot;;s:3:&quot;tar&quot;;s:17:&quot;application/x-tar&quot;;s:3:&quot;zip&quot;;s:15:&quot;application/zip&quot;;s:7:&quot;gz|gzip&quot;;s:18:&quot;application/x-gzip&quot;;s:3:&quot;rar&quot;;s:15:&quot;application/rar&quot;;s:2:&quot;7z&quot;;s:27:&quot;application/x-7z-compressed&quot;;s:3:&quot;psd&quot;;s:24:&quot;application/octet-stream&quot;;s:3:&quot;xcf&quot;;s:24:&quot;application/octet-stream&quot;;s:3:&quot;doc&quot;;s:18:&quot;application/msword&quot;;s:11:&quot;pot|pps|ppt&quot;;s:29:&quot;application/vnd.ms-powerpoint&quot;;s:3:&quot;wri&quot;;s:24:&quot;application/vnd.ms-write&quot;;s:15:&quot;xla|xls|xlt|xlw&quot;;s:24:&quot;application/vnd.ms-excel&quot;;s:3:&quot;mdb&quot;;s:25:&quot;application/vnd.ms-access&quot;;s:3:&quot;mpp&quot;;s:26:&quot;application/vnd.ms-project&quot;;s:4:&quot;docx&quot;;s:71:&quot;application/vnd.openxmlformats-officedocument.wordprocessingml.document&quot;;s:4:&quot;docm&quot;;s:48:&quot;application/vnd.ms-word.document.macroEnabled.12&quot;;s:4:&quot;dotx&quot;;s:71:&quot;application/vnd.openxmlformats-officedocument.wordprocessingml.template&quot;;s:4:&quot;dotm&quot;;s:48:&quot;application/vnd.ms-word.template.macroEnabled.12&quot;;s:4:&quot;xlsx&quot;;s:65:&quot;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&quot;;s:4:&quot;xlsm&quot;;s:46:&quot;application/vnd.ms-excel.sheet.macroEnabled.12&quot;;s:4:&quot;xlsb&quot;;s:53:&quot;application/vnd.ms-excel.sheet.binary.macroEnabled.12&quot;;s:4:&quot;xltx&quot;;s:68:&quot;application/vnd.openxmlformats-officedocument.spreadsheetml.template&quot;;s:4:&quot;xltm&quot;;s:49:&quot;application/vnd.ms-excel.template.macroEnabled.12&quot;;s:4:&quot;xlam&quot;;s:46:&quot;application/vnd.ms-excel.addin.macroEnabled.12&quot;;s:4:&quot;pptx&quot;;s:73:&quot;application/vnd.openxmlformats-officedocument.presentationml.presentation&quot;;s:4:&quot;pptm&quot;;s:58:&quot;application/vnd.ms-powerpoint.presentation.macroEnabled.12&quot;;s:4:&quot;ppsx&quot;;s:70:&quot;application/vnd.openxmlformats-officedocument.presentationml.slideshow&quot;;s:4:&quot;ppsm&quot;;s:55:&quot;application/vnd.ms-powerpoint.slideshow.macroEnabled.12&quot;;s:4:&quot;potx&quot;;s:69:&quot;application/vnd.openxmlformats-officedocument.presentationml.template&quot;;s:4:&quot;potm&quot;;s:54:&quot;application/vnd.ms-powerpoint.template.macroEnabled.12&quot;;s:4:&quot;ppam&quot;;s:51:&quot;application/vnd.ms-powerpoint.addin.macroEnabled.12&quot;;s:4:&quot;sldx&quot;;s:66:&quot;application/vnd.openxmlformats-officedocument.presentationml.slide&quot;;s:4:&quot;sldm&quot;;s:51:&quot;application/vnd.ms-powerpoint.slide.macroEnabled.12&quot;;s:28:&quot;onetoc|onetoc2|onetmp|onepkg&quot;;s:19:&quot;application/onenote&quot;;s:4:&quot;oxps&quot;;s:16:&quot;application/oxps&quot;;s:3:&quot;xps&quot;;s:30:&quot;application/vnd.ms-xpsdocument&quot;;s:3:&quot;odt&quot;;s:39:&quot;application/vnd.oasis.opendocument.text&quot;;s:3:&quot;odp&quot;;s:47:&quot;application/vnd.oasis.opendocument.presentation&quot;;s:3:&quot;ods&quot;;s:46:&quot;application/vnd.oasis.opendocument.spreadsheet&quot;;s:3:&quot;odg&quot;;s:43:&quot;application/vnd.oasis.opendocument.graphics&quot;;s:3:&quot;odc&quot;;s:40:&quot;application/vnd.oasis.opendocument.chart&quot;;s:3:&quot;odb&quot;;s:43:&quot;application/vnd.oasis.opendocument.database&quot;;s:3:&quot;odf&quot;;s:42:&quot;application/vnd.oasis.opendocument.formula&quot;;s:6:&quot;wp|wpd&quot;;s:23:&quot;application/wordperfect&quot;;s:3:&quot;key&quot;;s:29:&quot;application/vnd.apple.keynote&quot;;s:7:&quot;numbers&quot;;s:29:&quot;application/vnd.apple.numbers&quot;;s:5:&quot;pages&quot;;s:27:&quot;application/vnd.apple.pages&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/manage-upload-types/manage-upload-types.php(57): add_option('jm_mut_mime_typ...', Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(326): jm_mut_load_mime_types(Array)
-#6 /wordpress/wp-includes/plugin.php(205): WP_Hook->apply_filters(Array, Array)
-#7 /wordpress/wp-includes/functions.php(3653): apply_filters('upload_mimes', Array, NULL)
-#8 /wordpress/wp-content/plugins/manage-upload-types/manage-upload-types.php(42): get_allowed_mime_types()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): jm_mut_install(false)
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_manage...', false)
-#13 /internal/eval.php(20): activate_plugin('manage-upload-t...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jm_mut_mime_types', 'a:96:{s:12:\"jpg|jpeg|jpe\";s:10:\"image/jpeg\";s:3:\"gif\";s:9:\"image/gif\";s:3:\"png\";s:9:\"image/png\";s:3:\"bmp\";s:9:\"image/bmp\";s:8:\"tiff|tif\";s:10:\"image/tiff\";s:4:\"webp\";s:10:\"image/webp\";s:4:\"avif\";s:10:\"image/avif\";s:3:\"ico\";s:12:\"image/x-icon\";s:4:\"heic\";s:10:\"image/heic\";s:4:\"heif\";s:10:\"image/heif\";s:5:\"heics\";s:19:\"image/heic-sequence\";s:5:\"heifs\";s:19:\"image/heif-sequence\";s:7:\"asf|asx\";s:14:\"video/x-ms-asf\";s:3:\"wmv\";s:14:\"video/x-ms-wmv\";s:3:\"wmx\";s:14:\"video/x-ms-wmx\";s:2:\"wm\";s:13:\"video/x-ms-wm\";s:3:\"avi\";s:9:\"video/avi\";s:4:\"divx\";s:10:\"video/divx\";s:3:\"flv\";s:11:\"video/x-flv\";s:6:\"mov|qt\";s:15:\"video/quicktime\";s:12:\"mpeg|mpg|mpe\";s:10:\"video/mpeg\";s:7:\"mp4|m4v\";s:9:\"video/mp4\";s:3:\"ogv\";s:9:\"video/ogg\";s:4:\"webm\";s:10:\"video/webm\";s:3:\"mkv\";s:16:\"video/x-matroska\";s:8:\"3gp|3gpp\";s:10:\"video/3gpp\";s:8:\"3g2|3gp2\";s:11:\"video/3gpp2\";s:18:\"txt|asc|c|cc|h|srt\";s:10:\"text/plain\";s:3:\"csv\";s:8:\"text/csv\";s:3:\"tsv\";s:25:\"text/tab-separated-values\";s:3:\"ics\";s:13:\"text/calendar\";s:3:\"rtx\";s:13:\"text/richtext\";s:3:\"css\";s:8:\"text/css\";s:8:\"htm|html\";s:9:\"text/html\";s:3:\"vtt\";s:8:\"text/vtt\";s:4:\"dfxp\";s:20:\"application/ttaf+xml\";s:11:\"mp3|m4a|m4b\";s:10:\"audio/mpeg\";s:3:\"aac\";s:9:\"audio/aac\";s:6:\"ra|ram\";s:17:\"audio/x-realaudio\";s:3:\"wav\";s:9:\"audio/wav\";s:7:\"ogg|oga\";s:9:\"audio/ogg\";s:4:\"flac\";s:10:\"audio/flac\";s:8:\"mid|midi\";s:10:\"audio/midi\";s:3:\"wma\";s:14:\"audio/x-ms-wma\";s:3:\"wax\";s:14:\"audio/x-ms-wax\";s:3:\"mka\";s:16:\"audio/x-matroska\";s:3:\"rtf\";s:15:\"application/rtf\";s:2:\"js\";s:22:\"application/javascript\";s:3:\"pdf\";s:15:\"application/pdf\";s:5:\"class\";s:16:\"application/java\";s:3:\"tar\";s:17:\"application/x-tar\";s:3:\"zip\";s:15:\"application/zip\";s:7:\"gz|gzip\";s:18:\"application/x-gzip\";s:3:\"rar\";s:15:\"application/rar\";s:2:\"7z\";s:27:\"application/x-7z-compressed\";s:3:\"psd\";s:24:\"application/octet-stream\";s:3:\"xcf\";s:24:\"application/octet-stream\";s:3:\"doc\";s:18:\"application/msword\";s:11:\"pot|pps|ppt\";s:29:\"application/vnd.ms-powerpoint\";s:3:\"wri\";s:24:\"application/vnd.ms-write\";s:15:\"xla|xls|xlt|xlw\";s:24:\"application/vnd.ms-excel\";s:3:\"mdb\";s:25:\"application/vnd.ms-access\";s:3:\"mpp\";s:26:\"application/vnd.ms-project\";s:4:\"docx\";s:71:\"application/vnd.openxmlformats-officedocument.wordprocessingml.document\";s:4:\"docm\";s:48:\"application/vnd.ms-word.document.macroEnabled.12\";s:4:\"dotx\";s:71:\"application/vnd.openxmlformats-officedocument.wordprocessingml.template\";s:4:\"dotm\";s:48:\"application/vnd.ms-word.template.macroEnabled.12\";s:4:\"xlsx\";s:65:\"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\";s:4:\"xlsm\";s:46:\"application/vnd.ms-excel.sheet.macroEnabled.12\";s:4:\"xlsb\";s:53:\"application/vnd.ms-excel.sheet.binary.macroEnabled.12\";s:4:\"xltx\";s:68:\"application/vnd.openxmlformats-officedocument.spreadsheetml.template\";s:4:\"xltm\";s:49:\"application/vnd.ms-excel.template.macroEnabled.12\";s:4:\"xlam\";s:46:\"application/vnd.ms-excel.addin.macroEnabled.12\";s:4:\"pptx\";s:73:\"application/vnd.openxmlformats-officedocument.presentationml.presentation\";s:4:\"pptm\";s:58:\"application/vnd.ms-powerpoint.presentation.macroEnabled.12\";s:4:\"ppsx\";s:70:\"application/vnd.openxmlformats-officedocument.presentationml.slideshow\";s:4:\"ppsm\";s:55:\"application/vnd.ms-powerpoint.slideshow.macroEnabled.12\";s:4:\"potx\";s:69:\"application/vnd.openxmlformats-officedocument.presentationml.template\";s:4:\"potm\";s:54:\"application/vnd.ms-powerpoint.template.macroEnabled.12\";s:4:\"ppam\";s:51:\"application/vnd.ms-powerpoint.addin.macroEnabled.12\";s:4:\"sldx\";s:66:\"application/vnd.openxmlformats-officedocument.presentationml.slide\";s:4:\"sldm\";s:51:\"application/vnd.ms-powerpoint.slide.macroEnabled.12\";s:28:\"onetoc|onetoc2|onetmp|onepkg\";s:19:\"application/onenote\";s:4:\"oxps\";s:16:\"application/oxps\";s:3:\"xps\";s:30:\"application/vnd.ms-xpsdocument\";s:3:\"odt\";s:39:\"application/vnd.oasis.opendocument.text\";s:3:\"odp\";s:47:\"application/vnd.oasis.opendocument.presentation\";s:3:\"ods\";s:46:\"application/vnd.oasis.opendocument.spreadsheet\";s:3:\"odg\";s:43:\"application/vnd.oasis.opendocument.graphics\";s:3:\"odc\";s:40:\"application/vnd.oasis.opendocument.chart\";s:3:\"odb\";s:43:\"application/vnd.oasis.opendocument.database\";s:3:\"odf\";s:42:\"application/vnd.oasis.opendocument.formula\";s:6:\"wp|wpd\";s:23:\"application/wordperfect\";s:3:\"key\";s:29:\"application/vnd.apple.keynote\";s:7:\"numbers\";s:29:\"application/vnd.apple.numbers\";s:5:\"pages\";s:27:\"application/vnd.apple.pages\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_manage-upload-types/manage-upload-types.php'), WP_Hook->do_action, WP_Hook->apply_filters, jm_mut_install, get_allowed_mime_types, apply_filters('upload_mimes'), WP_Hook->apply_filters, jm_mut_load_mime_types, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:48:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jm_mut_mime_types', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'jm_mut_mime_types' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/manage-upload-types/manage-upload-types.php(43): add_option('jm_mut_mime_typ...', false)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): jm_mut_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_manage...', false)
-#9 /internal/eval.php(20): activate_plugin('manage-upload-t...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jm_mut_mime_types', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_manage-upload-types/manage-upload-types.php'), WP_Hook->do_action, WP_Hook->apply_filters, jm_mut_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:48:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:48:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:48:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:48:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:49:03 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:49:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:49:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:49:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:49:31 UTC] PHP Fatal error:  Uncaught Error: Non-static method Menu_Manager::bootstrap() cannot be called statically in /wordpress/wp-content/plugins/menu-manager/menu-manager.php:33
+Error: [10-Apr-2025 19:24:30 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/microcopy/microcopy.php on line 40
+[10-Apr-2025 19:24:30 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/microcopy/microcopy.php on line 41
+[10-Apr-2025 19:24:30 UTC] PHP Warning:  Undefined array key "page" in /wordpress/wp-content/plugins/microcopy/microcopy.php on line 42
+[10-Apr-2025 19:24:31 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/microcopy/microcopy.php on line 40
+[10-Apr-2025 19:24:31 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/microcopy/microcopy.php on line 41
+[10-Apr-2025 19:24:31 UTC] PHP Warning:  Undefined array key "page" in /wordpress/wp-content/plugins/microcopy/microcopy.php on line 42
+[10-Apr-2025 19:24:31 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>microcopy</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 19:24:31 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 19:24:38 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/microcopy/microcopy.php on line 40
+[10-Apr-2025 19:24:38 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/microcopy/microcopy.php on line 41
+[10-Apr-2025 19:24:38 UTC] PHP Warning:  Undefined array key "page" in /wordpress/wp-content/plugins/microcopy/microcopy.php on line 42
+[10-Apr-2025 19:24:39 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/microcopy/microcopy.php on line 40
+[10-Apr-2025 19:24:39 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/microcopy/microcopy.php on line 41
+[10-Apr-2025 19:24:39 UTC] PHP Warning:  Undefined array key "page" in /wordpress/wp-content/plugins/microcopy/microcopy.php on line 42
+[10-Apr-2025 19:24:39 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>microcopy</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 19:24:39 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 19:24:47 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/microcopy/microcopy.php on line 40
+[10-Apr-2025 19:24:47 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/microcopy/microcopy.php on line 41
+[10-Apr-2025 19:24:47 UTC] PHP Warning:  Undefined array key "page" in /wordpress/wp-content/plugins/microcopy/microcopy.php on line 42
+[10-Apr-2025 19:24:48 UTC] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/microcopy/microcopy.php on line 40
+[10-Apr-2025 19:24:48 UTC] PHP Warning:  Undefined array key "id" in /wordpress/wp-content/plugins/microcopy/microcopy.php on line 41
+[10-Apr-2025 19:24:48 UTC] PHP Warning:  Undefined array key "page" in /wordpress/wp-content/plugins/microcopy/microcopy.php on line 42
+[10-Apr-2025 19:24:48 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>microcopy</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 19:24:48 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 19:26:35 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 19:26:36 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 19:26:44 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 19:26:45 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 19:26:53 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 19:26:54 UTC] PHP Deprecated:  Function load_plugin_textdomain was called with an argument that is <strong>deprecated</strong> since version 2.7.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 19:27:34 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "STDERR" in /wordpress/wp-content/plugins/maaq-website-manager/vendor/composer/platform_check.php:17
+Stack trace:
+#0 /wordpress/wp-content/plugins/maaq-website-manager/vendor/composer/autoload_real.php(25): require()
+#1 /wordpress/wp-content/plugins/maaq-website-manager/vendor/autoload.php(25): ComposerAutoloaderInite64a4bcf2bc2bb1f778c9f440f1116ff::getLoader()
+#2 /wordpress/wp-content/plugins/maaq-website-manager/maaq.php(59): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('maaq-website-ma...')
+#5 /internal/eval.php(20): activate_plugin('maaq-website-ma...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/maaq-website-manager/vendor/composer/platform_check.php on line 17
+[10-Apr-2025 19:27:43 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "STDERR" in /wordpress/wp-content/plugins/maaq-website-manager/vendor/composer/platform_check.php:17
+Stack trace:
+#0 /wordpress/wp-content/plugins/maaq-website-manager/vendor/composer/autoload_real.php(25): require()
+#1 /wordpress/wp-content/plugins/maaq-website-manager/vendor/autoload.php(25): ComposerAutoloaderInite64a4bcf2bc2bb1f778c9f440f1116ff::getLoader()
+#2 /wordpress/wp-content/plugins/maaq-website-manager/maaq.php(59): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('maaq-website-ma...')
+#5 /internal/eval.php(20): activate_plugin('maaq-website-ma...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/maaq-website-manager/vendor/composer/platform_check.php on line 17
+[10-Apr-2025 19:27:53 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "STDERR" in /wordpress/wp-content/plugins/maaq-website-manager/vendor/composer/platform_check.php:17
+Stack trace:
+#0 /wordpress/wp-content/plugins/maaq-website-manager/vendor/composer/autoload_real.php(25): require()
+#1 /wordpress/wp-content/plugins/maaq-website-manager/vendor/autoload.php(25): ComposerAutoloaderInite64a4bcf2bc2bb1f778c9f440f1116ff::getLoader()
+#2 /wordpress/wp-content/plugins/maaq-website-manager/maaq.php(59): require_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('maaq-website-ma...')
+#5 /internal/eval.php(20): activate_plugin('maaq-website-ma...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/maaq-website-manager/vendor/composer/platform_check.php on line 17
+[10-Apr-2025 19:28:34 UTC] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /wordpress/wp-content/plugins/mediashort/includes/ms_settings.class.php:24
+Stack trace:
+#0 /wordpress/wp-content/plugins/mediashort/includes/ms_settings.class.php(19): MediaShort_Settings->init_variables()
+#1 /wordpress/wp-content/plugins/mediashort/includes/ms_settings.class.php(3): MediaShort_Settings->__construct()
+#2 /wordpress/wp-content/plugins/mediashort/mediashort.php(16): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mediashort/medi...')
+#5 /internal/eval.php(20): activate_plugin('mediashort/medi...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/mediashort/includes/ms_settings.class.php on line 24
+[10-Apr-2025 19:28:42 UTC] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /wordpress/wp-content/plugins/mediashort/includes/ms_settings.class.php:24
+Stack trace:
+#0 /wordpress/wp-content/plugins/mediashort/includes/ms_settings.class.php(19): MediaShort_Settings->init_variables()
+#1 /wordpress/wp-content/plugins/mediashort/includes/ms_settings.class.php(3): MediaShort_Settings->__construct()
+#2 /wordpress/wp-content/plugins/mediashort/mediashort.php(16): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mediashort/medi...')
+#5 /internal/eval.php(20): activate_plugin('mediashort/medi...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/mediashort/includes/ms_settings.class.php on line 24
+[10-Apr-2025 19:28:50 UTC] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /wordpress/wp-content/plugins/mediashort/includes/ms_settings.class.php:24
+Stack trace:
+#0 /wordpress/wp-content/plugins/mediashort/includes/ms_settings.class.php(19): MediaShort_Settings->init_variables()
+#1 /wordpress/wp-content/plugins/mediashort/includes/ms_settings.class.php(3): MediaShort_Settings->__construct()
+#2 /wordpress/wp-content/plugins/mediashort/mediashort.php(16): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mediashort/medi...')
+#5 /internal/eval.php(20): activate_plugin('mediashort/medi...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/mediashort/includes/ms_settings.class.php on line 24
+[10-Apr-2025 19:29:01 UTC] PHP Fatal error:  Uncaught Error: Non-static method Menu_Manager::bootstrap() cannot be called statically in /wordpress/wp-content/plugins/menu-manager/menu-manager.php:33
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('menu-manager/me...')
 #2 /internal/eval.php(20): activate_plugin('menu-manager/me...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/menu-manager/menu-manager.php on line 33
-[09-Apr-2025 07:49:39 UTC] PHP Fatal error:  Uncaught Error: Non-static method Menu_Manager::bootstrap() cannot be called statically in /wordpress/wp-content/plugins/menu-manager/menu-manager.php:33
+[10-Apr-2025 19:29:09 UTC] PHP Fatal error:  Uncaught Error: Non-static method Menu_Manager::bootstrap() cannot be called statically in /wordpress/wp-content/plugins/menu-manager/menu-manager.php:33
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('menu-manager/me...')
 #2 /internal/eval.php(20): activate_plugin('menu-manager/me...')
 #3 {main}
   thrown in /wordpress/wp-content/plugins/menu-manager/menu-manager.php on line 33
-[09-Apr-2025 07:49:47 UTC] PHP Fatal error:  Uncaught Error: Non-static method Menu_Manager::bootstrap() cannot be called statically in /wordpress/wp-content/plugins/menu-manager/menu-manager.php:33
+[10-Apr-2025 19:29:17 UTC] PHP Fatal error:  Uncaught Error: Non-static method Menu_Manager::bootstrap() cannot be called statically in /wordpress/wp-content/plugins/menu-manager/menu-manager.php:33
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('menu-manager/me...')
