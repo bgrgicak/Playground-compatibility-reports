@@ -2,142 +2,11 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [08-Apr-2025 06:36:28 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 06:36:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 06:36:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 06:36:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 06:36:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('simpleshib_options', 'a:11:{s:10:\"attr_email\";s:4:\"mail\";s:14:\"attr_firstname\";s:9:\"givenName\";s:13:\"attr_lastname\";s:2:\"sn\";s:13:\"attr_username\";s:3:\"uid\";s:13:\"autoprovision\";b:0;s:5:\"debug\";b:0;s:7:\"enabled\";b:0;s:15:\"pass_change_url\";s:34:\"https://www.example.com/passchange\";s:14:\"pass_reset_url\";s:33:\"https://www.example.com/passreset\";s:16:\"session_init_url\";s:21:\"/Shibboleth.sso/Login\";s:18:\"session_logout_url\";s:22:\"/Shibboleth.sso/Logout\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'simpleshib_options' , 'a:11:{s:10:&quot;attr_email&quot;;s:4:&quot;mail&quot;;s:14:&quot;attr_firstname&quot;;s:9:&quot;givenName&quot;;s:13:&quot;attr_lastname&quot;;s:2:&quot;sn&quot;;s:13:&quot;attr_username&quot;;s:3:&quot;uid&quot;;s:13:&quot;autoprovision&quot;;b:0;s:5:&quot;debug&quot;;b:0;s:7:&quot;enabled&quot;;b:0;s:15:&quot;pass_change_url&quot;;s:34:&quot;https://www.example.com/passchange&quot;;s:14:&quot;pass_reset_url&quot;;s:33:&quot;https://www.example.com/passreset&quot;;s:16:&quot;session_init_url&quot;;s:21:&quot;/Shibboleth.sso/Login&quot;;s:18:&quot;session_logout_url&quot;;s:22:&quot;/Shibboleth.sso/Logout&quot;;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('simpleshib_opti...', Array, '', 'off')
-#5 /wordpress/wp-includes/option.php(1928): add_network_option(1, 'simpleshib_opti...', Array)
-#6 /wordpress/wp-content/plugins/simpleshib/class-simple-shib.php(114): add_site_option('simpleshib_opti...', Array)
-#7 /wordpress/wp-content/plugins/simpleshib/class-simple-shib.php(65): Simple_Shib->initialize_options()
-#8 /wordpress/wp-content/plugins/simpleshib/simpleshib.php(24): Simple_Shib->__construct()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('simpleshib/simp...')
-#11 /internal/eval.php(20): activate_plugin('simpleshib/simp...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('simpleshib_options', 'a:11:{s:10:\"attr_email\";s:4:\"mail\";s:14:\"attr_firstname\";s:9:\"givenName\";s:13:\"attr_lastname\";s:2:\"sn\";s:13:\"attr_username\";s:3:\"uid\";s:13:\"autoprovision\";b:0;s:5:\"debug\";b:0;s:7:\"enabled\";b:0;s:15:\"pass_change_url\";s:34:\"https://www.example.com/passchange\";s:14:\"pass_reset_url\";s:33:\"https://www.example.com/passreset\";s:16:\"session_init_url\";s:21:\"/Shibboleth.sso/Login\";s:18:\"session_logout_url\";s:22:\"/Shibboleth.sso/Logout\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/simpleshib/simpleshib.php'), Simple_Shib->__construct, Simple_Shib->initialize_options, add_site_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 06:36:42 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 06:36:42 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 06:36:42 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 06:36:42 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 06:36:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('simpleshib_options', 'a:11:{s:10:\"attr_email\";s:4:\"mail\";s:14:\"attr_firstname\";s:9:\"givenName\";s:13:\"attr_lastname\";s:2:\"sn\";s:13:\"attr_username\";s:3:\"uid\";s:13:\"autoprovision\";b:0;s:5:\"debug\";b:0;s:7:\"enabled\";b:0;s:15:\"pass_change_url\";s:34:\"https://www.example.com/passchange\";s:14:\"pass_reset_url\";s:33:\"https://www.example.com/passreset\";s:16:\"session_init_url\";s:21:\"/Shibboleth.sso/Login\";s:18:\"session_logout_url\";s:22:\"/Shibboleth.sso/Logout\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'simpleshib_options' , 'a:11:{s:10:&quot;attr_email&quot;;s:4:&quot;mail&quot;;s:14:&quot;attr_firstname&quot;;s:9:&quot;givenName&quot;;s:13:&quot;attr_lastname&quot;;s:2:&quot;sn&quot;;s:13:&quot;attr_username&quot;;s:3:&quot;uid&quot;;s:13:&quot;autoprovision&quot;;b:0;s:5:&quot;debug&quot;;b:0;s:7:&quot;enabled&quot;;b:0;s:15:&quot;pass_change_url&quot;;s:34:&quot;https://www.example.com/passchange&quot;;s:14:&quot;pass_reset_url&quot;;s:33:&quot;https://www.example.com/passreset&quot;;s:16:&quot;session_init_url&quot;;s:21:&quot;/Shibboleth.sso/Login&quot;;s:18:&quot;session_logout_url&quot;;s:22:&quot;/Shibboleth.sso/Logout&quot;;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('simpleshib_opti...', Array, '', 'off')
-#5 /wordpress/wp-includes/option.php(1928): add_network_option(1, 'simpleshib_opti...', Array)
-#6 /wordpress/wp-content/plugins/simpleshib/class-simple-shib.php(114): add_site_option('simpleshib_opti...', Array)
-#7 /wordpress/wp-content/plugins/simpleshib/class-simple-shib.php(65): Simple_Shib->initialize_options()
-#8 /wordpress/wp-content/plugins/simpleshib/simpleshib.php(24): Simple_Shib->__construct()
-#9 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('simpleshib_options', 'a:11:{s:10:\"attr_email\";s:4:\"mail\";s:14:\"attr_firstname\";s:9:\"givenName\";s:13:\"attr_lastname\";s:2:\"sn\";s:13:\"attr_username\";s:3:\"uid\";s:13:\"autoprovision\";b:0;s:5:\"debug\";b:0;s:7:\"enabled\";b:0;s:15:\"pass_change_url\";s:34:\"https://www.example.com/passchange\";s:14:\"pass_reset_url\";s:33:\"https://www.example.com/passreset\";s:16:\"session_init_url\";s:21:\"/Shibboleth.sso/Login\";s:18:\"session_logout_url\";s:22:\"/Shibboleth.sso/Logout\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/simpleshib/simpleshib.php'), Simple_Shib->__construct, Simple_Shib->initialize_options, add_site_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 06:36:55 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 06:36:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 06:36:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 06:36:55 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 06:37:07 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 06:37:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 06:37:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 06:37:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 06:37:19 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 06:37:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 06:37:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 06:37:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 06:37:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('simplysociallink-options', 'a:1:{s:5:\"theme\";s:7:\"default\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'simplysociallink-options' , 'a:1:{s:5:&quot;theme&quot;;s:7:&quot;default&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('simplysociallin...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/simply-social-links/simply-social-links.php(321): update_option('simplysociallin...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): simplySocialLinks::instalar(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_simply...', false)
-#10 /internal/eval.php(20): activate_plugin('simply-social-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('simplysociallink-options', 'a:1:{s:5:\"theme\";s:7:\"default\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_simply-social-links/simply-social-links.php'), WP_Hook->do_action, WP_Hook->apply_filters, simplySocialLinks::instalar, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 06:37:19 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 06:37:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 06:37:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 06:37:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 06:37:31 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/sinoshare/sinoshare.php:1103
+Error: [10-Apr-2025 01:47:34 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 01:47:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 01:47:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 01:47:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 01:48:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/sinoshare/sinoshare.php:1103
 Stack trace:
 #0 /wordpress/wp-content/plugins/sinoshare/sinoshare.php(1135): snshare_install()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
@@ -145,7 +14,7 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('sinoshare/sinos...')
 #4 {main}
   thrown in /wordpress/wp-content/plugins/sinoshare/sinoshare.php on line 1103
-[08-Apr-2025 06:37:33 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/sinoshare/sinoshare.php:1103
+[10-Apr-2025 01:48:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/sinoshare/sinoshare.php:1103
 Stack trace:
 #0 /wordpress/wp-content/plugins/sinoshare/sinoshare.php(1135): snshare_install()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
@@ -153,7 +22,7 @@ Stack trace:
 #3 /internal/eval.php(20): activate_plugin('sinoshare/sinos...')
 #4 {main}
   thrown in /wordpress/wp-content/plugins/sinoshare/sinoshare.php on line 1103
-[08-Apr-2025 06:37:36 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/sinoshare/sinoshare.php:1103
+[10-Apr-2025 01:48:18 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /wordpress/wp-content/plugins/sinoshare/sinoshare.php:1103
 Stack trace:
 #0 /wordpress/wp-content/plugins/sinoshare/sinoshare.php(1135): snshare_install()
 #1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
