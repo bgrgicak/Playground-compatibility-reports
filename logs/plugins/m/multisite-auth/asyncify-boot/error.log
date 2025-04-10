@@ -2,341 +2,164 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 11:23:25 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:23:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:23:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:23:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:23:53 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:23:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:23:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:23:53 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:24:20 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:24:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:24:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:24:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:24:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [10-Apr-2025 22:48:45 UTC] PHP Deprecated:  Required parameter $data_to_save follows optional parameter $object_id in /wordpress/wp-content/plugins/mimo-carousel/includes/CMB2/includes/CMB2.php on line 411
+[10-Apr-2025 22:48:54 UTC] PHP Deprecated:  Required parameter $data_to_save follows optional parameter $object_id in /wordpress/wp-content/plugins/mimo-carousel/includes/CMB2/includes/CMB2.php on line 411
+[10-Apr-2025 22:49:03 UTC] PHP Deprecated:  Required parameter $data_to_save follows optional parameter $object_id in /wordpress/wp-content/plugins/mimo-carousel/includes/CMB2/includes/CMB2.php on line 411
+[10-Apr-2025 22:49:13 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_mks_themeforest_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT `ID` FROM `wp_posts` WHERE ( 	((`post_date` > 0 )&& (`post_date` <= CURRENT_TIMESTAMP())) OR 	((`post_date_gmt` > 0) && (`post_date_gmt` <= UTC_TIMESTAMP())) ) AND `post_status` = 'future'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_mks_themeforest_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT `ID` FROM `wp_posts` WHERE ( ( ( `post_date` &gt; 0 ) &amp;&amp; ( `post_date` &lt;= CURRENT_TIMESTAMP ) ) OR ( ( `post_date_gmt` &gt; 0 ) &amp;&amp; ( `post_date_gmt` &lt;= UTC_TIMESTAMP ( ) ) ) ) AND `post_status` = 'future' | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 near "&": syntax error
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_mks_them...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_mks_them...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_mks_themeforest_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:24:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:24:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:24:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:24:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:24:48 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:24:48 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:24:57 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:24:57 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:25:07 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:25:07 UTC] PHP Deprecated:  Function register_widget_control is <strong>deprecated</strong> since version 2.8.0! Use wp_register_widget_control() instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:25:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT `ID` FRO...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT `ID` FRO...')
+#3 /wordpress/wp-includes/class-wpdb.php(3103): WP_SQLite_DB->query('SELECT `ID` FRO...')
+#4 /wordpress/wp-content/plugins/missed-schedule/missed-schedule.php(31): wpdb->get_col('SELECT `ID` FRO...')
+#5 /wordpress/wp-includes/class-wp-hook.php(324): missed_schedule_init('')
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-settings.php(704): do_action('init')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query SELECT `ID` FROM `wp_posts` WHERE ( 	((`post_date` > 0 )&& (`post_date` <= CURRENT_TIMESTAMP())) OR 	((`post_date_gmt` > 0) && (`post_date_gmt` <= UTC_TIMESTAMP())) ) AND `post_status` = 'future' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, missed_schedule_init, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 22:49:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mm_unicode_font_tagger', 'a:1:{s:8:\"fontName\";s:8:\"myanmar3\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT `ID` FROM `wp_posts` WHERE ( 	((`post_date` > 0 )&& (`post_date` <= CURRENT_TIMESTAMP())) OR 	((`post_date_gmt` > 0) && (`post_date_gmt` <= UTC_TIMESTAMP())) ) AND `post_status` = 'future'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mm_unicode_font_tagger' , 'a:1:{s:8:&quot;fontName&quot;;s:8:&quot;myanmar3&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT `ID` FROM `wp_posts` WHERE ( 	((`post_date` &gt; 0 )&amp;&amp; (`post_date` &lt;= CURRENT_TIMESTAMP)) OR 	((`post_date_gmt` &gt; 0) &amp;&amp; (`post_date_gmt` &lt;= UTC_TIMESTAMP())) ) AND `post_status` = :param0  | parameters: future</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "&": syntax error.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('mm_unicode_font...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/mm-unicode-font-tagger/fonttagger.php(27): update_option('mm_unicode_font...', Array)
-#6 /wordpress/wp-content/plugins/mm-unicode-font-tagger/fonttagger.php(12): mm_unicode_font_tagger->hook()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mm-unicode-font...')
-#9 /internal/eval.php(20): activate_plugin('mm-unicode-font...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3103): WP_SQLite_DB->query('SELECT `ID` FRO...')
+#2 /wordpress/wp-content/plugins/missed-schedule/missed-schedule.php(31): wpdb->get_col('SELECT `ID` FRO...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): missed_schedule_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mm_unicode_font_tagger', 'a:1:{s:8:\"fontName\";s:8:\"myanmar3\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/mm-unicode-font-tagger/fonttagger.php'), mm_unicode_font_tagger->hook, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:25:16 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:25:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:25:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:25:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:25:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SELECT `ID` FROM `wp_posts` WHERE ( 	((`post_date` > 0 )&& (`post_date` <= CURRENT_TIMESTAMP())) OR 	((`post_date_gmt` > 0) && (`post_date_gmt` <= UTC_TIMESTAMP())) ) AND `post_status` = 'future' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, missed_schedule_init, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 22:49:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mm_unicode_font_tagger', 'a:1:{s:8:\"fontName\";s:8:\"myanmar3\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT `ID` FROM `wp_posts` WHERE ( 	((`post_date` > 0 )&& (`post_date` <= CURRENT_TIMESTAMP())) OR 	((`post_date_gmt` > 0) && (`post_date_gmt` <= UTC_TIMESTAMP())) ) AND `post_status` = 'future'</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'mm_unicode_font_tagger' , 'a:1:{s:8:&quot;fontName&quot;;s:8:&quot;myanmar3&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT `ID` FROM `wp_posts` WHERE ( 	((`post_date` &gt; 0 )&amp;&amp; (`post_date` &lt;= CURRENT_TIMESTAMP)) OR 	((`post_date_gmt` &gt; 0) &amp;&amp; (`post_date_gmt` &lt;= UTC_TIMESTAMP())) ) AND `post_status` = :param0  | parameters: future</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "&": syntax error.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('mm_unicode_font...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/mm-unicode-font-tagger/fonttagger.php(27): update_option('mm_unicode_font...', Array)
-#6 /wordpress/wp-content/plugins/mm-unicode-font-tagger/fonttagger.php(12): mm_unicode_font_tagger->hook()
-#7 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mm_unicode_font_tagger', 'a:1:{s:8:\"fontName\";s:8:\"myanmar3\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/mm-unicode-font-tagger/fonttagger.php'), mm_unicode_font_tagger->hook, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:25:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'aL{((29ar{B%8q/Jq!Q%z9<+yw,B+~bJ*k~Uyc?eBB9|r>))ubLc*su<>B[vA{Ng', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'aL{((29ar{B%8q/Jq!Q%z9&lt;+yw,B+~bJ*k~Uyc?eBB9|r&gt;))ubLc*su&lt;&gt;B[vA{Ng' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'aL{((29ar{B%8q/...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'aL{((29ar{B%8q/...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'aL{((29ar{B%8q/...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'aL{((29ar{B%8q/...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/mm-unicode-font-tagger/fonttagger.php(84): wp_register_script('mm-font-tagger', 'http://127.0.0....')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): mm_unicode_font_tagger::init('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'aL{((29ar{B%8q/Jq!Q%z9<+yw,B+~bJ*k~Uyc?eBB9|r>))ubLc*su<>B[vA{Ng', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, mm_unicode_font_tagger::init, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:25:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '`BbfOD.JQ%2A{:6P8thT<AaV&{$QXe,`3`4m]Iea Wp>=wDF~<]W=g7N{ x<afiz', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , '`BbfOD.JQ%2A{:6P8thT&lt;AaV&amp;{$QXe,`3`4m]Iea Wp&gt;=wDF~&lt;]W=g7N{ x&lt;afiz' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', '`BbfOD.JQ%2A{:6...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', '`BbfOD.JQ%2A{:6...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', '`BbfOD.JQ%2A{:6...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', '`BbfOD.JQ%2A{:6...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/mm-unicode-font-tagger/fonttagger.php(84): wp_register_script('mm-font-tagger', 'http://127.0.0....')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): mm_unicode_font_tagger::init('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', '`BbfOD.JQ%2A{:6P8thT<AaV&{$QXe,`3`4m]Iea Wp>=wDF~<]W=g7N{ x<afiz', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, mm_unicode_font_tagger::init, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:25:45 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:25:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:25:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:25:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:25:45 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:25:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:25:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:25:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:25:45 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:25:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:25:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:25:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:26:12 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:26:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:26:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:26:12 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:26:40 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:26:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:26:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:26:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:27:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jswj-my-bible-reading', 'a:9:{s:20:\"mbr_reminder_message\";s:0:\"\";s:8:\"versions\";a:6:{s:4:\"nkjv\";a:3:{s:4:\"name\";s:22:\"New King James Version\";s:10:\"is_checked\";s:0:\"\";s:11:\"is_selected\";s:0:\"\";}s:3:\"niv\";a:3:{s:4:\"name\";s:25:\"New International Version\";s:10:\"is_checked\";s:0:\"\";s:11:\"is_selected\";s:0:\"\";}s:3:\"nlt\";a:3:{s:4:\"name\";s:22:\"New Living Translation\";s:10:\"is_checked\";s:0:\"\";s:11:\"is_selected\";s:0:\"\";}s:3:\"esv\";a:3:{s:4:\"name\";s:24:\"English Standard Version\";s:10:\"is_checked\";s:0:\"\";s:11:\"is_selected\";s:0:\"\";}s:3:\"kjv\";a:3:{s:4:\"name\";s:18:\"King James Version\";s:10:\"is_checked\";s:0:\"\";s:11:\"is_selected\";s:0:\"\";}s:5:\"rvr60\";a:3:{s:4:\"name\";s:17:\"Reina-Valera 1960\";s:10:\"is_checked\";s:0:\"\";s:11:\"is_selected\";s:0:\"\";}}s:15:\"default_version\";s:4:\"nkjv\";s:20:\"reminder_frequencies\";a:8:{s:5:\"never\";a:2:{s:4:\"name\";s:20:\"Never Send Reminders\";s:11:\"is_selected\";s:0:\"\";}s:5:\"daily\";a:2:{s:4:\"name\";s:10:\"Once A Day\";s:11:\"is_selected\";s:0:\"\";}s:10:\"twicedaily\";a:2:{s:4:\"name\";s:11:\"Twice A Day\";s:11:\"is_selected\";s:0:\"\";}s:6:\"hourly\";a:2:{s:4:\"name\";s:6:\"Hourly\";s:11:\"is_selected\";s:0:\"\";}s:16:\"mbr_cron_fifteen\";a:2:{s:4:\"name\";s:16:\"Every 15 Minutes\";s:11:\"is_selected\";s:0:\"\";}s:12:\"mbr_cron_ten\";a:2:{s:4:\"name\";s:16:\"Every 10 Minutes\";s:11:\"is_selected\";s:0:\"\";}s:13:\"mbr_cron_five\";a:2:{s:4:\"name\";s:15:\"Every 5 Minutes\";s:11:\"is_selected\";s:0:\"\";}s:12:\"mbr_cron_two\";a:2:{s:4:\"name\";s:15:\"Every 2 Minutes\";s:11:\"is_selected\";s:0:\"\";}}s:18:\"reminder_frequency\";s:6:\"hourly\";s:5:\"plans\";a:4:{s:4:\"bi3y\";a:4:{s:4:\"name\";s:16:\"Bible In 3 Years\";s:4:\"pace\";s:28:\"One Or Two Chapters Each Day\";s:11:\"description\";s:39:\"Reading From Genesis Through Revelation\";s:10:\"is_checked\";s:0:\"\";}s:12:\"bi1y-3tracks\";a:4:{s:4:\"name\";s:26:\"Bible In 1 Year - 3 Tracks\";s:4:\"pace\";s:31:\"Three Or Four Chapters Each Day\";s:11:\"description\";s:201:\"Follows The 3 Year Plan, Reading 3 Portions Each Day. Track 1: Reading From Genesis Through 2 Kings. Track 2: Reading From 1 Chronicles Through Malachi. Track 3: Reading From Matthew Through Revelation\";s:10:\"is_checked\";s:0:\"\";}s:11:\"bi1y-1track\";a:4:{s:4:\"name\";s:15:\"Bible In 1 Year\";s:4:\"pace\";s:31:\"Three Or Four Chapters Each Day\";s:11:\"description\";s:39:\"Reading From Genesis Through Revelation\";s:10:\"is_checked\";s:0:\"\";}s:4:\"nt1y\";a:4:{s:4:\"name\";s:23:\"New Testament In 1 Year\";s:4:\"pace\";s:28:\"One Chapter Or Less Each Day\";s:11:\"description\";s:39:\"Reading From Matthew Through Revelation\";s:10:\"is_checked\";s:0:\"\";}}s:12:\"default_plan\";s:4:\"bi3y\";s:14:\"mbr_start_date\";s:10:\"2018-01-01\";s:14:\"reminder_times\";a:2:{s:5:\"hours\";a:24:{s:2:\"00\";a:2:{s:4:\"hour\";s:34:\"12<span class=\"mbr_ampm\">AM</span>\";s:11:\"is_selected\";s:0:\"\";}s:2:\"01\";a:2:{s:4:\"hour\";s:33:\"1<span class=\"mbr_ampm\">AM</span>\";s:11:\"is_selected\";s:0:\"\";}s:2:\"02\";a:2:{s:4:\"hour\";s:33:\"2<span class=\"mbr_ampm\">AM</span>\";s:11:\"is_selected\";s:0:\"\";}s:2:\"03\";a:2:{s:4:\"hour\";s:33:\"3<span class=\"mbr_ampm\">AM</span>\";s:11:\"is_selected\";s:0:\"\";}s:2:\"04\";a:2:{s:4:\"hour\";s:33:\"4<span class=\"mbr_ampm\">AM</span>\";s:11:\"is_selected\";s:0:\"\";}s:2:\"05\";a:2:{s:4:\"hour\";s:33:\"5<span class=\"mbr_ampm\">AM</span>\";s:11:\"is_selected\";s:0:\"\";}s:2:\"06\";a:2:{s:4:\"hour\";s:33:\"6<span class=\"mbr_ampm\">AM</span>\";s:11:\"is_selected\";s:0:\"\";}s:2:\"07\";a:2:{s:4:\"hour\";s:33:\"7<span class=\"mbr_ampm\">AM</span>\";s:11:\"is_selected\";s:0:\"\";}s:2:\"08\";a:2:{s:4:\"hour\";s:33:\"8<span class=\"mbr_ampm\">AM</span>\";s:11:\"is_selected\";s:0:\"\";}s:2:\"09\";a:2:{s:4:\"hour\";s:33:\"9<span class=\"mbr_ampm\">AM</span>\";s:11:\"is_selected\";s:0:\"\";}i:10;a:2:{s:4:\"hour\";s:34:\"10<span class=\"mbr_ampm\">AM</span>\";s:11:\"is_selected\";s:0:\"\";}i:11;a:2:{s:4:\"hour\";s:34:\"11<span class=\"mbr_ampm\">AM</span>\";s:11:\"is_selected\";s:0:\"\";}i:12;a:2:{s:4:\"hour\";s:34:\"12<span class=\"mbr_ampm\">PM</span>\";s:11:\"is_selected\";s:0:\"\";}i:13;a:2:{s:4:\"hour\";s:33:\"1<span class=\"mbr_ampm\">PM</span>\";s:11:\"is_selected\";s:0:\"\";}i:14;a:2:{s:4:\"hour\";s:33:\"2<span class=\"mbr_ampm\">PM</span>\";s:11:\"is_selected\";s:0:\"\";}i:15;a:2:{s:4:\"hour\";s:33:\"3<span class=\"mbr_ampm\">PM</span>\";s:11:\"is_selected\";s:0:\"\";}i:16;a:2:{s:4:\"hour\";s:33:\"4<span class=\"mbr_ampm\">PM</span>\";s:11:\"is_selected\";s:0:\"\";}i:17;a:2:{s:4:\"hour\";s:33:\"5<span class=\"mbr_ampm\">PM</span>\";s:11:\"is_selected\";s:0:\"\";}i:18;a:2:{s:4:\"hour\";s:33:\"6<span class=\"mbr_ampm\">PM</span>\";s:11:\"is_selected\";s:0:\"\";}i:19;a:2:{s:4:\"hour\";s:33:\"7<span class=\"mbr_ampm\">PM</span>\";s:11:\"is_selected\";s:0:\"\";}i:20;a:2:{s:4:\"hour\";s:33:\"8<span class=\"mbr_ampm\">PM</span>\";s:11:\"is_selected\";s:0:\"\";}i:21;a:2:{s:4:\"hour\";s:33:\"9<span class=\"mbr_ampm\">PM</span>\";s:11:\"is_selected\";s:0:\"\";}i:22;a:2:{s:4:\"hour\";s:34:\"10<span class=\"mbr_ampm\">PM</span>\";s:11:\"is_selected\";s:0:\"\";}i:23;a:2:{s:4:\"hour\";s:34:\"11<span class=\"mbr_ampm\">PM</span>\";s:11:\"is_selected\";s:0:\"\";}}s:7:\"minutes\";a:4:{s:2:\"00\";a:2:{s:6:\"minute\";s:3:\":00\";s:11:\"is_selected\";s:0:\"\";}i:15;a:2:{s:6:\"minute\";s:3:\":15\";s:11:\"is_selected\";s:0:\"\";}i:30;a:2:{s:6:\"minute\";s:3:\":30\";s:11:\"is_selected\";s:0:\"\";}i:45;a:2:{s:6:\"minute\";s:3:\":45\";s:11:\"is_selected\";s:0:\"\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'jswj-my-bible-reading' , 'a:9:{s:20:&quot;mbr_reminder_message&quot;;s:0:&quot;&quot;;s:8:&quot;versions&quot;;a:6:{s:4:&quot;nkjv&quot;;a:3:{s:4:&quot;name&quot;;s:22:&quot;New King James Version&quot;;s:10:&quot;is_checked&quot;;s:0:&quot;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}s:3:&quot;niv&quot;;a:3:{s:4:&quot;name&quot;;s:25:&quot;New International Version&quot;;s:10:&quot;is_checked&quot;;s:0:&quot;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}s:3:&quot;nlt&quot;;a:3:{s:4:&quot;name&quot;;s:22:&quot;New Living Translation&quot;;s:10:&quot;is_checked&quot;;s:0:&quot;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}s:3:&quot;esv&quot;;a:3:{s:4:&quot;name&quot;;s:24:&quot;English Standard Version&quot;;s:10:&quot;is_checked&quot;;s:0:&quot;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}s:3:&quot;kjv&quot;;a:3:{s:4:&quot;name&quot;;s:18:&quot;King James Version&quot;;s:10:&quot;is_checked&quot;;s:0:&quot;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}s:5:&quot;rvr60&quot;;a:3:{s:4:&quot;name&quot;;s:17:&quot;Reina-Valera 1960&quot;;s:10:&quot;is_checked&quot;;s:0:&quot;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}}s:15:&quot;default_version&quot;;s:4:&quot;nkjv&quot;;s:20:&quot;reminder_frequencies&quot;;a:8:{s:5:&quot;never&quot;;a:2:{s:4:&quot;name&quot;;s:20:&quot;Never Send Reminders&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}s:5:&quot;daily&quot;;a:2:{s:4:&quot;name&quot;;s:10:&quot;Once A Day&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}s:10:&quot;twicedaily&quot;;a:2:{s:4:&quot;name&quot;;s:11:&quot;Twice A Day&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}s:6:&quot;hourly&quot;;a:2:{s:4:&quot;name&quot;;s:6:&quot;Hourly&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}s:16:&quot;mbr_cron_fifteen&quot;;a:2:{s:4:&quot;name&quot;;s:16:&quot;Every 15 Minutes&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}s:12:&quot;mbr_cron_ten&quot;;a:2:{s:4:&quot;name&quot;;s:16:&quot;Every 10 Minutes&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}s:13:&quot;mbr_cron_five&quot;;a:2:{s:4:&quot;name&quot;;s:15:&quot;Every 5 Minutes&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}s:12:&quot;mbr_cron_two&quot;;a:2:{s:4:&quot;name&quot;;s:15:&quot;Every 2 Minutes&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}}s:18:&quot;reminder_frequency&quot;;s:6:&quot;hourly&quot;;s:5:&quot;plans&quot;;a:4:{s:4:&quot;bi3y&quot;;a:4:{s:4:&quot;name&quot;;s:16:&quot;Bible In 3 Years&quot;;s:4:&quot;pace&quot;;s:28:&quot;One Or Two Chapters Each Day&quot;;s:11:&quot;description&quot;;s:39:&quot;Reading From Genesis Through Revelation&quot;;s:10:&quot;is_checked&quot;;s:0:&quot;&quot;;}s:12:&quot;bi1y-3tracks&quot;;a:4:{s:4:&quot;name&quot;;s:26:&quot;Bible In 1 Year - 3 Tracks&quot;;s:4:&quot;pace&quot;;s:31:&quot;Three Or Four Chapters Each Day&quot;;s:11:&quot;description&quot;;s:201:&quot;Follows The 3 Year Plan, Reading 3 Portions Each Day. Track 1: Reading From Genesis Through 2 Kings. Track 2: Reading From 1 Chronicles Through Malachi. Track 3: Reading From Matthew Through Revelation&quot;;s:10:&quot;is_checked&quot;;s:0:&quot;&quot;;}s:11:&quot;bi1y-1track&quot;;a:4:{s:4:&quot;name&quot;;s:15:&quot;Bible In 1 Year&quot;;s:4:&quot;pace&quot;;s:31:&quot;Three Or Four Chapters Each Day&quot;;s:11:&quot;description&quot;;s:39:&quot;Reading From Genesis Through Revelation&quot;;s:10:&quot;is_checked&quot;;s:0:&quot;&quot;;}s:4:&quot;nt1y&quot;;a:4:{s:4:&quot;name&quot;;s:23:&quot;New Testament In 1 Year&quot;;s:4:&quot;pace&quot;;s:28:&quot;One Chapter Or Less Each Day&quot;;s:11:&quot;description&quot;;s:39:&quot;Reading From Matthew Through Revelation&quot;;s:10:&quot;is_checked&quot;;s:0:&quot;&quot;;}}s:12:&quot;default_plan&quot;;s:4:&quot;bi3y&quot;;s:14:&quot;mbr_start_date&quot;;s:10:&quot;2018-01-01&quot;;s:14:&quot;reminder_times&quot;;a:2:{s:5:&quot;hours&quot;;a:24:{s:2:&quot;00&quot;;a:2:{s:4:&quot;hour&quot;;s:34:&quot;12&lt;span class=&quot;mbr_ampm&quot;&gt;AM&lt;/span&gt;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}s:2:&quot;01&quot;;a:2:{s:4:&quot;hour&quot;;s:33:&quot;1&lt;span class=&quot;mbr_ampm&quot;&gt;AM&lt;/span&gt;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}s:2:&quot;02&quot;;a:2:{s:4:&quot;hour&quot;;s:33:&quot;2&lt;span class=&quot;mbr_ampm&quot;&gt;AM&lt;/span&gt;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}s:2:&quot;03&quot;;a:2:{s:4:&quot;hour&quot;;s:33:&quot;3&lt;span class=&quot;mbr_ampm&quot;&gt;AM&lt;/span&gt;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}s:2:&quot;04&quot;;a:2:{s:4:&quot;hour&quot;;s:33:&quot;4&lt;span class=&quot;mbr_ampm&quot;&gt;AM&lt;/span&gt;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}s:2:&quot;05&quot;;a:2:{s:4:&quot;hour&quot;;s:33:&quot;5&lt;span class=&quot;mbr_ampm&quot;&gt;AM&lt;/span&gt;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}s:2:&quot;06&quot;;a:2:{s:4:&quot;hour&quot;;s:33:&quot;6&lt;span class=&quot;mbr_ampm&quot;&gt;AM&lt;/span&gt;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}s:2:&quot;07&quot;;a:2:{s:4:&quot;hour&quot;;s:33:&quot;7&lt;span class=&quot;mbr_ampm&quot;&gt;AM&lt;/span&gt;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}s:2:&quot;08&quot;;a:2:{s:4:&quot;hour&quot;;s:33:&quot;8&lt;span class=&quot;mbr_ampm&quot;&gt;AM&lt;/span&gt;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}s:2:&quot;09&quot;;a:2:{s:4:&quot;hour&quot;;s:33:&quot;9&lt;span class=&quot;mbr_ampm&quot;&gt;AM&lt;/span&gt;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}i:10;a:2:{s:4:&quot;hour&quot;;s:34:&quot;10&lt;span class=&quot;mbr_ampm&quot;&gt;AM&lt;/span&gt;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}i:11;a:2:{s:4:&quot;hour&quot;;s:34:&quot;11&lt;span class=&quot;mbr_ampm&quot;&gt;AM&lt;/span&gt;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}i:12;a:2:{s:4:&quot;hour&quot;;s:34:&quot;12&lt;span class=&quot;mbr_ampm&quot;&gt;PM&lt;/span&gt;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}i:13;a:2:{s:4:&quot;hour&quot;;s:33:&quot;1&lt;span class=&quot;mbr_ampm&quot;&gt;PM&lt;/span&gt;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}i:14;a:2:{s:4:&quot;hour&quot;;s:33:&quot;2&lt;span class=&quot;mbr_ampm&quot;&gt;PM&lt;/span&gt;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}i:15;a:2:{s:4:&quot;hour&quot;;s:33:&quot;3&lt;span class=&quot;mbr_ampm&quot;&gt;PM&lt;/span&gt;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}i:16;a:2:{s:4:&quot;hour&quot;;s:33:&quot;4&lt;span class=&quot;mbr_ampm&quot;&gt;PM&lt;/span&gt;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}i:17;a:2:{s:4:&quot;hour&quot;;s:33:&quot;5&lt;span class=&quot;mbr_ampm&quot;&gt;PM&lt;/span&gt;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}i:18;a:2:{s:4:&quot;hour&quot;;s:33:&quot;6&lt;span class=&quot;mbr_ampm&quot;&gt;PM&lt;/span&gt;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}i:19;a:2:{s:4:&quot;hour&quot;;s:33:&quot;7&lt;span class=&quot;mbr_ampm&quot;&gt;PM&lt;/span&gt;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}i:20;a:2:{s:4:&quot;hour&quot;;s:33:&quot;8&lt;span class=&quot;mbr_ampm&quot;&gt;PM&lt;/span&gt;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}i:21;a:2:{s:4:&quot;hour&quot;;s:33:&quot;9&lt;span class=&quot;mbr_ampm&quot;&gt;PM&lt;/span&gt;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}i:22;a:2:{s:4:&quot;hour&quot;;s:34:&quot;10&lt;span class=&quot;mbr_ampm&quot;&gt;PM&lt;/span&gt;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}i:23;a:2:{s:4:&quot;hour&quot;;s:34:&quot;11&lt;span class=&quot;mbr_ampm&quot;&gt;PM&lt;/span&gt;&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}}s:7:&quot;minutes&quot;;a:4:{s:2:&quot;00&quot;;a:2:{s:6:&quot;minute&quot;;s:3:&quot;:00&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}i:15;a:2:{s:6:&quot;minute&quot;;s:3:&quot;:15&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}i:30;a:2:{s:6:&quot;minute&quot;;s:3:&quot;:30&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}i:45;a:2:{s:6:&quot;minute&quot;;s:3:&quot;:45&quot;;s:11:&quot;is_selected&quot;;s:0:&quot;&quot;;}}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('jswj-my-bible-r...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/my-bible-reading/my-bible-reading.php(183): update_option('jswj-my-bible-r...', Array)
-#6 /wordpress/wp-content/plugins/my-bible-reading/my-bible-reading.php(87): jswj_mbr_defaults_load()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('my-bible-readin...')
-#9 /internal/eval.php(20): activate_plugin('my-bible-readin...')
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3103): WP_SQLite_DB->query('SELECT `ID` FRO...')
+#2 /wordpress/wp-content/plugins/missed-schedule/missed-schedule.php(31): wpdb->get_col('SELECT `ID` FRO...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): missed_schedule_init('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-settings.php(704): do_action('init')
+#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jswj-my-bible-reading', 'a:9:{s:20:\"mbr_reminder_message\";s:0:\"\";s:8:\"versions\";a:6:{s:4:\"nkjv\";a:3:{s:4:\"name\";s:22:\"New King James Version\";s:10:\"is_checked\";s:0:\"\";s:11:\"is_selected\";s:0:\"\";}s:3:\"niv\";a:3:{s:4:\"name\";s:25:\"New International Version\";s:10:\"is_checked\";s:0:\"\";s:11:\"is_selected\";s:0:\"\";}s:3:\"nlt\";a:3:{s:4:\"name\";s:22:\"New Living Translation\";s:10:\"is_checked\";s:0:\"\";s:11:\"is_selected\";s:0:\"\";}s:3:\"esv\";a:3:{s:4:\"name\";s:24:\"English Standard Version\";s:10:\"is_checked\";s:0:\"\";s:11:\"is_selected\";s:0:\"\";}s:3:\"kjv\";a:3:{s:4:\"name\";s:18:\"King James Version\";s:10:\"is_checked\";s:0:\"\";s:11:\"is_selected\";s:0:\"\";}s:5:\"rvr60\";a:3:{s:4:\"name\";s:17:\"Reina-Valera 1960\";s:10:\"is_checked\";s:0:\"\";s:11:\"is_selected\";s:0:\"\";}}s:15:\"default_version\";s:4:\"nkjv\";s:20:\"reminder_frequencies\";a:8:{s:5:\"never\";a:2:{s:4:\"name\";s:20:\"Never Send Reminders\";s:11:\"is_selected\";s:0:\"\";}s:5:\"daily\";a:2:{s:4:\"name\";s:10:\"Once A Day\";s:11:\"is_selected\";s:0:\"\";}s:10:\"twicedaily\";a:2:{s:4:\"name\";s:11:\"Twice A Day\";s:11:\"is_selected\";s:0:\"\";}s:6:\"hourly\";a:2:{s:4:\"name\";s:6:\"Hourly\";s:11:\"is_selected\";s:0:\"\";}s:16:\"mbr_cron_fifteen\";a:2:{s:4:\"name\";s:16:\"Every 15 Minutes\";s:11:\"is_selected\";s:0:\"\";}s:12:\"mbr_cron_ten\";a:2:{s:4:\"name\";s:16:\"Every 10 Minutes\";s:11:\"is_selected\";s:0:\"\";}s:13:\"mbr_cron_five\";a:2:{s:4:\"name\";s:15:\"Every 5 Minutes\";s:11:\"is_selected\";s:0:\"\";}s:12:\"mbr_cron_two\";a:2:{s:4:\"name\";s:15:\"Every 2 Minutes\";s:11:\"is_selected\";s:0:\"\";}}s:18:\"reminder_frequency\";s:6:\"hourly\";s:5:\"plans\";a:4:{s:4:\"bi3y\";a:4:{s:4:\"name\";s:16:\"Bible In 3 Years\";s:4:\"pace\";s:28:\"One Or Two Chapters Each Day\";s:11:\"description\";s:39:\"Reading From Genesis Through Revelation\";s:10:\"is_checked\";s:0:\"\";}s:12:\"bi1y-3tracks\";a:4:{s:4:\"name\";s:26:\"Bible In 1 Year - 3 Tracks\";s:4:\"pace\";s:31:\"Three Or Four Chapters Each Day\";s:11:\"description\";s:201:\"Follows The 3 Year Plan, Reading 3 Portions Each Day. Track 1: Reading From Genesis Through 2 Kings. Track 2: Reading From 1 Chronicles Through Malachi. Track 3: Reading From Matthew Through Revelation\";s:10:\"is_checked\";s:0:\"\";}s:11:\"bi1y-1track\";a:4:{s:4:\"name\";s:15:\"Bible In 1 Year\";s:4:\"pace\";s:31:\"Three Or Four Chapters Each Day\";s:11:\"description\";s:39:\"Reading From Genesis Through Revelation\";s:10:\"is_checked\";s:0:\"\";}s:4:\"nt1y\";a:4:{s:4:\"name\";s:23:\"New Testament In 1 Year\";s:4:\"pace\";s:28:\"One Chapter Or Less Each Day\";s:11:\"description\";s:39:\"Reading From Matthew Through Revelation\";s:10:\"is_checked\";s:0:\"\";}}s:12:\"default_plan\";s:4:\"bi3y\";s:14:\"mbr_start_date\";s:10:\"2018-01-01\";s:14:\"reminder_times\";a:2:{s:5:\"hours\";a:24:{s:2:\"00\";a:2:{s:4:\"hour\";s:34:\"12<span class=\"mbr_ampm\">AM</span>\";s:11:\"is_selected\";s:0:\"\";}s:2:\"01\";a:2:{s:4:\"hour\";s:33:\"1<span class=\"mbr_ampm\">AM</span>\";s:11:\"is_selected\";s:0:\"\";}s:2:\"02\";a:2:{s:4:\"hour\";s:33:\"2<span class=\"mbr_ampm\">AM</span>\";s:11:\"is_selected\";s:0:\"\";}s:2:\"03\";a:2:{s:4:\"hour\";s:33:\"3<span class=\"mbr_ampm\">AM</span>\";s:11:\"is_selected\";s:0:\"\";}s:2:\"04\";a:2:{s:4:\"hour\";s:33:\"4<span class=\"mbr_ampm\">AM</span>\";s:11:\"is_selected\";s:0:\"\";}s:2:\"05\";a:2:{s:4:\"hour\";s:33:\"5<span class=\"mbr_ampm\">AM</span>\";s:11:\"is_selected\";s:0:\"\";}s:2:\"06\";a:2:{s:4:\"hour\";s:33:\"6<span class=\"mbr_ampm\">AM</span>\";s:11:\"is_selected\";s:0:\"\";}s:2:\"07\";a:2:{s:4:\"hour\";s:33:\"7<span class=\"mbr_ampm\">AM</span>\";s:11:\"is_selected\";s:0:\"\";}s:2:\"08\";a:2:{s:4:\"hour\";s:33:\"8<span class=\"mbr_ampm\">AM</span>\";s:11:\"is_selected\";s:0:\"\";}s:2:\"09\";a:2:{s:4:\"hour\";s:33:\"9<span class=\"mbr_ampm\">AM</span>\";s:11:\"is_selected\";s:0:\"\";}i:10;a:2:{s:4:\"hour\";s:34:\"10<span class=\"mbr_ampm\">AM</span>\";s:11:\"is_selected\";s:0:\"\";}i:11;a:2:{s:4:\"hour\";s:34:\"11<span class=\"mbr_ampm\">AM</span>\";s:11:\"is_selected\";s:0:\"\";}i:12;a:2:{s:4:\"hour\";s:34:\"12<span class=\"mbr_ampm\">PM</span>\";s:11:\"is_selected\";s:0:\"\";}i:13;a:2:{s:4:\"hour\";s:33:\"1<span class=\"mbr_ampm\">PM</span>\";s:11:\"is_selected\";s:0:\"\";}i:14;a:2:{s:4:\"hour\";s:33:\"2<span class=\"mbr_ampm\">PM</span>\";s:11:\"is_selected\";s:0:\"\";}i:15;a:2:{s:4:\"hour\";s:33:\"3<span class=\"mbr_ampm\">PM</span>\";s:11:\"is_selected\";s:0:\"\";}i:16;a:2:{s:4:\"hour\";s:33:\"4<span class=\"mbr_ampm\">PM</span>\";s:11:\"is_selected\";s:0:\"\";}i:17;a:2:{s:4:\"hour\";s:33:\"5<span class=\"mbr_ampm\">PM</span>\";s:11:\"is_selected\";s:0:\"\";}i:18;a:2:{s:4:\"hour\";s:33:\"6<span class=\"mbr_ampm\">PM</span>\";s:11:\"is_selected\";s:0:\"\";}i:19;a:2:{s:4:\"hour\";s:33:\"7<span class=\"mbr_ampm\">PM</span>\";s:11:\"is_selected\";s:0:\"\";}i:20;a:2:{s:4:\"hour\";s:33:\"8<span class=\"mbr_ampm\">PM</span>\";s:11:\"is_selected\";s:0:\"\";}i:21;a:2:{s:4:\"hour\";s:33:\"9<span class=\"mbr_ampm\">PM</span>\";s:11:\"is_selected\";s:0:\"\";}i:22;a:2:{s:4:\"hour\";s:34:\"10<span class=\"mbr_ampm\">PM</span>\";s:11:\"is_selected\";s:0:\"\";}i:23;a:2:{s:4:\"hour\";s:34:\"11<span class=\"mbr_ampm\">PM</span>\";s:11:\"is_selected\";s:0:\"\";}}s:7:\"minutes\";a:4:{s:2:\"00\";a:2:{s:6:\"minute\";s:3:\":00\";s:11:\"is_selected\";s:0:\"\";}i:15;a:2:{s:6:\"minute\";s:3:\":15\";s:11:\"is_selected\";s:0:\"\";}i:30;a:2:{s:6:\"minute\";s:3:\":30\";s:11:\"is_selected\";s:0:\"\";}i:45;a:2:{s:6:\"minute\";s:3:\":45\";s:11:\"is_selected\";s:0:\"\";}}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/my-bible-reading/my-bible-reading.php'), jswj_mbr_defaults_load, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:27:07 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jswj-my-bible-reading', 'a:1:{s:5:\"plans\";a:1:{s:4:\"bi6m\";a:4:{s:4:\"name\";s:17:\"Bible In 6 Months\";s:4:\"pace\";s:30:\"Six To Eight Chapters Each Day\";s:11:\"description\";s:39:\"Reading From Genesis Through Revelation\";s:10:\"is_checked\";s:0:\"\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'jswj-my-bible-reading' , 'a:1:{s:5:&quot;plans&quot;;a:1:{s:4:&quot;bi6m&quot;;a:4:{s:4:&quot;name&quot;;s:17:&quot;Bible In 6 Months&quot;;s:4:&quot;pace&quot;;s:30:&quot;Six To Eight Chapters Each Day&quot;;s:11:&quot;description&quot;;s:39:&quot;Reading From Genesis Through Revelation&quot;;s:10:&quot;is_checked&quot;;s:0:&quot;&quot;;}}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('jswj-my-bible-r...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/my-bible-reading/my-bible-reading.php(200): update_option('jswj-my-bible-r...', Array)
-#6 /wordpress/wp-content/plugins/my-bible-reading/my-bible-reading.php(87): jswj_mbr_defaults_load()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('my-bible-readin...')
-#9 /internal/eval.php(20): activate_plugin('my-bible-readin...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('jswj-my-bible-reading', 'a:1:{s:5:\"plans\";a:1:{s:4:\"bi6m\";a:4:{s:4:\"name\";s:17:\"Bible In 6 Months\";s:4:\"pace\";s:30:\"Six To Eight Chapters Each Day\";s:11:\"description\";s:39:\"Reading From Genesis Through Revelation\";s:10:\"is_checked\";s:0:\"\";}}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/my-bible-reading/my-bible-reading.php'), jswj_mbr_defaults_load, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:27:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('mbr_reading_schedule', 'a:1095:{i:0;a:1:{i:0;s:12:\"﻿Genesis 1\";}i:1;a:1:{i:0;s:9:\"Genesis 2\";}i:2;a:1:{i:0;s:9:\"Genesis 3\";}i:3;a:1:{i:0;s:9:\"Genesis 4\";}i:4;a:1:{i:0;s:9:\"Genesis 5\";}i:5;a:1:{i:0;s:9:\"Genesis 6\";}i:6;a:1:{i:0;s:9:\"Genesis 7\";}i:7;a:1:{i:0;s:9:\"Genesis 8\";}i:8;a:1:{i:0;s:9:\"Genesis 9\";}i:9;a:1:{i:0;s:10:\"Genesis 10\";}i:10;a:1:{i:0;s:10:\"Genesis 11\";}i:11;a:1:{i:0;s:10:\"Genesis 12\";}i:12;a:1:{i:0;s:10:\"Genesis 13\";}i:13;a:1:{i:0;s:10:\"Genesis 14\";}i:14;a:1:{i:0;s:10:\"Genesis 15\";}i:15;a:1:{i:0;s:10:\"Genesis 16\";}i:16;a:1:{i:0;s:10:\"Genesis 17\";}i:17;a:1:{i:0;s:10:\"Genesis 18\";}i:18;a:1:{i:0;s:10:\"Genesis 19\";}i:19;a:1:{i:0;s:10:\"Genesis 20\";}i:20;a:1:{i:0;s:10:\"Genesis 21\";}i:21;a:1:{i:0;s:10:\"Genesis 22\";}i:22;a:1:{i:0;s:10:\"Genesis 23\";}i:23;a:1:{i:0;s:15:\"Genesis 24:1-28\";}i:24;a:1:{i:0;s:16:\"Genesis 24:29-67\";}i:25;a:1:{i:0;s:10:\"Genesis 25\";}i:26;a:1:{i:0;s:10:\"Genesis 26\";}i:27;a:1:{i:0;s:10:\"Genesis 27\";}i:28;a:1:{i:0;s:10:\"Genesis 28\";}i:29;a:1:{i:0;s:10:\"Genesis 29\";}i:30;a:1:{i:0;s:10:\"Genesis 30\";}i:31;a:1:{i:0;s:15:\"Genesis 31:1-21\";}i:32;a:1:{i:0;s:16:\"Genesis 31:22-55\";}i:33;a:1:{i:0;s:10:\"Genesis 32\";}i:34;a:1:{i:0;s:10:\"Genesis 33\";}i:35;a:1:{i:0;s:10:\"Genesis 34\";}i:36;a:1:{i:0;s:10:\"Genesis 35\";}i:37;a:1:{i:0;s:10:\"Genesis 36\";}i:38;a:1:{i:0;s:10:\"Genesis 37\";}i:39;a:1:{i:0;s:10:\"Genesis 38\";}i:40;a:1:{i:0;s:10:\"Genesis 39\";}i:41;a:1:{i:0;s:10:\"Genesis 40\";}i:42;a:1:{i:0;s:15:\"Genesis 41:1-36\";}i:43;a:1:{i:0;s:16:\"Genesis 41:37-57\";}i:44;a:1:{i:0;s:10:\"Genesis 42\";}i:45;a:1:{i:0;s:10:\"Genesis 43\";}i:46;a:1:{i:0;s:10:\"Genesis 44\";}i:47;a:1:{i:0;s:10:\"Genesis 45\";}i:48;a:1:{i:0;s:10:\"Genesis 46\";}i:49;a:1:{i:0;s:10:\"Genesis 47\";}i:50;a:1:{i:0;s:10:\"Genesis 48\";}i:51;a:1:{i:0;s:10:\"Genesis 49\";}i:52;a:1:{i:0;s:10:\"Genesis 50\";}i:53;a:1:{i:0;s:8:\"Exodus 1\";}i:54;a:1:{i:0;s:8:\"Exodus 2\";}i:55;a:1:{i:0;s:8:\"Exodus 3\";}i:56;a:1:{i:0;s:8:\"Exodus 4\";}i:57;a:1:{i:0;s:8:\"Exodus 5\";}i:58;a:1:{i:0;s:8:\"Exodus 6\";}i:59;a:1:{i:0;s:8:\"Exodus 7\";}i:60;a:1:{i:0;s:8:\"Exodus 8\";}i:61;a:1:{i:0;s:8:\"Exodus 9\";}i:62;a:1:{i:0;s:9:\"Exodus 10\";}i:63;a:1:{i:0;s:9:\"Exodus 11\";}i:64;a:1:{i:0;s:14:\"Exodus 12:1-28\";}i:65;a:1:{i:0;s:15:\"Exodus 12:29-51\";}i:66;a:1:{i:0;s:9:\"Exodus 13\";}i:67;a:1:{i:0;s:9:\"Exodus 14\";}i:68;a:1:{i:0;s:9:\"Exodus 15\";}i:69;a:1:{i:0;s:9:\"Exodus 16\";}i:70;a:1:{i:0;s:9:\"Exodus 17\";}i:71;a:1:{i:0;s:9:\"Exodus 18\";}i:72;a:1:{i:0;s:9:\"Exodus 19\";}i:73;a:1:{i:0;s:9:\"Exodus 20\";}i:74;a:1:{i:0;s:9:\"Exodus 21\";}i:75;a:1:{i:0;s:9:\"Exodus 22\";}i:76;a:1:{i:0;s:9:\"Exodus 23\";}i:77;a:1:{i:0;s:9:\"Exodus 24\";}i:78;a:1:{i:0;s:9:\"Exodus 25\";}i:79;a:1:{i:0;s:9:\"Exodus 26\";}i:80;a:1:{i:0;s:9:\"Exodus 27\";}i:81;a:1:{i:0;s:9:\"Exodus 28\";}i:82;a:1:{i:0;s:14:\"Exodus 29:1-28\";}i:83;a:1:{i:0;s:15:\"Exodus 29:29-46\";}i:84;a:1:{i:0;s:9:\"Exodus 30\";}i:85;a:1:{i:0;s:9:\"Exodus 31\";}i:86;a:1:{i:0;s:9:\"Exodus 32\";}i:87;a:1:{i:0;s:9:\"Exodus 33\";}i:88;a:1:{i:0;s:9:\"Exodus 34\";}i:89;a:1:{i:0;s:9:\"Exodus 35\";}i:90;a:1:{i:0;s:9:\"Exodus 36\";}i:91;a:1:{i:0;s:9:\"Exodus 37\";}i:92;a:1:{i:0;s:9:\"Exodus 38\";}i:93;a:1:{i:0;s:9:\"Exodus 39\";}i:94;a:1:{i:0;s:9:\"Exodus 40\";}i:95;a:1:{i:0;s:11:\"Leviticus 1\";}i:96;a:1:{i:0;s:11:\"Leviticus 2\";}i:97;a:1:{i:0;s:11:\"Leviticus 3\";}i:98;a:1:{i:0;s:11:\"Leviticus 4\";}i:99;a:1:{i:0;s:11:\"Leviticus 5\";}i:100;a:1:{i:0;s:11:\"Leviticus 6\";}i:101;a:1:{i:0;s:11:\"Leviticus 7\";}i:102;a:1:{i:0;s:11:\"Leviticus 8\";}i:103;a:1:{i:0;s:11:\"Leviticus 9\";}i:104;a:1:{i:0;s:12:\"Leviticus 10\";}i:105;a:1:{i:0;s:12:\"Leviticus 11\";}i:106;a:1:{i:0;s:12:\"Leviticus 12\";}i:107;a:1:{i:0;s:17:\"Leviticus 13:1-28\";}i:108;a:1:{i:0;s:18:\"Leviticus 13:29-59\";}i:109;a:1:{i:0;s:17:\"Leviticus 14:1-32\";}i:110;a:1:{i:0;s:18:\"Leviticus 14:33-57\";}i:111;a:1:{i:0;s:12:\"Leviticus 15\";}i:112;a:1:{i:0;s:12:\"Leviticus 16\";}i:113;a:1:{i:0;s:12:\"Leviticus 17\";}i:114;a:1:{i:0;s:12:\"Leviticus 18\";}i:115;a:1:{i:0;s:12:\"Leviticus 19\";}i:116;a:1:{i:0;s:12:\"Leviticus 20\";}i:117;a:1:{i:0;s:12:\"Leviticus 21\";}i:118;a:1:{i:0;s:12:\"Leviticus 22\";}i:119;a:1:{i:0;s:12:\"Leviticus 23\";}i:120;a:1:{i:0;s:12:\"Leviticus 24\";}i:121;a:1:{i:0;s:17:\"Leviticus 25:1-22\";}i:122;a:1:{i:0;s:18:\"Leviticus 25:23-55\";}i:123;a:1:{i:0;s:12:\"Leviticus 26\";}i:124;a:1:{i:0;s:12:\"Leviticus 27\";}i:125;a:1:{i:0;s:9:\"Numbers 1\";}i:126;a:1:{i:0;s:9:\"Numbers 2\";}i:127;a:1:{i:0;s:9:\"Numbers 3\";}i:128;a:1:{i:0;s:14:\"Numbers 4:1-20\";}i:129;a:1:{i:0;s:15:\"Numbers 4:21-49\";}i:130;a:1:{i:0;s:9:\"Numbers 5\";}i:131;a:1:{i:0;s:9:\"Numbers 6\";}i:132;a:1:{i:0;s:9:\"Numbers 7\";}i:133;a:1:{i:0;s:9:\"Numbers 8\";}i:134;a:1:{i:0;s:9:\"Numbers 9\";}i:135;a:1:{i:0;s:10:\"Numbers 10\";}i:136;a:1:{i:0;s:10:\"Numbers 11\";}i:137;a:1:{i:0;s:10:\"Numbers 12\";}i:138;a:1:{i:0;s:10:\"Numbers 13\";}i:139;a:1:{i:0;s:10:\"Numbers 14\";}i:140;a:1:{i:0;s:10:\"Numbers 15\";}i:141;a:1:{i:0;s:15:\"Numbers 16:1-35\";}i:142;a:1:{i:0;s:16:\"Numbers 16:36-50\";}i:143;a:1:{i:0;s:10:\"Numbers 17\";}i:144;a:1:{i:0;s:10:\"Numbers 18\";}i:145;a:1:{i:0;s:10:\"Numbers 19\";}i:146;a:1:{i:0;s:10:\"Numbers 20\";}i:147;a:1:{i:0;s:10:\"Numbers 21\";}i:148;a:1:{i:0;s:10:\"Numbers 22\";}i:149;a:1:{i:0;s:10:\"Numbers 23\";}i:150;a:1:{i:0;s:10:\"Numbers 24\";}i:151;a:1:{i:0;s:10:\"Numbers 25\";}i:152;a:1:{i:0;s:10:\"Numbers 26\";}i:153;a:1:{i:0;s:10:\"Numbers 27\";}i:154;a:1:{i:0;s:10:\"Numbers 28\";}i:155;a:1:{i:0;s:10:\"Numbers 29\";}i:156;a:1:{i:0;s:10:\"Numbers 30\";}i:157;a:1:{i:0;s:10:\"Numbers 31\";}i:158;a:1:{i:0;s:10:\"Numbers 32\";}i:159;a:1:{i:0;s:10:\"Numbers 33\";}i:160;a:1:{i:0;s:10:\"Numbers 34\";}i:161;a:1:{i:0;s:10:\"Numbers 35\";}i:162;a:1:{i:0;s:10:\"Numbers 36\";}i:163;a:1:{i:0;s:13:\"Deuteronomy 1\";}i:164;a:1:{i:0;s:13:\"Deuteronomy 2\";}i:165;a:1:{i:0;s:13:\"Deuteronomy 3\";}i:166;a:1:{i:0;s:18:\"Deuteronomy 4:1-24\";}i:167;a:1:{i:0;s:19:\"Deuteronomy 4:25-49\";}i:168;a:1:{i:0;s:13:\"Deuteronomy 5\";}i:169;a:1:{i:0;s:13:\"Deuteronomy 6\";}i:170;a:1:{i:0;s:13:\"Deuteronomy 7\";}i:171;a:1:{i:0;s:13:\"Deuteronomy 8\";}i:172;a:1:{i:0;s:13:\"Deuteronomy 9\";}i:173;a:1:{i:0;s:14:\"Deuteronomy 10\";}i:174;a:1:{i:0;s:14:\"Deuteronomy 11\";}i:175;a:1:{i:0;s:14:\"Deuteronomy 12\";}i:176;a:1:{i:0;s:14:\"Deuteronomy 13\";}i:177;a:1:{i:0;s:14:\"Deuteronomy 14\";}i:178;a:1:{i:0;s:14:\"Deuteronomy 15\";}i:179;a:1:{i:0;s:14:\"Deuteronomy 16\";}i:180;a:1:{i:0;s:14:\"Deuteronomy 17\";}i:181;a:1:{i:0;s:14:\"Deuteronomy 18\";}i:182;a:1:{i:0;s:14:\"Deuteronomy 19\";}i:183;a:1:{i:0;s:14:\"Deuteronomy 20\";}i:184;a:1:{i:0;s:14:\"Deuteronomy 21\";}i:185;a:1:{i:0;s:14:\"Deuteronomy 22\";}i:186;a:1:{i:0;s:14:\"Deuteronomy 23\";}i:187;a:1:{i:0;s:14:\"Deuteronomy 24\";}i:188;a:1:{i:0;s:14:\"Deuteronomy 25\";}i:189;a:1:{i:0;s:14:\"Deuteronomy 26\";}i:190;a:1:{i:0;s:14:\"Deuteronomy 27\";}i:191;a:1:{i:0;s:19:\"Deuteronomy 28:1-46\";}i:192;a:1:{i:0;s:20:\"Deuteronomy 28:47-68\";}i:193;a:1:{i:0;s:14:\"Deuteronomy 29\";}i:194;a:1:{i:0;s:14:\"Deuteronomy 30
+ for query SELECT `ID` FROM `wp_posts` WHERE ( 	((`post_date` > 0 )&& (`post_date` <= CURRENT_TIMESTAMP())) OR 	((`post_date_gmt` > 0) && (`post_date_gmt` <= UTC_TIMESTAMP())) ) AND `post_status` = 'future' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, missed_schedule_init, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 22:50:31 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function is_subdomain_install() in /wordpress/wp-content/plugins/multisite-auth/Includes/Core/filters.php:112
+Stack trace:
+#0 /wordpress/wp-content/plugins/multisite-auth/Includes/Core/Plugin.php(69): require_once()
+#1 /wordpress/wp-content/plugins/multisite-auth/Includes/Core/Plugin.php(36): MUAUTH\Includes\Core\Plugin::_init()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): MUAUTH\Includes\Core\Plugin::loader('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/multisite-auth/Includes/Core/filters.php on line 112
+[10-Apr-2025 22:50:40 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function is_subdomain_install() in /wordpress/wp-content/plugins/multisite-auth/Includes/Core/filters.php:112
+Stack trace:
+#0 /wordpress/wp-content/plugins/multisite-auth/Includes/Core/Plugin.php(69): require_once()
+#1 /wordpress/wp-content/plugins/multisite-auth/Includes/Core/Plugin.php(36): MUAUTH\Includes\Core\Plugin::_init()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): MUAUTH\Includes\Core\Plugin::loader('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/multisite-auth/Includes/Core/filters.php on line 112
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"multisite-auth"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:73:13)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ],
+          expires: [ 'Wed, 11 Jan 1984 05:00:00 GMT' ],
+          'cache-control': [ 'no-cache, must-revalidate, max-age=0' ]
+        },
+        bytes: Uint8Array(2653) [
+           60,  33,  68,  79,  67,  84,  89,  80,  69,  32, 104, 116,
+          109, 108,  62,  10,  60, 104, 116, 109, 108,  32, 108,  97,
+          110, 103,  61,  34, 101, 110,  45,  85,  83,  34,  62,  10,
+           60, 104, 101,  97, 100,  62,  10,   9,  60, 109, 101, 116,
+           97,  32, 104, 116, 116, 112,  45, 101, 113, 117, 105, 118,
+           61,  34,  67, 111, 110, 116, 101, 110, 116,  45,  84, 121,
+          112, 101,  34,  32,  99, 111, 110, 116, 101, 110, 116,  61,
+           34, 116, 101, 120, 116,  47, 104, 116, 109, 108,  59,  32,
+           99, 104,  97, 114,
+          ... 2553 more items
+        ],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
