@@ -2,648 +2,183 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 03:28:08 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:28:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:28:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:28:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:28:36 UTC] PHP Warning:  Undefined variable $GET in /wordpress/wp-content/plugins/openbook-book-data/openbook.php on line 51
-[09-Apr-2025 03:28:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/openbook-book-data/openbook.php on line 51
-[09-Apr-2025 03:28:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_template1', '<span class=\"openbook_wrapper1\"><span class=\"openbook_cover1\">[OB_COVER_MEDIUM]</span><span class=\"openbook_title1\"> [OB_TITLE]</span><span class=\"openbook_author1\">[OB_AUTHORS]; [OB_PUBLISHER] [OB_PUBLISHYEAR]</span><span class=\"openbook_links1\">[OB_LINK_WORLDCAT][OB_DOT][OB_READONLINE][OB_DOT][OB_LINK_LIBRARYTHING][OB_DOT][OB_LINK_GOOGLEBOOKS][OB_DOT][OB_LINK_BOOKFINDER]</span>[OB_COINS]</span>', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'openbook_template1' , '&lt;span class=&quot;openbook_wrapper1&quot;&gt;&lt;span class=&quot;openbook_cover1&quot;&gt;[OB_COVER_MEDIUM]&lt;/span&gt;&lt;span class=&quot;openbook_title1&quot;&gt; [OB_TITLE]&lt;/span&gt;&lt;span class=&quot;openbook_author1&quot;&gt;[OB_AUTHORS]; [OB_PUBLISHER] [OB_PUBLISHYEAR]&lt;/span&gt;&lt;span class=&quot;openbook_links1&quot;&gt;[OB_LINK_WORLDCAT][OB_DOT][OB_READONLINE][OB_DOT][OB_LINK_LIBRARYTHING][OB_DOT][OB_LINK_GOOGLEBOOKS][OB_DOT][OB_LINK_BOOKFINDER]&lt;/span&gt;[OB_COINS]&lt;/span&gt;' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/openbook-book-data/libraries/openbook_utilities.php(17): add_option('openbook_templa...', '<span class="op...', '', 'off')
-#5 /wordpress/wp-content/plugins/openbook-book-data/openbook.php(69): openbook_utilities_setDefaultOptions()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ob_activation_check(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+Error: [10-Apr-2025 13:35:49 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 13:35:50 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 13:35:58 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 13:35:59 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 13:36:07 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 13:36:08 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 13:36:40 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744292197.778)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_openbo...', false)
-#10 /internal/eval.php(20): activate_plugin('openbook-book-d...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_template1', '<span class=\"openbook_wrapper1\"><span class=\"openbook_cover1\">[OB_COVER_MEDIUM]</span><span class=\"openbook_title1\"> [OB_TITLE]</span><span class=\"openbook_author1\">[OB_AUTHORS]; [OB_PUBLISHER] [OB_PUBLISHYEAR]</span><span class=\"openbook_links1\">[OB_LINK_WORLDCAT][OB_DOT][OB_READONLINE][OB_DOT][OB_LINK_LIBRARYTHING][OB_DOT][OB_LINK_GOOGLEBOOKS][OB_DOT][OB_LINK_BOOKFINDER]</span>[OB_COINS]</span>', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_openbook-book-data/openbook.php'), WP_Hook->do_action, WP_Hook->apply_filters, ob_activation_check, openbook_utilities_setDefaultOptions, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_template2', '<span class=\"openbook_wrapper1\"><span class=\"openbook_cover2\">[OB_COVER_SMALL]</span><span class=\"openbook_title2\">[OB_TITLE]; [OL_AUTHORFIRST]</span>[OB_COINS]</span>', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'openbook_template2' , '&lt;span class=&quot;openbook_wrapper1&quot;&gt;&lt;span class=&quot;openbook_cover2&quot;&gt;[OB_COVER_SMALL]&lt;/span&gt;&lt;span class=&quot;openbook_title2&quot;&gt;[OB_TITLE]; [OL_AUTHORFIRST]&lt;/span&gt;[OB_COINS]&lt;/span&gt;' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/openbook-book-data/libraries/openbook_utilities.php(18): add_option('openbook_templa...', '<span class="op...', '', 'off')
-#5 /wordpress/wp-content/plugins/openbook-book-data/openbook.php(69): openbook_utilities_setDefaultOptions()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ob_activation_check(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 13:38:10 UTC] PHP Deprecated:  Required parameter $post_id follows optional parameter $action in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-admin.php on line 488
+[10-Apr-2025 13:38:10 UTC] PHP Deprecated:  Required parameter $width follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 50
+[10-Apr-2025 13:38:10 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 50
+[10-Apr-2025 13:38:10 UTC] PHP Deprecated:  Required parameter $team follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 50
+[10-Apr-2025 13:38:10 UTC] PHP Deprecated:  Required parameter $services follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 50
+[10-Apr-2025 13:38:10 UTC] PHP Deprecated:  Required parameter $width follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 80
+[10-Apr-2025 13:38:10 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 80
+[10-Apr-2025 13:38:10 UTC] PHP Deprecated:  Required parameter $team follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 80
+[10-Apr-2025 13:38:10 UTC] PHP Deprecated:  Required parameter $services follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 80
+[10-Apr-2025 13:38:11 UTC] PHP Deprecated:  Required parameter $post_id follows optional parameter $action in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-admin.php on line 488
+[10-Apr-2025 13:38:11 UTC] PHP Deprecated:  Required parameter $width follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 50
+[10-Apr-2025 13:38:11 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 50
+[10-Apr-2025 13:38:11 UTC] PHP Deprecated:  Required parameter $team follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 50
+[10-Apr-2025 13:38:11 UTC] PHP Deprecated:  Required parameter $services follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 50
+[10-Apr-2025 13:38:11 UTC] PHP Deprecated:  Required parameter $width follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 80
+[10-Apr-2025 13:38:11 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 80
+[10-Apr-2025 13:38:11 UTC] PHP Deprecated:  Required parameter $team follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 80
+[10-Apr-2025 13:38:11 UTC] PHP Deprecated:  Required parameter $services follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 80
+[10-Apr-2025 13:38:18 UTC] PHP Deprecated:  Required parameter $post_id follows optional parameter $action in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-admin.php on line 488
+[10-Apr-2025 13:38:19 UTC] PHP Deprecated:  Required parameter $width follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 50
+[10-Apr-2025 13:38:19 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 50
+[10-Apr-2025 13:38:19 UTC] PHP Deprecated:  Required parameter $team follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 50
+[10-Apr-2025 13:38:19 UTC] PHP Deprecated:  Required parameter $services follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 50
+[10-Apr-2025 13:38:19 UTC] PHP Deprecated:  Required parameter $width follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 80
+[10-Apr-2025 13:38:19 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 80
+[10-Apr-2025 13:38:19 UTC] PHP Deprecated:  Required parameter $team follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 80
+[10-Apr-2025 13:38:19 UTC] PHP Deprecated:  Required parameter $services follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 80
+[10-Apr-2025 13:38:20 UTC] PHP Deprecated:  Required parameter $post_id follows optional parameter $action in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-admin.php on line 488
+[10-Apr-2025 13:38:20 UTC] PHP Deprecated:  Required parameter $width follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 50
+[10-Apr-2025 13:38:20 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 50
+[10-Apr-2025 13:38:20 UTC] PHP Deprecated:  Required parameter $team follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 50
+[10-Apr-2025 13:38:20 UTC] PHP Deprecated:  Required parameter $services follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 50
+[10-Apr-2025 13:38:20 UTC] PHP Deprecated:  Required parameter $width follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 80
+[10-Apr-2025 13:38:20 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 80
+[10-Apr-2025 13:38:20 UTC] PHP Deprecated:  Required parameter $team follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 80
+[10-Apr-2025 13:38:20 UTC] PHP Deprecated:  Required parameter $services follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 80
+[10-Apr-2025 13:38:28 UTC] PHP Deprecated:  Required parameter $post_id follows optional parameter $action in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-admin.php on line 488
+[10-Apr-2025 13:38:28 UTC] PHP Deprecated:  Required parameter $width follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 50
+[10-Apr-2025 13:38:28 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 50
+[10-Apr-2025 13:38:28 UTC] PHP Deprecated:  Required parameter $team follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 50
+[10-Apr-2025 13:38:28 UTC] PHP Deprecated:  Required parameter $services follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 50
+[10-Apr-2025 13:38:28 UTC] PHP Deprecated:  Required parameter $width follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 80
+[10-Apr-2025 13:38:28 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 80
+[10-Apr-2025 13:38:28 UTC] PHP Deprecated:  Required parameter $team follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 80
+[10-Apr-2025 13:38:28 UTC] PHP Deprecated:  Required parameter $services follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 80
+[10-Apr-2025 13:38:28 UTC] PHP Deprecated:  Required parameter $post_id follows optional parameter $action in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-admin.php on line 488
+[10-Apr-2025 13:38:28 UTC] PHP Deprecated:  Required parameter $width follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 50
+[10-Apr-2025 13:38:28 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 50
+[10-Apr-2025 13:38:28 UTC] PHP Deprecated:  Required parameter $team follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 50
+[10-Apr-2025 13:38:28 UTC] PHP Deprecated:  Required parameter $services follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 50
+[10-Apr-2025 13:38:28 UTC] PHP Deprecated:  Required parameter $width follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 80
+[10-Apr-2025 13:38:28 UTC] PHP Deprecated:  Required parameter $name follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 80
+[10-Apr-2025 13:38:28 UTC] PHP Deprecated:  Required parameter $team follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 80
+[10-Apr-2025 13:38:28 UTC] PHP Deprecated:  Required parameter $services follows optional parameter $page in /wordpress/wp-content/plugins/omnify-widget/admin/class-omnify-widget-api.php on line 80
+[10-Apr-2025 13:40:28 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "CACHE_PERIOD" in /wordpress/wp-content/plugins/opentok-video-chat/opentok.php:262
+Stack trace:
+#0 /wordpress/wp-content/plugins/opentok-video-chat/opentok.php(400): OpenTok_Video_Chat::get_settings()
+#1 /wordpress/wp-content/plugins/opentok-video-chat/opentok.php(125): OpenTok_Video_Chat::chat_can_happen()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): OpenTok_Video_Chat::instantiate_opentok_sdk('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(704): do_action('init')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/opentok-video-chat/opentok.php on line 262
+[10-Apr-2025 13:40:38 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "CACHE_PERIOD" in /wordpress/wp-content/plugins/opentok-video-chat/opentok.php:262
+Stack trace:
+#0 /wordpress/wp-content/plugins/opentok-video-chat/opentok.php(400): OpenTok_Video_Chat::get_settings()
+#1 /wordpress/wp-content/plugins/opentok-video-chat/opentok.php(125): OpenTok_Video_Chat::chat_can_happen()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): OpenTok_Video_Chat::instantiate_opentok_sdk('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(704): do_action('init')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/opentok-video-chat/opentok.php on line 262
+[10-Apr-2025 13:40:46 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "CACHE_PERIOD" in /wordpress/wp-content/plugins/opentok-video-chat/opentok.php:262
+Stack trace:
+#0 /wordpress/wp-content/plugins/opentok-video-chat/opentok.php(400): OpenTok_Video_Chat::get_settings()
+#1 /wordpress/wp-content/plugins/opentok-video-chat/opentok.php(125): OpenTok_Video_Chat::chat_can_happen()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): OpenTok_Video_Chat::instantiate_opentok_sdk('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(704): do_action('init')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/opentok-video-chat/opentok.php on line 262
+[10-Apr-2025 13:42:15 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744292533.411)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_openbo...', false)
-#10 /internal/eval.php(20): activate_plugin('openbook-book-d...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_template2', '<span class=\"openbook_wrapper1\"><span class=\"openbook_cover2\">[OB_COVER_SMALL]</span><span class=\"openbook_title2\">[OB_TITLE]; [OL_AUTHORFIRST]</span>[OB_COINS]</span>', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_openbook-book-data/openbook.php'), WP_Hook->do_action, WP_Hook->apply_filters, ob_activation_check, openbook_utilities_setDefaultOptions, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_template3', '<span class=\"openbook_wrapper3\"><span class=\"openbook_cover3\">[OB_COVER_LARGE]</span><span class=\"openbook_links1\">[OB_LINK_WORLDCAT][OB_DOT][OB_READONLINE][OB_DOT][OB_LINK_LIBRARYTHING][OB_DOT][OB_LINK_GOOGLEBOOKS][OB_DOT][OB_LINK_BOOKFINDER]</span>[OB_COINS]</span>', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'openbook_template3' , '&lt;span class=&quot;openbook_wrapper3&quot;&gt;&lt;span class=&quot;openbook_cover3&quot;&gt;[OB_COVER_LARGE]&lt;/span&gt;&lt;span class=&quot;openbook_links1&quot;&gt;[OB_LINK_WORLDCAT][OB_DOT][OB_READONLINE][OB_DOT][OB_LINK_LIBRARYTHING][OB_DOT][OB_LINK_GOOGLEBOOKS][OB_DOT][OB_LINK_BOOKFINDER]&lt;/span&gt;[OB_COINS]&lt;/span&gt;' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/openbook-book-data/libraries/openbook_utilities.php(19): add_option('openbook_templa...', '<span class="op...', '', 'off')
-#5 /wordpress/wp-content/plugins/openbook-book-data/openbook.php(69): openbook_utilities_setDefaultOptions()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ob_activation_check(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_openbo...', false)
-#10 /internal/eval.php(20): activate_plugin('openbook-book-d...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_template3', '<span class=\"openbook_wrapper3\"><span class=\"openbook_cover3\">[OB_COVER_LARGE]</span><span class=\"openbook_links1\">[OB_LINK_WORLDCAT][OB_DOT][OB_READONLINE][OB_DOT][OB_LINK_LIBRARYTHING][OB_DOT][OB_LINK_GOOGLEBOOKS][OB_DOT][OB_LINK_BOOKFINDER]</span>[OB_COINS]</span>', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_openbook-book-data/openbook.php'), WP_Hook->do_action, WP_Hook->apply_filters, ob_activation_check, openbook_utilities_setDefaultOptions, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_template4', '[OB_TITLE]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'openbook_template4' , '[OB_TITLE]' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/openbook-book-data/libraries/openbook_utilities.php(20): add_option('openbook_templa...', '[OB_TITLE]', '', 'off')
-#5 /wordpress/wp-content/plugins/openbook-book-data/openbook.php(69): openbook_utilities_setDefaultOptions()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ob_activation_check(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_openbo...', false)
-#10 /internal/eval.php(20): activate_plugin('openbook-book-d...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_template4', '[OB_TITLE]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_openbook-book-data/openbook.php'), WP_Hook->do_action, WP_Hook->apply_filters, ob_activation_check, openbook_utilities_setDefaultOptions, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_template5', '[OB_AUTHORS] ([OB_PUBLISHYEAR]). [OB_TITLE]. [OB_PUBLISHER].[OB_COINS]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'openbook_template5' , '[OB_AUTHORS] ([OB_PUBLISHYEAR]). [OB_TITLE]. [OB_PUBLISHER].[OB_COINS]' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/openbook-book-data/libraries/openbook_utilities.php(21): add_option('openbook_templa...', '[OB_AUTHORS] ([...', '', 'off')
-#5 /wordpress/wp-content/plugins/openbook-book-data/openbook.php(69): openbook_utilities_setDefaultOptions()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ob_activation_check(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_openbo...', false)
-#10 /internal/eval.php(20): activate_plugin('openbook-book-d...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_template5', '[OB_AUTHORS] ([OB_PUBLISHYEAR]). [OB_TITLE]. [OB_PUBLISHER].[OB_COINS]', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_openbook-book-data/openbook.php'), WP_Hook->do_action, WP_Hook->apply_filters, ob_activation_check, openbook_utilities_setDefaultOptions, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_findinlibrary_openurlresolver', '', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'openbook_findinlibrary_openurlresolver' , '' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/openbook-book-data/libraries/openbook_utilities.php(22): add_option('openbook_findin...', '', '', 'off')
-#5 /wordpress/wp-content/plugins/openbook-book-data/openbook.php(69): openbook_utilities_setDefaultOptions()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ob_activation_check(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_openbo...', false)
-#10 /internal/eval.php(20): activate_plugin('openbook-book-d...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_findinlibrary_openurlresolver', '', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_openbook-book-data/openbook.php'), WP_Hook->do_action, WP_Hook->apply_filters, ob_activation_check, openbook_utilities_setDefaultOptions, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_findinlibrary_phrase', 'Find in the Library', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'openbook_findinlibrary_phrase' , 'Find in the Library' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/openbook-book-data/libraries/openbook_utilities.php(23): add_option('openbook_findin...', 'Find in the Lib...', '', 'off')
-#5 /wordpress/wp-content/plugins/openbook-book-data/openbook.php(69): openbook_utilities_setDefaultOptions()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ob_activation_check(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_openbo...', false)
-#10 /internal/eval.php(20): activate_plugin('openbook-book-d...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_findinlibrary_phrase', 'Find in the Library', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_openbook-book-data/openbook.php'), WP_Hook->do_action, WP_Hook->apply_filters, ob_activation_check, openbook_utilities_setDefaultOptions, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_imagesrc_phrase', '', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'openbook_imagesrc_phrase' , '' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/openbook-book-data/libraries/openbook_utilities.php(24): add_option('openbook_images...', '', '', 'off')
-#5 /wordpress/wp-content/plugins/openbook-book-data/openbook.php(69): openbook_utilities_setDefaultOptions()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ob_activation_check(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_openbo...', false)
-#10 /internal/eval.php(20): activate_plugin('openbook-book-d...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_imagesrc_phrase', '', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_openbook-book-data/openbook.php'), WP_Hook->do_action, WP_Hook->apply_filters, ob_activation_check, openbook_utilities_setDefaultOptions, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_openlibrary_domain', 'http://openlibrary.org', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'openbook_openlibrary_domain' , 'http://openlibrary.org' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/openbook-book-data/libraries/openbook_utilities.php(25): add_option('openbook_openli...', 'http://openlibr...', '', 'off')
-#5 /wordpress/wp-content/plugins/openbook-book-data/openbook.php(69): openbook_utilities_setDefaultOptions()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ob_activation_check(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_openbo...', false)
-#10 /internal/eval.php(20): activate_plugin('openbook-book-d...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_openlibrary_domain', 'http://openlibrary.org', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_openbook-book-data/openbook.php'), WP_Hook->do_action, WP_Hook->apply_filters, ob_activation_check, openbook_utilities_setDefaultOptions, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_proxy', '', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'openbook_proxy' , '' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/openbook-book-data/libraries/openbook_utilities.php(26): add_option('openbook_proxy', '', '', 'off')
-#5 /wordpress/wp-content/plugins/openbook-book-data/openbook.php(69): openbook_utilities_setDefaultOptions()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ob_activation_check(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_openbo...', false)
-#10 /internal/eval.php(20): activate_plugin('openbook-book-d...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_proxy', '', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_openbook-book-data/openbook.php'), WP_Hook->do_action, WP_Hook->apply_filters, ob_activation_check, openbook_utilities_setDefaultOptions, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_proxyport', '', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'openbook_proxyport' , '' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/openbook-book-data/libraries/openbook_utilities.php(27): add_option('openbook_proxyp...', '', '', 'off')
-#5 /wordpress/wp-content/plugins/openbook-book-data/openbook.php(69): openbook_utilities_setDefaultOptions()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ob_activation_check(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_openbo...', false)
-#10 /internal/eval.php(20): activate_plugin('openbook-book-d...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_proxyport', '', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_openbook-book-data/openbook.php'), WP_Hook->do_action, WP_Hook->apply_filters, ob_activation_check, openbook_utilities_setDefaultOptions, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_timeout', '10', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'openbook_timeout' , '10' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/openbook-book-data/libraries/openbook_utilities.php(28): add_option('openbook_timeou...', '10', '', 'off')
-#5 /wordpress/wp-content/plugins/openbook-book-data/openbook.php(69): openbook_utilities_setDefaultOptions()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ob_activation_check(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_openbo...', false)
-#10 /internal/eval.php(20): activate_plugin('openbook-book-d...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_timeout', '10', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_openbook-book-data/openbook.php'), WP_Hook->do_action, WP_Hook->apply_filters, ob_activation_check, openbook_utilities_setDefaultOptions, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_showerrors', '', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'openbook_showerrors' , '' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/openbook-book-data/libraries/openbook_utilities.php(29): add_option('openbook_shower...', '', '', 'off')
-#5 /wordpress/wp-content/plugins/openbook-book-data/openbook.php(69): openbook_utilities_setDefaultOptions()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ob_activation_check(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_openbo...', false)
-#10 /internal/eval.php(20): activate_plugin('openbook-book-d...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_showerrors', '', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_openbook-book-data/openbook.php'), WP_Hook->do_action, WP_Hook->apply_filters, ob_activation_check, openbook_utilities_setDefaultOptions, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_savetemplates', 'checked', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'openbook_savetemplates' , 'checked' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/openbook-book-data/libraries/openbook_utilities.php(30): add_option('openbook_savete...', 'checked', '', 'off')
-#5 /wordpress/wp-content/plugins/openbook-book-data/openbook.php(69): openbook_utilities_setDefaultOptions()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): ob_activation_check(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_openbo...', false)
-#10 /internal/eval.php(20): activate_plugin('openbook-book-d...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('openbook_savetemplates', 'checked', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_openbook-book-data/openbook.php'), WP_Hook->do_action, WP_Hook->apply_filters, ob_activation_check, openbook_utilities_setDefaultOptions, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:28:36 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:28:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:28:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:28:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:28:45 UTC] PHP Warning:  Undefined variable $GET in /wordpress/wp-content/plugins/openbook-book-data/openbook.php on line 51
-[09-Apr-2025 03:28:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/openbook-book-data/openbook.php on line 51
-[09-Apr-2025 03:28:55 UTC] PHP Warning:  Undefined variable $GET in /wordpress/wp-content/plugins/openbook-book-data/openbook.php on line 51
-[09-Apr-2025 03:28:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /wordpress/wp-content/plugins/openbook-book-data/openbook.php on line 51
-[09-Apr-2025 03:29:05 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:29:05 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:29:05 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:29:05 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:29:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:29:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:29:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:29:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:29:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'nT`<&>$vEZ=~(/!G`aY$H{P Or1E)g TPK8_17xtD|~o[KWCQ UIh1RVSDQ~Y@gb', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'nT`&lt;&amp;&gt;$vEZ=~(/!G`aY$H{P Or1E)g TPK8_17xtD|~o[KWCQ UIh1RVSDQ~Y@gb' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'nT`<&>$vEZ=~(/!...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'nT`<&>$vEZ=~(/!...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'nT`<&>$vEZ=~(/!...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'nT`<&>$vEZ=~(/!...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/orbisius-simple-feedback/orbisius-simple-feedback.php(80): wp_enqueue_script('jquery')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): orbisius_simple_feedback_init('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'nT`<&>$vEZ=~(/!G`aY$H{P Or1E)g TPK8_17xtD|~o[KWCQ UIh1RVSDQ~Y@gb', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, orbisius_simple_feedback_init, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:29:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'J{~jvcju4t2P..J@&FX|p ,1+pdlEBb^a{Y|FSw @J21[f1c&>[;cOnEVuKDaiW}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'J{~jvcju4t2P..J@&amp;FX|p ,1+pdlEBb^a{Y|FSw @J21[f1c&amp;&gt;[;cOnEVuKDaiW}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'J{~jvcju4t2P..J...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'J{~jvcju4t2P..J...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'J{~jvcju4t2P..J...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'J{~jvcju4t2P..J...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/orbisius-simple-feedback/orbisius-simple-feedback.php(80): wp_enqueue_script('jquery')
-#19 /wordpress/wp-includes/class-wp-hook.php(324): orbisius_simple_feedback_init('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'J{~jvcju4t2P..J@&FX|p ,1+pdlEBb^a{Y|FSw @J21[f1c&>[;cOnEVuKDaiW}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, orbisius_simple_feedback_init, wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:30:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('osd_remove_all_wp_creds_options', 'a:2:{s:7:\"favicon\";s:0:\"\";s:11:\"login-image\";s:0:\"\";}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'osd_remove_all_wp_creds_options' , 'a:2:{s:7:&quot;favicon&quot;;s:0:&quot;&quot;;s:11:&quot;login-image&quot;;s:0:&quot;&quot;;}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 13:42:23 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wc_get_attribute_taxonomy_names() in /wordpress/wp-content/plugins/order-table-for-woocommerce/includes/start-args.php:59
+Stack trace:
+#0 /wordpress/wp-content/plugins/order-table-for-woocommerce/otfw-order.php(271): include()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): OTFW::activate(false)
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_order-...', false)
+#5 /internal/eval.php(20): activate_plugin('order-table-for...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/order-table-for-woocommerce/includes/start-args.php on line 59
+[10-Apr-2025 13:42:31 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wc_get_attribute_taxonomy_names() in /wordpress/wp-content/plugins/order-table-for-woocommerce/includes/start-args.php:59
+Stack trace:
+#0 /wordpress/wp-content/plugins/order-table-for-woocommerce/otfw-order.php(271): include()
+#1 /wordpress/wp-includes/class-wp-hook.php(324): OTFW::activate(false)
+#2 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#4 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_order-...', false)
+#5 /internal/eval.php(20): activate_plugin('order-table-for...')
+#6 {main}
+  thrown in /wordpress/wp-content/plugins/order-table-for-woocommerce/includes/start-args.php on line 59
+[10-Apr-2025 13:43:12 UTC] PHP Warning:  Undefined array key "post" in /wordpress/wp-content/plugins/osd-exclude-from-search-results/includes/OSDExcludeFromSearchResults.php on line 15
+[10-Apr-2025 13:43:13 UTC] PHP Warning:  Undefined array key "post" in /wordpress/wp-content/plugins/osd-exclude-from-search-results/includes/OSDExcludeFromSearchResults.php on line 15
+[10-Apr-2025 13:43:20 UTC] PHP Warning:  Undefined array key "post" in /wordpress/wp-content/plugins/osd-exclude-from-search-results/includes/OSDExcludeFromSearchResults.php on line 15
+[10-Apr-2025 13:43:22 UTC] PHP Warning:  Undefined array key "post" in /wordpress/wp-content/plugins/osd-exclude-from-search-results/includes/OSDExcludeFromSearchResults.php on line 15
+[10-Apr-2025 13:43:30 UTC] PHP Warning:  Undefined array key "post" in /wordpress/wp-content/plugins/osd-exclude-from-search-results/includes/OSDExcludeFromSearchResults.php on line 15
+[10-Apr-2025 13:43:31 UTC] PHP Warning:  Undefined array key "post" in /wordpress/wp-content/plugins/osd-exclude-from-search-results/includes/OSDExcludeFromSearchResults.php on line 15
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    ... 2 lines matching cause stack trace ...
+    at process.processTimers (node:internal/timers:543:7)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"ot-product-price-filter"},"options":{"activate":true}}) : Plugin /wordpress/wp-content/plugins/ot-product-price-filter could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at processTicksAndRejections (node:internal/process/task_queues:105:5)
+      ... 2 lines matching cause stack trace ...
+      at process.processTimers (node:internal/timers:543:7)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: Error: Plugin /wordpress/wp-content/plugins/ot-product-price-filter could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
+        at vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:119:51)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at runNextTicks (node:internal/process/task_queues:69:3)
+        at listOnTimeout (node:internal/timers:569:9)
+        at process.processTimers (node:internal/timers:543:7)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+  }
+}
+
+Node.js v23.11.0
