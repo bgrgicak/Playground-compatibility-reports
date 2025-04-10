@@ -2,372 +2,139 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 12:49:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp-content-framework', 'a:1:{s:16:\"marker_animation\";a:2:{i:0;s:5:\"2.1.1\";i:1;a:2:{i:0;s:74:\"/wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework\";i:1;a:13:{s:5:\"cache\";s:8:\"0.0.14.0\";s:4:\"core\";s:8:\"0.0.59.0\";s:6:\"common\";s:8:\"0.0.52.0\";s:9:\"presenter\";s:8:\"0.0.21.0\";s:10:\"controller\";s:7:\"0.0.5.0\";s:3:\"api\";s:8:\"0.0.14.0\";s:4:\"view\";s:7:\"0.0.9.0\";s:5:\"admin\";s:8:\"0.0.32.0\";s:7:\"session\";s:7:\"0.0.8.0\";s:2:\"db\";s:8:\"0.0.20.0\";s:11:\"custom_post\";s:8:\"0.0.38.0\";s:6:\"update\";s:7:\"0.0.8.0\";s:6:\"editor\";s:7:\"0.0.4.0\";}}}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp-content-framework' , 'a:1:{s:16:&quot;marker_animation&quot;;a:2:{i:0;s:5:&quot;2.1.1&quot;;i:1;a:2:{i:0;s:74:&quot;/wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework&quot;;i:1;a:13:{s:5:&quot;cache&quot;;s:8:&quot;0.0.14.0&quot;;s:4:&quot;core&quot;;s:8:&quot;0.0.59.0&quot;;s:6:&quot;common&quot;;s:8:&quot;0.0.52.0&quot;;s:9:&quot;presenter&quot;;s:8:&quot;0.0.21.0&quot;;s:10:&quot;controller&quot;;s:7:&quot;0.0.5.0&quot;;s:3:&quot;api&quot;;s:8:&quot;0.0.14.0&quot;;s:4:&quot;view&quot;;s:7:&quot;0.0.9.0&quot;;s:5:&quot;admin&quot;;s:8:&quot;0.0.32.0&quot;;s:7:&quot;session&quot;;s:7:&quot;0.0.8.0&quot;;s:2:&quot;db&quot;;s:8:&quot;0.0.20.0&quot;;s:11:&quot;custom_post&quot;;s:8:&quot;0.0.38.0&quot;;s:6:&quot;update&quot;;s:7:&quot;0.0.8.0&quot;;s:6:&quot;editor&quot;;s:7:&quot;0.0.4.0&quot;;}}}}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('wp-content-fram...', Array, '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'wp-content-fram...', Array)
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'wp-content-fram...', Array)
-#7 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/framework.php(649): update_site_option('wp-content-fram...', Array)
-#8 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/framework.php(727): WP_Framework->set_plugin_cache()
-#9 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/framework.php(259): WP_Framework->setup_framework_version()
-#10 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/framework.php(343): WP_Framework->__construct('Marker_Animatio...', '/wordpress/wp-c...', NULL, NULL, NULL)
-#11 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/framework.php(800): WP_Framework::{closure}()
-#12 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/framework.php(346): WP_Framework::run(Object(Closure))
-#13 /wordpress/wp-content/plugins/marker-animation/marker-animation.php(25): WP_Framework::get_instance('Marker_Animatio...', '/wordpress/wp-c...')
-#14 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('marker-animatio...')
-#16 /internal/eval.php(20): activate_plugin('marker-animatio...')
-#17 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp-content-framework', 'a:1:{s:16:\"marker_animation\";a:2:{i:0;s:5:\"2.1.1\";i:1;a:2:{i:0;s:74:\"/wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework\";i:1;a:13:{s:5:\"cache\";s:8:\"0.0.14.0\";s:4:\"core\";s:8:\"0.0.59.0\";s:6:\"common\";s:8:\"0.0.52.0\";s:9:\"presenter\";s:8:\"0.0.21.0\";s:10:\"controller\";s:7:\"0.0.5.0\";s:3:\"api\";s:8:\"0.0.14.0\";s:4:\"view\";s:7:\"0.0.9.0\";s:5:\"admin\";s:8:\"0.0.32.0\";s:7:\"session\";s:7:\"0.0.8.0\";s:2:\"db\";s:8:\"0.0.20.0\";s:11:\"custom_post\";s:8:\"0.0.38.0\";s:6:\"update\";s:7:\"0.0.8.0\";s:6:\"editor\";s:7:\"0.0.4.0\";}}}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/marker-animation/marker-animation.php'), WP_Framework::get_instance, WP_Framework::run, WP_Framework::{closure}, WP_Framework->__construct, WP_Framework->setup_framework_version, WP_Framework->set_plugin_cache, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 12:49:04 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 12:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 12:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 12:49:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 12:49:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp-content-framework', 'a:1:{s:16:\"marker_animation\";a:2:{i:0;s:5:\"2.1.1\";i:1;a:2:{i:0;s:74:\"/wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework\";i:1;a:13:{s:5:\"cache\";s:8:\"0.0.14.0\";s:4:\"core\";s:8:\"0.0.59.0\";s:6:\"common\";s:8:\"0.0.52.0\";s:9:\"presenter\";s:8:\"0.0.21.0\";s:10:\"controller\";s:7:\"0.0.5.0\";s:3:\"api\";s:8:\"0.0.14.0\";s:4:\"view\";s:7:\"0.0.9.0\";s:5:\"admin\";s:8:\"0.0.32.0\";s:7:\"session\";s:7:\"0.0.8.0\";s:2:\"db\";s:8:\"0.0.20.0\";s:11:\"custom_post\";s:8:\"0.0.38.0\";s:6:\"update\";s:7:\"0.0.8.0\";s:6:\"editor\";s:7:\"0.0.4.0\";}}}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp-content-framework' , 'a:1:{s:16:&quot;marker_animation&quot;;a:2:{i:0;s:5:&quot;2.1.1&quot;;i:1;a:2:{i:0;s:74:&quot;/wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework&quot;;i:1;a:13:{s:5:&quot;cache&quot;;s:8:&quot;0.0.14.0&quot;;s:4:&quot;core&quot;;s:8:&quot;0.0.59.0&quot;;s:6:&quot;common&quot;;s:8:&quot;0.0.52.0&quot;;s:9:&quot;presenter&quot;;s:8:&quot;0.0.21.0&quot;;s:10:&quot;controller&quot;;s:7:&quot;0.0.5.0&quot;;s:3:&quot;api&quot;;s:8:&quot;0.0.14.0&quot;;s:4:&quot;view&quot;;s:7:&quot;0.0.9.0&quot;;s:5:&quot;admin&quot;;s:8:&quot;0.0.32.0&quot;;s:7:&quot;session&quot;;s:7:&quot;0.0.8.0&quot;;s:2:&quot;db&quot;;s:8:&quot;0.0.20.0&quot;;s:11:&quot;custom_post&quot;;s:8:&quot;0.0.38.0&quot;;s:6:&quot;update&quot;;s:7:&quot;0.0.8.0&quot;;s:6:&quot;editor&quot;;s:7:&quot;0.0.4.0&quot;;}}}}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('wp-content-fram...', Array, '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'wp-content-fram...', Array)
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'wp-content-fram...', Array)
-#7 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/framework.php(649): update_site_option('wp-content-fram...', Array)
-#8 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/framework.php(727): WP_Framework->set_plugin_cache()
-#9 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/framework.php(259): WP_Framework->setup_framework_version()
-#10 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/framework.php(343): WP_Framework->__construct('Marker_Animatio...', '/wordpress/wp-c...', NULL, NULL, NULL)
-#11 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/framework.php(800): WP_Framework::{closure}()
-#12 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/framework.php(346): WP_Framework::run(Object(Closure))
-#13 /wordpress/wp-content/plugins/marker-animation/marker-animation.php(25): WP_Framework::get_instance('Marker_Animatio...', '/wordpress/wp-c...')
-#14 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#15 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#16 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#17 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp-content-framework', 'a:1:{s:16:\"marker_animation\";a:2:{i:0;s:5:\"2.1.1\";i:1;a:2:{i:0;s:74:\"/wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework\";i:1;a:13:{s:5:\"cache\";s:8:\"0.0.14.0\";s:4:\"core\";s:8:\"0.0.59.0\";s:6:\"common\";s:8:\"0.0.52.0\";s:9:\"presenter\";s:8:\"0.0.21.0\";s:10:\"controller\";s:7:\"0.0.5.0\";s:3:\"api\";s:8:\"0.0.14.0\";s:4:\"view\";s:7:\"0.0.9.0\";s:5:\"admin\";s:8:\"0.0.32.0\";s:7:\"session\";s:7:\"0.0.8.0\";s:2:\"db\";s:8:\"0.0.20.0\";s:11:\"custom_post\";s:8:\"0.0.38.0\";s:6:\"update\";s:7:\"0.0.8.0\";s:6:\"editor\";s:7:\"0.0.4.0\";}}}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/marker-animation/marker-animation.php'), WP_Framework::get_instance, WP_Framework::run, WP_Framework::{closure}, WP_Framework->__construct, WP_Framework->setup_framework_version, WP_Framework->set_plugin_cache, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 12:49:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('marker_animation_options/cache/marker-animation_classes_models_custom-post_setting', 'a:1:{s:14:\"post_type_args\";a:2:{i:0;a:2:{i:0;a:16:{s:6:\"labels\";a:10:{s:4:\"name\";s:8:\"Settings\";s:13:\"singular_name\";s:7:\"Setting\";s:9:\"menu_name\";s:8:\"Settings\";s:9:\"all_items\";s:12:\"All Settings\";s:7:\"add_new\";s:7:\"Add New\";s:12:\"add_new_item\";s:15:\"Add New Setting\";s:9:\"edit_item\";s:12:\"Edit Setting\";s:12:\"search_items\";s:15:\"Search Settings\";s:9:\"not_found\";s:18:\"No Settings found.\";s:18:\"not_found_in_trash\";s:27:\"No Settings found in Trash.\";}s:11:\"description\";s:0:\"\";s:6:\"public\";b:0;s:7:\"show_ui\";b:1;s:11:\"has_archive\";b:0;s:12:\"show_in_menu\";s:26:\"marker_animation-dashboard\";s:19:\"exclude_from_search\";b:1;s:15:\"capability_type\";s:7:\"setting\";s:12:\"capabilities\";a:15:{s:9:\"edit_post\";s:9:\"edit_post\";s:9:\"read_post\";s:9:\"read_post\";s:11:\"delete_post\";s:11:\"delete_post\";s:10:\"edit_posts\";s:10:\"edit_posts\";s:17:\"edit_others_posts\";s:17:\"edit_others_posts\";s:12:\"delete_posts\";s:12:\"delete_posts\";s:13:\"publish_posts\";s:13:\"publish_posts\";s:18:\"read_private_posts\";s:18:\"read_private_posts\";s:4:\"read\";s:4:\"read\";s:20:\"delete_private_posts\";s:20:\"delete_private_posts\";s:22:\"delete_published_posts\";s:22:\"delete_published_posts\";s:19:\"delete_others_posts\";s:19:\"delete_others_posts\";s:18:\"edit_private_posts\";s:18:\"edit_private_posts\";s:20:\"edit_published_posts\";s:20:\"edit_published_posts\";s:12:\"create_posts\";s:10:\"edit_posts\";}s:12:\"map_meta_cap\";b:1;s:12:\"hierarchical\";b:0;s:7:\"rewrite\";a:2:{s:4:\"slug\";s:7:\"setting\";s:10:\"with_front\";b:0;}s:9:\"query_var\";b:1;s:9:\"menu_icon\";s:23:\"dashicons-admin-plugins\";s:8:\"supports\";a:1:{i:0;s:5:\"title\";}s:13:\"menu_position\";i:5;}i:1;s:40:\"b1da97e1a2eadbf5c90885f09bef3e8f328ded2d\";}i:1;N;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'marker_animation_options/cache/marker-animation_classes_models_custom-post_setting' , 'a:1:{s:14:&quot;post_type_args&quot;;a:2:{i:0;a:2:{i:0;a:16:{s:6:&quot;labels&quot;;a:10:{s:4:&quot;name&quot;;s:8:&quot;Settings&quot;;s:13:&quot;singular_name&quot;;s:7:&quot;Setting&quot;;s:9:&quot;menu_name&quot;;s:8:&quot;Settings&quot;;s:9:&quot;all_items&quot;;s:12:&quot;All Settings&quot;;s:7:&quot;add_new&quot;;s:7:&quot;Add New&quot;;s:12:&quot;add_new_item&quot;;s:15:&quot;Add New Setting&quot;;s:9:&quot;edit_item&quot;;s:12:&quot;Edit Setting&quot;;s:12:&quot;search_items&quot;;s:15:&quot;Search Settings&quot;;s:9:&quot;not_found&quot;;s:18:&quot;No Settings found.&quot;;s:18:&quot;not_found_in_trash&quot;;s:27:&quot;No Settings found in Trash.&quot;;}s:11:&quot;description&quot;;s:0:&quot;&quot;;s:6:&quot;public&quot;;b:0;s:7:&quot;show_ui&quot;;b:1;s:11:&quot;has_archive&quot;;b:0;s:12:&quot;show_in_menu&quot;;s:26:&quot;marker_animation-dashboard&quot;;s:19:&quot;exclude_from_search&quot;;b:1;s:15:&quot;capability_type&quot;;s:7:&quot;setting&quot;;s:12:&quot;capabilities&quot;;a:15:{s:9:&quot;edit_post&quot;;s:9:&quot;edit_post&quot;;s:9:&quot;read_post&quot;;s:9:&quot;read_post&quot;;s:11:&quot;delete_post&quot;;s:11:&quot;delete_post&quot;;s:10:&quot;edit_posts&quot;;s:10:&quot;edit_posts&quot;;s:17:&quot;edit_others_posts&quot;;s:17:&quot;edit_others_posts&quot;;s:12:&quot;delete_posts&quot;;s:12:&quot;delete_posts&quot;;s:13:&quot;publish_posts&quot;;s:13:&quot;publish_posts&quot;;s:18:&quot;read_private_posts&quot;;s:18:&quot;read_private_posts&quot;;s:4:&quot;read&quot;;s:4:&quot;read&quot;;s:20:&quot;delete_private_posts&quot;;s:20:&quot;delete_private_posts&quot;;s:22:&quot;delete_published_posts&quot;;s:22:&quot;delete_published_posts&quot;;s:19:&quot;delete_others_posts&quot;;s:19:&quot;delete_others_posts&quot;;s:18:&quot;edit_private_posts&quot;;s:18:&quot;edit_private_posts&quot;;s:20:&quot;edit_published_posts&quot;;s:20:&quot;edit_published_posts&quot;;s:12:&quot;create_posts&quot;;s:10:&quot;edit_posts&quot;;}s:12:&quot;map_meta_cap&quot;;b:1;s:12:&quot;hierarchical&quot;;b:0;s:7:&quot;rewrite&quot;;a:2:{s:4:&quot;slug&quot;;s:7:&quot;setting&quot;;s:10:&quot;with_front&quot;;b:0;}s:9:&quot;query_var&quot;;b:1;s:9:&quot;menu_icon&quot;;s:23:&quot;dashicons-admin-plugins&quot;;s:8:&quot;supports&quot;;a:1:{i:0;s:5:&quot;title&quot;;}s:13:&quot;menu_position&quot;;i:5;}i:1;s:40:&quot;b1da97e1a2eadbf5c90885f09bef3e8f328ded2d&quot;;}i:1;N;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('marker_animatio...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/option.php(409): update_option('marker_animatio...', Array)
-#6 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/option.php(328): WP_Framework_Common\Classes\Models\Option->save('cache/marker-an...', Array, true)
-#7 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/cache/src/classes/models/cache/option.php(79): WP_Framework_Common\Classes\Models\Option->set_grouped('post_type_args', 'cache/marker-an...', Array, true)
-#8 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/cache/src/classes/models/cache/option.php(131): WP_Framework_Cache\Classes\Models\Cache\Option->set_option('post_type_args', 'marker-animatio...', true, Array, 0)
-#9 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/cache/src/classes/models/cache.php(105): WP_Framework_Cache\Classes\Models\Cache\Option->set('post_type_args', Array, 'marker-animatio...', true, NULL)
-#10 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/utility.php(268): WP_Framework_Cache\Classes\Models\Cache->set('post_type_args', Array, 'marker-animatio...', true, NULL)
-#11 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/custom_post/src/traits/custom_post.php(299): Marker_Animation\Classes\Models\Custom_Post\Setting->cache_set_common('post_type_args', Array)
-#12 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/custom_post/src/traits/custom_post.php(77): Marker_Animation\Classes\Models\Custom_Post\Setting->get_post_type_args()
-#13 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/custom_post/src/traits/custom_post.php(58): Marker_Animation\Classes\Models\Custom_Post\Setting->register_post_type()
-#14 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/singleton.php(192): Marker_Animation\Classes\Models\Custom_Post\Setting->initialized()
-#15 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/singleton.php(147): Marker_Animation\Classes\Models\Custom_Post\Setting->call_initialized()
-#16 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/singleton.php(134): Marker_Animation\Classes\Models\Custom_Post\Setting->init(Object(WP_Framework), Object(ReflectionClass))
-#17 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/singleton.php(105): Marker_Animation\Classes\Models\Custom_Post\Setting->__construct(Object(WP_Framework), Object(ReflectionClass))
-#18 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/loader.php(231): Marker_Animation\Classes\Models\Custom_Post\Setting::get_instance(Object(WP_Framework))
-#19 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/loader.php(186): WP_Framework_Custom_Post\Classes\Models\Custom_Post->get_class_instance(Array, '\\WP_Framework_C...')
-#20 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/loader.php(173): WP_Framework_Custom_Post\Classes\Models\Custom_Post->get_class_instances(Object(Generator), '\\WP_Framework_C...')
-#21 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/loader.php(107): WP_Framework_Custom_Post\Classes\Models\Custom_Post->get_classes('/wordpress/wp-c...', '\\WP_Framework_C...')
-#22 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/custom_post/src/classes/models/custom_post.php(540): WP_Framework_Custom_Post\Classes\Models\Custom_Post->get_class_list()
-#23 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/custom_post/src/classes/models/custom_post.php(54): WP_Framework_Custom_Post\Classes\Models\Custom_Post->get_custom_posts()
-#24 [internal function]: WP_Framework_Custom_Post\Classes\Models\Custom_Post->register_post_types('')
-#25 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/singleton.php(230): call_user_func(Array, '')
-#26 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/filter.php(188): WP_Framework_Custom_Post\Classes\Models\Custom_Post->filter_callback('register_post_t...', Array)
-#27 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/filter.php(212): WP_Framework_Common\Classes\Models\Filter->WP_Framework_Common\Classes\Models\{closure}(Array)
-#28 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/filter.php(180): WP_Framework_Common\Classes\Models\Filter->run('init', 'custom_post', 'register_post_t...', Object(Closure), Array)
-#29 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/filter.php(87): WP_Framework_Common\Classes\Models\Filter->call_filter_callback('init', 'custom_post', 'register_post_t...', Array)
-#30 /wordpress/wp-includes/class-wp-hook.php(324): WP_Framework_Common\Classes\Models\Filter->WP_Framework_Common\Classes\Models\{closure}('')
-#31 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#32 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#33 /wordpress/wp-settings.php(704): do_action('init')
-#34 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#35 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#36 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#37 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('marker_animation_options/cache/marker-animation_classes_models_custom-post_setting', 'a:1:{s:14:\"post_type_args\";a:2:{i:0;a:2:{i:0;a:16:{s:6:\"labels\";a:10:{s:4:\"name\";s:8:\"Settings\";s:13:\"singular_name\";s:7:\"Setting\";s:9:\"menu_name\";s:8:\"Settings\";s:9:\"all_items\";s:12:\"All Settings\";s:7:\"add_new\";s:7:\"Add New\";s:12:\"add_new_item\";s:15:\"Add New Setting\";s:9:\"edit_item\";s:12:\"Edit Setting\";s:12:\"search_items\";s:15:\"Search Settings\";s:9:\"not_found\";s:18:\"No Settings found.\";s:18:\"not_found_in_trash\";s:27:\"No Settings found in Trash.\";}s:11:\"description\";s:0:\"\";s:6:\"public\";b:0;s:7:\"show_ui\";b:1;s:11:\"has_archive\";b:0;s:12:\"show_in_menu\";s:26:\"marker_animation-dashboard\";s:19:\"exclude_from_search\";b:1;s:15:\"capability_type\";s:7:\"setting\";s:12:\"capabilities\";a:15:{s:9:\"edit_post\";s:9:\"edit_post\";s:9:\"read_post\";s:9:\"read_post\";s:11:\"delete_post\";s:11:\"delete_post\";s:10:\"edit_posts\";s:10:\"edit_posts\";s:17:\"edit_others_posts\";s:17:\"edit_others_posts\";s:12:\"delete_posts\";s:12:\"delete_posts\";s:13:\"publish_posts\";s:13:\"publish_posts\";s:18:\"read_private_posts\";s:18:\"read_private_posts\";s:4:\"read\";s:4:\"read\";s:20:\"delete_private_posts\";s:20:\"delete_private_posts\";s:22:\"delete_published_posts\";s:22:\"delete_published_posts\";s:19:\"delete_others_posts\";s:19:\"delete_others_posts\";s:18:\"edit_private_posts\";s:18:\"edit_private_posts\";s:20:\"edit_published_posts\";s:20:\"edit_published_posts\";s:12:\"create_posts\";s:10:\"edit_posts\";}s:12:\"map_meta_cap\";b:1;s:12:\"hierarchical\";b:0;s:7:\"rewrite\";a:2:{s:4:\"slug\";s:7:\"setting\";s:10:\"with_front\";b:0;}s:9:\"query_var\";b:1;s:9:\"menu_icon\";s:23:\"dashicons-admin-plugins\";s:8:\"supports\";a:1:{i:0;s:5:\"title\";}s:13:\"menu_position\";i:5;}i:1;s:40:\"b1da97e1a2eadbf5c90885f09bef3e8f328ded2d\";}i:1;N;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Framework_Common\Classes\Models\Filter->WP_Framework_Common\Classes\Models\{closure}, WP_Framework_Common\Classes\Models\Filter->call_filter_callback, WP_Framework_Common\Classes\Models\Filter->run, WP_Framework_Common\Classes\Models\Filter->WP_Framework_Common\Classes\Models\{closure}, WP_Framework_Custom_Post\Classes\Models\Custom_Post->filter_callback, call_user_func, WP_Framework_Custom_Post\Classes\Models\Custom_Post->register_post_types, WP_Framework_Custom_Post\Classes\Models\Custom_Post->get_custom_posts, WP_Framework_Custom_Post\Classes\Models\Custom_Post->get_class_list, WP_Framework_Custom_Post\Classes\Models\Custom_Post->get_classes, WP_Framework_Custom_Post\Classes\Models\Custom_Post->get_class_instances, WP_Framework_Custom_Post\Classes\Models\Custom_Post->get_class_instance, Marker_Animation\Classes\Models\Custom_Post\Setting::get_instance, Marker_Animation\Classes\Models\Custom_Post\Setting->__construct, Marker_Animation\Classes\Models\Custom_Post\Setting->init, Marker_Animation\Classes\Models\Custom_Post\Setting->call_initialized, Marker_Animation\Classes\Models\Custom_Post\Setting->initialized, Marker_Animation\Classes\Models\Custom_Post\Setting->register_post_type, Marker_Animation\Classes\Models\Custom_Post\Setting->get_post_type_args, Marker_Animation\Classes\Models\Custom_Post\Setting->cache_set_common, WP_Framework_Cache\Classes\Models\Cache->set, WP_Framework_Cache\Classes\Models\Cache\Option->set, WP_Framework_Cache\Classes\Models\Cache\Option->set_option, WP_Framework_Common\Classes\Models\Option->set_grouped, WP_Framework_Common\Classes\Models\Option->save, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 12:49:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('marker_animation_options/cache/wp-framework-custom-post_classes_models_custom-post', 'a:1:{s:14:\"class_settings\";a:2:{i:0;a:2:{i:0;a:1:{s:51:\"Marker_Animation\\Classes\\Models\\Custom_Post\\Setting\";a:3:{i:0;s:51:\"Marker_Animation\\Classes\\Models\\Custom_Post\\Setting\";i:1;s:0:\"\";i:2;s:89:\"/wordpress/wp-content/plugins/marker-animation/src/classes/models/custom_post/setting.php\";}}i:1;s:40:\"b1da97e1a2eadbf5c90885f09bef3e8f328ded2d\";}i:1;N;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'marker_animation_options/cache/wp-framework-custom-post_classes_models_custom-post' , 'a:1:{s:14:&quot;class_settings&quot;;a:2:{i:0;a:2:{i:0;a:1:{s:51:&quot;Marker_Animation\Classes\Models\Custom_Post\Setting&quot;;a:3:{i:0;s:51:&quot;Marker_Animation\Classes\Models\Custom_Post\Setting&quot;;i:1;s:0:&quot;&quot;;i:2;s:89:&quot;/wordpress/wp-content/plugins/marker-animation/src/classes/models/custom_post/setting.php&quot;;}}i:1;s:40:&quot;b1da97e1a2eadbf5c90885f09bef3e8f328ded2d&quot;;}i:1;N;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('marker_animatio...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/option.php(409): update_option('marker_animatio...', Array)
-#6 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/option.php(328): WP_Framework_Common\Classes\Models\Option->save('cache/wp-framew...', Array, true)
-#7 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/cache/src/classes/models/cache/option.php(79): WP_Framework_Common\Classes\Models\Option->set_grouped('class_settings', 'cache/wp-framew...', Array, true)
-#8 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/cache/src/classes/models/cache/option.php(131): WP_Framework_Cache\Classes\Models\Cache\Option->set_option('class_settings', 'wp-framework-cu...', true, Array, 0)
-#9 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/cache/src/classes/models/cache.php(105): WP_Framework_Cache\Classes\Models\Cache\Option->set('class_settings', Array, 'wp-framework-cu...', true, NULL)
-#10 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/utility.php(268): WP_Framework_Cache\Classes\Models\Cache->set('class_settings', Array, 'wp-framework-cu...', true, NULL)
-#11 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/loader.php(137): WP_Framework_Custom_Post\Classes\Models\Custom_Post->cache_set_common('class_settings', Array, 'b1da97e1a2eadbf...', NULL, true)
-#12 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/custom_post/src/classes/models/custom_post.php(540): WP_Framework_Custom_Post\Classes\Models\Custom_Post->get_class_list()
-#13 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/custom_post/src/classes/models/custom_post.php(54): WP_Framework_Custom_Post\Classes\Models\Custom_Post->get_custom_posts()
-#14 [internal function]: WP_Framework_Custom_Post\Classes\Models\Custom_Post->register_post_types('')
-#15 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/singleton.php(230): call_user_func(Array, '')
-#16 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/filter.php(188): WP_Framework_Custom_Post\Classes\Models\Custom_Post->filter_callback('register_post_t...', Array)
-#17 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/filter.php(212): WP_Framework_Common\Classes\Models\Filter->WP_Framework_Common\Classes\Models\{closure}(Array)
-#18 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/filter.php(180): WP_Framework_Common\Classes\Models\Filter->run('init', 'custom_post', 'register_post_t...', Object(Closure), Array)
-#19 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/filter.php(87): WP_Framework_Common\Classes\Models\Filter->call_filter_callback('init', 'custom_post', 'register_post_t...', Array)
-#20 /wordpress/wp-includes/class-wp-hook.php(324): WP_Framework_Common\Classes\Models\Filter->WP_Framework_Common\Classes\Models\{closure}('')
-#21 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#22 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#23 /wordpress/wp-settings.php(704): do_action('init')
-#24 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#25 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#26 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#27 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('marker_animation_options/cache/wp-framework-custom-post_classes_models_custom-post', 'a:1:{s:14:\"class_settings\";a:2:{i:0;a:2:{i:0;a:1:{s:51:\"Marker_Animation\\Classes\\Models\\Custom_Post\\Setting\";a:3:{i:0;s:51:\"Marker_Animation\\Classes\\Models\\Custom_Post\\Setting\";i:1;s:0:\"\";i:2;s:89:\"/wordpress/wp-content/plugins/marker-animation/src/classes/models/custom_post/setting.php\";}}i:1;s:40:\"b1da97e1a2eadbf5c90885f09bef3e8f328ded2d\";}i:1;N;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Framework_Common\Classes\Models\Filter->WP_Framework_Common\Classes\Models\{closure}, WP_Framework_Common\Classes\Models\Filter->call_filter_callback, WP_Framework_Common\Classes\Models\Filter->run, WP_Framework_Common\Classes\Models\Filter->WP_Framework_Common\Classes\Models\{closure}, WP_Framework_Custom_Post\Classes\Models\Custom_Post->filter_callback, call_user_func, WP_Framework_Custom_Post\Classes\Models\Custom_Post->register_post_types, WP_Framework_Custom_Post\Classes\Models\Custom_Post->get_custom_posts, WP_Framework_Custom_Post\Classes\Models\Custom_Post->get_class_list, WP_Framework_Custom_Post\Classes\Models\Custom_Post->cache_set_common, WP_Framework_Cache\Classes\Models\Cache->set, WP_Framework_Cache\Classes\Models\Cache\Option->set, WP_Framework_Cache\Classes\Models\Cache\Option->set_option, WP_Framework_Common\Classes\Models\Option->set_grouped, WP_Framework_Common\Classes\Models\Option->save, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 12:49:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('marker_animation_options', 'a:1:{s:15:\"__app_activated\";b:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'marker_animation_options' , 'a:1:{s:15:&quot;__app_activated&quot;;b:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('marker_animatio...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/option.php(409): update_option('marker_animatio...', Array)
-#6 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/option.php(328): WP_Framework_Common\Classes\Models\Option->save(NULL, Array, false)
-#7 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/option.php(312): WP_Framework_Common\Classes\Models\Option->set_grouped('__app_activated', NULL, true, false)
-#8 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/option.php(68): WP_Framework_Common\Classes\Models\Option->set('__app_activated', true)
-#9 [internal function]: WP_Framework_Common\Classes\Models\Option->app_activated(Object(WP_Framework))
-#10 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/singleton.php(230): call_user_func(Array, Object(WP_Framework))
-#11 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/filter.php(188): WP_Framework_Common\Classes\Models\Option->filter_callback('app_activated', Array)
-#12 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/filter.php(206): WP_Framework_Common\Classes\Models\Filter->WP_Framework_Common\Classes\Models\{closure}(Array)
-#13 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/filter.php(180): WP_Framework_Common\Classes\Models\Filter->run('marker_animatio...', 'option', 'app_activated', Object(Closure), Array)
-#14 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/filter.php(87): WP_Framework_Common\Classes\Models\Filter->call_filter_callback('marker_animatio...', 'option', 'app_activated', Array)
-#15 /wordpress/wp-includes/class-wp-hook.php(324): WP_Framework_Common\Classes\Models\Filter->WP_Framework_Common\Classes\Models\{closure}(Object(WP_Framework))
-#16 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#17 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#18 [internal function]: do_action('marker_animatio...', Object(WP_Framework))
-#19 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/hook.php(286): call_user_func_array('do_action', Array)
-#20 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/hook.php(268): WP_Framework_Common\Classes\Models\System->_do_action('marker_animatio...', Array)
-#21 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/system.php(89): WP_Framework_Common\Classes\Models\System->do_action('app_activated', Object(WP_Framework))
-#22 [internal function]: WP_Framework_Common\Classes\Models\System->app_initialized('')
-#23 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/singleton.php(230): call_user_func(Array, '')
-#24 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/filter.php(188): WP_Framework_Common\Classes\Models\System->filter_callback('app_initialized', Array)
-#25 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/filter.php(212): WP_Framework_Common\Classes\Models\Filter->WP_Framework_Common\Classes\Models\{closure}(Array)
-#26 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/filter.php(180): WP_Framework_Common\Classes\Models\Filter->run('wp-content-fram...', 'system', 'app_initialized', Object(Closure), Array)
-#27 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/filter.php(87): WP_Framework_Common\Classes\Models\Filter->call_filter_callback('wp-content-fram...', 'system', 'app_initialized', Array)
-#28 /wordpress/wp-includes/class-wp-hook.php(324): WP_Framework_Common\Classes\Models\Filter->WP_Framework_Common\Classes\Models\{closure}('')
-#29 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#30 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#31 [internal function]: do_action('wp-content-fram...')
-#32 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/hook.php(286): call_user_func_array('do_action', Array)
-#33 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/hook.php(276): WP_Framework_Common\Classes\Models\System->_do_action('wp-content-fram...', Array)
-#34 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/system.php(68): WP_Framework_Common\Classes\Models\System->do_framework_action('initialize')
-#35 /wordpress/wp-includes/class-wp-hook.php(324): WP_Framework_Common\Classes\Models\System->WP_Framework_Common\Classes\Models\{closure}('')
-#36 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#37 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#38 /wordpress/wp-settings.php(704): do_action('init')
-#39 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#40 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#41 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#42 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('marker_animation_options', 'a:1:{s:15:\"__app_activated\";b:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Framework_Common\Classes\Models\System->WP_Framework_Common\Classes\Models\{closure}, WP_Framework_Common\Classes\Models\System->do_framework_action, WP_Framework_Common\Classes\Models\System->_do_action, call_user_func_array, do_action('wp-content-framework/initialize'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Framework_Common\Classes\Models\Filter->WP_Framework_Common\Classes\Models\{closure}, WP_Framework_Common\Classes\Models\Filter->call_filter_callback, WP_Framework_Common\Classes\Models\Filter->run, WP_Framework_Common\Classes\Models\Filter->WP_Framework_Common\Classes\Models\{closure}, WP_Framework_Common\Classes\Models\System->filter_callback, call_user_func, WP_Framework_Common\Classes\Models\System->app_initialized, WP_Framework_Common\Classes\Models\System->do_action, WP_Framework_Common\Classes\Models\System->_do_action, call_user_func_array, do_action('marker_animation/app_activated'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Framework_Common\Classes\Models\Filter->WP_Framework_Common\Classes\Models\{closure}, WP_Framework_Common\Classes\Models\Filter->call_filter_callback, WP_Framework_Common\Classes\Models\Filter->run, WP_Framework_Common\Classes\Models\Filter->WP_Framework_Common\Classes\Models\{closure}, WP_Framework_Common\Classes\Models\Option->filter_callback, call_user_func, WP_Framework_Common\Classes\Models\Option->app_activated, WP_Framework_Common\Classes\Models\Option->set, WP_Framework_Common\Classes\Models\Option->set_grouped, WP_Framework_Common\Classes\Models\Option->save, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 12:49:06 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 12:49:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 12:49:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 12:49:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 12:49:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('marker_animation_options/cache/wp-framework-cache_classes_models_cache', 'a:1:{s:14:\"class_settings\";a:2:{i:0;a:2:{i:0;a:2:{s:44:\"WP_Framework_Cache\\Classes\\Models\\Cache\\File\";a:3:{i:0;s:45:\"\\WP_Framework_Cache\\Classes\\Models\\Cache\\File\";i:1;s:0:\"\";i:2;s:114:\"/wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/cache/src/classes/models/cache/file.php\";}s:46:\"WP_Framework_Cache\\Classes\\Models\\Cache\\Option\";a:3:{i:0;s:47:\"\\WP_Framework_Cache\\Classes\\Models\\Cache\\Option\";i:1;s:0:\"\";i:2;s:116:\"/wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/cache/src/classes/models/cache/option.php\";}}i:1;s:40:\"01c7406ee35165f0bbf06962d1e7d59500301eaa\";}i:1;N;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'marker_animation_options/cache/wp-framework-cache_classes_models_cache' , 'a:1:{s:14:&quot;class_settings&quot;;a:2:{i:0;a:2:{i:0;a:2:{s:44:&quot;WP_Framework_Cache\Classes\Models\Cache\File&quot;;a:3:{i:0;s:45:&quot;\WP_Framework_Cache\Classes\Models\Cache\File&quot;;i:1;s:0:&quot;&quot;;i:2;s:114:&quot;/wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/cache/src/classes/models/cache/file.php&quot;;}s:46:&quot;WP_Framework_Cache\Classes\Models\Cache\Option&quot;;a:3:{i:0;s:47:&quot;\WP_Framework_Cache\Classes\Models\Cache\Option&quot;;i:1;s:0:&quot;&quot;;i:2;s:116:&quot;/wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/cache/src/classes/models/cache/option.php&quot;;}}i:1;s:40:&quot;01c7406ee35165f0bbf06962d1e7d59500301eaa&quot;;}i:1;N;}}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('marker_animatio...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/option.php(409): update_option('marker_animatio...', Array)
-#6 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/option.php(328): WP_Framework_Common\Classes\Models\Option->save('cache/wp-framew...', Array, false)
-#7 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/cache/src/classes/models/cache/option.php(79): WP_Framework_Common\Classes\Models\Option->set_grouped('class_settings', 'cache/wp-framew...', Array, false)
-#8 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/cache/src/classes/models/cache/option.php(131): WP_Framework_Cache\Classes\Models\Cache\Option->set_option('class_settings', 'wp-framework-ca...', false, Array, 0)
-#9 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/cache/src/classes/models/cache.php(105): WP_Framework_Cache\Classes\Models\Cache\Option->set('class_settings', Array, 'wp-framework-ca...', false, NULL)
-#10 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/utility.php(268): WP_Framework_Cache\Classes\Models\Cache->set('class_settings', Array, 'wp-framework-ca...', false, NULL)
-#11 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/loader.php(137): WP_Framework_Cache\Classes\Models\Cache->cache_set_common('class_settings', Array, '01c7406ee35165f...', NULL, false)
-#12 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/cache/src/classes/models/cache.php(66): WP_Framework_Cache\Classes\Models\Cache->get_class_list()
-#13 [internal function]: WP_Framework_Cache\Classes\Models\Cache->clear_cache(Object(WP_Framework))
-#14 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/singleton.php(230): call_user_func(Array, Object(WP_Framework))
-#15 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/filter.php(188): WP_Framework_Cache\Classes\Models\Cache->filter_callback('clear_cache', Array)
-#16 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/filter.php(206): WP_Framework_Common\Classes\Models\Filter->WP_Framework_Common\Classes\Models\{closure}(Array)
-#17 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/filter.php(180): WP_Framework_Common\Classes\Models\Filter->run('marker_animatio...', 'cache', 'clear_cache', Object(Closure), Array)
-#18 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/filter.php(87): WP_Framework_Common\Classes\Models\Filter->call_filter_callback('marker_animatio...', 'cache', 'clear_cache', Array)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): WP_Framework_Common\Classes\Models\Filter->WP_Framework_Common\Classes\Models\{closure}(Object(WP_Framework))
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 [internal function]: do_action('marker_animatio...', Object(WP_Framework))
-#23 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/hook.php(286): call_user_func_array('do_action', Array)
-#24 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/hook.php(268): WP_Framework_Common\Classes\Models\System->_do_action('marker_animatio...', Array)
-#25 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/system.php(89): WP_Framework_Common\Classes\Models\System->do_action('app_activated', Object(WP_Framework))
-#26 [internal function]: WP_Framework_Common\Classes\Models\System->app_initialized('')
-#27 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/singleton.php(230): call_user_func(Array, '')
-#28 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/filter.php(188): WP_Framework_Common\Classes\Models\System->filter_callback('app_initialized', Array)
-#29 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/filter.php(212): WP_Framework_Common\Classes\Models\Filter->WP_Framework_Common\Classes\Models\{closure}(Array)
-#30 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/filter.php(180): WP_Framework_Common\Classes\Models\Filter->run('wp-content-fram...', 'system', 'app_initialized', Object(Closure), Array)
-#31 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/filter.php(87): WP_Framework_Common\Classes\Models\Filter->call_filter_callback('wp-content-fram...', 'system', 'app_initialized', Array)
-#32 /wordpress/wp-includes/class-wp-hook.php(324): WP_Framework_Common\Classes\Models\Filter->WP_Framework_Common\Classes\Models\{closure}('')
-#33 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#34 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#35 [internal function]: do_action('wp-content-fram...')
-#36 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/hook.php(286): call_user_func_array('do_action', Array)
-#37 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/core/src/traits/hook.php(276): WP_Framework_Common\Classes\Models\System->_do_action('wp-content-fram...', Array)
-#38 /wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/common/src/classes/models/system.php(68): WP_Framework_Common\Classes\Models\System->do_framework_action('initialize')
-#39 /wordpress/wp-includes/class-wp-hook.php(324): WP_Framework_Common\Classes\Models\System->WP_Framework_Common\Classes\Models\{closure}('')
-#40 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#41 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#42 /wordpress/wp-settings.php(704): do_action('init')
-#43 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#44 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#45 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#46 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('marker_animation_options/cache/wp-framework-cache_classes_models_cache', 'a:1:{s:14:\"class_settings\";a:2:{i:0;a:2:{i:0;a:2:{s:44:\"WP_Framework_Cache\\Classes\\Models\\Cache\\File\";a:3:{i:0;s:45:\"\\WP_Framework_Cache\\Classes\\Models\\Cache\\File\";i:1;s:0:\"\";i:2;s:114:\"/wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/cache/src/classes/models/cache/file.php\";}s:46:\"WP_Framework_Cache\\Classes\\Models\\Cache\\Option\";a:3:{i:0;s:47:\"\\WP_Framework_Cache\\Classes\\Models\\Cache\\Option\";i:1;s:0:\"\";i:2;s:116:\"/wordpress/wp-content/plugins/marker-animation/vendor/wp-content-framework/cache/src/classes/models/cache/option.php\";}}i:1;s:40:\"01c7406ee35165f0bbf06962d1e7d59500301eaa\";}i:1;N;}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Framework_Common\Classes\Models\System->WP_Framework_Common\Classes\Models\{closure}, WP_Framework_Common\Classes\Models\System->do_framework_action, WP_Framework_Common\Classes\Models\System->_do_action, call_user_func_array, do_action('wp-content-framework/initialize'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Framework_Common\Classes\Models\Filter->WP_Framework_Common\Classes\Models\{closure}, WP_Framework_Common\Classes\Models\Filter->call_filter_callback, WP_Framework_Common\Classes\Models\Filter->run, WP_Framework_Common\Classes\Models\Filter->WP_Framework_Common\Classes\Models\{closure}, WP_Framework_Common\Classes\Models\System->filter_callback, call_user_func, WP_Framework_Common\Classes\Models\System->app_initialized, WP_Framework_Common\Classes\Models\System->do_action, WP_Framework_Common\Classes\Models\System->_do_action, call_user_func_array, do_action('marker_animation/app_activated'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Framework_Common\Classes\Models\Filter->WP_Framework_Common\Classes\Models\{closure}, WP_Framework_Common\Classes\Models\Filter->call_filter_callback, WP_Framework_Common\Classes\Models\Filter->run, WP_Framework_Common\Classes\Models\Filter->WP_Framework_Common\Classes\Models\{closure}, WP_Framework_Cache\Classes\Models\Cache->filter_callback, call_user_func, WP_Framework_Cache\Classes\Models\Cache->clear_cache, WP_Framework_Cache\Classes\Models\Cache->get_class_list, WP_Framework_Cache\Classes\Models\Cache->cache_set_common, WP_Framework_Cache\Classes\Models\Cache->set, WP_Framework_Cache\Classes\Models\Cache\Option->set, WP_Framework_Cache\Classes\Models\Cache\Option->set_option, WP_Framework_Common\Classes\Models\Option->set_grouped, WP_Framework_Common\Classes\Models\Option->save, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 12:49:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('marker_animation_options', 'a:1:{s:20:\"has_inserted_presets\";b:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'marker_animation_options' , 'a:1:{s:20:&quot;has_inserted_presets&quot;;b:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite
+Error: [10-Apr-2025 23:46:30 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>maxmindCSS</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:46:30 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:46:30 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:46:30 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>maxmind</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:46:39 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>maxmindCSS</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:46:39 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:46:39 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:46:39 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>maxmind</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:46:48 UTC] PHP Notice:  Function wp_enqueue_style was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>maxmindCSS</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:46:48 UTC] PHP Notice:  Function is_feed was called <strong>incorrectly</strong>. Conditional query tags do not work before the query is run. Before then, they always return false. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:46:48 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>jquery</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:46:48 UTC] PHP Notice:  Function wp_enqueue_script was called <strong>incorrectly</strong>. Scripts and styles should not be registered or enqueued until the <code>wp_enqueue_scripts</code>, <code>admin_enqueue_scripts</code>, or <code>login_enqueue_scripts</code> hooks. This notice was triggered by the <code>maxmind</code> handle. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.3.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:47:48 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Most_Popular_Ca...')
+#2 /wordpress/wp-content/plugins/most-popular-categories/most-popular-categories.php(12): register_widget('Most_Popular_Ca...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): popular_categories_load_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 23:47:56 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Most_Popular_Ca...')
+#2 /wordpress/wp-content/plugins/most-popular-categories/most-popular-categories.php(12): register_widget('Most_Popular_Ca...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): popular_categories_load_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 23:48:01 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Most_Popular_Ca...')
+#2 /wordpress/wp-content/plugins/most-popular-categories/most-popular-categories.php(12): register_widget('Most_Popular_Ca...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): popular_categories_load_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 23:48:47 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744328924.784)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 23:49:18 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/mybb-cross-postalicious/mybb-cross-postalicious.php:47
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mybb-cross-post...')
+#2 /internal/eval.php(20): activate_plugin('mybb-cross-post...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/mybb-cross-postalicious/mybb-cross-postalicious.php on line 47
+[10-Apr-2025 23:49:26 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/mybb-cross-postalicious/mybb-cross-postalicious.php:47
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mybb-cross-post...')
+#2 /internal/eval.php(20): activate_plugin('mybb-cross-post...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/mybb-cross-postalicious/mybb-cross-postalicious.php on line 47
+[10-Apr-2025 23:49:34 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/mybb-cross-postalicious/mybb-cross-postalicious.php:47
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('mybb-cross-post...')
+#2 /internal/eval.php(20): activate_plugin('mybb-cross-post...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/mybb-cross-postalicious/mybb-cross-postalicious.php on line 47
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"mybb-cross-postalicious"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
