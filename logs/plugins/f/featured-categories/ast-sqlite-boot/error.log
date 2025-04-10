@@ -2,524 +2,102 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 11:24:22 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:24:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:24:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:24:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:24:50 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:24:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:24:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:24:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:25:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpins_flexia-core_migrated', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpins_flexia-core_migrated' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wpins_flexia-co...', true, '', 'auto')
-#5 /wordpress/wp-content/plugins/flexia-core/includes/class-plugin-usage-tracker.php(100): update_option('wpins_flexia-co...', true)
-#6 /wordpress/wp-content/plugins/flexia-core/includes/class-plugin-usage-tracker.php(59): Flexia_Core_Plugin_Usage_Tracker->init()
-#7 /wordpress/wp-content/plugins/flexia-core/flexia-core.php(106): Flexia_Core_Plugin_Usage_Tracker->__construct('/wordpress/wp-c...', 'http://app.wpde...', Array, true, true, 1)
-#8 /wordpress/wp-content/plugins/flexia-core/flexia-core.php(109): flexia_core_start_plugin_tracking()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('flexia-core/fle...')
-#11 /internal/eval.php(20): activate_plugin('flexia-core/fle...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpins_flexia-core_migrated', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/flexia-core/flexia-core.php'), flexia_core_start_plugin_tracking, Flexia_Core_Plugin_Usage_Tracker->__construct, Flexia_Core_Plugin_Usage_Tracker->init, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:25:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:25:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:25:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:25:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:25:18 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:25:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:25:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:25:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:25:18 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:25:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:25:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:25:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:25:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpins_flexia-core_migrated', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wpins_flexia-core_migrated' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wpins_flexia-co...', true, '', 'auto')
-#5 /wordpress/wp-content/plugins/flexia-core/includes/class-plugin-usage-tracker.php(100): update_option('wpins_flexia-co...', true)
-#6 /wordpress/wp-content/plugins/flexia-core/includes/class-plugin-usage-tracker.php(59): Flexia_Core_Plugin_Usage_Tracker->init()
-#7 /wordpress/wp-content/plugins/flexia-core/flexia-core.php(106): Flexia_Core_Plugin_Usage_Tracker->__construct('/wordpress/wp-c...', 'http://app.wpde...', Array, true, true, 1)
-#8 /wordpress/wp-content/plugins/flexia-core/flexia-core.php(109): flexia_core_start_plugin_tracking()
-#9 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wpins_flexia-core_migrated', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/flexia-core/flexia-core.php'), flexia_core_start_plugin_tracking, Flexia_Core_Plugin_Usage_Tracker->__construct, Flexia_Core_Plugin_Usage_Tracker->init, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:25:47 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('floship_insurance_table_version', '1.0.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'floship_insurance_table_version' , '1.0.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/floship-insurance/includes/class-floship-insurance-activator.php(48): add_option('floship_insuran...', '1.0.0')
-#5 /wordpress/wp-content/plugins/floship-insurance/floship-insurance.php(33): Floship_Insurance_Activator::activate()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): activate_floship_insurance(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+Error: [10-Apr-2025 23:46:45 UTC] PHP Deprecated:  Optional parameter $atts declared before required parameter $shortcode_tag is implicitly treated as a required parameter in /wordpress/wp-content/plugins/freedam-web-notices/public/class-freedam-web-notices-public.php on line 125
+[10-Apr-2025 23:46:45 UTC] PHP Deprecated:  Optional parameter $content declared before required parameter $shortcode_tag is implicitly treated as a required parameter in /wordpress/wp-content/plugins/freedam-web-notices/public/class-freedam-web-notices-public.php on line 125
+[10-Apr-2025 23:46:46 UTC] PHP Deprecated:  Optional parameter $atts declared before required parameter $shortcode_tag is implicitly treated as a required parameter in /wordpress/wp-content/plugins/freedam-web-notices/public/class-freedam-web-notices-public.php on line 125
+[10-Apr-2025 23:46:46 UTC] PHP Deprecated:  Optional parameter $content declared before required parameter $shortcode_tag is implicitly treated as a required parameter in /wordpress/wp-content/plugins/freedam-web-notices/public/class-freedam-web-notices-public.php on line 125
+[10-Apr-2025 23:46:55 UTC] PHP Deprecated:  Optional parameter $atts declared before required parameter $shortcode_tag is implicitly treated as a required parameter in /wordpress/wp-content/plugins/freedam-web-notices/public/class-freedam-web-notices-public.php on line 125
+[10-Apr-2025 23:46:55 UTC] PHP Deprecated:  Optional parameter $content declared before required parameter $shortcode_tag is implicitly treated as a required parameter in /wordpress/wp-content/plugins/freedam-web-notices/public/class-freedam-web-notices-public.php on line 125
+[10-Apr-2025 23:46:56 UTC] PHP Deprecated:  Optional parameter $atts declared before required parameter $shortcode_tag is implicitly treated as a required parameter in /wordpress/wp-content/plugins/freedam-web-notices/public/class-freedam-web-notices-public.php on line 125
+[10-Apr-2025 23:46:56 UTC] PHP Deprecated:  Optional parameter $content declared before required parameter $shortcode_tag is implicitly treated as a required parameter in /wordpress/wp-content/plugins/freedam-web-notices/public/class-freedam-web-notices-public.php on line 125
+[10-Apr-2025 23:47:04 UTC] PHP Deprecated:  Optional parameter $atts declared before required parameter $shortcode_tag is implicitly treated as a required parameter in /wordpress/wp-content/plugins/freedam-web-notices/public/class-freedam-web-notices-public.php on line 125
+[10-Apr-2025 23:47:04 UTC] PHP Deprecated:  Optional parameter $content declared before required parameter $shortcode_tag is implicitly treated as a required parameter in /wordpress/wp-content/plugins/freedam-web-notices/public/class-freedam-web-notices-public.php on line 125
+[10-Apr-2025 23:47:05 UTC] PHP Deprecated:  Optional parameter $atts declared before required parameter $shortcode_tag is implicitly treated as a required parameter in /wordpress/wp-content/plugins/freedam-web-notices/public/class-freedam-web-notices-public.php on line 125
+[10-Apr-2025 23:47:05 UTC] PHP Deprecated:  Optional parameter $content declared before required parameter $shortcode_tag is implicitly treated as a required parameter in /wordpress/wp-content/plugins/freedam-web-notices/public/class-freedam-web-notices-public.php on line 125
+[10-Apr-2025 23:47:17 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('FT_TriOutNC_Rec...')
+#2 /wordpress/wp-content/plugins/ft-trioutnc/ft-trioutnc.php(233): register_widget('FT_TriOutNC_Rec...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): ft_trioutnc_recentcheckins_register_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 23:47:25 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('FT_TriOutNC_Rec...')
+#2 /wordpress/wp-content/plugins/ft-trioutnc/ft-trioutnc.php(233): register_widget('FT_TriOutNC_Rec...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): ft_trioutnc_recentcheckins_register_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 23:47:34 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('FT_TriOutNC_Rec...')
+#2 /wordpress/wp-content/plugins/ft-trioutnc/ft-trioutnc.php(233): register_widget('FT_TriOutNC_Rec...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): ft_trioutnc_recentcheckins_register_widget('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 23:47:47 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>fx-builder</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:47:56 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>fx-builder</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:48:04 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>fx-builder</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 23:48:45 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744328923.061)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_floshi...', false)
-#10 /internal/eval.php(20): activate_plugin('floship-insuran...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('floship_insurance_table_version', '1.0.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_floship-insurance/floship-insurance.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_floship_insurance, Floship_Insurance_Activator::activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:25:47 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:25:47 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:25:47 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:25:47 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:26:45 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:26:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:26:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:26:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:26:46 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:26:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:26:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:26:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:27:38 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:27:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:27:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:27:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:27:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('smsfwc_settings', '{\"registeredHooks\":[],\"token\":\"6d533769c35640c9b228661b4c44cfd7\"}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'smsfwc_settings' , '{&quot;registeredHooks&quot;:[],&quot;token&quot;:&quot;6d533769c35640c9b228661b4c44cfd7&quot;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('smsfwc_settings', '{"registeredHoo...', '', 'auto')
-#5 /wordpress/wp-content/plugins/free-sms-for-woocommerce/index.php(66): update_option('smsfwc_settings', '{"registeredHoo...')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): smsfwc_plugin_activated(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 23:49:48 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744328985.668)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_free-s...', false)
-#10 /internal/eval.php(20): activate_plugin('free-sms-for-wo...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('smsfwc_settings', '{\"registeredHooks\":[],\"token\":\"6d533769c35640c9b228661b4c44cfd7\"}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_free-sms-for-woocommerce/index.php'), WP_Hook->do_action, WP_Hook->apply_filters, smsfwc_plugin_activated, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:27:38 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:27:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:27:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:27:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:28:14 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:28:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:28:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:28:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:28:15 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method functionsCapacitor::plugins_loaded_action() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#6 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[09-Apr-2025 11:28:25 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method functionsCapacitor::plugins_loaded_action() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#6 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[09-Apr-2025 11:28:34 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, non-static method functionsCapacitor::plugins_loaded_action() cannot be called statically in /wordpress/wp-includes/class-wp-hook.php:324
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#2 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#3 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#4 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#5 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#6 {main}
-  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
-[09-Apr-2025 11:28:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 11:28:44', '2025-04-09 11:28:44', '<!-- wp:paragraph -->
-<p><strong><em>Orden de domiciliación de adeudo directo SEPA - CORE</em></strong></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p><em>SEPA Direct Debit Mandate</em></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:table {\"className\":\"is-style-stripes\"} -->
-<figure class=\"wp-block-table is-style-stripes\"><table><tbody><tr><td><strong>Referencia de la orden domiciliación</strong></td><td>{referencia}</td></tr><tr><td>Identificador del acreedor</td><td>Empresa, SL</td></tr><tr><td>Nombre del acreedor</td><td>Empresa</td></tr><tr><td><strong>Dirección</strong></td><td>Dirección 1<br>Dirección 2<br>XXXXX Población - Ciudad<br>España</td></tr></tbody></table></figure>
-<!-- /wp:table -->
-
-<!-- wp:paragraph {\"fontSize\":\"small\"} -->
-<p class=\"has-small-font-size\"><em>Mediante la firma de esta orden de domiciliación, el deudor autoriza (A) al acreedor a enviar instrucciones a la entidad del deudor para adeudar su cuenta y (B) a la entidad para efectuar los adeudos en su cuenta siguiendo las instrucciones del acreedor. Como parte de sus derechos, el deudor está legitimado al reembolso por su entidad en los términos y condiciones del contrato suscrito con la misma. La solicitud de reembolso deberá efectuarse dentro de las ocho semanas que siguen a la fecha de adeudo en cuenta. Puede obtener información adicional sobre sus derechos en su entidad financiera.</em></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:separator -->
-<hr class=\"wp-block-separator has-alpha-channel-opacity\"/>
-<!-- /wp:separator -->
-
-<!-- wp:table {\"className\":\"is-style-stripes\"} -->
-<figure class=\"wp-block-table is-style-stripes\"><table><tbody><tr><td>Nombre del deudor<br><em>(titular/es de la cuenta de cargo)</em></td><td>{nombre}<br>{nif}<br>{cargo}<br>{email}<br>{telefono}</td></tr><tr><td>Dirección del deudor</td><td>{deudor_direccion}<br>{deudor_codigo_postal} {deudor_poblacion}<br>{deudor_provincia}</td></tr><tr><td>Swift BIC</td><td>{deudor_swift}</td></tr><tr><td>Número de cuenta – IBAN</td><td>{deudor_iban}</td></tr><tr><td>Tipo de pago</td><td>{deudor_tipo_pago}</td></tr></tbody></table></figure>
-<!-- /wp:table -->
-
-<!-- wp:separator -->
-<hr class=\"wp-block-separator has-alpha-channel-opacity\"/>
-<!-- /wp:separator -->
-
-<!-- wp:paragraph -->
-<p>Fecha – Localidad:<br>Date - {fecha}</p>
-<!-- /wp:paragraph -->', '', 'Sign SEPA', '', 'publish', 'firmafy_template', 'closed', 'closed', '', 'sepa', '', '', '2025-04-09 11:28:44', '2025-04-09 11:28:44', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 11:28:44' , '2025-04-09 11:28:44' , '&lt;!-- wp:paragraph --&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Orden de domiciliación de adeudo directo SEPA - CORE&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;!-- /wp:paragraph --&gt;
-
-&lt;!-- wp:paragraph --&gt;
-&lt;p&gt;&lt;em&gt;SEPA Direct Debit Mandate&lt;/em&gt;&lt;/p&gt;
-&lt;!-- /wp:paragraph --&gt;
-
-&lt;!-- wp:table {&quot;className&quot;:&quot;is-style-stripes&quot;} --&gt;
-&lt;figure class=&quot;wp-block-table is-style-stripes&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;Referencia de la orden domiciliación&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;{referencia}&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Identificador del acreedor&lt;/td&gt;&lt;td&gt;Empresa, SL&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Nombre del acreedor&lt;/td&gt;&lt;td&gt;Empresa&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;Dirección&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Dirección 1&lt;br&gt;Dirección 2&lt;br&gt;XXXXX Población - Ciudad&lt;br&gt;España&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;!-- /wp:table --&gt;
-
-&lt;!-- wp:paragraph {&quot;fontSize&quot;:&quot;small&quot;} --&gt;
-&lt;p class=&quot;has-small-font-size&quot;&gt;&lt;em&gt;Mediante la firma de esta orden de domiciliación, el deudor autoriza (A) al acreedor a enviar instrucciones a la entidad del deudor para adeudar su cuenta y (B) a la entidad para efectuar los adeudos en su cuenta siguiendo las instrucciones del acreedor. Como parte de sus derechos, el deudor está legitimado al reembolso por su entidad en los términos y condiciones del contrato suscrito con la misma. La solicitud de reembolso deberá efectuarse dentro de las ocho semanas que siguen a la fecha de adeudo en cuenta. Puede obtener información adicional sobre sus derechos en su entidad financiera.&lt;/em&gt;&lt;/p&gt;
-&lt;!-- /wp:paragraph --&gt;
-
-&lt;!-- wp:separator --&gt;
-&lt;hr class=&quot;wp-block-separator has-alpha-channel-opacity&quot;/&gt;
-&lt;!-- /wp:separator --&gt;
-
-&lt;!-- wp:table {&quot;className&quot;:&quot;is-style-stripes&quot;} --&gt;
-&lt;figure class=&quot;wp-block-table is-style-stripes&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;Nombre del deudor&lt;br&gt;&lt;em&gt;(titular/es de la cuenta de cargo)&lt;/em&gt;&lt;/td&gt;&lt;td&gt;{nombre}&lt;br&gt;{nif}&lt;br&gt;{cargo}&lt;br&gt;{email}&lt;br&gt;{telefono}&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Dirección del deudor&lt;/td&gt;&lt;td&gt;{deudor_direccion}&lt;br&gt;{deudor_codigo_postal} {deudor_poblacion}&lt;br&gt;{deudor_provincia}&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Swift BIC&lt;/td&gt;&lt;td&gt;{deudor_swift}&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Número de cuenta – IBAN&lt;/td&gt;&lt;td&gt;{deudor_iban}&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Tipo de pago&lt;/td&gt;&lt;td&gt;{deudor_tipo_pago}&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;!-- /wp:table --&gt;
-
-&lt;!-- wp:separator --&gt;
-&lt;hr class=&quot;wp-block-separator has-alpha-channel-opacity&quot;/&gt;
-&lt;!-- /wp:separator --&gt;
-
-&lt;!-- wp:paragraph --&gt;
-&lt;p&gt;Fecha – Localidad:&lt;br&gt;Date - {fecha}&lt;/p&gt;
-&lt;!-- /wp:paragraph --&gt;' , '' , 'Sign SEPA' , '' , 'publish' , 'firmafy_template' , 'closed' , 'closed' , '' , 'sepa' , '' , '' , '2025-04-09 11:28:44' , '2025-04-09 11:28:44' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/firmafy/includes/class-firmafy-admin-settings.php(856): wp_insert_post(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): FIRMAFY_ADMIN_SETTINGS->loads_templates_cpt(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_firmaf...', false)
-#11 /internal/eval.php(20): activate_plugin('firmafy/firmafy...')
-#12 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 11:28:44', '2025-04-09 11:28:44', '<!-- wp:paragraph -->
-<p><strong><em>Orden de domiciliación de adeudo directo SEPA - CORE</em></strong></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p><em>SEPA Direct Debit Mandate</em></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:table {\"className\":\"is-style-stripes\"} -->
-<figure class=\"wp-block-table is-style-stripes\"><table><tbody><tr><td><strong>Referencia de la orden domiciliación</strong></td><td>{referencia}</td></tr><tr><td>Identificador del acreedor</td><td>Empresa, SL</td></tr><tr><td>Nombre del acreedor</td><td>Empresa</td></tr><tr><td><strong>Dirección</strong></td><td>Dirección 1<br>Dirección 2<br>XXXXX Población - Ciudad<br>España</td></tr></tbody></table></figure>
-<!-- /wp:table -->
-
-<!-- wp:paragraph {\"fontSize\":\"small\"} -->
-<p class=\"has-small-font-size\"><em>Mediante la firma de esta orden de domiciliación, el deudor autoriza (A) al acreedor a enviar instrucciones a la entidad del deudor para adeudar su cuenta y (B) a la entidad para efectuar los adeudos en su cuenta siguiendo las instrucciones del acreedor. Como parte de sus derechos, el deudor está legitimado al reembolso por su entidad en los términos y condiciones del contrato suscrito con la misma. La solicitud de reembolso deberá efectuarse dentro de las ocho semanas que siguen a la fecha de adeudo en cuenta. Puede obtener información adicional sobre sus derechos en su entidad financiera.</em></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:separator -->
-<hr class=\"wp-block-separator has-alpha-channel-opacity\"/>
-<!-- /wp:separator -->
-
-<!-- wp:table {\"className\":\"is-style-stripes\"} -->
-<figure class=\"wp-block-table is-style-stripes\"><table><tbody><tr><td>Nombre del deudor<br><em>(titular/es de la cuenta de cargo)</em></td><td>{nombre}<br>{nif}<br>{cargo}<br>{email}<br>{telefono}</td></tr><tr><td>Dirección del deudor</td><td>{deudor_direccion}<br>{deudor_codigo_postal} {deudor_poblacion}<br>{deudor_provincia}</td></tr><tr><td>Swift BIC</td><td>{deudor_swift}</td></tr><tr><td>Número de cuenta – IBAN</td><td>{deudor_iban}</td></tr><tr><td>Tipo de pago</td><td>{deudor_tipo_pago}</td></tr></tbody></table></figure>
-<!-- /wp:table -->
-
-<!-- wp:separator -->
-<hr class=\"wp-block-separator has-alpha-channel-opacity\"/>
-<!-- /wp:separator -->
-
-<!-- wp:paragraph -->
-<p>Fecha – Localidad:<br>Date - {fecha}</p>
-<!-- /wp:paragraph -->', '', 'Sign SEPA', '', 'publish', 'firmafy_template', 'closed', 'closed', '', 'sepa', '', '', '2025-04-09 11:28:44', '2025-04-09 11:28:44', 0, 0, '', '') made by activate_plugin, do_action('activate_firmafy/firmafy.php'), WP_Hook->do_action, WP_Hook->apply_filters, FIRMAFY_ADMIN_SETTINGS->loads_templates_cpt, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:28:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 11:28:44', '2025-04-09 11:28:44', '<!-- wp:heading -->
-<h2>CONSENTIMIENTO INFORMADO EN RELACIÓN AL TRATAMIENTO DE SUS DATOS</h2>
-<!-- /wp:heading -->
-
-<!-- wp:table -->
-<figure class=\"wp-block-table\"><table><tbody><tr><td><strong>NOMBRE Y APELLIDOS</strong></td><td>{nombre}</td></tr><tr><td><strong>D.N.I.</strong></td><td><strong>{nif}</strong></td></tr><tr><td><strong>DIRECCION EMAIL ASIGNADA</strong></td><td><strong>{email}</strong></td></tr><tr><td><strong>TELÉFONO</strong></td><td><strong>{telefono}</strong></td></tr><tr><td><strong>FECHA</strong></td><td>{fecha}</td></tr></tbody></table></figure>
-<!-- /wp:table -->
-
-<!-- wp:paragraph -->
-<p>En base a lo dispuesto en el Reglamento (UE) 2016/679, de 27 de abril de 2016, del Parlamento Europeo y del Consejo y en la Ley Orgánica 3/2018, de 5 de Diciembre, de Protección de Datos Personales y Garantía de Derechos Digitales (LOPDGDD) relativos a la protección de las personas físicas en lo que respecta al tratamiento de datos personales y a la libre circulación de estos datos, y siguiendo las Recomendaciones e Instrucciones emitidas por la Agencia Española de Protección de Datos (A.E.P.D.), les informamos que:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:list -->
-<ul><li>Los datos de carácter personal facilitados por usted, serán incorporados a un fichero de titularidad privada cuyo responsable y único destinatario es la empresa <strong>NOMBRE_EMPRESA</strong>.</li><li>Solo serán solicitados aquellos datos estrictamente necesarios para prestar adecuadamente los servicios solicitados.</li><li>Todos los datos recogidos cuentan con el compromiso de confidencialidad, con las medidas de seguridad establecidas legalmente, y bajo ningún concepto son cedidos o tratados por terceras personas, físicas o jurídicas, sin el previo consentimiento del cliente, tutor o representante legal, salvo en aquellos casos en los que fuere imprescindible para la correcta prestación del servicio o por requerimiento legal.</li><li>Una vez finalizada la relación entre la empresa y el cliente los datos serán archivados y conservados, durante un periodo tiempo mínimo de <strong>TIEMPO</strong>, tras lo cual seguirá archivado o en su defecto serán devueltos íntegramente al cliente o autorizado legal. </li><li>Los datos que facilita serán incluidos para su tratamiento en el fichero denominado <strong>NOMBRE_FICHERO</strong> de la empresa <strong>NOMBRE_EMPRESA</strong>, con la finalidad de gestión del servicio contratado, emisión de facturas, contacto y todas las gestiones relacionadas con los clientes y manifiesta su consentimiento. Así mismo afirma haber sido informado de la posibilidad de ejercitar los derechos de acceso, rectificación, supresión, limitación, portabilidad y oposición, indicándolo por escrito a la empresa <strong>NOMBRE_EMPRESA</strong> con domicilio en <strong>DOMICILIO_EMPRESA</strong>.</li></ul>
-<!-- /wp:list -->
-
-<!-- wp:paragraph -->
-<p>En muestra de su conformidad, firma la presente,</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>En  <strong>CIUDAD</strong>, a {fecha_texto}</p>
-<!-- /wp:paragraph -->', '', 'RGPD New user', '', 'publish', 'firmafy_template', 'closed', 'closed', '', 'rgpd', '', '', '2025-04-09 11:28:44', '2025-04-09 11:28:44', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 11:28:44' , '2025-04-09 11:28:44' , '&lt;!-- wp:heading --&gt;
-&lt;h2&gt;CONSENTIMIENTO INFORMADO EN RELACIÓN AL TRATAMIENTO DE SUS DATOS&lt;/h2&gt;
-&lt;!-- /wp:heading --&gt;
-
-&lt;!-- wp:table --&gt;
-&lt;figure class=&quot;wp-block-table&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;NOMBRE Y APELLIDOS&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;{nombre}&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;D.N.I.&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;&lt;strong&gt;{nif}&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;DIRECCION EMAIL ASIGNADA&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;&lt;strong&gt;{email}&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;TELÉFONO&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;&lt;strong&gt;{telefono}&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;FECHA&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;{fecha}&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;!-- /wp:table --&gt;
-
-&lt;!-- wp:paragraph --&gt;
-&lt;p&gt;En base a lo dispuesto en el Reglamento (UE) 2016/679, de 27 de abril de 2016, del Parlamento Europeo y del Consejo y en la Ley Orgánica 3/2018, de 5 de Diciembre, de Protección de Datos Personales y Garantía de Derechos Digitales (LOPDGDD) relativos a la protección de las personas físicas en lo que respecta al tratamiento de datos personales y a la libre circulación de estos datos, y siguiendo las Recomendaciones e Instrucciones emitidas por la Agencia Española de Protección de Datos (A.E.P.D.), les informamos que:&lt;/p&gt;
-&lt;!-- /wp:paragraph --&gt;
-
-&lt;!-- wp:list --&gt;
-&lt;ul&gt;&lt;li&gt;Los datos de carácter personal facilitados por usted, serán incorporados a un fichero de titularidad privada cuyo responsable y único destinatario es la empresa &lt;strong&gt;NOMBRE_EMPRESA&lt;/strong&gt;.&lt;/li&gt;&lt;li&gt;Solo serán solicitados aquellos datos estrictamente necesarios para prestar adecuadamente los servicios solicitados.&lt;/li&gt;&lt;li&gt;Todos los datos recogidos cuentan con el compromiso de confidencialidad, con las medidas de seguridad establecidas legalmente, y bajo ningún concepto son cedidos o tratados por terceras personas, físicas o jurídicas, sin el previo consentimiento del cliente, tutor o representante legal, salvo en aquellos casos en los que fuere imprescindible para la correcta prestación del servicio o por requerimiento legal.&lt;/li&gt;&lt;li&gt;Una vez finalizada la relación entre la empresa y el cliente los datos serán archivados y conservados, durante un periodo tiempo mínimo de &lt;strong&gt;TIEMPO&lt;/strong&gt;, tras lo cual seguirá archivado o en su defecto serán devueltos íntegramente al cliente o autorizado legal. &lt;/li&gt;&lt;li&gt;Los datos que facilita serán incluidos para su tratamiento en el fichero denominado &lt;strong&gt;NOMBRE_FICHERO&lt;/strong&gt; de la empresa &lt;strong&gt;NOMBRE_EMPRESA&lt;/strong&gt;, con la finalidad de gestión del servicio contratado, emisión de facturas, contacto y todas las gestiones relacionadas con los clientes y manifiesta su consentimiento. Así mismo afirma haber sido informado de la posibilidad de ejercitar los derechos de acceso, rectificación, supresión, limitación, portabilidad y oposición, indicándolo por escrito a la empresa &lt;strong&gt;NOMBRE_EMPRESA&lt;/strong&gt; con domicilio en &lt;strong&gt;DOMICILIO_EMPRESA&lt;/strong&gt;.&lt;/li&gt;&lt;/ul&gt;
-&lt;!-- /wp:list --&gt;
-
-&lt;!-- wp:paragraph --&gt;
-&lt;p&gt;En muestra de su conformidad, firma la presente,&lt;/p&gt;
-&lt;!-- /wp:paragraph --&gt;
-
-&lt;!-- wp:paragraph --&gt;
-&lt;p&gt;En  &lt;strong&gt;CIUDAD&lt;/strong&gt;, a {fecha_texto}&lt;/p&gt;
-&lt;!-- /wp:paragraph --&gt;' , '' , 'RGPD New user' , '' , 'publish' , 'firmafy_template' , 'closed' , 'closed' , '' , 'rgpd' , '' , '' , '2025-04-09 11:28:44' , '2025-04-09 11:28:44' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/firmafy/includes/class-firmafy-admin-settings.php(856): wp_insert_post(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): FIRMAFY_ADMIN_SETTINGS->loads_templates_cpt(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_firmaf...', false)
-#11 /internal/eval.php(20): activate_plugin('firmafy/firmafy...')
-#12 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 11:28:44', '2025-04-09 11:28:44', '<!-- wp:heading -->
-<h2>CONSENTIMIENTO INFORMADO EN RELACIÓN AL TRATAMIENTO DE SUS DATOS</h2>
-<!-- /wp:heading -->
-
-<!-- wp:table -->
-<figure class=\"wp-block-table\"><table><tbody><tr><td><strong>NOMBRE Y APELLIDOS</strong></td><td>{nombre}</td></tr><tr><td><strong>D.N.I.</strong></td><td><strong>{nif}</strong></td></tr><tr><td><strong>DIRECCION EMAIL ASIGNADA</strong></td><td><strong>{email}</strong></td></tr><tr><td><strong>TELÉFONO</strong></td><td><strong>{telefono}</strong></td></tr><tr><td><strong>FECHA</strong></td><td>{fecha}</td></tr></tbody></table></figure>
-<!-- /wp:table -->
-
-<!-- wp:paragraph -->
-<p>En base a lo dispuesto en el Reglamento (UE) 2016/679, de 27 de abril de 2016, del Parlamento Europeo y del Consejo y en la Ley Orgánica 3/2018, de 5 de Diciembre, de Protección de Datos Personales y Garantía de Derechos Digitales (LOPDGDD) relativos a la protección de las personas físicas en lo que respecta al tratamiento de datos personales y a la libre circulación de estos datos, y siguiendo las Recomendaciones e Instrucciones emitidas por la Agencia Española de Protección de Datos (A.E.P.D.), les informamos que:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:list -->
-<ul><li>Los datos de carácter personal facilitados por usted, serán incorporados a un fichero de titularidad privada cuyo responsable y único destinatario es la empresa <strong>NOMBRE_EMPRESA</strong>.</li><li>Solo serán solicitados aquellos datos estrictamente necesarios para prestar adecuadamente los servicios solicitados.</li><li>Todos los datos recogidos cuentan con el compromiso de confidencialidad, con las medidas de seguridad establecidas legalmente, y bajo ningún concepto son cedidos o tratados por terceras personas, físicas o jurídicas, sin el previo consentimiento del cliente, tutor o representante legal, salvo en aquellos casos en los que fuere imprescindible para la correcta prestación del servicio o por requerimiento legal.</li><li>Una vez finalizada la relación entre la empresa y el cliente los datos serán archivados y conservados, durante un periodo tiempo mínimo de <strong>TIEMPO</strong>, tras lo cual seguirá archivado o en su defecto serán devueltos íntegramente al cliente o autorizado legal. </li><li>Los datos que facilita serán incluidos para su tratamiento en el fichero denominado <strong>NOMBRE_FICHERO</strong> de la empresa <strong>NOMBRE_EMPRESA</strong>, con la finalidad de gestión del servicio contratado, emisión de facturas, contacto y todas las gestiones relacionadas con los clientes y manifiesta su consentimiento. Así mismo afirma haber sido informado de la posibilidad de ejercitar los derechos de acceso, rectificación, supresión, limitación, portabilidad y oposición, indicándolo por escrito a la empresa <strong>NOMBRE_EMPRESA</strong> con domicilio en <strong>DOMICILIO_EMPRESA</strong>.</li></ul>
-<!-- /wp:list -->
-
-<!-- wp:paragraph -->
-<p>En muestra de su conformidad, firma la presente,</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>En  <strong>CIUDAD</strong>, a {fecha_texto}</p>
-<!-- /wp:paragraph -->', '', 'RGPD New user', '', 'publish', 'firmafy_template', 'closed', 'closed', '', 'rgpd', '', '', '2025-04-09 11:28:44', '2025-04-09 11:28:44', 0, 0, '', '') made by activate_plugin, do_action('activate_firmafy/firmafy.php'), WP_Hook->do_action, WP_Hook->apply_filters, FIRMAFY_ADMIN_SETTINGS->loads_templates_cpt, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:28:44 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:28:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:28:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:28:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:29:20 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:29:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:29:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:29:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:29:22 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Flip_Widget')
-#2 /wordpress/wp-content/plugins/flip-widget/flip-widget.php(50): register_widget('Flip_Widget')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): flip_load_widgets('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 11:29:30 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Flip_Widget')
-#2 /wordpress/wp-content/plugins/flip-widget/flip-widget.php(50): register_widget('Flip_Widget')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): flip_load_widgets('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 11:29:39 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
-Stack trace:
-#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
-#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Flip_Widget')
-#2 /wordpress/wp-content/plugins/flip-widget/flip-widget.php(50): register_widget('Flip_Widget')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): flip_load_widgets('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}
-  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 11:29:57 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:29:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:29:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:29:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:30:45 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/featured-categories/featured-categories.php:143
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 23:51:01 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/featured-categories/featured-categories.php:143
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
 #1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('featured-catego...')
@@ -528,24 +106,29 @@ Stack trace:
   thrown in /wordpress/wp-content/plugins/featured-categories/featured-categories.php on line 143
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:569:9)
+    at process.processTimers (node:internal/timers:543:7)
     at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
   [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"featured-categories"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
       at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at runNextTicks (node:internal/process/task_queues:65:5)
+      at listOnTimeout (node:internal/timers:569:9)
+      at process.processTimers (node:internal/timers:543:7)
       at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
       at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
       at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
     [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
         at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at runNextTicks (node:internal/process/task_queues:65:5)
+        at listOnTimeout (node:internal/timers:569:9)
+        at process.processTimers (node:internal/timers:543:7)
         at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
         at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
         at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
         at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
         at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
-        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568) {
       response: PHPResponse {
         httpStatusCode: 500,
         headers: {
