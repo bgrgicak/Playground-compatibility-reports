@@ -2,657 +2,99 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 11:44:34 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:44:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:44:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:44:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:45:01 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:45:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:45:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:45:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:45:29 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:45:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:45:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:45:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:45:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_ps_ads_pro_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_ps_ads_pro_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_ps_ads_p...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_ps_ads_p...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_ps_ads_pro_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:56 UTC] PHP Deprecated:  File class-snoopy.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/http.php instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:45:56 UTC] PHP Deprecated:  Function is_plugin_page is <strong>deprecated</strong> since version 3.1.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:45:56 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:45:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:45:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:45:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:45:57 UTC] PHP Deprecated:  File class-snoopy.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/http.php instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:45:57 UTC] PHP Deprecated:  Function is_plugin_page is <strong>deprecated</strong> since version 3.1.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:45:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('RandomFlickrFavs_flickr_fav_url', 'http://www.flickr.com/photos/95202115@N00/favorites', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'RandomFlickrFavs_flickr_fav_url' , 'http://www.flickr.com/photos/95202115@N00/favorites' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(36): add_option('RandomFlickrFav...', 'http://www.flic...')
-#5 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(71): RandomFlickrFavs_get_option('debug')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): RandomFlickrFavs_init('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(704): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('RandomFlickrFavs_flickr_fav_url', 'http://www.flickr.com/photos/95202115@N00/favorites', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, RandomFlickrFavs_init, RandomFlickrFavs_get_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('RandomFlickrFavs_update_intervall', '168', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'RandomFlickrFavs_update_intervall' , '168' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(37): add_option('RandomFlickrFav...', 168)
-#5 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(71): RandomFlickrFavs_get_option('debug')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): RandomFlickrFavs_init('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(704): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('RandomFlickrFavs_update_intervall', '168', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, RandomFlickrFavs_init, RandomFlickrFavs_get_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('RandomFlickrFavs_last_update', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'RandomFlickrFavs_last_update' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(38): add_option('RandomFlickrFav...', 0)
-#5 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(71): RandomFlickrFavs_get_option('debug')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): RandomFlickrFavs_init('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(704): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('RandomFlickrFavs_last_update', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, RandomFlickrFavs_init, RandomFlickrFavs_get_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('RandomFlickrFavs_image_size', 'm', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'RandomFlickrFavs_image_size' , 'm' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(39): add_option('RandomFlickrFav...', 'm')
-#5 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(71): RandomFlickrFavs_get_option('debug')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): RandomFlickrFavs_init('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(704): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('RandomFlickrFavs_image_size', 'm', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, RandomFlickrFavs_init, RandomFlickrFavs_get_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('RandomFlickrFavs_image_size_2', 'b', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'RandomFlickrFavs_image_size_2' , 'b' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(40): add_option('RandomFlickrFav...', 'b')
-#5 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(71): RandomFlickrFavs_get_option('debug')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): RandomFlickrFavs_init('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(704): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('RandomFlickrFavs_image_size_2', 'b', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, RandomFlickrFavs_init, RandomFlickrFavs_get_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('RandomFlickrFavs_installed', 'false', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'RandomFlickrFavs_installed' , 'false' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(41): add_option('RandomFlickrFav...', 'false')
-#5 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(71): RandomFlickrFavs_get_option('debug')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): RandomFlickrFavs_init('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(704): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('RandomFlickrFavs_installed', 'false', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, RandomFlickrFavs_init, RandomFlickrFavs_get_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('RandomFlickrFavs_layout', '<center><a href=\"%%image_page_url\" alt=\"%%artist\"><img src=\"%%image_url\" width=\"190\" alt=\"%%artist\"/><br\\>\"%%image_title\"</a></center>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'RandomFlickrFavs_layout' , '&lt;center&gt;&lt;a href=&quot;%%image_page_url&quot; alt=&quot;%%artist&quot;&gt;&lt;img src=&quot;%%image_url&quot; width=&quot;190&quot; alt=&quot;%%artist&quot;/&gt;&lt;br\&gt;&quot;%%image_title&quot;&lt;/a&gt;&lt;/center&gt;' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(42): add_option('RandomFlickrFav...', '<center><a href...')
-#5 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(71): RandomFlickrFavs_get_option('debug')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): RandomFlickrFavs_init('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(704): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('RandomFlickrFavs_layout', '<center><a href=\"%%image_page_url\" alt=\"%%artist\"><img src=\"%%image_url\" width=\"190\" alt=\"%%artist\"/><br\\>\"%%image_title\"</a></center>', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, RandomFlickrFavs_init, RandomFlickrFavs_get_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('RandomFlickrFavs_debug', 'false', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'RandomFlickrFavs_debug' , 'false' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(43): add_option('RandomFlickrFav...', 'false')
-#5 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(71): RandomFlickrFavs_get_option('debug')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): RandomFlickrFavs_init('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(704): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('RandomFlickrFavs_debug', 'false', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, RandomFlickrFavs_init, RandomFlickrFavs_get_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('RandomFlickrFavs_show_list', 'false', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'RandomFlickrFavs_show_list' , 'false' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(44): add_option('RandomFlickrFav...', 'false')
-#5 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(71): RandomFlickrFavs_get_option('debug')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): RandomFlickrFavs_init('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(704): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('RandomFlickrFavs_show_list', 'false', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, RandomFlickrFavs_init, RandomFlickrFavs_get_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('RandomFlickrFavs_show_thumbs', 'false', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'RandomFlickrFavs_show_thumbs' , 'false' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(45): add_option('RandomFlickrFav...', 'false')
-#5 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(71): RandomFlickrFavs_get_option('debug')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): RandomFlickrFavs_init('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(704): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('RandomFlickrFavs_show_thumbs', 'false', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, RandomFlickrFavs_init, RandomFlickrFavs_get_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT id FROM wp_randomflickrfavs ORDER BY id</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `id` FROM `wp_randomflickrfavs` ORDER BY `id` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_randomflickrfavs
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT id FROM ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT id FROM ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3103): WP_SQLite_DB->query('SELECT id FROM ...')
-#4 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(235): wpdb->get_col('SELECT id FROM ...')
-#5 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(90): RandomFlickrFavs_update_image_id_cache()
-#6 /wordpress/wp-includes/class-wp-hook.php(324): RandomFlickrFavs_init('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(704): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query SELECT id FROM wp_randomflickrfavs ORDER BY id made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, RandomFlickrFavs_init, RandomFlickrFavs_update_image_id_cache, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:58 UTC] PHP Warning:  Undefined array key "scheme" in /wordpress/wp-includes/class-snoopy.php on line 143
-[09-Apr-2025 11:45:58 UTC] PHP Warning:  Undefined array key "scheme" in /wordpress/wp-includes/class-snoopy.php on line 261
-[09-Apr-2025 11:45:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('RandomFlickrFavs_last_update', '1744199158', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'RandomFlickrFavs_last_update' , '1744199158' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('RandomFlickrFav...', 1744199158, '', 'auto')
-#5 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(63): update_option('RandomFlickrFav...', 1744199158)
-#6 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(214): RandomFlickrFavs_update_option('last_update', 1744199158)
-#7 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(93): RandomFlickrFavs_update_favourites()
-#8 /wordpress/wp-includes/class-wp-hook.php(324): RandomFlickrFavs_init('')
-#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#11 /wordpress/wp-settings.php(704): do_action('init')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('RandomFlickrFavs_last_update', '1744199158', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, RandomFlickrFavs_init, RandomFlickrFavs_update_favourites, RandomFlickrFavs_update_option, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>DELETE FROM wp_randomflickrfavs WHERE last_modified<1744199158</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: DELETE FROM `wp_randomflickrfavs` WHERE `last_modified` &lt; 1744199158 | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_randomflickrfavs
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('DELETE FROM wp_...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('DELETE FROM wp_...')
-#3 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(218): WP_SQLite_DB->query('DELETE FROM wp_...')
-#4 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(93): RandomFlickrFavs_update_favourites()
-#5 /wordpress/wp-includes/class-wp-hook.php(324): RandomFlickrFavs_init('')
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-settings.php(704): do_action('init')
-#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#12 {main}</pre>
- for query DELETE FROM wp_randomflickrfavs WHERE last_modified<1744199158 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, RandomFlickrFavs_init, RandomFlickrFavs_update_favourites, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:45:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT id FROM wp_randomflickrfavs ORDER BY id</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT `id` FROM `wp_randomflickrfavs` ORDER BY `id` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_randomflickrfavs
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT id FROM ...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT id FROM ...')
-#3 /wordpress/wp-includes/class-wpdb.php(3103): WP_SQLite_DB->query('SELECT id FROM ...')
-#4 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(235): wpdb->get_col('SELECT id FROM ...')
-#5 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(219): RandomFlickrFavs_update_image_id_cache()
-#6 /wordpress/wp-content/plugins/random-flickr-favourites/RandomFlickerFavs2.php(93): RandomFlickrFavs_update_favourites()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): RandomFlickrFavs_init('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query SELECT id FROM wp_randomflickrfavs ORDER BY id made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, RandomFlickrFavs_init, RandomFlickrFavs_update_favourites, RandomFlickrFavs_update_image_id_cache, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:46:05 UTC] PHP Deprecated:  File class-snoopy.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/http.php instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:46:05 UTC] PHP Deprecated:  Function is_plugin_page is <strong>deprecated</strong> since version 3.1.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:46:06 UTC] PHP Deprecated:  File class-snoopy.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/http.php instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:46:06 UTC] PHP Deprecated:  Function is_plugin_page is <strong>deprecated</strong> since version 3.1.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:46:15 UTC] PHP Deprecated:  File class-snoopy.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/http.php instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:46:15 UTC] PHP Deprecated:  Function is_plugin_page is <strong>deprecated</strong> since version 3.1.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:46:16 UTC] PHP Deprecated:  File class-snoopy.php is <strong>deprecated</strong> since version 3.0.0! Use wp-includes/http.php instead. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:46:16 UTC] PHP Deprecated:  Function is_plugin_page is <strong>deprecated</strong> since version 3.1.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:46:45 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:46:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:46:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:46:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:46:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_rpctwtabs', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_rpctwtabs' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_rpctwtab...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_rpctwtab...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_rpctwtabs', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:47:13 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:47:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:47:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:47:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:47:40 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:47:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:47:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:47:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:48:31 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:48:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:48:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:48:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:48:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('fpx_repositoryzip_option', 'a:4:{s:6:\"gitcmd\";N;s:8:\"linktext\";s:19:\"Repository Download\";s:8:\"cssclass\";N;s:3:\"dir\";a:3:{s:5:\"trunk\";s:5:\"trunk\";s:3:\"tag\";s:3:\"tag\";s:6:\"branch\";s:6:\"branch\";}}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND n
+Error: [10-Apr-2025 21:47:30 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/report-an-error/report-an-error.php:18
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('report-an-error...')
+#2 /internal/eval.php(20): activate_plugin('report-an-error...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/report-an-error/report-an-error.php on line 18
+[10-Apr-2025 21:47:39 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/report-an-error/report-an-error.php:18
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('report-an-error...')
+#2 /internal/eval.php(20): activate_plugin('report-an-error...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/report-an-error/report-an-error.php on line 18
+[10-Apr-2025 21:47:46 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/report-an-error/report-an-error.php:18
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('report-an-error...')
+#2 /internal/eval.php(20): activate_plugin('report-an-error...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/report-an-error/report-an-error.php on line 18
+[10-Apr-2025 21:50:32 UTC] PHP Fatal error:  Declaration of WordpressRandomEntries::update($new_instance) must be compatible with WP_Widget::update($new_instance, $old_instance) in /wordpress/wp-content/plugins/randomentries-widget/randomentries-widget.php on line 36
+[10-Apr-2025 21:50:40 UTC] PHP Fatal error:  Declaration of WordpressRandomEntries::update($new_instance) must be compatible with WP_Widget::update($new_instance, $old_instance) in /wordpress/wp-content/plugins/randomentries-widget/randomentries-widget.php on line 36
+[10-Apr-2025 21:50:47 UTC] PHP Fatal error:  Declaration of WordpressRandomEntries::update($new_instance) must be compatible with WP_Widget::update($new_instance, $old_instance) in /wordpress/wp-content/plugins/randomentries-widget/randomentries-widget.php on line 36
+[10-Apr-2025 21:51:01 UTC] PHP Fatal error:  Uncaught TypeError: sizeof(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/rapidology-by-leadpages/dashboard/includes/options_config.php:78
+Stack trace:
+#0 /wordpress/wp-content/plugins/rapidology-by-leadpages/dashboard/includes/options.php(47): require()
+#1 /wordpress/wp-content/plugins/rapidology-by-leadpages/dashboard/dashboard.php(80): require('/wordpress/wp-c...')
+#2 /wordpress/wp-content/plugins/rapidology-by-leadpages/dashboard/dashboard.php(43): RAD_Dashboard->include_options()
+#3 /wordpress/wp-content/plugins/rapidology-by-leadpages/rapidology.php(88): RAD_Dashboard->__construct(Array)
+#4 /wordpress/wp-content/plugins/rapidology-by-leadpages/rapidology.php(5045): RAD_Rapidology->__construct()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rapidology-by-l...')
+#7 /internal/eval.php(20): activate_plugin('rapidology-by-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/rapidology-by-leadpages/dashboard/includes/options_config.php on line 78
+[10-Apr-2025 21:51:10 UTC] PHP Fatal error:  Uncaught TypeError: sizeof(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/rapidology-by-leadpages/dashboard/includes/options_config.php:78
+Stack trace:
+#0 /wordpress/wp-content/plugins/rapidology-by-leadpages/dashboard/includes/options.php(47): require()
+#1 /wordpress/wp-content/plugins/rapidology-by-leadpages/dashboard/dashboard.php(80): require('/wordpress/wp-c...')
+#2 /wordpress/wp-content/plugins/rapidology-by-leadpages/dashboard/dashboard.php(43): RAD_Dashboard->include_options()
+#3 /wordpress/wp-content/plugins/rapidology-by-leadpages/rapidology.php(88): RAD_Dashboard->__construct(Array)
+#4 /wordpress/wp-content/plugins/rapidology-by-leadpages/rapidology.php(5045): RAD_Rapidology->__construct()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rapidology-by-l...')
+#7 /internal/eval.php(20): activate_plugin('rapidology-by-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/rapidology-by-leadpages/dashboard/includes/options_config.php on line 78
+[10-Apr-2025 21:51:19 UTC] PHP Fatal error:  Uncaught TypeError: sizeof(): Argument #1 ($value) must be of type Countable|array, bool given in /wordpress/wp-content/plugins/rapidology-by-leadpages/dashboard/includes/options_config.php:78
+Stack trace:
+#0 /wordpress/wp-content/plugins/rapidology-by-leadpages/dashboard/includes/options.php(47): require()
+#1 /wordpress/wp-content/plugins/rapidology-by-leadpages/dashboard/dashboard.php(80): require('/wordpress/wp-c...')
+#2 /wordpress/wp-content/plugins/rapidology-by-leadpages/dashboard/dashboard.php(43): RAD_Dashboard->include_options()
+#3 /wordpress/wp-content/plugins/rapidology-by-leadpages/rapidology.php(88): RAD_Dashboard->__construct(Array)
+#4 /wordpress/wp-content/plugins/rapidology-by-leadpages/rapidology.php(5045): RAD_Rapidology->__construct()
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('rapidology-by-l...')
+#7 /internal/eval.php(20): activate_plugin('rapidology-by-l...')
+#8 {main}
+  thrown in /wordpress/wp-content/plugins/rapidology-by-leadpages/dashboard/includes/options_config.php on line 78
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"rapidology-by-leadpages"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
