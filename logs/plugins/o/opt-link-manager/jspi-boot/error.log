@@ -2,565 +2,155 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 03:09:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opalmembership_use_php_sessions', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'opalmembership_use_php_sessions' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('opalmembership_...', true, '', 'auto')
-#5 /wordpress/wp-content/plugins/opal-membership/inc/core/class-opalmembership-session.php(300): update_option('opalmembership_...', true)
-#6 /wordpress/wp-content/plugins/opal-membership/inc/core/class-opalmembership-session.php(66): Opalmembership_Session->use_php_sessions()
-#7 /wordpress/wp-content/plugins/opal-membership/opalmembership.php(137): Opalmembership_Session->__construct()
-#8 /wordpress/wp-content/plugins/opal-membership/opalmembership.php(376): OpalMembership::getInstance()
-#9 /wordpress/wp-content/plugins/opal-membership/opalmembership.php(379): OpalMembership()
-#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('opal-membership...')
-#12 /internal/eval.php(20): activate_plugin('opal-membership...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opalmembership_use_php_sessions', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/opal-membership/opalmembership.php'), OpalMembership, OpalMembership::getInstance, Opalmembership_Session->__construct, Opalmembership_Session->use_php_sessions, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:09:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 03:09:15', '2025-04-09 03:09:15', '[opalmembership_dashboard]', '', 'Membership Dashboard', '', 'publish', 'page', 'closed', 'closed', '', 'membership-dashboard', '', '', '2025-04-09 03:09:15', '2025-04-09 03:09:15', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 03:09:15' , '2025-04-09 03:09:15' , '[opalmembership_dashboard]' , '' , 'Membership Dashboard' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'membership-dashboard' , '' , '' , '2025-04-09 03:09:15' , '2025-04-09 03:09:15' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/opal-membership/install.php(57): wp_insert_post(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): opalmembership_install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opal-m...', false)
-#11 /internal/eval.php(20): activate_plugin('opal-membership...')
-#12 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 03:09:15', '2025-04-09 03:09:15', '[opalmembership_dashboard]', '', 'Membership Dashboard', '', 'publish', 'page', 'closed', 'closed', '', 'membership-dashboard', '', '', '2025-04-09 03:09:15', '2025-04-09 03:09:15', 0, 0, '', '') made by activate_plugin, do_action('activate_opal-membership/opalmembership.php'), WP_Hook->do_action, WP_Hook->apply_filters, opalmembership_install, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:09:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 03:09:15', '2025-04-09 03:09:15', '[opalmembership_packages]', '', 'Membership Packages Page', '', 'publish', 'page', 'closed', 'closed', '', 'membership-packages-page', '', '', '2025-04-09 03:09:15', '2025-04-09 03:09:15', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 03:09:15' , '2025-04-09 03:09:15' , '[opalmembership_packages]' , '' , 'Membership Packages Page' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'membership-packages-page' , '' , '' , '2025-04-09 03:09:15' , '2025-04-09 03:09:15' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/opal-membership/install.php(77): wp_insert_post(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): opalmembership_install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opal-m...', false)
-#11 /internal/eval.php(20): activate_plugin('opal-membership...')
-#12 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 03:09:15', '2025-04-09 03:09:15', '[opalmembership_packages]', '', 'Membership Packages Page', '', 'publish', 'page', 'closed', 'closed', '', 'membership-packages-page', '', '', '2025-04-09 03:09:15', '2025-04-09 03:09:15', 0, 0, '', '') made by activate_plugin, do_action('activate_opal-membership/opalmembership.php'), WP_Hook->do_action, WP_Hook->apply_filters, opalmembership_install, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:09:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 03:09:15', '2025-04-09 03:09:15', '[opalmembership_receipt]', '', 'Membership Payment Successfull', '', 'publish', 'page', 'closed', 'closed', '', 'membership-payment-successfull', '', '', '2025-04-09 03:09:15', '2025-04-09 03:09:15', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 03:09:15' , '2025-04-09 03:09:15' , '[opalmembership_receipt]' , '' , 'Membership Payment Successfull' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'membership-payment-successfull' , '' , '' , '2025-04-09 03:09:15' , '2025-04-09 03:09:15' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/opal-membership/install.php(97): wp_insert_post(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): opalmembership_install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opal-m...', false)
-#11 /internal/eval.php(20): activate_plugin('opal-membership...')
-#12 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 03:09:15', '2025-04-09 03:09:15', '[opalmembership_receipt]', '', 'Membership Payment Successfull', '', 'publish', 'page', 'closed', 'closed', '', 'membership-payment-successfull', '', '', '2025-04-09 03:09:15', '2025-04-09 03:09:15', 0, 0, '', '') made by activate_plugin, do_action('activate_opal-membership/opalmembership.php'), WP_Hook->do_action, WP_Hook->apply_filters, opalmembership_install, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:09:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 03:09:15', '2025-04-09 03:09:15', '[opalmembership_checkout]', '', 'Membership Checkout', '', 'publish', 'page', 'closed', 'closed', '', 'membership-checkout', '', '', '2025-04-09 03:09:15', '2025-04-09 03:09:15', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 03:09:15' , '2025-04-09 03:09:15' , '[opalmembership_checkout]' , '' , 'Membership Checkout' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'membership-checkout' , '' , '' , '2025-04-09 03:09:15' , '2025-04-09 03:09:15' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/opal-membership/install.php(116): wp_insert_post(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): opalmembership_install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opal-m...', false)
-#11 /internal/eval.php(20): activate_plugin('opal-membership...')
-#12 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 03:09:15', '2025-04-09 03:09:15', '[opalmembership_checkout]', '', 'Membership Checkout', '', 'publish', 'page', 'closed', 'closed', '', 'membership-checkout', '', '', '2025-04-09 03:09:15', '2025-04-09 03:09:15', 0, 0, '', '') made by activate_plugin, do_action('activate_opal-membership/opalmembership.php'), WP_Hook->do_action, WP_Hook->apply_filters, opalmembership_install, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:09:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 03:09:15', '2025-04-09 03:09:15', '[opalmembership_history]', '', 'Membership Payment History', '', 'publish', 'page', 'closed', 'closed', '', 'membership-payment-history', '', '', '2025-04-09 03:09:15', '2025-04-09 03:09:15', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 03:09:15' , '2025-04-09 03:09:15' , '[opalmembership_history]' , '' , 'Membership Payment History' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'membership-payment-history' , '' , '' , '2025-04-09 03:09:15' , '2025-04-09 03:09:15' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/opal-membership/install.php(135): wp_insert_post(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): opalmembership_install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opal-m...', false)
-#11 /internal/eval.php(20): activate_plugin('opal-membership...')
-#12 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 03:09:15', '2025-04-09 03:09:15', '[opalmembership_history]', '', 'Membership Payment History', '', 'publish', 'page', 'closed', 'closed', '', 'membership-payment-history', '', '', '2025-04-09 03:09:15', '2025-04-09 03:09:15', 0, 0, '', '') made by activate_plugin, do_action('activate_opal-membership/opalmembership.php'), WP_Hook->do_action, WP_Hook->apply_filters, opalmembership_install, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:09:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 03:09:15', '2025-04-09 03:09:15', '[opalmembership_register_form]', '', 'Opal Membership Register', '', 'publish', 'page', 'closed', 'closed', '', 'opal-membership-register', '', '', '2025-04-09 03:09:15', '2025-04-09 03:09:15', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 03:09:15' , '2025-04-09 03:09:15' , '[opalmembership_register_form]' , '' , 'Opal Membership Register' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'opal-membership-register' , '' , '' , '2025-04-09 03:09:15' , '2025-04-09 03:09:15' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/opal-membership/install.php(173): wp_insert_post(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): opalmembership_install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opal-m...', false)
-#11 /internal/eval.php(20): activate_plugin('opal-membership...')
-#12 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 03:09:15', '2025-04-09 03:09:15', '[opalmembership_register_form]', '', 'Opal Membership Register', '', 'publish', 'page', 'closed', 'closed', '', 'opal-membership-register', '', '', '2025-04-09 03:09:15', '2025-04-09 03:09:15', 0, 0, '', '') made by activate_plugin, do_action('activate_opal-membership/opalmembership.php'), WP_Hook->do_action, WP_Hook->apply_filters, opalmembership_install, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:09:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 03:09:15', '2025-04-09 03:09:15', '[opalmembership_login_form]', '', 'Opal Membership Login', '', 'publish', 'page', 'closed', 'closed', '', 'opal-membership-login', '', '', '2025-04-09 03:09:15', '2025-04-09 03:09:15', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 1 , '2025-04-09 03:09:15' , '2025-04-09 03:09:15' , '[opalmembership_login_form]' , '' , 'Opal Membership Login' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'opal-membership-login' , '' , '' , '2025-04-09 03:09:15' , '2025-04-09 03:09:15' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/opal-membership/install.php(192): wp_insert_post(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): opalmembership_install(false)
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opal-m...', false)
-#11 /internal/eval.php(20): activate_plugin('opal-membership...')
-#12 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (1, '2025-04-09 03:09:15', '2025-04-09 03:09:15', '[opalmembership_login_form]', '', 'Opal Membership Login', '', 'publish', 'page', 'closed', 'closed', '', 'opal-membership-login', '', '', '2025-04-09 03:09:15', '2025-04-09 03:09:15', 0, 0, '', '') made by activate_plugin, do_action('activate_opal-membership/opalmembership.php'), WP_Hook->do_action, WP_Hook->apply_filters, opalmembership_install, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:09:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opalmembership_settings', 'a:31:{i:0;b:0;s:9:\"test_mode\";i:1;s:8:\"currency\";s:3:\"USD\";s:17:\"currency_position\";s:6:\"before\";s:8:\"gridcols\";s:1:\"4\";s:8:\"gateways\";a:3:{s:3:\"cod\";i:1;s:11:\"pp_standard\";i:1;s:6:\"stripe\";i:1;}s:15:\"default_gateway\";s:3:\"cod\";s:14:\"dashboard_page\";i:0;s:15:\"membership_page\";i:0;s:12:\"success_page\";i:0;s:13:\"checkout_page\";i:0;s:12:\"history_page\";i:0;s:13:\"register_page\";i:0;s:10:\"login_page\";i:0;s:12:\"base_country\";s:2:\"US\";s:19:\"thousands_separator\";s:1:\",\";s:17:\"decimal_separator\";s:1:\".\";s:18:\"price_num_decimals\";s:1:\"2\";s:9:\"from_name\";s:20:\"My WordPress Website\";s:10:\"from_email\";s:19:\"admin@localhost.com\";s:20:\"mail_message_success\";s:112:\"Thanks, your payment request is waiting to be confirmed. Updates will be sent to the email address you provided.\";s:21:\"expired_email_subject\";s:26:\"Your membership is expired\";s:18:\"expired_email_body\";s:287:\"Hi {user_name},
-                    <br>
-                    Your membership is expired at {site_name}:<br>
-                    <br>
-                    {package_membership}<br>
-                    <br>
-                    <em>This message was sent by {site_link} on {current_time}.</em>\";s:24:\"newpayment_email_subject\";s:59:\"New membership package purchased - Payment {payment_number}\";s:21:\"newpayment_email_body\";s:826:\"Thanks {user_name},<br>
-                            <br>
-                            Your payment request is <strong>waiting to be confirmed</strong>.<br>
-                            <br>
-                            Give us a few moments to make sure that we\'ve got space for you. You will receive another email from us soon. If this request was made outside of our normal working hours, we may not be able to confirm it until we\'re open again.<br>
-                            <br>
-                            <strong>Your request details:</strong><br>
-                        
-                            {membership_page}<br>
-
-                            <br>
-                            &nbsp;<br>
-                            <br>
-                            <em>This message was sent by {site_link} on {current_time}.</em>\";s:23:\"confirmed_email_subject\";s:47:\"Your Payment - ID {payment_number} is Confirmed\";s:20:\"confirmed_email_body\";s:528:\"Hi {user_name},<br>
-                            <br>
-                            Your payment status has been <strong>confirmed</strong>. Your package is actived now. You should go and check it out.<br>
-                            <br>
-                            <strong>Here is detail:</strong><br>
-                            {package_membership} <br>
-                            <br>
-                            Thanks you so much!
-                            <em>This message was sent by {site_link} on {current_time}.</em>\";s:23:\"cancelled_email_subject\";s:35:\"Membership Cancelled on {site_name}\";s:20:\"cancelled_email_body\";s:472:\"Hi {user_name},<br>
-                            <br>
-                            Sorry, we could not accommodate your booking request. We\'re full or not open at the time you requested:<br>
-                            <br>
-                            {package_membership}<br>
-                            <br>
-                            &nbsp;<br>
-                            <br>
-                            <em>This message was sent by {site_link} on {current_time}.</em>\";s:22:\"refunded_email_subject\";s:34:\"Membership Refunded on {site_name}\";s:19:\"refunded_email_body\";s:407:\"Hi {user_name},<br>
-                            <br>
-                            Your refund request has been received:<br>
-                            <br>
-                            {package_membership}<br>
-                            <br>
-                            &nbsp;<br>
-                            <br>
-                            <em>This message was sent by {site_link} on {current_time}.</em>\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'opalmembership_settings' , 'a:31:{i:0;b:0;s:9:&quot;test_mode&quot;;i:1;s:8:&quot;currency&quot;;s:3:&quot;USD&quot;;s:17:&quot;currency_position&quot;;s:6:&quot;before&quot;;s:8:&quot;gridcols&quot;;s:1:&quot;4&quot;;s:8:&quot;gateways&quot;;a:3:{s:3:&quot;cod&quot;;i:1;s:11:&quot;pp_standard&quot;;i:1;s:6:&quot;stripe&quot;;i:1;}s:15:&quot;default_gateway&quot;;s:3:&quot;cod&quot;;s:14:&quot;dashboard_page&quot;;i:0;s:15:&quot;membership_page&quot;;i:0;s:12:&quot;success_page&quot;;i:0;s:13:&quot;checkout_page&quot;;i:0;s:12:&quot;history_page&quot;;i:0;s:13:&quot;register_page&quot;;i:0;s:10:&quot;login_page&quot;;i:0;s:12:&quot;base_country&quot;;s:2:&quot;US&quot;;s:19:&quot;thousands_separator&quot;;s:1:&quot;,&quot;;s:17:&quot;decimal_separator&quot;;s:1:&quot;.&quot;;s:18:&quot;price_num_decimals&quot;;s:1:&quot;2&quot;;s:9:&quot;from_name&quot;;s:20:&quot;My WordPress Website&quot;;s:10:&quot;from_email&quot;;s:19:&quot;admin@localhost.com&quot;;s:20:&quot;mail_message_success&quot;;s:112:&quot;Thanks, your payment request is waiting to be confirmed. Updates will be sent to the email address you provided.&quot;;s:21:&quot;expired_email_subject&quot;;s:26:&quot;Your membership is expired&quot;;s:18:&quot;expired_email_body&quot;;s:287:&quot;Hi {user_name},
-                    &lt;br&gt;
-                    Your membership is expired at {site_name}:&lt;br&gt;
-                    &lt;br&gt;
-                    {package_membership}&lt;br&gt;
-                    &lt;br&gt;
-                    &lt;em&gt;This message was sent by {site_link} on {current_time}.&lt;/em&gt;&quot;;s:24:&quot;newpayment_email_subject&quot;;s:59:&quot;New membership package purchased - Payment {payment_number}&quot;;s:21:&quot;newpayment_email_body&quot;;s:826:&quot;Thanks {user_name},&lt;br&gt;
-                            &lt;br&gt;
-                            Your payment request is &lt;strong&gt;waiting to be confirmed&lt;/strong&gt;.&lt;br&gt;
-                            &lt;br&gt;
-                            Give us a few moments to make sure that we''ve got space for you. You will receive another email from us soon. If this request was made outside of our normal working hours, we may not be able to confirm it until we''re open again.&lt;br&gt;
-                            &lt;br&gt;
-                            &lt;strong&gt;Your request details:&lt;/strong&gt;&lt;br&gt;
-                        
-                            {membership_page}&lt;br&gt;
-
-                            &lt;br&gt;
-                            &amp;nbsp;&lt;br&gt;
-                            &lt;br&gt;
-                            &lt;em&gt;This message was sent by {site_link} on {current_time}.&lt;/em&gt;&quot;;s:23:&quot;confirmed_email_subject&quot;;s:47:&quot;Your Payment - ID {payment_number} is Confirmed&quot;;s:20:&quot;confirmed_email_body&quot;;s:528:&quot;Hi {user_name},&lt;br&gt;
-                            &lt;br&gt;
-                            Your payment status has been &lt;strong&gt;confirmed&lt;/strong&gt;. Your package is actived now. You should go and check it out.&lt;br&gt;
-                            &lt;br&gt;
-                            &lt;strong&gt;Here is detail:&lt;/strong&gt;&lt;br&gt;
-                            {package_membership} &lt;br&gt;
-                            &lt;br&gt;
-                            Thanks you so much!
-                            &lt;em&gt;This message was sent by {site_link} on {current_time}.&lt;/em&gt;&quot;;s:23:&quot;cancelled_email_subject&quot;;s:35:&quot;Membership Cancelled on {site_name}&quot;;s:20:&quot;cancelled_email_body&quot;;s:472:&quot;Hi {user_name},&lt;br&gt;
-                            &lt;br&gt;
-                            Sorry, we could not accommodate your booking request. We''re full or not open at the time you requested:&lt;br&gt;
-                            &lt;br&gt;
-                            {package_membership}&lt;br&gt;
-                            &lt;br&gt;
-                            &amp;nbsp;&lt;br&gt;
-                            &lt;br&gt;
-                            &lt;em&gt;This message was sent by {site_link} on {current_time}.&lt;/em&gt;&quot;;s:22:&quot;refunded_email_subject&quot;;s:34:&quot;Membership Refunded on {site_name}&quot;;s:19:&quot;refunded_email_body&quot;;s:407:&quot;Hi {user_name},&lt;br&gt;
-                            &lt;br&gt;
-                            Your refund request has been received:&lt;br&gt;
-                            &lt;br&gt;
-                            {package_membership}&lt;br&gt;
-                            &lt;br&gt;
-                            &amp;nbsp;&lt;br&gt;
-                            &lt;br&gt;
-                            &lt;em&gt;This message was sent by {site_link} on {current_time}.&lt;/em&gt;&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('opalmembership_...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/opal-membership/install.php(210): update_option('opalmembership_...', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): opalmembership_install(false)
+Error: [10-Apr-2025 13:13:04 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744290781.868)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
 #7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opal-m...', false)
-#10 /internal/eval.php(20): activate_plugin('opal-membership...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opalmembership_settings', 'a:31:{i:0;b:0;s:9:\"test_mode\";i:1;s:8:\"currency\";s:3:\"USD\";s:17:\"currency_position\";s:6:\"before\";s:8:\"gridcols\";s:1:\"4\";s:8:\"gateways\";a:3:{s:3:\"cod\";i:1;s:11:\"pp_standard\";i:1;s:6:\"stripe\";i:1;}s:15:\"default_gateway\";s:3:\"cod\";s:14:\"dashboard_page\";i:0;s:15:\"membership_page\";i:0;s:12:\"success_page\";i:0;s:13:\"checkout_page\";i:0;s:12:\"history_page\";i:0;s:13:\"register_page\";i:0;s:10:\"login_page\";i:0;s:12:\"base_country\";s:2:\"US\";s:19:\"thousands_separator\";s:1:\",\";s:17:\"decimal_separator\";s:1:\".\";s:18:\"price_num_decimals\";s:1:\"2\";s:9:\"from_name\";s:20:\"My WordPress Website\";s:10:\"from_email\";s:19:\"admin@localhost.com\";s:20:\"mail_message_success\";s:112:\"Thanks, your payment request is waiting to be confirmed. Updates will be sent to the email address you provided.\";s:21:\"expired_email_subject\";s:26:\"Your membership is expired\";s:18:\"expired_email_body\";s:287:\"Hi {user_name},
-                    <br>
-                    Your membership is expired at {site_name}:<br>
-                    <br>
-                    {package_membership}<br>
-                    <br>
-                    <em>This message was sent by {site_link} on {current_time}.</em>\";s:24:\"newpayment_email_subject\";s:59:\"New membership package purchased - Payment {payment_number}\";s:21:\"newpayment_email_body\";s:826:\"Thanks {user_name},<br>
-                            <br>
-                            Your payment request is <strong>waiting to be confirmed</strong>.<br>
-                            <br>
-                            Give us a few moments to make sure that we\'ve got space for you. You will receive another email from us soon. If this request was made outside of our normal working hours, we may not be able to confirm it until we\'re open again.<br>
-                            <br>
-                            <strong>Your request details:</strong><br>
-                        
-                            {membership_page}<br>
-
-                            <br>
-                            &nbsp;<br>
-                            <br>
-                            <em>This message was sent by {site_link} on {current_time}.</em>\";s:23:\"confirmed_email_subject\";s:47:\"Your Payment - ID {payment_number} is Confirmed\";s:20:\"confirmed_email_body\";s:528:\"Hi {user_name},<br>
-                            <br>
-                            Your payment status has been <strong>confirmed</strong>. Your package is actived now. You should go and check it out.<br>
-                            <br>
-                            <strong>Here is detail:</strong><br>
-                            {package_membership} <br>
-                            <br>
-                            Thanks you so much!
-                            <em>This message was sent by {site_link} on {current_time}.</em>\";s:23:\"cancelled_email_subject\";s:35:\"Membership Cancelled on {site_name}\";s:20:\"cancelled_email_body\";s:472:\"Hi {user_name},<br>
-                            <br>
-                            Sorry, we could not accommodate your booking request. We\'re full or not open at the time you requested:<br>
-                            <br>
-                            {package_membership}<br>
-                            <br>
-                            &nbsp;<br>
-                            <br>
-                            <em>This message was sent by {site_link} on {current_time}.</em>\";s:22:\"refunded_email_subject\";s:34:\"Membership Refunded on {site_name}\";s:19:\"refunded_email_body\";s:407:\"Hi {user_name},<br>
-                            <br>
-                            Your refund request has been received:<br>
-                            <br>
-                            {package_membership}<br>
-                            <br>
-                            &nbsp;<br>
-                            <br>
-                            <em>This message was sent by {site_link} on {current_time}.</em>\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_opal-membership/opalmembership.php'), WP_Hook->do_action, WP_Hook->apply_filters, opalmembership_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:09:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opalmembership_version', '1.2.4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'opalmembership_version' , '1.2.4' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('opalmembership_...', '1.2.4', '', 'auto')
-#5 /wordpress/wp-content/plugins/opal-membership/install.php(211): update_option('opalmembership_...', '1.2.4')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): opalmembership_install(false)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 13:15:38 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('ourwebsms_widge...')
+#2 /wordpress/wp-content/plugins/ourwebsms/ourwebsms.php(108): register_widget('ourwebsms_widge...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): ourwebsms_bb_register_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 13:15:47 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('ourwebsms_widge...')
+#2 /wordpress/wp-content/plugins/ourwebsms/ourwebsms.php(108): register_widget('ourwebsms_widge...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): ourwebsms_bb_register_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 13:15:56 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('ourwebsms_widge...')
+#2 /wordpress/wp-content/plugins/ourwebsms/ourwebsms.php(108): register_widget('ourwebsms_widge...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): ourwebsms_bb_register_widgets('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 13:16:38 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744290996.28)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
 #7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_opal-m...', false)
-#10 /internal/eval.php(20): activate_plugin('opal-membership...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('opalmembership_version', '1.2.4', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_opal-membership/opalmembership.php'), WP_Hook->do_action, WP_Hook->apply_filters, opalmembership_install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 03:09:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-d
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /wordp in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 13:17:41 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 13:17:42 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 13:17:49 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 13:17:50 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 13:17:58 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 13:17:59 UTC] PHP Deprecated:  Function get_settings is <strong>deprecated</strong> since version 2.1.0! Use get_option() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 13:20:29 UTC] PHP Warning:  require_once(admin/class/original/class-olm-options-page.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/opt-link-manager/opt-link-manager.php on line 64
+[10-Apr-2025 13:20:29 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'admin/class/original/class-olm-options-page.php' (include_path='.:') in /wordpress/wp-content/plugins/opt-link-manager/opt-link-manager.php:64
+Stack trace:
+#0 /wordpress/wp-content/plugins/opt-link-manager/opt-link-manager.php(47): Opt_Link_Magager->init()
+#1 /wordpress/wp-content/plugins/opt-link-manager/opt-link-manager.php(1032): Opt_Link_Magager->__construct()
+#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('opt-link-manage...')
+#4 /internal/eval.php(20): activate_plugin('opt-link-manage...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/opt-link-manager/opt-link-manager.php on line 64
+[10-Apr-2025 13:20:37 UTC] PHP Warning:  require_once(admin/class/original/class-olm-options-page.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/opt-link-manager/opt-link-manager.php on line 64
+[10-Apr-2025 13:20:37 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'admin/class/original/class-olm-options-page.php' (include_path='.:') in /wordpress/wp-content/plugins/opt-link-manager/opt-link-manager.php:64
+Stack trace:
+#0 /wordpress/wp-content/plugins/opt-link-manager/opt-link-manager.php(47): Opt_Link_Magager->init()
+#1 /wordpress/wp-content/plugins/opt-link-manager/opt-link-manager.php(1032): Opt_Link_Magager->__construct()
+#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('opt-link-manage...')
+#4 /internal/eval.php(20): activate_plugin('opt-link-manage...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/opt-link-manager/opt-link-manager.php on line 64
+[10-Apr-2025 13:20:45 UTC] PHP Warning:  require_once(admin/class/original/class-olm-options-page.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/opt-link-manager/opt-link-manager.php on line 64
+[10-Apr-2025 13:20:45 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'admin/class/original/class-olm-options-page.php' (include_path='.:') in /wordpress/wp-content/plugins/opt-link-manager/opt-link-manager.php:64
+Stack trace:
+#0 /wordpress/wp-content/plugins/opt-link-manager/opt-link-manager.php(47): Opt_Link_Magager->init()
+#1 /wordpress/wp-content/plugins/opt-link-manager/opt-link-manager.php(1032): Opt_Link_Magager->__construct()
+#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('opt-link-manage...')
+#4 /internal/eval.php(20): activate_plugin('opt-link-manage...')
+#5 {main}
+  thrown in /wordpress/wp-content/plugins/opt-link-manager/opt-link-manager.php on line 64
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"opt-link-manager"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
