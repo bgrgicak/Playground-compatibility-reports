@@ -2,539 +2,99 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 15:51:40 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 15:51:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 15:51:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 15:51:40 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 15:52:07 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 15:52:07 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 15:52:07 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 15:52:07 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 15:53:16 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 15:53:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 15:53:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 15:53:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 15:53:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_cr3postcarousel_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_cr3postcarousel_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_cr3postc...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_cr3postc...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_cr3postcarousel_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:53:43 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 15:53:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 15:53:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 15:53:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 15:54:10 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 15:54:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 15:54:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 15:54:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 15:54:36 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 15:54:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 15:54:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 15:54:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 15:55:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cb_aggregation_aggregator', 'a:2:{s:19:\"aggregation_enabled\";b:1;s:14:\"excluded_blogs\";a:0:{}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cb_aggregation_aggregator' , 'a:2:{s:19:&quot;aggregation_enabled&quot;;b:1;s:14:&quot;excluded_blogs&quot;;a:0:{}}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('cb_aggregation_...', Array, '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'cb_aggregation_...', Array)
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'cb_aggregation_...', Array)
-#7 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(427): update_site_option('cb_aggregation_...', Array)
-#8 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#9 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(360): ClassBlogs_BasePlugin->_get_options()
-#10 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/Plugins/Aggregation/Aggregator.php(57): ClassBlogs_BasePlugin->get_option('aggregation_ena...')
-#11 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(259): ClassBlogs_Plugins_Aggregation_Aggregator->__construct()
-#12 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/Plugins/Aggregation/Aggregator.php(735): ClassBlogs::register_plugin('sitewide_aggreg...', 'ClassBlogs_Plug...', 'Sitewide Aggreg...', 'Handles post, c...', false)
-#13 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(122): require_once('/wordpress/wp-c...')
-#14 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/Plugins/Aggregation.php(4): ClassBlogs::load_php_files('/wordpress/wp-c...')
-#15 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(122): require_once('/wordpress/wp-c...')
-#16 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(142): ClassBlogs::load_php_files('/wordpress/wp-c...')
-#17 /wordpress/wp-content/plugins/class-blogs/class-blogs.php(56): ClassBlogs::initialize()
-#18 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#19 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('class-blogs/cla...')
-#20 /internal/eval.php(20): activate_plugin('class-blogs/cla...')
-#21 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cb_aggregation_aggregator', 'a:2:{s:19:\"aggregation_enabled\";b:1;s:14:\"excluded_blogs\";a:0:{}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/class-blogs/class-blogs.php'), ClassBlogs::initialize, ClassBlogs::load_php_files, require_once('/plugins/class-blogs/ClassBlogs/Plugins/Aggregation.php'), ClassBlogs::load_php_files, require_once('/plugins/class-blogs/ClassBlogs/Plugins/Aggregation/Aggregator.php'), ClassBlogs::register_plugin, ClassBlogs_Plugins_Aggregation_Aggregator->__construct, ClassBlogs_BasePlugin->get_option, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:55:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cb_aggregation_aggregator', 'a:2:{s:19:\"aggregation_enabled\";b:1;s:14:\"excluded_blogs\";a:0:{}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cb_aggregation_aggregator' , 'a:2:{s:19:&quot;aggregation_enabled&quot;;b:1;s:14:&quot;excluded_blogs&quot;;a:0:{}}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('cb_aggregation_...', Array, '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'cb_aggregation_...', Array)
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'cb_aggregation_...', Array)
-#7 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(427): update_site_option('cb_aggregation_...', Array)
-#8 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#9 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#10 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#11 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(360): ClassBlogs_BasePlugin->_get_options()
-#12 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/Plugins/Aggregation/Aggregator.php(57): ClassBlogs_BasePlugin->get_option('aggregation_ena...')
-#13 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(259): ClassBlogs_Plugins_Aggregation_Aggregator->__construct()
-#14 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/Plugins/Aggregation/Aggregator.php(735): ClassBlogs::register_plugin('sitewide_aggreg...', 'ClassBlogs_Plug...', 'Sitewide Aggreg...', 'Handles post, c...', false)
-#15 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(122): require_once('/wordpress/wp-c...')
-#16 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/Plugins/Aggregation.php(4): ClassBlogs::load_php_files('/wordpress/wp-c...')
-#17 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(122): require_once('/wordpress/wp-c...')
-#18 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(142): ClassBlogs::load_php_files('/wordpress/wp-c...')
-#19 /wordpress/wp-content/plugins/class-blogs/class-blogs.php(56): ClassBlogs::initialize()
-#20 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#21 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('class-blogs/cla...')
-#22 /internal/eval.php(20): activate_plugin('class-blogs/cla...')
-#23 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cb_aggregation_aggregator', 'a:2:{s:19:\"aggregation_enabled\";b:1;s:14:\"excluded_blogs\";a:0:{}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/class-blogs/class-blogs.php'), ClassBlogs::initialize, ClassBlogs::load_php_files, require_once('/plugins/class-blogs/ClassBlogs/Plugins/Aggregation.php'), ClassBlogs::load_php_files, require_once('/plugins/class-blogs/ClassBlogs/Plugins/Aggregation/Aggregator.php'), ClassBlogs::register_plugin, ClassBlogs_Plugins_Aggregation_Aggregator->__construct, ClassBlogs_BasePlugin->get_option, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:55:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cb_aggregation_aggregator', 'a:2:{s:19:\"aggregation_enabled\";b:1;s:14:\"excluded_blogs\";a:0:{}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cb_aggregation_aggregator' , 'a:2:{s:19:&quot;aggregation_enabled&quot;;b:1;s:14:&quot;excluded_blogs&quot;;a:0:{}}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('cb_aggregation_...', Array, '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'cb_aggregation_...', Array)
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'cb_aggregation_...', Array)
-#7 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(427): update_site_option('cb_aggregation_...', Array)
-#8 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#9 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#10 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#11 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#12 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#13 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(360): ClassBlogs_BasePlugin->_get_options()
-#14 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/Plugins/Aggregation/Aggregator.php(57): ClassBlogs_BasePlugin->get_option('aggregation_ena...')
-#15 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(259): ClassBlogs_Plugins_Aggregation_Aggregator->__construct()
-#16 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/Plugins/Aggregation/Aggregator.php(735): ClassBlogs::register_plugin('sitewide_aggreg...', 'ClassBlogs_Plug...', 'Sitewide Aggreg...', 'Handles post, c...', false)
-#17 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(122): require_once('/wordpress/wp-c...')
-#18 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/Plugins/Aggregation.php(4): ClassBlogs::load_php_files('/wordpress/wp-c...')
-#19 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(122): require_once('/wordpress/wp-c...')
-#20 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(142): ClassBlogs::load_php_files('/wordpress/wp-c...')
-#21 /wordpress/wp-content/plugins/class-blogs/class-blogs.php(56): ClassBlogs::initialize()
-#22 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#23 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('class-blogs/cla...')
-#24 /internal/eval.php(20): activate_plugin('class-blogs/cla...')
-#25 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cb_aggregation_aggregator', 'a:2:{s:19:\"aggregation_enabled\";b:1;s:14:\"excluded_blogs\";a:0:{}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/class-blogs/class-blogs.php'), ClassBlogs::initialize, ClassBlogs::load_php_files, require_once('/plugins/class-blogs/ClassBlogs/Plugins/Aggregation.php'), ClassBlogs::load_php_files, require_once('/plugins/class-blogs/ClassBlogs/Plugins/Aggregation/Aggregator.php'), ClassBlogs::register_plugin, ClassBlogs_Plugins_Aggregation_Aggregator->__construct, ClassBlogs_BasePlugin->get_option, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:55:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cb_aggregation_aggregator', 'a:2:{s:19:\"aggregation_enabled\";b:1;s:14:\"excluded_blogs\";a:0:{}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cb_aggregation_aggregator' , 'a:2:{s:19:&quot;aggregation_enabled&quot;;b:1;s:14:&quot;excluded_blogs&quot;;a:0:{}}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('cb_aggregation_...', Array, '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'cb_aggregation_...', Array)
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'cb_aggregation_...', Array)
-#7 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(427): update_site_option('cb_aggregation_...', Array)
-#8 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#9 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#10 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#11 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#12 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#13 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#14 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#15 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(360): ClassBlogs_BasePlugin->_get_options()
-#16 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/Plugins/Aggregation/Aggregator.php(57): ClassBlogs_BasePlugin->get_option('aggregation_ena...')
-#17 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(259): ClassBlogs_Plugins_Aggregation_Aggregator->__construct()
-#18 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/Plugins/Aggregation/Aggregator.php(735): ClassBlogs::register_plugin('sitewide_aggreg...', 'ClassBlogs_Plug...', 'Sitewide Aggreg...', 'Handles post, c...', false)
-#19 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(122): require_once('/wordpress/wp-c...')
-#20 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/Plugins/Aggregation.php(4): ClassBlogs::load_php_files('/wordpress/wp-c...')
-#21 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(122): require_once('/wordpress/wp-c...')
-#22 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(142): ClassBlogs::load_php_files('/wordpress/wp-c...')
-#23 /wordpress/wp-content/plugins/class-blogs/class-blogs.php(56): ClassBlogs::initialize()
-#24 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#25 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('class-blogs/cla...')
-#26 /internal/eval.php(20): activate_plugin('class-blogs/cla...')
-#27 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cb_aggregation_aggregator', 'a:2:{s:19:\"aggregation_enabled\";b:1;s:14:\"excluded_blogs\";a:0:{}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/class-blogs/class-blogs.php'), ClassBlogs::initialize, ClassBlogs::load_php_files, require_once('/plugins/class-blogs/ClassBlogs/Plugins/Aggregation.php'), ClassBlogs::load_php_files, require_once('/plugins/class-blogs/ClassBlogs/Plugins/Aggregation/Aggregator.php'), ClassBlogs::register_plugin, ClassBlogs_Plugins_Aggregation_Aggregator->__construct, ClassBlogs_BasePlugin->get_option, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:55:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cb_aggregation_aggregator', 'a:2:{s:19:\"aggregation_enabled\";b:1;s:14:\"excluded_blogs\";a:0:{}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cb_aggregation_aggregator' , 'a:2:{s:19:&quot;aggregation_enabled&quot;;b:1;s:14:&quot;excluded_blogs&quot;;a:0:{}}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('cb_aggregation_...', Array, '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'cb_aggregation_...', Array)
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'cb_aggregation_...', Array)
-#7 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(427): update_site_option('cb_aggregation_...', Array)
-#8 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#9 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#10 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#11 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#12 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#13 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#14 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#15 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#16 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#17 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(360): ClassBlogs_BasePlugin->_get_options()
-#18 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/Plugins/Aggregation/Aggregator.php(57): ClassBlogs_BasePlugin->get_option('aggregation_ena...')
-#19 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(259): ClassBlogs_Plugins_Aggregation_Aggregator->__construct()
-#20 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/Plugins/Aggregation/Aggregator.php(735): ClassBlogs::register_plugin('sitewide_aggreg...', 'ClassBlogs_Plug...', 'Sitewide Aggreg...', 'Handles post, c...', false)
-#21 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(122): require_once('/wordpress/wp-c...')
-#22 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/Plugins/Aggregation.php(4): ClassBlogs::load_php_files('/wordpress/wp-c...')
-#23 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(122): require_once('/wordpress/wp-c...')
-#24 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(142): ClassBlogs::load_php_files('/wordpress/wp-c...')
-#25 /wordpress/wp-content/plugins/class-blogs/class-blogs.php(56): ClassBlogs::initialize()
-#26 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#27 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('class-blogs/cla...')
-#28 /internal/eval.php(20): activate_plugin('class-blogs/cla...')
-#29 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cb_aggregation_aggregator', 'a:2:{s:19:\"aggregation_enabled\";b:1;s:14:\"excluded_blogs\";a:0:{}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/class-blogs/class-blogs.php'), ClassBlogs::initialize, ClassBlogs::load_php_files, require_once('/plugins/class-blogs/ClassBlogs/Plugins/Aggregation.php'), ClassBlogs::load_php_files, require_once('/plugins/class-blogs/ClassBlogs/Plugins/Aggregation/Aggregator.php'), ClassBlogs::register_plugin, ClassBlogs_Plugins_Aggregation_Aggregator->__construct, ClassBlogs_BasePlugin->get_option, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:55:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cb_aggregation_aggregator', 'a:2:{s:19:\"aggregation_enabled\";b:1;s:14:\"excluded_blogs\";a:0:{}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cb_aggregation_aggregator' , 'a:2:{s:19:&quot;aggregation_enabled&quot;;b:1;s:14:&quot;excluded_blogs&quot;;a:0:{}}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('cb_aggregation_...', Array, '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'cb_aggregation_...', Array)
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'cb_aggregation_...', Array)
-#7 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(427): update_site_option('cb_aggregation_...', Array)
-#8 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#9 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#10 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#11 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#12 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#13 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#14 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#15 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#16 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#17 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#18 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#19 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(360): ClassBlogs_BasePlugin->_get_options()
-#20 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/Plugins/Aggregation/Aggregator.php(57): ClassBlogs_BasePlugin->get_option('aggregation_ena...')
-#21 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(259): ClassBlogs_Plugins_Aggregation_Aggregator->__construct()
-#22 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/Plugins/Aggregation/Aggregator.php(735): ClassBlogs::register_plugin('sitewide_aggreg...', 'ClassBlogs_Plug...', 'Sitewide Aggreg...', 'Handles post, c...', false)
-#23 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(122): require_once('/wordpress/wp-c...')
-#24 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/Plugins/Aggregation.php(4): ClassBlogs::load_php_files('/wordpress/wp-c...')
-#25 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(122): require_once('/wordpress/wp-c...')
-#26 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(142): ClassBlogs::load_php_files('/wordpress/wp-c...')
-#27 /wordpress/wp-content/plugins/class-blogs/class-blogs.php(56): ClassBlogs::initialize()
-#28 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#29 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('class-blogs/cla...')
-#30 /internal/eval.php(20): activate_plugin('class-blogs/cla...')
-#31 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cb_aggregation_aggregator', 'a:2:{s:19:\"aggregation_enabled\";b:1;s:14:\"excluded_blogs\";a:0:{}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/class-blogs/class-blogs.php'), ClassBlogs::initialize, ClassBlogs::load_php_files, require_once('/plugins/class-blogs/ClassBlogs/Plugins/Aggregation.php'), ClassBlogs::load_php_files, require_once('/plugins/class-blogs/ClassBlogs/Plugins/Aggregation/Aggregator.php'), ClassBlogs::register_plugin, ClassBlogs_Plugins_Aggregation_Aggregator->__construct, ClassBlogs_BasePlugin->get_option, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:55:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cb_aggregation_aggregator', 'a:2:{s:19:\"aggregation_enabled\";b:1;s:14:\"excluded_blogs\";a:0:{}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cb_aggregation_aggregator' , 'a:2:{s:19:&quot;aggregation_enabled&quot;;b:1;s:14:&quot;excluded_blogs&quot;;a:0:{}}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('cb_aggregation_...', Array, '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'cb_aggregation_...', Array)
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'cb_aggregation_...', Array)
-#7 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(427): update_site_option('cb_aggregation_...', Array)
-#8 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#9 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#10 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#11 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#12 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#13 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#14 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#15 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#16 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#17 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#18 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#19 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#20 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#21 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(360): ClassBlogs_BasePlugin->_get_options()
-#22 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/Plugins/Aggregation/Aggregator.php(57): ClassBlogs_BasePlugin->get_option('aggregation_ena...')
-#23 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(259): ClassBlogs_Plugins_Aggregation_Aggregator->__construct()
-#24 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/Plugins/Aggregation/Aggregator.php(735): ClassBlogs::register_plugin('sitewide_aggreg...', 'ClassBlogs_Plug...', 'Sitewide Aggreg...', 'Handles post, c...', false)
-#25 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(122): require_once('/wordpress/wp-c...')
-#26 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/Plugins/Aggregation.php(4): ClassBlogs::load_php_files('/wordpress/wp-c...')
-#27 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(122): require_once('/wordpress/wp-c...')
-#28 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(142): ClassBlogs::load_php_files('/wordpress/wp-c...')
-#29 /wordpress/wp-content/plugins/class-blogs/class-blogs.php(56): ClassBlogs::initialize()
-#30 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#31 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('class-blogs/cla...')
-#32 /internal/eval.php(20): activate_plugin('class-blogs/cla...')
-#33 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cb_aggregation_aggregator', 'a:2:{s:19:\"aggregation_enabled\";b:1;s:14:\"excluded_blogs\";a:0:{}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/class-blogs/class-blogs.php'), ClassBlogs::initialize, ClassBlogs::load_php_files, require_once('/plugins/class-blogs/ClassBlogs/Plugins/Aggregation.php'), ClassBlogs::load_php_files, require_once('/plugins/class-blogs/ClassBlogs/Plugins/Aggregation/Aggregator.php'), ClassBlogs::register_plugin, ClassBlogs_Plugins_Aggregation_Aggregator->__construct, ClassBlogs_BasePlugin->get_option, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:55:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cb_aggregation_aggregator', 'a:2:{s:19:\"aggregation_enabled\";b:1;s:14:\"excluded_blogs\";a:0:{}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cb_aggregation_aggregator' , 'a:2:{s:19:&quot;aggregation_enabled&quot;;b:1;s:14:&quot;excluded_blogs&quot;;a:0:{}}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('cb_aggregation_...', Array, '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'cb_aggregation_...', Array)
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'cb_aggregation_...', Array)
-#7 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(427): update_site_option('cb_aggregation_...', Array)
-#8 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#9 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#10 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#11 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#12 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#13 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#14 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#15 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#16 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#17 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#18 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#19 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#20 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#21 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#22 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#23 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(360): ClassBlogs_BasePlugin->_get_options()
-#24 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/Plugins/Aggregation/Aggregator.php(57): ClassBlogs_BasePlugin->get_option('aggregation_ena...')
-#25 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(259): ClassBlogs_Plugins_Aggregation_Aggregator->__construct()
-#26 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/Plugins/Aggregation/Aggregator.php(735): ClassBlogs::register_plugin('sitewide_aggreg...', 'ClassBlogs_Plug...', 'Sitewide Aggreg...', 'Handles post, c...', false)
-#27 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(122): require_once('/wordpress/wp-c...')
-#28 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/Plugins/Aggregation.php(4): ClassBlogs::load_php_files('/wordpress/wp-c...')
-#29 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(122): require_once('/wordpress/wp-c...')
-#30 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/ClassBlogs.php(142): ClassBlogs::load_php_files('/wordpress/wp-c...')
-#31 /wordpress/wp-content/plugins/class-blogs/class-blogs.php(56): ClassBlogs::initialize()
-#32 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#33 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('class-blogs/cla...')
-#34 /internal/eval.php(20): activate_plugin('class-blogs/cla...')
-#35 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cb_aggregation_aggregator', 'a:2:{s:19:\"aggregation_enabled\";b:1;s:14:\"excluded_blogs\";a:0:{}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/class-blogs/class-blogs.php'), ClassBlogs::initialize, ClassBlogs::load_php_files, require_once('/plugins/class-blogs/ClassBlogs/Plugins/Aggregation.php'), ClassBlogs::load_php_files, require_once('/plugins/class-blogs/ClassBlogs/Plugins/Aggregation/Aggregator.php'), ClassBlogs::register_plugin, ClassBlogs_Plugins_Aggregation_Aggregator->__construct, ClassBlogs_BasePlugin->get_option, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, ClassBlogs_BasePlugin->_get_options, ClassBlogs_BasePlugin->update_options, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:55:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cb_aggregation_aggregator', 'a:2:{s:19:\"aggregation_enabled\";b:1;s:14:\"excluded_blogs\";a:0:{}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cb_aggregation_aggregator' , 'a:2:{s:19:&quot;aggregation_enabled&quot;;b:1;s:14:&quot;excluded_blogs&quot;;a:0:{}}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('cb_aggregation_...', Array, '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'cb_aggregation_...', Array)
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'cb_aggregation_...', Array)
-#7 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(427): update_site_option('cb_aggregation_...', Array)
-#8 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#9 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#10 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#11 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#12 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#13 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#14 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#15 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#16 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#17 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options()
-#18 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(343): ClassBlogs_BasePlugin->update_options(Array)
-#19 /wordpress/wp-content/plugins/class-blogs/ClassBlogs/BasePlugin.php(428): ClassBlogs_BasePlugin->_get_options(
+Error: [10-Apr-2025 22:27:27 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744324045.958)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 22:28:16 UTC] Automatic updates starting...
+[10-Apr-2025 22:28:17 UTC]   Automatic plugin updates starting...
+[10-Apr-2025 22:28:17 UTC]   Automatic plugin updates complete.
+[10-Apr-2025 22:28:17 UTC]   Automatic theme updates starting...
+[10-Apr-2025 22:28:17 UTC]   Automatic theme updates complete.
+[10-Apr-2025 22:28:17 UTC] Automatic updates complete.
+[10-Apr-2025 22:29:31 UTC] Automatic updates starting...
+[10-Apr-2025 22:29:31 UTC]   Automatic plugin updates starting...
+[10-Apr-2025 22:29:31 UTC]   Automatic plugin updates complete.
+[10-Apr-2025 22:29:31 UTC]   Automatic theme updates starting...
+[10-Apr-2025 22:29:31 UTC]   Automatic theme updates complete.
+[10-Apr-2025 22:29:31 UTC] Automatic updates complete.
+[10-Apr-2025 22:35:36 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744324534.258)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 22:37:08 UTC] PHP Warning:  Undefined variable $options in /wordpress/wp-content/plugins/cpanel-operations/cpanel_ops.php on line 51
+[10-Apr-2025 22:37:08 UTC] PHP Warning:  Undefined variable $options in /wordpress/wp-content/plugins/cpanel-operations/cpanel_ops.php on line 54
+[10-Apr-2025 22:37:16 UTC] PHP Warning:  Undefined variable $options in /wordpress/wp-content/plugins/cpanel-operations/cpanel_ops.php on line 51
+[10-Apr-2025 22:37:16 UTC] PHP Warning:  Undefined variable $options in /wordpress/wp-content/plugins/cpanel-operations/cpanel_ops.php on line 54
+[10-Apr-2025 22:37:24 UTC] PHP Warning:  Undefined variable $options in /wordpress/wp-content/plugins/cpanel-operations/cpanel_ops.php on line 51
+[10-Apr-2025 22:37:24 UTC] PHP Warning:  Undefined variable $options in /wordpress/wp-content/plugins/cpanel-operations/cpanel_ops.php on line 54
+[10-Apr-2025 22:38:34 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/custom-login-page/class-lib/CLP_WidgetClass.php:233
+Stack trace:
+#0 /wordpress/wp-content/plugins/custom-login-page/custom-login-page.php(69): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('custom-login-pa...')
+#3 /internal/eval.php(20): activate_plugin('custom-login-pa...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/custom-login-page/class-lib/CLP_WidgetClass.php on line 233
+[10-Apr-2025 22:38:41 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/custom-login-page/class-lib/CLP_WidgetClass.php:233
+Stack trace:
+#0 /wordpress/wp-content/plugins/custom-login-page/custom-login-page.php(69): require_once()
+#1 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#2 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('custom-login-pa...')
+#3 /internal/eval.php(20): activate_plugin('custom-login-pa...')
+#4 {main}
+  thrown in /wordpress/wp-content/plugins/custom-login-page/class-lib/CLP_WidgetClass.php on line 233
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"custom-login-page"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
