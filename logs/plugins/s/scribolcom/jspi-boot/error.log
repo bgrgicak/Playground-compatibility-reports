@@ -2,527 +2,114 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [05-Apr-2025 16:02:28 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 16:02:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 16:02:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 16:02:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 16:02:57 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 16:02:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 16:02:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 16:02:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 16:02:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_statsfc_fixtures', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_statsfc_fixtures' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_statsfc_...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_statsfc_...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_statsfc_fixtures', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 16:03:08 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 16:03:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 16:03:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 16:03:08 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 16:03:20 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 16:03:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 16:03:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 16:03:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 16:03:20 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in SteamApiWidget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6114
-[05-Apr-2025 16:03:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_steam-api-widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_steam-api-widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_steam-ap...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_steam-ap...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_steam-api-widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 16:03:23 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in SteamApiWidget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6114
-[05-Apr-2025 16:03:26 UTC] PHP Deprecated:  The called constructor method for WP_Widget class in SteamApiWidget is <strong>deprecated</strong> since version 4.3.0! Use <code>__construct()</code> instead. in /wordpress/wp-includes/functions.php on line 6114
-[05-Apr-2025 16:03:33 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 16:03:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 16:03:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 16:03:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 16:03:45 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 16:03:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 16:03:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 16:03:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 16:03:57 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 16:03:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 16:03:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 16:03:57 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 16:03:57 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_widget_stockdio_ticker', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_widget_stockdio_ticker' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_widget_s...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_widget_s...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_widget_stockdio_ticker', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 16:04:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_site_transient_timeout_stop_xmlrpc_attack;arin_org;AUTOM-93', '1743955449', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_site_transient_timeout_stop_xmlrpc_attack;arin_org;AUTOM-93' , '1743955449' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('_site_transient...', 1743955449, '', 'off')
-#5 /wordpress/wp-includes/option.php(1928): add_network_option(1, '_site_transient...', 1743955449)
-#6 /wordpress/wp-includes/option.php(2636): add_site_option('_site_transient...', 1743955449)
-#7 /wordpress/wp-content/plugins/stop-xmlrpc-attack/stop-xmlrpc-attack.php(185): set_site_transient('stop_xmlrpc_att...', Array, 86400)
-#8 /wordpress/wp-content/plugins/stop-xmlrpc-attack/stop-xmlrpc-attack.php(241): Plugin_Stop_Xmlrpc_Attack->get_arin_organization_data('AUTOM-93')
-#9 /wordpress/wp-includes/class-wp-hook.php(324): Plugin_Stop_Xmlrpc_Attack->generate_htaccess('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-content/plugins/stop-xmlrpc-attack/stop-xmlrpc-attack.php(57): do_action('stop_xmlrpc_att...')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): Plugin_Stop_Xmlrpc_Attack::activated_plugin(false)
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_stop-x...', false)
-#17 /internal/eval.php(20): activate_plugin('stop-xmlrpc-att...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_site_transient_timeout_stop_xmlrpc_attack;arin_org;AUTOM-93', '1743955449', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_stop-xmlrpc-attack/stop-xmlrpc-attack.php'), WP_Hook->do_action, WP_Hook->apply_filters, Plugin_Stop_Xmlrpc_Attack::activated_plugin, do_action('stop_xmlrpc_attack_generate_htaccess'), WP_Hook->do_action, WP_Hook->apply_filters, Plugin_Stop_Xmlrpc_Attack->generate_htaccess, Plugin_Stop_Xmlrpc_Attack->get_arin_organization_data, set_site_transient, add_site_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 16:04:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_site_transient_stop_xmlrpc_attack;arin_org;AUTOM-93', 'a:1:{s:4:\"nets\";a:6:{s:6:\"@xmlns\";a:3:{s:3:\"ns3\";s:38:\"http://www.arin.net/whoisrws/netref/v2\";s:3:\"ns2\";s:36:\"http://www.arin.net/whoisrws/rdns/v1\";s:1:\"$\";s:36:\"http://www.arin.net/whoisrws/core/v1\";}s:16:\"@copyrightNotice\";s:65:\"Copyright 1997-2025, American Registry for Internet Numbers, Ltd.\";s:20:\"@inaccuracyReportUrl\";s:67:\"https://www.arin.net/resources/registry/whois/inaccuracy_reporting/\";s:11:\"@termsOfUse\";s:50:\"https://www.arin.net/resources/registry/whois/tou/\";s:13:\"limitExceeded\";a:2:{s:6:\"@limit\";s:3:\"256\";s:1:\"$\";s:5:\"false\";}s:6:\"netRef\";a:10:{i:0;a:5:{s:11:\"@endAddress\";s:13:\"192.0.127.255\";s:13:\"@startAddress\";s:10:\"192.0.64.0\";s:7:\"@handle\";s:16:\"NET-192-0-64-0-1\";s:5:\"@name\";s:10:\"AUTOMATTIC\";s:1:\"$\";s:48:\"https://whois.arin.net/rest/net/NET-192-0-64-0-1\";}i:1;a:5:{s:11:\"@endAddress\";s:15:\"198.181.119.255\";s:13:\"@startAddress\";s:13:\"198.181.116.0\";s:7:\"@handle\";s:19:\"NET-198-181-116-0-1\";s:5:\"@name\";s:10:\"AUTOMATTIC\";s:1:\"$\";s:51:\"https://whois.arin.net/rest/net/NET-198-181-116-0-1\";}i:2;a:5:{s:11:\"@endAddress\";s:36:\"2001:1978:1E00:3:FFFF:FFFF:FFFF:FFFF\";s:13:\"@startAddress\";s:18:\"2001:1978:1E00:3::\";s:7:\"@handle\";s:23:\"NET6-2001-1978-1E00-3-1\";s:5:\"@name\";s:14:\"PEER1-AUTOM-93\";s:1:\"$\";s:55:\"https://whois.arin.net/rest/net/NET6-2001-1978-1E00-3-1\";}i:3;a:5:{s:11:\"@endAddress\";s:38:\"2620:115:C0FF:FFFF:FFFF:FFFF:FFFF:FFFF\";s:13:\"@startAddress\";s:15:\"2620:115:C000::\";s:7:\"@handle\";s:20:\"NET6-2620-115-C000-1\";s:5:\"@name\";s:10:\"AUTOMATTIC\";s:1:\"$\";s:52:\"https://whois.arin.net/rest/net/NET6-2620-115-C000-1\";}i:4;a:5:{s:11:\"@endAddress\";s:13:\"64.34.206.255\";s:13:\"@startAddress\";s:11:\"64.34.206.0\";s:7:\"@handle\";s:17:\"NET-64-34-206-0-1\";s:5:\"@name\";s:19:\"PEER1-AUTOMATTIC-01\";s:1:\"$\";s:49:\"https://whois.arin.net/rest/net/NET-64-34-206-0-1\";}i:5;a:5:{s:11:\"@endAddress\";s:14:\"66.155.105.191\";s:13:\"@startAddress\";s:14:\"66.155.105.128\";s:7:\"@handle\";s:20:\"NET-66-155-105-128-1\";s:5:\"@name\";s:8:\"AUTOM-93\";s:1:\"$\";s:52:\"https://whois.arin.net/rest/net/NET-66-155-105-128-1\";}i:6;a:5:{s:11:\"@endAddress\";s:13:\"69.90.253.255\";s:13:\"@startAddress\";s:11:\"69.90.253.0\";s:7:\"@handle\";s:17:\"NET-69-90-253-0-1\";s:5:\"@name\";s:12:\"CP1-AUTOM-93\";s:1:\"$\";s:49:\"https://whois.arin.net/rest/net/NET-69-90-253-0-1\";}i:7;a:5:{s:11:\"@endAddress\";s:13:\"76.74.248.255\";s:13:\"@startAddress\";s:13:\"76.74.248.128\";s:7:\"@handle\";s:19:\"NET-76-74-248-128-1\";s:5:\"@name\";s:41:\"PEER1--AUTOMATTIC-SERVERBEACH-ACCOUNT--01\";s:1:\"$\";s:51:\"https://whois.arin.net/rest/net/NET-76-74-248-128-1\";}i:8;a:5:{s:11:\"@endAddress\";s:13:\"76.74.255.127\";s:13:\"@startAddress\";s:11:\"76.74.255.0\";s:7:\"@handle\";s:17:\"NET-76-74-255-0-1\";s:5:\"@name\";s:41:\"PEER1--AUTOMATTIC-SERVERBEACH-ACCOUNT--01\";s:1:\"$\";s:49:\"https://whois.arin.net/rest/net/NET-76-74-255-0-1\";}i:9;a:5:{s:11:\"@endAddress\";s:14:\"87.250.191.255\";s:13:\"@startAddress\";s:12:\"87.250.160.0\";s:7:\"@handle\";s:18:\"NET-87-250-160-0-1\";s:5:\"@name\";s:8:\"AUTOM-93\";s:1:\"$\";s:50:\"https://whois.arin.net/rest/net/NET-87-250-160-0-1\";}}}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( '_site_transient_stop_xmlrpc_attack;arin_org;AUTOM-93' , 'a:1:{s:4:&quot;nets&quot;;a:6:{s:6:&quot;@xmlns&quot;;a:3:{s:3:&quot;ns3&quot;;s:38:&quot;http://www.arin.net/whoisrws/netref/v2&quot;;s:3:&quot;ns2&quot;;s:36:&quot;http://www.arin.net/whoisrws/rdns/v1&quot;;s:1:&quot;$&quot;;s:36:&quot;http://www.arin.net/whoisrws/core/v1&quot;;}s:16:&quot;@copyrightNotice&quot;;s:65:&quot;Copyright 1997-2025, American Registry for Internet Numbers, Ltd.&quot;;s:20:&quot;@inaccuracyReportUrl&quot;;s:67:&quot;https://www.arin.net/resources/registry/whois/inaccuracy_reporting/&quot;;s:11:&quot;@termsOfUse&quot;;s:50:&quot;https://www.arin.net/resources/registry/whois/tou/&quot;;s:13:&quot;limitExceeded&quot;;a:2:{s:6:&quot;@limit&quot;;s:3:&quot;256&quot;;s:1:&quot;$&quot;;s:5:&quot;false&quot;;}s:6:&quot;netRef&quot;;a:10:{i:0;a:5:{s:11:&quot;@endAddress&quot;;s:13:&quot;192.0.127.255&quot;;s:13:&quot;@startAddress&quot;;s:10:&quot;192.0.64.0&quot;;s:7:&quot;@handle&quot;;s:16:&quot;NET-192-0-64-0-1&quot;;s:5:&quot;@name&quot;;s:10:&quot;AUTOMATTIC&quot;;s:1:&quot;$&quot;;s:48:&quot;https://whois.arin.net/rest/net/NET-192-0-64-0-1&quot;;}i:1;a:5:{s:11:&quot;@endAddress&quot;;s:15:&quot;198.181.119.255&quot;;s:13:&quot;@startAddress&quot;;s:13:&quot;198.181.116.0&quot;;s:7:&quot;@handle&quot;;s:19:&quot;NET-198-181-116-0-1&quot;;s:5:&quot;@name&quot;;s:10:&quot;AUTOMATTIC&quot;;s:1:&quot;$&quot;;s:51:&quot;https://whois.arin.net/rest/net/NET-198-181-116-0-1&quot;;}i:2;a:5:{s:11:&quot;@endAddress&quot;;s:36:&quot;2001:1978:1E00:3:FFFF:FFFF:FFFF:FFFF&quot;;s:13:&quot;@startAddress&quot;;s:18:&quot;2001:1978:1E00:3::&quot;;s:7:&quot;@handle&quot;;s:23:&quot;NET6-2001-1978-1E00-3-1&quot;;s:5:&quot;@name&quot;;s:14:&quot;PEER1-AUTOM-93&quot;;s:1:&quot;$&quot;;s:55:&quot;https://whois.arin.net/rest/net/NET6-2001-1978-1E00-3-1&quot;;}i:3;a:5:{s:11:&quot;@endAddress&quot;;s:38:&quot;2620:115:C0FF:FFFF:FFFF:FFFF:FFFF:FFFF&quot;;s:13:&quot;@startAddress&quot;;s:15:&quot;2620:115:C000::&quot;;s:7:&quot;@handle&quot;;s:20:&quot;NET6-2620-115-C000-1&quot;;s:5:&quot;@name&quot;;s:10:&quot;AUTOMATTIC&quot;;s:1:&quot;$&quot;;s:52:&quot;https://whois.arin.net/rest/net/NET6-2620-115-C000-1&quot;;}i:4;a:5:{s:11:&quot;@endAddress&quot;;s:13:&quot;64.34.206.255&quot;;s:13:&quot;@startAddress&quot;;s:11:&quot;64.34.206.0&quot;;s:7:&quot;@handle&quot;;s:17:&quot;NET-64-34-206-0-1&quot;;s:5:&quot;@name&quot;;s:19:&quot;PEER1-AUTOMATTIC-01&quot;;s:1:&quot;$&quot;;s:49:&quot;https://whois.arin.net/rest/net/NET-64-34-206-0-1&quot;;}i:5;a:5:{s:11:&quot;@endAddress&quot;;s:14:&quot;66.155.105.191&quot;;s:13:&quot;@startAddress&quot;;s:14:&quot;66.155.105.128&quot;;s:7:&quot;@handle&quot;;s:20:&quot;NET-66-155-105-128-1&quot;;s:5:&quot;@name&quot;;s:8:&quot;AUTOM-93&quot;;s:1:&quot;$&quot;;s:52:&quot;https://whois.arin.net/rest/net/NET-66-155-105-128-1&quot;;}i:6;a:5:{s:11:&quot;@endAddress&quot;;s:13:&quot;69.90.253.255&quot;;s:13:&quot;@startAddress&quot;;s:11:&quot;69.90.253.0&quot;;s:7:&quot;@handle&quot;;s:17:&quot;NET-69-90-253-0-1&quot;;s:5:&quot;@name&quot;;s:12:&quot;CP1-AUTOM-93&quot;;s:1:&quot;$&quot;;s:49:&quot;https://whois.arin.net/rest/net/NET-69-90-253-0-1&quot;;}i:7;a:5:{s:11:&quot;@endAddress&quot;;s:13:&quot;76.74.248.255&quot;;s:13:&quot;@startAddress&quot;;s:13:&quot;76.74.248.128&quot;;s:7:&quot;@handle&quot;;s:19:&quot;NET-76-74-248-128-1&quot;;s:5:&quot;@name&quot;;s:41:&quot;PEER1--AUTOMATTIC-SERVERBEACH-ACCOUNT--01&quot;;s:1:&quot;$&quot;;s:51:&quot;https://whois.arin.net/rest/net/NET-76-74-248-128-1&quot;;}i:8;a:5:{s:11:&quot;@endAddress&quot;;s:13:&quot;76.74.255.127&quot;;s:13:&quot;@startAddress&quot;;s:11:&quot;76.74.255.0&quot;;s:7:&quot;@handle&quot;;s:17:&quot;NET-76-74-255-0-1&quot;;s:5:&quot;@name&quot;;s:41:&quot;PEER1--AUTOMATTIC-SERVERBEACH-ACCOUNT--01&quot;;s:1:&quot;$&quot;;s:49:&quot;https://whois.arin.net/rest/net/NET-76-74-255-0-1&quot;;}i:9;a:5:{s:11:&quot;@endAddress&quot;;s:14:&quot;87.250.191.255&quot;;s:13:&quot;@startAddress&quot;;s:12:&quot;87.250.160.0&quot;;s:7:&quot;@handle&quot;;s:18:&quot;NET-87-250-160-0-1&quot;;s:5:&quot;@name&quot;;s:8:&quot;AUTOM-93&quot;;s:1:&quot;$&quot;;s:50:&quot;https://whois.arin.net/rest/net/NET-87-250-160-0-1&quot;;}}}}' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('_site_transient...', Array, '', 'off')
-#5 /wordpress/wp-includes/option.php(1928): add_network_option(1, '_site_transient...', Array)
-#6 /wordpress/wp-includes/option.php(2638): add_site_option('_site_transient...', Array)
-#7 /wordpress/wp-content/plugins/stop-xmlrpc-attack/stop-xmlrpc-attack.php(185): set_site_transient('stop_xmlrpc_att...', Array, 86400)
-#8 /wordpress/wp-content/plugins/stop-xmlrpc-attack/stop-xmlrpc-attack.php(241): Plugin_Stop_Xmlrpc_Attack->get_arin_organization_data('AUTOM-93')
-#9 /wordpress/wp-includes/class-wp-hook.php(324): Plugin_Stop_Xmlrpc_Attack->generate_htaccess('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-content/plugins/stop-xmlrpc-attack/stop-xmlrpc-attack.php(57): do_action('stop_xmlrpc_att...')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): Plugin_Stop_Xmlrpc_Attack::activated_plugin(false)
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_stop-x...', false)
-#17 /internal/eval.php(20): activate_plugin('stop-xmlrpc-att...')
-#18 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('_site_transient_stop_xmlrpc_attack;arin_org;AUTOM-93', 'a:1:{s:4:\"nets\";a:6:{s:6:\"@xmlns\";a:3:{s:3:\"ns3\";s:38:\"http://www.arin.net/whoisrws/netref/v2\";s:3:\"ns2\";s:36:\"http://www.arin.net/whoisrws/rdns/v1\";s:1:\"$\";s:36:\"http://www.arin.net/whoisrws/core/v1\";}s:16:\"@copyrightNotice\";s:65:\"Copyright 1997-2025, American Registry for Internet Numbers, Ltd.\";s:20:\"@inaccuracyReportUrl\";s:67:\"https://www.arin.net/resources/registry/whois/inaccuracy_reporting/\";s:11:\"@termsOfUse\";s:50:\"https://www.arin.net/resources/registry/whois/tou/\";s:13:\"limitExceeded\";a:2:{s:6:\"@limit\";s:3:\"256\";s:1:\"$\";s:5:\"false\";}s:6:\"netRef\";a:10:{i:0;a:5:{s:11:\"@endAddress\";s:13:\"192.0.127.255\";s:13:\"@startAddress\";s:10:\"192.0.64.0\";s:7:\"@handle\";s:16:\"NET-192-0-64-0-1\";s:5:\"@name\";s:10:\"AUTOMATTIC\";s:1:\"$\";s:48:\"https://whois.arin.net/rest/net/NET-192-0-64-0-1\";}i:1;a:5:{s:11:\"@endAddress\";s:15:\"198.181.119.255\";s:13:\"@startAddress\";s:13:\"198.181.116.0\";s:7:\"@handle\";s:19:\"NET-198-181-116-0-1\";s:5:\"@name\";s:10:\"AUTOMATTIC\";s:1:\"$\";s:51:\"https://whois.arin.net/rest/net/NET-198-181-116-0-1\";}i:2;a:5:{s:11:\"@endAddress\";s:36:\"2001:1978:1E00:3:FFFF:FFFF:FFFF:FFFF\";s:13:\"@startAddress\";s:18:\"2001:1978:1E00:3::\";s:7:\"@handle\";s:23:\"NET6-2001-1978-1E00-3-1\";s:5:\"@name\";s:14:\"PEER1-AUTOM-93\";s:1:\"$\";s:55:\"https://whois.arin.net/rest/net/NET6-2001-1978-1E00-3-1\";}i:3;a:5:{s:11:\"@endAddress\";s:38:\"2620:115:C0FF:FFFF:FFFF:FFFF:FFFF:FFFF\";s:13:\"@startAddress\";s:15:\"2620:115:C000::\";s:7:\"@handle\";s:20:\"NET6-2620-115-C000-1\";s:5:\"@name\";s:10:\"AUTOMATTIC\";s:1:\"$\";s:52:\"https://whois.arin.net/rest/net/NET6-2620-115-C000-1\";}i:4;a:5:{s:11:\"@endAddress\";s:13:\"64.34.206.255\";s:13:\"@startAddress\";s:11:\"64.34.206.0\";s:7:\"@handle\";s:17:\"NET-64-34-206-0-1\";s:5:\"@name\";s:19:\"PEER1-AUTOMATTIC-01\";s:1:\"$\";s:49:\"https://whois.arin.net/rest/net/NET-64-34-206-0-1\";}i:5;a:5:{s:11:\"@endAddress\";s:14:\"66.155.105.191\";s:13:\"@startAddress\";s:14:\"66.155.105.128\";s:7:\"@handle\";s:20:\"NET-66-155-105-128-1\";s:5:\"@name\";s:8:\"AUTOM-93\";s:1:\"$\";s:52:\"https://whois.arin.net/rest/net/NET-66-155-105-128-1\";}i:6;a:5:{s:11:\"@endAddress\";s:13:\"69.90.253.255\";s:13:\"@startAddress\";s:11:\"69.90.253.0\";s:7:\"@handle\";s:17:\"NET-69-90-253-0-1\";s:5:\"@name\";s:12:\"CP1-AUTOM-93\";s:1:\"$\";s:49:\"https://whois.arin.net/rest/net/NET-69-90-253-0-1\";}i:7;a:5:{s:11:\"@endAddress\";s:13:\"76.74.248.255\";s:13:\"@startAddress\";s:13:\"76.74.248.128\";s:7:\"@handle\";s:19:\"NET-76-74-248-128-1\";s:5:\"@name\";s:41:\"PEER1--AUTOMATTIC-SERVERBEACH-ACCOUNT--01\";s:1:\"$\";s:51:\"https://whois.arin.net/rest/net/NET-76-74-248-128-1\";}i:8;a:5:{s:11:\"@endAddress\";s:13:\"76.74.255.127\";s:13:\"@startAddress\";s:11:\"76.74.255.0\";s:7:\"@handle\";s:17:\"NET-76-74-255-0-1\";s:5:\"@name\";s:41:\"PEER1--AUTOMATTIC-SERVERBEACH-ACCOUNT--01\";s:1:\"$\";s:49:\"https://whois.arin.net/rest/net/NET-76-74-255-0-1\";}i:9;a:5:{s:11:\"@endAddress\";s:14:\"87.250.191.255\";s:13:\"@startAddress\";s:12:\"87.250.160.0\";s:7:\"@handle\";s:18:\"NET-87-250-160-0-1\";s:5:\"@name\";s:8:\"AUTOM-93\";s:1:\"$\";s:50:\"https://whois.arin.net/rest/net/NET-87-250-160-0-1\";}}}}', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_stop-xmlrpc-attack/stop-xmlrpc-attack.php'), WP_Hook->do_action, WP_Hook->apply_filters, Plugin_Stop_Xmlrpc_Attack::activated_plugin, do_action('stop_xmlrpc_attack_generate_htaccess'), WP_Hook->do_action, WP_Hook->apply_filters, Plugin_Stop_Xmlrpc_Attack->generate_htaccess, Plugin_Stop_Xmlrpc_Attack->get_arin_organization_data, set_site_transient, add_site_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 16:04:09 UTC] PHP Fatal error:  Uncaught ValueError: Path cannot be empty in /wordpress/wp-content/plugins/stop-xmlrpc-attack/stop-xmlrpc-attack.php:200
+Error: [10-Apr-2025 03:56:47 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 03:56:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 03:56:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 03:56:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 03:57:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 03:57:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 03:57:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 03:57:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 03:57:15 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
-#0 /wordpress/wp-content/plugins/stop-xmlrpc-attack/stop-xmlrpc-attack.php(200): file_get_contents('')
-#1 /wordpress/wp-content/plugins/stop-xmlrpc-attack/stop-xmlrpc-attack.php(259): Plugin_Stop_Xmlrpc_Attack->get_current_htaccess()
-#2 /wordpress/wp-includes/class-wp-hook.php(324): Plugin_Stop_Xmlrpc_Attack->generate_htaccess('')
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-content/plugins/stop-xmlrpc-attack/stop-xmlrpc-attack.php(57): do_action('stop_xmlrpc_att...')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Plugin_Stop_Xmlrpc_Attack::activated_plugin(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_stop-x...', false)
-#10 /internal/eval.php(20): activate_plugin('stop-xmlrpc-att...')
-#11 {main}
-  thrown in /wordpress/wp-content/plugins/stop-xmlrpc-attack/stop-xmlrpc-attack.php on line 200
-[05-Apr-2025 16:04:12 UTC] PHP Fatal error:  Uncaught ValueError: Path cannot be empty in /wordpress/wp-content/plugins/stop-xmlrpc-attack/stop-xmlrpc-attack.php:200
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Scribol_Widget')
+#2 /wordpress/wp-content/plugins/scribolcom/scribol-widget.php(77): register_widget('Scribol_Widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): Scribol_Widget::register('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 03:57:24 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
-#0 /wordpress/wp-content/plugins/stop-xmlrpc-attack/stop-xmlrpc-attack.php(200): file_get_contents('')
-#1 /wordpress/wp-content/plugins/stop-xmlrpc-attack/stop-xmlrpc-attack.php(259): Plugin_Stop_Xmlrpc_Attack->get_current_htaccess()
-#2 /wordpress/wp-includes/class-wp-hook.php(324): Plugin_Stop_Xmlrpc_Attack->generate_htaccess('')
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-content/plugins/stop-xmlrpc-attack/stop-xmlrpc-attack.php(57): do_action('stop_xmlrpc_att...')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Plugin_Stop_Xmlrpc_Attack::activated_plugin(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_stop-x...', false)
-#10 /internal/eval.php(20): activate_plugin('stop-xmlrpc-att...')
-#11 {main}
-  thrown in /wordpress/wp-content/plugins/stop-xmlrpc-attack/stop-xmlrpc-attack.php on line 200
-[05-Apr-2025 16:04:14 UTC] PHP Fatal error:  Uncaught ValueError: Path cannot be empty in /wordpress/wp-content/plugins/stop-xmlrpc-attack/stop-xmlrpc-attack.php:200
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Scribol_Widget')
+#2 /wordpress/wp-content/plugins/scribolcom/scribol-widget.php(77): register_widget('Scribol_Widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): Scribol_Widget::register('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 03:57:32 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
-#0 /wordpress/wp-content/plugins/stop-xmlrpc-attack/stop-xmlrpc-attack.php(200): file_get_contents('')
-#1 /wordpress/wp-content/plugins/stop-xmlrpc-attack/stop-xmlrpc-attack.php(259): Plugin_Stop_Xmlrpc_Attack->get_current_htaccess()
-#2 /wordpress/wp-includes/class-wp-hook.php(324): Plugin_Stop_Xmlrpc_Attack->generate_htaccess('')
-#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#5 /wordpress/wp-content/plugins/stop-xmlrpc-attack/stop-xmlrpc-attack.php(57): do_action('stop_xmlrpc_att...')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Plugin_Stop_Xmlrpc_Attack::activated_plugin(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_stop-x...', false)
-#10 /internal/eval.php(20): activate_plugin('stop-xmlrpc-att...')
-#11 {main}
-  thrown in /wordpress/wp-content/plugins/stop-xmlrpc-attack/stop-xmlrpc-attack.php on line 200
-[05-Apr-2025 16:04:20 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 16:04:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 16:04:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 16:04:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 16:04:32 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/stylish-login-pro/stylish-admin-login.php on line 31
-[05-Apr-2025 16:04:32 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_stylish_admin_login', 'a:3:{s:5:\"login\";s:2:\"on\";s:5:\"admin\";s:2:\"on\";s:5:\"image\";s:74:\"http://127.0.0.1:9400/wp-content/plugins/stylish-login-pro/images/logo.png\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_stylish_admin_login' , 'a:3:{s:5:&quot;login&quot;;s:2:&quot;on&quot;;s:5:&quot;admin&quot;;s:2:&quot;on&quot;;s:5:&quot;image&quot;;s:74:&quot;http://127.0.0.1:9400/wp-content/plugins/stylish-login-pro/images/logo.png&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/stylish-login-pro/stylish-admin-login.php(174): add_option('wp_stylish_admi...', Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): WP_Stylish_Admin_Login::activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_stylis...', false)
-#9 /internal/eval.php(20): activate_plugin('stylish-login-p...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_stylish_admin_login', 'a:3:{s:5:\"login\";s:2:\"on\";s:5:\"admin\";s:2:\"on\";s:5:\"image\";s:74:\"http://127.0.0.1:9400/wp-content/plugins/stylish-login-pro/images/logo.png\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_stylish-login-pro/stylish-admin-login.php'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Stylish_Admin_Login::activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 16:04:32 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 16:04:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 16:04:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 16:04:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 16:04:32 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/stylish-login-pro/stylish-admin-login.php on line 31
-[05-Apr-2025 16:04:35 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/stylish-login-pro/stylish-admin-login.php on line 31
-[05-Apr-2025 16:04:37 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/stylish-login-pro/stylish-admin-login.php on line 31
-[05-Apr-2025 16:04:44 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 16:04:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 16:04:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 16:04:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 16:04:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('subscribe2_options', 'a:39:{s:7:\"autosub\";s:2:\"no\";s:15:\"newreg_override\";s:2:\"no\";s:8:\"wpregdef\";s:2:\"no\";s:10:\"autoformat\";s:4:\"text\";s:12:\"show_autosub\";s:3:\"yes\";s:11:\"autosub_def\";s:3:\"yes\";s:12:\"comment_subs\";s:2:\"no\";s:11:\"comment_def\";s:2:\"no\";s:17:\"one_click_profile\";s:2:\"no\";s:8:\"bcclimit\";i:1;s:11:\"admin_email\";s:4:\"subs\";s:8:\"tracking\";s:0:\"\";s:6:\"s2page\";i:0;s:10:\"stylesheet\";s:3:\"yes\";s:5:\"pages\";s:2:\"no\";s:8:\"password\";s:2:\"no\";s:8:\"stickies\";s:2:\"no\";s:7:\"private\";s:2:\"no\";s:10:\"email_freq\";s:5:\"never\";s:10:\"cron_order\";s:4:\"desc\";s:10:\"compulsory\";s:0:\"\";s:7:\"exclude\";s:0:\"\";s:6:\"sender\";s:8:\"blogname\";s:12:\"reg_override\";s:1:\"1\";s:9:\"show_meta\";s:1:\"0\";s:11:\"show_button\";s:1:\"1\";s:4:\"ajax\";s:1:\"0\";s:6:\"widget\";s:1:\"0\";s:13:\"counterwidget\";s:1:\"0\";s:14:\"s2meta_default\";s:1:\"0\";s:7:\"entries\";i:25;s:6:\"barred\";s:0:\"\";s:15:\"exclude_formats\";s:0:\"\";s:8:\"mailtext\";s:215:\"{BLOGNAME} has posted a new item, \'{TITLE}\'
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Scribol_Widget')
+#2 /wordpress/wp-content/plugins/scribolcom/scribol-widget.php(77): register_widget('Scribol_Widget')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): Scribol_Widget::register('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
 
-{POST}
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"scribolcom"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:73:13)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ],
+          expires: [ 'Wed, 11 Jan 1984 05:00:00 GMT' ],
+          'cache-control': [ 'no-cache, must-revalidate, max-age=0' ]
+        },
+        bytes: Uint8Array(2653) [
+           60,  33,  68,  79,  67,  84,  89,  80,  69,  32, 104, 116,
+          109, 108,  62,  10,  60, 104, 116, 109, 108,  32, 108,  97,
+          110, 103,  61,  34, 101, 110,  45,  85,  83,  34,  62,  10,
+           60, 104, 101,  97, 100,  62,  10,   9,  60, 109, 101, 116,
+           97,  32, 104, 116, 116, 112,  45, 101, 113, 117, 105, 118,
+           61,  34,  67, 111, 110, 116, 101, 110, 116,  45,  84, 121,
+          112, 101,  34,  32,  99, 111, 110, 116, 101, 110, 116,  61,
+           34, 116, 101, 120, 116,  47, 104, 116, 109, 108,  59,  32,
+           99, 104,  97, 114,
+          ... 2553 more items
+        ],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
 
-You may view the latest post at
-{PERMALINK}
-
-You received this e-mail because you asked to be notified when new updates are posted.
-Best regards,
-{MYNAME}
-{EMAIL}\";s:20:\"notification_subject\";s:18:\"[{BLOGNAME}] TITLE\";s:13:\"confirm_email\";s:229:\"{BLOGNAME} has received a request to {ACTION} for this email address. To complete your request please click on the link below:
-
-{LINK}
-
-If you did not request this, please feel free to disregard this notice!
-
-Thank you,
-{MYNAME}.\";s:15:\"confirm_subject\";s:40:\"[{BLOGNAME}] Please confirm your request\";s:12:\"remind_email\";s:348:\"This email address was subscribed for notifications at {BLOGNAME} ({BLOGLINK}) but the subscription remains incomplete.
-
-If you wish to complete your subscription please click on the link below:
-
-{LINK}
-
-If you do not wish to complete your subscription please ignore this email and your address will be removed from our database.
-
-Regards,
-{MYNAME}\";s:14:\"remind_subject\";s:34:\"[{BLOGNAME}] Subscription Reminder\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'subscribe2_options' , 'a:39:{s:7:&quot;autosub&quot;;s:2:&quot;no&quot;;s:15:&quot;newreg_override&quot;;s:2:&quot;no&quot;;s:8:&quot;wpregdef&quot;;s:2:&quot;no&quot;;s:10:&quot;autoformat&quot;;s:4:&quot;text&quot;;s:12:&quot;show_autosub&quot;;s:3:&quot;yes&quot;;s:11:&quot;autosub_def&quot;;s:3:&quot;yes&quot;;s:12:&quot;comment_subs&quot;;s:2:&quot;no&quot;;s:11:&quot;comment_def&quot;;s:2:&quot;no&quot;;s:17:&quot;one_click_profile&quot;;s:2:&quot;no&quot;;s:8:&quot;bcclimit&quot;;i:1;s:11:&quot;admin_email&quot;;s:4:&quot;subs&quot;;s:8:&quot;tracking&quot;;s:0:&quot;&quot;;s:6:&quot;s2page&quot;;i:0;s:10:&quot;stylesheet&quot;;s:3:&quot;yes&quot;;s:5:&quot;pages&quot;;s:2:&quot;no&quot;;s:8:&quot;password&quot;;s:2:&quot;no&quot;;s:8:&quot;stickies&quot;;s:2:&quot;no&quot;;s:7:&quot;private&quot;;s:2:&quot;no&quot;;s:10:&quot;email_freq&quot;;s:5:&quot;never&quot;;s:10:&quot;cron_order&quot;;s:4:&quot;desc&quot;;s:10:&quot;compulsory&quot;;s:0:&quot;&quot;;s:7:&quot;exclude&quot;;s:0:&quot;&quot;;s:6:&quot;sender&quot;;s:8:&quot;blogname&quot;;s:12:&quot;reg_override&quot;;s:1:&quot;1&quot;;s:9:&quot;show_meta&quot;;s:1:&quot;0&quot;;s:11:&quot;show_button&quot;;s:1:&quot;1&quot;;s:4:&quot;ajax&quot;;s:1:&quot;0&quot;;s:6:&quot;widget&quot;;s:1:&quot;0&quot;;s:13:&quot;counterwidget&quot;;s:1:&quot;0&quot;;s:14:&quot;s2meta_default&quot;;s:1:&quot;0&quot;;s:7:&quot;entries&quot;;i:25;s:6:&quot;barred&quot;;s:0:&quot;&quot;;s:15:&quot;exclude_formats&quot;;s:0:&quot;&quot;;s:8:&quot;mailtext&quot;;s:215:&quot;{BLOGNAME} has posted a new item, ''{TITLE}''
-
-{POST}
-
-You may view the latest post at
-{PERMALINK}
-
-You received this e-mail because you asked to be notified when new updates are posted.
-Best regards,
-{MYNAME}
-{EMAIL}&quot;;s:20:&quot;notification_subject&quot;;s:18:&quot;[{BLOGNAME}] TITLE&quot;;s:13:&quot;confirm_email&quot;;s:229:&quot;{BLOGNAME} has received a request to {ACTION} for this email address. To complete your request please click on the link below:
-
-{LINK}
-
-If you did not request this, please feel free to disregard this notice!
-
-Thank you,
-{MYNAME}.&quot;;s:15:&quot;confirm_subject&quot;;s:40:&quot;[{BLOGNAME}] Please confirm your request&quot;;s:12:&quot;remind_email&quot;;s:348:&quot;This email address was subscribed for notifications at {BLOGNAME} ({BLOGLINK}) but the subscription remains incomplete.
-
-If you wish to complete your subscription please click on the link below:
-
-{LINK}
-
-If you do not wish to complete your subscription please ignore this email and your address will be removed from our database.
-
-Regards,
-{MYNAME}&quot;;s:14:&quot;remind_subject&quot;;s:34:&quot;[{BLOGNAME}] Subscription Reminder&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('subscribe2_opti...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/subscribe2-itzip/classes/class-s2-core.php(236): update_option('subscribe2_opti...', Array)
-#6 /wordpress/wp-content/plugins/subscribe2-itzip/classes/class-s2-core.php(78): s2class->reset()
-#7 /wordpress/wp-content/plugins/subscribe2-itzip/classes/class-s2-core.php(1682): s2class->install()
-#8 /wordpress/wp-content/plugins/subscribe2-itzip/subscribe2.php(62): s2class->s2init()
-#9 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('subscribe2-itzi...')
-#11 /internal/eval.php(20): activate_plugin('subscribe2-itzi...')
-#12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('subscribe2_options', 'a:39:{s:7:\"autosub\";s:2:\"no\";s:15:\"newreg_override\";s:2:\"no\";s:8:\"wpregdef\";s:2:\"no\";s:10:\"autoformat\";s:4:\"text\";s:12:\"show_autosub\";s:3:\"yes\";s:11:\"autosub_def\";s:3:\"yes\";s:12:\"comment_subs\";s:2:\"no\";s:11:\"comment_def\";s:2:\"no\";s:17:\"one_click_profile\";s:2:\"no\";s:8:\"bcclimit\";i:1;s:11:\"admin_email\";s:4:\"subs\";s:8:\"tracking\";s:0:\"\";s:6:\"s2page\";i:0;s:10:\"stylesheet\";s:3:\"yes\";s:5:\"pages\";s:2:\"no\";s:8:\"password\";s:2:\"no\";s:8:\"stickies\";s:2:\"no\";s:7:\"private\";s:2:\"no\";s:10:\"email_freq\";s:5:\"never\";s:10:\"cron_order\";s:4:\"desc\";s:10:\"compulsory\";s:0:\"\";s:7:\"exclude\";s:0:\"\";s:6:\"sender\";s:8:\"blogname\";s:12:\"reg_override\";s:1:\"1\";s:9:\"show_meta\";s:1:\"0\";s:11:\"show_button\";s:1:\"1\";s:4:\"ajax\";s:1:\"0\";s:6:\"widget\";s:1:\"0\";s:13:\"counterwidget\";s:1:\"0\";s:14:\"s2meta_default\";s:1:\"0\";s:7:\"entries\";i:25;s:6:\"barred\";s:0:\"\";s:15:\"exclude_formats\";s:0:\"\";s:8:\"mailtext\";s:215:\"{BLOGNAME} has posted a new item, \'{TITLE}\'
-
-{POST}
-
-You may view the latest post at
-{PERMALINK}
-
-You received this e-mail because you asked to be notified when new updates are posted.
-Best regards,
-{MYNAME}
-{EMAIL}\";s:20:\"notification_subject\";s:18:\"[{BLOGNAME}] TITLE\";s:13:\"confirm_email\";s:229:\"{BLOGNAME} has received a request to {ACTION} for this email address. To complete your request please click on the link below:
-
-{LINK}
-
-If you did not request this, please feel free to disregard this notice!
-
-Thank you,
-{MYNAME}.\";s:15:\"confirm_subject\";s:40:\"[{BLOGNAME}] Please confirm your request\";s:12:\"remind_email\";s:348:\"This email address was subscribed for notifications at {BLOGNAME} ({BLOGLINK}) but the subscription remains incomplete.
-
-If you wish to complete your subscription please click on the link below:
-
-{LINK}
-
-If you do not wish to complete your subscription please ignore this email and your address will be removed from our database.
-
-Regards,
-{MYNAME}\";s:14:\"remind_subject\";s:34:\"[{BLOGNAME}] Subscription Reminder\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/subscribe2-itzip/subscribe2.php'), s2class->s2init, s2class->install, s2class->reset, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 16:04:56 UTC] PHP Warning:  Undefined array key "version" in /wordpress/wp-content/plugins/subscribe2-itzip/classes/class-s2-core.php on line 1684
-[05-Apr-2025 16:04:56 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[05-Apr-2025 16:04:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[05-Apr-2025 16:04:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[05-Apr-2025 16:04:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[05-Apr-2025 16:04:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (1, 's2_format', 'excerpt')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_usermeta</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_usermeta</li>
-<li>Executing: INSERT INTO `wp_usermeta` () SELECT  FROM (VALUES ( 1 , 's2_format' , 'excerpt' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_usermeta', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/meta.php(124): wpdb->insert('wp_usermeta', Array)
-#6 /wordpress/wp-includes/meta.php(252): add_metadata('user', 1, 's2_format', 'excerpt')
-#7 /wordpress/wp-includes/user.php(1231): update_metadata('user', 1, 's2_format', 'excerpt', '')
-#8 /wordpress/wp-content/plugins/subscribe2-itzip/classes/class-s2-core.php(1093): update_user_meta('1', 's2_format', 'excerpt')
-#9 /wordpress/wp-content/plugins/subscribe2-itzip/classes/class-s2-core.php(110): s2class->register('1')
-#10 /wordpress/wp-includes/class-wp-hook.php(324): s2class->upgrade('')
-#11 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#12 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#13 /wordpress/wp-includes/load.php(1279): do_action('shutdown')
-#14 [internal function]: shutdown_action_hook()
-#15 {main}</pre>
- for query INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (1, 's2_format', 'excerpt') made by shutdown_action_hook, do_action('shutdown'), WP_Hook->do_action, WP_Hook->apply_filters, s2class->upgrade, s2class->register, update_user_meta, update_metadata, add_metadata, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[05-Apr-2025 16:04:56 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (1, 's2_autosub', 'yes')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_usermeta</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_usermeta</li>
-<li>Executing:
+Node.js v23.11.0
