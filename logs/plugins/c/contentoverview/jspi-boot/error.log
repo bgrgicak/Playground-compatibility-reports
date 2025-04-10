@@ -2,369 +2,159 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 05:49:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cxxx_enable_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cxxx_enable_debug_mode' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('cxxx_enable_deb...', '', '', 'auto')
-#5 /wordpress/wp-content/plugins/cybersyn/cybersyn.php(298): update_option('cxxx_enable_deb...', '')
-#6 /wordpress/wp-content/plugins/cybersyn/cybersyn.php(2793): csyn_preset_options()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cybersyn/cybers...')
-#9 /internal/eval.php(20): activate_plugin('cybersyn/cybers...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cxxx_enable_debug_mode', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/cybersyn/cybersyn.php'), csyn_preset_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:49:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cxxx_syndicated_feeds', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cxxx_syndicated_feeds' , 'a:0:{}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('cxxx_syndicated...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/cybersyn/cybersyn.php(302): update_option('cxxx_syndicated...', Array)
-#6 /wordpress/wp-content/plugins/cybersyn/cybersyn.php(2793): csyn_preset_options()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cybersyn/cybers...')
-#9 /internal/eval.php(20): activate_plugin('cybersyn/cybers...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cxxx_syndicated_feeds', 'a:0:{}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/cybersyn/cybersyn.php'), csyn_preset_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:49:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cxxx_cron_magic', '4ef63647c92678b0a9ad145abc9dcd50', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cxxx_cron_magic' , '4ef63647c92678b0a9ad145abc9dcd50' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('cxxx_cron_magic', '4ef63647c92678b...', '', 'auto')
-#5 /wordpress/wp-content/plugins/cybersyn/cybersyn.php(306): update_option('cxxx_cron_magic', '4ef63647c92678b...')
-#6 /wordpress/wp-content/plugins/cybersyn/cybersyn.php(2793): csyn_preset_options()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cybersyn/cybers...')
-#9 /internal/eval.php(20): activate_plugin('cybersyn/cybers...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cxxx_cron_magic', '4ef63647c92678b0a9ad145abc9dcd50', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/cybersyn/cybersyn.php'), csyn_preset_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:49:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cxxx_rss_pull_mode', 'auto', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cxxx_rss_pull_mode' , 'auto' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('cxxx_rss_pull_m...', 'auto', '', 'auto')
-#5 /wordpress/wp-content/plugins/cybersyn/cybersyn.php(310): update_option('cxxx_rss_pull_m...', 'auto')
-#6 /wordpress/wp-content/plugins/cybersyn/cybersyn.php(2793): csyn_preset_options()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cybersyn/cybers...')
-#9 /internal/eval.php(20): activate_plugin('cybersyn/cybers...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cxxx_rss_pull_mode', 'auto', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/cybersyn/cybersyn.php'), csyn_preset_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:49:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cxxx_pseudo_cron_interval', '10', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cxxx_pseudo_cron_interval' , '10' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('cxxx_pseudo_cro...', '10', '', 'auto')
-#5 /wordpress/wp-content/plugins/cybersyn/cybersyn.php(314): update_option('cxxx_pseudo_cro...', '10')
-#6 /wordpress/wp-content/plugins/cybersyn/cybersyn.php(2793): csyn_preset_options()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cybersyn/cybers...')
-#9 /internal/eval.php(20): activate_plugin('cybersyn/cybers...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cxxx_pseudo_cron_interval', '10', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/cybersyn/cybersyn.php'), csyn_preset_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:49:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cxxx_keep_images', 'on', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cxxx_keep_images' , 'on' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('cxxx_keep_image...', 'on', '', 'auto')
-#5 /wordpress/wp-content/plugins/cybersyn/cybersyn.php(318): update_option('cxxx_keep_image...', 'on')
-#6 /wordpress/wp-content/plugins/cybersyn/cybersyn.php(2793): csyn_preset_options()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cybersyn/cybers...')
-#9 /internal/eval.php(20): activate_plugin('cybersyn/cybers...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cxxx_keep_images', 'on', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/cybersyn/cybersyn.php'), csyn_preset_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:49:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cxxx_canonical_link', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cxxx_canonical_link' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('cxxx_canonical_...', '', '', 'auto')
-#5 /wordpress/wp-content/plugins/cybersyn/cybersyn.php(322): update_option('cxxx_canonical_...', '')
-#6 /wordpress/wp-content/plugins/cybersyn/cybersyn.php(2793): csyn_preset_options()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cybersyn/cybers...')
-#9 /internal/eval.php(20): activate_plugin('cybersyn/cybers...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cxxx_canonical_link', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/cybersyn/cybersyn.php'), csyn_preset_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:49:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cxxx_link_to_source', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cxxx_link_to_source' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('cxxx_link_to_so...', '', '', 'auto')
-#5 /wordpress/wp-content/plugins/cybersyn/cybersyn.php(326): update_option('cxxx_link_to_so...', '')
-#6 /wordpress/wp-content/plugins/cybersyn/cybersyn.php(2793): csyn_preset_options()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cybersyn/cybers...')
-#9 /internal/eval.php(20): activate_plugin('cybersyn/cybers...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cxxx_link_to_source', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/cybersyn/cybersyn.php'), csyn_preset_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:49:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cxxx_yandex_translate_langs', 'a:173:{s:5:\"az-ru\";s:19:\"Azerbaijani-Russian\";s:5:\"be-bg\";s:20:\"Belarusian-Bulgarian\";s:5:\"be-cs\";s:16:\"Belarusian-Czech\";s:5:\"be-de\";s:17:\"Belarusian-German\";s:5:\"be-en\";s:18:\"Belarusian-English\";s:5:\"be-es\";s:18:\"Belarusian-Spanish\";s:5:\"be-fr\";s:17:\"Belarusian-French\";s:5:\"be-it\";s:18:\"Belarusian-Italian\";s:5:\"be-pl\";s:17:\"Belarusian-Polish\";s:5:\"be-ro\";s:19:\"Belarusian-Romanian\";s:5:\"be-ru\";s:18:\"Belarusian-Russian\";s:5:\"be-sr\";s:18:\"Belarusian-Serbian\";s:5:\"be-tr\";s:18:\"Belarusian-Turkish\";s:5:\"bg-be\";s:20:\"Bulgarian-Belarusian\";s:5:\"bg-ru\";s:17:\"Bulgarian-Russian\";s:5:\"bg-uk\";s:19:\"Bulgarian-Ukrainian\";s:5:\"ca-en\";s:15:\"Catalan-English\";s:5:\"ca-ru\";s:15:\"Catalan-Russian\";s:5:\"zh-de\";s:14:\"Chinese-German\";s:5:\"zh-en\";s:15:\"Chinese-English\";s:5:\"zh-fr\";s:14:\"Chinese-French\";s:5:\"zh-it\";s:15:\"Chinese-Italian\";s:5:\"zh-ru\";s:15:\"Chinese-Russian\";s:5:\"zh-es\";s:15:\"Chinese-Spanish\";s:5:\"cs-be\";s:16:\"Czech-Belarusian\";s:5:\"cs-en\";s:13:\"Czech-English\";s:5:\"cs-ru\";s:13:\"Czech-Russian\";s:5:\"cs-uk\";s:15:\"Czech-Ukrainian\";s:5:\"da-en\";s:14:\"Danish-English\";s:5:\"da-ru\";s:14:\"Danish-Russian\";s:5:\"de-be\";s:17:\"German-Belarusian\";s:5:\"de-zh\";s:14:\"German-Chinese\";s:5:\"de-en\";s:14:\"German-English\";s:5:\"de-es\";s:14:\"German-Spanish\";s:5:\"de-fr\";s:13:\"German-French\";s:5:\"de-it\";s:14:\"German-Italian\";s:5:\"de-ru\";s:14:\"German-Russian\";s:5:\"de-tr\";s:14:\"German-Turkish\";s:5:\"de-uk\";s:16:\"German-Ukrainian\";s:5:\"el-en\";s:13:\"Greek-English\";s:5:\"el-ru\";s:13:\"Greek-Russian\";s:5:\"en-be\";s:18:\"English-Belarusian\";s:5:\"en-ca\";s:15:\"English-Catalan\";s:5:\"en-zh\";s:15:\"English-Chinese\";s:5:\"en-cs\";s:13:\"English-Czech\";s:5:\"en-da\";s:14:\"English-Danish\";s:5:\"en-de\";s:14:\"English-German\";s:5:\"en-el\";s:13:\"English-Greek\";s:5:\"en-es\";s:15:\"English-Spanish\";s:5:\"en-et\";s:16:\"English-Estonian\";s:5:\"en-fi\";s:15:\"English-Finnish\";s:5:\"en-fr\";s:14:\"English-French\";s:5:\"en-hu\";s:17:\"English-Hungarian\";s:5:\"en-it\";s:15:\"English-Italian\";s:5:\"en-lt\";s:18:\"English-Lithuanian\";s:5:\"en-lv\";s:15:\"English-Latvian\";s:5:\"en-mk\";s:18:\"English-Macedonian\";s:5:\"en-nl\";s:13:\"English-Dutch\";s:5:\"en-no\";s:17:\"English-Norwegian\";s:5:\"en-pt\";s:18:\"English-Portuguese\";s:5:\"en-ru\";s:15:\"English-Russian\";s:5:\"en-sk\";s:14:\"English-Slovak\";s:5:\"en-sl\";s:17:\"English-Slovenian\";s:5:\"en-sq\";s:16:\"English-Albanian\";s:5:\"en-sv\";s:15:\"English-Swedish\";s:5:\"en-tr\";s:15:\"English-Turkish\";s:5:\"en-uk\";s:17:\"English-Ukrainian\";s:5:\"es-be\";s:18:\"Spanish-Belarusian\";s:5:\"es-zh\";s:15:\"Spanish-Chinese\";s:5:\"es-de\";s:14:\"Spanish-German\";s:5:\"es-en\";s:15:\"Spanish-English\";s:5:\"es-ru\";s:15:\"Spanish-Russian\";s:5:\"es-uk\";s:17:\"Spanish-Ukrainian\";s:5:\"et-en\";s:16:\"Estonian-English\";s:5:\"et-ru\";s:16:\"Estonian-Russian\";s:5:\"fi-en\";s:15:\"Finnish-English\";s:5:\"fi-ru\";s:15:\"Finnish-Russian\";s:5:\"fr-be\";s:17:\"French-Belarusian\";s:5:\"fr-zh\";s:14:\"French-Chinese\";s:5:\"fr-de\";s:13:\"French-German\";s:5:\"fr-en\";s:14:\"French-English\";s:5:\"fr-it\";s:14:\"French-Italian\";s:5:\"fr-ru\";s:14:\"French-Russian\";s:5:\"fr-uk\";s:16:\"French-Ukrainian\";s:5:\"hr-ru\";s:16:\"Croatian-Russian\";s:5:\"hu-en\";s:17:\"Hungarian-English\";s:5:\"hu-ru\";s:17:\"Hungarian-Russian\";s:5:\"hy-ru\";s:16:\"Armenian-Russian\";s:5:\"it-be\";s:18:\"Italian-Belarusian\";s:5:\"it-zh\";s:15:\"Italian-Chinese\";s:5:\"it-de\";s:14:\"Italian-German\";s:5:\"it-en\";s:15:\"Italian-English\";s:5:\"it-fr\";s:14:\"Italian-French\";s:5:\"it-ru\";s:15:\"Italian-Russian\";s:5:\"it-uk\";s:17:\"Italian-Ukrainian\";s:5:\"lt-en\";s:18:\"Lithuanian-English\";s:5:\"lt-ru\";s:18:\"Lithuanian-Russian\";s:5:\"lv-en\";s:15:\"Latvian-English\";s:5:\"lv-ru\";s:15:\"Latvian-Russian\";s:5:\"mk-en\";s:18:\"Macedonian-English\";s:5:\"mk-ru\";s:18:\"Macedonian-Russian\";s:5:\"nl-en\";s:13:\"Dutch-English\";s:5:\"nl-ru\";s:13:\"Dutch-Russian\";s:5:\"no-en\";s:17:\"Norwegian-English\";s:5:\"no-ru\";s:17:\"Norwegian-Russian\";s:5:\"pl-be\";s:17:\"Polish-Belarusian\";s:5:\"pl-ru\";s:14:\"Polish-Russian\";s:5:\"pl-uk\";s:16:\"Polish-Ukrainian\";s:5:\"pt-en\";s:18:\"Portuguese-English\";s:5:\"pt-ru\";s:18:\"Portuguese-Russian\";s:5:\"ro-be\";s:19:\"Romanian-Belarusian\";s:5:\"ro-ru\";s:16:\"Romanian-Russian\";s:5:\"ro-uk\";s:18:\"Romanian-Ukrainian\";s:5:\"ru-az\";s:19:\"Russian-Azerbaijani\";s:5:\"ru-be\";s:18:\"Russian-Belarusian\";s:5:\"ru-bg\";s:17:\"Russian-Bulgarian\";s:5:\"ru-ca\";s:15:\"Russian-Catalan\";s:5:\"ru-cs\";s:13:\"Russian-Czech\";s:5:\"ru-da\";s:14:\"Russian-Danish\";s:5:\"ru-de\";s:14:\"Russian-German\";s:5:\"ru-el\";s:13:\"Russian-Greek\";s:5:\"ru-en\";s:15:\"Russian-English\";s:5:\"ru-es\";s:15:\"Russian-Spanish\";s:5:\"ru-et\";s:16:\"Russian-Estonian\";s:5:\"ru-fi\";s:15:\"Russian-Finnish\";s:5:\"ru-fr\";s:14:\"Russian-French\";s:5:\"ru-hr\";s:16:\"Russian-Croatian\";s:5:\"ru-hu\";s:17:\"Russian-Hungarian\";s:5:\"ru-hy\";s:16:\"Russian-Armenian\";s:5:\"ru-it\";s:15:\"Russian-Italian\";s:5:\"ru-lt\";s:18:\"Russian-Lithuanian\";s:5:\"ru-lv\";s:15:\"Russian-Latvian\";s:5:\"ru-mk\";s:18:\"Russian-Macedonian\";s:5:\"ru-nl\";s:13:\"Russian-Dutch\";s:5:\"ru-no\";s:17:\"Russian-Norwegian\";s:5:\"ru-pl\";s:14:\"Russian-Polish\";s:5:\"ru-pt\";s:18:\"Russian-Portuguese\";s:5:\"ru-ro\";s:16:\"Russian-Romanian\";s:5:\"ru-sk\";s:14:\"Russian-Slovak\";s:5:\"ru-sl\";s:17:\"Russian-Slovenian\";s:5:\"ru-sq\";s:16:\"Russian-Albanian\";s:5:\"ru-sr\";s:15:\"Russian-Serbian\";s:5:\"ru-sv\";s:15:\"Russian-Swedish\";s:5:\"ru-tr\";s:15:\"Russian-Turkish\";s:5:\"ru-uk\";s:17:\"Russian-Ukrainian\";s:5:\"sk-en\";s:14:\"Slovak-English\";s:5:\"sk-ru\";s:14:\"Slovak-Russian\";s:5:\"sl-en\";s:17:\"Slovenian-English\";s:5:\"sl-ru\";s:17:\"Slovenian-Russian\";s:5:\"sq-en\";s:16:\"Albanian-English\";s:5:\"sq-ru\";s:16:\"Albanian-Russian\";s:5:\"sr-be\";s:18:\"Serbian-Belarusian\";s:5:\"sr-ru\";s:15:\"Serbian-Russian\";s:5:\"sr-uk\";s:17:\"Serbian-Ukrainian\";s:5:\"sv-en\";s:15:\"Swedish-English\";s:5:\"sv-ru\";s:15:\"Swedish-Russian\";s:5:\"tr-be\";s:18:\"Turkish-Belarusian\";s:5:\"tr-de\";s:14:\"Turkish-German\";s:5:\"tr-en\";s:15:\"Turkish-English\";s:5:\"tr-ru\";s:15:\"Turkish-Russian\";s:5:\"tr-uk\";s:17:\"Turkish-Ukrainian\";s:5:\"uk-bg\";s:19:\"Ukrainian-Bulgarian\";s:5:\"uk-cs\";s:15:\"Ukrainian-Czech\";s:5:\"uk-de\";s:16:\"Ukrainian-German\";s:5:\"uk-en\";s:17:\"Ukrainian-English\";s:5:\"uk-es\";s:17:\"Ukrainian-Spanish\";s:5:\"uk-fr\";s:16:\"Ukrainian-French\";s:5:\"uk-it\";s:17:\"Ukrainian-Italian\";s:5:\"uk-pl\";s:16:\"Ukrainian-Polish\";s:5:\"uk-ro\";s:18:\"Ukrainian-Romanian\";s:5:\"uk-ru\";s:17:\"Ukrainian-Russian\";s:5:\"uk-sr\";s:17:\"Ukrainian-Serbian\";s:5:\"uk-tr\";s:17:\"Ukrainian-Turkish\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cxxx_yandex_translate_langs' , 'a:173:{s:5:&quot;az-ru&quot;;s:19:&quot;Azerbaijani-Russian&quot;;s:5:&quot;be-bg&quot;;s:20:&quot;Belarusian-Bulgarian&quot;;s:5:&quot;be-cs&quot;;s:16:&quot;Belarusian-Czech&quot;;s:5:&quot;be-de&quot;;s:17:&quot;Belarusian-German&quot;;s:5:&quot;be-en&quot;;s:18:&quot;Belarusian-English&quot;;s:5:&quot;be-es&quot;;s:18:&quot;Belarusian-Spanish&quot;;s:5:&quot;be-fr&quot;;s:17:&quot;Belarusian-French&quot;;s:5:&quot;be-it&quot;;s:18:&quot;Belarusian-Italian&quot;;s:5:&quot;be-pl&quot;;s:17:&quot;Belarusian-Polish&quot;;s:5:&quot;be-ro&quot;;s:19:&quot;Belarusian-Romanian&quot;;s:5:&quot;be-ru&quot;;s:18:&quot;Belarusian-Russian&quot;;s:5:&quot;be-sr&quot;;s:18:&quot;Belarusian-Serbian&quot;;s:5:&quot;be-tr&quot;;s:18:&quot;Belarusian-Turkish&quot;;s:5:&quot;bg-be&quot;;s:20:&quot;Bulgarian-Belarusian&quot;;s:5:&quot;bg-ru&quot;;s:17:&quot;Bulgarian-Russian&quot;;s:5:&quot;bg-uk&quot;;s:19:&quot;Bulgarian-Ukrainian&quot;;s:5:&quot;ca-en&quot;;s:15:&quot;Catalan-English&quot;;s:5:&quot;ca-ru&quot;;s:15:&quot;Catalan-Russian&quot;;s:5:&quot;zh-de&quot;;s:14:&quot;Chinese-German&quot;;s:5:&quot;zh-en&quot;;s:15:&quot;Chinese-English&quot;;s:5:&quot;zh-fr&quot;;s:14:&quot;Chinese-French&quot;;s:5:&quot;zh-it&quot;;s:15:&quot;Chinese-Italian&quot;;s:5:&quot;zh-ru&quot;;s:15:&quot;Chinese-Russian&quot;;s:5:&quot;zh-es&quot;;s:15:&quot;Chinese-Spanish&quot;;s:5:&quot;cs-be&quot;;s:16:&quot;Czech-Belarusian&quot;;s:5:&quot;cs-en&quot;;s:13:&quot;Czech-English&quot;;s:5:&quot;cs-ru&quot;;s:13:&quot;Czech-Russian&quot;;s:5:&quot;cs-uk&quot;;s:15:&quot;Czech-Ukrainian&quot;;s:5:&quot;da-en&quot;;s:14:&quot;Danish-English&quot;;s:5:&quot;da-ru&quot;;s:14:&quot;Danish-Russian&quot;;s:5:&quot;de-be&quot;;s:17:&quot;German-Belarusian&quot;;s:5:&quot;de-zh&quot;;s:14:&quot;German-Chinese&quot;;s:5:&quot;de-en&quot;;s:14:&quot;German-English&quot;;s:5:&quot;de-es&quot;;s:14:&quot;German-Spanish&quot;;s:5:&quot;de-fr&quot;;s:13:&quot;German-French&quot;;s:5:&quot;de-it&quot;;s:14:&quot;German-Italian&quot;;s:5:&quot;de-ru&quot;;s:14:&quot;German-Russian&quot;;s:5:&quot;de-tr&quot;;s:14:&quot;German-Turkish&quot;;s:5:&quot;de-uk&quot;;s:16:&quot;German-Ukrainian&quot;;s:5:&quot;el-en&quot;;s:13:&quot;Greek-English&quot;;s:5:&quot;el-ru&quot;;s:13:&quot;Greek-Russian&quot;;s:5:&quot;en-be&quot;;s:18:&quot;English-Belarusian&quot;;s:5:&quot;en-ca&quot;;s:15:&quot;English-Catalan&quot;;s:5:&quot;en-zh&quot;;s:15:&quot;English-Chinese&quot;;s:5:&quot;en-cs&quot;;s:13:&quot;English-Czech&quot;;s:5:&quot;en-da&quot;;s:14:&quot;English-Danish&quot;;s:5:&quot;en-de&quot;;s:14:&quot;English-German&quot;;s:5:&quot;en-el&quot;;s:13:&quot;English-Greek&quot;;s:5:&quot;en-es&quot;;s:15:&quot;English-Spanish&quot;;s:5:&quot;en-et&quot;;s:16:&quot;English-Estonian&quot;;s:5:&quot;en-fi&quot;;s:15:&quot;English-Finnish&quot;;s:5:&quot;en-fr&quot;;s:14:&quot;English-French&quot;;s:5:&quot;en-hu&quot;;s:17:&quot;English-Hungarian&quot;;s:5:&quot;en-it&quot;;s:15:&quot;English-Italian&quot;;s:5:&quot;en-lt&quot;;s:18:&quot;English-Lithuanian&quot;;s:5:&quot;en-lv&quot;;s:15:&quot;English-Latvian&quot;;s:5:&quot;en-mk&quot;;s:18:&quot;English-Macedonian&quot;;s:5:&quot;en-nl&quot;;s:13:&quot;English-Dutch&quot;;s:5:&quot;en-no&quot;;s:17:&quot;English-Norwegian&quot;;s:5:&quot;en-pt&quot;;s:18:&quot;English-Portuguese&quot;;s:5:&quot;en-ru&quot;;s:15:&quot;English-Russian&quot;;s:5:&quot;en-sk&quot;;s:14:&quot;English-Slovak&quot;;s:5:&quot;en-sl&quot;;s:17:&quot;English-Slovenian&quot;;s:5:&quot;en-sq&quot;;s:16:&quot;English-Albanian&quot;;s:5:&quot;en-sv&quot;;s:15:&quot;English-Swedish&quot;;s:5:&quot;en-tr&quot;;s:15:&quot;English-Turkish&quot;;s:5:&quot;en-uk&quot;;s:17:&quot;English-Ukrainian&quot;;s:5:&quot;es-be&quot;;s:18:&quot;Spanish-Belarusian&quot;;s:5:&quot;es-zh&quot;;s:15:&quot;Spanish-Chinese&quot;;s:5:&quot;es-de&quot;;s:14:&quot;Spanish-German&quot;;s:5:&quot;es-en&quot;;s:15:&quot;Spanish-English&quot;;s:5:&quot;es-ru&quot;;s:15:&quot;Spanish-Russian&quot;;s:5:&quot;es-uk&quot;;s:17:&quot;Spanish-Ukrainian&quot;;s:5:&quot;et-en&quot;;s:16:&quot;Estonian-English&quot;;s:5:&quot;et-ru&quot;;s:16:&quot;Estonian-Russian&quot;;s:5:&quot;fi-en&quot;;s:15:&quot;Finnish-English&quot;;s:5:&quot;fi-ru&quot;;s:15:&quot;Finnish-Russian&quot;;s:5:&quot;fr-be&quot;;s:17:&quot;French-Belarusian&quot;;s:5:&quot;fr-zh&quot;;s:14:&quot;French-Chinese&quot;;s:5:&quot;fr-de&quot;;s:13:&quot;French-German&quot;;s:5:&quot;fr-en&quot;;s:14:&quot;French-English&quot;;s:5:&quot;fr-it&quot;;s:14:&quot;French-Italian&quot;;s:5:&quot;fr-ru&quot;;s:14:&quot;French-Russian&quot;;s:5:&quot;fr-uk&quot;;s:16:&quot;French-Ukrainian&quot;;s:5:&quot;hr-ru&quot;;s:16:&quot;Croatian-Russian&quot;;s:5:&quot;hu-en&quot;;s:17:&quot;Hungarian-English&quot;;s:5:&quot;hu-ru&quot;;s:17:&quot;Hungarian-Russian&quot;;s:5:&quot;hy-ru&quot;;s:16:&quot;Armenian-Russian&quot;;s:5:&quot;it-be&quot;;s:18:&quot;Italian-Belarusian&quot;;s:5:&quot;it-zh&quot;;s:15:&quot;Italian-Chinese&quot;;s:5:&quot;it-de&quot;;s:14:&quot;Italian-German&quot;;s:5:&quot;it-en&quot;;s:15:&quot;Italian-English&quot;;s:5:&quot;it-fr&quot;;s:14:&quot;Italian-French&quot;;s:5:&quot;it-ru&quot;;s:15:&quot;Italian-Russian&quot;;s:5:&quot;it-uk&quot;;s:17:&quot;Italian-Ukrainian&quot;;s:5:&quot;lt-en&quot;;s:18:&quot;Lithuanian-English&quot;;s:5:&quot;lt-ru&quot;;s:18:&quot;Lithuanian-Russian&quot;;s:5:&quot;lv-en&quot;;s:15:&quot;Latvian-English&quot;;s:5:&quot;lv-ru&quot;;s:15:&quot;Latvian-Russian&quot;;s:5:&quot;mk-en&quot;;s:18:&quot;Macedonian-English&quot;;s:5:&quot;mk-ru&quot;;s:18:&quot;Macedonian-Russian&quot;;s:5:&quot;nl-en&quot;;s:13:&quot;Dutch-English&quot;;s:5:&quot;nl-ru&quot;;s:13:&quot;Dutch-Russian&quot;;s:5:&quot;no-en&quot;;s:17:&quot;Norwegian-English&quot;;s:5:&quot;no-ru&quot;;s:17:&quot;Norwegian-Russian&quot;;s:5:&quot;pl-be&quot;;s:17:&quot;Polish-Belarusian&quot;;s:5:&quot;pl-ru&quot;;s:14:&quot;Polish-Russian&quot;;s:5:&quot;pl-uk&quot;;s:16:&quot;Polish-Ukrainian&quot;;s:5:&quot;pt-en&quot;;s:18:&quot;Portuguese-English&quot;;s:5:&quot;pt-ru&quot;;s:18:&quot;Portuguese-Russian&quot;;s:5:&quot;ro-be&quot;;s:19:&quot;Romanian-Belarusian&quot;;s:5:&quot;ro-ru&quot;;s:16:&quot;Romanian-Russian&quot;;s:5:&quot;ro-uk&quot;;s:18:&quot;Romanian-Ukrainian&quot;;s:5:&quot;ru-az&quot;;s:19:&quot;Russian-Azerbaijani&quot;;s:5:&quot;ru-be&quot;;s:18:&quot;Russian-Belarusian&quot;;s:5:&quot;ru-bg&quot;;s:17:&quot;Russian-Bulgarian&quot;;s:5:&quot;ru-ca&quot;;s:15:&quot;Russian-Catalan&quot;;s:5:&quot;ru-cs&quot;;s:13:&quot;Russian-Czech&quot;;s:5:&quot;ru-da&quot;;s:14:&quot;Russian-Danish&quot;;s:5:&quot;ru-de&quot;;s:14:&quot;Russian-German&quot;;s:5:&quot;ru-el&quot;;s:13:&quot;Russian-Greek&quot;;s:5:&quot;ru-en&quot;;s:15:&quot;Russian-English&quot;;s:5:&quot;ru-es&quot;;s:15:&quot;Russian-Spanish&quot;;s:5:&quot;ru-et&quot;;s:16:&quot;Russian-Estonian&quot;;s:5:&quot;ru-fi&quot;;s:15:&quot;Russian-Finnish&quot;;s:5:&quot;ru-fr&quot;;s:14:&quot;Russian-French&quot;;s:5:&quot;ru-hr&quot;;s:16:&quot;Russian-Croatian&quot;;s:5:&quot;ru-hu&quot;;s:17:&quot;Russian-Hungarian&quot;;s:5:&quot;ru-hy&quot;;s:16:&quot;Russian-Armenian&quot;;s:5:&quot;ru-it&quot;;s:15:&quot;Russian-Italian&quot;;s:5:&quot;ru-lt&quot;;s:18:&quot;Russian-Lithuanian&quot;;s:5:&quot;ru-lv&quot;;s:15:&quot;Russian-Latvian&quot;;s:5:&quot;ru-mk&quot;;s:18:&quot;Russian-Macedonian&quot;;s:5:&quot;ru-nl&quot;;s:13:&quot;Russian-Dutch&quot;;s:5:&quot;ru-no&quot;;s:17:&quot;Russian-Norwegian&quot;;s:5:&quot;ru-pl&quot;;s:14:&quot;Russian-Polish&quot;;s:5:&quot;ru-pt&quot;;s:18:&quot;Russian-Portuguese&quot;;s:5:&quot;ru-ro&quot;;s:16:&quot;Russian-Romanian&quot;;s:5:&quot;ru-sk&quot;;s:14:&quot;Russian-Slovak&quot;;s:5:&quot;ru-sl&quot;;s:17:&quot;Russian-Slovenian&quot;;s:5:&quot;ru-sq&quot;;s:16:&quot;Russian-Albanian&quot;;s:5:&quot;ru-sr&quot;;s:15:&quot;Russian-Serbian&quot;;s:5:&quot;ru-sv&quot;;s:15:&quot;Russian-Swedish&quot;;s:5:&quot;ru-tr&quot;;s:15:&quot;Russian-Turkish&quot;;s:5:&quot;ru-uk&quot;;s:17:&quot;Russian-Ukrainian&quot;;s:5:&quot;sk-en&quot;;s:14:&quot;Slovak-English&quot;;s:5:&quot;sk-ru&quot;;s:14:&quot;Slovak-Russian&quot;;s:5:&quot;sl-en&quot;;s:17:&quot;Slovenian-English&quot;;s:5:&quot;sl-ru&quot;;s:17:&quot;Slovenian-Russian&quot;;s:5:&quot;sq-en&quot;;s:16:&quot;Albanian-English&quot;;s:5:&quot;sq-ru&quot;;s:16:&quot;Albanian-Russian&quot;;s:5:&quot;sr-be&quot;;s:18:&quot;Serbian-Belarusian&quot;;s:5:&quot;sr-ru&quot;;s:15:&quot;Serbian-Russian&quot;;s:5:&quot;sr-uk&quot;;s:17:&quot;Serbian-Ukrainian&quot;;s:5:&quot;sv-en&quot;;s:15:&quot;Swedish-English&quot;;s:5:&quot;sv-ru&quot;;s:15:&quot;Swedish-Russian&quot;;s:5:&quot;tr-be&quot;;s:18:&quot;Turkish-Belarusian&quot;;s:5:&quot;tr-de&quot;;s:14:&quot;Turkish-German&quot;;s:5:&quot;tr-en&quot;;s:15:&quot;Turkish-English&quot;;s:5:&quot;tr-ru&quot;;s:15:&quot;Turkish-Russian&quot;;s:5:&quot;tr-uk&quot;;s:17:&quot;Turkish-Ukrainian&quot;;s:5:&quot;uk-bg&quot;;s:19:&quot;Ukrainian-Bulgarian&quot;;s:5:&quot;uk-cs&quot;;s:15:&quot;Ukrainian-Czech&quot;;s:5:&quot;uk-de&quot;;s:16:&quot;Ukrainian-German&quot;;s:5:&quot;uk-en&quot;;s:17:&quot;Ukrainian-English&quot;;s:5:&quot;uk-es&quot;;s:17:&quot;Ukrainian-Spanish&quot;;s:5:&quot;uk-fr&quot;;s:16:&quot;Ukrainian-French&quot;;s:5:&quot;uk-it&quot;;s:17:&quot;Ukrainian-Italian&quot;;s:5:&quot;uk-pl&quot;;s:16:&quot;Ukrainian-Polish&quot;;s:5:&quot;uk-ro&quot;;s:18:&quot;Ukrainian-Romanian&quot;;s:5:&quot;uk-ru&quot;;s:17:&quot;Ukrainian-Russian&quot;;s:5:&quot;uk-sr&quot;;s:17:&quot;Ukrainian-Serbian&quot;;s:5:&quot;uk-tr&quot;;s:17:&quot;Ukrainian-Turkish&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('cxxx_yandex_tra...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/cybersyn/cybersyn.php(502): update_option('cxxx_yandex_tra...', Array)
-#6 /wordpress/wp-content/plugins/cybersyn/cybersyn.php(2793): csyn_preset_options()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cybersyn/cybers...')
-#9 /internal/eval.php(20): activate_plugin('cybersyn/cybers...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cxxx_yandex_translate_langs', 'a:173:{s:5:\"az-ru\";s:19:\"Azerbaijani-Russian\";s:5:\"be-bg\";s:20:\"Belarusian-Bulgarian\";s:5:\"be-cs\";s:16:\"Belarusian-Czech\";s:5:\"be-de\";s:17:\"Belarusian-German\";s:5:\"be-en\";s:18:\"Belarusian-English\";s:5:\"be-es\";s:18:\"Belarusian-Spanish\";s:5:\"be-fr\";s:17:\"Belarusian-French\";s:5:\"be-it\";s:18:\"Belarusian-Italian\";s:5:\"be-pl\";s:17:\"Belarusian-Polish\";s:5:\"be-ro\";s:19:\"Belarusian-Romanian\";s:5:\"be-ru\";s:18:\"Belarusian-Russian\";s:5:\"be-sr\";s:18:\"Belarusian-Serbian\";s:5:\"be-tr\";s:18:\"Belarusian-Turkish\";s:5:\"bg-be\";s:20:\"Bulgarian-Belarusian\";s:5:\"bg-ru\";s:17:\"Bulgarian-Russian\";s:5:\"bg-uk\";s:19:\"Bulgarian-Ukrainian\";s:5:\"ca-en\";s:15:\"Catalan-English\";s:5:\"ca-ru\";s:15:\"Catalan-Russian\";s:5:\"zh-de\";s:14:\"Chinese-German\";s:5:\"zh-en\";s:15:\"Chinese-English\";s:5:\"zh-fr\";s:14:\"Chinese-French\";s:5:\"zh-it\";s:15:\"Chinese-Italian\";s:5:\"zh-ru\";s:15:\"Chinese-Russian\";s:5:\"zh-es\";s:15:\"Chinese-Spanish\";s:5:\"cs-be\";s:16:\"Czech-Belarusian\";s:5:\"cs-en\";s:13:\"Czech-English\";s:5:\"cs-ru\";s:13:\"Czech-Russian\";s:5:\"cs-uk\";s:15:\"Czech-Ukrainian\";s:5:\"da-en\";s:14:\"Danish-English\";s:5:\"da-ru\";s:14:\"Danish-Russian\";s:5:\"de-be\";s:17:\"German-Belarusian\";s:5:\"de-zh\";s:14:\"German-Chinese\";s:5:\"de-en\";s:14:\"German-English\";s:5:\"de-es\";s:14:\"German-Spanish\";s:5:\"de-fr\";s:13:\"German-French\";s:5:\"de-it\";s:14:\"German-Italian\";s:5:\"de-ru\";s:14:\"German-Russian\";s:5:\"de-tr\";s:14:\"German-Turkish\";s:5:\"de-uk\";s:16:\"German-Ukrainian\";s:5:\"el-en\";s:13:\"Greek-English\";s:5:\"el-ru\";s:13:\"Greek-Russian\";s:5:\"en-be\";s:18:\"English-Belarusian\";s:5:\"en-ca\";s:15:\"English-Catalan\";s:5:\"en-zh\";s:15:\"English-Chinese\";s:5:\"en-cs\";s:13:\"English-Czech\";s:5:\"en-da\";s:14:\"English-Danish\";s:5:\"en-de\";s:14:\"English-German\";s:5:\"en-el\";s:13:\"English-Greek\";s:5:\"en-es\";s:15:\"English-Spanish\";s:5:\"en-et\";s:16:\"English-Estonian\";s:5:\"en-fi\";s:15:\"English-Finnish\";s:5:\"en-fr\";s:14:\"English-French\";s:5:\"en-hu\";s:17:\"English-Hungarian\";s:5:\"en-it\";s:15:\"English-Italian\";s:5:\"en-lt\";s:18:\"English-Lithuanian\";s:5:\"en-lv\";s:15:\"English-Latvian\";s:5:\"en-mk\";s:18:\"English-Macedonian\";s:5:\"en-nl\";s:13:\"English-Dutch\";s:5:\"en-no\";s:17:\"English-Norwegian\";s:5:\"en-pt\";s:18:\"English-Portuguese\";s:5:\"en-ru\";s:15:\"English-Russian\";s:5:\"en-sk\";s:14:\"English-Slovak\";s:5:\"en-sl\";s:17:\"English-Slovenian\";s:5:\"en-sq\";s:16:\"English-Albanian\";s:5:\"en-sv\";s:15:\"English-Swedish\";s:5:\"en-tr\";s:15:\"English-Turkish\";s:5:\"en-uk\";s:17:\"English-Ukrainian\";s:5:\"es-be\";s:18:\"Spanish-Belarusian\";s:5:\"es-zh\";s:15:\"Spanish-Chinese\";s:5:\"es-de\";s:14:\"Spanish-German\";s:5:\"es-en\";s:15:\"Spanish-English\";s:5:\"es-ru\";s:15:\"Spanish-Russian\";s:5:\"es-uk\";s:17:\"Spanish-Ukrainian\";s:5:\"et-en\";s:16:\"Estonian-English\";s:5:\"et-ru\";s:16:\"Estonian-Russian\";s:5:\"fi-en\";s:15:\"Finnish-English\";s:5:\"fi-ru\";s:15:\"Finnish-Russian\";s:5:\"fr-be\";s:17:\"French-Belarusian\";s:5:\"fr-zh\";s:14:\"French-Chinese\";s:5:\"fr-de\";s:13:\"French-German\";s:5:\"fr-en\";s:14:\"French-English\";s:5:\"fr-it\";s:14:\"French-Italian\";s:5:\"fr-ru\";s:14:\"French-Russian\";s:5:\"fr-uk\";s:16:\"French-Ukrainian\";s:5:\"hr-ru\";s:16:\"Croatian-Russian\";s:5:\"hu-en\";s:17:\"Hungarian-English\";s:5:\"hu-ru\";s:17:\"Hungarian-Russian\";s:5:\"hy-ru\";s:16:\"Armenian-Russian\";s:5:\"it-be\";s:18:\"Italian-Belarusian\";s:5:\"it-zh\";s:15:\"Italian-Chinese\";s:5:\"it-de\";s:14:\"Italian-German\";s:5:\"it-en\";s:15:\"Italian-English\";s:5:\"it-fr\";s:14:\"Italian-French\";s:5:\"it-ru\";s:15:\"Italian-Russian\";s:5:\"it-uk\";s:17:\"Italian-Ukrainian\";s:5:\"lt-en\";s:18:\"Lithuanian-English\";s:5:\"lt-ru\";s:18:\"Lithuanian-Russian\";s:5:\"lv-en\";s:15:\"Latvian-English\";s:5:\"lv-ru\";s:15:\"Latvian-Russian\";s:5:\"mk-en\";s:18:\"Macedonian-English\";s:5:\"mk-ru\";s:18:\"Macedonian-Russian\";s:5:\"nl-en\";s:13:\"Dutch-English\";s:5:\"nl-ru\";s:13:\"Dutch-Russian\";s:5:\"no-en\";s:17:\"Norwegian-English\";s:5:\"no-ru\";s:17:\"Norwegian-Russian\";s:5:\"pl-be\";s:17:\"Polish-Belarusian\";s:5:\"pl-ru\";s:14:\"Polish-Russian\";s:5:\"pl-uk\";s:16:\"Polish-Ukrainian\";s:5:\"pt-en\";s:18:\"Portuguese-English\";s:5:\"pt-ru\";s:18:\"Portuguese-Russian\";s:5:\"ro-be\";s:19:\"Romanian-Belarusian\";s:5:\"ro-ru\";s:16:\"Romanian-Russian\";s:5:\"ro-uk\";s:18:\"Romanian-Ukrainian\";s:5:\"ru-az\";s:19:\"Russian-Azerbaijani\";s:5:\"ru-be\";s:18:\"Russian-Belarusian\";s:5:\"ru-bg\";s:17:\"Russian-Bulgarian\";s:5:\"ru-ca\";s:15:\"Russian-Catalan\";s:5:\"ru-cs\";s:13:\"Russian-Czech\";s:5:\"ru-da\";s:14:\"Russian-Danish\";s:5:\"ru-de\";s:14:\"Russian-German\";s:5:\"ru-el\";s:13:\"Russian-Greek\";s:5:\"ru-en\";s:15:\"Russian-English\";s:5:\"ru-es\";s:15:\"Russian-Spanish\";s:5:\"ru-et\";s:16:\"Russian-Estonian\";s:5:\"ru-fi\";s:15:\"Russian-Finnish\";s:5:\"ru-fr\";s:14:\"Russian-French\";s:5:\"ru-hr\";s:16:\"Russian-Croatian\";s:5:\"ru-hu\";s:17:\"Russian-Hungarian\";s:5:\"ru-hy\";s:16:\"Russian-Armenian\";s:5:\"ru-it\";s:15:\"Russian-Italian\";s:5:\"ru-lt\";s:18:\"Russian-Lithuanian\";s:5:\"ru-lv\";s:15:\"Russian-Latvian\";s:5:\"ru-mk\";s:18:\"Russian-Macedonian\";s:5:\"ru-nl\";s:13:\"Russian-Dutch\";s:5:\"ru-no\";s:17:\"Russian-Norwegian\";s:5:\"ru-pl\";s:14:\"Russian-Polish\";s:5:\"ru-pt\";s:18:\"Russian-Portuguese\";s:5:\"ru-ro\";s:16:\"Russian-Romanian\";s:5:\"ru-sk\";s:14:\"Russian-Slovak\";s:5:\"ru-sl\";s:17:\"Russian-Slovenian\";s:5:\"ru-sq\";s:16:\"Russian-Albanian\";s:5:\"ru-sr\";s:15:\"Russian-Serbian\";s:5:\"ru-sv\";s:15:\"Russian-Swedish\";s:5:\"ru-tr\";s:15:\"Russian-Turkish\";s:5:\"ru-uk\";s:17:\"Russian-Ukrainian\";s:5:\"sk-en\";s:14:\"Slovak-English\";s:5:\"sk-ru\";s:14:\"Slovak-Russian\";s:5:\"sl-en\";s:17:\"Slovenian-English\";s:5:\"sl-ru\";s:17:\"Slovenian-Russian\";s:5:\"sq-en\";s:16:\"Albanian-English\";s:5:\"sq-ru\";s:16:\"Albanian-Russian\";s:5:\"sr-be\";s:18:\"Serbian-Belarusian\";s:5:\"sr-ru\";s:15:\"Serbian-Russian\";s:5:\"sr-uk\";s:17:\"Serbian-Ukrainian\";s:5:\"sv-en\";s:15:\"Swedish-English\";s:5:\"sv-ru\";s:15:\"Swedish-Russian\";s:5:\"tr-be\";s:18:\"Turkish-Belarusian\";s:5:\"tr-de\";s:14:\"Turkish-German\";s:5:\"tr-en\";s:15:\"Turkish-English\";s:5:\"tr-ru\";s:15:\"Turkish-Russian\";s:5:\"tr-uk\";s:17:\"Turkish-Ukrainian\";s:5:\"uk-bg\";s:19:\"Ukrainian-Bulgarian\";s:5:\"uk-cs\";s:15:\"Ukrainian-Czech\";s:5:\"uk-de\";s:16:\"Ukrainian-German\";s:5:\"uk-en\";s:17:\"Ukrainian-English\";s:5:\"uk-es\";s:17:\"Ukrainian-Spanish\";s:5:\"uk-fr\";s:16:\"Ukrainian-French\";s:5:\"uk-it\";s:17:\"Ukrainian-Italian\";s:5:\"uk-pl\";s:16:\"Ukrainian-Polish\";s:5:\"uk-ro\";s:18:\"Ukrainian-Romanian\";s:5:\"uk-ru\";s:17:\"Ukrainian-Russian\";s:5:\"uk-sr\";s:17:\"Ukrainian-Serbian\";s:5:\"uk-tr\";s:17:\"Ukrainian-Turkish\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/cybersyn/cybersyn.php'), csyn_preset_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:49:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cxxx_google_translate_langs', 'a:64:{s:2:\"af\";s:9:\"Afrikaans\";s:2:\"sq\";s:8:\"Albanian\";s:2:\"ar\";s:6:\"Arabic\";s:2:\"az\";s:11:\"Azerbaijani\";s:2:\"eu\";s:6:\"Basque\";s:2:\"be\";s:10:\"Belarusian\";s:2:\"bn\";s:7:\"Bengali\";s:2:\"bg\";s:9:\"Bulgarian\";s:2:\"ca\";s:7:\"Catalan\";s:5:\"zh-CN\";s:18:\"Chinese Simplified\";s:5:\"zh-TW\";s:19:\"Chinese Traditional\";s:2:\"hr\";s:8:\"Croatian\";s:2:\"cs\";s:5:\"Czech\";s:2:\"da\";s:6:\"Danish\";s:2:\"nl\";s:5:\"Dutch\";s:2:\"en\";s:7:\"English\";s:2:\"eo\";s:9:\"Esperanto\";s:2:\"et\";s:8:\"Estonian\";s:2:\"tl\";s:8:\"Filipino\";s:2:\"fi\";s:7:\"Finnish\";s:2:\"fr\";s:6:\"French\";s:2:\"gl\";s:8:\"Galician\";s:2:\"ka\";s:8:\"Georgian\";s:2:\"de\";s:6:\"German\";s:2:\"el\";s:5:\"Greek\";s:2:\"gu\";s:8:\"Gujarati\";s:2:\"ht\";s:14:\"Haitian Creole\";s:2:\"iw\";s:6:\"Hebrew\";s:2:\"hi\";s:5:\"Hindi\";s:2:\"hu\";s:9:\"Hungarian\";s:2:\"is\";s:9:\"Icelandic\";s:2:\"id\";s:10:\"Indonesian\";s:2:\"ga\";s:5:\"Irish\";s:2:\"it\";s:7:\"Italian\";s:2:\"ja\";s:8:\"Japanese\";s:2:\"kn\";s:7:\"Kannada\";s:2:\"ko\";s:6:\"Korean\";s:2:\"la\";s:5:\"Latin\";s:2:\"lv\";s:7:\"Latvian\";s:2:\"lt\";s:10:\"Lithuanian\";s:2:\"mk\";s:10:\"Macedonian\";s:2:\"ms\";s:5:\"Malay\";s:2:\"mt\";s:7:\"Maltese\";s:2:\"no\";s:9:\"Norwegian\";s:2:\"fa\";s:7:\"Persian\";s:2:\"pl\";s:6:\"Polish\";s:2:\"pt\";s:10:\"Portuguese\";s:2:\"ro\";s:8:\"Romanian\";s:2:\"ru\";s:7:\"Russian\";s:2:\"sr\";s:7:\"Serbian\";s:2:\"sk\";s:6:\"Slovak\";s:2:\"sl\";s:9:\"Slovenian\";s:2:\"es\";s:7:\"Spanish\";s:2:\"sw\";s:7:\"Swahili\";s:2:\"sv\";s:7:\"Swedish\";s:2:\"ta\";s:5:\"Tamil\";s:2:\"te\";s:6:\"Telugu\";s:2:\"th\";s:4:\"Thai\";s:2:\"tr\";s:7:\"Turkish\";s:2:\"uk\";s:9:\"Ukrainian\";s:2:\"ur\";s:4:\"Urdu\";s:2:\"vi\";s:10:\"Vietnamese\";s:2:\"cy\";s:5:\"Welsh\";s:2:\"yi\";s:7:\"Yiddish\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cxxx_google_translate_langs' , 'a:64:{s:2:&quot;af&quot;;s:9:&quot;Afrikaans&quot;;s:2:&quot;sq&quot;;s:8:&quot;Albanian&quot;;s:2:&quot;ar&quot;;s:6:&quot;Arabic&quot;;s:2:&quot;az&quot;;s:11:&quot;Azerbaijani&quot;;s:2:&quot;eu&quot;;s:6:&quot;Basque&quot;;s:2:&quot;be&quot;;s:10:&quot;Belarusian&quot;;s:2:&quot;bn&quot;;s:7:&quot;Bengali&quot;;s:2:&quot;bg&quot;;s:9:&quot;Bulgarian&quot;;s:2:&quot;ca&quot;;s:7:&quot;Catalan&quot;;s:5:&quot;zh-CN&quot;;s:18:&quot;Chinese Simplified&quot;;s:5:&quot;zh-TW&quot;;s:19:&quot;Chinese Traditional&quot;;s:2:&quot;hr&quot;;s:8:&quot;Croatian&quot;;s:2:&quot;cs&quot;;s:5:&quot;Czech&quot;;s:2:&quot;da&quot;;s:6:&quot;Danish&quot;;s:2:&quot;nl&quot;;s:5:&quot;Dutch&quot;;s:2:&quot;en&quot;;s:7:&quot;English&quot;;s:2:&quot;eo&quot;;s:9:&quot;Esperanto&quot;;s:2:&quot;et&quot;;s:8:&quot;Estonian&quot;;s:2:&quot;tl&quot;;s:8:&quot;Filipino&quot;;s:2:&quot;fi&quot;;s:7:&quot;Finnish&quot;;s:2:&quot;fr&quot;;s:6:&quot;French&quot;;s:2:&quot;gl&quot;;s:8:&quot;Galician&quot;;s:2:&quot;ka&quot;;s:8:&quot;Georgian&quot;;s:2:&quot;de&quot;;s:6:&quot;German&quot;;s:2:&quot;el&quot;;s:5:&quot;Greek&quot;;s:2:&quot;gu&quot;;s:8:&quot;Gujarati&quot;;s:2:&quot;ht&quot;;s:14:&quot;Haitian Creole&quot;;s:2:&quot;iw&quot;;s:6:&quot;Hebrew&quot;;s:2:&quot;hi&quot;;s:5:&quot;Hindi&quot;;s:2:&quot;hu&quot;;s:9:&quot;Hungarian&quot;;s:2:&quot;is&quot;;s:9:&quot;Icelandic&quot;;s:2:&quot;id&quot;;s:10:&quot;Indonesian&quot;;s:2:&quot;ga&quot;;s:5:&quot;Irish&quot;;s:2:&quot;it&quot;;s:7:&quot;Italian&quot;;s:2:&quot;ja&quot;;s:8:&quot;Japanese&quot;;s:2:&quot;kn&quot;;s:7:&quot;Kannada&quot;;s:2:&quot;ko&quot;;s:6:&quot;Korean&quot;;s:2:&quot;la&quot;;s:5:&quot;Latin&quot;;s:2:&quot;lv&quot;;s:7:&quot;Latvian&quot;;s:2:&quot;lt&quot;;s:10:&quot;Lithuanian&quot;;s:2:&quot;mk&quot;;s:10:&quot;Macedonian&quot;;s:2:&quot;ms&quot;;s:5:&quot;Malay&quot;;s:2:&quot;mt&quot;;s:7:&quot;Maltese&quot;;s:2:&quot;no&quot;;s:9:&quot;Norwegian&quot;;s:2:&quot;fa&quot;;s:7:&quot;Persian&quot;;s:2:&quot;pl&quot;;s:6:&quot;Polish&quot;;s:2:&quot;pt&quot;;s:10:&quot;Portuguese&quot;;s:2:&quot;ro&quot;;s:8:&quot;Romanian&quot;;s:2:&quot;ru&quot;;s:7:&quot;Russian&quot;;s:2:&quot;sr&quot;;s:7:&quot;Serbian&quot;;s:2:&quot;sk&quot;;s:6:&quot;Slovak&quot;;s:2:&quot;sl&quot;;s:9:&quot;Slovenian&quot;;s:2:&quot;es&quot;;s:7:&quot;Spanish&quot;;s:2:&quot;sw&quot;;s:7:&quot;Swahili&quot;;s:2:&quot;sv&quot;;s:7:&quot;Swedish&quot;;s:2:&quot;ta&quot;;s:5:&quot;Tamil&quot;;s:2:&quot;te&quot;;s:6:&quot;Telugu&quot;;s:2:&quot;th&quot;;s:4:&quot;Thai&quot;;s:2:&quot;tr&quot;;s:7:&quot;Turkish&quot;;s:2:&quot;uk&quot;;s:9:&quot;Ukrainian&quot;;s:2:&quot;ur&quot;;s:4:&quot;Urdu&quot;;s:2:&quot;vi&quot;;s:10:&quot;Vietnamese&quot;;s:2:&quot;cy&quot;;s:5:&quot;Welsh&quot;;s:2:&quot;yi&quot;;s:7:&quot;Yiddish&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('cxxx_google_tra...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/cybersyn/cybersyn.php(568): update_option('cxxx_google_tra...', Array)
-#6 /wordpress/wp-content/plugins/cybersyn/cybersyn.php(2793): csyn_preset_options()
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cybersyn/cybers...')
-#9 /internal/eval.php(20): activate_plugin('cybersyn/cybers...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cxxx_google_translate_langs', 'a:64:{s:2:\"af\";s:9:\"Afrikaans\";s:2:\"sq\";s:8:\"Albanian\";s:2:\"ar\";s:6:\"Arabic\";s:2:\"az\";s:11:\"Azerbaijani\";s:2:\"eu\";s:6:\"Basque\";s:2:\"be\";s:10:\"Belarusian\";s:2:\"bn\";s:7:\"Bengali\";s:2:\"bg\";s:9:\"Bulgarian\";s:2:\"ca\";s:7:\"Catalan\";s:5:\"zh-CN\";s:18:\"Chinese Simplified\";s:5:\"zh-TW\";s:19:\"Chinese Traditional\";s:2:\"hr\";s:8:\"Croatian\";s:2:\"cs\";s:5:\"Czech\";s:2:\"da\";s:6:\"Danish\";s:2:\"nl\";s:5:\"Dutch\";s:2:\"en\";s:7:\"English\";s:2:\"eo\";s:9:\"Esperanto\";s:2:\"et\";s:8:\"Estonian\";s:2:\"tl\";s:8:\"Filipino\";s:2:\"fi\";s:7:\"Finnish\";s:2:\"fr\";s:6:\"French\";s:2:\"gl\";s:8:\"Galician\";s:2:\"ka\";s:8:\"Georgian\";s:2:\"de\";s:6:\"German\";s:2:\"el\";s:5:\"Greek\";s:2:\"gu\";s:8:\"Gujarati\";s:2:\"ht\";s:14:\"Haitian Creole\";s:2:\"iw\";s:6:\"Hebrew\";s:2:\"hi\";s:5:\"Hindi\";s:2:\"hu\";s:9:\"Hungarian\";s:2:\"is\";s:9:\"Icelandic\";s:2:\"id\";s:10:\"Indonesian\";s:2:\"ga\";s:5:\"Irish\";s:2:\"it\";s:7:\"Italian\";s:2:\"ja\";s:8:\"Japanese\";s:2:\"kn\";s:7:\"Kannada\";s:2:\"ko\";s:6:\"Korean\";s:2:\"la\";s:5:\"Latin\";s:2:\"lv\";s:7:\"Latvian\";s:2:\"lt\";s:10:\"Lithuanian\";s:2:\"mk\";s:10:\"Macedonian\";s:2:\"ms\";s:5:\"Malay\";s:2:\"mt\";s:7:\"Maltese\";s:2:\"no\";s:9:\"Norwegian\";s:2:\"fa\";s:7:\"Persian\";s:2:\"pl\";s:6:\"Polish\";s:2:\"pt\";s:10:\"Portuguese\";s:2:\"ro\";s:8:\"Romanian\";s:2:\"ru\";s:7:\"Russian\";s:2:\"sr\";s:7:\"Serbian\";s:2:\"sk\";s:6:\"Slovak\";s:2:\"sl\";s:9:\"Slovenian\";s:2:\"es\";s:7:\"Spanish\";s:2:\"sw\";s:7:\"Swahili\";s:2:\"sv\";s:7:\"Swedish\";s:2:\"ta\";s:5:\"Tamil\";s:2:\"te\";s:6:\"Telugu\";s:2:\"th\";s:4:\"Thai\";s:2:\"tr\";s:7:\"Turkish\";s:2:\"uk\";s:9:\"Ukrainian\";s:2:\"ur\";s:4:\"Urdu\";s:2:\"vi\";s:10:\"Vietnamese\";s:2:\"cy\";s:5:\"Welsh\";s:2:\"yi\";s:7:\"Yiddish\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/cybersyn/cybersyn.php'), csyn_preset_options, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:49:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cxxx_feed_options', 'a:32:{s:8:\"interval\";i:1440;s:9:\"max_items\";i:1;s:11:\"post_status\";s:7:\"publish\";s:14:\"comment_status\";s:4:\"open\";s:11:\"ping_status\";s:6:\"closed\";s:11:\"post_author\";i:1;s:16:\"synonymizer_mode\";i:0;s:9:\"base_date\";s:4:\"post\";s:22:\"duplicate_check_method\";s:14:\"guid_and_title\";s:18:\"undefined_category\";s:11:\"use_default\";s:11:\"create_tags\";s:0:\"\";s:9:\"post_tags\";s:0:\"\";s:13:\"post_category\";a:0:{}s:8:\"date_min\";i:0;s:8:\"date_max\";i:0;s:24:\"insert_media_attachments\";s:2:\"no\";s:13:\"set_thumbnail\";s:8:\"no_thumb\";s:16:\"convert_encoding\";s:0:\"\";s:17:\"require_thumbnail\";s:0:\"\";s:12:\"store_images\";s:0:\"\";s:11:\"post_footer\";s:0:\"\";s:21:\"extract_full_articles\";s:0:\"\";s:13:\"wpml_language\";s:0:\"\";s:20:\"include_post_footers\";s:0:\"\";s:16:\"shorten_excerpts\";s:0:\"\";s:12:\"embed_videos\";s:0:\"\";s:10:\"translator\";s:4:\"none\";s:22:\"yandex_translation_dir\";s:0:\"\";s:14:\"yandex_api_key\";s:0:\"\";s:25:\"google_translation_source\";s:0:\"\";s:25:\"google_translation_target\";s:0:\"\";s:14:\"google_api_key\";s:0:\"\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cxxx_feed_options' , 'a:32:{s:8:&quot;interval&quot;;i:1440;s:9:&quot;max_items&quot;;i:1;s:11:&quot;post_status&quot;;s:7:&quot;publish&quot;;s:14:&quot;comment_status&quot;;s:4:&quot;open&quot;;s:11:&quot;ping_status&quot;;s:6:&quot;closed&quot;;s:11:&quot;post_author&quot;;i:1;s:16:&quot;synonymizer_mode&quot;;i:0;s:9:&quot;base_date&quot;;s:4:&quot;post&quot;;s:22:&quot;duplicate_check_method&quot;;s:14:&quot;guid_and_title&quot;;s:18:&quot;undefined_category&quot;;s:11:&quot;use_default&quot;;s:11:&quot;create_tags&quot;;s:0:&quot;&quot;;s:9:&quot;post_tags&quot;;s:0:&quot;&quot;;s:13:&quot;post_category&quot;;a:0:{}s:8:&quot;date_min&quot;;i:0;s:8:&quot;date_max&quot;;i:0;s:24:&quot;insert_media_attachments&quot;;s:2:&quot;no&quot;;s:13:&quot;set_thumbnail&quot;;s:8:&quot;no_thumb&quot;;s:16:&quot;convert_encoding&quot;;s:0:&quot;
+Error: [10-Apr-2025 12:47:53 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "replace_meta_widget" in /wordpress/wp-content/plugins/customize-meta-widget/customize-meta-widget.php:21
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('customize-meta-...')
+#2 /internal/eval.php(20): activate_plugin('customize-meta-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/customize-meta-widget/customize-meta-widget.php on line 21
+[10-Apr-2025 12:48:02 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "replace_meta_widget" in /wordpress/wp-content/plugins/customize-meta-widget/customize-meta-widget.php:21
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('customize-meta-...')
+#2 /internal/eval.php(20): activate_plugin('customize-meta-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/customize-meta-widget/customize-meta-widget.php on line 21
+[10-Apr-2025 12:48:11 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "replace_meta_widget" in /wordpress/wp-content/plugins/customize-meta-widget/customize-meta-widget.php:21
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('customize-meta-...')
+#2 /internal/eval.php(20): activate_plugin('customize-meta-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/customize-meta-widget/customize-meta-widget.php on line 21
+[10-Apr-2025 12:49:57 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 12:50:07 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 12:50:16 UTC] PHP Deprecated:  Function add_option was called with an argument that is <strong>deprecated</strong> since version 2.3.0 with no alternative available. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 12:50:49 UTC] PHP Warning:  Undefined array key "comment" in /wordpress/wp-content/plugins/comment-control-by-word-recognition/AvoidUnwantedComments.php on line 135
+[10-Apr-2025 12:50:58 UTC] PHP Warning:  Undefined array key "comment" in /wordpress/wp-content/plugins/comment-control-by-word-recognition/AvoidUnwantedComments.php on line 135
+[10-Apr-2025 12:51:08 UTC] PHP Warning:  Undefined array key "comment" in /wordpress/wp-content/plugins/comment-control-by-word-recognition/AvoidUnwantedComments.php on line 135
+[10-Apr-2025 12:52:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/craptoolcom-software-vote-widget/craptool_widget.php:78
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('craptoolcom-sof...')
+#2 /internal/eval.php(20): activate_plugin('craptoolcom-sof...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/craptoolcom-software-vote-widget/craptool_widget.php on line 78
+[10-Apr-2025 12:52:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/craptoolcom-software-vote-widget/craptool_widget.php:78
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('craptoolcom-sof...')
+#2 /internal/eval.php(20): activate_plugin('craptoolcom-sof...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/craptoolcom-software-vote-widget/craptool_widget.php on line 78
+[10-Apr-2025 12:52:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/craptoolcom-software-vote-widget/craptool_widget.php:78
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('craptoolcom-sof...')
+#2 /internal/eval.php(20): activate_plugin('craptoolcom-sof...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/craptoolcom-software-vote-widget/craptool_widget.php on line 78
+[10-Apr-2025 12:55:35 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 760
+[10-Apr-2025 12:55:35 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 761
+[10-Apr-2025 12:55:35 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 762
+[10-Apr-2025 12:55:35 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 763
+[10-Apr-2025 12:55:36 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 760
+[10-Apr-2025 12:55:36 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 761
+[10-Apr-2025 12:55:36 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 762
+[10-Apr-2025 12:55:36 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 763
+[10-Apr-2025 12:55:36 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 760
+[10-Apr-2025 12:55:36 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 761
+[10-Apr-2025 12:55:36 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 762
+[10-Apr-2025 12:55:36 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 763
+[10-Apr-2025 12:55:36 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 760
+[10-Apr-2025 12:55:36 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 761
+[10-Apr-2025 12:55:36 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 762
+[10-Apr-2025 12:55:36 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 763
+[10-Apr-2025 12:55:47 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 760
+[10-Apr-2025 12:55:47 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 761
+[10-Apr-2025 12:55:47 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 762
+[10-Apr-2025 12:55:47 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 763
+[10-Apr-2025 12:55:47 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 760
+[10-Apr-2025 12:55:47 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 761
+[10-Apr-2025 12:55:47 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 762
+[10-Apr-2025 12:55:47 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 763
+[10-Apr-2025 12:55:47 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 760
+[10-Apr-2025 12:55:47 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 761
+[10-Apr-2025 12:55:47 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 762
+[10-Apr-2025 12:55:47 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 763
+[10-Apr-2025 12:55:47 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 760
+[10-Apr-2025 12:55:47 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 761
+[10-Apr-2025 12:55:47 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 762
+[10-Apr-2025 12:55:47 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 763
+[10-Apr-2025 12:55:58 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 760
+[10-Apr-2025 12:55:58 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 761
+[10-Apr-2025 12:55:58 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 762
+[10-Apr-2025 12:55:58 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 763
+[10-Apr-2025 12:55:58 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 760
+[10-Apr-2025 12:55:58 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 761
+[10-Apr-2025 12:55:58 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 762
+[10-Apr-2025 12:55:58 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 763
+[10-Apr-2025 12:55:58 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 760
+[10-Apr-2025 12:55:58 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 761
+[10-Apr-2025 12:55:58 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 762
+[10-Apr-2025 12:55:58 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 763
+[10-Apr-2025 12:55:58 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 760
+[10-Apr-2025 12:55:58 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 761
+[10-Apr-2025 12:55:58 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 762
+[10-Apr-2025 12:55:58 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/cloud-manager/cloud-manager.php on line 763
+[10-Apr-2025 12:57:11 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, class cow_contentoverview_admin does not have a method "activation_hook" in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_conten...', false)
+#3 /internal/eval.php(20): activate_plugin('contentoverview...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[10-Apr-2025 12:57:18 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, class cow_contentoverview_admin does not have a method "activation_hook" in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_conten...', false)
+#3 /internal/eval.php(20): activate_plugin('contentoverview...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[10-Apr-2025 12:57:26 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, class cow_contentoverview_admin does not have a method "activation_hook" in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_conten...', false)
+#3 /internal/eval.php(20): activate_plugin('contentoverview...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"contentoverview"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
