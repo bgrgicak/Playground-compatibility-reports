@@ -2,242 +2,182 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 11:24:04 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "CYSTEME_FINDER" in /wordpress/wp-content/plugins/cysteme-finder/cysteme-finder.php:13
+Error: [10-Apr-2025 17:48:40 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-camoo-sms</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:48:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_camoo_sms_subscribes MODIFY name VARCHAR(250)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/camoo-sms/includes/class-wpsms-install.php(134): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/camoo-sms/includes/class-wpsms-install.php(105): CAMOO_SMS\Install::upgrade()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): CAMOO_SMS\Install::install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_camoo-...', false)
+#7 /internal/eval.php(20): activate_plugin('camoo-sms/camoo...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_camoo_sms_subscribes MODIFY name VARCHAR(250) made by activate_plugin, do_action('activate_camoo-sms/camoo-sms.php'), WP_Hook->do_action, WP_Hook->apply_filters, CAMOO_SMS\Install::install, CAMOO_SMS\Install::upgrade, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 17:48:56 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-camoo-sms</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:49:10 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE wp_camoo_sms_subscribes MODIFY name VARCHAR(250)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: Unknown operation: MODIFY.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-content/plugins/camoo-sms/includes/class-wpsms-install.php(134): WP_SQLite_DB->query('ALTER TABLE wp_...')
+#2 /wordpress/wp-content/plugins/camoo-sms/includes/class-wpsms-install.php(105): CAMOO_SMS\Install::upgrade()
+#3 /wordpress/wp-includes/class-wp-hook.php(324): CAMOO_SMS\Install::install(false)
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_camoo-...', false)
+#7 /internal/eval.php(20): activate_plugin('camoo-sms/camoo...')
+#8 {main}</pre>
+ for query ALTER TABLE wp_camoo_sms_subscribes MODIFY name VARCHAR(250) made by activate_plugin, do_action('activate_camoo-sms/camoo-sms.php'), WP_Hook->do_action, WP_Hook->apply_filters, CAMOO_SMS\Install::install, CAMOO_SMS\Install::upgrade, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 17:49:11 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>wp-camoo-sms</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:51:14 UTC] PHP Deprecated:  Required parameter $items_per_page follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/xmldb.inc.php on line 355
+[10-Apr-2025 17:51:14 UTC] PHP Deprecated:  Required parameter $get_mcat follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/xmldb.inc.php on line 355
+[10-Apr-2025 17:51:14 UTC] PHP Deprecated:  Required parameter $get_scat follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/xmldb.inc.php on line 355
+[10-Apr-2025 17:51:14 UTC] PHP Deprecated:  Required parameter $review_url follows optional parameter $read_review in /wordpress/wp-content/plugins/clickbank-storefront/functions.inc.php on line 110
+[10-Apr-2025 17:51:14 UTC] PHP Deprecated:  Required parameter $get_mcat follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/functions.inc.php on line 412
+[10-Apr-2025 17:51:14 UTC] PHP Deprecated:  Required parameter $get_scat follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/functions.inc.php on line 412
+[10-Apr-2025 17:51:14 UTC] PHP Deprecated:  Required parameter $show_title follows optional parameter $product_number in /wordpress/wp-content/plugins/clickbank-storefront/functions.inc.php on line 729
+[10-Apr-2025 17:51:14 UTC] PHP Warning:  The magic method custom_menu_items::__wakeup() must have public visibility in /wordpress/wp-content/plugins/clickbank-storefront/cb_menu.inc.php on line 29
+[10-Apr-2025 17:51:14 UTC] PHP Warning:  Undefined array key "cs_image_descr_layout" in /wordpress/wp-content/plugins/clickbank-storefront/clickbank-storefronts.php on line 384
+[10-Apr-2025 17:51:15 UTC] PHP Warning:  Problem while connecting to clickbankproads.com. Clickbank Storefronts can't work properly. in /wordpress/wp-content/plugins/clickbank-storefront/xmldb.inc.php on line 942
+[10-Apr-2025 17:51:15 UTC] PHP Deprecated:  Function wpdb::escape is <strong>deprecated</strong> since version 3.6.0! Use wpdb::prepare() or esc_sql() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:51:15 UTC] Automatic updates starting...
+[10-Apr-2025 17:51:17 UTC] PHP Deprecated:  Required parameter $items_per_page follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/xmldb.inc.php on line 355
+[10-Apr-2025 17:51:17 UTC] PHP Deprecated:  Required parameter $get_mcat follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/xmldb.inc.php on line 355
+[10-Apr-2025 17:51:17 UTC] PHP Deprecated:  Required parameter $get_scat follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/xmldb.inc.php on line 355
+[10-Apr-2025 17:51:17 UTC] PHP Deprecated:  Required parameter $review_url follows optional parameter $read_review in /wordpress/wp-content/plugins/clickbank-storefront/functions.inc.php on line 110
+[10-Apr-2025 17:51:17 UTC] PHP Deprecated:  Required parameter $get_mcat follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/functions.inc.php on line 412
+[10-Apr-2025 17:51:17 UTC] PHP Deprecated:  Required parameter $get_scat follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/functions.inc.php on line 412
+[10-Apr-2025 17:51:17 UTC] PHP Deprecated:  Required parameter $show_title follows optional parameter $product_number in /wordpress/wp-content/plugins/clickbank-storefront/functions.inc.php on line 729
+[10-Apr-2025 17:51:17 UTC] PHP Warning:  The magic method custom_menu_items::__wakeup() must have public visibility in /wordpress/wp-content/plugins/clickbank-storefront/cb_menu.inc.php on line 29
+[10-Apr-2025 17:51:17 UTC] PHP Warning:  Undefined array key "cs_image_descr_layout" in /wordpress/wp-content/plugins/clickbank-storefront/clickbank-storefronts.php on line 384
+[10-Apr-2025 17:51:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wp_validate_redirect() in /wordpress/wp-includes/http.php:655
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cysteme-finder/...')
-#2 /internal/eval.php(20): activate_plugin('cysteme-finder/...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/cysteme-finder/cysteme-finder.php on line 13
-[09-Apr-2025 11:24:11 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "CYSTEME_FINDER" in /wordpress/wp-content/plugins/cysteme-finder/cysteme-finder.php:13
+#0 /wordpress/wp-includes/class-wp-hook.php(326): allowed_http_request_hosts(false, 'cbproads.com')
+#1 /wordpress/wp-includes/plugin.php(205): WP_Hook->apply_filters(false, Array)
+#2 /wordpress/wp-includes/http.php(607): apply_filters('http_request_ho...', false, 'cbproads.com', 'https://cbproad...')
+#3 /wordpress/wp-includes/class-wp-http.php(280): wp_http_validate_url('https://cbproad...')
+#4 /wordpress/wp-includes/http.php(53): WP_Http->request('https://cbproad...', Array)
+#5 /wordpress/wp-includes/class-wp-simplepie-file.php(69): wp_safe_remote_request('https://cbproad...', Array)
+#6 [internal function]: WP_SimplePie_File->__construct('https://cbproad...', 10, 5, Array, 'SimplePie/1.8.0...', false, Array)
+#7 /wordpress/wp-includes/SimplePie/src/Registry.php(228): ReflectionClass->newInstanceArgs(Array)
+#8 /wordpress/wp-includes/SimplePie/src/SimplePie.php(1817): SimplePie\Registry->create('SimplePie\\File', Array)
+#9 /wordpress/wp-includes/SimplePie/src/SimplePie.php(1589): SimplePie\SimplePie->fetch_data(Object(SimplePie\Cache\BaseDataCache))
+#10 /wordpress/wp-includes/feed.php(844): SimplePie\SimplePie->init()
+#11 /wordpress/wp-content/plugins/clickbank-storefront/xmldb.inc.php(937): fetch_feed('https://cbproad...')
+#12 /wordpress/wp-content/plugins/clickbank-storefront/clickbank-storefronts.php(460): cs_get_categories(NULL)
+#13 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#14 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#15 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#16 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#17 {main}
+  thrown in /wordpress/wp-includes/http.php on line 655
+[10-Apr-2025 17:51:24 UTC] PHP Deprecated:  Required parameter $items_per_page follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/xmldb.inc.php on line 355
+[10-Apr-2025 17:51:24 UTC] PHP Deprecated:  Required parameter $get_mcat follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/xmldb.inc.php on line 355
+[10-Apr-2025 17:51:24 UTC] PHP Deprecated:  Required parameter $get_scat follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/xmldb.inc.php on line 355
+[10-Apr-2025 17:51:24 UTC] PHP Deprecated:  Required parameter $review_url follows optional parameter $read_review in /wordpress/wp-content/plugins/clickbank-storefront/functions.inc.php on line 110
+[10-Apr-2025 17:51:24 UTC] PHP Deprecated:  Required parameter $get_mcat follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/functions.inc.php on line 412
+[10-Apr-2025 17:51:24 UTC] PHP Deprecated:  Required parameter $get_scat follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/functions.inc.php on line 412
+[10-Apr-2025 17:51:24 UTC] PHP Deprecated:  Required parameter $show_title follows optional parameter $product_number in /wordpress/wp-content/plugins/clickbank-storefront/functions.inc.php on line 729
+[10-Apr-2025 17:51:24 UTC] PHP Warning:  The magic method custom_menu_items::__wakeup() must have public visibility in /wordpress/wp-content/plugins/clickbank-storefront/cb_menu.inc.php on line 29
+[10-Apr-2025 17:51:25 UTC] PHP Warning:  Undefined array key "cs_image_descr_layout" in /wordpress/wp-content/plugins/clickbank-storefront/clickbank-storefronts.php on line 384
+[10-Apr-2025 17:51:25 UTC] PHP Warning:  Problem while connecting to clickbankproads.com. Clickbank Storefronts can't work properly. in /wordpress/wp-content/plugins/clickbank-storefront/xmldb.inc.php on line 942
+[10-Apr-2025 17:51:25 UTC] PHP Deprecated:  Function wpdb::escape is <strong>deprecated</strong> since version 3.6.0! Use wpdb::prepare() or esc_sql() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:51:31 UTC] PHP Deprecated:  Required parameter $items_per_page follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/xmldb.inc.php on line 355
+[10-Apr-2025 17:51:31 UTC] PHP Deprecated:  Required parameter $get_mcat follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/xmldb.inc.php on line 355
+[10-Apr-2025 17:51:31 UTC] PHP Deprecated:  Required parameter $get_scat follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/xmldb.inc.php on line 355
+[10-Apr-2025 17:51:31 UTC] PHP Deprecated:  Required parameter $review_url follows optional parameter $read_review in /wordpress/wp-content/plugins/clickbank-storefront/functions.inc.php on line 110
+[10-Apr-2025 17:51:31 UTC] PHP Deprecated:  Required parameter $get_mcat follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/functions.inc.php on line 412
+[10-Apr-2025 17:51:31 UTC] PHP Deprecated:  Required parameter $get_scat follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/functions.inc.php on line 412
+[10-Apr-2025 17:51:31 UTC] PHP Deprecated:  Required parameter $show_title follows optional parameter $product_number in /wordpress/wp-content/plugins/clickbank-storefront/functions.inc.php on line 729
+[10-Apr-2025 17:51:31 UTC] PHP Warning:  The magic method custom_menu_items::__wakeup() must have public visibility in /wordpress/wp-content/plugins/clickbank-storefront/cb_menu.inc.php on line 29
+[10-Apr-2025 17:51:31 UTC] PHP Warning:  Undefined array key "cs_image_descr_layout" in /wordpress/wp-content/plugins/clickbank-storefront/clickbank-storefronts.php on line 384
+[10-Apr-2025 17:51:31 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wp_validate_redirect() in /wordpress/wp-includes/http.php:655
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cysteme-finder/...')
-#2 /internal/eval.php(20): activate_plugin('cysteme-finder/...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/cysteme-finder/cysteme-finder.php on line 13
-[09-Apr-2025 11:24:19 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "CYSTEME_FINDER" in /wordpress/wp-content/plugins/cysteme-finder/cysteme-finder.php:13
+#0 /wordpress/wp-includes/class-wp-hook.php(326): allowed_http_request_hosts(false, 'cbproads.com')
+#1 /wordpress/wp-includes/plugin.php(205): WP_Hook->apply_filters(false, Array)
+#2 /wordpress/wp-includes/http.php(607): apply_filters('http_request_ho...', false, 'cbproads.com', 'https://cbproad...')
+#3 /wordpress/wp-includes/class-wp-http.php(280): wp_http_validate_url('https://cbproad...')
+#4 /wordpress/wp-includes/http.php(53): WP_Http->request('https://cbproad...', Array)
+#5 /wordpress/wp-includes/class-wp-simplepie-file.php(69): wp_safe_remote_request('https://cbproad...', Array)
+#6 [internal function]: WP_SimplePie_File->__construct('https://cbproad...', 10, 5, Array, 'SimplePie/1.8.0...', false, Array)
+#7 /wordpress/wp-includes/SimplePie/src/Registry.php(228): ReflectionClass->newInstanceArgs(Array)
+#8 /wordpress/wp-includes/SimplePie/src/SimplePie.php(1817): SimplePie\Registry->create('SimplePie\\File', Array)
+#9 /wordpress/wp-includes/SimplePie/src/SimplePie.php(1589): SimplePie\SimplePie->fetch_data(Object(SimplePie\Cache\BaseDataCache))
+#10 /wordpress/wp-includes/feed.php(844): SimplePie\SimplePie->init()
+#11 /wordpress/wp-content/plugins/clickbank-storefront/xmldb.inc.php(937): fetch_feed('https://cbproad...')
+#12 /wordpress/wp-content/plugins/clickbank-storefront/clickbank-storefronts.php(460): cs_get_categories(NULL)
+#13 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#14 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#15 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#16 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#17 {main}
+  thrown in /wordpress/wp-includes/http.php on line 655
+[10-Apr-2025 17:51:39 UTC] PHP Deprecated:  Required parameter $items_per_page follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/xmldb.inc.php on line 355
+[10-Apr-2025 17:51:39 UTC] PHP Deprecated:  Required parameter $get_mcat follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/xmldb.inc.php on line 355
+[10-Apr-2025 17:51:39 UTC] PHP Deprecated:  Required parameter $get_scat follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/xmldb.inc.php on line 355
+[10-Apr-2025 17:51:39 UTC] PHP Deprecated:  Required parameter $review_url follows optional parameter $read_review in /wordpress/wp-content/plugins/clickbank-storefront/functions.inc.php on line 110
+[10-Apr-2025 17:51:39 UTC] PHP Deprecated:  Required parameter $get_mcat follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/functions.inc.php on line 412
+[10-Apr-2025 17:51:39 UTC] PHP Deprecated:  Required parameter $get_scat follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/functions.inc.php on line 412
+[10-Apr-2025 17:51:39 UTC] PHP Deprecated:  Required parameter $show_title follows optional parameter $product_number in /wordpress/wp-content/plugins/clickbank-storefront/functions.inc.php on line 729
+[10-Apr-2025 17:51:39 UTC] PHP Warning:  The magic method custom_menu_items::__wakeup() must have public visibility in /wordpress/wp-content/plugins/clickbank-storefront/cb_menu.inc.php on line 29
+[10-Apr-2025 17:51:39 UTC] PHP Warning:  Undefined array key "cs_image_descr_layout" in /wordpress/wp-content/plugins/clickbank-storefront/clickbank-storefronts.php on line 384
+[10-Apr-2025 17:51:39 UTC] PHP Warning:  Problem while connecting to clickbankproads.com. Clickbank Storefronts can't work properly. in /wordpress/wp-content/plugins/clickbank-storefront/xmldb.inc.php on line 942
+[10-Apr-2025 17:51:39 UTC] PHP Deprecated:  Function wpdb::escape is <strong>deprecated</strong> since version 3.6.0! Use wpdb::prepare() or esc_sql() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 17:51:41 UTC] PHP Deprecated:  Required parameter $items_per_page follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/xmldb.inc.php on line 355
+[10-Apr-2025 17:51:41 UTC] PHP Deprecated:  Required parameter $get_mcat follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/xmldb.inc.php on line 355
+[10-Apr-2025 17:51:41 UTC] PHP Deprecated:  Required parameter $get_scat follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/xmldb.inc.php on line 355
+[10-Apr-2025 17:51:41 UTC] PHP Deprecated:  Required parameter $review_url follows optional parameter $read_review in /wordpress/wp-content/plugins/clickbank-storefront/functions.inc.php on line 110
+[10-Apr-2025 17:51:41 UTC] PHP Deprecated:  Required parameter $get_mcat follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/functions.inc.php on line 412
+[10-Apr-2025 17:51:41 UTC] PHP Deprecated:  Required parameter $get_scat follows optional parameter $criteria in /wordpress/wp-content/plugins/clickbank-storefront/functions.inc.php on line 412
+[10-Apr-2025 17:51:41 UTC] PHP Deprecated:  Required parameter $show_title follows optional parameter $product_number in /wordpress/wp-content/plugins/clickbank-storefront/functions.inc.php on line 729
+[10-Apr-2025 17:51:41 UTC] PHP Warning:  The magic method custom_menu_items::__wakeup() must have public visibility in /wordpress/wp-content/plugins/clickbank-storefront/cb_menu.inc.php on line 29
+[10-Apr-2025 17:51:41 UTC] PHP Warning:  Undefined array key "cs_image_descr_layout" in /wordpress/wp-content/plugins/clickbank-storefront/clickbank-storefronts.php on line 384
+[10-Apr-2025 17:51:41 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wp_validate_redirect() in /wordpress/wp-includes/http.php:655
 Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('cysteme-finder/...')
-#2 /internal/eval.php(20): activate_plugin('cysteme-finder/...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/cysteme-finder/cysteme-finder.php on line 13
-[09-Apr-2025 11:24:27 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:24:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:24:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:24:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:24:54 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:24:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:24:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:24:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:25:21 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('chamameLiveChatVersion', '0.2.1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'chamameLiveChatVersion' , '0.2.1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('chamameLiveChat...', '0.2.1', '', 'auto')
-#5 /wordpress/wp-content/plugins/chamame-live-chat/libs/ChamameConfiguration.php(69): update_option('chamameLiveChat...', '0.2.1')
-#6 /wordpress/wp-content/plugins/chamame-live-chat/libs/ChamameConfiguration.php(33): ChamameConfiguration->setVersion('0.2.1')
-#7 /wordpress/wp-content/plugins/chamame-live-chat/libs/ChamameBuilder.php(10): ChamameConfiguration->__construct('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/chamame-live-chat/libs/ChamameBuilderFactory.php(15): ChamameBuilder->__construct('/wordpress/wp-c...')
-#9 /wordpress/wp-content/plugins/chamame-live-chat/chamame-live-chat.php(28): ChamameBuilderFactory::createBuilder('/wordpress/wp-c...')
-#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('chamame-live-ch...')
-#12 /internal/eval.php(20): activate_plugin('chamame-live-ch...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('chamameLiveChatVersion', '0.2.1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/chamame-live-chat/chamame-live-chat.php'), ChamameBuilderFactory::createBuilder, ChamameBuilder->__construct, ChamameConfiguration->__construct, ChamameConfiguration->setVersion, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Undefined array key "autoload" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:25:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:25:23 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('chamameLiveChatVersion', '0.2.1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'chamameLiveChatVersion' , '0.2.1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('chamameLiveChat...', '0.2.1', '', 'auto')
-#5 /wordpress/wp-content/plugins/chamame-live-chat/libs/ChamameConfiguration.php(69): update_option('chamameLiveChat...', '0.2.1')
-#6 /wordpress/wp-content/plugins/chamame-live-chat/libs/ChamameConfiguration.php(33): ChamameConfiguration->setVersion('0.2.1')
-#7 /wordpress/wp-content/plugins/chamame-live-chat/libs/ChamameBuilder.php(10): ChamameConfiguration->__construct('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/chamame-live-chat/libs/ChamameBuilderFactory.php(18): ChamameBuilder->__construct('/wordpress/wp-c...')
-#9 /wordpress/wp-content/plugins/chamame-live-chat/chamame-live-chat.php(28): ChamameBuilderFactory::createBuilder('/wordpress/wp-c...')
-#10 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('chamameLiveChatVersion', '0.2.1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/chamame-live-chat/chamame-live-chat.php'), ChamameBuilderFactory::createBuilder, ChamameBuilder->__construct, ChamameConfiguration->__construct, ChamameConfiguration->setVersion, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:26:09 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('CAUoptions', 'a:11:{s:15:\"show_menu_posts\";s:1:\"1\";s:15:\"show_menu_media\";s:1:\"1\";s:20:\"show_menu_page_links\";s:1:\"1\";s:15:\"show_menu_pages\";s:1:\"1\";s:18:\"show_menu_comments\";s:1:\"1\";s:15:\"show_menu_users\";s:1:\"1\";s:17:\"show_menu_plugins\";s:1:\"1\";s:16:\"show_menu_themes\";s:1:\"1\";s:15:\"show_menu_tools\";s:1:\"1\";s:19:\"show_menu_dashboard\";s:1:\"1\";s:10:\"db_version\";s:3:\"1.1\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'CAUoptions' , 'a:11:{s:15:&quot;show_menu_posts&quot;;s:1:&quot;1&quot;;s:15:&quot;show_menu_media&quot;;s:1:&quot;1&quot;;s:20:&quot;show_menu_page_links&quot;;s:1:&quot;1&quot;;s:15:&quot;show_menu_pages&quot;;s:1:&quot;1&quot;;s:18:&quot;show_menu_comments&quot;;s:1:&quot;1&quot;;s:15:&quot;show_menu_users&quot;;s:1:&quot;1&quot;;s:17:&quot;show_menu_plugins&quot;;s:1:&quot;1&quot;;s:16:&quot;show_menu_themes&quot;;s:1:&quot;1&quot;;s:15:&quot;show_menu_tools&quot;;s:1:&quot;1&quot;;s:19:&quot;show_menu_dashboard&quot;;s:1:&quot;1&quot;;s:10:&quot;db_version&quot;;s:3:&quot;1.1&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('CAUoptions', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/clean-admin-ui/clean-admin-ui.php(59): update_option('CAUoptions', Array)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): onCAUActivation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_clean-...', false)
-#10 /internal/eval.php(20): activate_plugin('clean-admin-ui/...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('CAUoptions', 'a:11:{s:15:\"show_menu_posts\";s:1:\"1\";s:15:\"show_menu_media\";s:1:\"1\";s:20:\"show_menu_page_links\";s:1:\"1\";s:15:\"show_menu_pages\";s:1:\"1\";s:18:\"show_menu_comments\";s:1:\"1\";s:15:\"show_menu_users\";s:1:\"1\";s:17:\"show_menu_plugins\";s:1:\"1\";s:16:\"show_menu_themes\";s:1:\"1\";s:15:\"show_menu_tools\";s:1:\"1\";s:19:\"show_menu_dashboard\";s:1:\"1\";s:10:\"db_version\";s:3:\"1.1\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_clean-admin-ui/clean-admin-ui.php'), WP_Hook->do_action, WP_Hook->apply_filters, onCAUActivation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:26:09 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:26:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:26:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:26:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:26:37 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:26:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:26:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:26:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:26:38 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>cloage</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:26:38 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cloage_rewrite_version_old', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'cloage_rewrite_version_old' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('cloage_rewrite_...', 1, '', 'auto')
-#5 /wordpress/wp-content/plugins/cloage/includes/Media/Rewrite.php(35): update_option('cloage_rewrite_...', 1)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): Cloage\Media\Rewrite->add_rewrite('')
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(704): do_action('init')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('cloage_rewrite_version_old', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, Cloage\Media\Rewrite->add_rewrite, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 11:26:38 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:26:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:26:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:26:38 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:26:47 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>cloage</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:26:56 UTC] PHP Notice:  Function _load_textdomain_just_in_time was called <strong>incorrectly</strong>. Translation loading for the <code>cloage</code> domain was triggered too early. This is usually an indicator for some code in the plugin or theme running too early. Translations should be loaded at the <code>init</code> action or later. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 6.7.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 11:27:05 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:27:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:27:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:27:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:27:31 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 11:27:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 11:27:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 11:27:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 11:27:32 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+#0 /wordpress/wp-includes/class-wp-hook.php(326): allowed_http_request_hosts(false, 'cbproads.com')
+#1 /wordpress/wp-includes/plugin.php(205): WP_Hook->apply_filters(false, Array)
+#2 /wordpress/wp-includes/http.php(607): apply_filters('http_request_ho...', false, 'cbproads.com', 'https://cbproad...')
+#3 /wordpress/wp-includes/class-wp-http.php(280): wp_http_validate_url('https://cbproad...')
+#4 /wordpress/wp-includes/http.php(53): WP_Http->request('https://cbproad...', Array)
+#5 /wordpress/wp-includes/class-wp-simplepie-file.php(69): wp_safe_remote_request('https://cbproad...', Array)
+#6 [internal function]: WP_SimplePie_File->__construct('https://cbproad...', 10, 5, Array, 'SimplePie/1.8.0...', false, Array)
+#7 /wordpress/wp-includes/SimplePie/src/Registry.php(228): ReflectionClass->newInstanceArgs(Array)
+#8 /wordpress/wp-includes/SimplePie/src/SimplePie.php(1817): SimplePie\Registry->create('SimplePie\\File', Array)
+#9 /wordpress/wp-includes/SimplePie/src/SimplePie.php(1589): SimplePie\SimplePie->fetch_data(Object(SimplePie\Cache\BaseDataCache))
+#10 /wordpress/wp-includes/feed.php(844): SimplePie\SimplePie->init()
+#11 /wordpress/wp-content/plugins/clickbank-storefront/xmldb.inc.php(937): fetch_feed('https://cbproad...')
+#12 /wordpress/wp-content/plugins/clickbank-storefront/clickbank-storefronts.php(460): cs_get_categories(NULL)
+#13 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#14 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#15 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#16 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#17 {main}
+  thrown in /wordpress/wp-includes/http.php on line 655
+[10-Apr-2025 17:52:22 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('ColourPressWidg...')
@@ -255,7 +195,7 @@ Stack trace:
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}
   thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
-[09-Apr-2025 11:27:41 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+[10-Apr-2025 17:52:32 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
 #1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('ColourPressWidg...')
