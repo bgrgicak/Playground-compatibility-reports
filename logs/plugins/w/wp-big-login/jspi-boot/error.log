@@ -2,701 +2,133 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [08-Apr-2025 20:49:15 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:49:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:49:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:49:15 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:49:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_countdown_widget', 'a:15:{s:11:\"label_years\";s:5:\"Years\";s:10:\"label_year\";s:4:\"Year\";s:12:\"label_months\";s:6:\"Months\";s:11:\"label_month\";s:5:\"Month\";s:11:\"label_weeks\";s:5:\"Weeks\";s:10:\"label_week\";s:4:\"Week\";s:10:\"label_days\";s:4:\"Days\";s:9:\"label_day\";s:3:\"Day\";s:11:\"label_hours\";s:5:\"Hours\";s:10:\"label_hour\";s:4:\"Hour\";s:13:\"label_minutes\";s:7:\"Minutes\";s:12:\"label_minute\";s:6:\"Minute\";s:13:\"label_seconds\";s:7:\"Seconds\";s:12:\"label_second\";s:6:\"Second\";s:7:\"version\";s:3:\"3.1\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp_countdown_widget' , 'a:15:{s:11:&quot;label_years&quot;;s:5:&quot;Years&quot;;s:10:&quot;label_year&quot;;s:4:&quot;Year&quot;;s:12:&quot;label_months&quot;;s:6:&quot;Months&quot;;s:11:&quot;label_month&quot;;s:5:&quot;Month&quot;;s:11:&quot;label_weeks&quot;;s:5:&quot;Weeks&quot;;s:10:&quot;label_week&quot;;s:4:&quot;Week&quot;;s:10:&quot;label_days&quot;;s:4:&quot;Days&quot;;s:9:&quot;label_day&quot;;s:3:&quot;Day&quot;;s:11:&quot;label_hours&quot;;s:5:&quot;Hours&quot;;s:10:&quot;label_hour&quot;;s:4:&quot;Hour&quot;;s:13:&quot;label_minutes&quot;;s:7:&quot;Minutes&quot;;s:12:&quot;label_minute&quot;;s:6:&quot;Minute&quot;;s:13:&quot;label_seconds&quot;;s:7:&quot;Seconds&quot;;s:12:&quot;label_second&quot;;s:6:&quot;Second&quot;;s:7:&quot;version&quot;;s:3:&quot;3.1&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wp_countdown_wi...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wordpress-countdown-widget/countdown-widget.php(509): update_option('wp_countdown_wi...', Array)
-#6 /wordpress/wp-content/plugins/wordpress-countdown-widget/countdown-widget.php(463): shailan_CountdownWidget->install_default_settings()
-#7 /wordpress/wp-content/plugins/wordpress-countdown-widget/countdown-widget.php(57): shailan_CountdownWidget->get_plugin_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(62): shailan_CountdownWidget->__construct()
-#9 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('shailan_Countdo...')
-#10 /wordpress/wp-content/plugins/wordpress-countdown-widget/countdown-widget.php(624): register_widget('shailan_Countdo...')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wcw_register_widget('')
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#13 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#15 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#16 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#17 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#18 /wordpress/wp-settings.php(704): do_action('init')
-#19 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#20 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#21 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#22 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp_countdown_widget', 'a:15:{s:11:\"label_years\";s:5:\"Years\";s:10:\"label_year\";s:4:\"Year\";s:12:\"label_months\";s:6:\"Months\";s:11:\"label_month\";s:5:\"Month\";s:11:\"label_weeks\";s:5:\"Weeks\";s:10:\"label_week\";s:4:\"Week\";s:10:\"label_days\";s:4:\"Days\";s:9:\"label_day\";s:3:\"Day\";s:11:\"label_hours\";s:5:\"Hours\";s:10:\"label_hour\";s:4:\"Hour\";s:13:\"label_minutes\";s:7:\"Minutes\";s:12:\"label_minute\";s:6:\"Minute\";s:13:\"label_seconds\";s:7:\"Seconds\";s:12:\"label_second\";s:6:\"Second\";s:7:\"version\";s:3:\"3.1\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, wcw_register_widget, register_widget, WP_Widget_Factory->register, shailan_CountdownWidget->__construct, shailan_CountdownWidget->get_plugin_settings, shailan_CountdownWidget->install_default_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:49:16 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_shailan-countdown-widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_shailan-countdown-widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_shailan-...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_shailan-...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_shailan-countdown-widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:49:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', ')_veTsN}(bvdMb,c{D}e^~xp>sQtyfH4n=Km;b+ET:K0qHqSc=QfyvU<mSO]pYo{', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , ')_veTsN}(bvdMb,c{D}e^~xp&gt;sQtyfH4n=Km;b+ET:K0qHqSc=QfyvU&lt;mSO]pYo{' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', ')_veTsN}(bvdMb,...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', ')_veTsN}(bvdMb,...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', ')_veTsN}(bvdMb,...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', ')_veTsN}(bvdMb,...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40374|wp_rest|1...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/wp-banners-lite/wp-banners-lite.php(11): wp_enqueue_script('jquery')
-#19 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#20 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-banners-lite...')
-#21 /internal/eval.php(20): activate_plugin('wp-banners-lite...')
-#22 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', ')_veTsN}(bvdMb,c{D}e^~xp>sQtyfH4n=Km;b+ET:K0qHqSc=QfyvU<mSO]pYo{', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-banners-lite/wp-banners-lite.php'), wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:49:42 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'IwvH)0..(sLq#f&PjFY~w,`6R59~J%4Vo|Wd7)TgI]%=TH^RGF9W2Njur}AOS{oc', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'IwvH)0..(sLq#f&amp;PjFY~w,`6R59~J%4Vo|Wd7)TgI]%=TH^RGF9W2Njur}AOS{oc' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'IwvH)0..(sLq#f&...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'IwvH)0..(sLq#f&...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'IwvH)0..(sLq#f&...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'IwvH)0..(sLq#f&...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40374|wp_rest|1...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(362): wp_scripts()
-#18 /wordpress/wp-content/plugins/wp-banners-lite/wp-banners-lite.php(11): wp_enqueue_script('jquery')
-#19 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#20 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-banners-lite...')
-#21 /internal/eval.php(20): activate_plugin('wp-banners-lite...')
-#22 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'IwvH)0..(sLq#f&PjFY~w,`6R59~J%4Vo|Wd7)TgI]%=TH^RGF9W2Njur}AOS{oc', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-banners-lite/wp-banners-lite.php'), wp_enqueue_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:49:42 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function eregi() in /wordpress/wp-content/plugins/wp-banners-lite/wp-banners-lite.php:203
+Error: [10-Apr-2025 11:45:36 UTC] PHP Fatal error:  Uncaught Error: Class "Automattic\WooCommerce\Utilities\OrderUtil" not found in /wordpress/wp-content/plugins/wc-multishipping/inc/admin/classes/abstract_classes/abstract_order.php:29
 Stack trace:
-#0 /wordpress/wp-content/plugins/wp-banners-lite/wp-banners-lite.php(106): wpbannerslite_class->check_settings()
-#1 /wordpress/wp-content/plugins/wp-banners-lite/wp-banners-lite.php(1218): wpbannerslite_class->__construct()
-#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-banners-lite...')
-#4 /internal/eval.php(20): activate_plugin('wp-banners-lite...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/wp-banners-lite/wp-banners-lite.php on line 203
-[08-Apr-2025 20:49:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function eregi() in /wordpress/wp-content/plugins/wp-banners-lite/wp-banners-lite.php:203
+#0 /wordpress/wp-content/plugins/wc-multishipping/inc/front/pickup/chronopost/chronopost_pickup_widget.php(122): WCMultiShipping\inc\admin\classes\abstract_classes\abstract_order->__construct()
+#1 /wordpress/wp-content/plugins/wc-multishipping/inc/front/pickup/abstract_classes/abstract_pickup_widget.php(273): WCMultiShipping\inc\front\pickup\chronopost\chronopost_pickup_widget::get_order_class()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): WCMultiShipping\inc\front\pickup\abstract_classes\abstract_pickup_widget->register_wms_post_statuses('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(704): do_action('init')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/wc-multishipping/inc/admin/classes/abstract_classes/abstract_order.php on line 29
+[10-Apr-2025 11:45:46 UTC] PHP Fatal error:  Uncaught Error: Class "Automattic\WooCommerce\Utilities\OrderUtil" not found in /wordpress/wp-content/plugins/wc-multishipping/inc/admin/classes/abstract_classes/abstract_order.php:29
 Stack trace:
-#0 /wordpress/wp-content/plugins/wp-banners-lite/wp-banners-lite.php(106): wpbannerslite_class->check_settings()
-#1 /wordpress/wp-content/plugins/wp-banners-lite/wp-banners-lite.php(1218): wpbannerslite_class->__construct()
-#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-banners-lite...')
-#4 /internal/eval.php(20): activate_plugin('wp-banners-lite...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/wp-banners-lite/wp-banners-lite.php on line 203
-[08-Apr-2025 20:49:58 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function eregi() in /wordpress/wp-content/plugins/wp-banners-lite/wp-banners-lite.php:203
+#0 /wordpress/wp-content/plugins/wc-multishipping/inc/front/pickup/chronopost/chronopost_pickup_widget.php(122): WCMultiShipping\inc\admin\classes\abstract_classes\abstract_order->__construct()
+#1 /wordpress/wp-content/plugins/wc-multishipping/inc/front/pickup/abstract_classes/abstract_pickup_widget.php(273): WCMultiShipping\inc\front\pickup\chronopost\chronopost_pickup_widget::get_order_class()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): WCMultiShipping\inc\front\pickup\abstract_classes\abstract_pickup_widget->register_wms_post_statuses('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(704): do_action('init')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/wc-multishipping/inc/admin/classes/abstract_classes/abstract_order.php on line 29
+[10-Apr-2025 11:45:55 UTC] PHP Fatal error:  Uncaught Error: Class "Automattic\WooCommerce\Utilities\OrderUtil" not found in /wordpress/wp-content/plugins/wc-multishipping/inc/admin/classes/abstract_classes/abstract_order.php:29
 Stack trace:
-#0 /wordpress/wp-content/plugins/wp-banners-lite/wp-banners-lite.php(106): wpbannerslite_class->check_settings()
-#1 /wordpress/wp-content/plugins/wp-banners-lite/wp-banners-lite.php(1218): wpbannerslite_class->__construct()
-#2 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#3 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-banners-lite...')
-#4 /internal/eval.php(20): activate_plugin('wp-banners-lite...')
-#5 {main}
-  thrown in /wordpress/wp-content/plugins/wp-banners-lite/wp-banners-lite.php on line 203
-[08-Apr-2025 20:50:07 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:50:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:50:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:50:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:50:34 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-github-commits/wp-github-commits.php:258
+#0 /wordpress/wp-content/plugins/wc-multishipping/inc/front/pickup/chronopost/chronopost_pickup_widget.php(122): WCMultiShipping\inc\admin\classes\abstract_classes\abstract_order->__construct()
+#1 /wordpress/wp-content/plugins/wc-multishipping/inc/front/pickup/abstract_classes/abstract_pickup_widget.php(273): WCMultiShipping\inc\front\pickup\chronopost\chronopost_pickup_widget::get_order_class()
+#2 /wordpress/wp-includes/class-wp-hook.php(324): WCMultiShipping\inc\front\pickup\abstract_classes\abstract_pickup_widget->register_wms_post_statuses('')
+#3 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#5 /wordpress/wp-settings.php(704): do_action('init')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}
+  thrown in /wordpress/wp-content/plugins/wc-multishipping/inc/admin/classes/abstract_classes/abstract_order.php on line 29
+[10-Apr-2025 11:46:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/women-quotes/women-quotes.php:126
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-github-commi...')
-#2 /internal/eval.php(20): activate_plugin('wp-github-commi...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('women-quotes/wo...')
+#2 /internal/eval.php(20): activate_plugin('women-quotes/wo...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/wp-github-commits/wp-github-commits.php on line 258
-[08-Apr-2025 20:50:41 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-github-commits/wp-github-commits.php:258
+  thrown in /wordpress/wp-content/plugins/women-quotes/women-quotes.php on line 126
+[10-Apr-2025 11:46:12 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/women-quotes/women-quotes.php:126
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-github-commi...')
-#2 /internal/eval.php(20): activate_plugin('wp-github-commi...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('women-quotes/wo...')
+#2 /internal/eval.php(20): activate_plugin('women-quotes/wo...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/wp-github-commits/wp-github-commits.php on line 258
-[08-Apr-2025 20:50:49 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/wp-github-commits/wp-github-commits.php:258
+  thrown in /wordpress/wp-content/plugins/women-quotes/women-quotes.php on line 126
+[10-Apr-2025 11:46:19 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/women-quotes/women-quotes.php:126
 Stack trace:
 #0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-github-commi...')
-#2 /internal/eval.php(20): activate_plugin('wp-github-commi...')
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('women-quotes/wo...')
+#2 /internal/eval.php(20): activate_plugin('women-quotes/wo...')
 #3 {main}
-  thrown in /wordpress/wp-content/plugins/wp-github-commits/wp-github-commits.php on line 258
-[08-Apr-2025 20:50:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT COUNT(id) as totalrows from wp_mynearbyplaces_category</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT ( `id` ) as `totalrows` from `wp_mynearbyplaces_category` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_mynearbyplaces_category
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT COUNT(id...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT COUNT(id...')
-#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT COUNT(id...')
-#4 /wordpress/wp-content/plugins/wp-nearby-places-basic/nearbyplaces.php(57): wpdb->get_results('SELECT COUNT(id...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wnp_mynearbyplaces_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-nea...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-nearby-place...')
-#10 {main}</pre>
- for query SELECT COUNT(id) as totalrows from wp_mynearbyplaces_category made by activate_plugin, do_action('activate_wp-nearby-places-basic/nearbyplaces.php'), WP_Hook->do_action, WP_Hook->apply_filters, wnp_mynearbyplaces_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:50:58 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT COUNT(id) as totalrows from wp_mynearbyplaces_sub_category</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT ( `id` ) as `totalrows` from `wp_mynearbyplaces_sub_category` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 no such table: wp_mynearbyplaces_sub_category
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT COUNT(id...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT COUNT(id...')
-#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT COUNT(id...')
-#4 /wordpress/wp-content/plugins/wp-nearby-places-basic/nearbyplaces.php(89): wpdb->get_results('SELECT COUNT(id...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wnp_mynearbyplaces_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-nea...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-nearby-place...')
-#10 {main}</pre>
- for query SELECT COUNT(id) as totalrows from wp_mynearbyplaces_sub_category made by activate_plugin, do_action('activate_wp-nearby-places-basic/nearbyplaces.php'), WP_Hook->do_action, WP_Hook->apply_filters, wnp_mynearbyplaces_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:50:58 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:50:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:50:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:50:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:51:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT COUNT(id) as totalrows from wp_mynearbyplaces_category</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT(id) as totalrows from wp_mynearbyplaces_category | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_mynearbyplaces_category.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT COUNT(id...')
-#2 /wordpress/wp-content/plugins/wp-nearby-places-basic/nearbyplaces.php(57): wpdb->get_results('SELECT COUNT(id...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): wnp_mynearbyplaces_activate(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-nea...', false)
-#7 /internal/eval.php(20): activate_plugin('wp-nearby-place...')
-#8 {main}</pre>
- for query SELECT COUNT(id) as totalrows from wp_mynearbyplaces_category made by activate_plugin, do_action('activate_wp-nearby-places-basic/nearbyplaces.php'), WP_Hook->do_action, WP_Hook->apply_filters, wnp_mynearbyplaces_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:51:08 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT COUNT(id) as totalrows from wp_mynearbyplaces_sub_category</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT(id) as totalrows from wp_mynearbyplaces_sub_category | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_mynearbyplaces_sub_category.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT COUNT(id...')
-#2 /wordpress/wp-content/plugins/wp-nearby-places-basic/nearbyplaces.php(89): wpdb->get_results('SELECT COUNT(id...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): wnp_mynearbyplaces_activate(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-nea...', false)
-#7 /internal/eval.php(20): activate_plugin('wp-nearby-place...')
-#8 {main}</pre>
- for query SELECT COUNT(id) as totalrows from wp_mynearbyplaces_sub_category made by activate_plugin, do_action('activate_wp-nearby-places-basic/nearbyplaces.php'), WP_Hook->do_action, WP_Hook->apply_filters, wnp_mynearbyplaces_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:51:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT COUNT(id) as totalrows from wp_mynearbyplaces_category</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT(id) as totalrows from wp_mynearbyplaces_category | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_mynearbyplaces_category.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT COUNT(id...')
-#2 /wordpress/wp-content/plugins/wp-nearby-places-basic/nearbyplaces.php(57): wpdb->get_results('SELECT COUNT(id...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): wnp_mynearbyplaces_activate(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-nea...', false)
-#7 /internal/eval.php(20): activate_plugin('wp-nearby-place...')
-#8 {main}</pre>
- for query SELECT COUNT(id) as totalrows from wp_mynearbyplaces_category made by activate_plugin, do_action('activate_wp-nearby-places-basic/nearbyplaces.php'), WP_Hook->do_action, WP_Hook->apply_filters, wnp_mynearbyplaces_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:51:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>SELECT COUNT(id) as totalrows from wp_mynearbyplaces_sub_category</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT COUNT(id) as totalrows from wp_mynearbyplaces_sub_category | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_mynearbyplaces_sub_category.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT COUNT(id...')
-#2 /wordpress/wp-content/plugins/wp-nearby-places-basic/nearbyplaces.php(89): wpdb->get_results('SELECT COUNT(id...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): wnp_mynearbyplaces_activate(false)
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-nea...', false)
-#7 /internal/eval.php(20): activate_plugin('wp-nearby-place...')
-#8 {main}</pre>
- for query SELECT COUNT(id) as totalrows from wp_mynearbyplaces_sub_category made by activate_plugin, do_action('activate_wp-nearby-places-basic/nearbyplaces.php'), WP_Hook->do_action, WP_Hook->apply_filters, wnp_mynearbyplaces_activate, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:51:31 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:51:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:51:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:51:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:51:31 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nabserver_show', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nabserver_show' , '0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nabserver_show', '0', '', 'auto')
-#5 /wordpress/wp-content/plugins/wp-server/wp-server.php(83): update_option('nabserver_show', '0')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): nabserver_main::activation(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+  thrown in /wordpress/wp-content/plugins/women-quotes/women-quotes.php on line 126
+[10-Apr-2025 11:47:12 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744285630.173)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-ser...', false)
-#10 /internal/eval.php(20): activate_plugin('wp-server/wp-se...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nabserver_show', '0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-server/wp-server.php'), WP_Hook->do_action, WP_Hook->apply_filters, nabserver_main::activation, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:51:31 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:51:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:51:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:51:31 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:51:59 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:51:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:51:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:51:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:52:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_trustindex_thumbtack_reviews` ADD highlight VARCHAR(11) NULL AFTER rating</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_trustindex_thumbtack_reviews, HIGHLIGHT, varchar(11)</li>
-<li>Executing: ALTER TABLE wp_trustindex_thumbtack_reviews ADD highlight text NULL   | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: highlight.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/widgets-for-thumbtack-reviews/include/update.php(10): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/widgets-for-thumbtack-reviews/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_thumbtack->load('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query ALTER TABLE `wp_trustindex_thumbtack_reviews` ADD highlight VARCHAR(11) NULL AFTER rating made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_thumbtack->load, include('/plugins/widgets-for-thumbtack-reviews/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:52:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_trustindex_thumbtack_reviews` ADD reply TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER date</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_trustindex_thumbtack_reviews, REPLY, text</li>
-<li>Executing: ALTER TABLE wp_trustindex_thumbtack_reviews ADD reply text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL   | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/widgets-for-thumbtack-reviews/include/update.php(14): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/widgets-for-thumbtack-reviews/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_thumbtack->load('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query ALTER TABLE `wp_trustindex_thumbtack_reviews` ADD reply TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER date made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_thumbtack->load, include('/plugins/widgets-for-thumbtack-reviews/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:52:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_trustindex_thumbtack_reviews` ADD reviewId TEXT NULL AFTER date</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_trustindex_thumbtack_reviews, REVIEWID, text</li>
-<li>Executing: ALTER TABLE wp_trustindex_thumbtack_reviews ADD reviewId text NULL   | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: reviewId.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/widgets-for-thumbtack-reviews/include/update.php(20): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/widgets-for-thumbtack-reviews/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_thumbtack->load('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query ALTER TABLE `wp_trustindex_thumbtack_reviews` ADD reviewId TEXT NULL AFTER date made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_thumbtack->load, include('/plugins/widgets-for-thumbtack-reviews/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:52:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_trustindex_thumbtack_reviews` ADD hidden TINYINT(1) NOT NULL DEFAULT 0 AFTER id</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_trustindex_thumbtack_reviews, HIDDEN, tinyint(1)</li>
-<li>Executing: ALTER TABLE wp_trustindex_thumbtack_reviews ADD hidden integer NOT NULL DEFAULT 0   | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: hidden.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/widgets-for-thumbtack-reviews/include/update.php(24): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/widgets-for-thumbtack-reviews/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_thumbtack->load('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query ALTER TABLE `wp_trustindex_thumbtack_reviews` ADD hidden TINYINT(1) NOT NULL DEFAULT 0 AFTER id made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_thumbtack->load, include('/plugins/widgets-for-thumbtack-reviews/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:52:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_trustindex_thumbtack_reviews` ADD highlight VARCHAR(11) NULL AFTER rating</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_trustindex_thumbtack_reviews, HIGHLIGHT, varchar(11)</li>
-<li>Executing: ALTER TABLE wp_trustindex_thumbtack_reviews ADD highlight text NULL   | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: highlight.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/widgets-for-thumbtack-reviews/include/update.php(10): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/widgets-for-thumbtack-reviews/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_thumbtack->load('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query ALTER TABLE `wp_trustindex_thumbtack_reviews` ADD highlight VARCHAR(11) NULL AFTER rating made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_thumbtack->load, include('/plugins/widgets-for-thumbtack-reviews/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:52:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_trustindex_thumbtack_reviews` ADD reply TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER date</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_trustindex_thumbtack_reviews, REPLY, text</li>
-<li>Executing: ALTER TABLE wp_trustindex_thumbtack_reviews ADD reply text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL   | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near "SET": syntax error.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/widgets-for-thumbtack-reviews/include/update.php(14): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/widgets-for-thumbtack-reviews/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_thumbtack->load('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query ALTER TABLE `wp_trustindex_thumbtack_reviews` ADD reply TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER date made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_thumbtack->load, include('/plugins/widgets-for-thumbtack-reviews/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:52:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_trustindex_thumbtack_reviews` ADD reviewId TEXT NULL AFTER date</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_trustindex_thumbtack_reviews, REVIEWID, text</li>
-<li>Executing: ALTER TABLE wp_trustindex_thumbtack_reviews ADD reviewId text NULL   | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: reviewId.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/widgets-for-thumbtack-reviews/include/update.php(20): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/widgets-for-thumbtack-reviews/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_thumbtack->load('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query ALTER TABLE `wp_trustindex_thumbtack_reviews` ADD reviewId TEXT NULL AFTER date made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_thumbtack->load, include('/plugins/widgets-for-thumbtack-reviews/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:52:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>ALTER TABLE `wp_trustindex_thumbtack_reviews` ADD hidden TINYINT(1) NOT NULL DEFAULT 0 AFTER id</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
-				VALUES (:table, :column, :datatype)
-				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
-			 | parameters: wp_trustindex_thumbtack_reviews, HIDDEN, tinyint(1)</li>
-<li>Executing: ALTER TABLE wp_trustindex_thumbtack_reviews ADD hidden integer NOT NULL DEFAULT 0   | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 duplicate column name: hidden.
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
-#1 /wordpress/wp-content/plugins/widgets-for-thumbtack-reviews/include/update.php(24): WP_SQLite_DB->query('ALTER TABLE `wp...')
-#2 /wordpress/wp-content/plugins/widgets-for-thumbtack-reviews/trustindex-plugin.class.php(224): include('/wordpress/wp-c...')
-#3 /wordpress/wp-includes/class-wp-hook.php(324): TrustindexPlugin_thumbtack->load('')
-#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#6 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#7 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#8 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#10 {main}</pre>
- for query ALTER TABLE `wp_trustindex_thumbtack_reviews` ADD hidden TINYINT(1) NOT NULL DEFAULT 0 AFTER id made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, TrustindexPlugin_thumbtack->load, include('/plugins/widgets-for-thumbtack-reviews/include/update.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:52:54 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:52:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/share
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 11:49:07 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "BIGLOGIN_TEXT_DOMAIN" in /wordpress/wp-content/plugins/wp-big-login/wp-big-login.php:22
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-big-login/wp...')
+#2 /internal/eval.php(20): activate_plugin('wp-big-login/wp...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-big-login/wp-big-login.php on line 22
+[10-Apr-2025 11:49:15 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "BIGLOGIN_TEXT_DOMAIN" in /wordpress/wp-content/plugins/wp-big-login/wp-big-login.php:22
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-big-login/wp...')
+#2 /internal/eval.php(20): activate_plugin('wp-big-login/wp...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-big-login/wp-big-login.php on line 22
+[10-Apr-2025 11:49:23 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "BIGLOGIN_TEXT_DOMAIN" in /wordpress/wp-content/plugins/wp-big-login/wp-big-login.php:22
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-big-login/wp...')
+#2 /internal/eval.php(20): activate_plugin('wp-big-login/wp...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-big-login/wp-big-login.php on line 22
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"wp-big-login"},"options":{"activate":true}}) : PHP.run() failed with exit code 255 and the following output: 
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: PHPExecutionFailureError: PHP.run() failed with exit code 255 and the following output: 
+        at PHP.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@php-wasm/universal/index.js:984:19)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:33:39)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+      response: PHPResponse {
+        httpStatusCode: 500,
+        headers: {
+          'x-powered-by': [ 'PHP/8.0.30-dev' ],
+          'content-type': [ 'text/html; charset=UTF-8' ]
+        },
+        bytes: Uint8Array(0) [],
+        exitCode: 255,
+        errors: ''
+      },
+      source: 'request'
+    }
+  }
+}
+
+Node.js v23.11.0
