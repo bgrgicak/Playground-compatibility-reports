@@ -2,22 +2,57 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 05:26:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [10-Apr-2025 19:23:45 UTC] PHP Warning:  The magic method WC_Cryptobillings::__wakeup() must have public visibility in /wordpress/wp-content/plugins/woo-cryptobillings-gateway/woocommerce-cryptobillings-gateway.php on line 93
+[10-Apr-2025 19:23:46 UTC] PHP Warning:  The magic method WC_Cryptobillings::__wakeup() must have public visibility in /wordpress/wp-content/plugins/woo-cryptobillings-gateway/woocommerce-cryptobillings-gateway.php on line 93
+[10-Apr-2025 19:23:54 UTC] PHP Warning:  The magic method WC_Cryptobillings::__wakeup() must have public visibility in /wordpress/wp-content/plugins/woo-cryptobillings-gateway/woocommerce-cryptobillings-gateway.php on line 93
+[10-Apr-2025 19:23:54 UTC] PHP Warning:  The magic method WC_Cryptobillings::__wakeup() must have public visibility in /wordpress/wp-content/plugins/woo-cryptobillings-gateway/woocommerce-cryptobillings-gateway.php on line 93
+[10-Apr-2025 19:24:03 UTC] PHP Warning:  The magic method WC_Cryptobillings::__wakeup() must have public visibility in /wordpress/wp-content/plugins/woo-cryptobillings-gateway/woocommerce-cryptobillings-gateway.php on line 93
+[10-Apr-2025 19:24:04 UTC] PHP Warning:  The magic method WC_Cryptobillings::__wakeup() must have public visibility in /wordpress/wp-content/plugins/woo-cryptobillings-gateway/woocommerce-cryptobillings-gateway.php on line 93
+[10-Apr-2025 19:24:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:1:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT * FROM wp_woocommerce_attribute_taxonomies WHERE attribute_name = "manufacturer"</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT * FROM `wp_woocommerce_attribute_taxonomies` WHERE `attribute_name` = 'manufacturer' | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT * FROM w...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT * FROM w...')
+#3 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#4 /wordpress/wp-content/plugins/woocommerce-pricefiles/includes/pricefiles.php(475): wpdb->get_row('SELECT * FROM w...')
+#5 /wordpress/wp-content/plugins/woocommerce-pricefiles/includes/pricefiles.php(433): WC_Pricefiles->woocomemrce_pricefiles_add_manufacturer_attribute()
+#6 /wordpress/wp-content/plugins/woocommerce-pricefiles/includes/pricefiles.php(346): WC_Pricefiles->single_activate()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): WC_Pricefiles->activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woocom...', false)
+#11 /internal/eval.php(20): activate_plugin('woocommerce-pri...')
+#12 {main}</pre>
+ for query SELECT * FROM wp_woocommerce_attribute_taxonomies WHERE attribute_name = "manufacturer" made by activate_plugin, do_action('activate_woocommerce-pricefiles/pricefiles.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Pricefiles->activate, WC_Pricefiles->single_activate, WC_Pricefiles->woocomemrce_pricefiles_add_manufacturer_attribute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 19:24:15 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_woocommerce_attribute_taxonomies` (`attribute_label`, `attribute_name`, `attribute_type`, `attribute_orderby`) VALUES ('Manufacturer', 'manufacturer', 'select', 'name')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_woocommerce_attribute_taxonomies</li>
 <li>Executing: 
 				SELECT column_name, is_nullable, column_default, data_type, extra
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
 				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wisy_builder_registered_blocks' , 'a:1:{s:5:&quot;audio&quot;;s:16:&quot;Wisy_Block_Audio&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_woocommerce_attribute_taxonomies</li>
+<li>Executing: INSERT INTO `wp_woocommerce_attribute_taxonomies` () SELECT  FROM (VALUES ( 'Manufacturer' , 'manufacturer' , 'select' , 'name' )) WHERE true | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -28,530 +63,372 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wisy_builder_re...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wisy/includes/wisy-functions.php(95): update_option('wisy_builder_re...', Array)
-#6 /wordpress/wp-content/plugins/wisy/blocks/audio/audio.php(97): wisy_register_block('Wisy_Block_Audi...')
-#7 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(73): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(50): Wisy_Builder->load_blocks()
-#9 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(78): Wisy_Builder->__construct()
-#10 /wordpress/wp-content/plugins/wisy/wisy-builder.php(36): require_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wisy/wisy-build...')
-#13 /internal/eval.php(20): activate_plugin('wisy/wisy-build...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:1:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wisy/wisy-builder.php'), require_once('/plugins/wisy/includes/class-wisy-builder.php'), Wisy_Builder->__construct, Wisy_Builder->load_blocks, include_once('/plugins/wisy/blocks/audio/audio.php'), wisy_register_block, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:26:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_woocommerce_...', Array, NULL, 'INSERT')
+#5 /wordpress/wp-content/plugins/woocommerce-pricefiles/includes/pricefiles.php(486): wpdb->insert('wp_woocommerce_...', Array)
+#6 /wordpress/wp-content/plugins/woocommerce-pricefiles/includes/pricefiles.php(433): WC_Pricefiles->woocomemrce_pricefiles_add_manufacturer_attribute()
+#7 /wordpress/wp-content/plugins/woocommerce-pricefiles/includes/pricefiles.php(346): WC_Pricefiles->single_activate()
+#8 /wordpress/wp-includes/class-wp-hook.php(324): WC_Pricefiles->activate(false)
+#9 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#10 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#11 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woocom...', false)
+#12 /internal/eval.php(20): activate_plugin('woocommerce-pri...')
+#13 {main}</pre>
+ for query INSERT INTO `wp_woocommerce_attribute_taxonomies` (`attribute_label`, `attribute_name`, `attribute_type`, `attribute_orderby`) VALUES ('Manufacturer', 'manufacturer', 'select', 'name') made by activate_plugin, do_action('activate_woocommerce-pricefiles/pricefiles.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Pricefiles->activate, WC_Pricefiles->single_activate, WC_Pricefiles->woocomemrce_pricefiles_add_manufacturer_attribute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 19:24:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:2:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";s:6:\"button\";s:17:\"Wisy_Block_Button\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT * FROM wp_woocommerce_attribute_taxonomies WHERE attribute_name = "manufacturer"</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wisy_builder_registered_blocks' , 'a:2:{s:5:&quot;audio&quot;;s:16:&quot;Wisy_Block_Audio&quot;;s:6:&quot;button&quot;;s:17:&quot;Wisy_Block_Button&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_woocommerce_attribute_taxonomies WHERE attribute_name = &quot;manufacturer&quot; | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wisy_builder_re...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wisy/includes/wisy-functions.php(95): update_option('wisy_builder_re...', Array)
-#6 /wordpress/wp-content/plugins/wisy/blocks/button/button.php(225): wisy_register_block('Wisy_Block_Butt...')
-#7 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(73): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(50): Wisy_Builder->load_blocks()
-#9 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(78): Wisy_Builder->__construct()
-#10 /wordpress/wp-content/plugins/wisy/wisy-builder.php(36): require_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wisy/wisy-build...')
-#13 /internal/eval.php(20): activate_plugin('wisy/wisy-build...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:2:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";s:6:\"button\";s:17:\"Wisy_Block_Button\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wisy/wisy-builder.php'), require_once('/plugins/wisy/includes/class-wisy-builder.php'), Wisy_Builder->__construct, Wisy_Builder->load_blocks, include_once('/plugins/wisy/blocks/button/button.php'), wisy_register_block, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:26:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/woocommerce-pricefiles/includes/pricefiles.php(475): wpdb->get_row('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/woocommerce-pricefiles/includes/pricefiles.php(433): WC_Pricefiles->woocomemrce_pricefiles_add_manufacturer_attribute()
+#4 /wordpress/wp-content/plugins/woocommerce-pricefiles/includes/pricefiles.php(346): WC_Pricefiles->single_activate()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): WC_Pricefiles->activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woocom...', false)
+#9 /internal/eval.php(20): activate_plugin('woocommerce-pri...')
+#10 {main}</pre>
+ for query SELECT * FROM wp_woocommerce_attribute_taxonomies WHERE attribute_name = "manufacturer" made by activate_plugin, do_action('activate_woocommerce-pricefiles/pricefiles.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Pricefiles->activate, WC_Pricefiles->single_activate, WC_Pricefiles->woocomemrce_pricefiles_add_manufacturer_attribute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 19:24:24 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:3:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";s:6:\"button\";s:17:\"Wisy_Block_Button\";s:6:\"column\";s:17:\"Wisy_Block_Column\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_woocommerce_attribute_taxonomies` (`attribute_label`, `attribute_name`, `attribute_type`, `attribute_orderby`) VALUES ('Manufacturer', 'manufacturer', 'select', 'name')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wisy_builder_registered_blocks' , 'a:3:{s:5:&quot;audio&quot;;s:16:&quot;Wisy_Block_Audio&quot;;s:6:&quot;button&quot;;s:17:&quot;Wisy_Block_Button&quot;;s:6:&quot;column&quot;;s:17:&quot;Wisy_Block_Column&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_woocommerce_attribute_taxonomies` (`attribute_label`, `attribute_name`, `attribute_type`, `attribute_orderby`) VALUES (:param0 , :param1 , :param2 , :param3 ) | parameters: Manufacturer, manufacturer, select, name</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wisy_builder_re...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wisy/includes/wisy-functions.php(95): update_option('wisy_builder_re...', Array)
-#6 /wordpress/wp-content/plugins/wisy/blocks/column/column.php(68): wisy_register_block('Wisy_Block_Colu...')
-#7 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(73): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(50): Wisy_Builder->load_blocks()
-#9 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(78): Wisy_Builder->__construct()
-#10 /wordpress/wp-content/plugins/wisy/wisy-builder.php(36): require_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wisy/wisy-build...')
-#13 /internal/eval.php(20): activate_plugin('wisy/wisy-build...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:3:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";s:6:\"button\";s:17:\"Wisy_Block_Button\";s:6:\"column\";s:17:\"Wisy_Block_Column\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wisy/wisy-builder.php'), require_once('/plugins/wisy/includes/class-wisy-builder.php'), Wisy_Builder->__construct, Wisy_Builder->load_blocks, include_once('/plugins/wisy/blocks/column/column.php'), wisy_register_block, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:26:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_woocommerce_...', Array, NULL, 'INSERT')
+#3 /wordpress/wp-content/plugins/woocommerce-pricefiles/includes/pricefiles.php(486): wpdb->insert('wp_woocommerce_...', Array)
+#4 /wordpress/wp-content/plugins/woocommerce-pricefiles/includes/pricefiles.php(433): WC_Pricefiles->woocomemrce_pricefiles_add_manufacturer_attribute()
+#5 /wordpress/wp-content/plugins/woocommerce-pricefiles/includes/pricefiles.php(346): WC_Pricefiles->single_activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WC_Pricefiles->activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woocom...', false)
+#10 /internal/eval.php(20): activate_plugin('woocommerce-pri...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_woocommerce_attribute_taxonomies` (`attribute_label`, `attribute_name`, `attribute_type`, `attribute_orderby`) VALUES ('Manufacturer', 'manufacturer', 'select', 'name') made by activate_plugin, do_action('activate_woocommerce-pricefiles/pricefiles.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Pricefiles->activate, WC_Pricefiles->single_activate, WC_Pricefiles->woocomemrce_pricefiles_add_manufacturer_attribute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 19:24:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:4:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";s:6:\"button\";s:17:\"Wisy_Block_Button\";s:6:\"column\";s:17:\"Wisy_Block_Column\";s:15:\"countdown-timer\";s:26:\"Wisy_Block_Countdown_Timer\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT * FROM wp_woocommerce_attribute_taxonomies WHERE attribute_name = "manufacturer"</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wisy_builder_registered_blocks' , 'a:4:{s:5:&quot;audio&quot;;s:16:&quot;Wisy_Block_Audio&quot;;s:6:&quot;button&quot;;s:17:&quot;Wisy_Block_Button&quot;;s:6:&quot;column&quot;;s:17:&quot;Wisy_Block_Column&quot;;s:15:&quot;countdown-timer&quot;;s:26:&quot;Wisy_Block_Countdown_Timer&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: SELECT * FROM wp_woocommerce_attribute_taxonomies WHERE attribute_name = &quot;manufacturer&quot; | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wisy_builder_re...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wisy/includes/wisy-functions.php(95): update_option('wisy_builder_re...', Array)
-#6 /wordpress/wp-content/plugins/wisy/blocks/countdown-timer/countdown-timer.php(220): wisy_register_block('Wisy_Block_Coun...')
-#7 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(73): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(50): Wisy_Builder->load_blocks()
-#9 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(78): Wisy_Builder->__construct()
-#10 /wordpress/wp-content/plugins/wisy/wisy-builder.php(36): require_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wisy/wisy-build...')
-#13 /internal/eval.php(20): activate_plugin('wisy/wisy-build...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:4:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";s:6:\"button\";s:17:\"Wisy_Block_Button\";s:6:\"column\";s:17:\"Wisy_Block_Column\";s:15:\"countdown-timer\";s:26:\"Wisy_Block_Countdown_Timer\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wisy/wisy-builder.php'), require_once('/plugins/wisy/includes/class-wisy-builder.php'), Wisy_Builder->__construct, Wisy_Builder->load_blocks, include_once('/plugins/wisy/blocks/countdown-timer/countdown-timer.php'), wisy_register_block, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:26:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3061): WP_SQLite_DB->query('SELECT * FROM w...')
+#2 /wordpress/wp-content/plugins/woocommerce-pricefiles/includes/pricefiles.php(475): wpdb->get_row('SELECT * FROM w...')
+#3 /wordpress/wp-content/plugins/woocommerce-pricefiles/includes/pricefiles.php(433): WC_Pricefiles->woocomemrce_pricefiles_add_manufacturer_attribute()
+#4 /wordpress/wp-content/plugins/woocommerce-pricefiles/includes/pricefiles.php(346): WC_Pricefiles->single_activate()
+#5 /wordpress/wp-includes/class-wp-hook.php(324): WC_Pricefiles->activate(false)
+#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woocom...', false)
+#9 /internal/eval.php(20): activate_plugin('woocommerce-pri...')
+#10 {main}</pre>
+ for query SELECT * FROM wp_woocommerce_attribute_taxonomies WHERE attribute_name = "manufacturer" made by activate_plugin, do_action('activate_woocommerce-pricefiles/pricefiles.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Pricefiles->activate, WC_Pricefiles->single_activate, WC_Pricefiles->woocomemrce_pricefiles_add_manufacturer_attribute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 19:24:33 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:5:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";s:6:\"button\";s:17:\"Wisy_Block_Button\";s:6:\"column\";s:17:\"Wisy_Block_Column\";s:15:\"countdown-timer\";s:26:\"Wisy_Block_Countdown_Timer\";s:11:\"gdpr-notice\";s:22:\"Wisy_Block_GDPR_Notice\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_woocommerce_attribute_taxonomies` (`attribute_label`, `attribute_name`, `attribute_type`, `attribute_orderby`) VALUES ('Manufacturer', 'manufacturer', 'select', 'name')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wisy_builder_registered_blocks' , 'a:5:{s:5:&quot;audio&quot;;s:16:&quot;Wisy_Block_Audio&quot;;s:6:&quot;button&quot;;s:17:&quot;Wisy_Block_Button&quot;;s:6:&quot;column&quot;;s:17:&quot;Wisy_Block_Column&quot;;s:15:&quot;countdown-timer&quot;;s:26:&quot;Wisy_Block_Countdown_Timer&quot;;s:11:&quot;gdpr-notice&quot;;s:22:&quot;Wisy_Block_GDPR_Notice&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_woocommerce_attribute_taxonomies` (`attribute_label`, `attribute_name`, `attribute_type`, `attribute_orderby`) VALUES (:param0 , :param1 , :param2 , :param3 ) | parameters: Manufacturer, manufacturer, select, name</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: wp_woocommerce_attribute_taxonomies.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wisy_builder_re...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wisy/includes/wisy-functions.php(95): update_option('wisy_builder_re...', Array)
-#6 /wordpress/wp-content/plugins/wisy/blocks/gdpr-notice/gdpr-notice.php(155): wisy_register_block('Wisy_Block_GDPR...')
-#7 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(73): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(50): Wisy_Builder->load_blocks()
-#9 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(78): Wisy_Builder->__construct()
-#10 /wordpress/wp-content/plugins/wisy/wisy-builder.php(36): require_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wisy/wisy-build...')
-#13 /internal/eval.php(20): activate_plugin('wisy/wisy-build...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:5:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";s:6:\"button\";s:17:\"Wisy_Block_Button\";s:6:\"column\";s:17:\"Wisy_Block_Column\";s:15:\"countdown-timer\";s:26:\"Wisy_Block_Countdown_Timer\";s:11:\"gdpr-notice\";s:22:\"Wisy_Block_GDPR_Notice\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wisy/wisy-builder.php'), require_once('/plugins/wisy/includes/class-wisy-builder.php'), Wisy_Builder->__construct, Wisy_Builder->load_blocks, include_once('/plugins/wisy/blocks/gdpr-notice/gdpr-notice.php'), wisy_register_block, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:26:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_woocommerce_...', Array, NULL, 'INSERT')
+#3 /wordpress/wp-content/plugins/woocommerce-pricefiles/includes/pricefiles.php(486): wpdb->insert('wp_woocommerce_...', Array)
+#4 /wordpress/wp-content/plugins/woocommerce-pricefiles/includes/pricefiles.php(433): WC_Pricefiles->woocomemrce_pricefiles_add_manufacturer_attribute()
+#5 /wordpress/wp-content/plugins/woocommerce-pricefiles/includes/pricefiles.php(346): WC_Pricefiles->single_activate()
+#6 /wordpress/wp-includes/class-wp-hook.php(324): WC_Pricefiles->activate(false)
+#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_woocom...', false)
+#10 /internal/eval.php(20): activate_plugin('woocommerce-pri...')
+#11 {main}</pre>
+ for query INSERT INTO `wp_woocommerce_attribute_taxonomies` (`attribute_label`, `attribute_name`, `attribute_type`, `attribute_orderby`) VALUES ('Manufacturer', 'manufacturer', 'select', 'name') made by activate_plugin, do_action('activate_woocommerce-pricefiles/pricefiles.php'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Pricefiles->activate, WC_Pricefiles->single_activate, WC_Pricefiles->woocomemrce_pricefiles_add_manufacturer_attribute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 19:26:01 UTC] PHP Warning:  Undefined array key "upload_image" in /wordpress/wp-content/plugins/wp-hide-my-site/index.php on line 12
+[10-Apr-2025 19:26:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:6:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";s:6:\"button\";s:17:\"Wisy_Block_Button\";s:6:\"column\";s:17:\"Wisy_Block_Column\";s:15:\"countdown-timer\";s:26:\"Wisy_Block_Countdown_Timer\";s:11:\"gdpr-notice\";s:22:\"Wisy_Block_GDPR_Notice\";s:4:\"icon\";s:15:\"Wisy_Block_Icon\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SHOW TABLES LIKE hiddenmysite</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLES LIK...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLES LIK...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SHOW TABLES LIK...')
+#4 /wordpress/wp-content/plugins/wp-hide-my-site/index.php(56): wpdb->get_var('SHOW TABLES LIK...')
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-hide-my-site...')
+#7 /internal/eval.php(20): activate_plugin('wp-hide-my-site...')
+#8 {main}</pre>
+ for query SHOW TABLES LIKE hiddenmysite made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-hide-my-site/index.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 19:26:02 UTC] PHP Warning:  Undefined array key "upload_image" in /wordpress/wp-content/plugins/wp-hide-my-site/index.php on line 12
+[10-Apr-2025 19:26:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW TABLES LIKE hiddenmysite</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW TABLES LIK...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW TABLES LIK...')
+#3 /wordpress/wp-includes/class-wpdb.php(3027): WP_SQLite_DB->query('SHOW TABLES LIK...')
+#4 /wordpress/wp-content/plugins/wp-hide-my-site/index.php(56): wpdb->get_var('SHOW TABLES LIK...')
+#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query SHOW TABLES LIKE hiddenmysite made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wp-hide-my-site/index.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 19:26:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE hiddenmysite (
+    new_id int(10) NOT NULL  PRIMARY KEY,
+    url_image varchar(150),
+	  background varchar(10));</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
+				INSERT INTO _wp_sqlite_mysql_information_schema_tables (table_schema, table_name, table_type, engine, row_format, table_collation)
+				VALUES (?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, hiddenmysite, BASE TABLE, InnoDB, Dynamic, utf8mb4_general_ci</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, hiddenmysite, new_id, 1, , NO, int, , , 10, 0, , , , int(10), PRI, , select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, hiddenmysite, 0, database_name_here, PRIMARY, 1, new_id, A, 0, , , , BTREE, , , YES, </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, hiddenmysite, url_image, 2, , YES, varchar, 150, 600, , , , utf8mb4, utf8mb4_general_ci, varchar(150), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, hiddenmysite, background, 3, , YES, varchar, 10, 40, , , , utf8mb4, utf8mb4_general_ci, varchar(10), , , select,insert,update,references, , , </li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
 				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wisy_builder_registered_blocks' , 'a:6:{s:5:&quot;audio&quot;;s:16:&quot;Wisy_Block_Audio&quot;;s:6:&quot;button&quot;;s:17:&quot;Wisy_Block_Button&quot;;s:6:&quot;column&quot;;s:17:&quot;Wisy_Block_Column&quot;;s:15:&quot;countdown-timer&quot;;s:26:&quot;Wisy_Block_Countdown_Timer&quot;;s:11:&quot;gdpr-notice&quot;;s:22:&quot;Wisy_Block_GDPR_Notice&quot;;s:4:&quot;icon&quot;;s:15:&quot;Wisy_Block_Icon&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, hiddenmysite</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, hiddenmysite</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, hiddenmysite</li>
+<li>Executing: CREATE TABLE `hiddenmysite` (
+  `new_id` INT NOT NULL,
+  `url_image` TEXT COLLATE NOCASE,
+  `background` TEXT COLLATE NOCASE,
+  `new_id` INT NOT NULL,
+  `url_image` TEXT COLLATE NOCASE,
+  `background` TEXT COLLATE NOCASE,
+  PRIMARY KEY (`new_id`)
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 table `hiddenmysite` already exists
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wisy_builder_re...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wisy/includes/wisy-functions.php(95): update_option('wisy_builder_re...', Array)
-#6 /wordpress/wp-content/plugins/wisy/blocks/icon/icon.php(211): wisy_register_block('Wisy_Block_Icon')
-#7 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(73): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(50): Wisy_Builder->load_blocks()
-#9 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(78): Wisy_Builder->__construct()
-#10 /wordpress/wp-content/plugins/wisy/wisy-builder.php(36): require_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wisy/wisy-build...')
-#13 /internal/eval.php(20): activate_plugin('wisy/wisy-build...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:6:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";s:6:\"button\";s:17:\"Wisy_Block_Button\";s:6:\"column\";s:17:\"Wisy_Block_Column\";s:15:\"countdown-timer\";s:26:\"Wisy_Block_Countdown_Timer\";s:11:\"gdpr-notice\";s:22:\"Wisy_Block_GDPR_Notice\";s:4:\"icon\";s:15:\"Wisy_Block_Icon\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wisy/wisy-builder.php'), require_once('/plugins/wisy/includes/class-wisy-builder.php'), Wisy_Builder->__construct, Wisy_Builder->load_blocks, include_once('/plugins/wisy/blocks/icon/icon.php'), wisy_register_block, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:26:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:7:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";s:6:\"button\";s:17:\"Wisy_Block_Button\";s:6:\"column\";s:17:\"Wisy_Block_Column\";s:15:\"countdown-timer\";s:26:\"Wisy_Block_Countdown_Timer\";s:11:\"gdpr-notice\";s:22:\"Wisy_Block_GDPR_Notice\";s:4:\"icon\";s:15:\"Wisy_Block_Icon\";s:5:\"image\";s:16:\"Wisy_Block_Image\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wisy_builder_registered_blocks' , 'a:7:{s:5:&quot;audio&quot;;s:16:&quot;Wisy_Block_Audio&quot;;s:6:&quot;button&quot;;s:17:&quot;Wisy_Block_Button&quot;;s:6:&quot;column&quot;;s:17:&quot;Wisy_Block_Column&quot;;s:15:&quot;countdown-timer&quot;;s:26:&quot;Wisy_Block_Countdown_Timer&quot;;s:11:&quot;gdpr-notice&quot;;s:22:&quot;Wisy_Block_GDPR_Notice&quot;;s:4:&quot;icon&quot;;s:15:&quot;Wisy_Block_Icon&quot;;s:5:&quot;image&quot;;s:16:&quot;Wisy_Block_Image&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wisy_builder_re...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wisy/includes/wisy-functions.php(95): update_option('wisy_builder_re...', Array)
-#6 /wordpress/wp-content/plugins/wisy/blocks/image/image.php(135): wisy_register_block('Wisy_Block_Imag...')
-#7 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(73): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(50): Wisy_Builder->load_blocks()
-#9 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(78): Wisy_Builder->__construct()
-#10 /wordpress/wp-content/plugins/wisy/wisy-builder.php(36): require_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wisy/wisy-build...')
-#13 /internal/eval.php(20): activate_plugin('wisy/wisy-build...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:7:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";s:6:\"button\";s:17:\"Wisy_Block_Button\";s:6:\"column\";s:17:\"Wisy_Block_Column\";s:15:\"countdown-timer\";s:26:\"Wisy_Block_Countdown_Timer\";s:11:\"gdpr-notice\";s:22:\"Wisy_Block_GDPR_Notice\";s:4:\"icon\";s:15:\"Wisy_Block_Icon\";s:5:\"image\";s:16:\"Wisy_Block_Image\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wisy/wisy-builder.php'), require_once('/plugins/wisy/includes/class-wisy-builder.php'), Wisy_Builder->__construct, Wisy_Builder->load_blocks, include_once('/plugins/wisy/blocks/image/image.php'), wisy_register_block, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:26:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:8:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";s:6:\"button\";s:17:\"Wisy_Block_Button\";s:6:\"column\";s:17:\"Wisy_Block_Column\";s:15:\"countdown-timer\";s:26:\"Wisy_Block_Countdown_Timer\";s:11:\"gdpr-notice\";s:22:\"Wisy_Block_GDPR_Notice\";s:4:\"icon\";s:15:\"Wisy_Block_Icon\";s:5:\"image\";s:16:\"Wisy_Block_Image\";s:3:\"row\";s:14:\"Wisy_Block_Row\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wisy_builder_registered_blocks' , 'a:8:{s:5:&quot;audio&quot;;s:16:&quot;Wisy_Block_Audio&quot;;s:6:&quot;button&quot;;s:17:&quot;Wisy_Block_Button&quot;;s:6:&quot;column&quot;;s:17:&quot;Wisy_Block_Column&quot;;s:15:&quot;countdown-timer&quot;;s:26:&quot;Wisy_Block_Countdown_Timer&quot;;s:11:&quot;gdpr-notice&quot;;s:22:&quot;Wisy_Block_GDPR_Notice&quot;;s:4:&quot;icon&quot;;s:15:&quot;Wisy_Block_Icon&quot;;s:5:&quot;image&quot;;s:16:&quot;Wisy_Block_Image&quot;;s:3:&quot;row&quot;;s:14:&quot;Wisy_Block_Row&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wisy_builder_re...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wisy/includes/wisy-functions.php(95): update_option('wisy_builder_re...', Array)
-#6 /wordpress/wp-content/plugins/wisy/blocks/row/row.php(144): wisy_register_block('Wisy_Block_Row')
-#7 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(73): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(50): Wisy_Builder->load_blocks()
-#9 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(78): Wisy_Builder->__construct()
-#10 /wordpress/wp-content/plugins/wisy/wisy-builder.php(36): require_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wisy/wisy-build...')
-#13 /internal/eval.php(20): activate_plugin('wisy/wisy-build...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:8:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";s:6:\"button\";s:17:\"Wisy_Block_Button\";s:6:\"column\";s:17:\"Wisy_Block_Column\";s:15:\"countdown-timer\";s:26:\"Wisy_Block_Countdown_Timer\";s:11:\"gdpr-notice\";s:22:\"Wisy_Block_GDPR_Notice\";s:4:\"icon\";s:15:\"Wisy_Block_Icon\";s:5:\"image\";s:16:\"Wisy_Block_Image\";s:3:\"row\";s:14:\"Wisy_Block_Row\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wisy/wisy-builder.php'), require_once('/plugins/wisy/includes/class-wisy-builder.php'), Wisy_Builder->__construct, Wisy_Builder->load_blocks, include_once('/plugins/wisy/blocks/row/row.php'), wisy_register_block, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:26:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:9:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";s:6:\"button\";s:17:\"Wisy_Block_Button\";s:6:\"column\";s:17:\"Wisy_Block_Column\";s:15:\"countdown-timer\";s:26:\"Wisy_Block_Countdown_Timer\";s:11:\"gdpr-notice\";s:22:\"Wisy_Block_GDPR_Notice\";s:4:\"icon\";s:15:\"Wisy_Block_Icon\";s:5:\"image\";s:16:\"Wisy_Block_Image\";s:3:\"row\";s:14:\"Wisy_Block_Row\";s:9:\"shortcode\";s:20:\"Wisy_Block_Shortcode\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wisy_builder_registered_blocks' , 'a:9:{s:5:&quot;audio&quot;;s:16:&quot;Wisy_Block_Audio&quot;;s:6:&quot;button&quot;;s:17:&quot;Wisy_Block_Button&quot;;s:6:&quot;column&quot;;s:17:&quot;Wisy_Block_Column&quot;;s:15:&quot;countdown-timer&quot;;s:26:&quot;Wisy_Block_Countdown_Timer&quot;;s:11:&quot;gdpr-notice&quot;;s:22:&quot;Wisy_Block_GDPR_Notice&quot;;s:4:&quot;icon&quot;;s:15:&quot;Wisy_Block_Icon&quot;;s:5:&quot;image&quot;;s:16:&quot;Wisy_Block_Image&quot;;s:3:&quot;row&quot;;s:14:&quot;Wisy_Block_Row&quot;;s:9:&quot;shortcode&quot;;s:20:&quot;Wisy_Block_Shortcode&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wisy_builder_re...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wisy/includes/wisy-functions.php(95): update_option('wisy_builder_re...', Array)
-#6 /wordpress/wp-content/plugins/wisy/blocks/shortcode/shortcode.php(53): wisy_register_block('Wisy_Block_Shor...')
-#7 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(73): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(50): Wisy_Builder->load_blocks()
-#9 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(78): Wisy_Builder->__construct()
-#10 /wordpress/wp-content/plugins/wisy/wisy-builder.php(36): require_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wisy/wisy-build...')
-#13 /internal/eval.php(20): activate_plugin('wisy/wisy-build...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:9:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";s:6:\"button\";s:17:\"Wisy_Block_Button\";s:6:\"column\";s:17:\"Wisy_Block_Column\";s:15:\"countdown-timer\";s:26:\"Wisy_Block_Countdown_Timer\";s:11:\"gdpr-notice\";s:22:\"Wisy_Block_GDPR_Notice\";s:4:\"icon\";s:15:\"Wisy_Block_Icon\";s:5:\"image\";s:16:\"Wisy_Block_Image\";s:3:\"row\";s:14:\"Wisy_Block_Row\";s:9:\"shortcode\";s:20:\"Wisy_Block_Shortcode\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wisy/wisy-builder.php'), require_once('/plugins/wisy/includes/class-wisy-builder.php'), Wisy_Builder->__construct, Wisy_Builder->load_blocks, include_once('/plugins/wisy/blocks/shortcode/shortcode.php'), wisy_register_block, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:26:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:10:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";s:6:\"button\";s:17:\"Wisy_Block_Button\";s:6:\"column\";s:17:\"Wisy_Block_Column\";s:15:\"countdown-timer\";s:26:\"Wisy_Block_Countdown_Timer\";s:11:\"gdpr-notice\";s:22:\"Wisy_Block_GDPR_Notice\";s:4:\"icon\";s:15:\"Wisy_Block_Icon\";s:5:\"image\";s:16:\"Wisy_Block_Image\";s:3:\"row\";s:14:\"Wisy_Block_Row\";s:9:\"shortcode\";s:20:\"Wisy_Block_Shortcode\";s:4:\"text\";s:15:\"Wisy_Block_Text\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wisy_builder_registered_blocks' , 'a:10:{s:5:&quot;audio&quot;;s:16:&quot;Wisy_Block_Audio&quot;;s:6:&quot;button&quot;;s:17:&quot;Wisy_Block_Button&quot;;s:6:&quot;column&quot;;s:17:&quot;Wisy_Block_Column&quot;;s:15:&quot;countdown-timer&quot;;s:26:&quot;Wisy_Block_Countdown_Timer&quot;;s:11:&quot;gdpr-notice&quot;;s:22:&quot;Wisy_Block_GDPR_Notice&quot;;s:4:&quot;icon&quot;;s:15:&quot;Wisy_Block_Icon&quot;;s:5:&quot;image&quot;;s:16:&quot;Wisy_Block_Image&quot;;s:3:&quot;row&quot;;s:14:&quot;Wisy_Block_Row&quot;;s:9:&quot;shortcode&quot;;s:20:&quot;Wisy_Block_Shortcode&quot;;s:4:&quot;text&quot;;s:15:&quot;Wisy_Block_Text&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wisy_builder_re...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wisy/includes/wisy-functions.php(95): update_option('wisy_builder_re...', Array)
-#6 /wordpress/wp-content/plugins/wisy/blocks/text/text.php(127): wisy_register_block('Wisy_Block_Text')
-#7 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(73): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(50): Wisy_Builder->load_blocks()
-#9 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(78): Wisy_Builder->__construct()
-#10 /wordpress/wp-content/plugins/wisy/wisy-builder.php(36): require_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wisy/wisy-build...')
-#13 /internal/eval.php(20): activate_plugin('wisy/wisy-build...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:10:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";s:6:\"button\";s:17:\"Wisy_Block_Button\";s:6:\"column\";s:17:\"Wisy_Block_Column\";s:15:\"countdown-timer\";s:26:\"Wisy_Block_Countdown_Timer\";s:11:\"gdpr-notice\";s:22:\"Wisy_Block_GDPR_Notice\";s:4:\"icon\";s:15:\"Wisy_Block_Icon\";s:5:\"image\";s:16:\"Wisy_Block_Image\";s:3:\"row\";s:14:\"Wisy_Block_Row\";s:9:\"shortcode\";s:20:\"Wisy_Block_Shortcode\";s:4:\"text\";s:15:\"Wisy_Block_Text\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wisy/wisy-builder.php'), require_once('/plugins/wisy/includes/class-wisy-builder.php'), Wisy_Builder->__construct, Wisy_Builder->load_blocks, include_once('/plugins/wisy/blocks/text/text.php'), wisy_register_block, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:26:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:11:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";s:6:\"button\";s:17:\"Wisy_Block_Button\";s:6:\"column\";s:17:\"Wisy_Block_Column\";s:15:\"countdown-timer\";s:26:\"Wisy_Block_Countdown_Timer\";s:11:\"gdpr-notice\";s:22:\"Wisy_Block_GDPR_Notice\";s:4:\"icon\";s:15:\"Wisy_Block_Icon\";s:5:\"image\";s:16:\"Wisy_Block_Image\";s:3:\"row\";s:14:\"Wisy_Block_Row\";s:9:\"shortcode\";s:20:\"Wisy_Block_Shortcode\";s:4:\"text\";s:15:\"Wisy_Block_Text\";s:5:\"video\";s:16:\"Wisy_Block_Video\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wisy_builder_registered_blocks' , 'a:11:{s:5:&quot;audio&quot;;s:16:&quot;Wisy_Block_Audio&quot;;s:6:&quot;button&quot;;s:17:&quot;Wisy_Block_Button&quot;;s:6:&quot;column&quot;;s:17:&quot;Wisy_Block_Column&quot;;s:15:&quot;countdown-timer&quot;;s:26:&quot;Wisy_Block_Countdown_Timer&quot;;s:11:&quot;gdpr-notice&quot;;s:22:&quot;Wisy_Block_GDPR_Notice&quot;;s:4:&quot;icon&quot;;s:15:&quot;Wisy_Block_Icon&quot;;s:5:&quot;image&quot;;s:16:&quot;Wisy_Block_Image&quot;;s:3:&quot;row&quot;;s:14:&quot;Wisy_Block_Row&quot;;s:9:&quot;shortcode&quot;;s:20:&quot;Wisy_Block_Shortcode&quot;;s:4:&quot;text&quot;;s:15:&quot;Wisy_Block_Text&quot;;s:5:&quot;video&quot;;s:16:&quot;Wisy_Block_Video&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wisy_builder_re...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wisy/includes/wisy-functions.php(95): update_option('wisy_builder_re...', Array)
-#6 /wordpress/wp-content/plugins/wisy/blocks/video/video.php(180): wisy_register_block('Wisy_Block_Vide...')
-#7 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(73): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(50): Wisy_Builder->load_blocks()
-#9 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(78): Wisy_Builder->__construct()
-#10 /wordpress/wp-content/plugins/wisy/wisy-builder.php(36): require_once('/wordpress/wp-c...')
-#11 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wisy/wisy-build...')
-#13 /internal/eval.php(20): activate_plugin('wisy/wisy-build...')
-#14 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:11:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";s:6:\"button\";s:17:\"Wisy_Block_Button\";s:6:\"column\";s:17:\"Wisy_Block_Column\";s:15:\"countdown-timer\";s:26:\"Wisy_Block_Countdown_Timer\";s:11:\"gdpr-notice\";s:22:\"Wisy_Block_GDPR_Notice\";s:4:\"icon\";s:15:\"Wisy_Block_Icon\";s:5:\"image\";s:16:\"Wisy_Block_Image\";s:3:\"row\";s:14:\"Wisy_Block_Row\";s:9:\"shortcode\";s:20:\"Wisy_Block_Shortcode\";s:4:\"text\";s:15:\"Wisy_Block_Text\";s:5:\"video\";s:16:\"Wisy_Block_Video\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wisy/wisy-builder.php'), require_once('/plugins/wisy/includes/class-wisy-builder.php'), Wisy_Builder->__construct, Wisy_Builder->load_blocks, include_once('/plugins/wisy/blocks/video/video.php'), wisy_register_block, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:26:30 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 05:26:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 05:26:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 05:26:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 05:26:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:1:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wisy_builder_registered_blocks' , 'a:1:{s:5:&quot;audio&quot;;s:16:&quot;Wisy_Block_Audio&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wisy_builder_re...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wisy/includes/wisy-functions.php(95): update_option('wisy_builder_re...', Array)
-#6 /wordpress/wp-content/plugins/wisy/blocks/audio/audio.php(97): wisy_register_block('Wisy_Block_Audi...')
-#7 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(73): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(50): Wisy_Builder->load_blocks()
-#9 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(78): Wisy_Builder->__construct()
-#10 /wordpress/wp-content/plugins/wisy/wisy-builder.php(36): require_once('/wordpress/wp-c...')
-#11 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:1:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wisy/wisy-builder.php'), require_once('/plugins/wisy/includes/class-wisy-builder.php'), Wisy_Builder->__construct, Wisy_Builder->load_blocks, include_once('/plugins/wisy/blocks/audio/audio.php'), wisy_register_block, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:26:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:2:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";s:6:\"button\";s:17:\"Wisy_Block_Button\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wisy_builder_registered_blocks' , 'a:2:{s:5:&quot;audio&quot;;s:16:&quot;Wisy_Block_Audio&quot;;s:6:&quot;button&quot;;s:17:&quot;Wisy_Block_Button&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wisy_builder_re...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wisy/includes/wisy-functions.php(95): update_option('wisy_builder_re...', Array)
-#6 /wordpress/wp-content/plugins/wisy/blocks/button/button.php(225): wisy_register_block('Wisy_Block_Butt...')
-#7 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(73): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(50): Wisy_Builder->load_blocks()
-#9 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(78): Wisy_Builder->__construct()
-#10 /wordpress/wp-content/plugins/wisy/wisy-builder.php(36): require_once('/wordpress/wp-c...')
-#11 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:2:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";s:6:\"button\";s:17:\"Wisy_Block_Button\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wisy/wisy-builder.php'), require_once('/plugins/wisy/includes/class-wisy-builder.php'), Wisy_Builder->__construct, Wisy_Builder->load_blocks, include_once('/plugins/wisy/blocks/button/button.php'), wisy_register_block, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 05:26:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:3:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";s:6:\"button\";s:17:\"Wisy_Block_Button\";s:6:\"column\";s:17:\"Wisy_Block_Column\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wisy_builder_registered_blocks' , 'a:3:{s:5:&quot;audio&quot;;s:16:&quot;Wisy_Block_Audio&quot;;s:6:&quot;button&quot;;s:17:&quot;Wisy_Block_Button&quot;;s:6:&quot;column&quot;;s:17:&quot;Wisy_Block_Column&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('wisy_builder_re...', Array, '', 'auto')
-#5 /wordpress/wp-content/plugins/wisy/includes/wisy-functions.php(95): update_option('wisy_builder_re...', Array)
-#6 /wordpress/wp-content/plugins/wisy/blocks/column/column.php(68): wisy_register_block('Wisy_Block_Colu...')
-#7 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(73): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(50): Wisy_Builder->load_blocks()
-#9 /wordpress/wp-content/plugins/wisy/includes/class-wisy-builder.php(78): Wisy_Builder->__construct()
-#10 /wordpress/wp-content/plugins/wisy/wisy-builder.php(36): require_once('/wordpress/wp-c...')
-#11 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#12 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#13 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#14 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#15 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wisy_builder_registered_blocks', 'a:3:{s:5:\"audio\";s:16:\"Wisy_Block_Audio\";s:6:\"button\";s:17:\"Wisy_Block_Button\";s:6:\"column\";s:17:\"Wisy_Block_Column\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), requi
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('CREATE TABLE hi...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('CREATE TABLE hi...')
+#3 /wordpress/wp-content/plugins/wp-hide-my-site/index.php(61): WP_SQLite_DB->query('CREATE TABLE hi...')
+#4 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}</pre>
+ for query CREATE TABLE hiddenmysite (
+    new_id int(10) NOT NULL  PRIMARY KEY,
+    url_image varchar(150),
+	  background varchar(10)); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wp-hide-my-site/index.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 19:26:09 UTC] PHP Warning:  Undefined array key "upload_image" in /wordpress/wp-content/plugins/wp-hide-my-site/index.php on line 12
+[10-Apr-2025 19:26:10 UTC] PHP Warning:  Undefined array key "upload_image" in /wordpress/wp-content/plugins/wp-hide-my-site/index.php on line 12
+[10-Apr-2025 19:26:19 UTC] PHP Warning:  Undefined array key "upload_image" in /wordpress/wp-content/plugins/wp-hide-my-site/index.php on line 12
+[10-Apr-2025 19:26:20 UTC] PHP Warning:  Undefined array key "upload_image" in /wordpress/wp-content/plugins/wp-hide-my-site/index.php on line 12
+[10-Apr-2025 19:26:33 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-minify-static/minify-cdn.php on line 11
+[10-Apr-2025 19:26:42 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-minify-static/minify-cdn.php on line 11
+[10-Apr-2025 19:26:51 UTC] PHP Warning:  Trying to access array offset on value of type bool in /wordpress/wp-content/plugins/wp-minify-static/minify-cdn.php on line 11
+[10-Apr-2025 19:27:02 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 19:27:02 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, class WPReadingTime does not have a method "activate" in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-rea...', false)
+#3 /internal/eval.php(20): activate_plugin('wp-reading-time...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[10-Apr-2025 19:27:10 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 19:27:10 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, class WPReadingTime does not have a method "activate" in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-rea...', false)
+#3 /internal/eval.php(20): activate_plugin('wp-reading-time...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[10-Apr-2025 19:27:19 UTC] PHP Notice:  Function register_uninstall_hook was called <strong>incorrectly</strong>. Only a static class method or function can be used in an uninstall hook. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.1.0.) in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 19:27:19 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, class WPReadingTime does not have a method "activate" in /wordpress/wp-includes/class-wp-hook.php:324
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#1 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#2 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-rea...', false)
+#3 /internal/eval.php(20): activate_plugin('wp-reading-time...')
+#4 {main}
+  thrown in /wordpress/wp-includes/class-wp-hook.php on line 324
+[10-Apr-2025 19:28:00 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Widget_CF7')
+#2 /wordpress/wp-content/plugins/widget-contact-form-7/cf7-widget.php(79): register_widget('Widget_CF7')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): widget_cf7_reg('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 19:28:09 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Widget_CF7')
+#2 /wordpress/wp-content/plugins/widget-contact-form-7/cf7-widget.php(79): register_widget('Widget_CF7')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): widget_cf7_reg('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 19:28:18 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('Widget_CF7')
+#2 /wordpress/wp-content/plugins/widget-contact-form-7/cf7-widget.php(79): register_widget('Widget_CF7')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): widget_cf7_reg('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 19:30:46 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function ereg_replace() in /wordpress/wp-content/plugins/wp-carousel/wp-carousel.php:175
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-carousel/wp-...')
+#2 /internal/eval.php(20): activate_plugin('wp-carousel/wp-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-carousel/wp-carousel.php on line 175
+[10-Apr-2025 19:30:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function ereg_replace() in /wordpress/wp-content/plugins/wp-carousel/wp-carousel.php:175
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-carousel/wp-...')
+#2 /internal/eval.php(20): activate_plugin('wp-carousel/wp-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-carousel/wp-carousel.php on line 175
+[10-Apr-2025 19:31:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function ereg_replace() in /wordpress/wp-content/plugins/wp-carousel/wp-carousel.php:175
+Stack trace:
+#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
+#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('wp-carousel/wp-...')
+#2 /internal/eval.php(20): activate_plugin('wp-carousel/wp-...')
+#3 {main}
+  thrown in /wordpress/wp-content/plugins/wp-carousel/wp-carousel.php on line 175
+
+    at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+  [cause]: Error: Error when executing the blueprint step #0 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"wp-directadmin"},"options":{"activate":true}}) : Plugin /wordpress/wp-content/plugins/wp-directadmin could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
+      at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+      at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+      at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
+    [cause]: Error: Plugin /wordpress/wp-content/plugins/wp-directadmin could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
+        at vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:119:51)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
+        at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
+        at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
+        at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
+        at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
+        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159)
+  }
+}
+
+Node.js v23.11.0
