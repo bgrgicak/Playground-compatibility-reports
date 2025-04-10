@@ -2,164 +2,701 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 07:47:13 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:47:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:47:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:47:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:48:02 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:48:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:48:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:48:02 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:48:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('canvas_db_version', '2.4.7', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'canvas_db_version' , '2.4.7' , 'on' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('canvas_db_versi...', '2.4.7', '', 'on')
-#5 /wordpress/wp-content/plugins/canvas/core/class-canvas.php(207): update_option('canvas_db_versi...', '2.4.7', true)
-#6 /wordpress/wp-includes/class-wp-hook.php(324): CNVS->check_version('')
+Error: [10-Apr-2025 14:26:40 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('currency_conver...')
+#2 /wordpress/wp-content/plugins/currency-converter/currency-converter.php(28): register_widget('currency_conver...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): load_currency_converter('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 14:26:50 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('currency_conver...')
+#2 /wordpress/wp-content/plugins/currency-converter/currency-converter.php(28): register_widget('currency_conver...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): load_currency_converter('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 14:26:59 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function WP_Widget::__construct(), 0 passed in /wordpress/wp-includes/class-wp-widget-factory.php on line 62 and at least 2 expected in /wordpress/wp-includes/class-wp-widget.php:163
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-widget-factory.php(62): WP_Widget->__construct()
+#1 /wordpress/wp-includes/widgets.php(123): WP_Widget_Factory->register('currency_conver...')
+#2 /wordpress/wp-content/plugins/currency-converter/currency-converter.php(28): register_widget('currency_conver...')
+#3 /wordpress/wp-includes/class-wp-hook.php(324): load_currency_converter('')
+#4 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#5 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#6 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#7 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-settings.php(704): do_action('init')
+#11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#14 {main}
+  thrown in /wordpress/wp-includes/class-wp-widget.php on line 163
+[10-Apr-2025 14:27:30 UTC] PHP Fatal error:  Uncaught Error: Class 'WpOrg\Requests\Response' not found in /wordpress/wp-includes/Requests/src/Requests.php:724
+Stack trace:
+#0 /wordpress/wp-includes/Requests/src/Requests.php(473): WpOrg\Requests\Requests::parse_response('', 'http://127.0.0....', Array, NULL, Array)
+#1 /wordpress/wp-includes/class-wp-http.php(410): WpOrg\Requests\Requests::request('http://127.0.0....', Array, NULL, 'POST', Array)
+#2 /wordpress/wp-includes/class-wp-http.php(633): WP_Http->request('http://127.0.0....', Array)
+#3 /wordpress/wp-includes/http.php(196): WP_Http->post('http://127.0.0....', Array)
+#4 /wordpress/wp-includes/cron.php(949): wp_remote_post('http://127.0.0....', Array)
+#5 /wordpress/wp-includes/cron.php(1029): spawn_cron(1744295247.442)
+#6 /wordpress/wp-includes/class-wp-hook.php(324): _wp_cron('')
 #7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
 #8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-settings.php(559): do_action('plugins_loaded')
-#10 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#11 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#12 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#13 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('canvas_db_version', '2.4.7', 'on') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, CNVS->check_version, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:48:03 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#9 /wordpress/wp-settings.php(726): do_action('wp_loaded')
+#10 /word in /wordpress/wp-includes/Requests/src/Requests.php on line 724
+[10-Apr-2025 14:27:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '6BU^2&Y@RFH$*4fa}tc#LOctR:o3jxE[OUvH)+89j?@(Qx>c%`qh.!&JgdNlX{$|', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TABLE contactFormKeys (
+	LogId integer UNIQUE default(1), 
+	siteKey TEXT NOT NULL,
+    secretKey TEXT NOT NULL,
+    emailAddress TEXT NOT NULL,
+    emailPassword TEXT NOT NULL,
+    hostName TEXT NOT NULL,
+    portNumber TEXT NOT NULL,
+    contactName TEXT NOT NULL,
+	Constraint CHK_Logging_singlerow CHECK (LogId = 1)
+);</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , '6BU^2&amp;Y@RFH$*4fa}tc#LOctR:o3jxE[OUvH)+89j?@(Qx&gt;c%`qh.!&amp;JgdNlX{$|' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, LogId, integer</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, siteKey, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, secretKey, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, emailAddress, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, emailPassword, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, hostName, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, portNumber, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, contactName, text</li>
+<li>Executing: CREATE TABLE &quot;contactFormKeys&quot; (
+&quot;LogId&quot; integer DEFAULT (,
+&quot;siteKey&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;secretKey&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;emailAddress&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;emailPassword&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;hostName&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;portNumber&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;contactName&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE) | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', '6BU^2&Y@RFH$*4f...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', '6BU^2&Y@RFH$*4f...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', '6BU^2&Y@RFH$*4f...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', '6BU^2&Y@RFH$*4f...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/canvas/components/basic-elements/class-block-alert.php(31): wp_register_script('canvas-block-al...', 'http://127.0.0....', Array, 1733211906, Array)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): CNVS_Block_Alert->init('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', '6BU^2&Y@RFH$*4fa}tc#LOctR:o3jxE[OUvH)+89j?@(Qx>c%`qh.!&JgdNlX{$|', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, CNVS_Block_Alert->init, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:48:04 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(2614): WP_SQLite_DB->query('CREATE TABLE co...')
+#2 /wordpress/wp-content/plugins/captcha-contact-form/environment.php(23): maybe_create_table('contactFormKeys', 'CREATE TABLE co...')
+#3 /wordpress/wp-content/plugins/captcha-contact-form/contact-form.php(29): require_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('captcha-contact...')
+#6 /internal/eval.php(20): activate_plugin('captcha-contact...')
+#7 {main}</pre>
+ for query CREATE TABLE contactFormKeys (
+	LogId integer UNIQUE default(1), 
+	siteKey TEXT NOT NULL,
+    secretKey TEXT NOT NULL,
+    emailAddress TEXT NOT NULL,
+    emailPassword TEXT NOT NULL,
+    hostName TEXT NOT NULL,
+    portNumber TEXT NOT NULL,
+    contactName TEXT NOT NULL,
+	Constraint CHK_Logging_singlerow CHECK (LogId = 1)
+); made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/captcha-contact-form/contact-form.php'), require_once('/plugins/captcha-contact-form/environment.php'), maybe_create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 14:27:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'wp(Ri{j.=88sG7PNE^mI,Yx<4)v[e)8p{P9-Z`}|uwQWx;07jaYu6F&~8c!B?kC6', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `contactFormKeys` (`LogId`, `siteKey`, `secretKey`, `emailAddress`, `emailPassword`, `hostName`, `portNumber`, `contactName`) VALUES ('1', '', '', '', '', '', '', '')</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'wp(Ri{j.=88sG7PNE^mI,Yx&lt;4)v[e)8p{P9-Z`}|uwQWx;07jaYu6F&amp;~8c!B?kC6' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `contactFormKeys` (`LogId`, `siteKey`, `secretKey`, `emailAddress`, `emailPassword`, `hostName`, `portNumber`, `contactName`) VALUES (:param0 , :param1 , :param2 , :param3 , :param4 , :param5 , :param6 , :param7 ) | parameters: 1, , , , , , , </li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: contactFormKeys.
 </div>
 <p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'wp(Ri{j.=88sG7P...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'wp(Ri{j.=88sG7P...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'wp(Ri{j.=88sG7P...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'wp(Ri{j.=88sG7P...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40375|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/canvas/components/basic-elements/class-block-alert.php(31): wp_register_script('canvas-block-al...', 'http://127.0.0....', Array, 1733211906, Array)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): CNVS_Block_Alert->init('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'wp(Ri{j.=88sG7PNE^mI,Yx<4)v[e)8p{P9-Z`}|uwQWx;07jaYu6F&~8c!B?kC6', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, CNVS_Block_Alert->init, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:48:32 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:48:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:48:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:48:32 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:48:59 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:48:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:48:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:48:59 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:49:28 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/css-javascript-toolbox/css-js-toolbox.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/cjte-black-white-image-effect/cjte-black-white-image-effect.php on line 70
-[09-Apr-2025 07:49:28 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/css-javascript-toolbox/css-js-toolbox.php' (include_path='.:') in /wordpress/wp-content/plugins/cjte-black-white-image-effect/cjte-black-white-image-effect.php:70
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `co...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('contactFormKeys', Array, NULL, 'INSERT')
+#3 /wordpress/wp-content/plugins/captcha-contact-form/environment.php(24): wpdb->insert('contactFormKeys', Array)
+#4 /wordpress/wp-content/plugins/captcha-contact-form/contact-form.php(29): require_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('captcha-contact...')
+#7 /internal/eval.php(20): activate_plugin('captcha-contact...')
+#8 {main}</pre>
+ for query INSERT INTO `contactFormKeys` (`LogId`, `siteKey`, `secretKey`, `emailAddress`, `emailPassword`, `hostName`, `portNumber`, `contactName`) VALUES ('1', '', '', '', '', '', '', '') made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/captcha-contact-form/contact-form.php'), require_once('/plugins/captcha-contact-form/environment.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 14:27:39 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM contactFormKeys WHERE LogId = 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM contactFormKeys WHERE LogId = 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: contactFormKeys.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM c...')
+#2 /wordpress/wp-content/plugins/captcha-contact-form/environment.php(27): wpdb->get_results('SELECT * FROM c...')
+#3 /wordpress/wp-content/plugins/captcha-contact-form/contact-form.php(29): require_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('captcha-contact...')
+#6 /internal/eval.php(20): activate_plugin('captcha-contact...')
+#7 {main}</pre>
+ for query SELECT * FROM contactFormKeys WHERE LogId = 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/captcha-contact-form/contact-form.php'), require_once('/plugins/captcha-contact-form/environment.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 14:27:39 UTC] PHP Notice:  Trying to get property 'siteKey' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 29
+[10-Apr-2025 14:27:39 UTC] PHP Notice:  Trying to get property 'secretKey' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 30
+[10-Apr-2025 14:27:39 UTC] PHP Notice:  Trying to get property 'emailAddress' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 31
+[10-Apr-2025 14:27:39 UTC] PHP Notice:  Trying to get property 'emailPassword' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 32
+[10-Apr-2025 14:27:39 UTC] PHP Notice:  Trying to get property 'hostName' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 33
+[10-Apr-2025 14:27:39 UTC] PHP Notice:  Trying to get property 'portNumber' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 34
+[10-Apr-2025 14:27:39 UTC] PHP Notice:  Trying to get property 'contactName' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 35
+[10-Apr-2025 14:27:39 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 72
+[10-Apr-2025 14:27:39 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 73
+[10-Apr-2025 14:27:39 UTC] PHP Notice:  Trying to get property 'siteKey' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 73
+[10-Apr-2025 14:27:39 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 74
+[10-Apr-2025 14:27:39 UTC] PHP Notice:  Trying to get property 'secretKey' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 74
+[10-Apr-2025 14:27:39 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 75
+[10-Apr-2025 14:27:39 UTC] PHP Notice:  Trying to get property 'emailAddress' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 75
+[10-Apr-2025 14:27:39 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 76
+[10-Apr-2025 14:27:39 UTC] PHP Notice:  Trying to get property 'emailPassword' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 76
+[10-Apr-2025 14:27:39 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 77
+[10-Apr-2025 14:27:39 UTC] PHP Notice:  Trying to get property 'hostName' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 77
+[10-Apr-2025 14:27:39 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 78
+[10-Apr-2025 14:27:39 UTC] PHP Notice:  Trying to get property 'portNumber' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 78
+[10-Apr-2025 14:27:39 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 79
+[10-Apr-2025 14:27:39 UTC] PHP Notice:  Trying to get property 'contactName' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 79
+[10-Apr-2025 14:27:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE contactFormKeys (
+	LogId integer UNIQUE default(1), 
+	siteKey TEXT NOT NULL,
+    secretKey TEXT NOT NULL,
+    emailAddress TEXT NOT NULL,
+    emailPassword TEXT NOT NULL,
+    hostName TEXT NOT NULL,
+    portNumber TEXT NOT NULL,
+    contactName TEXT NOT NULL,
+	Constraint CHK_Logging_singlerow CHECK (LogId = 1)
+);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, LogId, integer</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, siteKey, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, secretKey, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, emailAddress, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, emailPassword, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, hostName, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, portNumber, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, contactName, text</li>
+<li>Executing: CREATE TABLE &quot;contactFormKeys&quot; (
+&quot;LogId&quot; integer DEFAULT (,
+&quot;siteKey&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;secretKey&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;emailAddress&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;emailPassword&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;hostName&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;portNumber&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;contactName&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(2614): WP_SQLite_DB->query('CREATE TABLE co...')
+#2 /wordpress/wp-content/plugins/captcha-contact-form/environment.php(23): maybe_create_table('contactFormKeys', 'CREATE TABLE co...')
+#3 /wordpress/wp-content/plugins/captcha-contact-form/contact-form.php(29): require_once('/wordpress/wp-c...')
+#4 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}</pre>
+ for query CREATE TABLE contactFormKeys (
+	LogId integer UNIQUE default(1), 
+	siteKey TEXT NOT NULL,
+    secretKey TEXT NOT NULL,
+    emailAddress TEXT NOT NULL,
+    emailPassword TEXT NOT NULL,
+    hostName TEXT NOT NULL,
+    portNumber TEXT NOT NULL,
+    contactName TEXT NOT NULL,
+	Constraint CHK_Logging_singlerow CHECK (LogId = 1)
+); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/captcha-contact-form/contact-form.php'), require_once('/plugins/captcha-contact-form/environment.php'), maybe_create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 14:27:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `contactFormKeys` (`LogId`, `siteKey`, `secretKey`, `emailAddress`, `emailPassword`, `hostName`, `portNumber`, `contactName`) VALUES ('1', '', '', '', '', '', '', '')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `contactFormKeys` (`LogId`, `siteKey`, `secretKey`, `emailAddress`, `emailPassword`, `hostName`, `portNumber`, `contactName`) VALUES (:param0 , :param1 , :param2 , :param3 , :param4 , :param5 , :param6 , :param7 ) | parameters: 1, , , , , , , </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: contactFormKeys.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `co...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('contactFormKeys', Array, NULL, 'INSERT')
+#3 /wordpress/wp-content/plugins/captcha-contact-form/environment.php(24): wpdb->insert('contactFormKeys', Array)
+#4 /wordpress/wp-content/plugins/captcha-contact-form/contact-form.php(29): require_once('/wordpress/wp-c...')
+#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query INSERT INTO `contactFormKeys` (`LogId`, `siteKey`, `secretKey`, `emailAddress`, `emailPassword`, `hostName`, `portNumber`, `contactName`) VALUES ('1', '', '', '', '', '', '', '') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/captcha-contact-form/contact-form.php'), require_once('/plugins/captcha-contact-form/environment.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 14:27:40 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM contactFormKeys WHERE LogId = 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM contactFormKeys WHERE LogId = 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: contactFormKeys.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM c...')
+#2 /wordpress/wp-content/plugins/captcha-contact-form/environment.php(27): wpdb->get_results('SELECT * FROM c...')
+#3 /wordpress/wp-content/plugins/captcha-contact-form/contact-form.php(29): require_once('/wordpress/wp-c...')
+#4 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}</pre>
+ for query SELECT * FROM contactFormKeys WHERE LogId = 1 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/captcha-contact-form/contact-form.php'), require_once('/plugins/captcha-contact-form/environment.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 14:27:40 UTC] PHP Notice:  Trying to get property 'siteKey' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 29
+[10-Apr-2025 14:27:40 UTC] PHP Notice:  Trying to get property 'secretKey' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 30
+[10-Apr-2025 14:27:40 UTC] PHP Notice:  Trying to get property 'emailAddress' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 31
+[10-Apr-2025 14:27:40 UTC] PHP Notice:  Trying to get property 'emailPassword' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 32
+[10-Apr-2025 14:27:40 UTC] PHP Notice:  Trying to get property 'hostName' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 33
+[10-Apr-2025 14:27:40 UTC] PHP Notice:  Trying to get property 'portNumber' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 34
+[10-Apr-2025 14:27:40 UTC] PHP Notice:  Trying to get property 'contactName' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 35
+[10-Apr-2025 14:27:40 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 72
+[10-Apr-2025 14:27:40 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 73
+[10-Apr-2025 14:27:40 UTC] PHP Notice:  Trying to get property 'siteKey' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 73
+[10-Apr-2025 14:27:40 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 74
+[10-Apr-2025 14:27:40 UTC] PHP Notice:  Trying to get property 'secretKey' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 74
+[10-Apr-2025 14:27:40 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 75
+[10-Apr-2025 14:27:40 UTC] PHP Notice:  Trying to get property 'emailAddress' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 75
+[10-Apr-2025 14:27:40 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 76
+[10-Apr-2025 14:27:40 UTC] PHP Notice:  Trying to get property 'emailPassword' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 76
+[10-Apr-2025 14:27:40 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 77
+[10-Apr-2025 14:27:40 UTC] PHP Notice:  Trying to get property 'hostName' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 77
+[10-Apr-2025 14:27:40 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 78
+[10-Apr-2025 14:27:40 UTC] PHP Notice:  Trying to get property 'portNumber' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 78
+[10-Apr-2025 14:27:40 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 79
+[10-Apr-2025 14:27:40 UTC] PHP Notice:  Trying to get property 'contactName' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 79
+[10-Apr-2025 14:27:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE contactFormKeys (
+	LogId integer UNIQUE default(1), 
+	siteKey TEXT NOT NULL,
+    secretKey TEXT NOT NULL,
+    emailAddress TEXT NOT NULL,
+    emailPassword TEXT NOT NULL,
+    hostName TEXT NOT NULL,
+    portNumber TEXT NOT NULL,
+    contactName TEXT NOT NULL,
+	Constraint CHK_Logging_singlerow CHECK (LogId = 1)
+);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, LogId, integer</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, siteKey, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, secretKey, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, emailAddress, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, emailPassword, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, hostName, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, portNumber, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, contactName, text</li>
+<li>Executing: CREATE TABLE &quot;contactFormKeys&quot; (
+&quot;LogId&quot; integer DEFAULT (,
+&quot;siteKey&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;secretKey&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;emailAddress&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;emailPassword&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;hostName&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;portNumber&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;contactName&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(2614): WP_SQLite_DB->query('CREATE TABLE co...')
+#2 /wordpress/wp-content/plugins/captcha-contact-form/environment.php(23): maybe_create_table('contactFormKeys', 'CREATE TABLE co...')
+#3 /wordpress/wp-content/plugins/captcha-contact-form/contact-form.php(29): require_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('captcha-contact...')
+#6 /internal/eval.php(20): activate_plugin('captcha-contact...')
+#7 {main}</pre>
+ for query CREATE TABLE contactFormKeys (
+	LogId integer UNIQUE default(1), 
+	siteKey TEXT NOT NULL,
+    secretKey TEXT NOT NULL,
+    emailAddress TEXT NOT NULL,
+    emailPassword TEXT NOT NULL,
+    hostName TEXT NOT NULL,
+    portNumber TEXT NOT NULL,
+    contactName TEXT NOT NULL,
+	Constraint CHK_Logging_singlerow CHECK (LogId = 1)
+); made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/captcha-contact-form/contact-form.php'), require_once('/plugins/captcha-contact-form/environment.php'), maybe_create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 14:27:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `contactFormKeys` (`LogId`, `siteKey`, `secretKey`, `emailAddress`, `emailPassword`, `hostName`, `portNumber`, `contactName`) VALUES ('1', '', '', '', '', '', '', '')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `contactFormKeys` (`LogId`, `siteKey`, `secretKey`, `emailAddress`, `emailPassword`, `hostName`, `portNumber`, `contactName`) VALUES (:param0 , :param1 , :param2 , :param3 , :param4 , :param5 , :param6 , :param7 ) | parameters: 1, , , , , , , </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: contactFormKeys.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `co...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('contactFormKeys', Array, NULL, 'INSERT')
+#3 /wordpress/wp-content/plugins/captcha-contact-form/environment.php(24): wpdb->insert('contactFormKeys', Array)
+#4 /wordpress/wp-content/plugins/captcha-contact-form/contact-form.php(29): require_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('captcha-contact...')
+#7 /internal/eval.php(20): activate_plugin('captcha-contact...')
+#8 {main}</pre>
+ for query INSERT INTO `contactFormKeys` (`LogId`, `siteKey`, `secretKey`, `emailAddress`, `emailPassword`, `hostName`, `portNumber`, `contactName`) VALUES ('1', '', '', '', '', '', '', '') made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/captcha-contact-form/contact-form.php'), require_once('/plugins/captcha-contact-form/environment.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 14:27:48 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM contactFormKeys WHERE LogId = 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM contactFormKeys WHERE LogId = 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: contactFormKeys.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM c...')
+#2 /wordpress/wp-content/plugins/captcha-contact-form/environment.php(27): wpdb->get_results('SELECT * FROM c...')
+#3 /wordpress/wp-content/plugins/captcha-contact-form/contact-form.php(29): require_once('/wordpress/wp-c...')
+#4 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('captcha-contact...')
+#6 /internal/eval.php(20): activate_plugin('captcha-contact...')
+#7 {main}</pre>
+ for query SELECT * FROM contactFormKeys WHERE LogId = 1 made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/captcha-contact-form/contact-form.php'), require_once('/plugins/captcha-contact-form/environment.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 14:27:48 UTC] PHP Notice:  Trying to get property 'siteKey' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 29
+[10-Apr-2025 14:27:48 UTC] PHP Notice:  Trying to get property 'secretKey' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 30
+[10-Apr-2025 14:27:48 UTC] PHP Notice:  Trying to get property 'emailAddress' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 31
+[10-Apr-2025 14:27:48 UTC] PHP Notice:  Trying to get property 'emailPassword' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 32
+[10-Apr-2025 14:27:48 UTC] PHP Notice:  Trying to get property 'hostName' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 33
+[10-Apr-2025 14:27:48 UTC] PHP Notice:  Trying to get property 'portNumber' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 34
+[10-Apr-2025 14:27:48 UTC] PHP Notice:  Trying to get property 'contactName' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 35
+[10-Apr-2025 14:27:48 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 72
+[10-Apr-2025 14:27:48 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 73
+[10-Apr-2025 14:27:48 UTC] PHP Notice:  Trying to get property 'siteKey' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 73
+[10-Apr-2025 14:27:48 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 74
+[10-Apr-2025 14:27:48 UTC] PHP Notice:  Trying to get property 'secretKey' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 74
+[10-Apr-2025 14:27:48 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 75
+[10-Apr-2025 14:27:48 UTC] PHP Notice:  Trying to get property 'emailAddress' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 75
+[10-Apr-2025 14:27:48 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 76
+[10-Apr-2025 14:27:48 UTC] PHP Notice:  Trying to get property 'emailPassword' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 76
+[10-Apr-2025 14:27:48 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 77
+[10-Apr-2025 14:27:48 UTC] PHP Notice:  Trying to get property 'hostName' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 77
+[10-Apr-2025 14:27:48 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 78
+[10-Apr-2025 14:27:48 UTC] PHP Notice:  Trying to get property 'portNumber' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 78
+[10-Apr-2025 14:27:48 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 79
+[10-Apr-2025 14:27:48 UTC] PHP Notice:  Trying to get property 'contactName' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 79
+[10-Apr-2025 14:27:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>CREATE TABLE contactFormKeys (
+	LogId integer UNIQUE default(1), 
+	siteKey TEXT NOT NULL,
+    secretKey TEXT NOT NULL,
+    emailAddress TEXT NOT NULL,
+    emailPassword TEXT NOT NULL,
+    hostName TEXT NOT NULL,
+    portNumber TEXT NOT NULL,
+    contactName TEXT NOT NULL,
+	Constraint CHK_Logging_singlerow CHECK (LogId = 1)
+);</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, LogId, integer</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, siteKey, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, secretKey, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, emailAddress, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, emailPassword, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, hostName, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, portNumber, text</li>
+<li>Executing: INSERT INTO _mysql_data_types_cache (`table`, `column_or_index`, `mysql_type`)
+				VALUES (:table, :column, :datatype)
+				ON CONFLICT(`table`, `column_or_index`) DO UPDATE SET `mysql_type` = :datatype
+			 | parameters: contactFormKeys, contactName, text</li>
+<li>Executing: CREATE TABLE &quot;contactFormKeys&quot; (
+&quot;LogId&quot; integer DEFAULT (,
+&quot;siteKey&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;secretKey&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;emailAddress&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;emailPassword&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;hostName&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;portNumber&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE,
+&quot;contactName&quot; text NOT NULL ON CONFLICT REPLACE DEFAULT '' COLLATE NOCASE) | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 near ",": syntax error.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-admin/includes/upgrade.php(2614): WP_SQLite_DB->query('CREATE TABLE co...')
+#2 /wordpress/wp-content/plugins/captcha-contact-form/environment.php(23): maybe_create_table('contactFormKeys', 'CREATE TABLE co...')
+#3 /wordpress/wp-content/plugins/captcha-contact-form/contact-form.php(29): require_once('/wordpress/wp-c...')
+#4 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}</pre>
+ for query CREATE TABLE contactFormKeys (
+	LogId integer UNIQUE default(1), 
+	siteKey TEXT NOT NULL,
+    secretKey TEXT NOT NULL,
+    emailAddress TEXT NOT NULL,
+    emailPassword TEXT NOT NULL,
+    hostName TEXT NOT NULL,
+    portNumber TEXT NOT NULL,
+    contactName TEXT NOT NULL,
+	Constraint CHK_Logging_singlerow CHECK (LogId = 1)
+); made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/captcha-contact-form/contact-form.php'), require_once('/plugins/captcha-contact-form/environment.php'), maybe_create_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 14:27:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `contactFormKeys` (`LogId`, `siteKey`, `secretKey`, `emailAddress`, `emailPassword`, `hostName`, `portNumber`, `contactName`) VALUES ('1', '', '', '', '', '', '', '')</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: INSERT INTO `contactFormKeys` (`LogId`, `siteKey`, `secretKey`, `emailAddress`, `emailPassword`, `hostName`, `portNumber`, `contactName`) VALUES (:param0 , :param1 , :param2 , :param3 , :param4 , :param5 , :param6 , :param7 ) | parameters: 1, , , , , , , </li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: contactFormKeys.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `co...')
+#2 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('contactFormKeys', Array, NULL, 'INSERT')
+#3 /wordpress/wp-content/plugins/captcha-contact-form/environment.php(24): wpdb->insert('contactFormKeys', Array)
+#4 /wordpress/wp-content/plugins/captcha-contact-form/contact-form.php(29): require_once('/wordpress/wp-c...')
+#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#9 {main}</pre>
+ for query INSERT INTO `contactFormKeys` (`LogId`, `siteKey`, `secretKey`, `emailAddress`, `emailPassword`, `hostName`, `portNumber`, `contactName`) VALUES ('1', '', '', '', '', '', '', '') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/captcha-contact-form/contact-form.php'), require_once('/plugins/captcha-contact-form/environment.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 14:27:49 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SELECT * FROM contactFormKeys WHERE LogId = 1</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT * FROM contactFormKeys WHERE LogId = 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Error occurred at line 4117 in Function <code>handle_error</code>. Error message was: SQLSTATE[HY000]: General error: 1 no such table: contactFormKeys.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(287): WP_SQLite_Translator->get_error_message()
+#1 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SELECT * FROM c...')
+#2 /wordpress/wp-content/plugins/captcha-contact-form/environment.php(27): wpdb->get_results('SELECT * FROM c...')
+#3 /wordpress/wp-content/plugins/captcha-contact-form/contact-form.php(29): require_once('/wordpress/wp-c...')
+#4 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#5 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#6 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#8 {main}</pre>
+ for query SELECT * FROM contactFormKeys WHERE LogId = 1 made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/captcha-contact-form/contact-form.php'), require_once('/plugins/captcha-contact-form/environment.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 14:27:49 UTC] PHP Notice:  Trying to get property 'siteKey' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 29
+[10-Apr-2025 14:27:49 UTC] PHP Notice:  Trying to get property 'secretKey' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 30
+[10-Apr-2025 14:27:49 UTC] PHP Notice:  Trying to get property 'emailAddress' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 31
+[10-Apr-2025 14:27:49 UTC] PHP Notice:  Trying to get property 'emailPassword' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 32
+[10-Apr-2025 14:27:49 UTC] PHP Notice:  Trying to get property 'hostName' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 33
+[10-Apr-2025 14:27:49 UTC] PHP Notice:  Trying to get property 'portNumber' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 34
+[10-Apr-2025 14:27:49 UTC] PHP Notice:  Trying to get property 'contactName' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 35
+[10-Apr-2025 14:27:49 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 72
+[10-Apr-2025 14:27:49 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 73
+[10-Apr-2025 14:27:49 UTC] PHP Notice:  Trying to get property 'siteKey' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 73
+[10-Apr-2025 14:27:49 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 74
+[10-Apr-2025 14:27:49 UTC] PHP Notice:  Trying to get property 'secretKey' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 74
+[10-Apr-2025 14:27:49 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 75
+[10-Apr-2025 14:27:49 UTC] PHP Notice:  Trying to get property 'emailAddress' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 75
+[10-Apr-2025 14:27:49 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 76
+[10-Apr-2025 14:27:49 UTC] PHP Notice:  Trying to get property 'emailPassword' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 76
+[10-Apr-2025 14:27:49 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 77
+[10-Apr-2025 14:27:49 UTC] PHP Notice:  Trying to get property 'hostName' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 77
+[10-Apr-2025 14:27:49 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 78
+[10-Apr-2025 14:27:49 UTC] PHP Notice:  Trying to get property 'portNumber' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 78
+[10-Apr-2025 14:27:49 UTC] PHP Notice:  Undefined offset: 0 in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 79
+[10-Apr-2025 14:27:49 UTC] PHP Notice:  Trying to get property 'contactName' of non-object in /wordpress/wp-content/plugins/captcha-contact-form/environment.php on line 79
+[10-Apr-2025 14:29:02 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/css-javascript-toolbox/css-js-toolbox.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/cjte-black-white-image-effect/cjte-black-white-image-effect.php on line 70
+[10-Apr-2025 14:29:02 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/css-javascript-toolbox/css-js-toolbox.php' (include_path='.:') in /wordpress/wp-content/plugins/cjte-black-white-image-effect/cjte-black-white-image-effect.php:70
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): CJTEImageBlockWhiteEffectPackage_Plugin->_pluginActivated(false)
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
@@ -168,8 +705,8 @@ Stack trace:
 #4 /internal/eval.php(20): activate_plugin('cjte-black-whit...')
 #5 {main}
   thrown in /wordpress/wp-content/plugins/cjte-black-white-image-effect/cjte-black-white-image-effect.php on line 70
-[09-Apr-2025 07:49:36 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/css-javascript-toolbox/css-js-toolbox.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/cjte-black-white-image-effect/cjte-black-white-image-effect.php on line 70
-[09-Apr-2025 07:49:36 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/css-javascript-toolbox/css-js-toolbox.php' (include_path='.:') in /wordpress/wp-content/plugins/cjte-black-white-image-effect/cjte-black-white-image-effect.php:70
+[10-Apr-2025 14:29:10 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/css-javascript-toolbox/css-js-toolbox.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/cjte-black-white-image-effect/cjte-black-white-image-effect.php on line 70
+[10-Apr-2025 14:29:10 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/css-javascript-toolbox/css-js-toolbox.php' (include_path='.:') in /wordpress/wp-content/plugins/cjte-black-white-image-effect/cjte-black-white-image-effect.php:70
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): CJTEImageBlockWhiteEffectPackage_Plugin->_pluginActivated(false)
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
@@ -178,8 +715,8 @@ Stack trace:
 #4 /internal/eval.php(20): activate_plugin('cjte-black-whit...')
 #5 {main}
   thrown in /wordpress/wp-content/plugins/cjte-black-white-image-effect/cjte-black-white-image-effect.php on line 70
-[09-Apr-2025 07:49:44 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/css-javascript-toolbox/css-js-toolbox.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/cjte-black-white-image-effect/cjte-black-white-image-effect.php on line 70
-[09-Apr-2025 07:49:44 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/css-javascript-toolbox/css-js-toolbox.php' (include_path='.:') in /wordpress/wp-content/plugins/cjte-black-white-image-effect/cjte-black-white-image-effect.php:70
+[10-Apr-2025 14:29:18 UTC] PHP Warning:  require_once(/wordpress/wp-content/plugins/css-javascript-toolbox/css-js-toolbox.php): Failed to open stream: No such file or directory in /wordpress/wp-content/plugins/cjte-black-white-image-effect/cjte-black-white-image-effect.php on line 70
+[10-Apr-2025 14:29:18 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/wordpress/wp-content/plugins/css-javascript-toolbox/css-js-toolbox.php' (include_path='.:') in /wordpress/wp-content/plugins/cjte-black-white-image-effect/cjte-black-white-image-effect.php:70
 Stack trace:
 #0 /wordpress/wp-includes/class-wp-hook.php(324): CJTEImageBlockWhiteEffectPackage_Plugin->_pluginActivated(false)
 #1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
@@ -211,16 +748,4 @@ Stack trace:
       response: PHPResponse {
         httpStatusCode: 500,
         headers: {
-          'x-powered-by': [ 'PHP/8.0.30-dev' ],
-          'content-type': [ 'text/html; charset=UTF-8' ]
-        },
-        bytes: Uint8Array(0) [],
-        exitCode: 255,
-        errors: ''
-      },
-      source: 'request'
-    }
-  }
-}
-
-Node.js v23.11.0
+         
