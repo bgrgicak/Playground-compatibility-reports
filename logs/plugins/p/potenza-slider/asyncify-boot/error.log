@@ -2,13 +2,10 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [08-Apr-2025 12:05:28 UTC] PHP Fatal error:  Switch statements may only contain one default clause in /wordpress/wp-content/plugins/pdf-creator/MPDF/mpdf.php on line 1422
-[08-Apr-2025 12:05:32 UTC] PHP Fatal error:  Switch statements may only contain one default clause in /wordpress/wp-content/plugins/pdf-creator/MPDF/mpdf.php on line 1422
-[08-Apr-2025 12:05:37 UTC] PHP Fatal error:  Switch statements may only contain one default clause in /wordpress/wp-content/plugins/pdf-creator/MPDF/mpdf.php on line 1422
-[08-Apr-2025 12:05:44 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [10-Apr-2025 04:31:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wc_pebble_plugin_do_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('eop_do_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -20,7 +17,7 @@ Error: [08-Apr-2025 12:05:28 UTC] PHP Fatal error:  Switch statements may only c
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wc_pebble_plugin_do_activation_redirect' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'eop_do_activation_redirect' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -32,32 +29,54 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/pebble-shoppable-videos-ugc/woocommerce-pebble.php(79): add_option('wc_pebble_plugi...', true)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): wc_pebble_plugin_activate(false)
+#4 /wordpress/wp-content/plugins/pages-with-extension/pages-with-extension.php(125): add_option('eop_do_activati...', true)
+#5 /wordpress/wp-includes/class-wp-hook.php(324): active(false)
 #6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pebble...', false)
-#9 /internal/eval.php(20): activate_plugin('pebble-shoppabl...')
+#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pages-...', false)
+#9 /internal/eval.php(20): activate_plugin('pages-with-exte...')
 #10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wc_pebble_plugin_do_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_pebble-shoppable-videos-ugc/woocommerce-pebble.php'), WP_Hook->do_action, WP_Hook->apply_filters, wc_pebble_plugin_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 12:05:44 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 12:05:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 12:05:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 12:05:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 12:05:44 UTC] PHP Notice:  Function WP_Block_Type_Registry::register was called <strong>incorrectly</strong>. Block type names must contain a namespace prefix. Example: my-plugin/my-custom-block-type Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 5.0.0.) in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 12:05:46 UTC] PHP Notice:  Function WP_Block_Type_Registry::register was called <strong>incorrectly</strong>. Block type names must contain a namespace prefix. Example: my-plugin/my-custom-block-type Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 5.0.0.) in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 12:05:49 UTC] PHP Notice:  Function WP_Block_Type_Registry::register was called <strong>incorrectly</strong>. Block type names must contain a namespace prefix. Example: my-plugin/my-custom-block-type Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 5.0.0.) in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 12:05:55 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 13
-[08-Apr-2025 12:05:55 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 14
-[08-Apr-2025 12:05:55 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 15
-[08-Apr-2025 12:05:55 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 16
-[08-Apr-2025 12:05:55 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 17
-[08-Apr-2025 12:05:55 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 18
-[08-Apr-2025 12:05:55 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 21
-[08-Apr-2025 12:05:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('eop_do_activation_redirect', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_pages-with-extension/pages-with-extension.php'), WP_Hook->do_action, WP_Hook->apply_filters, active, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 04:31:30 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 04:31:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 04:31:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 04:31:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 04:32:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pelepay_business_method', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT 1 FROM `...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT 1 FROM `...')
+#3 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php(41): WP_SQLite_DB->query('SELECT 1 FROM `...')
+#4 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(78): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute('SELECT 1 FROM `...')
+#5 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(54): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest('SELECT 1 FROM `...')
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(242): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation()
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(215): PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate()
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(85): PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate()
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#12 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#13 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#14 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#15 {main}</pre>
+ for query SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest, PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 04:32:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('paygreen_last_update', 's:7:\"s:0:\"\";\";', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -69,7 +88,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pelepay_business_method' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'paygreen_last_update' , 's:7:&quot;s:0:&quot;&quot;;&quot;;' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -81,18 +100,59 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php(32): add_option('pelepay_busines...', '')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): pelepay_set_default_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pelepa...', false)
-#9 /internal/eval.php(20): activate_plugin('pelepay-integra...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pelepay_business_method', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_pelepay-integration-for-wpecommerce/pelepay.merchant.php'), WP_Hook->do_action, WP_Hook->apply_filters, pelepay_set_default_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 12:05:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(2145): add_option('paygreen_last_u...', 's:0:"";', '', 'off')
+#5 /wordpress/wp-includes/option.php(1928): add_network_option(1, 'paygreen_last_u...', 's:0:"";')
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/SystemSettingsOfficer.php(62): add_site_option('paygreen_last_u...', 's:0:"";')
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Settings.php(159): PGI\Module\PGWordPress\Services\Officers\SystemSettingsOfficer->setOption('paygreen_last_u...', '')
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(229): PGI\Module\PGModule\Services\Settings->set('last_update', '')
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(250): PGI\Module\PGModule\Services\Handlers\SetupHandler->setLastUpdate(NULL)
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(215): PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate()
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(85): PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate()
+#12 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#13 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#14 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#17 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#18 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('paygreen_last_update', 's:7:\"s:0:\"\";\";', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->setLastUpdate, PGI\Module\PGModule\Services\Settings->set, PGI\Module\PGWordPress\Services\Officers\SystemSettingsOfficer->setOption, add_site_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 04:32:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pelepay_cancel_url', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT 1 FROM `...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT 1 FROM `...')
+#3 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php(41): WP_SQLite_DB->query('SELECT 1 FROM `...')
+#4 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(78): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute('SELECT 1 FROM `...')
+#5 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(54): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest('SELECT 1 FROM `...')
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(242): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation()
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(215): PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate()
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(104): PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate()
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(88): PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall()
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#12 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#13 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#14 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#15 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#16 {main}</pre>
+ for query SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall, PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest, PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 04:32:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('paygreen_last_update', 's:7:\"s:0:\"\";\";', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -104,7 +164,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pelepay_cancel_url' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'paygreen_last_update' , 's:7:&quot;s:0:&quot;&quot;;&quot;;' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -116,18 +176,62 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php(37): add_option('pelepay_cancel_...', '')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): pelepay_set_default_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pelepa...', false)
-#9 /internal/eval.php(20): activate_plugin('pelepay-integra...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pelepay_cancel_url', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_pelepay-integration-for-wpecommerce/pelepay.merchant.php'), WP_Hook->do_action, WP_Hook->apply_filters, pelepay_set_default_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 12:05:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(2145): add_option('paygreen_last_u...', 's:0:"";', '', 'off')
+#5 /wordpress/wp-includes/option.php(1928): add_network_option(1, 'paygreen_last_u...', 's:0:"";')
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/SystemSettingsOfficer.php(62): add_site_option('paygreen_last_u...', 's:0:"";')
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Settings.php(159): PGI\Module\PGWordPress\Services\Officers\SystemSettingsOfficer->setOption('paygreen_last_u...', '')
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(229): PGI\Module\PGModule\Services\Settings->set('last_update', '')
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(250): PGI\Module\PGModule\Services\Handlers\SetupHandler->setLastUpdate(NULL)
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(215): PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate()
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(104): PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate()
+#12 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(88): PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall()
+#13 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#14 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#15 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#17 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#18 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#19 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('paygreen_last_update', 's:7:\"s:0:\"\";\";', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall, PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->setLastUpdate, PGI\Module\PGModule\Services\Settings->set, PGI\Module\PGWordPress\Services\Officers\SystemSettingsOfficer->setOption, add_site_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 04:32:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pelepay_success_url', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_transactions
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT 1 FROM `...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT 1 FROM `...')
+#3 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php(41): WP_SQLite_DB->query('SELECT 1 FROM `...')
+#4 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(78): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute('SELECT 1 FROM `...')
+#5 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(54): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest('SELECT 1 FROM `...')
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(242): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation()
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(215): PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate()
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(189): PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate()
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(160): PGI\Module\PGModule\Services\Handlers\SetupHandler->fire('install', '4.10.2')
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(106): PGI\Module\PGModule\Services\Handlers\SetupHandler->install()
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(88): PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall()
+#12 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#13 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#14 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#17 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#18 {main}</pre>
+ for query SELECT 1 FROM `wp_paygreen_transactions` LIMIT 1; made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall, PGI\Module\PGModule\Services\Handlers\SetupHandler->install, PGI\Module\PGModule\Services\Handlers\SetupHandler->fire, PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest, PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 04:32:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('paygreen_last_update', 's:7:\"s:0:\"\";\";', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -139,7 +243,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pelepay_success_url' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'paygreen_last_update' , 's:7:&quot;s:0:&quot;&quot;;&quot;;' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -151,18 +255,29 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php(42): add_option('pelepay_success...', '')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): pelepay_set_default_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pelepa...', false)
-#9 /internal/eval.php(20): activate_plugin('pelepay-integra...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pelepay_success_url', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_pelepay-integration-for-wpecommerce/pelepay.merchant.php'), WP_Hook->do_action, WP_Hook->apply_filters, pelepay_set_default_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 12:05:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(2145): add_option('paygreen_last_u...', 's:0:"";', '', 'off')
+#5 /wordpress/wp-includes/option.php(1928): add_network_option(1, 'paygreen_last_u...', 's:0:"";')
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/SystemSettingsOfficer.php(62): add_site_option('paygreen_last_u...', 's:0:"";')
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Settings.php(159): PGI\Module\PGWordPress\Services\Officers\SystemSettingsOfficer->setOption('paygreen_last_u...', '')
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(229): PGI\Module\PGModule\Services\Settings->set('last_update', '')
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(250): PGI\Module\PGModule\Services\Handlers\SetupHandler->setLastUpdate(NULL)
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(215): PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate()
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(189): PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate()
+#12 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(160): PGI\Module\PGModule\Services\Handlers\SetupHandler->fire('install', '4.10.2')
+#13 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(106): PGI\Module\PGModule\Services\Handlers\SetupHandler->install()
+#14 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(88): PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall()
+#15 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#16 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#17 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#18 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#19 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#20 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#21 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('paygreen_last_update', 's:7:\"s:0:\"\";\";', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall, PGI\Module\PGModule\Services\Handlers\SetupHandler->install, PGI\Module\PGModule\Services\Handlers\SetupHandler->fire, PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->setLastUpdate, PGI\Module\PGModule\Services\Settings->set, PGI\Module\PGWordPress\Services\Officers\SystemSettingsOfficer->setOption, add_site_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 04:32:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pelepay_failure_url', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('paygreen_behavior_detailed_logs', 's:8:\"s:1:\"0\";\";', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -174,7 +289,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pelepay_failure_url' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'paygreen_behavior_detailed_logs' , 's:8:&quot;s:1:&quot;0&quot;;&quot;;' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -186,18 +301,31 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php(47): add_option('pelepay_failure...', '')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): pelepay_set_default_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pelepa...', false)
-#9 /internal/eval.php(20): activate_plugin('pelepay-integra...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pelepay_failure_url', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_pelepay-integration-for-wpecommerce/pelepay.merchant.php'), WP_Hook->do_action, WP_Hook->apply_filters, pelepay_set_default_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 12:05:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(2145): add_option('paygreen_behavi...', 's:1:"0";', '', 'off')
+#5 /wordpress/wp-includes/option.php(1928): add_network_option(1, 'paygreen_behavi...', 's:1:"0";')
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/SystemSettingsOfficer.php(62): add_site_option('paygreen_behavi...', 's:1:"0";')
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Settings.php(159): PGI\Module\PGWordPress\Services\Officers\SystemSettingsOfficer->setOption('paygreen_behavi...', '0')
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Settings.php(77): PGI\Module\PGModule\Services\Settings->set('behavior_detail...', '0')
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Listeners/InstallDefaultSettingsListener.php(59): PGI\Module\PGModule\Services\Settings->installDefault()
+#10 [internal function]: PGI\Module\PGModule\Services\Listeners\InstallDefaultSettingsListener->listen(Object(PGI\Module\PGModule\Components\Events\Module))
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Broadcaster.php(206): call_user_func(Array, Object(PGI\Module\PGModule\Components\Events\Module))
+#12 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Broadcaster.php(161): PGI\Module\PGModule\Services\Broadcaster->callListener(Object(PGI\Module\PGModule\Components\Events\Module), Array)
+#13 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(196): PGI\Module\PGModule\Services\Broadcaster->fire(Object(PGI\Module\PGModule\Components\Events\Module))
+#14 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(160): PGI\Module\PGModule\Services\Handlers\SetupHandler->fire('install', '4.10.2')
+#15 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(106): PGI\Module\PGModule\Services\Handlers\SetupHandler->install()
+#16 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(88): PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall()
+#17 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#18 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#19 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#20 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#21 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#22 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#23 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('paygreen_behavior_detailed_logs', 's:8:\"s:1:\"0\";\";', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall, PGI\Module\PGModule\Services\Handlers\SetupHandler->install, PGI\Module\PGModule\Services\Handlers\SetupHandler->fire, PGI\Module\PGModule\Services\Broadcaster->fire, PGI\Module\PGModule\Services\Broadcaster->callListener, call_user_func, PGI\Module\PGModule\Services\Listeners\InstallDefaultSettingsListener->listen, PGI\Module\PGModule\Services\Settings->installDefault, PGI\Module\PGModule\Services\Settings->set, PGI\Module\PGWordPress\Services\Officers\SystemSettingsOfficer->setOption, add_site_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 04:32:00 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pelepay_button_url', 'https://www.pelepay.co.il/images/banners/respect_pp_8C.gif', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('paygreen_use_cache', 's:8:\"s:1:\"1\";\";', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -209,7 +337,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pelepay_button_url' , 'https://www.pelepay.co.il/images/banners/respect_pp_8C.gif' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'paygreen_use_cache' , 's:8:&quot;s:1:&quot;1&quot;;&quot;;' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -221,18 +349,31 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php(52): add_option('pelepay_button_...', 'https://www.pel...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): pelepay_set_default_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pelepa...', false)
-#9 /internal/eval.php(20): activate_plugin('pelepay-integra...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pelepay_button_url', 'https://www.pelepay.co.il/images/banners/respect_pp_8C.gif', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_pelepay-integration-for-wpecommerce/pelepay.merchant.php'), WP_Hook->do_action, WP_Hook->apply_filters, pelepay_set_default_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 12:05:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(2145): add_option('paygreen_use_ca...', 's:1:"1";', '', 'off')
+#5 /wordpress/wp-includes/option.php(1928): add_network_option(1, 'paygreen_use_ca...', 's:1:"1";')
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/SystemSettingsOfficer.php(62): add_site_option('paygreen_use_ca...', 's:1:"1";')
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Settings.php(159): PGI\Module\PGWordPress\Services\Officers\SystemSettingsOfficer->setOption('paygreen_use_ca...', '1')
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Settings.php(77): PGI\Module\PGModule\Services\Settings->set('use_cache', '1')
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Listeners/InstallDefaultSettingsListener.php(59): PGI\Module\PGModule\Services\Settings->installDefault()
+#10 [internal function]: PGI\Module\PGModule\Services\Listeners\InstallDefaultSettingsListener->listen(Object(PGI\Module\PGModule\Components\Events\Module))
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Broadcaster.php(206): call_user_func(Array, Object(PGI\Module\PGModule\Components\Events\Module))
+#12 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Broadcaster.php(161): PGI\Module\PGModule\Services\Broadcaster->callListener(Object(PGI\Module\PGModule\Components\Events\Module), Array)
+#13 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(196): PGI\Module\PGModule\Services\Broadcaster->fire(Object(PGI\Module\PGModule\Components\Events\Module))
+#14 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(160): PGI\Module\PGModule\Services\Handlers\SetupHandler->fire('install', '4.10.2')
+#15 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(106): PGI\Module\PGModule\Services\Handlers\SetupHandler->install()
+#16 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(88): PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall()
+#17 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#18 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#19 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#20 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#21 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#22 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#23 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('paygreen_use_cache', 's:8:\"s:1:\"1\";\";', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall, PGI\Module\PGModule\Services\Handlers\SetupHandler->install, PGI\Module\PGModule\Services\Handlers\SetupHandler->fire, PGI\Module\PGModule\Services\Broadcaster->fire, PGI\Module\PGModule\Services\Broadcaster->callListener, call_user_func, PGI\Module\PGModule\Services\Listeners\InstallDefaultSettingsListener->listen, PGI\Module\PGModule\Services\Settings->installDefault, PGI\Module\PGModule\Services\Settings->set, PGI\Module\PGWordPress\Services\Officers\SystemSettingsOfficer->setOption, add_site_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 04:32:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pelepay_gateway_url', 'https://www.pelepay.co.il/pay/custompaypage.aspx', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('paygreen_last_update', 's:13:\"s:6:\"4.10.2\";\";', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -244,7 +385,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pelepay_gateway_url' , 'https://www.pelepay.co.il/pay/custompaypage.aspx' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'paygreen_last_update' , 's:13:&quot;s:6:&quot;4.10.2&quot;;&quot;;' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -256,18 +397,63 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php(57): add_option('pelepay_gateway...', 'https://www.pel...')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): pelepay_set_default_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pelepa...', false)
-#9 /internal/eval.php(20): activate_plugin('pelepay-integra...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pelepay_gateway_url', 'https://www.pelepay.co.il/pay/custompaypage.aspx', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_pelepay-integration-for-wpecommerce/pelepay.merchant.php'), WP_Hook->do_action, WP_Hook->apply_filters, pelepay_set_default_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 12:05:55 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(2145): add_option('paygreen_last_u...', 's:6:"4.10.2";', '', 'off')
+#5 /wordpress/wp-includes/option.php(1928): add_network_option(1, 'paygreen_last_u...', 's:6:"4.10.2";')
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/SystemSettingsOfficer.php(62): add_site_option('paygreen_last_u...', 's:6:"4.10.2";')
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Settings.php(159): PGI\Module\PGWordPress\Services\Officers\SystemSettingsOfficer->setOption('paygreen_last_u...', '4.10.2')
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(229): PGI\Module\PGModule\Services\Settings->set('last_update', '4.10.2')
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(161): PGI\Module\PGModule\Services\Handlers\SetupHandler->setLastUpdate('4.10.2')
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(106): PGI\Module\PGModule\Services\Handlers\SetupHandler->install()
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(88): PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall()
+#12 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#13 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#14 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#15 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#16 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('paygreen-woocom...')
+#17 /internal/eval.php(20): activate_plugin('paygreen-woocom...')
+#18 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('paygreen_last_update', 's:13:\"s:6:\"4.10.2\";\";', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->runInstall, PGI\Module\PGModule\Services\Handlers\SetupHandler->install, PGI\Module\PGModule\Services\Handlers\SetupHandler->setLastUpdate, PGI\Module\PGModule\Services\Settings->set, PGI\Module\PGWordPress\Services\Officers\SystemSettingsOfficer->setOption, add_site_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 04:32:01 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 04:32:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 04:32:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 04:32:01 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 04:32:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pelepay_payment_number', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SELECT 1 FROM `wp_paygreen_fingerprint` LIMIT 1;</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM `wp_paygreen_fingerprint` LIMIT 1 | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 no such table: wp_paygreen_fingerprint
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SELECT 1 FROM `...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SELECT 1 FROM `...')
+#3 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/DatabaseOfficer.php(41): WP_SQLite_DB->query('SELECT 1 FROM `...')
+#4 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(78): PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute('SELECT 1 FROM `...')
+#5 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/MODPaygreen/services/officers/SetupOfficer.php(58): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest('SELECT 1 FROM `...')
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(242): PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation()
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(215): PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate()
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(85): PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate()
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#12 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#13 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#14 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#15 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#16 {main}</pre>
+ for query SELECT 1 FROM `wp_paygreen_fingerprint` LIMIT 1; made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->retrieveOldInstallation, PGI\Module\MODPaygreen\Services\Officers\SetupOfficer->isValidRequest, PGI\Module\PGWordPress\Services\Officers\DatabaseOfficer->execute, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 04:32:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('paygreen_last_update', 's:12:\"s:5:\"1.4.0\";\";', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -279,7 +465,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pelepay_payment_number' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'paygreen_last_update' , 's:12:&quot;s:5:&quot;1.4.0&quot;;&quot;;' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -291,326 +477,73 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php(62): add_option('pelepay_payment...', '1')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): pelepay_set_default_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pelepa...', false)
-#9 /internal/eval.php(20): activate_plugin('pelepay-integra...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pelepay_payment_number', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_pelepay-integration-for-wpecommerce/pelepay.merchant.php'), WP_Hook->do_action, WP_Hook->apply_filters, pelepay_set_default_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 12:05:55 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 12:05:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 12:05:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 12:05:55 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 12:05:55 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 13
-[08-Apr-2025 12:05:55 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 14
-[08-Apr-2025 12:05:55 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 15
-[08-Apr-2025 12:05:55 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 16
-[08-Apr-2025 12:05:55 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 17
-[08-Apr-2025 12:05:55 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 18
-[08-Apr-2025 12:05:55 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 21
-[08-Apr-2025 12:05:58 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 13
-[08-Apr-2025 12:05:58 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 14
-[08-Apr-2025 12:05:58 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 15
-[08-Apr-2025 12:05:58 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 16
-[08-Apr-2025 12:05:58 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 17
-[08-Apr-2025 12:05:58 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 18
-[08-Apr-2025 12:05:58 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 21
-[08-Apr-2025 12:05:58 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 13
-[08-Apr-2025 12:05:58 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 14
-[08-Apr-2025 12:05:58 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 15
-[08-Apr-2025 12:05:58 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 16
-[08-Apr-2025 12:05:58 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 17
-[08-Apr-2025 12:05:58 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 18
-[08-Apr-2025 12:05:58 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 25
-[08-Apr-2025 12:06:00 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 13
-[08-Apr-2025 12:06:00 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 14
-[08-Apr-2025 12:06:00 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 15
-[08-Apr-2025 12:06:00 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 16
-[08-Apr-2025 12:06:00 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 17
-[08-Apr-2025 12:06:00 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 18
-[08-Apr-2025 12:06:00 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 21
-[08-Apr-2025 12:06:00 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 13
-[08-Apr-2025 12:06:00 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 14
-[08-Apr-2025 12:06:00 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 15
-[08-Apr-2025 12:06:00 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 16
-[08-Apr-2025 12:06:00 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 17
-[08-Apr-2025 12:06:00 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 18
-[08-Apr-2025 12:06:00 UTC] PHP Warning:  Undefined variable $num in /wordpress/wp-content/plugins/pelepay-integration-for-wpecommerce/pelepay.merchant.php on line 25
-[08-Apr-2025 12:06:07 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 12:06:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 12:06:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 12:06:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 12:06:07 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 12:06:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 12:06:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 12:06:07 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 12:06:25 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 12:06:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 12:06:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 12:06:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 12:06:46 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 12:06:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 12:06:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 12:06:46 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 12:06:46 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+#4 /wordpress/wp-includes/option.php(2145): add_option('paygreen_last_u...', 's:5:"1.4.0";', '', 'off')
+#5 /wordpress/wp-includes/option.php(1928): add_network_option(1, 'paygreen_last_u...', 's:5:"1.4.0";')
+#6 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGWordPress/Services/Officers/SystemSettingsOfficer.php(62): add_site_option('paygreen_last_u...', 's:5:"1.4.0";')
+#7 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Settings.php(159): PGI\Module\PGWordPress\Services\Officers\SystemSettingsOfficer->setOption('paygreen_last_u...', '1.4.0')
+#8 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(229): PGI\Module\PGModule\Services\Settings->set('last_update', '1.4.0')
+#9 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(250): PGI\Module\PGModule\Services\Handlers\SetupHandler->setLastUpdate('1.4.0')
+#10 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(215): PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate()
+#11 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGModule/Services/Handlers/SetupHandler.php(85): PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate()
+#12 /wordpress/wp-content/plugins/paygreen-woocommerce/bundles/PGSystem/Components/Bootstrap.php(285): PGI\Module\PGModule\Services\Handlers\SetupHandler->run(3)
+#13 /wordpress/wp-content/plugins/paygreen-woocommerce/bootstrap.php(108): PGI\Module\PGSystem\Components\Bootstrap->setup()
+#14 /wordpress/wp-content/plugins/paygreen-woocommerce/paygreen-woocommerce.php(21): require_once('/wordpress/wp-c...')
+#15 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#16 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#17 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#18 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#19 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('paygreen_last_update', 's:12:\"s:5:\"1.4.0\";\";', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/paygreen-woocommerce/paygreen-woocommerce.php'), require_once('/plugins/paygreen-woocommerce/bootstrap.php'), PGI\Module\PGSystem\Components\Bootstrap->setup, PGI\Module\PGModule\Services\Handlers\SetupHandler->run, PGI\Module\PGModule\Services\Handlers\SetupHandler->getLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->buildLastUpdate, PGI\Module\PGModule\Services\Handlers\SetupHandler->setLastUpdate, PGI\Module\PGModule\Services\Settings->set, PGI\Module\PGWordPress\Services\Officers\SystemSettingsOfficer->setOption, add_site_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 04:32:02 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_widget_adsense_code', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>CREATE TABLE `wp_paygreen_categories_has_payments`
+(
+    `id`          INT(11)     NOT NULL AUTO_INCREMENT,
+    `id_category` INT(11)     NOT NULL,
+    `payment`     VARCHAR(50) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE = `InnoDB`
+  DEFAULT CHARSET = utf8
+;</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_widget_adsense_code' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_widget_a...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_widget_a...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_widget_adsense_code', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 12:06:58 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 12:06:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 12:06:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 12:06:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 12:07:10 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 12:07:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 12:07:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 12:07:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 12:07:22 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 12:07:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 12:07:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 12:07:22 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 12:07:34 UTC] PHP Warning:  Attempt to read property "ID" on null in /wordpress/wp-content/plugins/pingchecker/pingchecker.php on line 13
-[08-Apr-2025 12:07:34 UTC] PHP Warning:  Undefined array key "pingchecker" in /wordpress/wp-content/plugins/pingchecker/pingchecker.php on line 335
-[08-Apr-2025 12:07:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pbpref', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+				INSERT INTO _wp_sqlite_mysql_information_schema_tables (table_schema, table_name, table_type, engine, row_format, table_collation)
+				VALUES (?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_paygreen_categories_has_payments, BASE TABLE, InnoDB, Dynamic, utf8mb4_general_ci</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pbpref' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/pingchecker/pingchecker.php(411): add_option('pbpref', '')
-#5 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('pingchecker/pin...')
-#7 /internal/eval.php(20): activate_plugin('pingchecker/pin...')
-#8 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pbpref', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/pingchecker/pingchecker.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 12:07:34 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 12:07:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 12:07:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 12:07:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 12:07:34 UTC] PHP Warning:  Attempt to read property "ID" on null in /wordpress/wp-content/plugins/pingchecker/pingchecker.php on line 13
-[08-Apr-2025 12:07:34 UTC] PHP Warning:  Undefined array key "pingchecker" in /wordpress/wp-content/plugins/pingchecker/pingchecker.php on line 335
-[08-Apr-2025 12:07:34 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pbpref', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_paygreen_categories_has_payments, id, 1, , NO, int, , , 10, 0, , , , int(11), , auto_increment, select,insert,update,references, , , </li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'pbpref' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/pingchecker/pingchecker.php(411): add_option('pbpref', '')
-#5 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#6 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#7 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#8 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#9 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('pbpref', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/pingchecker/pingchecker.php'), add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 12:07:36 UTC] PHP Warning:  Attempt to read property "ID" on null in /wordpress/wp-content/plugins/pingchecker/pingchecker.php on line 13
-[08-Apr-2025 12:07:36 UTC] PHP Warning:  Undefined array key "pingchecker" in /wordpress/wp-content/plugins/pingchecker/pingchecker.php on line 335
-[08-Apr-2025 12:07:36 UTC] PHP Warning:  Attempt to read property "ID" on null in /wordpress/wp-content/plugins/pingchecker/pingchecker.php on line 13
-[08-Apr-2025 12:07:36 UTC] PHP Warning:  Undefined array key "pingchecker" in /wordpress/wp-content/plugins/pingchecker/pingchecker.php on line 335
-[08-Apr-2025 12:07:39 UTC] PHP Warning:  Attempt to read property "ID" on null in /wordpress/wp-content/plugins/pingchecker/pingchecker.php on line 13
-[08-Apr-2025 12:07:39 UTC] PHP Warning:  Undefined array key "pingchecker" in /wordpress/wp-content/plugins/pingchecker/pingchecker.php on line 335
-[08-Apr-2025 12:07:39 UTC] PHP Warning:  Attempt to read property "ID" on null in /wordpress/wp-content/plugins/pingchecker/pingchecker.php on line 13
-[08-Apr-2025 12:07:39 UTC] PHP Warning:  Undefined array key "pingchecker" in /wordpress/wp-content/plugins/pingchecker/pingchecker.php on line 335
-[08-Apr-2025 12:07:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ppfm_firstTime', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_paygreen_categories_has_payments, id_category, 2, , NO, int, , , 10, 0, , , , int(11), , , select,insert,update,references, , , </li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ppfm_firstTime' , '1' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/pingpressfm/pingPressFM.php(52): add_option('ppfm_firstTime', 1, '', 'off')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): ppfm_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pingpr...', false)
-#9 /internal/eval.php(20): activate_plugin('pingpressfm/pin...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ppfm_firstTime', '1', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_pingpressfm/pingPressFM.php'), WP_Hook->do_action, WP_Hook->apply_filters, ppfm_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 12:07:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ppfm_optionsUpdated', '0', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_paygreen_categories_has_payments, payment, 3, , NO, varchar, 50, 200, , , , utf8mb4, utf8mb4_general_ci, varchar(50), , , select,insert,update,references, , , </li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ppfm_optionsUpdated' , '0' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/pingpressfm/pingPressFM.php(53): add_option('ppfm_optionsUpd...', '0', '', 'off')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): ppfm_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pingpr...', false)
-#9 /internal/eval.php(20): activate_plugin('pingpressfm/pin...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ppfm_optionsUpdated', '0', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_pingpressfm/pingPressFM.php'), WP_Hook->do_action, WP_Hook->apply_filters, ppfm_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 12:07:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ppfm_keyVerified', '0', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+					SELECT column_name, data_type, is_nullable, character_maximum_length
+					FROM _wp_sqlite_mysql_information_schema_columns
+					WHERE table_schema = ?
+					AND table_name = ?
+					AND column_name IN (?)
+				 | parameters: database_name_here, wp_paygreen_categories_has_payments, id</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ppfm_keyVerified' , '0' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/pingpressfm/pingPressFM.php(54): add_option('ppfm_keyVerifie...', 0, '', 'off')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): ppfm_install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_pingpr...', false)
-#9 /internal/eval.php(20): activate_plugin('pingpressfm/pin...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ppfm_keyVerified', '0', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_pingpressfm/pingPressFM.php'), WP_Hook->do_action, WP_Hook->apply_filters, ppfm_install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 12:07:45 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ppfm_reverifyKey', '0', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+				INSERT INTO _wp_sqlite_mysql_information_schema_statistics (table_schema, table_name, non_unique, index_schema, index_name, seq_in_index, column_name, collation, cardinality, sub_part, packed, nullable, index_type, comment, index_comment, is_visible, expression)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_paygreen_categories_has_payments, 0, database_name_here, PRIMARY, 1, id, A, 0, , , , BTREE, , , YES, </li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: databas
+				WITH s AS (
+					SELECT
+						column_name,
+						CASE
+							WHEN MAX(index_name = 'PRIMARY') THEN 'PRI'
+							WHEN MAX(non_unique = 0 AND seq_in_index = 1) THEN 'UNI'
+							WHEN MAX(seq_in_index = 1) THEN 'MUL'
+							ELSE ''
+						END AS column_key
+					FROM _wp_sqlite_mysql_
