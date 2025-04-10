@@ -2,200 +2,228 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [08-Apr-2025 20:28:34 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:28:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:28:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:28:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:29:00 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:29:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:29:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:29:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:29:01 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [10-Apr-2025 07:46:18 UTC] PHP Deprecated:  Function wpdb::escape is <strong>deprecated</strong> since version 3.6.0! Use wpdb::prepare() or esc_sql() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 07:46:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_nls_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE `wp_ndizi_clients` ADD `active` ENUM('y','n') NOT NULL DEFAULT 'y' COMMENT 'Client Active' AFTER `access_key` </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ndizi_clients</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_clients</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ndizi_clients</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
+				SELECT MAX(ordinal_position)
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'widget_nls_widget' , 'a:1:{s:12:&quot;_multiwidget&quot;;i:1;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_ndizi_clients</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_ndizi_clients, active, 11, y, NO, enum, 1, 4, , , , utf8mb4, utf8mb4_general_ci, enum('y','n'), , , select,insert,update,references, Client Active, , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ndizi_clients</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_clients</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_clients</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_ndizi_clients_67f7774ac0a08` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `name` TEXT COLLATE NOCASE NOT NULL,
+  `phone` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `email` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `site` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `description` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `address` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `access_key` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `active` TEXT COLLATE NOCASE NOT NULL DEFAULT 'y',
+  `modified` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` TEXT COLLATE NOCASE NOT NULL DEFAULT 'y'
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 duplicate column name: active
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('widget_nls_widg...', Array, '', 'auto')
-#5 /wordpress/wp-includes/class-wp-widget.php(601): update_option('widget_nls_widg...', Array)
-#6 /wordpress/wp-includes/class-wp-widget.php(625): WP_Widget->save_settings(Array)
-#7 /wordpress/wp-includes/class-wp-widget.php(254): WP_Widget->get_settings()
-#8 /wordpress/wp-includes/class-wp-widget-factory.php(103): WP_Widget->_register()
-#9 /wordpress/wp-includes/class-wp-hook.php(324): WP_Widget_Factory->_register_widgets('')
-#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#12 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
-#13 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
-#14 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#15 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#16 /wordpress/wp-settings.php(704): do_action('init')
-#17 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#18 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#19 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#20 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('widget_nls_widget', 'a:1:{s:12:\"_multiwidget\";i:1;}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, wp_widgets_init, do_action('widgets_init'), WP_Hook->do_action, WP_Hook->apply_filters, WP_Widget_Factory->_register_widgets, WP_Widget->_register, WP_Widget->get_settings, WP_Widget->save_settings, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:29:27 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/news-in-stack-widget/news-in-stack-widget.php:450
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('news-in-stack-w...')
-#2 /internal/eval.php(20): activate_plugin('news-in-stack-w...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/news-in-stack-widget/news-in-stack-widget.php on line 450
-[08-Apr-2025 20:29:34 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/news-in-stack-widget/news-in-stack-widget.php:450
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('news-in-stack-w...')
-#2 /internal/eval.php(20): activate_plugin('news-in-stack-w...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/news-in-stack-widget/news-in-stack-widget.php on line 450
-[08-Apr-2025 20:29:42 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function create_function() in /wordpress/wp-content/plugins/news-in-stack-widget/news-in-stack-widget.php:450
-Stack trace:
-#0 /wordpress/wp-admin/includes/plugin.php(2387): include_once()
-#1 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('news-in-stack-w...')
-#2 /internal/eval.php(20): activate_plugin('news-in-stack-w...')
-#3 {main}
-  thrown in /wordpress/wp-content/plugins/news-in-stack-widget/news-in-stack-widget.php on line 450
-[08-Apr-2025 20:29:51 UTC] PHP Notice:  Undefined index: option_value in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:29:51 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:29:51 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:29:51 UTC] PHP Notice:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:30:19 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:30:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:30:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:30:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:30:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nksnow_snowflakes', '10', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nksnow_snowflakes' , '10' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nksnow_snowflak...', '10', '', 'auto')
-#5 /wordpress/wp-content/plugins/nksnow/inc/admin.php(10): update_option('nksnow_snowflak...', '10')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): nksnow_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_nksnow...', false)
-#10 /internal/eval.php(20): activate_plugin('nksnow/nksnow.p...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(388): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(264): Ndizi->upgrade_clients_table()
+#5 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(123): Ndizi->upgrade_tables()
+#6 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(108): Ndizi->install()
+#7 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.php(14): Ndizi->__construct()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ndizi-project-m...')
+#10 /internal/eval.php(20): activate_plugin('ndizi-project-m...')
 #11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nksnow_snowflakes', '10', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_nksnow/nksnow.php'), WP_Hook->do_action, WP_Hook->apply_filters, nksnow_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:30:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE `wp_ndizi_clients` ADD `active` ENUM('y','n') NOT NULL DEFAULT 'y' COMMENT 'Client Active' AFTER `access_key`  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ndizi-project-management/Ndizi.php'), Ndizi->__construct, Ndizi->install, Ndizi->upgrade_tables, Ndizi->upgrade_clients_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:46:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nksnow_timeout', '80', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SHOW KEYS FROM `wp_ndizi_clients` LIKE 'access_key'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW KEYS FROM ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW KEYS FROM ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW KEYS FROM ...')
+#4 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(2781): wpdb->get_results('SHOW KEYS FROM ...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(391): Ndizi->table_has_key('wp_ndizi_client...', 'access_key')
+#6 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(264): Ndizi->upgrade_clients_table()
+#7 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(123): Ndizi->upgrade_tables()
+#8 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(108): Ndizi->install()
+#9 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.php(14): Ndizi->__construct()
+#10 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#11 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ndizi-project-m...')
+#12 /internal/eval.php(20): activate_plugin('ndizi-project-m...')
+#13 {main}</pre>
+ for query SHOW KEYS FROM `wp_ndizi_clients` LIKE 'access_key' made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ndizi-project-management/Ndizi.php'), Ndizi->__construct, Ndizi->install, Ndizi->upgrade_tables, Ndizi->upgrade_clients_table, Ndizi->table_has_key, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:46:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_ndizi_projects` ADD `active` ENUM('y','n') NOT NULL DEFAULT 'y' COMMENT 'Project Active' AFTER `description` </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ndizi_projects</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_projects</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ndizi_projects</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
+				SELECT MAX(ordinal_position)
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nksnow_timeout' , '80' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_ndizi_projects</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_ndizi_projects, active, 7, y, NO, enum, 1, 4, , , , utf8mb4, utf8mb4_general_ci, enum('y','n'), , , select,insert,update,references, Project Active, , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ndizi_projects</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_projects</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_projects</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_ndizi_projects_67f7774ad4a58` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `client_id` INTEGER NOT NULL DEFAULT '0',
+  `name` TEXT COLLATE NOCASE NOT NULL,
+  `description` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `active` TEXT COLLATE NOCASE NOT NULL DEFAULT 'y',
+  `modified` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` TEXT COLLATE NOCASE NOT NULL DEFAULT 'y'
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 duplicate column name: active
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nksnow_timeout', '80', '', 'auto')
-#5 /wordpress/wp-content/plugins/nksnow/inc/admin.php(11): update_option('nksnow_timeout', '80')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): nksnow_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_nksnow...', false)
-#10 /internal/eval.php(20): activate_plugin('nksnow/nksnow.p...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(399): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(265): Ndizi->upgrade_projects_table()
+#5 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(123): Ndizi->upgrade_tables()
+#6 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(108): Ndizi->install()
+#7 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.php(14): Ndizi->__construct()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ndizi-project-m...')
+#10 /internal/eval.php(20): activate_plugin('ndizi-project-m...')
 #11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nksnow_timeout', '80', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_nksnow/nksnow.php'), WP_Hook->do_action, WP_Hook->apply_filters, nksnow_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:30:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE `wp_ndizi_projects` ADD `active` ENUM('y','n') NOT NULL DEFAULT 'y' COMMENT 'Project Active' AFTER `description`  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ndizi-project-management/Ndizi.php'), Ndizi->__construct, Ndizi->install, Ndizi->upgrade_tables, Ndizi->upgrade_projects_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:46:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nksnow_maxstepx', '10', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE `wp_ndizi_invoices` ADD `terms` VARCHAR( 255 ) NOT NULL DEFAULT '' COMMENT 'Invoice Terms' AFTER `notes` </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ndizi_invoices</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_invoices</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ndizi_invoices</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
+				SELECT MAX(ordinal_position)
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nksnow_maxstepx' , '10' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_ndizi_invoices</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_ndizi_invoices, terms, 13, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, Invoice Terms, , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ndizi_invoices</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_invoices</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_invoices</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_ndizi_invoices_67f7774ad8cc0` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `client_id` INTEGER NOT NULL DEFAULT '0',
+  `project_id` INTEGER NOT NULL DEFAULT '0',
+  `name` TEXT COLLATE NOCASE NOT NULL,
+  `description` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `notes` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `terms` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `total` REAL NOT NULL DEFAULT '0',
+  `paid` REAL NOT NULL DEFAULT '0',
+  `status` INTEGER NOT NULL DEFAULT '0',
+  `date` TEXT COLLATE NOCASE NOT NULL DEFAULT '0',
+  `modified` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `terms` TEXT COLLATE NOCASE NOT NULL DEFAULT ''
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 duplicate column name: terms
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nksnow_maxstepx', '10', '', 'auto')
-#5 /wordpress/wp-content/plugins/nksnow/inc/admin.php(12): update_option('nksnow_maxstepx', '10')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): nksnow_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_nksnow...', false)
-#10 /internal/eval.php(20): activate_plugin('nksnow/nksnow.p...')
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(408): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(268): Ndizi->upgrade_invoices_table()
+#5 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(123): Ndizi->upgrade_tables()
+#6 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(108): Ndizi->install()
+#7 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.php(14): Ndizi->__construct()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ndizi-project-m...')
+#10 /internal/eval.php(20): activate_plugin('ndizi-project-m...')
 #11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nksnow_maxstepx', '10', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_nksnow/nksnow.php'), WP_Hook->do_action, WP_Hook->apply_filters, nksnow_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:30:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE `wp_ndizi_invoices` ADD `terms` VARCHAR( 255 ) NOT NULL DEFAULT '' COMMENT 'Invoice Terms' AFTER `notes`  made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ndizi-project-management/Ndizi.php'), Ndizi->__construct, Ndizi->install, Ndizi->upgrade_tables, Ndizi->upgrade_invoices_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:46:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nksnow_maxstepy', '10', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('Ndizi Version', '0.9.7.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -207,7 +235,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nksnow_maxstepy' , '10' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'Ndizi Version' , '0.9.7.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -219,521 +247,503 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nksnow_maxstepy', '10', '', 'auto')
-#5 /wordpress/wp-content/plugins/nksnow/inc/admin.php(13): update_option('nksnow_maxstepy', '10')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): nksnow_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_nksnow...', false)
-#10 /internal/eval.php(20): activate_plugin('nksnow/nksnow.p...')
+#4 /wordpress/wp-includes/option.php(921): add_option('Ndizi Version', '0.9.7.0', '', 'auto')
+#5 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(124): update_option('Ndizi Version', '0.9.7.0')
+#6 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(108): Ndizi->install()
+#7 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.php(14): Ndizi->__construct()
+#8 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ndizi-project-m...')
+#10 /internal/eval.php(20): activate_plugin('ndizi-project-m...')
 #11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nksnow_maxstepy', '10', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_nksnow/nksnow.php'), WP_Hook->do_action, WP_Hook->apply_filters, nksnow_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:30:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('Ndizi Version', '0.9.7.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ndizi-project-management/Ndizi.php'), Ndizi->__construct, Ndizi->install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:46:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nksnow_selected', 'flake2.gif,flake3.gif', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE `wp_ndizi_clients` ADD `active` ENUM('y','n') NOT NULL DEFAULT 'y' COMMENT 'Client Active' AFTER `access_key` </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ndizi_clients</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_clients</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ndizi_clients</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
+				SELECT MAX(ordinal_position)
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nksnow_selected' , 'flake2.gif,flake3.gif' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_ndizi_clients</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_ndizi_clients, active, 11, y, NO, enum, 1, 4, , , , utf8mb4, utf8mb4_general_ci, enum('y','n'), , , select,insert,update,references, Client Active, , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ndizi_clients</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_clients</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_clients</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_ndizi_clients_67f7774ae2900` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `name` TEXT COLLATE NOCASE NOT NULL,
+  `phone` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `email` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `site` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `description` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `address` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `access_key` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `active` TEXT COLLATE NOCASE NOT NULL DEFAULT 'y',
+  `modified` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` TEXT COLLATE NOCASE NOT NULL DEFAULT 'y'
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 duplicate column name: active
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nksnow_selected', 'flake2.gif,flak...', '', 'auto')
-#5 /wordpress/wp-content/plugins/nksnow/inc/admin.php(14): update_option('nksnow_selected', 'flake2.gif,flak...')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): nksnow_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_nksnow...', false)
-#10 /internal/eval.php(20): activate_plugin('nksnow/nksnow.p...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nksnow_selected', 'flake2.gif,flake3.gif', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_nksnow/nksnow.php'), WP_Hook->do_action, WP_Hook->apply_filters, nksnow_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:30:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nksnow_maxtime', '20', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nksnow_maxtime' , '20' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nksnow_maxtime', '20', '', 'auto')
-#5 /wordpress/wp-content/plugins/nksnow/inc/admin.php(15): update_option('nksnow_maxtime', '20')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): nksnow_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_nksnow...', false)
-#10 /internal/eval.php(20): activate_plugin('nksnow/nksnow.p...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nksnow_maxtime', '20', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_nksnow/nksnow.php'), WP_Hook->do_action, WP_Hook->apply_filters, nksnow_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:30:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nksnow_uri', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nksnow_uri' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nksnow_uri', '', '', 'auto')
-#5 /wordpress/wp-content/plugins/nksnow/inc/admin.php(16): update_option('nksnow_uri', '')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): nksnow_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_nksnow...', false)
-#10 /internal/eval.php(20): activate_plugin('nksnow/nksnow.p...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nksnow_uri', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_nksnow/nksnow.php'), WP_Hook->do_action, WP_Hook->apply_filters, nksnow_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:30:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nksnow_precise', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nksnow_precise' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nksnow_precise', '', '', 'auto')
-#5 /wordpress/wp-content/plugins/nksnow/inc/admin.php(17): update_option('nksnow_precise', '')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): nksnow_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_nksnow...', false)
-#10 /internal/eval.php(20): activate_plugin('nksnow/nksnow.p...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nksnow_precise', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_nksnow/nksnow.php'), WP_Hook->do_action, WP_Hook->apply_filters, nksnow_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:30:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nksnow_flakesize', '40', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nksnow_flakesize' , '40' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nksnow_flakesiz...', '40', '', 'auto')
-#5 /wordpress/wp-content/plugins/nksnow/inc/admin.php(18): update_option('nksnow_flakesiz...', '40')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): nksnow_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_nksnow...', false)
-#10 /internal/eval.php(20): activate_plugin('nksnow/nksnow.p...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nksnow_flakesize', '40', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_nksnow/nksnow.php'), WP_Hook->do_action, WP_Hook->apply_filters, nksnow_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:30:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nksnow_invert', 'No', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nksnow_invert' , 'No' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nksnow_invert', 'No', '', 'auto')
-#5 /wordpress/wp-content/plugins/nksnow/inc/admin.php(19): update_option('nksnow_invert', 'No')
-#6 /wordpress/wp-includes/class-wp-hook.php(324): nksnow_activate(false)
-#7 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#8 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#9 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_nksnow...', false)
-#10 /internal/eval.php(20): activate_plugin('nksnow/nksnow.p...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nksnow_invert', 'No', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_nksnow/nksnow.php'), WP_Hook->do_action, WP_Hook->apply_filters, nksnow_activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:30:19 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:30:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:30:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:30:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:30:48 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:30:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:30:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:30:48 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:31:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nr_apikey', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nr_apikey' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/noserub-for-wordpress/nr_db_functions.php(6): add_option('nr_apikey')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): nr_set_NoseRub_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_noseru...', false)
-#9 /internal/eval.php(20): activate_plugin('noserub-for-wor...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nr_apikey', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_noserub-for-wordpress/noserub.php'), WP_Hook->do_action, WP_Hook->apply_filters, nr_set_NoseRub_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:31:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nr_url', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nr_url' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/noserub-for-wordpress/nr_db_functions.php(7): add_option('nr_url')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): nr_set_NoseRub_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_noseru...', false)
-#9 /internal/eval.php(20): activate_plugin('noserub-for-wor...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nr_url', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_noserub-for-wordpress/noserub.php'), WP_Hook->do_action, WP_Hook->apply_filters, nr_set_NoseRub_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:31:36 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nr_feed', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nr_feed' , '' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/noserub-for-wordpress/nr_db_functions.php(8): add_option('nr_feed')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): nr_set_NoseRub_options(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_noseru...', false)
-#9 /internal/eval.php(20): activate_plugin('noserub-for-wor...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nr_feed', '', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_noserub-for-wordpress/noserub.php'), WP_Hook->do_action, WP_Hook->apply_filters, nr_set_NoseRub_options, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:31:36 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:31:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:31:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:31:36 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:31:37 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 20:31:46 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 20:31:55 UTC] PHP Deprecated:  Function register_sidebar_widget is <strong>deprecated</strong> since version 2.8.0! Use wp_register_sidebar_widget() instead. in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 20:32:03 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:32:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:32:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:32:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:32:30 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nfl_letterform', 'sans', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nfl_letterform' , 'sans' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('nfl_letterform', 'sans', '', 'auto')
-#5 /wordpress/wp-content/plugins/noto-font-loader/includes/class-noto-font-loader-activator.php(33): update_option('nfl_letterform', 'sans')
-#6 /wordpress/wp-content/plugins/noto-font-loader/noto-font-loader.php(45): Noto_Font_Loader_Activator::activate()
-#7 /wordpress/wp-includes/class-wp-hook.php(324): activate_noto_font_loader(false)
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(388): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(264): Ndizi->upgrade_clients_table()
+#5 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(123): Ndizi->upgrade_tables()
+#6 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(115): Ndizi->install()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): Ndizi->on_activate(false)
 #8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_noto-f...', false)
-#11 /internal/eval.php(20): activate_plugin('noto-font-loade...')
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ndizi-...', false)
+#11 /internal/eval.php(20): activate_plugin('ndizi-project-m...')
 #12 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nfl_letterform', 'sans', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_noto-font-loader/noto-font-loader.php'), WP_Hook->do_action, WP_Hook->apply_filters, activate_noto_font_loader, Noto_Font_Loader_Activator::activate, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:32:30 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:32:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:32:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:32:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:33:05 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query ALTER TABLE `wp_ndizi_clients` ADD `active` ENUM('y','n') NOT NULL DEFAULT 'y' COMMENT 'Client Active' AFTER `access_key`  made by activate_plugin, do_action('activate_ndizi-project-management/Ndizi.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ndizi->on_activate, Ndizi->install, Ndizi->upgrade_tables, Ndizi->upgrade_clients_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:46:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ns_agenda_is_hourly', 'true', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>SHOW KEYS FROM `wp_ndizi_clients` LIKE 'access_key'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW KEYS FROM ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW KEYS FROM ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW KEYS FROM ...')
+#4 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(2781): wpdb->get_results('SHOW KEYS FROM ...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(391): Ndizi->table_has_key('wp_ndizi_client...', 'access_key')
+#6 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(264): Ndizi->upgrade_clients_table()
+#7 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(123): Ndizi->upgrade_tables()
+#8 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(115): Ndizi->install()
+#9 /wordpress/wp-includes/class-wp-hook.php(324): Ndizi->on_activate(false)
+#10 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#11 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#12 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ndizi-...', false)
+#13 /internal/eval.php(20): activate_plugin('ndizi-project-m...')
+#14 {main}</pre>
+ for query SHOW KEYS FROM `wp_ndizi_clients` LIKE 'access_key' made by activate_plugin, do_action('activate_ndizi-project-management/Ndizi.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ndizi->on_activate, Ndizi->install, Ndizi->upgrade_tables, Ndizi->upgrade_clients_table, Ndizi->table_has_key, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:46:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_ndizi_projects` ADD `active` ENUM('y','n') NOT NULL DEFAULT 'y' COMMENT 'Project Active' AFTER `description` </p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ndizi_projects</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_projects</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ndizi_projects</li>
 <li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
+				SELECT MAX(ordinal_position)
 				FROM _wp_sqlite_mysql_information_schema_columns
 				WHERE table_schema = ?
 				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ns_agenda_is_hourly' , 'true' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+			 | parameters: database_name_here, wp_ndizi_projects</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_ndizi_projects, active, 7, y, NO, enum, 1, 4, , , , utf8mb4, utf8mb4_general_ci, enum('y','n'), , , select,insert,update,references, Project Active, , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ndizi_projects</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_projects</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_projects</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_ndizi_projects_67f7774aed0f8` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `client_id` INTEGER NOT NULL DEFAULT '0',
+  `name` TEXT COLLATE NOCASE NOT NULL,
+  `description` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `active` TEXT COLLATE NOCASE NOT NULL DEFAULT 'y',
+  `modified` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` TEXT COLLATE NOCASE NOT NULL DEFAULT 'y'
+) STRICT | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
 <div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
+SQLSTATE[HY000]: General error: 1 duplicate column name: active
 </div>
 <p>Backtrace:</p>
 <pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ns_agenda_is_ho...', 'true', '', 'auto')
-#5 /wordpress/wp-content/plugins/ns-booking-agenda/ns-agenda-option-struct.php(59): update_option('ns_agenda_is_ho...', 'true')
-#6 /wordpress/wp-content/plugins/ns-booking-agenda/ns-agenda-page.php(54): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-admin/includes/plugin.php(2387): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-admin/includes/plugin.php(673): plugin_sandbox_scrape('ns-booking-agen...')
-#9 /internal/eval.php(20): activate_plugin('ns-booking-agen...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ns_agenda_is_hourly', 'true', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/ns-booking-agenda/ns-agenda-page.php'), require_once('/plugins/ns-booking-agenda/ns-agenda-option-struct.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:33:05 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:33:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:33:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:33:05 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:33:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ns_agenda_is_hourly', 'true', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'ns_agenda_is_hourly' , 'true' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(921): add_option('ns_agenda_is_ho...', 'true', '', 'auto')
-#5 /wordpress/wp-content/plugins/ns-booking-agenda/ns-agenda-option-struct.php(59): update_option('ns_agenda_is_ho...', 'true')
-#6 /wordpress/wp-content/plugins/ns-booking-agenda/ns-agenda-page.php(54): require_once('/wordpress/wp-c...')
-#7 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
-#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#11 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('ns_agenda_is_hourly', 'true', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/ns-booking-agenda/ns-agenda-page.php'), require_once('/plugins/ns-booking-agenda/ns-agenda-option-struct.php'), update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:33:06 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 20:33:06 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '2025-04-08 20:33:06', '2025-04-08 20:33:06', '', '', 'agenda', '', 'publish', 'page', 'closed', 'closed', '', 'agenda', '', '', '2025-04-08 20:33:06', '2025-04-08 20:33:06', 0, 0, '', '')</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_posts</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_posts</li>
-<li>Executing: INSERT INTO `wp_posts` () SELECT  FROM (VALUES ( 0 , '2025-04-08 20:33:06' , '2025-04-08 20:33:06' , '' , '' , 'agenda' , '' , 'publish' , 'page' , 'closed' , 'closed' , '' , 'agenda' , '' , '' , '2025-04-08 20:33:06' , '2025-04-08 20:33:06' , 0 , 0 , '' , '' )) WHERE true | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/class-wpdb.php(2610): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/class-wpdb.php(2499): wpdb->_insert_replace_helper('wp_posts', Array, NULL, 'INSERT')
-#5 /wordpress/wp-includes/post.php(4801): wpdb->insert('wp_posts', Array)
-#6 /wordpress/wp-content/plugins/ns-booking-agenda/ns-agenda-page.php(92): wp_insert_post(Array)
-#7 /wordpress/wp-includes/class-wp-hook.php(324): ns_agenda_create_default_page('')
-#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(399): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(265): Ndizi->upgrade_projects_table()
+#5 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(123): Ndizi->upgrade_tables()
+#6 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(115): Ndizi->install()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): Ndizi->on_activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
 #9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#10 /wordpress/wp-settings.php(704): do_action('init')
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ndizi-...', false)
+#11 /internal/eval.php(20): activate_plugin('ndizi-project-m...')
+#12 {main}</pre>
+ for query ALTER TABLE `wp_ndizi_projects` ADD `active` ENUM('y','n') NOT NULL DEFAULT 'y' COMMENT 'Project Active' AFTER `description`  made by activate_plugin, do_action('activate_ndizi-project-management/Ndizi.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ndizi->on_activate, Ndizi->install, Ndizi->upgrade_tables, Ndizi->upgrade_projects_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:46:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_ndizi_invoices` ADD `terms` VARCHAR( 255 ) NOT NULL DEFAULT '' COMMENT 'Invoice Terms' AFTER `notes` </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ndizi_invoices</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_invoices</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ndizi_invoices</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ndizi_invoices</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_ndizi_invoices, terms, 13, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, Invoice Terms, , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ndizi_invoices</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_invoices</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_invoices</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_ndizi_invoices_67f7774aeffd8` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `client_id` INTEGER NOT NULL DEFAULT '0',
+  `project_id` INTEGER NOT NULL DEFAULT '0',
+  `name` TEXT COLLATE NOCASE NOT NULL,
+  `description` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `notes` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `terms` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `total` REAL NOT NULL DEFAULT '0',
+  `paid` REAL NOT NULL DEFAULT '0',
+  `status` INTEGER NOT NULL DEFAULT '0',
+  `date` TEXT COLLATE NOCASE NOT NULL DEFAULT '0',
+  `modified` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `terms` TEXT COLLATE NOCASE NOT NULL DEFAULT ''
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: terms
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(408): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(268): Ndizi->upgrade_invoices_table()
+#5 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(123): Ndizi->upgrade_tables()
+#6 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(115): Ndizi->install()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): Ndizi->on_activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ndizi-...', false)
+#11 /internal/eval.php(20): activate_plugin('ndizi-project-m...')
+#12 {main}</pre>
+ for query ALTER TABLE `wp_ndizi_invoices` ADD `terms` VARCHAR( 255 ) NOT NULL DEFAULT '' COMMENT 'Invoice Terms' AFTER `notes`  made by activate_plugin, do_action('activate_ndizi-project-management/Ndizi.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ndizi->on_activate, Ndizi->install, Ndizi->upgrade_tables, Ndizi->upgrade_invoices_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:46:18 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('Ndizi Version', '0.9.7.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
+<li>Executing: 
+				SELECT column_name, is_nullable, column_default, data_type, extra
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+				ORDER BY ordinal_position
+			 | parameters: database_name_here, wp_options</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'Ndizi Version' , '0.9.7.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 near ")": syntax error
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
+#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
+#4 /wordpress/wp-includes/option.php(921): add_option('Ndizi Version', '0.9.7.0', '', 'auto')
+#5 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(124): update_option('Ndizi Version', '0.9.7.0')
+#6 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(115): Ndizi->install()
+#7 /wordpress/wp-includes/class-wp-hook.php(324): Ndizi->on_activate(false)
+#8 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#10 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_ndizi-...', false)
+#11 /internal/eval.php(20): activate_plugin('ndizi-project-m...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('Ndizi Version', '0.9.7.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_ndizi-project-management/Ndizi.php'), WP_Hook->do_action, WP_Hook->apply_filters, Ndizi->on_activate, Ndizi->install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:46:19 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
+[10-Apr-2025 07:46:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
+[10-Apr-2025 07:46:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
+[10-Apr-2025 07:46:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[10-Apr-2025 07:46:19 UTC] PHP Deprecated:  Function wpdb::escape is <strong>deprecated</strong> since version 3.6.0! Use wpdb::prepare() or esc_sql() instead. in /wordpress/wp-includes/functions.php on line 6114
+[10-Apr-2025 07:46:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_ndizi_clients` ADD `active` ENUM('y','n') NOT NULL DEFAULT 'y' COMMENT 'Client Active' AFTER `access_key` </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ndizi_clients</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_clients</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ndizi_clients</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ndizi_clients</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_ndizi_clients, active, 11, y, NO, enum, 1, 4, , , , utf8mb4, utf8mb4_general_ci, enum('y','n'), , , select,insert,update,references, Client Active, , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ndizi_clients</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_clients</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_clients</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_ndizi_clients_67f7774be2ce8` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `name` TEXT COLLATE NOCASE NOT NULL,
+  `phone` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `email` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `site` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `description` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `address` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `access_key` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `active` TEXT COLLATE NOCASE NOT NULL DEFAULT 'y',
+  `modified` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` TEXT COLLATE NOCASE NOT NULL DEFAULT 'y'
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: active
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(388): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(264): Ndizi->upgrade_clients_table()
+#5 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(123): Ndizi->upgrade_tables()
+#6 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(108): Ndizi->install()
+#7 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.php(14): Ndizi->__construct()
+#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE `wp_ndizi_clients` ADD `active` ENUM('y','n') NOT NULL DEFAULT 'y' COMMENT 'Client Active' AFTER `access_key`  made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/ndizi-project-management/Ndizi.php'), Ndizi->__construct, Ndizi->install, Ndizi->upgrade_tables, Ndizi->upgrade_clients_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:46:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>SHOW KEYS FROM `wp_ndizi_clients` LIKE 'access_key'</p>
+<p>Queries made or created this session were:</p>
+<ol>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+Failed to parse the MySQL query.
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('Failed to parse...', 0, Object(WP_SQLite_Driver_Exception))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('SHOW KEYS FROM ...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('SHOW KEYS FROM ...')
+#3 /wordpress/wp-includes/class-wpdb.php(3142): WP_SQLite_DB->query('SHOW KEYS FROM ...')
+#4 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(2781): wpdb->get_results('SHOW KEYS FROM ...', 'ARRAY_A')
+#5 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(391): Ndizi->table_has_key('wp_ndizi_client...', 'access_key')
+#6 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(264): Ndizi->upgrade_clients_table()
+#7 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(123): Ndizi->upgrade_tables()
+#8 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(108): Ndizi->install()
+#9 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.php(14): Ndizi->__construct()
+#10 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
 #11 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
 #12 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
 #13 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #14 {main}</pre>
- for query INSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_content_filtered`, `post_title`, `post_excerpt`, `post_status`, `post_type`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_parent`, `menu_order`, `post_mime_type`, `guid`) VALUES (0, '2025-04-08 20:33:06', '2025-04-08 20:33:06', '', '', 'agenda', '', 'publish', 'page', 'closed', 'closed', '', 'agenda', '', '', '2025-04-08 20:33:06', '2025-04-08 20:33:06', 0, 0, '', '') made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, ns_agenda_create_default_page, wp_insert_post, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:33:16 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 20:33:25 UTC] PHP Deprecated:  Function get_page_by_title is <strong>deprecated</strong> since version 6.2.0! Use WP_Query instead. in /wordpress/wp-includes/functions.php on line 6114
-[08-Apr-2025 20:34:16 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:34:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:34:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:34:16 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:34:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+ for query SHOW KEYS FROM `wp_ndizi_clients` LIKE 'access_key' made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/ndizi-project-management/Ndizi.php'), Ndizi->__construct, Ndizi->install, Ndizi->upgrade_tables, Ndizi->upgrade_clients_table, Ndizi->table_has_key, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:46:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'b/o?@ ONtz{lnK*/uO`mz}{nS}`d[XABzFnw]Ckiq?U^r+mK5|cYA2VM)tv]vejm', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
+<p>ALTER TABLE `wp_ndizi_projects` ADD `active` ENUM('y','n') NOT NULL DEFAULT 'y' COMMENT 'Project Active' AFTER `description` </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ndizi_projects</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_projects</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ndizi_projects</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ndizi_projects</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_ndizi_projects, active, 7, y, NO, enum, 1, 4, , , , utf8mb4, utf8mb4_general_ci, enum('y','n'), , , select,insert,update,references, Project Active, , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ndizi_projects</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_projects</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_projects</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_ndizi_projects_67f7774bee480` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `client_id` INTEGER NOT NULL DEFAULT '0',
+  `name` TEXT COLLATE NOCASE NOT NULL,
+  `description` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `active` TEXT COLLATE NOCASE NOT NULL DEFAULT 'y',
+  `modified` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` TEXT COLLATE NOCASE NOT NULL DEFAULT 'y'
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: active
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(399): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(265): Ndizi->upgrade_projects_table()
+#5 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(123): Ndizi->upgrade_tables()
+#6 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(108): Ndizi->install()
+#7 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.php(14): Ndizi->__construct()
+#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE `wp_ndizi_projects` ADD `active` ENUM('y','n') NOT NULL DEFAULT 'y' COMMENT 'Project Active' AFTER `description`  made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/ndizi-project-management/Ndizi.php'), Ndizi->__construct, Ndizi->install, Ndizi->upgrade_tables, Ndizi->upgrade_projects_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:46:19 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>ALTER TABLE `wp_ndizi_invoices` ADD `terms` VARCHAR( 255 ) NOT NULL DEFAULT '' COMMENT 'Invoice Terms' AFTER `notes` </p>
+<p>Queries made or created this session were:</p>
+<ol>
+<li>Executing: BEGIN | (no parameters)</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ndizi_invoices</li>
+<li>Executing: SELECT COLUMN_NAME FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_invoices</li>
+<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_ndizi_invoices</li>
+<li>Executing: 
+				SELECT MAX(ordinal_position)
+				FROM _wp_sqlite_mysql_information_schema_columns
+				WHERE table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ndizi_invoices</li>
+<li>Executing: 
+				INSERT INTO _wp_sqlite_mysql_information_schema_columns (table_schema, table_name, column_name, ordinal_position, column_default, is_nullable, data_type, character_maximum_length, character_octet_length, numeric_precision, numeric_scale, datetime_precision, character_set_name, collation_name, column_type, column_key, extra, privileges, column_comment, generation_expression, srs_id)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 | parameters: database_name_here, wp_ndizi_invoices, terms, 13, , NO, varchar, 255, 1020, , , , utf8mb4, utf8mb4_general_ci, varchar(255), , , select,insert,update,references, Invoice Terms, , </li>
+<li>Executing: PRAGMA foreign_keys | (no parameters)</li>
+<li>Executing: PRAGMA foreign_keys = OFF | (no parameters)</li>
+<li>Executing: 
+				SELECT *
+				FROM _wp_sqlite_mysql_information_schema_tables
+				WHERE table_type = 'BASE TABLE'
+				AND table_schema = ?
+				AND table_name = ?
+			 | parameters: database_name_here, wp_ndizi_invoices</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_columns WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_invoices</li>
+<li>Executing: SELECT * FROM _wp_sqlite_mysql_information_schema_statistics WHERE table_schema = ? AND table_name = ? | parameters: database_name_here, wp_ndizi_invoices</li>
+<li>Executing: CREATE TABLE `_wp_sqlite_tmp_wp_ndizi_invoices_67f7774bf32a0` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `client_id` INTEGER NOT NULL DEFAULT '0',
+  `project_id` INTEGER NOT NULL DEFAULT '0',
+  `name` TEXT COLLATE NOCASE NOT NULL,
+  `description` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `notes` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `terms` TEXT COLLATE NOCASE NOT NULL DEFAULT '',
+  `total` REAL NOT NULL DEFAULT '0',
+  `paid` REAL NOT NULL DEFAULT '0',
+  `status` INTEGER NOT NULL DEFAULT '0',
+  `date` TEXT COLLATE NOCASE NOT NULL DEFAULT '0',
+  `modified` TEXT COLLATE NOCASE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `terms` TEXT COLLATE NOCASE NOT NULL DEFAULT ''
+) STRICT | (no parameters)</li>
+<li>Executing: ROLLBACK | (no parameters)</li>
+</ol>
+</div>
+<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
+SQLSTATE[HY000]: General error: 1 duplicate column name: terms
+</div>
+<p>Backtrace:</p>
+<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
+#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('ALTER TABLE `wp...')
+#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('ALTER TABLE `wp...')
+#3 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(408): WP_SQLite_DB->query('ALTER TABLE `wp...')
+#4 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(268): Ndizi->upgrade_invoices_table()
+#5 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(123): Ndizi->upgrade_tables()
+#6 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(108): Ndizi->install()
+#7 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.php(14): Ndizi->__construct()
+#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query ALTER TABLE `wp_ndizi_invoices` ADD `terms` VARCHAR( 255 ) NOT NULL DEFAULT '' COMMENT 'Invoice Terms' AFTER `notes`  made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/ndizi-project-management/Ndizi.php'), Ndizi->__construct, Ndizi->install, Ndizi->upgrade_tables, Ndizi->upgrade_invoices_table, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2025 07:46:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
+<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
+<p>MySQL query:</p>
+<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('Ndizi Version', '0.9.7.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
 <p>Queries made or created this session were:</p>
 <ol>
 <li>Executing: BEGIN | (no parameters)</li>
@@ -745,7 +755,7 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 				AND table_name = ?
 				ORDER BY ordinal_position
 			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_key' , 'b/o?@ ONtz{lnK*/uO`mz}{nS}`d[XABzFnw]Ckiq?U^r+mK5|cYA2VM)tv]vejm' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
+<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'Ndizi Version' , '0.9.7.0' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
 <li>Executing: ROLLBACK | (no parameters)</li>
 </ol>
 </div>
@@ -757,94 +767,14 @@ SQLSTATE[HY000]: General error: 1 near ")": syntax error
 #1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
 #2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
 #3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_key', 'b/o?@ ONtz{lnK*...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_key', 'b/o?@ ONtz{lnK*...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_key', 'b/o?@ ONtz{lnK*...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_key', 'b/o?@ ONtz{lnK*...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40374|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/neat-slider/neat-slider.php(431): wp_register_script('slider-js', 'http://127.0.0....', Array, false, Array)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): slide_js_init('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_key', 'b/o?@ ONtz{lnK*/uO`mz}{nS}`d[XABzFnw]Ckiq?U^r+mK5|cYA2VM)tv]vejm', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, slide_js_init, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:34:17 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'E 57pklPgs+6NnxVh;,xHoDx$7)Qfz-TmR-}+g|@jWJPl6y%u=~t9PuAVY6p$pfg', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'nonce_salt' , 'E 57pklPgs+6NnxVh;,xHoDx$7)Qfz-TmR-}+g|@jWJPl6y%u=~t9PuAVY6p$pfg' , 'off' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-includes/option.php(2145): add_option('nonce_salt', 'E 57pklPgs+6Nnx...', '', 'off')
-#5 /wordpress/wp-includes/option.php(2390): add_network_option(1, 'nonce_salt', 'E 57pklPgs+6Nnx...')
-#6 /wordpress/wp-includes/option.php(1959): update_network_option(1, 'nonce_salt', 'E 57pklPgs+6Nnx...')
-#7 /wordpress/wp-includes/pluggable.php(2559): update_site_option('nonce_salt', 'E 57pklPgs+6Nnx...')
-#8 /wordpress/wp-includes/pluggable.php(2592): wp_salt('nonce')
-#9 /wordpress/wp-includes/pluggable.php(2428): wp_hash('40374|wp_rest|0...', 'nonce')
-#10 /wordpress/wp-includes/script-loader.php(824): wp_create_nonce('wp_rest')
-#11 /wordpress/wp-includes/class-wp-hook.php(324): wp_default_scripts(Object(WP_Scripts))
-#12 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#13 /wordpress/wp-includes/plugin.php(565): WP_Hook->do_action(Array)
-#14 /wordpress/wp-includes/class-wp-scripts.php(166): do_action_ref_array('wp_default_scri...', Array)
-#15 /wordpress/wp-includes/class-wp-scripts.php(149): WP_Scripts->init()
-#16 /wordpress/wp-includes/functions.wp-scripts.php(24): WP_Scripts->__construct()
-#17 /wordpress/wp-includes/functions.wp-scripts.php(187): wp_scripts()
-#18 /wordpress/wp-content/plugins/neat-slider/neat-slider.php(431): wp_register_script('slider-js', 'http://127.0.0....', Array, false, Array)
-#19 /wordpress/wp-includes/class-wp-hook.php(324): slide_js_init('')
-#20 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#21 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#22 /wordpress/wp-settings.php(704): do_action('init')
-#23 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
-#24 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
-#25 /internal/eval.php(3): require_once('/wordpress/wp-l...')
-#26 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nonce_salt', 'E 57pklPgs+6NnxVh;,xHoDx$7)Qfz-TmR-}+g|@jWJPl6y%u=~t9PuAVY6p$pfg', 'off') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, slide_js_init, wp_register_script, wp_scripts, WP_Scripts->__construct, WP_Scripts->init, do_action_ref_array('wp_default_scripts'), WP_Hook->do_action, WP_Hook->apply_filters, wp_default_scripts, wp_create_nonce, wp_hash, wp_salt, update_site_option, update_network_option, add_network_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[08-Apr-2025 20:34:43 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:34:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:34:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:34:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:35:10 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[08-Apr-2025 20:35:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[08-Apr-2025 20:35:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[08-Apr-2025 20:35:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[08-Apr-2025 20:35:37 UTC] PHP Deprecated:  Required parameter $sections follows optional parameter $current_section in /wordpress/wp-content/plugins/nice-infoboxes/lib/admin-ui/domain/class-admin-ui-service.php on line 209
-[08-Apr-2025 20:35:37 UTC] PHP Deprecated:  Required parameter $sections follows optional parameter $current_section in /wordpress/wp-content/plugins/nice-infoboxes/lib/admin-ui/domain/class-admin-ui-service.php on line 244
-[08-Apr-2025 20:35:37 UTC] PHP Warning:  Private methods cannot be final as they are never overridden by other classes in /wordpress/wp-content/plugins/nice-infoboxes/lib/admin-ui/domain/class-admin-ui-service.php on line 706
-[08-Apr-2025 20:35:37 UTC] PHP Deprecated:  Required parameter $textdomain follows optional parameter $args in /wordpress/wp-content/plugins/nice-infoboxes/lib/custom-post-type/post-type/functions.php on line 46
-[08-Apr-2025 20:35:37 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('nice_infoboxes_settings', 'a:8:{s:27:\"remove_data_on_deactivation\";b:0;s:5:\"limit\";s:2:\"10\";s:7:\"columns\";i:3;s:7:\"orderby\";s:2:\"id\";s:5:\"order\";s:4:\"desc\";s:8:\"avoidcss\";b:0;s:10:\"image_size\";s:6:\"medium\";s:5:\"icons\";a:585:{i:0;a:6:{s:4:\"name\";s:5:\"Glass\";s:2:\"id\";s:5:\"glass\";s:7:\"unicode\";s:4:\"f000\";s:7:\"created\";i:1;s:6:\"filter\";a:5:{i:0;s:7:\"martini\";i:1;s:5:\"drink\";i:2;s:3:\"bar\";i:3;s:7:\"alcohol\";i:4;s:6:\"liquor\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:1;a:6:{s:4:\"name\";s:5:\"Music\";s:2:\"id\";s:5:\"music\";s:7:\"unicode\";s:4:\"f001\";s:7:\"created\";i:1;s:6:\"filter\";a:2:{i:0;s:4:\"note\";i:1;s:5:\"sound\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:2;a:6:{s:4:\"name\";s:6:\"Search\";s:2:\"id\";s:6:\"search\";s:7:\"unicode\";s:4:\"f002\";s:7:\"created\";i:1;s:6:\"filter\";a:4:{i:0;s:7:\"magnify\";i:1;s:4:\"zoom\";i:2;s:7:\"enlarge\";i:3;s:6:\"bigger\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:3;a:6:{s:4:\"name\";s:17:\"Envelope Outlined\";s:2:\"id\";s:10:\"envelope-o\";s:7:\"unicode\";s:4:\"f003\";s:7:\"created\";i:1;s:6:\"filter\";a:6:{i:0;s:5:\"email\";i:1;s:7:\"support\";i:2;s:6:\"e-mail\";i:3;s:6:\"letter\";i:4;s:4:\"mail\";i:5;s:12:\"notification\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:4;a:6:{s:4:\"name\";s:5:\"Heart\";s:2:\"id\";s:5:\"heart\";s:7:\"unicode\";s:4:\"f004\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:4:\"love\";i:1;s:4:\"like\";i:2;s:8:\"favorite\";}s:10:\"categories\";a:2:{i:0;s:21:\"Web Application Icons\";i:1;s:13:\"Medical Icons\";}}i:5;a:6:{s:4:\"name\";s:4:\"Star\";s:2:\"id\";s:4:\"star\";s:7:\"unicode\";s:4:\"f005\";s:7:\"created\";i:1;s:6:\"filter\";a:5:{i:0;s:5:\"award\";i:1;s:11:\"achievement\";i:2;s:5:\"night\";i:3;s:6:\"rating\";i:4;s:5:\"score\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:6;a:6:{s:4:\"name\";s:13:\"Star Outlined\";s:2:\"id\";s:6:\"star-o\";s:7:\"unicode\";s:4:\"f006\";s:7:\"created\";i:1;s:6:\"filter\";a:5:{i:0;s:5:\"award\";i:1;s:11:\"achievement\";i:2;s:5:\"night\";i:3;s:6:\"rating\";i:4;s:5:\"score\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:7;a:6:{s:4:\"name\";s:4:\"User\";s:2:\"id\";s:4:\"user\";s:7:\"unicode\";s:4:\"f007\";s:7:\"created\";i:1;s:6:\"filter\";a:4:{i:0;s:6:\"person\";i:1;s:3:\"man\";i:2;s:4:\"head\";i:3;s:7:\"profile\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:8;a:6:{s:4:\"name\";s:4:\"Film\";s:2:\"id\";s:4:\"film\";s:7:\"unicode\";s:4:\"f008\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:5:\"movie\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:9;a:6:{s:4:\"name\";s:8:\"th-large\";s:2:\"id\";s:8:\"th-large\";s:7:\"unicode\";s:4:\"f009\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:6:\"blocks\";i:1;s:7:\"squares\";i:2;s:5:\"boxes\";}s:10:\"categories\";a:1:{i:0;s:17:\"Text Editor Icons\";}}i:10;a:6:{s:4:\"name\";s:2:\"th\";s:2:\"id\";s:2:\"th\";s:7:\"unicode\";s:4:\"f00a\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:6:\"blocks\";i:1;s:7:\"squares\";i:2;s:5:\"boxes\";}s:10:\"categories\";a:1:{i:0;s:17:\"Text Editor Icons\";}}i:11;a:6:{s:4:\"name\";s:7:\"th-list\";s:2:\"id\";s:7:\"th-list\";s:7:\"unicode\";s:4:\"f00b\";s:7:\"created\";i:1;s:6:\"filter\";a:7:{i:0;s:2:\"ul\";i:1;s:2:\"ol\";i:2;s:9:\"checklist\";i:3;s:8:\"finished\";i:4;s:9:\"completed\";i:5;s:4:\"done\";i:6;s:4:\"todo\";}s:10:\"categories\";a:1:{i:0;s:17:\"Text Editor Icons\";}}i:12;a:6:{s:4:\"name\";s:5:\"Check\";s:2:\"id\";s:5:\"check\";s:7:\"unicode\";s:4:\"f00c\";s:7:\"created\";i:1;s:6:\"filter\";a:7:{i:0;s:9:\"checkmark\";i:1;s:4:\"done\";i:2;s:4:\"todo\";i:3;s:5:\"agree\";i:4;s:6:\"accept\";i:5;s:7:\"confirm\";i:6;s:4:\"tick\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:13;a:7:{s:4:\"name\";s:5:\"Times\";s:2:\"id\";s:5:\"times\";s:7:\"unicode\";s:4:\"f00d\";s:7:\"created\";i:1;s:7:\"aliases\";a:2:{i:0;s:6:\"remove\";i:1;s:5:\"close\";}s:6:\"filter\";a:4:{i:0;s:5:\"close\";i:1;s:4:\"exit\";i:2;s:1:\"x\";i:3;s:5:\"cross\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:14;a:6:{s:4:\"name\";s:11:\"Search Plus\";s:2:\"id\";s:11:\"search-plus\";s:7:\"unicode\";s:4:\"f00e\";s:7:\"created\";i:1;s:6:\"filter\";a:4:{i:0;s:7:\"magnify\";i:1;s:4:\"zoom\";i:2;s:7:\"enlarge\";i:3;s:6:\"bigger\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:15;a:6:{s:4:\"name\";s:12:\"Search Minus\";s:2:\"id\";s:12:\"search-minus\";s:7:\"unicode\";s:4:\"f010\";s:7:\"created\";i:1;s:6:\"filter\";a:4:{i:0;s:7:\"magnify\";i:1;s:6:\"minify\";i:2;s:4:\"zoom\";i:3;s:7:\"smaller\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:16;a:6:{s:4:\"name\";s:9:\"Power Off\";s:2:\"id\";s:9:\"power-off\";s:7:\"unicode\";s:4:\"f011\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:2:\"on\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:17;a:5:{s:4:\"name\";s:6:\"signal\";s:2:\"id\";s:6:\"signal\";s:7:\"unicode\";s:4:\"f012\";s:7:\"created\";i:1;s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:18;a:7:{s:4:\"name\";s:3:\"cog\";s:2:\"id\";s:3:\"cog\";s:7:\"unicode\";s:4:\"f013\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:8:\"settings\";}s:7:\"aliases\";a:1:{i:0;s:4:\"gear\";}s:10:\"categories\";a:2:{i:0;s:21:\"Web Application Icons\";i:1;s:13:\"Spinner Icons\";}}i:19;a:6:{s:4:\"name\";s:14:\"Trash Outlined\";s:2:\"id\";s:7:\"trash-o\";s:7:\"unicode\";s:4:\"f014\";s:7:\"created\";i:1;s:6:\"filter\";a:5:{i:0;s:7:\"garbage\";i:1;s:6:\"delete\";i:2;s:6:\"remove\";i:3;s:5:\"trash\";i:4;s:4:\"hide\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:20;a:6:{s:4:\"name\";s:4:\"home\";s:2:\"id\";s:4:\"home\";s:7:\"unicode\";s:4:\"f015\";s:7:\"created\";i:1;s:6:\"filter\";a:2:{i:0;s:4:\"main\";i:1;s:5:\"house\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:21;a:6:{s:4:\"name\";s:13:\"File Outlined\";s:2:\"id\";s:6:\"file-o\";s:7:\"unicode\";s:4:\"f016\";s:7:\"created\";i:1;s:6:\"filter\";a:4:{i:0;s:3:\"new\";i:1;s:4:\"page\";i:2;s:3:\"pdf\";i:3;s:8:\"document\";}s:10:\"categories\";a:2:{i:0;s:17:\"Text Editor Icons\";i:1;s:15:\"File Type Icons\";}}i:22;a:6:{s:4:\"name\";s:14:\"Clock Outlined\";s:2:\"id\";s:7:\"clock-o\";s:7:\"unicode\";s:4:\"f017\";s:7:\"created\";i:1;s:6:\"filter\";a:4:{i:0;s:5:\"watch\";i:1;s:5:\"timer\";i:2;s:4:\"late\";i:3;s:9:\"timestamp\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:23;a:6:{s:4:\"name\";s:4:\"road\";s:2:\"id\";s:4:\"road\";s:7:\"unicode\";s:4:\"f018\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:6:\"street\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:24;a:6:{s:4:\"name\";s:8:\"Download\";s:2:\"id\";s:8:\"download\";s:7:\"unicode\";s:4:\"f019\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:6:\"import\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:25;a:6:{s:4:\"name\";s:26:\"Arrow Circle Outlined Down\";s:2:\"id\";s:19:\"arrow-circle-o-down\";s:7:\"unicode\";s:4:\"f01a\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:8:\"download\";}s:10:\"categories\";a:1:{i:0;s:17:\"Directional Icons\";}}i:26;a:5:{s:4:\"name\";s:24:\"Arrow Circle Outlined Up\";s:2:\"id\";s:17:\"arrow-circle-o-up\";s:7:\"unicode\";s:4:\"f01b\";s:7:\"created\";i:1;s:10:\"categories\";a:1:{i:0;s:17:\"Directional Icons\";}}i:27;a:5:{s:4:\"name\";s:5:\"inbox\";s:2:\"id\";s:5:\"inbox\";s:7:\"unicode\";s:4:\"f01c\";s:7:\"created\";i:1;s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:28;a:5:{s:4:\"name\";s:20:\"Play Circle Outlined\";s:2:\"id\";s:13:\"play-circle-o\";s:7:\"unicode\";s:4:\"f01d\";s:7:\"created\";i:1;s:10:\"categories\";a:1:{i:0;s:18:\"Video Player Icons\";}}i:29;a:7:{s:4:\"name\";s:6:\"Repeat\";s:2:\"id\";s:6:\"repeat\";s:7:\"unicode\";s:4:\"f01e\";s:7:\"created\";i:1;s:6:\"filter\";a:2:{i:0;s:4:\"redo\";i:1;s:7:\"forward\";}s:7:\"aliases\";a:1:{i:0;s:12:\"rotate-right\";}s:10:\"categories\";a:1:{i:0;s:17:\"Text Editor Icons\";}}i:30;a:6:{s:4:\"name\";s:7:\"refresh\";s:2:\"id\";s:7:\"refresh\";s:7:\"unicode\";s:4:\"f021\";s:7:\"created\";i:1;s:6:\"filter\";a:2:{i:0;s:6:\"reload\";i:1;s:4:\"sync\";}s:10:\"categories\";a:2:{i:0;s:21:\"Web Application Icons\";i:1;s:13:\"Spinner Icons\";}}i:31;a:6:{s:4:\"name\";s:8:\"list-alt\";s:2:\"id\";s:8:\"list-alt\";s:7:\"unicode\";s:4:\"f022\";s:7:\"created\";i:1;s:6:\"filter\";a:7:{i:0;s:2:\"ul\";i:1;s:2:\"ol\";i:2;s:9:\"checklist\";i:3;s:8:\"finished\";i:4;s:9:\"completed\";i:5;s:4:\"done\";i:6;s:4:\"todo\";}s:10:\"categories\";a:1:{i:0;s:17:\"Text Editor Icons\";}}i:32;a:6:{s:4:\"name\";s:4:\"lock\";s:2:\"id\";s:4:\"lock\";s:7:\"unicode\";s:4:\"f023\";s:7:\"created\";i:1;s:6:\"filter\";a:2:{i:0;s:7:\"protect\";i:1;s:5:\"admin\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:33;a:6:{s:4:\"name\";s:4:\"flag\";s:2:\"id\";s:4:\"flag\";s:7:\"unicode\";s:4:\"f024\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:6:\"report\";i:1;s:12:\"notification\";i:2;s:6:\"notify\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:34;a:6:{s:4:\"name\";s:10:\"headphones\";s:2:\"id\";s:10:\"headphones\";s:7:\"unicode\";s:4:\"f025\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:5:\"sound\";i:1;s:6:\"listen\";i:2;s:5:\"music\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:35;a:6:{s:4:\"name\";s:10:\"volume-off\";s:2:\"id\";s:10:\"volume-off\";s:7:\"unicode\";s:4:\"f026\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:4:\"mute\";i:1;s:5:\"sound\";i:2;s:5:\"music\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:36;a:6:{s:4:\"name\";s:11:\"volume-down\";s:2:\"id\";s:11:\"volume-down\";s:7:\"unicode\";s:4:\"f027\";s:7:\"created\";i:1;s:6:\"filter\";a:4:{i:0;s:5:\"lower\";i:1;s:7:\"quieter\";i:2;s:5:\"sound\";i:3;s:5:\"music\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:37;a:6:{s:4:\"name\";s:9:\"volume-up\";s:2:\"id\";s:9:\"volume-up\";s:7:\"unicode\";s:4:\"f028\";s:7:\"created\";i:1;s:6:\"filter\";a:4:{i:0;s:6:\"higher\";i:1;s:6:\"louder\";i:2;s:5:\"sound\";i:3;s:5:\"music\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:38;a:6:{s:4:\"name\";s:6:\"qrcode\";s:2:\"id\";s:6:\"qrcode\";s:7:\"unicode\";s:4:\"f029\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:4:\"scan\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:39;a:6:{s:4:\"name\";s:7:\"barcode\";s:2:\"id\";s:7:\"barcode\";s:7:\"unicode\";s:4:\"f02a\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:4:\"scan\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:40;a:6:{s:4:\"name\";s:3:\"tag\";s:2:\"id\";s:3:\"tag\";s:7:\"unicode\";s:4:\"f02b\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:5:\"label\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:41;a:6:{s:4:\"name\";s:4:\"tags\";s:2:\"id\";s:4:\"tags\";s:7:\"unicode\";s:4:\"f02c\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:6:\"labels\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:42;a:6:{s:4:\"name\";s:4:\"book\";s:2:\"id\";s:4:\"book\";s:7:\"unicode\";s:4:\"f02d\";s:7:\"created\";i:1;s:6:\"filter\";a:2:{i:0;s:4:\"read\";i:1;s:13:\"documentation\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:43;a:6:{s:4:\"name\";s:8:\"bookmark\";s:2:\"id\";s:8:\"bookmark\";s:7:\"unicode\";s:4:\"f02e\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:4:\"save\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:44;a:5:{s:4:\"name\";s:5:\"print\";s:2:\"id\";s:5:\"print\";s:7:\"unicode\";s:4:\"f02f\";s:7:\"created\";i:1;s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:45;a:6:{s:4:\"name\";s:6:\"camera\";s:2:\"id\";s:6:\"camera\";s:7:\"unicode\";s:4:\"f030\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:5:\"photo\";i:1;s:7:\"picture\";i:2;s:6:\"record\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:46;a:6:{s:4:\"name\";s:4:\"font\";s:2:\"id\";s:4:\"font\";s:7:\"unicode\";s:4:\"f031\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:4:\"text\";}s:10:\"categories\";a:1:{i:0;s:17:\"Text Editor Icons\";}}i:47;a:5:{s:4:\"name\";s:4:\"bold\";s:2:\"id\";s:4:\"bold\";s:7:\"unicode\";s:4:\"f032\";s:7:\"created\";i:1;s:10:\"categories\";a:1:{i:0;s:17:\"Text Editor Icons\";}}i:48;a:6:{s:4:\"name\";s:6:\"italic\";s:2:\"id\";s:6:\"italic\";s:7:\"unicode\";s:4:\"f033\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:7:\"italics\";}s:10:\"categories\";a:1:{i:0;s:17:\"Text Editor Icons\";}}i:49;a:5:{s:4:\"name\";s:11:\"text-height\";s:2:\"id\";s:11:\"text-height\";s:7:\"unicode\";s:4:\"f034\";s:7:\"created\";i:1;s:10:\"categories\";a:1:{i:0;s:17:\"Text Editor Icons\";}}i:50;a:5:{s:4:\"name\";s:10:\"text-width\";s:2:\"id\";s:10:\"text-width\";s:7:\"unicode\";s:4:\"f035\";s:7:\"created\";i:1;s:10:\"categories\";a:1:{i:0;s:17:\"Text Editor Icons\";}}i:51;a:6:{s:4:\"name\";s:10:\"align-left\";s:2:\"id\";s:10:\"align-left\";s:7:\"unicode\";s:4:\"f036\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:4:\"text\";}s:10:\"categories\";a:1:{i:0;s:17:\"Text Editor Icons\";}}i:52;a:6:{s:4:\"name\";s:12:\"align-center\";s:2:\"id\";s:12:\"align-center\";s:7:\"unicode\";s:4:\"f037\";s:7:\"created\";i:1;s:6:\"filter\";a:2:{i:0;s:6:\"middle\";i:1;s:4:\"text\";}s:10:\"categories\";a:1:{i:0;s:17:\"Text Editor Icons\";}}i:53;a:6:{s:4:\"name\";s:11:\"align-right\";s:2:\"id\";s:11:\"align-right\";s:7:\"unicode\";s:4:\"f038\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:4:\"text\";}s:10:\"categories\";a:1:{i:0;s:17:\"Text Editor Icons\";}}i:54;a:6:{s:4:\"name\";s:13:\"align-justify\";s:2:\"id\";s:13:\"align-justify\";s:7:\"unicode\";s:4:\"f039\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:4:\"text\";}s:10:\"categories\";a:1:{i:0;s:17:\"Text Editor Icons\";}}i:55;a:6:{s:4:\"name\";s:4:\"list\";s:2:\"id\";s:4:\"list\";s:7:\"unicode\";s:4:\"f03a\";s:7:\"created\";i:1;s:6:\"filter\";a:7:{i:0;s:2:\"ul\";i:1;s:2:\"ol\";i:2;s:9:\"checklist\";i:3;s:8:\"finished\";i:4;s:9:\"completed\";i:5;s:4:\"done\";i:6;s:4:\"todo\";}s:10:\"categories\";a:1:{i:0;s:17:\"Text Editor Icons\";}}i:56;a:6:{s:4:\"name\";s:7:\"Outdent\";s:2:\"id\";s:7:\"outdent\";s:7:\"unicode\";s:4:\"f03b\";s:7:\"created\";i:1;s:7:\"aliases\";a:1:{i:0;s:6:\"dedent\";}s:10:\"categories\";a:1:{i:0;s:17:\"Text Editor Icons\";}}i:57;a:5:{s:4:\"name\";s:6:\"Indent\";s:2:\"id\";s:6:\"indent\";s:7:\"unicode\";s:4:\"f03c\";s:7:\"created\";i:1;s:10:\"categories\";a:1:{i:0;s:17:\"Text Editor Icons\";}}i:58;a:6:{s:4:\"name\";s:12:\"Video Camera\";s:2:\"id\";s:12:\"video-camera\";s:7:\"unicode\";s:4:\"f03d\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:4:\"film\";i:1;s:5:\"movie\";i:2;s:6:\"record\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:59;a:6:{s:4:\"name\";s:16:\"Picture Outlined\";s:2:\"id\";s:9:\"picture-o\";s:7:\"unicode\";s:4:\"f03e\";s:7:\"created\";i:1;s:7:\"aliases\";a:2:{i:0;s:5:\"photo\";i:1;s:5:\"image\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:60;a:6:{s:4:\"name\";s:6:\"pencil\";s:2:\"id\";s:6:\"pencil\";s:7:\"unicode\";s:4:\"f040\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:5:\"write\";i:1;s:4:\"edit\";i:2;s:6:\"update\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:61;a:6:{s:4:\"name\";s:10:\"map-marker\";s:2:\"id\";s:10:\"map-marker\";s:7:\"unicode\";s:4:\"f041\";s:7:\"created\";i:1;s:6:\"filter\";a:9:{i:0;s:3:\"map\";i:1;s:3:\"pin\";i:2;s:8:\"location\";i:3;s:11:\"coordinates\";i:4;s:8:\"localize\";i:5;s:7:\"address\";i:6;s:6:\"travel\";i:7;s:5:\"where\";i:8;s:5:\"place\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:62;a:6:{s:4:\"name\";s:6:\"adjust\";s:2:\"id\";s:6:\"adjust\";s:7:\"unicode\";s:4:\"f042\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:8:\"contrast\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:63;a:6:{s:4:\"name\";s:4:\"tint\";s:2:\"id\";s:4:\"tint\";s:7:\"unicode\";s:4:\"f043\";s:7:\"created\";i:1;s:6:\"filter\";a:4:{i:0;s:8:\"raindrop\";i:1;s:9:\"waterdrop\";i:2;s:4:\"drop\";i:3;s:7:\"droplet\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:64;a:7:{s:4:\"name\";s:22:\"Pencil Square Outlined\";s:2:\"id\";s:15:\"pencil-square-o\";s:7:\"unicode\";s:4:\"f044\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:5:\"write\";i:1;s:4:\"edit\";i:2;s:6:\"update\";}s:7:\"aliases\";a:1:{i:0;s:4:\"edit\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:65;a:6:{s:4:\"name\";s:21:\"Share Square Outlined\";s:2:\"id\";s:14:\"share-square-o\";s:7:\"unicode\";s:4:\"f045\";s:7:\"created\";i:1;s:6:\"filter\";a:2:{i:0;s:6:\"social\";i:1;s:4:\"send\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:66;a:6:{s:4:\"name\";s:21:\"Check Square Outlined\";s:2:\"id\";s:14:\"check-square-o\";s:7:\"unicode\";s:4:\"f046\";s:7:\"created\";i:1;s:6:\"filter\";a:5:{i:0;s:4:\"todo\";i:1;s:4:\"done\";i:2;s:5:\"agree\";i:3;s:6:\"accept\";i:4;s:7:\"confirm\";}s:10:\"categories\";a:2:{i:0;s:21:\"Web Application Icons\";i:1;s:18:\"Form Control Icons\";}}i:67;a:6:{s:4:\"name\";s:6:\"Arrows\";s:2:\"id\";s:6:\"arrows\";s:7:\"unicode\";s:4:\"f047\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:4:\"move\";i:1;s:7:\"reorder\";i:2;s:6:\"resize\";}s:10:\"categories\";a:2:{i:0;s:21:\"Web Application Icons\";i:1;s:17:\"Directional Icons\";}}i:68;a:6:{s:4:\"name\";s:13:\"step-backward\";s:2:\"id\";s:13:\"step-backward\";s:7:\"unicode\";s:4:\"f048\";s:7:\"created\";i:1;s:6:\"filter\";a:5:{i:0;s:6:\"rewind\";i:1;s:8:\"previous\";i:2;s:9:\"beginning\";i:3;s:5:\"start\";i:4;s:5:\"first\";}s:10:\"categories\";a:1:{i:0;s:18:\"Video Player Icons\";}}i:69;a:6:{s:4:\"name\";s:13:\"fast-backward\";s:2:\"id\";s:13:\"fast-backward\";s:7:\"unicode\";s:4:\"f049\";s:7:\"created\";i:1;s:6:\"filter\";a:5:{i:0;s:6:\"rewind\";i:1;s:8:\"previous\";i:2;s:9:\"beginning\";i:3;s:5:\"start\";i:4;s:5:\"first\";}s:10:\"categories\";a:1:{i:0;s:18:\"Video Player Icons\";}}i:70;a:6:{s:4:\"name\";s:8:\"backward\";s:2:\"id\";s:8:\"backward\";s:7:\"unicode\";s:4:\"f04a\";s:7:\"created\";i:1;s:6:\"filter\";a:2:{i:0;s:6:\"rewind\";i:1;s:8:\"previous\";}s:10:\"categories\";a:1:{i:0;s:18:\"Video Player Icons\";}}i:71;a:6:{s:4:\"name\";s:4:\"play\";s:2:\"id\";s:4:\"play\";s:7:\"unicode\";s:4:\"f04b\";s:7:\"created\";i:1;s:6:\"filter\";a:4:{i:0;s:5:\"start\";i:1;s:7:\"playing\";i:2;s:5:\"music\";i:3;s:5:\"sound\";}s:10:\"categories\";a:1:{i:0;s:18:\"Video Player Icons\";}}i:72;a:6:{s:4:\"name\";s:5:\"pause\";s:2:\"id\";s:5:\"pause\";s:7:\"unicode\";s:4:\"f04c\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:4:\"wait\";}s:10:\"categories\";a:1:{i:0;s:18:\"Video Player Icons\";}}i:73;a:6:{s:4:\"name\";s:4:\"stop\";s:2:\"id\";s:4:\"stop\";s:7:\"unicode\";s:4:\"f04d\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:5:\"block\";i:1;s:3:\"box\";i:2;s:6:\"square\";}s:10:\"categories\";a:1:{i:0;s:18:\"Video Player Icons\";}}i:74;a:6:{s:4:\"name\";s:7:\"forward\";s:2:\"id\";s:7:\"forward\";s:7:\"unicode\";s:4:\"f04e\";s:7:\"created\";i:1;s:6:\"filter\";a:2:{i:0;s:7:\"forward\";i:1;s:4:\"next\";}s:10:\"categories\";a:1:{i:0;s:18:\"Video Player Icons\";}}i:75;a:6:{s:4:\"name\";s:12:\"fast-forward\";s:2:\"id\";s:12:\"fast-forward\";s:7:\"unicode\";s:4:\"f050\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:4:\"next\";i:1;s:3:\"end\";i:2;s:4:\"last\";}s:10:\"categories\";a:1:{i:0;s:18:\"Video Player Icons\";}}i:76;a:6:{s:4:\"name\";s:12:\"step-forward\";s:2:\"id\";s:12:\"step-forward\";s:7:\"unicode\";s:4:\"f051\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:4:\"next\";i:1;s:3:\"end\";i:2;s:4:\"last\";}s:10:\"categories\";a:1:{i:0;s:18:\"Video Player Icons\";}}i:77;a:5:{s:4:\"name\";s:5:\"eject\";s:2:\"id\";s:5:\"eject\";s:7:\"unicode\";s:4:\"f052\";s:7:\"created\";i:1;s:10:\"categories\";a:1:{i:0;s:18:\"Video Player Icons\";}}i:78;a:6:{s:4:\"name\";s:12:\"chevron-left\";s:2:\"id\";s:12:\"chevron-left\";s:7:\"unicode\";s:4:\"f053\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:7:\"bracket\";i:1;s:8:\"previous\";i:2;s:4:\"back\";}s:10:\"categories\";a:1:{i:0;s:17:\"Directional Icons\";}}i:79;a:6:{s:4:\"name\";s:13:\"chevron-right\";s:2:\"id\";s:13:\"chevron-right\";s:7:\"unicode\";s:4:\"f054\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:7:\"bracket\";i:1;s:4:\"next\";i:2;s:7:\"forward\";}s:10:\"categories\";a:1:{i:0;s:17:\"Directional Icons\";}}i:80;a:6:{s:4:\"name\";s:11:\"Plus Circle\";s:2:\"id\";s:11:\"plus-circle\";s:7:\"unicode\";s:4:\"f055\";s:7:\"created\";i:1;s:6:\"filter\";a:4:{i:0;s:3:\"add\";i:1;s:3:\"new\";i:2;s:6:\"create\";i:3;s:6:\"expand\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:81;a:6:{s:4:\"name\";s:12:\"Minus Circle\";s:2:\"id\";s:12:\"minus-circle\";s:7:\"unicode\";s:4:\"f056\";s:7:\"created\";i:1;s:6:\"filter\";a:4:{i:0;s:6:\"delete\";i:1;s:6:\"remove\";i:2;s:5:\"trash\";i:3;s:4:\"hide\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:82;a:6:{s:4:\"name\";s:12:\"Times Circle\";s:2:\"id\";s:12:\"times-circle\";s:7:\"unicode\";s:4:\"f057\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:5:\"close\";i:1;s:4:\"exit\";i:2;s:1:\"x\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:83;a:6:{s:4:\"name\";s:12:\"Check Circle\";s:2:\"id\";s:12:\"check-circle\";s:7:\"unicode\";s:4:\"f058\";s:7:\"created\";i:1;s:6:\"filter\";a:5:{i:0;s:4:\"todo\";i:1;s:4:\"done\";i:2;s:5:\"agree\";i:3;s:6:\"accept\";i:4;s:7:\"confirm\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:84;a:6:{s:4:\"name\";s:15:\"Question Circle\";s:2:\"id\";s:15:\"question-circle\";s:7:\"unicode\";s:4:\"f059\";s:6:\"filter\";a:4:{i:0;s:4:\"help\";i:1;s:11:\"information\";i:2;s:7:\"unknown\";i:3;s:7:\"support\";}s:7:\"created\";i:1;s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:85;a:6:{s:4:\"name\";s:11:\"Info Circle\";s:2:\"id\";s:11:\"info-circle\";s:7:\"unicode\";s:4:\"f05a\";s:7:\"created\";i:1;s:6:\"filter\";a:4:{i:0;s:4:\"help\";i:1;s:11:\"information\";i:2;s:4:\"more\";i:3;s:7:\"details\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:86;a:6:{s:4:\"name\";s:10:\"Crosshairs\";s:2:\"id\";s:10:\"crosshairs\";s:7:\"unicode\";s:4:\"f05b\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:6:\"picker\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:87;a:6:{s:4:\"name\";s:21:\"Times Circle Outlined\";s:2:\"id\";s:14:\"times-circle-o\";s:7:\"unicode\";s:4:\"f05c\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:5:\"close\";i:1;s:4:\"exit\";i:2;s:1:\"x\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:88;a:6:{s:4:\"name\";s:21:\"Check Circle Outlined\";s:2:\"id\";s:14:\"check-circle-o\";s:7:\"unicode\";s:4:\"f05d\";s:7:\"created\";i:1;s:6:\"filter\";a:5:{i:0;s:4:\"todo\";i:1;s:4:\"done\";i:2;s:5:\"agree\";i:3;s:6:\"accept\";i:4;s:7:\"confirm\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:89;a:6:{s:4:\"name\";s:3:\"ban\";s:2:\"id\";s:3:\"ban\";s:7:\"unicode\";s:4:\"f05e\";s:7:\"created\";i:1;s:6:\"filter\";a:8:{i:0;s:6:\"delete\";i:1;s:6:\"remove\";i:2;s:5:\"trash\";i:3;s:4:\"hide\";i:4;s:5:\"block\";i:5;s:4:\"stop\";i:6;s:5:\"abort\";i:7;s:6:\"cancel\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:90;a:6:{s:4:\"name\";s:10:\"arrow-left\";s:2:\"id\";s:10:\"arrow-left\";s:7:\"unicode\";s:4:\"f060\";s:7:\"created\";i:1;s:6:\"filter\";a:2:{i:0;s:8:\"previous\";i:1;s:4:\"back\";}s:10:\"categories\";a:1:{i:0;s:17:\"Directional Icons\";}}i:91;a:6:{s:4:\"name\";s:11:\"arrow-right\";s:2:\"id\";s:11:\"arrow-right\";s:7:\"unicode\";s:4:\"f061\";s:7:\"created\";i:1;s:6:\"filter\";a:2:{i:0;s:4:\"next\";i:1;s:7:\"forward\";}s:10:\"categories\";a:1:{i:0;s:17:\"Directional Icons\";}}i:92;a:5:{s:4:\"name\";s:8:\"arrow-up\";s:2:\"id\";s:8:\"arrow-up\";s:7:\"unicode\";s:4:\"f062\";s:7:\"created\";i:1;s:10:\"categories\";a:1:{i:0;s:17:\"Directional Icons\";}}i:93;a:6:{s:4:\"name\";s:10:\"arrow-down\";s:2:\"id\";s:10:\"arrow-down\";s:7:\"unicode\";s:4:\"f063\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:8:\"download\";}s:10:\"categories\";a:1:{i:0;s:17:\"Directional Icons\";}}i:94;a:6:{s:4:\"name\";s:5:\"Share\";s:2:\"id\";s:5:\"share\";s:7:\"unicode\";s:4:\"f064\";s:7:\"created\";i:1;s:7:\"aliases\";a:1:{i:0;s:12:\"mail-forward\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:95;a:6:{s:4:\"name\";s:6:\"Expand\";s:2:\"id\";s:6:\"expand\";s:7:\"unicode\";s:4:\"f065\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:7:\"enlarge\";i:1;s:6:\"bigger\";i:2;s:6:\"resize\";}s:10:\"categories\";a:1:{i:0;s:18:\"Video Player Icons\";}}i:96;a:6:{s:4:\"name\";s:8:\"Compress\";s:2:\"id\";s:8:\"compress\";s:7:\"unicode\";s:4:\"f066\";s:7:\"created\";i:1;s:6:\"filter\";a:5:{i:0;s:8:\"collapse\";i:1;s:7:\"combine\";i:2;s:8:\"contract\";i:3;s:5:\"merge\";i:4;s:7:\"smaller\";}s:10:\"categories\";a:1:{i:0;s:18:\"Video Player Icons\";}}i:97;a:6:{s:4:\"name\";s:4:\"plus\";s:2:\"id\";s:4:\"plus\";s:7:\"unicode\";s:4:\"f067\";s:7:\"created\";i:1;s:6:\"filter\";a:4:{i:0;s:3:\"add\";i:1;s:3:\"new\";i:2;s:6:\"create\";i:3;s:6:\"expand\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:98;a:6:{s:4:\"name\";s:5:\"minus\";s:2:\"id\";s:5:\"minus\";s:7:\"unicode\";s:4:\"f068\";s:7:\"created\";i:1;s:6:\"filter\";a:7:{i:0;s:4:\"hide\";i:1;s:6:\"minify\";i:2;s:6:\"delete\";i:3;s:6:\"remove\";i:4;s:5:\"trash\";i:5;s:4:\"hide\";i:6;s:8:\"collapse\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:99;a:6:{s:4:\"name\";s:8:\"asterisk\";s:2:\"id\";s:8:\"asterisk\";s:7:\"unicode\";s:4:\"f069\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:7:\"details\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:100;a:6:{s:4:\"name\";s:18:\"Exclamation Circle\";s:2:\"id\";s:18:\"exclamation-circle\";s:7:\"unicode\";s:4:\"f06a\";s:7:\"created\";i:1;s:6:\"filter\";a:5:{i:0;s:7:\"warning\";i:1;s:5:\"error\";i:2;s:7:\"problem\";i:3;s:12:\"notification\";i:4;s:5:\"alert\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:101;a:6:{s:4:\"name\";s:4:\"gift\";s:2:\"id\";s:4:\"gift\";s:7:\"unicode\";s:4:\"f06b\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:7:\"present\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:102;a:6:{s:4:\"name\";s:4:\"leaf\";s:2:\"id\";s:4:\"leaf\";s:7:\"unicode\";s:4:\"f06c\";s:7:\"created\";i:1;s:6:\"filter\";a:2:{i:0;s:3:\"eco\";i:1;s:6:\"nature\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:103;a:6:{s:4:\"name\";s:4:\"fire\";s:2:\"id\";s:4:\"fire\";s:7:\"unicode\";s:4:\"f06d\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:5:\"flame\";i:1;s:3:\"hot\";i:2;s:7:\"popular\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:104;a:6:{s:4:\"name\";s:3:\"Eye\";s:2:\"id\";s:3:\"eye\";s:7:\"unicode\";s:4:\"f06e\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:4:\"show\";i:1;s:7:\"visible\";i:2;s:5:\"views\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:105;a:6:{s:4:\"name\";s:9:\"Eye Slash\";s:2:\"id\";s:9:\"eye-slash\";s:7:\"unicode\";s:4:\"f070\";s:7:\"created\";i:1;s:6:\"filter\";a:6:{i:0;s:6:\"toggle\";i:1;s:4:\"show\";i:2;s:4:\"hide\";i:3;s:7:\"visible\";i:4;s:9:\"visiblity\";i:5;s:5:\"views\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:106;a:7:{s:4:\"name\";s:20:\"Exclamation Triangle\";s:2:\"id\";s:20:\"exclamation-triangle\";s:7:\"unicode\";s:4:\"f071\";s:7:\"created\";i:1;s:6:\"filter\";a:5:{i:0;s:7:\"warning\";i:1;s:5:\"error\";i:2;s:7:\"problem\";i:3;s:12:\"notification\";i:4;s:5:\"alert\";}s:7:\"aliases\";a:1:{i:0;s:7:\"warning\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:107;a:6:{s:4:\"name\";s:5:\"plane\";s:2:\"id\";s:5:\"plane\";s:7:\"unicode\";s:4:\"f072\";s:7:\"created\";i:1;s:6:\"filter\";a:7:{i:0;s:6:\"travel\";i:1;s:4:\"trip\";i:2;s:8:\"location\";i:3;s:11:\"destination\";i:4;s:8:\"airplane\";i:5;s:3:\"fly\";i:6;s:4:\"mode\";}s:10:\"categories\";a:2:{i:0;s:21:\"Web Application Icons\";i:1;s:20:\"Transportation Icons\";}}i:108;a:6:{s:4:\"name\";s:8:\"calendar\";s:2:\"id\";s:8:\"calendar\";s:7:\"unicode\";s:4:\"f073\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:4:\"date\";i:1;s:4:\"time\";i:2;s:4:\"when\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:109;a:6:{s:4:\"name\";s:6:\"random\";s:2:\"id\";s:6:\"random\";s:7:\"unicode\";s:4:\"f074\";s:7:\"created\";i:1;s:6:\"filter\";a:2:{i:0;s:4:\"sort\";i:1;s:7:\"shuffle\";}s:10:\"categories\";a:2:{i:0;s:21:\"Web Application Icons\";i:1;s:18:\"Video Player Icons\";}}i:110;a:6:{s:4:\"name\";s:7:\"comment\";s:2:\"id\";s:7:\"comment\";s:7:\"unicode\";s:4:\"f075\";s:7:\"created\";i:1;s:6:\"filter\";a:6:{i:0;s:6:\"speech\";i:1;s:12:\"notification\";i:2;s:4:\"note\";i:3;s:4:\"chat\";i:4;s:6:\"bubble\";i:5;s:8:\"feedback\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:111;a:5:{s:4:\"name\";s:6:\"magnet\";s:2:\"id\";s:6:\"magnet\";s:7:\"unicode\";s:4:\"f076\";s:7:\"created\";i:1;s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:112;a:5:{s:4:\"name\";s:10:\"chevron-up\";s:2:\"id\";s:10:\"chevron-up\";s:7:\"unicode\";s:4:\"f077\";s:7:\"created\";i:1;s:10:\"categories\";a:1:{i:0;s:17:\"Directional Icons\";}}i:113;a:5:{s:4:\"name\";s:12:\"chevron-down\";s:2:\"id\";s:12:\"chevron-down\";s:7:\"unicode\";s:4:\"f078\";s:7:\"created\";i:1;s:10:\"categories\";a:1:{i:0;s:17:\"Directional Icons\";}}i:114;a:6:{s:4:\"name\";s:7:\"retweet\";s:2:\"id\";s:7:\"retweet\";s:7:\"unicode\";s:4:\"f079\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:7:\"refresh\";i:1;s:6:\"reload\";i:2;s:5:\"share\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:115;a:6:{s:4:\"name\";s:13:\"shopping-cart\";s:2:\"id\";s:13:\"shopping-cart\";s:7:\"unicode\";s:4:\"f07a\";s:7:\"created\";i:1;s:6:\"filter\";a:4:{i:0;s:8:\"checkout\";i:1;s:3:\"buy\";i:2;s:8:\"purchase\";i:3;s:7:\"payment\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:116;a:5:{s:4:\"name\";s:6:\"Folder\";s:2:\"id\";s:6:\"folder\";s:7:\"unicode\";s:4:\"f07b\";s:7:\"created\";i:1;s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:117;a:5:{s:4:\"name\";s:11:\"Folder Open\";s:2:\"id\";s:11:\"folder-open\";s:7:\"unicode\";s:4:\"f07c\";s:7:\"created\";i:1;s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:118;a:6:{s:4:\"name\";s:15:\"Arrows Vertical\";s:2:\"id\";s:8:\"arrows-v\";s:7:\"unicode\";s:4:\"f07d\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:6:\"resize\";}s:10:\"categories\";a:2:{i:0;s:21:\"Web Application Icons\";i:1;s:17:\"Directional Icons\";}}i:119;a:6:{s:4:\"name\";s:17:\"Arrows Horizontal\";s:2:\"id\";s:8:\"arrows-h\";s:7:\"unicode\";s:4:\"f07e\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:6:\"resize\";}s:10:\"categories\";a:2:{i:0;s:21:\"Web Application Icons\";i:1;s:17:\"Directional Icons\";}}i:120;a:7:{s:4:\"name\";s:9:\"Bar Chart\";s:2:\"id\";s:9:\"bar-chart\";s:7:\"unicode\";s:4:\"f080\";s:7:\"created\";i:1;s:7:\"aliases\";a:1:{i:0;s:11:\"bar-chart-o\";}s:6:\"filter\";a:2:{i:0;s:5:\"graph\";i:1;s:9:\"analytics\";}s:10:\"categories\";a:2:{i:0;s:21:\"Web Application Icons\";i:1;s:11:\"Chart Icons\";}}i:121;a:6:{s:4:\"name\";s:14:\"Twitter Square\";s:2:\"id\";s:14:\"twitter-square\";s:7:\"unicode\";s:4:\"f081\";s:7:\"created\";i:1;s:6:\"filter\";a:2:{i:0;s:5:\"tweet\";i:1;s:14:\"social network\";}s:10:\"categories\";a:1:{i:0;s:11:\"Brand Icons\";}}i:122;a:6:{s:4:\"name\";s:15:\"Facebook Square\";s:2:\"id\";s:15:\"facebook-square\";s:7:\"unicode\";s:4:\"f082\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:14:\"social network\";}s:10:\"categories\";a:1:{i:0;s:11:\"Brand Icons\";}}i:123;a:6:{s:4:\"name\";s:12:\"camera-retro\";s:2:\"id\";s:12:\"camera-retro\";s:7:\"unicode\";s:4:\"f083\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:5:\"photo\";i:1;s:7:\"picture\";i:2;s:6:\"record\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:124;a:6:{s:4:\"name\";s:3:\"key\";s:2:\"id\";s:3:\"key\";s:7:\"unicode\";s:4:\"f084\";s:7:\"created\";i:1;s:6:\"filter\";a:2:{i:0;s:6:\"unlock\";i:1;s:8:\"password\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:125;a:7:{s:4:\"name\";s:4:\"cogs\";s:2:\"id\";s:4:\"cogs\";s:7:\"unicode\";s:4:\"f085\";s:7:\"created\";i:1;s:7:\"aliases\";a:1:{i:0;s:5:\"gears\";}s:6:\"filter\";a:1:{i:0;s:8:\"settings\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:126;a:6:{s:4:\"name\";s:8:\"comments\";s:2:\"id\";s:8:\"comments\";s:7:\"unicode\";s:4:\"f086\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:12:\"conversation\";i:1;s:12:\"notification\";i:2;s:5:\"notes\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:127;a:6:{s:4:\"name\";s:18:\"Thumbs Up Outlined\";s:2:\"id\";s:11:\"thumbs-o-up\";s:7:\"unicode\";s:4:\"f087\";s:7:\"created\";i:1;s:6:\"filter\";a:5:{i:0;s:4:\"like\";i:1;s:7:\"approve\";i:2;s:8:\"favorite\";i:3;s:5:\"agree\";i:4;s:4:\"hand\";}s:10:\"categories\";a:2:{i:0;s:21:\"Web Application Icons\";i:1;s:10:\"Hand Icons\";}}i:128;a:6:{s:4:\"name\";s:20:\"Thumbs Down Outlined\";s:2:\"id\";s:13:\"thumbs-o-down\";s:7:\"unicode\";s:4:\"f088\";s:7:\"created\";i:1;s:6:\"filter\";a:4:{i:0;s:7:\"dislike\";i:1;s:10:\"disapprove\";i:2;s:8:\"disagree\";i:3;s:4:\"hand\";}s:10:\"categories\";a:2:{i:0;s:21:\"Web Application Icons\";i:1;s:10:\"Hand Icons\";}}i:129;a:6:{s:4:\"name\";s:9:\"star-half\";s:2:\"id\";s:9:\"star-half\";s:7:\"unicode\";s:4:\"f089\";s:7:\"created\";i:1;s:6:\"filter\";a:4:{i:0;s:5:\"award\";i:1;s:11:\"achievement\";i:2;s:6:\"rating\";i:3;s:5:\"score\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:130;a:6:{s:4:\"name\";s:14:\"Heart Outlined\";s:2:\"id\";s:7:\"heart-o\";s:7:\"unicode\";s:4:\"f08a\";s:7:\"created\";i:1;s:6:\"filter\";a:3:{i:0;s:4:\"love\";i:1;s:4:\"like\";i:2;s:8:\"favorite\";}s:10:\"categories\";a:2:{i:0;s:21:\"Web Application Icons\";i:1;s:13:\"Medical Icons\";}}i:131;a:6:{s:4:\"name\";s:8:\"Sign Out\";s:2:\"id\";s:8:\"sign-out\";s:7:\"unicode\";s:4:\"f08b\";s:7:\"created\";i:1;s:6:\"filter\";a:5:{i:0;s:7:\"log out\";i:1;s:6:\"logout\";i:2;s:5:\"leave\";i:3;s:4:\"exit\";i:4;s:5:\"arrow\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:132;a:5:{s:4:\"name\";s:15:\"LinkedIn Square\";s:2:\"id\";s:15:\"linkedin-square\";s:7:\"unicode\";s:4:\"f08c\";s:7:\"created\";i:1;s:10:\"categories\";a:1:{i:0;s:11:\"Brand Icons\";}}i:133;a:6:{s:4:\"name\";s:10:\"Thumb Tack\";s:2:\"id\";s:10:\"thumb-tack\";s:7:\"unicode\";s:4:\"f08d\";s:7:\"created\";i:1;s:6:\"filter\";a:4:{i:0;s:6:\"marker\";i:1;s:3:\"pin\";i:2;s:8:\"location\";i:3;s:11:\"coordinates\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:134;a:6:{s:4:\"name\";s:13:\"External Link\";s:2:\"id\";s:13:\"external-link\";s:7:\"unicode\";s:4:\"f08e\";s:7:\"created\";i:1;s:6:\"filter\";a:2:{i:0;s:4:\"open\";i:1;s:3:\"new\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:135;a:6:{s:4:\"name\";s:7:\"Sign In\";s:2:\"id\";s:7:\"sign-in\";s:7:\"unicode\";s:4:\"f090\";s:7:\"created\";i:1;s:6:\"filter\";a:9:{i:0;s:5:\"enter\";i:1;s:4:\"join\";i:2;s:6:\"log in\";i:3;s:5:\"login\";i:4;s:7:\"sign up\";i:5;s:7:\"sign in\";i:6;s:6:\"signin\";i:7;s:6:\"signup\";i:8;s:5:\"arrow\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:136;a:6:{s:4:\"name\";s:6:\"trophy\";s:2:\"id\";s:6:\"trophy\";s:7:\"unicode\";s:4:\"f091\";s:7:\"created\";i:1;s:6:\"filter\";a:4:{i:0;s:5:\"award\";i:1;s:11:\"achievement\";i:2;s:6:\"winner\";i:3;s:4:\"game\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:137;a:6:{s:4:\"name\";s:13:\"GitHub Square\";s:2:\"id\";s:13:\"github-square\";s:7:\"unicode\";s:4:\"f092\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:7:\"octocat\";}s:10:\"categories\";a:1:{i:0;s:11:\"Brand Icons\";}}i:138;a:6:{s:4:\"name\";s:6:\"Upload\";s:2:\"id\";s:6:\"upload\";s:7:\"unicode\";s:4:\"f093\";s:7:\"created\";i:1;s:6:\"filter\";a:1:{i:0;s:6:\"import\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:139;a:5:{s:4:\"name\";s:14:\"Lemon Outlined\";s:2:\"id\";s:7:\"lemon-o\";s:7:\"unicode\";s:4:\"f094\";s:7:\"created\";i:1;s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:140;a:6:{s:4:\"name\";s:5:\"Phone\";s:2:\"id\";s:5:\"phone\";s:7:\"unicode\";s:4:\"f095\";s:7:\"created\";i:2;s:6:\"filter\";a:5:{i:0;s:4:\"call\";i:1;s:5:\"voice\";i:2;s:6:\"number\";i:3;s:7:\"support\";i:4;s:8:\"earphone\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:141;a:6:{s:4:\"name\";s:15:\"Square Outlined\";s:2:\"id\";s:8:\"square-o\";s:7:\"unicode\";s:4:\"f096\";s:7:\"created\";i:2;s:6:\"filter\";a:3:{i:0;s:5:\"block\";i:1;s:6:\"square\";i:2;s:3:\"box\";}s:10:\"categories\";a:2:{i:0;s:21:\"Web Application Icons\";i:1;s:18:\"Form Control Icons\";}}i:142;a:6:{s:4:\"name\";s:17:\"Bookmark Outlined\";s:2:\"id\";s:10:\"bookmark-o\";s:7:\"unicode\";s:4:\"f097\";s:7:\"created\";i:2;s:6:\"filter\";a:1:{i:0;s:4:\"save\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:143;a:6:{s:4:\"name\";s:12:\"Phone Square\";s:2:\"id\";s:12:\"phone-square\";s:7:\"unicode\";s:4:\"f098\";s:7:\"created\";i:2;s:6:\"filter\";a:4:{i:0;s:4:\"call\";i:1;s:5:\"voice\";i:2;s:6:\"number\";i:3;s:7:\"support\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:144;a:6:{s:4:\"name\";s:7:\"Twitter\";s:2:\"id\";s:7:\"twitter\";s:7:\"unicode\";s:4:\"f099\";s:7:\"created\";i:2;s:6:\"filter\";a:2:{i:0;s:5:\"tweet\";i:1;s:14:\"social network\";}s:10:\"categories\";a:1:{i:0;s:11:\"Brand Icons\";}}i:145;a:7:{s:4:\"name\";s:8:\"Facebook\";s:2:\"id\";s:8:\"facebook\";s:7:\"unicode\";s:4:\"f09a\";s:7:\"created\";i:2;s:7:\"aliases\";a:1:{i:0;s:10:\"facebook-f\";}s:6:\"filter\";a:1:{i:0;s:14:\"social network\";}s:10:\"categories\";a:1:{i:0;s:11:\"Brand Icons\";}}i:146;a:6:{s:4:\"name\";s:6:\"GitHub\";s:2:\"id\";s:6:\"github\";s:7:\"unicode\";s:4:\"f09b\";s:7:\"created\";i:2;s:6:\"filter\";a:1:{i:0;s:7:\"octocat\";}s:10:\"categories\";a:1:{i:0;s:11:\"Brand Icons\";}}i:147;a:6:{s:4:\"name\";s:6:\"unlock\";s:2:\"id\";s:6:\"unlock\";s:7:\"unicode\";s:4:\"f09c\";s:7:\"created\";i:2;s:6:\"filter\";a:4:{i:0;s:7:\"protect\";i:1;s:5:\"admin\";i:2;s:8:\"password\";i:3;s:4:\"lock\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:148;a:6:{s:4:\"name\";s:11:\"credit-card\";s:2:\"id\";s:11:\"credit-card\";s:7:\"unicode\";s:4:\"f09d\";s:7:\"created\";i:2;s:6:\"filter\";a:6:{i:0;s:5:\"money\";i:1;s:3:\"buy\";i:2;s:5:\"debit\";i:3;s:8:\"checkout\";i:4;s:8:\"purchase\";i:5;s:7:\"payment\";}s:10:\"categories\";a:2:{i:0;s:21:\"Web Application Icons\";i:1;s:13:\"Payment Icons\";}}i:149;a:7:{s:4:\"name\";s:3:\"rss\";s:2:\"id\";s:3:\"rss\";s:7:\"unicode\";s:4:\"f09e\";s:7:\"created\";i:2;s:6:\"filter\";a:1:{i:0;s:4:\"blog\";}s:7:\"aliases\";a:1:{i:0;s:4:\"feed\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:150;a:6:{s:4:\"name\";s:3:\"HDD\";s:2:\"id\";s:5:\"hdd-o\";s:7:\"unicode\";s:4:\"f0a0\";s:7:\"created\";i:2;s:6:\"filter\";a:4:{i:0;s:9:\"harddrive\";i:1;s:10:\"hard drive\";i:2;s:7:\"storage\";i:3;s:4:\"save\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:151;a:6:{s:4:\"name\";s:8:\"bullhorn\";s:2:\"id\";s:8:\"bullhorn\";s:7:\"unicode\";s:4:\"f0a1\";s:7:\"created\";i:2;s:6:\"filter\";a:4:{i:0;s:12:\"announcement\";i:1;s:5:\"share\";i:2;s:9:\"broadcast\";i:3;s:6:\"louder\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:152;a:6:{s:4:\"name\";s:4:\"bell\";s:2:\"id\";s:4:\"bell\";s:7:\"unicode\";s:4:\"f0f3\";s:7:\"created\";i:2;s:6:\"filter\";a:3:{i:0;s:5:\"alert\";i:1;s:8:\"reminder\";i:2;s:12:\"notification\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:153;a:6:{s:4:\"name\";s:11:\"certificate\";s:2:\"id\";s:11:\"certificate\";s:7:\"unicode\";s:4:\"f0a3\";s:7:\"created\";i:2;s:6:\"filter\";a:2:{i:0;s:5:\"badge\";i:1;s:4:\"star\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:154;a:6:{s:4:\"name\";s:19:\"Hand Outlined Right\";s:2:\"id\";s:12:\"hand-o-right\";s:7:\"unicode\";s:4:\"f0a4\";s:7:\"created\";i:2;s:6:\"filter\";a:4:{i:0;s:5:\"point\";i:1;s:5:\"right\";i:2;s:4:\"next\";i:3;s:7:\"forward\";}s:10:\"categories\";a:2:{i:0;s:17:\"Directional Icons\";i:1;s:10:\"Hand Icons\";}}i:155;a:6:{s:4:\"name\";s:18:\"Hand Outlined Left\";s:2:\"id\";s:11:\"hand-o-left\";s:7:\"unicode\";s:4:\"f0a5\";s:7:\"created\";i:2;s:6:\"filter\";a:4:{i:0;s:5:\"point\";i:1;s:4:\"left\";i:2;s:8:\"previous\";i:3;s:4:\"back\";}s:10:\"categories\";a:2:{i:0;s:17:\"Directional Icons\";i:1;s:10:\"Hand Icons\";}}i:156;a:6:{s:4:\"name\";s:16:\"Hand Outlined Up\";s:2:\"id\";s:9:\"hand-o-up\";s:7:\"unicode\";s:4:\"f0a6\";s:7:\"created\";i:2;s:6:\"filter\";a:1:{i:0;s:5:\"point\";}s:10:\"categories\";a:2:{i:0;s:17:\"Directional Icons\";i:1;s:10:\"Hand Icons\";}}i:157;a:6:{s:4:\"name\";s:18:\"Hand Outlined Down\";s:2:\"id\";s:11:\"hand-o-down\";s:7:\"unicode\";s:4:\"f0a7\";s:7:\"created\";i:2;s:6:\"filter\";a:1:{i:0;s:5:\"point\";}s:10:\"categories\";a:2:{i:0;s:17:\"Directional Icons\";i:1;s:10:\"Hand Icons\";}}i:158;a:6:{s:4:\"name\";s:17:\"Arrow Circle Left\";s:2:\"id\";s:17:\"arrow-circle-left\";s:7:\"unicode\";s:4:\"f0a8\";s:7:\"created\";i:2;s:6:\"filter\";a:2:{i:0;s:8:\"previous\";i:1;s:4:\"back\";}s:10:\"categories\";a:1:{i:0;s:17:\"Directional Icons\";}}i:159;a:6:{s:4:\"name\";s:18:\"Arrow Circle Right\";s:2:\"id\";s:18:\"arrow-circle-right\";s:7:\"unicode\";s:4:\"f0a9\";s:7:\"created\";i:2;s:6:\"filter\";a:2:{i:0;s:4:\"next\";i:1;s:7:\"forward\";}s:10:\"categories\";a:1:{i:0;s:17:\"Directional Icons\";}}i:160;a:5:{s:4:\"name\";s:15:\"Arrow Circle Up\";s:2:\"id\";s:15:\"arrow-circle-up\";s:7:\"unicode\";s:4:\"f0aa\";s:7:\"created\";i:2;s:10:\"categories\";a:1:{i:0;s:17:\"Directional Icons\";}}i:161;a:6:{s:4:\"name\";s:17:\"Arrow Circle Down\";s:2:\"id\";s:17:\"arrow-circle-down\";s:7:\"unicode\";s:4:\"f0ab\";s:7:\"created\";i:2;s:6:\"filter\";a:1:{i:0;s:8:\"download\";}s:10:\"categories\";a:1:{i:0;s:17:\"Directional Icons\";}}i:162;a:6:{s:4:\"name\";s:5:\"Globe\";s:2:\"id\";s:5:\"globe\";s:7:\"unicode\";s:4:\"f0ac\";s:7:\"created\";i:2;s:6:\"filter\";a:14:{i:0;s:5:\"world\";i:1;s:6:\"planet\";i:2;s:3:\"map\";i:3;s:5:\"place\";i:4;s:6:\"travel\";i:5;s:5:\"earth\";i:6;s:6:\"global\";i:7;s:9:\"translate\";i:8;s:3:\"all\";i:9;s:8:\"language\";i:10;s:8:\"localize\";i:11;s:8:\"location\";i:12;s:11:\"coordinates\";i:13;s:7:\"country\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:163;a:6:{s:4:\"name\";s:6:\"Wrench\";s:2:\"id\";s:6:\"wrench\";s:7:\"unicode\";s:4:\"f0ad\";s:7:\"created\";i:2;s:6:\"filter\";a:3:{i:0;s:8:\"settings\";i:1;s:3:\"fix\";i:2;s:6:\"update\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:164;a:6:{s:4:\"name\";s:5:\"Tasks\";s:2:\"id\";s:5:\"tasks\";s:7:\"unicode\";s:4:\"f0ae\";s:7:\"created\";i:2;s:6:\"filter\";a:5:{i:0;s:8:\"progress\";i:1;s:7:\"loading\";i:2;s:11:\"downloading\";i:3;s:9:\"downloads\";i:4;s:8:\"settings\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:165;a:6:{s:4:\"name\";s:6:\"Filter\";s:2:\"id\";s:6:\"filter\";s:7:\"unicode\";s:4:\"f0b0\";s:7:\"created\";i:2;s:6:\"filter\";a:2:{i:0;s:6:\"funnel\";i:1;s:7:\"options\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:166;a:6:{s:4:\"name\";s:9:\"Briefcase\";s:2:\"id\";s:9:\"briefcase\";s:7:\"unicode\";s:4:\"f0b1\";s:7:\"created\";i:2;s:6:\"filter\";a:5:{i:0;s:4:\"work\";i:1;s:8:\"business\";i:2;s:6:\"office\";i:3;s:7:\"luggage\";i:4;s:3:\"bag\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:167;a:6:{s:4:\"name\";s:10:\"Arrows Alt\";s:2:\"id\";s:10:\"arrows-alt\";s:7:\"unicode\";s:4:\"f0b2\";s:7:\"created\";i:2;s:6:\"filter\";a:7:{i:0;s:6:\"expand\";i:1;s:7:\"enlarge\";i:2;s:10:\"fullscreen\";i:3;s:6:\"bigger\";i:4;s:4:\"move\";i:5;s:7:\"reorder\";i:6;s:6:\"resize\";}s:10:\"categories\";a:2:{i:0;s:18:\"Video Player Icons\";i:1;s:17:\"Directional Icons\";}}i:168;a:7:{s:4:\"name\";s:5:\"Users\";s:2:\"id\";s:5:\"users\";s:7:\"unicode\";s:4:\"f0c0\";s:7:\"created\";i:2;s:6:\"filter\";a:3:{i:0;s:6:\"people\";i:1;s:8:\"profiles\";i:2;s:7:\"persons\";}s:7:\"aliases\";a:1:{i:0;s:5:\"group\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:169;a:7:{s:4:\"name\";s:4:\"Link\";s:2:\"id\";s:4:\"link\";s:7:\"unicode\";s:4:\"f0c1\";s:7:\"created\";i:2;s:6:\"filter\";a:1:{i:0;s:5:\"chain\";}s:7:\"aliases\";a:1:{i:0;s:5:\"chain\";}s:10:\"categories\";a:1:{i:0;s:17:\"Text Editor Icons\";}}i:170;a:6:{s:4:\"name\";s:5:\"Cloud\";s:2:\"id\";s:5:\"cloud\";s:6:\"filter\";a:1:{i:0;s:4:\"save\";}s:7:\"unicode\";s:4:\"f0c2\";s:7:\"created\";i:2;s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:171;a:6:{s:4:\"name\";s:5:\"Flask\";s:2:\"id\";s:5:\"flask\";s:7:\"unicode\";s:4:\"f0c3\";s:7:\"created\";i:2;s:6:\"filter\";a:4:{i:0;s:7:\"science\";i:1;s:6:\"beaker\";i:2;s:12:\"experimental\";i:3;s:4:\"labs\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:172;a:6:{s:4:\"name\";s:8:\"Scissors\";s:2:\"id\";s:8:\"scissors\";s:7:\"unicode\";s:4:\"f0c4\";s:7:\"created\";i:2;s:7:\"aliases\";a:1:{i:0;s:3:\"cut\";}s:10:\"categories\";a:1:{i:0;s:17:\"Text Editor Icons\";}}i:173;a:7:{s:4:\"name\";s:14:\"Files Outlined\";s:2:\"id\";s:7:\"files-o\";s:7:\"unicode\";s:4:\"f0c5\";s:7:\"created\";i:2;s:6:\"filter\";a:1:{i:0;s:9:\"duplicate\";}s:7:\"aliases\";a:1:{i:0;s:4:\"copy\";}s:10:\"categories\";a:1:{i:0;s:17:\"Text Editor Icons\";}}i:174;a:6:{s:4:\"name\";s:9:\"Paperclip\";s:2:\"id\";s:9:\"paperclip\";s:7:\"unicode\";s:4:\"f0c6\";s:7:\"created\";i:2;s:6:\"filter\";a:1:{i:0;s:10:\"attachment\";}s:10:\"categories\";a:1:{i:0;s:17:\"Text Editor Icons\";}}i:175;a:6:{s:4:\"name\";s:15:\"Floppy Outlined\";s:2:\"id\";s:8:\"floppy-o\";s:7:\"unicode\";s:4:\"f0c7\";s:7:\"created\";i:2;s:7:\"aliases\";a:1:{i:0;s:4:\"save\";}s:10:\"categories\";a:1:{i:0;s:17:\"Text Editor Icons\";}}i:176;a:6:{s:4:\"name\";s:6:\"Square\";s:2:\"id\";s:6:\"square\";s:7:\"unicode\";s:4:\"f0c8\";s:7:\"created\";i:2;s:6:\"filter\";a:2:{i:0;s:5:\"block\";i:1;s:3:\"box\";}s:10:\"categories\";a:2:{i:0;s:21:\"Web Application Icons\";i:1;s:18:\"Form Control Icons\";}}i:177;a:7:{s:4:\"name\";s:4:\"Bars\";s:2:\"id\";s:4:\"bars\";s:7:\"unicode\";s:4:\"f0c9\";s:7:\"created\";i:2;s:7:\"aliases\";a:2:{i:0;s:7:\"navicon\";i:1;s:7:\"reorder\";}s:6:\"filter\";a:11:{i:0;s:4:\"menu\";i:1;s:4:\"drag\";i:2;s:7:\"reorder\";i:3;s:8:\"settings\";i:4;s:4:\"list\";i:5;s:2:\"ul\";i:6;s:2:\"ol\";i:7;s:9:\"checklist\";i:8;s:4:\"todo\";i:9;s:4:\"list\";i:10;s:9:\"hamburger\";}s:10:\"categories\";a:1:{i:0;s:21:\"Web Application Icons\";}}i:178;a:6:{s:4:\"name\";s:7:\"list-ul\";s:2:\"id\";s:7:\"list-ul\";s:7:\"unicode\";s:4:\"f0ca\";s:7:\"created\";i:2;s:6:\"filter\";a:5:{i:0;s:2:\"ul\";i:1;s:2:\"ol\";i:2;s:9:\"checklist\";i:3;s:4:\"todo\";i:4;s:4:\"list\";}s:10:\"categories\";a:1:{i:0;s:17:\"Text Editor Icons\";}}i:179;a:6:{s:4:\"name\";s:7:\"list-ol\";s:2:\"id\";s:7:\"list-ol\";s:7:\"unicode\";s:4:\"f0cb\";s:7:\"created\";i:2;s:6:\"filter\";a:7:{i:0;s:2:\"ul\";i:1;s:2:\"ol\";i:2;s:9:\"checklist\";i:3;s:4:\"list\";i:4;s:4:\"todo\";i:5;s:4:\"list\";i:6;s:7:\"numbers\";}s:10:\"categories\";a:1:{i:0;s:17:\"Text Editor Icons\";}}i:180;a:5:{s:4:\"name\";s
+#4 /wordpress/wp-includes/option.php(921): add_option('Ndizi Version', '0.9.7.0', '', 'auto')
+#5 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(124): update_option('Ndizi Version', '0.9.7.0')
+#6 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.class.php(108): Ndizi->install()
+#7 /wordpress/wp-content/plugins/ndizi-project-management/Ndizi.php(14): Ndizi->__construct()
+#8 /wordpress/wp-settings.php(526): include_once('/wordpress/wp-c...')
+#9 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#10 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#11 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#12 {main}</pre>
+ for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('Ndizi Version', '0.9.7.0', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/ndizi-project-management/Ndizi.php'), Ndizi->__construct, Ndizi->install, update_option, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
+[10-Apr-2
