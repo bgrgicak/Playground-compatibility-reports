@@ -2,371 +2,9 @@ file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-pl
 `)},constants:R,phpIniEntries:{"openssl.cafile":"/internal/shared/ca-bundle.crt",allow_url_fopen:"1",disable_functions:""},hooks:{async beforeWordPressFiles(h){e.mountBeforeInstall&&u(h,e.mountBeforeInstall)}}}),d.log("Booted!");const W=await w.getPrimaryPhp();try{if(o&&!e.mountBeforeInstall&&!m.existsSync(f)&&(d.log("Caching preinstalled WordPress for the next boot..."),m.writeFileSync(f,await Z(W,"/wordpress")),d.log("Cached!")),e.mount&&u(W,e.mount),H=!0,l){const{php:h,reap:b}=await w.processManager.acquirePHPInstance();try{d.log("Running the Blueprint..."),await M(l,h),d.log("Finished running the blueprint")}finally{b()}}a==="build-snapshot"?(await i(e.outfile),d.log(`WordPress exported to ${e.outfile}`),process.exit(0)):a==="run-blueprint"?(d.log("Blueprint executed"),process.exit(0)):d.log(`WordPress is running on ${s}`)}catch(h){if(!e.debug)throw h;const b=W.readFileAsText(L);throw new Error(b,{cause:h})}},async handleRequest(r){return H?await w.request(r):U.forHttpCode(502,"WordPress is not ready yet")}})}te();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
 
-Error: [09-Apr-2025 07:26:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('webpm_slider_size_w', '800', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'webpm_slider_size_w' , '800' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/webpm-slider/webpm-slider.php(25): add_option('webpm_slider_si...', 800)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): WebPMSlider->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_webpm-...', false)
-#9 /internal/eval.php(20): activate_plugin('webpm-slider/we...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('webpm_slider_size_w', '800', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_webpm-slider/webpm-slider.php'), WP_Hook->do_action, WP_Hook->apply_filters, WebPMSlider->install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:26:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('webpm_slider_size_h', '800', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'webpm_slider_size_h' , '800' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/webpm-slider/webpm-slider.php(28): add_option('webpm_slider_si...', 800)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): WebPMSlider->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_webpm-...', false)
-#9 /internal/eval.php(20): activate_plugin('webpm-slider/we...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('webpm_slider_size_h', '800', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_webpm-slider/webpm-slider.php'), WP_Hook->do_action, WP_Hook->apply_filters, WebPMSlider->install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:26:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('webpm_slider_pagination', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'webpm_slider_pagination' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/webpm-slider/webpm-slider.php(31): add_option('webpm_slider_pa...', 1)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): WebPMSlider->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_webpm-...', false)
-#9 /internal/eval.php(20): activate_plugin('webpm-slider/we...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('webpm_slider_pagination', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_webpm-slider/webpm-slider.php'), WP_Hook->do_action, WP_Hook->apply_filters, WebPMSlider->install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:26:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('webpm_slider_showtext', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'webpm_slider_showtext' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/webpm-slider/webpm-slider.php(34): add_option('webpm_slider_sh...', 1)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): WebPMSlider->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_webpm-...', false)
-#9 /internal/eval.php(20): activate_plugin('webpm-slider/we...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('webpm_slider_showtext', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_webpm-slider/webpm-slider.php'), WP_Hook->do_action, WP_Hook->apply_filters, WebPMSlider->install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:26:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('webpm_slider_generatePagination', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'webpm_slider_generatePagination' , '1' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/webpm-slider/webpm-slider.php(37): add_option('webpm_slider_ge...', 1)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): WebPMSlider->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_webpm-...', false)
-#9 /internal/eval.php(20): activate_plugin('webpm-slider/we...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('webpm_slider_generatePagination', '1', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_webpm-slider/webpm-slider.php'), WP_Hook->do_action, WP_Hook->apply_filters, WebPMSlider->install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:26:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('webpm_slider_fadeSpeed', '350', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'webpm_slider_fadeSpeed' , '350' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/webpm-slider/webpm-slider.php(40): add_option('webpm_slider_fa...', 350)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): WebPMSlider->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_webpm-...', false)
-#9 /internal/eval.php(20): activate_plugin('webpm-slider/we...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('webpm_slider_fadeSpeed', '350', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_webpm-slider/webpm-slider.php'), WP_Hook->do_action, WP_Hook->apply_filters, WebPMSlider->install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:26:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('webpm_slider_slideSpeed', '350', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'webpm_slider_slideSpeed' , '350' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/webpm-slider/webpm-slider.php(43): add_option('webpm_slider_sl...', 350)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): WebPMSlider->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_webpm-...', false)
-#9 /internal/eval.php(20): activate_plugin('webpm-slider/we...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('webpm_slider_slideSpeed', '350', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_webpm-slider/webpm-slider.php'), WP_Hook->do_action, WP_Hook->apply_filters, WebPMSlider->install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:26:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('webpm_slider_effect', 'fade', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'webpm_slider_effect' , 'fade' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/webpm-slider/webpm-slider.php(46): add_option('webpm_slider_ef...', 'fade')
-#5 /wordpress/wp-includes/class-wp-hook.php(324): WebPMSlider->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_webpm-...', false)
-#9 /internal/eval.php(20): activate_plugin('webpm-slider/we...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('webpm_slider_effect', 'fade', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_webpm-slider/webpm-slider.php'), WP_Hook->do_action, WP_Hook->apply_filters, WebPMSlider->install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:26:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('webpm_slider_play', '3000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'webpm_slider_play' , '3000' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/webpm-slider/webpm-slider.php(49): add_option('webpm_slider_pl...', 3000)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): WebPMSlider->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_webpm-...', false)
-#9 /internal/eval.php(20): activate_plugin('webpm-slider/we...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('webpm_slider_play', '3000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_webpm-slider/webpm-slider.php'), WP_Hook->do_action, WP_Hook->apply_filters, WebPMSlider->install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:26:20 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('webpm_slider_pause', '3000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'webpm_slider_pause' , '3000' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/webpm-slider/webpm-slider.php(52): add_option('webpm_slider_pa...', 3000)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): WebPMSlider->install(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_webpm-...', false)
-#9 /internal/eval.php(20): activate_plugin('webpm-slider/we...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('webpm_slider_pause', '3000', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_webpm-slider/webpm-slider.php'), WP_Hook->do_action, WP_Hook->apply_filters, WebPMSlider->install, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:26:20 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:26:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:26:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:26:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:27:06 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:27:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:27:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:27:06 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:27:34 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:27:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 15:27:59 Asia/Shanghai] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 15:27:59 Asia/Shanghai] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (0) for the number of arguments passed (1). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 15:27:59 Asia/Shanghai] WordPress database error <div style="clear:both">&nbsp;</div>
+Error: [11-Apr-2025 05:27:37 Asia/Shanghai] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 05:27:37 Asia/Shanghai] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (0) for the number of arguments passed (1). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 05:27:37 Asia/Shanghai] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>select database()</p>
@@ -392,14 +30,10 @@ SQLSTATE[HY000]: General error: 1 no such function: database
 #8 /internal/eval.php(20): activate_plugin('wp-aliyun/index...')
 #9 {main}</pre>
  for query select database() made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-aliyun/index.php'), require_once('/plugins/wp-aliyun/wp-aliyun-config.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:27:59 Asia/Shanghai] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-aliyun/index.php on line 22
-[09-Apr-2025 15:27:59 Asia/Shanghai] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 15:27:59 Asia/Shanghai] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 15:27:59 Asia/Shanghai] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 15:27:59 Asia/Shanghai] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 15:28:00 Asia/Shanghai] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 15:28:00 Asia/Shanghai] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (0) for the number of arguments passed (1). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 15:28:00 Asia/Shanghai] WordPress database error <div style="clear:both">&nbsp;</div>
+[11-Apr-2025 05:27:37 Asia/Shanghai] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-aliyun/index.php on line 22
+[11-Apr-2025 05:27:38 Asia/Shanghai] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 05:27:38 Asia/Shanghai] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (0) for the number of arguments passed (1). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 05:27:38 Asia/Shanghai] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>select database()</p>
@@ -426,10 +60,10 @@ SQLSTATE[HY000]: General error: 1 no such function: database
 #9 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #10 {main}</pre>
  for query select database() made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wp-aliyun/index.php'), require_once('/plugins/wp-aliyun/wp-aliyun-config.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:28:00 Asia/Shanghai] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-aliyun/index.php on line 22
-[09-Apr-2025 15:28:08 Asia/Shanghai] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 15:28:08 Asia/Shanghai] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (0) for the number of arguments passed (1). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 15:28:08 Asia/Shanghai] WordPress database error <div style="clear:both">&nbsp;</div>
+[11-Apr-2025 05:27:38 Asia/Shanghai] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-aliyun/index.php on line 22
+[11-Apr-2025 05:27:47 Asia/Shanghai] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 05:27:47 Asia/Shanghai] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (0) for the number of arguments passed (1). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 05:27:47 Asia/Shanghai] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>select database()</p>
@@ -453,10 +87,10 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #6 /internal/eval.php(20): activate_plugin('wp-aliyun/index...')
 #7 {main}</pre>
  for query select database() made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-aliyun/index.php'), require_once('/plugins/wp-aliyun/wp-aliyun-config.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:28:08 Asia/Shanghai] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-aliyun/index.php on line 22
-[09-Apr-2025 15:28:09 Asia/Shanghai] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 15:28:09 Asia/Shanghai] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (0) for the number of arguments passed (1). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 15:28:09 Asia/Shanghai] WordPress database error <div style="clear:both">&nbsp;</div>
+[11-Apr-2025 05:27:47 Asia/Shanghai] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-aliyun/index.php on line 22
+[11-Apr-2025 05:27:48 Asia/Shanghai] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 05:27:48 Asia/Shanghai] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (0) for the number of arguments passed (1). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 05:27:48 Asia/Shanghai] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>select database()</p>
@@ -481,10 +115,10 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #8 {main}</pre>
  for query select database() made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wp-aliyun/index.php'), require_once('/plugins/wp-aliyun/wp-aliyun-config.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:28:09 Asia/Shanghai] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-aliyun/index.php on line 22
-[09-Apr-2025 15:28:17 Asia/Shanghai] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 15:28:17 Asia/Shanghai] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (0) for the number of arguments passed (1). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 15:28:17 Asia/Shanghai] WordPress database error <div style="clear:both">&nbsp;</div>
+[11-Apr-2025 05:27:48 Asia/Shanghai] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-aliyun/index.php on line 22
+[11-Apr-2025 05:27:55 Asia/Shanghai] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 05:27:55 Asia/Shanghai] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (0) for the number of arguments passed (1). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 05:27:55 Asia/Shanghai] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>select database()</p>
@@ -508,10 +142,10 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #6 /internal/eval.php(20): activate_plugin('wp-aliyun/index...')
 #7 {main}</pre>
  for query select database() made by activate_plugin, plugin_sandbox_scrape, include_once('/plugins/wp-aliyun/index.php'), require_once('/plugins/wp-aliyun/wp-aliyun-config.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:28:17 Asia/Shanghai] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-aliyun/index.php on line 22
-[09-Apr-2025 15:28:18 Asia/Shanghai] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 15:28:18 Asia/Shanghai] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (0) for the number of arguments passed (1). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6114
-[09-Apr-2025 15:28:18 Asia/Shanghai] WordPress database error <div style="clear:both">&nbsp;</div>
+[11-Apr-2025 05:27:56 Asia/Shanghai] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-aliyun/index.php on line 22
+[11-Apr-2025 05:27:57 Asia/Shanghai] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query argument of wpdb::prepare() must have a placeholder. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 3.9.0.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 05:27:57 Asia/Shanghai] PHP Notice:  Function wpdb::prepare was called <strong>incorrectly</strong>. The query does not contain the correct number of placeholders (0) for the number of arguments passed (1). Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.8.3.) in /wordpress/wp-includes/functions.php on line 6114
+[11-Apr-2025 05:27:57 Asia/Shanghai] WordPress database error <div style="clear:both">&nbsp;</div>
 <div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
 <p>MySQL query:</p>
 <p>select database()</p>
@@ -536,73 +170,80 @@ Error occurred at line 4117 in Function <code>handle_error</code>. Error message
 #7 /internal/eval.php(3): require_once('/wordpress/wp-l...')
 #8 {main}</pre>
  for query select database() made by require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), include_once('/plugins/wp-aliyun/index.php'), require_once('/plugins/wp-aliyun/wp-aliyun-config.php'), WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 15:28:18 Asia/Shanghai] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-aliyun/index.php on line 22
-[09-Apr-2025 07:28:44 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:28:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:28:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:28:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:29:09 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:29:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:29:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:29:09 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
-[09-Apr-2025 07:29:35 UTC] WordPress database error <div style="clear:both">&nbsp;</div>
-<div class="queries" style="clear:both;margin-bottom:2px;border:red dotted thin;">
-<p>MySQL query:</p>
-<p>INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp-slugify-options', 'a:13:{s:4:\"post\";s:1:\"1\";s:4:\"page\";s:1:\"1\";s:10:\"custom_css\";s:1:\"1\";s:19:\"customize_changeset\";s:1:\"1\";s:12:\"oembed_cache\";s:1:\"1\";s:12:\"user_request\";s:1:\"1\";s:8:\"wp_block\";s:1:\"1\";s:11:\"wp_template\";s:1:\"1\";s:16:\"wp_template_part\";s:1:\"1\";s:16:\"wp_global_styles\";s:1:\"1\";s:13:\"wp_navigation\";s:1:\"1\";s:14:\"wp_font_family\";s:1:\"1\";s:12:\"wp_font_face\";s:1:\"1\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)</p>
-<p>Queries made or created this session were:</p>
-<ol>
-<li>Executing: BEGIN | (no parameters)</li>
-<li>Executing: SELECT 1 FROM sqlite_temp_schema WHERE type = 'table' AND name = ? | parameters: wp_options</li>
-<li>Executing: 
-				SELECT column_name, is_nullable, column_default, data_type, extra
-				FROM _wp_sqlite_mysql_information_schema_columns
-				WHERE table_schema = ?
-				AND table_name = ?
-				ORDER BY ordinal_position
-			 | parameters: database_name_here, wp_options</li>
-<li>Executing: INSERT INTO `wp_options` () SELECT  FROM (VALUES ( 'wp-slugify-options' , 'a:13:{s:4:&quot;post&quot;;s:1:&quot;1&quot;;s:4:&quot;page&quot;;s:1:&quot;1&quot;;s:10:&quot;custom_css&quot;;s:1:&quot;1&quot;;s:19:&quot;customize_changeset&quot;;s:1:&quot;1&quot;;s:12:&quot;oembed_cache&quot;;s:1:&quot;1&quot;;s:12:&quot;user_request&quot;;s:1:&quot;1&quot;;s:8:&quot;wp_block&quot;;s:1:&quot;1&quot;;s:11:&quot;wp_template&quot;;s:1:&quot;1&quot;;s:16:&quot;wp_template_part&quot;;s:1:&quot;1&quot;;s:16:&quot;wp_global_styles&quot;;s:1:&quot;1&quot;;s:13:&quot;wp_navigation&quot;;s:1:&quot;1&quot;;s:14:&quot;wp_font_family&quot;;s:1:&quot;1&quot;;s:12:&quot;wp_font_face&quot;;s:1:&quot;1&quot;;}' , 'auto' )) WHERE true ON CONFLICT DO UPDATE SET `option_name` = `excluded`.`option_name` , `option_value` = `excluded`.`option_value` , `autoload` = `excluded`.`autoload` | (no parameters)</li>
-<li>Executing: ROLLBACK | (no parameters)</li>
-</ol>
-</div>
-<div style="clear:both;margin-bottom:2px;border:red dotted thin;" class="error_message" style="border-bottom:dotted blue thin;">
-SQLSTATE[HY000]: General error: 1 near ")": syntax error
-</div>
-<p>Backtrace:</p>
-<pre>#0 /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php(690): WP_SQLite_Driver->new_driver_exception('SQLSTATE[HY000]...', 0, Object(PDOException))
-#1 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(472): WP_SQLite_Driver->query('INSERT INTO `wp...')
-#2 /internal/shared/sqlite-database-integration/wp-includes/sqlite/class-wp-sqlite-db.php(413): WP_SQLite_DB->_do_query('INSERT INTO `wp...')
-#3 /wordpress/wp-includes/option.php(1134): WP_SQLite_DB->query('INSERT INTO `wp...')
-#4 /wordpress/wp-content/plugins/wp-slugify/library/WPSlugifyAdmin.php(92): add_option('wp-slugify-opti...', Array)
-#5 /wordpress/wp-includes/class-wp-hook.php(324): WPSlugifyAdmin->on_activate(false)
-#6 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
-#7 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
-#8 /wordpress/wp-admin/includes/plugin.php(703): do_action('activate_wp-slu...', false)
-#9 /internal/eval.php(20): activate_plugin('wp-slugify/wp-s...')
-#10 {main}</pre>
- for query INSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('wp-slugify-options', 'a:13:{s:4:\"post\";s:1:\"1\";s:4:\"page\";s:1:\"1\";s:10:\"custom_css\";s:1:\"1\";s:19:\"customize_changeset\";s:1:\"1\";s:12:\"oembed_cache\";s:1:\"1\";s:12:\"user_request\";s:1:\"1\";s:8:\"wp_block\";s:1:\"1\";s:11:\"wp_template\";s:1:\"1\";s:16:\"wp_template_part\";s:1:\"1\";s:16:\"wp_global_styles\";s:1:\"1\";s:13:\"wp_navigation\";s:1:\"1\";s:14:\"wp_font_family\";s:1:\"1\";s:12:\"wp_font_face\";s:1:\"1\";}', 'auto') ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`) made by activate_plugin, do_action('activate_wp-slugify/wp-slugify.php'), WP_Hook->do_action, WP_Hook->apply_filters, WPSlugifyAdmin->on_activate, add_option, WP_SQLite_DB->query, WP_SQLite_DB->print_error
-[09-Apr-2025 07:29:35 UTC] PHP Warning:  Undefined array key "option_value" in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3080
-[09-Apr-2025 07:29:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3081
-[09-Apr-2025 07:29:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3082
-[09-Apr-2025 07:29:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /internal/shared/sqlite-database-integration/wp-includes/sqlite-ast/class-wp-sqlite-driver.php on line 3083
+[11-Apr-2025 05:27:57 Asia/Shanghai] PHP Warning:  Undefined array key "action" in /wordpress/wp-content/plugins/wp-aliyun/index.php on line 22
+[10-Apr-2025 21:28:09 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WP_FlashClock_widget" in /wordpress/wp-content/plugins/wp-flash-clock/wp-flashclock.php:267
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): widget_init_WP_FlashClock_widget('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(704): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}
+  thrown in /wordpress/wp-content/plugins/wp-flash-clock/wp-flashclock.php on line 267
+[10-Apr-2025 21:28:17 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WP_FlashClock_widget" in /wordpress/wp-content/plugins/wp-flash-clock/wp-flashclock.php:267
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): widget_init_WP_FlashClock_widget('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(704): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}
+  thrown in /wordpress/wp-content/plugins/wp-flash-clock/wp-flashclock.php on line 267
+[10-Apr-2025 21:28:26 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WP_FlashClock_widget" in /wordpress/wp-content/plugins/wp-flash-clock/wp-flashclock.php:267
+Stack trace:
+#0 /wordpress/wp-includes/class-wp-hook.php(324): widget_init_WP_FlashClock_widget('')
+#1 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /wordpress/wp-includes/widgets.php(1870): do_action('widgets_init')
+#4 /wordpress/wp-includes/class-wp-hook.php(324): wp_widgets_init('')
+#5 /wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(704): do_action('init')
+#8 /wordpress/wp-config.php(102): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-load.php(50): require_once('/wordpress/wp-c...')
+#10 /internal/eval.php(3): require_once('/wordpress/wp-l...')
+#11 {main}
+  thrown in /wordpress/wp-content/plugins/wp-flash-clock/wp-flashclock.php on line 267
+[10-Apr-2025 21:35:38 UTC] PHP Warning:  Undefined array key "smit_action" in /wordpress/wp-content/plugins/wp-photo-ads/wpphotoads.php on line 30
+[10-Apr-2025 21:35:47 UTC] PHP Warning:  Undefined array key "smit_action" in /wordpress/wp-content/plugins/wp-photo-ads/wpphotoads.php on line 30
+[10-Apr-2025 21:35:56 UTC] PHP Warning:  Undefined array key "smit_action" in /wordpress/wp-content/plugins/wp-photo-ads/wpphotoads.php on line 30
 
     at Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:903)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    ... 2 lines matching cause stack trace ...
+    at process.processTimers (node:internal/timers:543:7)
     at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
   [cause]: Error: Error when executing the blueprint step #4 ({"step":"installPlugin","pluginData":{"resource":"wordpress.org/plugins","slug":"wp-umr"},"options":{"activate":true}}) : Plugin /wordpress/wp-content/plugins/wp-umr could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
       at Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12407:32)
-      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at processTicksAndRejections (node:internal/process/task_queues:105:5)
+      ... 2 lines matching cause stack trace ...
+      at process.processTimers (node:internal/timers:543:7)
       at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
       at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
       at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159) {
     [cause]: Error: Plugin /wordpress/wp-content/plugins/wp-umr could not be activated – WordPress exited with no error. Sometimes, when $_SERVER or site options are not configured correctly, WordPress exits early with a 301 redirect. Inspect the "debug" logs in the console for more details.
         at vr (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:119:51)
-        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at runNextTicks (node:internal/process/task_queues:69:3)
+        at listOnTimeout (node:internal/timers:569:9)
+        at process.processTimers (node:internal/timers:543:7)
         at async Object.ut [as installPlugin] (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:1084:42)
         at async d (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12473:30)
         at async Object.run (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12404:23)
         at async ns (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/blueprints/index.js:12508:3)
         at async Object.onBind (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:21:568)
-        at async Y (file:///home/runner/work/playground-tester/playground-tester/node_modules/@wp-playground/cli/cli.js:1:1159)
   }
 }
 
